@@ -292,12 +292,20 @@ module Aws
 
       interface _CreateSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSessionOutput]
+        def server_side_encryption: () -> ("AES256" | "aws:kms" | "aws:kms:dsse")
+        def ssekms_key_id: () -> ::String
+        def ssekms_encryption_context: () -> ::String
+        def bucket_key_enabled: () -> bool
         def credentials: () -> Types::SessionCredentials
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#create_session-instance_method
       def create_session: (
                             ?session_mode: ("ReadOnly" | "ReadWrite"),
-                            bucket: ::String
+                            bucket: ::String,
+                            ?server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse"),
+                            ?ssekms_key_id: ::String,
+                            ?ssekms_encryption_context: ::String,
+                            ?bucket_key_enabled: bool
                           ) -> _CreateSessionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionResponseSuccess
 

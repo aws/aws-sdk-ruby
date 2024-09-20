@@ -135,6 +135,22 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class AssociateSbomWithPackageVersionRequest
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor sbom: Types::Sbom
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSbomWithPackageVersionResponse
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor sbom: Types::Sbom
+      attr_accessor sbom_validation_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      SENSITIVE: []
+    end
+
     class AssociateTargetsWithJobRequest
       attr_accessor targets: ::Array[::String]
       attr_accessor job_id: ::String
@@ -892,9 +908,11 @@ module Aws::IoT
       attr_accessor version_name: ::String
       attr_accessor description: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor artifact: Types::PackageVersionArtifact
+      attr_accessor recipe: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
-      SENSITIVE: [:description, :attributes]
+      SENSITIVE: [:description, :attributes, :recipe]
     end
 
     class CreatePackageVersionResponse
@@ -1666,6 +1684,7 @@ module Aws::IoT
 
     class DescribeJobRequest
       attr_accessor job_id: ::String
+      attr_accessor before_substitution: bool
       SENSITIVE: []
     end
 
@@ -1972,6 +1991,16 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class DisassociateSbomFromPackageVersionRequest
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSbomFromPackageVersionResponse < Aws::EmptyStructure
+    end
+
     class DocumentParameter
       attr_accessor key: ::String
       attr_accessor description: ::String
@@ -2149,6 +2178,7 @@ module Aws::IoT
 
     class GetJobDocumentRequest
       attr_accessor job_id: ::String
+      attr_accessor before_substitution: bool
       SENSITIVE: []
     end
 
@@ -2211,11 +2241,15 @@ module Aws::IoT
       attr_accessor version_name: ::String
       attr_accessor description: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor artifact: Types::PackageVersionArtifact
       attr_accessor status: ("DRAFT" | "PUBLISHED" | "DEPRECATED")
       attr_accessor error_reason: ::String
       attr_accessor creation_date: ::Time
       attr_accessor last_modified_date: ::Time
-      SENSITIVE: [:description, :attributes]
+      attr_accessor sbom: Types::Sbom
+      attr_accessor sbom_validation_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor recipe: ::String
+      SENSITIVE: [:description, :attributes, :recipe]
     end
 
     class GetPercentilesRequest
@@ -3158,6 +3192,21 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class ListSbomValidationResultsRequest
+      attr_accessor package_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor validation_result: ("FAILED" | "SUCCEEDED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSbomValidationResultsResponse
+      attr_accessor validation_result_summaries: ::Array[Types::SbomValidationResultSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListScheduledAuditsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -3644,6 +3693,11 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class PackageVersionArtifact
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
     class PackageVersionSummary
       attr_accessor package_name: ::String
       attr_accessor version_name: ::String
@@ -3936,6 +3990,19 @@ module Aws::IoT
     class SalesforceAction
       attr_accessor token: ::String
       attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class Sbom
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class SbomValidationResultSummary
+      attr_accessor file_name: ::String
+      attr_accessor validation_result: ("FAILED" | "SUCCEEDED")
+      attr_accessor error_code: ("INCOMPATIBLE_FORMAT" | "FILE_SIZE_LIMIT_EXCEEDED")
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
@@ -4753,9 +4820,11 @@ module Aws::IoT
       attr_accessor version_name: ::String
       attr_accessor description: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor artifact: Types::PackageVersionArtifact
       attr_accessor action: ("PUBLISH" | "DEPRECATE")
+      attr_accessor recipe: ::String
       attr_accessor client_token: ::String
-      SENSITIVE: [:description, :attributes]
+      SENSITIVE: [:description, :attributes, :recipe]
     end
 
     class UpdatePackageVersionResponse < Aws::EmptyStructure

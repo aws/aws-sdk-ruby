@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2024-09-12)
+------------------
+
+* Feature - This release introduces two features. The first is tag replication, which allows for the propagation of canary tags onto Synthetics related resources, such as Lambda functions. The second is a limit increase in canary name length, which has now been increased from 21 to 255 characters.
+
+1.50.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.49.0 (2024-09-10)
 ------------------
 

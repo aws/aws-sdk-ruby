@@ -23,7 +23,7 @@ require_relative 'aws-sdk-ecr/endpoint_provider'
 require_relative 'aws-sdk-ecr/endpoints'
 require_relative 'aws-sdk-ecr/customizations'
 
-# This module provides support for Amazon EC2 Container Registry. This module is available in the
+# This module provides support for Amazon Elastic Container Registry. This module is available in the
 # `aws-sdk-ecr` gem.
 #
 # # Client
@@ -39,13 +39,13 @@ require_relative 'aws-sdk-ecr/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon EC2 Container Registry are defined in the
+# Errors returned from Amazon Elastic Container Registry are defined in the
 # {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ECR::Errors::ServiceError
-#       # rescues all Amazon EC2 Container Registry API errors
+#       # rescues all Amazon Elastic Container Registry API errors
 #     end
 #
 # See {Errors} for more information.
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-ecr/customizations'
 # @!group service
 module Aws::ECR
 
-  GEM_VERSION = '1.82.0'
+  GEM_VERSION = '1.84.0'
 
 end

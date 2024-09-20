@@ -40,10 +40,19 @@ module Aws::QuickSight
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          @handler.call(context)
+          with_metrics(context) { @handler.call(context) }
         end
 
         private
+
+        def with_metrics(context, &block)
+          metrics = []
+          metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
+          if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
+            metrics << 'SIGV4A_SIGNING'
+          end
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, values|
@@ -272,6 +281,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListFolderMembers.build(context)
           when :list_folders
             Aws::QuickSight::Endpoints::ListFolders.build(context)
+          when :list_folders_for_resource
+            Aws::QuickSight::Endpoints::ListFoldersForResource.build(context)
           when :list_group_memberships
             Aws::QuickSight::Endpoints::ListGroupMemberships.build(context)
           when :list_groups

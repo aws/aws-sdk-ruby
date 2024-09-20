@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-09-18)
+------------------
+
+* Feature - This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon DynamoDB reservations.
+
+1.108.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.107.0 (2024-09-10)
 ------------------
 

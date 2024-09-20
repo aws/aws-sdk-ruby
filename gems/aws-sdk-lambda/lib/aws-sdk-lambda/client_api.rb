@@ -75,6 +75,7 @@ module Aws::Lambda
     DeleteFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionUrlConfigRequest')
     DeleteLayerVersionRequest = Shapes::StructureShape.new(name: 'DeleteLayerVersionRequest')
     DeleteProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'DeleteProvisionedConcurrencyConfigRequest')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     Description = Shapes::StringShape.new(name: 'Description')
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DestinationConfig = Shapes::StructureShape.new(name: 'DestinationConfig')
@@ -100,6 +101,7 @@ module Aws::Lambda
     EnvironmentVariables = Shapes::MapShape.new(name: 'EnvironmentVariables')
     EphemeralStorage = Shapes::StructureShape.new(name: 'EphemeralStorage')
     EphemeralStorageSize = Shapes::IntegerShape.new(name: 'EphemeralStorageSize')
+    EventSourceMappingArn = Shapes::StringShape.new(name: 'EventSourceMappingArn')
     EventSourceMappingConfiguration = Shapes::StructureShape.new(name: 'EventSourceMappingConfiguration')
     EventSourceMappingsList = Shapes::ListShape.new(name: 'EventSourceMappingsList')
     EventSourcePosition = Shapes::StringShape.new(name: 'EventSourcePosition')
@@ -158,6 +160,10 @@ module Aws::Lambda
     GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     GetProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigRequest')
     GetProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigResponse')
+    GetPublicAccessBlockConfigRequest = Shapes::StructureShape.new(name: 'GetPublicAccessBlockConfigRequest')
+    GetPublicAccessBlockConfigResponse = Shapes::StructureShape.new(name: 'GetPublicAccessBlockConfigResponse')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     GetRuntimeManagementConfigRequest = Shapes::StructureShape.new(name: 'GetRuntimeManagementConfigRequest')
     GetRuntimeManagementConfigResponse = Shapes::StructureShape.new(name: 'GetRuntimeManagementConfigResponse')
     Handler = Shapes::StringShape.new(name: 'Handler')
@@ -268,6 +274,7 @@ module Aws::Lambda
     ParallelizationFactor = Shapes::IntegerShape.new(name: 'ParallelizationFactor')
     Pattern = Shapes::StringShape.new(name: 'Pattern')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
+    PolicyResourceArn = Shapes::StringShape.new(name: 'PolicyResourceArn')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Principal = Shapes::StringShape.new(name: 'Principal')
@@ -276,6 +283,9 @@ module Aws::Lambda
     ProvisionedConcurrencyConfigListItem = Shapes::StructureShape.new(name: 'ProvisionedConcurrencyConfigListItem')
     ProvisionedConcurrencyConfigNotFoundException = Shapes::StructureShape.new(name: 'ProvisionedConcurrencyConfigNotFoundException')
     ProvisionedConcurrencyStatusEnum = Shapes::StringShape.new(name: 'ProvisionedConcurrencyStatusEnum')
+    PublicAccessBlockConfig = Shapes::StructureShape.new(name: 'PublicAccessBlockConfig')
+    PublicAccessBlockResourceArn = Shapes::StringShape.new(name: 'PublicAccessBlockResourceArn')
+    PublicPolicyException = Shapes::StructureShape.new(name: 'PublicPolicyException')
     PublishLayerVersionRequest = Shapes::StructureShape.new(name: 'PublishLayerVersionRequest')
     PublishLayerVersionResponse = Shapes::StructureShape.new(name: 'PublishLayerVersionResponse')
     PublishVersionRequest = Shapes::StructureShape.new(name: 'PublishVersionRequest')
@@ -287,6 +297,10 @@ module Aws::Lambda
     PutFunctionRecursionConfigResponse = Shapes::StructureShape.new(name: 'PutFunctionRecursionConfigResponse')
     PutProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigRequest')
     PutProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigResponse')
+    PutPublicAccessBlockConfigRequest = Shapes::StructureShape.new(name: 'PutPublicAccessBlockConfigRequest')
+    PutPublicAccessBlockConfigResponse = Shapes::StructureShape.new(name: 'PutPublicAccessBlockConfigResponse')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PutRuntimeManagementConfigRequest = Shapes::StructureShape.new(name: 'PutRuntimeManagementConfigRequest')
     PutRuntimeManagementConfigResponse = Shapes::StructureShape.new(name: 'PutRuntimeManagementConfigResponse')
     Qualifier = Shapes::StringShape.new(name: 'Qualifier')
@@ -303,7 +317,9 @@ module Aws::Lambda
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
+    ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
     ResponseStreamingInvocationType = Shapes::StringShape.new(name: 'ResponseStreamingInvocationType')
+    RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
     RuntimeVersionArn = Shapes::StringShape.new(name: 'RuntimeVersionArn')
@@ -345,6 +361,7 @@ module Aws::Lambda
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaggableResource = Shapes::StringShape.new(name: 'TaggableResource')
     Tags = Shapes::MapShape.new(name: 'Tags')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
@@ -496,6 +513,7 @@ module Aws::Lambda
     CreateCodeSigningConfigRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateCodeSigningConfigRequest.add_member(:allowed_publishers, Shapes::ShapeRef.new(shape: AllowedPublishers, required: true, location_name: "AllowedPublishers"))
     CreateCodeSigningConfigRequest.add_member(:code_signing_policies, Shapes::ShapeRef.new(shape: CodeSigningPolicies, location_name: "CodeSigningPolicies"))
+    CreateCodeSigningConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateCodeSigningConfigRequest.struct_class = Types::CreateCodeSigningConfigRequest
 
     CreateCodeSigningConfigResponse.add_member(:code_signing_config, Shapes::ShapeRef.new(shape: CodeSigningConfig, required: true, location_name: "CodeSigningConfig"))
@@ -514,6 +532,7 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     CreateEventSourceMappingRequest.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     CreateEventSourceMappingRequest.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
+    CreateEventSourceMappingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateEventSourceMappingRequest.add_member(:tumbling_window_in_seconds, Shapes::ShapeRef.new(shape: TumblingWindowInSeconds, location_name: "TumblingWindowInSeconds"))
     CreateEventSourceMappingRequest.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
     CreateEventSourceMappingRequest.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
@@ -609,6 +628,10 @@ module Aws::Lambda
     DeleteProvisionedConcurrencyConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, required: true, location: "querystring", location_name: "Qualifier"))
     DeleteProvisionedConcurrencyConfigRequest.struct_class = Types::DeleteProvisionedConcurrencyConfigRequest
 
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PolicyResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    DeleteResourcePolicyRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location: "querystring", location_name: "RevisionId"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
     DestinationConfig.add_member(:on_success, Shapes::ShapeRef.new(shape: OnSuccess, location_name: "OnSuccess"))
     DestinationConfig.add_member(:on_failure, Shapes::ShapeRef.new(shape: OnFailure, location_name: "OnFailure"))
     DestinationConfig.struct_class = Types::DestinationConfig
@@ -702,6 +725,7 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
     EventSourceMappingConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     EventSourceMappingConfiguration.add_member(:filter_criteria_error, Shapes::ShapeRef.new(shape: FilterCriteriaError, location_name: "FilterCriteriaError"))
+    EventSourceMappingConfiguration.add_member(:event_source_mapping_arn, Shapes::ShapeRef.new(shape: EventSourceMappingArn, location_name: "EventSourceMappingArn"))
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
 
     EventSourceMappingsList.member = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
@@ -915,6 +939,19 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
     GetProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     GetProvisionedConcurrencyConfigResponse.struct_class = Types::GetProvisionedConcurrencyConfigResponse
+
+    GetPublicAccessBlockConfigRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PublicAccessBlockResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    GetPublicAccessBlockConfigRequest.struct_class = Types::GetPublicAccessBlockConfigRequest
+
+    GetPublicAccessBlockConfigResponse.add_member(:public_access_block_config, Shapes::ShapeRef.new(shape: PublicAccessBlockConfig, location_name: "PublicAccessBlockConfig"))
+    GetPublicAccessBlockConfigResponse.struct_class = Types::GetPublicAccessBlockConfigResponse
+
+    GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PolicyResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    GetResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "RevisionId"))
+    GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
     GetRuntimeManagementConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetRuntimeManagementConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
@@ -1178,7 +1215,7 @@ module Aws::Lambda
     ListProvisionedConcurrencyConfigsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
     ListProvisionedConcurrencyConfigsResponse.struct_class = Types::ListProvisionedConcurrencyConfigsResponse
 
-    ListTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    ListTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
     ListTagsRequest.struct_class = Types::ListTagsRequest
 
     ListTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -1227,6 +1264,14 @@ module Aws::Lambda
     ProvisionedConcurrencyConfigNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     ProvisionedConcurrencyConfigNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ProvisionedConcurrencyConfigNotFoundException.struct_class = Types::ProvisionedConcurrencyConfigNotFoundException
+
+    PublicAccessBlockConfig.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "BlockPublicPolicy"))
+    PublicAccessBlockConfig.add_member(:restrict_public_resource, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "RestrictPublicResource"))
+    PublicAccessBlockConfig.struct_class = Types::PublicAccessBlockConfig
+
+    PublicPolicyException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    PublicPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    PublicPolicyException.struct_class = Types::PublicPolicyException
 
     PublishLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     PublishLayerVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -1291,6 +1336,22 @@ module Aws::Lambda
     PutProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
     PutProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     PutProvisionedConcurrencyConfigResponse.struct_class = Types::PutProvisionedConcurrencyConfigResponse
+
+    PutPublicAccessBlockConfigRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PublicAccessBlockResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    PutPublicAccessBlockConfigRequest.add_member(:public_access_block_config, Shapes::ShapeRef.new(shape: PublicAccessBlockConfig, required: true, location_name: "PublicAccessBlockConfig"))
+    PutPublicAccessBlockConfigRequest.struct_class = Types::PutPublicAccessBlockConfigRequest
+
+    PutPublicAccessBlockConfigResponse.add_member(:public_access_block_config, Shapes::ShapeRef.new(shape: PublicAccessBlockConfig, location_name: "PublicAccessBlockConfig"))
+    PutPublicAccessBlockConfigResponse.struct_class = Types::PutPublicAccessBlockConfigResponse
+
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PolicyResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "Policy"))
+    PutResourcePolicyRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "RevisionId"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    PutResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "RevisionId"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
     PutRuntimeManagementConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     PutRuntimeManagementConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
@@ -1401,7 +1462,7 @@ module Aws::Lambda
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
-    TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
@@ -1426,7 +1487,7 @@ module Aws::Lambda
     UnsupportedMediaTypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnsupportedMediaTypeException.struct_class = Types::UnsupportedMediaTypeException
 
-    UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -1579,6 +1640,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: PublicPolicyException)
       end)
 
       api.add_operation(:create_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1773,6 +1835,20 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2024-09-16/resource-policy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+      end)
+
       api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAccountSettings"
         o.http_method = "GET"
@@ -1961,6 +2037,30 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedConcurrencyConfigNotFoundException)
+      end)
+
+      api.add_operation(:get_public_access_block_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPublicAccessBlockConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/2024-09-16/public-access-block/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetPublicAccessBlockConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPublicAccessBlockConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/2024-09-16/resource-policy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:get_runtime_management_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2364,6 +2464,35 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:put_public_access_block_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPublicAccessBlockConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2024-09-16/public-access-block/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: PutPublicAccessBlockConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutPublicAccessBlockConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2024-09-16/resource-policy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: PublicPolicyException)
+      end)
+
       api.add_operation(:put_runtime_management_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutRuntimeManagementConfig"
         o.http_method = "PUT"
@@ -2401,6 +2530,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: PublicPolicyException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

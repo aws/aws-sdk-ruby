@@ -178,6 +178,7 @@ module Aws::MailManager
     MailFrom = Shapes::StringShape.new(name: 'MailFrom')
     MaxMessageSizeBytes = Shapes::IntegerShape.new(name: 'MaxMessageSizeBytes')
     MessageBody = Shapes::StructureShape.new(name: 'MessageBody')
+    MimeHeaderAttribute = Shapes::StringShape.new(name: 'MimeHeaderAttribute')
     NameOrArn = Shapes::StringShape.new(name: 'NameOrArn')
     NoAuthentication = Shapes::StructureShape.new(name: 'NoAuthentication')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
@@ -270,6 +271,7 @@ module Aws::MailManager
     StopArchiveSearchResponse = Shapes::StructureShape.new(name: 'StopArchiveSearchResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    StringValue = Shapes::StringShape.new(name: 'StringValue')
     StringValueList = Shapes::ListShape.new(name: 'StringValueList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -968,8 +970,10 @@ module Aws::MailManager
     RuleStringList.member = Shapes::ShapeRef.new(shape: RuleStringValue)
 
     RuleStringToEvaluate.add_member(:attribute, Shapes::ShapeRef.new(shape: RuleStringEmailAttribute, location_name: "Attribute"))
+    RuleStringToEvaluate.add_member(:mime_header_attribute, Shapes::ShapeRef.new(shape: MimeHeaderAttribute, location_name: "MimeHeaderAttribute"))
     RuleStringToEvaluate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RuleStringToEvaluate.add_member_subclass(:attribute, Types::RuleStringToEvaluate::Attribute)
+    RuleStringToEvaluate.add_member_subclass(:mime_header_attribute, Types::RuleStringToEvaluate::MimeHeaderAttribute)
     RuleStringToEvaluate.add_member_subclass(:unknown, Types::RuleStringToEvaluate::Unknown)
     RuleStringToEvaluate.struct_class = Types::RuleStringToEvaluate
 
@@ -1052,7 +1056,7 @@ module Aws::MailManager
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
-    StringValueList.member = Shapes::ShapeRef.new(shape: String)
+    StringValueList.member = Shapes::ShapeRef.new(shape: StringValue)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -1137,6 +1141,7 @@ module Aws::MailManager
 
       api.metadata = {
         "apiVersion" => "2023-10-17",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mail-manager",
         "jsonVersion" => "1.0",
         "protocol" => "json",

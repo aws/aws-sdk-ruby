@@ -14,15 +14,12 @@ module Aws::S3
 
     class AbortMultipartUpload
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -41,15 +38,12 @@ module Aws::S3
 
     class CompleteMultipartUpload
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -68,15 +62,12 @@ module Aws::S3
 
     class CopyObject
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -95,15 +86,12 @@ module Aws::S3
 
     class CreateBucket
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -122,15 +110,12 @@ module Aws::S3
 
     class CreateMultipartUpload
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -149,15 +134,12 @@ module Aws::S3
 
     class CreateSession
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -176,15 +158,12 @@ module Aws::S3
 
     class DeleteBucket
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -203,15 +182,12 @@ module Aws::S3
 
     class DeleteBucketAnalyticsConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -230,15 +206,12 @@ module Aws::S3
 
     class DeleteBucketCors
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -257,15 +230,12 @@ module Aws::S3
 
     class DeleteBucketEncryption
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -284,15 +254,12 @@ module Aws::S3
 
     class DeleteBucketIntelligentTieringConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -311,15 +278,12 @@ module Aws::S3
 
     class DeleteBucketInventoryConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -338,15 +302,12 @@ module Aws::S3
 
     class DeleteBucketLifecycle
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -365,15 +326,12 @@ module Aws::S3
 
     class DeleteBucketMetricsConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -392,15 +350,12 @@ module Aws::S3
 
     class DeleteBucketOwnershipControls
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -419,15 +374,12 @@ module Aws::S3
 
     class DeleteBucketPolicy
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -446,15 +398,12 @@ module Aws::S3
 
     class DeleteBucketReplication
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -473,15 +422,12 @@ module Aws::S3
 
     class DeleteBucketTagging
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -500,15 +446,12 @@ module Aws::S3
 
     class DeleteBucketWebsite
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -527,15 +470,12 @@ module Aws::S3
 
     class DeleteObject
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -554,15 +494,12 @@ module Aws::S3
 
     class DeleteObjectTagging
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -581,15 +518,12 @@ module Aws::S3
 
     class DeleteObjects
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -608,15 +542,12 @@ module Aws::S3
 
     class DeletePublicAccessBlock
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -635,15 +566,12 @@ module Aws::S3
 
     class GetBucketAccelerateConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -662,15 +590,12 @@ module Aws::S3
 
     class GetBucketAcl
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -689,15 +614,12 @@ module Aws::S3
 
     class GetBucketAnalyticsConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -716,15 +638,12 @@ module Aws::S3
 
     class GetBucketCors
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -743,15 +662,12 @@ module Aws::S3
 
     class GetBucketEncryption
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -770,15 +686,12 @@ module Aws::S3
 
     class GetBucketIntelligentTieringConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -797,15 +710,12 @@ module Aws::S3
 
     class GetBucketInventoryConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -824,15 +734,12 @@ module Aws::S3
 
     class GetBucketLifecycle
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -851,15 +758,12 @@ module Aws::S3
 
     class GetBucketLifecycleConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -878,15 +782,12 @@ module Aws::S3
 
     class GetBucketLocation
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -905,15 +806,12 @@ module Aws::S3
 
     class GetBucketLogging
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -932,15 +830,12 @@ module Aws::S3
 
     class GetBucketMetricsConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -959,15 +854,12 @@ module Aws::S3
 
     class GetBucketNotification
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -986,15 +878,12 @@ module Aws::S3
 
     class GetBucketNotificationConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1013,15 +902,12 @@ module Aws::S3
 
     class GetBucketOwnershipControls
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1040,15 +926,12 @@ module Aws::S3
 
     class GetBucketPolicy
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1067,15 +950,12 @@ module Aws::S3
 
     class GetBucketPolicyStatus
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1094,15 +974,12 @@ module Aws::S3
 
     class GetBucketReplication
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1121,15 +998,12 @@ module Aws::S3
 
     class GetBucketRequestPayment
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1148,15 +1022,12 @@ module Aws::S3
 
     class GetBucketTagging
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1175,15 +1046,12 @@ module Aws::S3
 
     class GetBucketVersioning
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1202,15 +1070,12 @@ module Aws::S3
 
     class GetBucketWebsite
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1229,15 +1094,12 @@ module Aws::S3
 
     class GetObject
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1256,15 +1118,12 @@ module Aws::S3
 
     class GetObjectAcl
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1283,15 +1142,12 @@ module Aws::S3
 
     class GetObjectAttributes
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1310,15 +1166,12 @@ module Aws::S3
 
     class GetObjectLegalHold
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1337,15 +1190,12 @@ module Aws::S3
 
     class GetObjectLockConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1364,15 +1214,12 @@ module Aws::S3
 
     class GetObjectRetention
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1391,15 +1238,12 @@ module Aws::S3
 
     class GetObjectTagging
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1418,15 +1262,12 @@ module Aws::S3
 
     class GetObjectTorrent
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1445,15 +1286,12 @@ module Aws::S3
 
     class GetPublicAccessBlock
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1472,15 +1310,12 @@ module Aws::S3
 
     class HeadBucket
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1499,15 +1334,12 @@ module Aws::S3
 
     class HeadObject
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1526,15 +1358,12 @@ module Aws::S3
 
     class ListBucketAnalyticsConfigurations
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1553,15 +1382,12 @@ module Aws::S3
 
     class ListBucketIntelligentTieringConfigurations
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1580,15 +1406,12 @@ module Aws::S3
 
     class ListBucketInventoryConfigurations
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1607,15 +1430,12 @@ module Aws::S3
 
     class ListBucketMetricsConfigurations
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1634,15 +1454,12 @@ module Aws::S3
 
     class ListBuckets
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: nil,
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1661,15 +1478,12 @@ module Aws::S3
 
     class ListDirectoryBuckets
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: nil,
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1688,15 +1502,12 @@ module Aws::S3
 
     class ListMultipartUploads
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1715,15 +1526,12 @@ module Aws::S3
 
     class ListObjectVersions
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1742,15 +1550,12 @@ module Aws::S3
 
     class ListObjects
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1769,15 +1574,12 @@ module Aws::S3
 
     class ListObjectsV2
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1796,15 +1598,12 @@ module Aws::S3
 
     class ListParts
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1823,15 +1622,12 @@ module Aws::S3
 
     class PutBucketAccelerateConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1850,15 +1646,12 @@ module Aws::S3
 
     class PutBucketAcl
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1877,15 +1670,12 @@ module Aws::S3
 
     class PutBucketAnalyticsConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1904,15 +1694,12 @@ module Aws::S3
 
     class PutBucketCors
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1931,15 +1718,12 @@ module Aws::S3
 
     class PutBucketEncryption
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1958,15 +1742,12 @@ module Aws::S3
 
     class PutBucketIntelligentTieringConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -1985,15 +1766,12 @@ module Aws::S3
 
     class PutBucketInventoryConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2012,15 +1790,12 @@ module Aws::S3
 
     class PutBucketLifecycle
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2039,15 +1814,12 @@ module Aws::S3
 
     class PutBucketLifecycleConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2066,15 +1838,12 @@ module Aws::S3
 
     class PutBucketLogging
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2093,15 +1862,12 @@ module Aws::S3
 
     class PutBucketMetricsConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2120,15 +1886,12 @@ module Aws::S3
 
     class PutBucketNotification
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2147,15 +1910,12 @@ module Aws::S3
 
     class PutBucketNotificationConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2174,15 +1934,12 @@ module Aws::S3
 
     class PutBucketOwnershipControls
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2201,15 +1958,12 @@ module Aws::S3
 
     class PutBucketPolicy
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2228,15 +1982,12 @@ module Aws::S3
 
     class PutBucketReplication
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2255,15 +2006,12 @@ module Aws::S3
 
     class PutBucketRequestPayment
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2282,15 +2030,12 @@ module Aws::S3
 
     class PutBucketTagging
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2309,15 +2054,12 @@ module Aws::S3
 
     class PutBucketVersioning
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2336,15 +2078,12 @@ module Aws::S3
 
     class PutBucketWebsite
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2363,15 +2102,12 @@ module Aws::S3
 
     class PutObject
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2390,15 +2126,12 @@ module Aws::S3
 
     class PutObjectAcl
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2417,15 +2150,12 @@ module Aws::S3
 
     class PutObjectLegalHold
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2444,15 +2174,12 @@ module Aws::S3
 
     class PutObjectLockConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2471,15 +2198,12 @@ module Aws::S3
 
     class PutObjectRetention
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2498,15 +2222,12 @@ module Aws::S3
 
     class PutObjectTagging
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2525,15 +2246,12 @@ module Aws::S3
 
     class PutPublicAccessBlock
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2552,15 +2270,12 @@ module Aws::S3
 
     class RestoreObject
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2579,15 +2294,12 @@ module Aws::S3
 
     class SelectObjectContent
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2606,15 +2318,12 @@ module Aws::S3
 
     class UploadPart
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2633,15 +2342,12 @@ module Aws::S3
 
     class UploadPartCopy
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: context.params[:bucket],
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',
@@ -2660,15 +2366,12 @@ module Aws::S3
 
     class WriteGetObjectResponse
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::S3::EndpointParameters.new(
           bucket: nil,
           region: context.config.region,
           use_fips: context.config.use_fips_endpoint,
           use_dual_stack: context[:use_dualstack_endpoint],
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           force_path_style: context.config.force_path_style,
           accelerate: context[:use_accelerate_endpoint],
           use_global_endpoint: context.config.s3_us_east_1_regional_endpoint == 'legacy',

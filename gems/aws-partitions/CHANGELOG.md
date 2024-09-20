@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.977.0 (2024-09-18)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::DirectoryServiceData`.
+
+1.976.0 (2024-09-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.975.0 (2024-09-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.974.0 (2024-09-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.973.0 (2024-09-10)
 ------------------
 

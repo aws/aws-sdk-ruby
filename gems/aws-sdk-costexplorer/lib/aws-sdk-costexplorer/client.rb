@@ -2045,10 +2045,11 @@ module Aws::CostExplorer
     #     is with. Possible values are the following:
     #
     #     \- Amazon Web Services(Amazon Web Services): The entity that sells
-    #     Amazon Web Services.
+    #     Amazon Web Servicesservices.
     #
     #     \- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian
-    #     entity that's an acting reseller for Amazon Web Services in India.
+    #     entity that's an acting reseller for Amazon Web Servicesservices in
+    #     India.
     #
     #     \- Amazon Web Services Marketplace: The entity that supports the sale
     #     of solutions that are built on Amazon Web Services by third-party
@@ -2930,6 +2931,12 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].estimated_reservation_cost_for_lookback_period #=> String
     #   resp.recommendations[0].recommendation_details[0].upfront_cost #=> String
     #   resp.recommendations[0].recommendation_details[0].recurring_standard_monthly_cost #=> String
+    #   resp.recommendations[0].recommendation_details[0].reserved_capacity_details.dynamo_db_capacity_details.capacity_units #=> String
+    #   resp.recommendations[0].recommendation_details[0].reserved_capacity_details.dynamo_db_capacity_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].recommended_number_of_capacity_units_to_purchase #=> String
+    #   resp.recommendations[0].recommendation_details[0].minimum_number_of_capacity_units_used_per_hour #=> String
+    #   resp.recommendations[0].recommendation_details[0].maximum_number_of_capacity_units_used_per_hour #=> String
+    #   resp.recommendations[0].recommendation_details[0].average_number_of_capacity_units_used_per_hour #=> String
     #   resp.recommendations[0].recommendation_summary.total_estimated_monthly_savings_amount #=> String
     #   resp.recommendations[0].recommendation_summary.total_estimated_monthly_savings_percentage #=> String
     #   resp.recommendations[0].recommendation_summary.currency_code #=> String
@@ -5347,7 +5354,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

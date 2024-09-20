@@ -79,7 +79,7 @@ module Aws::CodeConnections
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of the connection. The ARN is used as
     #   the connection reference when the connection is shared between
-    #   Amazon Web Services.
+    #   Amazon Web Servicesservices.
     #
     #   <note markdown="1"> The ARN is never reused if the connection is deleted.
     #
@@ -316,6 +316,11 @@ module Aws::CodeConnections
     #   When to trigger Git sync to begin the stack update.
     #   @return [String]
     #
+    # @!attribute [rw] pull_request_comment
+    #   A toggle that specifies whether to enable or disable pull request
+    #   comments for the sync configuration to be created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/CreateSyncConfigurationInput AWS API Documentation
     #
     class CreateSyncConfigurationInput < Struct.new(
@@ -326,7 +331,8 @@ module Aws::CodeConnections
       :role_arn,
       :sync_type,
       :publish_deployment_status,
-      :trigger_resource_update_on)
+      :trigger_resource_update_on,
+      :pull_request_comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1490,6 +1496,11 @@ module Aws::CodeConnections
     #   When to trigger Git sync to begin the stack update.
     #   @return [String]
     #
+    # @!attribute [rw] pull_request_comment
+    #   A toggle that specifies whether to enable or disable pull request
+    #   comments for the sync configuration to be created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/SyncConfiguration AWS API Documentation
     #
     class SyncConfiguration < Struct.new(
@@ -1503,7 +1514,8 @@ module Aws::CodeConnections
       :role_arn,
       :sync_type,
       :publish_deployment_status,
-      :trigger_resource_update_on)
+      :trigger_resource_update_on,
+      :pull_request_comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1789,6 +1801,11 @@ module Aws::CodeConnections
     #   When to trigger Git sync to begin the stack update.
     #   @return [String]
     #
+    # @!attribute [rw] pull_request_comment
+    #   TA toggle that specifies whether to enable or disable pull request
+    #   comments for the sync configuration to be updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/UpdateSyncConfigurationInput AWS API Documentation
     #
     class UpdateSyncConfigurationInput < Struct.new(
@@ -1799,7 +1816,8 @@ module Aws::CodeConnections
       :role_arn,
       :sync_type,
       :publish_deployment_status,
-      :trigger_resource_update_on)
+      :trigger_resource_update_on,
+      :pull_request_comment)
       SENSITIVE = []
       include Aws::Structure
     end

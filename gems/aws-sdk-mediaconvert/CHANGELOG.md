@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2024-09-19)
+------------------
+
+* Feature - This release provides support for additional DRM configurations per SPEKE Version 2.0.
+
+1.138.0 (2024-09-12)
+------------------
+
+* Feature - This release includes support for dynamic video overlay workflows, including picture-in-picture and squeezeback
+
+1.137.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.136.0 (2024-09-10)
 ------------------
 

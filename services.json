@@ -359,6 +359,9 @@
   "DirectoryService": {
     "models": "ds/2015-04-16"
   },
+  "DirectoryServiceData": {
+    "models": "directory-service-data/2023-05-31"
+  },
   "DocDB": {
     "models": "docdb/2014-10-31",
     "addPlugins": [
@@ -1240,9 +1243,6 @@
   },
   "WorkDocs": {
     "models": "workdocs/2016-05-01"
-  },
-  "WorkLink": {
-    "models": "worklink/2018-09-25"
   },
   "WorkMail": {
     "models": "workmail/2017-10-01"

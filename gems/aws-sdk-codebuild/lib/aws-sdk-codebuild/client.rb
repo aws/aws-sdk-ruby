@@ -974,7 +974,7 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.last_modified_secret #=> Time
     #   resp.projects[0].webhook.scope_configuration.name #=> String
     #   resp.projects[0].webhook.scope_configuration.domain #=> String
-    #   resp.projects[0].webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL"
+    #   resp.projects[0].webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.projects[0].vpc_config.subnets #=> Array
     #   resp.projects[0].vpc_config.subnets[0] #=> String
@@ -1741,7 +1741,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.webhook.scope_configuration.name #=> String
     #   resp.project.webhook.scope_configuration.domain #=> String
-    #   resp.project.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL"
+    #   resp.project.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
     #   resp.project.vpc_config.subnets[0] #=> String
@@ -1943,7 +1943,7 @@ module Aws::CodeBuild
     #     scope_configuration: {
     #       name: "String", # required
     #       domain: "String",
-    #       scope: "GITHUB_ORGANIZATION", # required, accepts GITHUB_ORGANIZATION, GITHUB_GLOBAL
+    #       scope: "GITHUB_ORGANIZATION", # required, accepts GITHUB_ORGANIZATION, GITHUB_GLOBAL, GITLAB_GROUP
     #     },
     #   })
     #
@@ -1963,7 +1963,7 @@ module Aws::CodeBuild
     #   resp.webhook.last_modified_secret #=> Time
     #   resp.webhook.scope_configuration.name #=> String
     #   resp.webhook.scope_configuration.domain #=> String
-    #   resp.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL"
+    #   resp.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
     #
@@ -5565,7 +5565,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.webhook.scope_configuration.name #=> String
     #   resp.project.webhook.scope_configuration.domain #=> String
-    #   resp.project.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL"
+    #   resp.project.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
     #   resp.project.vpc_config.subnets[0] #=> String
@@ -5837,7 +5837,7 @@ module Aws::CodeBuild
     #   resp.webhook.last_modified_secret #=> Time
     #   resp.webhook.scope_configuration.name #=> String
     #   resp.webhook.scope_configuration.domain #=> String
-    #   resp.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL"
+    #   resp.webhook.scope_configuration.scope #=> String, one of "GITHUB_ORGANIZATION", "GITHUB_GLOBAL", "GITLAB_GROUP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook AWS API Documentation
     #
@@ -5866,7 +5866,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.127.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

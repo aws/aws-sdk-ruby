@@ -841,6 +841,7 @@ module Aws::MailManager
     #             string_expression: {
     #               evaluate: { # required
     #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
+    #                 mime_header_attribute: "MimeHeaderAttribute",
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
     #               values: ["RuleStringValue"], # required
@@ -888,6 +889,7 @@ module Aws::MailManager
     #             string_expression: {
     #               evaluate: { # required
     #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
+    #                 mime_header_attribute: "MimeHeaderAttribute",
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
     #               values: ["RuleStringValue"], # required
@@ -1667,6 +1669,7 @@ module Aws::MailManager
     #   resp.rules[0].conditions[0].number_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "GREATER_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN_OR_EQUAL"
     #   resp.rules[0].conditions[0].number_expression.value #=> Float
     #   resp.rules[0].conditions[0].string_expression.evaluate.attribute #=> String, one of "MAIL_FROM", "HELO", "RECIPIENT", "SENDER", "FROM", "SUBJECT", "TO", "CC"
+    #   resp.rules[0].conditions[0].string_expression.evaluate.mime_header_attribute #=> String
     #   resp.rules[0].conditions[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
     #   resp.rules[0].conditions[0].string_expression.values #=> Array
     #   resp.rules[0].conditions[0].string_expression.values[0] #=> String
@@ -1691,6 +1694,7 @@ module Aws::MailManager
     #   resp.rules[0].unless[0].number_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "GREATER_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN_OR_EQUAL"
     #   resp.rules[0].unless[0].number_expression.value #=> Float
     #   resp.rules[0].unless[0].string_expression.evaluate.attribute #=> String, one of "MAIL_FROM", "HELO", "RECIPIENT", "SENDER", "FROM", "SUBJECT", "TO", "CC"
+    #   resp.rules[0].unless[0].string_expression.evaluate.mime_header_attribute #=> String
     #   resp.rules[0].unless[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
     #   resp.rules[0].unless[0].string_expression.values #=> Array
     #   resp.rules[0].unless[0].string_expression.values[0] #=> String
@@ -2240,7 +2244,7 @@ module Aws::MailManager
     #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
-    #             values: ["String"], # required
+    #             values: ["StringValue"], # required
     #           },
     #         },
     #       ],
@@ -2257,7 +2261,7 @@ module Aws::MailManager
     #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
-    #             values: ["String"], # required
+    #             values: ["StringValue"], # required
     #           },
     #         },
     #       ],
@@ -2319,7 +2323,7 @@ module Aws::MailManager
     #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
-    #             values: ["String"], # required
+    #             values: ["StringValue"], # required
     #           },
     #         },
     #       ],
@@ -2336,7 +2340,7 @@ module Aws::MailManager
     #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
-    #             values: ["String"], # required
+    #             values: ["StringValue"], # required
     #           },
     #         },
     #       ],
@@ -2586,7 +2590,7 @@ module Aws::MailManager
       req.send_request(options)
     end
 
-    # &gt;Update attributes of an already provisioned rule set.
+    # Update attributes of an already provisioned rule set.
     #
     # @option params [required, String] :rule_set_id
     #   The identifier of a rule set you want to update.
@@ -2674,6 +2678,7 @@ module Aws::MailManager
     #             string_expression: {
     #               evaluate: { # required
     #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
+    #                 mime_header_attribute: "MimeHeaderAttribute",
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
     #               values: ["RuleStringValue"], # required
@@ -2721,6 +2726,7 @@ module Aws::MailManager
     #             string_expression: {
     #               evaluate: { # required
     #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
+    #                 mime_header_attribute: "MimeHeaderAttribute",
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
     #               values: ["RuleStringValue"], # required
@@ -2848,7 +2854,7 @@ module Aws::MailManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mailmanager'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

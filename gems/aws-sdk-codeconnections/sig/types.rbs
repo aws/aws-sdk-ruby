@@ -90,6 +90,7 @@ module Aws::CodeConnections
       attr_accessor sync_type: ("CFN_STACK_SYNC")
       attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
       attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
+      attr_accessor pull_request_comment: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -436,6 +437,7 @@ module Aws::CodeConnections
       attr_accessor sync_type: ("CFN_STACK_SYNC")
       attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
       attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
+      attr_accessor pull_request_comment: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -534,6 +536,7 @@ module Aws::CodeConnections
       attr_accessor sync_type: ("CFN_STACK_SYNC")
       attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
       attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
+      attr_accessor pull_request_comment: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

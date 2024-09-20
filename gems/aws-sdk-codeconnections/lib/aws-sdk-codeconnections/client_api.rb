@@ -94,6 +94,7 @@ module Aws::CodeConnections
     Parent = Shapes::StringShape.new(name: 'Parent')
     ProviderType = Shapes::StringShape.new(name: 'ProviderType')
     PublishDeploymentStatus = Shapes::StringShape.new(name: 'PublishDeploymentStatus')
+    PullRequestComment = Shapes::StringShape.new(name: 'PullRequestComment')
     RepositoryLinkArn = Shapes::StringShape.new(name: 'RepositoryLinkArn')
     RepositoryLinkId = Shapes::StringShape.new(name: 'RepositoryLinkId')
     RepositoryLinkInfo = Shapes::StructureShape.new(name: 'RepositoryLinkInfo')
@@ -224,6 +225,7 @@ module Aws::CodeConnections
     CreateSyncConfigurationInput.add_member(:sync_type, Shapes::ShapeRef.new(shape: SyncConfigurationType, required: true, location_name: "SyncType"))
     CreateSyncConfigurationInput.add_member(:publish_deployment_status, Shapes::ShapeRef.new(shape: PublishDeploymentStatus, location_name: "PublishDeploymentStatus"))
     CreateSyncConfigurationInput.add_member(:trigger_resource_update_on, Shapes::ShapeRef.new(shape: TriggerResourceUpdateOn, location_name: "TriggerResourceUpdateOn"))
+    CreateSyncConfigurationInput.add_member(:pull_request_comment, Shapes::ShapeRef.new(shape: PullRequestComment, location_name: "PullRequestComment"))
     CreateSyncConfigurationInput.struct_class = Types::CreateSyncConfigurationInput
 
     CreateSyncConfigurationOutput.add_member(:sync_configuration, Shapes::ShapeRef.new(shape: SyncConfiguration, required: true, location_name: "SyncConfiguration"))
@@ -482,6 +484,7 @@ module Aws::CodeConnections
     SyncConfiguration.add_member(:sync_type, Shapes::ShapeRef.new(shape: SyncConfigurationType, required: true, location_name: "SyncType"))
     SyncConfiguration.add_member(:publish_deployment_status, Shapes::ShapeRef.new(shape: PublishDeploymentStatus, location_name: "PublishDeploymentStatus"))
     SyncConfiguration.add_member(:trigger_resource_update_on, Shapes::ShapeRef.new(shape: TriggerResourceUpdateOn, location_name: "TriggerResourceUpdateOn"))
+    SyncConfiguration.add_member(:pull_request_comment, Shapes::ShapeRef.new(shape: PullRequestComment, location_name: "PullRequestComment"))
     SyncConfiguration.struct_class = Types::SyncConfiguration
 
     SyncConfigurationList.member = Shapes::ShapeRef.new(shape: SyncConfiguration)
@@ -555,6 +558,7 @@ module Aws::CodeConnections
     UpdateSyncConfigurationInput.add_member(:sync_type, Shapes::ShapeRef.new(shape: SyncConfigurationType, required: true, location_name: "SyncType"))
     UpdateSyncConfigurationInput.add_member(:publish_deployment_status, Shapes::ShapeRef.new(shape: PublishDeploymentStatus, location_name: "PublishDeploymentStatus"))
     UpdateSyncConfigurationInput.add_member(:trigger_resource_update_on, Shapes::ShapeRef.new(shape: TriggerResourceUpdateOn, location_name: "TriggerResourceUpdateOn"))
+    UpdateSyncConfigurationInput.add_member(:pull_request_comment, Shapes::ShapeRef.new(shape: PullRequestComment, location_name: "PullRequestComment"))
     UpdateSyncConfigurationInput.struct_class = Types::UpdateSyncConfigurationInput
 
     UpdateSyncConfigurationOutput.add_member(:sync_configuration, Shapes::ShapeRef.new(shape: SyncConfiguration, required: true, location_name: "SyncConfiguration"))

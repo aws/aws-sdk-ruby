@@ -14,7 +14,7 @@ module Aws::NeptuneGraph
   describe EndpointProvider do
     subject { Aws::NeptuneGraph::EndpointProvider.new }
 
-    context 'Region and CP ApiType are provided' do
+    context "Region and CP ApiType are provided" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mycustomDomain.com"}}
       end
@@ -28,7 +28,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Region and DP ApiType are provided' do
+    context "Region and DP ApiType are provided" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mycustomDomain.com"}}
       end
@@ -42,7 +42,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Region and invalid ApiType are provided' do
+    context "Region and invalid ApiType are provided" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mycustomDomain.com"}}
       end
@@ -56,7 +56,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Only invalid ApiType is provided' do
+    context "Only invalid ApiType is provided" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mycustomDomain.com"}}
       end
@@ -70,7 +70,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.us-east-1.api.aws"}}
       end
@@ -84,7 +84,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -97,7 +97,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.us-east-1.amazonaws.com"}}
       end
@@ -111,7 +111,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -124,7 +124,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-east-1.api.aws"}}
       end
@@ -138,7 +138,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-east-1.on.aws"}}
       end
@@ -152,7 +152,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-east-1.amazonaws.com"}}
       end
@@ -166,7 +166,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://us-east-1.neptune-graph.amazonaws.com"}}
       end
@@ -180,7 +180,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.us-east-2.api.aws"}}
       end
@@ -194,7 +194,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -207,7 +207,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.us-east-2.amazonaws.com"}}
       end
@@ -221,7 +221,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -234,7 +234,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-east-2.api.aws"}}
       end
@@ -248,7 +248,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-east-2.on.aws"}}
       end
@@ -262,7 +262,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-east-2.amazonaws.com"}}
       end
@@ -276,7 +276,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://us-east-2.neptune-graph.amazonaws.com"}}
       end
@@ -290,7 +290,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.us-west-2.api.aws"}}
       end
@@ -304,7 +304,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -317,7 +317,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.us-west-2.amazonaws.com"}}
       end
@@ -331,7 +331,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -344,7 +344,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-west-2.api.aws"}}
       end
@@ -358,7 +358,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-west-2.on.aws"}}
       end
@@ -372,7 +372,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.us-west-2.amazonaws.com"}}
       end
@@ -386,7 +386,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://us-west-2.neptune-graph.amazonaws.com"}}
       end
@@ -400,7 +400,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.eu-west-1.api.aws"}}
       end
@@ -414,7 +414,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -427,7 +427,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.eu-west-1.amazonaws.com"}}
       end
@@ -441,7 +441,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -454,7 +454,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-west-1.api.aws"}}
       end
@@ -468,7 +468,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-west-1.on.aws"}}
       end
@@ -482,7 +482,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-west-1.amazonaws.com"}}
       end
@@ -496,7 +496,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://eu-west-1.neptune-graph.amazonaws.com"}}
       end
@@ -510,7 +510,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.eu-west-2.api.aws"}}
       end
@@ -524,7 +524,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -537,7 +537,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.eu-west-2.amazonaws.com"}}
       end
@@ -551,7 +551,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -564,7 +564,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-west-2.api.aws"}}
       end
@@ -578,7 +578,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-west-2.on.aws"}}
       end
@@ -592,7 +592,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-west-2.amazonaws.com"}}
       end
@@ -606,7 +606,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://eu-west-2.neptune-graph.amazonaws.com"}}
       end
@@ -620,7 +620,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.eu-central-1.api.aws"}}
       end
@@ -634,7 +634,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -647,7 +647,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.eu-central-1.amazonaws.com"}}
       end
@@ -661,7 +661,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -674,7 +674,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-central-1.api.aws"}}
       end
@@ -688,7 +688,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-central-1.on.aws"}}
       end
@@ -702,7 +702,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.eu-central-1.amazonaws.com"}}
       end
@@ -716,7 +716,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://eu-central-1.neptune-graph.amazonaws.com"}}
       end
@@ -730,7 +730,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.ap-southeast-1.api.aws"}}
       end
@@ -744,7 +744,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -757,7 +757,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.ap-southeast-1.amazonaws.com"}}
       end
@@ -771,7 +771,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -784,7 +784,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.ap-southeast-1.api.aws"}}
       end
@@ -798,7 +798,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.ap-southeast-1.on.aws"}}
       end
@@ -812,7 +812,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.ap-southeast-1.amazonaws.com"}}
       end
@@ -826,7 +826,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://ap-southeast-1.neptune-graph.amazonaws.com"}}
       end
@@ -840,7 +840,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.ap-northeast-1.api.aws"}}
       end
@@ -854,7 +854,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -867,7 +867,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph-fips.ap-northeast-1.amazonaws.com"}}
       end
@@ -881,7 +881,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false" do
       let(:expected) do
         {"error"=>"Invalid Configuration: fips endpoint is not supported for this API"}
       end
@@ -894,7 +894,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.ap-northeast-1.api.aws"}}
       end
@@ -908,7 +908,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true' do
+    context "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.ap-northeast-1.on.aws"}}
       end
@@ -922,7 +922,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://neptune-graph.ap-northeast-1.amazonaws.com"}}
       end
@@ -936,7 +936,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false' do
+    context "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://ap-northeast-1.neptune-graph.amazonaws.com"}}
       end
@@ -950,7 +950,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate When no region is provided' do
+    context "Validate When no region is provided" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end
@@ -963,7 +963,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Validate When invalid/unknown ApiType provided' do
+    context "Validate When invalid/unknown ApiType provided" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Unknown ApiType"}
       end
@@ -976,7 +976,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Both Fips and dualstack enabled' do
+    context "Both Fips and dualstack enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -989,7 +989,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Fips enabled and dualstack disabled' do
+    context "Fips enabled and dualstack disabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -1002,7 +1002,7 @@ module Aws::NeptuneGraph
       end
     end
 
-    context 'Fips disabled and dualstack enabled' do
+    context "Fips disabled and dualstack enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end

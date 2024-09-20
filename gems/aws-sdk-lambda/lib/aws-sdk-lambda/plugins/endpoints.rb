@@ -40,10 +40,19 @@ module Aws::Lambda
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          @handler.call(context)
+          with_metrics(context) { @handler.call(context) }
         end
 
         private
+
+        def with_metrics(context, &block)
+          metrics = []
+          metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
+          if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
+            metrics << 'SIGV4A_SIGNING'
+          end
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, values|
@@ -92,6 +101,8 @@ module Aws::Lambda
             Aws::Lambda::Endpoints::DeleteLayerVersion.build(context)
           when :delete_provisioned_concurrency_config
             Aws::Lambda::Endpoints::DeleteProvisionedConcurrencyConfig.build(context)
+          when :delete_resource_policy
+            Aws::Lambda::Endpoints::DeleteResourcePolicy.build(context)
           when :get_account_settings
             Aws::Lambda::Endpoints::GetAccountSettings.build(context)
           when :get_alias
@@ -124,6 +135,10 @@ module Aws::Lambda
             Aws::Lambda::Endpoints::GetPolicy.build(context)
           when :get_provisioned_concurrency_config
             Aws::Lambda::Endpoints::GetProvisionedConcurrencyConfig.build(context)
+          when :get_public_access_block_config
+            Aws::Lambda::Endpoints::GetPublicAccessBlockConfig.build(context)
+          when :get_resource_policy
+            Aws::Lambda::Endpoints::GetResourcePolicy.build(context)
           when :get_runtime_management_config
             Aws::Lambda::Endpoints::GetRuntimeManagementConfig.build(context)
           when :invoke
@@ -170,6 +185,10 @@ module Aws::Lambda
             Aws::Lambda::Endpoints::PutFunctionRecursionConfig.build(context)
           when :put_provisioned_concurrency_config
             Aws::Lambda::Endpoints::PutProvisionedConcurrencyConfig.build(context)
+          when :put_public_access_block_config
+            Aws::Lambda::Endpoints::PutPublicAccessBlockConfig.build(context)
+          when :put_resource_policy
+            Aws::Lambda::Endpoints::PutResourcePolicy.build(context)
           when :put_runtime_management_config
             Aws::Lambda::Endpoints::PutRuntimeManagementConfig.build(context)
           when :remove_layer_version_permission

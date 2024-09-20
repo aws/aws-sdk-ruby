@@ -261,6 +261,7 @@ module Aws
                                      owner_id: ::Integer?
                                    },
                                    gateway_arn: ::String,
+                                   ?encryption_type: ("SseS3" | "SseKms" | "DsseKms"),
                                    ?kms_encrypted: bool,
                                    ?kms_key: ::String,
                                    role: ::String,
@@ -297,6 +298,7 @@ module Aws
       def create_smb_file_share: (
                                    client_token: ::String,
                                    gateway_arn: ::String,
+                                   ?encryption_type: ("SseS3" | "SseKms" | "DsseKms"),
                                    ?kms_encrypted: bool,
                                    ?kms_key: ::String,
                                    role: ::String,
@@ -1271,6 +1273,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_nfs_file_share-instance_method
       def update_nfs_file_share: (
                                    file_share_arn: ::String,
+                                   ?encryption_type: ("SseS3" | "SseKms" | "DsseKms"),
                                    ?kms_encrypted: bool,
                                    ?kms_key: ::String,
                                    ?nfs_file_share_defaults: {
@@ -1302,6 +1305,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_smb_file_share-instance_method
       def update_smb_file_share: (
                                    file_share_arn: ::String,
+                                   ?encryption_type: ("SseS3" | "SseKms" | "DsseKms"),
                                    ?kms_encrypted: bool,
                                    ?kms_key: ::String,
                                    ?default_storage_class: ::String,

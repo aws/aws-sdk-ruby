@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2024-09-17)
+------------------
+
+* Feature - GitLab Enhancements - Add support for Self-Hosted GitLab runners in CodeBuild. Add group webhooks
+
+1.128.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.127.0 (2024-09-10)
 ------------------
 

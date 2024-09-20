@@ -1014,9 +1014,13 @@ module Aws::Bedrock
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   VPC configuration (optional). Configuration parameters for the private
-    #   Virtual Private Cloud (VPC) that contains the resources you are using
-    #   for this job.
+    #   The configuration of the Virtual Private Cloud (VPC) that contains the
+    #   resources that you're using for this job. For more information, see
+    #   [Protect your model customization jobs using a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/vpc-model-customization.html
     #
     # @return [Types::CreateModelCustomizationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1219,6 +1223,15 @@ module Aws::Bedrock
     # @option params [required, Types::ModelInvocationJobOutputDataConfig] :output_data_config
     #   Details about the location of the output of the batch inference job.
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   The configuration of the Virtual Private Cloud (VPC) for the data in
+    #   the batch inference job. For more information, see [Protect batch
+    #   inference jobs using a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-vpc
+    #
     # @option params [Integer] :timeout_duration_in_hours
     #   The number of hours after which to force the batch inference job to
     #   time out.
@@ -1246,13 +1259,19 @@ module Aws::Bedrock
     #       s3_input_data_config: {
     #         s3_input_format: "JSONL", # accepts JSONL
     #         s3_uri: "S3Uri", # required
+    #         s3_bucket_owner: "AccountId",
     #       },
     #     },
     #     output_data_config: { # required
     #       s3_output_data_config: {
     #         s3_uri: "S3Uri", # required
     #         s3_encryption_key_id: "KmsKeyId",
+    #         s3_bucket_owner: "AccountId",
     #       },
+    #     },
+    #     vpc_config: {
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["SecurityGroupId"], # required
     #     },
     #     timeout_duration_in_hours: 1,
     #     tags: [
@@ -2107,6 +2126,7 @@ module Aws::Bedrock
     #   * {Types::GetModelInvocationJobResponse#end_time #end_time} => Time
     #   * {Types::GetModelInvocationJobResponse#input_data_config #input_data_config} => Types::ModelInvocationJobInputDataConfig
     #   * {Types::GetModelInvocationJobResponse#output_data_config #output_data_config} => Types::ModelInvocationJobOutputDataConfig
+    #   * {Types::GetModelInvocationJobResponse#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::GetModelInvocationJobResponse#timeout_duration_in_hours #timeout_duration_in_hours} => Integer
     #   * {Types::GetModelInvocationJobResponse#job_expiration_time #job_expiration_time} => Time
     #
@@ -2130,8 +2150,14 @@ module Aws::Bedrock
     #   resp.end_time #=> Time
     #   resp.input_data_config.s3_input_data_config.s3_input_format #=> String, one of "JSONL"
     #   resp.input_data_config.s3_input_data_config.s3_uri #=> String
+    #   resp.input_data_config.s3_input_data_config.s3_bucket_owner #=> String
     #   resp.output_data_config.s3_output_data_config.s3_uri #=> String
     #   resp.output_data_config.s3_output_data_config.s3_encryption_key_id #=> String
+    #   resp.output_data_config.s3_output_data_config.s3_bucket_owner #=> String
+    #   resp.vpc_config.subnet_ids #=> Array
+    #   resp.vpc_config.subnet_ids[0] #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.timeout_duration_in_hours #=> Integer
     #   resp.job_expiration_time #=> Time
     #
@@ -2999,8 +3025,14 @@ module Aws::Bedrock
     #   resp.invocation_job_summaries[0].end_time #=> Time
     #   resp.invocation_job_summaries[0].input_data_config.s3_input_data_config.s3_input_format #=> String, one of "JSONL"
     #   resp.invocation_job_summaries[0].input_data_config.s3_input_data_config.s3_uri #=> String
+    #   resp.invocation_job_summaries[0].input_data_config.s3_input_data_config.s3_bucket_owner #=> String
     #   resp.invocation_job_summaries[0].output_data_config.s3_output_data_config.s3_uri #=> String
     #   resp.invocation_job_summaries[0].output_data_config.s3_output_data_config.s3_encryption_key_id #=> String
+    #   resp.invocation_job_summaries[0].output_data_config.s3_output_data_config.s3_bucket_owner #=> String
+    #   resp.invocation_job_summaries[0].vpc_config.subnet_ids #=> Array
+    #   resp.invocation_job_summaries[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.invocation_job_summaries[0].vpc_config.security_group_ids #=> Array
+    #   resp.invocation_job_summaries[0].vpc_config.security_group_ids[0] #=> String
     #   resp.invocation_job_summaries[0].timeout_duration_in_hours #=> Integer
     #   resp.invocation_job_summaries[0].job_expiration_time #=> Time
     #
@@ -3562,7 +3594,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

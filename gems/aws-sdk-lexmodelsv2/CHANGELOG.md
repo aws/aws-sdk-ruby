@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2024-09-11)
+------------------
+
+* Feature - Support new Polly voice engines in VoiceSettings: long-form and generative
+
 1.59.0 (2024-09-10)
 ------------------
 

@@ -171,6 +171,7 @@ module Aws::Bedrock
       attr_accessor model_id: ::String
       attr_accessor input_data_config: Types::ModelInvocationJobInputDataConfig
       attr_accessor output_data_config: Types::ModelInvocationJobOutputDataConfig
+      attr_accessor vpc_config: Types::VpcConfig
       attr_accessor timeout_duration_in_hours: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -569,6 +570,7 @@ module Aws::Bedrock
       attr_accessor end_time: ::Time
       attr_accessor input_data_config: Types::ModelInvocationJobInputDataConfig
       attr_accessor output_data_config: Types::ModelInvocationJobOutputDataConfig
+      attr_accessor vpc_config: Types::VpcConfig
       attr_accessor timeout_duration_in_hours: ::Integer
       attr_accessor job_expiration_time: ::Time
       SENSITIVE: [:message]
@@ -1092,12 +1094,14 @@ module Aws::Bedrock
     class ModelInvocationJobS3InputDataConfig
       attr_accessor s3_input_format: ("JSONL")
       attr_accessor s3_uri: ::String
+      attr_accessor s3_bucket_owner: ::String
       SENSITIVE: []
     end
 
     class ModelInvocationJobS3OutputDataConfig
       attr_accessor s3_uri: ::String
       attr_accessor s3_encryption_key_id: ::String
+      attr_accessor s3_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -1114,6 +1118,7 @@ module Aws::Bedrock
       attr_accessor end_time: ::Time
       attr_accessor input_data_config: Types::ModelInvocationJobInputDataConfig
       attr_accessor output_data_config: Types::ModelInvocationJobOutputDataConfig
+      attr_accessor vpc_config: Types::VpcConfig
       attr_accessor timeout_duration_in_hours: ::Integer
       attr_accessor job_expiration_time: ::Time
       SENSITIVE: [:message]

@@ -1027,8 +1027,7 @@ module Aws::RDS
     #   The number of seconds for a proxy to wait for a connection to become
     #   available in the connection pool. This setting only applies when the
     #   proxy has opened its maximum number of connections and all
-    #   connections are busy with client sessions. For an unlimited wait
-    #   time, specify `0`.
+    #   connections are busy with client sessions.
     #
     #   Default: `120`
     #
@@ -3601,6 +3600,9 @@ module Aws::RDS
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB
     #     instances)
     #
+    #   * `custom-sqlserver-dev` (for RDS Custom for SQL Server DB
+    #     instances)
+    #
     #   * `db2-ae`
     #
     #   * `db2-se`
@@ -3730,7 +3732,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #   @return [String]
@@ -3951,10 +3953,11 @@ module Aws::RDS
     #
     #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
     #   Bring Your Own License (BYOL) model requires a custom parameter
-    #   group. The Db2 license through Amazon Web Services Marketplace model
-    #   requires an Amazon Web Services Marketplace subscription. For more
-    #   information, see [RDS for Db2 licensing options][1] in the *Amazon
-    #   RDS User Guide*.
+    #   group and an Amazon Web Services License Manager self-managed
+    #   license. The Db2 license through Amazon Web Services Marketplace
+    #   model requires an Amazon Web Services Marketplace subscription. For
+    #   more information, see [Amazon RDS for Db2 licensing options][1] in
+    #   the *Amazon RDS User Guide*.
     #
     #    The default for RDS for Db2 is `bring-your-own-license`.
     #
@@ -5081,9 +5084,6 @@ module Aws::RDS
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a presigned URL that is a valid request for the
     #   operation that can run in the source Amazon Web Services Region.
-    #
-    #    `SourceRegion` isn't supported for SQL Server, because Amazon RDS
-    #   for SQL Server doesn't support cross-Region read replicas.
     #
     #    </note>
     #
@@ -6303,6 +6303,10 @@ module Aws::RDS
     #   ^
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   Tags to assign to the global cluster.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalClusterMessage AWS API Documentation
     #
     class CreateGlobalClusterMessage < Struct.new(
@@ -6313,7 +6317,8 @@ module Aws::RDS
       :engine_lifecycle_support,
       :deletion_protection,
       :database_name,
-      :storage_encrypted)
+      :storage_encrypted,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9779,7 +9784,21 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] parameter_apply_status
-    #   The status of parameter updates.
+    #   The status of parameter updates. Valid values are:
+    #
+    #   * `applying`: The parameter group change is being applied to the
+    #     database.
+    #
+    #   * `failed-to-apply`: The parameter group is in an invalid state.
+    #
+    #   * `in-sync`: The parameter group change is synchronized with the
+    #     database.
+    #
+    #   * `pending-database-upgrade`: The parameter group change will be
+    #     applied after the DB instance is upgraded.
+    #
+    #   * `pending-reboot`: The parameter group change will be applied after
+    #     the DB instance reboots.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupStatus AWS API Documentation
@@ -16081,6 +16100,19 @@ module Aws::RDS
     #   called on this global cluster.
     #   @return [Types::FailoverState]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalCluster AWS API Documentation
     #
     class GlobalCluster < Struct.new(
@@ -16095,7 +16127,8 @@ module Aws::RDS
       :storage_encrypted,
       :deletion_protection,
       :global_cluster_members,
-      :failover_state)
+      :failover_state,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24139,10 +24172,11 @@ module Aws::RDS
     #
     #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
     #   Bring Your Own License (BYOL) model requires a custom parameter
-    #   group. The Db2 license through Amazon Web Services Marketplace model
-    #   requires an Amazon Web Services Marketplace subscription. For more
-    #   information, see [RDS for Db2 licensing options][1] in the *Amazon
-    #   RDS User Guide*.
+    #   group and an Amazon Web Services License Manager self-managed
+    #   license. The Db2 license through Amazon Web Services Marketplace
+    #   model requires an Amazon Web Services Marketplace subscription. For
+    #   more information, see [Amazon RDS for Db2 licensing options][1] in
+    #   the *Amazon RDS User Guide*.
     #
     #    </note>
     #
@@ -25545,10 +25579,11 @@ module Aws::RDS
     #
     #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
     #   Bring Your Own License (BYOL) model requires a custom parameter
-    #   group. The Db2 license through Amazon Web Services Marketplace model
-    #   requires an Amazon Web Services Marketplace subscription. For more
-    #   information, see [RDS for Db2 licensing options][1] in the *Amazon
-    #   RDS User Guide*.
+    #   group and an Amazon Web Services License Manager self-managed
+    #   license. The Db2 license through Amazon Web Services Marketplace
+    #   model requires an Amazon Web Services Marketplace subscription. For
+    #   more information, see [Amazon RDS for Db2 licensing options][1] in
+    #   the *Amazon RDS User Guide*.
     #
     #    </note>
     #

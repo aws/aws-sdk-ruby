@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2024-09-17)
+------------------
+
+* Feature - Support for additional levels of cross-account, cross-Region organizational units in Automation. Various documentation updates.
+
+1.178.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.177.0 (2024-09-10)
 ------------------
 

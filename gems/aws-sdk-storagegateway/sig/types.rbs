@@ -216,6 +216,7 @@ module Aws::StorageGateway
       attr_accessor client_token: ::String
       attr_accessor nfs_file_share_defaults: Types::NFSFileShareDefaults
       attr_accessor gateway_arn: ::String
+      attr_accessor encryption_type: ("SseS3" | "SseKms" | "DsseKms")
       attr_accessor kms_encrypted: bool
       attr_accessor kms_key: ::String
       attr_accessor role: ::String
@@ -245,6 +246,7 @@ module Aws::StorageGateway
     class CreateSMBFileShareInput
       attr_accessor client_token: ::String
       attr_accessor gateway_arn: ::String
+      attr_accessor encryption_type: ("SseS3" | "SseKms" | "DsseKms")
       attr_accessor kms_encrypted: bool
       attr_accessor kms_key: ::String
       attr_accessor role: ::String
@@ -1038,6 +1040,7 @@ module Aws::StorageGateway
       attr_accessor file_share_id: ::String
       attr_accessor file_share_status: ::String
       attr_accessor gateway_arn: ::String
+      attr_accessor encryption_type: ("SseS3" | "SseKms" | "DsseKms")
       attr_accessor kms_encrypted: bool
       attr_accessor kms_key: ::String
       attr_accessor path: ::String
@@ -1149,6 +1152,7 @@ module Aws::StorageGateway
       attr_accessor file_share_id: ::String
       attr_accessor file_share_status: ::String
       attr_accessor gateway_arn: ::String
+      attr_accessor encryption_type: ("SseS3" | "SseKms" | "DsseKms")
       attr_accessor kms_encrypted: bool
       attr_accessor kms_key: ::String
       attr_accessor path: ::String
@@ -1434,6 +1438,7 @@ module Aws::StorageGateway
 
     class UpdateNFSFileShareInput
       attr_accessor file_share_arn: ::String
+      attr_accessor encryption_type: ("SseS3" | "SseKms" | "DsseKms")
       attr_accessor kms_encrypted: bool
       attr_accessor kms_key: ::String
       attr_accessor nfs_file_share_defaults: Types::NFSFileShareDefaults
@@ -1458,6 +1463,7 @@ module Aws::StorageGateway
 
     class UpdateSMBFileShareInput
       attr_accessor file_share_arn: ::String
+      attr_accessor encryption_type: ("SseS3" | "SseKms" | "DsseKms")
       attr_accessor kms_encrypted: bool
       attr_accessor kms_key: ::String
       attr_accessor default_storage_class: ::String

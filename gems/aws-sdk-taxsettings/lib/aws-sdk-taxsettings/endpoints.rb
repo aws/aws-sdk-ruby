@@ -14,13 +14,10 @@ module Aws::TaxSettings
 
     class BatchDeleteTaxRegistration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::TaxSettings::EndpointParameters.new(
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -28,13 +25,10 @@ module Aws::TaxSettings
 
     class BatchPutTaxRegistration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::TaxSettings::EndpointParameters.new(
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -42,13 +36,10 @@ module Aws::TaxSettings
 
     class DeleteTaxRegistration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::TaxSettings::EndpointParameters.new(
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -56,13 +47,10 @@ module Aws::TaxSettings
 
     class GetTaxRegistration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::TaxSettings::EndpointParameters.new(
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -70,13 +58,10 @@ module Aws::TaxSettings
 
     class GetTaxRegistrationDocument
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::TaxSettings::EndpointParameters.new(
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -84,13 +69,10 @@ module Aws::TaxSettings
 
     class ListTaxRegistrations
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::TaxSettings::EndpointParameters.new(
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -98,13 +80,10 @@ module Aws::TaxSettings
 
     class PutTaxRegistration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::TaxSettings::EndpointParameters.new(
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end

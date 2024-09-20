@@ -110,6 +110,7 @@ module Aws
                             wait_minutes: ::Integer?
                           },
                         ],
+                        ?job_engine_version: ::String,
                         ?job_template: ::String,
                         ?priority: ::Integer,
                         ?queue: ::String,
@@ -153,7 +154,7 @@ module Aws
                                   audio_selector_names: Array[::String]?
                                 }]?,
                               audio_selectors: Hash[::String, {
-                                  audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME")?,
+                                  audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME" | "FORCE")?,
                                   custom_language_code: ::String?,
                                   default_selection: ("DEFAULT" | "NOT_DEFAULT")?,
                                   external_audio_file_input: ::String?,
@@ -202,6 +203,7 @@ module Aws
                                       terminate_captions: ("END_OF_INPUT" | "DISABLED")?
                                     }?,
                                     file_source_settings: {
+                                      byte_rate_limit: ("ENABLED" | "DISABLED")?,
                                       convert_608_to_708: ("UPCONVERT" | "DISABLED")?,
                                       convert_paint_to_pop: ("ENABLED" | "DISABLED")?,
                                       framerate: {
@@ -290,6 +292,13 @@ module Aws
                               video_overlays: Array[
                                 {
                                   end_timecode: ::String?,
+                                  initial_position: {
+                                    height: ::Integer?,
+                                    unit: ("PIXELS" | "PERCENTAGE")?,
+                                    width: ::Integer?,
+                                    x_position: ::Integer?,
+                                    y_position: ::Integer?
+                                  }?,
                                   input: {
                                     file_input: ::String?,
                                     input_clippings: Array[
@@ -301,7 +310,21 @@ module Aws
                                     timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")?,
                                     timecode_start: ::String?
                                   }?,
-                                  start_timecode: ::String?
+                                  playback: ("ONCE" | "REPEAT")?,
+                                  start_timecode: ::String?,
+                                  transitions: Array[
+                                    {
+                                      end_position: {
+                                        height: ::Integer?,
+                                        unit: ("PIXELS" | "PERCENTAGE")?,
+                                        width: ::Integer?,
+                                        x_position: ::Integer?,
+                                        y_position: ::Integer?
+                                      }?,
+                                      end_timecode: ::String?,
+                                      start_timecode: ::String?
+                                    },
+                                  ]?
                                 },
                               ]?,
                               video_selector: {
@@ -449,6 +472,10 @@ module Aws
                                     speke_key_provider: {
                                       certificate_arn: ::String?,
                                       dash_signaled_system_ids: Array[::String]?,
+                                      encryption_contract_configuration: {
+                                        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                      }?,
                                       hls_signaled_system_ids: Array[::String]?,
                                       resource_id: ::String?,
                                       url: ::String?
@@ -517,6 +544,10 @@ module Aws
                                     playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")?,
                                     speke_key_provider: {
                                       certificate_arn: ::String?,
+                                      encryption_contract_configuration: {
+                                        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                      }?,
                                       resource_id: ::String?,
                                       system_ids: Array[::String]?,
                                       url: ::String?
@@ -604,6 +635,10 @@ module Aws
                                     offline_encrypted: ("ENABLED" | "DISABLED")?,
                                     speke_key_provider: {
                                       certificate_arn: ::String?,
+                                      encryption_contract_configuration: {
+                                        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                      }?,
                                       resource_id: ::String?,
                                       system_ids: Array[::String]?,
                                       url: ::String?
@@ -668,6 +703,10 @@ module Aws
                                   encryption: {
                                     speke_key_provider: {
                                       certificate_arn: ::String?,
+                                      encryption_contract_configuration: {
+                                        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                      }?,
                                       resource_id: ::String?,
                                       system_ids: Array[::String]?,
                                       url: ::String?
@@ -938,7 +977,7 @@ module Aws
                                       timed_metadata_scheme_id_uri: ::String?,
                                       timed_metadata_value: ::String?
                                     }?,
-                                    container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "WEBM" | "RAW" | "Y4M")?,
+                                    container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "OGG" | "WEBM" | "RAW" | "Y4M")?,
                                     f4v_settings: {
                                       moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?
                                     }?,
@@ -1158,6 +1197,7 @@ module Aws
                                         }?,
                                         rate_control_mode: ("VBR" | "CBR" | "QVBR")?,
                                         repeat_pps: ("DISABLED" | "ENABLED")?,
+                                        saliency_aware_encoding: ("DISABLED" | "PREFERRED")?,
                                         scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                         scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
                                         slices: ::Integer?,
@@ -1575,7 +1615,7 @@ module Aws
                                            audio_selector_names: Array[::String]?
                                          }]?,
                                        audio_selectors: Hash[::String, {
-                                           audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME")?,
+                                           audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME" | "FORCE")?,
                                            custom_language_code: ::String?,
                                            default_selection: ("DEFAULT" | "NOT_DEFAULT")?,
                                            external_audio_file_input: ::String?,
@@ -1624,6 +1664,7 @@ module Aws
                                                terminate_captions: ("END_OF_INPUT" | "DISABLED")?
                                              }?,
                                              file_source_settings: {
+                                               byte_rate_limit: ("ENABLED" | "DISABLED")?,
                                                convert_608_to_708: ("UPCONVERT" | "DISABLED")?,
                                                convert_paint_to_pop: ("ENABLED" | "DISABLED")?,
                                                framerate: {
@@ -1697,6 +1738,13 @@ module Aws
                                        video_overlays: Array[
                                          {
                                            end_timecode: ::String?,
+                                           initial_position: {
+                                             height: ::Integer?,
+                                             unit: ("PIXELS" | "PERCENTAGE")?,
+                                             width: ::Integer?,
+                                             x_position: ::Integer?,
+                                             y_position: ::Integer?
+                                           }?,
                                            input: {
                                              file_input: ::String?,
                                              input_clippings: Array[
@@ -1708,7 +1756,21 @@ module Aws
                                              timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")?,
                                              timecode_start: ::String?
                                            }?,
-                                           start_timecode: ::String?
+                                           playback: ("ONCE" | "REPEAT")?,
+                                           start_timecode: ::String?,
+                                           transitions: Array[
+                                             {
+                                               end_position: {
+                                                 height: ::Integer?,
+                                                 unit: ("PIXELS" | "PERCENTAGE")?,
+                                                 width: ::Integer?,
+                                                 x_position: ::Integer?,
+                                                 y_position: ::Integer?
+                                               }?,
+                                               end_timecode: ::String?,
+                                               start_timecode: ::String?
+                                             },
+                                           ]?
                                          },
                                        ]?,
                                        video_selector: {
@@ -1856,6 +1918,10 @@ module Aws
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
                                                dash_signaled_system_ids: Array[::String]?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                hls_signaled_system_ids: Array[::String]?,
                                                resource_id: ::String?,
                                                url: ::String?
@@ -1924,6 +1990,10 @@ module Aws
                                              playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")?,
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -2011,6 +2081,10 @@ module Aws
                                              offline_encrypted: ("ENABLED" | "DISABLED")?,
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -2075,6 +2149,10 @@ module Aws
                                            encryption: {
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -2345,7 +2423,7 @@ module Aws
                                                timed_metadata_scheme_id_uri: ::String?,
                                                timed_metadata_value: ::String?
                                              }?,
-                                             container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "WEBM" | "RAW" | "Y4M")?,
+                                             container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "OGG" | "WEBM" | "RAW" | "Y4M")?,
                                              f4v_settings: {
                                                moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?
                                              }?,
@@ -2565,6 +2643,7 @@ module Aws
                                                  }?,
                                                  rate_control_mode: ("VBR" | "CBR" | "QVBR")?,
                                                  repeat_pps: ("DISABLED" | "ENABLED")?,
+                                                 saliency_aware_encoding: ("DISABLED" | "PREFERRED")?,
                                                  scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                                  scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
                                                  slices: ::Integer?,
@@ -3186,7 +3265,7 @@ module Aws
                                  timed_metadata_scheme_id_uri: ::String?,
                                  timed_metadata_value: ::String?
                                }?,
-                               container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "WEBM" | "RAW" | "Y4M")?,
+                               container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "OGG" | "WEBM" | "RAW" | "Y4M")?,
                                f4v_settings: {
                                  moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?
                                }?,
@@ -3392,6 +3471,7 @@ module Aws
                                    }?,
                                    rate_control_mode: ("VBR" | "CBR" | "QVBR")?,
                                    repeat_pps: ("DISABLED" | "ENABLED")?,
+                                   saliency_aware_encoding: ("DISABLED" | "PREFERRED")?,
                                    scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                    scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
                                    slices: ::Integer?,
@@ -3922,6 +4002,18 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::JobEngineVersion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConvert/Client.html#list_versions-instance_method
+      def list_versions: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListVersionsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVersionsResponseSuccess
+
       interface _PutPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutPolicyResponse]
         def policy: () -> Types::Policy
@@ -4032,7 +4124,7 @@ module Aws
                                            audio_selector_names: Array[::String]?
                                          }]?,
                                        audio_selectors: Hash[::String, {
-                                           audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME")?,
+                                           audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME" | "FORCE")?,
                                            custom_language_code: ::String?,
                                            default_selection: ("DEFAULT" | "NOT_DEFAULT")?,
                                            external_audio_file_input: ::String?,
@@ -4081,6 +4173,7 @@ module Aws
                                                terminate_captions: ("END_OF_INPUT" | "DISABLED")?
                                              }?,
                                              file_source_settings: {
+                                               byte_rate_limit: ("ENABLED" | "DISABLED")?,
                                                convert_608_to_708: ("UPCONVERT" | "DISABLED")?,
                                                convert_paint_to_pop: ("ENABLED" | "DISABLED")?,
                                                framerate: {
@@ -4154,6 +4247,13 @@ module Aws
                                        video_overlays: Array[
                                          {
                                            end_timecode: ::String?,
+                                           initial_position: {
+                                             height: ::Integer?,
+                                             unit: ("PIXELS" | "PERCENTAGE")?,
+                                             width: ::Integer?,
+                                             x_position: ::Integer?,
+                                             y_position: ::Integer?
+                                           }?,
                                            input: {
                                              file_input: ::String?,
                                              input_clippings: Array[
@@ -4165,7 +4265,21 @@ module Aws
                                              timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")?,
                                              timecode_start: ::String?
                                            }?,
-                                           start_timecode: ::String?
+                                           playback: ("ONCE" | "REPEAT")?,
+                                           start_timecode: ::String?,
+                                           transitions: Array[
+                                             {
+                                               end_position: {
+                                                 height: ::Integer?,
+                                                 unit: ("PIXELS" | "PERCENTAGE")?,
+                                                 width: ::Integer?,
+                                                 x_position: ::Integer?,
+                                                 y_position: ::Integer?
+                                               }?,
+                                               end_timecode: ::String?,
+                                               start_timecode: ::String?
+                                             },
+                                           ]?
                                          },
                                        ]?,
                                        video_selector: {
@@ -4313,6 +4427,10 @@ module Aws
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
                                                dash_signaled_system_ids: Array[::String]?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                hls_signaled_system_ids: Array[::String]?,
                                                resource_id: ::String?,
                                                url: ::String?
@@ -4381,6 +4499,10 @@ module Aws
                                              playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")?,
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -4468,6 +4590,10 @@ module Aws
                                              offline_encrypted: ("ENABLED" | "DISABLED")?,
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -4532,6 +4658,10 @@ module Aws
                                            encryption: {
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -4802,7 +4932,7 @@ module Aws
                                                timed_metadata_scheme_id_uri: ::String?,
                                                timed_metadata_value: ::String?
                                              }?,
-                                             container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "WEBM" | "RAW" | "Y4M")?,
+                                             container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "OGG" | "WEBM" | "RAW" | "Y4M")?,
                                              f4v_settings: {
                                                moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?
                                              }?,
@@ -5022,6 +5152,7 @@ module Aws
                                                  }?,
                                                  rate_control_mode: ("VBR" | "CBR" | "QVBR")?,
                                                  repeat_pps: ("DISABLED" | "ENABLED")?,
+                                                 saliency_aware_encoding: ("DISABLED" | "PREFERRED")?,
                                                  scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                                  scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
                                                  slices: ::Integer?,
@@ -5642,7 +5773,7 @@ module Aws
                                  timed_metadata_scheme_id_uri: ::String?,
                                  timed_metadata_value: ::String?
                                }?,
-                               container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "WEBM" | "RAW" | "Y4M")?,
+                               container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "OGG" | "WEBM" | "RAW" | "Y4M")?,
                                f4v_settings: {
                                  moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?
                                }?,
@@ -5848,6 +5979,7 @@ module Aws
                                    }?,
                                    rate_control_mode: ("VBR" | "CBR" | "QVBR")?,
                                    repeat_pps: ("DISABLED" | "ENABLED")?,
+                                   saliency_aware_encoding: ("DISABLED" | "PREFERRED")?,
                                    scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                    scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
                                    slices: ::Integer?,

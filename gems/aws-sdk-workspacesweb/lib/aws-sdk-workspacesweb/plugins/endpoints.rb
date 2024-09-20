@@ -40,10 +40,19 @@ module Aws::WorkSpacesWeb
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          @handler.call(context)
+          with_metrics(context) { @handler.call(context) }
         end
 
         private
+
+        def with_metrics(context, &block)
+          metrics = []
+          metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
+          if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
+            metrics << 'SIGV4A_SIGNING'
+          end
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, values|
@@ -114,6 +123,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::DisassociateUserAccessLoggingSettings.build(context)
           when :disassociate_user_settings
             Aws::WorkSpacesWeb::Endpoints::DisassociateUserSettings.build(context)
+          when :expire_session
+            Aws::WorkSpacesWeb::Endpoints::ExpireSession.build(context)
           when :get_browser_settings
             Aws::WorkSpacesWeb::Endpoints::GetBrowserSettings.build(context)
           when :get_identity_provider
@@ -126,6 +137,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::GetPortal.build(context)
           when :get_portal_service_provider_metadata
             Aws::WorkSpacesWeb::Endpoints::GetPortalServiceProviderMetadata.build(context)
+          when :get_session
+            Aws::WorkSpacesWeb::Endpoints::GetSession.build(context)
           when :get_trust_store
             Aws::WorkSpacesWeb::Endpoints::GetTrustStore.build(context)
           when :get_trust_store_certificate
@@ -144,6 +157,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::ListNetworkSettings.build(context)
           when :list_portals
             Aws::WorkSpacesWeb::Endpoints::ListPortals.build(context)
+          when :list_sessions
+            Aws::WorkSpacesWeb::Endpoints::ListSessions.build(context)
           when :list_tags_for_resource
             Aws::WorkSpacesWeb::Endpoints::ListTagsForResource.build(context)
           when :list_trust_store_certificates

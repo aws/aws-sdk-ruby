@@ -381,14 +381,22 @@ module Aws::S3
     end
 
     class CreateSessionOutput
+      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor ssekms_key_id: ::String
+      attr_accessor ssekms_encryption_context: ::String
+      attr_accessor bucket_key_enabled: bool
       attr_accessor credentials: Types::SessionCredentials
-      SENSITIVE: []
+      SENSITIVE: [:ssekms_key_id, :ssekms_encryption_context]
     end
 
     class CreateSessionRequest
       attr_accessor session_mode: ("ReadOnly" | "ReadWrite")
       attr_accessor bucket: ::String
-      SENSITIVE: []
+      attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
+      attr_accessor ssekms_key_id: ::String
+      attr_accessor ssekms_encryption_context: ::String
+      attr_accessor bucket_key_enabled: bool
+      SENSITIVE: [:ssekms_key_id, :ssekms_encryption_context]
     end
 
     class DefaultRetention

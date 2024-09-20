@@ -66,6 +66,13 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class AccountStatistics
+      attr_accessor account_id: ::String
+      attr_accessor last_generated_at: ::Time
+      attr_accessor total_findings: ::Integer
+      SENSITIVE: []
+    end
+
     class Action
       attr_accessor action_type: ::String
       attr_accessor aws_api_call_action: Types::AwsApiCallAction
@@ -460,6 +467,14 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class DateStatistics
+      attr_accessor date: ::Time
+      attr_accessor last_generated_at: ::Time
+      attr_accessor severity: ::Float
+      attr_accessor total_findings: ::Integer
+      SENSITIVE: []
+    end
+
     class DeclineInvitationsRequest
       attr_accessor account_ids: ::Array[::String]
       SENSITIVE: []
@@ -733,6 +748,7 @@ module Aws::GuardDuty
       attr_accessor volumes: ::Array[Types::Volume]
       attr_accessor containers: ::Array[Types::Container]
       attr_accessor group: ::String
+      attr_accessor launch_type: ::String
       SENSITIVE: []
     end
 
@@ -809,6 +825,18 @@ module Aws::GuardDuty
 
     class FindingStatistics
       attr_accessor count_by_severity: ::Hash[::String, ::Integer]
+      attr_accessor grouped_by_account: ::Array[Types::AccountStatistics]
+      attr_accessor grouped_by_date: ::Array[Types::DateStatistics]
+      attr_accessor grouped_by_finding_type: ::Array[Types::FindingTypeStatistics]
+      attr_accessor grouped_by_resource: ::Array[Types::ResourceStatistics]
+      attr_accessor grouped_by_severity: ::Array[Types::SeverityStatistics]
+      SENSITIVE: []
+    end
+
+    class FindingTypeStatistics
+      attr_accessor finding_type: ::String
+      attr_accessor last_generated_at: ::Time
+      attr_accessor total_findings: ::Integer
       SENSITIVE: []
     end
 
@@ -900,11 +928,15 @@ module Aws::GuardDuty
       attr_accessor detector_id: ::String
       attr_accessor finding_statistic_types: ::Array[("COUNT_BY_SEVERITY")]
       attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor group_by: ("ACCOUNT" | "DATE" | "FINDING_TYPE" | "RESOURCE" | "SEVERITY")
+      attr_accessor order_by: ("ASC" | "DESC")
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class GetFindingsStatisticsResponse
       attr_accessor finding_statistics: Types::FindingStatistics
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1803,6 +1835,15 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ResourceStatistics
+      attr_accessor account_id: ::String
+      attr_accessor last_generated_at: ::Time
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor total_findings: ::Integer
+      SENSITIVE: []
+    end
+
     class RuntimeContext
       attr_accessor modifying_process: Types::ProcessDetails
       attr_accessor modified_at: ::Time
@@ -1987,6 +2028,13 @@ module Aws::GuardDuty
     class ServiceAdditionalInfo
       attr_accessor value: ::String
       attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class SeverityStatistics
+      attr_accessor last_generated_at: ::Time
+      attr_accessor severity: ::Float
+      attr_accessor total_findings: ::Integer
       SENSITIVE: []
     end
 

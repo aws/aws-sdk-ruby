@@ -91,12 +91,15 @@ module Aws::ECR
     EvaluationTimestamp = Shapes::TimestampShape.new(name: 'EvaluationTimestamp')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExpirationTimestamp = Shapes::TimestampShape.new(name: 'ExpirationTimestamp')
+    ExploitAvailable = Shapes::StringShape.new(name: 'ExploitAvailable')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     FindingArn = Shapes::StringShape.new(name: 'FindingArn')
     FindingDescription = Shapes::StringShape.new(name: 'FindingDescription')
     FindingName = Shapes::StringShape.new(name: 'FindingName')
     FindingSeverity = Shapes::StringShape.new(name: 'FindingSeverity')
     FindingSeverityCounts = Shapes::MapShape.new(name: 'FindingSeverityCounts')
+    FixAvailable = Shapes::StringShape.new(name: 'FixAvailable')
+    FixedInVersion = Shapes::StringShape.new(name: 'FixedInVersion')
     ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
     GetAccountSettingRequest = Shapes::StructureShape.new(name: 'GetAccountSettingRequest')
     GetAccountSettingResponse = Shapes::StructureShape.new(name: 'GetAccountSettingResponse')
@@ -637,6 +640,8 @@ module Aws::ECR
     EnhancedImageScanFinding.add_member(:title, Shapes::ShapeRef.new(shape: Title, location_name: "title"))
     EnhancedImageScanFinding.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
     EnhancedImageScanFinding.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt"))
+    EnhancedImageScanFinding.add_member(:fix_available, Shapes::ShapeRef.new(shape: FixAvailable, location_name: "fixAvailable"))
+    EnhancedImageScanFinding.add_member(:exploit_available, Shapes::ShapeRef.new(shape: ExploitAvailable, location_name: "exploitAvailable"))
     EnhancedImageScanFinding.struct_class = Types::EnhancedImageScanFinding
 
     EnhancedImageScanFindingList.member = Shapes::ShapeRef.new(shape: EnhancedImageScanFinding)
@@ -1303,6 +1308,7 @@ module Aws::ECR
     VulnerablePackage.add_member(:release, Shapes::ShapeRef.new(shape: Release, location_name: "release"))
     VulnerablePackage.add_member(:source_layer_hash, Shapes::ShapeRef.new(shape: SourceLayerHash, location_name: "sourceLayerHash"))
     VulnerablePackage.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    VulnerablePackage.add_member(:fixed_in_version, Shapes::ShapeRef.new(shape: FixedInVersion, location_name: "fixedInVersion"))
     VulnerablePackage.struct_class = Types::VulnerablePackage
 
     VulnerablePackagesList.member = Shapes::ShapeRef.new(shape: VulnerablePackage)
@@ -1321,7 +1327,7 @@ module Aws::ECR
         "protocol" => "json",
         "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon ECR",
-        "serviceFullName" => "Amazon EC2 Container Registry",
+        "serviceFullName" => "Amazon Elastic Container Registry",
         "serviceId" => "ECR",
         "signatureVersion" => "v4",
         "signingName" => "ecr",

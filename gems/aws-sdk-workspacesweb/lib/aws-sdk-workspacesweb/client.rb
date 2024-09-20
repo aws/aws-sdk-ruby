@@ -1005,10 +1005,9 @@ module Aws::WorkSpacesWeb
     #   provider.
     #
     #   `IAM Identity Center` web portals are authenticated through IAM
-    #   Identity Center (successor to Single Sign-On). Identity sources
-    #   (including external identity provider integration), plus user and
-    #   group access to your web portal, can be configured in the IAM Identity
-    #   Center.
+    #   Identity Center. Identity sources (including external identity
+    #   provider integration), plus user and group access to your web portal,
+    #   can be configured in the IAM Identity Center.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1618,6 +1617,32 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Expires an active secure browser session.
+    #
+    # @option params [required, String] :portal_id
+    #   The ID of the web portal for the session.
+    #
+    # @option params [required, String] :session_id
+    #   The ID of the session to expire.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.expire_session({
+    #     portal_id: "PortalId", # required
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ExpireSession AWS API Documentation
+    #
+    # @overload expire_session(params = {})
+    # @param [Hash] params ({})
+    def expire_session(params = {}, options = {})
+      req = build_request(:expire_session, params)
+      req.send_request(options)
+    end
+
     # Gets browser settings.
     #
     # @option params [required, String] :browser_settings_arn
@@ -1832,6 +1857,45 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def get_portal_service_provider_metadata(params = {}, options = {})
       req = build_request(:get_portal_service_provider_metadata, params)
+      req.send_request(options)
+    end
+
+    # Gets information for a secure browser session.
+    #
+    # @option params [required, String] :portal_id
+    #   The ID of the web portal for the session.
+    #
+    # @option params [required, String] :session_id
+    #   The ID of the session.
+    #
+    # @return [Types::GetSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionResponse#session #session} => Types::Session
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session({
+    #     portal_id: "PortalId", # required
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session.client_ip_addresses #=> Array
+    #   resp.session.client_ip_addresses[0] #=> String
+    #   resp.session.end_time #=> Time
+    #   resp.session.portal_arn #=> String
+    #   resp.session.session_id #=> String
+    #   resp.session.start_time #=> Time
+    #   resp.session.status #=> String, one of "Active", "Terminated"
+    #   resp.session.username #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetSession AWS API Documentation
+    #
+    # @overload get_session(params = {})
+    # @param [Hash] params ({})
+    def get_session(params = {}, options = {})
+      req = build_request(:get_session, params)
       req.send_request(options)
     end
 
@@ -2196,6 +2260,70 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def list_portals(params = {}, options = {})
       req = build_request(:list_portals, params)
+      req.send_request(options)
+    end
+
+    # Lists information for multiple secure browser sessions from a specific
+    # portal.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @option params [required, String] :portal_id
+    #   The ID of the web portal for the sessions.
+    #
+    # @option params [String] :session_id
+    #   The ID of the session.
+    #
+    # @option params [String] :sort_by
+    #   The method in which the returned sessions should be sorted.
+    #
+    # @option params [String] :status
+    #   The status of the session.
+    #
+    # @option params [String] :username
+    #   The username of the session.
+    #
+    # @return [Types::ListSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionsResponse#next_token #next_token} => String
+    #   * {Types::ListSessionsResponse#sessions #sessions} => Array&lt;Types::SessionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sessions({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     portal_id: "PortalId", # required
+    #     session_id: "SessionId",
+    #     sort_by: "StartTimeAscending", # accepts StartTimeAscending, StartTimeDescending
+    #     status: "Active", # accepts Active, Terminated
+    #     username: "Username",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].end_time #=> Time
+    #   resp.sessions[0].portal_arn #=> String
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].start_time #=> Time
+    #   resp.sessions[0].status #=> String, one of "Active", "Terminated"
+    #   resp.sessions[0].username #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListSessions AWS API Documentation
+    #
+    # @overload list_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_sessions(params = {}, options = {})
+      req = build_request(:list_sessions, params)
       req.send_request(options)
     end
 
@@ -2807,10 +2935,9 @@ module Aws::WorkSpacesWeb
     #   provider.
     #
     #   `IAM Identity Center` web portals are authenticated through IAM
-    #   Identity Center (successor to Single Sign-On). Identity sources
-    #   (including external identity provider integration), plus user and
-    #   group access to your web portal, can be configured in the IAM Identity
-    #   Center.
+    #   Identity Center. Identity sources (including external identity
+    #   provider integration), plus user and group access to your web portal,
+    #   can be configured in the IAM Identity Center.
     #
     # @option params [String] :display_name
     #   The name of the web portal. This is not visible to users who log into
@@ -3114,7 +3241,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

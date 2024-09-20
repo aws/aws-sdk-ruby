@@ -599,14 +599,14 @@ module Aws::IVS
     #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
-    #   [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits and
-    #   requirements"; Amazon IVS has no service-specific constraints beyond
-    #   what is documented there.
+    #   [Best practices and strategies][1] in *Tagging Amazon Web Services
+    #   Resources and Tag Editor* for details, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @option params [Boolean] :insecure_ingest
     #   Whether the channel allows insecure RTMP and SRT ingest. Default:
@@ -709,14 +709,14 @@ module Aws::IVS
     #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
-    #   [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits and
-    #   requirements"; Amazon IVS has no service-specific constraints beyond
-    #   what is documented there.
+    #   [Best practices and strategies][1] in *Tagging Amazon Web Services
+    #   Resources and Tag Editor* for details, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Types::CreatePlaybackRestrictionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -780,14 +780,14 @@ module Aws::IVS
     #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
-    #   [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits and
-    #   requirements"; Amazon IVS has no service-specific constraints beyond
-    #   what is documented there.
+    #   [Best practices and strategies][1] in *Tagging Amazon Web Services
+    #   Resources and Tag Editor* for details, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @option params [Types::ThumbnailConfiguration] :thumbnail_configuration
     #   A complex type that allows you to enable/disable the recording of
@@ -873,14 +873,14 @@ module Aws::IVS
     #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
-    #   [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits and
-    #   requirements"; Amazon IVS has no service-specific constraints beyond
-    #   what is documented there.
+    #   [Best practices and strategies][1] in *Tagging Amazon Web Services
+    #   Resources and Tag Editor* for details, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Types::CreateStreamKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1374,14 +1374,15 @@ module Aws::IVS
     #
     # @option params [Hash<String,String>] :tags
     #   Any tags provided with the request are added to the playback key pair
-    #   tags. See [Tagging Amazon Web Services Resources][1] for more
-    #   information, including restrictions that apply to tags and "Tag
-    #   naming limits and requirements"; Amazon IVS has no service-specific
-    #   constraints beyond what is documented there.
+    #   tags. See [Best practices and strategies][1] in *Tagging Amazon Web
+    #   Services Resources and Tag Editor* for details, including restrictions
+    #   that apply to tags and "Tag naming limits and requirements"; Amazon
+    #   IVS has no service-specific constraints beyond what is documented
+    #   there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Types::ImportPlaybackKeyPairResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1907,14 +1908,15 @@ module Aws::IVS
     #
     # @option params [required, Hash<String,String>] :tags
     #   Array of tags to be added or updated. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that apply
-    #   to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #   service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging Amazon Web Services Resources and Tag Editor* for details,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints beyond
+    #   what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1944,14 +1946,15 @@ module Aws::IVS
     #
     # @option params [required, Array<String>] :tag_keys
     #   Array of tags to be removed. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that apply
-    #   to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #   service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging Amazon Web Services Resources and Tag Editor* for details,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints beyond
+    #   what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2149,7 +2152,7 @@ module Aws::IVS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

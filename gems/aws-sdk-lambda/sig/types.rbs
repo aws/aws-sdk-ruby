@@ -146,6 +146,7 @@ module Aws::Lambda
       attr_accessor description: ::String
       attr_accessor allowed_publishers: Types::AllowedPublishers
       attr_accessor code_signing_policies: Types::CodeSigningPolicies
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -168,6 +169,7 @@ module Aws::Lambda
       attr_accessor maximum_record_age_in_seconds: ::Integer
       attr_accessor bisect_batch_on_function_error: bool
       attr_accessor maximum_retry_attempts: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor tumbling_window_in_seconds: ::Integer
       attr_accessor topics: ::Array[::String]
       attr_accessor queues: ::Array[::String]
@@ -293,6 +295,12 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
     class DestinationConfig
       attr_accessor on_success: Types::OnSuccess
       attr_accessor on_failure: Types::OnFailure
@@ -407,6 +415,7 @@ module Aws::Lambda
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig
       attr_accessor kms_key_arn: ::String
       attr_accessor filter_criteria_error: Types::FilterCriteriaError
+      attr_accessor event_source_mapping_arn: ::String
       SENSITIVE: []
     end
 
@@ -674,6 +683,27 @@ module Aws::Lambda
       attr_accessor status: ("IN_PROGRESS" | "READY" | "FAILED")
       attr_accessor status_reason: ::String
       attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetPublicAccessBlockConfigRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublicAccessBlockConfigResponse
+      attr_accessor public_access_block_config: Types::PublicAccessBlockConfig
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 
@@ -1085,6 +1115,18 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class PublicAccessBlockConfig
+      attr_accessor block_public_policy: bool
+      attr_accessor restrict_public_resource: bool
+      SENSITIVE: []
+    end
+
+    class PublicPolicyException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class PublishLayerVersionRequest
       attr_accessor layer_name: ::String
       attr_accessor description: ::String
@@ -1168,6 +1210,30 @@ module Aws::Lambda
       attr_accessor status: ("IN_PROGRESS" | "READY" | "FAILED")
       attr_accessor status_reason: ::String
       attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class PutPublicAccessBlockConfigRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor public_access_block_config: Types::PublicAccessBlockConfig
+      SENSITIVE: []
+    end
+
+    class PutPublicAccessBlockConfigResponse
+      attr_accessor public_access_block_config: Types::PublicAccessBlockConfig
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 

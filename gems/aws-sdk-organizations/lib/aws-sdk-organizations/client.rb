@@ -825,9 +825,9 @@ module Aws::Organizations
     # <note markdown="1"> * You can close only 10% of member accounts, between 10 and 1000,
     #   within a rolling 30 day period. This quota is not bound by a
     #   calendar month, but starts when you close an account. After you
-    #   reach this limit, you can close additional accounts. For more
+    #   reach this limit, you can't close additional accounts. For more
     #   information, see [Closing a member account in your organization][3]
-    #   and [Quotas for Organizations][4]in the *Organizations User Guide*.
+    #   and [Quotas for Organizations][4] in the *Organizations User Guide*.
     #
     # * To reinstate a closed account, contact Amazon Web Services Support
     #   within the 90-day grace period while the account is in SUSPENDED
@@ -928,12 +928,12 @@ module Aws::Organizations
     #   then try again. If the error persists, contact [Amazon Web Services
     #   Support][5].
     #
-    # * Using `CreateAccount` to create multiple temporary accounts isn't
-    #   recommended. You can only close an account from the Billing and Cost
-    #   Management console, and you must be signed in as the root user. For
-    #   information on the requirements and process for closing an account,
-    #   see [Closing a member account in your organization][6] in the
-    #   *Organizations User Guide*.
+    # * It isn't recommended to use `CreateAccount` to create multiple
+    #   temporary accounts, and using the `CreateAccount` API to close
+    #   accounts is subject to a 30-day usage quota. For information on the
+    #   requirements and process for closing an account, see [Closing a
+    #   member account in your organization][6] in the *Organizations User
+    #   Guide*.
     #
     # <note markdown="1"> When you create a member account with this operation, you can choose
     # whether to create the account with the **IAM User and Role Access to
@@ -2476,7 +2476,7 @@ module Aws::Organizations
     #
     # @example Example: To get information about an organizational unit
     #
-    #   # The following example shows how to request details about an OU:/n/n
+    #   # The following example shows how to request details about an OU:
     #
     #   resp = client.describe_organizational_unit({
     #     organizational_unit_id: "ou-examplerootid111-exampleouid111", 
@@ -2896,12 +2896,13 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Enables the integration of an Amazon Web Services service (the service
-    # that is specified by `ServicePrincipal`) with Organizations. When you
-    # enable integration, you allow the specified service to create a
-    # [service-linked role][1] in all the accounts in your organization.
-    # This allows the service to perform operations on your behalf in your
-    # organization and its accounts.
+    # Provides an Amazon Web Services service (the service that is specified
+    # by `ServicePrincipal`) with permissions to view the structure of an
+    # organization, create a [service-linked role][1] in all the accounts in
+    # the organization, and allow the service to perform operations on
+    # behalf of the organization and its accounts. Establishing these
+    # permissions can be a first step in enabling the integration of an
+    # Amazon Web Services service with Organizations.
     #
     # We recommend that you enable integration between Organizations and the
     # specified Amazon Web Services service by using the console or commands
@@ -3393,8 +3394,9 @@ module Aws::Organizations
     #   support tags.
     #
     # * A newly created account has a waiting period before it can be
-    #   removed from its organization. If you get an error that indicates
-    #   that a wait period is required, then try again in a few days.
+    #   removed from its organization. You must wait until at least seven
+    #   days after the account was created. Invited accounts aren't subject
+    #   to this waiting period.
     #
     # * If you are using an organization principal to call
     #   `LeaveOrganization` across multiple accounts, you can only do this
@@ -5806,7 +5808,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

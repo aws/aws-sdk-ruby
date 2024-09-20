@@ -1429,6 +1429,8 @@ module Aws::RDS
     #
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB instances)
     #
+    #   * `custom-sqlserver-dev` (for RDS Custom for SQL Server DB instances)
+    #
     #   * `db2-ae`
     #
     #   * `db2-se`
@@ -1546,7 +1548,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     # @option options [String] :preferred_maintenance_window
@@ -1746,10 +1748,12 @@ module Aws::RDS
     #   The license model information for this DB instance.
     #
     #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
-    #   Bring Your Own License (BYOL) model requires a custom parameter group.
-    #   The Db2 license through Amazon Web Services Marketplace model requires
-    #   an Amazon Web Services Marketplace subscription. For more information,
-    #   see [RDS for Db2 licensing options][1] in the *Amazon RDS User Guide*.
+    #   Bring Your Own License (BYOL) model requires a custom parameter group
+    #   and an Amazon Web Services License Manager self-managed license. The
+    #   Db2 license through Amazon Web Services Marketplace model requires an
+    #   Amazon Web Services Marketplace subscription. For more information,
+    #   see [Amazon RDS for Db2 licensing options][1] in the *Amazon RDS User
+    #   Guide*.
     #
     #    The default for RDS for Db2 is `bring-your-own-license`.
     #

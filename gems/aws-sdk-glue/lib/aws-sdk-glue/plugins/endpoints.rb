@@ -40,10 +40,19 @@ module Aws::Glue
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          @handler.call(context)
+          with_metrics(context) { @handler.call(context) }
         end
 
         private
+
+        def with_metrics(context, &block)
+          metrics = []
+          metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
+          if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
+            metrics << 'SIGV4A_SIGNING'
+          end
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, values|
@@ -458,6 +467,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::StopWorkflowRun.build(context)
           when :tag_resource
             Aws::Glue::Endpoints::TagResource.build(context)
+          when :test_connection
+            Aws::Glue::Endpoints::TestConnection.build(context)
           when :untag_resource
             Aws::Glue::Endpoints::UntagResource.build(context)
           when :update_blueprint

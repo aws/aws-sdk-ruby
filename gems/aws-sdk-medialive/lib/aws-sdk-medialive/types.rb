@@ -1863,6 +1863,10 @@ module Aws::MediaLive
     #   Settings for VPC output
     #   @return [Types::VpcOutputSettingsDescription]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Anywhere settings for this channel.
+    #   @return [Types::DescribeAnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1883,7 +1887,8 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1983,6 +1988,10 @@ module Aws::MediaLive
     #   Settings for any VPC outputs.
     #   @return [Types::VpcOutputSettingsDescription]
     #
+    # @!attribute [rw] anywhere_settings
+    #   AnywhereSettings settings for this channel.
+    #   @return [Types::DescribeAnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -2001,7 +2010,8 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2151,6 +2161,10 @@ module Aws::MediaLive
     #   Settings for the VPC outputs
     #   @return [Types::VpcOutputSettings]
     #
+    # @!attribute [rw] anywhere_settings
+    #   The Elemental Anywhere settings for this channel.
+    #   @return [Types::AnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2167,7 +2181,8 @@ module Aws::MediaLive
       :reserved,
       :role_arn,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2223,6 +2238,10 @@ module Aws::MediaLive
     #   specified VPC
     #   @return [Types::VpcOutputSettings]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Elemental anywhere settings
+    #   @return [Types::AnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2239,7 +2258,8 @@ module Aws::MediaLive
       :reserved,
       :role_arn,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2326,6 +2346,15 @@ module Aws::MediaLive
     #   The settings associated with an SRT input.
     #   @return [Types::SrtSettingsRequest]
     #
+    # @!attribute [rw] input_network_location
+    #   The location of this input. AWS, for an input existing in the AWS
+    #   Cloud, On-Prem for an input in a customer network.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_settings
+    #   Multicast Input settings.
+    #   @return [Types::MulticastSettingsCreateRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
     class CreateInput < Struct.new(
@@ -2340,7 +2369,9 @@ module Aws::MediaLive
       :tags,
       :type,
       :vpc,
-      :srt_settings)
+      :srt_settings,
+      :input_network_location,
+      :multicast_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2392,6 +2423,17 @@ module Aws::MediaLive
     #   standard-pipeline input, include two srtCallerSource.
     #   @return [Types::SrtSettingsRequest]
     #
+    # @!attribute [rw] input_network_location
+    #   With the introduction of MediaLive Anywhere, a MediaLive input can
+    #   now exist in two different places: AWS or inside an on-premises
+    #   datacenter. By default all inputs will continue to be AWS inputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_settings
+    #   Settings for a Multicast input. Contains a list of multicast Urls
+    #   and optional source ip addresses.
+    #   @return [Types::MulticastSettingsCreateRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputRequest AWS API Documentation
     #
     class CreateInputRequest < Struct.new(
@@ -2406,7 +2448,9 @@ module Aws::MediaLive
       :tags,
       :type,
       :vpc,
-      :srt_settings)
+      :srt_settings,
+      :input_network_location,
+      :multicast_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2779,6 +2823,10 @@ module Aws::MediaLive
     #   The properties for a private VPC Output
     #   @return [Types::VpcOutputSettingsDescription]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Elemental anywhere settings
+    #   @return [Types::DescribeAnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -2799,7 +2847,8 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3167,6 +3216,10 @@ module Aws::MediaLive
     #   The properties for a private VPC Output
     #   @return [Types::VpcOutputSettingsDescription]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Elemental anywhere settings
+    #   @return [Types::DescribeAnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3187,7 +3240,8 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3409,6 +3463,17 @@ module Aws::MediaLive
     #   The configured sources for this SRT input.
     #   @return [Types::SrtSettings]
     #
+    # @!attribute [rw] input_network_location
+    #   With the introduction of MediaLive Anywhere, a MediaLive input can
+    #   now exist in two different places: AWS or inside an on-premises
+    #   datacenter. By default all inputs will continue to be AWS inputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_settings
+    #   Settings for a Multicast input. Contains a list of multicast Urls
+    #   and optional source ip addresses.
+    #   @return [Types::MulticastSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputResponse AWS API Documentation
     #
     class DescribeInputResponse < Struct.new(
@@ -3428,7 +3493,9 @@ module Aws::MediaLive
       :state,
       :tags,
       :type,
-      :srt_settings)
+      :srt_settings,
+      :input_network_location,
+      :multicast_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4910,10 +4977,15 @@ module Aws::MediaLive
     #   Temporal Filter Settings
     #   @return [Types::TemporalFilterSettings]
     #
+    # @!attribute [rw] bandwidth_reduction_filter_settings
+    #   Bandwidth Reduction Filter Settings
+    #   @return [Types::BandwidthReductionFilterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264FilterSettings AWS API Documentation
     #
     class H264FilterSettings < Struct.new(
-      :temporal_filter_settings)
+      :temporal_filter_settings,
+      :bandwidth_reduction_filter_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5324,10 +5396,15 @@ module Aws::MediaLive
     #   Temporal Filter Settings
     #   @return [Types::TemporalFilterSettings]
     #
+    # @!attribute [rw] bandwidth_reduction_filter_settings
+    #   Bandwidth Reduction Filter Settings
+    #   @return [Types::BandwidthReductionFilterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265FilterSettings AWS API Documentation
     #
     class H265FilterSettings < Struct.new(
-      :temporal_filter_settings)
+      :temporal_filter_settings,
+      :bandwidth_reduction_filter_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6426,6 +6503,15 @@ module Aws::MediaLive
     #   The settings associated with an SRT input.
     #   @return [Types::SrtSettings]
     #
+    # @!attribute [rw] input_network_location
+    #   The location of this input. AWS, for an input existing in the AWS
+    #   Cloud, On-Prem for an input in a customer network.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_settings
+    #   Multicast Input settings.
+    #   @return [Types::MulticastSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Input AWS API Documentation
     #
     class Input < Struct.new(
@@ -6445,7 +6531,9 @@ module Aws::MediaLive
       :state,
       :tags,
       :type,
-      :srt_settings)
+      :srt_settings,
+      :input_network_location,
+      :multicast_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6468,13 +6556,19 @@ module Aws::MediaLive
     #   Settings of an input (caption selector, etc.)
     #   @return [Types::InputSettings]
     #
+    # @!attribute [rw] logical_interface_names
+    #   Optional assignment of an input to a logical interface on the Node.
+    #   Only applies to on premises channels.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputAttachment AWS API Documentation
     #
     class InputAttachment < Struct.new(
       :automatic_input_failover_settings,
       :input_attachment_name,
       :input_id,
-      :input_settings)
+      :input_settings,
+      :logical_interface_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6544,13 +6638,25 @@ module Aws::MediaLive
     #   The properties for a VPC type input destination.
     #   @return [Types::InputDestinationVpc]
     #
+    # @!attribute [rw] network
+    #   The ID of the attached network.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_routes
+    #   If the push input has an input location of ON-PREM it's a
+    #   requirement to specify what the route of the input is going to be on
+    #   the customer local network.
+    #   @return [Array<Types::InputDestinationRoute>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestination AWS API Documentation
     #
     class InputDestination < Struct.new(
       :ip,
       :port,
       :url,
-      :vpc)
+      :vpc,
+      :network,
+      :network_routes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6561,10 +6667,30 @@ module Aws::MediaLive
     #   A unique name for the location the RTMP stream is being pushed to.
     #   @return [String]
     #
+    # @!attribute [rw] network
+    #   If the push input has an input location of ON-PREM, ID the ID of the
+    #   attached network.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_routes
+    #   If the push input has an input location of ON-PREM it's a
+    #   requirement to specify what the route of the input is going to be on
+    #   the customer local network.
+    #   @return [Array<Types::InputRequestDestinationRoute>]
+    #
+    # @!attribute [rw] static_ip_address
+    #   If the push input has an input location of ON-PREM it's optional to
+    #   specify what the ip address of the input is going to be on the
+    #   customer local network.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestinationRequest AWS API Documentation
     #
     class InputDestinationRequest < Struct.new(
-      :stream_name)
+      :stream_name,
+      :network,
+      :network_routes,
+      :static_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9295,10 +9421,15 @@ module Aws::MediaLive
     #   Destination is a Multiplex.
     #   @return [Types::OutputLocationRef]
     #
+    # @!attribute [rw] container_settings
+    #   Multiplex Container Settings
+    #   @return [Types::MultiplexContainerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexOutputSettings AWS API Documentation
     #
     class MultiplexOutputSettings < Struct.new(
-      :destination)
+      :destination,
+      :container_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9693,11 +9824,17 @@ module Aws::MediaLive
     #   https.
     #   @return [String]
     #
+    # @!attribute [rw] multicast_input_settings
+    #   Specifies multicast input settings when the uri is for a multicast
+    #   event.
+    #   @return [Types::MulticastInputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NetworkInputSettings AWS API Documentation
     #
     class NetworkInputSettings < Struct.new(
       :hls_input_settings,
-      :server_validation)
+      :server_validation,
+      :multicast_input_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9932,13 +10069,19 @@ module Aws::MediaLive
     #   redundant encoder.
     #   @return [Array<Types::OutputDestinationSettings>]
     #
+    # @!attribute [rw] srt_settings
+    #   SRT settings for an SRT output; one destination for each redundant
+    #   encoder.
+    #   @return [Array<Types::SrtOutputDestinationSettings>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestination AWS API Documentation
     #
     class OutputDestination < Struct.new(
       :id,
       :media_package_settings,
       :multiplex_settings,
-      :settings)
+      :settings,
+      :srt_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10032,6 +10175,10 @@ module Aws::MediaLive
     #   Cmaf Ingest Group Settings
     #   @return [Types::CmafIngestGroupSettings]
     #
+    # @!attribute [rw] srt_group_settings
+    #   Srt Group Settings
+    #   @return [Types::SrtGroupSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputGroupSettings AWS API Documentation
     #
     class OutputGroupSettings < Struct.new(
@@ -10043,7 +10190,8 @@ module Aws::MediaLive
       :multiplex_group_settings,
       :rtmp_group_settings,
       :udp_group_settings,
-      :cmaf_ingest_group_settings)
+      :cmaf_ingest_group_settings,
+      :srt_group_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10118,6 +10266,10 @@ module Aws::MediaLive
     #   Cmaf Ingest Output Settings
     #   @return [Types::CmafIngestOutputSettings]
     #
+    # @!attribute [rw] srt_output_settings
+    #   Srt Output Settings
+    #   @return [Types::SrtOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputSettings AWS API Documentation
     #
     class OutputSettings < Struct.new(
@@ -10129,7 +10281,8 @@ module Aws::MediaLive
       :multiplex_output_settings,
       :rtmp_output_settings,
       :udp_output_settings,
-      :cmaf_ingest_output_settings)
+      :cmaf_ingest_output_settings,
+      :srt_output_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11352,6 +11505,10 @@ module Aws::MediaLive
     #   The properties for a private VPC Output
     #   @return [Types::VpcOutputSettingsDescription]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Elemental anywhere settings
+    #   @return [Types::DescribeAnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -11372,7 +11529,8 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11790,6 +11948,10 @@ module Aws::MediaLive
     #   The properties for a private VPC Output
     #   @return [Types::VpcOutputSettingsDescription]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Elemental anywhere settings
+    #   @return [Types::DescribeAnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -11810,7 +11972,8 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12582,6 +12745,10 @@ module Aws::MediaLive
     #   The settings associated with an SRT input.
     #   @return [Types::SrtSettingsRequest]
     #
+    # @!attribute [rw] multicast_settings
+    #   Multicast Input settings.
+    #   @return [Types::MulticastSettingsUpdateRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
     class UpdateInput < Struct.new(
@@ -12592,7 +12759,8 @@ module Aws::MediaLive
       :name,
       :role_arn,
       :sources,
-      :srt_settings)
+      :srt_settings,
+      :multicast_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12772,6 +12940,11 @@ module Aws::MediaLive
     #   standard-pipeline input, include two srtCallerSource.
     #   @return [Types::SrtSettingsRequest]
     #
+    # @!attribute [rw] multicast_settings
+    #   Settings for a Multicast input. Contains a list of multicast Urls
+    #   and optional source ip addresses.
+    #   @return [Types::MulticastSettingsUpdateRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputRequest AWS API Documentation
     #
     class UpdateInputRequest < Struct.new(
@@ -12783,7 +12956,8 @@ module Aws::MediaLive
       :name,
       :role_arn,
       :sources,
-      :srt_settings)
+      :srt_settings,
+      :multicast_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13106,13 +13280,18 @@ module Aws::MediaLive
     #   Mpeg2 Settings
     #   @return [Types::Mpeg2Settings]
     #
+    # @!attribute [rw] av_1_settings
+    #   Av1 Settings
+    #   @return [Types::Av1Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoCodecSettings AWS API Documentation
     #
     class VideoCodecSettings < Struct.new(
       :frame_capture_settings,
       :h264_settings,
       :h265_settings,
-      :mpeg_2_settings)
+      :mpeg_2_settings,
+      :av_1_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13527,6 +13706,10 @@ module Aws::MediaLive
     #   The properties for a private VPC Output
     #   @return [Types::VpcOutputSettingsDescription]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Elemental anywhere settings
+    #   @return [Types::DescribeAnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
     #
     class RestartChannelPipelinesResponse < Struct.new(
@@ -13548,7 +13731,8 @@ module Aws::MediaLive
       :role_arn,
       :state,
       :tags,
-      :vpc)
+      :vpc,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17635,6 +17819,2940 @@ module Aws::MediaLive
     #
     class SrtSettingsRequest < Struct.new(
       :srt_caller_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Elemental anywhere settings
+    #
+    # @!attribute [rw] channel_placement_group_id
+    #   The ID of the channel placement group for the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_id
+    #   The ID of the cluster for the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AnywhereSettings AWS API Documentation
+    #
+    class AnywhereSettings < Struct.new(
+      :channel_placement_group_id,
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Av1 Color Space Settings
+    #
+    # @!attribute [rw] color_space_passthrough_settings
+    #   Passthrough applies no color space conversion to the output
+    #   @return [Types::ColorSpacePassthroughSettings]
+    #
+    # @!attribute [rw] hdr_10_settings
+    #   Hdr10 Settings
+    #   @return [Types::Hdr10Settings]
+    #
+    # @!attribute [rw] rec_601_settings
+    #   Rec601 Settings
+    #   @return [Types::Rec601Settings]
+    #
+    # @!attribute [rw] rec_709_settings
+    #   Rec709 Settings
+    #   @return [Types::Rec709Settings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1ColorSpaceSettings AWS API Documentation
+    #
+    class Av1ColorSpaceSettings < Struct.new(
+      :color_space_passthrough_settings,
+      :hdr_10_settings,
+      :rec_601_settings,
+      :rec_709_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Av1 Settings
+    #
+    # @!attribute [rw] afd_signaling
+    #   Configures whether MediaLive will write AFD values into the video.
+    #   AUTO: MediaLive will try to preserve the input AFD value (in cases
+    #   where multiple AFD values are valid). FIXED: the AFD value will be
+    #   the value configured in the fixedAfd parameter. NONE: MediaLive
+    #   won't write AFD into the video
+    #   @return [String]
+    #
+    # @!attribute [rw] buf_size
+    #   The size of the buffer (HRD buffer model) in bits.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] color_space_settings
+    #   Color Space settings
+    #   @return [Types::Av1ColorSpaceSettings]
+    #
+    # @!attribute [rw] fixed_afd
+    #   Complete this property only if you set the afdSignaling property to
+    #   FIXED. Choose the AFD value (4 bits) to write on all frames of the
+    #   video encode.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   The denominator for the framerate. Framerate is a fraction, for
+    #   example, 24000 / 1001.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   The numerator for the framerate. Framerate is a fraction, for
+    #   example, 24000 / 1001.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gop_size
+    #   The GOP size (keyframe interval). If GopSizeUnits is frames, GopSize
+    #   must be a whole number and must be greater than or equal to 1. If
+    #   GopSizeUnits is seconds, GopSize must be greater than 0, but it can
+    #   be a decimal.
+    #   @return [Float]
+    #
+    # @!attribute [rw] gop_size_units
+    #   Choose the units for the GOP size: FRAMES or SECONDS. For SECONDS,
+    #   MediaLive converts the size into a frame count at run time.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   Sets the level. This parameter is one of the properties of the
+    #   encoding scheme for AV1.
+    #   @return [String]
+    #
+    # @!attribute [rw] look_ahead_rate_control
+    #   Sets the amount of lookahead. A value of LOW can decrease latency
+    #   and memory usage. A value of HIGH can produce better quality for
+    #   certain content.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_bitrate
+    #   The maximum bitrate to assign. For recommendations, see the
+    #   description for qvbrQualityLevel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_i_interval
+    #   Applies only if you enable SceneChangeDetect. Sets the interval
+    #   between frames. This property ensures a minimum separation between
+    #   repeated (cadence) I-frames and any I-frames inserted by scene
+    #   change detection (SCD frames). Enter a number for the interval,
+    #   measured in number of frames. If an SCD frame and a cadence frame
+    #   are closer than the specified number of frames, MediaLive shrinks or
+    #   stretches the GOP to include the SCD frame. Then normal cadence
+    #   resumes in the next GOP. For GOP stretch to succeed, you must enable
+    #   LookAheadRateControl. Note that the maximum GOP stretch = (GOP size)
+    #   + (Minimum I-interval) - 1
+    #   @return [Integer]
+    #
+    # @!attribute [rw] par_denominator
+    #   The denominator for the output pixel aspect ratio (PAR).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] par_numerator
+    #   The numerator for the output pixel aspect ratio (PAR).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] qvbr_quality_level
+    #   Controls the target quality for the video encode. With QVBR rate
+    #   control mode, the final quality is the target quality, constrained
+    #   by the maxBitrate. Set values for the qvbrQualityLevel property and
+    #   maxBitrate property that suit your most important viewing devices.
+    #   To let MediaLive set the quality level (AUTO mode), leave the
+    #   qvbrQualityLevel field empty. In this case, MediaLive uses the
+    #   maximum bitrate, and the quality follows from that: more complex
+    #   content might have a lower quality. Or set a target quality level
+    #   and a maximum bitrate. With more complex content, MediaLive will try
+    #   to achieve the target quality, but it won't exceed the maximum
+    #   bitrate. With less complex content, This option will use only the
+    #   bitrate needed to reach the target quality. Recommended values are:
+    #   Primary screen: qvbrQualityLevel: Leave empty. maxBitrate: 4,000,000
+    #   PC or tablet: qvbrQualityLevel: Leave empty. maxBitrate: 1,500,000
+    #   to 3,000,000 Smartphone: qvbrQualityLevel: Leave empty. maxBitrate:
+    #   1,000,000 to 1,500,000
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scene_change_detect
+    #   Controls whether MediaLive inserts I-frames when it detects a scene
+    #   change. ENABLED or DISABLED.
+    #   @return [String]
+    #
+    # @!attribute [rw] timecode_burnin_settings
+    #   Configures the timecode burn-in feature. If you enable this feature,
+    #   the timecode will become part of the video.
+    #   @return [Types::TimecodeBurninSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1Settings AWS API Documentation
+    #
+    class Av1Settings < Struct.new(
+      :afd_signaling,
+      :buf_size,
+      :color_space_settings,
+      :fixed_afd,
+      :framerate_denominator,
+      :framerate_numerator,
+      :gop_size,
+      :gop_size_units,
+      :level,
+      :look_ahead_rate_control,
+      :max_bitrate,
+      :min_i_interval,
+      :par_denominator,
+      :par_numerator,
+      :qvbr_quality_level,
+      :scene_change_detect,
+      :timecode_burnin_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in DescribeClusterResult, DescribeClusterSummary,
+    # UpdateClusterResult.
+    #
+    # @!attribute [rw] default_route
+    #   The network interface that is the default route for traffic to and
+    #   from the node. MediaLive Anywhere uses this default when the
+    #   destination for the traffic isn't covered by the route table for
+    #   any of the networks. Specify the value of the appropriate
+    #   logicalInterfaceName parameter that you create in the
+    #   interfaceMappings.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_mappings
+    #   An array of interfaceMapping objects for this Cluster. Each mapping
+    #   logically connects one interface on the nodes with one Network. You
+    #   need only one mapping for each interface because all the Nodes share
+    #   the mapping.
+    #   @return [Array<Types::InterfaceMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ClusterNetworkSettings AWS API Documentation
+    #
+    class ClusterNetworkSettings < Struct.new(
+      :default_route,
+      :interface_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in a CreateClusterRequest.
+    #
+    # @!attribute [rw] default_route
+    #   Specify one network interface as the default route for traffic to
+    #   and from the Node. MediaLive Anywhere uses this default when the
+    #   destination for the traffic isn't covered by the route table for
+    #   any of the networks. Specify the value of the appropriate
+    #   logicalInterfaceName parameter that you create in the
+    #   interfaceMappings.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_mappings
+    #   An array of interfaceMapping objects for this Cluster. You must
+    #   create a mapping for node interfaces that you plan to use for
+    #   encoding traffic. You typically don't create a mapping for the
+    #   management interface. You define this mapping in the Cluster so that
+    #   the mapping can be used by all the Nodes. Each mapping logically
+    #   connects one interface on the nodes with one Network. Each mapping
+    #   consists of a pair of parameters. The logicalInterfaceName parameter
+    #   creates a logical name for the Node interface that handles a
+    #   specific type of traffic. For example, my-Inputs-Interface. The
+    #   networkID parameter refers to the ID of the network. When you create
+    #   the Nodes in this Cluster, you will associate the
+    #   logicalInterfaceName with the appropriate physical interface.
+    #   @return [Array<Types::InterfaceMappingCreateRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ClusterNetworkSettingsCreateRequest AWS API Documentation
+    #
+    class ClusterNetworkSettingsCreateRequest < Struct.new(
+      :default_route,
+      :interface_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] default_route
+    #   Include this parameter only if you want to change the default route
+    #   for the Cluster. Specify one network interface as the default route
+    #   for traffic to and from the node. MediaLive Anywhere uses this
+    #   default when the destination for the traffic isn't covered by the
+    #   route table for any of the networks. Specify the value of the
+    #   appropriate logicalInterfaceName parameter that you create in the
+    #   interfaceMappings.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_mappings
+    #   An array of interfaceMapping objects for this Cluster. Include this
+    #   parameter only if you want to change the interface mappings for the
+    #   Cluster. Typically, you change the interface mappings only to fix an
+    #   error you made when creating the mapping. In an update request, make
+    #   sure that you enter the entire set of mappings again, not just the
+    #   mappings that you want to add or change. You define this mapping so
+    #   that the mapping can be used by all the Nodes. Each mapping
+    #   logically connects one interface on the nodes with one Network. Each
+    #   mapping consists of a pair of parameters. The logicalInterfaceName
+    #   parameter creates a logical name for the Node interface that handles
+    #   a specific type of traffic. For example, my-Inputs-Interface. The
+    #   networkID parameter refers to the ID of the network. When you create
+    #   the Nodes in this Cluster, you will associate the
+    #   logicalInterfaceName with the appropriate physical interface.
+    #   @return [Array<Types::InterfaceMappingUpdateRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ClusterNetworkSettingsUpdateRequest AWS API Documentation
+    #
+    class ClusterNetworkSettingsUpdateRequest < Struct.new(
+      :default_route,
+      :interface_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specify a name that is unique in the Cluster. You can't change the
+    #   name. Names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   An array of one ID for the Node that you want to associate with the
+    #   ChannelPlacementGroup. (You can't associate more than one Node with
+    #   the ChannelPlacementGroup.) The Node and the ChannelPlacementGroup
+    #   must be in the same Cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources. the request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelPlacementGroupRequest AWS API Documentation
+    #
+    class CreateChannelPlacementGroupRequest < Struct.new(
+      :cluster_id,
+      :name,
+      :nodes,
+      :request_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channels
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeChannelPlacementGroupResult
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelPlacementGroupResponse AWS API Documentation
+    #
+    class CreateChannelPlacementGroupResponse < Struct.new(
+      :arn,
+      :channels,
+      :cluster_id,
+      :id,
+      :name,
+      :nodes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in the CreateCluster operation.
+    #
+    # @!attribute [rw] cluster_type
+    #   Specify a type. All the Nodes that you later add to this Cluster
+    #   must be this type of hardware. One Cluster instance can't contain
+    #   different hardware types. You won't be able to change this
+    #   parameter after you create the Cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_role_arn
+    #   The ARN of the IAM role for the Node in this Cluster. The role must
+    #   include all the operations that you expect these Node to perform. If
+    #   necessary, create a role in IAM, then attach it here.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specify a name that is unique in the AWS account. We recommend that
+    #   you assign a name that hints at the types of Nodes in the Cluster.
+    #   Names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Network settings that connect the Nodes in the Cluster to one or
+    #   more of the Networks that the Cluster is associated with.
+    #   @return [Types::ClusterNetworkSettingsCreateRequest]
+    #
+    # @!attribute [rw] request_id
+    #   The unique ID of the request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateClusterRequest AWS API Documentation
+    #
+    class CreateClusterRequest < Struct.new(
+      :cluster_type,
+      :instance_role_arn,
+      :name,
+      :network_settings,
+      :request_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_type
+    #   Used in CreateClusterSummary, DescribeClusterSummary,
+    #   DescribeClusterResult, UpdateClusterResult.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Used in DescribeClusterResult, DescribeClusterSummary,
+    #   UpdateClusterResult.
+    #   @return [Types::ClusterNetworkSettings]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeClusterSummary, DescribeClusterResult,
+    #   UpdateClusterResult.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateClusterResponse AWS API Documentation
+    #
+    class CreateClusterResponse < Struct.new(
+      :arn,
+      :channel_ids,
+      :cluster_type,
+      :id,
+      :instance_role_arn,
+      :name,
+      :network_settings,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in the CreateNetwork operation.
+    #
+    # @!attribute [rw] ip_pools
+    #   An array of IpPoolCreateRequests that identify a collection of IP
+    #   addresses in your network that you want to reserve for use in
+    #   MediaLive Anywhere. MediaLiveAnywhere uses these IP addresses for
+    #   Push inputs (in both Bridge and NATnetworks) and for output
+    #   destinations (only in Bridge networks). EachIpPoolUpdateRequest
+    #   specifies one CIDR block.
+    #   @return [Array<Types::IpPoolCreateRequest>]
+    #
+    # @!attribute [rw] name
+    #   Specify a name that is unique in the AWS account. We recommend that
+    #   you assign a name that hints at the type of traffic on the network.
+    #   Names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   An array of routes that MediaLive Anywhere needs to know about in
+    #   order to route encoding traffic.
+    #   @return [Array<Types::RouteCreateRequest>]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateNetworkRequest AWS API Documentation
+    #
+    class CreateNetworkRequest < Struct.new(
+      :ip_pools,
+      :name,
+      :request_id,
+      :routes,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_cluster_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_pools
+    #   @return [Array<Types::IpPool>]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNetworkResult, DescribeNetworkSummary,
+    #   UpdateNetworkResult.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateNetworkResponse AWS API Documentation
+    #
+    class CreateNetworkResponse < Struct.new(
+      :arn,
+      :associated_cluster_ids,
+      :id,
+      :ip_pools,
+      :name,
+      :routes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in the CreateNodeRegistrationScript operation.
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   If you're generating a re-registration script for an already
+    #   existing node, this is where you provide the id.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specify a pattern for MediaLive Anywhere to use to assign a name to
+    #   each Node in the Cluster. The pattern can include the variables $hn
+    #   (hostname of the node hardware) and $ts for the date and time that
+    #   the Node is created, in UTC (for example, 2024-08-20T23:35:12Z).
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   An array of interface mappings for the Node. Each mapping logically
+    #   connects one physical interface on the node hardware with one
+    #   logical interface name. This mapping associates a node interface
+    #   with a network. The association works as follows: Node
+    #   physicalInterfaceName > Node logicalInterfaceName = Cluster
+    #   logicalInterfaceName > networkId.
+    #   @return [Array<Types::NodeInterfaceMapping>]
+    #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The initial role of the Node in the Cluster. ACTIVE means the Node
+    #   is available for encoding. BACKUP means the Node is a redundant Node
+    #   and might get used if an ACTIVE Node fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateNodeRegistrationScriptRequest AWS API Documentation
+    #
+    class CreateNodeRegistrationScriptRequest < Struct.new(
+      :cluster_id,
+      :id,
+      :name,
+      :node_interface_mappings,
+      :request_id,
+      :role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] node_registration_script
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateNodeRegistrationScriptResponse AWS API Documentation
+    #
+    class CreateNodeRegistrationScriptResponse < Struct.new(
+      :node_registration_script)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for CreateNodeRegistrationScript.
+    #
+    # @!attribute [rw] node_registration_script
+    #   A script that can be run on a Bring Your Own Device Elemental
+    #   Anywhere system to create a node in a cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateNodeRegistrationScriptResult AWS API Documentation
+    #
+    class CreateNodeRegistrationScriptResult < Struct.new(
+      :node_registration_script)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The user-specified name of the Node to be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   An array of interface mappings for the Node. Each mapping logically
+    #   connects one physical interface on the node hardware with one
+    #   logical interface name. You created the logical names in the
+    #   logicalInterfaceName parameter when you created the Cluster. Create
+    #   one mapping for each physical interface on the node, but only for
+    #   node interfaces that you plan to use for encoding content traffic
+    #   (and not for any management-only interface). In each mapping pair,
+    #   we recommend that you specify the logical name first, then assign
+    #   the physical name that applies.The physicalInterfaceName is the
+    #   final piece of data that associates a node interface with a network.
+    #   The association works as follows: Node physicalInterfaceName > Node
+    #   logicalInterfaceName = Cluster logicalInterfaceName > networkId.
+    #   @return [Array<Types::NodeInterfaceMappingCreateRequest>]
+    #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The initial role of the Node in the Cluster. ACTIVE means the Node
+    #   is available for encoding. BACKUP means the Node is a redundant Node
+    #   and might get used if an ACTIVE Node fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateNodeRequest AWS API Documentation
+    #
+    class CreateNodeRequest < Struct.new(
+      :cluster_id,
+      :name,
+      :node_interface_mappings,
+      :request_id,
+      :role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_placement_groups
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   @return [Array<Types::NodeInterfaceMapping>]
+    #
+    # @!attribute [rw] role
+    #   Used in CreateNodeRequest, CreateNodeRegistrationScriptRequest,
+    #   DescribeNodeResult, DescribeNodeSummary, UpdateNodeRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateNodeResponse AWS API Documentation
+    #
+    class CreateNodeResponse < Struct.new(
+      :arn,
+      :channel_placement_groups,
+      :cluster_id,
+      :connection_state,
+      :id,
+      :instance_arn,
+      :name,
+      :node_interface_mappings,
+      :role,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_placement_group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelPlacementGroupRequest AWS API Documentation
+    #
+    class DeleteChannelPlacementGroupRequest < Struct.new(
+      :channel_placement_group_id,
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channels
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeChannelPlacementGroupResult
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelPlacementGroupResponse AWS API Documentation
+    #
+    class DeleteChannelPlacementGroupResponse < Struct.new(
+      :arn,
+      :channels,
+      :cluster_id,
+      :id,
+      :name,
+      :nodes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteClusterRequest AWS API Documentation
+    #
+    class DeleteClusterRequest < Struct.new(
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_type
+    #   Used in CreateClusterSummary, DescribeClusterSummary,
+    #   DescribeClusterResult, UpdateClusterResult.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Used in DescribeClusterResult, DescribeClusterSummary,
+    #   UpdateClusterResult.
+    #   @return [Types::ClusterNetworkSettings]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeClusterSummary, DescribeClusterResult,
+    #   UpdateClusterResult.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteClusterResponse AWS API Documentation
+    #
+    class DeleteClusterResponse < Struct.new(
+      :arn,
+      :channel_ids,
+      :cluster_type,
+      :id,
+      :instance_role_arn,
+      :name,
+      :network_settings,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteNetworkRequest AWS API Documentation
+    #
+    class DeleteNetworkRequest < Struct.new(
+      :network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_cluster_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_pools
+    #   @return [Array<Types::IpPool>]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNetworkResult, DescribeNetworkSummary,
+    #   UpdateNetworkResult.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteNetworkResponse AWS API Documentation
+    #
+    class DeleteNetworkResponse < Struct.new(
+      :arn,
+      :associated_cluster_ids,
+      :id,
+      :ip_pools,
+      :name,
+      :routes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteNodeRequest AWS API Documentation
+    #
+    class DeleteNodeRequest < Struct.new(
+      :cluster_id,
+      :node_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_placement_groups
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   @return [Array<Types::NodeInterfaceMapping>]
+    #
+    # @!attribute [rw] role
+    #   Used in CreateNodeRequest, CreateNodeRegistrationScriptRequest,
+    #   DescribeNodeResult, DescribeNodeSummary, UpdateNodeRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteNodeResponse AWS API Documentation
+    #
+    class DeleteNodeResponse < Struct.new(
+      :arn,
+      :channel_placement_groups,
+      :cluster_id,
+      :connection_state,
+      :id,
+      :instance_arn,
+      :name,
+      :node_interface_mappings,
+      :role,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Elemental anywhere settings
+    #
+    # @!attribute [rw] channel_placement_group_id
+    #   The ID of the channel placement group for the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_id
+    #   The ID of the cluster for the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAnywhereSettings AWS API Documentation
+    #
+    class DescribeAnywhereSettings < Struct.new(
+      :channel_placement_group_id,
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_placement_group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelPlacementGroupRequest AWS API Documentation
+    #
+    class DescribeChannelPlacementGroupRequest < Struct.new(
+      :channel_placement_group_id,
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channels
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeChannelPlacementGroupResult
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelPlacementGroupResponse AWS API Documentation
+    #
+    class DescribeChannelPlacementGroupResponse < Struct.new(
+      :arn,
+      :channels,
+      :cluster_id,
+      :id,
+      :name,
+      :nodes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for CreateChannelPlacementGroup,
+    # DescribeChannelPlacementGroup, DeleteChannelPlacementGroup,
+    # UpdateChannelPlacementGroup
+    #
+    # @!attribute [rw] arn
+    #   The ARN of this ChannelPlacementGroup. It is automatically assigned
+    #   when the ChannelPlacementGroup is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] channels
+    #   Used in ListChannelPlacementGroupsResult
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   The ID of the Cluster that the Node belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the ChannelPlacementGroup. Unique in the AWS account. The
+    #   ID is the resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for the ChannelPlacementGroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   An array with one item, which is the signle Node that is associated
+    #   with the ChannelPlacementGroup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the ChannelPlacementGroup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelPlacementGroupResult AWS API Documentation
+    #
+    class DescribeChannelPlacementGroupResult < Struct.new(
+      :arn,
+      :channels,
+      :cluster_id,
+      :id,
+      :name,
+      :nodes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for ListChannelPlacementGroups
+    #
+    # @!attribute [rw] arn
+    #   The ARN of this ChannelPlacementGroup. It is automatically assigned
+    #   when the ChannelPlacementGroup is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] channels
+    #   Used in ListChannelPlacementGroupsResult
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   The ID of the Cluster that the Node belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the ChannelPlacementGroup. Unique in the AWS account. The
+    #   ID is the resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for the ChannelPlacementGroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   An array with one item, which is the signle Node that is associated
+    #   with the ChannelPlacementGroup.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the ChannelPlacementGroup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelPlacementGroupSummary AWS API Documentation
+    #
+    class DescribeChannelPlacementGroupSummary < Struct.new(
+      :arn,
+      :channels,
+      :cluster_id,
+      :id,
+      :name,
+      :nodes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeClusterRequest AWS API Documentation
+    #
+    class DescribeClusterRequest < Struct.new(
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_type
+    #   Used in CreateClusterSummary, DescribeClusterSummary,
+    #   DescribeClusterResult, UpdateClusterResult.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Used in DescribeClusterResult, DescribeClusterSummary,
+    #   UpdateClusterResult.
+    #   @return [Types::ClusterNetworkSettings]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeClusterSummary, DescribeClusterResult,
+    #   UpdateClusterResult.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeClusterResponse AWS API Documentation
+    #
+    class DescribeClusterResponse < Struct.new(
+      :arn,
+      :channel_ids,
+      :cluster_type,
+      :id,
+      :instance_role_arn,
+      :name,
+      :network_settings,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for CreateCluster, DescribeCluster,
+    # DeleteCluster, UpdateCluster
+    #
+    # @!attribute [rw] arn
+    #   The ARN of this Cluster. It is automatically assigned when the
+    #   Cluster is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_type
+    #   The hardware type for the Cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the Cluster. Unique in the AWS account. The ID is the
+    #   resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_role_arn
+    #   The ARN of the IAM role for the Node in this Cluster. Any Nodes that
+    #   are associated with this Cluster assume this role. The role gives
+    #   permissions to the operations that you expect these Node to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for the Cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Network settings that connect the Nodes in the Cluster to one or
+    #   more of the Networks that the Cluster is associated with.
+    #   @return [Types::ClusterNetworkSettings]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeClusterResult AWS API Documentation
+    #
+    class DescribeClusterResult < Struct.new(
+      :arn,
+      :channel_ids,
+      :cluster_type,
+      :id,
+      :instance_role_arn,
+      :name,
+      :network_settings,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in ListClustersResult.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of this Cluster. It is automatically assigned when the
+    #   Cluster is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_ids
+    #   An array of the IDs of the Channels that are associated with this
+    #   Cluster. One Channel is associated with the Cluster as follows: A
+    #   Channel belongs to a ChannelPlacementGroup. A ChannelPlacementGroup
+    #   is attached to a Node. A Node belongs to a Cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_type
+    #   The hardware type for the Cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the Cluster. Unique in the AWS account. The ID is the
+    #   resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_role_arn
+    #   The ARN of the IAM role for the Node in this Cluster. Any Nodes that
+    #   are associated with this Cluster assume this role. The role gives
+    #   permissions to the operations that you expect these Node to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for the Cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Network settings that connect the Nodes in the Cluster to one or
+    #   more of the Networks that the Cluster is associated with.
+    #   @return [Types::ClusterNetworkSettings]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeClusterSummary AWS API Documentation
+    #
+    class DescribeClusterSummary < Struct.new(
+      :arn,
+      :channel_ids,
+      :cluster_type,
+      :id,
+      :instance_role_arn,
+      :name,
+      :network_settings,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeNetworkRequest AWS API Documentation
+    #
+    class DescribeNetworkRequest < Struct.new(
+      :network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_cluster_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_pools
+    #   @return [Array<Types::IpPool>]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNetworkResult, DescribeNetworkSummary,
+    #   UpdateNetworkResult.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeNetworkResponse AWS API Documentation
+    #
+    class DescribeNetworkResponse < Struct.new(
+      :arn,
+      :associated_cluster_ids,
+      :id,
+      :ip_pools,
+      :name,
+      :routes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for CreateNetwork, DescribeNetwork,
+    # DeleteNetwork, UpdateNetwork.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of this Network. It is automatically assigned when the
+    #   Network is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_cluster_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The ID of the Network. Unique in the AWS account. The ID is the
+    #   resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_pools
+    #   An array of IpPools in your organization's network that identify a
+    #   collection of IP addresses in this network that are reserved for use
+    #   in MediaLive Anywhere. MediaLive Anywhere uses these IP addresses
+    #   for Push inputs (in both Bridge and NAT networks) and for output
+    #   destinations (only in Bridge networks). Each IpPool specifies one
+    #   CIDR block.
+    #   @return [Array<Types::IpPool>]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for the Network.
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   An array of routes that MediaLive Anywhere needs to know about in
+    #   order to route encoding traffic.
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Network. Only MediaLive Anywhere can change
+    #   the state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeNetworkResult AWS API Documentation
+    #
+    class DescribeNetworkResult < Struct.new(
+      :arn,
+      :associated_cluster_ids,
+      :id,
+      :ip_pools,
+      :name,
+      :routes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in ListNetworksResult.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of this Network. It is automatically assigned when the
+    #   Network is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_cluster_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The ID of the Network. Unique in the AWS account. The ID is the
+    #   resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_pools
+    #   An array of IpPools in your organization's network that identify a
+    #   collection of IP addresses in your organization's network that are
+    #   reserved for use in MediaLive Anywhere. MediaLive Anywhere uses
+    #   these IP addresses for Push inputs (in both Bridge and NAT networks)
+    #   and for output destinations (only in Bridge networks). Each IpPool
+    #   specifies one CIDR block.
+    #   @return [Array<Types::IpPool>]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for this Network.
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   An array of routes that MediaLive Anywhere needs to know about in
+    #   order to route encoding traffic.
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Network. Only MediaLive Anywhere can change
+    #   the state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeNetworkSummary AWS API Documentation
+    #
+    class DescribeNetworkSummary < Struct.new(
+      :arn,
+      :associated_cluster_ids,
+      :id,
+      :ip_pools,
+      :name,
+      :routes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeNodeRequest AWS API Documentation
+    #
+    class DescribeNodeRequest < Struct.new(
+      :cluster_id,
+      :node_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_placement_groups
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   @return [Array<Types::NodeInterfaceMapping>]
+    #
+    # @!attribute [rw] role
+    #   Used in CreateNodeRequest, CreateNodeRegistrationScriptRequest,
+    #   DescribeNodeResult, DescribeNodeSummary, UpdateNodeRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeNodeResponse AWS API Documentation
+    #
+    class DescribeNodeResponse < Struct.new(
+      :arn,
+      :channel_placement_groups,
+      :cluster_id,
+      :connection_state,
+      :id,
+      :instance_arn,
+      :name,
+      :node_interface_mappings,
+      :role,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for CreateNode, DescribeNode, DeleteNode,
+    # UpdateNode
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Node. It is automatically assigned when the Node is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_placement_groups
+    #   An array of IDs. Each ID is one ChannelPlacementGroup that is
+    #   associated with this Node. Empty if the Node is not yet associated
+    #   with any groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   The ID of the Cluster that the Node belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The current connection state of the Node.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the Node. Unique in the Cluster. The ID is the
+    #   resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the EC2 instance hosting the Node.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for the Node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   An array of interface mappings for the Node. Each mapping logically
+    #   connects one physical interface on the node hardware with one
+    #   logical interface name. This mapping associates a node interface
+    #   with a network. The association works as follows: Node
+    #   physicalInterfaceName > Node logicalInterfaceName = Cluster
+    #   logicalInterfaceName > networkId.
+    #   @return [Array<Types::NodeInterfaceMapping>]
+    #
+    # @!attribute [rw] role
+    #   The initial role current role of the Node in the Cluster. ACTIVE
+    #   means the Node is available for encoding. BACKUP means the Node is a
+    #   redundant Node and might get used if an ACTIVE Node fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeNodeResult AWS API Documentation
+    #
+    class DescribeNodeResult < Struct.new(
+      :arn,
+      :channel_placement_groups,
+      :cluster_id,
+      :connection_state,
+      :id,
+      :instance_arn,
+      :name,
+      :node_interface_mappings,
+      :role,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the Node. It is automatically assigned when the Node is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_placement_groups
+    #   An array of IDs. Each ID is one ChannelPlacementGroup that is
+    #   associated with this Node. Empty if the Node is not yet associated
+    #   with any groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   The ID of the Cluster that the Node belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The current connection state of the Node.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the Node. Unique in the Cluster. The ID is the
+    #   resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The EC2 ARN of the Instance associated with the Node.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_instance_id
+    #   At the routing layer will get it from the callerId/context for use
+    #   with bring your own device.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for the Node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   An array of interface mappings for the Node. Each mapping logically
+    #   connects one physical interface on the node hardware with one
+    #   logical interface name. This mapping associates a node interface
+    #   with a network. The association works as follows: Node
+    #   physicalInterfaceName > Node logicalInterfaceName = Cluster
+    #   logicalInterfaceName > networkId.
+    #   @return [Array<Types::NodeInterfaceMapping>]
+    #
+    # @!attribute [rw] role
+    #   The initial role current role of the Node in the Cluster. ACTIVE
+    #   means the Node is available for encoding. BACKUP means the Node is a
+    #   redundant Node and might get used if an ACTIVE Node fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeNodeSummary AWS API Documentation
+    #
+    class DescribeNodeSummary < Struct.new(
+      :arn,
+      :channel_placement_groups,
+      :cluster_id,
+      :connection_state,
+      :id,
+      :instance_arn,
+      :managed_instance_id,
+      :name,
+      :node_interface_mappings,
+      :role,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A network route configuration.
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR of the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway
+    #   An optional gateway for the route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestinationRoute AWS API Documentation
+    #
+    class InputDestinationRoute < Struct.new(
+      :cidr,
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A network route configuration.
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR of the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway
+    #   An optional gateway for the route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputRequestDestinationRoute AWS API Documentation
+    #
+    class InputRequestDestinationRoute < Struct.new(
+      :cidr,
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in ClusterNetworkSettings
+    #
+    # @!attribute [rw] logical_interface_name
+    #   The logical name for one interface (on every Node) that handles a
+    #   specific type of traffic. We recommend that the name hints at the
+    #   physical interface it applies to. For example, it could refer to the
+    #   traffic that the physical interface handles. For example,
+    #   my-Inputs-Interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_id
+    #   The ID of the network that you want to connect to the specified
+    #   logicalInterfaceName.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InterfaceMapping AWS API Documentation
+    #
+    class InterfaceMapping < Struct.new(
+      :logical_interface_name,
+      :network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in ClusterNetworkSettingsCreateRequest.
+    #
+    # @!attribute [rw] logical_interface_name
+    #   The logical name for one interface (on every Node) that handles a
+    #   specific type of traffic. We recommend that the name hints at the
+    #   physical interface it applies to. For example, it could refer to the
+    #   traffic that the physical interface handles. For example,
+    #   my-Inputs-Interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_id
+    #   The ID of the network that you want to connect to the specified
+    #   logicalInterfaceName.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InterfaceMappingCreateRequest AWS API Documentation
+    #
+    class InterfaceMappingCreateRequest < Struct.new(
+      :logical_interface_name,
+      :network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] logical_interface_name
+    #   The logical name for one interface (on every Node) that handles a
+    #   specific type of traffic. We recommend that the name hints at the
+    #   physical interface it applies to. For example, it could refer to the
+    #   traffic that the physical interface handles. For example,
+    #   my-Inputs-Interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_id
+    #   The ID of the network that you want to connect to the specified
+    #   logicalInterfaceName. You can use the ListNetworks operation to
+    #   discover all the IDs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InterfaceMappingUpdateRequest AWS API Documentation
+    #
+    class InterfaceMappingUpdateRequest < Struct.new(
+      :logical_interface_name,
+      :network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in DescribeNetworkResult, DescribeNetworkSummary,
+    # UpdateNetworkResult.
+    #
+    # @!attribute [rw] cidr
+    #   A CIDR block of IP addresses that are reserved for MediaLive
+    #   Anywhere.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/IpPool AWS API Documentation
+    #
+    class IpPool < Struct.new(
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in CreateNetworkRequest.
+    #
+    # @!attribute [rw] cidr
+    #   A CIDR block of IP addresses to reserve for MediaLive Anywhere.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/IpPoolCreateRequest AWS API Documentation
+    #
+    class IpPoolCreateRequest < Struct.new(
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in UpdateNetworkRequest.
+    #
+    # @!attribute [rw] cidr
+    #   A CIDR block of IP addresses to reserve for MediaLive Anywhere.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/IpPoolUpdateRequest AWS API Documentation
+    #
+    class IpPoolUpdateRequest < Struct.new(
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannelPlacementGroupsRequest AWS API Documentation
+    #
+    class ListChannelPlacementGroupsRequest < Struct.new(
+      :cluster_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_placement_groups
+    #   @return [Array<Types::DescribeChannelPlacementGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannelPlacementGroupsResponse AWS API Documentation
+    #
+    class ListChannelPlacementGroupsResponse < Struct.new(
+      :channel_placement_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for ListChannelPlacementGroups.
+    #
+    # @!attribute [rw] channel_placement_groups
+    #   An array of ChannelPlacementGroups that exist in the Cluster.
+    #   @return [Array<Types::DescribeChannelPlacementGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannelPlacementGroupsResult AWS API Documentation
+    #
+    class ListChannelPlacementGroupsResult < Struct.new(
+      :channel_placement_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClustersRequest AWS API Documentation
+    #
+    class ListClustersRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] clusters
+    #   @return [Array<Types::DescribeClusterSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClustersResponse AWS API Documentation
+    #
+    class ListClustersResponse < Struct.new(
+      :clusters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for ListClusters.
+    #
+    # @!attribute [rw] clusters
+    #   A list of the Clusters that exist in your AWS account.
+    #   @return [Array<Types::DescribeClusterSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClustersResult AWS API Documentation
+    #
+    class ListClustersResult < Struct.new(
+      :clusters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListNetworksRequest AWS API Documentation
+    #
+    class ListNetworksRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] networks
+    #   @return [Array<Types::DescribeNetworkSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListNetworksResponse AWS API Documentation
+    #
+    class ListNetworksResponse < Struct.new(
+      :networks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for ListNetworks
+    #
+    # @!attribute [rw] networks
+    #   An array of networks that you have created.
+    #   @return [Array<Types::DescribeNetworkSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next ListNetworks request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListNetworksResult AWS API Documentation
+    #
+    class ListNetworksResult < Struct.new(
+      :networks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListNodesRequest AWS API Documentation
+    #
+    class ListNodesRequest < Struct.new(
+      :cluster_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   @return [Array<Types::DescribeNodeSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListNodesResponse AWS API Documentation
+    #
+    class ListNodesResponse < Struct.new(
+      :next_token,
+      :nodes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for ListNodes.
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next result.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   An array of Nodes that exist in the Cluster.
+    #   @return [Array<Types::DescribeNodeSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListNodesResult AWS API Documentation
+    #
+    class ListNodesResult < Struct.new(
+      :next_token,
+      :nodes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Multicast-specific input settings.
+    #
+    # @!attribute [rw] source_ip_address
+    #   Optionally, a source ip address to filter by for Source-specific
+    #   Multicast (SSM)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastInputSettings AWS API Documentation
+    #
+    class MulticastInputSettings < Struct.new(
+      :source_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for a Multicast input. Contains a list of multicast Urls and
+    # optional source ip addresses.
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::MulticastSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSettings AWS API Documentation
+    #
+    class MulticastSettings < Struct.new(
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for a Multicast input. Contains a list of multicast Urls and
+    # optional source ip addresses.
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::MulticastSourceCreateRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSettingsCreateRequest AWS API Documentation
+    #
+    class MulticastSettingsCreateRequest < Struct.new(
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for a Multicast input. Contains a list of multicast Urls and
+    # optional source ip addresses.
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::MulticastSourceUpdateRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSettingsUpdateRequest AWS API Documentation
+    #
+    class MulticastSettingsUpdateRequest < Struct.new(
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Pair of multicast url and source ip address (optional) that make up a
+    # multicast source.
+    #
+    # @!attribute [rw] source_ip
+    #   This represents the ip address of the device sending the multicast
+    #   stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   This represents the customer's source URL where multicast stream is
+    #   pulled from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSource AWS API Documentation
+    #
+    class MulticastSource < Struct.new(
+      :source_ip,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Pair of multicast url and source ip address (optional) that make up a
+    # multicast source.
+    #
+    # @!attribute [rw] source_ip
+    #   This represents the ip address of the device sending the multicast
+    #   stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   This represents the customer's source URL where multicast stream is
+    #   pulled from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSourceCreateRequest AWS API Documentation
+    #
+    class MulticastSourceCreateRequest < Struct.new(
+      :source_ip,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Pair of multicast url and source ip address (optional) that make up a
+    # multicast source.
+    #
+    # @!attribute [rw] source_ip
+    #   This represents the ip address of the device sending the multicast
+    #   stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   This represents the customer's source URL where multicast stream is
+    #   pulled from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSourceUpdateRequest AWS API Documentation
+    #
+    class MulticastSourceUpdateRequest < Struct.new(
+      :source_ip,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a configuration error on the Node.
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_errors
+    #   A collection of validation error responses.
+    #   @return [Array<Types::ValidationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NodeConfigurationValidationError AWS API Documentation
+    #
+    class NodeConfigurationValidationError < Struct.new(
+      :message,
+      :validation_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A mapping that's used to pair a logical network interface name on a
+    # Node with the physical interface name exposed in the operating system.
+    #
+    # @!attribute [rw] logical_interface_name
+    #   A uniform logical interface name to address in a MediaLive channel
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_mode
+    #   Used in NodeInterfaceMapping and NodeInterfaceMappingCreateRequest
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_interface_name
+    #   The name of the physical interface on the hardware that will be
+    #   running Elemental anywhere.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NodeInterfaceMapping AWS API Documentation
+    #
+    class NodeInterfaceMapping < Struct.new(
+      :logical_interface_name,
+      :network_interface_mode,
+      :physical_interface_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in CreateNodeRequest.
+    #
+    # @!attribute [rw] logical_interface_name
+    #   Specify one of the logicalInterfaceNames that you created in the
+    #   Cluster that this node belongs to. For example, my-Inputs-Interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_mode
+    #   The style of the network -- NAT or BRIDGE.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_interface_name
+    #   Specify the physical name that corresponds to the
+    #   logicalInterfaceName that you specified in this interface mapping.
+    #   For example, Eth1 or ENO1234EXAMPLE.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NodeInterfaceMappingCreateRequest AWS API Documentation
+    #
+    class NodeInterfaceMappingCreateRequest < Struct.new(
+      :logical_interface_name,
+      :network_interface_mode,
+      :physical_interface_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in DescribeNetworkResult, DescribeNetworkSummary,
+    # UpdateNetworkResult.
+    #
+    # @!attribute [rw] cidr
+    #   A CIDR block for one Route.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway
+    #   The IP address of the Gateway for this route, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Route AWS API Documentation
+    #
+    class Route < Struct.new(
+      :cidr,
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in CreateNetworkRequest.
+    #
+    # @!attribute [rw] cidr
+    #   A CIDR block for one Route.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway
+    #   The IP address of the Gateway for this route, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouteCreateRequest AWS API Documentation
+    #
+    class RouteCreateRequest < Struct.new(
+      :cidr,
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in UpdateNetworkRequest.
+    #
+    # @!attribute [rw] cidr
+    #   A CIDR block for one Route.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway
+    #   The IP address of the Gateway for this route, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouteUpdateRequest AWS API Documentation
+    #
+    class RouteUpdateRequest < Struct.new(
+      :cidr,
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Srt Group Settings
+    #
+    # @!attribute [rw] input_loss_action
+    #   Specifies behavior of last resort when input video is lost, and no
+    #   more backup inputs are available. When dropTs is selected the entire
+    #   transport stream will stop being emitted. When dropProgram is
+    #   selected the program can be dropped from the transport stream (and
+    #   replaced with null packets to meet the TS bitrate requirement). Or,
+    #   when emitProgram is chosen the transport stream will continue to be
+    #   produced normally with repeat frames, black frames, or slate frames
+    #   substituted for the absent input video.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtGroupSettings AWS API Documentation
+    #
+    class SrtGroupSettings < Struct.new(
+      :input_loss_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] encryption_passphrase_secret_arn
+    #   Arn used to extract the password from Secrets Manager
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_id
+    #   Stream id for SRT destinations (URLs of type srt://)
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   A URL specifying a destination
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtOutputDestinationSettings AWS API Documentation
+    #
+    class SrtOutputDestinationSettings < Struct.new(
+      :encryption_passphrase_secret_arn,
+      :stream_id,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Srt Output Settings
+    #
+    # @!attribute [rw] buffer_msec
+    #   SRT output buffering in milliseconds. A higher value increases
+    #   latency through the encoder. But the benefits are that it helps to
+    #   maintain a constant, low-jitter SRT output, and it accommodates
+    #   clock recovery, input switching, input disruptions, picture
+    #   reordering, and so on. Range: 0-10000 milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_settings
+    #   Udp Container Settings
+    #   @return [Types::UdpContainerSettings]
+    #
+    # @!attribute [rw] destination
+    #   Reference to an OutputDestination ID defined in the channel
+    #   @return [Types::OutputLocationRef]
+    #
+    # @!attribute [rw] encryption_type
+    #   The encryption level for the content. Valid values are AES128,
+    #   AES192, AES256. You and the downstream system should plan how to set
+    #   this field because the values must not conflict with each other.
+    #   @return [String]
+    #
+    # @!attribute [rw] latency
+    #   The latency value, in milliseconds, that is proposed during the SRT
+    #   connection handshake. SRT will choose the maximum of the values
+    #   proposed by the sender and receiver. On the sender side, latency is
+    #   the amount of time a packet is held to give it a chance to be
+    #   delivered successfully. On the receiver side, latency is the amount
+    #   of time the packet is held before delivering to the application,
+    #   aiding in packet recovery and matching as closely as possible the
+    #   packet timing of the sender. Range: 40-16000 milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtOutputSettings AWS API Documentation
+    #
+    class SrtOutputSettings < Struct.new(
+      :buffer_msec,
+      :container_settings,
+      :destination,
+      :encryption_type,
+      :latency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in the UpdateChannelPlacementGroup operation.
+    #
+    # @!attribute [rw] channel_placement_group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Include this parameter only if you want to change the current name
+    #   of the ChannelPlacementGroup. Specify a name that is unique in the
+    #   Cluster. You can't change the name. Names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   Include this parameter only if you want to change the list of Nodes
+    #   that are associated with the ChannelPlacementGroup.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelPlacementGroupRequest AWS API Documentation
+    #
+    class UpdateChannelPlacementGroupRequest < Struct.new(
+      :channel_placement_group_id,
+      :cluster_id,
+      :name,
+      :nodes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channels
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeChannelPlacementGroupResult
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelPlacementGroupResponse AWS API Documentation
+    #
+    class UpdateChannelPlacementGroupResponse < Struct.new(
+      :arn,
+      :channels,
+      :cluster_id,
+      :id,
+      :name,
+      :nodes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in the UpdatedCluster operation.
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Include this parameter only if you want to change the current name
+    #   of the Cluster. Specify a name that is unique in the AWS account.
+    #   You can't change the name. Names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Include this property only if you want to change the current
+    #   connections between the Nodes in the Cluster and the Networks the
+    #   Cluster is associated with.
+    #   @return [Types::ClusterNetworkSettingsUpdateRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateClusterRequest AWS API Documentation
+    #
+    class UpdateClusterRequest < Struct.new(
+      :cluster_id,
+      :name,
+      :network_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_type
+    #   Used in CreateClusterSummary, DescribeClusterSummary,
+    #   DescribeClusterResult, UpdateClusterResult.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Used in DescribeClusterResult, DescribeClusterSummary,
+    #   UpdateClusterResult.
+    #   @return [Types::ClusterNetworkSettings]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeClusterSummary, DescribeClusterResult,
+    #   UpdateClusterResult.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateClusterResponse AWS API Documentation
+    #
+    class UpdateClusterResponse < Struct.new(
+      :arn,
+      :channel_ids,
+      :cluster_type,
+      :id,
+      :name,
+      :network_settings,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name that you specified for the Cluster.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_ids
+    #   An array of the IDs of the Channels that are associated with this
+    #   Cluster. One Channel is associated with the Cluster as follows: A
+    #   Channel belongs to a ChannelPlacementGroup. A ChannelPlacementGroup
+    #   is attached to a Node. A Node belongs to a Cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_type
+    #   The hardware type for the Cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the Cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The user-specified name of the Cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_settings
+    #   Network settings that connect the Nodes in the Cluster to one or
+    #   more of the Networks that the Cluster is associated with.
+    #   @return [Types::ClusterNetworkSettings]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateClusterResult AWS API Documentation
+    #
+    class UpdateClusterResult < Struct.new(
+      :arn,
+      :channel_ids,
+      :cluster_type,
+      :id,
+      :name,
+      :network_settings,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in the UpdateNetwork operation.
+    #
+    # @!attribute [rw] ip_pools
+    #   Include this parameter only if you want to change the pool of IP
+    #   addresses in the network. An array of IpPoolCreateRequests that
+    #   identify a collection of IP addresses in this network that you want
+    #   to reserve for use in MediaLive Anywhere. MediaLive Anywhere uses
+    #   these IP addresses for Push inputs (in both Bridge and NAT networks)
+    #   and for output destinations (only in Bridge networks). Each
+    #   IpPoolUpdateRequest specifies one CIDR block.
+    #   @return [Array<Types::IpPoolUpdateRequest>]
+    #
+    # @!attribute [rw] name
+    #   Include this parameter only if you want to change the name of the
+    #   Network. Specify a name that is unique in the AWS account. Names are
+    #   case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_id
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   Include this parameter only if you want to change or add routes in
+    #   the Network. An array of Routes that MediaLive Anywhere needs to
+    #   know about in order to route encoding traffic.
+    #   @return [Array<Types::RouteUpdateRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateNetworkRequest AWS API Documentation
+    #
+    class UpdateNetworkRequest < Struct.new(
+      :ip_pools,
+      :name,
+      :network_id,
+      :routes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_cluster_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_pools
+    #   @return [Array<Types::IpPool>]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNetworkResult, DescribeNetworkSummary,
+    #   UpdateNetworkResult.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateNetworkResponse AWS API Documentation
+    #
+    class UpdateNetworkResponse < Struct.new(
+      :arn,
+      :associated_cluster_ids,
+      :id,
+      :ip_pools,
+      :name,
+      :routes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the response for the UpdateNetwork
+    #
+    # @!attribute [rw] arn
+    #   The ARN of this Network. It is automatically assigned when the
+    #   Network is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_cluster_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The ID of the Network. Unique in the AWS account. The ID is the
+    #   resource-id portion of the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_pools
+    #   An array of IpPools in your organization's network that identify a
+    #   collection of IP addresses in this network that are reserved for use
+    #   in MediaLive Anywhere. MediaLive Anywhere uses these IP addresses
+    #   for Push inputs (in both Bridge and NAT networks) and for output
+    #   destinations (only in Bridge networks). Each IpPool specifies one
+    #   CIDR block.
+    #   @return [Array<Types::IpPool>]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified for the Network.
+    #   @return [String]
+    #
+    # @!attribute [rw] routes
+    #   An array of Routes that MediaLive Anywhere needs to know about in
+    #   order to route encoding traffic.
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Network. Only MediaLive Anywhere can change
+    #   the state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateNetworkResult AWS API Documentation
+    #
+    class UpdateNetworkResult < Struct.new(
+      :arn,
+      :associated_cluster_ids,
+      :id,
+      :ip_pools,
+      :name,
+      :routes,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in the UpdateNode operation.
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Include this parameter only if you want to change the current name
+    #   of the Node. Specify a name that is unique in the Cluster. You
+    #   can't change the name. Names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The initial role of the Node in the Cluster. ACTIVE means the Node
+    #   is available for encoding. BACKUP means the Node is a redundant Node
+    #   and might get used if an ACTIVE Node fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateNodeRequest AWS API Documentation
+    #
+    class UpdateNodeRequest < Struct.new(
+      :cluster_id,
+      :name,
+      :node_id,
+      :role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_placement_groups
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   @return [Array<Types::NodeInterfaceMapping>]
+    #
+    # @!attribute [rw] role
+    #   Used in CreateNodeRequest, CreateNodeRegistrationScriptRequest,
+    #   DescribeNodeResult, DescribeNodeSummary, UpdateNodeRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateNodeResponse AWS API Documentation
+    #
+    class UpdateNodeResponse < Struct.new(
+      :arn,
+      :channel_placement_groups,
+      :cluster_id,
+      :connection_state,
+      :id,
+      :instance_arn,
+      :name,
+      :node_interface_mappings,
+      :role,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used in the UpdateNode operation.
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state to apply to the Node. Set to ACTIVE (COMMISSIONED) to
+    #   indicate that the Node is deployable. MediaLive Anywhere will
+    #   consider this node it needs a Node to run a Channel on, or when it
+    #   needs a Node to promote from a backup node to an active node. Set to
+    #   DRAINING to isolate the Node so that MediaLive Anywhere won't use
+    #   it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateNodeStateRequest AWS API Documentation
+    #
+    class UpdateNodeStateRequest < Struct.new(
+      :cluster_id,
+      :node_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_placement_groups
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] node_interface_mappings
+    #   @return [Array<Types::NodeInterfaceMapping>]
+    #
+    # @!attribute [rw] role
+    #   Used in CreateNodeRequest, CreateNodeRegistrationScriptRequest,
+    #   DescribeNodeResult, DescribeNodeSummary, UpdateNodeRequest.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Used in DescribeNodeSummary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateNodeStateResponse AWS API Documentation
+    #
+    class UpdateNodeStateResponse < Struct.new(
+      :arn,
+      :channel_placement_groups,
+      :cluster_id,
+      :connection_state,
+      :id,
+      :instance_arn,
+      :name,
+      :node_interface_mappings,
+      :role,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Bandwidth Reduction Filter Settings
+    #
+    # @!attribute [rw] post_filter_sharpening
+    #   Configures the sharpening control, which is available when the
+    #   bandwidth reduction filter is enabled. This control sharpens edges
+    #   and contours, which produces a specific artistic effect that you
+    #   might want. We recommend that you test each of the values (including
+    #   DISABLED) to observe the sharpening effect on the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] strength
+    #   Enables the bandwidth reduction filter. The filter strengths range
+    #   from 1 to 4. We recommend that you always enable this filter and use
+    #   AUTO, to let MediaLive apply the optimum filtering for the context.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BandwidthReductionFilterSettings AWS API Documentation
+    #
+    class BandwidthReductionFilterSettings < Struct.new(
+      :post_filter_sharpening,
+      :strength)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Multiplex Container Settings
+    #
+    # @!attribute [rw] multiplex_m2ts_settings
+    #   Multiplex M2ts Settings
+    #   @return [Types::MultiplexM2tsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexContainerSettings AWS API Documentation
+    #
+    class MultiplexContainerSettings < Struct.new(
+      :multiplex_m2ts_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Multiplex M2ts Settings
+    #
+    # @!attribute [rw] absent_input_audio_behavior
+    #   When set to drop, output audio streams will be removed from the
+    #   program if the selected input audio stream is removed from the
+    #   input. This allows the output audio configuration to dynamically
+    #   change based on input configuration. If this is set to
+    #   encodeSilence, all output audio streams will output encoded silence
+    #   when not connected to an active input stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arib
+    #   When set to enabled, uses ARIB-compliant field muxing and removes
+    #   video descriptor.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_buffer_model
+    #   When set to dvb, uses DVB buffer model for Dolby Digital audio. When
+    #   set to atsc, the ATSC model is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_frames_per_pes
+    #   The number of audio frames to insert for each PES packet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audio_stream_type
+    #   When set to atsc, uses stream type = 0x81 for AC3 and stream type =
+    #   0x87 for EAC3. When set to dvb, uses stream type = 0x06.
+    #   @return [String]
+    #
+    # @!attribute [rw] cc_descriptor
+    #   When set to enabled, generates captionServiceDescriptor in PMT.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebif
+    #   If set to passthrough, passes any EBIF data from the input source to
+    #   this output.
+    #   @return [String]
+    #
+    # @!attribute [rw] es_rate_in_pes
+    #   Include or exclude the ES Rate field in the PES header.
+    #   @return [String]
+    #
+    # @!attribute [rw] klv
+    #   If set to passthrough, passes any KLV data from the input source to
+    #   this output.
+    #   @return [String]
+    #
+    # @!attribute [rw] nielsen_id_3_behavior
+    #   If set to passthrough, Nielsen inaudible tones for media tracking
+    #   will be detected in the input audio and an equivalent ID3 tag will
+    #   be inserted in the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] pcr_control
+    #   When set to pcrEveryPesPacket, a Program Clock Reference value is
+    #   inserted for every Packetized Elementary Stream (PES) header. This
+    #   parameter is effective only when the PCR PID is the same as the
+    #   video or audio elementary stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] pcr_period
+    #   Maximum time in milliseconds between Program Clock Reference (PCRs)
+    #   inserted into the transport stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scte_35_control
+    #   Optionally pass SCTE-35 signals from the input source to this
+    #   output.
+    #   @return [String]
+    #
+    # @!attribute [rw] scte_35_preroll_pullup_milliseconds
+    #   Defines the amount SCTE-35 preroll will be increased (in
+    #   milliseconds) on the output. Preroll is the amount of time between
+    #   the presence of a SCTE-35 indication in a transport stream and the
+    #   PTS of the video frame it references. Zero means don't add pullup
+    #   (it doesn't mean set the preroll to zero). Negative pullup is not
+    #   supported, which means that you can't make the preroll shorter. Be
+    #   aware that latency in the output will increase by the pullup amount.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexM2tsSettings AWS API Documentation
+    #
+    class MultiplexM2tsSettings < Struct.new(
+      :absent_input_audio_behavior,
+      :arib,
+      :audio_buffer_model,
+      :audio_frames_per_pes,
+      :audio_stream_type,
+      :cc_descriptor,
+      :ebif,
+      :es_rate_in_pes,
+      :klv,
+      :nielsen_id_3_behavior,
+      :pcr_control,
+      :pcr_period,
+      :scte_35_control,
+      :scte_35_preroll_pullup_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end

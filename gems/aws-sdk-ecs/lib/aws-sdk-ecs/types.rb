@@ -1035,7 +1035,7 @@ module Aws::ECS
     #   entered in the `links` of another container to connect the
     #   containers. Up to 255 letters (uppercase and lowercase), numbers,
     #   underscores, and hyphens are allowed. This parameter maps to `name`
-    #   in tthe docker conainer create command and the `--name` option to
+    #   in the docker container create command and the `--name` option to
     #   docker run.
     #   @return [String]
     #
@@ -1046,7 +1046,7 @@ module Aws::ECS
     #   repository-url/image:tag ` or ` repository-url/image@digest `. Up to
     #   255 letters (uppercase and lowercase), numbers, hyphens,
     #   underscores, colons, periods, forward slashes, and number signs are
-    #   allowed. This parameter maps to `Image` in the docker conainer
+    #   allowed. This parameter maps to `Image` in the docker container
     #   create command and the `IMAGE` parameter of docker run.
     #
     #   * When a new task starts, the Amazon ECS container agent pulls the
@@ -1077,7 +1077,7 @@ module Aws::ECS
     #
     # @!attribute [rw] cpu
     #   The number of `cpu` units reserved for the container. This parameter
-    #   maps to `CpuShares` in the docker conainer create commandand the
+    #   maps to `CpuShares` in the docker container create commandand the
     #   `--cpu-shares` option to docker run.
     #
     #   This field is optional for tasks using the Fargate launch type, and
@@ -1142,9 +1142,8 @@ module Aws::ECS
     #   container attempts to exceed the memory specified here, the
     #   container is killed. The total amount of memory reserved for all
     #   containers within a task must be lower than the task `memory` value,
-    #   if one is specified. This parameter maps to `Memory` in thethe
-    #   docker conainer create command and the `--memory` option to docker
-    #   run.
+    #   if one is specified. This parameter maps to `Memory` in the docker
+    #   container create command and the `--memory` option to docker run.
     #
     #   If using the Fargate launch type, this parameter is optional.
     #
@@ -1172,9 +1171,8 @@ module Aws::ECS
     #   consume more memory when it needs to, up to either the hard limit
     #   specified with the `memory` parameter (if applicable), or all of the
     #   available memory on the container instance, whichever comes first.
-    #   This parameter maps to `MemoryReservation` in the the docker
-    #   conainer create command and the `--memory-reservation` option to
-    #   docker run.
+    #   This parameter maps to `MemoryReservation` in the docker container
+    #   create command and the `--memory-reservation` option to docker run.
     #
     #   If a task-level memory value is not specified, you must specify a
     #   non-zero integer for one or both of `memory` or `memoryReservation`
@@ -1208,7 +1206,7 @@ module Aws::ECS
     #   `name:internalName` construct is analogous to `name:alias` in Docker
     #   links. Up to 255 letters (uppercase and lowercase), numbers,
     #   underscores, and hyphens are allowed.. This parameter maps to
-    #   `Links` in the docker conainer create command and the `--link`
+    #   `Links` in the docker container create command and the `--link`
     #   option to docker run.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1235,7 +1233,7 @@ module Aws::ECS
     #   so you can't access a container's mapped port from the host
     #   itself.
     #
-    #   This parameter maps to `PortBindings` in the the docker conainer
+    #   This parameter maps to `PortBindings` in the the docker container
     #   create command and the `--publish` option to docker run. If the
     #   network mode of a task definition is set to `none`, then you can't
     #   specify port mappings. If the network mode of a task definition is
@@ -1294,20 +1292,20 @@ module Aws::ECS
     #   arguments as `command` array items instead.
     #
     #   The entry point that's passed to the container. This parameter maps
-    #   to `Entrypoint` in tthe docker conainer create command and the
+    #   to `Entrypoint` in the docker container create command and the
     #   `--entrypoint` option to docker run.
     #   @return [Array<String>]
     #
     # @!attribute [rw] command
     #   The command that's passed to the container. This parameter maps to
-    #   `Cmd` in the docker conainer create command and the `COMMAND`
+    #   `Cmd` in the docker container create command and the `COMMAND`
     #   parameter to docker run. If there are multiple arguments, each
     #   argument is a separated string in the array.
     #   @return [Array<String>]
     #
     # @!attribute [rw] environment
     #   The environment variables to pass to a container. This parameter
-    #   maps to `Env` in the docker conainer create command and the `--env`
+    #   maps to `Env` in the docker container create command and the `--env`
     #   option to docker run.
     #
     #   We don't recommend that you use plaintext environment variables for
@@ -1341,7 +1339,7 @@ module Aws::ECS
     # @!attribute [rw] mount_points
     #   The mount points for data volumes in your container.
     #
-    #   This parameter maps to `Volumes` in the the docker conainer create
+    #   This parameter maps to `Volumes` in the docker container create
     #   command and the `--volume` option to docker run.
     #
     #   Windows containers can mount whole directories on the same drive as
@@ -1351,7 +1349,7 @@ module Aws::ECS
     #
     # @!attribute [rw] volumes_from
     #   Data volumes to mount from another container. This parameter maps to
-    #   `VolumesFrom` in tthe docker conainer create command and the
+    #   `VolumesFrom` in the docker container create command and the
     #   `--volumes-from` option to docker run.
     #   @return [Array<Types::VolumeFrom>]
     #
@@ -1468,8 +1466,9 @@ module Aws::ECS
     #
     #   * Windows platform version `1.0.0` or later.
     #
-    #   The max stop timeout value is 120 seconds and if the parameter is
-    #   not specified, the default value of 30 seconds is used.
+    #   For tasks that use the Fargate launch type, the max stop timeout
+    #   value is 120 seconds and if the parameter is not specified, the
+    #   default value of 30 seconds is used.
     #
     #   For tasks that use the EC2 launch type, if the `stopTimeout`
     #   parameter isn't specified, the value set for the Amazon ECS
@@ -1491,7 +1490,7 @@ module Aws::ECS
     #   ECS-optimized Linux AMI][2] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
-    #   The valid values are 2-120 seconds.
+    #   The valid values for Fargate are 2-120 seconds.
     #
     #
     #
@@ -1501,7 +1500,7 @@ module Aws::ECS
     #
     # @!attribute [rw] hostname
     #   The hostname to use for your container. This parameter maps to
-    #   `Hostname` in thethe docker conainer create command and the
+    #   `Hostname` in the docker container create command and the
     #   `--hostname` option to docker run.
     #
     #   <note markdown="1"> The `hostname` parameter is not supported if you're using the
@@ -1512,7 +1511,7 @@ module Aws::ECS
     #
     # @!attribute [rw] user
     #   The user to use inside the container. This parameter maps to `User`
-    #   in the docker conainer create command and the `--user` option to
+    #   in the docker container create command and the `--user` option to
     #   docker run.
     #
     #   When running tasks using the `host` network mode, don't run
@@ -1541,13 +1540,13 @@ module Aws::ECS
     #
     # @!attribute [rw] working_directory
     #   The working directory to run commands inside the container in. This
-    #   parameter maps to `WorkingDir` in the docker conainer create command
-    #   and the `--workdir` option to docker run.
+    #   parameter maps to `WorkingDir` in the docker container create
+    #   command and the `--workdir` option to docker run.
     #   @return [String]
     #
     # @!attribute [rw] disable_networking
     #   When this parameter is true, networking is off within the container.
-    #   This parameter maps to `NetworkDisabled` in the docker conainer
+    #   This parameter maps to `NetworkDisabled` in the docker container
     #   create command.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1558,8 +1557,8 @@ module Aws::ECS
     # @!attribute [rw] privileged
     #   When this parameter is true, the container is given elevated
     #   privileges on the host container instance (similar to the `root`
-    #   user). This parameter maps to `Privileged` in the the docker
-    #   conainer create command and the `--privileged` option to docker run
+    #   user). This parameter maps to `Privileged` in the docker container
+    #   create command and the `--privileged` option to docker run
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
     #   on Fargate.
@@ -1570,7 +1569,7 @@ module Aws::ECS
     # @!attribute [rw] readonly_root_filesystem
     #   When this parameter is true, the container is given read-only access
     #   to its root file system. This parameter maps to `ReadonlyRootfs` in
-    #   the docker conainer create command and the `--read-only` option to
+    #   the docker container create command and the `--read-only` option to
     #   docker run.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1580,8 +1579,8 @@ module Aws::ECS
     #
     # @!attribute [rw] dns_servers
     #   A list of DNS servers that are presented to the container. This
-    #   parameter maps to `Dns` in the the docker conainer create command
-    #   and the `--dns` option to docker run.
+    #   parameter maps to `Dns` in the docker container create command and
+    #   the `--dns` option to docker run.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -1590,7 +1589,7 @@ module Aws::ECS
     #
     # @!attribute [rw] dns_search_domains
     #   A list of DNS search domains that are presented to the container.
-    #   This parameter maps to `DnsSearch` in the docker conainer create
+    #   This parameter maps to `DnsSearch` in the docker container create
     #   command and the `--dns-search` option to docker run.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1601,7 +1600,7 @@ module Aws::ECS
     # @!attribute [rw] extra_hosts
     #   A list of hostnames and IP address mappings to append to the
     #   `/etc/hosts` file on the container. This parameter maps to
-    #   `ExtraHosts` in the docker conainer create command and the
+    #   `ExtraHosts` in the docker container create command and the
     #   `--add-host` option to docker run.
     #
     #   <note markdown="1"> This parameter isn't supported for Windows containers or tasks that
@@ -1624,7 +1623,7 @@ module Aws::ECS
     #   Windows Containers][1] and [Using gMSAs for Linux Containers][2] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   This parameter maps to `SecurityOpt` in the docker conainer create
+    #   This parameter maps to `SecurityOpt` in the docker container create
     #   command and the `--security-opt` option to docker run.
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
@@ -1649,19 +1648,19 @@ module Aws::ECS
     # @!attribute [rw] interactive
     #   When this parameter is `true`, you can deploy containerized
     #   applications that require `stdin` or a `tty` to be allocated. This
-    #   parameter maps to `OpenStdin` in the docker conainer create command
+    #   parameter maps to `OpenStdin` in the docker container create command
     #   and the `--interactive` option to docker run.
     #   @return [Boolean]
     #
     # @!attribute [rw] pseudo_terminal
     #   When this parameter is `true`, a TTY is allocated. This parameter
-    #   maps to `Tty` in tthe docker conainer create command and the `--tty`
+    #   maps to `Tty` in the docker container create command and the `--tty`
     #   option to docker run.
     #   @return [Boolean]
     #
     # @!attribute [rw] docker_labels
     #   A key/value map of labels to add to the container. This parameter
-    #   maps to `Labels` in the docker conainer create command and the
+    #   maps to `Labels` in the docker container create command and the
     #   `--label` option to docker run. This parameter requires version 1.18
     #   of the Docker Remote API or greater on your container instance. To
     #   check the Docker Remote API version on your container instance, log
@@ -1672,7 +1671,7 @@ module Aws::ECS
     # @!attribute [rw] ulimits
     #   A list of `ulimits` to set in the container. If a `ulimit` value is
     #   specified in a task definition, it overrides the default values set
-    #   by Docker. This parameter maps to `Ulimits` in tthe docker conainer
+    #   by Docker. This parameter maps to `Ulimits` in the docker container
     #   create command and the `--ulimit` option to docker run. Valid naming
     #   values are displayed in the [Ulimit][1] data type.
     #
@@ -1701,7 +1700,7 @@ module Aws::ECS
     # @!attribute [rw] log_configuration
     #   The log configuration specification for the container.
     #
-    #   This parameter maps to `LogConfig` in the docker conainer create
+    #   This parameter maps to `LogConfig` in the docker container create
     #   command and the `--log-driver` option to docker run. By default,
     #   containers use the same logging driver that the Docker daemon uses.
     #   However the container can use a different logging driver than the
@@ -1743,13 +1742,13 @@ module Aws::ECS
     # @!attribute [rw] health_check
     #   The container health check command and associated configuration
     #   parameters for the container. This parameter maps to `HealthCheck`
-    #   in the docker conainer create command and the `HEALTHCHECK`
+    #   in the docker container create command and the `HEALTHCHECK`
     #   parameter of docker run.
     #   @return [Types::HealthCheck]
     #
     # @!attribute [rw] system_controls
     #   A list of namespaced kernel parameters to set in the container. This
-    #   parameter maps to `Sysctls` in tthe docker conainer create command
+    #   parameter maps to `Sysctls` in the docker container create command
     #   and the `--sysctl` option to docker run. For example, you can
     #   configure `net.ipv4.tcp_keepalive_time` setting to maintain longer
     #   lived connections.
@@ -3733,13 +3732,22 @@ module Aws::ECS
     #   using the `REPLICA` service scheduler is 200%.
     #
     #   If a service is using either the blue/green (`CODE_DEPLOY`) or
-    #   `EXTERNAL` deployment types and tasks that use the EC2 launch type,
-    #   the **maximum percent** value is set to the default value and is
-    #   used to define the upper limit on the number of the tasks in the
-    #   service that remain in the `RUNNING` state while the container
-    #   instances are in the `DRAINING` state. If the tasks in the service
-    #   use the Fargate launch type, the maximum percent value is not used,
-    #   although it is returned when describing your service.
+    #   `EXTERNAL` deployment types, and tasks in the service use the EC2
+    #   launch type, the **maximum percent** value is set to the default
+    #   value. The **maximum percent** value is used to define the upper
+    #   limit on the number of the tasks in the service that remain in the
+    #   `RUNNING` state while the container instances are in the `DRAINING`
+    #   state.
+    #
+    #   <note markdown="1"> You can't specify a custom `maximumPercent` value for a service
+    #   that uses either the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
+    #   deployment types and has tasks that use the EC2 launch type.
+    #
+    #    </note>
+    #
+    #   If the tasks in the service use the Fargate launch type, the maximum
+    #   percent value is not used, although it is returned when describing
+    #   your service.
     #   @return [Integer]
     #
     # @!attribute [rw] minimum_healthy_percent
@@ -3800,13 +3808,22 @@ module Aws::ECS
     #   If a service is using either the blue/green (`CODE_DEPLOY`) or
     #   `EXTERNAL` deployment types and is running tasks that use the EC2
     #   launch type, the **minimum healthy percent** value is set to the
-    #   default value and is used to define the lower limit on the number of
-    #   the tasks in the service that remain in the `RUNNING` state while
-    #   the container instances are in the `DRAINING` state. If a service is
-    #   using either the blue/green (`CODE_DEPLOY`) or `EXTERNAL` deployment
-    #   types and is running tasks that use the Fargate launch type, the
-    #   minimum healthy percent value is not used, although it is returned
-    #   when describing your service.
+    #   default value. The **minimum healthy percent** value is used to
+    #   define the lower limit on the number of the tasks in the service
+    #   that remain in the `RUNNING` state while the container instances are
+    #   in the `DRAINING` state.
+    #
+    #   <note markdown="1"> You can't specify a custom `minimumHealthyPercent` value for a
+    #   service that uses either the blue/green (`CODE_DEPLOY`) or
+    #   `EXTERNAL` deployment types and has tasks that use the EC2 launch
+    #   type.
+    #
+    #    </note>
+    #
+    #   If a service is using either the blue/green (`CODE_DEPLOY`) or
+    #   `EXTERNAL` deployment types and is running tasks that use the
+    #   Fargate launch type, the minimum healthy percent value is not used,
+    #   although it is returned when describing your service.
     #   @return [Integer]
     #
     # @!attribute [rw] alarms
@@ -4461,7 +4478,7 @@ module Aws::ECS
     #   use `docker plugin ls` to retrieve the driver name from your
     #   container instance. If the driver was installed using another
     #   method, use Docker plugin discovery to retrieve the driver name.
-    #   This parameter maps to `Driver` in the docker conainer create
+    #   This parameter maps to `Driver` in the docker container create
     #   command and the `xxdriver` option to docker volume create.
     #   @return [String]
     #
@@ -4473,7 +4490,7 @@ module Aws::ECS
     #
     # @!attribute [rw] labels
     #   Custom metadata to add to your Docker volume. This parameter maps to
-    #   `Labels` in the docker conainer create command and the `xxlabel`
+    #   `Labels` in the docker container create command and the `xxlabel`
     #   option to docker volume create.
     #   @return [Hash<String,String>]
     #
@@ -5202,8 +5219,8 @@ module Aws::ECS
     #   ` CMD-SHELL, curl -f http://localhost/ || exit 1`
     #
     #   An exit code of 0 indicates success, and non-zero exit code
-    #   indicates failure. For more information, see `HealthCheck` in tthe
-    #   docker conainer create command
+    #   indicates failure. For more information, see `HealthCheck` in the
+    #   docker container create command
     #   @return [Array<String>]
     #
     # @!attribute [rw] interval
@@ -5410,7 +5427,7 @@ module Aws::ECS
     # @!attribute [rw] add
     #   The Linux capabilities for the container that have been added to the
     #   default configuration provided by Docker. This parameter maps to
-    #   `CapAdd` in the docker conainer create command and the `--cap-add`
+    #   `CapAdd` in the docker container create command and the `--cap-add`
     #   option to docker run.
     #
     #   <note markdown="1"> Tasks launched on Fargate only support adding the `SYS_PTRACE`
@@ -5432,8 +5449,8 @@ module Aws::ECS
     # @!attribute [rw] drop
     #   The Linux capabilities for the container that have been removed from
     #   the default configuration provided by Docker. This parameter maps to
-    #   `CapDrop` in the docker conainer create command and the `--cap-drop`
-    #   option to docker run.
+    #   `CapDrop` in the docker container create command and the
+    #   `--cap-drop` option to docker run.
     #
     #   Valid values: `"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" |
     #   "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" |
@@ -5502,7 +5519,7 @@ module Aws::ECS
     #
     # @!attribute [rw] devices
     #   Any host devices to expose to the container. This parameter maps to
-    #   `Devices` in tthe docker conainer create command and the `--device`
+    #   `Devices` in the docker container create command and the `--device`
     #   option to docker run.
     #
     #   <note markdown="1"> If you're using tasks that use the Fargate launch type, the
@@ -6433,7 +6450,7 @@ module Aws::ECS
     end
 
     # The log configuration for the container. This parameter maps to
-    # `LogConfig` in the docker conainer create command and the
+    # `LogConfig` in the docker container create command and the
     # `--log-driver` option to docker run.
     #
     # By default, containers use the same logging driver that the Docker
@@ -7022,7 +7039,7 @@ module Aws::ECS
     # can be left blank or it must be the same value as the `containerPort`.
     #
     # Most fields of this parameter (`containerPort`, `hostPort`,
-    # `protocol`) maps to `PortBindings` in the docker conainer create
+    # `protocol`) maps to `PortBindings` in the docker container create
     # command and the `--publish` option to `docker run`. If the network
     # mode of a task definition is set to `host`, host ports must either be
     # undefined or match the container port in the port mapping.
@@ -7520,9 +7537,6 @@ module Aws::ECS
     #     launched on Amazon EC2 instances, see [Using a VPC in dual-stack
     #     mode][3]. For more information on using IPv6 with tasks launched
     #     on Fargate, see [Using a VPC in dual-stack mode][4].
-    #
-    #   * `fargateFIPSMode` - If you specify `fargateFIPSMode`, Fargate FIPS
-    #     140 compliance is affected.
     #
     #   * `fargateTaskRetirementWaitPeriod` - When Amazon Web Services
     #     determines that a security or infrastructure update is needed for
@@ -9175,7 +9189,7 @@ module Aws::ECS
     #
     # @!attribute [rw] log_configuration
     #   The log configuration for the container. This parameter maps to
-    #   `LogConfig` in the docker conainer create command and the
+    #   `LogConfig` in the docker container create command and the
     #   `--log-driver` option to docker run.
     #
     #   By default, containers use the same logging driver that the Docker
@@ -10158,7 +10172,7 @@ module Aws::ECS
     end
 
     # A list of namespaced kernel parameters to set in the container. This
-    # parameter maps to `Sysctls` in tthe docker conainer create command and
+    # parameter maps to `Sysctls` in the docker container create command and
     # the `--sysctl` option to docker run. For example, you can configure
     # `net.ipv4.tcp_keepalive_time` setting to maintain longer lived
     # connections.
@@ -10888,8 +10902,8 @@ module Aws::ECS
     #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
     #
     # @!attribute [rw] compatibilities
-    #   The task launch types the task definition validated against during
-    #   task definition registration. For more information, see [Amazon ECS
+    #   Amazon ECS validates the task definition parameters with those
+    #   supported by the launch type. For more information, see [Amazon ECS
     #   launch types][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
@@ -11849,11 +11863,15 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] soft_limit
-    #   The soft limit for the `ulimit` type.
+    #   The soft limit for the `ulimit` type. The value can be specified in
+    #   bytes, seconds, or as a count, depending on the `type` of the
+    #   `ulimit`.
     #   @return [Integer]
     #
     # @!attribute [rw] hard_limit
-    #   The hard limit for the `ulimit` type.
+    #   The hard limit for the `ulimit` type. The value can be specified in
+    #   bytes, seconds, or as a count, depending on the `type` of the
+    #   `ulimit`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Ulimit AWS API Documentation

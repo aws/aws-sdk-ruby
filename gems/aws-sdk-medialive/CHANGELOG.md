@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2024-09-19)
+------------------
+
+* Feature - Adds Bandwidth Reduction Filtering for HD AVC and HEVC encodes, multiplex container settings.
+
+1.132.0 (2024-09-16)
+------------------
+
+* Feature - Removing the ON_PREMISE enum from the input settings field.
+
+1.131.0 (2024-09-11)
+------------------
+
+* Feature - Adds AV1 Codec support, SRT ouputs, and MediaLive Anywhere support.
+
 1.130.0 (2024-09-10)
 ------------------
 

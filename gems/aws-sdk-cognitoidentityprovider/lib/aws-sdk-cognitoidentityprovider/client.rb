@@ -676,7 +676,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -1474,7 +1474,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -1685,7 +1685,7 @@ module Aws::CognitoIdentityProvider
     #
     # @example Response structure
     #
-    #   resp.challenge_name #=> String, one of "SMS_MFA", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
+    #   resp.challenge_name #=> String, one of "SMS_MFA", "EMAIL_OTP", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
     #   resp.session #=> String
     #   resp.challenge_parameters #=> Hash
     #   resp.challenge_parameters["StringType"] #=> String
@@ -2135,7 +2135,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -2266,7 +2266,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -2323,11 +2323,21 @@ module Aws::CognitoIdentityProvider
     #   SMS\_MFA
     #
     #   : `"ChallengeName": "SMS_MFA", "ChallengeResponses": \{"SMS_MFA_CODE":
-    #     "[SMS_code]", "USERNAME": "[username]"\}`
+    #     "[code]", "USERNAME": "[username]"\}`
+    #
+    #   EMAIL\_OTP
+    #
+    #   : `"ChallengeName": "EMAIL_OTP", "ChallengeResponses":
+    #     \{"EMAIL_OTP_CODE": "[code]", "USERNAME": "[username]"\}`
     #
     #   PASSWORD\_VERIFIER
     #
-    #   : `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
+    #   : This challenge response is part of the SRP flow. Amazon Cognito
+    #     requires that your application respond to this challenge within a
+    #     few seconds. When the response time exceeds this period, your user
+    #     pool returns a `NotAuthorizedException` error.
+    #
+    #     `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
     #     \{"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]",
     #     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
     #     [timestamp], "USERNAME": "[username]"\}`
@@ -2486,7 +2496,7 @@ module Aws::CognitoIdentityProvider
     #   resp = client.admin_respond_to_auth_challenge({
     #     user_pool_id: "UserPoolIdType", # required
     #     client_id: "ClientIdType", # required
-    #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, SOFTWARE_TOKEN_MFA, SELECT_MFA_TYPE, MFA_SETUP, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
+    #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, EMAIL_OTP, SOFTWARE_TOKEN_MFA, SELECT_MFA_TYPE, MFA_SETUP, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
     #     challenge_responses: {
     #       "StringType" => "StringType",
     #     },
@@ -2513,7 +2523,7 @@ module Aws::CognitoIdentityProvider
     #
     # @example Response structure
     #
-    #   resp.challenge_name #=> String, one of "SMS_MFA", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
+    #   resp.challenge_name #=> String, one of "SMS_MFA", "EMAIL_OTP", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
     #   resp.session #=> String
     #   resp.challenge_parameters #=> Hash
     #   resp.challenge_parameters["StringType"] #=> String
@@ -2534,12 +2544,12 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # The user's multi-factor authentication (MFA) preference, including
-    # which MFA options are activated, and if any are preferred. Only one
-    # factor can be set as preferred. The preferred MFA factor will be used
-    # to authenticate a user if multiple factors are activated. If multiple
-    # options are activated and no preference is set, a challenge to choose
-    # an MFA option will be returned during sign-in.
+    # Sets the user's multi-factor authentication (MFA) preference,
+    # including which MFA options are activated, and if any are preferred.
+    # Only one factor can be set as preferred. The preferred MFA factor will
+    # be used to authenticate a user if multiple factors are activated. If
+    # multiple options are activated and no preference is set, a challenge
+    # to choose an MFA option will be returned during sign-in.
     #
     # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
     # in requests for this API operation. For this operation, you must use
@@ -2560,10 +2570,24 @@ module Aws::CognitoIdentityProvider
     # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
     #
     # @option params [Types::SMSMfaSettingsType] :sms_mfa_settings
-    #   The SMS text message MFA settings.
+    #   User preferences for SMS message MFA. Activates or deactivates SMS MFA
+    #   and sets it as the preferred MFA method when multiple methods are
+    #   available.
     #
     # @option params [Types::SoftwareTokenMfaSettingsType] :software_token_mfa_settings
-    #   The time-based one-time password software token MFA settings.
+    #   User preferences for time-based one-time password (TOTP) MFA.
+    #   Activates or deactivates TOTP MFA and sets it as the preferred MFA
+    #   method when multiple methods are available.
+    #
+    # @option params [Types::EmailMfaSettingsType] :email_mfa_settings
+    #   User preferences for email message MFA. Activates or deactivates email
+    #   MFA and sets it as the preferred MFA method when multiple methods are
+    #   available. To activate this setting, [ advanced security features][1]
+    #   must be active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #
     # @option params [required, String] :username
     #   The username of the user that you want to query or modify. The value
@@ -2573,7 +2597,8 @@ module Aws::CognitoIdentityProvider
     #   username of a user from a third-party IdP.
     #
     # @option params [required, String] :user_pool_id
-    #   The user pool ID.
+    #   The ID of the user pool where you want to set a user's MFA
+    #   preferences.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2585,6 +2610,10 @@ module Aws::CognitoIdentityProvider
     #       preferred_mfa: false,
     #     },
     #     software_token_mfa_settings: {
+    #       enabled: false,
+    #       preferred_mfa: false,
+    #     },
+    #     email_mfa_settings: {
     #       enabled: false,
     #       preferred_mfa: false,
     #     },
@@ -2876,7 +2905,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -3970,7 +3999,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -4960,9 +4989,9 @@ module Aws::CognitoIdentityProvider
     #   are hours.
     #
     # @option params [Array<String>] :read_attributes
-    #   The list of user attributes that you want your app client to have
-    #   read-only access to. After your user authenticates in your app, their
-    #   access token authorizes them to read their own attribute value for any
+    #   The list of user attributes that you want your app client to have read
+    #   access to. After your user authenticates in your app, their access
+    #   token authorizes them to read their own attribute value for any
     #   attribute in this list. An example of this kind of activity is when
     #   your user selects a link to view their profile information. Your app
     #   makes a [GetUser][1] API request to retrieve and display your user's
@@ -4970,11 +4999,11 @@ module Aws::CognitoIdentityProvider
     #
     #   When you don't specify the `ReadAttributes` for your app client, your
     #   app can read the values of `email_verified`, `phone_number_verified`,
-    #   and the Standard attributes of your user pool. When your user pool has
-    #   read access to these default attributes, `ReadAttributes` doesn't
-    #   return any information. Amazon Cognito only populates `ReadAttributes`
-    #   in the API response if you have specified your own custom set of read
-    #   attributes.
+    #   and the Standard attributes of your user pool. When your user pool app
+    #   client has read access to these default attributes, `ReadAttributes`
+    #   doesn't return any information. Amazon Cognito only populates
+    #   `ReadAttributes` in the API response if you have specified your own
+    #   custom set of read attributes.
     #
     #
     #
@@ -6282,7 +6311,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -6770,7 +6799,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -6870,6 +6899,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * {Types::GetUserPoolMfaConfigResponse#sms_mfa_configuration #sms_mfa_configuration} => Types::SmsMfaConfigType
     #   * {Types::GetUserPoolMfaConfigResponse#software_token_mfa_configuration #software_token_mfa_configuration} => Types::SoftwareTokenMfaConfigType
+    #   * {Types::GetUserPoolMfaConfigResponse#email_mfa_configuration #email_mfa_configuration} => Types::EmailMfaConfigType
     #   * {Types::GetUserPoolMfaConfigResponse#mfa_configuration #mfa_configuration} => String
     #
     # @example Request syntax with placeholder values
@@ -6885,6 +6915,8 @@ module Aws::CognitoIdentityProvider
     #   resp.sms_mfa_configuration.sms_configuration.external_id #=> String
     #   resp.sms_mfa_configuration.sms_configuration.sns_region #=> String
     #   resp.software_token_mfa_configuration.enabled #=> Boolean
+    #   resp.email_mfa_configuration.message #=> String
+    #   resp.email_mfa_configuration.subject #=> String
     #   resp.mfa_configuration #=> String, one of "OFF", "ON", "OPTIONAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolMfaConfig AWS API Documentation
@@ -6983,7 +7015,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -7202,7 +7234,7 @@ module Aws::CognitoIdentityProvider
     #
     # @example Response structure
     #
-    #   resp.challenge_name #=> String, one of "SMS_MFA", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
+    #   resp.challenge_name #=> String, one of "SMS_MFA", "EMAIL_OTP", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
     #   resp.session #=> String
     #   resp.challenge_parameters #=> Hash
     #   resp.challenge_parameters["StringType"] #=> String
@@ -8073,7 +8105,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -8219,7 +8251,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -8268,11 +8300,21 @@ module Aws::CognitoIdentityProvider
     #   SMS\_MFA
     #
     #   : `"ChallengeName": "SMS_MFA", "ChallengeResponses": \{"SMS_MFA_CODE":
-    #     "[SMS_code]", "USERNAME": "[username]"\}`
+    #     "[code]", "USERNAME": "[username]"\}`
+    #
+    #   EMAIL\_OTP
+    #
+    #   : `"ChallengeName": "EMAIL_OTP", "ChallengeResponses":
+    #     \{"EMAIL_OTP_CODE": "[code]", "USERNAME": "[username]"\}`
     #
     #   PASSWORD\_VERIFIER
     #
-    #   : `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
+    #   : This challenge response is part of the SRP flow. Amazon Cognito
+    #     requires that your application respond to this challenge within a
+    #     few seconds. When the response time exceeds this period, your user
+    #     pool returns a `NotAuthorizedException` error.
+    #
+    #     `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
     #     \{"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]",
     #     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
     #     [timestamp], "USERNAME": "[username]"\}`
@@ -8407,7 +8449,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp = client.respond_to_auth_challenge({
     #     client_id: "ClientIdType", # required
-    #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, SOFTWARE_TOKEN_MFA, SELECT_MFA_TYPE, MFA_SETUP, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
+    #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, EMAIL_OTP, SOFTWARE_TOKEN_MFA, SELECT_MFA_TYPE, MFA_SETUP, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
     #     session: "SessionType",
     #     challenge_responses: {
     #       "StringType" => "StringType",
@@ -8426,7 +8468,7 @@ module Aws::CognitoIdentityProvider
     #
     # @example Response structure
     #
-    #   resp.challenge_name #=> String, one of "SMS_MFA", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
+    #   resp.challenge_name #=> String, one of "SMS_MFA", "EMAIL_OTP", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
     #   resp.session #=> String
     #   resp.challenge_parameters #=> Hash
     #   resp.challenge_parameters["StringType"] #=> String
@@ -8762,10 +8804,24 @@ module Aws::CognitoIdentityProvider
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
     #
     # @option params [Types::SMSMfaSettingsType] :sms_mfa_settings
-    #   The SMS text message multi-factor authentication (MFA) settings.
+    #   User preferences for SMS message MFA. Activates or deactivates SMS MFA
+    #   and sets it as the preferred MFA method when multiple methods are
+    #   available.
     #
     # @option params [Types::SoftwareTokenMfaSettingsType] :software_token_mfa_settings
-    #   The time-based one-time password (TOTP) software token MFA settings.
+    #   User preferences for time-based one-time password (TOTP) MFA.
+    #   Activates or deactivates TOTP MFA and sets it as the preferred MFA
+    #   method when multiple methods are available.
+    #
+    # @option params [Types::EmailMfaSettingsType] :email_mfa_settings
+    #   User preferences for email message MFA. Activates or deactivates email
+    #   MFA and sets it as the preferred MFA method when multiple methods are
+    #   available. To activate this setting, [ advanced security features][1]
+    #   must be active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #
     # @option params [required, String] :access_token
     #   A valid access token that Amazon Cognito issued to the user whose MFA
@@ -8781,6 +8837,10 @@ module Aws::CognitoIdentityProvider
     #       preferred_mfa: false,
     #     },
     #     software_token_mfa_settings: {
+    #       enabled: false,
+    #       preferred_mfa: false,
+    #     },
+    #     email_mfa_settings: {
     #       enabled: false,
     #       preferred_mfa: false,
     #     },
@@ -8808,7 +8868,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -8828,10 +8888,22 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID.
     #
     # @option params [Types::SmsMfaConfigType] :sms_mfa_configuration
-    #   The SMS text message MFA configuration.
+    #   Configures user pool SMS messages for MFA. Sets the message template
+    #   and the SMS message sending configuration for Amazon SNS.
     #
     # @option params [Types::SoftwareTokenMfaConfigType] :software_token_mfa_configuration
-    #   The software token MFA configuration.
+    #   Configures a user pool for time-based one-time password (TOTP) MFA.
+    #   Enables or disables TOTP.
+    #
+    # @option params [Types::EmailMfaConfigType] :email_mfa_configuration
+    #   Configures user pool email messages for MFA. Sets the subject and body
+    #   of the email message template for MFA messages. To activate this
+    #   setting, [ advanced security features][1] must be active in your user
+    #   pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #
     # @option params [String] :mfa_configuration
     #   The MFA configuration. If you set the MfaConfiguration value to ‘ON’,
@@ -8854,6 +8926,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * {Types::SetUserPoolMfaConfigResponse#sms_mfa_configuration #sms_mfa_configuration} => Types::SmsMfaConfigType
     #   * {Types::SetUserPoolMfaConfigResponse#software_token_mfa_configuration #software_token_mfa_configuration} => Types::SoftwareTokenMfaConfigType
+    #   * {Types::SetUserPoolMfaConfigResponse#email_mfa_configuration #email_mfa_configuration} => Types::EmailMfaConfigType
     #   * {Types::SetUserPoolMfaConfigResponse#mfa_configuration #mfa_configuration} => String
     #
     # @example Request syntax with placeholder values
@@ -8871,6 +8944,10 @@ module Aws::CognitoIdentityProvider
     #     software_token_mfa_configuration: {
     #       enabled: false,
     #     },
+    #     email_mfa_configuration: {
+    #       message: "EmailMfaMessageType",
+    #       subject: "EmailMfaSubjectType",
+    #     },
     #     mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
     #   })
     #
@@ -8881,6 +8958,8 @@ module Aws::CognitoIdentityProvider
     #   resp.sms_mfa_configuration.sms_configuration.external_id #=> String
     #   resp.sms_mfa_configuration.sms_configuration.sns_region #=> String
     #   resp.software_token_mfa_configuration.enabled #=> Boolean
+    #   resp.email_mfa_configuration.message #=> String
+    #   resp.email_mfa_configuration.subject #=> String
     #   resp.mfa_configuration #=> String, one of "OFF", "ON", "OPTIONAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolMfaConfig AWS API Documentation
@@ -8967,7 +9046,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -9778,7 +9857,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -9893,7 +9972,7 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Services service, Amazon Simple Notification Service
+    # other Amazon Web Servicesservice, Amazon Simple Notification Service
     # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
@@ -10282,9 +10361,9 @@ module Aws::CognitoIdentityProvider
     #   default for ID and access tokens is hours.
     #
     # @option params [Array<String>] :read_attributes
-    #   The list of user attributes that you want your app client to have
-    #   read-only access to. After your user authenticates in your app, their
-    #   access token authorizes them to read their own attribute value for any
+    #   The list of user attributes that you want your app client to have read
+    #   access to. After your user authenticates in your app, their access
+    #   token authorizes them to read their own attribute value for any
     #   attribute in this list. An example of this kind of activity is when
     #   your user selects a link to view their profile information. Your app
     #   makes a [GetUser][1] API request to retrieve and display your user's
@@ -10292,11 +10371,11 @@ module Aws::CognitoIdentityProvider
     #
     #   When you don't specify the `ReadAttributes` for your app client, your
     #   app can read the values of `email_verified`, `phone_number_verified`,
-    #   and the Standard attributes of your user pool. When your user pool has
-    #   read access to these default attributes, `ReadAttributes` doesn't
-    #   return any information. Amazon Cognito only populates `ReadAttributes`
-    #   in the API response if you have specified your own custom set of read
-    #   attributes.
+    #   and the Standard attributes of your user pool. When your user pool app
+    #   client has read access to these default attributes, `ReadAttributes`
+    #   doesn't return any information. Amazon Cognito only populates
+    #   `ReadAttributes` in the API response if you have specified your own
+    #   custom set of read attributes.
     #
     #
     #
@@ -10854,7 +10933,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

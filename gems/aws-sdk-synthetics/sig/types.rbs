@@ -160,6 +160,7 @@ module Aws::Synthetics
       attr_accessor failure_retention_period_in_days: ::Integer
       attr_accessor runtime_version: ::String
       attr_accessor vpc_config: Types::VpcConfigInput
+      attr_accessor resources_to_replicate_tags: ::Array[("lambda-function")]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor artifact_config: Types::ArtifactConfigInput
       SENSITIVE: []

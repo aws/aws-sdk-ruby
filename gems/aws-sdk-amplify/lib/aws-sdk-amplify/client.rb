@@ -461,6 +461,17 @@ module Aws::Amplify
     #   Hosting's original SSR support only, set the platform type to
     #   `WEB_DYNAMIC`.
     #
+    #   If you are deploying an SSG only app with Next.js version 14 or later,
+    #   you must set the platform type to `WEB_COMPUTE` and set the artifacts
+    #   `baseDirectory` to `.next` in the application's build settings. For
+    #   an example of the build specification settings, see [Amplify build
+    #   settings for a Next.js 14 SSG application][1] in the *Amplify Hosting
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/deploy-nextjs-app.html#build-setting-detection-ssg-14
+    #
     # @option params [String] :iam_service_role_arn
     #   The AWS Identity and Access Management (IAM) service role for an
     #   Amplify app.
@@ -2446,6 +2457,9 @@ module Aws::Amplify
     #   Hosting's original SSR support only, set the platform type to
     #   `WEB_DYNAMIC`.
     #
+    #   If you are deploying an SSG only app with Next.js version 14 or later,
+    #   you must set the platform type to `WEB_COMPUTE`.
+    #
     # @option params [String] :iam_service_role_arn
     #   The AWS Identity and Access Management (IAM) service role for an
     #   Amplify app.
@@ -2936,7 +2950,7 @@ module Aws::Amplify
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

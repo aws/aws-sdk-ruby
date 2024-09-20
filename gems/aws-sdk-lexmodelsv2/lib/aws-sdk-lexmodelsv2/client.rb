@@ -1060,7 +1060,7 @@ module Aws::LexModelsV2
     #     nlu_intent_confidence_threshold: 1.0, # required
     #     voice_settings: {
     #       voice_id: "VoiceId", # required
-    #       engine: "standard", # accepts standard, neural
+    #       engine: "standard", # accepts standard, neural, long-form, generative
     #     },
     #     generative_ai_settings: {
     #       runtime_settings: {
@@ -1115,7 +1115,7 @@ module Aws::LexModelsV2
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
-    #   resp.voice_settings.engine #=> String, one of "standard", "neural"
+    #   resp.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.creation_date_time #=> Time
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.enabled #=> Boolean
@@ -3549,7 +3549,7 @@ module Aws::LexModelsV2
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
-    #   resp.voice_settings.engine #=> String, one of "standard", "neural"
+    #   resp.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.intents_count #=> Integer
     #   resp.slot_types_count #=> Integer
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
@@ -4004,7 +4004,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.locale_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
-    #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural"
+    #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -8425,7 +8425,7 @@ module Aws::LexModelsV2
     #         nlu_intent_confidence_threshold: 1.0,
     #         voice_settings: {
     #           voice_id: "VoiceId", # required
-    #           engine: "standard", # accepts standard, neural
+    #           engine: "standard", # accepts standard, neural, long-form, generative
     #         },
     #       },
     #       custom_vocabulary_import_specification: {
@@ -8472,7 +8472,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.locale_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
-    #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural"
+    #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -9066,7 +9066,7 @@ module Aws::LexModelsV2
     #     nlu_intent_confidence_threshold: 1.0, # required
     #     voice_settings: {
     #       voice_id: "VoiceId", # required
-    #       engine: "standard", # accepts standard, neural
+    #       engine: "standard", # accepts standard, neural, long-form, generative
     #     },
     #     generative_ai_settings: {
     #       runtime_settings: {
@@ -9121,7 +9121,7 @@ module Aws::LexModelsV2
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
-    #   resp.voice_settings.engine #=> String, one of "standard", "neural"
+    #   resp.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
@@ -10494,7 +10494,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -966,11 +966,19 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Settings for a foundation model used to parse documents for a data
-    # source.
+    # Settings for a foundation model or [inference profile][1] used to
+    # parse documents for a data source.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #
     # @!attribute [rw] model_arn
-    #   The model's ARN.
+    #   The ARN of the foundation model or [inference profile][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #   @return [String]
     #
     # @!attribute [rw] parsing_prompt
@@ -5535,23 +5543,24 @@ module Aws::BedrockAgent
     # into images and use a model to describe the contents of each page.
     #
     # To use a model to parse PDF documents, set the parsing strategy to
-    # `BEDROCK_FOUNDATION_MODEL` and specify the model to use by ARN. You
-    # can also override the default parsing prompt with instructions for how
-    # to interpret images and tables in your documents. The following models
-    # are supported.
+    # `BEDROCK_FOUNDATION_MODEL` and specify the model or [inference
+    # profile][1] to use by ARN. You can also override the default parsing
+    # prompt with instructions for how to interpret images and tables in
+    # your documents. The following models are supported.
     #
     # * Anthropic Claude 3 Sonnet -
     #   `anthropic.claude-3-sonnet-20240229-v1:0`
     #
     # * Anthropic Claude 3 Haiku - `anthropic.claude-3-haiku-20240307-v1:0`
     #
-    # You can get the ARN of a model with the [ListFoundationModels][1]
+    # You can get the ARN of a model with the [ListFoundationModels][2]
     # action. Standard model usage charges apply for the foundation model
     # parsing strategy.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html
     #
     # @!attribute [rw] bedrock_foundation_model_configuration
     #   Settings for a foundation model used to parse documents for a data

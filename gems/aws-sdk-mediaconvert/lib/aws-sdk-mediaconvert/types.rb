@@ -43,7 +43,13 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] codec_profile
-    #   AAC Profile.
+    #   Specify the AAC profile. For the widest player compatibility and
+    #   where higher bitrates are acceptable: Keep the default profile, LC
+    #   (AAC-LC) For improved audio performance at lower bitrates: Choose
+    #   HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to
+    #   improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds
+    #   parametric stereo, which optimizes for encoding stereo audio at very
+    #   low bitrates.
     #   @return [String]
     #
     # @!attribute [rw] coding_mode
@@ -59,7 +65,11 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] rate_control_mode
-    #   Rate Control Mode.
+    #   Specify the AAC rate control mode. For a constant bitrate: Choose
+    #   CBR. Your AAC output bitrate will be equal to the value that you
+    #   choose for Bitrate. For a variable bitrate: Choose VBR. Your AAC
+    #   output bitrate will vary according to your audio content and the
+    #   value that you choose for Bitrate quality.
     #   @return [String]
     #
     # @!attribute [rw] raw_format
@@ -69,15 +79,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
-    #   Specify the Sample rate in Hz. Valid sample rates depend on the
-    #   Profile and Coding mode that you select. The following list shows
-    #   valid sample rates for each Profile and Coding mode. * LC Profile,
-    #   Coding mode 1.0, 2.0, and Receiver Mix: 8000, 12000, 16000, 22050,
-    #   24000, 32000, 44100, 48000, 88200, 96000. * LC Profile, Coding mode
-    #   5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding mode 1.0
-    #   and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1
-    #   Profile, Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. *
-    #   HEV2 Profile, Coding mode 2.0: 22050, 24000, 32000, 44100, 48000.
+    #   Specify the AAC sample rate in samples per second (Hz). Valid sample
+    #   rates depend on the AAC profile and Coding mode that you select. For
+    #   a list of supported sample rates, see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html
     #   @return [Integer]
     #
     # @!attribute [rw] specification
@@ -86,7 +91,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] vbr_quality
-    #   VBR Quality Level - Only used if rate\_control\_mode is VBR.
+    #   Specify the quality of your variable bitrate (VBR) AAC audio. For a
+    #   list of approximate VBR bitrates, see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac\_vbr
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AacSettings AWS API Documentation
@@ -693,7 +700,10 @@ module Aws::MediaConvert
     #   timestamps. No corrections are made to already-aligned frames.
     #   Frame-level correction may affect the pitch of corrected frames, and
     #   is recommended for atonal audio content such as speech or
-    #   percussion.
+    #   percussion. * Force: Apply audio duration correction, either Track
+    #   or Frame depending on your input, regardless of the accuracy of your
+    #   input's STTS table. Your output audio and video may not be aligned
+    #   or it may contain audio artifacts.
     #   @return [String]
     #
     # @!attribute [rw] custom_language_code
@@ -2947,6 +2957,14 @@ module Aws::MediaConvert
     #   feature, see the AWS Elemental MediaConvert User Guide.
     #   @return [Array<Types::HopDestination>]
     #
+    # @!attribute [rw] job_engine_version
+    #   Use Job engine versions to run jobs for your production workflow on
+    #   one version, while you test and validate the latest version. To
+    #   specify a Job engine version: Enter a date in a YYYY-MM-DD format.
+    #   For a list of valid Job engine versions, submit a ListVersions
+    #   request. To not specify a Job engine version: Leave blank.
+    #   @return [String]
+    #
     # @!attribute [rw] job_template
     #   Optional. When you create a job, you can either specify a job
     #   template or specify the transcoding settings individually.
@@ -3014,6 +3032,7 @@ module Aws::MediaConvert
       :billing_tags_source,
       :client_request_token,
       :hop_destinations,
+      :job_engine_version,
       :job_template,
       :priority,
       :queue,
@@ -4727,6 +4746,52 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Specify the SPEKE version, either v1.0 or v2.0, that MediaConvert uses
+    # when encrypting your output. For more information, see:
+    # https://docs.aws.amazon.com/speke/latest/documentation/speke-api-specification.html
+    # To use SPEKE v1.0: Leave blank. To use SPEKE v2.0: Specify a SPEKE
+    # v2.0 video preset and a SPEKE v2.0 audio preset.
+    #
+    # @!attribute [rw] speke_audio_preset
+    #   Specify which SPEKE version 2.0 audio preset MediaConvert uses to
+    #   request content keys from your SPEKE server. For more information,
+    #   see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/drm-content-speke-v2-presets.html
+    #   To encrypt to your audio outputs, choose from the following: Audio
+    #   preset 1, Audio preset 2, or Audio preset 3. To encrypt your audio
+    #   outputs, using the same content key for both your audio and video
+    #   outputs: Choose Shared. When you do, you must also set SPEKE v2.0
+    #   video preset to Shared. To not encrypt your audio outputs: Choose
+    #   Unencrypted. When you do, to encrypt your video outputs, you must
+    #   also specify a SPEKE v2.0 video preset (other than Shared or
+    #   Unencrypted).
+    #   @return [String]
+    #
+    # @!attribute [rw] speke_video_preset
+    #   Specify which SPEKE version 2.0 video preset MediaConvert uses to
+    #   request content keys from your SPEKE server. For more information,
+    #   see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/drm-content-speke-v2-presets.html
+    #   To encrypt to your video outputs, choose from the following: Video
+    #   preset 1, Video preset 2, Video preset 3, Video preset 4, Video
+    #   preset 5, Video preset 6, Video preset 7, or Video preset 8. To
+    #   encrypt your video outputs, using the same content key for both your
+    #   video and audio outputs: Choose Shared. When you do, you must also
+    #   set SPEKE v2.0 audio preset to Shared. To not encrypt your video
+    #   outputs: Choose Unencrypted. When you do, to encrypt your audio
+    #   outputs, you must also specify a SPEKE v2.0 audio preset (other than
+    #   Shared or Unencrypted).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EncryptionContractConfiguration AWS API Documentation
+    #
+    class EncryptionContractConfiguration < Struct.new(
+      :speke_audio_preset,
+      :speke_video_preset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an account-specific API endpoint.
     #
     # @!attribute [rw] url
@@ -4900,6 +4965,19 @@ module Aws::MediaConvert
     # If your caption source is IMSC in an IMF package, use
     # TrackSourceSettings instead of FileSoureSettings.
     #
+    # @!attribute [rw] byte_rate_limit
+    #   Choose whether to limit the byte rate at which your SCC input
+    #   captions are inserted into your output. To not limit the caption
+    #   rate: We recommend that you keep the default value, Disabled.
+    #   MediaConvert inserts captions in your output according to the byte
+    #   rates listed in the EIA-608 specification, typically 2 or 3 caption
+    #   bytes per frame depending on your output frame rate. To limit your
+    #   output caption rate: Choose Enabled. Choose this option if your
+    #   downstream systems require a maximum of 2 caption bytes per frame.
+    #   Note that this setting has no effect when your output frame rate is
+    #   30 or 60.
+    #   @return [String]
+    #
     # @!attribute [rw] convert_608_to_708
     #   Specify whether this set of input captions appears in your outputs
     #   in both 608 and 708 format. If you choose Upconvert, MediaConvert
@@ -4959,6 +5037,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FileSourceSettings AWS API Documentation
     #
     class FileSourceSettings < Struct.new(
+      :byte_rate_limit,
       :convert_608_to_708,
       :convert_paint_to_pop,
       :framerate,
@@ -5508,23 +5587,25 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
-    #   Use this setting only when you also enable Scene change detection.
-    #   This setting determines how the encoder manages the spacing between
-    #   I-frames that it inserts as part of the I-frame cadence and the
-    #   I-frames that it inserts for Scene change detection. We recommend
-    #   that you have the transcoder automatically choose this value for you
-    #   based on characteristics of your input video. To enable this
-    #   automatic behavior, do this by keeping the default empty value. When
-    #   you explicitly specify a value for this setting, the encoder
-    #   determines whether to skip a cadence-driven I-frame by the value you
-    #   set. For example, if you set Min I interval to 5 and a
-    #   cadence-driven I-frame would fall within 5 frames of a scene-change
-    #   I-frame, then the encoder skips the cadence-driven I-frame. In this
-    #   way, one GOP is shrunk slightly and one GOP is stretched slightly.
-    #   When the cadence-driven I-frames are farther from the scene-change
-    #   I-frame than the value you set, then the encoder leaves all I-frames
-    #   in place and the GOPs surrounding the scene change are smaller than
-    #   the usual cadence GOPs.
+    #   Specify the minimum number of frames allowed between two IDR-frames
+    #   in your output. This includes frames created at the start of a GOP
+    #   or a scene change. Use Min I-Interval to improve video compression
+    #   by varying GOP size when two IDR-frames would be created near each
+    #   other. For example, if a regular cadence-driven IDR-frame would fall
+    #   within 5 frames of a scene-change IDR-frame, and you set Min
+    #   I-interval to 5, then the encoder would only write an IDR-frame for
+    #   the scene-change. In this way, one GOP is shortened or extended. If
+    #   a cadence-driven IDR-frame would be further than 5 frames from a
+    #   scene-change IDR-frame, then the encoder leaves all IDR-frames in
+    #   place. To use an automatically determined interval: We recommend
+    #   that you keep this value blank. This allows for MediaConvert to use
+    #   an optimal setting according to the characteristics of your input
+    #   video, and results in better video compression. To manually specify
+    #   an interval: Enter a value from 1 to 30. Use when your downstream
+    #   systems have specific GOP size requirements. To disable GOP size
+    #   variance: Enter 0. MediaConvert will only create IDR-frames at the
+    #   start of your output's cadence-driven GOP. Use when your downstream
+    #   systems require a regular GOP size.
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
@@ -5592,6 +5673,19 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] repeat_pps
     #   Places a PPS header on each encoded picture, even if repeated.
+    #   @return [String]
+    #
+    # @!attribute [rw] saliency_aware_encoding
+    #   Specify whether to apply Saliency aware encoding to your output. Use
+    #   to improve the perceptual video quality of your output by allocating
+    #   more encoding bits to the prominent or noticeable parts of your
+    #   content. To apply saliency aware encoding, when possible: We
+    #   recommend that you choose Preferred. The effects of Saliency aware
+    #   encoding are best seen in lower bitrate outputs. When you choose
+    #   Preferred, note that Saliency aware encoding will only apply to
+    #   outputs that are 720p or higher in resolution. To not apply saliency
+    #   aware encoding, prioritizing encoding speed over perceptual video
+    #   quality: Choose Disabled.
     #   @return [String]
     #
     # @!attribute [rw] scan_type_conversion_mode
@@ -5764,6 +5858,7 @@ module Aws::MediaConvert
       :qvbr_settings,
       :rate_control_mode,
       :repeat_pps,
+      :saliency_aware_encoding,
       :scan_type_conversion_mode,
       :scene_change_detect,
       :slices,
@@ -6039,23 +6134,25 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
-    #   Use this setting only when you also enable Scene change detection.
-    #   This setting determines how the encoder manages the spacing between
-    #   I-frames that it inserts as part of the I-frame cadence and the
-    #   I-frames that it inserts for Scene change detection. We recommend
-    #   that you have the transcoder automatically choose this value for you
-    #   based on characteristics of your input video. To enable this
-    #   automatic behavior, do this by keeping the default empty value. When
-    #   you explicitly specify a value for this setting, the encoder
-    #   determines whether to skip a cadence-driven I-frame by the value you
-    #   set. For example, if you set Min I interval to 5 and a
-    #   cadence-driven I-frame would fall within 5 frames of a scene-change
-    #   I-frame, then the encoder skips the cadence-driven I-frame. In this
-    #   way, one GOP is shrunk slightly and one GOP is stretched slightly.
-    #   When the cadence-driven I-frames are farther from the scene-change
-    #   I-frame than the value you set, then the encoder leaves all I-frames
-    #   in place and the GOPs surrounding the scene change are smaller than
-    #   the usual cadence GOPs.
+    #   Specify the minimum number of frames allowed between two IDR-frames
+    #   in your output. This includes frames created at the start of a GOP
+    #   or a scene change. Use Min I-Interval to improve video compression
+    #   by varying GOP size when two IDR-frames would be created near each
+    #   other. For example, if a regular cadence-driven IDR-frame would fall
+    #   within 5 frames of a scene-change IDR-frame, and you set Min
+    #   I-interval to 5, then the encoder would only write an IDR-frame for
+    #   the scene-change. In this way, one GOP is shortened or extended. If
+    #   a cadence-driven IDR-frame would be further than 5 frames from a
+    #   scene-change IDR-frame, then the encoder leaves all IDR-frames in
+    #   place. To use an automatically determined interval: We recommend
+    #   that you keep this value blank. This allows for MediaConvert to use
+    #   an optimal setting according to the characteristics of your input
+    #   video, and results in better video compression. To manually specify
+    #   an interval: Enter a value from 1 to 30. Use when your downstream
+    #   systems have specific GOP size requirements. To disable GOP size
+    #   variance: Enter 0. MediaConvert will only create IDR-frames at the
+    #   start of your output's cadence-driven GOP. Use when your downstream
+    #   systems require a regular GOP size.
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
@@ -7888,6 +7985,22 @@ module Aws::MediaConvert
     #   MediaConvert resources
     #   @return [String]
     #
+    # @!attribute [rw] job_engine_version_requested
+    #   The Job engine version that you requested for your job. Valid
+    #   versions are in a YYYY-MM-DD format.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_engine_version_used
+    #   The Job engine version that your job used. Job engine versions are
+    #   in a YYYY-MM-DD format. When you request an expired version, the
+    #   response for this property will be empty. Requests to create jobs
+    #   with an expired version result in a regular job, as if no specific
+    #   Job engine version was requested. When you request an invalid
+    #   version, the response for this property will be empty. Requests to
+    #   create jobs with an invalid version result in a 400 error message,
+    #   and no job is created.
+    #   @return [String]
+    #
     # @!attribute [rw] job_percent_complete
     #   An estimate of how far your job has progressed. This estimate is
     #   shown as a percentage of the total time from when your job leaves
@@ -7997,6 +8110,8 @@ module Aws::MediaConvert
       :error_message,
       :hop_destinations,
       :id,
+      :job_engine_version_requested,
+      :job_engine_version_used,
       :job_percent_complete,
       :job_template,
       :messages,
@@ -8013,6 +8128,31 @@ module Aws::MediaConvert
       :timing,
       :user_metadata,
       :warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use Job engine versions to run jobs for your production workflow on
+    # one version, while you test and validate the latest version. Job
+    # engine versions are in a YYYY-MM-DD format.
+    #
+    # @!attribute [rw] expiration_date
+    #   The date that this Job engine version expires. Requests to create
+    #   jobs with an expired version result in a regular job, as if no
+    #   specific Job engine version was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   Use Job engine versions to run jobs for your production workflow on
+    #   one version, while you test and validate the latest version. Job
+    #   engine versions are in a YYYY-MM-DD format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobEngineVersion AWS API Documentation
+    #
+    class JobEngineVersion < Struct.new(
+      :expiration_date,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8778,6 +8918,50 @@ module Aws::MediaConvert
     #
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Retrieve a JSON array of all available Job engine versions and the
+    # date they expire. Job engine versions are in YYYY-MM-DD format.
+    #
+    # @!attribute [rw] max_results
+    #   Optional. Number of valid Job engine versions, up to twenty, that
+    #   will be returned at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of Job engine versions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListVersionsRequest AWS API Documentation
+    #
+    class ListVersionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Successful list versions requests will return a JSON for available Job
+    # engine versions.
+    #
+    # @!attribute [rw] next_token
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of Job engine versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   Retrieve a JSON array of all available Job engine versions and the
+    #   date they expire.
+    #   @return [Array<Types::JobEngineVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListVersionsResponse AWS API Documentation
+    #
+    class ListVersionsResponse < Struct.new(
+      :next_token,
+      :versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9951,20 +10135,22 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
-    #   Use this setting only when you also enable Scene change detection.
-    #   This setting determines how the encoder manages the spacing between
-    #   I-frames that it inserts as part of the I-frame cadence and the
-    #   I-frames that it inserts for Scene change detection. When you
-    #   specify a value for this setting, the encoder determines whether to
-    #   skip a cadence-driven I-frame by the value you set. For example, if
-    #   you set Min I interval to 5 and a cadence-driven I-frame would fall
-    #   within 5 frames of a scene-change I-frame, then the encoder skips
-    #   the cadence-driven I-frame. In this way, one GOP is shrunk slightly
-    #   and one GOP is stretched slightly. When the cadence-driven I-frames
-    #   are farther from the scene-change I-frame than the value you set,
-    #   then the encoder leaves all I-frames in place and the GOPs
-    #   surrounding the scene change are smaller than the usual cadence
-    #   GOPs.
+    #   Specify the minimum number of frames allowed between two IDR-frames
+    #   in your output. This includes frames created at the start of a GOP
+    #   or a scene change. Use Min I-Interval to improve video compression
+    #   by varying GOP size when two IDR-frames would be created near each
+    #   other. For example, if a regular cadence-driven IDR-frame would fall
+    #   within 5 frames of a scene-change IDR-frame, and you set Min
+    #   I-interval to 5, then the encoder would only write an IDR-frame for
+    #   the scene-change. In this way, one GOP is shortened or extended. If
+    #   a cadence-driven IDR-frame would be further than 5 frames from a
+    #   scene-change IDR-frame, then the encoder leaves all IDR-frames in
+    #   place. To manually specify an interval: Enter a value from 1 to 30.
+    #   Use when your downstream systems have specific GOP size
+    #   requirements. To disable GOP size variance: Enter 0. MediaConvert
+    #   will only create IDR-frames at the start of your output's
+    #   cadence-driven GOP. Use when your downstream systems require a
+    #   regular GOP size.
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
@@ -11792,6 +11978,14 @@ module Aws::MediaConvert
     #   Resource Name (ARN) here.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_contract_configuration
+    #   Specify the SPEKE version, either v1.0 or v2.0, that MediaConvert
+    #   uses when encrypting your output. For more information, see:
+    #   https://docs.aws.amazon.com/speke/latest/documentation/speke-api-specification.html
+    #   To use SPEKE v1.0: Leave blank. To use SPEKE v2.0: Specify a SPEKE
+    #   v2.0 video preset and a SPEKE v2.0 audio preset.
+    #   @return [Types::EncryptionContractConfiguration]
+    #
     # @!attribute [rw] resource_id
     #   Specify the resource ID that your SPEKE-compliant key provider uses
     #   to identify this content.
@@ -11814,6 +12008,7 @@ module Aws::MediaConvert
     #
     class SpekeKeyProvider < Struct.new(
       :certificate_arn,
+      :encryption_contract_configuration,
       :resource_id,
       :system_ids,
       :url)
@@ -11841,6 +12036,14 @@ module Aws::MediaConvert
     #   https://dashif.org/identifiers/content\_protection/.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] encryption_contract_configuration
+    #   Specify the SPEKE version, either v1.0 or v2.0, that MediaConvert
+    #   uses when encrypting your output. For more information, see:
+    #   https://docs.aws.amazon.com/speke/latest/documentation/speke-api-specification.html
+    #   To use SPEKE v1.0: Leave blank. To use SPEKE v2.0: Specify a SPEKE
+    #   v2.0 video preset and a SPEKE v2.0 audio preset.
+    #   @return [Types::EncryptionContractConfiguration]
+    #
     # @!attribute [rw] hls_signaled_system_ids
     #   Specify the DRM system ID that you want signaled in the HLS manifest
     #   that MediaConvert creates as part of this CMAF package. The HLS
@@ -11864,6 +12067,7 @@ module Aws::MediaConvert
     class SpekeKeyProviderCmaf < Struct.new(
       :certificate_arn,
       :dash_signaled_system_ids,
+      :encryption_contract_configuration,
       :hls_signaled_system_ids,
       :resource_id,
       :url)
@@ -12897,41 +13101,69 @@ module Aws::MediaConvert
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html
     #
     # @!attribute [rw] end_timecode
-    #   Enter the end timecode in the underlying input video for this
-    #   overlay. Your overlay will be active through this frame. To display
-    #   your video overlay for the duration of the underlying video: Leave
-    #   blank. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the
-    #   hour, MM is the minute, SS is the second, and FF is the frame
-    #   number. When entering this value, take into account your choice for
-    #   the underlying Input timecode source. For example, if you have
-    #   embedded timecodes that start at 01:00:00:00 and you want your
-    #   overlay to end ten minutes into the video, enter 01:10:00:00.
+    #   Enter the end timecode in the base input video for this overlay.
+    #   Your overlay will be active through this frame. To display your
+    #   video overlay for the duration of the base input video: Leave blank.
+    #   Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM
+    #   is the minute, SS isthe second, and FF is the frame number. When
+    #   entering this value, take into account your choice for the base
+    #   input video's timecode source. For example, if you have embedded
+    #   timecodes that start at 01:00:00:00 and you want your overlay to end
+    #   ten minutes into the video, enter 01:10:00:00.
     #   @return [String]
+    #
+    # @!attribute [rw] initial_position
+    #   Specify the Initial position of your video overlay. To specify the
+    #   Initial position of your video overlay, including distance from the
+    #   left or top edge of the base input video's frame, or size: Enter a
+    #   value for X position, Y position, Width, or Height. To use the full
+    #   frame of the base input video: Leave blank.
+    #   @return [Types::VideoOverlayPosition]
     #
     # @!attribute [rw] input
     #   Input settings for Video overlay. You can include one or more video
     #   overlays in sequence at different times that you specify.
     #   @return [Types::VideoOverlayInput]
     #
-    # @!attribute [rw] start_timecode
-    #   Enter the start timecode in the underlying input video for this
-    #   overlay. Your overlay will be active starting with this frame. To
-    #   display your video overlay starting at the beginning of the
-    #   underlying video: Leave blank. Use the format HH:MM:SS:FF or
-    #   HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the
-    #   second, and FF is the frame number. When entering this value, take
-    #   into account your choice for the underlying Input timecode source.
-    #   For example, if you have embedded timecodes that start at
-    #   01:00:00:00 and you want your overlay to begin five minutes into the
-    #   video, enter 01:05:00:00.
+    # @!attribute [rw] playback
+    #   Specify whether your video overlay repeats or plays only once. To
+    #   repeat your video overlay on a loop: Keep the default value, Repeat.
+    #   Your overlay will repeat for the duration of the base input video.
+    #   To playback your video overlay only once: Choose Once. With either
+    #   option, you can end playback at a time that you specify by entering
+    #   a value for End timecode.
     #   @return [String]
+    #
+    # @!attribute [rw] start_timecode
+    #   Enter the start timecode in the base input video for this overlay.
+    #   Your overlay will be active starting with this frame. To display
+    #   your video overlay starting at the beginning of the base input
+    #   video: Leave blank. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where
+    #   HH is the hour, MM is the minute, SS is the second, and FF is the
+    #   frame number. When entering this value, take into account your
+    #   choice for the base input video's timecode source. For example, if
+    #   you have embedded timecodes that start at 01:00:00:00 and you want
+    #   your overlay to begin five minutes into the video, enter
+    #   01:05:00:00.
+    #   @return [String]
+    #
+    # @!attribute [rw] transitions
+    #   Specify one or more transitions for your video overlay. Use
+    #   Transitions to reposition or resize your overlay over time. To use
+    #   the same position and size for the duration of your video overlay:
+    #   Leave blank. To specify a Transition: Enter a value for Start
+    #   timecode, End Timecode, X Position, Y Position, Width, or Height.
+    #   @return [Array<Types::VideoOverlayTransition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlay AWS API Documentation
     #
     class VideoOverlay < Struct.new(
       :end_timecode,
+      :initial_position,
       :input,
-      :start_timecode)
+      :playback,
+      :start_timecode,
+      :transitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12940,10 +13172,9 @@ module Aws::MediaConvert
     # overlays in sequence at different times that you specify.
     #
     # @!attribute [rw] file_input
-    #   Specify the input file S3, HTTP, or HTTPS URI for your video
-    #   overlay. For consistency in color and formatting in your output
-    #   video image, we recommend that you specify a video with similar
-    #   characteristics as the underlying input video.
+    #   Specify the input file S3, HTTP, or HTTPS URL for your video
+    #   overlay. To specify one or more Transitions for your base input
+    #   video instead: Leave blank.
     #   @return [String]
     #
     # @!attribute [rw] input_clippings
@@ -12999,6 +13230,116 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlayInputClipping AWS API Documentation
     #
     class VideoOverlayInputClipping < Struct.new(
+      :end_timecode,
+      :start_timecode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # position of video overlay
+    #
+    # @!attribute [rw] height
+    #   To scale your video overlay to the same height as the base input
+    #   video: Leave blank. To scale the height of your video overlay to a
+    #   different height: Enter an integer representing the Unit type that
+    #   you choose, either Pixels or Percentage. For example, when you enter
+    #   360 and choose Pixels, your video overlay will be rendered with a
+    #   height of 360. When you enter 50, choose Percentage, and your
+    #   overlay's source has a height of 1080, your video overlay will be
+    #   rendered with a height of 540. To scale your overlay to a specific
+    #   height while automatically maintaining its original aspect ratio,
+    #   enter a value for Height and leave Width blank.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   Specify the Unit type to use when you enter a value for X position,
+    #   Y position, Width, or Height. You can choose Pixels or Percentage.
+    #   Leave blank to use the default value, Pixels.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   To scale your video overlay to the same width as the base input
+    #   video: Leave blank. To scale the width of your video overlay to a
+    #   different width: Enter an integer representing the Unit type that
+    #   you choose, either Pixels or Percentage. For example, when you enter
+    #   640 and choose Pixels, your video overlay will scale to a height of
+    #   640 pixels. When you enter 50, choose Percentage, and your
+    #   overlay's source has a width of 1920, your video overlay will scale
+    #   to a width of 960. To scale your overlay to a specific width while
+    #   automatically maintaining its original aspect ratio, enter a value
+    #   for Width and leave Height blank.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x_position
+    #   To position the left edge of your video overlay along the left edge
+    #   of the base input video's frame: Keep blank, or enter 0. To
+    #   position the left edge of your video overlay to the right, relative
+    #   to the left edge of the base input video's frame: Enter an integer
+    #   representing the Unit type that you choose, either Pixels or
+    #   Percentage. For example, when you enter 10 and choose Pixels, your
+    #   video overlay will be positioned 10 pixels from the left edge of the
+    #   base input video's frame. When you enter 10, choose Percentage, and
+    #   your base input video is 1920x1080, your video overlay will be
+    #   positioned 192 pixels from the left edge of the base input video's
+    #   frame.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] y_position
+    #   To position the top edge of your video overlay along the top edge of
+    #   the base input video's frame: Keep blank, or enter 0. To position
+    #   the top edge of your video overlay down, relative to the top edge of
+    #   the base input video's frame: Enter an integer representing the
+    #   Unit type that you choose, either Pixels or Percentage. For example,
+    #   when you enter 10 and choose Pixels, your video overlay will be
+    #   positioned 10 pixels from the top edge of the base input video's
+    #   frame. When you enter 10, choose Percentage, and your underlying
+    #   video is 1920x1080, your video overlay will be positioned 108 pixels
+    #   from the top edge of the base input video's frame.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlayPosition AWS API Documentation
+    #
+    class VideoOverlayPosition < Struct.new(
+      :height,
+      :unit,
+      :width,
+      :x_position,
+      :y_position)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify one or more Transitions for your video overlay. Use
+    # Transitions to reposition or resize your overlay over time. To use the
+    # same position and size for the duration of your video overlay: Leave
+    # blank. To specify a Transition: Enter a value for Start timecode, End
+    # Timecode, X Position, Y Position, Width, or Height.
+    #
+    # @!attribute [rw] end_position
+    #   Specify the ending position for this transition, relative to the
+    #   base input video's frame. Your video overlay will move smoothly to
+    #   this position, beginning at this transition's Start timecode and
+    #   ending at this transition's End timecode.
+    #   @return [Types::VideoOverlayPosition]
+    #
+    # @!attribute [rw] end_timecode
+    #   Specify the timecode for when this transition ends. Use the format
+    #   HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute,
+    #   SS is the second, and FF is the frame number. When entering this
+    #   value, take into account your choice for Timecode source.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timecode
+    #   Specify the timecode for when this transition begins. Use the format
+    #   HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute,
+    #   SS is the second, and FF is the frame number. When entering this
+    #   value, take into account your choice for Timecode source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlayTransition AWS API Documentation
+    #
+    class VideoOverlayTransition < Struct.new(
+      :end_position,
       :end_timecode,
       :start_timecode)
       SENSITIVE = []

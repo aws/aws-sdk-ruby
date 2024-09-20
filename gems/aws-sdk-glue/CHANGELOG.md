@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.195.0 (2024-09-19)
+------------------
+
+* Feature - This change is for releasing TestConnection api SDK model
+
+1.194.0 (2024-09-12)
+------------------
+
+* Feature - AWS Glue is introducing two new optimizers for Apache Iceberg tables: snapshot retention and orphan file deletion. Customers can enable these optimizers and customize their configurations to perform daily maintenance tasks on their Iceberg tables based on their specific requirements.
+
+1.193.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.192.0 (2024-09-10)
 ------------------
 

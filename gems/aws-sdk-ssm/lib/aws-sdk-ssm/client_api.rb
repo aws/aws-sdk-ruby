@@ -394,6 +394,8 @@ module Aws::SSM
     EffectivePatch = Shapes::StructureShape.new(name: 'EffectivePatch')
     EffectivePatchList = Shapes::ListShape.new(name: 'EffectivePatchList')
     ErrorCount = Shapes::IntegerShape.new(name: 'ErrorCount')
+    ExcludeAccount = Shapes::StringShape.new(name: 'ExcludeAccount')
+    ExcludeAccounts = Shapes::ListShape.new(name: 'ExcludeAccounts')
     ExecutionMode = Shapes::StringShape.new(name: 'ExecutionMode')
     ExecutionRoleName = Shapes::StringShape.new(name: 'ExecutionRoleName')
     ExpirationDate = Shapes::TimestampShape.new(name: 'ExpirationDate')
@@ -1170,6 +1172,7 @@ module Aws::SSM
     TargetKey = Shapes::StringShape.new(name: 'TargetKey')
     TargetLocation = Shapes::StructureShape.new(name: 'TargetLocation')
     TargetLocations = Shapes::ListShape.new(name: 'TargetLocations')
+    TargetLocationsURL = Shapes::StringShape.new(name: 'TargetLocationsURL')
     TargetMap = Shapes::MapShape.new(name: 'TargetMap')
     TargetMapKey = Shapes::StringShape.new(name: 'TargetMapKey')
     TargetMapValue = Shapes::StringShape.new(name: 'TargetMapValue')
@@ -1500,6 +1503,7 @@ module Aws::SSM
     AutomationExecution.add_member(:progress_counters, Shapes::ShapeRef.new(shape: ProgressCounters, location_name: "ProgressCounters"))
     AutomationExecution.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     AutomationExecution.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
+    AutomationExecution.add_member(:target_locations_url, Shapes::ShapeRef.new(shape: TargetLocationsURL, location_name: "TargetLocationsURL"))
     AutomationExecution.add_member(:automation_subtype, Shapes::ShapeRef.new(shape: AutomationSubtype, location_name: "AutomationSubtype"))
     AutomationExecution.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ScheduledTime"))
     AutomationExecution.add_member(:runbooks, Shapes::ShapeRef.new(shape: Runbooks, location_name: "Runbooks"))
@@ -1544,6 +1548,7 @@ module Aws::SSM
     AutomationExecutionMetadata.add_member(:automation_type, Shapes::ShapeRef.new(shape: AutomationType, location_name: "AutomationType"))
     AutomationExecutionMetadata.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
     AutomationExecutionMetadata.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
+    AutomationExecutionMetadata.add_member(:target_locations_url, Shapes::ShapeRef.new(shape: TargetLocationsURL, location_name: "TargetLocationsURL"))
     AutomationExecutionMetadata.add_member(:automation_subtype, Shapes::ShapeRef.new(shape: AutomationSubtype, location_name: "AutomationSubtype"))
     AutomationExecutionMetadata.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ScheduledTime"))
     AutomationExecutionMetadata.add_member(:runbooks, Shapes::ShapeRef.new(shape: Runbooks, location_name: "Runbooks"))
@@ -2488,6 +2493,8 @@ module Aws::SSM
     EffectivePatch.struct_class = Types::EffectivePatch
 
     EffectivePatchList.member = Shapes::ShapeRef.new(shape: EffectivePatch)
+
+    ExcludeAccounts.member = Shapes::ShapeRef.new(shape: ExcludeAccount)
 
     FailedCreateAssociation.add_member(:entry, Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntry, location_name: "Entry"))
     FailedCreateAssociation.add_member(:message, Shapes::ShapeRef.new(shape: BatchErrorMessage, location_name: "Message"))
@@ -4437,6 +4444,7 @@ module Aws::SSM
     StartAutomationExecutionRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations", metadata: {"box"=>true}))
     StartAutomationExecutionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartAutomationExecutionRequest.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "AlarmConfiguration"))
+    StartAutomationExecutionRequest.add_member(:target_locations_url, Shapes::ShapeRef.new(shape: TargetLocationsURL, location_name: "TargetLocationsURL"))
     StartAutomationExecutionRequest.struct_class = Types::StartAutomationExecutionRequest
 
     StartAutomationExecutionResult.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "AutomationExecutionId"))
@@ -4537,6 +4545,11 @@ module Aws::SSM
     TargetLocation.add_member(:target_location_max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "TargetLocationMaxErrors", metadata: {"box"=>true}))
     TargetLocation.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName", metadata: {"box"=>true}))
     TargetLocation.add_member(:target_location_alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "TargetLocationAlarmConfiguration", metadata: {"box"=>true}))
+    TargetLocation.add_member(:include_child_organization_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeChildOrganizationUnits"))
+    TargetLocation.add_member(:exclude_accounts, Shapes::ShapeRef.new(shape: ExcludeAccounts, location_name: "ExcludeAccounts"))
+    TargetLocation.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    TargetLocation.add_member(:targets_max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "TargetsMaxConcurrency"))
+    TargetLocation.add_member(:targets_max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "TargetsMaxErrors"))
     TargetLocation.struct_class = Types::TargetLocation
 
     TargetLocations.member = Shapes::ShapeRef.new(shape: TargetLocation)

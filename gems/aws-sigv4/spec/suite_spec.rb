@@ -36,7 +36,6 @@ module Aws
             }
 
             it 'computes the canonical request' do # creq
-              skip("CRT Signer does not provide canonical request") if Signer.use_crt?
               signature = signer.sign_request(request)
               computed = signature.canonical_request
               expected = File.read("#{prefix}.creq", encoding: "utf-8")
@@ -46,8 +45,6 @@ module Aws
             end
 
             it 'computes the string to sign' do # sts
-              skip("CRT Signer does not provide string to sign") if Signer.use_crt?
-
               signature = signer.sign_request(request)
               computed = signature.string_to_sign
               expected = File.read("#{prefix}.sts", encoding: "utf-8")

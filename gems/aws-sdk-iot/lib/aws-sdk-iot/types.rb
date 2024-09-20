@@ -487,6 +487,65 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] package_name
+    #   The name of the new software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the new package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] sbom
+    #   The Amazon S3 location for the software bill of materials associated
+    #   with a software package version.
+    #   @return [Types::Sbom]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class AssociateSbomWithPackageVersionRequest < Struct.new(
+      :package_name,
+      :version_name,
+      :sbom,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the new software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the new package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] sbom
+    #   The Amazon S3 location for the software bill of materials associated
+    #   with a software package version.
+    #   @return [Types::Sbom]
+    #
+    # @!attribute [rw] sbom_validation_status
+    #   The status of the initial validation for the SBOM against the
+    #   Software Package Data Exchange (SPDX) and CycloneDX industry
+    #   standard format.
+    #   @return [String]
+    #
+    class AssociateSbomWithPackageVersionResponse < Struct.new(
+      :package_name,
+      :version_name,
+      :sbom,
+      :sbom_validation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] targets
     #   A list of thing group ARNs that define the targets of the job.
     #   @return [Array<String>]
@@ -3366,6 +3425,17 @@ module Aws::IoT
     #   limited to 3KB.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] artifact
+    #   The various build components created during the build process such
+    #   as libraries and configuration files that make up a software package
+    #   version.
+    #   @return [Types::PackageVersionArtifact]
+    #
+    # @!attribute [rw] recipe
+    #   The inline job document associated with a software package version
+    #   used for a quick job deployment via IoT Jobs.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Metadata that can be used to manage the package version.
     #   @return [Hash<String,String>]
@@ -3384,9 +3454,11 @@ module Aws::IoT
       :version_name,
       :description,
       :attributes,
+      :artifact,
+      :recipe,
       :tags,
       :client_token)
-      SENSITIVE = [:description, :attributes]
+      SENSITIVE = [:description, :attributes, :recipe]
       include Aws::Structure
     end
 
@@ -5698,8 +5770,14 @@ module Aws::IoT
     #   The unique identifier you assigned to this job when it was created.
     #   @return [String]
     #
+    # @!attribute [rw] before_substitution
+    #   A flag that provides a view of the job document before and after the
+    #   substitution parameters have been resolved with their exact values.
+    #   @return [Boolean]
+    #
     class DescribeJobRequest < Struct.new(
-      :job_id)
+      :job_id,
+      :before_substitution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6756,6 +6834,33 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] package_name
+    #   The name of the new software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the new package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DisassociateSbomFromPackageVersionRequest < Struct.new(
+      :package_name,
+      :version_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DisassociateSbomFromPackageVersionResponse < Aws::EmptyStructure; end
+
     # A map of key-value pairs containing the patterns that need to be
     # replaced in a managed template job document schema. You can use the
     # description of each key as a guidance to specify the inputs during
@@ -7386,8 +7491,14 @@ module Aws::IoT
     #   The unique identifier you assigned to this job when it was created.
     #   @return [String]
     #
+    # @!attribute [rw] before_substitution
+    #   A flag that provides a view of the job document before and after the
+    #   substitution parameters have been resolved with their exact values.
+    #   @return [Boolean]
+    #
     class GetJobDocumentRequest < Struct.new(
-      :job_id)
+      :job_id,
+      :before_substitution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7540,6 +7651,10 @@ module Aws::IoT
     #   define a package version’s configuration.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] artifact
+    #   The various components that make up a software package version.
+    #   @return [Types::PackageVersionArtifact]
+    #
     # @!attribute [rw] status
     #   The status associated to the package version. For more information,
     #   see [Package version lifecycle][1].
@@ -7562,17 +7677,35 @@ module Aws::IoT
     #   The date when the package version was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] sbom
+    #   The software bill of materials for a software package version.
+    #   @return [Types::Sbom]
+    #
+    # @!attribute [rw] sbom_validation_status
+    #   The status of the validation for a new software bill of materials
+    #   added to a software package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] recipe
+    #   The inline job document associated with a software package version
+    #   used for a quick job deployment via IoT Jobs.
+    #   @return [String]
+    #
     class GetPackageVersionResponse < Struct.new(
       :package_version_arn,
       :package_name,
       :version_name,
       :description,
       :attributes,
+      :artifact,
       :status,
       :error_reason,
       :creation_date,
-      :last_modified_date)
-      SENSITIVE = [:description, :attributes]
+      :last_modified_date,
+      :sbom,
+      :sbom_validation_status,
+      :recipe)
+      SENSITIVE = [:description, :attributes, :recipe]
       include Aws::Structure
     end
 
@@ -10760,6 +10893,54 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] package_name
+    #   The name of the new software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the new package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_result
+    #   The end result of the
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   null if there are no additional results.
+    #   @return [String]
+    #
+    class ListSbomValidationResultsRequest < Struct.new(
+      :package_name,
+      :version_name,
+      :validation_result,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] validation_result_summaries
+    #   A summary of the validation results for each software bill of
+    #   materials attached to a software package version.
+    #   @return [Array<Types::SbomValidationResultSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   null if there are no additional results.
+    #   @return [String]
+    #
+    class ListSbomValidationResultsResponse < Struct.new(
+      :validation_result_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The token for the next set of results.
     #   @return [String]
@@ -12442,6 +12623,19 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The Amazon S3 location for the artifacts associated with a software
+    # package version.
+    #
+    # @!attribute [rw] s3_location
+    #   The S3 location.
+    #   @return [Types::S3Location]
+    #
+    class PackageVersionArtifact < Struct.new(
+      :s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A summary of information about a package version.
     #
     # @!attribute [rw] package_name
@@ -13449,6 +13643,49 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The Amazon S3 location for the software bill of materials associated
+    # with a software package version.
+    #
+    # @!attribute [rw] s3_location
+    #   The S3 location.
+    #   @return [Types::S3Location]
+    #
+    class Sbom < Struct.new(
+      :s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the validation results for a specific software bill of
+    # materials (SBOM) attached to a software package version.
+    #
+    # @!attribute [rw] file_name
+    #   The name of the SBOM file.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_result
+    #   The end result of the SBOM validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The `errorCode` representing the validation failure error if the
+    #   SBOM validation failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The `errorMessage` representing the validation failure error if the
+    #   SBOM validation failed.
+    #   @return [String]
+    #
+    class SbomValidationResultSummary < Struct.new(
+      :file_name,
+      :validation_result,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the scheduled audit.
     #
     # @!attribute [rw] scheduled_audit_name
@@ -13685,7 +13922,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-domain-ocsp-config.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html
     #   @return [Boolean]
     #
     class ServerCertificateConfig < Struct.new(
@@ -16393,6 +16630,10 @@ module Aws::IoT
     #   limited to 3KB.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] artifact
+    #   The various components that make up a software package version.
+    #   @return [Types::PackageVersionArtifact]
+    #
     # @!attribute [rw] action
     #   The status that the package version should be assigned. For more
     #   information, see [Package version lifecycle][1].
@@ -16400,6 +16641,11 @@ module Aws::IoT
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #   @return [String]
+    #
+    # @!attribute [rw] recipe
+    #   The inline job document associated with a software package version
+    #   used for a quick job deployment via IoT Jobs.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -16416,9 +16662,11 @@ module Aws::IoT
       :version_name,
       :description,
       :attributes,
+      :artifact,
       :action,
+      :recipe,
       :client_token)
-      SENSITIVE = [:description, :attributes]
+      SENSITIVE = [:description, :attributes, :recipe]
       include Aws::Structure
     end
 

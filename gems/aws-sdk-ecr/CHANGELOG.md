@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2024-09-17)
+------------------
+
+* Feature - The `DescribeImageScanning` API now includes `fixAvailable`, `exploitAvailable`, and `fixedInVersion` fields to provide more detailed information about the availability of fixes, exploits, and fixed versions for identified image vulnerabilities.
+
+1.83.0 (2024-09-11)
+------------------
+
+* Feature - Added KMS_DSSE to EncryptionType
+
 1.82.0 (2024-09-10)
 ------------------
 

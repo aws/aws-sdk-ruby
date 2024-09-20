@@ -40,10 +40,19 @@ module Aws::DirectoryService
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          @handler.call(context)
+          with_metrics(context) { @handler.call(context) }
         end
 
         private
+
+        def with_metrics(context, &block)
+          metrics = []
+          metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
+          if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
+            metrics << 'SIGV4A_SIGNING'
+          end
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, values|
@@ -108,6 +117,8 @@ module Aws::DirectoryService
             Aws::DirectoryService::Endpoints::DescribeConditionalForwarders.build(context)
           when :describe_directories
             Aws::DirectoryService::Endpoints::DescribeDirectories.build(context)
+          when :describe_directory_data_access
+            Aws::DirectoryService::Endpoints::DescribeDirectoryDataAccess.build(context)
           when :describe_domain_controllers
             Aws::DirectoryService::Endpoints::DescribeDomainControllers.build(context)
           when :describe_event_topics
@@ -128,6 +139,8 @@ module Aws::DirectoryService
             Aws::DirectoryService::Endpoints::DescribeUpdateDirectory.build(context)
           when :disable_client_authentication
             Aws::DirectoryService::Endpoints::DisableClientAuthentication.build(context)
+          when :disable_directory_data_access
+            Aws::DirectoryService::Endpoints::DisableDirectoryDataAccess.build(context)
           when :disable_ldaps
             Aws::DirectoryService::Endpoints::DisableLDAPS.build(context)
           when :disable_radius
@@ -136,6 +149,8 @@ module Aws::DirectoryService
             Aws::DirectoryService::Endpoints::DisableSso.build(context)
           when :enable_client_authentication
             Aws::DirectoryService::Endpoints::EnableClientAuthentication.build(context)
+          when :enable_directory_data_access
+            Aws::DirectoryService::Endpoints::EnableDirectoryDataAccess.build(context)
           when :enable_ldaps
             Aws::DirectoryService::Endpoints::EnableLDAPS.build(context)
           when :enable_radius

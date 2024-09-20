@@ -14,7 +14,7 @@ module Aws::Mgn
   describe EndpointProvider do
     subject { Aws::Mgn::EndpointProvider.new }
 
-    context 'For region af-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region af-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.af-south-1.amazonaws.com"}}
       end
@@ -28,7 +28,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region ap-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.ap-east-1.amazonaws.com"}}
       end
@@ -42,7 +42,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region ap-northeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.ap-northeast-1.amazonaws.com"}}
       end
@@ -56,7 +56,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region ap-northeast-2 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.ap-northeast-2.amazonaws.com"}}
       end
@@ -70,7 +70,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region ap-northeast-3 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-3 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.ap-northeast-3.amazonaws.com"}}
       end
@@ -84,7 +84,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region ap-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.ap-south-1.amazonaws.com"}}
       end
@@ -98,7 +98,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region ap-southeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.ap-southeast-1.amazonaws.com"}}
       end
@@ -112,7 +112,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region ap-southeast-2 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.ap-southeast-2.amazonaws.com"}}
       end
@@ -126,7 +126,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region ca-central-1 with FIPS disabled and DualStack disabled' do
+    context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.ca-central-1.amazonaws.com"}}
       end
@@ -140,7 +140,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region eu-central-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.eu-central-1.amazonaws.com"}}
       end
@@ -154,7 +154,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region eu-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.eu-north-1.amazonaws.com"}}
       end
@@ -168,7 +168,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region eu-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.eu-south-1.amazonaws.com"}}
       end
@@ -182,7 +182,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region eu-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.eu-west-1.amazonaws.com"}}
       end
@@ -196,7 +196,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region eu-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.eu-west-2.amazonaws.com"}}
       end
@@ -210,7 +210,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region eu-west-3 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.eu-west-3.amazonaws.com"}}
       end
@@ -224,7 +224,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region me-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region me-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.me-south-1.amazonaws.com"}}
       end
@@ -238,7 +238,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region sa-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.sa-east-1.amazonaws.com"}}
       end
@@ -252,7 +252,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-east-1.amazonaws.com"}}
       end
@@ -266,7 +266,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-east-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-east-2.amazonaws.com"}}
       end
@@ -280,7 +280,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-west-1.amazonaws.com"}}
       end
@@ -294,7 +294,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-west-2.amazonaws.com"}}
       end
@@ -308,7 +308,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn-fips.us-east-1.api.aws"}}
       end
@@ -322,7 +322,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn-fips.us-east-1.amazonaws.com"}}
       end
@@ -336,7 +336,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-east-1.api.aws"}}
       end
@@ -350,7 +350,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -364,7 +364,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn-fips.cn-north-1.amazonaws.com.cn"}}
       end
@@ -378,7 +378,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -392,7 +392,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.cn-north-1.amazonaws.com.cn"}}
       end
@@ -406,7 +406,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn-fips.us-gov-east-1.api.aws"}}
       end
@@ -420,7 +420,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn-fips.us-gov-east-1.amazonaws.com"}}
       end
@@ -434,7 +434,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-gov-east-1.api.aws"}}
       end
@@ -448,7 +448,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-gov-east-1.amazonaws.com"}}
       end
@@ -462,7 +462,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -475,7 +475,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn-fips.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -489,7 +489,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -502,7 +502,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -516,7 +516,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -529,7 +529,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -543,7 +543,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -556,7 +556,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://mgn.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -570,7 +570,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -584,7 +584,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -598,7 +598,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For custom endpoint with fips enabled and dualstack disabled' do
+    context "For custom endpoint with fips enabled and dualstack disabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -611,7 +611,7 @@ module Aws::Mgn
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack enabled' do
+    context "For custom endpoint with fips disabled and dualstack enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end
@@ -624,7 +624,7 @@ module Aws::Mgn
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end

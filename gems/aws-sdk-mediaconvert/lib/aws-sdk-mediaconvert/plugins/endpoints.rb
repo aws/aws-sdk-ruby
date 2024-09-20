@@ -40,10 +40,19 @@ module Aws::MediaConvert
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          @handler.call(context)
+          with_metrics(context) { @handler.call(context) }
         end
 
         private
+
+        def with_metrics(context, &block)
+          metrics = []
+          metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
+          if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
+            metrics << 'SIGV4A_SIGNING'
+          end
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, values|
@@ -102,6 +111,8 @@ module Aws::MediaConvert
             Aws::MediaConvert::Endpoints::ListQueues.build(context)
           when :list_tags_for_resource
             Aws::MediaConvert::Endpoints::ListTagsForResource.build(context)
+          when :list_versions
+            Aws::MediaConvert::Endpoints::ListVersions.build(context)
           when :put_policy
             Aws::MediaConvert::Endpoints::PutPolicy.build(context)
           when :search_jobs

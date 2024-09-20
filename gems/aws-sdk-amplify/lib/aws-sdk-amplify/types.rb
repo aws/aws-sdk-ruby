@@ -43,6 +43,9 @@ module Aws::Amplify
     #   platform type to `WEB_COMPUTE`. For an app requiring Amplify
     #   Hosting's original SSR support only, set the platform type to
     #   `WEB_DYNAMIC`.
+    #
+    #   If you are deploying an SSG only app with Next.js 14 or later, you
+    #   must use the platform type `WEB_COMPUTE`.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -641,6 +644,17 @@ module Aws::Amplify
     #   platform type to `WEB_COMPUTE`. For an app requiring Amplify
     #   Hosting's original SSR support only, set the platform type to
     #   `WEB_DYNAMIC`.
+    #
+    #   If you are deploying an SSG only app with Next.js version 14 or
+    #   later, you must set the platform type to `WEB_COMPUTE` and set the
+    #   artifacts `baseDirectory` to `.next` in the application's build
+    #   settings. For an example of the build specification settings, see
+    #   [Amplify build settings for a Next.js 14 SSG application][1] in the
+    #   *Amplify Hosting User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/deploy-nextjs-app.html#build-setting-detection-ssg-14
     #   @return [String]
     #
     # @!attribute [rw] iam_service_role_arn
@@ -2659,6 +2673,9 @@ module Aws::Amplify
     #   platform type to `WEB_COMPUTE`. For an app requiring Amplify
     #   Hosting's original SSR support only, set the platform type to
     #   `WEB_DYNAMIC`.
+    #
+    #   If you are deploying an SSG only app with Next.js version 14 or
+    #   later, you must set the platform type to `WEB_COMPUTE`.
     #   @return [String]
     #
     # @!attribute [rw] iam_service_role_arn

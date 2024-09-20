@@ -196,6 +196,32 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Represents a list of map of accounts with the number of findings
+    # associated with each account.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_generated_at
+    #   The timestamp at which the finding for this account was last
+    #   generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings associated with an account.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountStatistics AWS API Documentation
+    #
+    class AccountStatistics < Struct.new(
+      :account_id,
+      :last_generated_at,
+      :total_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about actions.
     #
     # @!attribute [rw] action_type
@@ -1181,8 +1207,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The ID of the detector belonging to the GuardDuty account that you
-    #   want to create a filter for.
+    #   The detector ID associated with the GuardDuty account for which you
+    #   want to create a filter.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1467,8 +1493,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to create an IPSet for.
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create an IPSet.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1536,8 +1562,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   IAM role with permissions required to scan and add tags to the
-    #   associated protected resource.
+    #   Amazon Resource Name (ARN) of the IAM role that has the permissions
+    #   to scan and add tags to the associated protected resource.
     #   @return [String]
     #
     # @!attribute [rw] protected_resource
@@ -1581,8 +1607,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to associate member accounts with.
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to associate member accounts.
     #   @return [String]
     #
     # @!attribute [rw] account_details
@@ -1695,7 +1721,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The ID of the detector to create sample findings for.
+    #   The ID of the detector for which you need to create sample findings.
     #   @return [String]
     #
     # @!attribute [rw] finding_types
@@ -1716,8 +1742,8 @@ module Aws::GuardDuty
     class CreateSampleFindingsResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to create a threatIntelSet for.
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create a `ThreatIntelSet`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1916,6 +1942,42 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Represents list a map of dates with a count of total findings
+    # generated on each date.
+    #
+    # @!attribute [rw] date
+    #   The timestamp when the total findings count is observed.
+    #
+    #   For example, `Date` would look like `"2024-09-05T17:00:00-07:00"`
+    #   whereas `LastGeneratedAt` would look like
+    #   2024-09-05T17:12:29-07:00".
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_generated_at
+    #   The timestamp at which the last finding in the findings count, was
+    #   generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the findings generated on each date.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings that were generated per severity level
+    #   on each date.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DateStatistics AWS API Documentation
+    #
+    class DateStatistics < Struct.new(
+      :date,
+      :last_generated_at,
+      :severity,
+      :total_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_ids
     #   A list of account IDs of the Amazon Web Services accounts that sent
     #   invitations to the current member account that you want to decline
@@ -1985,7 +2047,7 @@ module Aws::GuardDuty
     class DeleteDetectorResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the filter is associated with.
+    #   The unique ID of the detector that is associated with the filter.
     #   @return [String]
     #
     # @!attribute [rw] filter_name
@@ -2120,8 +2182,8 @@ module Aws::GuardDuty
     class DeletePublishingDestinationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the threatIntelSet is associated
-    #   with.
+    #   The unique ID of the detector that is associated with the
+    #   threatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id
@@ -2204,8 +2266,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The ID of the detector to retrieve information about the delegated
-    #   administrator from.
+    #   The detector ID of the delegated administrator for which you need to
+    #   retrieve the information.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2845,6 +2907,11 @@ module Aws::GuardDuty
     #   The name of the task group that's associated with the task.
     #   @return [String]
     #
+    # @!attribute [rw] launch_type
+    #   A capacity on which the task is running. For example, `Fargate` and
+    #   `EC2`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EcsTaskDetails AWS API Documentation
     #
     class EcsTaskDetails < Struct.new(
@@ -2857,7 +2924,8 @@ module Aws::GuardDuty
       :tags,
       :volumes,
       :containers,
-      :group)
+      :group,
+      :launch_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3142,14 +3210,77 @@ module Aws::GuardDuty
     # Contains information about finding statistics.
     #
     # @!attribute [rw] count_by_severity
-    #   Represents a map of severity to count statistics for a set of
-    #   findings.
+    #   Represents a list of map of severity to count statistics for a set
+    #   of findings.
     #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] grouped_by_account
+    #   Represents a list of map of accounts with a findings count
+    #   associated with each account.
+    #   @return [Array<Types::AccountStatistics>]
+    #
+    # @!attribute [rw] grouped_by_date
+    #   Represents a list of map of dates with a count of total findings
+    #   generated on each date per severity level.
+    #   @return [Array<Types::DateStatistics>]
+    #
+    # @!attribute [rw] grouped_by_finding_type
+    #   Represents a list of map of finding types with a count of total
+    #   findings generated for each type.
+    #
+    #   Based on the `orderBy` parameter, this request returns either the
+    #   most occurring finding types or the least occurring finding types.
+    #   If the `orderBy` parameter is `ASC`, this will represent the least
+    #   occurring finding types in your account; otherwise, this will
+    #   represent the most occurring finding types. The default value of
+    #   `orderBy` is `DESC`.
+    #   @return [Array<Types::FindingTypeStatistics>]
+    #
+    # @!attribute [rw] grouped_by_resource
+    #   Represents a list of map of top resources with a count of total
+    #   findings.
+    #   @return [Array<Types::ResourceStatistics>]
+    #
+    # @!attribute [rw] grouped_by_severity
+    #   Represents a list of map of total findings for each severity level.
+    #   @return [Array<Types::SeverityStatistics>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingStatistics AWS API Documentation
     #
     class FindingStatistics < Struct.new(
-      :count_by_severity)
+      :count_by_severity,
+      :grouped_by_account,
+      :grouped_by_date,
+      :grouped_by_finding_type,
+      :grouped_by_resource,
+      :grouped_by_severity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about each finding type associated with the
+    # `groupedByFindingType` statistics.
+    #
+    # @!attribute [rw] finding_type
+    #   Name of the finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_generated_at
+    #   The timestamp at which this finding type was last generated in your
+    #   environment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings associated with generated for each
+    #   distinct finding type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingTypeStatistics AWS API Documentation
+    #
+    class FindingTypeStatistics < Struct.new(
+      :finding_type,
+      :last_generated_at,
+      :total_findings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3231,12 +3362,11 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the GuardDuty detector associated to the coverage
-    #   statistics.
+    #   The unique ID of the GuardDuty detector.
     #   @return [String]
     #
     # @!attribute [rw] filter_criteria
-    #   Represents the criteria used to filter the coverage statistics
+    #   Represents the criteria used to filter the coverage statistics.
     #   @return [Types::CoverageFilterCriteria]
     #
     # @!attribute [rw] statistics_type
@@ -3327,7 +3457,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the filter is associated with.
+    #   The unique ID of the detector that is associated with this filter.
     #   @return [String]
     #
     # @!attribute [rw] filter_name
@@ -3420,8 +3550,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The ID of the detector that specifies the GuardDuty service whose
-    #   findings' statistics you want to retrieve.
+    #   The ID of the detector whose findings statistics you want to
+    #   retrieve.
     #   @return [String]
     #
     # @!attribute [rw] finding_statistic_types
@@ -3432,12 +3562,34 @@ module Aws::GuardDuty
     #   Represents the criteria that is used for querying findings.
     #   @return [Types::FindingCriteria]
     #
+    # @!attribute [rw] group_by
+    #   Displays the findings statistics grouped by one of the listed valid
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] order_by
+    #   Displays the sorted findings in the requested order. The default
+    #   value of `orderBy` is `DESC`.
+    #
+    #   You can use this parameter only with the `groupBy` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned in the response. The
+    #   default value is 25.
+    #
+    #   You can use this parameter only with the `groupBy` parameter.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsRequest AWS API Documentation
     #
     class GetFindingsStatisticsRequest < Struct.new(
       :detector_id,
       :finding_statistic_types,
-      :finding_criteria)
+      :finding_criteria,
+      :group_by,
+      :order_by,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3446,16 +3598,24 @@ module Aws::GuardDuty
     #   The finding statistics object.
     #   @return [Types::FindingStatistics]
     #
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items.
+    #
+    #   This parameter is currently not supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsResponse AWS API Documentation
     #
     class GetFindingsStatisticsResponse < Struct.new(
-      :finding_statistics)
+      :finding_statistics,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the IPSet is associated with.
+    #   The unique ID of the detector that is associated with the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
@@ -3539,8 +3699,9 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   IAM role that includes the permissions required to scan and add tags
-    #   to the associated protected resource.
+    #   Amazon Resource Name (ARN) of the IAM role that includes the
+    #   permissions to scan and add tags to the associated protected
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] protected_resource
@@ -3587,8 +3748,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the scan setting is associated
-    #   with.
+    #   The unique ID of the detector that is associated with this scan.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanSettingsRequest AWS API Documentation
@@ -3646,7 +3806,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] account_ids
-    #   The account ID of the member account.
+    #   A list of member account IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMemberDetectorsRequest AWS API Documentation
@@ -3763,8 +3923,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the threatIntelSet is associated
-    #   with.
+    #   The unique ID of the detector that is associated with the
+    #   threatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id
@@ -4082,8 +4242,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to invite members with.
+    #   The unique ID of the detector of the GuardDuty account with which
+    #   you want to invite members.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -4711,7 +4871,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the filter is associated with.
+    #   The unique ID of the detector that is associated with the filter.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -4860,6 +5020,8 @@ module Aws::GuardDuty
     #     listed. When this attribute is not set, all existing findings are
     #     listed.
     #
+    #   * service.ebsVolumeScanDetails.scanId
+    #
     #   * service.resourceRole
     #
     #   * severity
@@ -4920,7 +5082,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the IPSet is associated with.
+    #   The unique ID of the detector that is associated with IPSet.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5045,7 +5207,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the member is associated with.
+    #   The unique ID of the detector that is associated with the member.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5148,7 +5310,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The ID of the detector to retrieve publishing destinations for.
+    #   The detector ID for which you want to retrieve the publishing
+    #   destination.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5220,8 +5383,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector that the threatIntelSet is associated
-    #   with.
+    #   The unique ID of the detector that is associated with the
+    #   threatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6856,6 +7019,67 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about each resource type associated with the
+    # `groupedByResource` statistics.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_generated_at
+    #   The timestamp at which the statistics for this resource was last
+    #   generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_id
+    #   ID associated with each resource. The following list provides the
+    #   mapping of the resource type and resource ID.
+    #
+    #   **Mapping of resource and resource ID**
+    #
+    #   * AccessKey - `resource.accessKeyDetails.accessKeyId`
+    #
+    #   * Container - `resource.containerDetails.id`
+    #
+    #   * ECSCluster - `resource.ecsClusterDetails.name`
+    #
+    #   * EKSCluster - `resource.eksClusterDetails.name`
+    #
+    #   * Instance - `resource.instanceDetails.instanceId`
+    #
+    #   * KubernetesCluster -
+    #     `resource.kubernetesDetails.kubernetesWorkloadDetails.name`
+    #
+    #   * Lambda - `resource.lambdaDetails.functionName`
+    #
+    #   * RDSDBInstance -
+    #     `resource.rdsDbInstanceDetails.dbInstanceIdentifier`
+    #
+    #   * S3Bucket - `resource.s3BucketDetails.name`
+    #
+    #   * S3Object - `resource.s3BucketDetails.name`
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings associated with this resource.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ResourceStatistics AWS API Documentation
+    #
+    class ResourceStatistics < Struct.new(
+      :account_id,
+      :last_generated_at,
+      :resource_id,
+      :resource_type,
+      :total_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional information about the suspicious activity.
     #
     # @!attribute [rw] modifying_process
@@ -7148,8 +7372,8 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] admin_detector_id
     #   The unique detector ID of the administrator account that the request
-    #   is associated with. Note that this value will be the same as the one
-    #   used for `DetectorId` if the account is an administrator.
+    #   is associated with. If the account is an administrator, the
+    #   `AdminDetectorId` will be the same as the one used for `DetectorId`.
     #   @return [String]
     #
     # @!attribute [rw] scan_id
@@ -7593,6 +7817,31 @@ module Aws::GuardDuty
     class ServiceAdditionalInfo < Struct.new(
       :value,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about severity level for each finding type.
+    #
+    # @!attribute [rw] last_generated_at
+    #   The timestamp at which a finding type for a specific severity was
+    #   last generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] severity
+    #   The severity level associated with each finding type.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings associated with this severity.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SeverityStatistics AWS API Documentation
+    #
+    class SeverityStatistics < Struct.new(
+      :last_generated_at,
+      :severity,
+      :total_findings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8067,8 +8316,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The ID of the detector associated with the findings to update
-    #   feedback for.
+    #   The ID of the detector that is associated with the findings for
+    #   which you want to update the feedback.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -8142,8 +8391,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   IAM role with permissions required to scan and add tags to the
-    #   associated protected resource.
+    #   Amazon Resource Name (ARN) of the IAM role with permissions to scan
+    #   and add tags to the associated protected resource.
     #   @return [String]
     #
     # @!attribute [rw] actions

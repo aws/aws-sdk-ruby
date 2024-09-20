@@ -2141,7 +2141,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "databaseNameString",
     #         table_name: "tableNameString",
-    #         type: "compaction", # accepts compaction
+    #         type: "compaction", # accepts compaction, retention, orphan_file_deletion
     #       },
     #     ],
     #   })
@@ -2152,9 +2152,14 @@ module Aws::Glue
     #   resp.table_optimizers[0].catalog_id #=> String
     #   resp.table_optimizers[0].database_name #=> String
     #   resp.table_optimizers[0].table_name #=> String
-    #   resp.table_optimizers[0].table_optimizer.type #=> String, one of "compaction"
+    #   resp.table_optimizers[0].table_optimizer.type #=> String, one of "compaction", "retention", "orphan_file_deletion"
     #   resp.table_optimizers[0].table_optimizer.configuration.role_arn #=> String
     #   resp.table_optimizers[0].table_optimizer.configuration.enabled #=> Boolean
+    #   resp.table_optimizers[0].table_optimizer.configuration.retention_configuration.iceberg_configuration.snapshot_retention_period_in_days #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.configuration.retention_configuration.iceberg_configuration.number_of_snapshots_to_retain #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.configuration.retention_configuration.iceberg_configuration.clean_expired_files #=> Boolean
+    #   resp.table_optimizers[0].table_optimizer.configuration.orphan_file_deletion_configuration.iceberg_configuration.orphan_file_retention_period_in_days #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.configuration.orphan_file_deletion_configuration.iceberg_configuration.location #=> String
     #   resp.table_optimizers[0].table_optimizer.last_run.event_type #=> String, one of "starting", "completed", "failed", "in_progress"
     #   resp.table_optimizers[0].table_optimizer.last_run.start_timestamp #=> Time
     #   resp.table_optimizers[0].table_optimizer.last_run.end_timestamp #=> Time
@@ -2163,13 +2168,25 @@ module Aws::Glue
     #   resp.table_optimizers[0].table_optimizer.last_run.metrics.number_of_dpus #=> String
     #   resp.table_optimizers[0].table_optimizer.last_run.metrics.job_duration_in_hour #=> String
     #   resp.table_optimizers[0].table_optimizer.last_run.error #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.compaction_metrics.iceberg_metrics.number_of_bytes_compacted #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.compaction_metrics.iceberg_metrics.number_of_files_compacted #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.compaction_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.compaction_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizers[0].table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_data_files_deleted #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_manifest_files_deleted #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_manifest_lists_deleted #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.retention_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizers[0].table_optimizer.last_run.orphan_file_deletion_metrics.iceberg_metrics.number_of_orphan_files_deleted #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.orphan_file_deletion_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizers[0].table_optimizer.last_run.orphan_file_deletion_metrics.iceberg_metrics.job_duration_in_hour #=> Float
     #   resp.failures #=> Array
     #   resp.failures[0].error.error_code #=> String
     #   resp.failures[0].error.error_message #=> String
     #   resp.failures[0].catalog_id #=> String
     #   resp.failures[0].database_name #=> String
     #   resp.failures[0].table_name #=> String
-    #   resp.failures[0].type #=> String, one of "compaction"
+    #   resp.failures[0].type #=> String, one of "compaction", "retention", "orphan_file_deletion"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTableOptimizer AWS API Documentation
     #
@@ -4812,10 +4829,23 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
-    #     type: "compaction", # required, accepts compaction
+    #     type: "compaction", # required, accepts compaction, retention, orphan_file_deletion
     #     table_optimizer_configuration: { # required
     #       role_arn: "ArnString",
     #       enabled: false,
+    #       retention_configuration: {
+    #         iceberg_configuration: {
+    #           snapshot_retention_period_in_days: 1,
+    #           number_of_snapshots_to_retain: 1,
+    #           clean_expired_files: false,
+    #         },
+    #       },
+    #       orphan_file_deletion_configuration: {
+    #         iceberg_configuration: {
+    #           orphan_file_retention_period_in_days: 1,
+    #           location: "MessageString",
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -5826,7 +5856,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
-    #     type: "compaction", # required, accepts compaction
+    #     type: "compaction", # required, accepts compaction, retention, orphan_file_deletion
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableOptimizer AWS API Documentation
@@ -11346,7 +11376,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
-    #     type: "compaction", # required, accepts compaction
+    #     type: "compaction", # required, accepts compaction, retention, orphan_file_deletion
     #   })
     #
     # @example Response structure
@@ -11354,9 +11384,14 @@ module Aws::Glue
     #   resp.catalog_id #=> String
     #   resp.database_name #=> String
     #   resp.table_name #=> String
-    #   resp.table_optimizer.type #=> String, one of "compaction"
+    #   resp.table_optimizer.type #=> String, one of "compaction", "retention", "orphan_file_deletion"
     #   resp.table_optimizer.configuration.role_arn #=> String
     #   resp.table_optimizer.configuration.enabled #=> Boolean
+    #   resp.table_optimizer.configuration.retention_configuration.iceberg_configuration.snapshot_retention_period_in_days #=> Integer
+    #   resp.table_optimizer.configuration.retention_configuration.iceberg_configuration.number_of_snapshots_to_retain #=> Integer
+    #   resp.table_optimizer.configuration.retention_configuration.iceberg_configuration.clean_expired_files #=> Boolean
+    #   resp.table_optimizer.configuration.orphan_file_deletion_configuration.iceberg_configuration.orphan_file_retention_period_in_days #=> Integer
+    #   resp.table_optimizer.configuration.orphan_file_deletion_configuration.iceberg_configuration.location #=> String
     #   resp.table_optimizer.last_run.event_type #=> String, one of "starting", "completed", "failed", "in_progress"
     #   resp.table_optimizer.last_run.start_timestamp #=> Time
     #   resp.table_optimizer.last_run.end_timestamp #=> Time
@@ -11365,6 +11400,18 @@ module Aws::Glue
     #   resp.table_optimizer.last_run.metrics.number_of_dpus #=> String
     #   resp.table_optimizer.last_run.metrics.job_duration_in_hour #=> String
     #   resp.table_optimizer.last_run.error #=> String
+    #   resp.table_optimizer.last_run.compaction_metrics.iceberg_metrics.number_of_bytes_compacted #=> Integer
+    #   resp.table_optimizer.last_run.compaction_metrics.iceberg_metrics.number_of_files_compacted #=> Integer
+    #   resp.table_optimizer.last_run.compaction_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizer.last_run.compaction_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_data_files_deleted #=> Integer
+    #   resp.table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_manifest_files_deleted #=> Integer
+    #   resp.table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_manifest_lists_deleted #=> Integer
+    #   resp.table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizer.last_run.retention_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizer.last_run.orphan_file_deletion_metrics.iceberg_metrics.number_of_orphan_files_deleted #=> Integer
+    #   resp.table_optimizer.last_run.orphan_file_deletion_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizer.last_run.orphan_file_deletion_metrics.iceberg_metrics.job_duration_in_hour #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableOptimizer AWS API Documentation
     #
@@ -14398,7 +14445,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
-    #     type: "compaction", # required, accepts compaction
+    #     type: "compaction", # required, accepts compaction, retention, orphan_file_deletion
     #     max_results: 1,
     #     next_token: "ListTableOptimizerRunsToken",
     #   })
@@ -14418,6 +14465,18 @@ module Aws::Glue
     #   resp.table_optimizer_runs[0].metrics.number_of_dpus #=> String
     #   resp.table_optimizer_runs[0].metrics.job_duration_in_hour #=> String
     #   resp.table_optimizer_runs[0].error #=> String
+    #   resp.table_optimizer_runs[0].compaction_metrics.iceberg_metrics.number_of_bytes_compacted #=> Integer
+    #   resp.table_optimizer_runs[0].compaction_metrics.iceberg_metrics.number_of_files_compacted #=> Integer
+    #   resp.table_optimizer_runs[0].compaction_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizer_runs[0].compaction_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizer_runs[0].retention_metrics.iceberg_metrics.number_of_data_files_deleted #=> Integer
+    #   resp.table_optimizer_runs[0].retention_metrics.iceberg_metrics.number_of_manifest_files_deleted #=> Integer
+    #   resp.table_optimizer_runs[0].retention_metrics.iceberg_metrics.number_of_manifest_lists_deleted #=> Integer
+    #   resp.table_optimizer_runs[0].retention_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizer_runs[0].retention_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizer_runs[0].orphan_file_deletion_metrics.iceberg_metrics.number_of_orphan_files_deleted #=> Integer
+    #   resp.table_optimizer_runs[0].orphan_file_deletion_metrics.iceberg_metrics.number_of_dpus #=> Integer
+    #   resp.table_optimizer_runs[0].orphan_file_deletion_metrics.iceberg_metrics.job_duration_in_hour #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTableOptimizerRuns AWS API Documentation
     #
@@ -16293,6 +16352,66 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Tests a connection to a service to validate the service credentials
+    # that you provide.
+    #
+    # You can either provide an existing connection name or a
+    # `TestConnectionInput` for testing a non-existing connection input.
+    # Providing both at the same time will cause an error.
+    #
+    # If the action is successful, the service sends back an HTTP 200
+    # response.
+    #
+    # @option params [String] :connection_name
+    #   Optional. The name of the connection to test. If only name is
+    #   provided, the operation will get the connection and use that for
+    #   testing.
+    #
+    # @option params [Types::TestConnectionInput] :test_connection_input
+    #   A structure that is used to specify testing a connection to a service.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_connection({
+    #     connection_name: "NameString",
+    #     test_connection_input: {
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE, VIEW_VALIDATION_REDSHIFT, VIEW_VALIDATION_ATHENA
+    #       connection_properties: { # required
+    #         "HOST" => "ValueString",
+    #       },
+    #       authentication_configuration: {
+    #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
+    #         secret_arn: "SecretArn",
+    #         o_auth_2_properties: {
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_client_application: {
+    #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
+    #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
+    #           },
+    #           token_url: "TokenUrl",
+    #           token_url_parameters_map: {
+    #             "TokenUrlParameterKey" => "TokenUrlParameterValue",
+    #           },
+    #           authorization_code_properties: {
+    #             authorization_code: "AuthorizationCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TestConnection AWS API Documentation
+    #
+    # @overload test_connection(params = {})
+    # @param [Hash] params ({})
+    def test_connection(params = {}, options = {})
+      req = build_request(:test_connection, params)
+      req.send_request(options)
+    end
+
     # Removes tags from a resource.
     #
     # @option params [required, String] :resource_arn
@@ -17804,10 +17923,23 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
-    #     type: "compaction", # required, accepts compaction
+    #     type: "compaction", # required, accepts compaction, retention, orphan_file_deletion
     #     table_optimizer_configuration: { # required
     #       role_arn: "ArnString",
     #       enabled: false,
+    #       retention_configuration: {
+    #         iceberg_configuration: {
+    #           snapshot_retention_period_in_days: 1,
+    #           number_of_snapshots_to_retain: 1,
+    #           clean_expired_files: false,
+    #         },
+    #       },
+    #       orphan_file_deletion_configuration: {
+    #         iceberg_configuration: {
+    #           orphan_file_retention_period_in_days: 1,
+    #           location: "MessageString",
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -18077,7 +18209,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.192.0'
+      context[:gem_version] = '1.195.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

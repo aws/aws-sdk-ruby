@@ -151,7 +151,8 @@ module Aws
                                        role_arn: ::String,
                                        sync_type: ("CFN_STACK_SYNC"),
                                        ?publish_deployment_status: ("ENABLED" | "DISABLED"),
-                                       ?trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
+                                       ?trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE"),
+                                       ?pull_request_comment: ("ENABLED" | "DISABLED")
                                      ) -> _CreateSyncConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSyncConfigurationResponseSuccess
 
@@ -428,7 +429,8 @@ module Aws
                                        ?role_arn: ::String,
                                        sync_type: ("CFN_STACK_SYNC"),
                                        ?publish_deployment_status: ("ENABLED" | "DISABLED"),
-                                       ?trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
+                                       ?trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE"),
+                                       ?pull_request_comment: ("ENABLED" | "DISABLED")
                                      ) -> _UpdateSyncConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSyncConfigurationResponseSuccess
     end

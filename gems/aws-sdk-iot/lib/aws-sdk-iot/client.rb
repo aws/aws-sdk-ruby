@@ -567,6 +567,72 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Associates a software bill of materials (SBOM) with a specific
+    # software package version.
+    #
+    # Requires permission to access the [AssociateSbomWithPackageVersion][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the new software package.
+    #
+    # @option params [required, String] :version_name
+    #   The name of the new package version.
+    #
+    # @option params [required, Types::Sbom] :sbom
+    #   The Amazon S3 location for the software bill of materials associated
+    #   with a software package version.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::AssociateSbomWithPackageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateSbomWithPackageVersionResponse#package_name #package_name} => String
+    #   * {Types::AssociateSbomWithPackageVersionResponse#version_name #version_name} => String
+    #   * {Types::AssociateSbomWithPackageVersionResponse#sbom #sbom} => Types::Sbom
+    #   * {Types::AssociateSbomWithPackageVersionResponse#sbom_validation_status #sbom_validation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_sbom_with_package_version({
+    #     package_name: "PackageName", # required
+    #     version_name: "VersionName", # required
+    #     sbom: { # required
+    #       s3_location: {
+    #         bucket: "S3Bucket",
+    #         key: "S3Key",
+    #         version: "S3Version",
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_name #=> String
+    #   resp.version_name #=> String
+    #   resp.sbom.s3_location.bucket #=> String
+    #   resp.sbom.s3_location.key #=> String
+    #   resp.sbom.s3_location.version #=> String
+    #   resp.sbom_validation_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #
+    # @overload associate_sbom_with_package_version(params = {})
+    # @param [Hash] params ({})
+    def associate_sbom_with_package_version(params = {}, options = {})
+      req = build_request(:associate_sbom_with_package_version, params)
+      req.send_request(options)
+    end
+
     # Associates a group with a continuous job. The following criteria must
     # be met:
     #
@@ -2616,6 +2682,15 @@ module Aws::IoT
     #   The combined size of all the attributes on a package version is
     #   limited to 3KB.
     #
+    # @option params [Types::PackageVersionArtifact] :artifact
+    #   The various build components created during the build process such as
+    #   libraries and configuration files that make up a software package
+    #   version.
+    #
+    # @option params [String] :recipe
+    #   The inline job document associated with a software package version
+    #   used for a quick job deployment via IoT Jobs.
+    #
     # @option params [Hash<String,String>] :tags
     #   Metadata that can be used to manage the package version.
     #
@@ -2646,6 +2721,14 @@ module Aws::IoT
     #     attributes: {
     #       "ResourceAttributeKey" => "ResourceAttributeValue",
     #     },
+    #     artifact: {
+    #       s3_location: {
+    #         bucket: "S3Bucket",
+    #         key: "S3Key",
+    #         version: "S3Version",
+    #       },
+    #     },
+    #     recipe: "PackageVersionRecipe",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -6163,6 +6246,10 @@ module Aws::IoT
     # @option params [required, String] :job_id
     #   The unique identifier you assigned to this job when it was created.
     #
+    # @option params [Boolean] :before_substitution
+    #   A flag that provides a view of the job document before and after the
+    #   substitution parameters have been resolved with their exact values.
+    #
     # @return [Types::DescribeJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeJobResponse#document_source #document_source} => String
@@ -6172,6 +6259,7 @@ module Aws::IoT
     #
     #   resp = client.describe_job({
     #     job_id: "JobId", # required
+    #     before_substitution: false,
     #   })
     #
     # @example Response structure
@@ -7137,6 +7225,47 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Disassociates a software bill of materials (SBOM) from a specific
+    # software package version.
+    #
+    # Requires permission to access the
+    # [DisassociateSbomWithPackageVersion][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the new software package.
+    #
+    # @option params [required, String] :version_name
+    #   The name of the new package version.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_sbom_from_package_version({
+    #     package_name: "PackageName", # required
+    #     version_name: "VersionName", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload disassociate_sbom_from_package_version(params = {})
+    # @param [Hash] params ({})
+    def disassociate_sbom_from_package_version(params = {}, options = {})
+      req = build_request(:disassociate_sbom_from_package_version, params)
+      req.send_request(options)
+    end
+
     # Enables the rule.
     #
     # Requires permission to access the [EnableTopicRule][1] action.
@@ -7423,6 +7552,10 @@ module Aws::IoT
     # @option params [required, String] :job_id
     #   The unique identifier you assigned to this job when it was created.
     #
+    # @option params [Boolean] :before_substitution
+    #   A flag that provides a view of the job document before and after the
+    #   substitution parameters have been resolved with their exact values.
+    #
     # @return [Types::GetJobDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetJobDocumentResponse#document #document} => String
@@ -7431,6 +7564,7 @@ module Aws::IoT
     #
     #   resp = client.get_job_document({
     #     job_id: "JobId", # required
+    #     before_substitution: false,
     #   })
     #
     # @example Response structure
@@ -7637,10 +7771,14 @@ module Aws::IoT
     #   * {Types::GetPackageVersionResponse#version_name #version_name} => String
     #   * {Types::GetPackageVersionResponse#description #description} => String
     #   * {Types::GetPackageVersionResponse#attributes #attributes} => Hash&lt;String,String&gt;
+    #   * {Types::GetPackageVersionResponse#artifact #artifact} => Types::PackageVersionArtifact
     #   * {Types::GetPackageVersionResponse#status #status} => String
     #   * {Types::GetPackageVersionResponse#error_reason #error_reason} => String
     #   * {Types::GetPackageVersionResponse#creation_date #creation_date} => Time
     #   * {Types::GetPackageVersionResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::GetPackageVersionResponse#sbom #sbom} => Types::Sbom
+    #   * {Types::GetPackageVersionResponse#sbom_validation_status #sbom_validation_status} => String
+    #   * {Types::GetPackageVersionResponse#recipe #recipe} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7657,10 +7795,18 @@ module Aws::IoT
     #   resp.description #=> String
     #   resp.attributes #=> Hash
     #   resp.attributes["ResourceAttributeKey"] #=> String
+    #   resp.artifact.s3_location.bucket #=> String
+    #   resp.artifact.s3_location.key #=> String
+    #   resp.artifact.s3_location.version #=> String
     #   resp.status #=> String, one of "DRAFT", "PUBLISHED", "DEPRECATED"
     #   resp.error_reason #=> String
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
+    #   resp.sbom.s3_location.bucket #=> String
+    #   resp.sbom.s3_location.key #=> String
+    #   resp.sbom.s3_location.version #=> String
+    #   resp.sbom_validation_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.recipe #=> String
     #
     # @overload get_package_version(params = {})
     # @param [Hash] params ({})
@@ -10653,6 +10799,65 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_role_aliases(params = {}, options = {})
       req = build_request(:list_role_aliases, params)
+      req.send_request(options)
+    end
+
+    # The validation results for all software bill of materials (SBOM)
+    # attached to a specific software package version.
+    #
+    # Requires permission to access the [ListSbomValidationResults][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the new software package.
+    #
+    # @option params [required, String] :version_name
+    #   The name of the new package version.
+    #
+    # @option params [String] :validation_result
+    #   The end result of the
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :next_token
+    #   A token that can be used to retrieve the next set of results, or null
+    #   if there are no additional results.
+    #
+    # @return [Types::ListSbomValidationResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSbomValidationResultsResponse#validation_result_summaries #validation_result_summaries} => Array&lt;Types::SbomValidationResultSummary&gt;
+    #   * {Types::ListSbomValidationResultsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sbom_validation_results({
+    #     package_name: "PackageName", # required
+    #     version_name: "VersionName", # required
+    #     validation_result: "FAILED", # accepts FAILED, SUCCEEDED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.validation_result_summaries #=> Array
+    #   resp.validation_result_summaries[0].file_name #=> String
+    #   resp.validation_result_summaries[0].validation_result #=> String, one of "FAILED", "SUCCEEDED"
+    #   resp.validation_result_summaries[0].error_code #=> String, one of "INCOMPATIBLE_FORMAT", "FILE_SIZE_LIMIT_EXCEEDED"
+    #   resp.validation_result_summaries[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_sbom_validation_results(params = {})
+    # @param [Hash] params ({})
+    def list_sbom_validation_results(params = {}, options = {})
+      req = build_request(:list_sbom_validation_results, params)
       req.send_request(options)
     end
 
@@ -14450,6 +14655,9 @@ module Aws::IoT
     #   The combined size of all the attributes on a package version is
     #   limited to 3KB.
     #
+    # @option params [Types::PackageVersionArtifact] :artifact
+    #   The various components that make up a software package version.
+    #
     # @option params [String] :action
     #   The status that the package version should be assigned. For more
     #   information, see [Package version lifecycle][1].
@@ -14457,6 +14665,10 @@ module Aws::IoT
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #
+    # @option params [String] :recipe
+    #   The inline job document associated with a software package version
+    #   used for a quick job deployment via IoT Jobs.
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -14477,7 +14689,15 @@ module Aws::IoT
     #     attributes: {
     #       "ResourceAttributeKey" => "ResourceAttributeValue",
     #     },
+    #     artifact: {
+    #       s3_location: {
+    #         bucket: "S3Bucket",
+    #         key: "S3Key",
+    #         version: "S3Version",
+    #       },
+    #     },
     #     action: "PUBLISH", # accepts PUBLISH, DEPRECATE
+    #     recipe: "PackageVersionRecipe",
     #     client_token: "ClientToken",
     #   })
     #
@@ -15207,7 +15427,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

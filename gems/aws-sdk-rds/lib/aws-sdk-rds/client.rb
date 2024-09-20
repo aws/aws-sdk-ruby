@@ -4593,6 +4593,8 @@ module Aws::RDS
     #
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB instances)
     #
+    #   * `custom-sqlserver-dev` (for RDS Custom for SQL Server DB instances)
+    #
     #   * `db2-ae`
     #
     #   * `db2-se`
@@ -4716,7 +4718,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #
@@ -4925,10 +4927,12 @@ module Aws::RDS
     #   The license model information for this DB instance.
     #
     #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
-    #   Bring Your Own License (BYOL) model requires a custom parameter group.
-    #   The Db2 license through Amazon Web Services Marketplace model requires
-    #   an Amazon Web Services Marketplace subscription. For more information,
-    #   see [RDS for Db2 licensing options][1] in the *Amazon RDS User Guide*.
+    #   Bring Your Own License (BYOL) model requires a custom parameter group
+    #   and an Amazon Web Services License Manager self-managed license. The
+    #   Db2 license through Amazon Web Services Marketplace model requires an
+    #   Amazon Web Services Marketplace subscription. For more information,
+    #   see [Amazon RDS for Db2 licensing options][1] in the *Amazon RDS User
+    #   Guide*.
     #
     #    The default for RDS for Db2 is `bring-your-own-license`.
     #
@@ -6296,9 +6300,6 @@ module Aws::RDS
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a presigned URL that is a valid request for the
     #   operation that can run in the source Amazon Web Services Region.
-    #
-    #    `SourceRegion` isn't supported for SQL Server, because Amazon RDS for
-    #   SQL Server doesn't support cross-Region read replicas.
     #
     #    </note>
     #
@@ -8064,6 +8065,9 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to assign to the global cluster.
+    #
     # @return [Types::CreateGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
@@ -8105,6 +8109,12 @@ module Aws::RDS
     #     deletion_protection: false,
     #     database_name: "String",
     #     storage_encrypted: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8130,6 +8140,9 @@ module Aws::RDS
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalCluster AWS API Documentation
     #
@@ -10417,6 +10430,9 @@ module Aws::RDS
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteGlobalCluster AWS API Documentation
     #
@@ -15998,6 +16014,9 @@ module Aws::RDS
     #   resp.global_clusters[0].failover_state.from_db_cluster_arn #=> String
     #   resp.global_clusters[0].failover_state.to_db_cluster_arn #=> String
     #   resp.global_clusters[0].failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_clusters[0].tag_list #=> Array
+    #   resp.global_clusters[0].tag_list[0].key #=> String
+    #   resp.global_clusters[0].tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeGlobalClusters AWS API Documentation
     #
@@ -18040,6 +18059,9 @@ module Aws::RDS
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverGlobalCluster AWS API Documentation
     #
@@ -18053,11 +18075,13 @@ module Aws::RDS
     # Lists all tags on an Amazon RDS resource.
     #
     # For an overview on tagging an Amazon RDS resource, see [Tagging Amazon
-    # RDS Resources][1] in the *Amazon RDS User Guide*.
+    # RDS Resources][1] in the *Amazon RDS User Guide* or [Tagging Amazon
+    # Aurora and Amazon RDS Resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon RDS resource with tags to be listed. This value is an
@@ -22516,6 +22540,9 @@ module Aws::RDS
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalCluster AWS API Documentation
     #
@@ -24034,6 +24061,9 @@ module Aws::RDS
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalCluster AWS API Documentation
     #
@@ -24216,11 +24246,13 @@ module Aws::RDS
     # Removes metadata tags from an Amazon RDS resource.
     #
     # For an overview on tagging an Amazon RDS resource, see [Tagging Amazon
-    # RDS Resources][1] in the *Amazon RDS User Guide.*
+    # RDS Resources][1] in the *Amazon RDS User Guide* or [Tagging Amazon
+    # Aurora and Amazon RDS Resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon RDS resource that the tags are removed from. This value is
@@ -26687,10 +26719,23 @@ module Aws::RDS
     # If you are restoring from a shared manual DB snapshot, the
     # `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
     #
+    # To restore from a DB snapshot with an unsupported engine version, you
+    # must first upgrade the engine version of the snapshot. For more
+    # information about upgrading a RDS for MySQL DB snapshot engine
+    # version, see [Upgrading a MySQL DB snapshot engine version][1]. For
+    # more information about upgrading a RDS for PostgreSQL DB snapshot
+    # engine version, [Upgrading a PostgreSQL DB snapshot engine
+    # version][2].
+    #
     # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
     # Aurora, use `RestoreDBClusterFromSnapshot`.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html
+    # [2]: https://docs.aws.amazon.com/USER_UpgradeDBSnapshot.PostgreSQL.html
     #
     # @option params [required, String] :db_instance_identifier
     #   The name of the DB instance to create from the DB snapshot. This
@@ -26797,10 +26842,12 @@ module Aws::RDS
     #   License model information for the restored DB instance.
     #
     #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
-    #   Bring Your Own License (BYOL) model requires a custom parameter group.
-    #   The Db2 license through Amazon Web Services Marketplace model requires
-    #   an Amazon Web Services Marketplace subscription. For more information,
-    #   see [RDS for Db2 licensing options][1] in the *Amazon RDS User Guide*.
+    #   Bring Your Own License (BYOL) model requires a custom parameter group
+    #   and an Amazon Web Services License Manager self-managed license. The
+    #   Db2 license through Amazon Web Services Marketplace model requires an
+    #   Amazon Web Services Marketplace subscription. For more information,
+    #   see [Amazon RDS for Db2 licensing options][1] in the *Amazon RDS User
+    #   Guide*.
     #
     #    </note>
     #
@@ -28490,10 +28537,12 @@ module Aws::RDS
     #   The license model information for the restored DB instance.
     #
     #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
-    #   Bring Your Own License (BYOL) model requires a custom parameter group.
-    #   The Db2 license through Amazon Web Services Marketplace model requires
-    #   an Amazon Web Services Marketplace subscription. For more information,
-    #   see [RDS for Db2 licensing options][1] in the *Amazon RDS User Guide*.
+    #   Bring Your Own License (BYOL) model requires a custom parameter group
+    #   and an Amazon Web Services License Manager self-managed license. The
+    #   Db2 license through Amazon Web Services Marketplace model requires an
+    #   Amazon Web Services Marketplace subscription. For more information,
+    #   see [Amazon RDS for Db2 licensing options][1] in the *Amazon RDS User
+    #   Guide*.
     #
     #    </note>
     #
@@ -31155,6 +31204,9 @@ module Aws::RDS
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #   resp.global_cluster.tag_list #=> Array
+    #   resp.global_cluster.tag_list[0].key #=> String
+    #   resp.global_cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverGlobalCluster AWS API Documentation
     #
@@ -31381,7 +31433,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.243.0'
+      context[:gem_version] = '1.248.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

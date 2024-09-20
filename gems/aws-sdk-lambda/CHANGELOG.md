@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2024-09-19)
+------------------
+
+* Feature - Tagging support for Lambda event source mapping, and code signing configuration resources.
+
+1.131.0 (2024-09-17)
+------------------
+
+* Feature - Support for JSON resource-based policies and block public access
+
+1.130.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.129.0 (2024-09-10)
 ------------------
 

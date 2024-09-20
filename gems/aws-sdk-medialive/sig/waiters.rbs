@@ -29,6 +29,39 @@ module Aws
                 | (Hash[Symbol, untyped]) -> Client::_DescribeChannelResponseSuccess
       end
 
+      class ChannelPlacementGroupAssigned
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    channel_placement_group_id: ::String,
+                    cluster_id: ::String
+                  ) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+      end
+
+      class ChannelPlacementGroupDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    channel_placement_group_id: ::String,
+                    cluster_id: ::String
+                  ) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+      end
+
+      class ChannelPlacementGroupUnassigned
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    channel_placement_group_id: ::String,
+                    cluster_id: ::String
+                  ) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+      end
+
       class ChannelRunning
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
@@ -47,6 +80,26 @@ module Aws
                     channel_id: ::String
                   ) -> Client::_DescribeChannelResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeChannelResponseSuccess
+      end
+
+      class ClusterCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_id: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeClusterResponseSuccess
+      end
+
+      class ClusterDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_id: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeClusterResponseSuccess
       end
 
       class InputAttached
@@ -117,6 +170,28 @@ module Aws
                     multiplex_id: ::String
                   ) -> Client::_DescribeMultiplexResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeMultiplexResponseSuccess
+      end
+
+      class NodeDeregistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_id: ::String,
+                    node_id: ::String
+                  ) -> Client::_DescribeNodeResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeNodeResponseSuccess
+      end
+
+      class NodeRegistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_id: ::String,
+                    node_id: ::String
+                  ) -> Client::_DescribeNodeResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeNodeResponseSuccess
       end
 
       class SignalMapCreated

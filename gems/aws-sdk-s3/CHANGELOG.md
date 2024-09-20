@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - Default to using `CRC32` checksum validation for S3 uploads and downloads.
 
+1.163.0 (2024-09-18)
+------------------
+
+* Feature - Added SSE-KMS support for directory buckets.
+
+1.162.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.161.0 (2024-09-10)
 ------------------
 

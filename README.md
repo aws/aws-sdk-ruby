@@ -355,6 +355,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Device Farm                                       | Aws::DeviceFarm                          | aws-sdk-devicefarm                          | 2015-06-23  |
 | AWS Direct Connect                                    | Aws::DirectConnect                       | aws-sdk-directconnect                       | 2012-10-25  |
 | AWS Directory Service                                 | Aws::DirectoryService                    | aws-sdk-directoryservice                    | 2015-04-16  |
+| AWS Directory Service Data                            | Aws::DirectoryServiceData                | aws-sdk-directoryservicedata                | 2023-05-31  |
 | AWS EC2 Instance Connect                              | Aws::EC2InstanceConnect                  | aws-sdk-ec2instanceconnect                  | 2018-04-02  |
 | AWS Elastic Beanstalk                                 | Aws::ElasticBeanstalk                    | aws-sdk-elasticbeanstalk                    | 2010-12-01  |
 | AWS Elemental MediaConvert                            | Aws::MediaConvert                        | aws-sdk-mediaconvert                        | 2017-08-29  |
@@ -527,7 +528,6 @@ RubyGems.org page under "LINKS" section.
 | Amazon DynamoDB                                       | Aws::DynamoDB                            | aws-sdk-dynamodb                            | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)                     | Aws::DAX                                 | aws-sdk-dax                                 | 2017-04-19  |
 | Amazon DynamoDB Streams                               | Aws::DynamoDBStreams                     | aws-sdk-dynamodbstreams                     | 2012-08-10  |
-| Amazon EC2 Container Registry                         | Aws::ECR                                 | aws-sdk-ecr                                 | 2015-09-21  |
 | Amazon EC2 Container Service                          | Aws::ECS                                 | aws-sdk-ecs                                 | 2014-11-13  |
 | Amazon EKS Auth                                       | Aws::EKSAuth                             | aws-sdk-eksauth                             | 2023-11-26  |
 | Amazon EMR                                            | Aws::EMR                                 | aws-sdk-emr                                 | 2009-03-31  |
@@ -536,6 +536,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Elastic  Inference                             | Aws::ElasticInference                    | aws-sdk-elasticinference                    | 2017-07-25  |
 | Amazon Elastic Block Store                            | Aws::EBS                                 | aws-sdk-ebs                                 | 2019-11-02  |
 | Amazon Elastic Compute Cloud                          | Aws::EC2                                 | aws-sdk-ec2                                 | 2016-11-15  |
+| Amazon Elastic Container Registry                     | Aws::ECR                                 | aws-sdk-ecr                                 | 2015-09-21  |
 | Amazon Elastic Container Registry Public              | Aws::ECRPublic                           | aws-sdk-ecrpublic                           | 2020-10-30  |
 | Amazon Elastic File System                            | Aws::EFS                                 | aws-sdk-efs                                 | 2015-02-01  |
 | Amazon Elastic Kubernetes Service                     | Aws::EKS                                 | aws-sdk-eks                                 | 2017-11-01  |
@@ -636,7 +637,6 @@ RubyGems.org page under "LINKS" section.
 | Amazon Verified Permissions                           | Aws::VerifiedPermissions                 | aws-sdk-verifiedpermissions                 | 2021-12-01  |
 | Amazon Voice ID                                       | Aws::VoiceID                             | aws-sdk-voiceid                             | 2021-09-27  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                            | aws-sdk-workdocs                            | 2016-05-01  |
-| Amazon WorkLink                                       | Aws::WorkLink                            | aws-sdk-worklink                            | 2018-09-25  |
 | Amazon WorkMail                                       | Aws::WorkMail                            | aws-sdk-workmail                            | 2017-10-01  |
 | Amazon WorkMail Message Flow                          | Aws::WorkMailMessageFlow                 | aws-sdk-workmailmessageflow                 | 2019-05-01  |
 | Amazon WorkSpaces                                     | Aws::WorkSpaces                          | aws-sdk-workspaces                          | 2015-04-08  |

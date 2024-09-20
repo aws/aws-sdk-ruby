@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.248.0 (2024-09-18)
+------------------
+
+* Feature - Updates Amazon RDS documentation with information upgrading snapshots with unsupported engine versions for RDS for MySQL and RDS for PostgreSQL.
+
+1.247.0 (2024-09-17)
+------------------
+
+* Feature - Updates Amazon RDS documentation with configuration information about the BYOL model for RDS for Db2.
+
+1.246.0 (2024-09-16)
+------------------
+
+* Feature - Launching Global Cluster tagging.
+
+1.245.0 (2024-09-12)
+------------------
+
+* Feature - This release adds support for the os-upgrade pending maintenance action for Amazon Aurora DB clusters.
+
+1.244.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.243.0 (2024-09-10)
 ------------------
 

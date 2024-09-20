@@ -176,7 +176,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class AdminInitiateAuthResponse
-      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor challenge_name: ("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
       attr_accessor session: ::String
       attr_accessor challenge_parameters: ::Hash[::String, ::String]
       attr_accessor authentication_result: Types::AuthenticationResultType
@@ -255,7 +255,7 @@ module Aws::CognitoIdentityProvider
     class AdminRespondToAuthChallengeRequest
       attr_accessor user_pool_id: ::String
       attr_accessor client_id: ::String
-      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor challenge_name: ("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
       attr_accessor challenge_responses: ::Hash[::String, ::String]
       attr_accessor session: ::String
       attr_accessor analytics_metadata: Types::AnalyticsMetadataType
@@ -265,7 +265,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class AdminRespondToAuthChallengeResponse
-      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor challenge_name: ("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
       attr_accessor session: ::String
       attr_accessor challenge_parameters: ::Hash[::String, ::String]
       attr_accessor authentication_result: Types::AuthenticationResultType
@@ -275,6 +275,7 @@ module Aws::CognitoIdentityProvider
     class AdminSetUserMFAPreferenceRequest
       attr_accessor sms_mfa_settings: Types::SMSMfaSettingsType
       attr_accessor software_token_mfa_settings: Types::SoftwareTokenMfaSettingsType
+      attr_accessor email_mfa_settings: Types::EmailMfaSettingsType
       attr_accessor username: ::String
       attr_accessor user_pool_id: ::String
       SENSITIVE: [:username]
@@ -836,6 +837,18 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class EmailMfaConfigType
+      attr_accessor message: ::String
+      attr_accessor subject: ::String
+      SENSITIVE: []
+    end
+
+    class EmailMfaSettingsType
+      attr_accessor enabled: bool
+      attr_accessor preferred_mfa: bool
+      SENSITIVE: []
+    end
+
     class EnableSoftwareTokenMFAException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -995,6 +1008,7 @@ module Aws::CognitoIdentityProvider
     class GetUserPoolMfaConfigResponse
       attr_accessor sms_mfa_configuration: Types::SmsMfaConfigType
       attr_accessor software_token_mfa_configuration: Types::SoftwareTokenMfaConfigType
+      attr_accessor email_mfa_configuration: Types::EmailMfaConfigType
       attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
       SENSITIVE: []
     end
@@ -1066,7 +1080,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class InitiateAuthResponse
-      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor challenge_name: ("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
       attr_accessor session: ::String
       attr_accessor challenge_parameters: ::Hash[::String, ::String]
       attr_accessor authentication_result: Types::AuthenticationResultType
@@ -1426,7 +1440,7 @@ module Aws::CognitoIdentityProvider
 
     class RespondToAuthChallengeRequest
       attr_accessor client_id: ::String
-      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor challenge_name: ("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
       attr_accessor session: ::String
       attr_accessor challenge_responses: ::Hash[::String, ::String]
       attr_accessor analytics_metadata: Types::AnalyticsMetadataType
@@ -1436,7 +1450,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class RespondToAuthChallengeResponse
-      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor challenge_name: ("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
       attr_accessor session: ::String
       attr_accessor challenge_parameters: ::Hash[::String, ::String]
       attr_accessor authentication_result: Types::AuthenticationResultType
@@ -1537,6 +1551,7 @@ module Aws::CognitoIdentityProvider
     class SetUserMFAPreferenceRequest
       attr_accessor sms_mfa_settings: Types::SMSMfaSettingsType
       attr_accessor software_token_mfa_settings: Types::SoftwareTokenMfaSettingsType
+      attr_accessor email_mfa_settings: Types::EmailMfaSettingsType
       attr_accessor access_token: ::String
       SENSITIVE: [:access_token]
     end
@@ -1548,6 +1563,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_id: ::String
       attr_accessor sms_mfa_configuration: Types::SmsMfaConfigType
       attr_accessor software_token_mfa_configuration: Types::SoftwareTokenMfaConfigType
+      attr_accessor email_mfa_configuration: Types::EmailMfaConfigType
       attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
       SENSITIVE: []
     end
@@ -1555,6 +1571,7 @@ module Aws::CognitoIdentityProvider
     class SetUserPoolMfaConfigResponse
       attr_accessor sms_mfa_configuration: Types::SmsMfaConfigType
       attr_accessor software_token_mfa_configuration: Types::SoftwareTokenMfaConfigType
+      attr_accessor email_mfa_configuration: Types::EmailMfaConfigType
       attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
       SENSITIVE: []
     end

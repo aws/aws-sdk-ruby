@@ -373,6 +373,15 @@ module Aws::WorkSpacesWeb
     class DisassociateUserSettingsResponse < Aws::EmptyStructure
     end
 
+    class ExpireSessionRequest
+      attr_accessor portal_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExpireSessionResponse < Aws::EmptyStructure
+    end
+
     class GetBrowserSettingsRequest
       attr_accessor browser_settings_arn: ::String
       SENSITIVE: []
@@ -431,6 +440,17 @@ module Aws::WorkSpacesWeb
     class GetPortalServiceProviderMetadataResponse
       attr_accessor portal_arn: ::String
       attr_accessor service_provider_saml_metadata: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionRequest
+      attr_accessor portal_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionResponse
+      attr_accessor session: Types::Session
       SENSITIVE: []
     end
 
@@ -584,6 +604,23 @@ module Aws::WorkSpacesWeb
       SENSITIVE: []
     end
 
+    class ListSessionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor portal_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor sort_by: ("StartTimeAscending" | "StartTimeDescending")
+      attr_accessor status: ("Active" | "Terminated")
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class ListSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor sessions: ::Array[Types::SessionSummary]
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -716,6 +753,27 @@ module Aws::WorkSpacesWeb
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
       SENSITIVE: []
+    end
+
+    class Session
+      attr_accessor client_ip_addresses: ::Array[::String]
+      attr_accessor end_time: ::Time
+      attr_accessor portal_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("Active" | "Terminated")
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class SessionSummary
+      attr_accessor end_time: ::Time
+      attr_accessor portal_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("Active" | "Terminated")
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
     end
 
     class Tag

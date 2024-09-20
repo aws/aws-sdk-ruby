@@ -106,6 +106,28 @@ module Aws
                                     ) -> _AddThingToThingGroupResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddThingToThingGroupResponseSuccess
 
+      interface _AssociateSbomWithPackageVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSbomWithPackageVersionResponse]
+        def package_name: () -> ::String
+        def version_name: () -> ::String
+        def sbom: () -> Types::Sbom
+        def sbom_validation_status: () -> ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#associate_sbom_with_package_version-instance_method
+      def associate_sbom_with_package_version: (
+                                                 package_name: ::String,
+                                                 version_name: ::String,
+                                                 sbom: {
+                                                   s3_location: {
+                                                     bucket: ::String?,
+                                                     key: ::String?,
+                                                     version: ::String?
+                                                   }?
+                                                 },
+                                                 ?client_token: ::String
+                                               ) -> _AssociateSbomWithPackageVersionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSbomWithPackageVersionResponseSuccess
+
       interface _AssociateTargetsWithJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateTargetsWithJobResponse]
         def job_arn: () -> ::String
@@ -791,6 +813,14 @@ module Aws
                                     version_name: ::String,
                                     ?description: ::String,
                                     ?attributes: Hash[::String, ::String],
+                                    ?artifact: {
+                                      s3_location: {
+                                        bucket: ::String?,
+                                        key: ::String?,
+                                        version: ::String?
+                                      }?
+                                    },
+                                    ?recipe: ::String,
                                     ?tags: Hash[::String, ::String],
                                     ?client_token: ::String
                                   ) -> _CreatePackageVersionResponseSuccess
@@ -2139,7 +2169,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#describe_job-instance_method
       def describe_job: (
-                          job_id: ::String
+                          job_id: ::String,
+                          ?before_substitution: bool
                         ) -> _DescribeJobResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobResponseSuccess
 
@@ -2411,6 +2442,17 @@ module Aws
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DisassociateSbomFromPackageVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSbomFromPackageVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#disassociate_sbom_from_package_version-instance_method
+      def disassociate_sbom_from_package_version: (
+                                                    package_name: ::String,
+                                                    version_name: ::String,
+                                                    ?client_token: ::String
+                                                  ) -> _DisassociateSbomFromPackageVersionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSbomFromPackageVersionResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#enable_topic_rule-instance_method
       def enable_topic_rule: (
                                rule_name: ::String
@@ -2490,7 +2532,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#get_job_document-instance_method
       def get_job_document: (
-                              job_id: ::String
+                              job_id: ::String,
+                              ?before_substitution: bool
                             ) -> _GetJobDocumentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobDocumentResponseSuccess
 
@@ -2545,10 +2588,14 @@ module Aws
         def version_name: () -> ::String
         def description: () -> ::String
         def attributes: () -> ::Hash[::String, ::String]
+        def artifact: () -> Types::PackageVersionArtifact
         def status: () -> ("DRAFT" | "PUBLISHED" | "DEPRECATED")
         def error_reason: () -> ::String
         def creation_date: () -> ::Time
         def last_modified_date: () -> ::Time
+        def sbom: () -> Types::Sbom
+        def sbom_validation_status: () -> ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+        def recipe: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#get_package_version-instance_method
       def get_package_version: (
@@ -3248,6 +3295,21 @@ module Aws
                                ?ascending_order: bool
                              ) -> _ListRoleAliasesResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoleAliasesResponseSuccess
+
+      interface _ListSbomValidationResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSbomValidationResultsResponse]
+        def validation_result_summaries: () -> ::Array[Types::SbomValidationResultSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#list_sbom_validation_results-instance_method
+      def list_sbom_validation_results: (
+                                          package_name: ::String,
+                                          version_name: ::String,
+                                          ?validation_result: ("FAILED" | "SUCCEEDED"),
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListSbomValidationResultsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSbomValidationResultsResponseSuccess
 
       interface _ListScheduledAuditsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduledAuditsResponse]
@@ -4649,7 +4711,15 @@ module Aws
                                     version_name: ::String,
                                     ?description: ::String,
                                     ?attributes: Hash[::String, ::String],
+                                    ?artifact: {
+                                      s3_location: {
+                                        bucket: ::String?,
+                                        key: ::String?,
+                                        version: ::String?
+                                      }?
+                                    },
                                     ?action: ("PUBLISH" | "DEPRECATE"),
+                                    ?recipe: ::String,
                                     ?client_token: ::String
                                   ) -> _UpdatePackageVersionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePackageVersionResponseSuccess

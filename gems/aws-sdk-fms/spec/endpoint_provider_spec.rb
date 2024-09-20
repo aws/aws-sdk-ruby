@@ -14,7 +14,7 @@ module Aws::FMS
   describe EndpointProvider do
     subject { Aws::FMS::EndpointProvider.new }
 
-    context 'For region af-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region af-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.af-south-1.amazonaws.com"}}
       end
@@ -28,7 +28,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region af-south-1 with FIPS enabled and DualStack disabled' do
+    context "For region af-south-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.af-south-1.amazonaws.com"}}
       end
@@ -42,7 +42,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.ap-east-1.amazonaws.com"}}
       end
@@ -56,7 +56,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region ap-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.ap-east-1.amazonaws.com"}}
       end
@@ -70,7 +70,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-northeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.ap-northeast-1.amazonaws.com"}}
       end
@@ -84,7 +84,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-northeast-1 with FIPS enabled and DualStack disabled' do
+    context "For region ap-northeast-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.ap-northeast-1.amazonaws.com"}}
       end
@@ -98,7 +98,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-northeast-2 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.ap-northeast-2.amazonaws.com"}}
       end
@@ -112,7 +112,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-northeast-2 with FIPS enabled and DualStack disabled' do
+    context "For region ap-northeast-2 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.ap-northeast-2.amazonaws.com"}}
       end
@@ -126,7 +126,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-northeast-3 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-3 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.ap-northeast-3.amazonaws.com"}}
       end
@@ -140,7 +140,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.ap-south-1.amazonaws.com"}}
       end
@@ -154,7 +154,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-south-1 with FIPS enabled and DualStack disabled' do
+    context "For region ap-south-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.ap-south-1.amazonaws.com"}}
       end
@@ -168,7 +168,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-southeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.ap-southeast-1.amazonaws.com"}}
       end
@@ -182,7 +182,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-southeast-1 with FIPS enabled and DualStack disabled' do
+    context "For region ap-southeast-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.ap-southeast-1.amazonaws.com"}}
       end
@@ -196,7 +196,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-southeast-2 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.ap-southeast-2.amazonaws.com"}}
       end
@@ -210,7 +210,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ap-southeast-2 with FIPS enabled and DualStack disabled' do
+    context "For region ap-southeast-2 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.ap-southeast-2.amazonaws.com"}}
       end
@@ -224,7 +224,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ca-central-1 with FIPS disabled and DualStack disabled' do
+    context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.ca-central-1.amazonaws.com"}}
       end
@@ -238,7 +238,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region ca-central-1 with FIPS enabled and DualStack disabled' do
+    context "For region ca-central-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.ca-central-1.amazonaws.com"}}
       end
@@ -252,7 +252,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-central-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.eu-central-1.amazonaws.com"}}
       end
@@ -266,7 +266,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-central-1 with FIPS enabled and DualStack disabled' do
+    context "For region eu-central-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.eu-central-1.amazonaws.com"}}
       end
@@ -280,7 +280,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.eu-north-1.amazonaws.com"}}
       end
@@ -294,7 +294,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.eu-south-1.amazonaws.com"}}
       end
@@ -308,7 +308,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-south-1 with FIPS enabled and DualStack disabled' do
+    context "For region eu-south-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.eu-south-1.amazonaws.com"}}
       end
@@ -322,7 +322,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.eu-west-1.amazonaws.com"}}
       end
@@ -336,7 +336,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-west-1 with FIPS enabled and DualStack disabled' do
+    context "For region eu-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.eu-west-1.amazonaws.com"}}
       end
@@ -350,7 +350,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.eu-west-2.amazonaws.com"}}
       end
@@ -364,7 +364,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-west-2 with FIPS enabled and DualStack disabled' do
+    context "For region eu-west-2 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.eu-west-2.amazonaws.com"}}
       end
@@ -378,7 +378,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-west-3 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.eu-west-3.amazonaws.com"}}
       end
@@ -392,7 +392,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region eu-west-3 with FIPS enabled and DualStack disabled' do
+    context "For region eu-west-3 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.eu-west-3.amazonaws.com"}}
       end
@@ -406,7 +406,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region me-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region me-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.me-south-1.amazonaws.com"}}
       end
@@ -420,7 +420,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region me-south-1 with FIPS enabled and DualStack disabled' do
+    context "For region me-south-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.me-south-1.amazonaws.com"}}
       end
@@ -434,7 +434,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region sa-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.sa-east-1.amazonaws.com"}}
       end
@@ -448,7 +448,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region sa-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region sa-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.sa-east-1.amazonaws.com"}}
       end
@@ -462,7 +462,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-east-1.amazonaws.com"}}
       end
@@ -476,7 +476,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-east-1.amazonaws.com"}}
       end
@@ -490,7 +490,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-east-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-east-2.amazonaws.com"}}
       end
@@ -504,7 +504,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-east-2 with FIPS enabled and DualStack disabled' do
+    context "For region us-east-2 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-east-2.amazonaws.com"}}
       end
@@ -518,7 +518,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-west-1.amazonaws.com"}}
       end
@@ -532,7 +532,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-west-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-west-1.amazonaws.com"}}
       end
@@ -546,7 +546,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-west-2.amazonaws.com"}}
       end
@@ -560,7 +560,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-west-2 with FIPS enabled and DualStack disabled' do
+    context "For region us-west-2 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-west-2.amazonaws.com"}}
       end
@@ -574,7 +574,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-east-1.api.aws"}}
       end
@@ -588,7 +588,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-east-1.api.aws"}}
       end
@@ -602,7 +602,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.cn-north-1.amazonaws.com.cn"}}
       end
@@ -616,7 +616,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region cn-northwest-1 with FIPS disabled and DualStack disabled' do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.cn-northwest-1.amazonaws.com.cn"}}
       end
@@ -630,7 +630,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -644,7 +644,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.cn-north-1.amazonaws.com.cn"}}
       end
@@ -658,7 +658,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -672,7 +672,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-gov-east-1.amazonaws.com"}}
       end
@@ -686,7 +686,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-gov-east-1.amazonaws.com"}}
       end
@@ -700,7 +700,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-gov-west-1.amazonaws.com"}}
       end
@@ -714,7 +714,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-gov-west-1.amazonaws.com"}}
       end
@@ -728,7 +728,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-gov-east-1.api.aws"}}
       end
@@ -742,7 +742,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-gov-east-1.api.aws"}}
       end
@@ -756,7 +756,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -769,7 +769,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -783,7 +783,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -796,7 +796,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -810,7 +810,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -823,7 +823,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -837,7 +837,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -850,7 +850,7 @@ module Aws::FMS
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://fms.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -864,7 +864,7 @@ module Aws::FMS
       end
     end
 
-    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -878,7 +878,7 @@ module Aws::FMS
       end
     end
 
-    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -892,7 +892,7 @@ module Aws::FMS
       end
     end
 
-    context 'For custom endpoint with fips enabled and dualstack disabled' do
+    context "For custom endpoint with fips enabled and dualstack disabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -905,7 +905,7 @@ module Aws::FMS
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack enabled' do
+    context "For custom endpoint with fips disabled and dualstack enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end
@@ -918,7 +918,7 @@ module Aws::FMS
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end

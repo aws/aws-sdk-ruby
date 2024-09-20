@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-09-19)
+------------------
+
+* Feature - This release adds the PullRequestComment field to CreateSyncConfiguration API input, UpdateSyncConfiguration API input, GetSyncConfiguration API output and ListSyncConfiguration API output
+
+1.10.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.9.0 (2024-09-10)
 ------------------
 
