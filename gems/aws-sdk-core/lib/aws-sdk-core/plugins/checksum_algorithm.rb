@@ -27,11 +27,12 @@ module Aws
 
       # byte size of checksums, used in computing the trailer length
       CHECKSUM_SIZE = {
-        'CRC32' => 16,
-        'CRC32C' => 16,
-        'CRC64NVME' => 20,
-        'SHA1' => 36,
-        'SHA256' => 52
+        'CRC32' => 9,
+        'CRC32C' => 9,
+        'CRC64NVME' => 13,
+        # SHA functions need 1 byte padding because of how they are encoded
+        'SHA1' => 28 + 1,
+        'SHA256' => 44 + 1
       }.freeze
 
       DEFAULT_CHECKSUM = 'CRC32'
@@ -90,10 +91,10 @@ module Aws
           end
         end
 
-        # The trailer size (in bytes) is the overhead + the trailer name +
-        # the length of the base64 encoded checksum
+        # The trailer size (in bytes) is the overhead (0, \r, \n) + the trailer
+        # name + the bytesize of the base64 encoded checksum.
         def trailer_length(algorithm, location_name)
-          CHECKSUM_SIZE[algorithm] + location_name.size
+          7 + location_name.size + CHECKSUM_SIZE[algorithm]
         end
 
         private
@@ -132,9 +133,6 @@ module Aws
       # Applies only to digest functions that produce 32 or 64 bit
       # integer checksums (eg CRC32 or CRC64).
       class Digest
-        attr_reader :value
-
-        # @param [Object] digest_fn
         def initialize(digest_fn, directive)
           @digest_fn = digest_fn
           @directive = directive
@@ -492,7 +490,7 @@ module Aws
           else
             trailers = {}
             trailers[@location_name] = @digest.base64digest
-            trailers = trailers.map { |k,v| "#{k}:#{v}"}.join("\r\n")
+            trailers = trailers.map { |k,v| "#{k}:#{v}" }.join("\r\n")
             @trailer_io = StringIO.new("0\r\n#{trailers}\r\n\r\n")
             chunk = @trailer_io.read(length, buf)
           end
