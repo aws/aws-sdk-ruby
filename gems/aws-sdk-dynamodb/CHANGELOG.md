@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2024-09-20)
+------------------
+
+* Feature - Generate account endpoint for DynamoDB requests when the account ID is available
+
 1.122.0 (2024-09-11)
 ------------------
 

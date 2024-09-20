@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.264.0 (2024-09-20)
+------------------
+
+* Feature - Amazon SageMaker now supports using manifest files to specify the location of uncompressed model artifacts within Model Packages
+
 1.263.0 (2024-09-19)
 ------------------
 

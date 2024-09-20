@@ -130,13 +130,15 @@ module Aws::SageMaker
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
-    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
+    #       `:account_id` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
+    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
     #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
     #       to true.
@@ -154,6 +156,8 @@ module Aws::SageMaker
     #     * `~/.aws/config`
     #
     #   @option options [String] :access_key_id
+    #
+    #   @option options [String] :account_id
     #
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
@@ -376,7 +380,9 @@ module Aws::SageMaker
     #     sending the request.
     #
     #   @option options [Aws::SageMaker::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SageMaker::EndpointParameters`
+    #     The endpoint provider used to resolve endpoints. Any object that responds to
+    #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+    #     `Aws::SageMaker::EndpointParameters`.
     #
     #   @option options [Float] :http_continue_timeout (1)
     #     The number of seconds to wait for a 100-continue response before sending the
@@ -668,6 +674,7 @@ module Aws::SageMaker
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.manifest_s3_uri #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].product_id #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment #=> Hash
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -929,6 +936,7 @@ module Aws::SageMaker
     #               hub_access_config: {
     #                 hub_content_arn: "HubContentArn", # required
     #               },
+    #               manifest_s3_uri: "S3ModelUri",
     #             },
     #           },
     #           product_id: "ProductId",
@@ -5815,6 +5823,7 @@ module Aws::SageMaker
     #           hub_access_config: {
     #             hub_content_arn: "HubContentArn", # required
     #           },
+    #           manifest_s3_uri: "S3ModelUri",
     #         },
     #       },
     #       additional_model_data_sources: [
@@ -5830,6 +5839,7 @@ module Aws::SageMaker
     #             hub_access_config: {
     #               hub_content_arn: "HubContentArn", # required
     #             },
+    #             manifest_s3_uri: "S3ModelUri",
     #           },
     #         },
     #       ],
@@ -5865,6 +5875,7 @@ module Aws::SageMaker
     #             hub_access_config: {
     #               hub_content_arn: "HubContentArn", # required
     #             },
+    #             manifest_s3_uri: "S3ModelUri",
     #           },
     #         },
     #         additional_model_data_sources: [
@@ -5880,6 +5891,7 @@ module Aws::SageMaker
     #               hub_access_config: {
     #                 hub_content_arn: "HubContentArn", # required
     #               },
+    #               manifest_s3_uri: "S3ModelUri",
     #             },
     #           },
     #         ],
@@ -6557,6 +6569,7 @@ module Aws::SageMaker
     #               hub_access_config: {
     #                 hub_content_arn: "HubContentArn", # required
     #               },
+    #               manifest_s3_uri: "S3ModelUri",
     #             },
     #           },
     #           product_id: "ProductId",
@@ -6634,6 +6647,7 @@ module Aws::SageMaker
     #               hub_access_config: {
     #                 hub_content_arn: "HubContentArn", # required
     #               },
+    #               manifest_s3_uri: "S3ModelUri",
     #             },
     #           },
     #           algorithm_name: "ArnOrName", # required
@@ -6787,6 +6801,7 @@ module Aws::SageMaker
     #                 hub_access_config: {
     #                   hub_content_arn: "HubContentArn", # required
     #                 },
+    #                 manifest_s3_uri: "S3ModelUri",
     #               },
     #             },
     #             product_id: "ProductId",
@@ -11460,6 +11475,7 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.manifest_s3_uri #=> String
     #   resp.inference_specification.containers[0].product_id #=> String
     #   resp.inference_specification.containers[0].environment #=> Hash
     #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -14636,6 +14652,7 @@ module Aws::SageMaker
     #   resp.primary_container.model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.primary_container.model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.primary_container.model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.primary_container.model_data_source.s3_data_source.manifest_s3_uri #=> String
     #   resp.primary_container.additional_model_data_sources #=> Array
     #   resp.primary_container.additional_model_data_sources[0].channel_name #=> String
     #   resp.primary_container.additional_model_data_sources[0].s3_data_source.s3_uri #=> String
@@ -14643,6 +14660,7 @@ module Aws::SageMaker
     #   resp.primary_container.additional_model_data_sources[0].s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.primary_container.additional_model_data_sources[0].s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.primary_container.additional_model_data_sources[0].s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.primary_container.additional_model_data_sources[0].s3_data_source.manifest_s3_uri #=> String
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
     #   resp.primary_container.model_package_name #=> String
@@ -14660,6 +14678,7 @@ module Aws::SageMaker
     #   resp.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.containers[0].model_data_source.s3_data_source.manifest_s3_uri #=> String
     #   resp.containers[0].additional_model_data_sources #=> Array
     #   resp.containers[0].additional_model_data_sources[0].channel_name #=> String
     #   resp.containers[0].additional_model_data_sources[0].s3_data_source.s3_uri #=> String
@@ -14667,6 +14686,7 @@ module Aws::SageMaker
     #   resp.containers[0].additional_model_data_sources[0].s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.containers[0].additional_model_data_sources[0].s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.containers[0].additional_model_data_sources[0].s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.containers[0].additional_model_data_sources[0].s3_data_source.manifest_s3_uri #=> String
     #   resp.containers[0].environment #=> Hash
     #   resp.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.containers[0].model_package_name #=> String
@@ -15065,6 +15085,7 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.manifest_s3_uri #=> String
     #   resp.inference_specification.containers[0].product_id #=> String
     #   resp.inference_specification.containers[0].environment #=> Hash
     #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -15090,6 +15111,7 @@ module Aws::SageMaker
     #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.manifest_s3_uri #=> String
     #   resp.source_algorithm_specification.source_algorithms[0].algorithm_name #=> String
     #   resp.validation_specification.validation_role #=> String
     #   resp.validation_specification.validation_profiles #=> Array
@@ -15209,6 +15231,7 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.manifest_s3_uri #=> String
     #   resp.additional_inference_specifications[0].containers[0].product_id #=> String
     #   resp.additional_inference_specifications[0].containers[0].environment #=> Hash
     #   resp.additional_inference_specifications[0].containers[0].environment["EnvironmentKey"] #=> String
@@ -26305,6 +26328,7 @@ module Aws::SageMaker
     #                 hub_access_config: {
     #                   hub_content_arn: "HubContentArn", # required
     #                 },
+    #                 manifest_s3_uri: "S3ModelUri",
     #               },
     #             },
     #             product_id: "ProductId",
@@ -26348,6 +26372,7 @@ module Aws::SageMaker
     #               hub_access_config: {
     #                 hub_content_arn: "HubContentArn", # required
     #               },
+    #               manifest_s3_uri: "S3ModelUri",
     #             },
     #           },
     #           product_id: "ProductId",
@@ -27774,7 +27799,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.263.0'
+      context[:gem_version] = '1.264.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

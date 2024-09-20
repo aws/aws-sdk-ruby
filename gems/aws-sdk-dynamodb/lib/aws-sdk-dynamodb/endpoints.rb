@@ -19,6 +19,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -30,6 +32,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -41,6 +45,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -52,6 +58,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -63,6 +71,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -74,6 +84,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -85,6 +97,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -96,6 +110,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -107,6 +123,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -118,6 +136,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -129,6 +149,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -140,6 +162,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -151,6 +175,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -162,6 +188,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -173,6 +201,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -184,6 +214,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -195,6 +227,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -206,6 +240,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -217,6 +253,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -228,6 +266,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -239,6 +279,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -250,6 +292,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -261,6 +305,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -272,6 +318,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -283,6 +331,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -294,6 +344,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -305,6 +357,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -316,6 +370,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -327,6 +383,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -338,6 +396,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -349,6 +409,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -360,6 +422,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -371,6 +435,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -382,6 +448,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -393,6 +461,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -404,6 +474,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -415,6 +487,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -426,6 +500,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -437,6 +513,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -448,6 +526,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -459,6 +539,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -470,6 +552,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -481,6 +565,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -492,6 +578,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -503,6 +591,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -514,6 +604,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -525,6 +617,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -536,6 +630,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -547,6 +643,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -558,6 +656,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -569,6 +669,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -580,6 +682,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -591,6 +695,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -602,6 +708,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -613,6 +721,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -624,6 +734,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end
@@ -635,6 +747,8 @@ module Aws::DynamoDB
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+          account_id: context.config.credentials.credentials.account_id,
+          account_id_endpoint_mode: context.config.account_id_endpoint_mode,
         )
       end
     end

@@ -15,19 +15,22 @@ module Aws::S3
         :endpoint_provider,
         doc_type: 'Aws::S3::EndpointProvider',
         rbs_type: 'untyped',
-        docstring: 'The endpoint provider used to resolve endpoints. Any '\
-                   'object that responds to `#resolve_endpoint(parameters)` '\
-                   'where `parameters` is a Struct similar to '\
-                   '`Aws::S3::EndpointParameters`'
-      ) do |cfg|
+        docstring: <<~DOCS) do |_cfg|
+The endpoint provider used to resolve endpoints. Any object that responds to
+`#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+`Aws::S3::EndpointParameters`.
+        DOCS
         Aws::S3::EndpointProvider.new
       end
 
       option(
         :disable_s3_express_session_auth,
         doc_type: 'Boolean',
-        default: nil,
-        docstring: "Parameter to indicate whether S3Express session auth should be disabled")
+        docstring: <<~DOCS) do |cfg|
+Parameter to indicate whether S3Express session auth should be disabled
+        DOCS
+        nil
+      end
 
       # @api private
       class Handler < Seahorse::Client::Handler
@@ -56,6 +59,9 @@ module Aws::S3
           metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
           if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
             metrics << 'SIGV4A_SIGNING'
+          end
+          if context.config.credentials&.credentials&.account_id
+            metrics << 'RESOLVED_ACCOUNT_ID'
           end
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end

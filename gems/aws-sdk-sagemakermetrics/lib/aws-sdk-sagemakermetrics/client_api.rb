@@ -13,6 +13,8 @@ module Aws::SageMakerMetrics
 
     include Seahorse::Model
 
+    BatchGetMetricsRequest = Shapes::StructureShape.new(name: 'BatchGetMetricsRequest')
+    BatchGetMetricsResponse = Shapes::StructureShape.new(name: 'BatchGetMetricsResponse')
     BatchPutMetricsError = Shapes::StructureShape.new(name: 'BatchPutMetricsError')
     BatchPutMetricsErrorList = Shapes::ListShape.new(name: 'BatchPutMetricsErrorList')
     BatchPutMetricsRequest = Shapes::StructureShape.new(name: 'BatchPutMetricsRequest')
@@ -20,12 +22,31 @@ module Aws::SageMakerMetrics
     Double = Shapes::FloatShape.new(name: 'Double')
     ExperimentEntityName = Shapes::StringShape.new(name: 'ExperimentEntityName')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    Long = Shapes::IntegerShape.new(name: 'Long')
+    Message = Shapes::StringShape.new(name: 'Message')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricQuery = Shapes::StructureShape.new(name: 'MetricQuery')
+    MetricQueryList = Shapes::ListShape.new(name: 'MetricQueryList')
+    MetricQueryResult = Shapes::StructureShape.new(name: 'MetricQueryResult')
+    MetricQueryResultList = Shapes::ListShape.new(name: 'MetricQueryResultList')
+    MetricQueryResultStatus = Shapes::StringShape.new(name: 'MetricQueryResultStatus')
+    MetricStatistic = Shapes::StringShape.new(name: 'MetricStatistic')
+    MetricValues = Shapes::ListShape.new(name: 'MetricValues')
+    Period = Shapes::StringShape.new(name: 'Period')
     PutMetricsErrorCode = Shapes::StringShape.new(name: 'PutMetricsErrorCode')
     RawMetricData = Shapes::StructureShape.new(name: 'RawMetricData')
     RawMetricDataList = Shapes::ListShape.new(name: 'RawMetricDataList')
+    SageMakerResourceArn = Shapes::StringShape.new(name: 'SageMakerResourceArn')
     Step = Shapes::IntegerShape.new(name: 'Step')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    XAxisType = Shapes::StringShape.new(name: 'XAxisType')
+    XAxisValues = Shapes::ListShape.new(name: 'XAxisValues')
+
+    BatchGetMetricsRequest.add_member(:metric_queries, Shapes::ShapeRef.new(shape: MetricQueryList, required: true, location_name: "MetricQueries"))
+    BatchGetMetricsRequest.struct_class = Types::BatchGetMetricsRequest
+
+    BatchGetMetricsResponse.add_member(:metric_query_results, Shapes::ShapeRef.new(shape: MetricQueryResultList, location_name: "MetricQueryResults"))
+    BatchGetMetricsResponse.struct_class = Types::BatchGetMetricsResponse
 
     BatchPutMetricsError.add_member(:code, Shapes::ShapeRef.new(shape: PutMetricsErrorCode, location_name: "Code"))
     BatchPutMetricsError.add_member(:metric_index, Shapes::ShapeRef.new(shape: Integer, location_name: "MetricIndex"))
@@ -40,6 +61,27 @@ module Aws::SageMakerMetrics
     BatchPutMetricsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchPutMetricsErrorList, location_name: "Errors"))
     BatchPutMetricsResponse.struct_class = Types::BatchPutMetricsResponse
 
+    MetricQuery.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    MetricQuery.add_member(:resource_arn, Shapes::ShapeRef.new(shape: SageMakerResourceArn, required: true, location_name: "ResourceArn"))
+    MetricQuery.add_member(:metric_stat, Shapes::ShapeRef.new(shape: MetricStatistic, required: true, location_name: "MetricStat"))
+    MetricQuery.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
+    MetricQuery.add_member(:x_axis_type, Shapes::ShapeRef.new(shape: XAxisType, required: true, location_name: "XAxisType"))
+    MetricQuery.add_member(:start, Shapes::ShapeRef.new(shape: Long, location_name: "Start", metadata: {"box"=>true}))
+    MetricQuery.add_member(:end, Shapes::ShapeRef.new(shape: Long, location_name: "End", metadata: {"box"=>true}))
+    MetricQuery.struct_class = Types::MetricQuery
+
+    MetricQueryList.member = Shapes::ShapeRef.new(shape: MetricQuery)
+
+    MetricQueryResult.add_member(:status, Shapes::ShapeRef.new(shape: MetricQueryResultStatus, required: true, location_name: "Status"))
+    MetricQueryResult.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    MetricQueryResult.add_member(:x_axis_values, Shapes::ShapeRef.new(shape: XAxisValues, required: true, location_name: "XAxisValues"))
+    MetricQueryResult.add_member(:metric_values, Shapes::ShapeRef.new(shape: MetricValues, required: true, location_name: "MetricValues"))
+    MetricQueryResult.struct_class = Types::MetricQueryResult
+
+    MetricQueryResultList.member = Shapes::ShapeRef.new(shape: MetricQueryResult)
+
+    MetricValues.member = Shapes::ShapeRef.new(shape: Double)
+
     RawMetricData.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     RawMetricData.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     RawMetricData.add_member(:step, Shapes::ShapeRef.new(shape: Step, location_name: "Step"))
@@ -47,6 +89,8 @@ module Aws::SageMakerMetrics
     RawMetricData.struct_class = Types::RawMetricData
 
     RawMetricDataList.member = Shapes::ShapeRef.new(shape: RawMetricData)
+
+    XAxisValues.member = Shapes::ShapeRef.new(shape: Long)
 
 
     # @api private
@@ -67,6 +111,14 @@ module Aws::SageMakerMetrics
         "signingName" => "sagemaker",
         "uid" => "sagemaker-metrics-2022-09-30",
       }
+
+      api.add_operation(:batch_get_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchGetMetrics"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetMetricsResponse)
+      end)
 
       api.add_operation(:batch_put_metrics, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchPutMetrics"

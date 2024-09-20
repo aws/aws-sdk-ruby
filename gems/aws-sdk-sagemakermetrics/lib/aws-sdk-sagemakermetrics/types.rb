@@ -10,6 +10,30 @@
 module Aws::SageMakerMetrics
   module Types
 
+    # @!attribute [rw] metric_queries
+    #   Queries made to retrieve training metrics from SageMaker.
+    #   @return [Array<Types::MetricQuery>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-metrics-2022-09-30/BatchGetMetricsRequest AWS API Documentation
+    #
+    class BatchGetMetricsRequest < Struct.new(
+      :metric_queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_query_results
+    #   The results of a query to retrieve training metrics from SageMaker.
+    #   @return [Array<Types::MetricQueryResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-metrics-2022-09-30/BatchGetMetricsResponse AWS API Documentation
+    #
+    class BatchGetMetricsResponse < Struct.new(
+      :metric_query_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error that occured when putting the metric data.
     #
     # @!attribute [rw] code
@@ -41,7 +65,8 @@ module Aws::SageMakerMetrics
     end
 
     # @!attribute [rw] trial_component_name
-    #   The name of the Trial Component to associate with the metrics.
+    #   The name of the Trial Component to associate with the metrics. The
+    #   Trial Component name must be entirely lowercase.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
@@ -65,6 +90,79 @@ module Aws::SageMakerMetrics
     #
     class BatchPutMetricsResponse < Struct.new(
       :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a query to retrieve training metrics from SageMaker.
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the SageMaker resource to retrieve metrics for.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_stat
+    #   The metrics stat type of metrics to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The time period of metrics to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] x_axis_type
+    #   The x-axis type of metrics to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] start
+    #   The start time of metrics to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   The end time of metrics to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-metrics-2022-09-30/MetricQuery AWS API Documentation
+    #
+    class MetricQuery < Struct.new(
+      :metric_name,
+      :resource_arn,
+      :metric_stat,
+      :period,
+      :x_axis_type,
+      :start,
+      :end)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a query to retrieve training metrics from SageMaker.
+    #
+    # @!attribute [rw] status
+    #   The status of the metric query.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the status of the metric query.
+    #   @return [String]
+    #
+    # @!attribute [rw] x_axis_values
+    #   The values for the x-axis of the metrics.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] metric_values
+    #   The metric values retrieved by the query.
+    #   @return [Array<Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-metrics-2022-09-30/MetricQueryResult AWS API Documentation
+    #
+    class MetricQueryResult < Struct.new(
+      :status,
+      :message,
+      :x_axis_values,
+      :metric_values)
       SENSITIVE = []
       include Aws::Structure
     end
