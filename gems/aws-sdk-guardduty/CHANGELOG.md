@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-09-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-09-18)
+------------------
+
+* Feature - Add `launchType` and `sourceIPs` fields to GuardDuty findings.
+
 1.99.0 (2024-09-11)
 ------------------
 

@@ -748,6 +748,7 @@ module Aws::GuardDuty
       attr_accessor volumes: ::Array[Types::Volume]
       attr_accessor containers: ::Array[Types::Container]
       attr_accessor group: ::String
+      attr_accessor launch_type: ::String
       SENSITIVE: []
     end
 

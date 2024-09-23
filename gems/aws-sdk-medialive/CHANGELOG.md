@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2024-09-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.133.0 (2024-09-19)
+------------------
+
+* Feature - Adds Bandwidth Reduction Filtering for HD AVC and HEVC encodes, multiplex container settings.
+
 1.132.0 (2024-09-16)
 ------------------
 

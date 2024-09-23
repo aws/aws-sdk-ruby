@@ -84,6 +84,9 @@ module Aws::MediaLive
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BadRequestExceptionResponseContent = Shapes::StructureShape.new(name: 'BadRequestExceptionResponseContent')
+    BandwidthReductionFilterSettings = Shapes::StructureShape.new(name: 'BandwidthReductionFilterSettings')
+    BandwidthReductionFilterStrength = Shapes::StringShape.new(name: 'BandwidthReductionFilterStrength')
+    BandwidthReductionPostFilterSharpening = Shapes::StringShape.new(name: 'BandwidthReductionPostFilterSharpening')
     BatchDelete = Shapes::StructureShape.new(name: 'BatchDelete')
     BatchDeleteRequest = Shapes::StructureShape.new(name: 'BatchDeleteRequest')
     BatchDeleteResponse = Shapes::StructureShape.new(name: 'BatchDeleteResponse')
@@ -681,7 +684,9 @@ module Aws::MediaLive
     MulticastSourceUpdateRequest = Shapes::StructureShape.new(name: 'MulticastSourceUpdateRequest')
     Multiplex = Shapes::StructureShape.new(name: 'Multiplex')
     MultiplexConfigurationValidationError = Shapes::StructureShape.new(name: 'MultiplexConfigurationValidationError')
+    MultiplexContainerSettings = Shapes::StructureShape.new(name: 'MultiplexContainerSettings')
     MultiplexGroupSettings = Shapes::StructureShape.new(name: 'MultiplexGroupSettings')
+    MultiplexM2tsSettings = Shapes::StructureShape.new(name: 'MultiplexM2tsSettings')
     MultiplexMediaConnectOutputDestinationSettings = Shapes::StructureShape.new(name: 'MultiplexMediaConnectOutputDestinationSettings')
     MultiplexOutputDestination = Shapes::StructureShape.new(name: 'MultiplexOutputDestination')
     MultiplexOutputSettings = Shapes::StructureShape.new(name: 'MultiplexOutputSettings')
@@ -1374,6 +1379,10 @@ module Aws::MediaLive
 
     BadRequestExceptionResponseContent.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     BadRequestExceptionResponseContent.struct_class = Types::BadRequestExceptionResponseContent
+
+    BandwidthReductionFilterSettings.add_member(:post_filter_sharpening, Shapes::ShapeRef.new(shape: BandwidthReductionPostFilterSharpening, location_name: "postFilterSharpening"))
+    BandwidthReductionFilterSettings.add_member(:strength, Shapes::ShapeRef.new(shape: BandwidthReductionFilterStrength, location_name: "strength"))
+    BandwidthReductionFilterSettings.struct_class = Types::BandwidthReductionFilterSettings
 
     BatchDelete.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
     BatchDelete.add_member(:input_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputIds"))
@@ -2973,6 +2982,7 @@ module Aws::MediaLive
     H264ColorSpaceSettings.struct_class = Types::H264ColorSpaceSettings
 
     H264FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
+    H264FilterSettings.add_member(:bandwidth_reduction_filter_settings, Shapes::ShapeRef.new(shape: BandwidthReductionFilterSettings, location_name: "bandwidthReductionFilterSettings"))
     H264FilterSettings.struct_class = Types::H264FilterSettings
 
     H264Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H264AdaptiveQuantization, location_name: "adaptiveQuantization"))
@@ -3028,6 +3038,7 @@ module Aws::MediaLive
     H265ColorSpaceSettings.struct_class = Types::H265ColorSpaceSettings
 
     H265FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
+    H265FilterSettings.add_member(:bandwidth_reduction_filter_settings, Shapes::ShapeRef.new(shape: BandwidthReductionFilterSettings, location_name: "bandwidthReductionFilterSettings"))
     H265FilterSettings.struct_class = Types::H265FilterSettings
 
     H265Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H265AdaptiveQuantization, location_name: "adaptiveQuantization"))
@@ -3948,7 +3959,26 @@ module Aws::MediaLive
     MultiplexConfigurationValidationError.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
     MultiplexConfigurationValidationError.struct_class = Types::MultiplexConfigurationValidationError
 
+    MultiplexContainerSettings.add_member(:multiplex_m2ts_settings, Shapes::ShapeRef.new(shape: MultiplexM2tsSettings, location_name: "multiplexM2tsSettings"))
+    MultiplexContainerSettings.struct_class = Types::MultiplexContainerSettings
+
     MultiplexGroupSettings.struct_class = Types::MultiplexGroupSettings
+
+    MultiplexM2tsSettings.add_member(:absent_input_audio_behavior, Shapes::ShapeRef.new(shape: M2tsAbsentInputAudioBehavior, location_name: "absentInputAudioBehavior"))
+    MultiplexM2tsSettings.add_member(:arib, Shapes::ShapeRef.new(shape: M2tsArib, location_name: "arib"))
+    MultiplexM2tsSettings.add_member(:audio_buffer_model, Shapes::ShapeRef.new(shape: M2tsAudioBufferModel, location_name: "audioBufferModel"))
+    MultiplexM2tsSettings.add_member(:audio_frames_per_pes, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "audioFramesPerPes"))
+    MultiplexM2tsSettings.add_member(:audio_stream_type, Shapes::ShapeRef.new(shape: M2tsAudioStreamType, location_name: "audioStreamType"))
+    MultiplexM2tsSettings.add_member(:cc_descriptor, Shapes::ShapeRef.new(shape: M2tsCcDescriptor, location_name: "ccDescriptor"))
+    MultiplexM2tsSettings.add_member(:ebif, Shapes::ShapeRef.new(shape: M2tsEbifControl, location_name: "ebif"))
+    MultiplexM2tsSettings.add_member(:es_rate_in_pes, Shapes::ShapeRef.new(shape: M2tsEsRateInPes, location_name: "esRateInPes"))
+    MultiplexM2tsSettings.add_member(:klv, Shapes::ShapeRef.new(shape: M2tsKlv, location_name: "klv"))
+    MultiplexM2tsSettings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: M2tsNielsenId3Behavior, location_name: "nielsenId3Behavior"))
+    MultiplexM2tsSettings.add_member(:pcr_control, Shapes::ShapeRef.new(shape: M2tsPcrControl, location_name: "pcrControl"))
+    MultiplexM2tsSettings.add_member(:pcr_period, Shapes::ShapeRef.new(shape: __integerMin0Max500, location_name: "pcrPeriod"))
+    MultiplexM2tsSettings.add_member(:scte_35_control, Shapes::ShapeRef.new(shape: M2tsScte35Control, location_name: "scte35Control"))
+    MultiplexM2tsSettings.add_member(:scte_35_preroll_pullup_milliseconds, Shapes::ShapeRef.new(shape: __doubleMin0Max5000, location_name: "scte35PrerollPullupMilliseconds"))
+    MultiplexM2tsSettings.struct_class = Types::MultiplexM2tsSettings
 
     MultiplexMediaConnectOutputDestinationSettings.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "entitlementArn"))
     MultiplexMediaConnectOutputDestinationSettings.struct_class = Types::MultiplexMediaConnectOutputDestinationSettings
@@ -3957,6 +3987,7 @@ module Aws::MediaLive
     MultiplexOutputDestination.struct_class = Types::MultiplexOutputDestination
 
     MultiplexOutputSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    MultiplexOutputSettings.add_member(:container_settings, Shapes::ShapeRef.new(shape: MultiplexContainerSettings, location_name: "containerSettings"))
     MultiplexOutputSettings.struct_class = Types::MultiplexOutputSettings
 
     MultiplexPacketIdentifiersMapping.key = Shapes::ShapeRef.new(shape: __string)

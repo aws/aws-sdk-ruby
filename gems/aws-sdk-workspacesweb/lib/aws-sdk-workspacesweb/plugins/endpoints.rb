@@ -15,11 +15,11 @@ module Aws::WorkSpacesWeb
         :endpoint_provider,
         doc_type: 'Aws::WorkSpacesWeb::EndpointProvider',
         rbs_type: 'untyped',
-        docstring: 'The endpoint provider used to resolve endpoints. Any '\
-                   'object that responds to `#resolve_endpoint(parameters)` '\
-                   'where `parameters` is a Struct similar to '\
-                   '`Aws::WorkSpacesWeb::EndpointParameters`'
-      ) do |cfg|
+        docstring: <<~DOCS) do |_cfg|
+The endpoint provider used to resolve endpoints. Any object that responds to
+`#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+`Aws::WorkSpacesWeb::EndpointParameters`.
+        DOCS
         Aws::WorkSpacesWeb::EndpointProvider.new
       end
 
@@ -50,6 +50,9 @@ module Aws::WorkSpacesWeb
           metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
           if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
             metrics << 'SIGV4A_SIGNING'
+          end
+          if context.config.credentials&.credentials&.account_id
+            metrics << 'RESOLVED_ACCOUNT_ID'
           end
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end
@@ -123,6 +126,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::DisassociateUserAccessLoggingSettings.build(context)
           when :disassociate_user_settings
             Aws::WorkSpacesWeb::Endpoints::DisassociateUserSettings.build(context)
+          when :expire_session
+            Aws::WorkSpacesWeb::Endpoints::ExpireSession.build(context)
           when :get_browser_settings
             Aws::WorkSpacesWeb::Endpoints::GetBrowserSettings.build(context)
           when :get_identity_provider
@@ -135,6 +140,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::GetPortal.build(context)
           when :get_portal_service_provider_metadata
             Aws::WorkSpacesWeb::Endpoints::GetPortalServiceProviderMetadata.build(context)
+          when :get_session
+            Aws::WorkSpacesWeb::Endpoints::GetSession.build(context)
           when :get_trust_store
             Aws::WorkSpacesWeb::Endpoints::GetTrustStore.build(context)
           when :get_trust_store_certificate
@@ -153,6 +160,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::ListNetworkSettings.build(context)
           when :list_portals
             Aws::WorkSpacesWeb::Endpoints::ListPortals.build(context)
+          when :list_sessions
+            Aws::WorkSpacesWeb::Endpoints::ListSessions.build(context)
           when :list_tags_for_resource
             Aws::WorkSpacesWeb::Endpoints::ListTagsForResource.build(context)
           when :list_trust_store_certificates

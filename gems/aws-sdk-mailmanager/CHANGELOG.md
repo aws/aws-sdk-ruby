@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-09-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2024-09-18)
+------------------
+
+* Feature - Introduce a new RuleSet condition evaluation, where customers can set up a StringExpression with a MimeHeader condition. This condition will perform the necessary validation based on the X-header provided by customers.
+
 1.8.0 (2024-09-11)
 ------------------
 

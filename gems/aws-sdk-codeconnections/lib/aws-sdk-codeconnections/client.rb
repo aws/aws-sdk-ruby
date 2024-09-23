@@ -130,13 +130,15 @@ module Aws::CodeConnections
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
-    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
+    #       `:account_id` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
+    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
     #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
     #       to true.
@@ -154,6 +156,8 @@ module Aws::CodeConnections
     #     * `~/.aws/config`
     #
     #   @option options [String] :access_key_id
+    #
+    #   @option options [String] :account_id
     #
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
@@ -376,7 +380,9 @@ module Aws::CodeConnections
     #     sending the request.
     #
     #   @option options [Aws::CodeConnections::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CodeConnections::EndpointParameters`
+    #     The endpoint provider used to resolve endpoints. Any object that responds to
+    #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+    #     `Aws::CodeConnections::EndpointParameters`.
     #
     #   @option options [Float] :http_continue_timeout (1)
     #     The number of seconds to wait for a 100-continue response before sending the
@@ -676,6 +682,10 @@ module Aws::CodeConnections
     # @option params [String] :trigger_resource_update_on
     #   When to trigger Git sync to begin the stack update.
     #
+    # @option params [String] :pull_request_comment
+    #   A toggle that specifies whether to enable or disable pull request
+    #   comments for the sync configuration to be created.
+    #
     # @return [Types::CreateSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
@@ -691,6 +701,7 @@ module Aws::CodeConnections
     #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
     #     publish_deployment_status: "ENABLED", # accepts ENABLED, DISABLED
     #     trigger_resource_update_on: "ANY_CHANGE", # accepts ANY_CHANGE, FILE_CHANGE
+    #     pull_request_comment: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -706,6 +717,7 @@ module Aws::CodeConnections
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
     #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
+    #   resp.sync_configuration.pull_request_comment #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/CreateSyncConfiguration AWS API Documentation
     #
@@ -1141,6 +1153,7 @@ module Aws::CodeConnections
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
     #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
+    #   resp.sync_configuration.pull_request_comment #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/GetSyncConfiguration AWS API Documentation
     #
@@ -1390,6 +1403,7 @@ module Aws::CodeConnections
     #   resp.sync_configurations[0].sync_type #=> String, one of "CFN_STACK_SYNC"
     #   resp.sync_configurations[0].publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.sync_configurations[0].trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
+    #   resp.sync_configurations[0].pull_request_comment #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/ListSyncConfigurations AWS API Documentation
@@ -1661,6 +1675,10 @@ module Aws::CodeConnections
     # @option params [String] :trigger_resource_update_on
     #   When to trigger Git sync to begin the stack update.
     #
+    # @option params [String] :pull_request_comment
+    #   TA toggle that specifies whether to enable or disable pull request
+    #   comments for the sync configuration to be updated.
+    #
     # @return [Types::UpdateSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
@@ -1676,6 +1694,7 @@ module Aws::CodeConnections
     #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
     #     publish_deployment_status: "ENABLED", # accepts ENABLED, DISABLED
     #     trigger_resource_update_on: "ANY_CHANGE", # accepts ANY_CHANGE, FILE_CHANGE
+    #     pull_request_comment: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -1691,6 +1710,7 @@ module Aws::CodeConnections
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
     #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
+    #   resp.sync_configuration.pull_request_comment #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/UpdateSyncConfiguration AWS API Documentation
     #
@@ -1719,7 +1739,7 @@ module Aws::CodeConnections
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codeconnections'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

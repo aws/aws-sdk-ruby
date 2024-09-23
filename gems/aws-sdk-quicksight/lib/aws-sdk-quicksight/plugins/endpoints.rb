@@ -15,11 +15,11 @@ module Aws::QuickSight
         :endpoint_provider,
         doc_type: 'Aws::QuickSight::EndpointProvider',
         rbs_type: 'untyped',
-        docstring: 'The endpoint provider used to resolve endpoints. Any '\
-                   'object that responds to `#resolve_endpoint(parameters)` '\
-                   'where `parameters` is a Struct similar to '\
-                   '`Aws::QuickSight::EndpointParameters`'
-      ) do |cfg|
+        docstring: <<~DOCS) do |_cfg|
+The endpoint provider used to resolve endpoints. Any object that responds to
+`#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+`Aws::QuickSight::EndpointParameters`.
+        DOCS
         Aws::QuickSight::EndpointProvider.new
       end
 
@@ -50,6 +50,9 @@ module Aws::QuickSight
           metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
           if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
             metrics << 'SIGV4A_SIGNING'
+          end
+          if context.config.credentials&.credentials&.account_id
+            metrics << 'RESOLVED_ACCOUNT_ID'
           end
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end
@@ -281,6 +284,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListFolderMembers.build(context)
           when :list_folders
             Aws::QuickSight::Endpoints::ListFolders.build(context)
+          when :list_folders_for_resource
+            Aws::QuickSight::Endpoints::ListFoldersForResource.build(context)
           when :list_group_memberships
             Aws::QuickSight::Endpoints::ListGroupMemberships.build(context)
           when :list_groups

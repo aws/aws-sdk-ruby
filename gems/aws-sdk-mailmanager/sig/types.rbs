@@ -953,10 +953,13 @@ module Aws::MailManager
 
     class RuleStringToEvaluate
       attr_accessor attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")
+      attr_accessor mime_header_attribute: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Attribute < RuleStringToEvaluate
+      end
+      class MimeHeaderAttribute < RuleStringToEvaluate
       end
       class Unknown < RuleStringToEvaluate
       end

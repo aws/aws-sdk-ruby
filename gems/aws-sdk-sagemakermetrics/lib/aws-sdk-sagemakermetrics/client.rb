@@ -130,13 +130,15 @@ module Aws::SageMakerMetrics
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
-    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
+    #       `:account_id` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
+    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
     #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
     #       to true.
@@ -154,6 +156,8 @@ module Aws::SageMakerMetrics
     #     * `~/.aws/config`
     #
     #   @option options [String] :access_key_id
+    #
+    #   @option options [String] :account_id
     #
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
@@ -369,7 +373,9 @@ module Aws::SageMakerMetrics
     #     sending the request.
     #
     #   @option options [Aws::SageMakerMetrics::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SageMakerMetrics::EndpointParameters`
+    #     The endpoint provider used to resolve endpoints. Any object that responds to
+    #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+    #     `Aws::SageMakerMetrics::EndpointParameters`.
     #
     #   @option options [Float] :http_continue_timeout (1)
     #     The number of seconds to wait for a 100-continue response before sending the
@@ -443,12 +449,56 @@ module Aws::SageMakerMetrics
 
     # @!group API Operations
 
+    # Used to retrieve training metrics from SageMaker.
+    #
+    # @option params [required, Array<Types::MetricQuery>] :metric_queries
+    #   Queries made to retrieve training metrics from SageMaker.
+    #
+    # @return [Types::BatchGetMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetMetricsResponse#metric_query_results #metric_query_results} => Array&lt;Types::MetricQueryResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_metrics({
+    #     metric_queries: [ # required
+    #       {
+    #         metric_name: "MetricName", # required
+    #         resource_arn: "SageMakerResourceArn", # required
+    #         metric_stat: "Min", # required, accepts Min, Max, Avg, Count, StdDev, Last
+    #         period: "OneMinute", # required, accepts OneMinute, FiveMinute, OneHour, IterationNumber
+    #         x_axis_type: "IterationNumber", # required, accepts IterationNumber, Timestamp
+    #         start: 1,
+    #         end: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_query_results #=> Array
+    #   resp.metric_query_results[0].status #=> String, one of "Complete", "Truncated", "InternalError", "ValidationError"
+    #   resp.metric_query_results[0].message #=> String
+    #   resp.metric_query_results[0].x_axis_values #=> Array
+    #   resp.metric_query_results[0].x_axis_values[0] #=> Integer
+    #   resp.metric_query_results[0].metric_values #=> Array
+    #   resp.metric_query_results[0].metric_values[0] #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-metrics-2022-09-30/BatchGetMetrics AWS API Documentation
+    #
+    # @overload batch_get_metrics(params = {})
+    # @param [Hash] params ({})
+    def batch_get_metrics(params = {}, options = {})
+      req = build_request(:batch_get_metrics, params)
+      req.send_request(options)
+    end
+
     # Used to ingest training metrics into SageMaker. These metrics can be
-    # visualized in SageMaker Studio and retrieved with the `GetMetrics`
-    # API.
+    # visualized in SageMaker Studio.
     #
     # @option params [required, String] :trial_component_name
-    #   The name of the Trial Component to associate with the metrics.
+    #   The name of the Trial Component to associate with the metrics. The
+    #   Trial Component name must be entirely lowercase.
     #
     # @option params [required, Array<Types::RawMetricData>] :metric_data
     #   A list of raw metric values to put.
@@ -504,7 +554,7 @@ module Aws::SageMakerMetrics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemakermetrics'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

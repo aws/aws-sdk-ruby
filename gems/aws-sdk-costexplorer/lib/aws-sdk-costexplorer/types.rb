@@ -26,8 +26,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] dimension_value
-    #   The dimension for the anomaly (for example, an Amazon Web Service in
-    #   a service monitor).
+    #   The dimension for the anomaly (for example, an Amazon Web
+    #   Servicesservice in a service monitor).
     #   @return [String]
     #
     # @!attribute [rw] root_causes
@@ -1486,6 +1486,26 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The DynamoDB reservations that Amazon Web Services recommends that you
+    # purchase.
+    #
+    # @!attribute [rw] capacity_units
+    #   The capacity unit of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DynamoDBCapacityDetails AWS API Documentation
+    #
+    class DynamoDBCapacityDetails < Struct.new(
+      :capacity_units,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The EBS field that contains a list of EBS metrics that are associated
     # with the current instance.
     #
@@ -2805,11 +2825,11 @@ module Aws::CostExplorer
     #     is with. Possible values are the following:
     #
     #     \- Amazon Web Services(Amazon Web Services): The entity that sells
-    #     Amazon Web Services.
+    #     Amazon Web Servicesservices.
     #
     #     \- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian
-    #     entity that's an acting reseller for Amazon Web Services in
-    #     India.
+    #     entity that's an acting reseller for Amazon Web Servicesservices
+    #     in India.
     #
     #     \- Amazon Web Services Marketplace: The entity that supports the
     #     sale of solutions that are built on Amazon Web Services by
@@ -5733,18 +5753,18 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] average_utilization
-    #   The average utilization of your instances. Amazon Web Services uses
-    #   this to calculate your recommended reservation purchases.
+    #   The average utilization of your recommendations. Amazon Web Services
+    #   uses this to calculate your recommended reservation purchases.
     #   @return [String]
     #
     # @!attribute [rw] estimated_break_even_in_months
     #   How long Amazon Web Services estimates that it takes for this
-    #   instance to start saving you money, in months.
+    #   recommendation to start saving you money, in months.
     #   @return [String]
     #
     # @!attribute [rw] currency_code
     #   The currency code that Amazon Web Services used to calculate the
-    #   costs for this instance.
+    #   costs for this recommendation.
     #   @return [String]
     #
     # @!attribute [rw] estimated_monthly_savings_amount
@@ -5770,11 +5790,40 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] upfront_cost
-    #   How much purchasing this instance costs you upfront.
+    #   How much purchasing this recommendation costs you upfront.
     #   @return [String]
     #
     # @!attribute [rw] recurring_standard_monthly_cost
-    #   How much purchasing this instance costs you on a monthly basis.
+    #   How much purchasing this recommendation costs you on a monthly
+    #   basis.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_capacity_details
+    #   Details about the reservations that Amazon Web Services recommends
+    #   that you purchase.
+    #   @return [Types::ReservedCapacityDetails]
+    #
+    # @!attribute [rw] recommended_number_of_capacity_units_to_purchase
+    #   The number of reserved capacity units that Amazon Web Services
+    #   recommends that you purchase.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_number_of_capacity_units_used_per_hour
+    #   The minimum number of provisioned capacity units that you used in an
+    #   hour during the historical period. Amazon Web Services uses this to
+    #   calculate your recommended reservation purchases.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_number_of_capacity_units_used_per_hour
+    #   The maximum number of provisioned capacity units that you used in an
+    #   hour during the historical period. Amazon Web Services uses this to
+    #   calculate your recommended reservation purchases.
+    #   @return [String]
+    #
+    # @!attribute [rw] average_number_of_capacity_units_used_per_hour
+    #   The average number of provisioned capacity units that you used in an
+    #   hour during the historical period. Amazon Web Services uses this to
+    #   calculate your recommended reservation purchases.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationPurchaseRecommendationDetail AWS API Documentation
@@ -5798,7 +5847,12 @@ module Aws::CostExplorer
       :estimated_monthly_on_demand_cost,
       :estimated_reservation_cost_for_lookback_period,
       :upfront_cost,
-      :recurring_standard_monthly_cost)
+      :recurring_standard_monthly_cost,
+      :reserved_capacity_details,
+      :recommended_number_of_capacity_units_to_purchase,
+      :minimum_number_of_capacity_units_used_per_hour,
+      :maximum_number_of_capacity_units_used_per_hour,
+      :average_number_of_capacity_units_used_per_hour)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5882,6 +5936,22 @@ module Aws::CostExplorer
       :value,
       :attributes,
       :utilization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the reservations that Amazon Web Services recommends
+    # that you purchase.
+    #
+    # @!attribute [rw] dynamo_db_capacity_details
+    #   The DynamoDB reservations that Amazon Web Services recommends that
+    #   you purchase.
+    #   @return [Types::DynamoDBCapacityDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservedCapacityDetails AWS API Documentation
+    #
+    class ReservedCapacityDetails < Struct.new(
+      :dynamo_db_capacity_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6123,13 +6193,13 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The combination of Amazon Web Service, linked account, linked account
-    # name, Region, and usage type where a cost anomaly is observed. The
-    # linked account name will only be available when the account name can
-    # be identified.
+    # The combination of Amazon Web Servicesservice, linked account, linked
+    # account name, Region, and usage type where a cost anomaly is observed.
+    # The linked account name will only be available when the account name
+    # can be identified.
     #
     # @!attribute [rw] service
-    #   The Amazon Web Service name that's associated with the cost
+    #   The Amazon Web Servicesservice name that's associated with the cost
     #   anomaly.
     #   @return [String]
     #

@@ -9593,11 +9593,17 @@ module Aws::QuickSight
     #   The display options of a control.
     #   @return [Types::DateTimePickerControlDisplayOptions]
     #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `DateTimePickerControl`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultDateTimePickerControlOptions AWS API Documentation
     #
     class DefaultDateTimePickerControlOptions < Struct.new(
       :type,
-      :display_options)
+      :display_options,
+      :commit_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9695,12 +9701,18 @@ module Aws::QuickSight
     #   A list of selectable values that are used in a control.
     #   @return [Types::FilterSelectableValues]
     #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `FilterDropDownControl`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFilterDropDownControlOptions AWS API Documentation
     #
     class DefaultFilterDropDownControlOptions < Struct.new(
       :display_options,
       :type,
-      :selectable_values)
+      :selectable_values,
+      :commit_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9856,10 +9868,16 @@ module Aws::QuickSight
     #   The display options of a control.
     #   @return [Types::RelativeDateTimeControlDisplayOptions]
     #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `RelativeDateTimeControl`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultRelativeDateTimeControlOptions AWS API Documentation
     #
     class DefaultRelativeDateTimeControlOptions < Struct.new(
-      :display_options)
+      :display_options,
+      :commit_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14786,6 +14804,11 @@ module Aws::QuickSight
     #     dropdown menu.
     #   @return [String]
     #
+    # @!attribute [rw] commit_mode
+    #   The visibility configurationof the Apply button on a
+    #   `DateTimePickerControl`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterDateTimePickerControl AWS API Documentation
     #
     class FilterDateTimePickerControl < Struct.new(
@@ -14793,7 +14816,8 @@ module Aws::QuickSight
       :title,
       :source_filter_id,
       :display_options,
-      :type)
+      :type,
+      :commit_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14838,6 +14862,11 @@ module Aws::QuickSight
     #   controls.
     #   @return [Types::CascadingControlConfiguration]
     #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `FilterDropDownControl`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterDropDownControl AWS API Documentation
     #
     class FilterDropDownControl < Struct.new(
@@ -14847,7 +14876,8 @@ module Aws::QuickSight
       :display_options,
       :type,
       :selectable_values,
-      :cascading_control_configuration)
+      :cascading_control_configuration,
+      :commit_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15087,13 +15117,19 @@ module Aws::QuickSight
     #   The display options of a control.
     #   @return [Types::RelativeDateTimeControlDisplayOptions]
     #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `FilterRelativeDateTimeControl`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterRelativeDateTimeControl AWS API Documentation
     #
     class FilterRelativeDateTimeControl < Struct.new(
       :filter_control_id,
       :title,
       :source_filter_id,
-      :display_options)
+      :display_options,
+      :commit_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19619,6 +19655,65 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that contains the
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) the resource whose folders you need
+    #   to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFoldersForResourceRequest AWS API Documentation
+    #
+    class ListFoldersForResourceRequest < Struct.new(
+      :aws_account_id,
+      :resource_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folders
+    #   A list that contains the Amazon Resource Names (ARNs) of all folders
+    #   that the resource is a member of.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFoldersForResourceResponse AWS API Documentation
+    #
+    class ListFoldersForResourceResponse < Struct.new(
+      :status,
+      :folders,
+      :next_token,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
@@ -22320,6 +22415,11 @@ module Aws::QuickSight
     #   controls.
     #   @return [Types::CascadingControlConfiguration]
     #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `ParameterDropDownControl`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ParameterDropDownControl AWS API Documentation
     #
     class ParameterDropDownControl < Struct.new(
@@ -22329,7 +22429,8 @@ module Aws::QuickSight
       :display_options,
       :type,
       :selectable_values,
-      :cascading_control_configuration)
+      :cascading_control_configuration,
+      :commit_mode)
       SENSITIVE = []
       include Aws::Structure
     end

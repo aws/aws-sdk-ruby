@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.249.0 (2024-09-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.248.0 (2024-09-18)
+------------------
+
+* Feature - Updates Amazon RDS documentation with information upgrading snapshots with unsupported engine versions for RDS for MySQL and RDS for PostgreSQL.
+
 1.247.0 (2024-09-17)
 ------------------
 

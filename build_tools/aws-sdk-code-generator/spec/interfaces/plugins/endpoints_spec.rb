@@ -75,7 +75,8 @@ describe 'Plugins Interface:' do
             region: region,
             endpoint: endpoint,
             use_fips: true,
-            use_dual_stack: true
+            use_dual_stack: true,
+            account_id_endpoint_mode: 'preferred'
           ).and_call_original
 
         client.operation
@@ -92,6 +93,25 @@ describe 'Plugins Interface:' do
         expect(params.use_dual_stack).to eq(false)
         expect(params.use_fips).to eq(false)
         expect(params.endpoint).to be_nil
+      end
+
+      describe 'account id endpoint mode option' do
+        it 'is configured to use preferred by default' do
+          expect(client.config.account_id_endpoint_mode).to eq 'preferred'
+        end
+
+        it 'can be configured using shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:account_id_endpoint_mode).and_return('disabled')
+          expect(client.config.account_id_endpoint_mode).to eq 'disabled'
+        end
+
+        it 'can be configured using ENV with precedence over shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:account_id_endpoint_mode).and_return('disabled')
+          ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE'] = 'required'
+          expect(client.config.account_id_endpoint_mode).to eq 'required'
+        end
       end
     end
 

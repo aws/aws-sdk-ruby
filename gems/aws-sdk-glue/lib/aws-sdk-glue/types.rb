@@ -23021,6 +23021,71 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure that is used to specify testing a connection to a service.
+    #
+    # @!attribute [rw] connection_type
+    #   The type of connection to test. This operation is only available for
+    #   the `JDBC` or `SALESFORCE` connection types.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_properties
+    #   The key-value pairs that define parameters for the connection.
+    #
+    #   JDBC connections use the following connection properties:
+    #
+    #   * Required: All of (`HOST`, `PORT`, `JDBC_ENGINE`) or
+    #     `JDBC_CONNECTION_URL`.
+    #
+    #   * Required: All of (`USERNAME`, `PASSWORD`) or `SECRET_ID`.
+    #
+    #   * Optional: `JDBC_ENFORCE_SSL`, `CUSTOM_JDBC_CERT`,
+    #     `CUSTOM_JDBC_CERT_STRING`, `SKIP_CUSTOM_JDBC_CERT_VALIDATION`.
+    #     These parameters are used to configure SSL with JDBC.
+    #
+    #   SALESFORCE connections require the `AuthenticationConfiguration`
+    #   member to be configured.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   A structure containing the authentication configuration in the
+    #   TestConnection request. Required for a connection to Salesforce
+    #   using OAuth authentication.
+    #   @return [Types::AuthenticationConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TestConnectionInput AWS API Documentation
+    #
+    class TestConnectionInput < Struct.new(
+      :connection_type,
+      :connection_properties,
+      :authentication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_name
+    #   Optional. The name of the connection to test. If only name is
+    #   provided, the operation will get the connection and use that for
+    #   testing.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_connection_input
+    #   A structure that is used to specify testing a connection to a
+    #   service.
+    #   @return [Types::TestConnectionInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TestConnectionRequest AWS API Documentation
+    #
+    class TestConnectionRequest < Struct.new(
+      :connection_name,
+      :test_connection_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TestConnectionResponse AWS API Documentation
+    #
+    class TestConnectionResponse < Aws::EmptyStructure; end
+
     # The throttling threshhold was exceeded.
     #
     # @!attribute [rw] message

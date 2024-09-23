@@ -101,6 +101,7 @@ module Aws::Lambda
     EnvironmentVariables = Shapes::MapShape.new(name: 'EnvironmentVariables')
     EphemeralStorage = Shapes::StructureShape.new(name: 'EphemeralStorage')
     EphemeralStorageSize = Shapes::IntegerShape.new(name: 'EphemeralStorageSize')
+    EventSourceMappingArn = Shapes::StringShape.new(name: 'EventSourceMappingArn')
     EventSourceMappingConfiguration = Shapes::StructureShape.new(name: 'EventSourceMappingConfiguration')
     EventSourceMappingsList = Shapes::ListShape.new(name: 'EventSourceMappingsList')
     EventSourcePosition = Shapes::StringShape.new(name: 'EventSourcePosition')
@@ -360,6 +361,7 @@ module Aws::Lambda
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaggableResource = Shapes::StringShape.new(name: 'TaggableResource')
     Tags = Shapes::MapShape.new(name: 'Tags')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
@@ -511,6 +513,7 @@ module Aws::Lambda
     CreateCodeSigningConfigRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateCodeSigningConfigRequest.add_member(:allowed_publishers, Shapes::ShapeRef.new(shape: AllowedPublishers, required: true, location_name: "AllowedPublishers"))
     CreateCodeSigningConfigRequest.add_member(:code_signing_policies, Shapes::ShapeRef.new(shape: CodeSigningPolicies, location_name: "CodeSigningPolicies"))
+    CreateCodeSigningConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateCodeSigningConfigRequest.struct_class = Types::CreateCodeSigningConfigRequest
 
     CreateCodeSigningConfigResponse.add_member(:code_signing_config, Shapes::ShapeRef.new(shape: CodeSigningConfig, required: true, location_name: "CodeSigningConfig"))
@@ -529,6 +532,7 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     CreateEventSourceMappingRequest.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     CreateEventSourceMappingRequest.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
+    CreateEventSourceMappingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateEventSourceMappingRequest.add_member(:tumbling_window_in_seconds, Shapes::ShapeRef.new(shape: TumblingWindowInSeconds, location_name: "TumblingWindowInSeconds"))
     CreateEventSourceMappingRequest.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
     CreateEventSourceMappingRequest.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
@@ -721,6 +725,7 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
     EventSourceMappingConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     EventSourceMappingConfiguration.add_member(:filter_criteria_error, Shapes::ShapeRef.new(shape: FilterCriteriaError, location_name: "FilterCriteriaError"))
+    EventSourceMappingConfiguration.add_member(:event_source_mapping_arn, Shapes::ShapeRef.new(shape: EventSourceMappingArn, location_name: "EventSourceMappingArn"))
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
 
     EventSourceMappingsList.member = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
@@ -1210,7 +1215,7 @@ module Aws::Lambda
     ListProvisionedConcurrencyConfigsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
     ListProvisionedConcurrencyConfigsResponse.struct_class = Types::ListProvisionedConcurrencyConfigsResponse
 
-    ListTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    ListTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
     ListTagsRequest.struct_class = Types::ListTagsRequest
 
     ListTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -1457,7 +1462,7 @@ module Aws::Lambda
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
-    TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
@@ -1482,7 +1487,7 @@ module Aws::Lambda
     UnsupportedMediaTypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnsupportedMediaTypeException.struct_class = Types::UnsupportedMediaTypeException
 
-    UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: TaggableResource, required: true, location: "uri", location_name: "ARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -1635,6 +1640,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: PublicPolicyException)
       end)
 
       api.add_operation(:create_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -2524,6 +2530,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: PublicPolicyException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

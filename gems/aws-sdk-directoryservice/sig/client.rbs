@@ -15,6 +15,7 @@ module Aws
                       ?credentials: untyped,
                       ?region: String,
                       ?access_key_id: String,
+                      ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
                       ?client_side_monitoring: bool,
@@ -412,6 +413,16 @@ module Aws
                                 ) -> _DescribeDirectoriesResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDirectoriesResponseSuccess
 
+      interface _DescribeDirectoryDataAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDirectoryDataAccessResult]
+        def data_access_status: () -> ("Disabled" | "Disabling" | "Enabled" | "Enabling" | "Failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_directory_data_access-instance_method
+      def describe_directory_data_access: (
+                                            directory_id: ::String
+                                          ) -> _DescribeDirectoryDataAccessResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDirectoryDataAccessResponseSuccess
+
       interface _DescribeDomainControllersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainControllersResult]
         def domain_controllers: () -> ::Array[Types::DomainController]
@@ -544,6 +555,15 @@ module Aws
                                          ) -> _DisableClientAuthenticationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableClientAuthenticationResponseSuccess
 
+      interface _DisableDirectoryDataAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableDirectoryDataAccessResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#disable_directory_data_access-instance_method
+      def disable_directory_data_access: (
+                                           directory_id: ::String
+                                         ) -> _DisableDirectoryDataAccessResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableDirectoryDataAccessResponseSuccess
+
       interface _DisableLDAPSResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisableLDAPSResult]
       end
@@ -583,6 +603,15 @@ module Aws
                                           type: ("SmartCard" | "SmartCardOrPassword")
                                         ) -> _EnableClientAuthenticationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableClientAuthenticationResponseSuccess
+
+      interface _EnableDirectoryDataAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableDirectoryDataAccessResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#enable_directory_data_access-instance_method
+      def enable_directory_data_access: (
+                                          directory_id: ::String
+                                        ) -> _EnableDirectoryDataAccessResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableDirectoryDataAccessResponseSuccess
 
       interface _EnableLDAPSResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableLDAPSResult]

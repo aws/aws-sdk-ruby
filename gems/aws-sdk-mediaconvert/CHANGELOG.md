@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2024-09-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2024-09-19)
+------------------
+
+* Feature - This release provides support for additional DRM configurations per SPEKE Version 2.0.
+
 1.138.0 (2024-09-12)
 ------------------
 

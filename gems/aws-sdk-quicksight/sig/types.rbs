@@ -2356,6 +2356,7 @@ module Aws::QuickSight
     class DefaultDateTimePickerControlOptions
       attr_accessor type: ("SINGLE_VALUED" | "DATE_RANGE")
       attr_accessor display_options: Types::DateTimePickerControlDisplayOptions
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
       SENSITIVE: []
     end
 
@@ -2380,6 +2381,7 @@ module Aws::QuickSight
       attr_accessor display_options: Types::DropDownControlDisplayOptions
       attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
       attr_accessor selectable_values: Types::FilterSelectableValues
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
       SENSITIVE: []
     end
 
@@ -2426,6 +2428,7 @@ module Aws::QuickSight
 
     class DefaultRelativeDateTimeControlOptions
       attr_accessor display_options: Types::RelativeDateTimeControlDisplayOptions
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
       SENSITIVE: []
     end
 
@@ -3771,6 +3774,7 @@ module Aws::QuickSight
       attr_accessor source_filter_id: ::String
       attr_accessor display_options: Types::DateTimePickerControlDisplayOptions
       attr_accessor type: ("SINGLE_VALUED" | "DATE_RANGE")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
       SENSITIVE: []
     end
 
@@ -3782,6 +3786,7 @@ module Aws::QuickSight
       attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
       attr_accessor selectable_values: Types::FilterSelectableValues
       attr_accessor cascading_control_configuration: Types::CascadingControlConfiguration
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
       SENSITIVE: []
     end
 
@@ -3835,6 +3840,7 @@ module Aws::QuickSight
       attr_accessor title: ::String
       attr_accessor source_filter_id: ::String
       attr_accessor display_options: Types::RelativeDateTimeControlDisplayOptions
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
       SENSITIVE: []
     end
 
@@ -5005,6 +5011,22 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ListFoldersForResourceRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFoldersForResourceResponse
+      attr_accessor status: ::Integer
+      attr_accessor folders: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class ListFoldersRequest
       attr_accessor aws_account_id: ::String
       attr_accessor next_token: ::String
@@ -5733,6 +5755,7 @@ module Aws::QuickSight
       attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
       attr_accessor selectable_values: Types::ParameterSelectableValues
       attr_accessor cascading_control_configuration: Types::CascadingControlConfiguration
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
       SENSITIVE: []
     end
 

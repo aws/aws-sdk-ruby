@@ -130,6 +130,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-devicefarm', '~> 1')
   spec.add_dependency('aws-sdk-directconnect', '~> 1')
   spec.add_dependency('aws-sdk-directoryservice', '~> 1')
+  spec.add_dependency('aws-sdk-directoryservicedata', '~> 1')
   spec.add_dependency('aws-sdk-docdb', '~> 1')
   spec.add_dependency('aws-sdk-docdbelastic', '~> 1')
   spec.add_dependency('aws-sdk-drs', '~> 1')

@@ -15,6 +15,7 @@ module Aws
                       ?credentials: untyped,
                       ?region: String,
                       ?access_key_id: String,
+                      ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
                       ?client_side_monitoring: bool,
@@ -455,6 +456,16 @@ module Aws
                                       ) -> _DisassociateUserSettingsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateUserSettingsResponseSuccess
 
+      interface _ExpireSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExpireSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#expire_session-instance_method
+      def expire_session: (
+                            portal_id: ::String,
+                            session_id: ::String
+                          ) -> _ExpireSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExpireSessionResponseSuccess
+
       interface _GetBrowserSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBrowserSettingsResponse]
         def browser_settings: () -> Types::BrowserSettings
@@ -515,6 +526,17 @@ module Aws
                                                   portal_arn: ::String
                                                 ) -> _GetPortalServiceProviderMetadataResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPortalServiceProviderMetadataResponseSuccess
+
+      interface _GetSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
+        def session: () -> Types::Session
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#get_session-instance_method
+      def get_session: (
+                         portal_id: ::String,
+                         session_id: ::String
+                       ) -> _GetSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
 
       interface _GetTrustStoreResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustStoreResponse]
@@ -618,6 +640,23 @@ module Aws
                           ?next_token: ::String
                         ) -> _ListPortalsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortalsResponseSuccess
+
+      interface _ListSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsResponse]
+        def next_token: () -> ::String
+        def sessions: () -> ::Array[Types::SessionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesWeb/Client.html#list_sessions-instance_method
+      def list_sessions: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           portal_id: ::String,
+                           ?session_id: ::String,
+                           ?sort_by: ("StartTimeAscending" | "StartTimeDescending"),
+                           ?status: ("Active" | "Terminated"),
+                           ?username: ::String
+                         ) -> _ListSessionsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]

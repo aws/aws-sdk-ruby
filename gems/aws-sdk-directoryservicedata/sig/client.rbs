@@ -1,0 +1,354 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DirectoryServiceData
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddGroupMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddGroupMemberResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#add_group_member-instance_method
+      def add_group_member: (
+                              ?client_token: ::String,
+                              directory_id: ::String,
+                              group_name: ::String,
+                              member_name: ::String,
+                              ?member_realm: ::String
+                            ) -> _AddGroupMemberResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddGroupMemberResponseSuccess
+
+      interface _CreateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupResult]
+        def directory_id: () -> ::String
+        def sam_account_name: () -> ::String
+        def sid: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#create_group-instance_method
+      def create_group: (
+                          ?client_token: ::String,
+                          directory_id: ::String,
+                          ?group_scope: ("DomainLocal" | "Global" | "Universal" | "BuiltinLocal"),
+                          ?group_type: ("Distribution" | "Security"),
+                          ?other_attributes: Hash[::String, untyped],
+                          sam_account_name: ::String
+                        ) -> _CreateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResult]
+        def directory_id: () -> ::String
+        def sam_account_name: () -> ::String
+        def sid: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#create_user-instance_method
+      def create_user: (
+                         ?client_token: ::String,
+                         directory_id: ::String,
+                         ?email_address: ::String,
+                         ?given_name: ::String,
+                         ?other_attributes: Hash[::String, untyped],
+                         sam_account_name: ::String,
+                         ?surname: ::String
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _DeleteGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGroupResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#delete_group-instance_method
+      def delete_group: (
+                          ?client_token: ::String,
+                          directory_id: ::String,
+                          sam_account_name: ::String
+                        ) -> _DeleteGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#delete_user-instance_method
+      def delete_user: (
+                         ?client_token: ::String,
+                         directory_id: ::String,
+                         sam_account_name: ::String
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DescribeGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGroupResult]
+        def directory_id: () -> ::String
+        def distinguished_name: () -> ::String
+        def group_scope: () -> ("DomainLocal" | "Global" | "Universal" | "BuiltinLocal")
+        def group_type: () -> ("Distribution" | "Security")
+        def other_attributes: () -> ::Hash[::String, Types::AttributeValue]
+        def realm: () -> ::String
+        def sam_account_name: () -> ::String
+        def sid: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#describe_group-instance_method
+      def describe_group: (
+                            directory_id: ::String,
+                            ?other_attributes: Array[::String],
+                            ?realm: ::String,
+                            sam_account_name: ::String
+                          ) -> _DescribeGroupResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGroupResponseSuccess
+
+      interface _DescribeUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserResult]
+        def directory_id: () -> ::String
+        def distinguished_name: () -> ::String
+        def email_address: () -> ::String
+        def enabled: () -> bool
+        def given_name: () -> ::String
+        def other_attributes: () -> ::Hash[::String, Types::AttributeValue]
+        def realm: () -> ::String
+        def sam_account_name: () -> ::String
+        def sid: () -> ::String
+        def surname: () -> ::String
+        def user_principal_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#describe_user-instance_method
+      def describe_user: (
+                           directory_id: ::String,
+                           ?other_attributes: Array[::String],
+                           ?realm: ::String,
+                           sam_account_name: ::String
+                         ) -> _DescribeUserResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUserResponseSuccess
+
+      interface _DisableUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableUserResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#disable_user-instance_method
+      def disable_user: (
+                          ?client_token: ::String,
+                          directory_id: ::String,
+                          sam_account_name: ::String
+                        ) -> _DisableUserResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableUserResponseSuccess
+
+      interface _ListGroupMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupMembersResult]
+        def directory_id: () -> ::String
+        def member_realm: () -> ::String
+        def members: () -> ::Array[Types::Member]
+        def next_token: () -> ::String
+        def realm: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#list_group_members-instance_method
+      def list_group_members: (
+                                directory_id: ::String,
+                                ?max_results: ::Integer,
+                                ?member_realm: ::String,
+                                ?next_token: ::String,
+                                ?realm: ::String,
+                                sam_account_name: ::String
+                              ) -> _ListGroupMembersResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupMembersResponseSuccess
+
+      interface _ListGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsResult]
+        def directory_id: () -> ::String
+        def groups: () -> ::Array[Types::GroupSummary]
+        def next_token: () -> ::String
+        def realm: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#list_groups-instance_method
+      def list_groups: (
+                         directory_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?realm: ::String
+                       ) -> _ListGroupsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
+
+      interface _ListGroupsForMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsForMemberResult]
+        def directory_id: () -> ::String
+        def groups: () -> ::Array[Types::GroupSummary]
+        def member_realm: () -> ::String
+        def next_token: () -> ::String
+        def realm: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#list_groups_for_member-instance_method
+      def list_groups_for_member: (
+                                    directory_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?member_realm: ::String,
+                                    ?next_token: ::String,
+                                    ?realm: ::String,
+                                    sam_account_name: ::String
+                                  ) -> _ListGroupsForMemberResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsForMemberResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResult]
+        def directory_id: () -> ::String
+        def next_token: () -> ::String
+        def realm: () -> ::String
+        def users: () -> ::Array[Types::UserSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#list_users-instance_method
+      def list_users: (
+                        directory_id: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String,
+                        ?realm: ::String
+                      ) -> _ListUsersResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _RemoveGroupMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveGroupMemberResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#remove_group_member-instance_method
+      def remove_group_member: (
+                                 ?client_token: ::String,
+                                 directory_id: ::String,
+                                 group_name: ::String,
+                                 member_name: ::String,
+                                 ?member_realm: ::String
+                               ) -> _RemoveGroupMemberResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveGroupMemberResponseSuccess
+
+      interface _SearchGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchGroupsResult]
+        def directory_id: () -> ::String
+        def groups: () -> ::Array[Types::Group]
+        def next_token: () -> ::String
+        def realm: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#search_groups-instance_method
+      def search_groups: (
+                           directory_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?realm: ::String,
+                           search_attributes: Array[::String],
+                           search_string: ::String
+                         ) -> _SearchGroupsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchGroupsResponseSuccess
+
+      interface _SearchUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchUsersResult]
+        def directory_id: () -> ::String
+        def next_token: () -> ::String
+        def realm: () -> ::String
+        def users: () -> ::Array[Types::User]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#search_users-instance_method
+      def search_users: (
+                          directory_id: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?realm: ::String,
+                          search_attributes: Array[::String],
+                          search_string: ::String
+                        ) -> _SearchUsersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUsersResponseSuccess
+
+      interface _UpdateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#update_group-instance_method
+      def update_group: (
+                          ?client_token: ::String,
+                          directory_id: ::String,
+                          ?group_scope: ("DomainLocal" | "Global" | "Universal" | "BuiltinLocal"),
+                          ?group_type: ("Distribution" | "Security"),
+                          ?other_attributes: Hash[::String, untyped],
+                          sam_account_name: ::String,
+                          ?update_type: ("ADD" | "REPLACE" | "REMOVE")
+                        ) -> _UpdateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryServiceData/Client.html#update_user-instance_method
+      def update_user: (
+                         ?client_token: ::String,
+                         directory_id: ::String,
+                         ?email_address: ::String,
+                         ?given_name: ::String,
+                         ?other_attributes: Hash[::String, untyped],
+                         sam_account_name: ::String,
+                         ?surname: ::String,
+                         ?update_type: ("ADD" | "REPLACE" | "REMOVE")
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+    end
+  end
+end
+

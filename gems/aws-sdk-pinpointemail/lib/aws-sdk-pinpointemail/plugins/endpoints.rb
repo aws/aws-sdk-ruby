@@ -15,11 +15,11 @@ module Aws::PinpointEmail
         :endpoint_provider,
         doc_type: 'Aws::PinpointEmail::EndpointProvider',
         rbs_type: 'untyped',
-        docstring: 'The endpoint provider used to resolve endpoints. Any '\
-                   'object that responds to `#resolve_endpoint(parameters)` '\
-                   'where `parameters` is a Struct similar to '\
-                   '`Aws::PinpointEmail::EndpointParameters`'
-      ) do |cfg|
+        docstring: <<~DOCS) do |_cfg|
+The endpoint provider used to resolve endpoints. Any object that responds to
+`#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+`Aws::PinpointEmail::EndpointParameters`.
+        DOCS
         Aws::PinpointEmail::EndpointProvider.new
       end
 
@@ -50,6 +50,9 @@ module Aws::PinpointEmail
           metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
           if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
             metrics << 'SIGV4A_SIGNING'
+          end
+          if context.config.credentials&.credentials&.account_id
+            metrics << 'RESOLVED_ACCOUNT_ID'
           end
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end

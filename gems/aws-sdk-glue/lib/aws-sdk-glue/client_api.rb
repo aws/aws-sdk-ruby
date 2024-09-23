@@ -1212,6 +1212,9 @@ module Aws::Glue
     TaskRunSortCriteria = Shapes::StructureShape.new(name: 'TaskRunSortCriteria')
     TaskStatusType = Shapes::StringShape.new(name: 'TaskStatusType')
     TaskType = Shapes::StringShape.new(name: 'TaskType')
+    TestConnectionInput = Shapes::StructureShape.new(name: 'TestConnectionInput')
+    TestConnectionRequest = Shapes::StructureShape.new(name: 'TestConnectionRequest')
+    TestConnectionResponse = Shapes::StructureShape.new(name: 'TestConnectionResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -5935,6 +5938,17 @@ module Aws::Glue
     TaskRunSortCriteria.add_member(:sort_direction, Shapes::ShapeRef.new(shape: SortDirectionType, required: true, location_name: "SortDirection"))
     TaskRunSortCriteria.struct_class = Types::TaskRunSortCriteria
 
+    TestConnectionInput.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "ConnectionType"))
+    TestConnectionInput.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, required: true, location_name: "ConnectionProperties"))
+    TestConnectionInput.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfigurationInput, location_name: "AuthenticationConfiguration"))
+    TestConnectionInput.struct_class = Types::TestConnectionInput
+
+    TestConnectionRequest.add_member(:connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionName"))
+    TestConnectionRequest.add_member(:test_connection_input, Shapes::ShapeRef.new(shape: TestConnectionInput, location_name: "TestConnectionInput"))
+    TestConnectionRequest.struct_class = Types::TestConnectionRequest
+
+    TestConnectionResponse.struct_class = Types::TestConnectionResponse
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -9191,6 +9205,23 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
+      api.add_operation(:test_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TestConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: TestConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|

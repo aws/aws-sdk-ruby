@@ -198,6 +198,7 @@ module Aws
 
     config_reader(
       :region,
+      :account_id_endpoint_mode,
       :sigv4a_signing_region_set,
       :ca_bundle,
       :credential_process,
@@ -414,7 +415,8 @@ module Aws
       creds = Credentials.new(
         prof_config['aws_access_key_id'],
         prof_config['aws_secret_access_key'],
-        prof_config['aws_session_token']
+        prof_config['aws_session_token'],
+        account_id: prof_config['aws_account_id']
       )
       creds if creds.set?
     end

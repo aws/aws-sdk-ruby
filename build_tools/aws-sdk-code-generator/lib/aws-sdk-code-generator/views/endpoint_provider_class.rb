@@ -9,6 +9,11 @@ module AwsSdkCodeGenerator
       def initialize(options)
         @service = options.fetch(:service)
         @endpoint_rules = @service.endpoint_rules
+        # Used to collect metrics in the generated endpoint provider
+        @has_account_id_endpoint_mode =
+          @endpoint_rules['parameters'].find do |_, param|
+            param['builtIn'] == 'AWS::Auth::AccountIdEndpointMode'
+          end
 
         version = @endpoint_rules['version']
         return if version&.match(/^\d+\.\d+$/) # && version == '1.0'
@@ -75,6 +80,10 @@ module AwsSdkCodeGenerator
         end
         if endpoint['properties']
           res << ", properties: #{templated_hash_to_s(endpoint['properties'])}"
+        end
+        if @has_account_id_endpoint_mode
+          account_id_endpoint = endpoint['url'].include?('{AccountId}')
+          res << ", metadata: { account_id_endpoint: #{account_id_endpoint} }"
         end
         res << ")\n"
         indent(res.string, levels)

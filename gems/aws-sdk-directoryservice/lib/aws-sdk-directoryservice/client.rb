@@ -130,13 +130,15 @@ module Aws::DirectoryService
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
-    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
+    #       `:account_id` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
+    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
     #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
     #       to true.
@@ -154,6 +156,8 @@ module Aws::DirectoryService
     #     * `~/.aws/config`
     #
     #   @option options [String] :access_key_id
+    #
+    #   @option options [String] :account_id
     #
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
@@ -376,7 +380,9 @@ module Aws::DirectoryService
     #     sending the request.
     #
     #   @option options [Aws::DirectoryService::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::DirectoryService::EndpointParameters`
+    #     The endpoint provider used to resolve endpoints. Any object that responds to
+    #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+    #     `Aws::DirectoryService::EndpointParameters`.
     #
     #   @option options [Float] :http_continue_timeout (1)
     #     The number of seconds to wait for a 100-continue response before sending the
@@ -521,41 +527,56 @@ module Aws::DirectoryService
     #
     #   Inbound:
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
     #   * Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:
-    #     0.0.0.0/0
+    #     Managed Microsoft AD VPC IPv4 CIDR
     #
     #   * Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:
-    #     0.0.0.0/0
+    #     Managed Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0
+    #   * Type: DNS (UDP), Protocol: UDP, Range: 53, Source: Managed Microsoft
+    #     AD VPC IPv4 CIDR
     #
-    #   * Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0
+    #   * Type: DNS (TCP), Protocol: TCP, Range: 53, Source: Managed Microsoft
+    #     AD VPC IPv4 CIDR
     #
-    #   * Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0
+    #   * Type: LDAP, Protocol: TCP, Range: 389, Source: Managed Microsoft AD
+    #     VPC IPv4 CIDR
     #
-    #   * Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0
+    #   * Type: All ICMP, Protocol: All, Range: N/A, Source: Managed Microsoft
+    #     AD VPC IPv4 CIDR
     #
     #
     #
@@ -1187,8 +1208,8 @@ module Aws::DirectoryService
     #   which to create the trust relationship.
     #
     # @option params [required, String] :trust_password
-    #   The trust password. The must be the same password that was used when
-    #   creating the trust relationship on the external domain.
+    #   The trust password. The trust password must be the same password that
+    #   was used when creating the trust relationship on the external domain.
     #
     # @option params [required, String] :trust_direction
     #   The direction of the trust relationship.
@@ -1636,7 +1657,7 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].description #=> String
     #   resp.directory_descriptions[0].dns_ip_addrs #=> Array
     #   resp.directory_descriptions[0].dns_ip_addrs[0] #=> String
-    #   resp.directory_descriptions[0].stage #=> String, one of "Requested", "Creating", "Created", "Active", "Inoperable", "Impaired", "Restoring", "RestoreFailed", "Deleting", "Deleted", "Failed"
+    #   resp.directory_descriptions[0].stage #=> String, one of "Requested", "Creating", "Created", "Active", "Inoperable", "Impaired", "Restoring", "RestoreFailed", "Deleting", "Deleted", "Failed", "Updating"
     #   resp.directory_descriptions[0].share_status #=> String, one of "Shared", "PendingAcceptance", "Rejected", "Rejecting", "RejectFailed", "Sharing", "ShareFailed", "Deleted", "Deleting"
     #   resp.directory_descriptions[0].share_method #=> String, one of "ORGANIZATIONS", "HANDSHAKE"
     #   resp.directory_descriptions[0].share_notes #=> String
@@ -1706,6 +1727,35 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Obtains status of directory data access enablement through the
+    # Directory Service Data API for the specified directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The directory identifier.
+    #
+    # @return [Types::DescribeDirectoryDataAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDirectoryDataAccessResult#data_access_status #data_access_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_directory_data_access({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_access_status #=> String, one of "Disabled", "Disabling", "Enabled", "Enabling", "Failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectoryDataAccess AWS API Documentation
+    #
+    # @overload describe_directory_data_access(params = {})
+    # @param [Hash] params ({})
+    def describe_directory_data_access(params = {}, options = {})
+      req = build_request(:describe_directory_data_access, params)
+      req.send_request(options)
+    end
+
     # Provides information about any domain controllers in your directory.
     #
     # @option params [required, String] :directory_id
@@ -1748,7 +1798,7 @@ module Aws::DirectoryService
     #   resp.domain_controllers[0].vpc_id #=> String
     #   resp.domain_controllers[0].subnet_id #=> String
     #   resp.domain_controllers[0].availability_zone #=> String
-    #   resp.domain_controllers[0].status #=> String, one of "Creating", "Active", "Impaired", "Restoring", "Deleting", "Deleted", "Failed"
+    #   resp.domain_controllers[0].status #=> String, one of "Creating", "Active", "Impaired", "Restoring", "Deleting", "Deleted", "Failed", "Updating"
     #   resp.domain_controllers[0].status_reason #=> String
     #   resp.domain_controllers[0].launch_time #=> Time
     #   resp.domain_controllers[0].status_last_updated_date_time #=> Time
@@ -1892,7 +1942,7 @@ module Aws::DirectoryService
     #   resp.regions_description[0].directory_id #=> String
     #   resp.regions_description[0].region_name #=> String
     #   resp.regions_description[0].region_type #=> String, one of "Primary", "Additional"
-    #   resp.regions_description[0].status #=> String, one of "Requested", "Creating", "Created", "Active", "Inoperable", "Impaired", "Restoring", "RestoreFailed", "Deleting", "Deleted", "Failed"
+    #   resp.regions_description[0].status #=> String, one of "Requested", "Creating", "Created", "Active", "Inoperable", "Impaired", "Restoring", "RestoreFailed", "Deleting", "Deleted", "Failed", "Updating"
     #   resp.regions_description[0].vpc_settings.vpc_id #=> String
     #   resp.regions_description[0].vpc_settings.subnet_ids #=> Array
     #   resp.regions_description[0].vpc_settings.subnet_ids[0] #=> String
@@ -2210,8 +2260,8 @@ module Aws::DirectoryService
     #   The identifier of the directory
     #
     # @option params [required, String] :type
-    #   The type of client authentication to disable. Currently, only the
-    #   parameter, `SmartCard` is supported.
+    #   The type of client authentication to disable. Currently the only
+    #   parameter `"SmartCard"` is supported.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2228,6 +2278,29 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def disable_client_authentication(params = {}, options = {})
       req = build_request(:disable_client_authentication, params)
+      req.send_request(options)
+    end
+
+    # Deactivates access to directory data via the Directory Service Data
+    # API for the specified directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The directory identifier.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_directory_data_access({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableDirectoryDataAccess AWS API Documentation
+    #
+    # @overload disable_directory_data_access(params = {})
+    # @param [Hash] params ({})
+    def disable_directory_data_access(params = {}, options = {})
+      req = build_request(:disable_directory_data_access, params)
       req.send_request(options)
     end
 
@@ -2349,6 +2422,29 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def enable_client_authentication(params = {}, options = {})
       req = build_request(:enable_client_authentication, params)
+      req.send_request(options)
+    end
+
+    # Enables access to directory data via the Directory Service Data API
+    # for the specified directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The directory identifier.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_directory_data_access({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableDirectoryDataAccess AWS API Documentation
+    #
+    # @overload enable_directory_data_access(params = {})
+    # @param [Hash] params ({})
+    def enable_directory_data_access(params = {}, options = {})
+      req = build_request(:enable_directory_data_access, params)
       req.send_request(options)
     end
 
@@ -2944,7 +3040,8 @@ module Aws::DirectoryService
     end
 
     # Resets the password for any user in your Managed Microsoft AD or
-    # Simple AD directory.
+    # Simple AD directory. Disabled users will become enabled and can be
+    # authenticated following the API call.
     #
     # You can reset the password for any user in your directory with the
     # following exceptions:
@@ -3444,7 +3541,7 @@ module Aws::DirectoryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -15,6 +15,7 @@ module Aws
                       ?credentials: untyped,
                       ?region: String,
                       ?access_key_id: String,
+                      ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
                       ?client_side_monitoring: bool,
@@ -254,7 +255,8 @@ module Aws
                                      }?,
                                      string_expression: {
                                        evaluate: {
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+                                         mime_header_attribute: ::String?
                                        },
                                        operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
                                        values: Array[::String]
@@ -301,7 +303,8 @@ module Aws
                                      }?,
                                      string_expression: {
                                        evaluate: {
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+                                         mime_header_attribute: ::String?
                                        },
                                        operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
                                        values: Array[::String]
@@ -1011,7 +1014,8 @@ module Aws
                                      }?,
                                      string_expression: {
                                        evaluate: {
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+                                         mime_header_attribute: ::String?
                                        },
                                        operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
                                        values: Array[::String]
@@ -1058,7 +1062,8 @@ module Aws
                                      }?,
                                      string_expression: {
                                        evaluate: {
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?
+                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+                                         mime_header_attribute: ::String?
                                        },
                                        operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
                                        values: Array[::String]

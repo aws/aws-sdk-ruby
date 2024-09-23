@@ -30,11 +30,23 @@ module Aws::DynamoDB
   #
   #   @return [String]
   #
+  # @!attribute account_id
+  #   The AWS AccountId used for the request.
+  #
+  #   @return [String]
+  #
+  # @!attribute account_id_endpoint_mode
+  #   The AccountId Endpoint Mode.
+  #
+  #   @return [String]
+  #
   EndpointParameters = Struct.new(
     :region,
     :use_dual_stack,
     :use_fips,
     :endpoint,
+    :account_id,
+    :account_id_endpoint_mode,
   ) do
     include Aws::Structure
 
@@ -45,6 +57,8 @@ module Aws::DynamoDB
         'UseDualStack' => :use_dual_stack,
         'UseFIPS' => :use_fips,
         'Endpoint' => :endpoint,
+        'AccountId' => :account_id,
+        'AccountIdEndpointMode' => :account_id_endpoint_mode,
       }.freeze
     end
 
@@ -61,6 +75,8 @@ module Aws::DynamoDB
         raise ArgumentError, "Missing required EndpointParameter: :use_fips"
       end
       self[:endpoint] = options[:endpoint]
+      self[:account_id] = options[:account_id]
+      self[:account_id_endpoint_mode] = options[:account_id_endpoint_mode]
     end
   end
 end

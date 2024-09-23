@@ -130,13 +130,15 @@ module Aws::CostExplorer
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
-    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
+    #       `:account_id` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
+    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
     #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
     #       to true.
@@ -154,6 +156,8 @@ module Aws::CostExplorer
     #     * `~/.aws/config`
     #
     #   @option options [String] :access_key_id
+    #
+    #   @option options [String] :account_id
     #
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
@@ -376,7 +380,9 @@ module Aws::CostExplorer
     #     sending the request.
     #
     #   @option options [Aws::CostExplorer::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CostExplorer::EndpointParameters`
+    #     The endpoint provider used to resolve endpoints. Any object that responds to
+    #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+    #     `Aws::CostExplorer::EndpointParameters`.
     #
     #   @option options [Float] :http_continue_timeout (1)
     #     The number of seconds to wait for a 100-continue response before sending the
@@ -2045,10 +2051,11 @@ module Aws::CostExplorer
     #     is with. Possible values are the following:
     #
     #     \- Amazon Web Services(Amazon Web Services): The entity that sells
-    #     Amazon Web Services.
+    #     Amazon Web Servicesservices.
     #
     #     \- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian
-    #     entity that's an acting reseller for Amazon Web Services in India.
+    #     entity that's an acting reseller for Amazon Web Servicesservices in
+    #     India.
     #
     #     \- Amazon Web Services Marketplace: The entity that supports the sale
     #     of solutions that are built on Amazon Web Services by third-party
@@ -2930,6 +2937,12 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].estimated_reservation_cost_for_lookback_period #=> String
     #   resp.recommendations[0].recommendation_details[0].upfront_cost #=> String
     #   resp.recommendations[0].recommendation_details[0].recurring_standard_monthly_cost #=> String
+    #   resp.recommendations[0].recommendation_details[0].reserved_capacity_details.dynamo_db_capacity_details.capacity_units #=> String
+    #   resp.recommendations[0].recommendation_details[0].reserved_capacity_details.dynamo_db_capacity_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].recommended_number_of_capacity_units_to_purchase #=> String
+    #   resp.recommendations[0].recommendation_details[0].minimum_number_of_capacity_units_used_per_hour #=> String
+    #   resp.recommendations[0].recommendation_details[0].maximum_number_of_capacity_units_used_per_hour #=> String
+    #   resp.recommendations[0].recommendation_details[0].average_number_of_capacity_units_used_per_hour #=> String
     #   resp.recommendations[0].recommendation_summary.total_estimated_monthly_savings_amount #=> String
     #   resp.recommendations[0].recommendation_summary.total_estimated_monthly_savings_percentage #=> String
     #   resp.recommendations[0].recommendation_summary.currency_code #=> String
@@ -5347,7 +5360,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

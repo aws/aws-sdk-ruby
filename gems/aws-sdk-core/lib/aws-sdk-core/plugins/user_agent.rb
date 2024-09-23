@@ -20,7 +20,12 @@ module Aws
           "GZIP_REQUEST_COMPRESSION": "L",
           "PROTOCOL_RPC_V2_CBOR": "M",
           "ENDPOINT_OVERRIDE": "N",
-          "SIGV4A_SIGNING": "S"
+          "ACCOUNT_ID_ENDPOINT": "O",
+          "ACCOUNT_ID_MODE_PREFERRED": "P",
+          "ACCOUNT_ID_MODE_DISABLED": "Q",
+          "ACCOUNT_ID_MODE_REQUIRED": "R",
+          "SIGV4A_SIGNING": "S",
+          "RESOLVED_ACCOUNT_ID": "T"
         }
       METRICS
 

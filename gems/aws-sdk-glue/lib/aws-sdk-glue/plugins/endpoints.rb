@@ -15,11 +15,11 @@ module Aws::Glue
         :endpoint_provider,
         doc_type: 'Aws::Glue::EndpointProvider',
         rbs_type: 'untyped',
-        docstring: 'The endpoint provider used to resolve endpoints. Any '\
-                   'object that responds to `#resolve_endpoint(parameters)` '\
-                   'where `parameters` is a Struct similar to '\
-                   '`Aws::Glue::EndpointParameters`'
-      ) do |cfg|
+        docstring: <<~DOCS) do |_cfg|
+The endpoint provider used to resolve endpoints. Any object that responds to
+`#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+`Aws::Glue::EndpointParameters`.
+        DOCS
         Aws::Glue::EndpointProvider.new
       end
 
@@ -50,6 +50,9 @@ module Aws::Glue
           metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
           if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
             metrics << 'SIGV4A_SIGNING'
+          end
+          if context.config.credentials&.credentials&.account_id
+            metrics << 'RESOLVED_ACCOUNT_ID'
           end
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end
@@ -467,6 +470,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::StopWorkflowRun.build(context)
           when :tag_resource
             Aws::Glue::Endpoints::TagResource.build(context)
+          when :test_connection
+            Aws::Glue::Endpoints::TestConnection.build(context)
           when :untag_resource
             Aws::Glue::Endpoints::UntagResource.build(context)
           when :update_blueprint

@@ -749,10 +749,9 @@ module Aws::WorkSpacesWeb
     #   provider.
     #
     #   `IAM Identity Center` web portals are authenticated through IAM
-    #   Identity Center (successor to Single Sign-On). Identity sources
-    #   (including external identity provider integration), plus user and
-    #   group access to your web portal, can be configured in the IAM
-    #   Identity Center.
+    #   Identity Center. Identity sources (including external identity
+    #   provider integration), plus user and group access to your web
+    #   portal, can be configured in the IAM Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1246,6 +1245,27 @@ module Aws::WorkSpacesWeb
     #
     class DisassociateUserSettingsResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] portal_id
+    #   The ID of the web portal for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session to expire.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ExpireSessionRequest AWS API Documentation
+    #
+    class ExpireSessionRequest < Struct.new(
+      :portal_id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ExpireSessionResponse AWS API Documentation
+    #
+    class ExpireSessionResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] browser_settings_arn
     #   The ARN of the browser settings.
     #   @return [String]
@@ -1391,6 +1411,35 @@ module Aws::WorkSpacesWeb
     class GetPortalServiceProviderMetadataResponse < Struct.new(
       :portal_arn,
       :service_provider_saml_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_id
+    #   The ID of the web portal for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetSessionRequest AWS API Documentation
+    #
+    class GetSessionRequest < Struct.new(
+      :portal_id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session
+    #   The sessions in a list.
+    #   @return [Types::Session]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetSessionResponse AWS API Documentation
+    #
+    class GetSessionResponse < Struct.new(
+      :session)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1925,6 +1974,67 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be included in the next page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_id
+    #   The ID of the web portal for the sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The method in which the returned sessions should be sorted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListSessionsRequest AWS API Documentation
+    #
+    class ListSessionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :portal_id,
+      :session_id,
+      :sort_by,
+      :status,
+      :username)
+      SENSITIVE = [:username]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] sessions
+    #   The sessions in a list.
+    #   @return [Array<Types::SessionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListSessionsResponse AWS API Documentation
+    #
+    class ListSessionsResponse < Struct.new(
+      :next_token,
+      :sessions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource.
     #   @return [String]
@@ -2179,10 +2289,9 @@ module Aws::WorkSpacesWeb
     #   provider.
     #
     #   `IAM Identity Center` web portals are authenticated through IAM
-    #   Identity Center (successor to Single Sign-On). Identity sources
-    #   (including external identity provider integration), plus user and
-    #   group access to your web portal, can be configured in the IAM
-    #   Identity Center.
+    #   Identity Center. Identity sources (including external identity
+    #   provider integration), plus user and group access to your web
+    #   portal, can be configured in the IAM Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] browser_settings_arn
@@ -2297,10 +2406,9 @@ module Aws::WorkSpacesWeb
     #   provider.
     #
     #   `IAM Identity Center` web portals are authenticated through IAM
-    #   Identity Center (successor to Single Sign-On). Identity sources
-    #   (including external identity provider integration), plus user and
-    #   group access to your web portal, can be configured in the IAM
-    #   Identity Center.
+    #   Identity Center. Identity sources (including external identity
+    #   provider integration), plus user and group access to your web
+    #   portal, can be configured in the IAM Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] browser_settings_arn
@@ -2443,6 +2551,89 @@ module Aws::WorkSpacesWeb
       :resource_type,
       :service_code)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a secure browser session.
+    #
+    # @!attribute [rw] client_ip_addresses
+    #   The IP address of the client.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the session.
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the web portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the session.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/Session AWS API Documentation
+    #
+    class Session < Struct.new(
+      :client_ip_addresses,
+      :end_time,
+      :portal_arn,
+      :session_id,
+      :start_time,
+      :status,
+      :username)
+      SENSITIVE = [:client_ip_addresses, :username]
+      include Aws::Structure
+    end
+
+    # Summary information about a secure browser session.
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the session.
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the web portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the session.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/SessionSummary AWS API Documentation
+    #
+    class SessionSummary < Struct.new(
+      :end_time,
+      :portal_arn,
+      :session_id,
+      :start_time,
+      :status,
+      :username)
+      SENSITIVE = [:username]
       include Aws::Structure
     end
 
@@ -2897,10 +3088,9 @@ module Aws::WorkSpacesWeb
     #   provider.
     #
     #   `IAM Identity Center` web portals are authenticated through IAM
-    #   Identity Center (successor to Single Sign-On). Identity sources
-    #   (including external identity provider integration), plus user and
-    #   group access to your web portal, can be configured in the IAM
-    #   Identity Center.
+    #   Identity Center. Identity sources (including external identity
+    #   provider integration), plus user and group access to your web
+    #   portal, can be configured in the IAM Identity Center.
     #   @return [String]
     #
     # @!attribute [rw] display_name

@@ -120,6 +120,7 @@ module Aws
   autoload :DeviceFarm, 'aws-sdk-devicefarm'
   autoload :DirectConnect, 'aws-sdk-directconnect'
   autoload :DirectoryService, 'aws-sdk-directoryservice'
+  autoload :DirectoryServiceData, 'aws-sdk-directoryservicedata'
   autoload :DocDB, 'aws-sdk-docdb'
   autoload :DocDBElastic, 'aws-sdk-docdbelastic'
   autoload :Drs, 'aws-sdk-drs'

@@ -1350,6 +1350,7 @@ module Aws::MediaLive
 
     class H264FilterSettings
       attr_accessor temporal_filter_settings: Types::TemporalFilterSettings
+      attr_accessor bandwidth_reduction_filter_settings: Types::BandwidthReductionFilterSettings
       SENSITIVE: []
     end
 
@@ -1411,6 +1412,7 @@ module Aws::MediaLive
 
     class H265FilterSettings
       attr_accessor temporal_filter_settings: Types::TemporalFilterSettings
+      attr_accessor bandwidth_reduction_filter_settings: Types::BandwidthReductionFilterSettings
       SENSITIVE: []
     end
 
@@ -2348,6 +2350,7 @@ module Aws::MediaLive
 
     class MultiplexOutputSettings
       attr_accessor destination: Types::OutputLocationRef
+      attr_accessor container_settings: Types::MultiplexContainerSettings
       SENSITIVE: []
     end
 
@@ -5398,6 +5401,35 @@ module Aws::MediaLive
       attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
       attr_accessor role: ("BACKUP" | "ACTIVE")
       attr_accessor state: ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      SENSITIVE: []
+    end
+
+    class BandwidthReductionFilterSettings
+      attr_accessor post_filter_sharpening: ("DISABLED" | "SHARPENING_1" | "SHARPENING_2" | "SHARPENING_3")
+      attr_accessor strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4")
+      SENSITIVE: []
+    end
+
+    class MultiplexContainerSettings
+      attr_accessor multiplex_m2ts_settings: Types::MultiplexM2tsSettings
+      SENSITIVE: []
+    end
+
+    class MultiplexM2tsSettings
+      attr_accessor absent_input_audio_behavior: ("DROP" | "ENCODE_SILENCE")
+      attr_accessor arib: ("DISABLED" | "ENABLED")
+      attr_accessor audio_buffer_model: ("ATSC" | "DVB")
+      attr_accessor audio_frames_per_pes: ::Integer
+      attr_accessor audio_stream_type: ("ATSC" | "DVB")
+      attr_accessor cc_descriptor: ("DISABLED" | "ENABLED")
+      attr_accessor ebif: ("NONE" | "PASSTHROUGH")
+      attr_accessor es_rate_in_pes: ("EXCLUDE" | "INCLUDE")
+      attr_accessor klv: ("NONE" | "PASSTHROUGH")
+      attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")
+      attr_accessor pcr_period: ::Integer
+      attr_accessor scte_35_control: ("NONE" | "PASSTHROUGH")
+      attr_accessor scte_35_preroll_pullup_milliseconds: ::Float
       SENSITIVE: []
     end
   end

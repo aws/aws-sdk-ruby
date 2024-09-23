@@ -103,6 +103,7 @@ module Aws::CostExplorer
     DimensionValuesWithAttributes = Shapes::StructureShape.new(name: 'DimensionValuesWithAttributes')
     DimensionValuesWithAttributesList = Shapes::ListShape.new(name: 'DimensionValuesWithAttributesList')
     DiskResourceUtilization = Shapes::StructureShape.new(name: 'DiskResourceUtilization')
+    DynamoDBCapacityDetails = Shapes::StructureShape.new(name: 'DynamoDBCapacityDetails')
     EBSResourceUtilization = Shapes::StructureShape.new(name: 'EBSResourceUtilization')
     EC2InstanceDetails = Shapes::StructureShape.new(name: 'EC2InstanceDetails')
     EC2ResourceDetails = Shapes::StructureShape.new(name: 'EC2ResourceDetails')
@@ -251,6 +252,7 @@ module Aws::CostExplorer
     ReservationPurchaseRecommendations = Shapes::ListShape.new(name: 'ReservationPurchaseRecommendations')
     ReservationUtilizationGroup = Shapes::StructureShape.new(name: 'ReservationUtilizationGroup')
     ReservationUtilizationGroups = Shapes::ListShape.new(name: 'ReservationUtilizationGroups')
+    ReservedCapacityDetails = Shapes::StructureShape.new(name: 'ReservedCapacityDetails')
     ReservedHours = Shapes::StringShape.new(name: 'ReservedHours')
     ReservedNormalizedUnits = Shapes::StringShape.new(name: 'ReservedNormalizedUnits')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
@@ -620,6 +622,10 @@ module Aws::CostExplorer
     DiskResourceUtilization.add_member(:disk_read_bytes_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "DiskReadBytesPerSecond"))
     DiskResourceUtilization.add_member(:disk_write_bytes_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "DiskWriteBytesPerSecond"))
     DiskResourceUtilization.struct_class = Types::DiskResourceUtilization
+
+    DynamoDBCapacityDetails.add_member(:capacity_units, Shapes::ShapeRef.new(shape: GenericString, location_name: "CapacityUnits"))
+    DynamoDBCapacityDetails.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
+    DynamoDBCapacityDetails.struct_class = Types::DynamoDBCapacityDetails
 
     EBSResourceUtilization.add_member(:ebs_read_ops_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "EbsReadOpsPerSecond"))
     EBSResourceUtilization.add_member(:ebs_write_ops_per_second, Shapes::ShapeRef.new(shape: GenericString, location_name: "EbsWriteOpsPerSecond"))
@@ -1197,6 +1203,11 @@ module Aws::CostExplorer
     ReservationPurchaseRecommendationDetail.add_member(:estimated_reservation_cost_for_lookback_period, Shapes::ShapeRef.new(shape: GenericString, location_name: "EstimatedReservationCostForLookbackPeriod"))
     ReservationPurchaseRecommendationDetail.add_member(:upfront_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "UpfrontCost"))
     ReservationPurchaseRecommendationDetail.add_member(:recurring_standard_monthly_cost, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecurringStandardMonthlyCost"))
+    ReservationPurchaseRecommendationDetail.add_member(:reserved_capacity_details, Shapes::ShapeRef.new(shape: ReservedCapacityDetails, location_name: "ReservedCapacityDetails"))
+    ReservationPurchaseRecommendationDetail.add_member(:recommended_number_of_capacity_units_to_purchase, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendedNumberOfCapacityUnitsToPurchase"))
+    ReservationPurchaseRecommendationDetail.add_member(:minimum_number_of_capacity_units_used_per_hour, Shapes::ShapeRef.new(shape: GenericString, location_name: "MinimumNumberOfCapacityUnitsUsedPerHour"))
+    ReservationPurchaseRecommendationDetail.add_member(:maximum_number_of_capacity_units_used_per_hour, Shapes::ShapeRef.new(shape: GenericString, location_name: "MaximumNumberOfCapacityUnitsUsedPerHour"))
+    ReservationPurchaseRecommendationDetail.add_member(:average_number_of_capacity_units_used_per_hour, Shapes::ShapeRef.new(shape: GenericString, location_name: "AverageNumberOfCapacityUnitsUsedPerHour"))
     ReservationPurchaseRecommendationDetail.struct_class = Types::ReservationPurchaseRecommendationDetail
 
     ReservationPurchaseRecommendationDetails.member = Shapes::ShapeRef.new(shape: ReservationPurchaseRecommendationDetail)
@@ -1220,6 +1231,9 @@ module Aws::CostExplorer
     ReservationUtilizationGroup.struct_class = Types::ReservationUtilizationGroup
 
     ReservationUtilizationGroups.member = Shapes::ShapeRef.new(shape: ReservationUtilizationGroup)
+
+    ReservedCapacityDetails.add_member(:dynamo_db_capacity_details, Shapes::ShapeRef.new(shape: DynamoDBCapacityDetails, location_name: "DynamoDBCapacityDetails"))
+    ReservedCapacityDetails.struct_class = Types::ReservedCapacityDetails
 
     ResourceDetails.add_member(:ec2_resource_details, Shapes::ShapeRef.new(shape: EC2ResourceDetails, location_name: "EC2ResourceDetails"))
     ResourceDetails.struct_class = Types::ResourceDetails

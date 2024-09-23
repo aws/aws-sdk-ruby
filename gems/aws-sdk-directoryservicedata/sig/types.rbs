@@ -1,0 +1,384 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DirectoryServiceData
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor reason: ("IAM_AUTH" | "DIRECTORY_AUTH" | "DATA_DISABLED")
+      SENSITIVE: []
+    end
+
+    class AddGroupMemberRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor member_name: ::String
+      attr_accessor member_realm: ::String
+      SENSITIVE: []
+    end
+
+    class AddGroupMemberResult < Aws::EmptyStructure
+    end
+
+    class AttributeValue
+      attr_accessor bool: bool
+      attr_accessor n: ::Integer
+      attr_accessor s: ::String
+      attr_accessor ss: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: [:bool, :n, :s, :ss]
+
+      class Bool < AttributeValue
+      end
+      class N < AttributeValue
+      end
+      class S < AttributeValue
+      end
+      class Ss < AttributeValue
+      end
+      class Unknown < AttributeValue
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor group_scope: ("DomainLocal" | "Global" | "Universal" | "BuiltinLocal")
+      attr_accessor group_type: ("Distribution" | "Security")
+      attr_accessor other_attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor sam_account_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupResult
+      attr_accessor directory_id: ::String
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor email_address: ::String
+      attr_accessor given_name: ::String
+      attr_accessor other_attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor sam_account_name: ::String
+      attr_accessor surname: ::String
+      SENSITIVE: [:email_address, :given_name, :surname]
+    end
+
+    class CreateUserResult
+      attr_accessor directory_id: ::String
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor sam_account_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupResult < Aws::EmptyStructure
+    end
+
+    class DeleteUserRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor sam_account_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserResult < Aws::EmptyStructure
+    end
+
+    class DescribeGroupRequest
+      attr_accessor directory_id: ::String
+      attr_accessor other_attributes: ::Array[::String]
+      attr_accessor realm: ::String
+      attr_accessor sam_account_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGroupResult
+      attr_accessor directory_id: ::String
+      attr_accessor distinguished_name: ::String
+      attr_accessor group_scope: ("DomainLocal" | "Global" | "Universal" | "BuiltinLocal")
+      attr_accessor group_type: ("Distribution" | "Security")
+      attr_accessor other_attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor realm: ::String
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      SENSITIVE: [:distinguished_name]
+    end
+
+    class DescribeUserRequest
+      attr_accessor directory_id: ::String
+      attr_accessor other_attributes: ::Array[::String]
+      attr_accessor realm: ::String
+      attr_accessor sam_account_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserResult
+      attr_accessor directory_id: ::String
+      attr_accessor distinguished_name: ::String
+      attr_accessor email_address: ::String
+      attr_accessor enabled: bool
+      attr_accessor given_name: ::String
+      attr_accessor other_attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor realm: ::String
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      attr_accessor surname: ::String
+      attr_accessor user_principal_name: ::String
+      SENSITIVE: [:distinguished_name, :email_address, :given_name, :surname, :user_principal_name]
+    end
+
+    class DirectoryUnavailableException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_DIRECTORY_STATE" | "DIRECTORY_TIMEOUT" | "DIRECTORY_RESOURCES_EXCEEDED" | "NO_DISK_SPACE" | "TRUST_AUTH_FAILURE")
+      SENSITIVE: []
+    end
+
+    class DisableUserRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor sam_account_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisableUserResult < Aws::EmptyStructure
+    end
+
+    class Group
+      attr_accessor distinguished_name: ::String
+      attr_accessor group_scope: ("DomainLocal" | "Global" | "Universal" | "BuiltinLocal")
+      attr_accessor group_type: ("Distribution" | "Security")
+      attr_accessor other_attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      SENSITIVE: [:distinguished_name]
+    end
+
+    class GroupSummary
+      attr_accessor group_scope: ("DomainLocal" | "Global" | "Universal" | "BuiltinLocal")
+      attr_accessor group_type: ("Distribution" | "Security")
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupMembersRequest
+      attr_accessor directory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor member_realm: ::String
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      attr_accessor sam_account_name: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListGroupMembersResult
+      attr_accessor directory_id: ::String
+      attr_accessor member_realm: ::String
+      attr_accessor members: ::Array[Types::Member]
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListGroupsForMemberRequest
+      attr_accessor directory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor member_realm: ::String
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      attr_accessor sam_account_name: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListGroupsForMemberResult
+      attr_accessor directory_id: ::String
+      attr_accessor groups: ::Array[Types::GroupSummary]
+      attr_accessor member_realm: ::String
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListGroupsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListGroupsResult
+      attr_accessor directory_id: ::String
+      attr_accessor groups: ::Array[Types::GroupSummary]
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListUsersRequest
+      attr_accessor directory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListUsersResult
+      attr_accessor directory_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      attr_accessor users: ::Array[Types::UserSummary]
+      SENSITIVE: [:next_token]
+    end
+
+    class Member
+      attr_accessor member_type: ("USER" | "GROUP" | "COMPUTER")
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveGroupMemberRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor member_name: ::String
+      attr_accessor member_realm: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveGroupMemberResult < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SearchGroupsRequest
+      attr_accessor directory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      attr_accessor search_attributes: ::Array[::String]
+      attr_accessor search_string: ::String
+      SENSITIVE: [:next_token, :search_string]
+    end
+
+    class SearchGroupsResult
+      attr_accessor directory_id: ::String
+      attr_accessor groups: ::Array[Types::Group]
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class SearchUsersRequest
+      attr_accessor directory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      attr_accessor search_attributes: ::Array[::String]
+      attr_accessor search_string: ::String
+      SENSITIVE: [:next_token, :search_string]
+    end
+
+    class SearchUsersResult
+      attr_accessor directory_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor realm: ::String
+      attr_accessor users: ::Array[Types::User]
+      SENSITIVE: [:next_token]
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateGroupRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor group_scope: ("DomainLocal" | "Global" | "Universal" | "BuiltinLocal")
+      attr_accessor group_type: ("Distribution" | "Security")
+      attr_accessor other_attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor sam_account_name: ::String
+      attr_accessor update_type: ("ADD" | "REPLACE" | "REMOVE")
+      SENSITIVE: []
+    end
+
+    class UpdateGroupResult < Aws::EmptyStructure
+    end
+
+    class UpdateUserRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor email_address: ::String
+      attr_accessor given_name: ::String
+      attr_accessor other_attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor sam_account_name: ::String
+      attr_accessor surname: ::String
+      attr_accessor update_type: ("ADD" | "REPLACE" | "REMOVE")
+      SENSITIVE: [:email_address, :given_name, :surname]
+    end
+
+    class UpdateUserResult < Aws::EmptyStructure
+    end
+
+    class User
+      attr_accessor distinguished_name: ::String
+      attr_accessor email_address: ::String
+      attr_accessor enabled: bool
+      attr_accessor given_name: ::String
+      attr_accessor other_attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      attr_accessor surname: ::String
+      attr_accessor user_principal_name: ::String
+      SENSITIVE: [:distinguished_name, :email_address, :given_name, :surname, :user_principal_name]
+    end
+
+    class UserSummary
+      attr_accessor enabled: bool
+      attr_accessor given_name: ::String
+      attr_accessor sam_account_name: ::String
+      attr_accessor sid: ::String
+      attr_accessor surname: ::String
+      SENSITIVE: [:given_name, :surname]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_REALM" | "INVALID_DIRECTORY_TYPE" | "INVALID_SECONDARY_REGION" | "INVALID_NEXT_TOKEN" | "INVALID_ATTRIBUTE_VALUE" | "INVALID_ATTRIBUTE_NAME" | "INVALID_ATTRIBUTE_FOR_USER" | "INVALID_ATTRIBUTE_FOR_GROUP" | "INVALID_ATTRIBUTE_FOR_SEARCH" | "INVALID_ATTRIBUTE_FOR_MODIFY" | "DUPLICATE_ATTRIBUTE" | "MISSING_ATTRIBUTE" | "ATTRIBUTE_EXISTS" | "LDAP_SIZE_LIMIT_EXCEEDED" | "LDAP_UNSUPPORTED_OPERATION")
+      SENSITIVE: []
+    end
+  end
+end

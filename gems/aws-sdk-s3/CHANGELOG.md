@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2024-09-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.163.0 (2024-09-18)
+------------------
+
+* Feature - Added SSE-KMS support for directory buckets.
+
 1.162.0 (2024-09-11)
 ------------------
 

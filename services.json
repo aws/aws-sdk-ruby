@@ -359,6 +359,9 @@
   "DirectoryService": {
     "models": "ds/2015-04-16"
   },
+  "DirectoryServiceData": {
+    "models": "directory-service-data/2023-05-31"
+  },
   "DocDB": {
     "models": "docdb/2014-10-31",
     "addPlugins": [

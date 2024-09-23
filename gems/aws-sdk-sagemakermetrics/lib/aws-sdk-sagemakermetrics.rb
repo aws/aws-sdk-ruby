@@ -32,7 +32,7 @@ require_relative 'aws-sdk-sagemakermetrics/customizations'
 # structure.
 #
 #     sage_maker_metrics = Aws::SageMakerMetrics::Client.new
-#     resp = sage_maker_metrics.batch_put_metrics(params)
+#     resp = sage_maker_metrics.batch_get_metrics(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-sagemakermetrics/customizations'
 # @!group service
 module Aws::SageMakerMetrics
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end

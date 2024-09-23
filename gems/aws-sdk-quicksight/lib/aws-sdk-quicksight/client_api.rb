@@ -328,6 +328,7 @@ module Aws::QuickSight
     ComboChartFieldWells = Shapes::StructureShape.new(name: 'ComboChartFieldWells')
     ComboChartSortConfiguration = Shapes::StructureShape.new(name: 'ComboChartSortConfiguration')
     ComboChartVisual = Shapes::StructureShape.new(name: 'ComboChartVisual')
+    CommitMode = Shapes::StringShape.new(name: 'CommitMode')
     ComparativeOrder = Shapes::StructureShape.new(name: 'ComparativeOrder')
     ComparisonConfiguration = Shapes::StructureShape.new(name: 'ComparisonConfiguration')
     ComparisonFormatConfiguration = Shapes::StructureShape.new(name: 'ComparisonFormatConfiguration')
@@ -808,6 +809,7 @@ module Aws::QuickSight
     FolderSummary = Shapes::StructureShape.new(name: 'FolderSummary')
     FolderSummaryList = Shapes::ListShape.new(name: 'FolderSummaryList')
     FolderType = Shapes::StringShape.new(name: 'FolderType')
+    FoldersForResourceArnList = Shapes::ListShape.new(name: 'FoldersForResourceArnList')
     Font = Shapes::StructureShape.new(name: 'Font')
     FontConfiguration = Shapes::StructureShape.new(name: 'FontConfiguration')
     FontDecoration = Shapes::StringShape.new(name: 'FontDecoration')
@@ -1043,6 +1045,8 @@ module Aws::QuickSight
     ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
     ListFolderMembersRequest = Shapes::StructureShape.new(name: 'ListFolderMembersRequest')
     ListFolderMembersResponse = Shapes::StructureShape.new(name: 'ListFolderMembersResponse')
+    ListFoldersForResourceRequest = Shapes::StructureShape.new(name: 'ListFoldersForResourceRequest')
+    ListFoldersForResourceResponse = Shapes::StructureShape.new(name: 'ListFoldersForResourceResponse')
     ListFoldersRequest = Shapes::StructureShape.new(name: 'ListFoldersRequest')
     ListFoldersResponse = Shapes::StructureShape.new(name: 'ListFoldersResponse')
     ListGroupMembershipsRequest = Shapes::StructureShape.new(name: 'ListGroupMembershipsRequest')
@@ -3883,6 +3887,7 @@ module Aws::QuickSight
 
     DefaultDateTimePickerControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlDateTimePickerType, location_name: "Type"))
     DefaultDateTimePickerControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: DateTimePickerControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultDateTimePickerControlOptions.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     DefaultDateTimePickerControlOptions.struct_class = Types::DefaultDateTimePickerControlOptions
 
     DefaultFilterControlConfiguration.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
@@ -3901,6 +3906,7 @@ module Aws::QuickSight
     DefaultFilterDropDownControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: DropDownControlDisplayOptions, location_name: "DisplayOptions"))
     DefaultFilterDropDownControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
     DefaultFilterDropDownControlOptions.add_member(:selectable_values, Shapes::ShapeRef.new(shape: FilterSelectableValues, location_name: "SelectableValues"))
+    DefaultFilterDropDownControlOptions.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     DefaultFilterDropDownControlOptions.struct_class = Types::DefaultFilterDropDownControlOptions
 
     DefaultFilterListControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: ListControlDisplayOptions, location_name: "DisplayOptions"))
@@ -3931,6 +3937,7 @@ module Aws::QuickSight
     DefaultPaginatedLayoutConfiguration.struct_class = Types::DefaultPaginatedLayoutConfiguration
 
     DefaultRelativeDateTimeControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: RelativeDateTimeControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultRelativeDateTimeControlOptions.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     DefaultRelativeDateTimeControlOptions.struct_class = Types::DefaultRelativeDateTimeControlOptions
 
     DefaultSectionBasedLayoutConfiguration.add_member(:canvas_size_options, Shapes::ShapeRef.new(shape: SectionBasedLayoutCanvasSizeOptions, required: true, location_name: "CanvasSizeOptions"))
@@ -4943,6 +4950,7 @@ module Aws::QuickSight
     FilterDateTimePickerControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterDateTimePickerControl.add_member(:display_options, Shapes::ShapeRef.new(shape: DateTimePickerControlDisplayOptions, location_name: "DisplayOptions"))
     FilterDateTimePickerControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlDateTimePickerType, location_name: "Type"))
+    FilterDateTimePickerControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     FilterDateTimePickerControl.struct_class = Types::FilterDateTimePickerControl
 
     FilterDropDownControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
@@ -4952,6 +4960,7 @@ module Aws::QuickSight
     FilterDropDownControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
     FilterDropDownControl.add_member(:selectable_values, Shapes::ShapeRef.new(shape: FilterSelectableValues, location_name: "SelectableValues"))
     FilterDropDownControl.add_member(:cascading_control_configuration, Shapes::ShapeRef.new(shape: CascadingControlConfiguration, location_name: "CascadingControlConfiguration"))
+    FilterDropDownControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     FilterDropDownControl.struct_class = Types::FilterDropDownControl
 
     FilterGroup.add_member(:filter_group_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterGroupId"))
@@ -4995,6 +5004,7 @@ module Aws::QuickSight
     FilterRelativeDateTimeControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
     FilterRelativeDateTimeControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterRelativeDateTimeControl.add_member(:display_options, Shapes::ShapeRef.new(shape: RelativeDateTimeControlDisplayOptions, location_name: "DisplayOptions"))
+    FilterRelativeDateTimeControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     FilterRelativeDateTimeControl.struct_class = Types::FilterRelativeDateTimeControl
 
     FilterScopeConfiguration.add_member(:selected_sheets, Shapes::ShapeRef.new(shape: SelectedSheetsFilterScopeConfiguration, location_name: "SelectedSheets"))
@@ -5066,6 +5076,8 @@ module Aws::QuickSight
     FolderSummary.struct_class = Types::FolderSummary
 
     FolderSummaryList.member = Shapes::ShapeRef.new(shape: FolderSummary)
+
+    FoldersForResourceArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
     Font.add_member(:font_family, Shapes::ShapeRef.new(shape: String, location_name: "FontFamily"))
     Font.struct_class = Types::Font
@@ -5926,6 +5938,18 @@ module Aws::QuickSight
     ListFolderMembersResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListFolderMembersResponse.struct_class = Types::ListFolderMembersResponse
 
+    ListFoldersForResourceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListFoldersForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
+    ListFoldersForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListFoldersForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListFoldersForResourceRequest.struct_class = Types::ListFoldersForResourceRequest
+
+    ListFoldersForResourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListFoldersForResourceResponse.add_member(:folders, Shapes::ShapeRef.new(shape: FoldersForResourceArnList, location_name: "Folders"))
+    ListFoldersForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFoldersForResourceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListFoldersForResourceResponse.struct_class = Types::ListFoldersForResourceResponse
+
     ListFoldersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListFoldersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListFoldersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
@@ -6486,6 +6510,7 @@ module Aws::QuickSight
     ParameterDropDownControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
     ParameterDropDownControl.add_member(:selectable_values, Shapes::ShapeRef.new(shape: ParameterSelectableValues, location_name: "SelectableValues"))
     ParameterDropDownControl.add_member(:cascading_control_configuration, Shapes::ShapeRef.new(shape: CascadingControlConfiguration, location_name: "CascadingControlConfiguration"))
+    ParameterDropDownControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     ParameterDropDownControl.struct_class = Types::ParameterDropDownControl
 
     ParameterListControl.add_member(:parameter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ParameterControlId"))
@@ -10767,6 +10792,27 @@ module Aws::QuickSight
         o.http_request_uri = "/accounts/{AwsAccountId}/folders"
         o.input = Shapes::ShapeRef.new(shape: ListFoldersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFoldersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_folders_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFoldersForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/resource/{ResourceArn}/folders"
+        o.input = Shapes::ShapeRef.new(shape: ListFoldersForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFoldersForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
