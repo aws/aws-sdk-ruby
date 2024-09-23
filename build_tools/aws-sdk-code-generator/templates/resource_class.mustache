@@ -304,3 +304,8 @@ module {{module_name}}
     {{/batch_actions?}}
   end
 end
+{{#customization_file_exists?}}
+
+# Load customizations if they exist
+require '{{resource_customization}}'
+{{/customization_file_exists?}}

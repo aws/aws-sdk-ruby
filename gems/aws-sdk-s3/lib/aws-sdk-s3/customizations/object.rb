@@ -559,6 +559,12 @@ module Aws
         end
         true
       end
+
+      class Collection < Aws::Resources::Collection
+        alias_method :delete, :batch_delete!
+        extend Aws::Deprecations
+        deprecated :delete, use: :batch_delete!
+      end
     end
   end
 end

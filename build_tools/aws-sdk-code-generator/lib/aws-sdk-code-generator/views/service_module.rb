@@ -11,7 +11,7 @@ module AwsSdkCodeGenerator
       def initialize(options)
         @service = options.fetch(:service)
         @prefix = options.fetch(:prefix)
-        @codegenerated_plugins = options.fetch(:codegenerated_plugins)
+        @codegenerated_plugins = options.fetch(:codegenerated_plugins) || []
       end
 
       # @return [String|nil]
@@ -60,47 +60,56 @@ module AwsSdkCodeGenerator
         @service.included_in_core?
       end
 
-      # @return [Array<String>]
-      def relative_requires
-        paths = Set.new
-        paths << "#{@prefix}/types"
-        paths << "#{@prefix}/client_api"
+      # @return [Array<Hash>] list of autoload path hashes with :path, :class_name and
+      # :is_plugin keys.
+      def autoloads
+        paths = []
+        paths << auto_load("#{@prefix}/types", :Types)
+        paths << auto_load("#{@prefix}/client_api", :ClientApi)
 
         # these must be required before the client
-        if @codegenerated_plugins
-          paths += @codegenerated_plugins.map { | p| p.path }
+        paths += @codegenerated_plugins.map do |p|
+          auto_load(p.path, p.class_name.split('::').last, true)
         end
 
-        paths << "#{@prefix}/client"
-        paths << "#{@prefix}/errors"
-        paths << "#{@prefix}/waiters" if @service.waiters
-        paths << "#{@prefix}/resource"
+        paths << auto_load("#{@prefix}/client", :Client)
+        paths << auto_load("#{@prefix}/errors", :Errors)
+        paths << auto_load("#{@prefix}/waiters", :Waiters) if @service.waiters
+        paths << auto_load("#{@prefix}/resource", :Resource)
 
         unless @service.legacy_endpoints?
-          paths << "#{@prefix}/endpoint_parameters"
-          paths << "#{@prefix}/endpoint_provider"
-          paths << "#{@prefix}/endpoints"
+          paths << auto_load("#{@prefix}/endpoint_parameters", :EndpointParameters)
+          paths << auto_load("#{@prefix}/endpoint_provider", :EndpointProvider)
+          paths << auto_load("#{@prefix}/endpoints", :Endpoints)
         end
 
         if @service.resources && @service.resources['resources']
           @service.resources['resources'].keys.each do |resource_name|
             path = "#{@prefix}/#{underscore(resource_name)}"
-            if paths.include?(path)
-              raise "resource path conflict for `#{resource_name}'"
-            else
-              paths << path
-            end
+            paths << auto_load(path, resource_name)
           end
         end
-        paths << "#{@prefix}/customizations"
         if @service.api['metadata']['protocolSettings'] &&
-          @service.api['metadata']['protocolSettings']['h2'] == 'eventstream'
-          paths << "#{@prefix}/async_client"
-          paths << "#{@prefix}/event_streams"
+           @service.api['metadata']['protocolSettings']['h2'] == 'eventstream'
+          paths << auto_load("#{@prefix}/async_client", :AsyncClient)
+          paths << auto_load("#{@prefix}/event_streams", :EventStreams)
         elsif eventstream_shape?
-          paths << "#{@prefix}/event_streams"
+          paths << auto_load("#{@prefix}/event_streams", :EventStreams)
         end
-        paths.to_a
+
+        paths
+      end
+
+      def auto_load(path, class_name, is_plugin = false)
+        {
+          file_path: path,
+          class_name: class_name,
+          is_plugin: is_plugin
+        }
+      end
+
+      def service_identifier
+        @prefix
       end
 
       def example_var_name
@@ -108,7 +117,8 @@ module AwsSdkCodeGenerator
       end
 
       def example_operation_name
-        raise "no operations found for the service" if @service.api['operations'].empty?
+        raise 'no operations found for the service' if @service.api['operations'].empty?
+
         underscore(@service.api['operations'].keys.first)
       end
 

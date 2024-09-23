@@ -80,7 +80,19 @@ module AwsSdkCodeGenerator
         end
       end
 
+      # @return [Array<String>]
+      def types_customizations
+        Dir.glob(File.join(Helper.gem_lib_path(gem_name), "#{gem_name}/customizations/types", '*.rb')).map do |file|
+          filename = File.basename(file, '.rb')
+          "#{gem_name}/customizations/types/#{filename}"
+        end
+      end
+
       private
+
+      def gem_name
+        "aws-sdk-#{module_name.split('::').last.downcase}"
+      end
 
       def struct_members(shape)
         return if shape['members'].nil?
