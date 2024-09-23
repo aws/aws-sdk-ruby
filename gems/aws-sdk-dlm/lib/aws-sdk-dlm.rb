@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-dlm/types'
-require_relative 'aws-sdk-dlm/client_api'
-require_relative 'aws-sdk-dlm/plugins/endpoints.rb'
-require_relative 'aws-sdk-dlm/client'
-require_relative 'aws-sdk-dlm/errors'
-require_relative 'aws-sdk-dlm/resource'
-require_relative 'aws-sdk-dlm/endpoint_parameters'
-require_relative 'aws-sdk-dlm/endpoint_provider'
-require_relative 'aws-sdk-dlm/endpoints'
-require_relative 'aws-sdk-dlm/customizations'
-
 # This module provides support for Amazon Data Lifecycle Manager. This module is available in the
 # `aws-sdk-dlm` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-dlm/customizations'
 #
 # @!group service
 module Aws::DLM
+  autoload :Types, 'aws-sdk-dlm/types'
+  autoload :ClientApi, 'aws-sdk-dlm/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-dlm/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-dlm/client'
+  autoload :Errors, 'aws-sdk-dlm/errors'
+  autoload :Resource, 'aws-sdk-dlm/resource'
+  autoload :EndpointParameters, 'aws-sdk-dlm/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-dlm/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-dlm/endpoints'
 
-  GEM_VERSION = '1.79.0'
+  GEM_VERSION = '1.80.0'
 
 end
+
+require_relative 'aws-sdk-dlm/customizations'

@@ -164,6 +164,10 @@ module Aws
                                 ?interactive_configuration: {
                                   studio_enabled: bool?,
                                   livy_endpoint_enabled: bool?
+                                },
+                                ?scheduler_configuration: {
+                                  queue_timeout_minutes: ::Integer?,
+                                  max_concurrent_runs: ::Integer?
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -250,7 +254,7 @@ module Aws
                            ?max_results: ::Integer,
                            ?created_at_after: ::Time,
                            ?created_at_before: ::Time,
-                           ?states: Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")],
+                           ?states: Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED" | "QUEUED")],
                            ?mode: ("BATCH" | "STREAMING")
                          ) -> _ListJobRunsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobRunsResponseSuccess
@@ -439,6 +443,10 @@ module Aws
                                   prometheus_monitoring_configuration: {
                                     remote_write_url: ::String?
                                   }?
+                                },
+                                ?scheduler_configuration: {
+                                  queue_timeout_minutes: ::Integer?,
+                                  max_concurrent_runs: ::Integer?
                                 }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess

@@ -133,7 +133,6 @@ module Aws::RDS
   # * {InvalidExportTaskStateFault}
   # * {InvalidGlobalClusterStateFault}
   # * {InvalidIntegrationStateFault}
-  # * {InvalidMaxAcuFault}
   # * {InvalidOptionGroupStateFault}
   # * {InvalidResourceStateFault}
   # * {InvalidRestoreFault}
@@ -1234,16 +1233,6 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::InvalidIntegrationStateFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class InvalidMaxAcuFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::RDS::Types::InvalidMaxAcuFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

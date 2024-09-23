@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-appfabric/types'
-require_relative 'aws-sdk-appfabric/client_api'
-require_relative 'aws-sdk-appfabric/plugins/endpoints.rb'
-require_relative 'aws-sdk-appfabric/client'
-require_relative 'aws-sdk-appfabric/errors'
-require_relative 'aws-sdk-appfabric/waiters'
-require_relative 'aws-sdk-appfabric/resource'
-require_relative 'aws-sdk-appfabric/endpoint_parameters'
-require_relative 'aws-sdk-appfabric/endpoint_provider'
-require_relative 'aws-sdk-appfabric/endpoints'
-require_relative 'aws-sdk-appfabric/customizations'
-
 # This module provides support for AppFabric. This module is available in the
 # `aws-sdk-appfabric` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-appfabric/customizations'
 #
 # @!group service
 module Aws::AppFabric
+  autoload :Types, 'aws-sdk-appfabric/types'
+  autoload :ClientApi, 'aws-sdk-appfabric/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-appfabric/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-appfabric/client'
+  autoload :Errors, 'aws-sdk-appfabric/errors'
+  autoload :Waiters, 'aws-sdk-appfabric/waiters'
+  autoload :Resource, 'aws-sdk-appfabric/resource'
+  autoload :EndpointParameters, 'aws-sdk-appfabric/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-appfabric/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-appfabric/endpoints'
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end
+
+require_relative 'aws-sdk-appfabric/customizations'

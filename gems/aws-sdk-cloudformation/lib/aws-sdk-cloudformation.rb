@@ -11,22 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudformation/types'
-require_relative 'aws-sdk-cloudformation/client_api'
-require_relative 'aws-sdk-cloudformation/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudformation/client'
-require_relative 'aws-sdk-cloudformation/errors'
-require_relative 'aws-sdk-cloudformation/waiters'
-require_relative 'aws-sdk-cloudformation/resource'
-require_relative 'aws-sdk-cloudformation/endpoint_parameters'
-require_relative 'aws-sdk-cloudformation/endpoint_provider'
-require_relative 'aws-sdk-cloudformation/endpoints'
-require_relative 'aws-sdk-cloudformation/event'
-require_relative 'aws-sdk-cloudformation/stack'
-require_relative 'aws-sdk-cloudformation/stack_resource'
-require_relative 'aws-sdk-cloudformation/stack_resource_summary'
-require_relative 'aws-sdk-cloudformation/customizations'
-
 # This module provides support for AWS CloudFormation. This module is available in the
 # `aws-sdk-cloudformation` gem.
 #
@@ -56,7 +40,25 @@ require_relative 'aws-sdk-cloudformation/customizations'
 #
 # @!group service
 module Aws::CloudFormation
+  autoload :Types, 'aws-sdk-cloudformation/types'
+  autoload :ClientApi, 'aws-sdk-cloudformation/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudformation/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudformation/client'
+  autoload :Errors, 'aws-sdk-cloudformation/errors'
+  autoload :Waiters, 'aws-sdk-cloudformation/waiters'
+  autoload :Resource, 'aws-sdk-cloudformation/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudformation/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudformation/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudformation/endpoints'
+  autoload :Event, 'aws-sdk-cloudformation/event'
+  autoload :Stack, 'aws-sdk-cloudformation/stack'
+  autoload :StackResource, 'aws-sdk-cloudformation/stack_resource'
+  autoload :StackResourceSummary, 'aws-sdk-cloudformation/stack_resource_summary'
 
-  GEM_VERSION = '1.118.0'
+  GEM_VERSION = '1.119.0'
 
 end
+
+require_relative 'aws-sdk-cloudformation/customizations'

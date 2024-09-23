@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudsearch/types'
-require_relative 'aws-sdk-cloudsearch/client_api'
-require_relative 'aws-sdk-cloudsearch/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudsearch/client'
-require_relative 'aws-sdk-cloudsearch/errors'
-require_relative 'aws-sdk-cloudsearch/resource'
-require_relative 'aws-sdk-cloudsearch/endpoint_parameters'
-require_relative 'aws-sdk-cloudsearch/endpoint_provider'
-require_relative 'aws-sdk-cloudsearch/endpoints'
-require_relative 'aws-sdk-cloudsearch/customizations'
-
 # This module provides support for Amazon CloudSearch. This module is available in the
 # `aws-sdk-cloudsearch` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-cloudsearch/customizations'
 #
 # @!group service
 module Aws::CloudSearch
+  autoload :Types, 'aws-sdk-cloudsearch/types'
+  autoload :ClientApi, 'aws-sdk-cloudsearch/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudsearch/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudsearch/client'
+  autoload :Errors, 'aws-sdk-cloudsearch/errors'
+  autoload :Resource, 'aws-sdk-cloudsearch/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudsearch/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudsearch/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudsearch/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
+
+require_relative 'aws-sdk-cloudsearch/customizations'

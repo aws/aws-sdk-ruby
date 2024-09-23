@@ -1379,3 +1379,4 @@ module Aws::TaxSettings
 
   end
 end
+

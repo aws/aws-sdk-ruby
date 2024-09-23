@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-appsync/types'
-require_relative 'aws-sdk-appsync/client_api'
-require_relative 'aws-sdk-appsync/plugins/endpoints.rb'
-require_relative 'aws-sdk-appsync/client'
-require_relative 'aws-sdk-appsync/errors'
-require_relative 'aws-sdk-appsync/resource'
-require_relative 'aws-sdk-appsync/endpoint_parameters'
-require_relative 'aws-sdk-appsync/endpoint_provider'
-require_relative 'aws-sdk-appsync/endpoints'
-require_relative 'aws-sdk-appsync/customizations'
-
 # This module provides support for AWS AppSync. This module is available in the
 # `aws-sdk-appsync` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-appsync/customizations'
 #
 # @!group service
 module Aws::AppSync
+  autoload :Types, 'aws-sdk-appsync/types'
+  autoload :ClientApi, 'aws-sdk-appsync/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-appsync/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-appsync/client'
+  autoload :Errors, 'aws-sdk-appsync/errors'
+  autoload :Resource, 'aws-sdk-appsync/resource'
+  autoload :EndpointParameters, 'aws-sdk-appsync/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-appsync/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-appsync/endpoints'
 
-  GEM_VERSION = '1.87.0'
+  GEM_VERSION = '1.88.0'
 
 end
+
+require_relative 'aws-sdk-appsync/customizations'

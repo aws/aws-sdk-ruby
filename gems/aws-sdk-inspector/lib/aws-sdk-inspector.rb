@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-inspector/types'
-require_relative 'aws-sdk-inspector/client_api'
-require_relative 'aws-sdk-inspector/plugins/endpoints.rb'
-require_relative 'aws-sdk-inspector/client'
-require_relative 'aws-sdk-inspector/errors'
-require_relative 'aws-sdk-inspector/resource'
-require_relative 'aws-sdk-inspector/endpoint_parameters'
-require_relative 'aws-sdk-inspector/endpoint_provider'
-require_relative 'aws-sdk-inspector/endpoints'
-require_relative 'aws-sdk-inspector/customizations'
-
 # This module provides support for Amazon Inspector. This module is available in the
 # `aws-sdk-inspector` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-inspector/customizations'
 #
 # @!group service
 module Aws::Inspector
+  autoload :Types, 'aws-sdk-inspector/types'
+  autoload :ClientApi, 'aws-sdk-inspector/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-inspector/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-inspector/client'
+  autoload :Errors, 'aws-sdk-inspector/errors'
+  autoload :Resource, 'aws-sdk-inspector/resource'
+  autoload :EndpointParameters, 'aws-sdk-inspector/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-inspector/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-inspector/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
+
+require_relative 'aws-sdk-inspector/customizations'

@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-codegurusecurity/types'
-require_relative 'aws-sdk-codegurusecurity/client_api'
-require_relative 'aws-sdk-codegurusecurity/plugins/endpoints.rb'
-require_relative 'aws-sdk-codegurusecurity/client'
-require_relative 'aws-sdk-codegurusecurity/errors'
-require_relative 'aws-sdk-codegurusecurity/resource'
-require_relative 'aws-sdk-codegurusecurity/endpoint_parameters'
-require_relative 'aws-sdk-codegurusecurity/endpoint_provider'
-require_relative 'aws-sdk-codegurusecurity/endpoints'
-require_relative 'aws-sdk-codegurusecurity/customizations'
-
 # This module provides support for Amazon CodeGuru Security. This module is available in the
 # `aws-sdk-codegurusecurity` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-codegurusecurity/customizations'
 #
 # @!group service
 module Aws::CodeGuruSecurity
+  autoload :Types, 'aws-sdk-codegurusecurity/types'
+  autoload :ClientApi, 'aws-sdk-codegurusecurity/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-codegurusecurity/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-codegurusecurity/client'
+  autoload :Errors, 'aws-sdk-codegurusecurity/errors'
+  autoload :Resource, 'aws-sdk-codegurusecurity/resource'
+  autoload :EndpointParameters, 'aws-sdk-codegurusecurity/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-codegurusecurity/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-codegurusecurity/endpoints'
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end
+
+require_relative 'aws-sdk-codegurusecurity/customizations'

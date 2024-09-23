@@ -2522,3 +2522,4 @@ module Aws::MigrationHubStrategyRecommendations
 
   end
 end
+

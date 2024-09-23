@@ -94,3 +94,4 @@ module Aws::KinesisVideoWebRTCStorage
 
   end
 end
+

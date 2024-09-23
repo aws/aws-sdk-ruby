@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-sagemakerruntime/types'
-require_relative 'aws-sdk-sagemakerruntime/client_api'
-require_relative 'aws-sdk-sagemakerruntime/plugins/endpoints.rb'
-require_relative 'aws-sdk-sagemakerruntime/client'
-require_relative 'aws-sdk-sagemakerruntime/errors'
-require_relative 'aws-sdk-sagemakerruntime/resource'
-require_relative 'aws-sdk-sagemakerruntime/endpoint_parameters'
-require_relative 'aws-sdk-sagemakerruntime/endpoint_provider'
-require_relative 'aws-sdk-sagemakerruntime/endpoints'
-require_relative 'aws-sdk-sagemakerruntime/customizations'
-require_relative 'aws-sdk-sagemakerruntime/event_streams'
-
 # This module provides support for Amazon SageMaker Runtime. This module is available in the
 # `aws-sdk-sagemakerruntime` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-sagemakerruntime/event_streams'
 #
 # @!group service
 module Aws::SageMakerRuntime
+  autoload :Types, 'aws-sdk-sagemakerruntime/types'
+  autoload :ClientApi, 'aws-sdk-sagemakerruntime/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-sagemakerruntime/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-sagemakerruntime/client'
+  autoload :Errors, 'aws-sdk-sagemakerruntime/errors'
+  autoload :Resource, 'aws-sdk-sagemakerruntime/resource'
+  autoload :EndpointParameters, 'aws-sdk-sagemakerruntime/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-sagemakerruntime/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-sagemakerruntime/endpoints'
+  autoload :EventStreams, 'aws-sdk-sagemakerruntime/event_streams'
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.74.0'
 
 end
+
+require_relative 'aws-sdk-sagemakerruntime/customizations'

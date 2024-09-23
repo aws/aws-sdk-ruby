@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-rolesanywhere/types'
-require_relative 'aws-sdk-rolesanywhere/client_api'
-require_relative 'aws-sdk-rolesanywhere/plugins/endpoints.rb'
-require_relative 'aws-sdk-rolesanywhere/client'
-require_relative 'aws-sdk-rolesanywhere/errors'
-require_relative 'aws-sdk-rolesanywhere/resource'
-require_relative 'aws-sdk-rolesanywhere/endpoint_parameters'
-require_relative 'aws-sdk-rolesanywhere/endpoint_provider'
-require_relative 'aws-sdk-rolesanywhere/endpoints'
-require_relative 'aws-sdk-rolesanywhere/customizations'
-
 # This module provides support for IAM Roles Anywhere. This module is available in the
 # `aws-sdk-rolesanywhere` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-rolesanywhere/customizations'
 #
 # @!group service
 module Aws::RolesAnywhere
+  autoload :Types, 'aws-sdk-rolesanywhere/types'
+  autoload :ClientApi, 'aws-sdk-rolesanywhere/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-rolesanywhere/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-rolesanywhere/client'
+  autoload :Errors, 'aws-sdk-rolesanywhere/errors'
+  autoload :Resource, 'aws-sdk-rolesanywhere/resource'
+  autoload :EndpointParameters, 'aws-sdk-rolesanywhere/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-rolesanywhere/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-rolesanywhere/endpoints'
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end
+
+require_relative 'aws-sdk-rolesanywhere/customizations'

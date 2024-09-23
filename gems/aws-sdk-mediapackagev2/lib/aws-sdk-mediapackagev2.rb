@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mediapackagev2/types'
-require_relative 'aws-sdk-mediapackagev2/client_api'
-require_relative 'aws-sdk-mediapackagev2/plugins/endpoints.rb'
-require_relative 'aws-sdk-mediapackagev2/client'
-require_relative 'aws-sdk-mediapackagev2/errors'
-require_relative 'aws-sdk-mediapackagev2/waiters'
-require_relative 'aws-sdk-mediapackagev2/resource'
-require_relative 'aws-sdk-mediapackagev2/endpoint_parameters'
-require_relative 'aws-sdk-mediapackagev2/endpoint_provider'
-require_relative 'aws-sdk-mediapackagev2/endpoints'
-require_relative 'aws-sdk-mediapackagev2/customizations'
-
 # This module provides support for AWS Elemental MediaPackage v2. This module is available in the
 # `aws-sdk-mediapackagev2` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-mediapackagev2/customizations'
 #
 # @!group service
 module Aws::MediaPackageV2
+  autoload :Types, 'aws-sdk-mediapackagev2/types'
+  autoload :ClientApi, 'aws-sdk-mediapackagev2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mediapackagev2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mediapackagev2/client'
+  autoload :Errors, 'aws-sdk-mediapackagev2/errors'
+  autoload :Waiters, 'aws-sdk-mediapackagev2/waiters'
+  autoload :Resource, 'aws-sdk-mediapackagev2/resource'
+  autoload :EndpointParameters, 'aws-sdk-mediapackagev2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mediapackagev2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mediapackagev2/endpoints'
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end
+
+require_relative 'aws-sdk-mediapackagev2/customizations'

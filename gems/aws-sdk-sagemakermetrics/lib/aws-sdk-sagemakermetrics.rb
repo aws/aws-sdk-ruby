@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-sagemakermetrics/types'
-require_relative 'aws-sdk-sagemakermetrics/client_api'
-require_relative 'aws-sdk-sagemakermetrics/plugins/endpoints.rb'
-require_relative 'aws-sdk-sagemakermetrics/client'
-require_relative 'aws-sdk-sagemakermetrics/errors'
-require_relative 'aws-sdk-sagemakermetrics/resource'
-require_relative 'aws-sdk-sagemakermetrics/endpoint_parameters'
-require_relative 'aws-sdk-sagemakermetrics/endpoint_provider'
-require_relative 'aws-sdk-sagemakermetrics/endpoints'
-require_relative 'aws-sdk-sagemakermetrics/customizations'
-
 # This module provides support for Amazon SageMaker Metrics Service. This module is available in the
 # `aws-sdk-sagemakermetrics` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-sagemakermetrics/customizations'
 #
 # @!group service
 module Aws::SageMakerMetrics
+  autoload :Types, 'aws-sdk-sagemakermetrics/types'
+  autoload :ClientApi, 'aws-sdk-sagemakermetrics/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-sagemakermetrics/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-sagemakermetrics/client'
+  autoload :Errors, 'aws-sdk-sagemakermetrics/errors'
+  autoload :Resource, 'aws-sdk-sagemakermetrics/resource'
+  autoload :EndpointParameters, 'aws-sdk-sagemakermetrics/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-sagemakermetrics/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-sagemakermetrics/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
+
+require_relative 'aws-sdk-sagemakermetrics/customizations'

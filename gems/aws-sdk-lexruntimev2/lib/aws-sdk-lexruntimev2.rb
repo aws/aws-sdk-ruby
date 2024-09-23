@@ -11,19 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-lexruntimev2/types'
-require_relative 'aws-sdk-lexruntimev2/client_api'
-require_relative 'aws-sdk-lexruntimev2/plugins/endpoints.rb'
-require_relative 'aws-sdk-lexruntimev2/client'
-require_relative 'aws-sdk-lexruntimev2/errors'
-require_relative 'aws-sdk-lexruntimev2/resource'
-require_relative 'aws-sdk-lexruntimev2/endpoint_parameters'
-require_relative 'aws-sdk-lexruntimev2/endpoint_provider'
-require_relative 'aws-sdk-lexruntimev2/endpoints'
-require_relative 'aws-sdk-lexruntimev2/customizations'
-require_relative 'aws-sdk-lexruntimev2/async_client'
-require_relative 'aws-sdk-lexruntimev2/event_streams'
-
 # This module provides support for Amazon Lex Runtime V2. This module is available in the
 # `aws-sdk-lexruntimev2` gem.
 #
@@ -53,7 +40,22 @@ require_relative 'aws-sdk-lexruntimev2/event_streams'
 #
 # @!group service
 module Aws::LexRuntimeV2
+  autoload :Types, 'aws-sdk-lexruntimev2/types'
+  autoload :ClientApi, 'aws-sdk-lexruntimev2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-lexruntimev2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-lexruntimev2/client'
+  autoload :Errors, 'aws-sdk-lexruntimev2/errors'
+  autoload :Resource, 'aws-sdk-lexruntimev2/resource'
+  autoload :EndpointParameters, 'aws-sdk-lexruntimev2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-lexruntimev2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-lexruntimev2/endpoints'
+  autoload :AsyncClient, 'aws-sdk-lexruntimev2/async_client'
+  autoload :EventStreams, 'aws-sdk-lexruntimev2/event_streams'
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end
+
+require_relative 'aws-sdk-lexruntimev2/customizations'

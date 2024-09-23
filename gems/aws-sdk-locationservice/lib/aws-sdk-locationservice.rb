@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-locationservice/types'
-require_relative 'aws-sdk-locationservice/client_api'
-require_relative 'aws-sdk-locationservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-locationservice/client'
-require_relative 'aws-sdk-locationservice/errors'
-require_relative 'aws-sdk-locationservice/resource'
-require_relative 'aws-sdk-locationservice/endpoint_parameters'
-require_relative 'aws-sdk-locationservice/endpoint_provider'
-require_relative 'aws-sdk-locationservice/endpoints'
-require_relative 'aws-sdk-locationservice/customizations'
-
 # This module provides support for Amazon Location Service. This module is available in the
 # `aws-sdk-locationservice` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-locationservice/customizations'
 #
 # @!group service
 module Aws::LocationService
+  autoload :Types, 'aws-sdk-locationservice/types'
+  autoload :ClientApi, 'aws-sdk-locationservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-locationservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-locationservice/client'
+  autoload :Errors, 'aws-sdk-locationservice/errors'
+  autoload :Resource, 'aws-sdk-locationservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-locationservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-locationservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-locationservice/endpoints'
 
-  GEM_VERSION = '1.59.0'
+  GEM_VERSION = '1.60.0'
 
 end
+
+require_relative 'aws-sdk-locationservice/customizations'

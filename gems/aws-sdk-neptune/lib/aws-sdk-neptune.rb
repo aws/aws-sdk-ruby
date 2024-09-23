@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-neptune/types'
-require_relative 'aws-sdk-neptune/client_api'
-require_relative 'aws-sdk-neptune/plugins/endpoints.rb'
-require_relative 'aws-sdk-neptune/client'
-require_relative 'aws-sdk-neptune/errors'
-require_relative 'aws-sdk-neptune/waiters'
-require_relative 'aws-sdk-neptune/resource'
-require_relative 'aws-sdk-neptune/endpoint_parameters'
-require_relative 'aws-sdk-neptune/endpoint_provider'
-require_relative 'aws-sdk-neptune/endpoints'
-require_relative 'aws-sdk-neptune/customizations'
-
 # This module provides support for Amazon Neptune. This module is available in the
 # `aws-sdk-neptune` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-neptune/customizations'
 #
 # @!group service
 module Aws::Neptune
+  autoload :Types, 'aws-sdk-neptune/types'
+  autoload :ClientApi, 'aws-sdk-neptune/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-neptune/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-neptune/client'
+  autoload :Errors, 'aws-sdk-neptune/errors'
+  autoload :Waiters, 'aws-sdk-neptune/waiters'
+  autoload :Resource, 'aws-sdk-neptune/resource'
+  autoload :EndpointParameters, 'aws-sdk-neptune/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-neptune/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-neptune/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
+
+require_relative 'aws-sdk-neptune/customizations'

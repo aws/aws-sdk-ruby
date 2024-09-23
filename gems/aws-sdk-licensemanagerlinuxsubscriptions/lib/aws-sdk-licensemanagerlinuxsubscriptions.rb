@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/types'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/client_api'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/plugins/endpoints.rb'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/client'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/errors'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/resource'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/endpoint_parameters'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/endpoint_provider'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/endpoints'
-require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/customizations'
-
 # This module provides support for AWS License Manager Linux Subscriptions. This module is available in the
 # `aws-sdk-licensemanagerlinuxsubscriptions` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/customizations'
 #
 # @!group service
 module Aws::LicenseManagerLinuxSubscriptions
+  autoload :Types, 'aws-sdk-licensemanagerlinuxsubscriptions/types'
+  autoload :ClientApi, 'aws-sdk-licensemanagerlinuxsubscriptions/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-licensemanagerlinuxsubscriptions/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-licensemanagerlinuxsubscriptions/client'
+  autoload :Errors, 'aws-sdk-licensemanagerlinuxsubscriptions/errors'
+  autoload :Resource, 'aws-sdk-licensemanagerlinuxsubscriptions/resource'
+  autoload :EndpointParameters, 'aws-sdk-licensemanagerlinuxsubscriptions/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-licensemanagerlinuxsubscriptions/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-licensemanagerlinuxsubscriptions/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
+
+require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/customizations'

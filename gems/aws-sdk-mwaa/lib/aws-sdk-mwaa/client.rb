@@ -1454,7 +1454,7 @@ module Aws::MWAA
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -253,3 +253,4 @@ module Aws::ForecastQueryService
 
   end
 end
+

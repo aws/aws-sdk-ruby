@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-apptest/types'
-require_relative 'aws-sdk-apptest/client_api'
-require_relative 'aws-sdk-apptest/plugins/endpoints.rb'
-require_relative 'aws-sdk-apptest/client'
-require_relative 'aws-sdk-apptest/errors'
-require_relative 'aws-sdk-apptest/waiters'
-require_relative 'aws-sdk-apptest/resource'
-require_relative 'aws-sdk-apptest/endpoint_parameters'
-require_relative 'aws-sdk-apptest/endpoint_provider'
-require_relative 'aws-sdk-apptest/endpoints'
-require_relative 'aws-sdk-apptest/customizations'
-
 # This module provides support for AWS Mainframe Modernization Application Testing. This module is available in the
 # `aws-sdk-apptest` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-apptest/customizations'
 #
 # @!group service
 module Aws::AppTest
+  autoload :Types, 'aws-sdk-apptest/types'
+  autoload :ClientApi, 'aws-sdk-apptest/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-apptest/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-apptest/client'
+  autoload :Errors, 'aws-sdk-apptest/errors'
+  autoload :Waiters, 'aws-sdk-apptest/waiters'
+  autoload :Resource, 'aws-sdk-apptest/resource'
+  autoload :EndpointParameters, 'aws-sdk-apptest/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-apptest/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-apptest/endpoints'
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end
+
+require_relative 'aws-sdk-apptest/customizations'

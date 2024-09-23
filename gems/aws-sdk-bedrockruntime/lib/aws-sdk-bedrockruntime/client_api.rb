@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::BedrockRuntime
   # @api private
   module ClientApi

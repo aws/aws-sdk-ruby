@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-waf/types'
-require_relative 'aws-sdk-waf/client_api'
-require_relative 'aws-sdk-waf/plugins/endpoints.rb'
-require_relative 'aws-sdk-waf/client'
-require_relative 'aws-sdk-waf/errors'
-require_relative 'aws-sdk-waf/resource'
-require_relative 'aws-sdk-waf/endpoint_parameters'
-require_relative 'aws-sdk-waf/endpoint_provider'
-require_relative 'aws-sdk-waf/endpoints'
-require_relative 'aws-sdk-waf/customizations'
-
 # This module provides support for AWS WAF. This module is available in the
 # `aws-sdk-waf` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-waf/customizations'
 #
 # @!group service
 module Aws::WAF
+  autoload :Types, 'aws-sdk-waf/types'
+  autoload :ClientApi, 'aws-sdk-waf/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-waf/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-waf/client'
+  autoload :Errors, 'aws-sdk-waf/errors'
+  autoload :Resource, 'aws-sdk-waf/resource'
+  autoload :EndpointParameters, 'aws-sdk-waf/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-waf/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-waf/endpoints'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
+
+require_relative 'aws-sdk-waf/customizations'

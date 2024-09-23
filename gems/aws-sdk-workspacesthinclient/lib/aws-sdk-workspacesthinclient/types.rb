@@ -1407,3 +1407,4 @@ module Aws::WorkSpacesThinClient
 
   end
 end
+

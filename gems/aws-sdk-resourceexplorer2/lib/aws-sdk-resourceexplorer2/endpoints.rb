@@ -155,6 +155,17 @@ module Aws::ResourceExplorer2
       end
     end
 
+    class ListResources
+      def self.build(context)
+        Aws::ResourceExplorer2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class ListSupportedResourceTypes
       def self.build(context)
         Aws::ResourceExplorer2::EndpointParameters.new(

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ResourceExplorer2
   # @api private
   module ClientApi
@@ -62,6 +63,13 @@ module Aws::ResourceExplorer2
     ListIndexesInputNextTokenString = Shapes::StringShape.new(name: 'ListIndexesInputNextTokenString')
     ListIndexesInputRegionsList = Shapes::ListShape.new(name: 'ListIndexesInputRegionsList')
     ListIndexesOutput = Shapes::StructureShape.new(name: 'ListIndexesOutput')
+    ListResourcesInput = Shapes::StructureShape.new(name: 'ListResourcesInput')
+    ListResourcesInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListResourcesInputMaxResultsInteger')
+    ListResourcesInputNextTokenString = Shapes::StringShape.new(name: 'ListResourcesInputNextTokenString')
+    ListResourcesInputViewArnString = Shapes::StringShape.new(name: 'ListResourcesInputViewArnString')
+    ListResourcesOutput = Shapes::StructureShape.new(name: 'ListResourcesOutput')
+    ListResourcesOutputNextTokenString = Shapes::StringShape.new(name: 'ListResourcesOutputNextTokenString')
+    ListResourcesOutputViewArnString = Shapes::StringShape.new(name: 'ListResourcesOutputViewArnString')
     ListSupportedResourceTypesInput = Shapes::StructureShape.new(name: 'ListSupportedResourceTypesInput')
     ListSupportedResourceTypesInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListSupportedResourceTypesInputMaxResultsInteger')
     ListSupportedResourceTypesOutput = Shapes::StructureShape.new(name: 'ListSupportedResourceTypesOutput')
@@ -239,6 +247,17 @@ module Aws::ResourceExplorer2
     ListIndexesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListIndexesOutput.struct_class = Types::ListIndexesOutput
 
+    ListResourcesInput.add_member(:filters, Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
+    ListResourcesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListResourcesInputMaxResultsInteger, location_name: "MaxResults"))
+    ListResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListResourcesInputNextTokenString, location_name: "NextToken"))
+    ListResourcesInput.add_member(:view_arn, Shapes::ShapeRef.new(shape: ListResourcesInputViewArnString, location_name: "ViewArn"))
+    ListResourcesInput.struct_class = Types::ListResourcesInput
+
+    ListResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListResourcesOutputNextTokenString, location_name: "NextToken"))
+    ListResourcesOutput.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "Resources"))
+    ListResourcesOutput.add_member(:view_arn, Shapes::ShapeRef.new(shape: ListResourcesOutputViewArnString, location_name: "ViewArn"))
+    ListResourcesOutput.struct_class = Types::ListResourcesOutput
+
     ListSupportedResourceTypesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListSupportedResourceTypesInputMaxResultsInteger, location_name: "MaxResults"))
     ListSupportedResourceTypesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListSupportedResourceTypesInput.struct_class = Types::ListSupportedResourceTypesInput
@@ -397,9 +416,11 @@ module Aws::ResourceExplorer2
 
       api.metadata = {
         "apiVersion" => "2022-07-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "resource-explorer-2",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Resource Explorer",
         "serviceId" => "Resource Explorer 2",
         "signatureVersion" => "v4",
@@ -579,6 +600,26 @@ module Aws::ResourceExplorer2
         o.output = Shapes::ShapeRef.new(shape: ListIndexesForMembersOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListResources"
+        o.input = Shapes::ShapeRef.new(shape: ListResourcesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListResourcesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(

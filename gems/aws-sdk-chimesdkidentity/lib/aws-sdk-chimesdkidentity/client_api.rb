@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ChimeSDKIdentity
   # @api private
   module ClientApi

@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-artifact/types'
-require_relative 'aws-sdk-artifact/client_api'
-require_relative 'aws-sdk-artifact/plugins/endpoints.rb'
-require_relative 'aws-sdk-artifact/client'
-require_relative 'aws-sdk-artifact/errors'
-require_relative 'aws-sdk-artifact/waiters'
-require_relative 'aws-sdk-artifact/resource'
-require_relative 'aws-sdk-artifact/endpoint_parameters'
-require_relative 'aws-sdk-artifact/endpoint_provider'
-require_relative 'aws-sdk-artifact/endpoints'
-require_relative 'aws-sdk-artifact/customizations'
-
 # This module provides support for AWS Artifact. This module is available in the
 # `aws-sdk-artifact` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-artifact/customizations'
 #
 # @!group service
 module Aws::Artifact
+  autoload :Types, 'aws-sdk-artifact/types'
+  autoload :ClientApi, 'aws-sdk-artifact/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-artifact/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-artifact/client'
+  autoload :Errors, 'aws-sdk-artifact/errors'
+  autoload :Waiters, 'aws-sdk-artifact/waiters'
+  autoload :Resource, 'aws-sdk-artifact/resource'
+  autoload :EndpointParameters, 'aws-sdk-artifact/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-artifact/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-artifact/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end
+
+require_relative 'aws-sdk-artifact/customizations'

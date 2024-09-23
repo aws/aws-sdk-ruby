@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::BedrockAgent
   # @api private
   module ClientApi
@@ -243,6 +244,7 @@ module Aws::BedrockAgent
     KnowledgeBaseConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseConfiguration')
     KnowledgeBaseFlowNodeConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseFlowNodeConfiguration')
     KnowledgeBaseId = Shapes::StringShape.new(name: 'KnowledgeBaseId')
+    KnowledgeBaseModelIdentifier = Shapes::StringShape.new(name: 'KnowledgeBaseModelIdentifier')
     KnowledgeBaseRoleArn = Shapes::StringShape.new(name: 'KnowledgeBaseRoleArn')
     KnowledgeBaseState = Shapes::StringShape.new(name: 'KnowledgeBaseState')
     KnowledgeBaseStatus = Shapes::StringShape.new(name: 'KnowledgeBaseStatus')
@@ -1336,7 +1338,7 @@ module Aws::BedrockAgent
     KnowledgeBaseConfiguration.struct_class = Types::KnowledgeBaseConfiguration
 
     KnowledgeBaseFlowNodeConfiguration.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location_name: "knowledgeBaseId"))
-    KnowledgeBaseFlowNodeConfiguration.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "modelId"))
+    KnowledgeBaseFlowNodeConfiguration.add_member(:model_id, Shapes::ShapeRef.new(shape: KnowledgeBaseModelIdentifier, location_name: "modelId"))
     KnowledgeBaseFlowNodeConfiguration.struct_class = Types::KnowledgeBaseFlowNodeConfiguration
 
     KnowledgeBaseSummaries.member = Shapes::ShapeRef.new(shape: KnowledgeBaseSummary)

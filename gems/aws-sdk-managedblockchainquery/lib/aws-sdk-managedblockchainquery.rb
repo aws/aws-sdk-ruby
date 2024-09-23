@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-managedblockchainquery/types'
-require_relative 'aws-sdk-managedblockchainquery/client_api'
-require_relative 'aws-sdk-managedblockchainquery/plugins/endpoints.rb'
-require_relative 'aws-sdk-managedblockchainquery/client'
-require_relative 'aws-sdk-managedblockchainquery/errors'
-require_relative 'aws-sdk-managedblockchainquery/waiters'
-require_relative 'aws-sdk-managedblockchainquery/resource'
-require_relative 'aws-sdk-managedblockchainquery/endpoint_parameters'
-require_relative 'aws-sdk-managedblockchainquery/endpoint_provider'
-require_relative 'aws-sdk-managedblockchainquery/endpoints'
-require_relative 'aws-sdk-managedblockchainquery/customizations'
-
 # This module provides support for Amazon Managed Blockchain Query. This module is available in the
 # `aws-sdk-managedblockchainquery` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-managedblockchainquery/customizations'
 #
 # @!group service
 module Aws::ManagedBlockchainQuery
+  autoload :Types, 'aws-sdk-managedblockchainquery/types'
+  autoload :ClientApi, 'aws-sdk-managedblockchainquery/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-managedblockchainquery/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-managedblockchainquery/client'
+  autoload :Errors, 'aws-sdk-managedblockchainquery/errors'
+  autoload :Waiters, 'aws-sdk-managedblockchainquery/waiters'
+  autoload :Resource, 'aws-sdk-managedblockchainquery/resource'
+  autoload :EndpointParameters, 'aws-sdk-managedblockchainquery/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-managedblockchainquery/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-managedblockchainquery/endpoints'
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end
+
+require_relative 'aws-sdk-managedblockchainquery/customizations'

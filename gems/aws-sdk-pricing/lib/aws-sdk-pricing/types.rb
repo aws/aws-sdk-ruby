@@ -536,3 +536,4 @@ module Aws::Pricing
 
   end
 end
+

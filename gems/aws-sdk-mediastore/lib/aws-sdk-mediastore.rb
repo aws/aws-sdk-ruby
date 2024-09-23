@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mediastore/types'
-require_relative 'aws-sdk-mediastore/client_api'
-require_relative 'aws-sdk-mediastore/plugins/endpoints.rb'
-require_relative 'aws-sdk-mediastore/client'
-require_relative 'aws-sdk-mediastore/errors'
-require_relative 'aws-sdk-mediastore/resource'
-require_relative 'aws-sdk-mediastore/endpoint_parameters'
-require_relative 'aws-sdk-mediastore/endpoint_provider'
-require_relative 'aws-sdk-mediastore/endpoints'
-require_relative 'aws-sdk-mediastore/customizations'
-
 # This module provides support for AWS Elemental MediaStore. This module is available in the
 # `aws-sdk-mediastore` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-mediastore/customizations'
 #
 # @!group service
 module Aws::MediaStore
+  autoload :Types, 'aws-sdk-mediastore/types'
+  autoload :ClientApi, 'aws-sdk-mediastore/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mediastore/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mediastore/client'
+  autoload :Errors, 'aws-sdk-mediastore/errors'
+  autoload :Resource, 'aws-sdk-mediastore/resource'
+  autoload :EndpointParameters, 'aws-sdk-mediastore/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mediastore/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mediastore/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
+
+require_relative 'aws-sdk-mediastore/customizations'

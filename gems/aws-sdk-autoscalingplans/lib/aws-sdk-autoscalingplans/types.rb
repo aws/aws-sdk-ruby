@@ -1225,3 +1225,4 @@ module Aws::AutoScalingPlans
 
   end
 end
+

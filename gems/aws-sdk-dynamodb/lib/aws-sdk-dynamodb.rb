@@ -11,19 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-dynamodb/types'
-require_relative 'aws-sdk-dynamodb/client_api'
-require_relative 'aws-sdk-dynamodb/plugins/endpoints.rb'
-require_relative 'aws-sdk-dynamodb/client'
-require_relative 'aws-sdk-dynamodb/errors'
-require_relative 'aws-sdk-dynamodb/waiters'
-require_relative 'aws-sdk-dynamodb/resource'
-require_relative 'aws-sdk-dynamodb/endpoint_parameters'
-require_relative 'aws-sdk-dynamodb/endpoint_provider'
-require_relative 'aws-sdk-dynamodb/endpoints'
-require_relative 'aws-sdk-dynamodb/table'
-require_relative 'aws-sdk-dynamodb/customizations'
-
 # This module provides support for Amazon DynamoDB. This module is available in the
 # `aws-sdk-dynamodb` gem.
 #
@@ -53,7 +40,22 @@ require_relative 'aws-sdk-dynamodb/customizations'
 #
 # @!group service
 module Aws::DynamoDB
+  autoload :Types, 'aws-sdk-dynamodb/types'
+  autoload :ClientApi, 'aws-sdk-dynamodb/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-dynamodb/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-dynamodb/client'
+  autoload :Errors, 'aws-sdk-dynamodb/errors'
+  autoload :Waiters, 'aws-sdk-dynamodb/waiters'
+  autoload :Resource, 'aws-sdk-dynamodb/resource'
+  autoload :EndpointParameters, 'aws-sdk-dynamodb/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-dynamodb/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-dynamodb/endpoints'
+  autoload :Table, 'aws-sdk-dynamodb/table'
 
-  GEM_VERSION = '1.123.0'
+  GEM_VERSION = '1.124.0'
 
 end
+
+require_relative 'aws-sdk-dynamodb/customizations'

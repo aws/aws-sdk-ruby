@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::IoTDeviceAdvisor
   # @api private
   module ClientApi

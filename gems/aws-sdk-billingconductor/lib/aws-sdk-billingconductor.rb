@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-billingconductor/types'
-require_relative 'aws-sdk-billingconductor/client_api'
-require_relative 'aws-sdk-billingconductor/plugins/endpoints.rb'
-require_relative 'aws-sdk-billingconductor/client'
-require_relative 'aws-sdk-billingconductor/errors'
-require_relative 'aws-sdk-billingconductor/waiters'
-require_relative 'aws-sdk-billingconductor/resource'
-require_relative 'aws-sdk-billingconductor/endpoint_parameters'
-require_relative 'aws-sdk-billingconductor/endpoint_provider'
-require_relative 'aws-sdk-billingconductor/endpoints'
-require_relative 'aws-sdk-billingconductor/customizations'
-
 # This module provides support for AWSBillingConductor. This module is available in the
 # `aws-sdk-billingconductor` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-billingconductor/customizations'
 #
 # @!group service
 module Aws::BillingConductor
+  autoload :Types, 'aws-sdk-billingconductor/types'
+  autoload :ClientApi, 'aws-sdk-billingconductor/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-billingconductor/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-billingconductor/client'
+  autoload :Errors, 'aws-sdk-billingconductor/errors'
+  autoload :Waiters, 'aws-sdk-billingconductor/waiters'
+  autoload :Resource, 'aws-sdk-billingconductor/resource'
+  autoload :EndpointParameters, 'aws-sdk-billingconductor/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-billingconductor/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-billingconductor/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
+
+require_relative 'aws-sdk-billingconductor/customizations'

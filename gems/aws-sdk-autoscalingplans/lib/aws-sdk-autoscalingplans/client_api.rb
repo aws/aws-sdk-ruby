@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::AutoScalingPlans
   # @api private
   module ClientApi

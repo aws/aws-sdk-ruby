@@ -137,11 +137,12 @@ module Aws
 
       interface _CreateDataCatalogResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataCatalogOutput]
+        def data_catalog: () -> Types::DataCatalog
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_data_catalog-instance_method
       def create_data_catalog: (
                                  name: ::String,
-                                 type: ("LAMBDA" | "GLUE" | "HIVE"),
+                                 type: ("LAMBDA" | "GLUE" | "HIVE" | "FEDERATED"),
                                  ?description: ::String,
                                  ?parameters: Hash[::String, ::String],
                                  ?tags: Array[
@@ -267,6 +268,7 @@ module Aws
 
       interface _DeleteDataCatalogResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataCatalogOutput]
+        def data_catalog: () -> Types::DataCatalog
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#delete_data_catalog-instance_method
       def delete_data_catalog: (
@@ -907,7 +909,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_data_catalog-instance_method
       def update_data_catalog: (
                                  name: ::String,
-                                 type: ("LAMBDA" | "GLUE" | "HIVE"),
+                                 type: ("LAMBDA" | "GLUE" | "HIVE" | "FEDERATED"),
                                  ?description: ::String,
                                  ?parameters: Hash[::String, ::String]
                                ) -> _UpdateDataCatalogResponseSuccess

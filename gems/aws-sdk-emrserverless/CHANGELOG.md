@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2024-09-23)
+------------------
+
+* Feature - This release adds support for job concurrency and queuing configuration at Application level.
+
 1.34.0 (2024-09-20)
 ------------------
 

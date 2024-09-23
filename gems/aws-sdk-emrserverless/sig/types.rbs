@@ -30,6 +30,7 @@ module Aws::EMRServerless
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor interactive_configuration: Types::InteractiveConfiguration
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration
       SENSITIVE: []
     end
 
@@ -114,6 +115,7 @@ module Aws::EMRServerless
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor interactive_configuration: Types::InteractiveConfiguration
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration
       SENSITIVE: []
     end
 
@@ -224,7 +226,7 @@ module Aws::EMRServerless
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor execution_role: ::String
-      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED" | "QUEUED")
       attr_accessor state_details: ::String
       attr_accessor release_label: ::String
       attr_accessor configuration_overrides: Types::ConfigurationOverrides
@@ -240,6 +242,9 @@ module Aws::EMRServerless
       attr_accessor attempt: ::Integer
       attr_accessor attempt_created_at: ::Time
       attr_accessor attempt_updated_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor queued_duration_milliseconds: ::Integer
       SENSITIVE: []
     end
 
@@ -254,7 +259,7 @@ module Aws::EMRServerless
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor execution_role: ::String
-      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED" | "QUEUED")
       attr_accessor state_details: ::String
       attr_accessor release_label: ::String
       attr_accessor type: ::String
@@ -272,7 +277,7 @@ module Aws::EMRServerless
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor execution_role: ::String
-      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED" | "QUEUED")
       attr_accessor state_details: ::String
       attr_accessor release_label: ::String
       attr_accessor type: ::String
@@ -315,7 +320,7 @@ module Aws::EMRServerless
       attr_accessor max_results: ::Integer
       attr_accessor created_at_after: ::Time
       attr_accessor created_at_before: ::Time
-      attr_accessor states: ::Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")]
+      attr_accessor states: ::Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED" | "QUEUED")]
       attr_accessor mode: ("BATCH" | "STREAMING")
       SENSITIVE: []
     end
@@ -389,6 +394,12 @@ module Aws::EMRServerless
     class S3MonitoringConfiguration
       attr_accessor log_uri: ::String
       attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SchedulerConfiguration
+      attr_accessor queue_timeout_minutes: ::Integer
+      attr_accessor max_concurrent_runs: ::Integer
       SENSITIVE: []
     end
 
@@ -481,6 +492,7 @@ module Aws::EMRServerless
       attr_accessor release_label: ::String
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration
       SENSITIVE: []
     end
 

@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-savingsplans/types'
-require_relative 'aws-sdk-savingsplans/client_api'
-require_relative 'aws-sdk-savingsplans/plugins/endpoints.rb'
-require_relative 'aws-sdk-savingsplans/client'
-require_relative 'aws-sdk-savingsplans/errors'
-require_relative 'aws-sdk-savingsplans/resource'
-require_relative 'aws-sdk-savingsplans/endpoint_parameters'
-require_relative 'aws-sdk-savingsplans/endpoint_provider'
-require_relative 'aws-sdk-savingsplans/endpoints'
-require_relative 'aws-sdk-savingsplans/customizations'
-
 # This module provides support for AWS Savings Plans. This module is available in the
 # `aws-sdk-savingsplans` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-savingsplans/customizations'
 #
 # @!group service
 module Aws::SavingsPlans
+  autoload :Types, 'aws-sdk-savingsplans/types'
+  autoload :ClientApi, 'aws-sdk-savingsplans/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-savingsplans/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-savingsplans/client'
+  autoload :Errors, 'aws-sdk-savingsplans/errors'
+  autoload :Resource, 'aws-sdk-savingsplans/resource'
+  autoload :EndpointParameters, 'aws-sdk-savingsplans/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-savingsplans/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-savingsplans/endpoints'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end
+
+require_relative 'aws-sdk-savingsplans/customizations'

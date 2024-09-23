@@ -510,3 +510,4 @@ module Aws::PersonalizeEvents
 
   end
 end
+

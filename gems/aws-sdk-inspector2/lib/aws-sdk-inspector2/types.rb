@@ -7480,3 +7480,4 @@ module Aws::Inspector2
 
   end
 end
+

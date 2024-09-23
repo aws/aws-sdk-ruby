@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mturk/types'
-require_relative 'aws-sdk-mturk/client_api'
-require_relative 'aws-sdk-mturk/plugins/endpoints.rb'
-require_relative 'aws-sdk-mturk/client'
-require_relative 'aws-sdk-mturk/errors'
-require_relative 'aws-sdk-mturk/resource'
-require_relative 'aws-sdk-mturk/endpoint_parameters'
-require_relative 'aws-sdk-mturk/endpoint_provider'
-require_relative 'aws-sdk-mturk/endpoints'
-require_relative 'aws-sdk-mturk/customizations'
-
 # This module provides support for Amazon Mechanical Turk. This module is available in the
 # `aws-sdk-mturk` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-mturk/customizations'
 #
 # @!group service
 module Aws::MTurk
+  autoload :Types, 'aws-sdk-mturk/types'
+  autoload :ClientApi, 'aws-sdk-mturk/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mturk/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mturk/client'
+  autoload :Errors, 'aws-sdk-mturk/errors'
+  autoload :Resource, 'aws-sdk-mturk/resource'
+  autoload :EndpointParameters, 'aws-sdk-mturk/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mturk/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mturk/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
+
+require_relative 'aws-sdk-mturk/customizations'

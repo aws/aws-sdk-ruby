@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-apigatewaymanagementapi/types'
-require_relative 'aws-sdk-apigatewaymanagementapi/client_api'
-require_relative 'aws-sdk-apigatewaymanagementapi/plugins/endpoints.rb'
-require_relative 'aws-sdk-apigatewaymanagementapi/client'
-require_relative 'aws-sdk-apigatewaymanagementapi/errors'
-require_relative 'aws-sdk-apigatewaymanagementapi/resource'
-require_relative 'aws-sdk-apigatewaymanagementapi/endpoint_parameters'
-require_relative 'aws-sdk-apigatewaymanagementapi/endpoint_provider'
-require_relative 'aws-sdk-apigatewaymanagementapi/endpoints'
-require_relative 'aws-sdk-apigatewaymanagementapi/customizations'
-
 # This module provides support for AmazonApiGatewayManagementApi. This module is available in the
 # `aws-sdk-apigatewaymanagementapi` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-apigatewaymanagementapi/customizations'
 #
 # @!group service
 module Aws::ApiGatewayManagementApi
+  autoload :Types, 'aws-sdk-apigatewaymanagementapi/types'
+  autoload :ClientApi, 'aws-sdk-apigatewaymanagementapi/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-apigatewaymanagementapi/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-apigatewaymanagementapi/client'
+  autoload :Errors, 'aws-sdk-apigatewaymanagementapi/errors'
+  autoload :Resource, 'aws-sdk-apigatewaymanagementapi/resource'
+  autoload :EndpointParameters, 'aws-sdk-apigatewaymanagementapi/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-apigatewaymanagementapi/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-apigatewaymanagementapi/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
+
+require_relative 'aws-sdk-apigatewaymanagementapi/customizations'

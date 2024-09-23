@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ecrpublic/types'
-require_relative 'aws-sdk-ecrpublic/client_api'
-require_relative 'aws-sdk-ecrpublic/plugins/endpoints.rb'
-require_relative 'aws-sdk-ecrpublic/client'
-require_relative 'aws-sdk-ecrpublic/errors'
-require_relative 'aws-sdk-ecrpublic/resource'
-require_relative 'aws-sdk-ecrpublic/endpoint_parameters'
-require_relative 'aws-sdk-ecrpublic/endpoint_provider'
-require_relative 'aws-sdk-ecrpublic/endpoints'
-require_relative 'aws-sdk-ecrpublic/customizations'
-
 # This module provides support for Amazon Elastic Container Registry Public. This module is available in the
 # `aws-sdk-ecrpublic` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-ecrpublic/customizations'
 #
 # @!group service
 module Aws::ECRPublic
+  autoload :Types, 'aws-sdk-ecrpublic/types'
+  autoload :ClientApi, 'aws-sdk-ecrpublic/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ecrpublic/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ecrpublic/client'
+  autoload :Errors, 'aws-sdk-ecrpublic/errors'
+  autoload :Resource, 'aws-sdk-ecrpublic/resource'
+  autoload :EndpointParameters, 'aws-sdk-ecrpublic/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ecrpublic/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ecrpublic/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end
+
+require_relative 'aws-sdk-ecrpublic/customizations'

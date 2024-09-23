@@ -3922,3 +3922,4 @@ module Aws::ConnectWisdomService
 
   end
 end
+

@@ -576,8 +576,8 @@ module Aws::BedrockAgent
     #   A description of the agent.
     #
     # @option params [String] :foundation_model
-    #   The foundation model to be used for orchestration by the agent you
-    #   create.
+    #   The Amazon Resource Name (ARN) of the foundation model to be used for
+    #   orchestration by the agent you create.
     #
     # @option params [Types::GuardrailConfiguration] :guardrail_configuration
     #   The unique Guardrail configuration assigned to the agent when it is
@@ -1376,7 +1376,7 @@ module Aws::BedrockAgent
     #             },
     #             knowledge_base: {
     #               knowledge_base_id: "KnowledgeBaseId", # required
-    #               model_id: "ModelIdentifier",
+    #               model_id: "KnowledgeBaseModelIdentifier",
     #             },
     #             lambda_function: {
     #               lambda_arn: "LambdaArn", # required
@@ -5136,7 +5136,7 @@ module Aws::BedrockAgent
     #             },
     #             knowledge_base: {
     #               knowledge_base_id: "KnowledgeBaseId", # required
-    #               model_id: "ModelIdentifier",
+    #               model_id: "KnowledgeBaseModelIdentifier",
     #             },
     #             lambda_function: {
     #               lambda_arn: "LambdaArn", # required
@@ -5675,7 +5675,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

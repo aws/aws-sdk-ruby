@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-neptunegraph/types'
-require_relative 'aws-sdk-neptunegraph/client_api'
-require_relative 'aws-sdk-neptunegraph/plugins/endpoints.rb'
-require_relative 'aws-sdk-neptunegraph/client'
-require_relative 'aws-sdk-neptunegraph/errors'
-require_relative 'aws-sdk-neptunegraph/waiters'
-require_relative 'aws-sdk-neptunegraph/resource'
-require_relative 'aws-sdk-neptunegraph/endpoint_parameters'
-require_relative 'aws-sdk-neptunegraph/endpoint_provider'
-require_relative 'aws-sdk-neptunegraph/endpoints'
-require_relative 'aws-sdk-neptunegraph/customizations'
-
 # This module provides support for Amazon Neptune Graph. This module is available in the
 # `aws-sdk-neptunegraph` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-neptunegraph/customizations'
 #
 # @!group service
 module Aws::NeptuneGraph
+  autoload :Types, 'aws-sdk-neptunegraph/types'
+  autoload :ClientApi, 'aws-sdk-neptunegraph/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-neptunegraph/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-neptunegraph/client'
+  autoload :Errors, 'aws-sdk-neptunegraph/errors'
+  autoload :Waiters, 'aws-sdk-neptunegraph/waiters'
+  autoload :Resource, 'aws-sdk-neptunegraph/resource'
+  autoload :EndpointParameters, 'aws-sdk-neptunegraph/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-neptunegraph/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-neptunegraph/endpoints'
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end
+
+require_relative 'aws-sdk-neptunegraph/customizations'

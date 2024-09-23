@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-marketplacedeployment/types'
-require_relative 'aws-sdk-marketplacedeployment/client_api'
-require_relative 'aws-sdk-marketplacedeployment/plugins/endpoints.rb'
-require_relative 'aws-sdk-marketplacedeployment/client'
-require_relative 'aws-sdk-marketplacedeployment/errors'
-require_relative 'aws-sdk-marketplacedeployment/resource'
-require_relative 'aws-sdk-marketplacedeployment/endpoint_parameters'
-require_relative 'aws-sdk-marketplacedeployment/endpoint_provider'
-require_relative 'aws-sdk-marketplacedeployment/endpoints'
-require_relative 'aws-sdk-marketplacedeployment/customizations'
-
 # This module provides support for AWS Marketplace Deployment Service. This module is available in the
 # `aws-sdk-marketplacedeployment` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-marketplacedeployment/customizations'
 #
 # @!group service
 module Aws::MarketplaceDeployment
+  autoload :Types, 'aws-sdk-marketplacedeployment/types'
+  autoload :ClientApi, 'aws-sdk-marketplacedeployment/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-marketplacedeployment/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-marketplacedeployment/client'
+  autoload :Errors, 'aws-sdk-marketplacedeployment/errors'
+  autoload :Resource, 'aws-sdk-marketplacedeployment/resource'
+  autoload :EndpointParameters, 'aws-sdk-marketplacedeployment/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-marketplacedeployment/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-marketplacedeployment/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end
+
+require_relative 'aws-sdk-marketplacedeployment/customizations'

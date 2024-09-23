@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-emrserverless/types'
-require_relative 'aws-sdk-emrserverless/client_api'
-require_relative 'aws-sdk-emrserverless/plugins/endpoints.rb'
-require_relative 'aws-sdk-emrserverless/client'
-require_relative 'aws-sdk-emrserverless/errors'
-require_relative 'aws-sdk-emrserverless/resource'
-require_relative 'aws-sdk-emrserverless/endpoint_parameters'
-require_relative 'aws-sdk-emrserverless/endpoint_provider'
-require_relative 'aws-sdk-emrserverless/endpoints'
-require_relative 'aws-sdk-emrserverless/customizations'
-
 # This module provides support for EMR Serverless. This module is available in the
 # `aws-sdk-emrserverless` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-emrserverless/customizations'
 #
 # @!group service
 module Aws::EMRServerless
+  autoload :Types, 'aws-sdk-emrserverless/types'
+  autoload :ClientApi, 'aws-sdk-emrserverless/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-emrserverless/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-emrserverless/client'
+  autoload :Errors, 'aws-sdk-emrserverless/errors'
+  autoload :Resource, 'aws-sdk-emrserverless/resource'
+  autoload :EndpointParameters, 'aws-sdk-emrserverless/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-emrserverless/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-emrserverless/endpoints'
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.35.0'
 
 end
+
+require_relative 'aws-sdk-emrserverless/customizations'

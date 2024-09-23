@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-docdbelastic/types'
-require_relative 'aws-sdk-docdbelastic/client_api'
-require_relative 'aws-sdk-docdbelastic/plugins/endpoints.rb'
-require_relative 'aws-sdk-docdbelastic/client'
-require_relative 'aws-sdk-docdbelastic/errors'
-require_relative 'aws-sdk-docdbelastic/resource'
-require_relative 'aws-sdk-docdbelastic/endpoint_parameters'
-require_relative 'aws-sdk-docdbelastic/endpoint_provider'
-require_relative 'aws-sdk-docdbelastic/endpoints'
-require_relative 'aws-sdk-docdbelastic/customizations'
-
 # This module provides support for Amazon DocumentDB Elastic Clusters. This module is available in the
 # `aws-sdk-docdbelastic` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-docdbelastic/customizations'
 #
 # @!group service
 module Aws::DocDBElastic
+  autoload :Types, 'aws-sdk-docdbelastic/types'
+  autoload :ClientApi, 'aws-sdk-docdbelastic/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-docdbelastic/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-docdbelastic/client'
+  autoload :Errors, 'aws-sdk-docdbelastic/errors'
+  autoload :Resource, 'aws-sdk-docdbelastic/resource'
+  autoload :EndpointParameters, 'aws-sdk-docdbelastic/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-docdbelastic/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-docdbelastic/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
+
+require_relative 'aws-sdk-docdbelastic/customizations'

@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mq/types'
-require_relative 'aws-sdk-mq/client_api'
-require_relative 'aws-sdk-mq/plugins/endpoints.rb'
-require_relative 'aws-sdk-mq/client'
-require_relative 'aws-sdk-mq/errors'
-require_relative 'aws-sdk-mq/resource'
-require_relative 'aws-sdk-mq/endpoint_parameters'
-require_relative 'aws-sdk-mq/endpoint_provider'
-require_relative 'aws-sdk-mq/endpoints'
-require_relative 'aws-sdk-mq/customizations'
-
 # This module provides support for AmazonMQ. This module is available in the
 # `aws-sdk-mq` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-mq/customizations'
 #
 # @!group service
 module Aws::MQ
+  autoload :Types, 'aws-sdk-mq/types'
+  autoload :ClientApi, 'aws-sdk-mq/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mq/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mq/client'
+  autoload :Errors, 'aws-sdk-mq/errors'
+  autoload :Resource, 'aws-sdk-mq/resource'
+  autoload :EndpointParameters, 'aws-sdk-mq/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mq/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mq/endpoints'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
+
+require_relative 'aws-sdk-mq/customizations'

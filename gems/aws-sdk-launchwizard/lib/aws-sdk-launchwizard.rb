@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-launchwizard/types'
-require_relative 'aws-sdk-launchwizard/client_api'
-require_relative 'aws-sdk-launchwizard/plugins/endpoints.rb'
-require_relative 'aws-sdk-launchwizard/client'
-require_relative 'aws-sdk-launchwizard/errors'
-require_relative 'aws-sdk-launchwizard/resource'
-require_relative 'aws-sdk-launchwizard/endpoint_parameters'
-require_relative 'aws-sdk-launchwizard/endpoint_provider'
-require_relative 'aws-sdk-launchwizard/endpoints'
-require_relative 'aws-sdk-launchwizard/customizations'
-
 # This module provides support for AWS Launch Wizard. This module is available in the
 # `aws-sdk-launchwizard` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-launchwizard/customizations'
 #
 # @!group service
 module Aws::LaunchWizard
+  autoload :Types, 'aws-sdk-launchwizard/types'
+  autoload :ClientApi, 'aws-sdk-launchwizard/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-launchwizard/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-launchwizard/client'
+  autoload :Errors, 'aws-sdk-launchwizard/errors'
+  autoload :Resource, 'aws-sdk-launchwizard/resource'
+  autoload :EndpointParameters, 'aws-sdk-launchwizard/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-launchwizard/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-launchwizard/endpoints'
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end
+
+require_relative 'aws-sdk-launchwizard/customizations'

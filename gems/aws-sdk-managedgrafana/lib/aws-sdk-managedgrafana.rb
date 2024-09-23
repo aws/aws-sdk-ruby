@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-managedgrafana/types'
-require_relative 'aws-sdk-managedgrafana/client_api'
-require_relative 'aws-sdk-managedgrafana/plugins/endpoints.rb'
-require_relative 'aws-sdk-managedgrafana/client'
-require_relative 'aws-sdk-managedgrafana/errors'
-require_relative 'aws-sdk-managedgrafana/resource'
-require_relative 'aws-sdk-managedgrafana/endpoint_parameters'
-require_relative 'aws-sdk-managedgrafana/endpoint_provider'
-require_relative 'aws-sdk-managedgrafana/endpoints'
-require_relative 'aws-sdk-managedgrafana/customizations'
-
 # This module provides support for Amazon Managed Grafana. This module is available in the
 # `aws-sdk-managedgrafana` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-managedgrafana/customizations'
 #
 # @!group service
 module Aws::ManagedGrafana
+  autoload :Types, 'aws-sdk-managedgrafana/types'
+  autoload :ClientApi, 'aws-sdk-managedgrafana/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-managedgrafana/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-managedgrafana/client'
+  autoload :Errors, 'aws-sdk-managedgrafana/errors'
+  autoload :Resource, 'aws-sdk-managedgrafana/resource'
+  autoload :EndpointParameters, 'aws-sdk-managedgrafana/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-managedgrafana/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-managedgrafana/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end
+
+require_relative 'aws-sdk-managedgrafana/customizations'

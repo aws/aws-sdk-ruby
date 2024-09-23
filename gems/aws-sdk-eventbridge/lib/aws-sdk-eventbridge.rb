@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-eventbridge/types'
-require_relative 'aws-sdk-eventbridge/client_api'
-require_relative 'aws-sdk-eventbridge/plugins/endpoints.rb'
-require_relative 'aws-sdk-eventbridge/client'
-require_relative 'aws-sdk-eventbridge/errors'
-require_relative 'aws-sdk-eventbridge/resource'
-require_relative 'aws-sdk-eventbridge/endpoint_parameters'
-require_relative 'aws-sdk-eventbridge/endpoint_provider'
-require_relative 'aws-sdk-eventbridge/endpoints'
-require_relative 'aws-sdk-eventbridge/customizations'
-
 # This module provides support for Amazon EventBridge. This module is available in the
 # `aws-sdk-eventbridge` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-eventbridge/customizations'
 #
 # @!group service
 module Aws::EventBridge
+  autoload :Types, 'aws-sdk-eventbridge/types'
+  autoload :ClientApi, 'aws-sdk-eventbridge/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-eventbridge/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-eventbridge/client'
+  autoload :Errors, 'aws-sdk-eventbridge/errors'
+  autoload :Resource, 'aws-sdk-eventbridge/resource'
+  autoload :EndpointParameters, 'aws-sdk-eventbridge/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-eventbridge/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-eventbridge/endpoints'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end
+
+require_relative 'aws-sdk-eventbridge/customizations'

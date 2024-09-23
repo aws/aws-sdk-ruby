@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-resourceexplorer2/types'
-require_relative 'aws-sdk-resourceexplorer2/client_api'
-require_relative 'aws-sdk-resourceexplorer2/plugins/endpoints.rb'
-require_relative 'aws-sdk-resourceexplorer2/client'
-require_relative 'aws-sdk-resourceexplorer2/errors'
-require_relative 'aws-sdk-resourceexplorer2/resource'
-require_relative 'aws-sdk-resourceexplorer2/endpoint_parameters'
-require_relative 'aws-sdk-resourceexplorer2/endpoint_provider'
-require_relative 'aws-sdk-resourceexplorer2/endpoints'
-require_relative 'aws-sdk-resourceexplorer2/customizations'
-
 # This module provides support for AWS Resource Explorer. This module is available in the
 # `aws-sdk-resourceexplorer2` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-resourceexplorer2/customizations'
 #
 # @!group service
 module Aws::ResourceExplorer2
+  autoload :Types, 'aws-sdk-resourceexplorer2/types'
+  autoload :ClientApi, 'aws-sdk-resourceexplorer2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-resourceexplorer2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-resourceexplorer2/client'
+  autoload :Errors, 'aws-sdk-resourceexplorer2/errors'
+  autoload :Resource, 'aws-sdk-resourceexplorer2/resource'
+  autoload :EndpointParameters, 'aws-sdk-resourceexplorer2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-resourceexplorer2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-resourceexplorer2/endpoints'
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end
+
+require_relative 'aws-sdk-resourceexplorer2/customizations'

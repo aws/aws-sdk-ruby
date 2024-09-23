@@ -199,3 +199,4 @@ module Aws::MarketplaceEntitlementService
 
   end
 end
+

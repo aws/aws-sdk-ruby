@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-connectcases/types'
-require_relative 'aws-sdk-connectcases/client_api'
-require_relative 'aws-sdk-connectcases/plugins/endpoints.rb'
-require_relative 'aws-sdk-connectcases/client'
-require_relative 'aws-sdk-connectcases/errors'
-require_relative 'aws-sdk-connectcases/resource'
-require_relative 'aws-sdk-connectcases/endpoint_parameters'
-require_relative 'aws-sdk-connectcases/endpoint_provider'
-require_relative 'aws-sdk-connectcases/endpoints'
-require_relative 'aws-sdk-connectcases/customizations'
-
 # This module provides support for Amazon Connect Cases. This module is available in the
 # `aws-sdk-connectcases` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-connectcases/customizations'
 #
 # @!group service
 module Aws::ConnectCases
+  autoload :Types, 'aws-sdk-connectcases/types'
+  autoload :ClientApi, 'aws-sdk-connectcases/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-connectcases/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-connectcases/client'
+  autoload :Errors, 'aws-sdk-connectcases/errors'
+  autoload :Resource, 'aws-sdk-connectcases/resource'
+  autoload :EndpointParameters, 'aws-sdk-connectcases/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-connectcases/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-connectcases/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end
+
+require_relative 'aws-sdk-connectcases/customizations'

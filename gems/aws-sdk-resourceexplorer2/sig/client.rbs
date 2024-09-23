@@ -225,6 +225,23 @@ module Aws
                                     ) -> _ListIndexesForMembersResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndexesForMembersResponseSuccess
 
+      interface _ListResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesOutput]
+        def next_token: () -> ::String
+        def resources: () -> ::Array[Types::Resource]
+        def view_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_resources-instance_method
+      def list_resources: (
+                            ?filters: {
+                              filter_string: ::String
+                            },
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?view_arn: ::String
+                          ) -> _ListResourcesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesResponseSuccess
+
       interface _ListSupportedResourceTypesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSupportedResourceTypesOutput]
         def next_token: () -> ::String

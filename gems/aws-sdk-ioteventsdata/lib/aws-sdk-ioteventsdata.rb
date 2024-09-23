@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ioteventsdata/types'
-require_relative 'aws-sdk-ioteventsdata/client_api'
-require_relative 'aws-sdk-ioteventsdata/plugins/endpoints.rb'
-require_relative 'aws-sdk-ioteventsdata/client'
-require_relative 'aws-sdk-ioteventsdata/errors'
-require_relative 'aws-sdk-ioteventsdata/resource'
-require_relative 'aws-sdk-ioteventsdata/endpoint_parameters'
-require_relative 'aws-sdk-ioteventsdata/endpoint_provider'
-require_relative 'aws-sdk-ioteventsdata/endpoints'
-require_relative 'aws-sdk-ioteventsdata/customizations'
-
 # This module provides support for AWS IoT Events Data. This module is available in the
 # `aws-sdk-ioteventsdata` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-ioteventsdata/customizations'
 #
 # @!group service
 module Aws::IoTEventsData
+  autoload :Types, 'aws-sdk-ioteventsdata/types'
+  autoload :ClientApi, 'aws-sdk-ioteventsdata/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ioteventsdata/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ioteventsdata/client'
+  autoload :Errors, 'aws-sdk-ioteventsdata/errors'
+  autoload :Resource, 'aws-sdk-ioteventsdata/resource'
+  autoload :EndpointParameters, 'aws-sdk-ioteventsdata/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ioteventsdata/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ioteventsdata/endpoints'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end
+
+require_relative 'aws-sdk-ioteventsdata/customizations'

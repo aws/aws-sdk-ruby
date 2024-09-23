@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::DevOpsGuru
   # @api private
   module ClientApi

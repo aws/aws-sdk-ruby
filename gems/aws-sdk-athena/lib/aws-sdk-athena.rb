@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-athena/types'
-require_relative 'aws-sdk-athena/client_api'
-require_relative 'aws-sdk-athena/plugins/endpoints.rb'
-require_relative 'aws-sdk-athena/client'
-require_relative 'aws-sdk-athena/errors'
-require_relative 'aws-sdk-athena/resource'
-require_relative 'aws-sdk-athena/endpoint_parameters'
-require_relative 'aws-sdk-athena/endpoint_provider'
-require_relative 'aws-sdk-athena/endpoints'
-require_relative 'aws-sdk-athena/customizations'
-
 # This module provides support for Amazon Athena. This module is available in the
 # `aws-sdk-athena` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-athena/customizations'
 #
 # @!group service
 module Aws::Athena
+  autoload :Types, 'aws-sdk-athena/types'
+  autoload :ClientApi, 'aws-sdk-athena/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-athena/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-athena/client'
+  autoload :Errors, 'aws-sdk-athena/errors'
+  autoload :Resource, 'aws-sdk-athena/resource'
+  autoload :EndpointParameters, 'aws-sdk-athena/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-athena/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-athena/endpoints'
 
-  GEM_VERSION = '1.93.0'
+  GEM_VERSION = '1.94.0'
 
 end
+
+require_relative 'aws-sdk-athena/customizations'

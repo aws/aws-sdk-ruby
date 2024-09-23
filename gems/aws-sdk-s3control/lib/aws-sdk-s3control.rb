@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-s3control/types'
-require_relative 'aws-sdk-s3control/client_api'
-require_relative 'aws-sdk-s3control/plugins/endpoints.rb'
-require_relative 'aws-sdk-s3control/client'
-require_relative 'aws-sdk-s3control/errors'
-require_relative 'aws-sdk-s3control/resource'
-require_relative 'aws-sdk-s3control/endpoint_parameters'
-require_relative 'aws-sdk-s3control/endpoint_provider'
-require_relative 'aws-sdk-s3control/endpoints'
-require_relative 'aws-sdk-s3control/customizations'
-
 # This module provides support for AWS S3 Control. This module is available in the
 # `aws-sdk-s3control` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-s3control/customizations'
 #
 # @!group service
 module Aws::S3Control
+  autoload :Types, 'aws-sdk-s3control/types'
+  autoload :ClientApi, 'aws-sdk-s3control/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-s3control/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-s3control/client'
+  autoload :Errors, 'aws-sdk-s3control/errors'
+  autoload :Resource, 'aws-sdk-s3control/resource'
+  autoload :EndpointParameters, 'aws-sdk-s3control/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-s3control/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-s3control/endpoints'
 
-  GEM_VERSION = '1.92.0'
+  GEM_VERSION = '1.93.0'
 
 end
+
+require_relative 'aws-sdk-s3control/customizations'

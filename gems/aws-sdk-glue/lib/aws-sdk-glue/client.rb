@@ -2954,6 +2954,9 @@ module Aws::Glue
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
     #       },
+    #       athena_properties: {
+    #         "PropertyKey" => "PropertyValue",
+    #       },
     #       physical_connection_requirements: {
     #         subnet_id: "NameString",
     #         security_group_id_list: ["NameString"],
@@ -2961,7 +2964,6 @@ module Aws::Glue
     #       },
     #       authentication_configuration: {
     #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
-    #         secret_arn: "SecretArn",
     #         o_auth_2_properties: {
     #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
     #           o_auth_2_client_application: {
@@ -2977,6 +2979,7 @@ module Aws::Glue
     #             redirect_uri: "RedirectUri",
     #           },
     #         },
+    #         secret_arn: "SecretArn",
     #       },
     #       validate_credentials: false,
     #     },
@@ -6640,6 +6643,8 @@ module Aws::Glue
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
     #   resp.connection.connection_properties["ConnectionPropertyKey"] #=> String
+    #   resp.connection.athena_properties #=> Hash
+    #   resp.connection.athena_properties["PropertyKey"] #=> String
     #   resp.connection.physical_connection_requirements.subnet_id #=> String
     #   resp.connection.physical_connection_requirements.security_group_id_list #=> Array
     #   resp.connection.physical_connection_requirements.security_group_id_list[0] #=> String
@@ -6721,6 +6726,8 @@ module Aws::Glue
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
     #   resp.connection_list[0].connection_properties["ConnectionPropertyKey"] #=> String
+    #   resp.connection_list[0].athena_properties #=> Hash
+    #   resp.connection_list[0].athena_properties["PropertyKey"] #=> String
     #   resp.connection_list[0].physical_connection_requirements.subnet_id #=> String
     #   resp.connection_list[0].physical_connection_requirements.security_group_id_list #=> Array
     #   resp.connection_list[0].physical_connection_requirements.security_group_id_list[0] #=> String
@@ -16389,7 +16396,6 @@ module Aws::Glue
     #       },
     #       authentication_configuration: {
     #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
-    #         secret_arn: "SecretArn",
     #         o_auth_2_properties: {
     #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
     #           o_auth_2_client_application: {
@@ -16405,6 +16411,7 @@ module Aws::Glue
     #             redirect_uri: "RedirectUri",
     #           },
     #         },
+    #         secret_arn: "SecretArn",
     #       },
     #     },
     #   })
@@ -16839,6 +16846,9 @@ module Aws::Glue
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
     #       },
+    #       athena_properties: {
+    #         "PropertyKey" => "PropertyValue",
+    #       },
     #       physical_connection_requirements: {
     #         subnet_id: "NameString",
     #         security_group_id_list: ["NameString"],
@@ -16846,7 +16856,6 @@ module Aws::Glue
     #       },
     #       authentication_configuration: {
     #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
-    #         secret_arn: "SecretArn",
     #         o_auth_2_properties: {
     #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
     #           o_auth_2_client_application: {
@@ -16862,6 +16871,7 @@ module Aws::Glue
     #             redirect_uri: "RedirectUri",
     #           },
     #         },
+    #         secret_arn: "SecretArn",
     #       },
     #       validate_credentials: false,
     #     },
@@ -18215,7 +18225,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.196.0'
+      context[:gem_version] = '1.197.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

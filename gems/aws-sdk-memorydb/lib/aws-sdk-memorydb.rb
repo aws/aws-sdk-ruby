@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-memorydb/types'
-require_relative 'aws-sdk-memorydb/client_api'
-require_relative 'aws-sdk-memorydb/plugins/endpoints.rb'
-require_relative 'aws-sdk-memorydb/client'
-require_relative 'aws-sdk-memorydb/errors'
-require_relative 'aws-sdk-memorydb/resource'
-require_relative 'aws-sdk-memorydb/endpoint_parameters'
-require_relative 'aws-sdk-memorydb/endpoint_provider'
-require_relative 'aws-sdk-memorydb/endpoints'
-require_relative 'aws-sdk-memorydb/customizations'
-
 # This module provides support for Amazon MemoryDB. This module is available in the
 # `aws-sdk-memorydb` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-memorydb/customizations'
 #
 # @!group service
 module Aws::MemoryDB
+  autoload :Types, 'aws-sdk-memorydb/types'
+  autoload :ClientApi, 'aws-sdk-memorydb/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-memorydb/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-memorydb/client'
+  autoload :Errors, 'aws-sdk-memorydb/errors'
+  autoload :Resource, 'aws-sdk-memorydb/resource'
+  autoload :EndpointParameters, 'aws-sdk-memorydb/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-memorydb/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-memorydb/endpoints'
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end
+
+require_relative 'aws-sdk-memorydb/customizations'

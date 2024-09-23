@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-pcaconnectorad/types'
-require_relative 'aws-sdk-pcaconnectorad/client_api'
-require_relative 'aws-sdk-pcaconnectorad/plugins/endpoints.rb'
-require_relative 'aws-sdk-pcaconnectorad/client'
-require_relative 'aws-sdk-pcaconnectorad/errors'
-require_relative 'aws-sdk-pcaconnectorad/resource'
-require_relative 'aws-sdk-pcaconnectorad/endpoint_parameters'
-require_relative 'aws-sdk-pcaconnectorad/endpoint_provider'
-require_relative 'aws-sdk-pcaconnectorad/endpoints'
-require_relative 'aws-sdk-pcaconnectorad/customizations'
-
 # This module provides support for PcaConnectorAd. This module is available in the
 # `aws-sdk-pcaconnectorad` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-pcaconnectorad/customizations'
 #
 # @!group service
 module Aws::PcaConnectorAd
+  autoload :Types, 'aws-sdk-pcaconnectorad/types'
+  autoload :ClientApi, 'aws-sdk-pcaconnectorad/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-pcaconnectorad/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-pcaconnectorad/client'
+  autoload :Errors, 'aws-sdk-pcaconnectorad/errors'
+  autoload :Resource, 'aws-sdk-pcaconnectorad/resource'
+  autoload :EndpointParameters, 'aws-sdk-pcaconnectorad/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-pcaconnectorad/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-pcaconnectorad/endpoints'
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end
+
+require_relative 'aws-sdk-pcaconnectorad/customizations'

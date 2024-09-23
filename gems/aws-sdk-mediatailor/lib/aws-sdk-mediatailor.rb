@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mediatailor/types'
-require_relative 'aws-sdk-mediatailor/client_api'
-require_relative 'aws-sdk-mediatailor/plugins/endpoints.rb'
-require_relative 'aws-sdk-mediatailor/client'
-require_relative 'aws-sdk-mediatailor/errors'
-require_relative 'aws-sdk-mediatailor/resource'
-require_relative 'aws-sdk-mediatailor/endpoint_parameters'
-require_relative 'aws-sdk-mediatailor/endpoint_provider'
-require_relative 'aws-sdk-mediatailor/endpoints'
-require_relative 'aws-sdk-mediatailor/customizations'
-
 # This module provides support for AWS MediaTailor. This module is available in the
 # `aws-sdk-mediatailor` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-mediatailor/customizations'
 #
 # @!group service
 module Aws::MediaTailor
+  autoload :Types, 'aws-sdk-mediatailor/types'
+  autoload :ClientApi, 'aws-sdk-mediatailor/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mediatailor/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mediatailor/client'
+  autoload :Errors, 'aws-sdk-mediatailor/errors'
+  autoload :Resource, 'aws-sdk-mediatailor/resource'
+  autoload :EndpointParameters, 'aws-sdk-mediatailor/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mediatailor/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mediatailor/endpoints'
 
-  GEM_VERSION = '1.88.0'
+  GEM_VERSION = '1.89.0'
 
 end
+
+require_relative 'aws-sdk-mediatailor/customizations'

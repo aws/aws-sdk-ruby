@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ResourceGroupsTaggingAPI
   # @api private
   module ClientApi

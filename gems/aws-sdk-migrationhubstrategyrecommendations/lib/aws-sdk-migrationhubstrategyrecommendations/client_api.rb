@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::MigrationHubStrategyRecommendations
   # @api private
   module ClientApi

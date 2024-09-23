@@ -602,3 +602,4 @@ module Aws::IoT1ClickDevicesService
 
   end
 end
+

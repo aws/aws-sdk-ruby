@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-datasync/types'
-require_relative 'aws-sdk-datasync/client_api'
-require_relative 'aws-sdk-datasync/plugins/endpoints.rb'
-require_relative 'aws-sdk-datasync/client'
-require_relative 'aws-sdk-datasync/errors'
-require_relative 'aws-sdk-datasync/resource'
-require_relative 'aws-sdk-datasync/endpoint_parameters'
-require_relative 'aws-sdk-datasync/endpoint_provider'
-require_relative 'aws-sdk-datasync/endpoints'
-require_relative 'aws-sdk-datasync/customizations'
-
 # This module provides support for AWS DataSync. This module is available in the
 # `aws-sdk-datasync` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-datasync/customizations'
 #
 # @!group service
 module Aws::DataSync
+  autoload :Types, 'aws-sdk-datasync/types'
+  autoload :ClientApi, 'aws-sdk-datasync/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-datasync/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-datasync/client'
+  autoload :Errors, 'aws-sdk-datasync/errors'
+  autoload :Resource, 'aws-sdk-datasync/resource'
+  autoload :EndpointParameters, 'aws-sdk-datasync/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-datasync/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-datasync/endpoints'
 
-  GEM_VERSION = '1.87.0'
+  GEM_VERSION = '1.88.0'
 
 end
+
+require_relative 'aws-sdk-datasync/customizations'

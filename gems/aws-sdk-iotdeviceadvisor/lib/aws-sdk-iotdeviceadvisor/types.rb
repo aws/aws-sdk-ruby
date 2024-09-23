@@ -928,3 +928,4 @@ module Aws::IoTDeviceAdvisor
 
   end
 end
+

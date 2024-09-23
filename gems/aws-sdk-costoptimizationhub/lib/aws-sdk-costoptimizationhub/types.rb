@@ -2171,3 +2171,4 @@ module Aws::CostOptimizationHub
 
   end
 end
+

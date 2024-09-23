@@ -1339,3 +1339,4 @@ module Aws::IoTEventsData
 
   end
 end
+

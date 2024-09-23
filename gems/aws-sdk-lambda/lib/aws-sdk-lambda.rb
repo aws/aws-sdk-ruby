@@ -11,19 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-lambda/types'
-require_relative 'aws-sdk-lambda/client_api'
-require_relative 'aws-sdk-lambda/plugins/endpoints.rb'
-require_relative 'aws-sdk-lambda/client'
-require_relative 'aws-sdk-lambda/errors'
-require_relative 'aws-sdk-lambda/waiters'
-require_relative 'aws-sdk-lambda/resource'
-require_relative 'aws-sdk-lambda/endpoint_parameters'
-require_relative 'aws-sdk-lambda/endpoint_provider'
-require_relative 'aws-sdk-lambda/endpoints'
-require_relative 'aws-sdk-lambda/customizations'
-require_relative 'aws-sdk-lambda/event_streams'
-
 # This module provides support for AWS Lambda. This module is available in the
 # `aws-sdk-lambda` gem.
 #
@@ -53,7 +40,22 @@ require_relative 'aws-sdk-lambda/event_streams'
 #
 # @!group service
 module Aws::Lambda
+  autoload :Types, 'aws-sdk-lambda/types'
+  autoload :ClientApi, 'aws-sdk-lambda/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-lambda/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-lambda/client'
+  autoload :Errors, 'aws-sdk-lambda/errors'
+  autoload :Waiters, 'aws-sdk-lambda/waiters'
+  autoload :Resource, 'aws-sdk-lambda/resource'
+  autoload :EndpointParameters, 'aws-sdk-lambda/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-lambda/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-lambda/endpoints'
+  autoload :EventStreams, 'aws-sdk-lambda/event_streams'
 
-  GEM_VERSION = '1.133.0'
+  GEM_VERSION = '1.134.0'
 
 end
+
+require_relative 'aws-sdk-lambda/customizations'

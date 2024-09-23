@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ConnectCampaignService
   # @api private
   module ClientApi

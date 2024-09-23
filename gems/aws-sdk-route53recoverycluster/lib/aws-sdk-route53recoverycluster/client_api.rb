@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::Route53RecoveryCluster
   # @api private
   module ClientApi

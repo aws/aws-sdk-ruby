@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::CostandUsageReportService
   # @api private
   module ClientApi

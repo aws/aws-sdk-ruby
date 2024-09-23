@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-workspaces/types'
-require_relative 'aws-sdk-workspaces/client_api'
-require_relative 'aws-sdk-workspaces/plugins/endpoints.rb'
-require_relative 'aws-sdk-workspaces/client'
-require_relative 'aws-sdk-workspaces/errors'
-require_relative 'aws-sdk-workspaces/resource'
-require_relative 'aws-sdk-workspaces/endpoint_parameters'
-require_relative 'aws-sdk-workspaces/endpoint_provider'
-require_relative 'aws-sdk-workspaces/endpoints'
-require_relative 'aws-sdk-workspaces/customizations'
-
 # This module provides support for Amazon WorkSpaces. This module is available in the
 # `aws-sdk-workspaces` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-workspaces/customizations'
 #
 # @!group service
 module Aws::WorkSpaces
+  autoload :Types, 'aws-sdk-workspaces/types'
+  autoload :ClientApi, 'aws-sdk-workspaces/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-workspaces/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-workspaces/client'
+  autoload :Errors, 'aws-sdk-workspaces/errors'
+  autoload :Resource, 'aws-sdk-workspaces/resource'
+  autoload :EndpointParameters, 'aws-sdk-workspaces/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-workspaces/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-workspaces/endpoints'
 
-  GEM_VERSION = '1.118.0'
+  GEM_VERSION = '1.119.0'
 
 end
+
+require_relative 'aws-sdk-workspaces/customizations'

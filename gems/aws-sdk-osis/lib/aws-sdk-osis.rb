@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-osis/types'
-require_relative 'aws-sdk-osis/client_api'
-require_relative 'aws-sdk-osis/plugins/endpoints.rb'
-require_relative 'aws-sdk-osis/client'
-require_relative 'aws-sdk-osis/errors'
-require_relative 'aws-sdk-osis/resource'
-require_relative 'aws-sdk-osis/endpoint_parameters'
-require_relative 'aws-sdk-osis/endpoint_provider'
-require_relative 'aws-sdk-osis/endpoints'
-require_relative 'aws-sdk-osis/customizations'
-
 # This module provides support for Amazon OpenSearch Ingestion. This module is available in the
 # `aws-sdk-osis` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-osis/customizations'
 #
 # @!group service
 module Aws::OSIS
+  autoload :Types, 'aws-sdk-osis/types'
+  autoload :ClientApi, 'aws-sdk-osis/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-osis/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-osis/client'
+  autoload :Errors, 'aws-sdk-osis/errors'
+  autoload :Resource, 'aws-sdk-osis/resource'
+  autoload :EndpointParameters, 'aws-sdk-osis/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-osis/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-osis/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
+
+require_relative 'aws-sdk-osis/customizations'

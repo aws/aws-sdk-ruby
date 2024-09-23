@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-swf/types'
-require_relative 'aws-sdk-swf/client_api'
-require_relative 'aws-sdk-swf/plugins/endpoints.rb'
-require_relative 'aws-sdk-swf/client'
-require_relative 'aws-sdk-swf/errors'
-require_relative 'aws-sdk-swf/resource'
-require_relative 'aws-sdk-swf/endpoint_parameters'
-require_relative 'aws-sdk-swf/endpoint_provider'
-require_relative 'aws-sdk-swf/endpoints'
-require_relative 'aws-sdk-swf/customizations'
-
 # This module provides support for Amazon Simple Workflow Service. This module is available in the
 # `aws-sdk-swf` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-swf/customizations'
 #
 # @!group service
 module Aws::SWF
+  autoload :Types, 'aws-sdk-swf/types'
+  autoload :ClientApi, 'aws-sdk-swf/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-swf/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-swf/client'
+  autoload :Errors, 'aws-sdk-swf/errors'
+  autoload :Resource, 'aws-sdk-swf/resource'
+  autoload :EndpointParameters, 'aws-sdk-swf/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-swf/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-swf/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
+
+require_relative 'aws-sdk-swf/customizations'

@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.208.0 (2024-09-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Use autoloading at the service level to load service clients and resources.
 
 3.207.0 (2024-09-20)

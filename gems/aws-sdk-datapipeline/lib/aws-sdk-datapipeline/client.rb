@@ -1453,7 +1453,7 @@ module Aws::DataPipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datapipeline'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

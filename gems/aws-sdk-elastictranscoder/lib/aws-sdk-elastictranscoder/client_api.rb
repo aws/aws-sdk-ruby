@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ElasticTranscoder
   # @api private
   module ClientApi

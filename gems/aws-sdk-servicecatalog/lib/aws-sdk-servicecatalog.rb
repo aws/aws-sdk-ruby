@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-servicecatalog/types'
-require_relative 'aws-sdk-servicecatalog/client_api'
-require_relative 'aws-sdk-servicecatalog/plugins/endpoints.rb'
-require_relative 'aws-sdk-servicecatalog/client'
-require_relative 'aws-sdk-servicecatalog/errors'
-require_relative 'aws-sdk-servicecatalog/resource'
-require_relative 'aws-sdk-servicecatalog/endpoint_parameters'
-require_relative 'aws-sdk-servicecatalog/endpoint_provider'
-require_relative 'aws-sdk-servicecatalog/endpoints'
-require_relative 'aws-sdk-servicecatalog/customizations'
-
 # This module provides support for AWS Service Catalog. This module is available in the
 # `aws-sdk-servicecatalog` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-servicecatalog/customizations'
 #
 # @!group service
 module Aws::ServiceCatalog
+  autoload :Types, 'aws-sdk-servicecatalog/types'
+  autoload :ClientApi, 'aws-sdk-servicecatalog/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-servicecatalog/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-servicecatalog/client'
+  autoload :Errors, 'aws-sdk-servicecatalog/errors'
+  autoload :Resource, 'aws-sdk-servicecatalog/resource'
+  autoload :EndpointParameters, 'aws-sdk-servicecatalog/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-servicecatalog/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-servicecatalog/endpoints'
 
-  GEM_VERSION = '1.103.0'
+  GEM_VERSION = '1.104.0'
 
 end
+
+require_relative 'aws-sdk-servicecatalog/customizations'

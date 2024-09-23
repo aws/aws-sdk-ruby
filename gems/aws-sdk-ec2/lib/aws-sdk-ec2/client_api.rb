@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::EC2
   # @api private
   module ClientApi
@@ -1924,6 +1925,7 @@ module Aws::EC2
     KeyPairInfo = Shapes::StructureShape.new(name: 'KeyPairInfo')
     KeyPairList = Shapes::ListShape.new(name: 'KeyPairList')
     KeyPairName = Shapes::StringShape.new(name: 'KeyPairName')
+    KeyPairNameWithResolver = Shapes::StringShape.new(name: 'KeyPairNameWithResolver')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
@@ -5809,7 +5811,7 @@ module Aws::EC2
     DeleteIpamScopeResult.add_member(:ipam_scope, Shapes::ShapeRef.new(shape: IpamScope, location_name: "ipamScope"))
     DeleteIpamScopeResult.struct_class = Types::DeleteIpamScopeResult
 
-    DeleteKeyPairRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairName, location_name: "KeyName"))
+    DeleteKeyPairRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairNameWithResolver, location_name: "KeyName"))
     DeleteKeyPairRequest.add_member(:key_pair_id, Shapes::ShapeRef.new(shape: KeyPairId, location_name: "KeyPairId"))
     DeleteKeyPairRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteKeyPairRequest.struct_class = Types::DeleteKeyPairRequest
@@ -6346,8 +6348,8 @@ module Aws::EC2
     DescribeByoipCidrsResult.struct_class = Types::DescribeByoipCidrsResult
 
     DescribeCapacityBlockOfferingsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    DescribeCapacityBlockOfferingsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
-    DescribeCapacityBlockOfferingsRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
     DescribeCapacityBlockOfferingsRequest.add_member(:start_date_range, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "StartDateRange"))
     DescribeCapacityBlockOfferingsRequest.add_member(:end_date_range, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "EndDateRange"))
     DescribeCapacityBlockOfferingsRequest.add_member(:capacity_duration_hours, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "CapacityDurationHours"))

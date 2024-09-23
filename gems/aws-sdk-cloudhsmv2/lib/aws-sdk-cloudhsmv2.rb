@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudhsmv2/types'
-require_relative 'aws-sdk-cloudhsmv2/client_api'
-require_relative 'aws-sdk-cloudhsmv2/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudhsmv2/client'
-require_relative 'aws-sdk-cloudhsmv2/errors'
-require_relative 'aws-sdk-cloudhsmv2/resource'
-require_relative 'aws-sdk-cloudhsmv2/endpoint_parameters'
-require_relative 'aws-sdk-cloudhsmv2/endpoint_provider'
-require_relative 'aws-sdk-cloudhsmv2/endpoints'
-require_relative 'aws-sdk-cloudhsmv2/customizations'
-
 # This module provides support for AWS CloudHSM V2. This module is available in the
 # `aws-sdk-cloudhsmv2` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-cloudhsmv2/customizations'
 #
 # @!group service
 module Aws::CloudHSMV2
+  autoload :Types, 'aws-sdk-cloudhsmv2/types'
+  autoload :ClientApi, 'aws-sdk-cloudhsmv2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudhsmv2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudhsmv2/client'
+  autoload :Errors, 'aws-sdk-cloudhsmv2/errors'
+  autoload :Resource, 'aws-sdk-cloudhsmv2/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudhsmv2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudhsmv2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudhsmv2/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
+
+require_relative 'aws-sdk-cloudhsmv2/customizations'

@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-apigatewayv2/types'
-require_relative 'aws-sdk-apigatewayv2/client_api'
-require_relative 'aws-sdk-apigatewayv2/plugins/endpoints.rb'
-require_relative 'aws-sdk-apigatewayv2/client'
-require_relative 'aws-sdk-apigatewayv2/errors'
-require_relative 'aws-sdk-apigatewayv2/resource'
-require_relative 'aws-sdk-apigatewayv2/endpoint_parameters'
-require_relative 'aws-sdk-apigatewayv2/endpoint_provider'
-require_relative 'aws-sdk-apigatewayv2/endpoints'
-require_relative 'aws-sdk-apigatewayv2/customizations'
-
 # This module provides support for AmazonApiGatewayV2. This module is available in the
 # `aws-sdk-apigatewayv2` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-apigatewayv2/customizations'
 #
 # @!group service
 module Aws::ApiGatewayV2
+  autoload :Types, 'aws-sdk-apigatewayv2/types'
+  autoload :ClientApi, 'aws-sdk-apigatewayv2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-apigatewayv2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-apigatewayv2/client'
+  autoload :Errors, 'aws-sdk-apigatewayv2/errors'
+  autoload :Resource, 'aws-sdk-apigatewayv2/resource'
+  autoload :EndpointParameters, 'aws-sdk-apigatewayv2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-apigatewayv2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-apigatewayv2/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
+
+require_relative 'aws-sdk-apigatewayv2/customizations'

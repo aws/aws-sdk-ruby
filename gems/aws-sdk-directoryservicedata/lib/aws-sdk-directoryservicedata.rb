@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-directoryservicedata/types'
-require_relative 'aws-sdk-directoryservicedata/client_api'
-require_relative 'aws-sdk-directoryservicedata/plugins/endpoints.rb'
-require_relative 'aws-sdk-directoryservicedata/client'
-require_relative 'aws-sdk-directoryservicedata/errors'
-require_relative 'aws-sdk-directoryservicedata/resource'
-require_relative 'aws-sdk-directoryservicedata/endpoint_parameters'
-require_relative 'aws-sdk-directoryservicedata/endpoint_provider'
-require_relative 'aws-sdk-directoryservicedata/endpoints'
-require_relative 'aws-sdk-directoryservicedata/customizations'
-
 # This module provides support for AWS Directory Service Data. This module is available in the
 # `aws-sdk-directoryservicedata` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-directoryservicedata/customizations'
 #
 # @!group service
 module Aws::DirectoryServiceData
+  autoload :Types, 'aws-sdk-directoryservicedata/types'
+  autoload :ClientApi, 'aws-sdk-directoryservicedata/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-directoryservicedata/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-directoryservicedata/client'
+  autoload :Errors, 'aws-sdk-directoryservicedata/errors'
+  autoload :Resource, 'aws-sdk-directoryservicedata/resource'
+  autoload :EndpointParameters, 'aws-sdk-directoryservicedata/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-directoryservicedata/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-directoryservicedata/endpoints'
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end
+
+require_relative 'aws-sdk-directoryservicedata/customizations'

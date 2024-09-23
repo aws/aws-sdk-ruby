@@ -2273,3 +2273,4 @@ module Aws::BedrockRuntime
 
   end
 end
+

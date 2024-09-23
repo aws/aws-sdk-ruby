@@ -3947,3 +3947,4 @@ module Aws::VPCLattice
 
   end
 end
+

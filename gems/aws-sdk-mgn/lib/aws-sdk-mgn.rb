@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mgn/types'
-require_relative 'aws-sdk-mgn/client_api'
-require_relative 'aws-sdk-mgn/plugins/endpoints.rb'
-require_relative 'aws-sdk-mgn/client'
-require_relative 'aws-sdk-mgn/errors'
-require_relative 'aws-sdk-mgn/resource'
-require_relative 'aws-sdk-mgn/endpoint_parameters'
-require_relative 'aws-sdk-mgn/endpoint_provider'
-require_relative 'aws-sdk-mgn/endpoints'
-require_relative 'aws-sdk-mgn/customizations'
-
 # This module provides support for Application Migration Service. This module is available in the
 # `aws-sdk-mgn` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-mgn/customizations'
 #
 # @!group service
 module Aws::Mgn
+  autoload :Types, 'aws-sdk-mgn/types'
+  autoload :ClientApi, 'aws-sdk-mgn/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mgn/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mgn/client'
+  autoload :Errors, 'aws-sdk-mgn/errors'
+  autoload :Resource, 'aws-sdk-mgn/resource'
+  autoload :EndpointParameters, 'aws-sdk-mgn/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mgn/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mgn/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
+
+require_relative 'aws-sdk-mgn/customizations'

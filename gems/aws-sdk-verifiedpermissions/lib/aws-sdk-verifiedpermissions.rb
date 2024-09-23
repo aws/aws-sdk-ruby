@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-verifiedpermissions/types'
-require_relative 'aws-sdk-verifiedpermissions/client_api'
-require_relative 'aws-sdk-verifiedpermissions/plugins/endpoints.rb'
-require_relative 'aws-sdk-verifiedpermissions/client'
-require_relative 'aws-sdk-verifiedpermissions/errors'
-require_relative 'aws-sdk-verifiedpermissions/waiters'
-require_relative 'aws-sdk-verifiedpermissions/resource'
-require_relative 'aws-sdk-verifiedpermissions/endpoint_parameters'
-require_relative 'aws-sdk-verifiedpermissions/endpoint_provider'
-require_relative 'aws-sdk-verifiedpermissions/endpoints'
-require_relative 'aws-sdk-verifiedpermissions/customizations'
-
 # This module provides support for Amazon Verified Permissions. This module is available in the
 # `aws-sdk-verifiedpermissions` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-verifiedpermissions/customizations'
 #
 # @!group service
 module Aws::VerifiedPermissions
+  autoload :Types, 'aws-sdk-verifiedpermissions/types'
+  autoload :ClientApi, 'aws-sdk-verifiedpermissions/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-verifiedpermissions/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-verifiedpermissions/client'
+  autoload :Errors, 'aws-sdk-verifiedpermissions/errors'
+  autoload :Waiters, 'aws-sdk-verifiedpermissions/waiters'
+  autoload :Resource, 'aws-sdk-verifiedpermissions/resource'
+  autoload :EndpointParameters, 'aws-sdk-verifiedpermissions/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-verifiedpermissions/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-verifiedpermissions/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end
+
+require_relative 'aws-sdk-verifiedpermissions/customizations'

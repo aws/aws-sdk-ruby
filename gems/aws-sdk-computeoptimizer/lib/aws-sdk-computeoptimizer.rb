@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-computeoptimizer/types'
-require_relative 'aws-sdk-computeoptimizer/client_api'
-require_relative 'aws-sdk-computeoptimizer/plugins/endpoints.rb'
-require_relative 'aws-sdk-computeoptimizer/client'
-require_relative 'aws-sdk-computeoptimizer/errors'
-require_relative 'aws-sdk-computeoptimizer/resource'
-require_relative 'aws-sdk-computeoptimizer/endpoint_parameters'
-require_relative 'aws-sdk-computeoptimizer/endpoint_provider'
-require_relative 'aws-sdk-computeoptimizer/endpoints'
-require_relative 'aws-sdk-computeoptimizer/customizations'
-
 # This module provides support for AWS Compute Optimizer. This module is available in the
 # `aws-sdk-computeoptimizer` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 #
 # @!group service
 module Aws::ComputeOptimizer
+  autoload :Types, 'aws-sdk-computeoptimizer/types'
+  autoload :ClientApi, 'aws-sdk-computeoptimizer/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-computeoptimizer/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-computeoptimizer/client'
+  autoload :Errors, 'aws-sdk-computeoptimizer/errors'
+  autoload :Resource, 'aws-sdk-computeoptimizer/resource'
+  autoload :EndpointParameters, 'aws-sdk-computeoptimizer/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-computeoptimizer/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-computeoptimizer/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
+
+require_relative 'aws-sdk-computeoptimizer/customizations'

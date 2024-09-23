@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/types'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/client_api'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/plugins/endpoints.rb'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/client'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/errors'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/resource'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/endpoint_parameters'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/endpoint_provider'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/endpoints'
-require_relative 'aws-sdk-kinesisvideoarchivedmedia/customizations'
-
 # This module provides support for Amazon Kinesis Video Streams Archived Media. This module is available in the
 # `aws-sdk-kinesisvideoarchivedmedia` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-kinesisvideoarchivedmedia/customizations'
 #
 # @!group service
 module Aws::KinesisVideoArchivedMedia
+  autoload :Types, 'aws-sdk-kinesisvideoarchivedmedia/types'
+  autoload :ClientApi, 'aws-sdk-kinesisvideoarchivedmedia/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-kinesisvideoarchivedmedia/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-kinesisvideoarchivedmedia/client'
+  autoload :Errors, 'aws-sdk-kinesisvideoarchivedmedia/errors'
+  autoload :Resource, 'aws-sdk-kinesisvideoarchivedmedia/resource'
+  autoload :EndpointParameters, 'aws-sdk-kinesisvideoarchivedmedia/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-kinesisvideoarchivedmedia/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-kinesisvideoarchivedmedia/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
+
+require_relative 'aws-sdk-kinesisvideoarchivedmedia/customizations'

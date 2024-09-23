@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-chimesdkmessaging/types'
-require_relative 'aws-sdk-chimesdkmessaging/client_api'
-require_relative 'aws-sdk-chimesdkmessaging/plugins/endpoints.rb'
-require_relative 'aws-sdk-chimesdkmessaging/client'
-require_relative 'aws-sdk-chimesdkmessaging/errors'
-require_relative 'aws-sdk-chimesdkmessaging/resource'
-require_relative 'aws-sdk-chimesdkmessaging/endpoint_parameters'
-require_relative 'aws-sdk-chimesdkmessaging/endpoint_provider'
-require_relative 'aws-sdk-chimesdkmessaging/endpoints'
-require_relative 'aws-sdk-chimesdkmessaging/customizations'
-
 # This module provides support for Amazon Chime SDK Messaging. This module is available in the
 # `aws-sdk-chimesdkmessaging` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-chimesdkmessaging/customizations'
 #
 # @!group service
 module Aws::ChimeSDKMessaging
+  autoload :Types, 'aws-sdk-chimesdkmessaging/types'
+  autoload :ClientApi, 'aws-sdk-chimesdkmessaging/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-chimesdkmessaging/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-chimesdkmessaging/client'
+  autoload :Errors, 'aws-sdk-chimesdkmessaging/errors'
+  autoload :Resource, 'aws-sdk-chimesdkmessaging/resource'
+  autoload :EndpointParameters, 'aws-sdk-chimesdkmessaging/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-chimesdkmessaging/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-chimesdkmessaging/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
+
+require_relative 'aws-sdk-chimesdkmessaging/customizations'

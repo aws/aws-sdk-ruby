@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-nimblestudio/types'
-require_relative 'aws-sdk-nimblestudio/client_api'
-require_relative 'aws-sdk-nimblestudio/plugins/endpoints.rb'
-require_relative 'aws-sdk-nimblestudio/client'
-require_relative 'aws-sdk-nimblestudio/errors'
-require_relative 'aws-sdk-nimblestudio/waiters'
-require_relative 'aws-sdk-nimblestudio/resource'
-require_relative 'aws-sdk-nimblestudio/endpoint_parameters'
-require_relative 'aws-sdk-nimblestudio/endpoint_provider'
-require_relative 'aws-sdk-nimblestudio/endpoints'
-require_relative 'aws-sdk-nimblestudio/customizations'
-
 # This module provides support for AmazonNimbleStudio. This module is available in the
 # `aws-sdk-nimblestudio` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-nimblestudio/customizations'
 #
 # @!group service
 module Aws::NimbleStudio
+  autoload :Types, 'aws-sdk-nimblestudio/types'
+  autoload :ClientApi, 'aws-sdk-nimblestudio/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-nimblestudio/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-nimblestudio/client'
+  autoload :Errors, 'aws-sdk-nimblestudio/errors'
+  autoload :Waiters, 'aws-sdk-nimblestudio/waiters'
+  autoload :Resource, 'aws-sdk-nimblestudio/resource'
+  autoload :EndpointParameters, 'aws-sdk-nimblestudio/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-nimblestudio/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-nimblestudio/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
+
+require_relative 'aws-sdk-nimblestudio/customizations'

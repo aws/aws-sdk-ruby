@@ -558,6 +558,10 @@ module Aws::EMRServerless
     #   The interactive configuration object that enables the interactive use
     #   cases to use when running an application.
     #
+    # @option params [Types::SchedulerConfiguration] :scheduler_configuration
+    #   The scheduler configuration for batch and streaming jobs running on
+    #   this application. Supported with release labels emr-7.0.0 and above.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -648,6 +652,10 @@ module Aws::EMRServerless
     #     interactive_configuration: {
     #       studio_enabled: false,
     #       livy_endpoint_enabled: false,
+    #     },
+    #     scheduler_configuration: {
+    #       queue_timeout_minutes: 1,
+    #       max_concurrent_runs: 1,
     #     },
     #   })
     #
@@ -758,6 +766,8 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
     #   resp.application.interactive_configuration.studio_enabled #=> Boolean
     #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
+    #   resp.application.scheduler_configuration.queue_timeout_minutes #=> Integer
+    #   resp.application.scheduler_configuration.max_concurrent_runs #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -853,7 +863,7 @@ module Aws::EMRServerless
     #   resp.job_run.created_at #=> Time
     #   resp.job_run.updated_at #=> Time
     #   resp.job_run.execution_role #=> String
-    #   resp.job_run.state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.job_run.state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED", "QUEUED"
     #   resp.job_run.state_details #=> String
     #   resp.job_run.release_label #=> String
     #   resp.job_run.configuration_overrides.application_configuration #=> Array
@@ -900,6 +910,9 @@ module Aws::EMRServerless
     #   resp.job_run.attempt #=> Integer
     #   resp.job_run.attempt_created_at #=> Time
     #   resp.job_run.attempt_updated_at #=> Time
+    #   resp.job_run.started_at #=> Time
+    #   resp.job_run.ended_at #=> Time
+    #   resp.job_run.queued_duration_milliseconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetJobRun AWS API Documentation
     #
@@ -1005,7 +1018,7 @@ module Aws::EMRServerless
     #   resp.job_run_attempts[0].created_at #=> Time
     #   resp.job_run_attempts[0].updated_at #=> Time
     #   resp.job_run_attempts[0].execution_role #=> String
-    #   resp.job_run_attempts[0].state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.job_run_attempts[0].state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED", "QUEUED"
     #   resp.job_run_attempts[0].state_details #=> String
     #   resp.job_run_attempts[0].release_label #=> String
     #   resp.job_run_attempts[0].type #=> String
@@ -1061,7 +1074,7 @@ module Aws::EMRServerless
     #     max_results: 1,
     #     created_at_after: Time.now,
     #     created_at_before: Time.now,
-    #     states: ["SUBMITTED"], # accepts SUBMITTED, PENDING, SCHEDULED, RUNNING, SUCCESS, FAILED, CANCELLING, CANCELLED
+    #     states: ["SUBMITTED"], # accepts SUBMITTED, PENDING, SCHEDULED, RUNNING, SUCCESS, FAILED, CANCELLING, CANCELLED, QUEUED
     #     mode: "BATCH", # accepts BATCH, STREAMING
     #   })
     #
@@ -1077,7 +1090,7 @@ module Aws::EMRServerless
     #   resp.job_runs[0].created_at #=> Time
     #   resp.job_runs[0].updated_at #=> Time
     #   resp.job_runs[0].execution_role #=> String
-    #   resp.job_runs[0].state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.job_runs[0].state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED", "QUEUED"
     #   resp.job_runs[0].state_details #=> String
     #   resp.job_runs[0].release_label #=> String
     #   resp.job_runs[0].type #=> String
@@ -1431,6 +1444,10 @@ module Aws::EMRServerless
     # @option params [Types::MonitoringConfiguration] :monitoring_configuration
     #   The configuration setting for monitoring.
     #
+    # @option params [Types::SchedulerConfiguration] :scheduler_configuration
+    #   The scheduler configuration for batch and streaming jobs running on
+    #   this application. Supported with release labels emr-7.0.0 and above.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application #application} => Types::Application
@@ -1516,6 +1533,10 @@ module Aws::EMRServerless
     #         remote_write_url: "PrometheusUrlString",
     #       },
     #     },
+    #     scheduler_configuration: {
+    #       queue_timeout_minutes: 1,
+    #       max_concurrent_runs: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1572,6 +1593,8 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
     #   resp.application.interactive_configuration.studio_enabled #=> Boolean
     #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
+    #   resp.application.scheduler_configuration.queue_timeout_minutes #=> Integer
+    #   resp.application.scheduler_configuration.max_concurrent_runs #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1600,7 +1623,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3295,7 +3295,7 @@ module Aws::VPCLattice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

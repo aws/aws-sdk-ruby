@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ServerlessApplicationRepository
   # @api private
   module ClientApi

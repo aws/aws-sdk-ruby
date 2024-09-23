@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-finspacedata/types'
-require_relative 'aws-sdk-finspacedata/client_api'
-require_relative 'aws-sdk-finspacedata/plugins/endpoints.rb'
-require_relative 'aws-sdk-finspacedata/client'
-require_relative 'aws-sdk-finspacedata/errors'
-require_relative 'aws-sdk-finspacedata/resource'
-require_relative 'aws-sdk-finspacedata/endpoint_parameters'
-require_relative 'aws-sdk-finspacedata/endpoint_provider'
-require_relative 'aws-sdk-finspacedata/endpoints'
-require_relative 'aws-sdk-finspacedata/customizations'
-
 # This module provides support for FinSpace Public API. This module is available in the
 # `aws-sdk-finspacedata` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-finspacedata/customizations'
 #
 # @!group service
 module Aws::FinSpaceData
+  autoload :Types, 'aws-sdk-finspacedata/types'
+  autoload :ClientApi, 'aws-sdk-finspacedata/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-finspacedata/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-finspacedata/client'
+  autoload :Errors, 'aws-sdk-finspacedata/errors'
+  autoload :Resource, 'aws-sdk-finspacedata/resource'
+  autoload :EndpointParameters, 'aws-sdk-finspacedata/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-finspacedata/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-finspacedata/endpoints'
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end
+
+require_relative 'aws-sdk-finspacedata/customizations'

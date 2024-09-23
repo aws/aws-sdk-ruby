@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-imagebuilder/types'
-require_relative 'aws-sdk-imagebuilder/client_api'
-require_relative 'aws-sdk-imagebuilder/plugins/endpoints.rb'
-require_relative 'aws-sdk-imagebuilder/client'
-require_relative 'aws-sdk-imagebuilder/errors'
-require_relative 'aws-sdk-imagebuilder/resource'
-require_relative 'aws-sdk-imagebuilder/endpoint_parameters'
-require_relative 'aws-sdk-imagebuilder/endpoint_provider'
-require_relative 'aws-sdk-imagebuilder/endpoints'
-require_relative 'aws-sdk-imagebuilder/customizations'
-
 # This module provides support for EC2 Image Builder. This module is available in the
 # `aws-sdk-imagebuilder` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-imagebuilder/customizations'
 #
 # @!group service
 module Aws::Imagebuilder
+  autoload :Types, 'aws-sdk-imagebuilder/types'
+  autoload :ClientApi, 'aws-sdk-imagebuilder/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-imagebuilder/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-imagebuilder/client'
+  autoload :Errors, 'aws-sdk-imagebuilder/errors'
+  autoload :Resource, 'aws-sdk-imagebuilder/resource'
+  autoload :EndpointParameters, 'aws-sdk-imagebuilder/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-imagebuilder/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-imagebuilder/endpoints'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end
+
+require_relative 'aws-sdk-imagebuilder/customizations'

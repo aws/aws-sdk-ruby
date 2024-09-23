@@ -62060,7 +62060,7 @@ module Aws::EC2
     # Details about the import snapshot task.
     #
     # @!attribute [rw] description
-    #   The description of the snapshot.
+    #   The description of the disk image being imported.
     #   @return [String]
     #
     # @!attribute [rw] disk_image_size
@@ -69862,3 +69862,4 @@ module Aws::EC2
 
   end
 end
+

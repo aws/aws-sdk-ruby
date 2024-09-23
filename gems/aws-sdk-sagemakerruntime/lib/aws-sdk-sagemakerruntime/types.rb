@@ -690,3 +690,4 @@ module Aws::SageMakerRuntime
 
   end
 end
+

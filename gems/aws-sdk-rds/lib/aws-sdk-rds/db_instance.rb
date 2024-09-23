@@ -2368,17 +2368,24 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [String] :db_parameter_group_name
-    #   The name of the DB parameter group to associate with this DB instance.
+    #   The name of the DB parameter group to associate with this read replica
+    #   DB instance.
     #
-    #   If you don't specify a value for `DBParameterGroupName`, then Amazon
-    #   RDS uses the `DBParameterGroup` of the source DB instance for a same
+    #   For Single-AZ or Multi-AZ DB instance read replica instances, if you
+    #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
+    #   uses the `DBParameterGroup` of the source DB instance for a same
     #   Region read replica, or the default `DBParameterGroup` for the
     #   specified DB engine for a cross-Region read replica.
     #
+    #   For Multi-AZ DB cluster same Region read replica instances, if you
+    #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
+    #   uses the default `DBParameterGroup`.
+    #
     #   Specifying a parameter group for this operation is only supported for
-    #   MySQL DB instances for cross-Region read replicas and for Oracle DB
-    #   instances. It isn't supported for MySQL DB instances for same Region
-    #   read replicas or for RDS Custom.
+    #   MySQL DB instances for cross-Region read replicas, for Multi-AZ DB
+    #   cluster read replica instances, and for Oracle DB instances. It isn't
+    #   supported for MySQL DB instances for same Region read replicas or for
+    #   RDS Custom.
     #
     #   Constraints:
     #

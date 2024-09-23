@@ -11,13 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudsearchdomain/types'
-require_relative 'aws-sdk-cloudsearchdomain/client_api'
-require_relative 'aws-sdk-cloudsearchdomain/client'
-require_relative 'aws-sdk-cloudsearchdomain/errors'
-require_relative 'aws-sdk-cloudsearchdomain/resource'
-require_relative 'aws-sdk-cloudsearchdomain/customizations'
-
 # This module provides support for Amazon CloudSearch Domain. This module is available in the
 # `aws-sdk-cloudsearchdomain` gem.
 #
@@ -47,7 +40,14 @@ require_relative 'aws-sdk-cloudsearchdomain/customizations'
 #
 # @!group service
 module Aws::CloudSearchDomain
+  autoload :Types, 'aws-sdk-cloudsearchdomain/types'
+  autoload :ClientApi, 'aws-sdk-cloudsearchdomain/client_api'
+  autoload :Client, 'aws-sdk-cloudsearchdomain/client'
+  autoload :Errors, 'aws-sdk-cloudsearchdomain/errors'
+  autoload :Resource, 'aws-sdk-cloudsearchdomain/resource'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
+
+require_relative 'aws-sdk-cloudsearchdomain/customizations'

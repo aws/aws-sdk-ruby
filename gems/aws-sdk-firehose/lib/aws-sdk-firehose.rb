@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-firehose/types'
-require_relative 'aws-sdk-firehose/client_api'
-require_relative 'aws-sdk-firehose/plugins/endpoints.rb'
-require_relative 'aws-sdk-firehose/client'
-require_relative 'aws-sdk-firehose/errors'
-require_relative 'aws-sdk-firehose/resource'
-require_relative 'aws-sdk-firehose/endpoint_parameters'
-require_relative 'aws-sdk-firehose/endpoint_provider'
-require_relative 'aws-sdk-firehose/endpoints'
-require_relative 'aws-sdk-firehose/customizations'
-
 # This module provides support for Amazon Kinesis Firehose. This module is available in the
 # `aws-sdk-firehose` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-firehose/customizations'
 #
 # @!group service
 module Aws::Firehose
+  autoload :Types, 'aws-sdk-firehose/types'
+  autoload :ClientApi, 'aws-sdk-firehose/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-firehose/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-firehose/client'
+  autoload :Errors, 'aws-sdk-firehose/errors'
+  autoload :Resource, 'aws-sdk-firehose/resource'
+  autoload :EndpointParameters, 'aws-sdk-firehose/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-firehose/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-firehose/endpoints'
 
-  GEM_VERSION = '1.80.0'
+  GEM_VERSION = '1.81.0'
 
 end
+
+require_relative 'aws-sdk-firehose/customizations'

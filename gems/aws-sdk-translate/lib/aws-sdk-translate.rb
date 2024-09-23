@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-translate/types'
-require_relative 'aws-sdk-translate/client_api'
-require_relative 'aws-sdk-translate/plugins/endpoints.rb'
-require_relative 'aws-sdk-translate/client'
-require_relative 'aws-sdk-translate/errors'
-require_relative 'aws-sdk-translate/resource'
-require_relative 'aws-sdk-translate/endpoint_parameters'
-require_relative 'aws-sdk-translate/endpoint_provider'
-require_relative 'aws-sdk-translate/endpoints'
-require_relative 'aws-sdk-translate/customizations'
-
 # This module provides support for Amazon Translate. This module is available in the
 # `aws-sdk-translate` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-translate/customizations'
 #
 # @!group service
 module Aws::Translate
+  autoload :Types, 'aws-sdk-translate/types'
+  autoload :ClientApi, 'aws-sdk-translate/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-translate/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-translate/client'
+  autoload :Errors, 'aws-sdk-translate/errors'
+  autoload :Resource, 'aws-sdk-translate/resource'
+  autoload :EndpointParameters, 'aws-sdk-translate/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-translate/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-translate/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
+
+require_relative 'aws-sdk-translate/customizations'

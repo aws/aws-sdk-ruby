@@ -1552,3 +1552,6 @@ module Aws::S3
     class Collection < Aws::Resources::Collection; end
   end
 end
+
+# Load customizations if they exist
+require 'aws-sdk-s3/customizations/bucket'

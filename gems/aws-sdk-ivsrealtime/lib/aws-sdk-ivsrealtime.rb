@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ivsrealtime/types'
-require_relative 'aws-sdk-ivsrealtime/client_api'
-require_relative 'aws-sdk-ivsrealtime/plugins/endpoints.rb'
-require_relative 'aws-sdk-ivsrealtime/client'
-require_relative 'aws-sdk-ivsrealtime/errors'
-require_relative 'aws-sdk-ivsrealtime/waiters'
-require_relative 'aws-sdk-ivsrealtime/resource'
-require_relative 'aws-sdk-ivsrealtime/endpoint_parameters'
-require_relative 'aws-sdk-ivsrealtime/endpoint_provider'
-require_relative 'aws-sdk-ivsrealtime/endpoints'
-require_relative 'aws-sdk-ivsrealtime/customizations'
-
 # This module provides support for Amazon Interactive Video Service RealTime. This module is available in the
 # `aws-sdk-ivsrealtime` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-ivsrealtime/customizations'
 #
 # @!group service
 module Aws::IVSRealTime
+  autoload :Types, 'aws-sdk-ivsrealtime/types'
+  autoload :ClientApi, 'aws-sdk-ivsrealtime/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ivsrealtime/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ivsrealtime/client'
+  autoload :Errors, 'aws-sdk-ivsrealtime/errors'
+  autoload :Waiters, 'aws-sdk-ivsrealtime/waiters'
+  autoload :Resource, 'aws-sdk-ivsrealtime/resource'
+  autoload :EndpointParameters, 'aws-sdk-ivsrealtime/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ivsrealtime/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ivsrealtime/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
+
+require_relative 'aws-sdk-ivsrealtime/customizations'

@@ -587,3 +587,4 @@ module Aws::SimpleDB
 
   end
 end
+

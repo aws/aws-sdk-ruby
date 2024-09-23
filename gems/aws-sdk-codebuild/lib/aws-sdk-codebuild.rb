@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-codebuild/types'
-require_relative 'aws-sdk-codebuild/client_api'
-require_relative 'aws-sdk-codebuild/plugins/endpoints.rb'
-require_relative 'aws-sdk-codebuild/client'
-require_relative 'aws-sdk-codebuild/errors'
-require_relative 'aws-sdk-codebuild/resource'
-require_relative 'aws-sdk-codebuild/endpoint_parameters'
-require_relative 'aws-sdk-codebuild/endpoint_provider'
-require_relative 'aws-sdk-codebuild/endpoints'
-require_relative 'aws-sdk-codebuild/customizations'
-
 # This module provides support for AWS CodeBuild. This module is available in the
 # `aws-sdk-codebuild` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-codebuild/customizations'
 #
 # @!group service
 module Aws::CodeBuild
+  autoload :Types, 'aws-sdk-codebuild/types'
+  autoload :ClientApi, 'aws-sdk-codebuild/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-codebuild/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-codebuild/client'
+  autoload :Errors, 'aws-sdk-codebuild/errors'
+  autoload :Resource, 'aws-sdk-codebuild/resource'
+  autoload :EndpointParameters, 'aws-sdk-codebuild/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-codebuild/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-codebuild/endpoints'
 
-  GEM_VERSION = '1.130.0'
+  GEM_VERSION = '1.131.0'
 
 end
+
+require_relative 'aws-sdk-codebuild/customizations'

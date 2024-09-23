@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::NeptuneGraph
   # @api private
   module ClientApi

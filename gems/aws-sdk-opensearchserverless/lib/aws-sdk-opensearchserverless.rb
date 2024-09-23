@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-opensearchserverless/types'
-require_relative 'aws-sdk-opensearchserverless/client_api'
-require_relative 'aws-sdk-opensearchserverless/plugins/endpoints.rb'
-require_relative 'aws-sdk-opensearchserverless/client'
-require_relative 'aws-sdk-opensearchserverless/errors'
-require_relative 'aws-sdk-opensearchserverless/resource'
-require_relative 'aws-sdk-opensearchserverless/endpoint_parameters'
-require_relative 'aws-sdk-opensearchserverless/endpoint_provider'
-require_relative 'aws-sdk-opensearchserverless/endpoints'
-require_relative 'aws-sdk-opensearchserverless/customizations'
-
 # This module provides support for OpenSearch Service Serverless. This module is available in the
 # `aws-sdk-opensearchserverless` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-opensearchserverless/customizations'
 #
 # @!group service
 module Aws::OpenSearchServerless
+  autoload :Types, 'aws-sdk-opensearchserverless/types'
+  autoload :ClientApi, 'aws-sdk-opensearchserverless/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-opensearchserverless/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-opensearchserverless/client'
+  autoload :Errors, 'aws-sdk-opensearchserverless/errors'
+  autoload :Resource, 'aws-sdk-opensearchserverless/resource'
+  autoload :EndpointParameters, 'aws-sdk-opensearchserverless/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-opensearchserverless/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-opensearchserverless/endpoints'
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end
+
+require_relative 'aws-sdk-opensearchserverless/customizations'

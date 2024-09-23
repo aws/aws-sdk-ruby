@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-migrationhubconfig/types'
-require_relative 'aws-sdk-migrationhubconfig/client_api'
-require_relative 'aws-sdk-migrationhubconfig/plugins/endpoints.rb'
-require_relative 'aws-sdk-migrationhubconfig/client'
-require_relative 'aws-sdk-migrationhubconfig/errors'
-require_relative 'aws-sdk-migrationhubconfig/resource'
-require_relative 'aws-sdk-migrationhubconfig/endpoint_parameters'
-require_relative 'aws-sdk-migrationhubconfig/endpoint_provider'
-require_relative 'aws-sdk-migrationhubconfig/endpoints'
-require_relative 'aws-sdk-migrationhubconfig/customizations'
-
 # This module provides support for AWS Migration Hub Config. This module is available in the
 # `aws-sdk-migrationhubconfig` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-migrationhubconfig/customizations'
 #
 # @!group service
 module Aws::MigrationHubConfig
+  autoload :Types, 'aws-sdk-migrationhubconfig/types'
+  autoload :ClientApi, 'aws-sdk-migrationhubconfig/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-migrationhubconfig/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-migrationhubconfig/client'
+  autoload :Errors, 'aws-sdk-migrationhubconfig/errors'
+  autoload :Resource, 'aws-sdk-migrationhubconfig/resource'
+  autoload :EndpointParameters, 'aws-sdk-migrationhubconfig/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-migrationhubconfig/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-migrationhubconfig/endpoints'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
+
+require_relative 'aws-sdk-migrationhubconfig/customizations'

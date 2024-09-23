@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-opsworkscm/types'
-require_relative 'aws-sdk-opsworkscm/client_api'
-require_relative 'aws-sdk-opsworkscm/plugins/endpoints.rb'
-require_relative 'aws-sdk-opsworkscm/client'
-require_relative 'aws-sdk-opsworkscm/errors'
-require_relative 'aws-sdk-opsworkscm/waiters'
-require_relative 'aws-sdk-opsworkscm/resource'
-require_relative 'aws-sdk-opsworkscm/endpoint_parameters'
-require_relative 'aws-sdk-opsworkscm/endpoint_provider'
-require_relative 'aws-sdk-opsworkscm/endpoints'
-require_relative 'aws-sdk-opsworkscm/customizations'
-
 # This module provides support for AWS OpsWorks CM. This module is available in the
 # `aws-sdk-opsworkscm` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 #
 # @!group service
 module Aws::OpsWorksCM
+  autoload :Types, 'aws-sdk-opsworkscm/types'
+  autoload :ClientApi, 'aws-sdk-opsworkscm/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-opsworkscm/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-opsworkscm/client'
+  autoload :Errors, 'aws-sdk-opsworkscm/errors'
+  autoload :Waiters, 'aws-sdk-opsworkscm/waiters'
+  autoload :Resource, 'aws-sdk-opsworkscm/resource'
+  autoload :EndpointParameters, 'aws-sdk-opsworkscm/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-opsworkscm/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-opsworkscm/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
+
+require_relative 'aws-sdk-opsworkscm/customizations'

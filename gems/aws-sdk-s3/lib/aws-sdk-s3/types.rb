@@ -18108,3 +18108,6 @@ module Aws::S3
 
   end
 end
+
+require "aws-sdk-s3/customizations/types/list_object_versions_output"
+require "aws-sdk-s3/customizations/types/permanent_redirect"

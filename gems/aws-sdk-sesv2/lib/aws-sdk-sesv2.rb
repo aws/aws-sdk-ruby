@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-sesv2/types'
-require_relative 'aws-sdk-sesv2/client_api'
-require_relative 'aws-sdk-sesv2/plugins/endpoints.rb'
-require_relative 'aws-sdk-sesv2/client'
-require_relative 'aws-sdk-sesv2/errors'
-require_relative 'aws-sdk-sesv2/resource'
-require_relative 'aws-sdk-sesv2/endpoint_parameters'
-require_relative 'aws-sdk-sesv2/endpoint_provider'
-require_relative 'aws-sdk-sesv2/endpoints'
-require_relative 'aws-sdk-sesv2/customizations'
-
 # This module provides support for Amazon Simple Email Service. This module is available in the
 # `aws-sdk-sesv2` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-sesv2/customizations'
 #
 # @!group service
 module Aws::SESV2
+  autoload :Types, 'aws-sdk-sesv2/types'
+  autoload :ClientApi, 'aws-sdk-sesv2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-sesv2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-sesv2/client'
+  autoload :Errors, 'aws-sdk-sesv2/errors'
+  autoload :Resource, 'aws-sdk-sesv2/resource'
+  autoload :EndpointParameters, 'aws-sdk-sesv2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-sesv2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-sesv2/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
+
+require_relative 'aws-sdk-sesv2/customizations'

@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-budgets/types'
-require_relative 'aws-sdk-budgets/client_api'
-require_relative 'aws-sdk-budgets/plugins/endpoints.rb'
-require_relative 'aws-sdk-budgets/client'
-require_relative 'aws-sdk-budgets/errors'
-require_relative 'aws-sdk-budgets/resource'
-require_relative 'aws-sdk-budgets/endpoint_parameters'
-require_relative 'aws-sdk-budgets/endpoint_provider'
-require_relative 'aws-sdk-budgets/endpoints'
-require_relative 'aws-sdk-budgets/customizations'
-
 # This module provides support for AWS Budgets. This module is available in the
 # `aws-sdk-budgets` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-budgets/customizations'
 #
 # @!group service
 module Aws::Budgets
+  autoload :Types, 'aws-sdk-budgets/types'
+  autoload :ClientApi, 'aws-sdk-budgets/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-budgets/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-budgets/client'
+  autoload :Errors, 'aws-sdk-budgets/errors'
+  autoload :Resource, 'aws-sdk-budgets/resource'
+  autoload :EndpointParameters, 'aws-sdk-budgets/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-budgets/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-budgets/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
+
+require_relative 'aws-sdk-budgets/customizations'

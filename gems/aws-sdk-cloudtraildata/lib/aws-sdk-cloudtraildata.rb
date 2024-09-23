@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudtraildata/types'
-require_relative 'aws-sdk-cloudtraildata/client_api'
-require_relative 'aws-sdk-cloudtraildata/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudtraildata/client'
-require_relative 'aws-sdk-cloudtraildata/errors'
-require_relative 'aws-sdk-cloudtraildata/resource'
-require_relative 'aws-sdk-cloudtraildata/endpoint_parameters'
-require_relative 'aws-sdk-cloudtraildata/endpoint_provider'
-require_relative 'aws-sdk-cloudtraildata/endpoints'
-require_relative 'aws-sdk-cloudtraildata/customizations'
-
 # This module provides support for AWS CloudTrail Data Service. This module is available in the
 # `aws-sdk-cloudtraildata` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-cloudtraildata/customizations'
 #
 # @!group service
 module Aws::CloudTrailData
+  autoload :Types, 'aws-sdk-cloudtraildata/types'
+  autoload :ClientApi, 'aws-sdk-cloudtraildata/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudtraildata/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudtraildata/client'
+  autoload :Errors, 'aws-sdk-cloudtraildata/errors'
+  autoload :Resource, 'aws-sdk-cloudtraildata/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudtraildata/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudtraildata/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudtraildata/endpoints'
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end
+
+require_relative 'aws-sdk-cloudtraildata/customizations'

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::CodeStarNotifications
   # @api private
   module ClientApi

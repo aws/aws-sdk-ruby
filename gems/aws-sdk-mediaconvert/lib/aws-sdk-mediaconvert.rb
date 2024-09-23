@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mediaconvert/types'
-require_relative 'aws-sdk-mediaconvert/client_api'
-require_relative 'aws-sdk-mediaconvert/plugins/endpoints.rb'
-require_relative 'aws-sdk-mediaconvert/client'
-require_relative 'aws-sdk-mediaconvert/errors'
-require_relative 'aws-sdk-mediaconvert/resource'
-require_relative 'aws-sdk-mediaconvert/endpoint_parameters'
-require_relative 'aws-sdk-mediaconvert/endpoint_provider'
-require_relative 'aws-sdk-mediaconvert/endpoints'
-require_relative 'aws-sdk-mediaconvert/customizations'
-
 # This module provides support for AWS Elemental MediaConvert. This module is available in the
 # `aws-sdk-mediaconvert` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-mediaconvert/customizations'
 #
 # @!group service
 module Aws::MediaConvert
+  autoload :Types, 'aws-sdk-mediaconvert/types'
+  autoload :ClientApi, 'aws-sdk-mediaconvert/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mediaconvert/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mediaconvert/client'
+  autoload :Errors, 'aws-sdk-mediaconvert/errors'
+  autoload :Resource, 'aws-sdk-mediaconvert/resource'
+  autoload :EndpointParameters, 'aws-sdk-mediaconvert/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mediaconvert/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mediaconvert/endpoints'
 
-  GEM_VERSION = '1.140.0'
+  GEM_VERSION = '1.141.0'
 
 end
+
+require_relative 'aws-sdk-mediaconvert/customizations'

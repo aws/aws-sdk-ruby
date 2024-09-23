@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-eksauth/types'
-require_relative 'aws-sdk-eksauth/client_api'
-require_relative 'aws-sdk-eksauth/plugins/endpoints.rb'
-require_relative 'aws-sdk-eksauth/client'
-require_relative 'aws-sdk-eksauth/errors'
-require_relative 'aws-sdk-eksauth/waiters'
-require_relative 'aws-sdk-eksauth/resource'
-require_relative 'aws-sdk-eksauth/endpoint_parameters'
-require_relative 'aws-sdk-eksauth/endpoint_provider'
-require_relative 'aws-sdk-eksauth/endpoints'
-require_relative 'aws-sdk-eksauth/customizations'
-
 # This module provides support for Amazon EKS Auth. This module is available in the
 # `aws-sdk-eksauth` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-eksauth/customizations'
 #
 # @!group service
 module Aws::EKSAuth
+  autoload :Types, 'aws-sdk-eksauth/types'
+  autoload :ClientApi, 'aws-sdk-eksauth/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-eksauth/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-eksauth/client'
+  autoload :Errors, 'aws-sdk-eksauth/errors'
+  autoload :Waiters, 'aws-sdk-eksauth/waiters'
+  autoload :Resource, 'aws-sdk-eksauth/resource'
+  autoload :EndpointParameters, 'aws-sdk-eksauth/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-eksauth/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-eksauth/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
+
+require_relative 'aws-sdk-eksauth/customizations'

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ConnectWisdomService
   # @api private
   module ClientApi

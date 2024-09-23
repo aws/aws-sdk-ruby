@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-machinelearning/types'
-require_relative 'aws-sdk-machinelearning/client_api'
-require_relative 'aws-sdk-machinelearning/plugins/endpoints.rb'
-require_relative 'aws-sdk-machinelearning/client'
-require_relative 'aws-sdk-machinelearning/errors'
-require_relative 'aws-sdk-machinelearning/waiters'
-require_relative 'aws-sdk-machinelearning/resource'
-require_relative 'aws-sdk-machinelearning/endpoint_parameters'
-require_relative 'aws-sdk-machinelearning/endpoint_provider'
-require_relative 'aws-sdk-machinelearning/endpoints'
-require_relative 'aws-sdk-machinelearning/customizations'
-
 # This module provides support for Amazon Machine Learning. This module is available in the
 # `aws-sdk-machinelearning` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-machinelearning/customizations'
 #
 # @!group service
 module Aws::MachineLearning
+  autoload :Types, 'aws-sdk-machinelearning/types'
+  autoload :ClientApi, 'aws-sdk-machinelearning/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-machinelearning/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-machinelearning/client'
+  autoload :Errors, 'aws-sdk-machinelearning/errors'
+  autoload :Waiters, 'aws-sdk-machinelearning/waiters'
+  autoload :Resource, 'aws-sdk-machinelearning/resource'
+  autoload :EndpointParameters, 'aws-sdk-machinelearning/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-machinelearning/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-machinelearning/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
+
+require_relative 'aws-sdk-machinelearning/customizations'

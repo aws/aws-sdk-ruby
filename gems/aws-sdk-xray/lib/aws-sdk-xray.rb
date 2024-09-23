@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-xray/types'
-require_relative 'aws-sdk-xray/client_api'
-require_relative 'aws-sdk-xray/plugins/endpoints.rb'
-require_relative 'aws-sdk-xray/client'
-require_relative 'aws-sdk-xray/errors'
-require_relative 'aws-sdk-xray/resource'
-require_relative 'aws-sdk-xray/endpoint_parameters'
-require_relative 'aws-sdk-xray/endpoint_provider'
-require_relative 'aws-sdk-xray/endpoints'
-require_relative 'aws-sdk-xray/customizations'
-
 # This module provides support for AWS X-Ray. This module is available in the
 # `aws-sdk-xray` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-xray/customizations'
 #
 # @!group service
 module Aws::XRay
+  autoload :Types, 'aws-sdk-xray/types'
+  autoload :ClientApi, 'aws-sdk-xray/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-xray/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-xray/client'
+  autoload :Errors, 'aws-sdk-xray/errors'
+  autoload :Resource, 'aws-sdk-xray/resource'
+  autoload :EndpointParameters, 'aws-sdk-xray/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-xray/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-xray/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
+
+require_relative 'aws-sdk-xray/customizations'

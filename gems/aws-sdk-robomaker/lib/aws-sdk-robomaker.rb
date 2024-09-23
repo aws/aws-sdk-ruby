@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-robomaker/types'
-require_relative 'aws-sdk-robomaker/client_api'
-require_relative 'aws-sdk-robomaker/plugins/endpoints.rb'
-require_relative 'aws-sdk-robomaker/client'
-require_relative 'aws-sdk-robomaker/errors'
-require_relative 'aws-sdk-robomaker/resource'
-require_relative 'aws-sdk-robomaker/endpoint_parameters'
-require_relative 'aws-sdk-robomaker/endpoint_provider'
-require_relative 'aws-sdk-robomaker/endpoints'
-require_relative 'aws-sdk-robomaker/customizations'
-
 # This module provides support for AWS RoboMaker. This module is available in the
 # `aws-sdk-robomaker` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-robomaker/customizations'
 #
 # @!group service
 module Aws::RoboMaker
+  autoload :Types, 'aws-sdk-robomaker/types'
+  autoload :ClientApi, 'aws-sdk-robomaker/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-robomaker/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-robomaker/client'
+  autoload :Errors, 'aws-sdk-robomaker/errors'
+  autoload :Resource, 'aws-sdk-robomaker/resource'
+  autoload :EndpointParameters, 'aws-sdk-robomaker/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-robomaker/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-robomaker/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
+
+require_relative 'aws-sdk-robomaker/customizations'

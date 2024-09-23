@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::CodeCatalyst
   # @api private
   module ClientApi

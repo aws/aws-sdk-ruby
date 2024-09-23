@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-redshiftdataapiservice/types'
-require_relative 'aws-sdk-redshiftdataapiservice/client_api'
-require_relative 'aws-sdk-redshiftdataapiservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-redshiftdataapiservice/client'
-require_relative 'aws-sdk-redshiftdataapiservice/errors'
-require_relative 'aws-sdk-redshiftdataapiservice/resource'
-require_relative 'aws-sdk-redshiftdataapiservice/endpoint_parameters'
-require_relative 'aws-sdk-redshiftdataapiservice/endpoint_provider'
-require_relative 'aws-sdk-redshiftdataapiservice/endpoints'
-require_relative 'aws-sdk-redshiftdataapiservice/customizations'
-
 # This module provides support for Redshift Data API Service. This module is available in the
 # `aws-sdk-redshiftdataapiservice` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-redshiftdataapiservice/customizations'
 #
 # @!group service
 module Aws::RedshiftDataAPIService
+  autoload :Types, 'aws-sdk-redshiftdataapiservice/types'
+  autoload :ClientApi, 'aws-sdk-redshiftdataapiservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-redshiftdataapiservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-redshiftdataapiservice/client'
+  autoload :Errors, 'aws-sdk-redshiftdataapiservice/errors'
+  autoload :Resource, 'aws-sdk-redshiftdataapiservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-redshiftdataapiservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-redshiftdataapiservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-redshiftdataapiservice/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
+
+require_relative 'aws-sdk-redshiftdataapiservice/customizations'

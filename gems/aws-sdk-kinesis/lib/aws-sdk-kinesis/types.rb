@@ -2597,3 +2597,4 @@ module Aws::Kinesis
 
   end
 end
+

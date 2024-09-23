@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-09-23)
+------------------
+
+* Feature - Amazon Bedrock Prompt Flows and Prompt Management now supports using inference profiles to increase throughput and improve resilience.
+
 1.25.0 (2024-09-20)
 ------------------
 

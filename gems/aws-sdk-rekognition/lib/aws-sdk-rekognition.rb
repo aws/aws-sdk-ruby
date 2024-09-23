@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-rekognition/types'
-require_relative 'aws-sdk-rekognition/client_api'
-require_relative 'aws-sdk-rekognition/plugins/endpoints.rb'
-require_relative 'aws-sdk-rekognition/client'
-require_relative 'aws-sdk-rekognition/errors'
-require_relative 'aws-sdk-rekognition/waiters'
-require_relative 'aws-sdk-rekognition/resource'
-require_relative 'aws-sdk-rekognition/endpoint_parameters'
-require_relative 'aws-sdk-rekognition/endpoint_provider'
-require_relative 'aws-sdk-rekognition/endpoints'
-require_relative 'aws-sdk-rekognition/customizations'
-
 # This module provides support for Amazon Rekognition. This module is available in the
 # `aws-sdk-rekognition` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-rekognition/customizations'
 #
 # @!group service
 module Aws::Rekognition
+  autoload :Types, 'aws-sdk-rekognition/types'
+  autoload :ClientApi, 'aws-sdk-rekognition/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-rekognition/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-rekognition/client'
+  autoload :Errors, 'aws-sdk-rekognition/errors'
+  autoload :Waiters, 'aws-sdk-rekognition/waiters'
+  autoload :Resource, 'aws-sdk-rekognition/resource'
+  autoload :EndpointParameters, 'aws-sdk-rekognition/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-rekognition/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-rekognition/endpoints'
 
-  GEM_VERSION = '1.106.0'
+  GEM_VERSION = '1.107.0'
 
 end
+
+require_relative 'aws-sdk-rekognition/customizations'

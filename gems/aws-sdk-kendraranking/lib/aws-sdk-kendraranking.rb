@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kendraranking/types'
-require_relative 'aws-sdk-kendraranking/client_api'
-require_relative 'aws-sdk-kendraranking/plugins/endpoints.rb'
-require_relative 'aws-sdk-kendraranking/client'
-require_relative 'aws-sdk-kendraranking/errors'
-require_relative 'aws-sdk-kendraranking/resource'
-require_relative 'aws-sdk-kendraranking/endpoint_parameters'
-require_relative 'aws-sdk-kendraranking/endpoint_provider'
-require_relative 'aws-sdk-kendraranking/endpoints'
-require_relative 'aws-sdk-kendraranking/customizations'
-
 # This module provides support for Amazon Kendra Intelligent Ranking. This module is available in the
 # `aws-sdk-kendraranking` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-kendraranking/customizations'
 #
 # @!group service
 module Aws::KendraRanking
+  autoload :Types, 'aws-sdk-kendraranking/types'
+  autoload :ClientApi, 'aws-sdk-kendraranking/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-kendraranking/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-kendraranking/client'
+  autoload :Errors, 'aws-sdk-kendraranking/errors'
+  autoload :Resource, 'aws-sdk-kendraranking/resource'
+  autoload :EndpointParameters, 'aws-sdk-kendraranking/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-kendraranking/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-kendraranking/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
+
+require_relative 'aws-sdk-kendraranking/customizations'

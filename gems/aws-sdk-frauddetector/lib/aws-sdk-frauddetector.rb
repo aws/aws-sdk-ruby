@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-frauddetector/types'
-require_relative 'aws-sdk-frauddetector/client_api'
-require_relative 'aws-sdk-frauddetector/plugins/endpoints.rb'
-require_relative 'aws-sdk-frauddetector/client'
-require_relative 'aws-sdk-frauddetector/errors'
-require_relative 'aws-sdk-frauddetector/resource'
-require_relative 'aws-sdk-frauddetector/endpoint_parameters'
-require_relative 'aws-sdk-frauddetector/endpoint_provider'
-require_relative 'aws-sdk-frauddetector/endpoints'
-require_relative 'aws-sdk-frauddetector/customizations'
-
 # This module provides support for Amazon Fraud Detector. This module is available in the
 # `aws-sdk-frauddetector` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-frauddetector/customizations'
 #
 # @!group service
 module Aws::FraudDetector
+  autoload :Types, 'aws-sdk-frauddetector/types'
+  autoload :ClientApi, 'aws-sdk-frauddetector/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-frauddetector/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-frauddetector/client'
+  autoload :Errors, 'aws-sdk-frauddetector/errors'
+  autoload :Resource, 'aws-sdk-frauddetector/resource'
+  autoload :EndpointParameters, 'aws-sdk-frauddetector/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-frauddetector/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-frauddetector/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
+
+require_relative 'aws-sdk-frauddetector/customizations'

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::TimestreamQuery
   # @api private
   module ClientApi

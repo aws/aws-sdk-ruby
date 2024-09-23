@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-organizations/types'
-require_relative 'aws-sdk-organizations/client_api'
-require_relative 'aws-sdk-organizations/plugins/endpoints.rb'
-require_relative 'aws-sdk-organizations/client'
-require_relative 'aws-sdk-organizations/errors'
-require_relative 'aws-sdk-organizations/resource'
-require_relative 'aws-sdk-organizations/endpoint_parameters'
-require_relative 'aws-sdk-organizations/endpoint_provider'
-require_relative 'aws-sdk-organizations/endpoints'
-require_relative 'aws-sdk-organizations/customizations'
-
 # This module provides support for AWS Organizations. This module is available in the
 # `aws-sdk-organizations` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-organizations/customizations'
 #
 # @!group service
 module Aws::Organizations
+  autoload :Types, 'aws-sdk-organizations/types'
+  autoload :ClientApi, 'aws-sdk-organizations/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-organizations/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-organizations/client'
+  autoload :Errors, 'aws-sdk-organizations/errors'
+  autoload :Resource, 'aws-sdk-organizations/resource'
+  autoload :EndpointParameters, 'aws-sdk-organizations/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-organizations/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-organizations/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
+
+require_relative 'aws-sdk-organizations/customizations'

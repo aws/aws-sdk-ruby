@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::DynamoDBStreams
   # @api private
   module ClientApi

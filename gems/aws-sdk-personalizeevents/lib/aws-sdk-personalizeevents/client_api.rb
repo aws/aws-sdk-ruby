@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::PersonalizeEvents
   # @api private
   module ClientApi

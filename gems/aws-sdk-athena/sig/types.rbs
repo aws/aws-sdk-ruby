@@ -166,14 +166,16 @@ module Aws::Athena
 
     class CreateDataCatalogInput
       attr_accessor name: ::String
-      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE")
+      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE" | "FEDERATED")
       attr_accessor description: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
-    class CreateDataCatalogOutput < Aws::EmptyStructure
+    class CreateDataCatalogOutput
+      attr_accessor data_catalog: Types::DataCatalog
+      SENSITIVE: []
     end
 
     class CreateNamedQueryInput
@@ -245,14 +247,20 @@ module Aws::Athena
     class DataCatalog
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE")
+      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE" | "FEDERATED")
       attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "CREATE_FAILED_CLEANUP_IN_PROGRESS" | "CREATE_FAILED_CLEANUP_COMPLETE" | "CREATE_FAILED_CLEANUP_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED")
+      attr_accessor connection_type: ("DYNAMODB" | "MYSQL" | "POSTGRESQL" | "REDSHIFT" | "ORACLE" | "SYNAPSE" | "SQLSERVER" | "DB2" | "OPENSEARCH" | "BIGQUERY" | "GOOGLECLOUDSTORAGE" | "HBASE" | "DOCUMENTDB" | "MSK" | "NEPTUNE" | "CMDB" | "TPCDS" | "REDIS" | "CLOUDWATCH" | "TIMESTREAM" | "SAPHANA" | "SNOWFLAKE" | "TERADATA" | "VERTICA" | "CLOUDERAIMPALA" | "CLOUDERAHIVE" | "HORTONWORKSHIVE" | "DATALAKEGEN2" | "DB2AS400" | "CLOUDWATCHMETRICS")
+      attr_accessor error: ::String
       SENSITIVE: []
     end
 
     class DataCatalogSummary
       attr_accessor catalog_name: ::String
-      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE")
+      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE" | "FEDERATED")
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "CREATE_FAILED_CLEANUP_IN_PROGRESS" | "CREATE_FAILED_CLEANUP_COMPLETE" | "CREATE_FAILED_CLEANUP_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED")
+      attr_accessor connection_type: ("DYNAMODB" | "MYSQL" | "POSTGRESQL" | "REDSHIFT" | "ORACLE" | "SYNAPSE" | "SQLSERVER" | "DB2" | "OPENSEARCH" | "BIGQUERY" | "GOOGLECLOUDSTORAGE" | "HBASE" | "DOCUMENTDB" | "MSK" | "NEPTUNE" | "CMDB" | "TPCDS" | "REDIS" | "CLOUDWATCH" | "TIMESTREAM" | "SAPHANA" | "SNOWFLAKE" | "TERADATA" | "VERTICA" | "CLOUDERAIMPALA" | "CLOUDERAHIVE" | "HORTONWORKSHIVE" | "DATALAKEGEN2" | "DB2AS400" | "CLOUDWATCHMETRICS")
+      attr_accessor error: ::String
       SENSITIVE: []
     end
 
@@ -281,7 +289,9 @@ module Aws::Athena
       SENSITIVE: []
     end
 
-    class DeleteDataCatalogOutput < Aws::EmptyStructure
+    class DeleteDataCatalogOutput
+      attr_accessor data_catalog: Types::DataCatalog
+      SENSITIVE: []
     end
 
     class DeleteNamedQueryInput
@@ -1203,7 +1213,7 @@ module Aws::Athena
 
     class UpdateDataCatalogInput
       attr_accessor name: ::String
-      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE")
+      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE" | "FEDERATED")
       attr_accessor description: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
       SENSITIVE: []

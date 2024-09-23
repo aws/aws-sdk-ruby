@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.197.0 (2024-09-23)
+------------------
+
+* Feature - Added AthenaProperties parameter to Glue Connections, allowing Athena to store service specific properties on Glue Connections.
+
 1.196.0 (2024-09-20)
 ------------------
 

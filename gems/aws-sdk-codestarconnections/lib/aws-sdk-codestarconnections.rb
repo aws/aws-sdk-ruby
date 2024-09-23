@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-codestarconnections/types'
-require_relative 'aws-sdk-codestarconnections/client_api'
-require_relative 'aws-sdk-codestarconnections/plugins/endpoints.rb'
-require_relative 'aws-sdk-codestarconnections/client'
-require_relative 'aws-sdk-codestarconnections/errors'
-require_relative 'aws-sdk-codestarconnections/resource'
-require_relative 'aws-sdk-codestarconnections/endpoint_parameters'
-require_relative 'aws-sdk-codestarconnections/endpoint_provider'
-require_relative 'aws-sdk-codestarconnections/endpoints'
-require_relative 'aws-sdk-codestarconnections/customizations'
-
 # This module provides support for AWS CodeStar connections. This module is available in the
 # `aws-sdk-codestarconnections` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-codestarconnections/customizations'
 #
 # @!group service
 module Aws::CodeStarconnections
+  autoload :Types, 'aws-sdk-codestarconnections/types'
+  autoload :ClientApi, 'aws-sdk-codestarconnections/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-codestarconnections/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-codestarconnections/client'
+  autoload :Errors, 'aws-sdk-codestarconnections/errors'
+  autoload :Resource, 'aws-sdk-codestarconnections/resource'
+  autoload :EndpointParameters, 'aws-sdk-codestarconnections/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-codestarconnections/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-codestarconnections/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
+
+require_relative 'aws-sdk-codestarconnections/customizations'

@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-apprunner/types'
-require_relative 'aws-sdk-apprunner/client_api'
-require_relative 'aws-sdk-apprunner/plugins/endpoints.rb'
-require_relative 'aws-sdk-apprunner/client'
-require_relative 'aws-sdk-apprunner/errors'
-require_relative 'aws-sdk-apprunner/resource'
-require_relative 'aws-sdk-apprunner/endpoint_parameters'
-require_relative 'aws-sdk-apprunner/endpoint_provider'
-require_relative 'aws-sdk-apprunner/endpoints'
-require_relative 'aws-sdk-apprunner/customizations'
-
 # This module provides support for AWS App Runner. This module is available in the
 # `aws-sdk-apprunner` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-apprunner/customizations'
 #
 # @!group service
 module Aws::AppRunner
+  autoload :Types, 'aws-sdk-apprunner/types'
+  autoload :ClientApi, 'aws-sdk-apprunner/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-apprunner/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-apprunner/client'
+  autoload :Errors, 'aws-sdk-apprunner/errors'
+  autoload :Resource, 'aws-sdk-apprunner/resource'
+  autoload :EndpointParameters, 'aws-sdk-apprunner/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-apprunner/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-apprunner/endpoints'
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end
+
+require_relative 'aws-sdk-apprunner/customizations'

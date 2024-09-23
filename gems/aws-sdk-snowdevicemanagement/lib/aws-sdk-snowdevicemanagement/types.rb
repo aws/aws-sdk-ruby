@@ -1122,3 +1122,4 @@ module Aws::SnowDeviceManagement
 
   end
 end
+

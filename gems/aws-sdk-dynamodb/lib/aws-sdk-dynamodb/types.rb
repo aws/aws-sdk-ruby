@@ -10548,3 +10548,4 @@ module Aws::DynamoDB
 
   end
 end
+

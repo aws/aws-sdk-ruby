@@ -3560,3 +3560,4 @@ module Aws::AmplifyUIBuilder
 
   end
 end
+

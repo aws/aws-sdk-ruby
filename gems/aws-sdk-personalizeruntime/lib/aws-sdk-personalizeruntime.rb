@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-personalizeruntime/types'
-require_relative 'aws-sdk-personalizeruntime/client_api'
-require_relative 'aws-sdk-personalizeruntime/plugins/endpoints.rb'
-require_relative 'aws-sdk-personalizeruntime/client'
-require_relative 'aws-sdk-personalizeruntime/errors'
-require_relative 'aws-sdk-personalizeruntime/resource'
-require_relative 'aws-sdk-personalizeruntime/endpoint_parameters'
-require_relative 'aws-sdk-personalizeruntime/endpoint_provider'
-require_relative 'aws-sdk-personalizeruntime/endpoints'
-require_relative 'aws-sdk-personalizeruntime/customizations'
-
 # This module provides support for Amazon Personalize Runtime. This module is available in the
 # `aws-sdk-personalizeruntime` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-personalizeruntime/customizations'
 #
 # @!group service
 module Aws::PersonalizeRuntime
+  autoload :Types, 'aws-sdk-personalizeruntime/types'
+  autoload :ClientApi, 'aws-sdk-personalizeruntime/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-personalizeruntime/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-personalizeruntime/client'
+  autoload :Errors, 'aws-sdk-personalizeruntime/errors'
+  autoload :Resource, 'aws-sdk-personalizeruntime/resource'
+  autoload :EndpointParameters, 'aws-sdk-personalizeruntime/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-personalizeruntime/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-personalizeruntime/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
+
+require_relative 'aws-sdk-personalizeruntime/customizations'

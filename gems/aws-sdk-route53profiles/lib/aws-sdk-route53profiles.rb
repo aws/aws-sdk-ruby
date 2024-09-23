@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-route53profiles/types'
-require_relative 'aws-sdk-route53profiles/client_api'
-require_relative 'aws-sdk-route53profiles/plugins/endpoints.rb'
-require_relative 'aws-sdk-route53profiles/client'
-require_relative 'aws-sdk-route53profiles/errors'
-require_relative 'aws-sdk-route53profiles/resource'
-require_relative 'aws-sdk-route53profiles/endpoint_parameters'
-require_relative 'aws-sdk-route53profiles/endpoint_provider'
-require_relative 'aws-sdk-route53profiles/endpoints'
-require_relative 'aws-sdk-route53profiles/customizations'
-
 # This module provides support for Route 53 Profiles. This module is available in the
 # `aws-sdk-route53profiles` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-route53profiles/customizations'
 #
 # @!group service
 module Aws::Route53Profiles
+  autoload :Types, 'aws-sdk-route53profiles/types'
+  autoload :ClientApi, 'aws-sdk-route53profiles/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-route53profiles/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-route53profiles/client'
+  autoload :Errors, 'aws-sdk-route53profiles/errors'
+  autoload :Resource, 'aws-sdk-route53profiles/resource'
+  autoload :EndpointParameters, 'aws-sdk-route53profiles/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-route53profiles/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-route53profiles/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end
+
+require_relative 'aws-sdk-route53profiles/customizations'

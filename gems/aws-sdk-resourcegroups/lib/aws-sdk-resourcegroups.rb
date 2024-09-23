@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-resourcegroups/types'
-require_relative 'aws-sdk-resourcegroups/client_api'
-require_relative 'aws-sdk-resourcegroups/plugins/endpoints.rb'
-require_relative 'aws-sdk-resourcegroups/client'
-require_relative 'aws-sdk-resourcegroups/errors'
-require_relative 'aws-sdk-resourcegroups/resource'
-require_relative 'aws-sdk-resourcegroups/endpoint_parameters'
-require_relative 'aws-sdk-resourcegroups/endpoint_provider'
-require_relative 'aws-sdk-resourcegroups/endpoints'
-require_relative 'aws-sdk-resourcegroups/customizations'
-
 # This module provides support for AWS Resource Groups. This module is available in the
 # `aws-sdk-resourcegroups` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-resourcegroups/customizations'
 #
 # @!group service
 module Aws::ResourceGroups
+  autoload :Types, 'aws-sdk-resourcegroups/types'
+  autoload :ClientApi, 'aws-sdk-resourcegroups/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-resourcegroups/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-resourcegroups/client'
+  autoload :Errors, 'aws-sdk-resourcegroups/errors'
+  autoload :Resource, 'aws-sdk-resourcegroups/resource'
+  autoload :EndpointParameters, 'aws-sdk-resourcegroups/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-resourcegroups/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-resourcegroups/endpoints'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
+
+require_relative 'aws-sdk-resourcegroups/customizations'

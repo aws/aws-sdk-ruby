@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-timestreamwrite/types'
-require_relative 'aws-sdk-timestreamwrite/client_api'
-require_relative 'aws-sdk-timestreamwrite/plugins/endpoints.rb'
-require_relative 'aws-sdk-timestreamwrite/client'
-require_relative 'aws-sdk-timestreamwrite/errors'
-require_relative 'aws-sdk-timestreamwrite/resource'
-require_relative 'aws-sdk-timestreamwrite/endpoint_parameters'
-require_relative 'aws-sdk-timestreamwrite/endpoint_provider'
-require_relative 'aws-sdk-timestreamwrite/endpoints'
-require_relative 'aws-sdk-timestreamwrite/customizations'
-
 # This module provides support for Amazon Timestream Write. This module is available in the
 # `aws-sdk-timestreamwrite` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-timestreamwrite/customizations'
 #
 # @!group service
 module Aws::TimestreamWrite
+  autoload :Types, 'aws-sdk-timestreamwrite/types'
+  autoload :ClientApi, 'aws-sdk-timestreamwrite/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-timestreamwrite/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-timestreamwrite/client'
+  autoload :Errors, 'aws-sdk-timestreamwrite/errors'
+  autoload :Resource, 'aws-sdk-timestreamwrite/resource'
+  autoload :EndpointParameters, 'aws-sdk-timestreamwrite/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-timestreamwrite/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-timestreamwrite/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
+
+require_relative 'aws-sdk-timestreamwrite/customizations'

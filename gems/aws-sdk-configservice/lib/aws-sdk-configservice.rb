@@ -11,17 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-configservice/types'
-require_relative 'aws-sdk-configservice/client_api'
-require_relative 'aws-sdk-configservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-configservice/client'
-require_relative 'aws-sdk-configservice/errors'
-require_relative 'aws-sdk-configservice/resource'
-require_relative 'aws-sdk-configservice/endpoint_parameters'
-require_relative 'aws-sdk-configservice/endpoint_provider'
-require_relative 'aws-sdk-configservice/endpoints'
-require_relative 'aws-sdk-configservice/customizations'
-
 # This module provides support for AWS Config. This module is available in the
 # `aws-sdk-configservice` gem.
 #
@@ -51,7 +40,20 @@ require_relative 'aws-sdk-configservice/customizations'
 #
 # @!group service
 module Aws::ConfigService
+  autoload :Types, 'aws-sdk-configservice/types'
+  autoload :ClientApi, 'aws-sdk-configservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-configservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-configservice/client'
+  autoload :Errors, 'aws-sdk-configservice/errors'
+  autoload :Resource, 'aws-sdk-configservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-configservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-configservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-configservice/endpoints'
 
-  GEM_VERSION = '1.118.0'
+  GEM_VERSION = '1.119.0'
 
 end
+
+require_relative 'aws-sdk-configservice/customizations'

@@ -1264,3 +1264,4 @@ module Aws::MarketplaceAgreement
 
   end
 end
+

@@ -11,18 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cleanroomsml/types'
-require_relative 'aws-sdk-cleanroomsml/client_api'
-require_relative 'aws-sdk-cleanroomsml/plugins/endpoints.rb'
-require_relative 'aws-sdk-cleanroomsml/client'
-require_relative 'aws-sdk-cleanroomsml/errors'
-require_relative 'aws-sdk-cleanroomsml/waiters'
-require_relative 'aws-sdk-cleanroomsml/resource'
-require_relative 'aws-sdk-cleanroomsml/endpoint_parameters'
-require_relative 'aws-sdk-cleanroomsml/endpoint_provider'
-require_relative 'aws-sdk-cleanroomsml/endpoints'
-require_relative 'aws-sdk-cleanroomsml/customizations'
-
 # This module provides support for AWS Clean Rooms ML. This module is available in the
 # `aws-sdk-cleanroomsml` gem.
 #
@@ -52,7 +40,21 @@ require_relative 'aws-sdk-cleanroomsml/customizations'
 #
 # @!group service
 module Aws::CleanRoomsML
+  autoload :Types, 'aws-sdk-cleanroomsml/types'
+  autoload :ClientApi, 'aws-sdk-cleanroomsml/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cleanroomsml/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cleanroomsml/client'
+  autoload :Errors, 'aws-sdk-cleanroomsml/errors'
+  autoload :Waiters, 'aws-sdk-cleanroomsml/waiters'
+  autoload :Resource, 'aws-sdk-cleanroomsml/resource'
+  autoload :EndpointParameters, 'aws-sdk-cleanroomsml/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cleanroomsml/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cleanroomsml/endpoints'
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end
+
+require_relative 'aws-sdk-cleanroomsml/customizations'
