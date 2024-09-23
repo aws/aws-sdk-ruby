@@ -36,15 +36,16 @@ depending on service gems.**
 
 ## Configuration
 
-You will need to configure credentials and a region, either in configuration
-files or environment variables, to make API calls. It is recommended that you
+You will need to configure credentials and a region, either in 
+[configuration files](https://docs.aws.amazon.com/sdkref/latest/guide/file-location.html)
+or environment variables, to make API calls. It is recommended that you
 provide these via your environment. This makes it easier to rotate credentials
-and it keeps your secrets out of source control.
+and it keeps your secrets out of source control. 
 
 The SDK searches the following locations for credentials:
 
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
-* The shared credentials ini file at `~/.aws/credentials`
+* The shared credentials ini file at `~/.aws/credentials`.  The location used can be changed with the `AWS_CREDENTIALS_FILE` ENV variable.
   * Credential options supported in this file are:
     * Static Credentials (`aws_access_key_id`, `aws_secret_access_key`, `aws_session_token`)
     * Assume Role Web Identity Credentials (`web_identity_token_file`, `role_arn`, `source_profile`)
