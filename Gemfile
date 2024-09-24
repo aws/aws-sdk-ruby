@@ -30,8 +30,9 @@ group :benchmark do
   gem 'memory_profiler'
 
   # required for uploading report/putting metrics
-  gem 'aws-sdk-cloudwatch'
-  gem 'aws-sdk-s3'
+  gem 'aws-sdk-cloudwatch', require: false
+  gem 'aws-sdk-s3', require: false
+  gem 'aws-sdk-lambda', require: false
 end
 
 group :build do
