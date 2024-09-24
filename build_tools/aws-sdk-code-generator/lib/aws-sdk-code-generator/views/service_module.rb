@@ -10,9 +10,13 @@ module AwsSdkCodeGenerator
       # @option options [required, String] :prefix
       def initialize(options)
         @service = options.fetch(:service)
+        @service_identifier = @service.identifier
         @prefix = options.fetch(:prefix)
         @codegenerated_plugins = options.fetch(:codegenerated_plugins) || []
       end
+
+      # @return [String]
+      attr_reader :service_identifier
 
       # @return [String|nil]
       def generated_src_warning
@@ -108,7 +112,7 @@ module AwsSdkCodeGenerator
         }
       end
 
-      def service_identifier
+      def prefix
         @prefix
       end
 

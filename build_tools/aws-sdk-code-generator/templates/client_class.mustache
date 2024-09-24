@@ -7,8 +7,6 @@
 require '{{.}}'
 {{/plugin_requires}}
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:{{service_identifier}})
-
 module {{module_name}}
   # An API client for {{service_name}}.  To construct a client, you need to configure a `:region` and `:credentials`.
   #

@@ -17,6 +17,8 @@ require '{{.}}'
 {{/requires}}
 {{/require_core_guard?}}
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:{{service_identifier}})
+
 # This module provides support for {{full_name}}. This module is available in the
 # `{{gem_name}}` gem.
 #
@@ -63,4 +65,4 @@ module {{module_name}}
 
 end
 
-require_relative '{{service_identifier}}/customizations'
+require_relative '{{prefix}}/customizations'

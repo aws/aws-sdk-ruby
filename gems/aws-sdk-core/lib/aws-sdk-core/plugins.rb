@@ -6,5 +6,6 @@ module Aws
   module Plugins
     autoload :BearerAuthorization, 'aws-sdk-core/plugins/bearer_authorization'
     autoload :SignatureV4, 'aws-sdk-core/plugins/signature_v4'
+    autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
   end
 end
