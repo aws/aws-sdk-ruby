@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:connectcampaignservice)
+
 # This module provides support for AmazonConnectCampaignService. This module is available in the
 # `aws-sdk-connectcampaignservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ConnectCampaignService
   autoload :EndpointProvider, 'aws-sdk-connectcampaignservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectcampaignservice/endpoints'
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end
 

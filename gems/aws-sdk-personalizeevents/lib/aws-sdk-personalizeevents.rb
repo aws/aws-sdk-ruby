@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:personalizeevents)
+
 # This module provides support for Amazon Personalize Events. This module is available in the
 # `aws-sdk-personalizeevents` gem.
 #
@@ -52,7 +54,7 @@ module Aws::PersonalizeEvents
   autoload :EndpointProvider, 'aws-sdk-personalizeevents/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-personalizeevents/endpoints'
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end
 

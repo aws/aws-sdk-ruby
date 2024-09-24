@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:opensearchservice)
+
 # This module provides support for Amazon OpenSearch Service. This module is available in the
 # `aws-sdk-opensearchservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::OpenSearchService
   autoload :EndpointProvider, 'aws-sdk-opensearchservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-opensearchservice/endpoints'
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end
 

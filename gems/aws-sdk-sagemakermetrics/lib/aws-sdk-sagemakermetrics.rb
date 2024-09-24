@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sagemakermetrics)
+
 # This module provides support for Amazon SageMaker Metrics Service. This module is available in the
 # `aws-sdk-sagemakermetrics` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SageMakerMetrics
   autoload :EndpointProvider, 'aws-sdk-sagemakermetrics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemakermetrics/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

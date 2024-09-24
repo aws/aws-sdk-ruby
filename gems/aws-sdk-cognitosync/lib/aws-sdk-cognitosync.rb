@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cognitosync)
+
 # This module provides support for Amazon Cognito Sync. This module is available in the
 # `aws-sdk-cognitosync` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CognitoSync
   autoload :EndpointProvider, 'aws-sdk-cognitosync/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cognitosync/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sms)
+
 # This module provides support for AWS Server Migration Service. This module is available in the
 # `aws-sdk-sms` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SMS
   autoload :EndpointProvider, 'aws-sdk-sms/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sms/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
 

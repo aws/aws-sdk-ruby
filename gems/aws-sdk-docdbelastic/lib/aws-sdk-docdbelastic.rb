@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:docdbelastic)
+
 # This module provides support for Amazon DocumentDB Elastic Clusters. This module is available in the
 # `aws-sdk-docdbelastic` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DocDBElastic
   autoload :EndpointProvider, 'aws-sdk-docdbelastic/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-docdbelastic/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
 

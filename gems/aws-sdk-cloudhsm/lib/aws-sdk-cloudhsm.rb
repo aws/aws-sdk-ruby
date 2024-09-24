@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudhsm)
+
 # This module provides support for Amazon CloudHSM. This module is available in the
 # `aws-sdk-cloudhsm` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudHSM
   autoload :EndpointProvider, 'aws-sdk-cloudhsm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudhsm/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
 

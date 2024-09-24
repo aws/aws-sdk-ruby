@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:wafregional)
+
 # This module provides support for AWS WAF Regional. This module is available in the
 # `aws-sdk-wafregional` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WAFRegional
   autoload :EndpointProvider, 'aws-sdk-wafregional/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-wafregional/endpoints'
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.74.0'
 
 end
 

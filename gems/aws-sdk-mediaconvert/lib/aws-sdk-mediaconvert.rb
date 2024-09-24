@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mediaconvert)
+
 # This module provides support for AWS Elemental MediaConvert. This module is available in the
 # `aws-sdk-mediaconvert` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MediaConvert
   autoload :EndpointProvider, 'aws-sdk-mediaconvert/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediaconvert/endpoints'
 
-  GEM_VERSION = '1.141.0'
+  GEM_VERSION = '1.142.0'
 
 end
 

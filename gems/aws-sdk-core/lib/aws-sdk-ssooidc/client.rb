@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ssooidc)
-
 module Aws::SSOOIDC
   # An API client for SSOOIDC.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1024,7 +1022,7 @@ module Aws::SSOOIDC
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.208.0'
+      context[:gem_version] = '3.209.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

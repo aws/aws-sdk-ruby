@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotdataplane)
+
 # This module provides support for AWS IoT Data Plane. This module is available in the
 # `aws-sdk-iotdataplane` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTDataPlane
   autoload :EndpointProvider, 'aws-sdk-iotdataplane/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotdataplane/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

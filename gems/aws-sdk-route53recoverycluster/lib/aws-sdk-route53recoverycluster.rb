@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:route53recoverycluster)
+
 # This module provides support for Route53 Recovery Cluster. This module is available in the
 # `aws-sdk-route53recoverycluster` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Route53RecoveryCluster
   autoload :EndpointProvider, 'aws-sdk-route53recoverycluster/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53recoverycluster/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

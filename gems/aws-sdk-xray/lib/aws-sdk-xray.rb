@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:xray)
+
 # This module provides support for AWS X-Ray. This module is available in the
 # `aws-sdk-xray` gem.
 #
@@ -52,7 +54,7 @@ module Aws::XRay
   autoload :EndpointProvider, 'aws-sdk-xray/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-xray/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
 

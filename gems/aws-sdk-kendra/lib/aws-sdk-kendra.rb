@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kendra)
+
 # This module provides support for AWSKendraFrontendService. This module is available in the
 # `aws-sdk-kendra` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Kendra
   autoload :EndpointProvider, 'aws-sdk-kendra/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kendra/endpoints'
 
-  GEM_VERSION = '1.90.0'
+  GEM_VERSION = '1.91.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ivschat)
+
 # This module provides support for Amazon Interactive Video Service Chat. This module is available in the
 # `aws-sdk-ivschat` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Ivschat
   autoload :EndpointProvider, 'aws-sdk-ivschat/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ivschat/endpoints'
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end
 

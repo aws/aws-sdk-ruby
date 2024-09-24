@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:servicequotas)
+
 # This module provides support for Service Quotas. This module is available in the
 # `aws-sdk-servicequotas` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ServiceQuotas
   autoload :EndpointProvider, 'aws-sdk-servicequotas/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-servicequotas/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

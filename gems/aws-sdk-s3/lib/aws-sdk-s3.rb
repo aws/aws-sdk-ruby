@@ -12,6 +12,8 @@ require 'aws-sdk-kms'
 require 'aws-sigv4'
 require 'aws-sdk-core'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
+
 # This module provides support for Amazon Simple Storage Service. This module is available in the
 # `aws-sdk-s3` gem.
 #
@@ -73,7 +75,7 @@ module Aws::S3
   autoload :ObjectVersion, 'aws-sdk-s3/object_version'
   autoload :EventStreams, 'aws-sdk-s3/event_streams'
 
-  GEM_VERSION = '1.165.0'
+  GEM_VERSION = '1.166.0'
 
 end
 

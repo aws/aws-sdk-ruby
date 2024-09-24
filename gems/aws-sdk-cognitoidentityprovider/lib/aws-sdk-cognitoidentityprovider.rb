@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cognitoidentityprovider)
+
 # This module provides support for Amazon Cognito Identity Provider. This module is available in the
 # `aws-sdk-cognitoidentityprovider` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CognitoIdentityProvider
   autoload :EndpointProvider, 'aws-sdk-cognitoidentityprovider/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cognitoidentityprovider/endpoints'
 
-  GEM_VERSION = '1.106.0'
+  GEM_VERSION = '1.107.0'
 
 end
 

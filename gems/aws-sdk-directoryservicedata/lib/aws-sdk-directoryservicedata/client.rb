@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:directoryservicedata)
-
 module Aws::DirectoryServiceData
   # An API client for DirectoryServiceData.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1737,7 +1735,7 @@ module Aws::DirectoryServiceData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directoryservicedata'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

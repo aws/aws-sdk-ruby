@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lex)
+
 # This module provides support for Amazon Lex Runtime Service. This module is available in the
 # `aws-sdk-lex` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Lex
   autoload :EndpointProvider, 'aws-sdk-lex/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lex/endpoints'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
 

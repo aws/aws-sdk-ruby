@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:chatbot)
+
 # This module provides support for AWS Chatbot. This module is available in the
 # `aws-sdk-chatbot` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Chatbot
   autoload :EndpointProvider, 'aws-sdk-chatbot/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chatbot/endpoints'
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end
 

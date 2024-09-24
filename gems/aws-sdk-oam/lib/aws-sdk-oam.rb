@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:oam)
+
 # This module provides support for CloudWatch Observability Access Manager. This module is available in the
 # `aws-sdk-oam` gem.
 #
@@ -52,7 +54,7 @@ module Aws::OAM
   autoload :EndpointProvider, 'aws-sdk-oam/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-oam/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end
 

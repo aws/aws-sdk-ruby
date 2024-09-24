@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatchrum)
+
 # This module provides support for CloudWatch RUM. This module is available in the
 # `aws-sdk-cloudwatchrum` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudWatchRUM
   autoload :EndpointProvider, 'aws-sdk-cloudwatchrum/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudwatchrum/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

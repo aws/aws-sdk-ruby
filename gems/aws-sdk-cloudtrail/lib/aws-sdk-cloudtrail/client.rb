@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:cloudtrail)
-
 module Aws::CloudTrail
   # An API client for CloudTrail.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3920,7 +3918,7 @@ module Aws::CloudTrail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

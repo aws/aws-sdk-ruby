@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:billingconductor)
+
 # This module provides support for AWSBillingConductor. This module is available in the
 # `aws-sdk-billingconductor` gem.
 #
@@ -53,7 +55,7 @@ module Aws::BillingConductor
   autoload :EndpointProvider, 'aws-sdk-billingconductor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-billingconductor/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end
 

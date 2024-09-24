@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:elasticbeanstalk)
-
 module Aws::ElasticBeanstalk
   # An API client for ElasticBeanstalk.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -4628,7 +4626,7 @@ module Aws::ElasticBeanstalk
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:forecastqueryservice)
+
 # This module provides support for Amazon Forecast Query Service. This module is available in the
 # `aws-sdk-forecastqueryservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ForecastQueryService
   autoload :EndpointProvider, 'aws-sdk-forecastqueryservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-forecastqueryservice/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

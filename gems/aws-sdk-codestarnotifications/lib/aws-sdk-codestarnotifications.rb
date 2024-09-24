@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codestarnotifications)
+
 # This module provides support for AWS CodeStar Notifications. This module is available in the
 # `aws-sdk-codestarnotifications` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeStarNotifications
   autoload :EndpointProvider, 'aws-sdk-codestarnotifications/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codestarnotifications/endpoints'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
 

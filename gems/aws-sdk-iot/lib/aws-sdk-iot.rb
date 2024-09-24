@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iot)
+
 # This module provides support for AWS IoT. This module is available in the
 # `aws-sdk-iot` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoT
   autoload :EndpointProvider, 'aws-sdk-iot/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iot/endpoints'
 
-  GEM_VERSION = '1.134.0'
+  GEM_VERSION = '1.135.0'
 
 end
 

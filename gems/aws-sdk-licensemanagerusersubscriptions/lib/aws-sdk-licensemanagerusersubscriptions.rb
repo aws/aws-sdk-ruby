@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:licensemanagerusersubscriptions)
+
 # This module provides support for AWS License Manager User Subscriptions. This module is available in the
 # `aws-sdk-licensemanagerusersubscriptions` gem.
 #
@@ -52,7 +54,7 @@ module Aws::LicenseManagerUserSubscriptions
   autoload :EndpointProvider, 'aws-sdk-licensemanagerusersubscriptions/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-licensemanagerusersubscriptions/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

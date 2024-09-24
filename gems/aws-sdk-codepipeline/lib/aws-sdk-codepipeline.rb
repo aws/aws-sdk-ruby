@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codepipeline)
+
 # This module provides support for AWS CodePipeline. This module is available in the
 # `aws-sdk-codepipeline` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodePipeline
   autoload :EndpointProvider, 'aws-sdk-codepipeline/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codepipeline/endpoints'
 
-  GEM_VERSION = '1.84.0'
+  GEM_VERSION = '1.85.0'
 
 end
 

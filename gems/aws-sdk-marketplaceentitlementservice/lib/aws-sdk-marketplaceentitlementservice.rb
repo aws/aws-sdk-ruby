@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:marketplaceentitlementservice)
+
 # This module provides support for AWS Marketplace Entitlement Service. This module is available in the
 # `aws-sdk-marketplaceentitlementservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MarketplaceEntitlementService
   autoload :EndpointProvider, 'aws-sdk-marketplaceentitlementservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplaceentitlementservice/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

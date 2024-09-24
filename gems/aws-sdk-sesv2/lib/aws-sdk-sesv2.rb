@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sesv2)
+
 # This module provides support for Amazon Simple Email Service. This module is available in the
 # `aws-sdk-sesv2` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SESV2
   autoload :EndpointProvider, 'aws-sdk-sesv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sesv2/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

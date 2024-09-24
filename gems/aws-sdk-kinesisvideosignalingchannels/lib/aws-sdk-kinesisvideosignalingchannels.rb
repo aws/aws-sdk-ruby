@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kinesisvideosignalingchannels)
+
 # This module provides support for Amazon Kinesis Video Signaling Channels. This module is available in the
 # `aws-sdk-kinesisvideosignalingchannels` gem.
 #
@@ -52,7 +54,7 @@ module Aws::KinesisVideoSignalingChannels
   autoload :EndpointProvider, 'aws-sdk-kinesisvideosignalingchannels/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kinesisvideosignalingchannels/endpoints'
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.44.0'
 
 end
 

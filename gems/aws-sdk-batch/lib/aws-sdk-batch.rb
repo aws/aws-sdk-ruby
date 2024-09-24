@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:batch)
+
 # This module provides support for AWS Batch. This module is available in the
 # `aws-sdk-batch` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Batch
   autoload :EndpointProvider, 'aws-sdk-batch/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-batch/endpoints'
 
-  GEM_VERSION = '1.100.0'
+  GEM_VERSION = '1.101.0'
 
 end
 

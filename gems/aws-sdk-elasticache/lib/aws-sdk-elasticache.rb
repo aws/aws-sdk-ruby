@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:elasticache)
+
 # This module provides support for Amazon ElastiCache. This module is available in the
 # `aws-sdk-elasticache` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ElastiCache
   autoload :EndpointProvider, 'aws-sdk-elasticache/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticache/endpoints'
 
-  GEM_VERSION = '1.114.0'
+  GEM_VERSION = '1.115.0'
 
 end
 

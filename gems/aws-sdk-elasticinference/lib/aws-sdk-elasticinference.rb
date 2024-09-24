@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:elasticinference)
+
 # This module provides support for Amazon Elastic  Inference. This module is available in the
 # `aws-sdk-elasticinference` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ElasticInference
   autoload :EndpointProvider, 'aws-sdk-elasticinference/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticinference/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

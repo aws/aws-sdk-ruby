@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:detective)
+
 # This module provides support for Amazon Detective. This module is available in the
 # `aws-sdk-detective` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Detective
   autoload :EndpointProvider, 'aws-sdk-detective/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-detective/endpoints'
 
-  GEM_VERSION = '1.58.0'
+  GEM_VERSION = '1.59.0'
 
 end
 

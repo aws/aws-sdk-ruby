@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:networkmanager)
+
 # This module provides support for AWS Network Manager. This module is available in the
 # `aws-sdk-networkmanager` gem.
 #
@@ -52,7 +54,7 @@ module Aws::NetworkManager
   autoload :EndpointProvider, 'aws-sdk-networkmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-networkmanager/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

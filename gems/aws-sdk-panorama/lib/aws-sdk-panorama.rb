@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:panorama)
+
 # This module provides support for AWS Panorama. This module is available in the
 # `aws-sdk-panorama` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Panorama
   autoload :EndpointProvider, 'aws-sdk-panorama/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-panorama/endpoints'
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.35.0'
 
 end
 

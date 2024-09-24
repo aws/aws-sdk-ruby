@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:marketplacedeployment)
+
 # This module provides support for AWS Marketplace Deployment Service. This module is available in the
 # `aws-sdk-marketplacedeployment` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MarketplaceDeployment
   autoload :EndpointProvider, 'aws-sdk-marketplacedeployment/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacedeployment/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:elasticloadbalancing)
+
 # This module provides support for Elastic Load Balancing. This module is available in the
 # `aws-sdk-elasticloadbalancing` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ElasticLoadBalancing
   autoload :EndpointProvider, 'aws-sdk-elasticloadbalancing/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticloadbalancing/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

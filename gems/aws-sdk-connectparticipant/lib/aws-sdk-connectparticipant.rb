@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:connectparticipant)
+
 # This module provides support for Amazon Connect Participant Service. This module is available in the
 # `aws-sdk-connectparticipant` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ConnectParticipant
   autoload :EndpointProvider, 'aws-sdk-connectparticipant/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectparticipant/endpoints'
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end
 

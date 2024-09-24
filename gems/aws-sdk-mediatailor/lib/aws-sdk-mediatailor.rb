@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mediatailor)
+
 # This module provides support for AWS MediaTailor. This module is available in the
 # `aws-sdk-mediatailor` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MediaTailor
   autoload :EndpointProvider, 'aws-sdk-mediatailor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediatailor/endpoints'
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.90.0'
 
 end
 

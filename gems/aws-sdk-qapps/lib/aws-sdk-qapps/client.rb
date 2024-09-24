@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:qapps)
-
 module Aws::QApps
   # An API client for QApps.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2507,7 +2505,7 @@ module Aws::QApps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qapps'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

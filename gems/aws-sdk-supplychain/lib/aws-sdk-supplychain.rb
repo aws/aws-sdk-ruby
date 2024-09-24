@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:supplychain)
+
 # This module provides support for AWS Supply Chain. This module is available in the
 # `aws-sdk-supplychain` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SupplyChain
   autoload :EndpointProvider, 'aws-sdk-supplychain/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-supplychain/endpoints'
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end
 

@@ -970,7 +970,10 @@ module Aws::SageMaker
     GroupingAttributeNames = Shapes::ListShape.new(name: 'GroupingAttributeNames')
     Groups = Shapes::ListShape.new(name: 'Groups')
     HiddenAppTypesList = Shapes::ListShape.new(name: 'HiddenAppTypesList')
+    HiddenInstanceTypesList = Shapes::ListShape.new(name: 'HiddenInstanceTypesList')
     HiddenMlToolsList = Shapes::ListShape.new(name: 'HiddenMlToolsList')
+    HiddenSageMakerImage = Shapes::StructureShape.new(name: 'HiddenSageMakerImage')
+    HiddenSageMakerImageVersionAliasesList = Shapes::ListShape.new(name: 'HiddenSageMakerImageVersionAliasesList')
     HolidayConfig = Shapes::ListShape.new(name: 'HolidayConfig')
     HolidayConfigAttributes = Shapes::StructureShape.new(name: 'HolidayConfigAttributes')
     HookParameters = Shapes::MapShape.new(name: 'HookParameters')
@@ -1080,6 +1083,7 @@ module Aws::SageMaker
     ImageUri = Shapes::StringShape.new(name: 'ImageUri')
     ImageVersion = Shapes::StructureShape.new(name: 'ImageVersion')
     ImageVersionAlias = Shapes::StringShape.new(name: 'ImageVersionAlias')
+    ImageVersionAliasPattern = Shapes::StringShape.new(name: 'ImageVersionAliasPattern')
     ImageVersionArn = Shapes::StringShape.new(name: 'ImageVersionArn')
     ImageVersionNumber = Shapes::IntegerShape.new(name: 'ImageVersionNumber')
     ImageVersionSortBy = Shapes::StringShape.new(name: 'ImageVersionSortBy')
@@ -1936,6 +1940,7 @@ module Aws::SageMaker
     S3Presign = Shapes::StructureShape.new(name: 'S3Presign')
     S3StorageConfig = Shapes::StructureShape.new(name: 'S3StorageConfig')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SageMakerImageName = Shapes::StringShape.new(name: 'SageMakerImageName')
     SageMakerImageVersionAlias = Shapes::StringShape.new(name: 'SageMakerImageVersionAlias')
     SageMakerImageVersionAliases = Shapes::ListShape.new(name: 'SageMakerImageVersionAliases')
     SageMakerPublicHubContentArn = Shapes::StringShape.new(name: 'SageMakerPublicHubContentArn')
@@ -2338,6 +2343,7 @@ module Aws::SageMaker
     VariantWeight = Shapes::FloatShape.new(name: 'VariantWeight')
     VectorConfig = Shapes::StructureShape.new(name: 'VectorConfig')
     VendorGuidance = Shapes::StringShape.new(name: 'VendorGuidance')
+    VersionAliasesList = Shapes::ListShape.new(name: 'VersionAliasesList')
     VersionId = Shapes::StringShape.new(name: 'VersionId')
     VersionedArnOrName = Shapes::StringShape.new(name: 'VersionedArnOrName')
     Vertex = Shapes::StructureShape.new(name: 'Vertex')
@@ -6031,7 +6037,15 @@ module Aws::SageMaker
 
     HiddenAppTypesList.member = Shapes::ShapeRef.new(shape: AppType)
 
+    HiddenInstanceTypesList.member = Shapes::ShapeRef.new(shape: AppInstanceType)
+
     HiddenMlToolsList.member = Shapes::ShapeRef.new(shape: MlTools)
+
+    HiddenSageMakerImage.add_member(:sage_maker_image_name, Shapes::ShapeRef.new(shape: SageMakerImageName, location_name: "SageMakerImageName"))
+    HiddenSageMakerImage.add_member(:version_aliases, Shapes::ShapeRef.new(shape: VersionAliasesList, location_name: "VersionAliases"))
+    HiddenSageMakerImage.struct_class = Types::HiddenSageMakerImage
+
+    HiddenSageMakerImageVersionAliasesList.member = Shapes::ShapeRef.new(shape: HiddenSageMakerImage)
 
     HolidayConfig.member = Shapes::ShapeRef.new(shape: HolidayConfigAttributes)
 
@@ -6105,7 +6119,7 @@ module Aws::SageMaker
 
     HumanTaskConfig.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, required: true, location_name: "WorkteamArn"))
     HumanTaskConfig.add_member(:ui_config, Shapes::ShapeRef.new(shape: UiConfig, required: true, location_name: "UiConfig"))
-    HumanTaskConfig.add_member(:pre_human_task_lambda_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "PreHumanTaskLambdaArn"))
+    HumanTaskConfig.add_member(:pre_human_task_lambda_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, location_name: "PreHumanTaskLambdaArn"))
     HumanTaskConfig.add_member(:task_keywords, Shapes::ShapeRef.new(shape: TaskKeywords, location_name: "TaskKeywords"))
     HumanTaskConfig.add_member(:task_title, Shapes::ShapeRef.new(shape: TaskTitle, required: true, location_name: "TaskTitle"))
     HumanTaskConfig.add_member(:task_description, Shapes::ShapeRef.new(shape: TaskDescription, required: true, location_name: "TaskDescription"))
@@ -6113,7 +6127,7 @@ module Aws::SageMaker
     HumanTaskConfig.add_member(:task_time_limit_in_seconds, Shapes::ShapeRef.new(shape: TaskTimeLimitInSeconds, required: true, location_name: "TaskTimeLimitInSeconds"))
     HumanTaskConfig.add_member(:task_availability_lifetime_in_seconds, Shapes::ShapeRef.new(shape: TaskAvailabilityLifetimeInSeconds, location_name: "TaskAvailabilityLifetimeInSeconds"))
     HumanTaskConfig.add_member(:max_concurrent_task_count, Shapes::ShapeRef.new(shape: MaxConcurrentTaskCount, location_name: "MaxConcurrentTaskCount"))
-    HumanTaskConfig.add_member(:annotation_consolidation_config, Shapes::ShapeRef.new(shape: AnnotationConsolidationConfig, required: true, location_name: "AnnotationConsolidationConfig"))
+    HumanTaskConfig.add_member(:annotation_consolidation_config, Shapes::ShapeRef.new(shape: AnnotationConsolidationConfig, location_name: "AnnotationConsolidationConfig"))
     HumanTaskConfig.add_member(:public_workforce_task_price, Shapes::ShapeRef.new(shape: PublicWorkforceTaskPrice, location_name: "PublicWorkforceTaskPrice"))
     HumanTaskConfig.struct_class = Types::HumanTaskConfig
 
@@ -6607,7 +6621,7 @@ module Aws::SageMaker
     LabelingJobSummary.add_member(:labeling_job_status, Shapes::ShapeRef.new(shape: LabelingJobStatus, required: true, location_name: "LabelingJobStatus"))
     LabelingJobSummary.add_member(:label_counters, Shapes::ShapeRef.new(shape: LabelCounters, required: true, location_name: "LabelCounters"))
     LabelingJobSummary.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, required: true, location_name: "WorkteamArn"))
-    LabelingJobSummary.add_member(:pre_human_task_lambda_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "PreHumanTaskLambdaArn"))
+    LabelingJobSummary.add_member(:pre_human_task_lambda_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, location_name: "PreHumanTaskLambdaArn"))
     LabelingJobSummary.add_member(:annotation_consolidation_lambda_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, location_name: "AnnotationConsolidationLambdaArn"))
     LabelingJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     LabelingJobSummary.add_member(:labeling_job_output, Shapes::ShapeRef.new(shape: LabelingJobOutput, location_name: "LabelingJobOutput"))
@@ -9507,6 +9521,8 @@ module Aws::SageMaker
 
     StudioWebPortalSettings.add_member(:hidden_ml_tools, Shapes::ShapeRef.new(shape: HiddenMlToolsList, location_name: "HiddenMlTools"))
     StudioWebPortalSettings.add_member(:hidden_app_types, Shapes::ShapeRef.new(shape: HiddenAppTypesList, location_name: "HiddenAppTypes"))
+    StudioWebPortalSettings.add_member(:hidden_instance_types, Shapes::ShapeRef.new(shape: HiddenInstanceTypesList, location_name: "HiddenInstanceTypes"))
+    StudioWebPortalSettings.add_member(:hidden_sage_maker_image_version_aliases, Shapes::ShapeRef.new(shape: HiddenSageMakerImageVersionAliasesList, location_name: "HiddenSageMakerImageVersionAliases"))
     StudioWebPortalSettings.struct_class = Types::StudioWebPortalSettings
 
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
@@ -10359,6 +10375,8 @@ module Aws::SageMaker
 
     VectorConfig.add_member(:dimension, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "Dimension"))
     VectorConfig.struct_class = Types::VectorConfig
+
+    VersionAliasesList.member = Shapes::ShapeRef.new(shape: ImageVersionAliasPattern)
 
     Vertex.add_member(:arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "Arn"))
     Vertex.add_member(:type, Shapes::ShapeRef.new(shape: String40, location_name: "Type"))

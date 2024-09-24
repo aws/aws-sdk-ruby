@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codeartifact)
+
 # This module provides support for CodeArtifact. This module is available in the
 # `aws-sdk-codeartifact` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeArtifact
   autoload :EndpointProvider, 'aws-sdk-codeartifact/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codeartifact/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

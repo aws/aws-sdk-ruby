@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:shield)
+
 # This module provides support for AWS Shield. This module is available in the
 # `aws-sdk-shield` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Shield
   autoload :EndpointProvider, 'aws-sdk-shield/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-shield/endpoints'
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.74.0'
 
 end
 

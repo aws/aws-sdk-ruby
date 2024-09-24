@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:resiliencehub)
+
 # This module provides support for AWS Resilience Hub. This module is available in the
 # `aws-sdk-resiliencehub` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ResilienceHub
   autoload :EndpointProvider, 'aws-sdk-resiliencehub/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-resiliencehub/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
 

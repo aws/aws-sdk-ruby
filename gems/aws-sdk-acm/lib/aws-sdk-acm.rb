@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:acm)
+
 # This module provides support for AWS Certificate Manager. This module is available in the
 # `aws-sdk-acm` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ACM
   autoload :EndpointProvider, 'aws-sdk-acm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-acm/endpoints'
 
-  GEM_VERSION = '1.79.0'
+  GEM_VERSION = '1.80.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lookoutmetrics)
+
 # This module provides support for Amazon Lookout for Metrics. This module is available in the
 # `aws-sdk-lookoutmetrics` gem.
 #
@@ -52,7 +54,7 @@ module Aws::LookoutMetrics
   autoload :EndpointProvider, 'aws-sdk-lookoutmetrics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lookoutmetrics/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

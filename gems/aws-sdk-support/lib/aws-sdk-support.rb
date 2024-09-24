@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:support)
+
 # This module provides support for AWS Support. This module is available in the
 # `aws-sdk-support` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Support
   autoload :EndpointProvider, 'aws-sdk-support/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-support/endpoints'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotfleetwise)
+
 # This module provides support for AWS IoT FleetWise. This module is available in the
 # `aws-sdk-iotfleetwise` gem.
 #
@@ -53,7 +55,7 @@ module Aws::IoTFleetWise
   autoload :EndpointProvider, 'aws-sdk-iotfleetwise/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotfleetwise/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

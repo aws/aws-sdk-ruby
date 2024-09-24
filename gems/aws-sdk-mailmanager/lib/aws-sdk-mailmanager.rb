@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mailmanager)
+
 # This module provides support for MailManager. This module is available in the
 # `aws-sdk-mailmanager` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MailManager
   autoload :EndpointProvider, 'aws-sdk-mailmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mailmanager/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end
 

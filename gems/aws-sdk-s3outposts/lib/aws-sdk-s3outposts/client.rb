@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:s3outposts)
-
 module Aws::S3Outposts
   # An API client for S3Outposts.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -758,7 +756,7 @@ module Aws::S3Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3outposts'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

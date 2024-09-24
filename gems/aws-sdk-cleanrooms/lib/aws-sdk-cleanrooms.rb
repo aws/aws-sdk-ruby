@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cleanrooms)
+
 # This module provides support for AWS Clean Rooms Service. This module is available in the
 # `aws-sdk-cleanrooms` gem.
 #
@@ -53,7 +55,7 @@ module Aws::CleanRooms
   autoload :EndpointProvider, 'aws-sdk-cleanrooms/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cleanrooms/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end
 

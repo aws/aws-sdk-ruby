@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:transcribestreamingservice)
+
 # This module provides support for Amazon Transcribe Streaming Service. This module is available in the
 # `aws-sdk-transcribestreamingservice` gem.
 #
@@ -54,7 +56,7 @@ module Aws::TranscribeStreamingService
   autoload :AsyncClient, 'aws-sdk-transcribestreamingservice/async_client'
   autoload :EventStreams, 'aws-sdk-transcribestreamingservice/event_streams'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end
 

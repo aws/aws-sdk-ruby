@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:drs)
+
 # This module provides support for Elastic Disaster Recovery Service. This module is available in the
 # `aws-sdk-drs` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Drs
   autoload :EndpointProvider, 'aws-sdk-drs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-drs/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

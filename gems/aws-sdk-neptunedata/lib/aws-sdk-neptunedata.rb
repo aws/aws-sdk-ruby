@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:neptunedata)
+
 # This module provides support for Amazon NeptuneData. This module is available in the
 # `aws-sdk-neptunedata` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Neptunedata
   autoload :EndpointProvider, 'aws-sdk-neptunedata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-neptunedata/endpoints'
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end
 

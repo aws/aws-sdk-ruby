@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2024-09-24)
+------------------
+
+* Feature - This release includes support to add tags when creating a stream
+
 1.68.0 (2024-09-23)
 ------------------
 

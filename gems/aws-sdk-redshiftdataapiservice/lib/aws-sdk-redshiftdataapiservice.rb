@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:redshiftdataapiservice)
+
 # This module provides support for Redshift Data API Service. This module is available in the
 # `aws-sdk-redshiftdataapiservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::RedshiftDataAPIService
   autoload :EndpointProvider, 'aws-sdk-redshiftdataapiservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-redshiftdataapiservice/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

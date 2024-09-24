@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:opsworkscm)
+
 # This module provides support for AWS OpsWorks CM. This module is available in the
 # `aws-sdk-opsworkscm` gem.
 #
@@ -53,7 +55,7 @@ module Aws::OpsWorksCM
   autoload :EndpointProvider, 'aws-sdk-opsworkscm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-opsworkscm/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

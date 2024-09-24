@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssmincidents)
+
 # This module provides support for AWS Systems Manager Incident Manager. This module is available in the
 # `aws-sdk-ssmincidents` gem.
 #
@@ -53,7 +55,7 @@ module Aws::SSMIncidents
   autoload :EndpointProvider, 'aws-sdk-ssmincidents/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmincidents/endpoints'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
 

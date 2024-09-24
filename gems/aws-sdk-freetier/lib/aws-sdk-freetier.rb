@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:freetier)
+
 # This module provides support for AWS Free Tier. This module is available in the
 # `aws-sdk-freetier` gem.
 #
@@ -52,7 +54,7 @@ module Aws::FreeTier
   autoload :EndpointProvider, 'aws-sdk-freetier/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-freetier/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

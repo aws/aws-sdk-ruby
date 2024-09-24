@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:directconnect)
+
 # This module provides support for AWS Direct Connect. This module is available in the
 # `aws-sdk-directconnect` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DirectConnect
   autoload :EndpointProvider, 'aws-sdk-directconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-directconnect/endpoints'
 
-  GEM_VERSION = '1.82.0'
+  GEM_VERSION = '1.83.0'
 
 end
 

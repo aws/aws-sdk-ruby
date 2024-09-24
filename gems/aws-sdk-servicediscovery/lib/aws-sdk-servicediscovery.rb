@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:servicediscovery)
+
 # This module provides support for AWS Cloud Map. This module is available in the
 # `aws-sdk-servicediscovery` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ServiceDiscovery
   autoload :EndpointProvider, 'aws-sdk-servicediscovery/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-servicediscovery/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
 

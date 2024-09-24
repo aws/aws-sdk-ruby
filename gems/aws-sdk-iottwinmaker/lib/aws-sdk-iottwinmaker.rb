@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iottwinmaker)
+
 # This module provides support for AWS IoT TwinMaker. This module is available in the
 # `aws-sdk-iottwinmaker` gem.
 #
@@ -53,7 +55,7 @@ module Aws::IoTTwinMaker
   autoload :EndpointProvider, 'aws-sdk-iottwinmaker/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iottwinmaker/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

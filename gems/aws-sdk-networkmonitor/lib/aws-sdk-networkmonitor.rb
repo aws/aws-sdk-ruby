@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:networkmonitor)
+
 # This module provides support for Amazon CloudWatch Network Monitor. This module is available in the
 # `aws-sdk-networkmonitor` gem.
 #
@@ -53,7 +55,7 @@ module Aws::NetworkMonitor
   autoload :EndpointProvider, 'aws-sdk-networkmonitor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-networkmonitor/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

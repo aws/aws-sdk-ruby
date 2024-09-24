@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:snowball)
+
 # This module provides support for Amazon Import/Export Snowball. This module is available in the
 # `aws-sdk-snowball` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Snowball
   autoload :EndpointProvider, 'aws-sdk-snowball/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-snowball/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end
 

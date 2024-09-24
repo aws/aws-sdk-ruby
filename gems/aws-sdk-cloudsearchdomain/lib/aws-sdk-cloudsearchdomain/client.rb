@@ -35,8 +35,6 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-cloudsearchdomain/plugins/conditional_signing.rb'
 require 'aws-sdk-cloudsearchdomain/plugins/switch_to_post.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:cloudsearchdomain)
-
 module Aws::CloudSearchDomain
   # An API client for CloudSearchDomain.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -992,7 +990,7 @@ module Aws::CloudSearchDomain
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudsearchdomain'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

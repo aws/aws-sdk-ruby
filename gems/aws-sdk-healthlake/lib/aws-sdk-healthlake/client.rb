@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:healthlake)
-
 module Aws::HealthLake
   # An API client for HealthLake.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1164,7 +1162,7 @@ module Aws::HealthLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:codeartifact)
-
 module Aws::CodeArtifact
   # An API client for CodeArtifact.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -4019,7 +4017,7 @@ module Aws::CodeArtifact
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:migrationhub)
+
 # This module provides support for AWS Migration Hub. This module is available in the
 # `aws-sdk-migrationhub` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MigrationHub
   autoload :EndpointProvider, 'aws-sdk-migrationhub/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-migrationhub/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:applicationautoscaling)
+
 # This module provides support for Application Auto Scaling. This module is available in the
 # `aws-sdk-applicationautoscaling` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ApplicationAutoScaling
   autoload :EndpointProvider, 'aws-sdk-applicationautoscaling/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationautoscaling/endpoints'
 
-  GEM_VERSION = '1.95.0'
+  GEM_VERSION = '1.96.0'
 
 end
 

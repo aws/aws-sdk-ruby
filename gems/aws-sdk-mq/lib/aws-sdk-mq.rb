@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mq)
+
 # This module provides support for AmazonMQ. This module is available in the
 # `aws-sdk-mq` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MQ
   autoload :EndpointProvider, 'aws-sdk-mq/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mq/endpoints'
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.72.0'
 
 end
 

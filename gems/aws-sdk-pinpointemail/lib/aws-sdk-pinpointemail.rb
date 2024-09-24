@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pinpointemail)
+
 # This module provides support for Amazon Pinpoint Email Service. This module is available in the
 # `aws-sdk-pinpointemail` gem.
 #
@@ -52,7 +54,7 @@ module Aws::PinpointEmail
   autoload :EndpointProvider, 'aws-sdk-pinpointemail/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pinpointemail/endpoints'
 
-  GEM_VERSION = '1.59.0'
+  GEM_VERSION = '1.60.0'
 
 end
 

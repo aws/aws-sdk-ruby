@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:route53profiles)
-
 module Aws::Route53Profiles
   # An API client for Route53Profiles.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1201,7 +1199,7 @@ module Aws::Route53Profiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53profiles'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

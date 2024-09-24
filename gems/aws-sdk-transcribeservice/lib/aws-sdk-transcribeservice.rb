@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:transcribeservice)
+
 # This module provides support for Amazon Transcribe Service. This module is available in the
 # `aws-sdk-transcribeservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::TranscribeService
   autoload :EndpointProvider, 'aws-sdk-transcribeservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-transcribeservice/endpoints'
 
-  GEM_VERSION = '1.108.0'
+  GEM_VERSION = '1.109.0'
 
 end
 

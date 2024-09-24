@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:athena)
+
 # This module provides support for Amazon Athena. This module is available in the
 # `aws-sdk-athena` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Athena
   autoload :EndpointProvider, 'aws-sdk-athena/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-athena/endpoints'
 
-  GEM_VERSION = '1.94.0'
+  GEM_VERSION = '1.95.0'
 
 end
 

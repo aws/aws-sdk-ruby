@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sagemakeredgemanager)
+
 # This module provides support for Amazon Sagemaker Edge Manager. This module is available in the
 # `aws-sdk-sagemakeredgemanager` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SagemakerEdgeManager
   autoload :EndpointProvider, 'aws-sdk-sagemakeredgemanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemakeredgemanager/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

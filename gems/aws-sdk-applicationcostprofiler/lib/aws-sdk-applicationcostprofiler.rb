@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:applicationcostprofiler)
+
 # This module provides support for AWS Application Cost Profiler. This module is available in the
 # `aws-sdk-applicationcostprofiler` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ApplicationCostProfiler
   autoload :EndpointProvider, 'aws-sdk-applicationcostprofiler/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationcostprofiler/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

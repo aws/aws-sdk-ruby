@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codegurusecurity)
+
 # This module provides support for Amazon CodeGuru Security. This module is available in the
 # `aws-sdk-codegurusecurity` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeGuruSecurity
   autoload :EndpointProvider, 'aws-sdk-codegurusecurity/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codegurusecurity/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
 

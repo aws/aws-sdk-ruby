@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:comprehend)
+
 # This module provides support for Amazon Comprehend. This module is available in the
 # `aws-sdk-comprehend` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Comprehend
   autoload :EndpointProvider, 'aws-sdk-comprehend/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-comprehend/endpoints'
 
-  GEM_VERSION = '1.92.0'
+  GEM_VERSION = '1.93.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:devicefarm)
+
 # This module provides support for AWS Device Farm. This module is available in the
 # `aws-sdk-devicefarm` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DeviceFarm
   autoload :EndpointProvider, 'aws-sdk-devicefarm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-devicefarm/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end
 

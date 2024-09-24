@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:apigatewaymanagementapi)
+
 # This module provides support for AmazonApiGatewayManagementApi. This module is available in the
 # `aws-sdk-apigatewaymanagementapi` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ApiGatewayManagementApi
   autoload :EndpointProvider, 'aws-sdk-apigatewaymanagementapi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-apigatewaymanagementapi/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

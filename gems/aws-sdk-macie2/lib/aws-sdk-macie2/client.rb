@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:macie2)
-
 module Aws::Macie2
   # An API client for Macie2.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -4038,7 +4036,7 @@ module Aws::Macie2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

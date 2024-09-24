@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:costoptimizationhub)
+
 # This module provides support for Cost Optimization Hub. This module is available in the
 # `aws-sdk-costoptimizationhub` gem.
 #
@@ -53,7 +55,7 @@ module Aws::CostOptimizationHub
   autoload :EndpointProvider, 'aws-sdk-costoptimizationhub/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-costoptimizationhub/endpoints'
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.17.0'
 
 end
 

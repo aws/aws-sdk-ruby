@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codedeploy)
+
 # This module provides support for AWS CodeDeploy. This module is available in the
 # `aws-sdk-codedeploy` gem.
 #
@@ -53,7 +55,7 @@ module Aws::CodeDeploy
   autoload :EndpointProvider, 'aws-sdk-codedeploy/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codedeploy/endpoints'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end
 

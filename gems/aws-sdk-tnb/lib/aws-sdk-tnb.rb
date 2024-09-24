@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:tnb)
+
 # This module provides support for AWS Telco Network Builder. This module is available in the
 # `aws-sdk-tnb` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Tnb
   autoload :EndpointProvider, 'aws-sdk-tnb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-tnb/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
 

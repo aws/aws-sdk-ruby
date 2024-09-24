@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:appfabric)
+
 # This module provides support for AppFabric. This module is available in the
 # `aws-sdk-appfabric` gem.
 #
@@ -53,7 +55,7 @@ module Aws::AppFabric
   autoload :EndpointProvider, 'aws-sdk-appfabric/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appfabric/endpoints'
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloud9)
+
 # This module provides support for AWS Cloud9. This module is available in the
 # `aws-sdk-cloud9` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Cloud9
   autoload :EndpointProvider, 'aws-sdk-cloud9/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloud9/endpoints'
 
-  GEM_VERSION = '1.79.0'
+  GEM_VERSION = '1.80.0'
 
 end
 

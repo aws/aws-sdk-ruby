@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:redshift)
+
 # This module provides support for Amazon Redshift. This module is available in the
 # `aws-sdk-redshift` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Redshift
   autoload :EndpointProvider, 'aws-sdk-redshift/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-redshift/endpoints'
 
-  GEM_VERSION = '1.124.0'
+  GEM_VERSION = '1.125.0'
 
 end
 

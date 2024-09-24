@@ -38,8 +38,6 @@ require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-sqs/plugins/queue_urls.rb'
 require 'aws-sdk-sqs/plugins/md5s.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:sqs)
-
 module Aws::SQS
   # An API client for SQS.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2910,7 +2908,7 @@ module Aws::SQS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

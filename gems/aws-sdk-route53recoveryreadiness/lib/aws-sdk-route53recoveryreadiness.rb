@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:route53recoveryreadiness)
+
 # This module provides support for AWS Route53 Recovery Readiness. This module is available in the
 # `aws-sdk-route53recoveryreadiness` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Route53RecoveryReadiness
   autoload :EndpointProvider, 'aws-sdk-route53recoveryreadiness/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53recoveryreadiness/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

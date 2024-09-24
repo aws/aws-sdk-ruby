@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotfleethub)
+
 # This module provides support for AWS IoT Fleet Hub. This module is available in the
 # `aws-sdk-iotfleethub` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTFleetHub
   autoload :EndpointProvider, 'aws-sdk-iotfleethub/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotfleethub/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

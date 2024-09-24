@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:swf)
+
 # This module provides support for Amazon Simple Workflow Service. This module is available in the
 # `aws-sdk-swf` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SWF
   autoload :EndpointProvider, 'aws-sdk-swf/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-swf/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
 

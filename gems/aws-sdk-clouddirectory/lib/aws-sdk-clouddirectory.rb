@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:clouddirectory)
+
 # This module provides support for Amazon CloudDirectory. This module is available in the
 # `aws-sdk-clouddirectory` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudDirectory
   autoload :EndpointProvider, 'aws-sdk-clouddirectory/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-clouddirectory/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

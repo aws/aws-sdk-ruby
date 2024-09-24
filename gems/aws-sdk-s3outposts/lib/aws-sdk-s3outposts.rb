@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:s3outposts)
+
 # This module provides support for Amazon S3 on Outposts. This module is available in the
 # `aws-sdk-s3outposts` gem.
 #
@@ -52,7 +54,7 @@ module Aws::S3Outposts
   autoload :EndpointProvider, 'aws-sdk-s3outposts/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-s3outposts/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

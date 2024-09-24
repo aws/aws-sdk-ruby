@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mainframemodernization)
+
 # This module provides support for AWSMainframeModernization. This module is available in the
 # `aws-sdk-mainframemodernization` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MainframeModernization
   autoload :EndpointProvider, 'aws-sdk-mainframemodernization/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mainframemodernization/endpoints'
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end
 

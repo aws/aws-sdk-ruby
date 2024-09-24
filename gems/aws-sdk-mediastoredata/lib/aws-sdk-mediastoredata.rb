@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mediastoredata)
+
 # This module provides support for AWS Elemental MediaStore Data Plane. This module is available in the
 # `aws-sdk-mediastoredata` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MediaStoreData
   autoload :EndpointProvider, 'aws-sdk-mediastoredata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediastoredata/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

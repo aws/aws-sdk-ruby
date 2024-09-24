@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:guardduty)
+
 # This module provides support for Amazon GuardDuty. This module is available in the
 # `aws-sdk-guardduty` gem.
 #
@@ -52,7 +54,7 @@ module Aws::GuardDuty
   autoload :EndpointProvider, 'aws-sdk-guardduty/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-guardduty/endpoints'
 
-  GEM_VERSION = '1.102.0'
+  GEM_VERSION = '1.103.0'
 
 end
 

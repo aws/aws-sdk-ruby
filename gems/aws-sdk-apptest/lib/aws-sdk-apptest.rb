@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:apptest)
+
 # This module provides support for AWS Mainframe Modernization Application Testing. This module is available in the
 # `aws-sdk-apptest` gem.
 #
@@ -53,7 +55,7 @@ module Aws::AppTest
   autoload :EndpointProvider, 'aws-sdk-apptest/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-apptest/endpoints'
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end
 

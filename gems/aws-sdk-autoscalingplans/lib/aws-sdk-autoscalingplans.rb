@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:autoscalingplans)
+
 # This module provides support for AWS Auto Scaling Plans. This module is available in the
 # `aws-sdk-autoscalingplans` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AutoScalingPlans
   autoload :EndpointProvider, 'aws-sdk-autoscalingplans/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-autoscalingplans/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
 

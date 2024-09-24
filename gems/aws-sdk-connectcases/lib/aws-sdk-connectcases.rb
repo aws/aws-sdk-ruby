@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:connectcases)
+
 # This module provides support for Amazon Connect Cases. This module is available in the
 # `aws-sdk-connectcases` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ConnectCases
   autoload :EndpointProvider, 'aws-sdk-connectcases/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectcases/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

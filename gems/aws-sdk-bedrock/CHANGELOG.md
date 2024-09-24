@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-09-24)
+------------------
+
+* Feature - Add support for Cross Region Inference in Bedrock Model Evaluations.
+
 1.23.0 (2024-09-23)
 ------------------
 

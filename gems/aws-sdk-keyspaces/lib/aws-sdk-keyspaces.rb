@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:keyspaces)
+
 # This module provides support for Amazon Keyspaces. This module is available in the
 # `aws-sdk-keyspaces` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Keyspaces
   autoload :EndpointProvider, 'aws-sdk-keyspaces/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-keyspaces/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
 

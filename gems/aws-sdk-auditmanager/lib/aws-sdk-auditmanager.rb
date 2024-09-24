@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:auditmanager)
+
 # This module provides support for AWS Audit Manager. This module is available in the
 # `aws-sdk-auditmanager` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AuditManager
   autoload :EndpointProvider, 'aws-sdk-auditmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-auditmanager/endpoints'
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.57.0'
 
 end
 

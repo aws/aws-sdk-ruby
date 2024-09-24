@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:timestreamwrite)
+
 # This module provides support for Amazon Timestream Write. This module is available in the
 # `aws-sdk-timestreamwrite` gem.
 #
@@ -52,7 +54,7 @@ module Aws::TimestreamWrite
   autoload :EndpointProvider, 'aws-sdk-timestreamwrite/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-timestreamwrite/endpoints'
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end
 

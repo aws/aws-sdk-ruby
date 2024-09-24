@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:account)
+
 # This module provides support for AWS Account. This module is available in the
 # `aws-sdk-account` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Account
   autoload :EndpointProvider, 'aws-sdk-account/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-account/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

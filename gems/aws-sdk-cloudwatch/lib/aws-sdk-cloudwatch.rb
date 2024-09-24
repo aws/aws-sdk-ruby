@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatch)
+
 # This module provides support for Amazon CloudWatch. This module is available in the
 # `aws-sdk-cloudwatch` gem.
 #
@@ -56,7 +58,7 @@ module Aws::CloudWatch
   autoload :CompositeAlarm, 'aws-sdk-cloudwatch/composite_alarm'
   autoload :Metric, 'aws-sdk-cloudwatch/metric'
 
-  GEM_VERSION = '1.102.0'
+  GEM_VERSION = '1.103.0'
 
 end
 

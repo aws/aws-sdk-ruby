@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ivs)
-
 module Aws::IVS
   # An API client for IVS.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2158,7 +2156,7 @@ module Aws::IVS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

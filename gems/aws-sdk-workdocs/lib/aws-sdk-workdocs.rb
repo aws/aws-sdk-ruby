@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:workdocs)
+
 # This module provides support for Amazon WorkDocs. This module is available in the
 # `aws-sdk-workdocs` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WorkDocs
   autoload :EndpointProvider, 'aws-sdk-workdocs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workdocs/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

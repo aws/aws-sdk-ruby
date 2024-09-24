@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:costandusagereportservice)
+
 # This module provides support for AWS Cost and Usage Report Service. This module is available in the
 # `aws-sdk-costandusagereportservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CostandUsageReportService
   autoload :EndpointProvider, 'aws-sdk-costandusagereportservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-costandusagereportservice/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

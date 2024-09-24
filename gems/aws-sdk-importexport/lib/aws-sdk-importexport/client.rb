@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/signature_v2.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:importexport)
-
 module Aws::ImportExport
   # An API client for ImportExport.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -799,7 +797,7 @@ module Aws::ImportExport
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-importexport'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

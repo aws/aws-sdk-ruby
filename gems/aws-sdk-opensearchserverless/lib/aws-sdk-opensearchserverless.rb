@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:opensearchserverless)
+
 # This module provides support for OpenSearch Service Serverless. This module is available in the
 # `aws-sdk-opensearchserverless` gem.
 #
@@ -52,7 +54,7 @@ module Aws::OpenSearchServerless
   autoload :EndpointProvider, 'aws-sdk-opensearchserverless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-opensearchserverless/endpoints'
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:macie2)
+
 # This module provides support for Amazon Macie 2. This module is available in the
 # `aws-sdk-macie2` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Macie2
   autoload :EndpointProvider, 'aws-sdk-macie2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-macie2/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end
 

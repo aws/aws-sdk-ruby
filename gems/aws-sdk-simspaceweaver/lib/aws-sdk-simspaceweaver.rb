@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:simspaceweaver)
+
 # This module provides support for AWS SimSpace Weaver. This module is available in the
 # `aws-sdk-simspaceweaver` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SimSpaceWeaver
   autoload :EndpointProvider, 'aws-sdk-simspaceweaver/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-simspaceweaver/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end
 

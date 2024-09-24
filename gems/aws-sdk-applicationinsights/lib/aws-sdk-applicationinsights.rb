@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:applicationinsights)
+
 # This module provides support for Amazon CloudWatch Application Insights. This module is available in the
 # `aws-sdk-applicationinsights` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ApplicationInsights
   autoload :EndpointProvider, 'aws-sdk-applicationinsights/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationinsights/endpoints'
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.57.0'
 
 end
 

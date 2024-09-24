@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pinpointsmsvoice)
+
 # This module provides support for Amazon Pinpoint SMS and Voice Service. This module is available in the
 # `aws-sdk-pinpointsmsvoice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::PinpointSMSVoice
   autoload :EndpointProvider, 'aws-sdk-pinpointsmsvoice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pinpointsmsvoice/endpoints'
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end
 

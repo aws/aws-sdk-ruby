@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:paymentcryptography)
+
 # This module provides support for Payment Cryptography Control Plane. This module is available in the
 # `aws-sdk-paymentcryptography` gem.
 #
@@ -53,7 +55,7 @@ module Aws::PaymentCryptography
   autoload :EndpointProvider, 'aws-sdk-paymentcryptography/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-paymentcryptography/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

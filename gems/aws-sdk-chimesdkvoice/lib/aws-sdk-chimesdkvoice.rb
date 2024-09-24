@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:chimesdkvoice)
+
 # This module provides support for Amazon Chime SDK Voice. This module is available in the
 # `aws-sdk-chimesdkvoice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ChimeSDKVoice
   autoload :EndpointProvider, 'aws-sdk-chimesdkvoice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkvoice/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

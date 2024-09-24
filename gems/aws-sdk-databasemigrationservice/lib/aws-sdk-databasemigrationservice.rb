@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:databasemigrationservice)
+
 # This module provides support for AWS Database Migration Service. This module is available in the
 # `aws-sdk-databasemigrationservice` gem.
 #
@@ -53,7 +55,7 @@ module Aws::DatabaseMigrationService
   autoload :EndpointProvider, 'aws-sdk-databasemigrationservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-databasemigrationservice/endpoints'
 
-  GEM_VERSION = '1.105.0'
+  GEM_VERSION = '1.106.0'
 
 end
 

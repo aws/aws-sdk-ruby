@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:personalizeruntime)
+
 # This module provides support for Amazon Personalize Runtime. This module is available in the
 # `aws-sdk-personalizeruntime` gem.
 #
@@ -52,7 +54,7 @@ module Aws::PersonalizeRuntime
   autoload :EndpointProvider, 'aws-sdk-personalizeruntime/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-personalizeruntime/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockagent)
+
 # This module provides support for Agents for Amazon Bedrock. This module is available in the
 # `aws-sdk-bedrockagent` gem.
 #
@@ -52,7 +54,7 @@ module Aws::BedrockAgent
   autoload :EndpointProvider, 'aws-sdk-bedrockagent/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bedrockagent/endpoints'
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:dlm)
+
 # This module provides support for Amazon Data Lifecycle Manager. This module is available in the
 # `aws-sdk-dlm` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DLM
   autoload :EndpointProvider, 'aws-sdk-dlm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dlm/endpoints'
 
-  GEM_VERSION = '1.80.0'
+  GEM_VERSION = '1.81.0'
 
 end
 

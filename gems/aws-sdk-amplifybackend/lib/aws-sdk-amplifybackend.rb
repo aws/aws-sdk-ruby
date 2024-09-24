@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:amplifybackend)
+
 # This module provides support for AmplifyBackend. This module is available in the
 # `aws-sdk-amplifybackend` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AmplifyBackend
   autoload :EndpointProvider, 'aws-sdk-amplifybackend/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-amplifybackend/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

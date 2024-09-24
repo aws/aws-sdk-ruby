@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ebs)
+
 # This module provides support for Amazon Elastic Block Store. This module is available in the
 # `aws-sdk-ebs` gem.
 #
@@ -52,7 +54,7 @@ module Aws::EBS
   autoload :EndpointProvider, 'aws-sdk-ebs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ebs/endpoints'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

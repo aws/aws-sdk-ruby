@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:memorydb)
-
 module Aws::MemoryDB
   # An API client for MemoryDB.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2989,7 +2987,7 @@ module Aws::MemoryDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

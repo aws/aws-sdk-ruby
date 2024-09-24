@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:machinelearning)
+
 # This module provides support for Amazon Machine Learning. This module is available in the
 # `aws-sdk-machinelearning` gem.
 #
@@ -53,7 +55,7 @@ module Aws::MachineLearning
   autoload :EndpointProvider, 'aws-sdk-machinelearning/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-machinelearning/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:emrserverless)
+
 # This module provides support for EMR Serverless. This module is available in the
 # `aws-sdk-emrserverless` gem.
 #
@@ -52,7 +54,7 @@ module Aws::EMRServerless
   autoload :EndpointProvider, 'aws-sdk-emrserverless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-emrserverless/endpoints'
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end
 

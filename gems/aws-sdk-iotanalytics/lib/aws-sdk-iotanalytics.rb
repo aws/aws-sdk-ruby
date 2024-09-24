@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotanalytics)
+
 # This module provides support for AWS IoT Analytics. This module is available in the
 # `aws-sdk-iotanalytics` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTAnalytics
   autoload :EndpointProvider, 'aws-sdk-iotanalytics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotanalytics/endpoints'
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.74.0'
 
 end
 

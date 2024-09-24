@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:emrcontainers)
+
 # This module provides support for Amazon EMR Containers. This module is available in the
 # `aws-sdk-emrcontainers` gem.
 #
@@ -52,7 +54,7 @@ module Aws::EMRContainers
   autoload :EndpointProvider, 'aws-sdk-emrcontainers/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-emrcontainers/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

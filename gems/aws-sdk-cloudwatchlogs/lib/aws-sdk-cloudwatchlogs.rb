@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatchlogs)
+
 # This module provides support for Amazon CloudWatch Logs. This module is available in the
 # `aws-sdk-cloudwatchlogs` gem.
 #
@@ -53,7 +55,7 @@ module Aws::CloudWatchLogs
   autoload :Endpoints, 'aws-sdk-cloudwatchlogs/endpoints'
   autoload :EventStreams, 'aws-sdk-cloudwatchlogs/event_streams'
 
-  GEM_VERSION = '1.95.0'
+  GEM_VERSION = '1.96.0'
 
 end
 

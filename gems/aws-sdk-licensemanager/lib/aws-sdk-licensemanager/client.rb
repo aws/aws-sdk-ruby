@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:licensemanager)
-
 module Aws::LicenseManager
   # An API client for LicenseManager.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3280,7 +3278,7 @@ module Aws::LicenseManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

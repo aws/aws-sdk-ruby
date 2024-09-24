@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ecr)
+
 # This module provides support for Amazon Elastic Container Registry. This module is available in the
 # `aws-sdk-ecr` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ECR
   autoload :EndpointProvider, 'aws-sdk-ecr/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ecr/endpoints'
 
-  GEM_VERSION = '1.86.0'
+  GEM_VERSION = '1.87.0'
 
 end
 

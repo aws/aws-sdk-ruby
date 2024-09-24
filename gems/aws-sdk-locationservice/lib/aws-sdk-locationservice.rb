@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:locationservice)
+
 # This module provides support for Amazon Location Service. This module is available in the
 # `aws-sdk-locationservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::LocationService
   autoload :EndpointProvider, 'aws-sdk-locationservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-locationservice/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

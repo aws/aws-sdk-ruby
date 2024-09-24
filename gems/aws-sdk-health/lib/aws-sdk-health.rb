@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:health)
+
 # This module provides support for AWS Health APIs and Notifications. This module is available in the
 # `aws-sdk-health` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Health
   autoload :EndpointProvider, 'aws-sdk-health/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-health/endpoints'
 
-  GEM_VERSION = '1.72.0'
+  GEM_VERSION = '1.73.0'
 
 end
 

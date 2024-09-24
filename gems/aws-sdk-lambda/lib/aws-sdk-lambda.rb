@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lambda)
+
 # This module provides support for AWS Lambda. This module is available in the
 # `aws-sdk-lambda` gem.
 #
@@ -54,7 +56,7 @@ module Aws::Lambda
   autoload :Endpoints, 'aws-sdk-lambda/endpoints'
   autoload :EventStreams, 'aws-sdk-lambda/event_streams'
 
-  GEM_VERSION = '1.134.0'
+  GEM_VERSION = '1.135.0'
 
 end
 

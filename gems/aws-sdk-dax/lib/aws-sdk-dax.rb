@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:dax)
+
 # This module provides support for Amazon DynamoDB Accelerator (DAX). This module is available in the
 # `aws-sdk-dax` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DAX
   autoload :EndpointProvider, 'aws-sdk-dax/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dax/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
 

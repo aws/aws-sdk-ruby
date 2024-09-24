@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:chimesdkidentity)
+
 # This module provides support for Amazon Chime SDK Identity. This module is available in the
 # `aws-sdk-chimesdkidentity` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ChimeSDKIdentity
   autoload :EndpointProvider, 'aws-sdk-chimesdkidentity/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkidentity/endpoints'
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end
 

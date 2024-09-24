@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:dlm)
-
 module Aws::DLM
   # An API client for DLM.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1371,7 +1369,7 @@ module Aws::DLM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

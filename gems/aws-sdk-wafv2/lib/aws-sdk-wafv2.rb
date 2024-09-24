@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:wafv2)
+
 # This module provides support for AWS WAFV2. This module is available in the
 # `aws-sdk-wafv2` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WAFV2
   autoload :EndpointProvider, 'aws-sdk-wafv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-wafv2/endpoints'
 
-  GEM_VERSION = '1.94.0'
+  GEM_VERSION = '1.95.0'
 
 end
 

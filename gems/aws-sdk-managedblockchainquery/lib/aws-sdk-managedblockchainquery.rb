@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:managedblockchainquery)
+
 # This module provides support for Amazon Managed Blockchain Query. This module is available in the
 # `aws-sdk-managedblockchainquery` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ManagedBlockchainQuery
   autoload :EndpointProvider, 'aws-sdk-managedblockchainquery/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-managedblockchainquery/endpoints'
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:eventbridge)
+
 # This module provides support for Amazon EventBridge. This module is available in the
 # `aws-sdk-eventbridge` gem.
 #
@@ -52,7 +54,7 @@ module Aws::EventBridge
   autoload :EndpointProvider, 'aws-sdk-eventbridge/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-eventbridge/endpoints'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
 

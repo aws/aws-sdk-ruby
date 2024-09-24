@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:greengrassv2)
+
 # This module provides support for AWS IoT Greengrass V2. This module is available in the
 # `aws-sdk-greengrassv2` gem.
 #
@@ -52,7 +54,7 @@ module Aws::GreengrassV2
   autoload :EndpointProvider, 'aws-sdk-greengrassv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-greengrassv2/endpoints'
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end
 

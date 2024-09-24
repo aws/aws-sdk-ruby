@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:migrationhubrefactorspaces)
+
 # This module provides support for AWS Migration Hub Refactor Spaces. This module is available in the
 # `aws-sdk-migrationhubrefactorspaces` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MigrationHubRefactorSpaces
   autoload :EndpointProvider, 'aws-sdk-migrationhubrefactorspaces/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-migrationhubrefactorspaces/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

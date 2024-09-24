@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:fms)
+
 # This module provides support for Firewall Management Service. This module is available in the
 # `aws-sdk-fms` gem.
 #
@@ -52,7 +54,7 @@ module Aws::FMS
   autoload :EndpointProvider, 'aws-sdk-fms/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-fms/endpoints'
 
-  GEM_VERSION = '1.81.0'
+  GEM_VERSION = '1.82.0'
 
 end
 

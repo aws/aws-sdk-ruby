@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codebuild)
+
 # This module provides support for AWS CodeBuild. This module is available in the
 # `aws-sdk-codebuild` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeBuild
   autoload :EndpointProvider, 'aws-sdk-codebuild/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codebuild/endpoints'
 
-  GEM_VERSION = '1.131.0'
+  GEM_VERSION = '1.132.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ec2)
+
 # This module provides support for Amazon Elastic Compute Cloud. This module is available in the
 # `aws-sdk-ec2` gem.
 #
@@ -76,7 +78,7 @@ module Aws::EC2
   autoload :VpcPeeringConnection, 'aws-sdk-ec2/vpc_peering_connection'
   autoload :VpcAddress, 'aws-sdk-ec2/vpc_address'
 
-  GEM_VERSION = '1.476.0'
+  GEM_VERSION = '1.477.0'
 
 end
 

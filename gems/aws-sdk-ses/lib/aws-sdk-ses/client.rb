@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ses)
-
 module Aws::SES
   # An API client for SES.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -5185,7 +5183,7 @@ module Aws::SES
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

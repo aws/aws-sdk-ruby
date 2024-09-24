@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codeconnections)
+
 # This module provides support for AWS CodeConnections. This module is available in the
 # `aws-sdk-codeconnections` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeConnections
   autoload :EndpointProvider, 'aws-sdk-codeconnections/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codeconnections/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

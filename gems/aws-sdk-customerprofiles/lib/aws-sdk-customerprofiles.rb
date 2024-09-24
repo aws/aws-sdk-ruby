@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:customerprofiles)
+
 # This module provides support for Amazon Connect Customer Profiles. This module is available in the
 # `aws-sdk-customerprofiles` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CustomerProfiles
   autoload :EndpointProvider, 'aws-sdk-customerprofiles/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-customerprofiles/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

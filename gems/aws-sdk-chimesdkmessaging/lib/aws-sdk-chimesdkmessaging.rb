@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:chimesdkmessaging)
+
 # This module provides support for Amazon Chime SDK Messaging. This module is available in the
 # `aws-sdk-chimesdkmessaging` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ChimeSDKMessaging
   autoload :EndpointProvider, 'aws-sdk-chimesdkmessaging/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkmessaging/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

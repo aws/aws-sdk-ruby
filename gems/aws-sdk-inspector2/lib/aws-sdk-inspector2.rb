@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:inspector2)
+
 # This module provides support for Inspector2. This module is available in the
 # `aws-sdk-inspector2` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Inspector2
   autoload :EndpointProvider, 'aws-sdk-inspector2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-inspector2/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

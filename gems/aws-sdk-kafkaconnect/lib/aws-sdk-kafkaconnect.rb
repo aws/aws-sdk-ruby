@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kafkaconnect)
+
 # This module provides support for Managed Streaming for Kafka Connect. This module is available in the
 # `aws-sdk-kafkaconnect` gem.
 #
@@ -52,7 +54,7 @@ module Aws::KafkaConnect
   autoload :EndpointProvider, 'aws-sdk-kafkaconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kafkaconnect/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

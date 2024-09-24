@@ -84,7 +84,7 @@ module Aws::PinpointSMSVoiceV2
     class ConflictException
       attr_accessor message: ::String
       attr_accessor reason: ("CREATE_REGISTRATION_VERSION_NOT_ALLOWED" | "DELETION_PROTECTION_ENABLED" | "DESTINATION_PHONE_NUMBER_NOT_VERIFIED" | "DESTINATION_PHONE_NUMBER_OPTED_OUT" | "DISASSOCIATE_REGISTRATION_NOT_ALLOWED" | "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED" | "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED" | "EVENT_DESTINATION_MISMATCH" | "KEYWORD_MISMATCH" | "LAST_PHONE_NUMBER" | "NUMBER_CAPABILITIES_MISMATCH" | "MESSAGE_TYPE_MISMATCH" | "NO_ORIGINATION_IDENTITIES_FOUND" | "OPT_OUT_LIST_MISMATCH" | "PHONE_NUMBER_ASSOCIATED_TO_POOL" | "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION" | "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL" | "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION" | "REGISTRATION_ALREADY_SUBMITTED" | "REGISTRATION_NOT_COMPLETE" | "SENDER_ID_ASSOCIATED_TO_POOL" | "RESOURCE_ALREADY_EXISTS" | "RESOURCE_DELETION_NOT_ALLOWED" | "RESOURCE_MODIFICATION_NOT_ALLOWED" | "RESOURCE_NOT_ACTIVE" | "RESOURCE_NOT_EMPTY" | "SELF_MANAGED_OPT_OUTS_MISMATCH" | "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED" | "TWO_WAY_CONFIG_MISMATCH" | "VERIFICATION_CODE_EXPIRED" | "VERIFICATION_ALREADY_COMPLETE" | "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT" | "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET" | "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET" | "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION")
-      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number" | "protect-configuration")
+      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number" | "protect-configuration" | "policy")
       attr_accessor resource_id: ::String
       SENSITIVE: []
     end
@@ -460,6 +460,18 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResult
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class DeleteTextMessageSpendLimitOverrideRequest < Aws::EmptyStructure
     end
 
@@ -548,6 +560,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor opt_out_list_names: ::Array[::String]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor owner: ("SELF" | "SHARED")
       SENSITIVE: []
     end
 
@@ -579,6 +592,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor filters: ::Array[Types::PhoneNumberFilter]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor owner: ("SELF" | "SHARED")
       SENSITIVE: []
     end
 
@@ -593,6 +607,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor filters: ::Array[Types::PoolFilter]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor owner: ("SELF" | "SHARED")
       SENSITIVE: []
     end
 
@@ -730,6 +745,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor filters: ::Array[Types::SenderIdFilter]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor owner: ("SELF" | "SHARED")
       SENSITIVE: []
     end
 
@@ -832,6 +848,18 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor protect_configuration_id: ::String
       attr_accessor number_capability: ("SMS" | "VOICE" | "MMS")
       attr_accessor country_rule_set: ::Hash[::String, Types::ProtectConfigurationCountryRuleSetInformation]
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResult
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor created_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -1058,6 +1086,19 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor select_choices: ::Array[::String]
       attr_accessor text_value: ::String
       attr_accessor registration_attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResult
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor created_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -1317,7 +1358,7 @@ module Aws::PinpointSMSVoiceV2
 
     class ResourceNotFoundException
       attr_accessor message: ::String
-      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number" | "protect-configuration")
+      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number" | "protect-configuration" | "policy")
       attr_accessor resource_id: ::String
       SENSITIVE: []
     end

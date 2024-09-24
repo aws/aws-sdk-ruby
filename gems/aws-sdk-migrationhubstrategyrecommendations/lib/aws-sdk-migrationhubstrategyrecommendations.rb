@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:migrationhubstrategyrecommendations)
+
 # This module provides support for Migration Hub Strategy Recommendations. This module is available in the
 # `aws-sdk-migrationhubstrategyrecommendations` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MigrationHubStrategyRecommendations
   autoload :EndpointProvider, 'aws-sdk-migrationhubstrategyrecommendations/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-migrationhubstrategyrecommendations/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

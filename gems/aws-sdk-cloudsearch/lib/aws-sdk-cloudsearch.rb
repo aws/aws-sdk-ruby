@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudsearch)
+
 # This module provides support for Amazon CloudSearch. This module is available in the
 # `aws-sdk-cloudsearch` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudSearch
   autoload :EndpointProvider, 'aws-sdk-cloudsearch/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudsearch/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

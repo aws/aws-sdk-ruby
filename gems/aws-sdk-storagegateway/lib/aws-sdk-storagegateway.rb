@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:storagegateway)
+
 # This module provides support for AWS Storage Gateway. This module is available in the
 # `aws-sdk-storagegateway` gem.
 #
@@ -52,7 +54,7 @@ module Aws::StorageGateway
   autoload :EndpointProvider, 'aws-sdk-storagegateway/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-storagegateway/endpoints'
 
-  GEM_VERSION = '1.97.0'
+  GEM_VERSION = '1.98.0'
 
 end
 

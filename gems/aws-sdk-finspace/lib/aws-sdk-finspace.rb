@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:finspace)
+
 # This module provides support for FinSpace User Environment Management service. This module is available in the
 # `aws-sdk-finspace` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Finspace
   autoload :EndpointProvider, 'aws-sdk-finspace/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-finspace/endpoints'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
 

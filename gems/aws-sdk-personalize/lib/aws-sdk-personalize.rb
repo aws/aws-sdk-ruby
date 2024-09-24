@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:personalize)
+
 # This module provides support for Amazon Personalize. This module is available in the
 # `aws-sdk-personalize` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Personalize
   autoload :EndpointProvider, 'aws-sdk-personalize/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-personalize/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
 

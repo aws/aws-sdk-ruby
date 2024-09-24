@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:iottwinmaker)
-
 module Aws::IoTTwinMaker
   # An API client for IoTTwinMaker.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3522,7 +3520,7 @@ module Aws::IoTTwinMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iottwinmaker'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

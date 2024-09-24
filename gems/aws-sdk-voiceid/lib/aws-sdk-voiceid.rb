@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:voiceid)
+
 # This module provides support for Amazon Voice ID. This module is available in the
 # `aws-sdk-voiceid` gem.
 #
@@ -52,7 +54,7 @@ module Aws::VoiceID
   autoload :EndpointProvider, 'aws-sdk-voiceid/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-voiceid/endpoints'
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.35.0'
 
 end
 

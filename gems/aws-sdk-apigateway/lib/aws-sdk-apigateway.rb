@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:apigateway)
+
 # This module provides support for Amazon API Gateway. This module is available in the
 # `aws-sdk-apigateway` gem.
 #
@@ -52,7 +54,7 @@ module Aws::APIGateway
   autoload :EndpointProvider, 'aws-sdk-apigateway/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-apigateway/endpoints'
 
-  GEM_VERSION = '1.106.0'
+  GEM_VERSION = '1.107.0'
 
 end
 

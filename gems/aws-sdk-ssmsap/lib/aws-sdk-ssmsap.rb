@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssmsap)
+
 # This module provides support for AWS Systems Manager for SAP. This module is available in the
 # `aws-sdk-ssmsap` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SsmSap
   autoload :EndpointProvider, 'aws-sdk-ssmsap/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmsap/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
 

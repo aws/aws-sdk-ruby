@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:timestreaminfluxdb)
+
 # This module provides support for Timestream InfluxDB. This module is available in the
 # `aws-sdk-timestreaminfluxdb` gem.
 #
@@ -52,7 +54,7 @@ module Aws::TimestreamInfluxDB
   autoload :EndpointProvider, 'aws-sdk-timestreaminfluxdb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-timestreaminfluxdb/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end
 

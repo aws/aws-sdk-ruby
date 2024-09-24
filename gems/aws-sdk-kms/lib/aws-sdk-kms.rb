@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kms)
+
 # This module provides support for AWS Key Management Service. This module is available in the
 # `aws-sdk-kms` gem.
 #
@@ -52,7 +54,7 @@ module Aws::KMS
   autoload :EndpointProvider, 'aws-sdk-kms/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kms/endpoints'
 
-  GEM_VERSION = '1.93.0'
+  GEM_VERSION = '1.94.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:recyclebin)
+
 # This module provides support for Amazon Recycle Bin. This module is available in the
 # `aws-sdk-recyclebin` gem.
 #
@@ -52,7 +54,7 @@ module Aws::RecycleBin
   autoload :EndpointProvider, 'aws-sdk-recyclebin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-recyclebin/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

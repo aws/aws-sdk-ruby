@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:states)
+
 # This module provides support for AWS Step Functions. This module is available in the
 # `aws-sdk-states` gem.
 #
@@ -52,7 +54,7 @@ module Aws::States
   autoload :EndpointProvider, 'aws-sdk-states/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-states/endpoints'
 
-  GEM_VERSION = '1.79.0'
+  GEM_VERSION = '1.80.0'
 
 end
 

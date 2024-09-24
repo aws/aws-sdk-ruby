@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:organizations)
+
 # This module provides support for AWS Organizations. This module is available in the
 # `aws-sdk-organizations` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Organizations
   autoload :EndpointProvider, 'aws-sdk-organizations/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-organizations/endpoints'
 
-  GEM_VERSION = '1.102.0'
+  GEM_VERSION = '1.103.0'
 
 end
 

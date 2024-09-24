@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:marketplacemetering)
+
 # This module provides support for AWSMarketplace Metering. This module is available in the
 # `aws-sdk-marketplacemetering` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MarketplaceMetering
   autoload :EndpointProvider, 'aws-sdk-marketplacemetering/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacemetering/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

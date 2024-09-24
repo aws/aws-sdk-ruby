@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:servicecatalog)
+
 # This module provides support for AWS Service Catalog. This module is available in the
 # `aws-sdk-servicecatalog` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ServiceCatalog
   autoload :EndpointProvider, 'aws-sdk-servicecatalog/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-servicecatalog/endpoints'
 
-  GEM_VERSION = '1.104.0'
+  GEM_VERSION = '1.105.0'
 
 end
 

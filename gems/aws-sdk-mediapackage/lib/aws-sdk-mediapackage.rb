@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mediapackage)
+
 # This module provides support for AWS Elemental MediaPackage. This module is available in the
 # `aws-sdk-mediapackage` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MediaPackage
   autoload :EndpointProvider, 'aws-sdk-mediapackage/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediapackage/endpoints'
 
-  GEM_VERSION = '1.81.0'
+  GEM_VERSION = '1.82.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:costexplorer)
+
 # This module provides support for AWS Cost Explorer Service. This module is available in the
 # `aws-sdk-costexplorer` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CostExplorer
   autoload :EndpointProvider, 'aws-sdk-costexplorer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-costexplorer/endpoints'
 
-  GEM_VERSION = '1.111.0'
+  GEM_VERSION = '1.112.0'
 
 end
 

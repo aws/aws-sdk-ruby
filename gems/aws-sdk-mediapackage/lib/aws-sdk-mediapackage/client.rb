@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:mediapackage)
-
 module Aws::MediaPackage
   # An API client for MediaPackage.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2029,7 +2027,7 @@ module Aws::MediaPackage
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

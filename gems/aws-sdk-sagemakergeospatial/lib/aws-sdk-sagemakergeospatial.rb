@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sagemakergeospatial)
+
 # This module provides support for Amazon SageMaker geospatial capabilities. This module is available in the
 # `aws-sdk-sagemakergeospatial` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SageMakerGeospatial
   autoload :EndpointProvider, 'aws-sdk-sagemakergeospatial/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemakergeospatial/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

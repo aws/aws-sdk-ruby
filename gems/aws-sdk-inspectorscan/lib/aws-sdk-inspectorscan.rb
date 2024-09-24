@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:inspectorscan)
+
 # This module provides support for Inspector Scan. This module is available in the
 # `aws-sdk-inspectorscan` gem.
 #
@@ -52,7 +54,7 @@ module Aws::InspectorScan
   autoload :EndpointProvider, 'aws-sdk-inspectorscan/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-inspectorscan/endpoints'
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end
 

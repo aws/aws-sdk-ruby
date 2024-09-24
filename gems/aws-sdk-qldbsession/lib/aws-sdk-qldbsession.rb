@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:qldbsession)
+
 # This module provides support for Amazon QLDB Session. This module is available in the
 # `aws-sdk-qldbsession` gem.
 #
@@ -52,7 +54,7 @@ module Aws::QLDBSession
   autoload :EndpointProvider, 'aws-sdk-qldbsession/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-qldbsession/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

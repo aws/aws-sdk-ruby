@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.266.0 (2024-09-24)
+------------------
+
+* Feature - Adding `HiddenInstanceTypes` and `HiddenSageMakerImageVersionAliases` attribute to SageMaker API
+
 1.265.0 (2024-09-23)
 ------------------
 

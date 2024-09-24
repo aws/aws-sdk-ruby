@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:storagegateway)
-
 module Aws::StorageGateway
   # An API client for StorageGateway.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -7559,7 +7557,7 @@ module Aws::StorageGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

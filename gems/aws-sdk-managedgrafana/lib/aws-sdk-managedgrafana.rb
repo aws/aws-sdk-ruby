@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:managedgrafana)
+
 # This module provides support for Amazon Managed Grafana. This module is available in the
 # `aws-sdk-managedgrafana` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ManagedGrafana
   autoload :EndpointProvider, 'aws-sdk-managedgrafana/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-managedgrafana/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mgn)
+
 # This module provides support for Application Migration Service. This module is available in the
 # `aws-sdk-mgn` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Mgn
   autoload :EndpointProvider, 'aws-sdk-mgn/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mgn/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

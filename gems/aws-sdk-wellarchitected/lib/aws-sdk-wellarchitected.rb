@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:wellarchitected)
+
 # This module provides support for AWS Well-Architected Tool. This module is available in the
 # `aws-sdk-wellarchitected` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WellArchitected
   autoload :EndpointProvider, 'aws-sdk-wellarchitected/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-wellarchitected/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

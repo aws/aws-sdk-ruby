@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:translate)
+
 # This module provides support for Amazon Translate. This module is available in the
 # `aws-sdk-translate` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Translate
   autoload :EndpointProvider, 'aws-sdk-translate/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-translate/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
 

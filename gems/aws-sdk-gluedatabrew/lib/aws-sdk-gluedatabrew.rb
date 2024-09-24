@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:gluedatabrew)
+
 # This module provides support for AWS Glue DataBrew. This module is available in the
 # `aws-sdk-gluedatabrew` gem.
 #
@@ -52,7 +54,7 @@ module Aws::GlueDataBrew
   autoload :EndpointProvider, 'aws-sdk-gluedatabrew/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-gluedatabrew/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

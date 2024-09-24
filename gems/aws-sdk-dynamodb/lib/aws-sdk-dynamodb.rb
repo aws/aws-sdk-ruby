@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:dynamodb)
+
 # This module provides support for Amazon DynamoDB. This module is available in the
 # `aws-sdk-dynamodb` gem.
 #
@@ -54,7 +56,7 @@ module Aws::DynamoDB
   autoload :Endpoints, 'aws-sdk-dynamodb/endpoints'
   autoload :Table, 'aws-sdk-dynamodb/table'
 
-  GEM_VERSION = '1.124.0'
+  GEM_VERSION = '1.125.0'
 
 end
 

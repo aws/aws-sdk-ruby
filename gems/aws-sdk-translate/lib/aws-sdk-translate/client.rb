@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-translate/plugins/translate_document_encoding.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:translate)
-
 module Aws::Translate
   # An API client for Translate.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1721,7 +1719,7 @@ module Aws::Translate
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

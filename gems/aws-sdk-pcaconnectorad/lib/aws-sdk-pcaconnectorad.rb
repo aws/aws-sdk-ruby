@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pcaconnectorad)
+
 # This module provides support for PcaConnectorAd. This module is available in the
 # `aws-sdk-pcaconnectorad` gem.
 #
@@ -52,7 +54,7 @@ module Aws::PcaConnectorAd
   autoload :EndpointProvider, 'aws-sdk-pcaconnectorad/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pcaconnectorad/endpoints'
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end
 

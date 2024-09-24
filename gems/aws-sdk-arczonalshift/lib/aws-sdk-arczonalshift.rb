@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:arczonalshift)
+
 # This module provides support for AWS ARC - Zonal Shift. This module is available in the
 # `aws-sdk-arczonalshift` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ARCZonalShift
   autoload :EndpointProvider, 'aws-sdk-arczonalshift/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-arczonalshift/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

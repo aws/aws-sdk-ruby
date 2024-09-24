@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:serverlessapplicationrepository)
+
 # This module provides support for AWSServerlessApplicationRepository. This module is available in the
 # `aws-sdk-serverlessapplicationrepository` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ServerlessApplicationRepository
   autoload :EndpointProvider, 'aws-sdk-serverlessapplicationrepository/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-serverlessapplicationrepository/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

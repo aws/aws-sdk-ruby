@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:frauddetector)
+
 # This module provides support for Amazon Fraud Detector. This module is available in the
 # `aws-sdk-frauddetector` gem.
 #
@@ -52,7 +54,7 @@ module Aws::FraudDetector
   autoload :EndpointProvider, 'aws-sdk-frauddetector/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-frauddetector/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

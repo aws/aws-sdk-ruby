@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:proton)
-
 module Aws::Proton
   # An API client for Proton.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -6159,7 +6157,7 @@ module Aws::Proton
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

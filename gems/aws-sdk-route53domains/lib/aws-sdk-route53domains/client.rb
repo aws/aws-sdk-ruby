@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:route53domains)
-
 module Aws::Route53Domains
   # An API client for Route53Domains.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2833,7 +2831,7 @@ module Aws::Route53Domains
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

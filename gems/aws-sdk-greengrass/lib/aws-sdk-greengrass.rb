@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:greengrass)
+
 # This module provides support for AWS Greengrass. This module is available in the
 # `aws-sdk-greengrass` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Greengrass
   autoload :EndpointProvider, 'aws-sdk-greengrass/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-greengrass/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
 

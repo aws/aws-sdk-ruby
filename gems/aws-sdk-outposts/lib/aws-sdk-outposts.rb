@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:outposts)
+
 # This module provides support for AWS Outposts. This module is available in the
 # `aws-sdk-outposts` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Outposts
   autoload :EndpointProvider, 'aws-sdk-outposts/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-outposts/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-09-24)
+------------------
+
+* Feature - Releasing minor partitional endpoint updates
+
 1.76.0 (2024-09-23)
 ------------------
 

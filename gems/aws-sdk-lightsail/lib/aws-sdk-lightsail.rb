@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lightsail)
+
 # This module provides support for Amazon Lightsail. This module is available in the
 # `aws-sdk-lightsail` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Lightsail
   autoload :EndpointProvider, 'aws-sdk-lightsail/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lightsail/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
 

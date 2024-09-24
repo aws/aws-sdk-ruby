@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lexruntimev2)
+
 # This module provides support for Amazon Lex Runtime V2. This module is available in the
 # `aws-sdk-lexruntimev2` gem.
 #
@@ -54,7 +56,7 @@ module Aws::LexRuntimeV2
   autoload :AsyncClient, 'aws-sdk-lexruntimev2/async_client'
   autoload :EventStreams, 'aws-sdk-lexruntimev2/event_streams'
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.44.0'
 
 end
 

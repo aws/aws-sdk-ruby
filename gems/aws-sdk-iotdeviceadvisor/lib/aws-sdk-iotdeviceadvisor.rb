@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotdeviceadvisor)
+
 # This module provides support for AWS IoT Core Device Advisor. This module is available in the
 # `aws-sdk-iotdeviceadvisor` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTDeviceAdvisor
   autoload :EndpointProvider, 'aws-sdk-iotdeviceadvisor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotdeviceadvisor/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

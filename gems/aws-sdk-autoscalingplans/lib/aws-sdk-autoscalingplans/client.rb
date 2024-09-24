@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:autoscalingplans)
-
 module Aws::AutoScalingPlans
   # An API client for AutoScalingPlans.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1008,7 +1006,7 @@ module Aws::AutoScalingPlans
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscalingplans'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

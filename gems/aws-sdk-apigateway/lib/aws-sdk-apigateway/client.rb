@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:apigateway)
-
 module Aws::APIGateway
   # An API client for APIGateway.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -7127,7 +7125,7 @@ module Aws::APIGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

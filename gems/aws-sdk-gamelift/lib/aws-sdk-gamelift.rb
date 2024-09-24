@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:gamelift)
+
 # This module provides support for Amazon GameLift. This module is available in the
 # `aws-sdk-gamelift` gem.
 #
@@ -52,7 +54,7 @@ module Aws::GameLift
   autoload :EndpointProvider, 'aws-sdk-gamelift/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-gamelift/endpoints'
 
-  GEM_VERSION = '1.91.0'
+  GEM_VERSION = '1.92.0'
 
 end
 

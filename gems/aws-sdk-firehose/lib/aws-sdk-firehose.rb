@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:firehose)
+
 # This module provides support for Amazon Kinesis Firehose. This module is available in the
 # `aws-sdk-firehose` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Firehose
   autoload :EndpointProvider, 'aws-sdk-firehose/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-firehose/endpoints'
 
-  GEM_VERSION = '1.81.0'
+  GEM_VERSION = '1.82.0'
 
 end
 

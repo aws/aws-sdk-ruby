@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:kinesis)
-
 module Aws::Kinesis
   # An API client for Kinesis.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -562,6 +560,13 @@ module Aws::Kinesis
     #
     # CreateStream has a limit of five transactions per second per account.
     #
+    # You can add tags to the stream when making a `CreateStream` request by
+    # setting the `Tags` parameter. If you pass `Tags` parameter, in
+    # addition to having `kinesis:createStream` permission, you must also
+    # have `kinesis:addTagsToStream` permission for the stream that will be
+    # created. Tags will take effect from the `CREATING` status of the
+    # stream.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
@@ -585,6 +590,9 @@ module Aws::Kinesis
     #   Data Streams, you can choose between an **on-demand** capacity mode
     #   and a **provisioned** capacity mode for your data streams.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A set of up to 10 key-value pairs to use to create the tags.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -594,6 +602,9 @@ module Aws::Kinesis
     #     shard_count: 1,
     #     stream_mode_details: {
     #       stream_mode: "PROVISIONED", # required, accepts PROVISIONED, ON_DEMAND
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -2322,15 +2333,18 @@ module Aws::Kinesis
     # You can register up to 20 consumers per stream. A given consumer can
     # only be registered with one stream at a time.
     #
-    # For an example of how to use this operations, see [Enhanced Fan-Out
-    # Using the Kinesis Data Streams
-    # API](/streams/latest/dev/building-enhanced-consumers-api.html).
+    # For an example of how to use this operation, see [Enhanced Fan-Out
+    # Using the Kinesis Data Streams API][1].
     #
     # The use of this operation has a limit of five transactions per second
     # per account. Also, only 5 consumers can be created simultaneously. In
     # other words, you cannot have more than 5 consumers in a `CREATING`
     # status at the same time. Registering a 6th consumer while there are 5
     # in a `CREATING` status results in a `LimitExceededException`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html
     #
     # @option params [required, String] :stream_arn
     #   The ARN of the Kinesis data stream that you want to register the
@@ -2840,7 +2854,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:identitystore)
-
 module Aws::IdentityStore
   # An API client for IdentityStore.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1587,7 +1585,7 @@ module Aws::IdentityStore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

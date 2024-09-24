@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:s3control)
+
 # This module provides support for AWS S3 Control. This module is available in the
 # `aws-sdk-s3control` gem.
 #
@@ -52,7 +54,7 @@ module Aws::S3Control
   autoload :EndpointProvider, 'aws-sdk-s3control/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-s3control/endpoints'
 
-  GEM_VERSION = '1.93.0'
+  GEM_VERSION = '1.94.0'
 
 end
 

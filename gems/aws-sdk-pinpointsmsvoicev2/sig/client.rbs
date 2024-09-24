@@ -523,6 +523,18 @@ module Aws
                                            ) -> _DeleteRegistrationFieldValueResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRegistrationFieldValueResponseSuccess
 
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResult]
+        def resource_arn: () -> ::String
+        def policy: () -> ::String
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
       interface _DeleteTextMessageSpendLimitOverrideResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTextMessageSpendLimitOverrideResult]
         def monthly_limit: () -> ::Integer
@@ -628,7 +640,8 @@ module Aws
       def describe_opt_out_lists: (
                                     ?opt_out_list_names: Array[::String],
                                     ?next_token: ::String,
-                                    ?max_results: ::Integer
+                                    ?max_results: ::Integer,
+                                    ?owner: ("SELF" | "SHARED")
                                   ) -> _DescribeOptOutListsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOptOutListsResponseSuccess
 
@@ -669,7 +682,8 @@ module Aws
                                       },
                                     ],
                                     ?next_token: ::String,
-                                    ?max_results: ::Integer
+                                    ?max_results: ::Integer,
+                                    ?owner: ("SELF" | "SHARED")
                                   ) -> _DescribePhoneNumbersResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePhoneNumbersResponseSuccess
 
@@ -688,7 +702,8 @@ module Aws
                               },
                             ],
                             ?next_token: ::String,
-                            ?max_results: ::Integer
+                            ?max_results: ::Integer,
+                            ?owner: ("SELF" | "SHARED")
                           ) -> _DescribePoolsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePoolsResponseSuccess
 
@@ -860,7 +875,8 @@ module Aws
                                    },
                                  ],
                                  ?next_token: ::String,
-                                 ?max_results: ::Integer
+                                 ?max_results: ::Integer,
+                                 ?owner: ("SELF" | "SHARED")
                                ) -> _DescribeSenderIdsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSenderIdsResponseSuccess
 
@@ -954,6 +970,18 @@ module Aws
                                                         number_capability: ("SMS" | "VOICE" | "MMS")
                                                       ) -> _GetProtectConfigurationCountryRuleSetResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProtectConfigurationCountryRuleSetResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResult]
+        def resource_arn: () -> ::String
+        def policy: () -> ::String
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
 
       interface _ListPoolOriginationIdentitiesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPoolOriginationIdentitiesResult]
@@ -1060,6 +1088,19 @@ module Aws
                                           ?registration_attachment_id: ::String
                                         ) -> _PutRegistrationFieldValueResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRegistrationFieldValueResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResult]
+        def resource_arn: () -> ::String
+        def policy: () -> ::String
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
 
       interface _ReleasePhoneNumberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReleasePhoneNumberResult]

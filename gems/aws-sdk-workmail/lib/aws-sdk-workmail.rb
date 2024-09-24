@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:workmail)
+
 # This module provides support for Amazon WorkMail. This module is available in the
 # `aws-sdk-workmail` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WorkMail
   autoload :EndpointProvider, 'aws-sdk-workmail/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workmail/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
 

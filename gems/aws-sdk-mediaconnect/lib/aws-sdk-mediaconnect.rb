@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mediaconnect)
+
 # This module provides support for AWS MediaConnect. This module is available in the
 # `aws-sdk-mediaconnect` gem.
 #
@@ -53,7 +55,7 @@ module Aws::MediaConnect
   autoload :EndpointProvider, 'aws-sdk-mediaconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediaconnect/endpoints'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
 

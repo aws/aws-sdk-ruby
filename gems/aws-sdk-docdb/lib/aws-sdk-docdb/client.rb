@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-docdb/plugins/cross_region_copying.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:docdb)
-
 module Aws::DocDB
   # An API client for DocDB.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -5607,7 +5605,7 @@ module Aws::DocDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

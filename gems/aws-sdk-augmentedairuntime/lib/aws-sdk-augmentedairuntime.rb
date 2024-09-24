@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:augmentedairuntime)
+
 # This module provides support for Amazon Augmented AI Runtime. This module is available in the
 # `aws-sdk-augmentedairuntime` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AugmentedAIRuntime
   autoload :EndpointProvider, 'aws-sdk-augmentedairuntime/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-augmentedairuntime/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

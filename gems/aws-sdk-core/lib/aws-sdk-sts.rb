@@ -13,6 +13,8 @@ unless Module.const_defined?(:Aws)
   require 'aws-sigv4'
 end
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sts)
+
 # This module provides support for AWS Security Token Service. This module is available in the
 # `aws-sdk-core` gem.
 #
@@ -54,7 +56,7 @@ module Aws::STS
   autoload :EndpointProvider, 'aws-sdk-sts/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sts/endpoints'
 
-  GEM_VERSION = '3.208.0'
+  GEM_VERSION = '3.209.0'
 
 end
 

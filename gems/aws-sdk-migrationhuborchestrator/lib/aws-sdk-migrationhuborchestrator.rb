@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:migrationhuborchestrator)
+
 # This module provides support for AWS Migration Hub Orchestrator. This module is available in the
 # `aws-sdk-migrationhuborchestrator` gem.
 #
@@ -53,7 +55,7 @@ module Aws::MigrationHubOrchestrator
   autoload :EndpointProvider, 'aws-sdk-migrationhuborchestrator/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-migrationhuborchestrator/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

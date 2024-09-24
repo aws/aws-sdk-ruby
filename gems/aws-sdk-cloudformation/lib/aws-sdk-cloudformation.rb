@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudformation)
+
 # This module provides support for AWS CloudFormation. This module is available in the
 # `aws-sdk-cloudformation` gem.
 #
@@ -57,7 +59,7 @@ module Aws::CloudFormation
   autoload :StackResource, 'aws-sdk-cloudformation/stack_resource'
   autoload :StackResourceSummary, 'aws-sdk-cloudformation/stack_resource_summary'
 
-  GEM_VERSION = '1.119.0'
+  GEM_VERSION = '1.120.0'
 
 end
 

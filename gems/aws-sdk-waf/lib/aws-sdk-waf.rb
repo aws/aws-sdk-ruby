@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:waf)
+
 # This module provides support for AWS WAF. This module is available in the
 # `aws-sdk-waf` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WAF
   autoload :EndpointProvider, 'aws-sdk-waf/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-waf/endpoints'
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.72.0'
 
 end
 

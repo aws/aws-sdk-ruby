@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:securityhub)
+
 # This module provides support for AWS SecurityHub. This module is available in the
 # `aws-sdk-securityhub` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SecurityHub
   autoload :EndpointProvider, 'aws-sdk-securityhub/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-securityhub/endpoints'
 
-  GEM_VERSION = '1.119.0'
+  GEM_VERSION = '1.120.0'
 
 end
 

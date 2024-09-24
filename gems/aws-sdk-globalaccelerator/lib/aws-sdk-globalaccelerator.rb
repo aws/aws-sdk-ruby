@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:globalaccelerator)
+
 # This module provides support for AWS Global Accelerator. This module is available in the
 # `aws-sdk-globalaccelerator` gem.
 #
@@ -52,7 +54,7 @@ module Aws::GlobalAccelerator
   autoload :EndpointProvider, 'aws-sdk-globalaccelerator/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-globalaccelerator/endpoints'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end
 

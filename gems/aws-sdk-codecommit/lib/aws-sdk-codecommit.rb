@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codecommit)
+
 # This module provides support for AWS CodeCommit. This module is available in the
 # `aws-sdk-codecommit` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeCommit
   autoload :EndpointProvider, 'aws-sdk-codecommit/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codecommit/endpoints'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end
 

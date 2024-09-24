@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:controltower)
+
 # This module provides support for AWS Control Tower. This module is available in the
 # `aws-sdk-controltower` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ControlTower
   autoload :EndpointProvider, 'aws-sdk-controltower/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-controltower/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end
 

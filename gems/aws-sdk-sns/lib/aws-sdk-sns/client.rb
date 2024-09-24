@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:sns)
-
 module Aws::SNS
   # An API client for SNS.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2997,7 +2995,7 @@ module Aws::SNS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

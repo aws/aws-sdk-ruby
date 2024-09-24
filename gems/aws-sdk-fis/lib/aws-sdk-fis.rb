@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:fis)
+
 # This module provides support for AWS Fault Injection Simulator. This module is available in the
 # `aws-sdk-fis` gem.
 #
@@ -52,7 +54,7 @@ module Aws::FIS
   autoload :EndpointProvider, 'aws-sdk-fis/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-fis/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

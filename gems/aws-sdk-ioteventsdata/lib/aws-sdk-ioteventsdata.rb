@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ioteventsdata)
+
 # This module provides support for AWS IoT Events Data. This module is available in the
 # `aws-sdk-ioteventsdata` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTEventsData
   autoload :EndpointProvider, 'aws-sdk-ioteventsdata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ioteventsdata/endpoints'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

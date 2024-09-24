@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:scheduler)
+
 # This module provides support for Amazon EventBridge Scheduler. This module is available in the
 # `aws-sdk-scheduler` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Scheduler
   autoload :EndpointProvider, 'aws-sdk-scheduler/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-scheduler/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotsecuretunneling)
+
 # This module provides support for AWS IoT Secure Tunneling. This module is available in the
 # `aws-sdk-iotsecuretunneling` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTSecureTunneling
   autoload :EndpointProvider, 'aws-sdk-iotsecuretunneling/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotsecuretunneling/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end
 

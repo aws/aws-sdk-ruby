@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:resourcegroups)
+
 # This module provides support for AWS Resource Groups. This module is available in the
 # `aws-sdk-resourcegroups` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ResourceGroups
   autoload :EndpointProvider, 'aws-sdk-resourcegroups/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-resourcegroups/endpoints'
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.72.0'
 
 end
 

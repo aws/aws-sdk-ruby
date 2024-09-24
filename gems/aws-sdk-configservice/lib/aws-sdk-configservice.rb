@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:configservice)
+
 # This module provides support for AWS Config. This module is available in the
 # `aws-sdk-configservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ConfigService
   autoload :EndpointProvider, 'aws-sdk-configservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-configservice/endpoints'
 
-  GEM_VERSION = '1.119.0'
+  GEM_VERSION = '1.120.0'
 
 end
 

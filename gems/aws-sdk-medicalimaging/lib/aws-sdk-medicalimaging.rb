@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:medicalimaging)
+
 # This module provides support for AWS Health Imaging. This module is available in the
 # `aws-sdk-medicalimaging` gem.
 #
@@ -53,7 +55,7 @@ module Aws::MedicalImaging
   autoload :EndpointProvider, 'aws-sdk-medicalimaging/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-medicalimaging/endpoints'
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end
 

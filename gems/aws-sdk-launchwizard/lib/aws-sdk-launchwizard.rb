@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:launchwizard)
+
 # This module provides support for AWS Launch Wizard. This module is available in the
 # `aws-sdk-launchwizard` gem.
 #
@@ -52,7 +54,7 @@ module Aws::LaunchWizard
   autoload :EndpointProvider, 'aws-sdk-launchwizard/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-launchwizard/endpoints'
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end
 

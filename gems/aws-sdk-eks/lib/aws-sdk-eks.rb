@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:eks)
+
 # This module provides support for Amazon Elastic Kubernetes Service. This module is available in the
 # `aws-sdk-eks` gem.
 #
@@ -53,7 +55,7 @@ module Aws::EKS
   autoload :EndpointProvider, 'aws-sdk-eks/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-eks/endpoints'
 
-  GEM_VERSION = '1.117.0'
+  GEM_VERSION = '1.118.0'
 
 end
 

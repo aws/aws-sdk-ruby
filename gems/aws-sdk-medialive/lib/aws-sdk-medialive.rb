@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:medialive)
+
 # This module provides support for AWS Elemental MediaLive. This module is available in the
 # `aws-sdk-medialive` gem.
 #
@@ -53,7 +55,7 @@ module Aws::MediaLive
   autoload :EndpointProvider, 'aws-sdk-medialive/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-medialive/endpoints'
 
-  GEM_VERSION = '1.135.0'
+  GEM_VERSION = '1.136.0'
 
 end
 

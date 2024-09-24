@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv2'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:simpledb)
+
 # This module provides support for Amazon SimpleDB. This module is available in the
 # `aws-sdk-simpledb` gem.
 #
@@ -46,7 +48,7 @@ module Aws::SimpleDB
   autoload :Errors, 'aws-sdk-simpledb/errors'
   autoload :Resource, 'aws-sdk-simpledb/resource'
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.57.0'
 
 end
 

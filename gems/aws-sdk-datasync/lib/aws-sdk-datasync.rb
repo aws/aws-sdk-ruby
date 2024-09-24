@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:datasync)
+
 # This module provides support for AWS DataSync. This module is available in the
 # `aws-sdk-datasync` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DataSync
   autoload :EndpointProvider, 'aws-sdk-datasync/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-datasync/endpoints'
 
-  GEM_VERSION = '1.88.0'
+  GEM_VERSION = '1.89.0'
 
 end
 

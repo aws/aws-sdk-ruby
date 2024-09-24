@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:budgets)
+
 # This module provides support for AWS Budgets. This module is available in the
 # `aws-sdk-budgets` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Budgets
   autoload :EndpointProvider, 'aws-sdk-budgets/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-budgets/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:chimesdkmeetings)
+
 # This module provides support for Amazon Chime SDK Meetings. This module is available in the
 # `aws-sdk-chimesdkmeetings` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ChimeSDKMeetings
   autoload :EndpointProvider, 'aws-sdk-chimesdkmeetings/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkmeetings/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

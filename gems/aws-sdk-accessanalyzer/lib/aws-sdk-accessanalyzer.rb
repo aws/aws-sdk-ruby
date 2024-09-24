@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:accessanalyzer)
+
 # This module provides support for Access Analyzer. This module is available in the
 # `aws-sdk-accessanalyzer` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AccessAnalyzer
   autoload :EndpointProvider, 'aws-sdk-accessanalyzer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-accessanalyzer/endpoints'
 
-  GEM_VERSION = '1.59.0'
+  GEM_VERSION = '1.60.0'
 
 end
 

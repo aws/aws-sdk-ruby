@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:signer)
+
 # This module provides support for AWS Signer. This module is available in the
 # `aws-sdk-signer` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Signer
   autoload :EndpointProvider, 'aws-sdk-signer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-signer/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
 

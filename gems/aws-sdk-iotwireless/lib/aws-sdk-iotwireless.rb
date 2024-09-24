@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotwireless)
+
 # This module provides support for AWS IoT Wireless. This module is available in the
 # `aws-sdk-iotwireless` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTWireless
   autoload :EndpointProvider, 'aws-sdk-iotwireless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotwireless/endpoints'
 
-  GEM_VERSION = '1.58.0'
+  GEM_VERSION = '1.59.0'
 
 end
 

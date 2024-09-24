@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:appmesh)
+
 # This module provides support for AWS App Mesh. This module is available in the
 # `aws-sdk-appmesh` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AppMesh
   autoload :EndpointProvider, 'aws-sdk-appmesh/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appmesh/endpoints'
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.72.0'
 
 end
 

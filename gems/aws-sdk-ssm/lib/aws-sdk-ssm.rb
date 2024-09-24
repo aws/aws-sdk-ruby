@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssm)
+
 # This module provides support for Amazon Simple Systems Manager (SSM). This module is available in the
 # `aws-sdk-ssm` gem.
 #
@@ -53,7 +55,7 @@ module Aws::SSM
   autoload :EndpointProvider, 'aws-sdk-ssm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssm/endpoints'
 
-  GEM_VERSION = '1.181.0'
+  GEM_VERSION = '1.182.0'
 
 end
 

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:iotwireless)
-
 module Aws::IoTWireless
   # An API client for IoTWireless.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -5323,7 +5321,7 @@ module Aws::IoTWireless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

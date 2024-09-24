@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iam)
+
 # This module provides support for AWS Identity and Access Management. This module is available in the
 # `aws-sdk-iam` gem.
 #
@@ -74,7 +76,7 @@ module Aws::IAM
   autoload :UserPolicy, 'aws-sdk-iam/user_policy'
   autoload :VirtualMfaDevice, 'aws-sdk-iam/virtual_mfa_device'
 
-  GEM_VERSION = '1.110.0'
+  GEM_VERSION = '1.111.0'
 
 end
 

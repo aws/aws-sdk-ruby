@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ecrpublic)
+
 # This module provides support for Amazon Elastic Container Registry Public. This module is available in the
 # `aws-sdk-ecrpublic` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ECRPublic
   autoload :EndpointProvider, 'aws-sdk-ecrpublic/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ecrpublic/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
 

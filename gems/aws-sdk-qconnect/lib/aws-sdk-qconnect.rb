@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:qconnect)
+
 # This module provides support for Amazon Q Connect. This module is available in the
 # `aws-sdk-qconnect` gem.
 #
@@ -52,7 +54,7 @@ module Aws::QConnect
   autoload :EndpointProvider, 'aws-sdk-qconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-qconnect/endpoints'
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end
 

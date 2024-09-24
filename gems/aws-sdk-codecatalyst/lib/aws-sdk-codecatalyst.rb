@@ -10,6 +10,8 @@
 
 require 'aws-sdk-core'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codecatalyst)
+
 # This module provides support for Amazon CodeCatalyst. This module is available in the
 # `aws-sdk-codecatalyst` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeCatalyst
   autoload :EndpointProvider, 'aws-sdk-codecatalyst/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codecatalyst/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end
 

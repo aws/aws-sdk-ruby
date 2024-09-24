@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:rolesanywhere)
-
 module Aws::RolesAnywhere
   # An API client for RolesAnywhere.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2021,7 +2019,7 @@ module Aws::RolesAnywhere
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

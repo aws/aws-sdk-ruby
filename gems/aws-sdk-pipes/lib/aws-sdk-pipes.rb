@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pipes)
+
 # This module provides support for Amazon EventBridge Pipes. This module is available in the
 # `aws-sdk-pipes` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Pipes
   autoload :EndpointProvider, 'aws-sdk-pipes/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pipes/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
 

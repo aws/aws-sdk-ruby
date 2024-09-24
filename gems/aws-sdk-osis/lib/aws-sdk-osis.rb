@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:osis)
+
 # This module provides support for Amazon OpenSearch Ingestion. This module is available in the
 # `aws-sdk-osis` gem.
 #
@@ -52,7 +54,7 @@ module Aws::OSIS
   autoload :EndpointProvider, 'aws-sdk-osis/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-osis/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end
 

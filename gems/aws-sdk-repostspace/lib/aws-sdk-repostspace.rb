@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:repostspace)
+
 # This module provides support for AWS re:Post Private. This module is available in the
 # `aws-sdk-repostspace` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Repostspace
   autoload :EndpointProvider, 'aws-sdk-repostspace/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-repostspace/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

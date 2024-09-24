@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:controlcatalog)
+
 # This module provides support for AWS Control Catalog. This module is available in the
 # `aws-sdk-controlcatalog` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ControlCatalog
   autoload :EndpointProvider, 'aws-sdk-controlcatalog/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-controlcatalog/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

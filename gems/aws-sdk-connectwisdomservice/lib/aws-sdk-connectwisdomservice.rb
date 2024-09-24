@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:connectwisdomservice)
+
 # This module provides support for Amazon Connect Wisdom Service. This module is available in the
 # `aws-sdk-connectwisdomservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ConnectWisdomService
   autoload :EndpointProvider, 'aws-sdk-connectwisdomservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectwisdomservice/endpoints'
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end
 

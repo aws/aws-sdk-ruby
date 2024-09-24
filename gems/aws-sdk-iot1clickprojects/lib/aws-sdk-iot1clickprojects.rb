@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iot1clickprojects)
+
 # This module provides support for AWS IoT 1-Click Projects Service. This module is available in the
 # `aws-sdk-iot1clickprojects` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoT1ClickProjects
   autoload :EndpointProvider, 'aws-sdk-iot1clickprojects/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iot1clickprojects/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

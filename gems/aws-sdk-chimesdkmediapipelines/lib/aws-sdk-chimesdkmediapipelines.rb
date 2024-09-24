@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:chimesdkmediapipelines)
+
 # This module provides support for Amazon Chime SDK Media Pipelines. This module is available in the
 # `aws-sdk-chimesdkmediapipelines` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ChimeSDKMediaPipelines
   autoload :EndpointProvider, 'aws-sdk-chimesdkmediapipelines/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkmediapipelines/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

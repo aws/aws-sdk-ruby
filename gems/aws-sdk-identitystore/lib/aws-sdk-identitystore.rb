@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:identitystore)
+
 # This module provides support for AWS SSO Identity Store. This module is available in the
 # `aws-sdk-identitystore` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IdentityStore
   autoload :EndpointProvider, 'aws-sdk-identitystore/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-identitystore/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end
 

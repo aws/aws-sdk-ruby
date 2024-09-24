@@ -57,8 +57,6 @@ require 'aws-sdk-s3/plugins/streaming_retry.rb'
 require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
-
 module Aws::S3
   # An API client for S3.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -19814,7 +19812,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

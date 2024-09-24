@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:verifiedpermissions)
+
 # This module provides support for Amazon Verified Permissions. This module is available in the
 # `aws-sdk-verifiedpermissions` gem.
 #
@@ -53,7 +55,7 @@ module Aws::VerifiedPermissions
   autoload :EndpointProvider, 'aws-sdk-verifiedpermissions/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-verifiedpermissions/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

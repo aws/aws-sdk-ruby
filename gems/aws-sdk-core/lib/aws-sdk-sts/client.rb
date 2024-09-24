@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-sts/plugins/sts_regional_endpoints.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:sts)
-
 module Aws::STS
   # An API client for STS.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2418,7 +2416,7 @@ module Aws::STS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.208.0'
+      context[:gem_version] = '3.209.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

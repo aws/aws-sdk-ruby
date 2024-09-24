@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:polly)
+
 # This module provides support for Amazon Polly. This module is available in the
 # `aws-sdk-polly` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Polly
   autoload :EndpointProvider, 'aws-sdk-polly/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-polly/endpoints'
 
-  GEM_VERSION = '1.96.0'
+  GEM_VERSION = '1.97.0'
 
 end
 

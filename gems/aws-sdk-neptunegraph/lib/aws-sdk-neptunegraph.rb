@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:neptunegraph)
+
 # This module provides support for Amazon Neptune Graph. This module is available in the
 # `aws-sdk-neptunegraph` gem.
 #
@@ -53,7 +55,7 @@ module Aws::NeptuneGraph
   autoload :EndpointProvider, 'aws-sdk-neptunegraph/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-neptunegraph/endpoints'
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end
 

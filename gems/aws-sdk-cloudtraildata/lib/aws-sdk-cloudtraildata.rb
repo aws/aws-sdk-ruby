@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudtraildata)
+
 # This module provides support for AWS CloudTrail Data Service. This module is available in the
 # `aws-sdk-cloudtraildata` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudTrailData
   autoload :EndpointProvider, 'aws-sdk-cloudtraildata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudtraildata/endpoints'
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end
 

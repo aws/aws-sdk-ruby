@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:marketplacecommerceanalytics)
+
 # This module provides support for AWS Marketplace Commerce Analytics. This module is available in the
 # `aws-sdk-marketplacecommerceanalytics` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MarketplaceCommerceAnalytics
   autoload :EndpointProvider, 'aws-sdk-marketplacecommerceanalytics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacecommerceanalytics/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

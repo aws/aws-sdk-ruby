@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:dataexchange)
+
 # This module provides support for AWS Data Exchange. This module is available in the
 # `aws-sdk-dataexchange` gem.
 #
@@ -53,7 +55,7 @@ module Aws::DataExchange
   autoload :EndpointProvider, 'aws-sdk-dataexchange/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dataexchange/endpoints'
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.58.0'
 
 end
 

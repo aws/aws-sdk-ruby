@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kinesisanalyticsv2)
+
 # This module provides support for Amazon Kinesis Analytics. This module is available in the
 # `aws-sdk-kinesisanalyticsv2` gem.
 #
@@ -52,7 +54,7 @@ module Aws::KinesisAnalyticsV2
   autoload :EndpointProvider, 'aws-sdk-kinesisanalyticsv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kinesisanalyticsv2/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

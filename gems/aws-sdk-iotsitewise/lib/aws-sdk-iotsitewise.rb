@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotsitewise)
+
 # This module provides support for AWS IoT SiteWise. This module is available in the
 # `aws-sdk-iotsitewise` gem.
 #
@@ -53,7 +55,7 @@ module Aws::IoTSiteWise
   autoload :EndpointProvider, 'aws-sdk-iotsitewise/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotsitewise/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.75.0'
 
 end
 

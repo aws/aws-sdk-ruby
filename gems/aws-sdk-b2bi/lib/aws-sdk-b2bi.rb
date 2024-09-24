@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:b2bi)
+
 # This module provides support for AWS B2B Data Interchange. This module is available in the
 # `aws-sdk-b2bi` gem.
 #
@@ -52,7 +54,7 @@ module Aws::B2bi
   autoload :EndpointProvider, 'aws-sdk-b2bi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-b2bi/endpoints'
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end
 

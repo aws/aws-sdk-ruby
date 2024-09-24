@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:proton)
+
 # This module provides support for AWS Proton. This module is available in the
 # `aws-sdk-proton` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Proton
   autoload :EndpointProvider, 'aws-sdk-proton/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-proton/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

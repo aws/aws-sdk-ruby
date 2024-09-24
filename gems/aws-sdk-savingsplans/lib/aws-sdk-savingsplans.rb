@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:savingsplans)
+
 # This module provides support for AWS Savings Plans. This module is available in the
 # `aws-sdk-savingsplans` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SavingsPlans
   autoload :EndpointProvider, 'aws-sdk-savingsplans/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-savingsplans/endpoints'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

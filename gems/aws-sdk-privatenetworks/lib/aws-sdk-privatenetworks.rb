@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:privatenetworks)
+
 # This module provides support for AWS Private 5G. This module is available in the
 # `aws-sdk-privatenetworks` gem.
 #
@@ -52,7 +54,7 @@ module Aws::PrivateNetworks
   autoload :EndpointProvider, 'aws-sdk-privatenetworks/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-privatenetworks/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end
 

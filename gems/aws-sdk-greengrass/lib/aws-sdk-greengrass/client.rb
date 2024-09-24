@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:greengrass)
-
 module Aws::Greengrass
   # An API client for Greengrass.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -4224,7 +4222,7 @@ module Aws::Greengrass
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

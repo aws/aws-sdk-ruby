@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ec2instanceconnect)
+
 # This module provides support for AWS EC2 Instance Connect. This module is available in the
 # `aws-sdk-ec2instanceconnect` gem.
 #
@@ -52,7 +54,7 @@ module Aws::EC2InstanceConnect
   autoload :EndpointProvider, 'aws-sdk-ec2instanceconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ec2instanceconnect/endpoints'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end
 

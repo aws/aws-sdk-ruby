@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:redshiftserverless)
+
 # This module provides support for Redshift Serverless. This module is available in the
 # `aws-sdk-redshiftserverless` gem.
 #
@@ -52,7 +54,7 @@ module Aws::RedshiftServerless
   autoload :EndpointProvider, 'aws-sdk-redshiftserverless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-redshiftserverless/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
 

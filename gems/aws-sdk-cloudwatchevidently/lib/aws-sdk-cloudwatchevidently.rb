@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatchevidently)
+
 # This module provides support for Amazon CloudWatch Evidently. This module is available in the
 # `aws-sdk-cloudwatchevidently` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudWatchEvidently
   autoload :EndpointProvider, 'aws-sdk-cloudwatchevidently/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudwatchevidently/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

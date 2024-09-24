@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:paymentcryptographydata)
+
 # This module provides support for Payment Cryptography Data Plane. This module is available in the
 # `aws-sdk-paymentcryptographydata` gem.
 #
@@ -53,7 +55,7 @@ module Aws::PaymentCryptographyData
   autoload :EndpointProvider, 'aws-sdk-paymentcryptographydata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-paymentcryptographydata/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
 

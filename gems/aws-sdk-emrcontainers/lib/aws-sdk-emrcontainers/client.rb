@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:emrcontainers)
-
 module Aws::EMRContainers
   # An API client for EMRContainers.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1913,7 +1911,7 @@ module Aws::EMRContainers
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

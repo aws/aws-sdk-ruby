@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:connectcontactlens)
+
 # This module provides support for Amazon Connect Contact Lens. This module is available in the
 # `aws-sdk-connectcontactlens` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ConnectContactLens
   autoload :EndpointProvider, 'aws-sdk-connectcontactlens/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectcontactlens/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

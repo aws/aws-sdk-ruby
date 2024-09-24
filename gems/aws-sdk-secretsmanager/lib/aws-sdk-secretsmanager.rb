@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:secretsmanager)
+
 # This module provides support for AWS Secrets Manager. This module is available in the
 # `aws-sdk-secretsmanager` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SecretsManager
   autoload :EndpointProvider, 'aws-sdk-secretsmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-secretsmanager/endpoints'
 
-  GEM_VERSION = '1.107.0'
+  GEM_VERSION = '1.108.0'
 
 end
 

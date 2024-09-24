@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.209.0 (2024-09-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Issue - Add service identifiers to GlobalConfig's list of identifiers outside of autoload (#3113).
 
 * Issue - Ignore invalid ARNs when trying to parse accountId in assume role credentials.

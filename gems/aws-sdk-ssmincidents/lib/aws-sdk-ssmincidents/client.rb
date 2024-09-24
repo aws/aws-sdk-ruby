@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ssmincidents)
-
 module Aws::SSMIncidents
   # An API client for SSMIncidents.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2150,7 +2148,7 @@ module Aws::SSMIncidents
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

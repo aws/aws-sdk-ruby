@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pi)
+
 # This module provides support for AWS Performance Insights. This module is available in the
 # `aws-sdk-pi` gem.
 #
@@ -52,7 +54,7 @@ module Aws::PI
   autoload :EndpointProvider, 'aws-sdk-pi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pi/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

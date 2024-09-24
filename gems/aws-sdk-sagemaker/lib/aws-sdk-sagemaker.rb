@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sagemaker)
+
 # This module provides support for Amazon SageMaker Service. This module is available in the
 # `aws-sdk-sagemaker` gem.
 #
@@ -53,7 +55,7 @@ module Aws::SageMaker
   autoload :EndpointProvider, 'aws-sdk-sagemaker/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemaker/endpoints'
 
-  GEM_VERSION = '1.265.0'
+  GEM_VERSION = '1.266.0'
 
 end
 

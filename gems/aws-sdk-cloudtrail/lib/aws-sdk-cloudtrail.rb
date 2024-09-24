@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudtrail)
+
 # This module provides support for AWS CloudTrail. This module is available in the
 # `aws-sdk-cloudtrail` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudTrail
   autoload :EndpointProvider, 'aws-sdk-cloudtrail/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudtrail/endpoints'
 
-  GEM_VERSION = '1.90.0'
+  GEM_VERSION = '1.91.0'
 
 end
 

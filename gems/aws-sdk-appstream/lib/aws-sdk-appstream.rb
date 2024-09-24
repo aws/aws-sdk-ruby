@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:appstream)
+
 # This module provides support for Amazon AppStream. This module is available in the
 # `aws-sdk-appstream` gem.
 #
@@ -53,7 +55,7 @@ module Aws::AppStream
   autoload :EndpointProvider, 'aws-sdk-appstream/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appstream/endpoints'
 
-  GEM_VERSION = '1.99.0'
+  GEM_VERSION = '1.100.0'
 
 end
 

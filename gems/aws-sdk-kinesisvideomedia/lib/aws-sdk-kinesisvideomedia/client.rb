@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:kinesisvideomedia)
-
 module Aws::KinesisVideoMedia
   # An API client for KinesisVideoMedia.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -564,7 +562,7 @@ module Aws::KinesisVideoMedia
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesisvideomedia'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

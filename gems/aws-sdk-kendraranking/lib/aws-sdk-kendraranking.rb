@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kendraranking)
+
 # This module provides support for Amazon Kendra Intelligent Ranking. This module is available in the
 # `aws-sdk-kendraranking` gem.
 #
@@ -52,7 +54,7 @@ module Aws::KendraRanking
   autoload :EndpointProvider, 'aws-sdk-kendraranking/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kendraranking/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
 

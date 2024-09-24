@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:snowdevicemanagement)
+
 # This module provides support for AWS Snow Device Management. This module is available in the
 # `aws-sdk-snowdevicemanagement` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SnowDeviceManagement
   autoload :EndpointProvider, 'aws-sdk-snowdevicemanagement/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-snowdevicemanagement/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
 

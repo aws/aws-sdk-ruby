@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:rekognition)
+
 # This module provides support for Amazon Rekognition. This module is available in the
 # `aws-sdk-rekognition` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Rekognition
   autoload :EndpointProvider, 'aws-sdk-rekognition/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-rekognition/endpoints'
 
-  GEM_VERSION = '1.107.0'
+  GEM_VERSION = '1.108.0'
 
 end
 

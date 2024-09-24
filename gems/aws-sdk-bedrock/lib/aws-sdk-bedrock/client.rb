@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:bedrock)
-
 module Aws::Bedrock
   # An API client for Bedrock.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -542,8 +540,13 @@ module Aws::Bedrock
     #
     # @option params [required, Types::EvaluationInferenceConfig] :inference_config
     #   Specify the models you want to use in your model evaluation job.
-    #   Automatic model evaluation jobs support a single model, and model
-    #   evaluation job that use human workers support two models.
+    #   Automatic model evaluation jobs support a single model or [inference
+    #   profile][1], and model evaluation job that use human workers support
+    #   two models or inference profiles.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #
     # @option params [required, Types::EvaluationOutputDataConfig] :output_data_config
     #   An object that defines where the results of model evaluation job will
@@ -3600,7 +3603,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

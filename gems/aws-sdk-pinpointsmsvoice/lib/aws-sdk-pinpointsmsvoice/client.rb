@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:pinpointsmsvoice)
-
 module Aws::PinpointSMSVoice
   # An API client for PinpointSMSVoice.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -759,7 +757,7 @@ module Aws::PinpointSMSVoice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoice'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

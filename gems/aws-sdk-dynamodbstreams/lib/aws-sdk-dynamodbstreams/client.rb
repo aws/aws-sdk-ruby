@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-dynamodbstreams/plugins/simple_attributes.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:dynamodbstreams)
-
 module Aws::DynamoDBStreams
   # An API client for DynamoDBStreams.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -917,7 +915,7 @@ module Aws::DynamoDBStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodbstreams'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

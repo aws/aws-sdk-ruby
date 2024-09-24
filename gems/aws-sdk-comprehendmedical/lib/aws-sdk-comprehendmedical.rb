@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:comprehendmedical)
+
 # This module provides support for AWS Comprehend Medical. This module is available in the
 # `aws-sdk-comprehendmedical` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ComprehendMedical
   autoload :EndpointProvider, 'aws-sdk-comprehendmedical/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-comprehendmedical/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

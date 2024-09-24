@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:efs)
+
 # This module provides support for Amazon Elastic File System. This module is available in the
 # `aws-sdk-efs` gem.
 #
@@ -52,7 +54,7 @@ module Aws::EFS
   autoload :EndpointProvider, 'aws-sdk-efs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-efs/endpoints'
 
-  GEM_VERSION = '1.84.0'
+  GEM_VERSION = '1.85.0'
 
 end
 

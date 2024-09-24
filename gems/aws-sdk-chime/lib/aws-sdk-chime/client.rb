@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:chime)
-
 module Aws::Chime
   # An API client for Chime.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -10350,7 +10348,7 @@ module Aws::Chime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

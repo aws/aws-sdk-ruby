@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:qldb)
+
 # This module provides support for Amazon QLDB. This module is available in the
 # `aws-sdk-qldb` gem.
 #
@@ -52,7 +54,7 @@ module Aws::QLDB
   autoload :EndpointProvider, 'aws-sdk-qldb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-qldb/endpoints'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end
 

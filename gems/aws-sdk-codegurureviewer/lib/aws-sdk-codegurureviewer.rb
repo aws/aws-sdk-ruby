@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codegurureviewer)
+
 # This module provides support for Amazon CodeGuru Reviewer. This module is available in the
 # `aws-sdk-codegurureviewer` gem.
 #
@@ -53,7 +55,7 @@ module Aws::CodeGuruReviewer
   autoload :EndpointProvider, 'aws-sdk-codegurureviewer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codegurureviewer/endpoints'
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.58.0'
 
 end
 

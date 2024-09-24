@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:forecastservice)
+
 # This module provides support for Amazon Forecast Service. This module is available in the
 # `aws-sdk-forecastservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ForecastService
   autoload :EndpointProvider, 'aws-sdk-forecastservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-forecastservice/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
 

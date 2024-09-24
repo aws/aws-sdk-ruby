@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:qbusiness)
-
 module Aws::QBusiness
   # An API client for QBusiness.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -4157,7 +4155,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

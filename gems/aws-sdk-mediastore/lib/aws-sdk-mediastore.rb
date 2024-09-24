@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mediastore)
+
 # This module provides support for AWS Elemental MediaStore. This module is available in the
 # `aws-sdk-mediastore` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MediaStore
   autoload :EndpointProvider, 'aws-sdk-mediastore/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediastore/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

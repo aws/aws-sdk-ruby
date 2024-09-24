@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:trustedadvisor)
+
 # This module provides support for TrustedAdvisor Public API. This module is available in the
 # `aws-sdk-trustedadvisor` gem.
 #
@@ -52,7 +54,7 @@ module Aws::TrustedAdvisor
   autoload :EndpointProvider, 'aws-sdk-trustedadvisor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-trustedadvisor/endpoints'
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end
 

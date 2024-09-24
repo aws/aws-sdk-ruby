@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:datapipeline)
+
 # This module provides support for AWS Data Pipeline. This module is available in the
 # `aws-sdk-datapipeline` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DataPipeline
   autoload :EndpointProvider, 'aws-sdk-datapipeline/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-datapipeline/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

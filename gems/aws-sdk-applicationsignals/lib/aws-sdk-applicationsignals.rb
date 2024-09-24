@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:applicationsignals)
+
 # This module provides support for Amazon CloudWatch Application Signals. This module is available in the
 # `aws-sdk-applicationsignals` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ApplicationSignals
   autoload :EndpointProvider, 'aws-sdk-applicationsignals/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationsignals/endpoints'
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end
 

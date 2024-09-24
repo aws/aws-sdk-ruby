@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:elasticbeanstalk)
+
 # This module provides support for AWS Elastic Beanstalk. This module is available in the
 # `aws-sdk-elasticbeanstalk` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ElasticBeanstalk
   autoload :EndpointProvider, 'aws-sdk-elasticbeanstalk/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticbeanstalk/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end
 

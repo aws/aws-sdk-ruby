@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudfrontkeyvaluestore)
+
 # This module provides support for Amazon CloudFront KeyValueStore. This module is available in the
 # `aws-sdk-cloudfrontkeyvaluestore` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudFrontKeyValueStore
   autoload :EndpointProvider, 'aws-sdk-cloudfrontkeyvaluestore/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudfrontkeyvaluestore/endpoints'
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end
 

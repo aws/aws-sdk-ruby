@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:prometheusservice)
+
 # This module provides support for Amazon Prometheus Service. This module is available in the
 # `aws-sdk-prometheusservice` gem.
 #
@@ -53,7 +55,7 @@ module Aws::PrometheusService
   autoload :EndpointProvider, 'aws-sdk-prometheusservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-prometheusservice/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

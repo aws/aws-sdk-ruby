@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sagemakerfeaturestoreruntime)
+
 # This module provides support for Amazon SageMaker Feature Store Runtime. This module is available in the
 # `aws-sdk-sagemakerfeaturestoreruntime` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SageMakerFeatureStoreRuntime
   autoload :EndpointProvider, 'aws-sdk-sagemakerfeaturestoreruntime/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemakerfeaturestoreruntime/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

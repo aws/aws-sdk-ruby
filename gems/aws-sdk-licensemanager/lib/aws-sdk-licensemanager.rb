@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:licensemanager)
+
 # This module provides support for AWS License Manager. This module is available in the
 # `aws-sdk-licensemanager` gem.
 #
@@ -52,7 +54,7 @@ module Aws::LicenseManager
   autoload :EndpointProvider, 'aws-sdk-licensemanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-licensemanager/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

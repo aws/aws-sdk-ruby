@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:apigatewayv2)
+
 # This module provides support for AmazonApiGatewayV2. This module is available in the
 # `aws-sdk-apigatewayv2` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ApiGatewayV2
   autoload :EndpointProvider, 'aws-sdk-apigatewayv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-apigatewayv2/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

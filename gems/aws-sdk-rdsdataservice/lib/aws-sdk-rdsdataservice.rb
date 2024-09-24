@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:rdsdataservice)
+
 # This module provides support for AWS RDS DataService. This module is available in the
 # `aws-sdk-rdsdataservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::RDSDataService
   autoload :EndpointProvider, 'aws-sdk-rdsdataservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-rdsdataservice/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:dynamodbstreams)
+
 # This module provides support for Amazon DynamoDB Streams. This module is available in the
 # `aws-sdk-dynamodbstreams` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DynamoDBStreams
   autoload :EndpointProvider, 'aws-sdk-dynamodbstreams/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dynamodbstreams/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

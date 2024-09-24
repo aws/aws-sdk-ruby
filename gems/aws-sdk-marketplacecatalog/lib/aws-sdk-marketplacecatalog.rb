@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:marketplacecatalog)
+
 # This module provides support for AWS Marketplace Catalog Service. This module is available in the
 # `aws-sdk-marketplacecatalog` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MarketplaceCatalog
   autoload :EndpointProvider, 'aws-sdk-marketplacecatalog/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacecatalog/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

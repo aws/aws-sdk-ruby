@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudsearchdomain)
+
 # This module provides support for Amazon CloudSearch Domain. This module is available in the
 # `aws-sdk-cloudsearchdomain` gem.
 #
@@ -46,7 +48,7 @@ module Aws::CloudSearchDomain
   autoload :Errors, 'aws-sdk-cloudsearchdomain/errors'
   autoload :Resource, 'aws-sdk-cloudsearchdomain/resource'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

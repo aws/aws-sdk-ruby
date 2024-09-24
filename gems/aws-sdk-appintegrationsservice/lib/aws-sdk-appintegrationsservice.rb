@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:appintegrationsservice)
+
 # This module provides support for Amazon AppIntegrations Service. This module is available in the
 # `aws-sdk-appintegrationsservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AppIntegrationsService
   autoload :EndpointProvider, 'aws-sdk-appintegrationsservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appintegrationsservice/endpoints'
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end
 

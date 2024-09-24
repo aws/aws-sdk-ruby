@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pinpoint)
+
 # This module provides support for Amazon Pinpoint. This module is available in the
 # `aws-sdk-pinpoint` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Pinpoint
   autoload :EndpointProvider, 'aws-sdk-pinpoint/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pinpoint/endpoints'
 
-  GEM_VERSION = '1.100.0'
+  GEM_VERSION = '1.101.0'
 
 end
 

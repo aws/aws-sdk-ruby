@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:groundstation)
+
 # This module provides support for AWS Ground Station. This module is available in the
 # `aws-sdk-groundstation` gem.
 #
@@ -53,7 +55,7 @@ module Aws::GroundStation
   autoload :EndpointProvider, 'aws-sdk-groundstation/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-groundstation/endpoints'
 
-  GEM_VERSION = '1.58.0'
+  GEM_VERSION = '1.59.0'
 
 end
 

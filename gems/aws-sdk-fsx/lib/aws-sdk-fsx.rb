@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:fsx)
+
 # This module provides support for Amazon FSx. This module is available in the
 # `aws-sdk-fsx` gem.
 #
@@ -52,7 +54,7 @@ module Aws::FSx
   autoload :EndpointProvider, 'aws-sdk-fsx/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-fsx/endpoints'
 
-  GEM_VERSION = '1.99.0'
+  GEM_VERSION = '1.100.0'
 
 end
 

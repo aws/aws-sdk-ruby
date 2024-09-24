@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:acmpca)
+
 # This module provides support for AWS Certificate Manager Private Certificate Authority. This module is available in the
 # `aws-sdk-acmpca` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ACMPCA
   autoload :EndpointProvider, 'aws-sdk-acmpca/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-acmpca/endpoints'
 
-  GEM_VERSION = '1.81.0'
+  GEM_VERSION = '1.82.0'
 
 end
 

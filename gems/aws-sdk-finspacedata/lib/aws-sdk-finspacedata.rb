@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:finspacedata)
+
 # This module provides support for FinSpace Public API. This module is available in the
 # `aws-sdk-finspacedata` gem.
 #
@@ -52,7 +54,7 @@ module Aws::FinSpaceData
   autoload :EndpointProvider, 'aws-sdk-finspacedata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-finspacedata/endpoints'
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.44.0'
 
 end
 

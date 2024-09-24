@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ram)
-
 module Aws::RAM
   # An API client for RAM.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3353,7 +3351,7 @@ module Aws::RAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

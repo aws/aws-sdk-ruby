@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kinesisvideomedia)
+
 # This module provides support for Amazon Kinesis Video Streams Media. This module is available in the
 # `aws-sdk-kinesisvideomedia` gem.
 #
@@ -52,7 +54,7 @@ module Aws::KinesisVideoMedia
   autoload :EndpointProvider, 'aws-sdk-kinesisvideomedia/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kinesisvideomedia/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:textract)
+
 # This module provides support for Amazon Textract. This module is available in the
 # `aws-sdk-textract` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Textract
   autoload :EndpointProvider, 'aws-sdk-textract/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-textract/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

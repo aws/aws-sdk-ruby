@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:timestreamwrite)
-
 module Aws::TimestreamWrite
   # An API client for TimestreamWrite.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1657,7 +1655,7 @@ module Aws::TimestreamWrite
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreamwrite'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssoadmin)
+
 # This module provides support for AWS Single Sign-On Admin. This module is available in the
 # `aws-sdk-ssoadmin` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SSOAdmin
   autoload :EndpointProvider, 'aws-sdk-ssoadmin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssoadmin/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

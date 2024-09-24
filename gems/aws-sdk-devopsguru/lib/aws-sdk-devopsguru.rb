@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:devopsguru)
+
 # This module provides support for Amazon DevOps Guru. This module is available in the
 # `aws-sdk-devopsguru` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DevOpsGuru
   autoload :EndpointProvider, 'aws-sdk-devopsguru/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-devopsguru/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

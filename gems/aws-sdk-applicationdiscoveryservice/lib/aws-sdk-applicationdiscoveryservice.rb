@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:applicationdiscoveryservice)
+
 # This module provides support for AWS Application Discovery Service. This module is available in the
 # `aws-sdk-applicationdiscoveryservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ApplicationDiscoveryService
   autoload :EndpointProvider, 'aws-sdk-applicationdiscoveryservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationdiscoveryservice/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

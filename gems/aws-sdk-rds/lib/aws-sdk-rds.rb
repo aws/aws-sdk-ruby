@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:rds)
+
 # This module provides support for Amazon Relational Database Service. This module is available in the
 # `aws-sdk-rds` gem.
 #
@@ -78,7 +80,7 @@ module Aws::RDS
   autoload :ReservedDBInstancesOffering, 'aws-sdk-rds/reserved_db_instances_offering'
   autoload :ResourcePendingMaintenanceActionList, 'aws-sdk-rds/resource_pending_maintenance_action_list'
 
-  GEM_VERSION = '1.250.0'
+  GEM_VERSION = '1.251.0'
 
 end
 

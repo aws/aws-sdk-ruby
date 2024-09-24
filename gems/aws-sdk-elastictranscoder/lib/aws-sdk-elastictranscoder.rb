@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:elastictranscoder)
+
 # This module provides support for Amazon Elastic Transcoder. This module is available in the
 # `aws-sdk-elastictranscoder` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ElasticTranscoder
   autoload :EndpointProvider, 'aws-sdk-elastictranscoder/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elastictranscoder/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

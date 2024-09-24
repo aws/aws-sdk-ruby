@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:route53profiles)
+
 # This module provides support for Route 53 Profiles. This module is available in the
 # `aws-sdk-route53profiles` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Route53Profiles
   autoload :EndpointProvider, 'aws-sdk-route53profiles/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53profiles/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sns)
+
 # This module provides support for Amazon Simple Notification Service. This module is available in the
 # `aws-sdk-sns` gem.
 #
@@ -56,7 +58,7 @@ module Aws::SNS
   autoload :Subscription, 'aws-sdk-sns/subscription'
   autoload :Topic, 'aws-sdk-sns/topic'
 
-  GEM_VERSION = '1.87.0'
+  GEM_VERSION = '1.88.0'
 
 end
 

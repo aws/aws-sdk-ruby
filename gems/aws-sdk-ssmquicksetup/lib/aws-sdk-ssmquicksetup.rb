@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssmquicksetup)
+
 # This module provides support for AWS Systems Manager QuickSetup. This module is available in the
 # `aws-sdk-ssmquicksetup` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SSMQuickSetup
   autoload :EndpointProvider, 'aws-sdk-ssmquicksetup/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmquicksetup/endpoints'
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end
 

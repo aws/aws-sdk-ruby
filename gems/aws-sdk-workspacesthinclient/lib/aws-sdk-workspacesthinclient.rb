@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:workspacesthinclient)
+
 # This module provides support for Amazon WorkSpaces Thin Client. This module is available in the
 # `aws-sdk-workspacesthinclient` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WorkSpacesThinClient
   autoload :EndpointProvider, 'aws-sdk-workspacesthinclient/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workspacesthinclient/endpoints'
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.17.0'
 
 end
 

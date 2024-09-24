@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:timestreamquery)
+
 # This module provides support for Amazon Timestream Query. This module is available in the
 # `aws-sdk-timestreamquery` gem.
 #
@@ -52,7 +54,7 @@ module Aws::TimestreamQuery
   autoload :EndpointProvider, 'aws-sdk-timestreamquery/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-timestreamquery/endpoints'
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.44.0'
 
 end
 

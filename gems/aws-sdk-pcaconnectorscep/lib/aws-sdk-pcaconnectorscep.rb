@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pcaconnectorscep)
+
 # This module provides support for Private CA Connector for SCEP. This module is available in the
 # `aws-sdk-pcaconnectorscep` gem.
 #
@@ -53,7 +55,7 @@ module Aws::PcaConnectorScep
   autoload :EndpointProvider, 'aws-sdk-pcaconnectorscep/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pcaconnectorscep/endpoints'
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end
 

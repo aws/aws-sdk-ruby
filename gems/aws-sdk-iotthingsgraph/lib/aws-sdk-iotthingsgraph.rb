@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotthingsgraph)
+
 # This module provides support for AWS IoT Things Graph. This module is available in the
 # `aws-sdk-iotthingsgraph` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTThingsGraph
   autoload :EndpointProvider, 'aws-sdk-iotthingsgraph/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotthingsgraph/endpoints'
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end
 

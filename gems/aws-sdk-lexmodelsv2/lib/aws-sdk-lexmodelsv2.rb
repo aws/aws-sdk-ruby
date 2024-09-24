@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lexmodelsv2)
+
 # This module provides support for Amazon Lex Model Building V2. This module is available in the
 # `aws-sdk-lexmodelsv2` gem.
 #
@@ -53,7 +55,7 @@ module Aws::LexModelsV2
   autoload :EndpointProvider, 'aws-sdk-lexmodelsv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lexmodelsv2/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

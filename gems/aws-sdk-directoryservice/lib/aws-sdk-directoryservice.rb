@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:directoryservice)
+
 # This module provides support for AWS Directory Service. This module is available in the
 # `aws-sdk-directoryservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DirectoryService
   autoload :EndpointProvider, 'aws-sdk-directoryservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-directoryservice/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

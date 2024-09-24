@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudcontrolapi)
+
 # This module provides support for AWS Cloud Control API. This module is available in the
 # `aws-sdk-cloudcontrolapi` gem.
 #
@@ -53,7 +55,7 @@ module Aws::CloudControlApi
   autoload :EndpointProvider, 'aws-sdk-cloudcontrolapi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudcontrolapi/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:vpclattice)
+
 # This module provides support for Amazon VPC Lattice. This module is available in the
 # `aws-sdk-vpclattice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::VPCLattice
   autoload :EndpointProvider, 'aws-sdk-vpclattice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-vpclattice/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
 

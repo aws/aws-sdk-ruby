@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-rds/plugins/cross_region_copying.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:rds)
-
 module Aws::RDS
   # An API client for RDS.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -31468,7 +31466,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.250.0'
+      context[:gem_version] = '1.251.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

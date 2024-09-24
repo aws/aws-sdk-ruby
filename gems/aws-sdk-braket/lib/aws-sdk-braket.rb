@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:braket)
+
 # This module provides support for Braket. This module is available in the
 # `aws-sdk-braket` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Braket
   autoload :EndpointProvider, 'aws-sdk-braket/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-braket/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end
 

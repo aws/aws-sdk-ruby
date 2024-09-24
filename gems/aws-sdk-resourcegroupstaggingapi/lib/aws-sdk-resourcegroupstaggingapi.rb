@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:resourcegroupstaggingapi)
+
 # This module provides support for AWS Resource Groups Tagging API. This module is available in the
 # `aws-sdk-resourcegroupstaggingapi` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ResourceGroupsTaggingAPI
   autoload :EndpointProvider, 'aws-sdk-resourcegroupstaggingapi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-resourcegroupstaggingapi/endpoints'
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.72.0'
 
 end
 

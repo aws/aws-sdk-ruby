@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codeguruprofiler)
+
 # This module provides support for Amazon CodeGuru Profiler. This module is available in the
 # `aws-sdk-codeguruprofiler` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeGuruProfiler
   autoload :EndpointProvider, 'aws-sdk-codeguruprofiler/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codeguruprofiler/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

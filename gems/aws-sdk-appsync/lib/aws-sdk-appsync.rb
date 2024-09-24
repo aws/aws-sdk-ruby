@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:appsync)
+
 # This module provides support for AWS AppSync. This module is available in the
 # `aws-sdk-appsync` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AppSync
   autoload :EndpointProvider, 'aws-sdk-appsync/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appsync/endpoints'
 
-  GEM_VERSION = '1.88.0'
+  GEM_VERSION = '1.89.0'
 
 end
 

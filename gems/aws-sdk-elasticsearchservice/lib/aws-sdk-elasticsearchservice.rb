@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:elasticsearchservice)
+
 # This module provides support for Amazon Elasticsearch Service. This module is available in the
 # `aws-sdk-elasticsearchservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ElasticsearchService
   autoload :EndpointProvider, 'aws-sdk-elasticsearchservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticsearchservice/endpoints'
 
-  GEM_VERSION = '1.94.0'
+  GEM_VERSION = '1.95.0'
 
 end
 

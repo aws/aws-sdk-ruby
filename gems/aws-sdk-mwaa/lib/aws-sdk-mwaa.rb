@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mwaa)
+
 # This module provides support for AmazonMWAA. This module is available in the
 # `aws-sdk-mwaa` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MWAA
   autoload :EndpointProvider, 'aws-sdk-mwaa/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mwaa/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

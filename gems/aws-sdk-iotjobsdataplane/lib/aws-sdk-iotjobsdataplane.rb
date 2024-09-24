@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotjobsdataplane)
+
 # This module provides support for AWS IoT Jobs Data Plane. This module is available in the
 # `aws-sdk-iotjobsdataplane` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoTJobsDataPlane
   autoload :EndpointProvider, 'aws-sdk-iotjobsdataplane/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotjobsdataplane/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

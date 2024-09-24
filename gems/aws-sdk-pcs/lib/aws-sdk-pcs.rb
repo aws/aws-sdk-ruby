@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pcs)
+
 # This module provides support for AWS Parallel Computing Service. This module is available in the
 # `aws-sdk-pcs` gem.
 #
@@ -53,7 +55,7 @@ module Aws::PCS
   autoload :EndpointProvider, 'aws-sdk-pcs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pcs/endpoints'
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end
 

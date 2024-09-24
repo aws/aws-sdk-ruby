@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:workspacesweb)
+
 # This module provides support for Amazon WorkSpaces Web. This module is available in the
 # `aws-sdk-workspacesweb` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WorkSpacesWeb
   autoload :EndpointProvider, 'aws-sdk-workspacesweb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workspacesweb/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end
 

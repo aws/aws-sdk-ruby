@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:entityresolution)
+
 # This module provides support for AWS EntityResolution. This module is available in the
 # `aws-sdk-entityresolution` gem.
 #
@@ -52,7 +54,7 @@ module Aws::EntityResolution
   autoload :EndpointProvider, 'aws-sdk-entityresolution/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-entityresolution/endpoints'
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end
 

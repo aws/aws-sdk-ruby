@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:managedblockchain)
+
 # This module provides support for Amazon Managed Blockchain. This module is available in the
 # `aws-sdk-managedblockchain` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ManagedBlockchain
   autoload :EndpointProvider, 'aws-sdk-managedblockchain/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-managedblockchain/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

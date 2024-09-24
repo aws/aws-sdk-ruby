@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:rdsdataservice)
-
 module Aws::RDSDataService
   # An API client for RDSDataService.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1038,7 +1036,7 @@ module Aws::RDSDataService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

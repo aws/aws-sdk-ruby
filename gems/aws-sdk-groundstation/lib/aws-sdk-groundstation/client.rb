@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:groundstation)
-
 module Aws::GroundStation
   # An API client for GroundStation.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2307,7 +2305,7 @@ module Aws::GroundStation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

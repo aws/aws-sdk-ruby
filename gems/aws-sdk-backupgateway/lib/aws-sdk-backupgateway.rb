@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:backupgateway)
+
 # This module provides support for AWS Backup Gateway. This module is available in the
 # `aws-sdk-backupgateway` gem.
 #
@@ -52,7 +54,7 @@ module Aws::BackupGateway
   autoload :EndpointProvider, 'aws-sdk-backupgateway/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-backupgateway/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
 

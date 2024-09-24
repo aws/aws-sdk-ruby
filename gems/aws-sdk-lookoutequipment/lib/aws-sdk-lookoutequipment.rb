@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lookoutequipment)
+
 # This module provides support for Amazon Lookout for Equipment. This module is available in the
 # `aws-sdk-lookoutequipment` gem.
 #
@@ -52,7 +54,7 @@ module Aws::LookoutEquipment
   autoload :EndpointProvider, 'aws-sdk-lookoutequipment/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lookoutequipment/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

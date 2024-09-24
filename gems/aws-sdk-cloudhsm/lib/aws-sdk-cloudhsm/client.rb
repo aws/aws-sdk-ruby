@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:cloudhsm)
-
 module Aws::CloudHSM
   # An API client for CloudHSM.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1640,7 +1638,7 @@ module Aws::CloudHSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudhsm'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:appflow)
-
 module Aws::Appflow
   # An API client for Appflow.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3334,7 +3332,7 @@ module Aws::Appflow
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

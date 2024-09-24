@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:autoscaling)
+
 # This module provides support for Auto Scaling. This module is available in the
 # `aws-sdk-autoscaling` gem.
 #
@@ -63,7 +65,7 @@ module Aws::AutoScaling
   autoload :ScheduledAction, 'aws-sdk-autoscaling/scheduled_action'
   autoload :Tag, 'aws-sdk-autoscaling/tag'
 
-  GEM_VERSION = '1.120.0'
+  GEM_VERSION = '1.121.0'
 
 end
 

@@ -397,9 +397,12 @@ module Aws::Kinesis
     # subscription and the previous connection expires or fails with a
     # `ResourceInUseException`.
     #
-    # For an example of how to use this operations, see [Enhanced Fan-Out
-    # Using the Kinesis Data Streams
-    # API](/streams/latest/dev/building-enhanced-consumers-api.html).
+    # For an example of how to use this operation, see [Enhanced Fan-Out
+    # Using the Kinesis Data Streams API][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html
     #
     # @option params [required, String] :consumer_arn
     #   For this parameter, use the value you obtained when you called
@@ -687,7 +690,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

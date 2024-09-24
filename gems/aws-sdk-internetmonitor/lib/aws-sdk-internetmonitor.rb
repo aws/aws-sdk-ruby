@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:internetmonitor)
+
 # This module provides support for Amazon CloudWatch Internet Monitor. This module is available in the
 # `aws-sdk-internetmonitor` gem.
 #
@@ -53,7 +55,7 @@ module Aws::InternetMonitor
   autoload :EndpointProvider, 'aws-sdk-internetmonitor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-internetmonitor/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
 

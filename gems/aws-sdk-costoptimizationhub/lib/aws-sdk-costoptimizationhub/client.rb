@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:costoptimizationhub)
-
 module Aws::CostOptimizationHub
   # An API client for CostOptimizationHub.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1327,7 +1325,7 @@ module Aws::CostOptimizationHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costoptimizationhub'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

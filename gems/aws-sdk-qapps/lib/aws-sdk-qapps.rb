@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:qapps)
+
 # This module provides support for QApps. This module is available in the
 # `aws-sdk-qapps` gem.
 #
@@ -53,7 +55,7 @@ module Aws::QApps
   autoload :EndpointProvider, 'aws-sdk-qapps/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-qapps/endpoints'
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end
 

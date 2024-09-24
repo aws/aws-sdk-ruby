@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:securitylake)
+
 # This module provides support for Amazon Security Lake. This module is available in the
 # `aws-sdk-securitylake` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SecurityLake
   autoload :EndpointProvider, 'aws-sdk-securitylake/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-securitylake/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end
 

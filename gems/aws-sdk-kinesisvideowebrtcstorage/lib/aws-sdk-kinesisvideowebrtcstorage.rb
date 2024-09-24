@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kinesisvideowebrtcstorage)
+
 # This module provides support for Amazon Kinesis Video WebRTC Storage. This module is available in the
 # `aws-sdk-kinesisvideowebrtcstorage` gem.
 #
@@ -52,7 +54,7 @@ module Aws::KinesisVideoWebRTCStorage
   autoload :EndpointProvider, 'aws-sdk-kinesisvideowebrtcstorage/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kinesisvideowebrtcstorage/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

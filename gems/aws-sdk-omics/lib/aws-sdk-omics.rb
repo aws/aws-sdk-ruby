@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:omics)
+
 # This module provides support for Amazon Omics. This module is available in the
 # `aws-sdk-omics` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Omics
   autoload :EndpointProvider, 'aws-sdk-omics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-omics/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end
 

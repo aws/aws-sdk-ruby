@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:glue)
+
 # This module provides support for AWS Glue. This module is available in the
 # `aws-sdk-glue` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Glue
   autoload :EndpointProvider, 'aws-sdk-glue/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-glue/endpoints'
 
-  GEM_VERSION = '1.197.0'
+  GEM_VERSION = '1.198.0'
 
 end
 

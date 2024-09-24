@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssmcontacts)
+
 # This module provides support for AWS Systems Manager Incident Manager Contacts. This module is available in the
 # `aws-sdk-ssmcontacts` gem.
 #
@@ -52,7 +54,7 @@ module Aws::SSMContacts
   autoload :EndpointProvider, 'aws-sdk-ssmcontacts/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmcontacts/endpoints'
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end
 

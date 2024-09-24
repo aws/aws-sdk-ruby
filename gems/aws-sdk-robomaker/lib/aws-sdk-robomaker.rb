@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:robomaker)
+
 # This module provides support for AWS RoboMaker. This module is available in the
 # `aws-sdk-robomaker` gem.
 #
@@ -52,7 +54,7 @@ module Aws::RoboMaker
   autoload :EndpointProvider, 'aws-sdk-robomaker/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-robomaker/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
 

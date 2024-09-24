@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:personalizeevents)
-
 module Aws::PersonalizeEvents
   # An API client for PersonalizeEvents.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -701,7 +699,7 @@ module Aws::PersonalizeEvents
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-personalizeevents'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

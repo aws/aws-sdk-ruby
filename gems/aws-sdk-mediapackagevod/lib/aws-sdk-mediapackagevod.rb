@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:mediapackagevod)
+
 # This module provides support for AWS Elemental MediaPackage VOD. This module is available in the
 # `aws-sdk-mediapackagevod` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MediaPackageVod
   autoload :EndpointProvider, 'aws-sdk-mediapackagevod/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediapackagevod/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
 

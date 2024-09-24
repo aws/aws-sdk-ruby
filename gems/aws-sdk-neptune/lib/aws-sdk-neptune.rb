@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:neptune)
+
 # This module provides support for Amazon Neptune. This module is available in the
 # `aws-sdk-neptune` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Neptune
   autoload :EndpointProvider, 'aws-sdk-neptune/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-neptune/endpoints'
 
-  GEM_VERSION = '1.75.0'
+  GEM_VERSION = '1.76.0'
 
 end
 

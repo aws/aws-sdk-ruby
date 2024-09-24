@@ -39,8 +39,6 @@ require 'aws-sdk-dynamodb/plugins/extended_retries.rb'
 require 'aws-sdk-dynamodb/plugins/simple_attributes.rb'
 require 'aws-sdk-dynamodb/plugins/crc32_validation.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:dynamodb)
-
 module Aws::DynamoDB
   # An API client for DynamoDB.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -8438,7 +8436,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

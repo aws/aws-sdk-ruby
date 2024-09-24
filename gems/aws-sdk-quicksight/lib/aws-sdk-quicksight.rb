@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:quicksight)
+
 # This module provides support for Amazon QuickSight. This module is available in the
 # `aws-sdk-quicksight` gem.
 #
@@ -52,7 +54,7 @@ module Aws::QuickSight
   autoload :EndpointProvider, 'aws-sdk-quicksight/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-quicksight/endpoints'
 
-  GEM_VERSION = '1.128.0'
+  GEM_VERSION = '1.129.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:docdb)
+
 # This module provides support for Amazon DocumentDB with MongoDB compatibility. This module is available in the
 # `aws-sdk-docdb` gem.
 #
@@ -53,7 +55,7 @@ module Aws::DocDB
   autoload :EndpointProvider, 'aws-sdk-docdb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-docdb/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

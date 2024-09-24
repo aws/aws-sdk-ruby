@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:artifact)
+
 # This module provides support for AWS Artifact. This module is available in the
 # `aws-sdk-artifact` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Artifact
   autoload :EndpointProvider, 'aws-sdk-artifact/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-artifact/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

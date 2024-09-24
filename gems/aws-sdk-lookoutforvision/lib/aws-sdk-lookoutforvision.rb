@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lookoutforvision)
+
 # This module provides support for Amazon Lookout for Vision. This module is available in the
 # `aws-sdk-lookoutforvision` gem.
 #
@@ -52,7 +54,7 @@ module Aws::LookoutforVision
   autoload :EndpointProvider, 'aws-sdk-lookoutforvision/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lookoutforvision/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

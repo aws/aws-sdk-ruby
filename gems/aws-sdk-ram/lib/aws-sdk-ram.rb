@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ram)
+
 # This module provides support for AWS Resource Access Manager. This module is available in the
 # `aws-sdk-ram` gem.
 #
@@ -52,7 +54,7 @@ module Aws::RAM
   autoload :EndpointProvider, 'aws-sdk-ram/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ram/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

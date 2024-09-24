@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:marketplaceagreement)
-
 module Aws::MarketplaceAgreement
   # An API client for MarketplaceAgreement.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -782,7 +780,7 @@ module Aws::MarketplaceAgreement
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceagreement'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

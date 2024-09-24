@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:opsworks)
+
 # This module provides support for AWS OpsWorks. This module is available in the
 # `aws-sdk-opsworks` gem.
 #
@@ -56,7 +58,7 @@ module Aws::OpsWorks
   autoload :Stack, 'aws-sdk-opsworks/stack'
   autoload :StackSummary, 'aws-sdk-opsworks/stack_summary'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

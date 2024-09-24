@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:directoryservicedata)
+
 # This module provides support for AWS Directory Service Data. This module is available in the
 # `aws-sdk-directoryservicedata` gem.
 #
@@ -52,7 +54,7 @@ module Aws::DirectoryServiceData
   autoload :EndpointProvider, 'aws-sdk-directoryservicedata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-directoryservicedata/endpoints'
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end
 

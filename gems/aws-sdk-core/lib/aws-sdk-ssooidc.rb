@@ -13,6 +13,8 @@ unless Module.const_defined?(:Aws)
   require 'aws-sigv4'
 end
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssooidc)
+
 # This module provides support for AWS SSO OIDC. This module is available in the
 # `aws-sdk-core` gem.
 #
@@ -54,7 +56,7 @@ module Aws::SSOOIDC
   autoload :EndpointProvider, 'aws-sdk-ssooidc/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssooidc/endpoints'
 
-  GEM_VERSION = '3.208.0'
+  GEM_VERSION = '3.209.0'
 
 end
 

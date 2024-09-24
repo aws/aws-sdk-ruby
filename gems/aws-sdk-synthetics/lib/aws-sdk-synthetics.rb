@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:synthetics)
+
 # This module provides support for Synthetics. This module is available in the
 # `aws-sdk-synthetics` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Synthetics
   autoload :EndpointProvider, 'aws-sdk-synthetics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-synthetics/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

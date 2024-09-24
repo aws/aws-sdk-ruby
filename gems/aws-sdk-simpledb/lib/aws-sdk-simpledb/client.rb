@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/signature_v2.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:simpledb)
-
 module Aws::SimpleDB
   # An API client for SimpleDB.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -966,7 +964,7 @@ module Aws::SimpleDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-simpledb'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:schemas)
+
 # This module provides support for Schemas. This module is available in the
 # `aws-sdk-schemas` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Schemas
   autoload :EndpointProvider, 'aws-sdk-schemas/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-schemas/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

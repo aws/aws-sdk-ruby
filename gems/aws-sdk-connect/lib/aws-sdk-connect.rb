@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:connect)
+
 # This module provides support for Amazon Connect Service. This module is available in the
 # `aws-sdk-connect` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Connect
   autoload :EndpointProvider, 'aws-sdk-connect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connect/endpoints'
 
-  GEM_VERSION = '1.177.0'
+  GEM_VERSION = '1.178.0'
 
 end
 

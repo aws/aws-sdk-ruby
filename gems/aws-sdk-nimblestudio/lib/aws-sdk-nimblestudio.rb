@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:nimblestudio)
+
 # This module provides support for AmazonNimbleStudio. This module is available in the
 # `aws-sdk-nimblestudio` gem.
 #
@@ -53,7 +55,7 @@ module Aws::NimbleStudio
   autoload :EndpointProvider, 'aws-sdk-nimblestudio/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-nimblestudio/endpoints'
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end
 

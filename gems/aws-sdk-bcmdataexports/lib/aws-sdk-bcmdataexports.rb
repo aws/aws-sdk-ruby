@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:bcmdataexports)
+
 # This module provides support for AWS Billing and Cost Management Data Exports. This module is available in the
 # `aws-sdk-bcmdataexports` gem.
 #
@@ -52,7 +54,7 @@ module Aws::BCMDataExports
   autoload :EndpointProvider, 'aws-sdk-bcmdataexports/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bcmdataexports/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

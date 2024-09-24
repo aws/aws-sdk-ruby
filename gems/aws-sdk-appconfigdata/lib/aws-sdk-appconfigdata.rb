@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:appconfigdata)
+
 # This module provides support for AWS AppConfig Data. This module is available in the
 # `aws-sdk-appconfigdata` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AppConfigData
   autoload :EndpointProvider, 'aws-sdk-appconfigdata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appconfigdata/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
 

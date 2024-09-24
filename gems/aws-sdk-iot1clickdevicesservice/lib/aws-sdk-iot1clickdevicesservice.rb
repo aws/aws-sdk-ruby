@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:iot1clickdevicesservice)
+
 # This module provides support for AWS IoT 1-Click Devices Service. This module is available in the
 # `aws-sdk-iot1clickdevicesservice` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IoT1ClickDevicesService
   autoload :EndpointProvider, 'aws-sdk-iot1clickdevicesservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iot1clickdevicesservice/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:memorydb)
+
 # This module provides support for Amazon MemoryDB. This module is available in the
 # `aws-sdk-memorydb` gem.
 #
@@ -52,7 +54,7 @@ module Aws::MemoryDB
   autoload :EndpointProvider, 'aws-sdk-memorydb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-memorydb/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

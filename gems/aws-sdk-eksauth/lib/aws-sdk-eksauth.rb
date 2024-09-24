@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:eksauth)
+
 # This module provides support for Amazon EKS Auth. This module is available in the
 # `aws-sdk-eksauth` gem.
 #
@@ -53,7 +55,7 @@ module Aws::EKSAuth
   autoload :EndpointProvider, 'aws-sdk-eksauth/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-eksauth/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

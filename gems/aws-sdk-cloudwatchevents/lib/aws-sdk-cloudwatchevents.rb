@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatchevents)
+
 # This module provides support for Amazon CloudWatch Events. This module is available in the
 # `aws-sdk-cloudwatchevents` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CloudWatchEvents
   autoload :EndpointProvider, 'aws-sdk-cloudwatchevents/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudwatchevents/endpoints'
 
-  GEM_VERSION = '1.82.0'
+  GEM_VERSION = '1.83.0'
 
 end
 

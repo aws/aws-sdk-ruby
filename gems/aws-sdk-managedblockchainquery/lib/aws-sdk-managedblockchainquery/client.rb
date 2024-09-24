@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:managedblockchainquery)
-
 module Aws::ManagedBlockchainQuery
   # An API client for ManagedBlockchainQuery.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1175,7 +1173,7 @@ module Aws::ManagedBlockchainQuery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-managedblockchainquery'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

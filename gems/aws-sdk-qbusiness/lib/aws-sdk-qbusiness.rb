@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:qbusiness)
+
 # This module provides support for QBusiness. This module is available in the
 # `aws-sdk-qbusiness` gem.
 #
@@ -55,7 +57,7 @@ module Aws::QBusiness
   autoload :AsyncClient, 'aws-sdk-qbusiness/async_client'
   autoload :EventStreams, 'aws-sdk-qbusiness/event_streams'
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end
 

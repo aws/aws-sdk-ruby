@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:kafka)
+
 # This module provides support for Managed Streaming for Kafka. This module is available in the
 # `aws-sdk-kafka` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Kafka
   autoload :EndpointProvider, 'aws-sdk-kafka/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kafka/endpoints'
 
-  GEM_VERSION = '1.83.0'
+  GEM_VERSION = '1.84.0'
 
 end
 

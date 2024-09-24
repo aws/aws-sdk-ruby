@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:appregistry)
+
 # This module provides support for AWS Service Catalog App Registry. This module is available in the
 # `aws-sdk-appregistry` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AppRegistry
   autoload :EndpointProvider, 'aws-sdk-appregistry/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appregistry/endpoints'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
 

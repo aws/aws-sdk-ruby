@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:datapipeline)
-
 module Aws::DataPipeline
   # An API client for DataPipeline.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1453,7 +1451,7 @@ module Aws::DataPipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datapipeline'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

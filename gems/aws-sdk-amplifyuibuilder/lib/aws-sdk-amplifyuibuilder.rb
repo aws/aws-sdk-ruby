@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:amplifyuibuilder)
+
 # This module provides support for AWS Amplify UI Builder. This module is available in the
 # `aws-sdk-amplifyuibuilder` gem.
 #
@@ -53,7 +55,7 @@ module Aws::AmplifyUIBuilder
   autoload :EndpointProvider, 'aws-sdk-amplifyuibuilder/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-amplifyuibuilder/endpoints'
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end
 

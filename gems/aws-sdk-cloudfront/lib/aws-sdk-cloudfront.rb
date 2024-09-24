@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudfront)
+
 # This module provides support for Amazon CloudFront. This module is available in the
 # `aws-sdk-cloudfront` gem.
 #
@@ -53,7 +55,7 @@ module Aws::CloudFront
   autoload :EndpointProvider, 'aws-sdk-cloudfront/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudfront/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:route53domains)
+
 # This module provides support for Amazon Route 53 Domains. This module is available in the
 # `aws-sdk-route53domains` gem.
 #
@@ -52,7 +54,7 @@ module Aws::Route53Domains
   autoload :EndpointProvider, 'aws-sdk-route53domains/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53domains/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:computeoptimizer)
+
 # This module provides support for AWS Compute Optimizer. This module is available in the
 # `aws-sdk-computeoptimizer` gem.
 #
@@ -52,7 +54,7 @@ module Aws::ComputeOptimizer
   autoload :EndpointProvider, 'aws-sdk-computeoptimizer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-computeoptimizer/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

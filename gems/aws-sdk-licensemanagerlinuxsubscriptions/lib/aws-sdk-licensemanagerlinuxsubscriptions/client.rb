@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:licensemanagerlinuxsubscriptions)
-
 module Aws::LicenseManagerLinuxSubscriptions
   # An API client for LicenseManagerLinuxSubscriptions.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -969,7 +967,7 @@ module Aws::LicenseManagerLinuxSubscriptions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanagerlinuxsubscriptions'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:xray)
-
 module Aws::XRay
   # An API client for XRay.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2294,7 +2292,7 @@ module Aws::XRay
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

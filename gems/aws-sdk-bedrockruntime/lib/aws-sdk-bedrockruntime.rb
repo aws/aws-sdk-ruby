@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockruntime)
+
 # This module provides support for Amazon Bedrock Runtime. This module is available in the
 # `aws-sdk-bedrockruntime` gem.
 #
@@ -54,7 +56,7 @@ module Aws::BedrockRuntime
   autoload :Endpoints, 'aws-sdk-bedrockruntime/endpoints'
   autoload :EventStreams, 'aws-sdk-bedrockruntime/event_streams'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end
 

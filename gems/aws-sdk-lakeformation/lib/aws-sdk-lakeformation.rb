@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:lakeformation)
+
 # This module provides support for AWS Lake Formation. This module is available in the
 # `aws-sdk-lakeformation` gem.
 #
@@ -52,7 +54,7 @@ module Aws::LakeFormation
   autoload :EndpointProvider, 'aws-sdk-lakeformation/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lakeformation/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

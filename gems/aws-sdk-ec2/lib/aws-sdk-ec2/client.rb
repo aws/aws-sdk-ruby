@@ -38,8 +38,6 @@ require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
 require 'aws-sdk-ec2/plugins/region_validation.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ec2)
-
 module Aws::EC2
   # An API client for EC2.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -60125,7 +60123,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.476.0'
+      context[:gem_version] = '1.477.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

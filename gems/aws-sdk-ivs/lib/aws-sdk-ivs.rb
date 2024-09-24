@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ivs)
+
 # This module provides support for Amazon Interactive Video Service. This module is available in the
 # `aws-sdk-ivs` gem.
 #
@@ -52,7 +54,7 @@ module Aws::IVS
   autoload :EndpointProvider, 'aws-sdk-ivs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ivs/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

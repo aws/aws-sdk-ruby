@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-neptune/plugins/cross_region_copying.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:neptune)
-
 module Aws::Neptune
   # An API client for Neptune.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -7611,7 +7609,7 @@ module Aws::Neptune
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

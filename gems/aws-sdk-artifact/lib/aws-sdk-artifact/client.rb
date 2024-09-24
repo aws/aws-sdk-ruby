@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:artifact)
-
 module Aws::Artifact
   # An API client for Artifact.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -810,7 +808,7 @@ module Aws::Artifact
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-artifact'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -13,6 +13,8 @@ unless Module.const_defined?(:Aws)
   require 'aws-sigv4'
 end
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:sso)
+
 # This module provides support for AWS Single Sign-On. This module is available in the
 # `aws-sdk-core` gem.
 #
@@ -54,7 +56,7 @@ module Aws::SSO
   autoload :EndpointProvider, 'aws-sdk-sso/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sso/endpoints'
 
-  GEM_VERSION = '3.208.0'
+  GEM_VERSION = '3.209.0'
 
 end
 

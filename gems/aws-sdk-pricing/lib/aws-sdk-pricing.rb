@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:pricing)
+
 # This module provides support for AWS Price List Service. This module is available in the
 # `aws-sdk-pricing` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Pricing
   autoload :EndpointProvider, 'aws-sdk-pricing/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pricing/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

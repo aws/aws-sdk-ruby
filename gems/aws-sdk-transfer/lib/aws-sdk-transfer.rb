@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:transfer)
+
 # This module provides support for AWS Transfer Family. This module is available in the
 # `aws-sdk-transfer` gem.
 #
@@ -53,7 +55,7 @@ module Aws::Transfer
   autoload :EndpointProvider, 'aws-sdk-transfer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-transfer/endpoints'
 
-  GEM_VERSION = '1.103.0'
+  GEM_VERSION = '1.104.0'
 
 end
 

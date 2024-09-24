@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:ecs)
+
 # This module provides support for Amazon EC2 Container Service. This module is available in the
 # `aws-sdk-ecs` gem.
 #
@@ -53,7 +55,7 @@ module Aws::ECS
   autoload :EndpointProvider, 'aws-sdk-ecs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ecs/endpoints'
 
-  GEM_VERSION = '1.160.0'
+  GEM_VERSION = '1.161.0'
 
 end
 

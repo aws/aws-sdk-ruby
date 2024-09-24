@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:apprunner)
+
 # This module provides support for AWS App Runner. This module is available in the
 # `aws-sdk-apprunner` gem.
 #
@@ -52,7 +54,7 @@ module Aws::AppRunner
   autoload :EndpointProvider, 'aws-sdk-apprunner/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-apprunner/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.50.0'
 
 end
 

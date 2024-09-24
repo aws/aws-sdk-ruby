@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:controlcatalog)
-
 module Aws::ControlCatalog
   # An API client for ControlCatalog.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -738,7 +736,7 @@ module Aws::ControlCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controlcatalog'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

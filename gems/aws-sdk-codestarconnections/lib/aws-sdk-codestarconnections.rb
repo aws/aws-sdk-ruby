@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:codestarconnections)
+
 # This module provides support for AWS CodeStar connections. This module is available in the
 # `aws-sdk-codestarconnections` gem.
 #
@@ -52,7 +54,7 @@ module Aws::CodeStarconnections
   autoload :EndpointProvider, 'aws-sdk-codestarconnections/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codestarconnections/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

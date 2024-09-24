@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:marketplacecommerceanalytics)
-
 module Aws::MarketplaceCommerceAnalytics
   # An API client for MarketplaceCommerceAnalytics.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -715,7 +713,7 @@ module Aws::MarketplaceCommerceAnalytics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

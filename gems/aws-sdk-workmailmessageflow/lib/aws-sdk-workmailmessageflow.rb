@@ -11,6 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+Aws::Plugins::GlobalConfiguration.add_identifier(:workmailmessageflow)
+
 # This module provides support for Amazon WorkMail Message Flow. This module is available in the
 # `aws-sdk-workmailmessageflow` gem.
 #
@@ -52,7 +54,7 @@ module Aws::WorkMailMessageFlow
   autoload :EndpointProvider, 'aws-sdk-workmailmessageflow/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workmailmessageflow/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end
 
