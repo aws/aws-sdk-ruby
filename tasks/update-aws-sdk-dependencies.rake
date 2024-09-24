@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # updates list of service gems dependend on by the aws-sdk gem
-task 'update-aws-sdk-dependencies' do
+task 'update-aws-sdk-dependencies' => 'require-build-tools' do
 
   # update the aws-sdk-resources.gemspec
   BuildTools.replace_lines(

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # updates the services in the aws-partitions gem
-task 'update-partition-service-list' do
+task 'update-partition-service-list' => 'require-build-tools' do
   lines = []
   lines << "          {\n"
   BuildTools::Services.sort_by(&:name).each do |svc|
