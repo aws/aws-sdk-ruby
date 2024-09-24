@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Issue - Add service identifiers to GlobalConfig's list of identifiers outside of autoload (#3113).
 
+* Issue - Ignore invalid ARNs when trying to parse accountId in assume role credentials.
+
 3.208.0 (2024-09-23)
 ------------------
 
