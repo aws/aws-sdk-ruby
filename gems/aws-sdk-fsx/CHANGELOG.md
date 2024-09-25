@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-09-25)
+------------------
+
+* Feature - Doc-only update to address Lustre S3 hard-coded names.
+
 1.100.0 (2024-09-24)
 ------------------
 

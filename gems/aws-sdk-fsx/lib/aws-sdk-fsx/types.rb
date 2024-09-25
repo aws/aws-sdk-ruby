@@ -840,9 +840,9 @@ module Aws::FSx
     #   absolute path that defines where the completion report will be
     #   stored in the destination location. The `Path` you provide must be
     #   located within the file system’s ExportPath. An example `Path` value
-    #   is "s3://myBucket/myExportPath/optionalPrefix". The report
-    #   provides the following information for each file in the report:
-    #   FilePath, FileStatus, and ErrorCode.
+    #   is "s3://amzn-s3-demo-bucket/myExportPath/optionalPrefix". The
+    #   report provides the following information for each file in the
+    #   report: FilePath, FileStatus, and ErrorCode.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -1169,8 +1169,9 @@ module Aws::FSx
     # @!attribute [rw] data_repository_path
     #   The path to the Amazon S3 data repository that will be linked to the
     #   file system. The path can be an S3 bucket or prefix in the format
-    #   `s3://myBucket/myPrefix/`. This path specifies where in the S3 data
-    #   repository files will be imported from or exported to.
+    #   `s3://bucket-name/prefix/` (where `prefix` is optional). This path
+    #   specifies where in the S3 data repository files will be imported
+    #   from or exported to.
     #   @return [String]
     #
     # @!attribute [rw] batch_import_meta_data_on_create
@@ -1278,7 +1279,7 @@ module Aws::FSx
     #   * For import tasks, the list contains paths in the Amazon S3 bucket
     #     from which POSIX metadata changes are imported to the FSx for
     #     Lustre file system. The path can be an S3 bucket or prefix in the
-    #     format `s3://myBucket/myPrefix` (where `myPrefix` is optional).
+    #     format `s3://bucket-name/prefix` (where `prefix` is optional).
     #
     #   * For release tasks, the list contains directory or file paths on
     #     the FSx for Lustre file system from which to release exported
@@ -3633,10 +3634,12 @@ module Aws::FSx
     #       parameter.
     #
     #   * For Amazon File Cache, the path can be an S3 bucket or prefix in
-    #     the format `s3://myBucket/myPrefix/`.
+    #     the format `s3://bucket-name/prefix/` (where `prefix` is
+    #     optional).
     #
     #   * For Amazon FSx for Lustre, the path can be an S3 bucket or prefix
-    #     in the format `s3://myBucket/myPrefix/`.
+    #     in the format `s3://bucket-name/prefix/` (where `prefix` is
+    #     optional).
     #   @return [String]
     #
     # @!attribute [rw] batch_import_meta_data_on_create
@@ -5728,7 +5731,7 @@ module Aws::FSx
     #       parameter.
     #
     #   * The path can be an S3 bucket or prefix in the format
-    #     `s3://myBucket/myPrefix/`.
+    #     `s3://bucket-name/prefix/` (where `prefix` is optional).
     #   @return [String]
     #
     # @!attribute [rw] data_repository_subdirectories

@@ -12055,23 +12055,22 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
-    #   <note markdown="1"> This parameter is in preview and may not be available for your
-    #   account.
-    #
-    #    </note>
-    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway. Use this option to simplify security group
-    #   management and control of instance-to-instance traffic across VPCs
-    #   that are connected by transit gateway. You can also use this option
-    #   to migrate from VPC peering (which was the only option that
-    #   supported security group referencing) to transit gateways (which now
-    #   also support security group referencing). This option is disabled by
-    #   default and there are no additional costs to use this feature.
+    #   transit gateway to simplify security group management.
+    #
+    #   This option is disabled by default.
     #
     #   If you don't enable or disable SecurityGroupReferencingSupport in
     #   the request, the attachment will inherit the security group
     #   referencing support setting on the transit gateway.
+    #
+    #   For more information about security group referencing, see [Security
+    #   group referencing ][1] in the *Amazon Web Services Transit Gateways
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
@@ -50230,19 +50229,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
-    #   <note markdown="1"> This parameter is in preview and may not be available for your
-    #   account.
-    #
-    #    </note>
-    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway. Use this option to simplify security group
-    #   management and control of instance-to-instance traffic across VPCs
-    #   that are connected by transit gateway. You can also use this option
-    #   to migrate from VPC peering (which was the only option that
-    #   supported security group referencing) to transit gateways (which now
-    #   also support security group referencing). This option is disabled by
-    #   default and there are no additional costs to use this feature.
+    #   transit gateway to simplify security group management.
+    #
+    #   This option is disabled by default.
+    #
+    #   For more information about security group referencing, see [Security
+    #   group referencing][1] in the *Amazon Web Services Transit Gateways
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
     #   @return [String]
     #
     # @!attribute [rw] auto_accept_shared_attachments
@@ -50437,19 +50435,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
-    #   <note markdown="1"> This parameter is in preview and may not be available for your
-    #   account.
-    #
-    #    </note>
-    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway. Use this option to simplify security group
-    #   management and control of instance-to-instance traffic across VPCs
-    #   that are connected by transit gateway. You can also use this option
-    #   to migrate from VPC peering (which was the only option that
-    #   supported security group referencing) to transit gateways (which now
-    #   also support security group referencing). This option is disabled by
-    #   default and there are no additional costs to use this feature.
+    #   transit gateway to simplify security group management.
+    #
+    #   This option is disabled by default.
+    #
+    #   For more information about security group referencing, see [Security
+    #   group referencing][1] in the *Amazon Web Services Transit Gateways
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
@@ -65942,19 +65939,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
-    #   <note markdown="1"> This parameter is in preview and may not be available for your
-    #   account.
-    #
-    #    </note>
-    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway. Use this option to simplify security group
-    #   management and control of instance-to-instance traffic across VPCs
-    #   that are connected by transit gateway. You can also use this option
-    #   to migrate from VPC peering (which was the only option that
-    #   supported security group referencing) to transit gateways (which now
-    #   also support security group referencing). This option is disabled by
-    #   default and there are no additional costs to use this feature.
+    #   transit gateway to simplify security group management.
+    #
+    #   This option is enabled by default.
+    #
+    #   For more information about security group referencing, see [Security
+    #   group referencing][1] in the *Amazon Web Services Transit Gateways
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
     #   @return [String]
     #
     # @!attribute [rw] multicast_support
@@ -66340,19 +66336,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
-    #   <note markdown="1"> This parameter is in preview and may not be available for your
-    #   account.
-    #
-    #    </note>
-    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway. Use this option to simplify security group
-    #   management and control of instance-to-instance traffic across VPCs
-    #   that are connected by transit gateway. You can also use this option
-    #   to migrate from VPC peering (which was the only option that
-    #   supported security group referencing) to transit gateways (which now
-    #   also support security group referencing). This option is disabled by
-    #   default and there are no additional costs to use this feature.
+    #   transit gateway to simplify security group management.
+    #
+    #   This option is disabled by default.
+    #
+    #   For more information about security group referencing, see [Security
+    #   group referencing][1] in the *Amazon Web Services Transit Gateways
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
     #   @return [String]
     #
     # @!attribute [rw] multicast_support
@@ -66733,19 +66728,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
-    #   <note markdown="1"> This parameter is in preview and may not be available for your
-    #   account.
-    #
-    #    </note>
-    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway. Use this option to simplify security group
-    #   management and control of instance-to-instance traffic across VPCs
-    #   that are connected by transit gateway. You can also use this option
-    #   to migrate from VPC peering (which was the only option that
-    #   supported security group referencing) to transit gateways (which now
-    #   also support security group referencing). This option is disabled by
-    #   default and there are no additional costs to use this feature.
+    #   transit gateway to simplify security group management.
+    #
+    #   This option is disabled by default.
+    #
+    #   For more information about security group referencing, see [Security
+    #   group referencing][1] in the *Amazon Web Services Transit Gateways
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support

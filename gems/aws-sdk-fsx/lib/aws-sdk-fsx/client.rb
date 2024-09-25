@@ -2039,8 +2039,9 @@ module Aws::FSx
     # @option params [required, String] :data_repository_path
     #   The path to the Amazon S3 data repository that will be linked to the
     #   file system. The path can be an S3 bucket or prefix in the format
-    #   `s3://myBucket/myPrefix/`. This path specifies where in the S3 data
-    #   repository files will be imported from or exported to.
+    #   `s3://bucket-name/prefix/` (where `prefix` is optional). This path
+    #   specifies where in the S3 data repository files will be imported from
+    #   or exported to.
     #
     # @option params [Boolean] :batch_import_meta_data_on_create
     #   Set to `true` to run an import data repository task to import metadata
@@ -2205,7 +2206,7 @@ module Aws::FSx
     #   * For import tasks, the list contains paths in the Amazon S3 bucket
     #     from which POSIX metadata changes are imported to the FSx for Lustre
     #     file system. The path can be an S3 bucket or prefix in the format
-    #     `s3://myBucket/myPrefix` (where `myPrefix` is optional).
+    #     `s3://bucket-name/prefix` (where `prefix` is optional).
     #
     #   * For release tasks, the list contains directory or file paths on the
     #     FSx for Lustre file system from which to release exported files. If
@@ -9330,7 +9331,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

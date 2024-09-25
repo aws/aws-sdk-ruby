@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.478.0 (2024-09-25)
+------------------
+
+* Feature - Updates to documentation for the transit gateway security group referencing feature.
+
 1.477.0 (2024-09-24)
 ------------------
 

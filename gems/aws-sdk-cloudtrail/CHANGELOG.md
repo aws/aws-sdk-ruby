@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2024-09-25)
+------------------
+
+* Feature - Doc-only update for CloudTrail network activity events release (in preview)
+
 1.91.0 (2024-09-24)
 ------------------
 
