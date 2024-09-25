@@ -13,16 +13,7 @@ unless Module.const_defined?(:Aws)
   require 'aws-sigv4'
 end
 
-require_relative 'aws-sdk-ssooidc/types'
-require_relative 'aws-sdk-ssooidc/client_api'
-require_relative 'aws-sdk-ssooidc/plugins/endpoints.rb'
-require_relative 'aws-sdk-ssooidc/client'
-require_relative 'aws-sdk-ssooidc/errors'
-require_relative 'aws-sdk-ssooidc/resource'
-require_relative 'aws-sdk-ssooidc/endpoint_parameters'
-require_relative 'aws-sdk-ssooidc/endpoint_provider'
-require_relative 'aws-sdk-ssooidc/endpoints'
-require_relative 'aws-sdk-ssooidc/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssooidc)
 
 # This module provides support for AWS SSO OIDC. This module is available in the
 # `aws-sdk-core` gem.
@@ -53,7 +44,20 @@ require_relative 'aws-sdk-ssooidc/customizations'
 #
 # @!group service
 module Aws::SSOOIDC
+  autoload :Types, 'aws-sdk-ssooidc/types'
+  autoload :ClientApi, 'aws-sdk-ssooidc/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ssooidc/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ssooidc/client'
+  autoload :Errors, 'aws-sdk-ssooidc/errors'
+  autoload :Resource, 'aws-sdk-ssooidc/resource'
+  autoload :EndpointParameters, 'aws-sdk-ssooidc/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ssooidc/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ssooidc/endpoints'
 
-  GEM_VERSION = '3.207.0'
+  GEM_VERSION = '3.209.0'
 
 end
+
+require_relative 'aws-sdk-ssooidc/customizations'

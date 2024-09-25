@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:lookoutequipment)
-
 module Aws::LookoutEquipment
   # An API client for LookoutEquipment.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3365,7 +3363,7 @@ module Aws::LookoutEquipment
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

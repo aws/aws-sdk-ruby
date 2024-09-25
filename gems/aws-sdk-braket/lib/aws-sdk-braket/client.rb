@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:braket)
-
 module Aws::Braket
   # An API client for Braket.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1216,7 +1214,7 @@ module Aws::Braket
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-braket'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

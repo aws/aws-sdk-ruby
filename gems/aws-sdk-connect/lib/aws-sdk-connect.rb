@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-connect/types'
-require_relative 'aws-sdk-connect/client_api'
-require_relative 'aws-sdk-connect/plugins/endpoints.rb'
-require_relative 'aws-sdk-connect/client'
-require_relative 'aws-sdk-connect/errors'
-require_relative 'aws-sdk-connect/resource'
-require_relative 'aws-sdk-connect/endpoint_parameters'
-require_relative 'aws-sdk-connect/endpoint_provider'
-require_relative 'aws-sdk-connect/endpoints'
-require_relative 'aws-sdk-connect/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:connect)
 
 # This module provides support for Amazon Connect Service. This module is available in the
 # `aws-sdk-connect` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-connect/customizations'
 #
 # @!group service
 module Aws::Connect
+  autoload :Types, 'aws-sdk-connect/types'
+  autoload :ClientApi, 'aws-sdk-connect/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-connect/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-connect/client'
+  autoload :Errors, 'aws-sdk-connect/errors'
+  autoload :Resource, 'aws-sdk-connect/resource'
+  autoload :EndpointParameters, 'aws-sdk-connect/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-connect/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-connect/endpoints'
 
-  GEM_VERSION = '1.176.0'
+  GEM_VERSION = '1.178.0'
 
 end
+
+require_relative 'aws-sdk-connect/customizations'

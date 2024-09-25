@@ -1479,3 +1479,4 @@ module Aws::ManagedBlockchainQuery
 
   end
 end
+

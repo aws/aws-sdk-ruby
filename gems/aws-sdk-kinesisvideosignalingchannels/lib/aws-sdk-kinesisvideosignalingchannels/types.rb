@@ -207,3 +207,4 @@ module Aws::KinesisVideoSignalingChannels
 
   end
 end
+

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2024-09-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2024-09-23)
+------------------
+
+* Feature - This release adds support for job concurrency and queuing configuration at Application level.
+
 1.34.0 (2024-09-20)
 ------------------
 

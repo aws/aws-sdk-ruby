@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-connectcampaignservice/types'
-require_relative 'aws-sdk-connectcampaignservice/client_api'
-require_relative 'aws-sdk-connectcampaignservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-connectcampaignservice/client'
-require_relative 'aws-sdk-connectcampaignservice/errors'
-require_relative 'aws-sdk-connectcampaignservice/resource'
-require_relative 'aws-sdk-connectcampaignservice/endpoint_parameters'
-require_relative 'aws-sdk-connectcampaignservice/endpoint_provider'
-require_relative 'aws-sdk-connectcampaignservice/endpoints'
-require_relative 'aws-sdk-connectcampaignservice/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:connectcampaignservice)
 
 # This module provides support for AmazonConnectCampaignService. This module is available in the
 # `aws-sdk-connectcampaignservice` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-connectcampaignservice/customizations'
 #
 # @!group service
 module Aws::ConnectCampaignService
+  autoload :Types, 'aws-sdk-connectcampaignservice/types'
+  autoload :ClientApi, 'aws-sdk-connectcampaignservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-connectcampaignservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-connectcampaignservice/client'
+  autoload :Errors, 'aws-sdk-connectcampaignservice/errors'
+  autoload :Resource, 'aws-sdk-connectcampaignservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-connectcampaignservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-connectcampaignservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-connectcampaignservice/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.27.0'
 
 end
+
+require_relative 'aws-sdk-connectcampaignservice/customizations'

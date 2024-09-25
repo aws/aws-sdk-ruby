@@ -21268,6 +21268,27 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The SageMaker images that are hidden from the Studio user interface.
+    # You must specify the SageMaker image name and version aliases.
+    #
+    # @!attribute [rw] sage_maker_image_name
+    #   The SageMaker image name that you are hiding from the Studio user
+    #   interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_aliases
+    #   The version aliases you are hiding from the Studio user interface.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HiddenSageMakerImage AWS API Documentation
+    #
+    class HiddenSageMakerImage < Struct.new(
+      :sage_maker_image_name,
+      :version_aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Stores the holiday featurization attributes applicable to each item of
     # time-series datasets during the training of a forecasting model. This
     # allows the model to identify patterns associated with specific
@@ -41864,11 +41885,21 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated-apps.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] hidden_instance_types
+    #   The instance types you are hiding from the Studio user interface.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] hidden_sage_maker_image_version_aliases
+    #   The version aliases you are hiding from the Studio user interface.
+    #   @return [Array<Types::HiddenSageMakerImage>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StudioWebPortalSettings AWS API Documentation
     #
     class StudioWebPortalSettings < Struct.new(
       :hidden_ml_tools,
-      :hidden_app_types)
+      :hidden_app_types,
+      :hidden_instance_types,
+      :hidden_sage_maker_image_version_aliases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47494,3 +47525,4 @@ module Aws::SageMaker
 
   end
 end
+

@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-workmail/types'
-require_relative 'aws-sdk-workmail/client_api'
-require_relative 'aws-sdk-workmail/plugins/endpoints.rb'
-require_relative 'aws-sdk-workmail/client'
-require_relative 'aws-sdk-workmail/errors'
-require_relative 'aws-sdk-workmail/resource'
-require_relative 'aws-sdk-workmail/endpoint_parameters'
-require_relative 'aws-sdk-workmail/endpoint_provider'
-require_relative 'aws-sdk-workmail/endpoints'
-require_relative 'aws-sdk-workmail/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:workmail)
 
 # This module provides support for Amazon WorkMail. This module is available in the
 # `aws-sdk-workmail` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-workmail/customizations'
 #
 # @!group service
 module Aws::WorkMail
+  autoload :Types, 'aws-sdk-workmail/types'
+  autoload :ClientApi, 'aws-sdk-workmail/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-workmail/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-workmail/client'
+  autoload :Errors, 'aws-sdk-workmail/errors'
+  autoload :Resource, 'aws-sdk-workmail/resource'
+  autoload :EndpointParameters, 'aws-sdk-workmail/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-workmail/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-workmail/endpoints'
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.76.0'
 
 end
+
+require_relative 'aws-sdk-workmail/customizations'

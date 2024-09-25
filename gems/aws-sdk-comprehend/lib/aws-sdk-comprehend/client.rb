@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:comprehend)
-
 module Aws::Comprehend
   # An API client for Comprehend.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -5975,7 +5973,7 @@ module Aws::Comprehend
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

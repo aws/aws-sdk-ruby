@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/types'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/client_api'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/plugins/endpoints.rb'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/client'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/errors'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/resource'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/endpoint_parameters'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/endpoint_provider'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/endpoints'
-require_relative 'aws-sdk-migrationhubstrategyrecommendations/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:migrationhubstrategyrecommendations)
 
 # This module provides support for Migration Hub Strategy Recommendations. This module is available in the
 # `aws-sdk-migrationhubstrategyrecommendations` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-migrationhubstrategyrecommendations/customizations'
 #
 # @!group service
 module Aws::MigrationHubStrategyRecommendations
+  autoload :Types, 'aws-sdk-migrationhubstrategyrecommendations/types'
+  autoload :ClientApi, 'aws-sdk-migrationhubstrategyrecommendations/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-migrationhubstrategyrecommendations/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-migrationhubstrategyrecommendations/client'
+  autoload :Errors, 'aws-sdk-migrationhubstrategyrecommendations/errors'
+  autoload :Resource, 'aws-sdk-migrationhubstrategyrecommendations/resource'
+  autoload :EndpointParameters, 'aws-sdk-migrationhubstrategyrecommendations/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-migrationhubstrategyrecommendations/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-migrationhubstrategyrecommendations/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.32.0'
 
 end
+
+require_relative 'aws-sdk-migrationhubstrategyrecommendations/customizations'

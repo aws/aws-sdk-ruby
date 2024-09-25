@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:codecommit)
-
 module Aws::CodeCommit
   # An API client for CodeCommit.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -5185,7 +5183,7 @@ module Aws::CodeCommit
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

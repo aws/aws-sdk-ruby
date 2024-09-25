@@ -177,12 +177,17 @@ module Aws::Kinesis
     #   streams.
     #   @return [Types::StreamModeDetails]
     #
+    # @!attribute [rw] tags
+    #   A set of up to 10 key-value pairs to use to create the tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamInput AWS API Documentation
     #
     class CreateStreamInput < Struct.new(
       :stream_name,
       :shard_count,
-      :stream_mode_details)
+      :stream_mode_details,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2597,3 +2602,4 @@ module Aws::Kinesis
 
   end
 end
+

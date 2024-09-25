@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-codestarnotifications/types'
-require_relative 'aws-sdk-codestarnotifications/client_api'
-require_relative 'aws-sdk-codestarnotifications/plugins/endpoints.rb'
-require_relative 'aws-sdk-codestarnotifications/client'
-require_relative 'aws-sdk-codestarnotifications/errors'
-require_relative 'aws-sdk-codestarnotifications/resource'
-require_relative 'aws-sdk-codestarnotifications/endpoint_parameters'
-require_relative 'aws-sdk-codestarnotifications/endpoint_provider'
-require_relative 'aws-sdk-codestarnotifications/endpoints'
-require_relative 'aws-sdk-codestarnotifications/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:codestarnotifications)
 
 # This module provides support for AWS CodeStar Notifications. This module is available in the
 # `aws-sdk-codestarnotifications` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-codestarnotifications/customizations'
 #
 # @!group service
 module Aws::CodeStarNotifications
+  autoload :Types, 'aws-sdk-codestarnotifications/types'
+  autoload :ClientApi, 'aws-sdk-codestarnotifications/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-codestarnotifications/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-codestarnotifications/client'
+  autoload :Errors, 'aws-sdk-codestarnotifications/errors'
+  autoload :Resource, 'aws-sdk-codestarnotifications/resource'
+  autoload :EndpointParameters, 'aws-sdk-codestarnotifications/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-codestarnotifications/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-codestarnotifications/endpoints'
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.45.0'
 
 end
+
+require_relative 'aws-sdk-codestarnotifications/customizations'

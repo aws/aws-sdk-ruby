@@ -289,3 +289,4 @@ module Aws::MarketplaceDeployment
 
   end
 end
+

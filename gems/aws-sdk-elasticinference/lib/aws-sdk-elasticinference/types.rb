@@ -387,3 +387,4 @@ module Aws::ElasticInference
 
   end
 end
+

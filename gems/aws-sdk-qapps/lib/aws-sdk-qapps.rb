@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-qapps/types'
-require_relative 'aws-sdk-qapps/client_api'
-require_relative 'aws-sdk-qapps/plugins/endpoints.rb'
-require_relative 'aws-sdk-qapps/client'
-require_relative 'aws-sdk-qapps/errors'
-require_relative 'aws-sdk-qapps/waiters'
-require_relative 'aws-sdk-qapps/resource'
-require_relative 'aws-sdk-qapps/endpoint_parameters'
-require_relative 'aws-sdk-qapps/endpoint_provider'
-require_relative 'aws-sdk-qapps/endpoints'
-require_relative 'aws-sdk-qapps/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:qapps)
 
 # This module provides support for QApps. This module is available in the
 # `aws-sdk-qapps` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-qapps/customizations'
 #
 # @!group service
 module Aws::QApps
+  autoload :Types, 'aws-sdk-qapps/types'
+  autoload :ClientApi, 'aws-sdk-qapps/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-qapps/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-qapps/client'
+  autoload :Errors, 'aws-sdk-qapps/errors'
+  autoload :Waiters, 'aws-sdk-qapps/waiters'
+  autoload :Resource, 'aws-sdk-qapps/resource'
+  autoload :EndpointParameters, 'aws-sdk-qapps/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-qapps/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-qapps/endpoints'
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.7.0'
 
 end
+
+require_relative 'aws-sdk-qapps/customizations'

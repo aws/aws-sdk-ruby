@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:supportapp)
-
 module Aws::SupportApp
   # An API client for SupportApp.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -956,7 +954,7 @@ module Aws::SupportApp
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-supportapp'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-route53/plugins/id_fix.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:route53)
-
 module Aws::Route53
   # An API client for Route53.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -6209,7 +6207,7 @@ module Aws::Route53
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:eksauth)
-
 module Aws::EKSAuth
   # An API client for EKSAuth.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -519,7 +517,7 @@ module Aws::EKSAuth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eksauth'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

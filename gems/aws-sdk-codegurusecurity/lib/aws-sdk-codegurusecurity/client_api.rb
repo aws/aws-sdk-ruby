@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::CodeGuruSecurity
   # @api private
   module ClientApi

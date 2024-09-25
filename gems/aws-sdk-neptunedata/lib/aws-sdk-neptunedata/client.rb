@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:neptunedata)
-
 module Aws::Neptunedata
   # An API client for Neptunedata.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3400,7 +3398,7 @@ module Aws::Neptunedata
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunedata'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

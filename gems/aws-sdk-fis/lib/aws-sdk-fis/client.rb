@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:fis)
-
 module Aws::FIS
   # An API client for FIS.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1917,7 +1915,7 @@ module Aws::FIS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

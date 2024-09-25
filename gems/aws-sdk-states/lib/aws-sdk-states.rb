@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-states/types'
-require_relative 'aws-sdk-states/client_api'
-require_relative 'aws-sdk-states/plugins/endpoints.rb'
-require_relative 'aws-sdk-states/client'
-require_relative 'aws-sdk-states/errors'
-require_relative 'aws-sdk-states/resource'
-require_relative 'aws-sdk-states/endpoint_parameters'
-require_relative 'aws-sdk-states/endpoint_provider'
-require_relative 'aws-sdk-states/endpoints'
-require_relative 'aws-sdk-states/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:states)
 
 # This module provides support for AWS Step Functions. This module is available in the
 # `aws-sdk-states` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-states/customizations'
 #
 # @!group service
 module Aws::States
+  autoload :Types, 'aws-sdk-states/types'
+  autoload :ClientApi, 'aws-sdk-states/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-states/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-states/client'
+  autoload :Errors, 'aws-sdk-states/errors'
+  autoload :Resource, 'aws-sdk-states/resource'
+  autoload :EndpointParameters, 'aws-sdk-states/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-states/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-states/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.80.0'
 
 end
+
+require_relative 'aws-sdk-states/customizations'

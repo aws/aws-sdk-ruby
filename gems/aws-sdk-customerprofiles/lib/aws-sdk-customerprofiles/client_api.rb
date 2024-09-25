@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::CustomerProfiles
   # @api private
   module ClientApi

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::BCMDataExports
   # @api private
   module ClientApi

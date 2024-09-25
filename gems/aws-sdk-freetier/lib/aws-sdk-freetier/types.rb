@@ -266,3 +266,4 @@ module Aws::FreeTier
 
   end
 end
+

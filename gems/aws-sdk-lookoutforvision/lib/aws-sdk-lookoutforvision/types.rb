@@ -2073,3 +2073,4 @@ module Aws::LookoutforVision
 
   end
 end
+

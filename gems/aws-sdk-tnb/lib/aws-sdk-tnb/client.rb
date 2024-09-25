@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:tnb)
-
 module Aws::Tnb
   # An API client for Tnb.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2112,7 +2110,7 @@ module Aws::Tnb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-tnb'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

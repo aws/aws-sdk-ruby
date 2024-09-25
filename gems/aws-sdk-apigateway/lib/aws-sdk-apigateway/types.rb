@@ -1845,7 +1845,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] certificate_upload_date
     #   The timestamp when the certificate that was used by edge-optimized
-    #   endpoint for this domain name was uploaded.
+    #   endpoint for this domain name was uploaded. API Gateway doesn't
+    #   change this value if you update the certificate.
     #   @return [Time]
     #
     # @!attribute [rw] regional_domain_name
@@ -6007,3 +6008,4 @@ module Aws::APIGateway
 
   end
 end
+

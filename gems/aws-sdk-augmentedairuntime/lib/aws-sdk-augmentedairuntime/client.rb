@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:augmentedairuntime)
-
 module Aws::AugmentedAIRuntime
   # An API client for AugmentedAIRuntime.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -670,7 +668,7 @@ module Aws::AugmentedAIRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-augmentedairuntime'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

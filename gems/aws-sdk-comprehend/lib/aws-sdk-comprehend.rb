@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-comprehend/types'
-require_relative 'aws-sdk-comprehend/client_api'
-require_relative 'aws-sdk-comprehend/plugins/endpoints.rb'
-require_relative 'aws-sdk-comprehend/client'
-require_relative 'aws-sdk-comprehend/errors'
-require_relative 'aws-sdk-comprehend/resource'
-require_relative 'aws-sdk-comprehend/endpoint_parameters'
-require_relative 'aws-sdk-comprehend/endpoint_provider'
-require_relative 'aws-sdk-comprehend/endpoints'
-require_relative 'aws-sdk-comprehend/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:comprehend)
 
 # This module provides support for Amazon Comprehend. This module is available in the
 # `aws-sdk-comprehend` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-comprehend/customizations'
 #
 # @!group service
 module Aws::Comprehend
+  autoload :Types, 'aws-sdk-comprehend/types'
+  autoload :ClientApi, 'aws-sdk-comprehend/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-comprehend/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-comprehend/client'
+  autoload :Errors, 'aws-sdk-comprehend/errors'
+  autoload :Resource, 'aws-sdk-comprehend/resource'
+  autoload :EndpointParameters, 'aws-sdk-comprehend/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-comprehend/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-comprehend/endpoints'
 
-  GEM_VERSION = '1.91.0'
+  GEM_VERSION = '1.93.0'
 
 end
+
+require_relative 'aws-sdk-comprehend/customizations'

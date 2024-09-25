@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.266.0 (2024-09-24)
+------------------
+
+* Feature - Adding `HiddenInstanceTypes` and `HiddenSageMakerImageVersionAliases` attribute to SageMaker API
+
+1.265.0 (2024-09-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.264.0 (2024-09-20)
 ------------------
 

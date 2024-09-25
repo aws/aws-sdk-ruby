@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-acm/types'
-require_relative 'aws-sdk-acm/client_api'
-require_relative 'aws-sdk-acm/plugins/endpoints.rb'
-require_relative 'aws-sdk-acm/client'
-require_relative 'aws-sdk-acm/errors'
-require_relative 'aws-sdk-acm/waiters'
-require_relative 'aws-sdk-acm/resource'
-require_relative 'aws-sdk-acm/endpoint_parameters'
-require_relative 'aws-sdk-acm/endpoint_provider'
-require_relative 'aws-sdk-acm/endpoints'
-require_relative 'aws-sdk-acm/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:acm)
 
 # This module provides support for AWS Certificate Manager. This module is available in the
 # `aws-sdk-acm` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-acm/customizations'
 #
 # @!group service
 module Aws::ACM
+  autoload :Types, 'aws-sdk-acm/types'
+  autoload :ClientApi, 'aws-sdk-acm/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-acm/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-acm/client'
+  autoload :Errors, 'aws-sdk-acm/errors'
+  autoload :Waiters, 'aws-sdk-acm/waiters'
+  autoload :Resource, 'aws-sdk-acm/resource'
+  autoload :EndpointParameters, 'aws-sdk-acm/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-acm/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-acm/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.80.0'
 
 end
+
+require_relative 'aws-sdk-acm/customizations'

@@ -2,6 +2,7 @@
 
 # updates the defaults mode configuration
 task 'update-defaults-mode', [:defaults_file] do |t, args|
+  Rake::Task['require-build-tools'].invoke
 
   defaults_file = args[:defaults_file]
   if defaults_file.nil? || defaults_file.empty?

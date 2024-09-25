@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-schemas/types'
-require_relative 'aws-sdk-schemas/client_api'
-require_relative 'aws-sdk-schemas/plugins/endpoints.rb'
-require_relative 'aws-sdk-schemas/client'
-require_relative 'aws-sdk-schemas/errors'
-require_relative 'aws-sdk-schemas/waiters'
-require_relative 'aws-sdk-schemas/resource'
-require_relative 'aws-sdk-schemas/endpoint_parameters'
-require_relative 'aws-sdk-schemas/endpoint_provider'
-require_relative 'aws-sdk-schemas/endpoints'
-require_relative 'aws-sdk-schemas/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:schemas)
 
 # This module provides support for Schemas. This module is available in the
 # `aws-sdk-schemas` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-schemas/customizations'
 #
 # @!group service
 module Aws::Schemas
+  autoload :Types, 'aws-sdk-schemas/types'
+  autoload :ClientApi, 'aws-sdk-schemas/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-schemas/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-schemas/client'
+  autoload :Errors, 'aws-sdk-schemas/errors'
+  autoload :Waiters, 'aws-sdk-schemas/waiters'
+  autoload :Resource, 'aws-sdk-schemas/resource'
+  autoload :EndpointParameters, 'aws-sdk-schemas/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-schemas/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-schemas/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.47.0'
 
 end
+
+require_relative 'aws-sdk-schemas/customizations'

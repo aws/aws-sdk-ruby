@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ApplicationSignals
   # @api private
   module ClientApi

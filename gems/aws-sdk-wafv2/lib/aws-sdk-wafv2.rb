@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-wafv2/types'
-require_relative 'aws-sdk-wafv2/client_api'
-require_relative 'aws-sdk-wafv2/plugins/endpoints.rb'
-require_relative 'aws-sdk-wafv2/client'
-require_relative 'aws-sdk-wafv2/errors'
-require_relative 'aws-sdk-wafv2/resource'
-require_relative 'aws-sdk-wafv2/endpoint_parameters'
-require_relative 'aws-sdk-wafv2/endpoint_provider'
-require_relative 'aws-sdk-wafv2/endpoints'
-require_relative 'aws-sdk-wafv2/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:wafv2)
 
 # This module provides support for AWS WAFV2. This module is available in the
 # `aws-sdk-wafv2` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-wafv2/customizations'
 #
 # @!group service
 module Aws::WAFV2
+  autoload :Types, 'aws-sdk-wafv2/types'
+  autoload :ClientApi, 'aws-sdk-wafv2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-wafv2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-wafv2/client'
+  autoload :Errors, 'aws-sdk-wafv2/errors'
+  autoload :Resource, 'aws-sdk-wafv2/resource'
+  autoload :EndpointParameters, 'aws-sdk-wafv2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-wafv2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-wafv2/endpoints'
 
-  GEM_VERSION = '1.93.0'
+  GEM_VERSION = '1.95.0'
 
 end
+
+require_relative 'aws-sdk-wafv2/customizations'

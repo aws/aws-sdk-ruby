@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:voiceid)
-
 module Aws::VoiceID
   # An API client for VoiceID.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1903,7 +1901,7 @@ module Aws::VoiceID
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-voiceid'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

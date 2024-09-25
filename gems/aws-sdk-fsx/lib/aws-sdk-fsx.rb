@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-fsx/types'
-require_relative 'aws-sdk-fsx/client_api'
-require_relative 'aws-sdk-fsx/plugins/endpoints.rb'
-require_relative 'aws-sdk-fsx/client'
-require_relative 'aws-sdk-fsx/errors'
-require_relative 'aws-sdk-fsx/resource'
-require_relative 'aws-sdk-fsx/endpoint_parameters'
-require_relative 'aws-sdk-fsx/endpoint_provider'
-require_relative 'aws-sdk-fsx/endpoints'
-require_relative 'aws-sdk-fsx/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:fsx)
 
 # This module provides support for Amazon FSx. This module is available in the
 # `aws-sdk-fsx` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-fsx/customizations'
 #
 # @!group service
 module Aws::FSx
+  autoload :Types, 'aws-sdk-fsx/types'
+  autoload :ClientApi, 'aws-sdk-fsx/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-fsx/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-fsx/client'
+  autoload :Errors, 'aws-sdk-fsx/errors'
+  autoload :Resource, 'aws-sdk-fsx/resource'
+  autoload :EndpointParameters, 'aws-sdk-fsx/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-fsx/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-fsx/endpoints'
 
-  GEM_VERSION = '1.98.0'
+  GEM_VERSION = '1.100.0'
 
 end
+
+require_relative 'aws-sdk-fsx/customizations'

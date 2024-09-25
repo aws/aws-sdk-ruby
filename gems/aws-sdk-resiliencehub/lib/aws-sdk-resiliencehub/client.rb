@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:resiliencehub)
-
 module Aws::ResilienceHub
   # An API client for ResilienceHub.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -4932,7 +4930,7 @@ module Aws::ResilienceHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

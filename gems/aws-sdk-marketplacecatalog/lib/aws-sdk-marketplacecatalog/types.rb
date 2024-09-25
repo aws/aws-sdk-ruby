@@ -2693,3 +2693,4 @@ module Aws::MarketplaceCatalog
 
   end
 end
+

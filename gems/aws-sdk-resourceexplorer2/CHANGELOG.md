@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-09-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2024-09-23)
+------------------
+
+* Feature - AWS Resource Explorer released ListResources feature which allows customers to list all indexed AWS resources within a view.
+
 1.26.0 (2024-09-20)
 ------------------
 

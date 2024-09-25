@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-marketplaceagreement/types'
-require_relative 'aws-sdk-marketplaceagreement/client_api'
-require_relative 'aws-sdk-marketplaceagreement/plugins/endpoints.rb'
-require_relative 'aws-sdk-marketplaceagreement/client'
-require_relative 'aws-sdk-marketplaceagreement/errors'
-require_relative 'aws-sdk-marketplaceagreement/resource'
-require_relative 'aws-sdk-marketplaceagreement/endpoint_parameters'
-require_relative 'aws-sdk-marketplaceagreement/endpoint_provider'
-require_relative 'aws-sdk-marketplaceagreement/endpoints'
-require_relative 'aws-sdk-marketplaceagreement/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:marketplaceagreement)
 
 # This module provides support for AWS Marketplace Agreement Service. This module is available in the
 # `aws-sdk-marketplaceagreement` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-marketplaceagreement/customizations'
 #
 # @!group service
 module Aws::MarketplaceAgreement
+  autoload :Types, 'aws-sdk-marketplaceagreement/types'
+  autoload :ClientApi, 'aws-sdk-marketplaceagreement/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-marketplaceagreement/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-marketplaceagreement/client'
+  autoload :Errors, 'aws-sdk-marketplaceagreement/errors'
+  autoload :Resource, 'aws-sdk-marketplaceagreement/resource'
+  autoload :EndpointParameters, 'aws-sdk-marketplaceagreement/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-marketplaceagreement/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-marketplaceagreement/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.13.0'
 
 end
+
+require_relative 'aws-sdk-marketplaceagreement/customizations'

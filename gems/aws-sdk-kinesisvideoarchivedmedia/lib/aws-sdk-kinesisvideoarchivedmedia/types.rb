@@ -1269,3 +1269,4 @@ module Aws::KinesisVideoArchivedMedia
 
   end
 end
+

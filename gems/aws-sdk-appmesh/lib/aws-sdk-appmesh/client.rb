@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:appmesh)
-
 module Aws::AppMesh
   # An API client for AppMesh.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -5564,7 +5562,7 @@ module Aws::AppMesh
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

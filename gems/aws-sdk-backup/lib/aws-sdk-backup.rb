@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-backup/types'
-require_relative 'aws-sdk-backup/client_api'
-require_relative 'aws-sdk-backup/plugins/endpoints.rb'
-require_relative 'aws-sdk-backup/client'
-require_relative 'aws-sdk-backup/errors'
-require_relative 'aws-sdk-backup/resource'
-require_relative 'aws-sdk-backup/endpoint_parameters'
-require_relative 'aws-sdk-backup/endpoint_provider'
-require_relative 'aws-sdk-backup/endpoints'
-require_relative 'aws-sdk-backup/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:backup)
 
 # This module provides support for AWS Backup. This module is available in the
 # `aws-sdk-backup` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-backup/customizations'
 #
 # @!group service
 module Aws::Backup
+  autoload :Types, 'aws-sdk-backup/types'
+  autoload :ClientApi, 'aws-sdk-backup/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-backup/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-backup/client'
+  autoload :Errors, 'aws-sdk-backup/errors'
+  autoload :Resource, 'aws-sdk-backup/resource'
+  autoload :EndpointParameters, 'aws-sdk-backup/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-backup/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-backup/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.80.0'
 
 end
+
+require_relative 'aws-sdk-backup/customizations'

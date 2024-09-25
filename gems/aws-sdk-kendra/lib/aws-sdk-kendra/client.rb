@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:kendra)
-
 module Aws::Kendra
   # An API client for Kendra.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -7371,7 +7369,7 @@ module Aws::Kendra
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

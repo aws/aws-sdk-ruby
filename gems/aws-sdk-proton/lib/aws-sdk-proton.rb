@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-proton/types'
-require_relative 'aws-sdk-proton/client_api'
-require_relative 'aws-sdk-proton/plugins/endpoints.rb'
-require_relative 'aws-sdk-proton/client'
-require_relative 'aws-sdk-proton/errors'
-require_relative 'aws-sdk-proton/waiters'
-require_relative 'aws-sdk-proton/resource'
-require_relative 'aws-sdk-proton/endpoint_parameters'
-require_relative 'aws-sdk-proton/endpoint_provider'
-require_relative 'aws-sdk-proton/endpoints'
-require_relative 'aws-sdk-proton/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:proton)
 
 # This module provides support for AWS Proton. This module is available in the
 # `aws-sdk-proton` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-proton/customizations'
 #
 # @!group service
 module Aws::Proton
+  autoload :Types, 'aws-sdk-proton/types'
+  autoload :ClientApi, 'aws-sdk-proton/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-proton/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-proton/client'
+  autoload :Errors, 'aws-sdk-proton/errors'
+  autoload :Waiters, 'aws-sdk-proton/waiters'
+  autoload :Resource, 'aws-sdk-proton/resource'
+  autoload :EndpointParameters, 'aws-sdk-proton/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-proton/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-proton/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.47.0'
 
 end
+
+require_relative 'aws-sdk-proton/customizations'

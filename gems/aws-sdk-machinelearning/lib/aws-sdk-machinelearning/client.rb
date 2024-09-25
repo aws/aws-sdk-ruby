@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-machinelearning/plugins/predict_endpoint.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:machinelearning)
-
 module Aws::MachineLearning
   # An API client for MachineLearning.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2490,7 +2488,7 @@ module Aws::MachineLearning
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-machinelearning'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

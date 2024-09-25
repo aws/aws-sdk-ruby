@@ -106,7 +106,29 @@ module AwsSdkCodeGenerator
         @identifiers.size > 0
       end
 
+      # @return [Boolean]
+      def customization_file_exists?
+        File.exist?(
+          File.join(
+            Helper.gem_lib_path(gem_name), "#{resource_customization}.rb"
+          )
+        )
+      end
+
+      # @return [String]
+      def resource_customization
+        "#{gem_name}/customizations/#{underscored_name}"
+      end
+
       private
+
+      def gem_name
+        "aws-sdk-#{module_name.split('::').last.downcase}"
+      end
+
+      def underscored_name
+        class_name.gsub(/([a-z])([A-Z])/, '\1_\2').downcase
+      end
 
       def build_associations(options)
         ResourceAssociation.build_list(

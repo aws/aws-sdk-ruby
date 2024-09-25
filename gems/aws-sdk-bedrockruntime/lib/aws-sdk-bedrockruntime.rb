@@ -11,18 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-bedrockruntime/types'
-require_relative 'aws-sdk-bedrockruntime/client_api'
-require_relative 'aws-sdk-bedrockruntime/plugins/endpoints.rb'
-require_relative 'aws-sdk-bedrockruntime/client'
-require_relative 'aws-sdk-bedrockruntime/errors'
-require_relative 'aws-sdk-bedrockruntime/waiters'
-require_relative 'aws-sdk-bedrockruntime/resource'
-require_relative 'aws-sdk-bedrockruntime/endpoint_parameters'
-require_relative 'aws-sdk-bedrockruntime/endpoint_provider'
-require_relative 'aws-sdk-bedrockruntime/endpoints'
-require_relative 'aws-sdk-bedrockruntime/customizations'
-require_relative 'aws-sdk-bedrockruntime/event_streams'
+Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockruntime)
 
 # This module provides support for Amazon Bedrock Runtime. This module is available in the
 # `aws-sdk-bedrockruntime` gem.
@@ -53,7 +42,22 @@ require_relative 'aws-sdk-bedrockruntime/event_streams'
 #
 # @!group service
 module Aws::BedrockRuntime
+  autoload :Types, 'aws-sdk-bedrockruntime/types'
+  autoload :ClientApi, 'aws-sdk-bedrockruntime/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-bedrockruntime/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-bedrockruntime/client'
+  autoload :Errors, 'aws-sdk-bedrockruntime/errors'
+  autoload :Waiters, 'aws-sdk-bedrockruntime/waiters'
+  autoload :Resource, 'aws-sdk-bedrockruntime/resource'
+  autoload :EndpointParameters, 'aws-sdk-bedrockruntime/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-bedrockruntime/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-bedrockruntime/endpoints'
+  autoload :EventStreams, 'aws-sdk-bedrockruntime/event_streams'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.25.0'
 
 end
+
+require_relative 'aws-sdk-bedrockruntime/customizations'

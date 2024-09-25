@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:resourceexplorer2)
-
 module Aws::ResourceExplorer2
   # An API client for ResourceExplorer2.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -872,9 +870,8 @@ module Aws::ResourceExplorer2
 
     # Retrieves the status of your account's Amazon Web Services service
     # access, and validates the service linked role required to access the
-    # multi-account search feature. Only the management account or a
-    # delegated administrator with service access enabled can invoke this
-    # API call.
+    # multi-account search feature. Only the management account can invoke
+    # this API call.
     #
     # @return [Types::GetAccountLevelServiceConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1129,6 +1126,90 @@ module Aws::ResourceExplorer2
     # @param [Hash] params ({})
     def list_indexes_for_members(params = {}, options = {})
       req = build_request(:list_indexes_for_members, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of resources and their details that match the specified
+    # criteria. This query must use a view. If you don’t explicitly specify
+    # a view, then Resource Explorer uses the default view for the Amazon
+    # Web Services Region in which you call this operation.
+    #
+    # @option params [Types::SearchFilter] :filters
+    #   A search filter defines which resources can be part of a search query
+    #   result set.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value appropriate to the operation. If additional items exist beyond
+    #   those included in the current response, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
+    #
+    # @option params [String] :view_arn
+    #   Specifies the Amazon resource name (ARN) of the view to use for the
+    #   query. If you don't specify a value for this parameter, then the
+    #   operation automatically uses the default view for the Amazon Web
+    #   Services Region in which you called this operation. If the Region
+    #   either doesn't have a default view or if you don't have permission
+    #   to use the default view, then the operation fails with a 401
+    #   Unauthorized exception.
+    #
+    # @return [Types::ListResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourcesOutput#next_token #next_token} => String
+    #   * {Types::ListResourcesOutput#resources #resources} => Array&lt;Types::Resource&gt;
+    #   * {Types::ListResourcesOutput#view_arn #view_arn} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resources({
+    #     filters: {
+    #       filter_string: "SearchFilterFilterStringString", # required
+    #     },
+    #     max_results: 1,
+    #     next_token: "ListResourcesInputNextTokenString",
+    #     view_arn: "ListResourcesInputViewArnString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.resources #=> Array
+    #   resp.resources[0].arn #=> String
+    #   resp.resources[0].last_reported_at #=> Time
+    #   resp.resources[0].owning_account_id #=> String
+    #   resp.resources[0].properties #=> Array
+    #   resp.resources[0].properties[0].last_reported_at #=> Time
+    #   resp.resources[0].properties[0].name #=> String
+    #   resp.resources[0].region #=> String
+    #   resp.resources[0].resource_type #=> String
+    #   resp.resources[0].service #=> String
+    #   resp.view_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListResources AWS API Documentation
+    #
+    # @overload list_resources(params = {})
+    # @param [Hash] params ({})
+    def list_resources(params = {}, options = {})
+      req = build_request(:list_resources, params)
       req.send_request(options)
     end
 
@@ -1677,7 +1758,7 @@ module Aws::ResourceExplorer2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

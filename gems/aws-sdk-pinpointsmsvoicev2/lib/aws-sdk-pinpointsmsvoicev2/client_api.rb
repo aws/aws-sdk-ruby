@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::PinpointSMSVoiceV2
   # @api private
   module ClientApi
@@ -94,6 +95,8 @@ module Aws::PinpointSMSVoiceV2
     DeleteRegistrationFieldValueResult = Shapes::StructureShape.new(name: 'DeleteRegistrationFieldValueResult')
     DeleteRegistrationRequest = Shapes::StructureShape.new(name: 'DeleteRegistrationRequest')
     DeleteRegistrationResult = Shapes::StructureShape.new(name: 'DeleteRegistrationResult')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResult = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResult')
     DeleteTextMessageSpendLimitOverrideRequest = Shapes::StructureShape.new(name: 'DeleteTextMessageSpendLimitOverrideRequest')
     DeleteTextMessageSpendLimitOverrideResult = Shapes::StructureShape.new(name: 'DeleteTextMessageSpendLimitOverrideResult')
     DeleteVerifiedDestinationNumberRequest = Shapes::StructureShape.new(name: 'DeleteVerifiedDestinationNumberRequest')
@@ -162,6 +165,8 @@ module Aws::PinpointSMSVoiceV2
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     GetProtectConfigurationCountryRuleSetRequest = Shapes::StructureShape.new(name: 'GetProtectConfigurationCountryRuleSetRequest')
     GetProtectConfigurationCountryRuleSetResult = Shapes::StructureShape.new(name: 'GetProtectConfigurationCountryRuleSetResult')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResult = Shapes::StructureShape.new(name: 'GetResourcePolicyResult')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -211,6 +216,7 @@ module Aws::PinpointSMSVoiceV2
     OptedOutNumberList = Shapes::ListShape.new(name: 'OptedOutNumberList')
     OriginationIdentityMetadata = Shapes::StructureShape.new(name: 'OriginationIdentityMetadata')
     OriginationIdentityMetadataList = Shapes::ListShape.new(name: 'OriginationIdentityMetadataList')
+    Owner = Shapes::StringShape.new(name: 'Owner')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     PhoneNumberFilter = Shapes::StructureShape.new(name: 'PhoneNumberFilter')
     PhoneNumberFilterList = Shapes::ListShape.new(name: 'PhoneNumberFilterList')
@@ -252,6 +258,8 @@ module Aws::PinpointSMSVoiceV2
     PutOptedOutNumberResult = Shapes::StructureShape.new(name: 'PutOptedOutNumberResult')
     PutRegistrationFieldValueRequest = Shapes::StructureShape.new(name: 'PutRegistrationFieldValueRequest')
     PutRegistrationFieldValueResult = Shapes::StructureShape.new(name: 'PutRegistrationFieldValueResult')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResult = Shapes::StructureShape.new(name: 'PutResourcePolicyResult')
     RegistrationAssociationBehavior = Shapes::StringShape.new(name: 'RegistrationAssociationBehavior')
     RegistrationAssociationFilter = Shapes::StructureShape.new(name: 'RegistrationAssociationFilter')
     RegistrationAssociationFilterList = Shapes::ListShape.new(name: 'RegistrationAssociationFilterList')
@@ -312,6 +320,7 @@ module Aws::PinpointSMSVoiceV2
     RequestableNumberType = Shapes::StringShape.new(name: 'RequestableNumberType')
     ResourceIdOrArn = Shapes::StringShape.new(name: 'ResourceIdOrArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     SectionPath = Shapes::StringShape.new(name: 'SectionPath')
     SectionPathList = Shapes::ListShape.new(name: 'SectionPathList')
@@ -763,6 +772,14 @@ module Aws::PinpointSMSVoiceV2
     DeleteRegistrationResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
     DeleteRegistrationResult.struct_class = Types::DeleteRegistrationResult
 
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResult.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
+    DeleteResourcePolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    DeleteResourcePolicyResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    DeleteResourcePolicyResult.struct_class = Types::DeleteResourcePolicyResult
+
     DeleteTextMessageSpendLimitOverrideRequest.struct_class = Types::DeleteTextMessageSpendLimitOverrideRequest
 
     DeleteTextMessageSpendLimitOverrideResult.add_member(:monthly_limit, Shapes::ShapeRef.new(shape: MonthlyLimit, location_name: "MonthlyLimit"))
@@ -824,6 +841,7 @@ module Aws::PinpointSMSVoiceV2
     DescribeOptOutListsRequest.add_member(:opt_out_list_names, Shapes::ShapeRef.new(shape: OptOutListNameList, location_name: "OptOutListNames"))
     DescribeOptOutListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeOptOutListsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeOptOutListsRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     DescribeOptOutListsRequest.struct_class = Types::DescribeOptOutListsRequest
 
     DescribeOptOutListsResult.add_member(:opt_out_lists, Shapes::ShapeRef.new(shape: OptOutListInformationList, location_name: "OptOutLists"))
@@ -847,6 +865,7 @@ module Aws::PinpointSMSVoiceV2
     DescribePhoneNumbersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PhoneNumberFilterList, location_name: "Filters"))
     DescribePhoneNumbersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribePhoneNumbersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribePhoneNumbersRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     DescribePhoneNumbersRequest.struct_class = Types::DescribePhoneNumbersRequest
 
     DescribePhoneNumbersResult.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: PhoneNumberInformationList, location_name: "PhoneNumbers"))
@@ -857,6 +876,7 @@ module Aws::PinpointSMSVoiceV2
     DescribePoolsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PoolFilterList, location_name: "Filters"))
     DescribePoolsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribePoolsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribePoolsRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     DescribePoolsRequest.struct_class = Types::DescribePoolsRequest
 
     DescribePoolsResult.add_member(:pools, Shapes::ShapeRef.new(shape: PoolInformationList, location_name: "Pools"))
@@ -958,6 +978,7 @@ module Aws::PinpointSMSVoiceV2
     DescribeSenderIdsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SenderIdFilterList, location_name: "Filters"))
     DescribeSenderIdsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeSenderIdsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeSenderIdsRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     DescribeSenderIdsRequest.struct_class = Types::DescribeSenderIdsRequest
 
     DescribeSenderIdsResult.add_member(:sender_ids, Shapes::ShapeRef.new(shape: SenderIdInformationList, location_name: "SenderIds"))
@@ -1046,6 +1067,14 @@ module Aws::PinpointSMSVoiceV2
     GetProtectConfigurationCountryRuleSetResult.add_member(:number_capability, Shapes::ShapeRef.new(shape: NumberCapability, required: true, location_name: "NumberCapability"))
     GetProtectConfigurationCountryRuleSetResult.add_member(:country_rule_set, Shapes::ShapeRef.new(shape: ProtectConfigurationCountryRuleSet, required: true, location_name: "CountryRuleSet"))
     GetProtectConfigurationCountryRuleSetResult.struct_class = Types::GetProtectConfigurationCountryRuleSetResult
+
+    GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResult.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
+    GetResourcePolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    GetResourcePolicyResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    GetResourcePolicyResult.struct_class = Types::GetResourcePolicyResult
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -1265,6 +1294,15 @@ module Aws::PinpointSMSVoiceV2
     PutRegistrationFieldValueResult.add_member(:text_value, Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
     PutRegistrationFieldValueResult.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationAttachmentId"))
     PutRegistrationFieldValueResult.struct_class = Types::PutRegistrationFieldValueResult
+
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "Policy"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResult.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
+    PutResourcePolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    PutResourcePolicyResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    PutResourcePolicyResult.struct_class = Types::PutResourcePolicyResult
 
     RegistrationAssociationFilter.add_member(:name, Shapes::ShapeRef.new(shape: RegistrationAssociationFilterName, required: true, location_name: "Name"))
     RegistrationAssociationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
@@ -2242,6 +2280,19 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_text_message_spend_limit_override, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTextMessageSpendLimitOverride"
         o.http_method = "POST"
@@ -2690,6 +2741,19 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:list_pool_origination_identities, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPoolOriginationIdentities"
         o.http_method = "POST"
@@ -2780,6 +2844,19 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

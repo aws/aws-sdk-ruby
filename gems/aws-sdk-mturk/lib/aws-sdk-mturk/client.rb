@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:mturk)
-
 module Aws::MTurk
   # An API client for MTurk.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2988,7 +2986,7 @@ module Aws::MTurk
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mturk'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

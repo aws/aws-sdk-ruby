@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-elasticloadbalancingv2/types'
-require_relative 'aws-sdk-elasticloadbalancingv2/client_api'
-require_relative 'aws-sdk-elasticloadbalancingv2/plugins/endpoints.rb'
-require_relative 'aws-sdk-elasticloadbalancingv2/client'
-require_relative 'aws-sdk-elasticloadbalancingv2/errors'
-require_relative 'aws-sdk-elasticloadbalancingv2/waiters'
-require_relative 'aws-sdk-elasticloadbalancingv2/resource'
-require_relative 'aws-sdk-elasticloadbalancingv2/endpoint_parameters'
-require_relative 'aws-sdk-elasticloadbalancingv2/endpoint_provider'
-require_relative 'aws-sdk-elasticloadbalancingv2/endpoints'
-require_relative 'aws-sdk-elasticloadbalancingv2/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:elasticloadbalancingv2)
 
 # This module provides support for Elastic Load Balancing. This module is available in the
 # `aws-sdk-elasticloadbalancingv2` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-elasticloadbalancingv2/customizations'
 #
 # @!group service
 module Aws::ElasticLoadBalancingV2
+  autoload :Types, 'aws-sdk-elasticloadbalancingv2/types'
+  autoload :ClientApi, 'aws-sdk-elasticloadbalancingv2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-elasticloadbalancingv2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-elasticloadbalancingv2/client'
+  autoload :Errors, 'aws-sdk-elasticloadbalancingv2/errors'
+  autoload :Waiters, 'aws-sdk-elasticloadbalancingv2/waiters'
+  autoload :Resource, 'aws-sdk-elasticloadbalancingv2/resource'
+  autoload :EndpointParameters, 'aws-sdk-elasticloadbalancingv2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-elasticloadbalancingv2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-elasticloadbalancingv2/endpoints'
 
-  GEM_VERSION = '1.115.0'
+  GEM_VERSION = '1.117.0'
 
 end
+
+require_relative 'aws-sdk-elasticloadbalancingv2/customizations'

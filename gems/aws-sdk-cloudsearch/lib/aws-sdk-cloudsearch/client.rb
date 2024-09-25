@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:cloudsearch)
-
 module Aws::CloudSearch
   # An API client for CloudSearch.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1972,7 +1970,7 @@ module Aws::CloudSearch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudsearch'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

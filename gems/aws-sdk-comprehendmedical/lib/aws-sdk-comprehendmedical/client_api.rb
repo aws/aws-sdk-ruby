@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ComprehendMedical
   # @api private
   module ClientApi

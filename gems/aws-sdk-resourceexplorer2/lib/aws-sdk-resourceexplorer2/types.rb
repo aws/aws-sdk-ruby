@@ -732,6 +732,86 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   A search filter defines which resources can be part of a search
+    #   query result set.
+    #   @return [Types::SearchFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value appropriate to the operation. If additional items exist beyond
+    #   those included in the current response, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after
+    #   24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_arn
+    #   Specifies the Amazon resource name (ARN) of the view to use for the
+    #   query. If you don't specify a value for this parameter, then the
+    #   operation automatically uses the default view for the Amazon Web
+    #   Services Region in which you called this operation. If the Region
+    #   either doesn't have a default view or if you don't have permission
+    #   to use the default view, then the operation fails with a 401
+    #   Unauthorized exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListResourcesInput AWS API Documentation
+    #
+    class ListResourcesInput < Struct.new(
+      :filters,
+      :max_results,
+      :next_token,
+      :view_arn)
+      SENSITIVE = [:filters]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`. The pagination tokens expire after 24
+    #   hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The list of structures that describe the resources that match the
+    #   query.
+    #   @return [Array<Types::Resource>]
+    #
+    # @!attribute [rw] view_arn
+    #   The Amazon resource name (ARN) of the view that this operation used
+    #   to perform the search.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListResourcesOutput AWS API Documentation
+    #
+    class ListResourcesOutput < Struct.new(
+      :next_token,
+      :resources,
+      :view_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results that you want included on each page of
     #   the response. If you do not include this parameter, it defaults to a
@@ -981,8 +1061,8 @@ module Aws::ResourceExplorer2
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   The Amazon Web Service that owns the resource and is responsible for
-    #   creating and updating it.
+    #   The Amazon Web Servicesservice that owns the resource and is
+    #   responsible for creating and updating it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/Resource AWS API Documentation
@@ -1235,9 +1315,9 @@ module Aws::ResourceExplorer2
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   The Amazon Web Service that is associated with the resource type.
-    #   This is the primary service that lets you create and interact with
-    #   resources of this type.
+    #   The Amazon Web Servicesservice that is associated with the resource
+    #   type. This is the primary service that lets you create and interact
+    #   with resources of this type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/SupportedResourceType AWS API Documentation
@@ -1556,3 +1636,4 @@ module Aws::ResourceExplorer2
 
   end
 end
+

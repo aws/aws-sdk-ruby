@@ -598,3 +598,4 @@ module Aws::MarketplaceMetering
 
   end
 end
+

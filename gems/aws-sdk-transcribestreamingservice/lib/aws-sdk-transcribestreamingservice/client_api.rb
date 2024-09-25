@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::TranscribeStreamingService
   # @api private
   module ClientApi

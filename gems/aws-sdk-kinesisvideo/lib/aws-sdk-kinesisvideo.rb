@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kinesisvideo/types'
-require_relative 'aws-sdk-kinesisvideo/client_api'
-require_relative 'aws-sdk-kinesisvideo/plugins/endpoints.rb'
-require_relative 'aws-sdk-kinesisvideo/client'
-require_relative 'aws-sdk-kinesisvideo/errors'
-require_relative 'aws-sdk-kinesisvideo/resource'
-require_relative 'aws-sdk-kinesisvideo/endpoint_parameters'
-require_relative 'aws-sdk-kinesisvideo/endpoint_provider'
-require_relative 'aws-sdk-kinesisvideo/endpoints'
-require_relative 'aws-sdk-kinesisvideo/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:kinesisvideo)
 
 # This module provides support for Amazon Kinesis Video Streams. This module is available in the
 # `aws-sdk-kinesisvideo` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-kinesisvideo/customizations'
 #
 # @!group service
 module Aws::KinesisVideo
+  autoload :Types, 'aws-sdk-kinesisvideo/types'
+  autoload :ClientApi, 'aws-sdk-kinesisvideo/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-kinesisvideo/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-kinesisvideo/client'
+  autoload :Errors, 'aws-sdk-kinesisvideo/errors'
+  autoload :Resource, 'aws-sdk-kinesisvideo/resource'
+  autoload :EndpointParameters, 'aws-sdk-kinesisvideo/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-kinesisvideo/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-kinesisvideo/endpoints'
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.73.0'
 
 end
+
+require_relative 'aws-sdk-kinesisvideo/customizations'

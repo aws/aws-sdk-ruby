@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudtrail/types'
-require_relative 'aws-sdk-cloudtrail/client_api'
-require_relative 'aws-sdk-cloudtrail/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudtrail/client'
-require_relative 'aws-sdk-cloudtrail/errors'
-require_relative 'aws-sdk-cloudtrail/resource'
-require_relative 'aws-sdk-cloudtrail/endpoint_parameters'
-require_relative 'aws-sdk-cloudtrail/endpoint_provider'
-require_relative 'aws-sdk-cloudtrail/endpoints'
-require_relative 'aws-sdk-cloudtrail/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudtrail)
 
 # This module provides support for AWS CloudTrail. This module is available in the
 # `aws-sdk-cloudtrail` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-cloudtrail/customizations'
 #
 # @!group service
 module Aws::CloudTrail
+  autoload :Types, 'aws-sdk-cloudtrail/types'
+  autoload :ClientApi, 'aws-sdk-cloudtrail/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudtrail/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudtrail/client'
+  autoload :Errors, 'aws-sdk-cloudtrail/errors'
+  autoload :Resource, 'aws-sdk-cloudtrail/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudtrail/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudtrail/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudtrail/endpoints'
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.91.0'
 
 end
+
+require_relative 'aws-sdk-cloudtrail/customizations'

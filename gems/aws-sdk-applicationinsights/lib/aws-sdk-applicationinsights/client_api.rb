@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ApplicationInsights
   # @api private
   module ClientApi

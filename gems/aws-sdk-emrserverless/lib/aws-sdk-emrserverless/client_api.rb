@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::EMRServerless
   # @api private
   module ClientApi
@@ -99,6 +100,7 @@ module Aws::EMRServerless
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
     LogTypeMap = Shapes::MapShape.new(name: 'LogTypeMap')
     LogTypeString = Shapes::StringShape.new(name: 'LogTypeString')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedPersistenceMonitoringConfiguration = Shapes::StructureShape.new(name: 'ManagedPersistenceMonitoringConfiguration')
     MaximumAllowedResources = Shapes::StructureShape.new(name: 'MaximumAllowedResources')
     MemorySize = Shapes::StringShape.new(name: 'MemorySize')
@@ -116,6 +118,7 @@ module Aws::EMRServerless
     RetryPolicy = Shapes::StructureShape.new(name: 'RetryPolicy')
     RetryPolicyMaxFailedAttemptsPerHourInteger = Shapes::IntegerShape.new(name: 'RetryPolicyMaxFailedAttemptsPerHourInteger')
     S3MonitoringConfiguration = Shapes::StructureShape.new(name: 'S3MonitoringConfiguration')
+    SchedulerConfiguration = Shapes::StructureShape.new(name: 'SchedulerConfiguration')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityGroupString = Shapes::StringShape.new(name: 'SecurityGroupString')
     SensitivePropertiesMap = Shapes::MapShape.new(name: 'SensitivePropertiesMap')
@@ -175,6 +178,7 @@ module Aws::EMRServerless
     Application.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     Application.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
     Application.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
+    Application.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     Application.struct_class = Types::Application
 
     ApplicationList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
@@ -245,6 +249,7 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     CreateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
     CreateApplicationRequest.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
+    CreateApplicationRequest.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -339,6 +344,9 @@ module Aws::EMRServerless
     JobRun.add_member(:attempt, Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "attempt"))
     JobRun.add_member(:attempt_created_at, Shapes::ShapeRef.new(shape: Date, location_name: "attemptCreatedAt"))
     JobRun.add_member(:attempt_updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "attemptUpdatedAt"))
+    JobRun.add_member(:started_at, Shapes::ShapeRef.new(shape: Date, location_name: "startedAt"))
+    JobRun.add_member(:ended_at, Shapes::ShapeRef.new(shape: Date, location_name: "endedAt"))
+    JobRun.add_member(:queued_duration_milliseconds, Shapes::ShapeRef.new(shape: Long, location_name: "queuedDurationMilliseconds"))
     JobRun.struct_class = Types::JobRun
 
     JobRunAttemptSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -463,6 +471,10 @@ module Aws::EMRServerless
     S3MonitoringConfiguration.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: EncryptionKeyArn, location_name: "encryptionKeyArn"))
     S3MonitoringConfiguration.struct_class = Types::S3MonitoringConfiguration
 
+    SchedulerConfiguration.add_member(:queue_timeout_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "queueTimeoutMinutes"))
+    SchedulerConfiguration.add_member(:max_concurrent_runs, Shapes::ShapeRef.new(shape: Integer, location_name: "maxConcurrentRuns"))
+    SchedulerConfiguration.struct_class = Types::SchedulerConfiguration
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupString)
 
     SensitivePropertiesMap.key = Shapes::ShapeRef.new(shape: ConfigurationPropertyKey)
@@ -541,6 +553,7 @@ module Aws::EMRServerless
     UpdateApplicationRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
     UpdateApplicationRequest.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     UpdateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    UpdateApplicationRequest.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application, Shapes::ShapeRef.new(shape: Application, required: true, location_name: "application"))
@@ -575,9 +588,10 @@ module Aws::EMRServerless
 
       api.metadata = {
         "apiVersion" => "2021-07-13",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "emr-serverless",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "EMR Serverless",
         "serviceId" => "EMR Serverless",
         "signatureVersion" => "v4",

@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-resiliencehub/types'
-require_relative 'aws-sdk-resiliencehub/client_api'
-require_relative 'aws-sdk-resiliencehub/plugins/endpoints.rb'
-require_relative 'aws-sdk-resiliencehub/client'
-require_relative 'aws-sdk-resiliencehub/errors'
-require_relative 'aws-sdk-resiliencehub/resource'
-require_relative 'aws-sdk-resiliencehub/endpoint_parameters'
-require_relative 'aws-sdk-resiliencehub/endpoint_provider'
-require_relative 'aws-sdk-resiliencehub/endpoints'
-require_relative 'aws-sdk-resiliencehub/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:resiliencehub)
 
 # This module provides support for AWS Resilience Hub. This module is available in the
 # `aws-sdk-resiliencehub` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-resiliencehub/customizations'
 #
 # @!group service
 module Aws::ResilienceHub
+  autoload :Types, 'aws-sdk-resiliencehub/types'
+  autoload :ClientApi, 'aws-sdk-resiliencehub/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-resiliencehub/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-resiliencehub/client'
+  autoload :Errors, 'aws-sdk-resiliencehub/errors'
+  autoload :Resource, 'aws-sdk-resiliencehub/resource'
+  autoload :EndpointParameters, 'aws-sdk-resiliencehub/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-resiliencehub/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-resiliencehub/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.39.0'
 
 end
+
+require_relative 'aws-sdk-resiliencehub/customizations'

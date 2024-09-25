@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-pcs/types'
-require_relative 'aws-sdk-pcs/client_api'
-require_relative 'aws-sdk-pcs/plugins/endpoints.rb'
-require_relative 'aws-sdk-pcs/client'
-require_relative 'aws-sdk-pcs/errors'
-require_relative 'aws-sdk-pcs/waiters'
-require_relative 'aws-sdk-pcs/resource'
-require_relative 'aws-sdk-pcs/endpoint_parameters'
-require_relative 'aws-sdk-pcs/endpoint_provider'
-require_relative 'aws-sdk-pcs/endpoints'
-require_relative 'aws-sdk-pcs/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:pcs)
 
 # This module provides support for AWS Parallel Computing Service. This module is available in the
 # `aws-sdk-pcs` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-pcs/customizations'
 #
 # @!group service
 module Aws::PCS
+  autoload :Types, 'aws-sdk-pcs/types'
+  autoload :ClientApi, 'aws-sdk-pcs/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-pcs/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-pcs/client'
+  autoload :Errors, 'aws-sdk-pcs/errors'
+  autoload :Waiters, 'aws-sdk-pcs/waiters'
+  autoload :Resource, 'aws-sdk-pcs/resource'
+  autoload :EndpointParameters, 'aws-sdk-pcs/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-pcs/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-pcs/endpoints'
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.6.0'
 
 end
+
+require_relative 'aws-sdk-pcs/customizations'

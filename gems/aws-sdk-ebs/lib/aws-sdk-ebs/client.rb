@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ebs)
-
 module Aws::EBS
   # An API client for EBS.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1060,7 +1058,7 @@ module Aws::EBS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

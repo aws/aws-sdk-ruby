@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-gluedatabrew/types'
-require_relative 'aws-sdk-gluedatabrew/client_api'
-require_relative 'aws-sdk-gluedatabrew/plugins/endpoints.rb'
-require_relative 'aws-sdk-gluedatabrew/client'
-require_relative 'aws-sdk-gluedatabrew/errors'
-require_relative 'aws-sdk-gluedatabrew/resource'
-require_relative 'aws-sdk-gluedatabrew/endpoint_parameters'
-require_relative 'aws-sdk-gluedatabrew/endpoint_provider'
-require_relative 'aws-sdk-gluedatabrew/endpoints'
-require_relative 'aws-sdk-gluedatabrew/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:gluedatabrew)
 
 # This module provides support for AWS Glue DataBrew. This module is available in the
 # `aws-sdk-gluedatabrew` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-gluedatabrew/customizations'
 #
 # @!group service
 module Aws::GlueDataBrew
+  autoload :Types, 'aws-sdk-gluedatabrew/types'
+  autoload :ClientApi, 'aws-sdk-gluedatabrew/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-gluedatabrew/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-gluedatabrew/client'
+  autoload :Errors, 'aws-sdk-gluedatabrew/errors'
+  autoload :Resource, 'aws-sdk-gluedatabrew/resource'
+  autoload :EndpointParameters, 'aws-sdk-gluedatabrew/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-gluedatabrew/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-gluedatabrew/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.48.0'
 
 end
+
+require_relative 'aws-sdk-gluedatabrew/customizations'

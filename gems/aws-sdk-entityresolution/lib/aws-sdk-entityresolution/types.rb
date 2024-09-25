@@ -3244,3 +3244,4 @@ module Aws::EntityResolution
 
   end
 end
+

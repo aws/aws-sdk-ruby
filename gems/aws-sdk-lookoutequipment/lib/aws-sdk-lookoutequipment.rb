@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-lookoutequipment/types'
-require_relative 'aws-sdk-lookoutequipment/client_api'
-require_relative 'aws-sdk-lookoutequipment/plugins/endpoints.rb'
-require_relative 'aws-sdk-lookoutequipment/client'
-require_relative 'aws-sdk-lookoutequipment/errors'
-require_relative 'aws-sdk-lookoutequipment/resource'
-require_relative 'aws-sdk-lookoutequipment/endpoint_parameters'
-require_relative 'aws-sdk-lookoutequipment/endpoint_provider'
-require_relative 'aws-sdk-lookoutequipment/endpoints'
-require_relative 'aws-sdk-lookoutequipment/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:lookoutequipment)
 
 # This module provides support for Amazon Lookout for Equipment. This module is available in the
 # `aws-sdk-lookoutequipment` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-lookoutequipment/customizations'
 #
 # @!group service
 module Aws::LookoutEquipment
+  autoload :Types, 'aws-sdk-lookoutequipment/types'
+  autoload :ClientApi, 'aws-sdk-lookoutequipment/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-lookoutequipment/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-lookoutequipment/client'
+  autoload :Errors, 'aws-sdk-lookoutequipment/errors'
+  autoload :Resource, 'aws-sdk-lookoutequipment/resource'
+  autoload :EndpointParameters, 'aws-sdk-lookoutequipment/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-lookoutequipment/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-lookoutequipment/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.42.0'
 
 end
+
+require_relative 'aws-sdk-lookoutequipment/customizations'

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::MarketplaceCommerceAnalytics
   # @api private
   module ClientApi

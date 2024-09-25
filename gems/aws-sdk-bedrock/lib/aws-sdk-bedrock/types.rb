@@ -205,8 +205,13 @@ module Aws::Bedrock
     #
     # @!attribute [rw] inference_config
     #   Specify the models you want to use in your model evaluation job.
-    #   Automatic model evaluation jobs support a single model, and model
-    #   evaluation job that use human workers support two models.
+    #   Automatic model evaluation jobs support a single model or [inference
+    #   profile][1], and model evaluation job that use human workers support
+    #   two models or inference profiles.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #   @return [Types::EvaluationInferenceConfig]
     #
     # @!attribute [rw] output_data_config
@@ -970,11 +975,11 @@ module Aws::Bedrock
     #
     class DeleteProvisionedModelThroughputResponse < Aws::EmptyStructure; end
 
-    # Contains the ARN of the Amazon Bedrock models specified in your model
-    # evaluation job. Each Amazon Bedrock model supports different
-    # `inferenceParams`. To learn more about supported inference parameters
-    # for Amazon Bedrock models, see [Inference parameters for foundation
-    # models][1].
+    # Contains the ARN of the Amazon Bedrock model or [inference profile][1]
+    # specified in your model evaluation job. Each Amazon Bedrock model
+    # supports different `inferenceParams`. To learn more about supported
+    # inference parameters for Amazon Bedrock models, see [Inference
+    # parameters for foundation models][2].
     #
     # The `inferenceParams` are specified using JSON. To successfully insert
     # JSON as string make sure that all quotations are properly escaped. For
@@ -984,10 +989,11 @@ module Aws::Bedrock
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
     #
     # @!attribute [rw] model_identifier
-    #   The ARN of the Amazon Bedrock model specified.
+    #   The ARN of the Amazon Bedrock model or inference profile specified.
     #   @return [String]
     #
     # @!attribute [rw] inference_params
@@ -1146,8 +1152,8 @@ module Aws::Bedrock
     # @note EvaluationModelConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluationModelConfig corresponding to the set member.
     #
     # @!attribute [rw] bedrock_model
-    #   Defines the Amazon Bedrock model and inference parameters you want
-    #   used.
+    #   Defines the Amazon Bedrock model or inference profile and inference
+    #   parameters you want used.
     #   @return [Types::EvaluationBedrockModel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationModelConfig AWS API Documentation
@@ -5225,3 +5231,4 @@ module Aws::Bedrock
 
   end
 end
+

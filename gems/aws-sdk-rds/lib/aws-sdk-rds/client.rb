@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-rds/plugins/cross_region_copying.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:rds)
-
 module Aws::RDS
   # An API client for RDS.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -6090,17 +6088,24 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [String] :db_parameter_group_name
-    #   The name of the DB parameter group to associate with this DB instance.
+    #   The name of the DB parameter group to associate with this read replica
+    #   DB instance.
     #
-    #   If you don't specify a value for `DBParameterGroupName`, then Amazon
-    #   RDS uses the `DBParameterGroup` of the source DB instance for a same
+    #   For Single-AZ or Multi-AZ DB instance read replica instances, if you
+    #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
+    #   uses the `DBParameterGroup` of the source DB instance for a same
     #   Region read replica, or the default `DBParameterGroup` for the
     #   specified DB engine for a cross-Region read replica.
     #
+    #   For Multi-AZ DB cluster same Region read replica instances, if you
+    #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
+    #   uses the default `DBParameterGroup`.
+    #
     #   Specifying a parameter group for this operation is only supported for
-    #   MySQL DB instances for cross-Region read replicas and for Oracle DB
-    #   instances. It isn't supported for MySQL DB instances for same Region
-    #   read replicas or for RDS Custom.
+    #   MySQL DB instances for cross-Region read replicas, for Multi-AZ DB
+    #   cluster read replica instances, and for Oracle DB instances. It isn't
+    #   supported for MySQL DB instances for same Region read replicas or for
+    #   RDS Custom.
     #
     #   Constraints:
     #
@@ -7378,18 +7383,17 @@ module Aws::RDS
     #   The name of the primary DB cluster for the DB shard group.
     #
     # @option params [Integer] :compute_redundancy
-    #   Specifies whether to create standby instances for the DB shard group.
-    #   Valid values are the following:
+    #   Specifies whether to create standby DB shard groups for the DB shard
+    #   group. Valid values are the following:
     #
-    #   * 0 - Creates a single, primary DB instance for each physical shard.
-    #     This is the default value, and the only one supported for the
-    #     preview.
+    #   * 0 - Creates a DB shard group without a standby DB shard group. This
+    #     is the default value.
     #
-    #   * 1 - Creates a primary DB instance and a standby instance in a
-    #     different Availability Zone (AZ) for each physical shard.
+    #   * 1 - Creates a DB shard group with a standby DB shard group in a
+    #     different Availability Zone (AZ).
     #
-    #   * 2 - Creates a primary DB instance and two standby instances in
-    #     different AZs for each physical shard.
+    #   * 2 - Creates a DB shard group with two standby DB shard groups in two
+    #     different AZs.
     #
     # @option params [required, Float] :max_acu
     #   The maximum capacity of the DB shard group in Aurora capacity units
@@ -7445,6 +7449,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#status #status} => String
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DBShardGroup#endpoint #endpoint} => String
+    #   * {Types::DBShardGroup#db_shard_group_arn #db_shard_group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7468,6 +7473,7 @@ module Aws::RDS
     #   resp.status #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.endpoint #=> String
+    #   resp.db_shard_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBShardGroup AWS API Documentation
     #
@@ -10110,6 +10116,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#status #status} => String
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DBShardGroup#endpoint #endpoint} => String
+    #   * {Types::DBShardGroup#db_shard_group_arn #db_shard_group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -10128,6 +10135,7 @@ module Aws::RDS
     #   resp.status #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.endpoint #=> String
+    #   resp.db_shard_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBShardGroup AWS API Documentation
     #
@@ -14417,6 +14425,7 @@ module Aws::RDS
     #   resp.db_shard_groups[0].status #=> String
     #   resp.db_shard_groups[0].publicly_accessible #=> Boolean
     #   resp.db_shard_groups[0].endpoint #=> String
+    #   resp.db_shard_groups[0].db_shard_group_arn #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBShardGroups AWS API Documentation
@@ -21830,6 +21839,19 @@ module Aws::RDS
     #   The minimum capacity of the DB shard group in Aurora capacity units
     #   (ACUs).
     #
+    # @option params [Integer] :compute_redundancy
+    #   Specifies whether to create standby DB shard groups for the DB shard
+    #   group. Valid values are the following:
+    #
+    #   * 0 - Creates a DB shard group without a standby DB shard group. This
+    #     is the default value.
+    #
+    #   * 1 - Creates a DB shard group with a standby DB shard group in a
+    #     different Availability Zone (AZ).
+    #
+    #   * 2 - Creates a DB shard group with two standby DB shard groups in two
+    #     different AZs.
+    #
     # @return [Types::DBShardGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBShardGroup#db_shard_group_resource_id #db_shard_group_resource_id} => String
@@ -21841,6 +21863,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#status #status} => String
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DBShardGroup#endpoint #endpoint} => String
+    #   * {Types::DBShardGroup#db_shard_group_arn #db_shard_group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -21848,6 +21871,7 @@ module Aws::RDS
     #     db_shard_group_identifier: "DBShardGroupIdentifier", # required
     #     max_acu: 1.0,
     #     min_acu: 1.0,
+    #     compute_redundancy: 1,
     #   })
     #
     # @example Response structure
@@ -21861,6 +21885,7 @@ module Aws::RDS
     #   resp.status #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.endpoint #=> String
+    #   resp.db_shard_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBShardGroup AWS API Documentation
     #
@@ -23895,6 +23920,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#status #status} => String
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DBShardGroup#endpoint #endpoint} => String
+    #   * {Types::DBShardGroup#db_shard_group_arn #db_shard_group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -23913,6 +23939,7 @@ module Aws::RDS
     #   resp.status #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.endpoint #=> String
+    #   resp.db_shard_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBShardGroup AWS API Documentation
     #
@@ -26741,7 +26768,7 @@ module Aws::RDS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html
-    # [2]: https://docs.aws.amazon.com/USER_UpgradeDBSnapshot.PostgreSQL.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html
     #
     # @option params [required, String] :db_instance_identifier
     #   The name of the DB instance to create from the DB snapshot. This
@@ -31439,7 +31466,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.249.0'
+      context[:gem_version] = '1.251.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

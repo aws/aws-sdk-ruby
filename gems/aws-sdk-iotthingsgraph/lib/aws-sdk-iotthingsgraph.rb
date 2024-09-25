@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iotthingsgraph/types'
-require_relative 'aws-sdk-iotthingsgraph/client_api'
-require_relative 'aws-sdk-iotthingsgraph/plugins/endpoints.rb'
-require_relative 'aws-sdk-iotthingsgraph/client'
-require_relative 'aws-sdk-iotthingsgraph/errors'
-require_relative 'aws-sdk-iotthingsgraph/resource'
-require_relative 'aws-sdk-iotthingsgraph/endpoint_parameters'
-require_relative 'aws-sdk-iotthingsgraph/endpoint_provider'
-require_relative 'aws-sdk-iotthingsgraph/endpoints'
-require_relative 'aws-sdk-iotthingsgraph/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:iotthingsgraph)
 
 # This module provides support for AWS IoT Things Graph. This module is available in the
 # `aws-sdk-iotthingsgraph` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-iotthingsgraph/customizations'
 #
 # @!group service
 module Aws::IoTThingsGraph
+  autoload :Types, 'aws-sdk-iotthingsgraph/types'
+  autoload :ClientApi, 'aws-sdk-iotthingsgraph/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iotthingsgraph/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iotthingsgraph/client'
+  autoload :Errors, 'aws-sdk-iotthingsgraph/errors'
+  autoload :Resource, 'aws-sdk-iotthingsgraph/resource'
+  autoload :EndpointParameters, 'aws-sdk-iotthingsgraph/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iotthingsgraph/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iotthingsgraph/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.49.0'
 
 end
+
+require_relative 'aws-sdk-iotthingsgraph/customizations'

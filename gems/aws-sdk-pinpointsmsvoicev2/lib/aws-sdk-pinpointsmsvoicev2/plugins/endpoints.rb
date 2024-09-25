@@ -122,6 +122,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::PinpointSMSVoiceV2::Endpoints::DeleteRegistrationAttachment.build(context)
           when :delete_registration_field_value
             Aws::PinpointSMSVoiceV2::Endpoints::DeleteRegistrationFieldValue.build(context)
+          when :delete_resource_policy
+            Aws::PinpointSMSVoiceV2::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_text_message_spend_limit_override
             Aws::PinpointSMSVoiceV2::Endpoints::DeleteTextMessageSpendLimitOverride.build(context)
           when :delete_verified_destination_number
@@ -174,6 +176,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::PinpointSMSVoiceV2::Endpoints::DiscardRegistrationVersion.build(context)
           when :get_protect_configuration_country_rule_set
             Aws::PinpointSMSVoiceV2::Endpoints::GetProtectConfigurationCountryRuleSet.build(context)
+          when :get_resource_policy
+            Aws::PinpointSMSVoiceV2::Endpoints::GetResourcePolicy.build(context)
           when :list_pool_origination_identities
             Aws::PinpointSMSVoiceV2::Endpoints::ListPoolOriginationIdentities.build(context)
           when :list_registration_associations
@@ -186,6 +190,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::PinpointSMSVoiceV2::Endpoints::PutOptedOutNumber.build(context)
           when :put_registration_field_value
             Aws::PinpointSMSVoiceV2::Endpoints::PutRegistrationFieldValue.build(context)
+          when :put_resource_policy
+            Aws::PinpointSMSVoiceV2::Endpoints::PutResourcePolicy.build(context)
           when :release_phone_number
             Aws::PinpointSMSVoiceV2::Endpoints::ReleasePhoneNumber.build(context)
           when :release_sender_id

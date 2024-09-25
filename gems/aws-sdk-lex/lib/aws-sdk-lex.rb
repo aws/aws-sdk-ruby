@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-lex/types'
-require_relative 'aws-sdk-lex/client_api'
-require_relative 'aws-sdk-lex/plugins/endpoints.rb'
-require_relative 'aws-sdk-lex/client'
-require_relative 'aws-sdk-lex/errors'
-require_relative 'aws-sdk-lex/resource'
-require_relative 'aws-sdk-lex/endpoint_parameters'
-require_relative 'aws-sdk-lex/endpoint_provider'
-require_relative 'aws-sdk-lex/endpoints'
-require_relative 'aws-sdk-lex/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:lex)
 
 # This module provides support for Amazon Lex Runtime Service. This module is available in the
 # `aws-sdk-lex` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-lex/customizations'
 #
 # @!group service
 module Aws::Lex
+  autoload :Types, 'aws-sdk-lex/types'
+  autoload :ClientApi, 'aws-sdk-lex/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-lex/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-lex/client'
+  autoload :Errors, 'aws-sdk-lex/errors'
+  autoload :Resource, 'aws-sdk-lex/resource'
+  autoload :EndpointParameters, 'aws-sdk-lex/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-lex/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-lex/endpoints'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.71.0'
 
 end
+
+require_relative 'aws-sdk-lex/customizations'

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:route53recoveryreadiness)
-
 module Aws::Route53RecoveryReadiness
   # An API client for Route53RecoveryReadiness.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1726,7 +1724,7 @@ module Aws::Route53RecoveryReadiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53recoveryreadiness'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

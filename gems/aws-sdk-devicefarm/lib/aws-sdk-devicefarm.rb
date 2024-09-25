@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-devicefarm/types'
-require_relative 'aws-sdk-devicefarm/client_api'
-require_relative 'aws-sdk-devicefarm/plugins/endpoints.rb'
-require_relative 'aws-sdk-devicefarm/client'
-require_relative 'aws-sdk-devicefarm/errors'
-require_relative 'aws-sdk-devicefarm/resource'
-require_relative 'aws-sdk-devicefarm/endpoint_parameters'
-require_relative 'aws-sdk-devicefarm/endpoint_provider'
-require_relative 'aws-sdk-devicefarm/endpoints'
-require_relative 'aws-sdk-devicefarm/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:devicefarm)
 
 # This module provides support for AWS Device Farm. This module is available in the
 # `aws-sdk-devicefarm` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-devicefarm/customizations'
 #
 # @!group service
 module Aws::DeviceFarm
+  autoload :Types, 'aws-sdk-devicefarm/types'
+  autoload :ClientApi, 'aws-sdk-devicefarm/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-devicefarm/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-devicefarm/client'
+  autoload :Errors, 'aws-sdk-devicefarm/errors'
+  autoload :Resource, 'aws-sdk-devicefarm/resource'
+  autoload :EndpointParameters, 'aws-sdk-devicefarm/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-devicefarm/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-devicefarm/endpoints'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.79.0'
 
 end
+
+require_relative 'aws-sdk-devicefarm/customizations'

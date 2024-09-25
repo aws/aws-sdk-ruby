@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ssmcontacts/types'
-require_relative 'aws-sdk-ssmcontacts/client_api'
-require_relative 'aws-sdk-ssmcontacts/plugins/endpoints.rb'
-require_relative 'aws-sdk-ssmcontacts/client'
-require_relative 'aws-sdk-ssmcontacts/errors'
-require_relative 'aws-sdk-ssmcontacts/resource'
-require_relative 'aws-sdk-ssmcontacts/endpoint_parameters'
-require_relative 'aws-sdk-ssmcontacts/endpoint_provider'
-require_relative 'aws-sdk-ssmcontacts/endpoints'
-require_relative 'aws-sdk-ssmcontacts/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssmcontacts)
 
 # This module provides support for AWS Systems Manager Incident Manager Contacts. This module is available in the
 # `aws-sdk-ssmcontacts` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-ssmcontacts/customizations'
 #
 # @!group service
 module Aws::SSMContacts
+  autoload :Types, 'aws-sdk-ssmcontacts/types'
+  autoload :ClientApi, 'aws-sdk-ssmcontacts/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ssmcontacts/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ssmcontacts/client'
+  autoload :Errors, 'aws-sdk-ssmcontacts/errors'
+  autoload :Resource, 'aws-sdk-ssmcontacts/resource'
+  autoload :EndpointParameters, 'aws-sdk-ssmcontacts/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ssmcontacts/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ssmcontacts/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.40.0'
 
 end
+
+require_relative 'aws-sdk-ssmcontacts/customizations'

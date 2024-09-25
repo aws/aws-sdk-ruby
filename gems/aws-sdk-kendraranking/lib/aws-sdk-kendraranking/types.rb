@@ -662,3 +662,4 @@ module Aws::KendraRanking
 
   end
 end
+

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:iotevents)
-
 module Aws::IoTEvents
   # An API client for IoTEvents.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3510,7 +3508,7 @@ module Aws::IoTEvents
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

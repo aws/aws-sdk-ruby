@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-eks/types'
-require_relative 'aws-sdk-eks/client_api'
-require_relative 'aws-sdk-eks/plugins/endpoints.rb'
-require_relative 'aws-sdk-eks/client'
-require_relative 'aws-sdk-eks/errors'
-require_relative 'aws-sdk-eks/waiters'
-require_relative 'aws-sdk-eks/resource'
-require_relative 'aws-sdk-eks/endpoint_parameters'
-require_relative 'aws-sdk-eks/endpoint_provider'
-require_relative 'aws-sdk-eks/endpoints'
-require_relative 'aws-sdk-eks/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:eks)
 
 # This module provides support for Amazon Elastic Kubernetes Service. This module is available in the
 # `aws-sdk-eks` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-eks/customizations'
 #
 # @!group service
 module Aws::EKS
+  autoload :Types, 'aws-sdk-eks/types'
+  autoload :ClientApi, 'aws-sdk-eks/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-eks/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-eks/client'
+  autoload :Errors, 'aws-sdk-eks/errors'
+  autoload :Waiters, 'aws-sdk-eks/waiters'
+  autoload :Resource, 'aws-sdk-eks/resource'
+  autoload :EndpointParameters, 'aws-sdk-eks/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-eks/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-eks/endpoints'
 
-  GEM_VERSION = '1.116.0'
+  GEM_VERSION = '1.118.0'
 
 end
+
+require_relative 'aws-sdk-eks/customizations'

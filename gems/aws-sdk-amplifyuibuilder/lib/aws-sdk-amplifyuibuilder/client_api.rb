@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::AmplifyUIBuilder
   # @api private
   module ClientApi

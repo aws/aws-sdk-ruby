@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:bcmdataexports)
-
 module Aws::BCMDataExports
   # An API client for BCMDataExports.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1041,7 +1039,7 @@ module Aws::BCMDataExports
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmdataexports'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

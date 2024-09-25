@@ -347,3 +347,4 @@ module Aws::ConnectContactLens
 
   end
 end
+

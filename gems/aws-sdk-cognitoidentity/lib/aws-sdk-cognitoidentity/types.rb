@@ -1359,3 +1359,4 @@ module Aws::CognitoIdentity
 
   end
 end
+

@@ -812,3 +812,4 @@ module Aws::DynamoDBStreams
 
   end
 end
+

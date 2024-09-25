@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:iotthingsgraph)
-
 module Aws::IoTThingsGraph
   # An API client for IoTThingsGraph.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2022,7 +2020,7 @@ module Aws::IoTThingsGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotthingsgraph'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

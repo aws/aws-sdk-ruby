@@ -755,6 +755,7 @@ module Aws
         def status: () -> ::String
         def publicly_accessible: () -> bool
         def endpoint: () -> ::String
+        def db_shard_group_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_db_shard_group-instance_method
       def create_db_shard_group: (
@@ -1099,6 +1100,7 @@ module Aws
         def status: () -> ::String
         def publicly_accessible: () -> bool
         def endpoint: () -> ::String
+        def db_shard_group_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#delete_db_shard_group-instance_method
       def delete_db_shard_group: (
@@ -2553,12 +2555,14 @@ module Aws
         def status: () -> ::String
         def publicly_accessible: () -> bool
         def endpoint: () -> ::String
+        def db_shard_group_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_db_shard_group-instance_method
       def modify_db_shard_group: (
                                    db_shard_group_identifier: ::String,
                                    ?max_acu: ::Float,
-                                   ?min_acu: ::Float
+                                   ?min_acu: ::Float,
+                                   ?compute_redundancy: ::Integer
                                  ) -> _ModifyDBShardGroupResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBShardGroupResponseSuccess
 
@@ -2770,6 +2774,7 @@ module Aws
         def status: () -> ::String
         def publicly_accessible: () -> bool
         def endpoint: () -> ::String
+        def db_shard_group_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#reboot_db_shard_group-instance_method
       def reboot_db_shard_group: (

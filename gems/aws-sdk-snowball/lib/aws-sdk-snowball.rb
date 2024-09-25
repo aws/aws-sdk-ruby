@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-snowball/types'
-require_relative 'aws-sdk-snowball/client_api'
-require_relative 'aws-sdk-snowball/plugins/endpoints.rb'
-require_relative 'aws-sdk-snowball/client'
-require_relative 'aws-sdk-snowball/errors'
-require_relative 'aws-sdk-snowball/resource'
-require_relative 'aws-sdk-snowball/endpoint_parameters'
-require_relative 'aws-sdk-snowball/endpoint_provider'
-require_relative 'aws-sdk-snowball/endpoints'
-require_relative 'aws-sdk-snowball/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:snowball)
 
 # This module provides support for Amazon Import/Export Snowball. This module is available in the
 # `aws-sdk-snowball` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-snowball/customizations'
 #
 # @!group service
 module Aws::Snowball
+  autoload :Types, 'aws-sdk-snowball/types'
+  autoload :ClientApi, 'aws-sdk-snowball/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-snowball/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-snowball/client'
+  autoload :Errors, 'aws-sdk-snowball/errors'
+  autoload :Resource, 'aws-sdk-snowball/resource'
+  autoload :EndpointParameters, 'aws-sdk-snowball/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-snowball/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-snowball/endpoints'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.79.0'
 
 end
+
+require_relative 'aws-sdk-snowball/customizations'

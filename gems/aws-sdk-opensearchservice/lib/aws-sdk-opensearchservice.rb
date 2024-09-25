@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-opensearchservice/types'
-require_relative 'aws-sdk-opensearchservice/client_api'
-require_relative 'aws-sdk-opensearchservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-opensearchservice/client'
-require_relative 'aws-sdk-opensearchservice/errors'
-require_relative 'aws-sdk-opensearchservice/resource'
-require_relative 'aws-sdk-opensearchservice/endpoint_parameters'
-require_relative 'aws-sdk-opensearchservice/endpoint_provider'
-require_relative 'aws-sdk-opensearchservice/endpoints'
-require_relative 'aws-sdk-opensearchservice/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:opensearchservice)
 
 # This module provides support for Amazon OpenSearch Service. This module is available in the
 # `aws-sdk-opensearchservice` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-opensearchservice/customizations'
 #
 # @!group service
 module Aws::OpenSearchService
+  autoload :Types, 'aws-sdk-opensearchservice/types'
+  autoload :ClientApi, 'aws-sdk-opensearchservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-opensearchservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-opensearchservice/client'
+  autoload :Errors, 'aws-sdk-opensearchservice/errors'
+  autoload :Resource, 'aws-sdk-opensearchservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-opensearchservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-opensearchservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-opensearchservice/endpoints'
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.56.0'
 
 end
+
+require_relative 'aws-sdk-opensearchservice/customizations'

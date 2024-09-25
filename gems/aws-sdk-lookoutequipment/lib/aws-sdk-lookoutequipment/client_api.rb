@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::LookoutEquipment
   # @api private
   module ClientApi

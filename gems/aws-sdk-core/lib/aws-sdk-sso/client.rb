@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:sso)
-
 module Aws::SSO
   # An API client for SSO.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -671,7 +669,7 @@ module Aws::SSO
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.207.0'
+      context[:gem_version] = '3.209.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

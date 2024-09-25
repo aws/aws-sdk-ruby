@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-repostspace/types'
-require_relative 'aws-sdk-repostspace/client_api'
-require_relative 'aws-sdk-repostspace/plugins/endpoints.rb'
-require_relative 'aws-sdk-repostspace/client'
-require_relative 'aws-sdk-repostspace/errors'
-require_relative 'aws-sdk-repostspace/resource'
-require_relative 'aws-sdk-repostspace/endpoint_parameters'
-require_relative 'aws-sdk-repostspace/endpoint_provider'
-require_relative 'aws-sdk-repostspace/endpoints'
-require_relative 'aws-sdk-repostspace/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:repostspace)
 
 # This module provides support for AWS re:Post Private. This module is available in the
 # `aws-sdk-repostspace` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-repostspace/customizations'
 #
 # @!group service
 module Aws::Repostspace
+  autoload :Types, 'aws-sdk-repostspace/types'
+  autoload :ClientApi, 'aws-sdk-repostspace/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-repostspace/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-repostspace/client'
+  autoload :Errors, 'aws-sdk-repostspace/errors'
+  autoload :Resource, 'aws-sdk-repostspace/resource'
+  autoload :EndpointParameters, 'aws-sdk-repostspace/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-repostspace/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-repostspace/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.14.0'
 
 end
+
+require_relative 'aws-sdk-repostspace/customizations'

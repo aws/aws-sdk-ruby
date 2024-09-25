@@ -53,6 +53,25 @@ module AwsSdkCodeGenerator
         actions? || associations?
       end
 
+      # @return [Boolean]
+      def customization_file_exists?
+        File.exist?(
+          File.join(
+            Helper.gem_lib_path(gem_name), "#{customization_file_path}.rb"
+          )
+        )
+      end
+
+      # @return [String]
+      def customization_file_path
+        "#{gem_name}/customizations/resource"
+      end
+
+      private
+
+      def gem_name
+        "aws-sdk-#{module_name.split('::').last.downcase}"
+      end
     end
   end
 end

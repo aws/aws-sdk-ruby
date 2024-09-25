@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-servicequotas/types'
-require_relative 'aws-sdk-servicequotas/client_api'
-require_relative 'aws-sdk-servicequotas/plugins/endpoints.rb'
-require_relative 'aws-sdk-servicequotas/client'
-require_relative 'aws-sdk-servicequotas/errors'
-require_relative 'aws-sdk-servicequotas/resource'
-require_relative 'aws-sdk-servicequotas/endpoint_parameters'
-require_relative 'aws-sdk-servicequotas/endpoint_provider'
-require_relative 'aws-sdk-servicequotas/endpoints'
-require_relative 'aws-sdk-servicequotas/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:servicequotas)
 
 # This module provides support for Service Quotas. This module is available in the
 # `aws-sdk-servicequotas` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-servicequotas/customizations'
 #
 # @!group service
 module Aws::ServiceQuotas
+  autoload :Types, 'aws-sdk-servicequotas/types'
+  autoload :ClientApi, 'aws-sdk-servicequotas/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-servicequotas/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-servicequotas/client'
+  autoload :Errors, 'aws-sdk-servicequotas/errors'
+  autoload :Resource, 'aws-sdk-servicequotas/resource'
+  autoload :EndpointParameters, 'aws-sdk-servicequotas/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-servicequotas/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-servicequotas/endpoints'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.48.0'
 
 end
+
+require_relative 'aws-sdk-servicequotas/customizations'

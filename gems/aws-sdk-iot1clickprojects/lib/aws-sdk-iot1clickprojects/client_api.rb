@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::IoT1ClickProjects
   # @api private
   module ClientApi

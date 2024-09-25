@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-applicationsignals/types'
-require_relative 'aws-sdk-applicationsignals/client_api'
-require_relative 'aws-sdk-applicationsignals/plugins/endpoints.rb'
-require_relative 'aws-sdk-applicationsignals/client'
-require_relative 'aws-sdk-applicationsignals/errors'
-require_relative 'aws-sdk-applicationsignals/resource'
-require_relative 'aws-sdk-applicationsignals/endpoint_parameters'
-require_relative 'aws-sdk-applicationsignals/endpoint_provider'
-require_relative 'aws-sdk-applicationsignals/endpoints'
-require_relative 'aws-sdk-applicationsignals/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:applicationsignals)
 
 # This module provides support for Amazon CloudWatch Application Signals. This module is available in the
 # `aws-sdk-applicationsignals` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-applicationsignals/customizations'
 #
 # @!group service
 module Aws::ApplicationSignals
+  autoload :Types, 'aws-sdk-applicationsignals/types'
+  autoload :ClientApi, 'aws-sdk-applicationsignals/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-applicationsignals/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-applicationsignals/client'
+  autoload :Errors, 'aws-sdk-applicationsignals/errors'
+  autoload :Resource, 'aws-sdk-applicationsignals/resource'
+  autoload :EndpointParameters, 'aws-sdk-applicationsignals/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-applicationsignals/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-applicationsignals/endpoints'
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.11.0'
 
 end
+
+require_relative 'aws-sdk-applicationsignals/customizations'

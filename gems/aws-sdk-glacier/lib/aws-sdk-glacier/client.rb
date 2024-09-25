@@ -39,8 +39,6 @@ require 'aws-sdk-glacier/plugins/account_id.rb'
 require 'aws-sdk-glacier/plugins/api_version.rb'
 require 'aws-sdk-glacier/plugins/checksums.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:glacier)
-
 module Aws::Glacier
   # An API client for Glacier.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -3503,7 +3501,7 @@ module Aws::Glacier
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

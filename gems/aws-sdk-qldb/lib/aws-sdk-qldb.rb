@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-qldb/types'
-require_relative 'aws-sdk-qldb/client_api'
-require_relative 'aws-sdk-qldb/plugins/endpoints.rb'
-require_relative 'aws-sdk-qldb/client'
-require_relative 'aws-sdk-qldb/errors'
-require_relative 'aws-sdk-qldb/resource'
-require_relative 'aws-sdk-qldb/endpoint_parameters'
-require_relative 'aws-sdk-qldb/endpoint_provider'
-require_relative 'aws-sdk-qldb/endpoints'
-require_relative 'aws-sdk-qldb/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:qldb)
 
 # This module provides support for Amazon QLDB. This module is available in the
 # `aws-sdk-qldb` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-qldb/customizations'
 #
 # @!group service
 module Aws::QLDB
+  autoload :Types, 'aws-sdk-qldb/types'
+  autoload :ClientApi, 'aws-sdk-qldb/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-qldb/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-qldb/client'
+  autoload :Errors, 'aws-sdk-qldb/errors'
+  autoload :Resource, 'aws-sdk-qldb/resource'
+  autoload :EndpointParameters, 'aws-sdk-qldb/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-qldb/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-qldb/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.51.0'
 
 end
+
+require_relative 'aws-sdk-qldb/customizations'

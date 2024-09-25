@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:iot1clickprojects)
-
 module Aws::IoT1ClickProjects
   # An API client for IoT1ClickProjects.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1032,7 +1030,7 @@ module Aws::IoT1ClickProjects
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot1clickprojects'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

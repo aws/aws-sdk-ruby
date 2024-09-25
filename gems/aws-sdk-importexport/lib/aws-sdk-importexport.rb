@@ -11,12 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv2'
 
-require_relative 'aws-sdk-importexport/types'
-require_relative 'aws-sdk-importexport/client_api'
-require_relative 'aws-sdk-importexport/client'
-require_relative 'aws-sdk-importexport/errors'
-require_relative 'aws-sdk-importexport/resource'
-require_relative 'aws-sdk-importexport/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:importexport)
 
 # This module provides support for AWS Import/Export. This module is available in the
 # `aws-sdk-importexport` gem.
@@ -47,7 +42,14 @@ require_relative 'aws-sdk-importexport/customizations'
 #
 # @!group service
 module Aws::ImportExport
+  autoload :Types, 'aws-sdk-importexport/types'
+  autoload :ClientApi, 'aws-sdk-importexport/client_api'
+  autoload :Client, 'aws-sdk-importexport/client'
+  autoload :Errors, 'aws-sdk-importexport/errors'
+  autoload :Resource, 'aws-sdk-importexport/resource'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.55.0'
 
 end
+
+require_relative 'aws-sdk-importexport/customizations'

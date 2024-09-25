@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::RedshiftServerless
   # @api private
   module ClientApi

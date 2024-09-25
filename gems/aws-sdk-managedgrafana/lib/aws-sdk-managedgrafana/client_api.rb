@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ManagedGrafana
   # @api private
   module ClientApi

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ssmcontacts)
-
 module Aws::SSMContacts
   # An API client for SSMContacts.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2413,7 +2411,7 @@ module Aws::SSMContacts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssmcontacts'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-supplychain/types'
-require_relative 'aws-sdk-supplychain/client_api'
-require_relative 'aws-sdk-supplychain/plugins/endpoints.rb'
-require_relative 'aws-sdk-supplychain/client'
-require_relative 'aws-sdk-supplychain/errors'
-require_relative 'aws-sdk-supplychain/resource'
-require_relative 'aws-sdk-supplychain/endpoint_parameters'
-require_relative 'aws-sdk-supplychain/endpoint_provider'
-require_relative 'aws-sdk-supplychain/endpoints'
-require_relative 'aws-sdk-supplychain/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:supplychain)
 
 # This module provides support for AWS Supply Chain. This module is available in the
 # `aws-sdk-supplychain` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-supplychain/customizations'
 #
 # @!group service
 module Aws::SupplyChain
+  autoload :Types, 'aws-sdk-supplychain/types'
+  autoload :ClientApi, 'aws-sdk-supplychain/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-supplychain/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-supplychain/client'
+  autoload :Errors, 'aws-sdk-supplychain/errors'
+  autoload :Resource, 'aws-sdk-supplychain/resource'
+  autoload :EndpointParameters, 'aws-sdk-supplychain/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-supplychain/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-supplychain/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.15.0'
 
 end
+
+require_relative 'aws-sdk-supplychain/customizations'

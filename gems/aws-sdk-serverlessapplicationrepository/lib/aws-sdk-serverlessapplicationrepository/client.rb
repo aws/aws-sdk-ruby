@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:serverlessapplicationrepository)
-
 module Aws::ServerlessApplicationRepository
   # An API client for ServerlessApplicationRepository.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1265,7 +1263,7 @@ module Aws::ServerlessApplicationRepository
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

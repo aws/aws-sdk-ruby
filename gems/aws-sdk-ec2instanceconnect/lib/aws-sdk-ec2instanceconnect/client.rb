@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ec2instanceconnect)
-
 module Aws::EC2InstanceConnect
   # An API client for EC2InstanceConnect.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -600,7 +598,7 @@ module Aws::EC2InstanceConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2instanceconnect'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-costexplorer/types'
-require_relative 'aws-sdk-costexplorer/client_api'
-require_relative 'aws-sdk-costexplorer/plugins/endpoints.rb'
-require_relative 'aws-sdk-costexplorer/client'
-require_relative 'aws-sdk-costexplorer/errors'
-require_relative 'aws-sdk-costexplorer/resource'
-require_relative 'aws-sdk-costexplorer/endpoint_parameters'
-require_relative 'aws-sdk-costexplorer/endpoint_provider'
-require_relative 'aws-sdk-costexplorer/endpoints'
-require_relative 'aws-sdk-costexplorer/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:costexplorer)
 
 # This module provides support for AWS Cost Explorer Service. This module is available in the
 # `aws-sdk-costexplorer` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-costexplorer/customizations'
 #
 # @!group service
 module Aws::CostExplorer
+  autoload :Types, 'aws-sdk-costexplorer/types'
+  autoload :ClientApi, 'aws-sdk-costexplorer/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-costexplorer/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-costexplorer/client'
+  autoload :Errors, 'aws-sdk-costexplorer/errors'
+  autoload :Resource, 'aws-sdk-costexplorer/resource'
+  autoload :EndpointParameters, 'aws-sdk-costexplorer/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-costexplorer/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-costexplorer/endpoints'
 
-  GEM_VERSION = '1.110.0'
+  GEM_VERSION = '1.112.0'
 
 end
+
+require_relative 'aws-sdk-costexplorer/customizations'

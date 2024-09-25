@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-bedrock/types'
-require_relative 'aws-sdk-bedrock/client_api'
-require_relative 'aws-sdk-bedrock/plugins/endpoints.rb'
-require_relative 'aws-sdk-bedrock/client'
-require_relative 'aws-sdk-bedrock/errors'
-require_relative 'aws-sdk-bedrock/waiters'
-require_relative 'aws-sdk-bedrock/resource'
-require_relative 'aws-sdk-bedrock/endpoint_parameters'
-require_relative 'aws-sdk-bedrock/endpoint_provider'
-require_relative 'aws-sdk-bedrock/endpoints'
-require_relative 'aws-sdk-bedrock/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:bedrock)
 
 # This module provides support for Amazon Bedrock. This module is available in the
 # `aws-sdk-bedrock` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-bedrock/customizations'
 #
 # @!group service
 module Aws::Bedrock
+  autoload :Types, 'aws-sdk-bedrock/types'
+  autoload :ClientApi, 'aws-sdk-bedrock/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-bedrock/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-bedrock/client'
+  autoload :Errors, 'aws-sdk-bedrock/errors'
+  autoload :Waiters, 'aws-sdk-bedrock/waiters'
+  autoload :Resource, 'aws-sdk-bedrock/resource'
+  autoload :EndpointParameters, 'aws-sdk-bedrock/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-bedrock/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-bedrock/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.24.0'
 
 end
+
+require_relative 'aws-sdk-bedrock/customizations'

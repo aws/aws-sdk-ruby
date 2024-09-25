@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-comprehendmedical/types'
-require_relative 'aws-sdk-comprehendmedical/client_api'
-require_relative 'aws-sdk-comprehendmedical/plugins/endpoints.rb'
-require_relative 'aws-sdk-comprehendmedical/client'
-require_relative 'aws-sdk-comprehendmedical/errors'
-require_relative 'aws-sdk-comprehendmedical/resource'
-require_relative 'aws-sdk-comprehendmedical/endpoint_parameters'
-require_relative 'aws-sdk-comprehendmedical/endpoint_provider'
-require_relative 'aws-sdk-comprehendmedical/endpoints'
-require_relative 'aws-sdk-comprehendmedical/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:comprehendmedical)
 
 # This module provides support for AWS Comprehend Medical. This module is available in the
 # `aws-sdk-comprehendmedical` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-comprehendmedical/customizations'
 #
 # @!group service
 module Aws::ComprehendMedical
+  autoload :Types, 'aws-sdk-comprehendmedical/types'
+  autoload :ClientApi, 'aws-sdk-comprehendmedical/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-comprehendmedical/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-comprehendmedical/client'
+  autoload :Errors, 'aws-sdk-comprehendmedical/errors'
+  autoload :Resource, 'aws-sdk-comprehendmedical/resource'
+  autoload :EndpointParameters, 'aws-sdk-comprehendmedical/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-comprehendmedical/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-comprehendmedical/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.63.0'
 
 end
+
+require_relative 'aws-sdk-comprehendmedical/customizations'

@@ -266,3 +266,4 @@ module Aws::MarketplaceCommerceAnalytics
 
   end
 end
+

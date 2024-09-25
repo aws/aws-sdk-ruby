@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:chimesdkmediapipelines)
-
 module Aws::ChimeSDKMediaPipelines
   # An API client for ChimeSDKMediaPipelines.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2561,7 +2559,7 @@ module Aws::ChimeSDKMediaPipelines
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

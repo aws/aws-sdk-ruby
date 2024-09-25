@@ -2183,3 +2183,4 @@ module Aws::TranscribeStreamingService
 
   end
 end
+

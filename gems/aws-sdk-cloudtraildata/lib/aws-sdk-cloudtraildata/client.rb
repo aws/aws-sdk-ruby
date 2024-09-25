@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:cloudtraildata)
-
 module Aws::CloudTrailData
   # An API client for CloudTrailData.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -523,7 +521,7 @@ module Aws::CloudTrailData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtraildata'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

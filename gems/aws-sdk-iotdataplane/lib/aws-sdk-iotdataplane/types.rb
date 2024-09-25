@@ -479,3 +479,4 @@ module Aws::IoTDataPlane
 
   end
 end
+

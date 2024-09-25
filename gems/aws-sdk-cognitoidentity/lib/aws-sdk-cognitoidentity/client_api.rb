@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::CognitoIdentity
   # @api private
   module ClientApi

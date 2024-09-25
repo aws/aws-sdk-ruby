@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::RolesAnywhere
   # @api private
   module ClientApi

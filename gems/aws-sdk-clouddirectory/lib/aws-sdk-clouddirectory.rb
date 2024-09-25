@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-clouddirectory/types'
-require_relative 'aws-sdk-clouddirectory/client_api'
-require_relative 'aws-sdk-clouddirectory/plugins/endpoints.rb'
-require_relative 'aws-sdk-clouddirectory/client'
-require_relative 'aws-sdk-clouddirectory/errors'
-require_relative 'aws-sdk-clouddirectory/resource'
-require_relative 'aws-sdk-clouddirectory/endpoint_parameters'
-require_relative 'aws-sdk-clouddirectory/endpoint_provider'
-require_relative 'aws-sdk-clouddirectory/endpoints'
-require_relative 'aws-sdk-clouddirectory/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:clouddirectory)
 
 # This module provides support for Amazon CloudDirectory. This module is available in the
 # `aws-sdk-clouddirectory` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-clouddirectory/customizations'
 #
 # @!group service
 module Aws::CloudDirectory
+  autoload :Types, 'aws-sdk-clouddirectory/types'
+  autoload :ClientApi, 'aws-sdk-clouddirectory/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-clouddirectory/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-clouddirectory/client'
+  autoload :Errors, 'aws-sdk-clouddirectory/errors'
+  autoload :Resource, 'aws-sdk-clouddirectory/resource'
+  autoload :EndpointParameters, 'aws-sdk-clouddirectory/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-clouddirectory/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-clouddirectory/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.67.0'
 
 end
+
+require_relative 'aws-sdk-clouddirectory/customizations'

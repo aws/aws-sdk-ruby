@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-bcmdataexports/types'
-require_relative 'aws-sdk-bcmdataexports/client_api'
-require_relative 'aws-sdk-bcmdataexports/plugins/endpoints.rb'
-require_relative 'aws-sdk-bcmdataexports/client'
-require_relative 'aws-sdk-bcmdataexports/errors'
-require_relative 'aws-sdk-bcmdataexports/resource'
-require_relative 'aws-sdk-bcmdataexports/endpoint_parameters'
-require_relative 'aws-sdk-bcmdataexports/endpoint_provider'
-require_relative 'aws-sdk-bcmdataexports/endpoints'
-require_relative 'aws-sdk-bcmdataexports/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:bcmdataexports)
 
 # This module provides support for AWS Billing and Cost Management Data Exports. This module is available in the
 # `aws-sdk-bcmdataexports` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-bcmdataexports/customizations'
 #
 # @!group service
 module Aws::BCMDataExports
+  autoload :Types, 'aws-sdk-bcmdataexports/types'
+  autoload :ClientApi, 'aws-sdk-bcmdataexports/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-bcmdataexports/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-bcmdataexports/client'
+  autoload :Errors, 'aws-sdk-bcmdataexports/errors'
+  autoload :Resource, 'aws-sdk-bcmdataexports/resource'
+  autoload :EndpointParameters, 'aws-sdk-bcmdataexports/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-bcmdataexports/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-bcmdataexports/endpoints'
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.14.0'
 
 end
+
+require_relative 'aws-sdk-bcmdataexports/customizations'

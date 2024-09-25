@@ -17,9 +17,7 @@ require '{{.}}'
 {{/requires}}
 {{/require_core_guard?}}
 
-{{#relative_requires}}
-require_relative '{{.}}'
-{{/relative_requires}}
+Aws::Plugins::GlobalConfiguration.add_identifier(:{{service_identifier}})
 
 # This module provides support for {{full_name}}. This module is available in the
 # `{{gem_name}}` gem.
@@ -52,7 +50,19 @@ require_relative '{{.}}'
 #
 # @!group service
 module {{module_name}}
+  {{#autoloads}}
+    {{#is_plugin}}
+  module Plugins
+    autoload :{{class_name}}, '{{file_path}}'
+  end
+    {{/is_plugin}}
+    {{^is_plugin}}
+  autoload :{{class_name}}, '{{file_path}}'
+    {{/is_plugin}}
+  {{/autoloads}}
 
   GEM_VERSION = '{{gem_version}}'
 
 end
+
+require_relative '{{prefix}}/customizations'

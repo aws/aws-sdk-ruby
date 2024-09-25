@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-finspacedata/plugins/content_type.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:finspacedata)
-
 module Aws::FinSpaceData
   # An API client for FinSpaceData.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2189,7 +2187,7 @@ module Aws::FinSpaceData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

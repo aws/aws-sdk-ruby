@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-controlcatalog/types'
-require_relative 'aws-sdk-controlcatalog/client_api'
-require_relative 'aws-sdk-controlcatalog/plugins/endpoints.rb'
-require_relative 'aws-sdk-controlcatalog/client'
-require_relative 'aws-sdk-controlcatalog/errors'
-require_relative 'aws-sdk-controlcatalog/waiters'
-require_relative 'aws-sdk-controlcatalog/resource'
-require_relative 'aws-sdk-controlcatalog/endpoint_parameters'
-require_relative 'aws-sdk-controlcatalog/endpoint_provider'
-require_relative 'aws-sdk-controlcatalog/endpoints'
-require_relative 'aws-sdk-controlcatalog/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:controlcatalog)
 
 # This module provides support for AWS Control Catalog. This module is available in the
 # `aws-sdk-controlcatalog` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-controlcatalog/customizations'
 #
 # @!group service
 module Aws::ControlCatalog
+  autoload :Types, 'aws-sdk-controlcatalog/types'
+  autoload :ClientApi, 'aws-sdk-controlcatalog/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-controlcatalog/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-controlcatalog/client'
+  autoload :Errors, 'aws-sdk-controlcatalog/errors'
+  autoload :Waiters, 'aws-sdk-controlcatalog/waiters'
+  autoload :Resource, 'aws-sdk-controlcatalog/resource'
+  autoload :EndpointParameters, 'aws-sdk-controlcatalog/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-controlcatalog/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-controlcatalog/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.13.0'
 
 end
+
+require_relative 'aws-sdk-controlcatalog/customizations'

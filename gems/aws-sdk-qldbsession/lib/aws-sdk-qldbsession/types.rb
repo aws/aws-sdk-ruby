@@ -533,3 +533,4 @@ module Aws::QLDBSession
 
   end
 end
+

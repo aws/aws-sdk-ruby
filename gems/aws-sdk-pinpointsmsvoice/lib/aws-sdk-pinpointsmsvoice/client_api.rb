@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::PinpointSMSVoice
   # @api private
   module ClientApi

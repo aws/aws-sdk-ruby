@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-oam/types'
-require_relative 'aws-sdk-oam/client_api'
-require_relative 'aws-sdk-oam/plugins/endpoints.rb'
-require_relative 'aws-sdk-oam/client'
-require_relative 'aws-sdk-oam/errors'
-require_relative 'aws-sdk-oam/resource'
-require_relative 'aws-sdk-oam/endpoint_parameters'
-require_relative 'aws-sdk-oam/endpoint_provider'
-require_relative 'aws-sdk-oam/endpoints'
-require_relative 'aws-sdk-oam/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:oam)
 
 # This module provides support for CloudWatch Observability Access Manager. This module is available in the
 # `aws-sdk-oam` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-oam/customizations'
 #
 # @!group service
 module Aws::OAM
+  autoload :Types, 'aws-sdk-oam/types'
+  autoload :ClientApi, 'aws-sdk-oam/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-oam/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-oam/client'
+  autoload :Errors, 'aws-sdk-oam/errors'
+  autoload :Resource, 'aws-sdk-oam/resource'
+  autoload :EndpointParameters, 'aws-sdk-oam/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-oam/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-oam/endpoints'
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.26.0'
 
 end
+
+require_relative 'aws-sdk-oam/customizations'

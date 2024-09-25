@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:codestarconnections)
-
 module Aws::CodeStarconnections
   # An API client for CodeStarconnections.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1725,7 +1723,7 @@ module Aws::CodeStarconnections
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

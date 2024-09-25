@@ -39,8 +39,6 @@ require 'aws-sdk-s3control/plugins/arn.rb'
 require 'aws-sdk-s3control/plugins/dualstack.rb'
 require 'aws-sdk-s3control/plugins/s3_host_id.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:s3control)
-
 module Aws::S3Control
   # An API client for S3Control.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -7725,7 +7723,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

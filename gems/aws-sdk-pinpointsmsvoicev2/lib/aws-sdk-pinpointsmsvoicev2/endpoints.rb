@@ -298,6 +298,17 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class DeleteResourcePolicy
+      def self.build(context)
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class DeleteTextMessageSpendLimitOverride
       def self.build(context)
         Aws::PinpointSMSVoiceV2::EndpointParameters.new(
@@ -584,6 +595,17 @@ module Aws::PinpointSMSVoiceV2
       end
     end
 
+    class GetResourcePolicy
+      def self.build(context)
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class ListPoolOriginationIdentities
       def self.build(context)
         Aws::PinpointSMSVoiceV2::EndpointParameters.new(
@@ -640,6 +662,17 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class PutRegistrationFieldValue
+      def self.build(context)
+        Aws::PinpointSMSVoiceV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class PutResourcePolicy
       def self.build(context)
         Aws::PinpointSMSVoiceV2::EndpointParameters.new(
           region: context.config.region,

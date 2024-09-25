@@ -3410,3 +3410,4 @@ module Aws::ChimeSDKMessaging
 
   end
 end
+

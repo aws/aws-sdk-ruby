@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:comprehendmedical)
-
 module Aws::ComprehendMedical
   # An API client for ComprehendMedical.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1929,7 +1927,7 @@ module Aws::ComprehendMedical
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-comprehendmedical'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

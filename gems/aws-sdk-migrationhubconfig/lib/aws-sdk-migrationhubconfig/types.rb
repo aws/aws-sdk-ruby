@@ -288,3 +288,4 @@ module Aws::MigrationHubConfig
 
   end
 end
+

@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-redshift/types'
-require_relative 'aws-sdk-redshift/client_api'
-require_relative 'aws-sdk-redshift/plugins/endpoints.rb'
-require_relative 'aws-sdk-redshift/client'
-require_relative 'aws-sdk-redshift/errors'
-require_relative 'aws-sdk-redshift/waiters'
-require_relative 'aws-sdk-redshift/resource'
-require_relative 'aws-sdk-redshift/endpoint_parameters'
-require_relative 'aws-sdk-redshift/endpoint_provider'
-require_relative 'aws-sdk-redshift/endpoints'
-require_relative 'aws-sdk-redshift/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:redshift)
 
 # This module provides support for Amazon Redshift. This module is available in the
 # `aws-sdk-redshift` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-redshift/customizations'
 #
 # @!group service
 module Aws::Redshift
+  autoload :Types, 'aws-sdk-redshift/types'
+  autoload :ClientApi, 'aws-sdk-redshift/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-redshift/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-redshift/client'
+  autoload :Errors, 'aws-sdk-redshift/errors'
+  autoload :Waiters, 'aws-sdk-redshift/waiters'
+  autoload :Resource, 'aws-sdk-redshift/resource'
+  autoload :EndpointParameters, 'aws-sdk-redshift/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-redshift/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-redshift/endpoints'
 
-  GEM_VERSION = '1.123.0'
+  GEM_VERSION = '1.125.0'
 
 end
+
+require_relative 'aws-sdk-redshift/customizations'

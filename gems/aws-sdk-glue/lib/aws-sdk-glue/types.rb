@@ -523,22 +523,22 @@ module Aws::Glue
     #   CreateConnection request.
     #   @return [String]
     #
-    # @!attribute [rw] secret_arn
-    #   The secret manager ARN to store credentials in the CreateConnection
-    #   request.
-    #   @return [String]
-    #
     # @!attribute [rw] o_auth_2_properties
     #   The properties for OAuth2 authentication in the CreateConnection
     #   request.
     #   @return [Types::OAuth2PropertiesInput]
     #
+    # @!attribute [rw] secret_arn
+    #   The secret manager ARN to store credentials in the CreateConnection
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AuthenticationConfigurationInput AWS API Documentation
     #
     class AuthenticationConfigurationInput < Struct.new(
       :authentication_type,
-      :secret_arn,
-      :o_auth_2_properties)
+      :o_auth_2_properties,
+      :secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -564,7 +564,7 @@ module Aws::Glue
     class AuthorizationCodeProperties < Struct.new(
       :authorization_code,
       :redirect_uri)
-      SENSITIVE = []
+      SENSITIVE = [:authorization_code]
       include Aws::Structure
     end
 
@@ -3403,6 +3403,10 @@ module Aws::Glue
     #   [5]: https://kafka.apache.org/documentation/#security_sasl_kerberos_clientconfig
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] athena_properties
+    #   This field is not currently used.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] physical_connection_requirements
     #   The physical connection requirements, such as virtual private cloud
     #   (VPC) and `SecurityGroup`, that are needed to make this connection
@@ -3449,6 +3453,7 @@ module Aws::Glue
       :connection_type,
       :match_criteria,
       :connection_properties,
+      :athena_properties,
       :physical_connection_requirements,
       :creation_time,
       :last_updated_time,
@@ -3588,6 +3593,10 @@ module Aws::Glue
     #   These key-value pairs define parameters for the connection.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] athena_properties
+    #   This field is not currently used.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] physical_connection_requirements
     #   The physical connection requirements, such as virtual private cloud
     #   (VPC) and `SecurityGroup`, that are needed to successfully make this
@@ -3612,6 +3621,7 @@ module Aws::Glue
       :connection_type,
       :match_criteria,
       :connection_properties,
+      :athena_properties,
       :physical_connection_requirements,
       :authentication_configuration,
       :validate_credentials)
@@ -25420,3 +25430,4 @@ module Aws::Glue
 
   end
 end
+

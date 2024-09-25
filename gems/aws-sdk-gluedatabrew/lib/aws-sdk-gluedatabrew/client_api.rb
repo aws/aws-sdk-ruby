@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::GlueDataBrew
   # @api private
   module ClientApi

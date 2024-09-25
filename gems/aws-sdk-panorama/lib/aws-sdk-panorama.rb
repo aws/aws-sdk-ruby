@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-panorama/types'
-require_relative 'aws-sdk-panorama/client_api'
-require_relative 'aws-sdk-panorama/plugins/endpoints.rb'
-require_relative 'aws-sdk-panorama/client'
-require_relative 'aws-sdk-panorama/errors'
-require_relative 'aws-sdk-panorama/resource'
-require_relative 'aws-sdk-panorama/endpoint_parameters'
-require_relative 'aws-sdk-panorama/endpoint_provider'
-require_relative 'aws-sdk-panorama/endpoints'
-require_relative 'aws-sdk-panorama/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:panorama)
 
 # This module provides support for AWS Panorama. This module is available in the
 # `aws-sdk-panorama` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-panorama/customizations'
 #
 # @!group service
 module Aws::Panorama
+  autoload :Types, 'aws-sdk-panorama/types'
+  autoload :ClientApi, 'aws-sdk-panorama/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-panorama/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-panorama/client'
+  autoload :Errors, 'aws-sdk-panorama/errors'
+  autoload :Resource, 'aws-sdk-panorama/resource'
+  autoload :EndpointParameters, 'aws-sdk-panorama/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-panorama/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-panorama/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.35.0'
 
 end
+
+require_relative 'aws-sdk-panorama/customizations'

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:mq)
-
 module Aws::MQ
   # An API client for MQ.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1688,7 +1686,7 @@ module Aws::MQ
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

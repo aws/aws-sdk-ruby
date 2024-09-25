@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-appconfigdata/types'
-require_relative 'aws-sdk-appconfigdata/client_api'
-require_relative 'aws-sdk-appconfigdata/plugins/endpoints.rb'
-require_relative 'aws-sdk-appconfigdata/client'
-require_relative 'aws-sdk-appconfigdata/errors'
-require_relative 'aws-sdk-appconfigdata/resource'
-require_relative 'aws-sdk-appconfigdata/endpoint_parameters'
-require_relative 'aws-sdk-appconfigdata/endpoint_provider'
-require_relative 'aws-sdk-appconfigdata/endpoints'
-require_relative 'aws-sdk-appconfigdata/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:appconfigdata)
 
 # This module provides support for AWS AppConfig Data. This module is available in the
 # `aws-sdk-appconfigdata` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-appconfigdata/customizations'
 #
 # @!group service
 module Aws::AppConfigData
+  autoload :Types, 'aws-sdk-appconfigdata/types'
+  autoload :ClientApi, 'aws-sdk-appconfigdata/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-appconfigdata/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-appconfigdata/client'
+  autoload :Errors, 'aws-sdk-appconfigdata/errors'
+  autoload :Resource, 'aws-sdk-appconfigdata/resource'
+  autoload :EndpointParameters, 'aws-sdk-appconfigdata/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-appconfigdata/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-appconfigdata/endpoints'
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.31.0'
 
 end
+
+require_relative 'aws-sdk-appconfigdata/customizations'

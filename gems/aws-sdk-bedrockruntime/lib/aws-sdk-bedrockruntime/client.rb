@@ -37,8 +37,6 @@ require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockruntime)
-
 module Aws::BedrockRuntime
   # An API client for BedrockRuntime.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1878,7 +1876,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

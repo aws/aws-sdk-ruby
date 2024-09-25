@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-lexmodelbuildingservice/types'
-require_relative 'aws-sdk-lexmodelbuildingservice/client_api'
-require_relative 'aws-sdk-lexmodelbuildingservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-lexmodelbuildingservice/client'
-require_relative 'aws-sdk-lexmodelbuildingservice/errors'
-require_relative 'aws-sdk-lexmodelbuildingservice/resource'
-require_relative 'aws-sdk-lexmodelbuildingservice/endpoint_parameters'
-require_relative 'aws-sdk-lexmodelbuildingservice/endpoint_provider'
-require_relative 'aws-sdk-lexmodelbuildingservice/endpoints'
-require_relative 'aws-sdk-lexmodelbuildingservice/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:lexmodelbuildingservice)
 
 # This module provides support for Amazon Lex Model Building Service. This module is available in the
 # `aws-sdk-lexmodelbuildingservice` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-lexmodelbuildingservice/customizations'
 #
 # @!group service
 module Aws::LexModelBuildingService
+  autoload :Types, 'aws-sdk-lexmodelbuildingservice/types'
+  autoload :ClientApi, 'aws-sdk-lexmodelbuildingservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-lexmodelbuildingservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-lexmodelbuildingservice/client'
+  autoload :Errors, 'aws-sdk-lexmodelbuildingservice/errors'
+  autoload :Resource, 'aws-sdk-lexmodelbuildingservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-lexmodelbuildingservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-lexmodelbuildingservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-lexmodelbuildingservice/endpoints'
 
-  GEM_VERSION = '1.80.0'
+  GEM_VERSION = '1.82.0'
 
 end
+
+require_relative 'aws-sdk-lexmodelbuildingservice/customizations'

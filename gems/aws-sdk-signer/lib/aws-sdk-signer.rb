@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-signer/types'
-require_relative 'aws-sdk-signer/client_api'
-require_relative 'aws-sdk-signer/plugins/endpoints.rb'
-require_relative 'aws-sdk-signer/client'
-require_relative 'aws-sdk-signer/errors'
-require_relative 'aws-sdk-signer/waiters'
-require_relative 'aws-sdk-signer/resource'
-require_relative 'aws-sdk-signer/endpoint_parameters'
-require_relative 'aws-sdk-signer/endpoint_provider'
-require_relative 'aws-sdk-signer/endpoints'
-require_relative 'aws-sdk-signer/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:signer)
 
 # This module provides support for AWS Signer. This module is available in the
 # `aws-sdk-signer` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-signer/customizations'
 #
 # @!group service
 module Aws::Signer
+  autoload :Types, 'aws-sdk-signer/types'
+  autoload :ClientApi, 'aws-sdk-signer/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-signer/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-signer/client'
+  autoload :Errors, 'aws-sdk-signer/errors'
+  autoload :Waiters, 'aws-sdk-signer/waiters'
+  autoload :Resource, 'aws-sdk-signer/resource'
+  autoload :EndpointParameters, 'aws-sdk-signer/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-signer/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-signer/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.65.0'
 
 end
+
+require_relative 'aws-sdk-signer/customizations'

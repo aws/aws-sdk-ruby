@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/types'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/client_api'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/plugins/endpoints.rb'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/client'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/errors'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/resource'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/endpoint_parameters'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/endpoint_provider'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/endpoints'
-require_relative 'aws-sdk-kinesisvideowebrtcstorage/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:kinesisvideowebrtcstorage)
 
 # This module provides support for Amazon Kinesis Video WebRTC Storage. This module is available in the
 # `aws-sdk-kinesisvideowebrtcstorage` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-kinesisvideowebrtcstorage/customizations'
 #
 # @!group service
 module Aws::KinesisVideoWebRTCStorage
+  autoload :Types, 'aws-sdk-kinesisvideowebrtcstorage/types'
+  autoload :ClientApi, 'aws-sdk-kinesisvideowebrtcstorage/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-kinesisvideowebrtcstorage/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-kinesisvideowebrtcstorage/client'
+  autoload :Errors, 'aws-sdk-kinesisvideowebrtcstorage/errors'
+  autoload :Resource, 'aws-sdk-kinesisvideowebrtcstorage/resource'
+  autoload :EndpointParameters, 'aws-sdk-kinesisvideowebrtcstorage/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-kinesisvideowebrtcstorage/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-kinesisvideowebrtcstorage/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.25.0'
 
 end
+
+require_relative 'aws-sdk-kinesisvideowebrtcstorage/customizations'

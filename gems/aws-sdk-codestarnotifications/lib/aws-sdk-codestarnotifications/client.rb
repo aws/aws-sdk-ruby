@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:codestarnotifications)
-
 module Aws::CodeStarNotifications
   # An API client for CodeStarNotifications.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1081,7 +1079,7 @@ module Aws::CodeStarNotifications
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codestarnotifications'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

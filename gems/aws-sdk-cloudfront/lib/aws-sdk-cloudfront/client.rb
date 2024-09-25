@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:cloudfront)
-
 module Aws::CloudFront
   # An API client for CloudFront.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -9486,7 +9484,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

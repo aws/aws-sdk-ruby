@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-omics/types'
-require_relative 'aws-sdk-omics/client_api'
-require_relative 'aws-sdk-omics/plugins/endpoints.rb'
-require_relative 'aws-sdk-omics/client'
-require_relative 'aws-sdk-omics/errors'
-require_relative 'aws-sdk-omics/waiters'
-require_relative 'aws-sdk-omics/resource'
-require_relative 'aws-sdk-omics/endpoint_parameters'
-require_relative 'aws-sdk-omics/endpoint_provider'
-require_relative 'aws-sdk-omics/endpoints'
-require_relative 'aws-sdk-omics/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:omics)
 
 # This module provides support for Amazon Omics. This module is available in the
 # `aws-sdk-omics` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-omics/customizations'
 #
 # @!group service
 module Aws::Omics
+  autoload :Types, 'aws-sdk-omics/types'
+  autoload :ClientApi, 'aws-sdk-omics/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-omics/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-omics/client'
+  autoload :Errors, 'aws-sdk-omics/errors'
+  autoload :Waiters, 'aws-sdk-omics/waiters'
+  autoload :Resource, 'aws-sdk-omics/resource'
+  autoload :EndpointParameters, 'aws-sdk-omics/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-omics/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-omics/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.38.0'
 
 end
+
+require_relative 'aws-sdk-omics/customizations'

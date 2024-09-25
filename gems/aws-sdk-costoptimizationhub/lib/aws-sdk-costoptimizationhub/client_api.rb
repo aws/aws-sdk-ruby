@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::CostOptimizationHub
   # @api private
   module ClientApi

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::Athena
   # @api private
   module ClientApi
@@ -61,6 +62,7 @@ module Aws::Athena
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnNullable = Shapes::StringShape.new(name: 'ColumnNullable')
     CommentString = Shapes::StringShape.new(name: 'CommentString')
+    ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     CoordinatorDpuSize = Shapes::IntegerShape.new(name: 'CoordinatorDpuSize')
     CreateCapacityReservationInput = Shapes::StructureShape.new(name: 'CreateCapacityReservationInput')
     CreateCapacityReservationOutput = Shapes::StructureShape.new(name: 'CreateCapacityReservationOutput')
@@ -78,6 +80,7 @@ module Aws::Athena
     CreateWorkGroupOutput = Shapes::StructureShape.new(name: 'CreateWorkGroupOutput')
     CustomerContentEncryptionConfiguration = Shapes::StructureShape.new(name: 'CustomerContentEncryptionConfiguration')
     DataCatalog = Shapes::StructureShape.new(name: 'DataCatalog')
+    DataCatalogStatus = Shapes::StringShape.new(name: 'DataCatalogStatus')
     DataCatalogSummary = Shapes::StructureShape.new(name: 'DataCatalogSummary')
     DataCatalogSummaryList = Shapes::ListShape.new(name: 'DataCatalogSummaryList')
     DataCatalogType = Shapes::StringShape.new(name: 'DataCatalogType')
@@ -476,6 +479,7 @@ module Aws::Athena
     CreateDataCatalogInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataCatalogInput.struct_class = Types::CreateDataCatalogInput
 
+    CreateDataCatalogOutput.add_member(:data_catalog, Shapes::ShapeRef.new(shape: DataCatalog, location_name: "DataCatalog"))
     CreateDataCatalogOutput.struct_class = Types::CreateDataCatalogOutput
 
     CreateNamedQueryInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -528,10 +532,16 @@ module Aws::Athena
     DataCatalog.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     DataCatalog.add_member(:type, Shapes::ShapeRef.new(shape: DataCatalogType, required: true, location_name: "Type"))
     DataCatalog.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
+    DataCatalog.add_member(:status, Shapes::ShapeRef.new(shape: DataCatalogStatus, location_name: "Status"))
+    DataCatalog.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
+    DataCatalog.add_member(:error, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Error"))
     DataCatalog.struct_class = Types::DataCatalog
 
     DataCatalogSummary.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, location_name: "CatalogName"))
     DataCatalogSummary.add_member(:type, Shapes::ShapeRef.new(shape: DataCatalogType, location_name: "Type"))
+    DataCatalogSummary.add_member(:status, Shapes::ShapeRef.new(shape: DataCatalogStatus, location_name: "Status"))
+    DataCatalogSummary.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
+    DataCatalogSummary.add_member(:error, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Error"))
     DataCatalogSummary.struct_class = Types::DataCatalogSummary
 
     DataCatalogSummaryList.member = Shapes::ShapeRef.new(shape: DataCatalogSummary)
@@ -554,6 +564,7 @@ module Aws::Athena
     DeleteDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     DeleteDataCatalogInput.struct_class = Types::DeleteDataCatalogInput
 
+    DeleteDataCatalogOutput.add_member(:data_catalog, Shapes::ShapeRef.new(shape: DataCatalog, location_name: "DataCatalog"))
     DeleteDataCatalogOutput.struct_class = Types::DeleteDataCatalogOutput
 
     DeleteNamedQueryInput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, required: true, location_name: "NamedQueryId", metadata: {"idempotencyToken"=>true}))

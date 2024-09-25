@@ -93,7 +93,8 @@ module Aws
                            ?shard_count: ::Integer,
                            ?stream_mode_details: {
                              stream_mode: ("PROVISIONED" | "ON_DEMAND")
-                           }
+                           },
+                           ?tags: Hash[::String, ::String]
                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

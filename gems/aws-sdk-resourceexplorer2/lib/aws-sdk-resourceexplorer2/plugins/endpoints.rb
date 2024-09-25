@@ -96,6 +96,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::ResourceExplorer2::Endpoints::ListIndexes.build(context)
           when :list_indexes_for_members
             Aws::ResourceExplorer2::Endpoints::ListIndexesForMembers.build(context)
+          when :list_resources
+            Aws::ResourceExplorer2::Endpoints::ListResources.build(context)
           when :list_supported_resource_types
             Aws::ResourceExplorer2::Endpoints::ListSupportedResourceTypes.build(context)
           when :list_tags_for_resource

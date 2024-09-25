@@ -1475,3 +1475,4 @@ module Aws::ResourceGroups
 
   end
 end
+

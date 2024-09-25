@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::SnowDeviceManagement
   # @api private
   module ClientApi

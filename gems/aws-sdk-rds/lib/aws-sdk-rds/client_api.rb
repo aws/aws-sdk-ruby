@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::RDS
   # @api private
   module ClientApi
@@ -481,7 +482,6 @@ module Aws::RDS
     InvalidExportTaskStateFault = Shapes::StructureShape.new(name: 'InvalidExportTaskStateFault', error: {"code"=>"InvalidExportTaskStateFault", "httpStatusCode"=>400, "senderFault"=>true})
     InvalidGlobalClusterStateFault = Shapes::StructureShape.new(name: 'InvalidGlobalClusterStateFault', error: {"code"=>"InvalidGlobalClusterStateFault", "httpStatusCode"=>400, "senderFault"=>true})
     InvalidIntegrationStateFault = Shapes::StructureShape.new(name: 'InvalidIntegrationStateFault', error: {"code"=>"InvalidIntegrationStateFault", "httpStatusCode"=>400, "senderFault"=>true})
-    InvalidMaxAcuFault = Shapes::StructureShape.new(name: 'InvalidMaxAcuFault', error: {"code"=>"InvalidMaxAcu", "httpStatusCode"=>400, "senderFault"=>true})
     InvalidOptionGroupStateFault = Shapes::StructureShape.new(name: 'InvalidOptionGroupStateFault', error: {"code"=>"InvalidOptionGroupStateFault", "httpStatusCode"=>400, "senderFault"=>true})
     InvalidResourceStateFault = Shapes::StructureShape.new(name: 'InvalidResourceStateFault', error: {"code"=>"InvalidResourceStateFault", "httpStatusCode"=>400, "senderFault"=>true})
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault', error: {"code"=>"InvalidRestoreFault", "httpStatusCode"=>400, "senderFault"=>true})
@@ -2025,6 +2025,7 @@ module Aws::RDS
     DBShardGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DBShardGroup.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     DBShardGroup.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
+    DBShardGroup.add_member(:db_shard_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBShardGroupArn"))
     DBShardGroup.struct_class = Types::DBShardGroup
 
     DBShardGroupAlreadyExistsFault.struct_class = Types::DBShardGroupAlreadyExistsFault
@@ -2948,8 +2949,6 @@ module Aws::RDS
 
     InvalidIntegrationStateFault.struct_class = Types::InvalidIntegrationStateFault
 
-    InvalidMaxAcuFault.struct_class = Types::InvalidMaxAcuFault
-
     InvalidOptionGroupStateFault.struct_class = Types::InvalidOptionGroupStateFault
 
     InvalidResourceStateFault.struct_class = Types::InvalidResourceStateFault
@@ -3217,6 +3216,7 @@ module Aws::RDS
     ModifyDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: DBShardGroupIdentifier, required: true, location_name: "DBShardGroupIdentifier"))
     ModifyDBShardGroupMessage.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxACU"))
     ModifyDBShardGroupMessage.add_member(:min_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinACU"))
+    ModifyDBShardGroupMessage.add_member(:compute_redundancy, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ComputeRedundancy"))
     ModifyDBShardGroupMessage.struct_class = Types::ModifyDBShardGroupMessage
 
     ModifyDBSnapshotAttributeMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))
@@ -4707,7 +4707,6 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: MaxDBShardGroupLimitReached)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxAcuFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedDBEngineVersionFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
       end)
@@ -5932,7 +5931,6 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBShardGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxAcuFault)
       end)
 
       api.add_operation(:modify_db_snapshot, Seahorse::Model::Operation.new.tap do |o|

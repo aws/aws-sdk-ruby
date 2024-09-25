@@ -48,6 +48,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor shard_count: ::Integer
       attr_accessor stream_mode_details: Types::StreamModeDetails
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-securitylake/types'
-require_relative 'aws-sdk-securitylake/client_api'
-require_relative 'aws-sdk-securitylake/plugins/endpoints.rb'
-require_relative 'aws-sdk-securitylake/client'
-require_relative 'aws-sdk-securitylake/errors'
-require_relative 'aws-sdk-securitylake/resource'
-require_relative 'aws-sdk-securitylake/endpoint_parameters'
-require_relative 'aws-sdk-securitylake/endpoint_provider'
-require_relative 'aws-sdk-securitylake/endpoints'
-require_relative 'aws-sdk-securitylake/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:securitylake)
 
 # This module provides support for Amazon Security Lake. This module is available in the
 # `aws-sdk-securitylake` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-securitylake/customizations'
 #
 # @!group service
 module Aws::SecurityLake
+  autoload :Types, 'aws-sdk-securitylake/types'
+  autoload :ClientApi, 'aws-sdk-securitylake/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-securitylake/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-securitylake/client'
+  autoload :Errors, 'aws-sdk-securitylake/errors'
+  autoload :Resource, 'aws-sdk-securitylake/resource'
+  autoload :EndpointParameters, 'aws-sdk-securitylake/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-securitylake/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-securitylake/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.30.0'
 
 end
+
+require_relative 'aws-sdk-securitylake/customizations'

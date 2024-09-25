@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-09-24)
+------------------
+
+* Feature - Add support for Cross Region Inference in Bedrock Model Evaluations.
+
+1.23.0 (2024-09-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.22.0 (2024-09-20)
 ------------------
 

@@ -831,3 +831,4 @@ module Aws::LicenseManagerUserSubscriptions
 
   end
 end
+

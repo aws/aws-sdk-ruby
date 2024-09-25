@@ -141,3 +141,4 @@ module Aws::InspectorScan
 
   end
 end
+

@@ -257,7 +257,8 @@
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InvalidArgumentException"}
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceInUseException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
@@ -714,7 +715,8 @@
       "members":{
         "StreamName":{"shape":"StreamName"},
         "ShardCount":{"shape":"PositiveIntegerObject"},
-        "StreamModeDetails":{"shape":"StreamModeDetails"}
+        "StreamModeDetails":{"shape":"StreamModeDetails"},
+        "Tags":{"shape":"TagMap"}
       }
     },
     "Data":{

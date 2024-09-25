@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'aws-sdk-core'
+
 require_relative 'aws-sdk-code-generator/api'
 require_relative 'aws-sdk-code-generator/apply_docs'
 require_relative 'aws-sdk-code-generator/codegenerated_plugin'

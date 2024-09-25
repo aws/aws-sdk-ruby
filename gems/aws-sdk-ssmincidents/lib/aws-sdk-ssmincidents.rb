@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ssmincidents/types'
-require_relative 'aws-sdk-ssmincidents/client_api'
-require_relative 'aws-sdk-ssmincidents/plugins/endpoints.rb'
-require_relative 'aws-sdk-ssmincidents/client'
-require_relative 'aws-sdk-ssmincidents/errors'
-require_relative 'aws-sdk-ssmincidents/waiters'
-require_relative 'aws-sdk-ssmincidents/resource'
-require_relative 'aws-sdk-ssmincidents/endpoint_parameters'
-require_relative 'aws-sdk-ssmincidents/endpoint_provider'
-require_relative 'aws-sdk-ssmincidents/endpoints'
-require_relative 'aws-sdk-ssmincidents/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:ssmincidents)
 
 # This module provides support for AWS Systems Manager Incident Manager. This module is available in the
 # `aws-sdk-ssmincidents` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-ssmincidents/customizations'
 #
 # @!group service
 module Aws::SSMIncidents
+  autoload :Types, 'aws-sdk-ssmincidents/types'
+  autoload :ClientApi, 'aws-sdk-ssmincidents/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ssmincidents/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ssmincidents/client'
+  autoload :Errors, 'aws-sdk-ssmincidents/errors'
+  autoload :Waiters, 'aws-sdk-ssmincidents/waiters'
+  autoload :Resource, 'aws-sdk-ssmincidents/resource'
+  autoload :EndpointParameters, 'aws-sdk-ssmincidents/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ssmincidents/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ssmincidents/endpoints'
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.45.0'
 
 end
+
+require_relative 'aws-sdk-ssmincidents/customizations'

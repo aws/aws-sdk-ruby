@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:opsworks)
-
 module Aws::OpsWorks
   # An API client for OpsWorks.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -5792,7 +5790,7 @@ module Aws::OpsWorks
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opsworks'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

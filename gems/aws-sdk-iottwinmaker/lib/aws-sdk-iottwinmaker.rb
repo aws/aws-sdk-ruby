@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iottwinmaker/types'
-require_relative 'aws-sdk-iottwinmaker/client_api'
-require_relative 'aws-sdk-iottwinmaker/plugins/endpoints.rb'
-require_relative 'aws-sdk-iottwinmaker/client'
-require_relative 'aws-sdk-iottwinmaker/errors'
-require_relative 'aws-sdk-iottwinmaker/waiters'
-require_relative 'aws-sdk-iottwinmaker/resource'
-require_relative 'aws-sdk-iottwinmaker/endpoint_parameters'
-require_relative 'aws-sdk-iottwinmaker/endpoint_provider'
-require_relative 'aws-sdk-iottwinmaker/endpoints'
-require_relative 'aws-sdk-iottwinmaker/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:iottwinmaker)
 
 # This module provides support for AWS IoT TwinMaker. This module is available in the
 # `aws-sdk-iottwinmaker` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-iottwinmaker/customizations'
 #
 # @!group service
 module Aws::IoTTwinMaker
+  autoload :Types, 'aws-sdk-iottwinmaker/types'
+  autoload :ClientApi, 'aws-sdk-iottwinmaker/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iottwinmaker/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iottwinmaker/client'
+  autoload :Errors, 'aws-sdk-iottwinmaker/errors'
+  autoload :Waiters, 'aws-sdk-iottwinmaker/waiters'
+  autoload :Resource, 'aws-sdk-iottwinmaker/resource'
+  autoload :EndpointParameters, 'aws-sdk-iottwinmaker/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iottwinmaker/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iottwinmaker/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.34.0'
 
 end
+
+require_relative 'aws-sdk-iottwinmaker/customizations'

@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-lexmodelsv2/types'
-require_relative 'aws-sdk-lexmodelsv2/client_api'
-require_relative 'aws-sdk-lexmodelsv2/plugins/endpoints.rb'
-require_relative 'aws-sdk-lexmodelsv2/client'
-require_relative 'aws-sdk-lexmodelsv2/errors'
-require_relative 'aws-sdk-lexmodelsv2/waiters'
-require_relative 'aws-sdk-lexmodelsv2/resource'
-require_relative 'aws-sdk-lexmodelsv2/endpoint_parameters'
-require_relative 'aws-sdk-lexmodelsv2/endpoint_provider'
-require_relative 'aws-sdk-lexmodelsv2/endpoints'
-require_relative 'aws-sdk-lexmodelsv2/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:lexmodelsv2)
 
 # This module provides support for Amazon Lex Model Building V2. This module is available in the
 # `aws-sdk-lexmodelsv2` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-lexmodelsv2/customizations'
 #
 # @!group service
 module Aws::LexModelsV2
+  autoload :Types, 'aws-sdk-lexmodelsv2/types'
+  autoload :ClientApi, 'aws-sdk-lexmodelsv2/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-lexmodelsv2/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-lexmodelsv2/client'
+  autoload :Errors, 'aws-sdk-lexmodelsv2/errors'
+  autoload :Waiters, 'aws-sdk-lexmodelsv2/waiters'
+  autoload :Resource, 'aws-sdk-lexmodelsv2/resource'
+  autoload :EndpointParameters, 'aws-sdk-lexmodelsv2/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-lexmodelsv2/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-lexmodelsv2/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.63.0'
 
 end
+
+require_relative 'aws-sdk-lexmodelsv2/customizations'

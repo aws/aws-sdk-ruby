@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-greengrass/types'
-require_relative 'aws-sdk-greengrass/client_api'
-require_relative 'aws-sdk-greengrass/plugins/endpoints.rb'
-require_relative 'aws-sdk-greengrass/client'
-require_relative 'aws-sdk-greengrass/errors'
-require_relative 'aws-sdk-greengrass/resource'
-require_relative 'aws-sdk-greengrass/endpoint_parameters'
-require_relative 'aws-sdk-greengrass/endpoint_provider'
-require_relative 'aws-sdk-greengrass/endpoints'
-require_relative 'aws-sdk-greengrass/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:greengrass)
 
 # This module provides support for AWS Greengrass. This module is available in the
 # `aws-sdk-greengrass` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-greengrass/customizations'
 #
 # @!group service
 module Aws::Greengrass
+  autoload :Types, 'aws-sdk-greengrass/types'
+  autoload :ClientApi, 'aws-sdk-greengrass/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-greengrass/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-greengrass/client'
+  autoload :Errors, 'aws-sdk-greengrass/errors'
+  autoload :Resource, 'aws-sdk-greengrass/resource'
+  autoload :EndpointParameters, 'aws-sdk-greengrass/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-greengrass/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-greengrass/endpoints'
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.75.0'
 
 end
+
+require_relative 'aws-sdk-greengrass/customizations'

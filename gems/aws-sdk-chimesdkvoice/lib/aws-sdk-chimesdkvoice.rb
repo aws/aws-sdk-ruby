@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-chimesdkvoice/types'
-require_relative 'aws-sdk-chimesdkvoice/client_api'
-require_relative 'aws-sdk-chimesdkvoice/plugins/endpoints.rb'
-require_relative 'aws-sdk-chimesdkvoice/client'
-require_relative 'aws-sdk-chimesdkvoice/errors'
-require_relative 'aws-sdk-chimesdkvoice/resource'
-require_relative 'aws-sdk-chimesdkvoice/endpoint_parameters'
-require_relative 'aws-sdk-chimesdkvoice/endpoint_provider'
-require_relative 'aws-sdk-chimesdkvoice/endpoints'
-require_relative 'aws-sdk-chimesdkvoice/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:chimesdkvoice)
 
 # This module provides support for Amazon Chime SDK Voice. This module is available in the
 # `aws-sdk-chimesdkvoice` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-chimesdkvoice/customizations'
 #
 # @!group service
 module Aws::ChimeSDKVoice
+  autoload :Types, 'aws-sdk-chimesdkvoice/types'
+  autoload :ClientApi, 'aws-sdk-chimesdkvoice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-chimesdkvoice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-chimesdkvoice/client'
+  autoload :Errors, 'aws-sdk-chimesdkvoice/errors'
+  autoload :Resource, 'aws-sdk-chimesdkvoice/resource'
+  autoload :EndpointParameters, 'aws-sdk-chimesdkvoice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-chimesdkvoice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-chimesdkvoice/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.32.0'
 
 end
+
+require_relative 'aws-sdk-chimesdkvoice/customizations'

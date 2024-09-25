@@ -11,9 +11,9 @@ $:.unshift("#{$GEMS_DIR}/aws-partitions/lib")
 $:.unshift("#{$GEMS_DIR}/aws-eventstream/lib")
 $:.unshift("#{$GEMS_DIR}/aws-sigv4/lib")
 
-require 'build_tools'
-require 'aws-sdk-code-generator'
-require 'aws-sdk-core'
+task 'require-build-tools' do
+  require 'build_tools'
+end
 
 Dir.glob("#{$REPO_ROOT}/tasks/**/*.rake").each do |task_file|
   load(task_file)

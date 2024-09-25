@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.477.0 (2024-09-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.476.0 (2024-09-23)
+------------------
+
+* Feature - Amazon EC2 G6e instances powered by NVIDIA L40S Tensor Core GPUs are the most cost-efficient GPU instances for deploying generative AI models and the highest performance GPU instances for spatial computing workloads.
+
 1.475.0 (2024-09-20)
 ------------------
 

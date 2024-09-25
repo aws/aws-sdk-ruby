@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-b2bi/types'
-require_relative 'aws-sdk-b2bi/client_api'
-require_relative 'aws-sdk-b2bi/plugins/endpoints.rb'
-require_relative 'aws-sdk-b2bi/client'
-require_relative 'aws-sdk-b2bi/errors'
-require_relative 'aws-sdk-b2bi/resource'
-require_relative 'aws-sdk-b2bi/endpoint_parameters'
-require_relative 'aws-sdk-b2bi/endpoint_provider'
-require_relative 'aws-sdk-b2bi/endpoints'
-require_relative 'aws-sdk-b2bi/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:b2bi)
 
 # This module provides support for AWS B2B Data Interchange. This module is available in the
 # `aws-sdk-b2bi` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-b2bi/customizations'
 #
 # @!group service
 module Aws::B2bi
+  autoload :Types, 'aws-sdk-b2bi/types'
+  autoload :ClientApi, 'aws-sdk-b2bi/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-b2bi/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-b2bi/client'
+  autoload :Errors, 'aws-sdk-b2bi/errors'
+  autoload :Resource, 'aws-sdk-b2bi/resource'
+  autoload :EndpointParameters, 'aws-sdk-b2bi/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-b2bi/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-b2bi/endpoints'
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.20.0'
 
 end
+
+require_relative 'aws-sdk-b2bi/customizations'

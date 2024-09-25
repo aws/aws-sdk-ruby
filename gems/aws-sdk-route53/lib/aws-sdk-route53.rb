@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-route53/types'
-require_relative 'aws-sdk-route53/client_api'
-require_relative 'aws-sdk-route53/plugins/endpoints.rb'
-require_relative 'aws-sdk-route53/client'
-require_relative 'aws-sdk-route53/errors'
-require_relative 'aws-sdk-route53/waiters'
-require_relative 'aws-sdk-route53/resource'
-require_relative 'aws-sdk-route53/endpoint_parameters'
-require_relative 'aws-sdk-route53/endpoint_provider'
-require_relative 'aws-sdk-route53/endpoints'
-require_relative 'aws-sdk-route53/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:route53)
 
 # This module provides support for Amazon Route 53. This module is available in the
 # `aws-sdk-route53` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-route53/customizations'
 #
 # @!group service
 module Aws::Route53
+  autoload :Types, 'aws-sdk-route53/types'
+  autoload :ClientApi, 'aws-sdk-route53/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-route53/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-route53/client'
+  autoload :Errors, 'aws-sdk-route53/errors'
+  autoload :Waiters, 'aws-sdk-route53/waiters'
+  autoload :Resource, 'aws-sdk-route53/resource'
+  autoload :EndpointParameters, 'aws-sdk-route53/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-route53/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-route53/endpoints'
 
-  GEM_VERSION = '1.100.0'
+  GEM_VERSION = '1.102.0'
 
 end
+
+require_relative 'aws-sdk-route53/customizations'

@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-appflow/types'
-require_relative 'aws-sdk-appflow/client_api'
-require_relative 'aws-sdk-appflow/plugins/endpoints.rb'
-require_relative 'aws-sdk-appflow/client'
-require_relative 'aws-sdk-appflow/errors'
-require_relative 'aws-sdk-appflow/resource'
-require_relative 'aws-sdk-appflow/endpoint_parameters'
-require_relative 'aws-sdk-appflow/endpoint_provider'
-require_relative 'aws-sdk-appflow/endpoints'
-require_relative 'aws-sdk-appflow/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:appflow)
 
 # This module provides support for Amazon Appflow. This module is available in the
 # `aws-sdk-appflow` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-appflow/customizations'
 #
 # @!group service
 module Aws::Appflow
+  autoload :Types, 'aws-sdk-appflow/types'
+  autoload :ClientApi, 'aws-sdk-appflow/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-appflow/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-appflow/client'
+  autoload :Errors, 'aws-sdk-appflow/errors'
+  autoload :Resource, 'aws-sdk-appflow/resource'
+  autoload :EndpointParameters, 'aws-sdk-appflow/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-appflow/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-appflow/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.68.0'
 
 end
+
+require_relative 'aws-sdk-appflow/customizations'

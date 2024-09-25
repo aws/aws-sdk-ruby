@@ -821,3 +821,4 @@ module Aws::SSOOIDC
 
   end
 end
+

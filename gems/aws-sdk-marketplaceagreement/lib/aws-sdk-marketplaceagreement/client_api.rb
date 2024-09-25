@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::MarketplaceAgreement
   # @api private
   module ClientApi

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:privatenetworks)
-
 module Aws::PrivateNetworks
   # An API client for PrivateNetworks.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -2193,7 +2191,7 @@ module Aws::PrivateNetworks
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-privatenetworks'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

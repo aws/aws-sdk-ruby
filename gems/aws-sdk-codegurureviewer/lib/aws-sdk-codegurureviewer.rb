@@ -11,17 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-codegurureviewer/types'
-require_relative 'aws-sdk-codegurureviewer/client_api'
-require_relative 'aws-sdk-codegurureviewer/plugins/endpoints.rb'
-require_relative 'aws-sdk-codegurureviewer/client'
-require_relative 'aws-sdk-codegurureviewer/errors'
-require_relative 'aws-sdk-codegurureviewer/waiters'
-require_relative 'aws-sdk-codegurureviewer/resource'
-require_relative 'aws-sdk-codegurureviewer/endpoint_parameters'
-require_relative 'aws-sdk-codegurureviewer/endpoint_provider'
-require_relative 'aws-sdk-codegurureviewer/endpoints'
-require_relative 'aws-sdk-codegurureviewer/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:codegurureviewer)
 
 # This module provides support for Amazon CodeGuru Reviewer. This module is available in the
 # `aws-sdk-codegurureviewer` gem.
@@ -52,7 +42,21 @@ require_relative 'aws-sdk-codegurureviewer/customizations'
 #
 # @!group service
 module Aws::CodeGuruReviewer
+  autoload :Types, 'aws-sdk-codegurureviewer/types'
+  autoload :ClientApi, 'aws-sdk-codegurureviewer/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-codegurureviewer/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-codegurureviewer/client'
+  autoload :Errors, 'aws-sdk-codegurureviewer/errors'
+  autoload :Waiters, 'aws-sdk-codegurureviewer/waiters'
+  autoload :Resource, 'aws-sdk-codegurureviewer/resource'
+  autoload :EndpointParameters, 'aws-sdk-codegurureviewer/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-codegurureviewer/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-codegurureviewer/endpoints'
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.58.0'
 
 end
+
+require_relative 'aws-sdk-codegurureviewer/customizations'

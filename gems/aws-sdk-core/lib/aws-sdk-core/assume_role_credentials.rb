@@ -64,11 +64,17 @@ module Aws
     def refresh
       c = @client.assume_role(@assume_role_params)
       creds = c.credentials
+      account_id =
+        begin
+          ARNParser.parse(c.assumed_role_user.arn).account_id
+        rescue Aws::Errors::InvalidARNError
+          nil
+        end
       @credentials = Credentials.new(
         creds.access_key_id,
         creds.secret_access_key,
         creds.session_token,
-        account_id: ARNParser.parse(c.assumed_role_user.arn).account_id
+        account_id: account_id
       )
       @expiration = creds.expiration
     end

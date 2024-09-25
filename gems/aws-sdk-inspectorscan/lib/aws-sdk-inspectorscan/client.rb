@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:inspectorscan)
-
 module Aws::InspectorScan
   # An API client for InspectorScan.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -508,7 +506,7 @@ module Aws::InspectorScan
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspectorscan'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

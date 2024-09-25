@@ -113,6 +113,11 @@ module Aws::EMRServerless
     #   use cases for an application.
     #   @return [Types::InteractiveConfiguration]
     #
+    # @!attribute [rw] scheduler_configuration
+    #   The scheduler configuration for batch and streaming jobs running on
+    #   this application. Supported with release labels emr-7.0.0 and above.
+    #   @return [Types::SchedulerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -136,7 +141,8 @@ module Aws::EMRServerless
       :worker_type_specifications,
       :runtime_configuration,
       :monitoring_configuration,
-      :interactive_configuration)
+      :interactive_configuration,
+      :scheduler_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -476,6 +482,11 @@ module Aws::EMRServerless
     #   use cases to use when running an application.
     #   @return [Types::InteractiveConfiguration]
     #
+    # @!attribute [rw] scheduler_configuration
+    #   The scheduler configuration for batch and streaming jobs running on
+    #   this application. Supported with release labels emr-7.0.0 and above.
+    #   @return [Types::SchedulerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -494,7 +505,8 @@ module Aws::EMRServerless
       :worker_type_specifications,
       :runtime_configuration,
       :monitoring_configuration,
-      :interactive_configuration)
+      :interactive_configuration,
+      :scheduler_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -890,6 +902,18 @@ module Aws::EMRServerless
     #   The date and time of when the job run attempt was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] started_at
+    #   The date and time when the job moved to the RUNNING state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The date and time when the job was terminated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] queued_duration_milliseconds
+    #   The total time for a job in the QUEUED state in milliseconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -916,7 +940,10 @@ module Aws::EMRServerless
       :retry_policy,
       :attempt,
       :attempt_created_at,
-      :attempt_updated_at)
+      :attempt_updated_at,
+      :started_at,
+      :ended_at,
+      :queued_duration_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1468,6 +1495,30 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
+    # The scheduler configuration for batch and streaming jobs running on
+    # this application. Supported with release labels emr-7.0.0 and above.
+    #
+    # @!attribute [rw] queue_timeout_minutes
+    #   The maximum duration in minutes for the job in QUEUED state. If
+    #   scheduler configuration is enabled on your application, the default
+    #   value is 360 minutes (6 hours). The valid range is from 15 to 720.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrent_runs
+    #   The maximum concurrent job runs on this application. If scheduler
+    #   configuration is enabled on your application, the default value is
+    #   15. The valid range is 1 to 1000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/SchedulerConfiguration AWS API Documentation
+    #
+    class SchedulerConfiguration < Struct.new(
+      :queue_timeout_minutes,
+      :max_concurrent_runs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The maximum number of resources per account has been reached.
     #
     # @!attribute [rw] message
@@ -1780,6 +1831,11 @@ module Aws::EMRServerless
     #   The configuration setting for monitoring.
     #   @return [Types::MonitoringConfiguration]
     #
+    # @!attribute [rw] scheduler_configuration
+    #   The scheduler configuration for batch and streaming jobs running on
+    #   this application. Supported with release labels emr-7.0.0 and above.
+    #   @return [Types::SchedulerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1796,7 +1852,8 @@ module Aws::EMRServerless
       :interactive_configuration,
       :release_label,
       :runtime_configuration,
-      :monitoring_configuration)
+      :monitoring_configuration,
+      :scheduler_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1890,3 +1947,4 @@ module Aws::EMRServerless
 
   end
 end
+

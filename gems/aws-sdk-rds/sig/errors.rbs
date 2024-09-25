@@ -223,8 +223,6 @@ module Aws
       end
       class InvalidIntegrationStateFault < ::Aws::Errors::ServiceError
       end
-      class InvalidMaxAcuFault < ::Aws::Errors::ServiceError
-      end
       class InvalidOptionGroupStateFault < ::Aws::Errors::ServiceError
       end
       class InvalidResourceStateFault < ::Aws::Errors::ServiceError

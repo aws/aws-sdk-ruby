@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:ecrpublic)
-
 module Aws::ECRPublic
   # An API client for ECRPublic.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1669,7 +1667,7 @@ module Aws::ECRPublic
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecrpublic'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

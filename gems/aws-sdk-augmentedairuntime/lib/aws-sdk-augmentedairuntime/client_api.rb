@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::AugmentedAIRuntime
   # @api private
   module ClientApi

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:codegurureviewer)
-
 module Aws::CodeGuruReviewer
   # An API client for CodeGuruReviewer.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1498,7 +1496,7 @@ module Aws::CodeGuruReviewer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

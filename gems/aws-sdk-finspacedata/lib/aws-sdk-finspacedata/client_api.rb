@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::FinSpaceData
   # @api private
   module ClientApi

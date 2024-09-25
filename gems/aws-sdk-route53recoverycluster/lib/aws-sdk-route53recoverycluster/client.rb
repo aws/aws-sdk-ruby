@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:route53recoverycluster)
-
 module Aws::Route53RecoveryCluster
   # An API client for Route53RecoveryCluster.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -784,7 +782,7 @@ module Aws::Route53RecoveryCluster
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53recoverycluster'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -4852,18 +4852,24 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_name
-    #   The name of the DB parameter group to associate with this DB
-    #   instance.
+    #   The name of the DB parameter group to associate with this read
+    #   replica DB instance.
     #
-    #   If you don't specify a value for `DBParameterGroupName`, then
-    #   Amazon RDS uses the `DBParameterGroup` of the source DB instance for
-    #   a same Region read replica, or the default `DBParameterGroup` for
-    #   the specified DB engine for a cross-Region read replica.
+    #   For Single-AZ or Multi-AZ DB instance read replica instances, if you
+    #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
+    #   uses the `DBParameterGroup` of the source DB instance for a same
+    #   Region read replica, or the default `DBParameterGroup` for the
+    #   specified DB engine for a cross-Region read replica.
+    #
+    #   For Multi-AZ DB cluster same Region read replica instances, if you
+    #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
+    #   uses the default `DBParameterGroup`.
     #
     #   Specifying a parameter group for this operation is only supported
-    #   for MySQL DB instances for cross-Region read replicas and for Oracle
-    #   DB instances. It isn't supported for MySQL DB instances for same
-    #   Region read replicas or for RDS Custom.
+    #   for MySQL DB instances for cross-Region read replicas, for Multi-AZ
+    #   DB cluster read replica instances, and for Oracle DB instances. It
+    #   isn't supported for MySQL DB instances for same Region read
+    #   replicas or for RDS Custom.
     #
     #   Constraints:
     #
@@ -5869,18 +5875,17 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] compute_redundancy
-    #   Specifies whether to create standby instances for the DB shard
+    #   Specifies whether to create standby DB shard groups for the DB shard
     #   group. Valid values are the following:
     #
-    #   * 0 - Creates a single, primary DB instance for each physical shard.
-    #     This is the default value, and the only one supported for the
-    #     preview.
+    #   * 0 - Creates a DB shard group without a standby DB shard group.
+    #     This is the default value.
     #
-    #   * 1 - Creates a primary DB instance and a standby instance in a
-    #     different Availability Zone (AZ) for each physical shard.
+    #   * 1 - Creates a DB shard group with a standby DB shard group in a
+    #     different Availability Zone (AZ).
     #
-    #   * 2 - Creates a primary DB instance and two standby instances in
-    #     different AZs for each physical shard.
+    #   * 2 - Creates a DB shard group with two standby DB shard groups in
+    #     two different AZs.
     #   @return [Integer]
     #
     # @!attribute [rw] max_acu
@@ -10563,18 +10568,17 @@ module Aws::RDS
     #   @return [Float]
     #
     # @!attribute [rw] compute_redundancy
-    #   Specifies whether to create standby instances for the DB shard
+    #   Specifies whether to create standby DB shard groups for the DB shard
     #   group. Valid values are the following:
     #
-    #   * 0 - Creates a single, primary DB instance for each physical shard.
-    #     This is the default value, and the only one supported for the
-    #     preview.
+    #   * 0 - Creates a DB shard group without a standby DB shard group.
+    #     This is the default value.
     #
-    #   * 1 - Creates a primary DB instance and a standby instance in a
-    #     different Availability Zone (AZ) for each physical shard.
+    #   * 1 - Creates a DB shard group with a standby DB shard group in a
+    #     different Availability Zone (AZ).
     #
-    #   * 2 - Creates a primary DB instance and two standby instances in
-    #     different AZs for each physical shard.
+    #   * 2 - Creates a DB shard group with two standby DB shard groups in
+    #     two different AZs.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -10605,6 +10609,10 @@ module Aws::RDS
     #   The connection endpoint for the DB shard group.
     #   @return [String]
     #
+    # @!attribute [rw] db_shard_group_arn
+    #   The Amazon Resource Name (ARN) for the DB shard group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBShardGroup AWS API Documentation
     #
     class DBShardGroup < Struct.new(
@@ -10616,7 +10624,8 @@ module Aws::RDS
       :compute_redundancy,
       :status,
       :publicly_accessible,
-      :endpoint)
+      :endpoint,
+      :db_shard_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16584,13 +16593,6 @@ module Aws::RDS
     #
     class InvalidIntegrationStateFault < Aws::EmptyStructure; end
 
-    # The maximum capacity of the DB shard group must be 48-7168 Aurora
-    # capacity units (ACUs).
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidMaxAcuFault AWS API Documentation
-    #
-    class InvalidMaxAcuFault < Aws::EmptyStructure; end
-
     # The option group isn't in the *available* state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidOptionGroupStateFault AWS API Documentation
@@ -19542,12 +19544,27 @@ module Aws::RDS
     #   (ACUs).
     #   @return [Float]
     #
+    # @!attribute [rw] compute_redundancy
+    #   Specifies whether to create standby DB shard groups for the DB shard
+    #   group. Valid values are the following:
+    #
+    #   * 0 - Creates a DB shard group without a standby DB shard group.
+    #     This is the default value.
+    #
+    #   * 1 - Creates a DB shard group with a standby DB shard group in a
+    #     different Availability Zone (AZ).
+    #
+    #   * 2 - Creates a DB shard group with two standby DB shard groups in
+    #     two different AZs.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBShardGroupMessage AWS API Documentation
     #
     class ModifyDBShardGroupMessage < Struct.new(
       :db_shard_group_identifier,
       :max_acu,
-      :min_acu)
+      :min_acu,
+      :compute_redundancy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27931,3 +27948,4 @@ module Aws::RDS
 
   end
 end
+

@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mediastoredata/types'
-require_relative 'aws-sdk-mediastoredata/client_api'
-require_relative 'aws-sdk-mediastoredata/plugins/endpoints.rb'
-require_relative 'aws-sdk-mediastoredata/client'
-require_relative 'aws-sdk-mediastoredata/errors'
-require_relative 'aws-sdk-mediastoredata/resource'
-require_relative 'aws-sdk-mediastoredata/endpoint_parameters'
-require_relative 'aws-sdk-mediastoredata/endpoint_provider'
-require_relative 'aws-sdk-mediastoredata/endpoints'
-require_relative 'aws-sdk-mediastoredata/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:mediastoredata)
 
 # This module provides support for AWS Elemental MediaStore Data Plane. This module is available in the
 # `aws-sdk-mediastoredata` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-mediastoredata/customizations'
 #
 # @!group service
 module Aws::MediaStoreData
+  autoload :Types, 'aws-sdk-mediastoredata/types'
+  autoload :ClientApi, 'aws-sdk-mediastoredata/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mediastoredata/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mediastoredata/client'
+  autoload :Errors, 'aws-sdk-mediastoredata/errors'
+  autoload :Resource, 'aws-sdk-mediastoredata/resource'
+  autoload :EndpointParameters, 'aws-sdk-mediastoredata/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mediastoredata/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mediastoredata/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.63.0'
 
 end
+
+require_relative 'aws-sdk-mediastoredata/customizations'

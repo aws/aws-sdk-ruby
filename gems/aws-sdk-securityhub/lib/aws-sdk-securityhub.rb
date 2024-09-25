@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-securityhub/types'
-require_relative 'aws-sdk-securityhub/client_api'
-require_relative 'aws-sdk-securityhub/plugins/endpoints.rb'
-require_relative 'aws-sdk-securityhub/client'
-require_relative 'aws-sdk-securityhub/errors'
-require_relative 'aws-sdk-securityhub/resource'
-require_relative 'aws-sdk-securityhub/endpoint_parameters'
-require_relative 'aws-sdk-securityhub/endpoint_provider'
-require_relative 'aws-sdk-securityhub/endpoints'
-require_relative 'aws-sdk-securityhub/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:securityhub)
 
 # This module provides support for AWS SecurityHub. This module is available in the
 # `aws-sdk-securityhub` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-securityhub/customizations'
 #
 # @!group service
 module Aws::SecurityHub
+  autoload :Types, 'aws-sdk-securityhub/types'
+  autoload :ClientApi, 'aws-sdk-securityhub/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-securityhub/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-securityhub/client'
+  autoload :Errors, 'aws-sdk-securityhub/errors'
+  autoload :Resource, 'aws-sdk-securityhub/resource'
+  autoload :EndpointParameters, 'aws-sdk-securityhub/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-securityhub/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-securityhub/endpoints'
 
-  GEM_VERSION = '1.118.0'
+  GEM_VERSION = '1.120.0'
 
 end
+
+require_relative 'aws-sdk-securityhub/customizations'

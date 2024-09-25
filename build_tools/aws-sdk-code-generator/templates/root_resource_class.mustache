@@ -49,3 +49,8 @@ module {{module_name}}
 
   end
 end
+{{#customization_file_exists?}}
+
+# Load customizations if they exist
+require '{{customization_file_path}}'
+{{/customization_file_exists?}}

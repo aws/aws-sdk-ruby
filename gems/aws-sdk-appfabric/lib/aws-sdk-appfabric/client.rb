@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:appfabric)
-
 module Aws::AppFabric
   # An API client for AppFabric.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1809,7 +1807,7 @@ module Aws::AppFabric
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appfabric'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

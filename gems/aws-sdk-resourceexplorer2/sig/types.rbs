@@ -172,6 +172,21 @@ module Aws::ResourceExplorer2
       SENSITIVE: []
     end
 
+    class ListResourcesInput
+      attr_accessor filters: Types::SearchFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor view_arn: ::String
+      SENSITIVE: [:filters]
+    end
+
+    class ListResourcesOutput
+      attr_accessor next_token: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
     class ListSupportedResourceTypesInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String

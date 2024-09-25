@@ -1409,8 +1409,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] foundation_model
-    #   The foundation model to be used for orchestration by the agent you
-    #   create.
+    #   The Amazon Resource Name (ARN) of the foundation model to be used
+    #   for orchestration by the agent you create.
     #   @return [String]
     #
     # @!attribute [rw] guardrail_configuration
@@ -4592,9 +4592,13 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] model_id
-    #   The unique identifier of the model to use to generate a response
-    #   from the query results. Omit this field if you want to return the
-    #   retrieved results as an array.
+    #   The unique identifier of the model or [inference profile][1] to use
+    #   to generate a response from the query results. Omit this field if
+    #   you want to return the retrieved results as an array.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBaseFlowNodeConfiguration AWS API Documentation
@@ -5891,7 +5895,12 @@ module Aws::BedrockAgent
     #   @return [Types::PromptInferenceConfiguration]
     #
     # @!attribute [rw] model_id
-    #   The unique identifier of the model to run inference with.
+    #   The unique identifier of the model or [inference profile][1] to run
+    #   inference with.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #   @return [String]
     #
     # @!attribute [rw] template_configuration
@@ -6077,8 +6086,8 @@ module Aws::BedrockAgent
     #   foundation model output in parts of the agent sequence. If you
     #   specify this field, at least one of the `promptConfigurations` must
     #   contain a `parserMode` value that is set to `OVERRIDDEN`. For more
-    #   information, see [Parser Lambda function in Agents for Amazon
-    #   Bedrock][1].
+    #   information, see [Parser Lambda function in Amazon Bedrock
+    #   Agents][1].
     #
     #
     #
@@ -6203,8 +6212,12 @@ module Aws::BedrockAgent
     #   @return [Array<Types::PromptMetadataEntry>]
     #
     # @!attribute [rw] model_id
-    #   The unique identifier of the model with which to run inference on
-    #   the prompt.
+    #   The unique identifier of the model or [inference profile][1] with
+    #   which to run inference on the prompt.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -7942,3 +7955,4 @@ module Aws::BedrockAgent
 
   end
 end
+

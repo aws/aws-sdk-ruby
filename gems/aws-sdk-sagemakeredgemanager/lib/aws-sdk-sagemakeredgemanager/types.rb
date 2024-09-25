@@ -361,3 +361,4 @@ module Aws::SagemakerEdgeManager
 
   end
 end
+

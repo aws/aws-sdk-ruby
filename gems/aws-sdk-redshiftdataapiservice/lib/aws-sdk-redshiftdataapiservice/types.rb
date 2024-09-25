@@ -1487,3 +1487,4 @@ module Aws::RedshiftDataAPIService
 
   end
 end
+

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:appregistry)
-
 module Aws::AppRegistry
   # An API client for AppRegistry.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1588,7 +1586,7 @@ module Aws::AppRegistry
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:marketplacedeployment)
-
 module Aws::MarketplaceDeployment
   # An API client for MarketplaceDeployment.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -629,7 +627,7 @@ module Aws::MarketplaceDeployment
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacedeployment'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 module Aws::ServiceDiscovery
   # @api private
   module ClientApi

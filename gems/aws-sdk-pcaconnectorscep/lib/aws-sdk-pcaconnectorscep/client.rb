@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:pcaconnectorscep)
-
 module Aws::PcaConnectorScep
   # An API client for PcaConnectorScep.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -999,7 +997,7 @@ module Aws::PcaConnectorScep
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcaconnectorscep'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

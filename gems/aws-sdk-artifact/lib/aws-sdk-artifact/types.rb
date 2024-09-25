@@ -572,3 +572,4 @@ module Aws::Artifact
 
   end
 end
+

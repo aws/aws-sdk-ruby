@@ -36,8 +36,6 @@ require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:cloudhsmv2)
-
 module Aws::CloudHSMV2
   # An API client for CloudHSMV2.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
@@ -1544,7 +1542,7 @@ module Aws::CloudHSMV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

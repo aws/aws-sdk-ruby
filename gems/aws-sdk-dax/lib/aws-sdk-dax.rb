@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-dax/types'
-require_relative 'aws-sdk-dax/client_api'
-require_relative 'aws-sdk-dax/plugins/endpoints.rb'
-require_relative 'aws-sdk-dax/client'
-require_relative 'aws-sdk-dax/errors'
-require_relative 'aws-sdk-dax/resource'
-require_relative 'aws-sdk-dax/endpoint_parameters'
-require_relative 'aws-sdk-dax/endpoint_provider'
-require_relative 'aws-sdk-dax/endpoints'
-require_relative 'aws-sdk-dax/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:dax)
 
 # This module provides support for Amazon DynamoDB Accelerator (DAX). This module is available in the
 # `aws-sdk-dax` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-dax/customizations'
 #
 # @!group service
 module Aws::DAX
+  autoload :Types, 'aws-sdk-dax/types'
+  autoload :ClientApi, 'aws-sdk-dax/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-dax/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-dax/client'
+  autoload :Errors, 'aws-sdk-dax/errors'
+  autoload :Resource, 'aws-sdk-dax/resource'
+  autoload :EndpointParameters, 'aws-sdk-dax/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-dax/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-dax/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.64.0'
 
 end
+
+require_relative 'aws-sdk-dax/customizations'

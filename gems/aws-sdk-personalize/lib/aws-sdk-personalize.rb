@@ -11,16 +11,7 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-personalize/types'
-require_relative 'aws-sdk-personalize/client_api'
-require_relative 'aws-sdk-personalize/plugins/endpoints.rb'
-require_relative 'aws-sdk-personalize/client'
-require_relative 'aws-sdk-personalize/errors'
-require_relative 'aws-sdk-personalize/resource'
-require_relative 'aws-sdk-personalize/endpoint_parameters'
-require_relative 'aws-sdk-personalize/endpoint_provider'
-require_relative 'aws-sdk-personalize/endpoints'
-require_relative 'aws-sdk-personalize/customizations'
+Aws::Plugins::GlobalConfiguration.add_identifier(:personalize)
 
 # This module provides support for Amazon Personalize. This module is available in the
 # `aws-sdk-personalize` gem.
@@ -51,7 +42,20 @@ require_relative 'aws-sdk-personalize/customizations'
 #
 # @!group service
 module Aws::Personalize
+  autoload :Types, 'aws-sdk-personalize/types'
+  autoload :ClientApi, 'aws-sdk-personalize/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-personalize/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-personalize/client'
+  autoload :Errors, 'aws-sdk-personalize/errors'
+  autoload :Resource, 'aws-sdk-personalize/resource'
+  autoload :EndpointParameters, 'aws-sdk-personalize/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-personalize/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-personalize/endpoints'
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.75.0'
 
 end
+
+require_relative 'aws-sdk-personalize/customizations'
