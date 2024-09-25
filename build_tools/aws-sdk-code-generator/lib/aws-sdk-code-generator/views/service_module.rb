@@ -10,13 +10,12 @@ module AwsSdkCodeGenerator
       # @option options [required, String] :prefix
       def initialize(options)
         @service = options.fetch(:service)
-        @service_identifier = @service.identifier
         @prefix = options.fetch(:prefix)
         @codegenerated_plugins = options.fetch(:codegenerated_plugins) || []
       end
 
       # @return [String]
-      attr_reader :service_identifier
+      attr_reader :prefix
 
       # @return [String|nil]
       def generated_src_warning
@@ -62,6 +61,11 @@ module AwsSdkCodeGenerator
       # moved from the aws-sdk-sso gem into aws-sdk-core.
       def require_core_guard?
         @service.included_in_core?
+      end
+
+      # @return [String]
+      def service_identifier
+        @service.identifier
       end
 
       # @return [Array<Hash>] list of autoload path hashes with :path, :class_name and
@@ -110,10 +114,6 @@ module AwsSdkCodeGenerator
           class_name: class_name,
           is_plugin: is_plugin
         }
-      end
-
-      def prefix
-        @prefix
       end
 
       def example_var_name

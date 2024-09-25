@@ -118,6 +118,24 @@ module Aws
       expect(c.expiration).to eq(in_one_hour)
     end
 
+    context 'invalid assumed role arn' do
+      let(:assumed_role_user) do
+        double(
+          'assumed_role_user',
+          arn: 'invalid_arn',
+          assumed_role_id: 'role id'
+        )
+      end
+
+      it 'does not set accountId' do
+        c = AssumeRoleCredentials.new(
+          role_arn: 'arn',
+          role_session_name: 'session'
+        )
+        expect(c.credentials.account_id).to be_nil
+      end
+    end
+
     it 'refreshes asynchronously' do
       # expiration 6 minutes out, within the async exp time window
       allow(credentials).to receive(:expiration).and_return(Time.now + (6*60))

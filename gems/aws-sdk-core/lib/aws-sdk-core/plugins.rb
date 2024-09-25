@@ -3,6 +3,7 @@
 module Aws
   # setup autoloading for Plugins
   # Most plugins are required explicitly from service clients
+  # but users may reference them outside of client usage.
   module Plugins
     autoload :ApiKey, 'aws-sdk-core/plugins/api_key'
     autoload :BearerAuthorization, 'aws-sdk-core/plugins/bearer_authorization'
