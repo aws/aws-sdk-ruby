@@ -75,6 +75,8 @@ module Aws
   # dynamic endpoints
   autoload :Endpoints, 'aws-sdk-core/endpoints'
 
+  autoload :Sigv4, 'aws-sigv4'
+
   CORE_GEM_VERSION = File.read(File.expand_path('../VERSION', __dir__)).strip
 
   @config = {}

@@ -66,7 +66,7 @@ module Aws
       creds = c.credentials
       account_id =
         begin
-          ARNParser.parse(c.assumed_role_user.arn).account_id
+          ARNParser.parse(c.assumed_role_user&.arn).account_id
         rescue Aws::Errors::InvalidARNError
           nil
         end
