@@ -3,6 +3,7 @@
 require 'aws-partitions'
 require 'seahorse'
 require 'jmespath'
+require 'aws-sigv4'
 
 require_relative 'aws-sdk-core/deprecations'
 # defaults
@@ -74,8 +75,6 @@ module Aws
 
   # dynamic endpoints
   autoload :Endpoints, 'aws-sdk-core/endpoints'
-
-  autoload :Sigv4, 'aws-sigv4'
 
   CORE_GEM_VERSION = File.read(File.expand_path('../VERSION', __dir__)).strip
 
