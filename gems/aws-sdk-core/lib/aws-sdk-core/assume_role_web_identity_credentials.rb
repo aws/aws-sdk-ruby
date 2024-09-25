@@ -75,12 +75,11 @@ module Aws
 
       resp = @client.assume_role_with_web_identity(@assume_role_web_identity_params)
       creds = resp.credentials
-      account_id = parse_account_id(resp)
       @credentials = Credentials.new(
         creds.access_key_id,
         creds.secret_access_key,
         creds.session_token,
-        account_id: account_id
+        account_id: parse_account_id(resp)
       )
       @expiration = creds.expiration
     end
