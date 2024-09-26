@@ -14,7 +14,7 @@ Unreleased Changes
 1.123.0 (2024-09-20)
 ------------------
 
-* Feature - Generate account endpoint for DynamoDB requests when the account ID is available
+* Feature - Generate and use AWS-account-based endpoints for DynamoDB requests when the account ID is available. The new endpoint URL pattern will be https://<account-id>.ddb.<region>.amazonaws.com. See the documentation for details: https://docs.aws.amazon.com/sdkref/latest/guide/feature-account-endpoints.html
 
 1.122.0 (2024-09-11)
 ------------------
