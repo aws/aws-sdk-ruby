@@ -98,6 +98,7 @@ module Aws::Chatbot
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceState = Shapes::StringShape.new(name: 'ResourceState')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SlackChannelConfiguration = Shapes::StructureShape.new(name: 'SlackChannelConfiguration')
     SlackChannelConfigurationList = Shapes::ListShape.new(name: 'SlackChannelConfigurationList')
@@ -111,6 +112,7 @@ module Aws::Chatbot
     SlackWorkspace = Shapes::StructureShape.new(name: 'SlackWorkspace')
     SlackWorkspacesList = Shapes::ListShape.new(name: 'SlackWorkspacesList')
     SnsTopicArnList = Shapes::ListShape.new(name: 'SnsTopicArnList')
+    String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -154,6 +156,8 @@ module Aws::Chatbot
     ChimeWebhookConfiguration.add_member(:configuration_name, Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName"))
     ChimeWebhookConfiguration.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
     ChimeWebhookConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ChimeWebhookConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
+    ChimeWebhookConfiguration.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
     ChimeWebhookConfiguration.struct_class = Types::ChimeWebhookConfiguration
 
     ChimeWebhookConfigurationList.member = Shapes::ShapeRef.new(shape: ChimeWebhookConfiguration)
@@ -161,6 +165,8 @@ module Aws::Chatbot
     ConfiguredTeam.add_member(:tenant_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "TenantId"))
     ConfiguredTeam.add_member(:team_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "TeamId"))
     ConfiguredTeam.add_member(:team_name, Shapes::ShapeRef.new(shape: UUID, location_name: "TeamName"))
+    ConfiguredTeam.add_member(:state, Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
+    ConfiguredTeam.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
     ConfiguredTeam.struct_class = Types::ConfiguredTeam
 
     ConfiguredTeamsList.member = Shapes::ShapeRef.new(shape: ConfiguredTeam)
@@ -417,6 +423,8 @@ module Aws::Chatbot
     SlackChannelConfiguration.add_member(:guardrail_policy_arns, Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
     SlackChannelConfiguration.add_member(:user_authorization_required, Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
     SlackChannelConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    SlackChannelConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
+    SlackChannelConfiguration.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
     SlackChannelConfiguration.struct_class = Types::SlackChannelConfiguration
 
     SlackChannelConfigurationList.member = Shapes::ShapeRef.new(shape: SlackChannelConfiguration)
@@ -432,6 +440,8 @@ module Aws::Chatbot
 
     SlackWorkspace.add_member(:slack_team_id, Shapes::ShapeRef.new(shape: SlackTeamId, required: true, location_name: "SlackTeamId"))
     SlackWorkspace.add_member(:slack_team_name, Shapes::ShapeRef.new(shape: SlackTeamName, required: true, location_name: "SlackTeamName"))
+    SlackWorkspace.add_member(:state, Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
+    SlackWorkspace.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
     SlackWorkspace.struct_class = Types::SlackWorkspace
 
     SlackWorkspacesList.member = Shapes::ShapeRef.new(shape: SlackWorkspace)
@@ -469,6 +479,8 @@ module Aws::Chatbot
     TeamsChannelConfiguration.add_member(:guardrail_policy_arns, Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
     TeamsChannelConfiguration.add_member(:user_authorization_required, Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
     TeamsChannelConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    TeamsChannelConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
+    TeamsChannelConfiguration.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
     TeamsChannelConfiguration.struct_class = Types::TeamsChannelConfiguration
 
     TeamsUserIdentitiesList.member = Shapes::ShapeRef.new(shape: TeamsUserIdentity)

@@ -605,9 +605,10 @@ module Aws::RDSDataService
     # minutes. If a transaction times out before it's committed, it's
     # rolled back automatically.
     #
-    #  DDL statements inside a transaction cause an implicit commit. We
-    # recommend that you run each DDL statement in a separate
-    # `ExecuteStatement` call with `continueAfterTimeout` enabled.
+    #  For Aurora MySQL, DDL statements inside a transaction cause an
+    # implicit commit. We recommend that you run each MySQL DDL statement in
+    # a separate `ExecuteStatement` call with `continueAfterTimeout`
+    # enabled.
     #
     #  </note>
     #
@@ -688,9 +689,9 @@ module Aws::RDSDataService
 
     # Runs one or more SQL statements.
     #
-    # <note markdown="1"> This operation isn't supported for Aurora PostgreSQL Serverless v2
-    # and provisioned DB clusters, and for Aurora Serverless v1 DB clusters,
-    # the operation is deprecated. Use the `BatchExecuteStatement` or
+    # <note markdown="1"> This operation isn't supported for Aurora Serverless v2 and
+    # provisioned DB clusters. For Aurora Serverless v1 DB clusters, the
+    # operation is deprecated. Use the `BatchExecuteStatement` or
     # `ExecuteStatement` operation.
     #
     #  </note>
@@ -1036,7 +1037,7 @@ module Aws::RDSDataService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

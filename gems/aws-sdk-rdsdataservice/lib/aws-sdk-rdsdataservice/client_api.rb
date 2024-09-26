@@ -342,9 +342,10 @@ module Aws::RDSDataService
 
       api.metadata = {
         "apiVersion" => "2018-08-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rds-data",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS RDS DataService",
         "serviceId" => "RDS Data",
         "signatureVersion" => "v4",

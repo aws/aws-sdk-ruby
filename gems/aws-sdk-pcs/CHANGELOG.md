@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-09-26)
+------------------
+
+* Feature - AWS PCS API documentation - Edited the description of the iamInstanceProfileArn parameter of the CreateComputeNodeGroup and UpdateComputeNodeGroup actions; edited the description of the SlurmCustomSetting data type to list the supported parameters for clusters and compute node groups.
+
 1.6.0 (2024-09-24)
 ------------------
 

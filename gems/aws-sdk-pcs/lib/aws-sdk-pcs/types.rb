@@ -272,9 +272,16 @@ module Aws::PCS
     # @!attribute [rw] iam_instance_profile_arn
     #   The Amazon Resource Name (ARN) of the IAM instance profile used to
     #   pass an IAM role when launching EC2 instances. The role contained in
-    #   your instance profile must have
-    #   `pcs:RegisterComputeNodeGroupInstance` permissions attached to
-    #   provision instances correctly.
+    #   your instance profile must have the
+    #   `pcs:RegisterComputeNodeGroupInstance` permission. The resource
+    #   identifier of the ARN must start with `AWSPCS` or it must have
+    #   `/aws-pcs/` in its path.
+    #
+    #   **Examples**
+    #
+    #   * `arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1`
+    #
+    #   * `arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2`
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -568,11 +575,16 @@ module Aws::PCS
     # @!attribute [rw] iam_instance_profile_arn
     #   The Amazon Resource Name (ARN) of the IAM instance profile used to
     #   pass an IAM role when launching EC2 instances. The role contained in
-    #   your instance profile must have
-    #   `pcs:RegisterComputeNodeGroupInstance` permissions attached in order
-    #   to provision instances correctly. The resource identifier of the ARN
-    #   must start with `AWSPCS`. For example,
-    #   `arn:aws:iam:123456789012:instance-profile/AWSPCSMyComputeNodeInstanceProfile`.
+    #   your instance profile must have the
+    #   `pcs:RegisterComputeNodeGroupInstance` permission. The resource
+    #   identifier of the ARN must start with `AWSPCS` or it must have
+    #   `/aws-pcs/` in its path.
+    #
+    #   **Examples**
+    #
+    #   * `arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1`
+    #
+    #   * `arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2`
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -1590,14 +1602,28 @@ module Aws::PCS
     #
     # @!attribute [rw] parameter_name
     #   Amazon Web Services PCS supports configuration of the following
-    #   Slurm parameters: [ `Prolog` ][1], [ `Epilog` ][2], and [
-    #   `SelectTypeParameters` ][3].
+    #   Slurm parameters:
+    #
+    #   * For **clusters**
+    #
+    #     * [ `Prolog` ][1]
+    #
+    #     * [ `Epilog` ][2]
+    #
+    #     * [ `SelectTypeParameters` ][3]
+    #
+    #   * For **compute node groups**
+    #
+    #     * [ `Weight` ][4]
+    #
+    #     * [ `RealMemory` ][4]
     #
     #
     #
     #   [1]: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1
     #   [2]: https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1
     #   [3]: https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters
+    #   [4]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
     #   @return [String]
     #
     # @!attribute [rw] parameter_value
@@ -1741,9 +1767,16 @@ module Aws::PCS
     # @!attribute [rw] iam_instance_profile_arn
     #   The Amazon Resource Name (ARN) of the IAM instance profile used to
     #   pass an IAM role when launching EC2 instances. The role contained in
-    #   your instance profile must have
-    #   `pcs:RegisterComputeNodeGroupInstance` permissions attached to
-    #   provision instances correctly.
+    #   your instance profile must have the
+    #   `pcs:RegisterComputeNodeGroupInstance` permission. The resource
+    #   identifier of the ARN must start with `AWSPCS` or it must have
+    #   `/aws-pcs/` in its path.
+    #
+    #   **Examples**
+    #
+    #   * `arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1`
+    #
+    #   * `arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2`
     #   @return [String]
     #
     # @!attribute [rw] slurm_configuration

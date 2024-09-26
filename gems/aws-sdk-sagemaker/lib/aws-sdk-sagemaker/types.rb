@@ -6217,6 +6217,11 @@ module Aws::SageMaker
     #   value must be set to `Service`.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation
+    #   Indicates whether custom tag propagation is supported for the
+    #   domain. Defaults to `DISABLED`.
+    #   @return [String]
+    #
     # @!attribute [rw] default_space_settings
     #   The default settings used to create a space.
     #   @return [Types::DefaultSpaceSettings]
@@ -6235,6 +6240,7 @@ module Aws::SageMaker
       :home_efs_file_system_kms_key_id,
       :kms_key_id,
       :app_security_group_management,
+      :tag_propagation,
       :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -13494,6 +13500,11 @@ module Aws::SageMaker
     #   is provided.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation
+    #   Indicates whether custom tag propagation is supported for the
+    #   domain.
+    #   @return [String]
+    #
     # @!attribute [rw] default_space_settings
     #   The default settings used to create a space.
     #   @return [Types::DefaultSpaceSettings]
@@ -13522,6 +13533,7 @@ module Aws::SageMaker
       :vpc_id,
       :kms_key_id,
       :app_security_group_management,
+      :tag_propagation,
       :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -45318,6 +45330,11 @@ module Aws::SageMaker
     #   is provided as part of the same request.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation
+    #   Indicates whether custom tag propagation is supported for the
+    #   domain. Defaults to `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDomainRequest AWS API Documentation
     #
     class UpdateDomainRequest < Struct.new(
@@ -45327,7 +45344,8 @@ module Aws::SageMaker
       :app_security_group_management,
       :default_space_settings,
       :subnet_ids,
-      :app_network_access_type)
+      :app_network_access_type,
+      :tag_propagation)
       SENSITIVE = []
       include Aws::Structure
     end

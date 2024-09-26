@@ -104,8 +104,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Lambda::Endpoints::DeleteLayerVersion.build(context)
           when :delete_provisioned_concurrency_config
             Aws::Lambda::Endpoints::DeleteProvisionedConcurrencyConfig.build(context)
-          when :delete_resource_policy
-            Aws::Lambda::Endpoints::DeleteResourcePolicy.build(context)
           when :get_account_settings
             Aws::Lambda::Endpoints::GetAccountSettings.build(context)
           when :get_alias
@@ -138,10 +136,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Lambda::Endpoints::GetPolicy.build(context)
           when :get_provisioned_concurrency_config
             Aws::Lambda::Endpoints::GetProvisionedConcurrencyConfig.build(context)
-          when :get_public_access_block_config
-            Aws::Lambda::Endpoints::GetPublicAccessBlockConfig.build(context)
-          when :get_resource_policy
-            Aws::Lambda::Endpoints::GetResourcePolicy.build(context)
           when :get_runtime_management_config
             Aws::Lambda::Endpoints::GetRuntimeManagementConfig.build(context)
           when :invoke
@@ -188,10 +182,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Lambda::Endpoints::PutFunctionRecursionConfig.build(context)
           when :put_provisioned_concurrency_config
             Aws::Lambda::Endpoints::PutProvisionedConcurrencyConfig.build(context)
-          when :put_public_access_block_config
-            Aws::Lambda::Endpoints::PutPublicAccessBlockConfig.build(context)
-          when :put_resource_policy
-            Aws::Lambda::Endpoints::PutResourcePolicy.build(context)
           when :put_runtime_management_config
             Aws::Lambda::Endpoints::PutRuntimeManagementConfig.build(context)
           when :remove_layer_version_permission

@@ -1205,20 +1205,23 @@ module Aws::Organizations
     #   The type of policy to create. You can specify one of the following
     #   values:
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
+    #   * [SERVICE\_CONTROL\_POLICY][1]
     #
     #   * [BACKUP\_POLICY][2]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #   * [TAG\_POLICY][3]
     #
-    #   * [TAG\_POLICY][4]
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1519,17 +1522,20 @@ module Aws::Organizations
     #   The type of policy that you want information about. You can specify
     #   one of the following values:
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
+    #   * [BACKUP\_POLICY][1]
     #
-    #   * [BACKUP\_POLICY][2]
+    #   * [TAG\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [CHATBOT\_POLICY][3]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][4]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -1786,20 +1792,23 @@ module Aws::Organizations
     #   The policy type that you want to disable in this root. You can
     #   specify one of the following values:
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
+    #   * [SERVICE\_CONTROL\_POLICY][1]
     #
     #   * [BACKUP\_POLICY][2]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #   * [TAG\_POLICY][3]
     #
-    #   * [TAG\_POLICY][4]
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -1992,20 +2001,23 @@ module Aws::Organizations
     #   The policy type that you want to enable. You can specify one of the
     #   following values:
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
+    #   * [SERVICE\_CONTROL\_POLICY][1]
     #
     #   * [BACKUP\_POLICY][2]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #   * [TAG\_POLICY][3]
     #
-    #   * [TAG\_POLICY][4]
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -3297,20 +3309,23 @@ module Aws::Organizations
     #   The type of policy that you want to include in the returned list.
     #   You must specify one of the following values:
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
+    #   * [SERVICE\_CONTROL\_POLICY][1]
     #
     #   * [BACKUP\_POLICY][2]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #   * [TAG\_POLICY][3]
     #
-    #   * [TAG\_POLICY][4]
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3370,20 +3385,23 @@ module Aws::Organizations
     #   Specifies the type of policy that you want to include in the
     #   response. You must specify one of the following values:
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][1]
+    #   * [SERVICE\_CONTROL\_POLICY][1]
     #
     #   * [BACKUP\_POLICY][2]
     #
-    #   * [SERVICE\_CONTROL\_POLICY][3]
+    #   * [TAG\_POLICY][3]
     #
-    #   * [TAG\_POLICY][4]
+    #   * [CHATBOT\_POLICY][4]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @!attribute [rw] next_token

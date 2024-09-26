@@ -1190,6 +1190,7 @@ module Aws
                            ?home_efs_file_system_kms_key_id: ::String,
                            ?kms_key_id: ::String,
                            ?app_security_group_management: ("Service" | "Customer"),
+                           ?tag_propagation: ("ENABLED" | "DISABLED"),
                            ?default_space_settings: {
                              execution_role: ::String?,
                              security_groups: Array[::String]?,
@@ -5082,6 +5083,7 @@ module Aws
         def vpc_id: () -> ::String
         def kms_key_id: () -> ::String
         def app_security_group_management: () -> ("Service" | "Customer")
+        def tag_propagation: () -> ("ENABLED" | "DISABLED")
         def default_space_settings: () -> Types::DefaultSpaceSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_domain-instance_method
@@ -8495,7 +8497,8 @@ module Aws
                              ]?
                            },
                            ?subnet_ids: Array[::String],
-                           ?app_network_access_type: ("PublicInternetOnly" | "VpcOnly")
+                           ?app_network_access_type: ("PublicInternetOnly" | "VpcOnly"),
+                           ?tag_propagation: ("ENABLED" | "DISABLED")
                          ) -> _UpdateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainResponseSuccess
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-09-26)
+------------------
+
+* Feature - Return State and StateReason fields for Chatbot Channel Configurations.
+
 1.16.0 (2024-09-24)
 ------------------
 

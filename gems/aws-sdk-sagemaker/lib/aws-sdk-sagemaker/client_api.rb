@@ -2106,6 +2106,7 @@ module Aws::SageMaker
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TagPropagation = Shapes::StringShape.new(name: 'TagPropagation')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetAttributeName = Shapes::StringShape.new(name: 'TargetAttributeName')
     TargetDevice = Shapes::StringShape.new(name: 'TargetDevice')
@@ -3345,6 +3346,7 @@ module Aws::SageMaker
     CreateDomainRequest.add_member(:home_efs_file_system_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, deprecated: true, location_name: "HomeEfsFileSystemKmsKeyId", metadata: {"deprecatedMessage"=>"This property is deprecated, use KmsKeyId instead."}))
     CreateDomainRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateDomainRequest.add_member(:app_security_group_management, Shapes::ShapeRef.new(shape: AppSecurityGroupManagement, location_name: "AppSecurityGroupManagement"))
+    CreateDomainRequest.add_member(:tag_propagation, Shapes::ShapeRef.new(shape: TagPropagation, location_name: "TagPropagation"))
     CreateDomainRequest.add_member(:default_space_settings, Shapes::ShapeRef.new(shape: DefaultSpaceSettings, location_name: "DefaultSpaceSettings"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
@@ -4614,6 +4616,7 @@ module Aws::SageMaker
     DescribeDomainResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     DescribeDomainResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeDomainResponse.add_member(:app_security_group_management, Shapes::ShapeRef.new(shape: AppSecurityGroupManagement, location_name: "AppSecurityGroupManagement"))
+    DescribeDomainResponse.add_member(:tag_propagation, Shapes::ShapeRef.new(shape: TagPropagation, location_name: "TagPropagation"))
     DescribeDomainResponse.add_member(:default_space_settings, Shapes::ShapeRef.new(shape: DefaultSpaceSettings, location_name: "DefaultSpaceSettings"))
     DescribeDomainResponse.struct_class = Types::DescribeDomainResponse
 
@@ -10051,6 +10054,7 @@ module Aws::SageMaker
     UpdateDomainRequest.add_member(:default_space_settings, Shapes::ShapeRef.new(shape: DefaultSpaceSettings, location_name: "DefaultSpaceSettings"))
     UpdateDomainRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: Subnets, location_name: "SubnetIds"))
     UpdateDomainRequest.add_member(:app_network_access_type, Shapes::ShapeRef.new(shape: AppNetworkAccessType, location_name: "AppNetworkAccessType"))
+    UpdateDomainRequest.add_member(:tag_propagation, Shapes::ShapeRef.new(shape: TagPropagation, location_name: "TagPropagation"))
     UpdateDomainRequest.struct_class = Types::UpdateDomainRequest
 
     UpdateDomainResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))

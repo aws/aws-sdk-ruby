@@ -2589,6 +2589,10 @@ module Aws::SageMaker
     #   is provided. If setting up the domain for use with RStudio, this value
     #   must be set to `Service`.
     #
+    # @option params [String] :tag_propagation
+    #   Indicates whether custom tag propagation is supported for the domain.
+    #   Defaults to `DISABLED`.
+    #
     # @option params [Types::DefaultSpaceSettings] :default_space_settings
     #   The default settings used to create a space.
     #
@@ -2833,6 +2837,7 @@ module Aws::SageMaker
     #     home_efs_file_system_kms_key_id: "KmsKeyId",
     #     kms_key_id: "KmsKeyId",
     #     app_security_group_management: "Service", # accepts Service, Customer
+    #     tag_propagation: "ENABLED", # accepts ENABLED, DISABLED
     #     default_space_settings: {
     #       execution_role: "RoleArn",
     #       security_groups: ["SecurityGroupId"],
@@ -12618,6 +12623,7 @@ module Aws::SageMaker
     #   * {Types::DescribeDomainResponse#vpc_id #vpc_id} => String
     #   * {Types::DescribeDomainResponse#kms_key_id #kms_key_id} => String
     #   * {Types::DescribeDomainResponse#app_security_group_management #app_security_group_management} => String
+    #   * {Types::DescribeDomainResponse#tag_propagation #tag_propagation} => String
     #   * {Types::DescribeDomainResponse#default_space_settings #default_space_settings} => Types::DefaultSpaceSettings
     #
     # @example Request syntax with placeholder values
@@ -12777,6 +12783,7 @@ module Aws::SageMaker
     #   resp.vpc_id #=> String
     #   resp.kms_key_id #=> String
     #   resp.app_security_group_management #=> String, one of "Service", "Customer"
+    #   resp.tag_propagation #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_space_settings.execution_role #=> String
     #   resp.default_space_settings.security_groups #=> Array
     #   resp.default_space_settings.security_groups[0] #=> String
@@ -25088,6 +25095,10 @@ module Aws::SageMaker
     #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
     #   is provided as part of the same request.
     #
+    # @option params [String] :tag_propagation
+    #   Indicates whether custom tag propagation is supported for the domain.
+    #   Defaults to `DISABLED`.
+    #
     # @return [Types::UpdateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainResponse#domain_arn #domain_arn} => String
@@ -25406,6 +25417,7 @@ module Aws::SageMaker
     #     },
     #     subnet_ids: ["SubnetId"],
     #     app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
+    #     tag_propagation: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -27837,7 +27849,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.266.0'
+      context[:gem_version] = '1.267.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

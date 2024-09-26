@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2024-09-26)
+------------------
+
+* Feature - Reverting Lambda resource-based policy and block public access APIs.
+
 1.135.0 (2024-09-24)
 ------------------
 

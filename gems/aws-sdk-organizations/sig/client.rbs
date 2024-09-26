@@ -183,7 +183,7 @@ module Aws
                            content: ::String,
                            description: ::String,
                            name: ::String,
-                           type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY"),
+                           type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY"),
                            ?tags: Array[
                              {
                                key: ::String,
@@ -256,7 +256,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#describe_effective_policy-instance_method
       def describe_effective_policy: (
-                                       policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY"),
+                                       policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY"),
                                        ?target_id: ::String
                                      ) -> _DescribeEffectivePolicyResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEffectivePolicyResponseSuccess
@@ -327,7 +327,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#disable_policy_type-instance_method
       def disable_policy_type: (
                                  root_id: ::String,
-                                 policy_type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+                                 policy_type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
                                ) -> _DisablePolicyTypeResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisablePolicyTypeResponseSuccess
 
@@ -353,7 +353,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#enable_policy_type-instance_method
       def enable_policy_type: (
                                 root_id: ::String,
-                                policy_type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+                                policy_type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
                               ) -> _EnablePolicyTypeResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnablePolicyTypeResponseSuccess
 
@@ -536,7 +536,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_policies-instance_method
       def list_policies: (
-                           filter: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY"),
+                           filter: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY"),
                            ?next_token: ::String,
                            ?max_results: ::Integer
                          ) -> _ListPoliciesResponseSuccess
@@ -550,7 +550,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Organizations/Client.html#list_policies_for_target-instance_method
       def list_policies_for_target: (
                                       target_id: ::String,
-                                      filter: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY"),
+                                      filter: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY"),
                                       ?next_token: ::String,
                                       ?max_results: ::Integer
                                     ) -> _ListPoliciesForTargetResponseSuccess
