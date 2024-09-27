@@ -425,18 +425,12 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # One or more actions to update finding fields if a finding matches the
-    # defined criteria of the rule.
+    # One or more actions that Security Hub takes when a finding matches the
+    # defined criteria of a rule.
     #
     # @!attribute [rw] type
-    #   Specifies that the rule action should update the `Types` finding
-    #   field. The `Types` finding field classifies findings in the format
-    #   of namespace/category/classifier. For more information, see [Types
-    #   taxonomy for ASFF][1] in the *Security Hub User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html
+    #   Specifies the type of action that Security Hub takes when a finding
+    #   matches the defined criteria of a rule.
     #   @return [String]
     #
     # @!attribute [rw] finding_fields_update
@@ -865,7 +859,7 @@ module Aws::SecurityHub
     #   The identifier for the given resource type. For Amazon Web Services
     #   resources that are identified by Amazon Resource Names (ARNs), this
     #   is the ARN. For Amazon Web Services resources that lack ARNs, this
-    #   is the identifier as defined by the Amazon Web Servicesservice that
+    #   is the identifier as defined by the Amazon Web Services service that
     #   created the resource. For non-Amazon Web Services resources, this is
     #   a unique identifier that is associated with the resource.
     #
@@ -3299,9 +3293,9 @@ module Aws::SecurityHub
     # @!attribute [rw] lifecycle
     #   Defines when a protected resource is transitioned to cold storage
     #   and when it expires. Backup transitions and expires backups
-    #   automatically according to the lifecycle that you define. If you do
-    #   not specify a lifecycle, Backup applies the lifecycle policy of the
-    #   source backup to the destination backup.
+    #   automatically according to the lifecycle that you define. If you
+    #   don't specify a lifecycle, Backup applies the lifecycle policy of
+    #   the source backup to the destination backup.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
     #   for a minimum of 90 days.
@@ -3366,9 +3360,9 @@ module Aws::SecurityHub
     # @!attribute [rw] lifecycle
     #   Defines when a protected resource is transitioned to cold storage
     #   and when it expires. Backup transitions and expires backups
-    #   automatically according to the lifecycle that you define. If you do
-    #   not specify a lifecycle, Backup applies the lifecycle policy of the
-    #   source backup to the destination backup.
+    #   automatically according to the lifecycle that you define. If you
+    #   don't specify a lifecycle, Backup applies the lifecycle policy of
+    #   the source backup to the destination backup.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
     #   for a minimum of 90 days.
@@ -3409,7 +3403,7 @@ module Aws::SecurityHub
     # @!attribute [rw] encryption_key_arn
     #   The unique ARN associated with the server-side encryption key. You
     #   can specify a key to encrypt your backups from services that support
-    #   full Backup management. If you do not specify a key, Backup creates
+    #   full Backup management. If you don't specify a key, Backup creates
     #   an KMS key for you by default.
     #   @return [String]
     #
@@ -10075,7 +10069,7 @@ module Aws::SecurityHub
     #   active container instance that meets all of the task placement
     #   constraints that are specified in the cluster. The service scheduler
     #   also evaluates the task placement constraints for running tasks and
-    #   stops tasks that do not meet the placement constraints.
+    #   stops tasks that don't meet the placement constraints.
     #
     #   Valid values: `REPLICA` \| `DAEMON`
     #   @return [String]
@@ -16283,7 +16277,7 @@ module Aws::SecurityHub
     #   **Oracle**
     #
     #   Contains the Oracle System ID (SID) of the created DB instance. Not
-    #   shown when the returned parameters do not apply to an Oracle DB
+    #   shown when the returned parameters don't apply to an Oracle DB
     #   instance.
     #   @return [String]
     #
@@ -20542,7 +20536,7 @@ module Aws::SecurityHub
     #     * `Compliance.Status` changes from `PASSED` to `FAILED`,
     #       `WARNING`, or `NOT_AVAILABLE`.
     #
-    #   * `SUPPRESSED` - Indicates that you reviewed the finding and do not
+    #   * `SUPPRESSED` - Indicates that you reviewed the finding and don't
     #     believe that any action is needed.
     #
     #     The workflow status of a `SUPPRESSED` finding does not change if
@@ -20647,7 +20641,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] compliance_security_control_id
     #   The unique identifier of a control across standards. Values for this
-    #   field typically consist of an Amazon Web Servicesservice and a
+    #   field typically consist of an Amazon Web Services service and a
     #   number, such as APIGateway.5.
     #   @return [Array<Types::StringFilter>]
     #
@@ -21887,7 +21881,7 @@ module Aws::SecurityHub
     #   counted.
     #
     #   `ActivatedRule`\|`OverrideAction` applies only when updating or
-    #   adding a `RuleGroup` to a web ACL. In this case you do not use
+    #   adding a `RuleGroup` to a web ACL. In this case you don't use
     #   `ActivatedRule` `Action`. For all other update requests,
     #   `ActivatedRule` `Action` is used instead of `ActivatedRule`
     #   `OverrideAction`.
@@ -21897,7 +21891,7 @@ module Aws::SecurityHub
     #   Specifies the order in which the rules in a web ACL are evaluated.
     #   Rules with a lower value for `Priority` are evaluated before rules
     #   with a higher value. The value must be a unique integer. If you add
-    #   multiple rules to a web ACL, the values do not need to be
+    #   multiple rules to a web ACL, the values don't need to be
     #   consecutive.
     #   @return [Integer]
     #
@@ -23160,7 +23154,7 @@ module Aws::SecurityHub
     # @!attribute [rw] security_control_id
     #   Typically provides the unique identifier of a control across
     #   standards. For Security Hub controls, this field consists of an
-    #   Amazon Web Servicesservice and a unique number, such as
+    #   Amazon Web Services service and a unique number, such as
     #   `APIGateway.5`.
     #   @return [String]
     #
@@ -23703,12 +23697,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this
-    #   is a space-separated list of Regions that do not aggregate findings
-    #   to the aggregation Region.
+    #   is a space-separated list of Regions that don't replicate and send
+    #   findings to the home Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   space-separated list of Regions that do aggregate findings to the
-    #   aggregation Region.
+    #   space-separated list of Regions that do replicate and send findings
+    #   to the home Region.
     #
     #   An `InvalidInputException` error results if you populate this field
     #   while `RegionLinkingMode` is `NO_REGIONS`.
@@ -23725,11 +23719,13 @@ module Aws::SecurityHub
 
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator. You use the finding aggregator
-    #   ARN to retrieve details for, update, and stop finding aggregation.
+    #   ARN to retrieve details for, update, and stop cross-Region
+    #   aggregation.
     #   @return [String]
     #
     # @!attribute [rw] finding_aggregation_region
-    #   The aggregation Region.
+    #   The home Region. Findings generated in linked Regions are replicated
+    #   and sent to the home Region.
     #   @return [String]
     #
     # @!attribute [rw] region_linking_mode
@@ -24655,7 +24651,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] enable_default_standards
     #   Whether to enable the security standards that Security Hub has
-    #   designated as automatically enabled. If you do not provide a value
+    #   designated as automatically enabled. If you don't provide a value
     #   for `EnableDefaultStandards`, it is set to `true`. To not enable the
     #   automatically enabled standards, set `EnableDefaultStandards` to
     #   `false`.
@@ -24781,8 +24777,9 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A finding aggregator. A finding aggregator contains the configuration
-    # for finding aggregation.
+    # A finding aggregator is a Security Hub resource that specifies
+    # cross-Region aggregation settings, including the home Region and any
+    # linked Regions.
     #
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator. You use the finding aggregator
@@ -24839,7 +24836,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] update_source
     #   Identifies the source of the event that changed the finding. For
-    #   example, an integrated Amazon Web Servicesservice or third-party
+    #   example, an integrated Amazon Web Services service or third-party
     #   partner integration may call [ `BatchImportFindings` ][1], or an
     #   Security Hub customer may call [ `BatchUpdateFindings` ][2].
     #
@@ -24917,8 +24914,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] type
     #   Describes the type of finding change event, such as a call to [
-    #   `BatchImportFindings` ][1] (by an integrated Amazon Web
-    #   Servicesservice or third party partner integration) or [
+    #   `BatchImportFindings` ][1] (by an integrated Amazon Web Services
+    #   service or third party partner integration) or [
     #   `BatchUpdateFindings` ][2] (by a Security Hub customer).
     #
     #
@@ -25442,7 +25439,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] finding_aggregation_region
-    #   The aggregation Region.
+    #   The home Region. Findings generated in linked Regions are replicated
+    #   and sent to the home Region.
     #   @return [String]
     #
     # @!attribute [rw] region_linking_mode
@@ -25681,7 +25679,7 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] insight_arns
-    #   The ARNs of the insights to describe. If you do not provide any
+    #   The ARNs of the insights to describe. If you don't provide any
     #   insight ARNs, then `GetInsights` returns all of your custom
     #   insights. It does not return any managed insights.
     #   @return [Array<String>]
@@ -27637,8 +27635,8 @@ module Aws::SecurityHub
     # @note Policy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Policy corresponding to the set member.
     #
     # @!attribute [rw] security_hub
-    #   The Amazon Web Servicesservice that the configuration policy applies
-    #   to.
+    #   The Amazon Web Services service that the configuration policy
+    #   applies to.
     #   @return [Types::SecurityHubPolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Policy AWS API Documentation
@@ -28772,7 +28770,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] destination_prefix_list_id
-    #   The prefix of the destination Amazon Web Servicesservice.
+    #   The prefix of the destination Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
@@ -29287,7 +29285,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   The unique identifier of a security control across standards. Values
-    #   for this field typically consist of an Amazon Web Servicesservice
+    #   for this field typically consist of an Amazon Web Services service
     #   name and a number, such as APIGateway.3.
     #   @return [String]
     #
@@ -29400,7 +29398,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   The unique identifier of a security control across standards. Values
-    #   for this field typically consist of an Amazon Web Servicesservice
+    #   for this field typically consist of an Amazon Web Services service
     #   name and a number (for example, APIGateway.3). This parameter
     #   differs from `SecurityControlArn`, which is a unique Amazon Resource
     #   Name (ARN) assigned to a control. The ARN references the security
@@ -29640,7 +29638,7 @@ module Aws::SecurityHub
     #   * `CRITICAL` - The issue must be remediated immediately to avoid it
     #     escalating.
     #
-    #   If you provide `Normalized` and do not provide `Label`, then `Label`
+    #   If you provide `Normalized` and don't provide `Label`, then `Label`
     #   is set automatically as follows.
     #
     #   * 0 - `INFORMATIONAL`
@@ -29660,7 +29658,7 @@ module Aws::SecurityHub
     #
     #   The value of `Normalized` can be an integer between `0` and `100`.
     #
-    #   If you provide `Label` and do not provide `Normalized`, then
+    #   If you provide `Label` and don't provide `Normalized`, then
     #   `Normalized` is set automatically as follows.
     #
     #   * `INFORMATIONAL` - 0
@@ -29698,7 +29696,7 @@ module Aws::SecurityHub
     #   The normalized severity for the finding. This attribute is to be
     #   deprecated in favor of `Label`.
     #
-    #   If you provide `Normalized` and do not provide `Label`, `Label` is
+    #   If you provide `Normalized` and don't provide `Label`, `Label` is
     #   set automatically as follows.
     #
     #   * 0 - `INFORMATIONAL`
@@ -29947,7 +29945,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   The unique identifier of a security control across standards. Values
-    #   for this field typically consist of an Amazon Web Servicesservice
+    #   for this field typically consist of an Amazon Web Services service
     #   name and a number, such as APIGateway.3.
     #   @return [String]
     #
@@ -30048,7 +30046,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   A unique standard-agnostic identifier for a control. Values for this
-    #   field typically consist of an Amazon Web Servicesservice and a
+    #   field typically consist of an Amazon Web Services service and a
     #   number, such as APIGateway.5. This field doesn't reference a
     #   specific standard.
     #   @return [String]
@@ -31156,12 +31154,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this
-    #   is a space-separated list of Regions that do not aggregate findings
-    #   to the aggregation Region.
+    #   is a space-separated list of Regions that don't replicate and send
+    #   findings to the home Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   space-separated list of Regions that do aggregate findings to the
-    #   aggregation Region.
+    #   space-separated list of Regions that do replicate and send findings
+    #   to the home Region.
     #
     #   An `InvalidInputException` error results if you populate this field
     #   while `RegionLinkingMode` is `NO_REGIONS`.
@@ -31182,7 +31180,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] finding_aggregation_region
-    #   The aggregation Region.
+    #   The home Region. Findings generated in linked Regions are replicated
+    #   and sent to the home Region.
     #   @return [String]
     #
     # @!attribute [rw] region_linking_mode
@@ -31757,7 +31756,7 @@ module Aws::SecurityHub
     #     the security issue. Used when the initial reviewer is not the
     #     resource owner, and needs intervention from the resource owner.
     #
-    #   * `SUPPRESSED` - Indicates that you reviewed the finding and do not
+    #   * `SUPPRESSED` - Indicates that you reviewed the finding and don't
     #     believe that any action is needed. The finding is no longer
     #     updated.
     #
@@ -31801,7 +31800,7 @@ module Aws::SecurityHub
     #   * `RESOLVED` - The finding was reviewed and remediated and is now
     #     considered resolved.
     #
-    #   * `SUPPRESSED` - Indicates that you reviewed the finding and do not
+    #   * `SUPPRESSED` - Indicates that you reviewed the finding and don't
     #     believe that any action is needed. The finding is no longer
     #     updated.
     #   @return [String]

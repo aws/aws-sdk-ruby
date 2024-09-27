@@ -680,6 +680,8 @@ module Aws::QuickSight
     DescribeKeyRegistrationResponse = Shapes::StructureShape.new(name: 'DescribeKeyRegistrationResponse')
     DescribeNamespaceRequest = Shapes::StructureShape.new(name: 'DescribeNamespaceRequest')
     DescribeNamespaceResponse = Shapes::StructureShape.new(name: 'DescribeNamespaceResponse')
+    DescribeQPersonalizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeQPersonalizationConfigurationRequest')
+    DescribeQPersonalizationConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeQPersonalizationConfigurationResponse')
     DescribeRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleRequest')
     DescribeRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleResponse')
     DescribeRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'DescribeRoleCustomPermissionRequest')
@@ -1215,6 +1217,7 @@ module Aws::QuickSight
     PeriodToDateComputation = Shapes::StructureShape.new(name: 'PeriodToDateComputation')
     PeriodsBackward = Shapes::IntegerShape.new(name: 'PeriodsBackward')
     PeriodsForward = Shapes::IntegerShape.new(name: 'PeriodsForward')
+    PersonalizationMode = Shapes::StringShape.new(name: 'PersonalizationMode')
     PhysicalTable = Shapes::StructureShape.new(name: 'PhysicalTable')
     PhysicalTableId = Shapes::StringShape.new(name: 'PhysicalTableId')
     PhysicalTableMap = Shapes::MapShape.new(name: 'PhysicalTableMap')
@@ -1813,6 +1816,8 @@ module Aws::QuickSight
     UpdateLinkPermissionList = Shapes::ListShape.new(name: 'UpdateLinkPermissionList')
     UpdatePublicSharingSettingsRequest = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsRequest')
     UpdatePublicSharingSettingsResponse = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsResponse')
+    UpdateQPersonalizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateQPersonalizationConfigurationRequest')
+    UpdateQPersonalizationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateQPersonalizationConfigurationResponse')
     UpdateRefreshScheduleRequest = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleRequest')
     UpdateRefreshScheduleResponse = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleResponse')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
@@ -4558,6 +4563,14 @@ module Aws::QuickSight
     DescribeNamespaceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeNamespaceResponse.struct_class = Types::DescribeNamespaceResponse
+
+    DescribeQPersonalizationConfigurationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeQPersonalizationConfigurationRequest.struct_class = Types::DescribeQPersonalizationConfigurationRequest
+
+    DescribeQPersonalizationConfigurationResponse.add_member(:personalization_mode, Shapes::ShapeRef.new(shape: PersonalizationMode, location_name: "PersonalizationMode"))
+    DescribeQPersonalizationConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeQPersonalizationConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeQPersonalizationConfigurationResponse.struct_class = Types::DescribeQPersonalizationConfigurationResponse
 
     DescribeRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
@@ -8741,6 +8754,15 @@ module Aws::QuickSight
     UpdatePublicSharingSettingsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdatePublicSharingSettingsResponse.struct_class = Types::UpdatePublicSharingSettingsResponse
 
+    UpdateQPersonalizationConfigurationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateQPersonalizationConfigurationRequest.add_member(:personalization_mode, Shapes::ShapeRef.new(shape: PersonalizationMode, required: true, location_name: "PersonalizationMode"))
+    UpdateQPersonalizationConfigurationRequest.struct_class = Types::UpdateQPersonalizationConfigurationRequest
+
+    UpdateQPersonalizationConfigurationResponse.add_member(:personalization_mode, Shapes::ShapeRef.new(shape: PersonalizationMode, location_name: "PersonalizationMode"))
+    UpdateQPersonalizationConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateQPersonalizationConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateQPersonalizationConfigurationResponse.struct_class = Types::UpdateQPersonalizationConfigurationResponse
+
     UpdateRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
     UpdateRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateRefreshScheduleRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: RefreshSchedule, required: true, location_name: "Schedule"))
@@ -10350,6 +10372,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
+      api.add_operation(:describe_q_personalization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQPersonalizationConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/q-personalization-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQPersonalizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQPersonalizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:describe_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeRefreshSchedule"
         o.http_method = "GET"
@@ -11781,6 +11817,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_q_personalization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQPersonalizationConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/q-personalization-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQPersonalizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateQPersonalizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:update_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|

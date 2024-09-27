@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2024-09-27)
+------------------
+
+* Feature - Adding personalization in QuickSight data stories. Admins can enable or disable personalization through QuickSight settings.
+
 1.129.0 (2024-09-24)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2024-09-27)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
 1.120.0 (2024-09-24)
 ------------------
 

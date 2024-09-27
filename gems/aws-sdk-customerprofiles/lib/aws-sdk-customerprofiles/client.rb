@@ -1892,6 +1892,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetIntegrationResponse#object_type_names #object_type_names} => Hash&lt;String,String&gt;
     #   * {Types::GetIntegrationResponse#workflow_id #workflow_id} => String
     #   * {Types::GetIntegrationResponse#is_unstructured #is_unstructured} => Boolean
+    #   * {Types::GetIntegrationResponse#role_arn #role_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1913,6 +1914,7 @@ module Aws::CustomerProfiles
     #   resp.object_type_names["string1To255"] #=> String
     #   resp.workflow_id #=> String
     #   resp.is_unstructured #=> Boolean
+    #   resp.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegration AWS API Documentation
     #
@@ -2352,6 +2354,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].object_type_names["string1To255"] #=> String
     #   resp.items[0].workflow_id #=> String
     #   resp.items[0].is_unstructured #=> Boolean
+    #   resp.items[0].role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListAccountIntegrations AWS API Documentation
@@ -2642,6 +2645,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].object_type_names["string1To255"] #=> String
     #   resp.items[0].workflow_id #=> String
     #   resp.items[0].is_unstructured #=> Boolean
+    #   resp.items[0].role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrations AWS API Documentation
@@ -3067,6 +3071,10 @@ module Aws::CustomerProfiles
     #   `ShopifyUpdateDraftOrders`, `ShopifyCreateOrders`, and
     #   `ShopifyUpdatedOrders`.
     #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. The Integration uses
+    #   this role to make Customer Profiles requests on your behalf.
+    #
     # @return [Types::PutIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutIntegrationResponse#domain_name #domain_name} => String
@@ -3078,6 +3086,7 @@ module Aws::CustomerProfiles
     #   * {Types::PutIntegrationResponse#object_type_names #object_type_names} => Hash&lt;String,String&gt;
     #   * {Types::PutIntegrationResponse#workflow_id #workflow_id} => String
     #   * {Types::PutIntegrationResponse#is_unstructured #is_unstructured} => Boolean
+    #   * {Types::PutIntegrationResponse#role_arn #role_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3154,6 +3163,7 @@ module Aws::CustomerProfiles
     #     object_type_names: {
     #       "string1To255" => "typeName",
     #     },
+    #     role_arn: "RoleArn",
     #   })
     #
     # @example Response structure
@@ -3169,6 +3179,7 @@ module Aws::CustomerProfiles
     #   resp.object_type_names["string1To255"] #=> String
     #   resp.workflow_id #=> String
     #   resp.is_unstructured #=> Boolean
+    #   resp.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegration AWS API Documentation
     #
@@ -4078,7 +4089,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

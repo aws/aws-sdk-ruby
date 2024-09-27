@@ -2269,6 +2269,11 @@ module Aws::CustomerProfiles
     #   equals \_unstructured via API/CLI in flowDefinition.
     #   @return [Boolean]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. The Integration uses
+    #   this role to make Customer Profiles requests on your behalf.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegrationResponse AWS API Documentation
     #
     class GetIntegrationResponse < Struct.new(
@@ -2280,7 +2285,8 @@ module Aws::CustomerProfiles
       :tags,
       :object_type_names,
       :workflow_id,
-      :is_unstructured)
+      :is_unstructured,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3265,6 +3271,11 @@ module Aws::CustomerProfiles
     #   equals \_unstructured via API/CLI in flowDefinition.
     #   @return [Boolean]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. The Integration uses
+    #   this role to make Customer Profiles requests on your behalf.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrationItem AWS API Documentation
     #
     class ListIntegrationItem < Struct.new(
@@ -3276,7 +3287,8 @@ module Aws::CustomerProfiles
       :tags,
       :object_type_names,
       :workflow_id,
-      :is_unstructured)
+      :is_unstructured,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4196,6 +4208,11 @@ module Aws::CustomerProfiles
     #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. The Integration uses
+    #   this role to make Customer Profiles requests on your behalf.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationRequest AWS API Documentation
     #
     class PutIntegrationRequest < Struct.new(
@@ -4204,7 +4221,8 @@ module Aws::CustomerProfiles
       :object_type_name,
       :tags,
       :flow_definition,
-      :object_type_names)
+      :object_type_names,
+      :role_arn)
       SENSITIVE = [:flow_definition]
       include Aws::Structure
     end
@@ -4254,6 +4272,11 @@ module Aws::CustomerProfiles
     #   equals \_unstructured via API/CLI in flowDefinition.
     #   @return [Boolean]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. The Integration uses
+    #   this role to make Customer Profiles requests on your behalf.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationResponse AWS API Documentation
     #
     class PutIntegrationResponse < Struct.new(
@@ -4265,7 +4288,8 @@ module Aws::CustomerProfiles
       :tags,
       :object_type_names,
       :workflow_id,
-      :is_unstructured)
+      :is_unstructured,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

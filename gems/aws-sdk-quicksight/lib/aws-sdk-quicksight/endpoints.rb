@@ -881,6 +881,17 @@ module Aws::QuickSight
       end
     end
 
+    class DescribeQPersonalizationConfiguration
+      def self.build(context)
+        Aws::QuickSight::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class DescribeRefreshSchedule
       def self.build(context)
         Aws::QuickSight::EndpointParameters.new(
@@ -1806,6 +1817,17 @@ module Aws::QuickSight
     end
 
     class UpdatePublicSharingSettings
+      def self.build(context)
+        Aws::QuickSight::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class UpdateQPersonalizationConfiguration
       def self.build(context)
         Aws::QuickSight::EndpointParameters.new(
           region: context.config.region,

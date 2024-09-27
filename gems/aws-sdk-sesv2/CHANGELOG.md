@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2024-09-27)
+------------------
+
+* Feature - This release adds support for engagement tracking over Https using custom domains.
+
 1.62.0 (2024-09-24)
 ------------------
 

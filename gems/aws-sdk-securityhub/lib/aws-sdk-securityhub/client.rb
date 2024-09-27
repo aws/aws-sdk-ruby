@@ -447,6 +447,13 @@ module Aws::SecurityHub
 
     # @!group API Operations
 
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
     # Accepts the invitation to be a member account and be monitored by the
     # Security Hub administrator account that the invitation was sent from.
     #
@@ -456,6 +463,10 @@ module Aws::SecurityHub
     # When the member account accepts the invitation, permission is granted
     # to the administrator account to view findings generated in the member
     # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, String] :administrator_id
     #   The account ID of the Security Hub administrator account that sent the
@@ -1855,7 +1866,7 @@ module Aws::SecurityHub
     # account and their member accounts. Member accounts can update findings
     # for their account.
     #
-    # Updates from `BatchUpdateFindings` do not affect the value of
+    # Updates from `BatchUpdateFindings` don't affect the value of
     # `UpdatedAt` for a finding.
     #
     # Administrator and member accounts can use `BatchUpdateFindings` to
@@ -2848,11 +2859,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Used to enable finding aggregation. Must be called from the
-    # aggregation Region.
+    # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
     #
-    # For more details about cross-Region replication, see [Configuring
-    # finding aggregation][1] in the *Security Hub User Guide*.
+    #  </note>
+    #
+    # Used to enable cross-Region aggregation. This operation can be invoked
+    # from the home Region only.
+    #
+    # For information about how cross-Region aggregation works, see
+    # [Understanding cross-Region aggregation in Security Hub][1] in the
+    # *Security Hub User Guide*.
     #
     #
     #
@@ -2889,12 +2905,12 @@ module Aws::SecurityHub
     #
     # @option params [Array<String>] :regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
-    #   a space-separated list of Regions that do not aggregate findings to
-    #   the aggregation Region.
+    #   a space-separated list of Regions that don't replicate and send
+    #   findings to the home Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   space-separated list of Regions that do aggregate findings to the
-    #   aggregation Region.
+    #   space-separated list of Regions that do replicate and send findings to
+    #   the home Region.
     #
     #   An `InvalidInputException` error results if you populate this field
     #   while `RegionLinkingMode` is `NO_REGIONS`.
@@ -3752,7 +3768,7 @@ module Aws::SecurityHub
     # owner accepts the invitation, the account becomes a member account in
     # Security Hub.
     #
-    # Accounts that are managed using Organizations do not receive an
+    # Accounts that are managed using Organizations don't receive an
     # invitation. They automatically become a member account in Security
     # Hub.
     #
@@ -3832,13 +3848,25 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Declines invitations to become a member account.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
+    # Declines invitations to become a Security Hub member account.
     #
     # A prospective member account uses this operation to decline an
     # invitation to become a member.
     #
-    # This operation is only called by member accounts that aren't part of
-    # an organization. Organization accounts don't receive invitations.
+    # Only member accounts that aren't part of an Amazon Web Services
+    # organization should use this operation. Organization accounts don't
+    # receive invitations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of prospective member account IDs for which to decline an
@@ -3972,13 +4000,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes a finding aggregator. When you delete the finding aggregator,
-    # you stop finding aggregation.
+    # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
     #
-    # When you stop finding aggregation, findings that were already
-    # aggregated to the aggregation Region are still visible from the
-    # aggregation Region. New findings and finding updates are not
-    # aggregated.
+    #  </note>
+    #
+    # Deletes a finding aggregator. When you delete the finding aggregator,
+    # you stop cross-Region aggregation. Finding replication stops occurring
+    # from the linked Regions to the home Region.
+    #
+    # When you stop cross-Region aggregation, findings that were already
+    # replicated and sent to the home Region are still visible from the home
+    # Region. However, new findings and finding updates are no longer
+    # replicated and sent to the home Region.
     #
     # @option params [required, String] :finding_aggregator_arn
     #   The ARN of the finding aggregator to delete. To obtain the ARN, use
@@ -4053,15 +4086,26 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes invitations received by the Amazon Web Services account to
-    # become a member account.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
+    # Deletes invitations to become a Security Hub member account.
     #
     # A Security Hub administrator account can use this operation to delete
-    # invitations sent to one or more member accounts.
+    # invitations sent to one or more prospective member accounts.
     #
     # This operation is only used to delete invitations that are sent to
-    # member accounts that aren't part of an organization. Organization
-    # accounts don't receive invitations.
+    # prospective member accounts that aren't part of an Amazon Web
+    # Services organization. Organization accounts don't receive
+    # invitations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of member account IDs that received the invitations you want
@@ -4345,7 +4389,7 @@ module Aws::SecurityHub
     # You can optionally provide an integration ARN. If you provide an
     # integration ARN, then the results only include that integration.
     #
-    # If you do not provide an integration ARN, then the results include all
+    # If you don't provide an integration ARN, then the results include all
     # of the available product integrations.
     #
     # @option params [String] :next_token
@@ -4952,7 +4996,7 @@ module Aws::SecurityHub
     #
     # @option params [Boolean] :enable_default_standards
     #   Whether to enable the security standards that Security Hub has
-    #   designated as automatically enabled. If you do not provide a value for
+    #   designated as automatically enabled. If you don't provide a value for
     #   `EnableDefaultStandards`, it is set to `true`. To not enable the
     #   automatically enabled standards, set `EnableDefaultStandards` to
     #   `false`.
@@ -5312,7 +5356,13 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns the current finding aggregation configuration.
+    # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
+    #
+    #  </note>
+    #
+    # Returns the current configuration in the calling account for
+    # cross-Region aggregation. A finding aggregator is a resource that
+    # establishes the home Region and any linked Regions.
     #
     # @option params [required, String] :finding_aggregator_arn
     #   The ARN of the finding aggregator to return details for. To obtain the
@@ -5550,9 +5600,9 @@ module Aws::SecurityHub
 
     # Returns a list of findings that match the specified criteria.
     #
-    # If finding aggregation is enabled, then when you call `GetFindings`
-    # from the aggregation Region, the results include all of the matching
-    # findings from both the aggregation Region and the linked Regions.
+    # If cross-Region aggregation is enabled, then when you call
+    # `GetFindings` from the home Region, the results include all of the
+    # matching findings from both the home Region and linked Regions.
     #
     # @option params [Types::AwsSecurityFindingFilters] :filters
     #   The finding attributes used to define a condition to filter the
@@ -6476,7 +6526,7 @@ module Aws::SecurityHub
     # Lists and describes insights for the specified insight ARNs.
     #
     # @option params [Array<String>] :insight_arns
-    #   The ARNs of the insights to describe. If you do not provide any
+    #   The ARNs of the insights to describe. If you don't provide any
     #   insight ARNs, then `GetInsights` returns all of your custom insights.
     #   It does not return any managed insights.
     #
@@ -6919,9 +6969,20 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
     # Returns the count of all Security Hub membership invitations that were
-    # sent to the current member account, not including the currently
+    # sent to the calling member account, not including the currently
     # accepted invitation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @return [Types::GetInvitationsCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7176,12 +7237,20 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
     # Invites other Amazon Web Services accounts to become member accounts
     # for the Security Hub administrator account that the invitation is sent
     # from.
     #
-    # This operation is only used to invite accounts that do not belong to
-    # an organization. Organization accounts do not receive invitations.
+    # This operation is only used to invite accounts that don't belong to
+    # an Amazon Web Services organization. Organization accounts don't
+    # receive invitations.
     #
     # Before you can use this action to invite a member, you must first use
     # the `CreateMembers` action to create the member account in Security
@@ -7189,7 +7258,11 @@ module Aws::SecurityHub
     #
     # When the account owner enables Security Hub and accepts the invitation
     # to become a member account, the administrator account can view the
-    # findings generated from the member account.
+    # findings generated in the member account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs of the Amazon Web Services accounts to invite
@@ -7564,9 +7637,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # If finding aggregation is enabled, then `ListFindingAggregators`
-    # returns the ARN of the finding aggregator. You can run this operation
-    # from any Region.
+    # If cross-Region aggregation is enabled, then `ListFindingAggregators`
+    # returns the Amazon Resource Name (ARN) of the finding aggregator. You
+    # can run this operation from any Amazon Web Services Region.
     #
     # @option params [String] :next_token
     #   The token returned with the previous set of results. Identifies the
@@ -7622,12 +7695,23 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists all Security Hub membership invitations that were sent to the
-    # current Amazon Web Services account.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
     #
-    # This operation is only used by accounts that are managed by
-    # invitation. Accounts that are managed using the integration with
-    # Organizations do not receive invitations.
+    #  </note>
+    #
+    # Lists all Security Hub membership invitations that were sent to the
+    # calling account.
+    #
+    # Only accounts that are managed by invitation can use this operation.
+    # Accounts that are managed using the integration with Organizations
+    # don't receive invitations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
@@ -8594,12 +8678,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates the finding aggregation configuration. Used to update the
-    # Region linking mode and the list of included or excluded Regions. You
-    # cannot use `UpdateFindingAggregator` to change the aggregation Region.
+    # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
     #
-    # You must run `UpdateFindingAggregator` from the current aggregation
-    # Region.
+    #  </note>
+    #
+    # Updates cross-Region aggregation settings. You can use this operation
+    # to update the Region linking mode and the list of included or excluded
+    # Amazon Web Services Regions. However, you can't use this operation to
+    # change the home Region.
+    #
+    # You can invoke this operation from the current home Region only.
     #
     # @option params [required, String] :finding_aggregator_arn
     #   The ARN of the finding aggregator. To obtain the ARN, use
@@ -8636,12 +8724,12 @@ module Aws::SecurityHub
     #
     # @option params [Array<String>] :regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
-    #   a space-separated list of Regions that do not aggregate findings to
-    #   the aggregation Region.
+    #   a space-separated list of Regions that don't replicate and send
+    #   findings to the home Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   space-separated list of Regions that do aggregate findings to the
-    #   aggregation Region.
+    #   space-separated list of Regions that do replicate and send findings to
+    #   the home Region.
     #
     #   An `InvalidInputException` error results if you populate this field
     #   while `RegionLinkingMode` is `NO_REGIONS`.
@@ -10460,7 +10548,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

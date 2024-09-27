@@ -3274,6 +3274,18 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DescribeQPersonalizationConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQPersonalizationConfigurationResponse
+      attr_accessor personalization_mode: ("ENABLED" | "DISABLED")
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class DescribeRefreshScheduleRequest
       attr_accessor aws_account_id: ::String
       attr_accessor data_set_id: ::String
@@ -8507,6 +8519,19 @@ module Aws::QuickSight
     end
 
     class UpdatePublicSharingSettingsResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateQPersonalizationConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor personalization_mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateQPersonalizationConfigurationResponse
+      attr_accessor personalization_mode: ("ENABLED" | "DISABLED")
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []

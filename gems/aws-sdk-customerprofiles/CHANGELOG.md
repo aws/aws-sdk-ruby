@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2024-09-27)
+------------------
+
+* Feature - Introduces optional RoleArn parameter for PutIntegration request and includes RoleArn in the response of PutIntegration, GetIntegration and ListIntegrations
+
 1.53.0 (2024-09-24)
 ------------------
 

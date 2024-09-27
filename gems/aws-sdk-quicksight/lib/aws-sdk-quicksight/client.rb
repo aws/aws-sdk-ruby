@@ -7063,6 +7063,39 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes a personalization configuration.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   personalization configuration that the user wants described.
+    #
+    # @return [Types::DescribeQPersonalizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQPersonalizationConfigurationResponse#personalization_mode #personalization_mode} => String
+    #   * {Types::DescribeQPersonalizationConfigurationResponse#request_id #request_id} => String
+    #   * {Types::DescribeQPersonalizationConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_q_personalization_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.personalization_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeQPersonalizationConfiguration AWS API Documentation
+    #
+    # @overload describe_q_personalization_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_q_personalization_configuration(params = {}, options = {})
+      req = build_request(:describe_q_personalization_configuration, params)
+      req.send_request(options)
+    end
+
     # Provides a summary of a refresh schedule.
     #
     # @option params [required, String] :aws_account_id
@@ -14120,6 +14153,45 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates a personalization configuration.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account account that contains the
+    #   personalization configuration that the user wants to update.
+    #
+    # @option params [required, String] :personalization_mode
+    #   An option to allow Amazon QuickSight to customize data stories with
+    #   user specific metadata, specifically location and job information, in
+    #   your IAM Identity Center instance.
+    #
+    # @return [Types::UpdateQPersonalizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateQPersonalizationConfigurationResponse#personalization_mode #personalization_mode} => String
+    #   * {Types::UpdateQPersonalizationConfigurationResponse#request_id #request_id} => String
+    #   * {Types::UpdateQPersonalizationConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_q_personalization_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     personalization_mode: "ENABLED", # required, accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.personalization_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateQPersonalizationConfiguration AWS API Documentation
+    #
+    # @overload update_q_personalization_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_q_personalization_configuration(params = {}, options = {})
+      req = build_request(:update_q_personalization_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates a refresh schedule for a dataset.
     #
     # @option params [required, String] :data_set_id
@@ -15333,7 +15405,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

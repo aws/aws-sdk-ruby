@@ -12934,6 +12934,41 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   personalization configuration that the user wants described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeQPersonalizationConfigurationRequest AWS API Documentation
+    #
+    class DescribeQPersonalizationConfigurationRequest < Struct.new(
+      :aws_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] personalization_mode
+    #   A value that indicates whether personalization is enabled or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeQPersonalizationConfigurationResponse AWS API Documentation
+    #
+    class DescribeQPersonalizationConfigurationResponse < Struct.new(
+      :personalization_mode,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account ID.
     #   @return [String]
     #
@@ -33356,6 +33391,49 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdatePublicSharingSettingsResponse AWS API Documentation
     #
     class UpdatePublicSharingSettingsResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account account that contains the
+    #   personalization configuration that the user wants to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] personalization_mode
+    #   An option to allow Amazon QuickSight to customize data stories with
+    #   user specific metadata, specifically location and job information,
+    #   in your IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateQPersonalizationConfigurationRequest AWS API Documentation
+    #
+    class UpdateQPersonalizationConfigurationRequest < Struct.new(
+      :aws_account_id,
+      :personalization_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] personalization_mode
+    #   The personalization mode that is used for the personalization
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateQPersonalizationConfigurationResponse AWS API Documentation
+    #
+    class UpdateQPersonalizationConfigurationResponse < Struct.new(
+      :personalization_mode,
       :request_id,
       :status)
       SENSITIVE = []

@@ -778,6 +778,7 @@ module Aws::CustomerProfiles
     GetIntegrationResponse.add_member(:object_type_names, Shapes::ShapeRef.new(shape: ObjectTypeNames, location_name: "ObjectTypeNames"))
     GetIntegrationResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "WorkflowId"))
     GetIntegrationResponse.add_member(:is_unstructured, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "IsUnstructured"))
+    GetIntegrationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     GetIntegrationResponse.struct_class = Types::GetIntegrationResponse
 
     GetMatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
@@ -984,6 +985,7 @@ module Aws::CustomerProfiles
     ListIntegrationItem.add_member(:object_type_names, Shapes::ShapeRef.new(shape: ObjectTypeNames, location_name: "ObjectTypeNames"))
     ListIntegrationItem.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "WorkflowId"))
     ListIntegrationItem.add_member(:is_unstructured, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "IsUnstructured"))
+    ListIntegrationItem.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     ListIntegrationItem.struct_class = Types::ListIntegrationItem
 
     ListIntegrationsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
@@ -1191,6 +1193,7 @@ module Aws::CustomerProfiles
     PutIntegrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     PutIntegrationRequest.add_member(:flow_definition, Shapes::ShapeRef.new(shape: FlowDefinition, location_name: "FlowDefinition"))
     PutIntegrationRequest.add_member(:object_type_names, Shapes::ShapeRef.new(shape: ObjectTypeNames, location_name: "ObjectTypeNames"))
+    PutIntegrationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     PutIntegrationRequest.struct_class = Types::PutIntegrationRequest
 
     PutIntegrationResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "DomainName"))
@@ -1202,6 +1205,7 @@ module Aws::CustomerProfiles
     PutIntegrationResponse.add_member(:object_type_names, Shapes::ShapeRef.new(shape: ObjectTypeNames, location_name: "ObjectTypeNames"))
     PutIntegrationResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "WorkflowId"))
     PutIntegrationResponse.add_member(:is_unstructured, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "IsUnstructured"))
+    PutIntegrationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     PutIntegrationResponse.struct_class = Types::PutIntegrationResponse
 
     PutProfileObjectRequest.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location_name: "ObjectTypeName"))
