@@ -1113,6 +1113,8 @@ module Aws::Connect
     StartContactRecordingResponse = Shapes::StructureShape.new(name: 'StartContactRecordingResponse')
     StartContactStreamingRequest = Shapes::StructureShape.new(name: 'StartContactStreamingRequest')
     StartContactStreamingResponse = Shapes::StructureShape.new(name: 'StartContactStreamingResponse')
+    StartOutboundChatContactRequest = Shapes::StructureShape.new(name: 'StartOutboundChatContactRequest')
+    StartOutboundChatContactResponse = Shapes::StructureShape.new(name: 'StartOutboundChatContactResponse')
     StartOutboundVoiceContactRequest = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactRequest')
     StartOutboundVoiceContactResponse = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactResponse')
     StartTaskContactRequest = Shapes::StructureShape.new(name: 'StartTaskContactRequest')
@@ -4974,6 +4976,23 @@ module Aws::Connect
 
     StartContactStreamingResponse.add_member(:streaming_id, Shapes::ShapeRef.new(shape: StreamingId, required: true, location_name: "StreamingId"))
     StartContactStreamingResponse.struct_class = Types::StartContactStreamingResponse
+
+    StartOutboundChatContactRequest.add_member(:source_endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "SourceEndpoint"))
+    StartOutboundChatContactRequest.add_member(:destination_endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "DestinationEndpoint"))
+    StartOutboundChatContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StartOutboundChatContactRequest.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: SegmentAttributes, required: true, location_name: "SegmentAttributes"))
+    StartOutboundChatContactRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    StartOutboundChatContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
+    StartOutboundChatContactRequest.add_member(:chat_duration_in_minutes, Shapes::ShapeRef.new(shape: ChatDurationInMinutes, location_name: "ChatDurationInMinutes"))
+    StartOutboundChatContactRequest.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetails, location_name: "ParticipantDetails"))
+    StartOutboundChatContactRequest.add_member(:initial_system_message, Shapes::ShapeRef.new(shape: ChatMessage, location_name: "InitialSystemMessage"))
+    StartOutboundChatContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
+    StartOutboundChatContactRequest.add_member(:supported_messaging_content_types, Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: "SupportedMessagingContentTypes"))
+    StartOutboundChatContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartOutboundChatContactRequest.struct_class = Types::StartOutboundChatContactRequest
+
+    StartOutboundChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
+    StartOutboundChatContactResponse.struct_class = Types::StartOutboundChatContactResponse
 
     StartOutboundVoiceContactRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     StartOutboundVoiceContactRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -8837,6 +8856,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_outbound_chat_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartOutboundChatContact"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact/outbound-chat"
+        o.input = Shapes::ShapeRef.new(shape: StartOutboundChatContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartOutboundChatContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:start_outbound_voice_contact, Seahorse::Model::Operation.new.tap do |o|

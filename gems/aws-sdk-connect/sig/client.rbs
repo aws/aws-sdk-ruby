@@ -333,11 +333,11 @@ module Aws
                                contact_data_request_list: Array[
                                  {
                                    system_endpoint: {
-                                     type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW")?,
+                                     type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW" | "CONNECT_PHONENUMBER_ARN")?,
                                      address: ::String?
                                    }?,
                                    customer_endpoint: {
-                                     type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW")?,
+                                     type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW" | "CONNECT_PHONENUMBER_ARN")?,
                                      address: ::String?
                                    }?,
                                    request_identifier: ::String?,
@@ -3455,6 +3455,40 @@ module Aws
                                      client_token: ::String
                                    ) -> _StartContactStreamingResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartContactStreamingResponseSuccess
+
+      interface _StartOutboundChatContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartOutboundChatContactResponse]
+        def contact_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_outbound_chat_contact-instance_method
+      def start_outbound_chat_contact: (
+                                         source_endpoint: {
+                                           type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW" | "CONNECT_PHONENUMBER_ARN")?,
+                                           address: ::String?
+                                         },
+                                         destination_endpoint: {
+                                           type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW" | "CONNECT_PHONENUMBER_ARN")?,
+                                           address: ::String?
+                                         },
+                                         instance_id: ::String,
+                                         segment_attributes: Hash[::String, {
+                                             value_string: ::String?
+                                           }],
+                                         ?attributes: Hash[::String, ::String],
+                                         contact_flow_id: ::String,
+                                         ?chat_duration_in_minutes: ::Integer,
+                                         ?participant_details: {
+                                           display_name: ::String
+                                         },
+                                         ?initial_system_message: {
+                                           content_type: ::String,
+                                           content: ::String
+                                         },
+                                         ?related_contact_id: ::String,
+                                         ?supported_messaging_content_types: Array[::String],
+                                         ?client_token: ::String
+                                       ) -> _StartOutboundChatContactResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOutboundChatContactResponseSuccess
 
       interface _StartOutboundVoiceContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartOutboundVoiceContactResponse]

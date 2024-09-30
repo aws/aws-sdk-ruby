@@ -956,6 +956,7 @@ module Aws::VerifiedPermissions
 
       api.metadata = {
         "apiVersion" => "2021-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "verifiedpermissions",
         "jsonVersion" => "1.0",
         "protocol" => "json",

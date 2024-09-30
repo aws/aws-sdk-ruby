@@ -49,6 +49,18 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # @!attribute [rw] task_arn
+    #   The Amazon resource name (ARN) of the tag-sync task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CancelTagSyncTaskInput AWS API Documentation
+    #
+    class CancelTagSyncTaskInput < Struct.new(
+      :task_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the group, which is the identifier of the group in other
     #   operations. You can't change the name of a resource group after you
@@ -102,6 +114,22 @@ module Aws::ResourceGroups
     #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #   @return [Array<Types::GroupConfigurationItem>]
     #
+    # @!attribute [rw] criticality
+    #   The critical rank of the application group on a scale of 1 to 10,
+    #   with a rank of 1 being the most critical, and a rank of 10 being
+    #   least critical.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner
+    #   A name, email address or other identifier for the person or group
+    #   who is considered as the owner of this application group within your
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the application group, which you can change at any time.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CreateGroupInput AWS API Documentation
     #
     class CreateGroupInput < Struct.new(
@@ -109,7 +137,10 @@ module Aws::ResourceGroups
       :description,
       :resource_query,
       :tags,
-      :configuration)
+      :configuration,
+      :criticality,
+      :owner,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -158,7 +189,8 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group to delete.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/DeleteGroupInput AWS API Documentation
@@ -185,7 +217,8 @@ module Aws::ResourceGroups
     # A resource that failed to be added to or removed from a group.
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource that failed to be added or removed.
+    #   The Amazon resource name (ARN) of the resource that failed to be
+    #   added or removed.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -232,8 +265,8 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group for which you want to
-    #   retrive the service configuration.
+    #   The name or the Amazon resource name (ARN) of the resource group for
+    #   which you want to retrive the service configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupConfigurationInput AWS API Documentation
@@ -267,7 +300,8 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group to retrieve.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupInput AWS API Documentation
@@ -298,7 +332,8 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group to query.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   query.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQueryInput AWS API Documentation
@@ -328,8 +363,93 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # @!attribute [rw] task_arn
+    #   The Amazon resource name (ARN) of the tag-sync task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagSyncTaskInput AWS API Documentation
+    #
+    class GetTagSyncTaskInput < Struct.new(
+      :task_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_arn
+    #   The Amazon resource name (ARN) of the application group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the application group.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_arn
+    #   The Amazon resource name (ARN) of the tag-sync task.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon resource name (ARN) of the role assumed by Resource
+    #   Groups to tag and untag resources on your behalf.
+    #
+    #   For more information about this role, review [Tag-sync required
+    #   permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/arguide/app-tag-sync.html#tag-sync-role
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the tag-sync task.
+    #
+    #   Valid values include:
+    #
+    #   * `ACTIVE` - The tag-sync task is actively managing resources in the
+    #     application by adding or removing the `awsApplication` tag from
+    #     resources when they are tagged or untagged with the specified tag
+    #     key-value pair.
+    #
+    #   * `ERROR` - The tag-sync task is not actively managing resources in
+    #     the application. Review the `ErrorMessage` for more information
+    #     about resolving the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The specific error message in cases where the tag-sync task status
+    #   is `ERROR`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the tag-sync task was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagSyncTaskOutput AWS API Documentation
+    #
+    class GetTagSyncTaskOutput < Struct.new(
+      :group_arn,
+      :group_name,
+      :task_arn,
+      :tag_key,
+      :tag_value,
+      :role_arn,
+      :status,
+      :error_message,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
-    #   The ARN of the resource group whose tags you want to retrieve.
+    #   The Amazon resource name (ARN) of the resource group whose tags you
+    #   want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagsInput AWS API Documentation
@@ -341,7 +461,7 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the tagged resource group.
+    #   TheAmazon resource name (ARN) of the tagged resource group.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -373,7 +493,7 @@ module Aws::ResourceGroups
     #   specifies which resource types can be included in the group.
     #
     # @!attribute [rw] group_arn
-    #   The ARN of the resource group.
+    #   The Amazon resource name (ARN) of the resource group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -384,12 +504,37 @@ module Aws::ResourceGroups
     #   The description of the resource group.
     #   @return [String]
     #
+    # @!attribute [rw] criticality
+    #   The critical rank of the application group on a scale of 1 to 10,
+    #   with a rank of 1 being the most critical, and a rank of 10 being
+    #   least critical.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner
+    #   A name, email address or other identifier for the person or group
+    #   who is considered as the owner of this application group within your
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the application group, which you can change at any time.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_tag
+    #   A tag that defines the application group membership. This tag is
+    #   only supported for application groups.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/Group AWS API Documentation
     #
     class Group < Struct.new(
       :group_arn,
       :name,
-      :description)
+      :description,
+      :criticality,
+      :owner,
+      :display_name,
+      :application_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -539,14 +684,38 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] group_arn
-    #   The ARN of the resource group.
+    #   The Amazon resource name (ARN) of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the application group.
+    #   @return [String]
+    #
+    # @!attribute [rw] criticality
+    #   The critical rank of the application group on a scale of 1 to 10,
+    #   with a rank of 1 being the most critical, and a rank of 10 being
+    #   least critical.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner
+    #   A name, email address or other identifier for the person or group
+    #   who is considered as the owner of this group within your
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the application group, which you can change at any time.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupIdentifier AWS API Documentation
     #
     class GroupIdentifier < Struct.new(
       :group_name,
-      :group_arn)
+      :group_arn,
+      :description,
+      :criticality,
+      :owner,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -574,11 +743,13 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group to add resources to.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   add resources to.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The list of ARNs of the resources to be added to the group.
+    #   The list of Amazon resource names (ARNs) of the resources to be
+    #   added to the group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupResourcesInput AWS API Documentation
@@ -591,22 +762,22 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] succeeded
-    #   A list of ARNs of the resources that this operation successfully
-    #   added to the group.
+    #   A list of Amazon resource names (ARNs) of the resources that this
+    #   operation successfully added to the group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] failed
-    #   A list of ARNs of any resources that this operation failed to add to
-    #   the group.
+    #   A list of Amazon resource names (ARNs) of any resources that this
+    #   operation failed to add to the group.
     #   @return [Array<Types::FailedResource>]
     #
     # @!attribute [rw] pending
-    #   A list of ARNs of any resources that this operation is still in the
-    #   process adding to the group. These pending additions continue
-    #   asynchronously. You can check the status of pending additions by
-    #   using the ` ListGroupResources ` operation, and checking the
-    #   `Resources` array in the response and the `Status` field of each
-    #   object in that array.
+    #   A list of Amazon resource names (ARNs) of any resources that this
+    #   operation is still in the process adding to the group. These pending
+    #   additions continue asynchronously. You can check the status of
+    #   pending additions by using the ` ListGroupResources ` operation, and
+    #   checking the `Resources` array in the response and the `Status`
+    #   field of each object in that array.
     #   @return [Array<Types::PendingResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupResourcesOutput AWS API Documentation
@@ -615,6 +786,47 @@ module Aws::ResourceGroups
       :succeeded,
       :failed,
       :pending)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about a grouping or ungrouping resource action.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon resource name (ARN) of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   Describes the resource grouping action with values of `GROUP` or
+    #   `UNGROUP`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes the resource grouping status with values of `SUCCESS`,
+    #   `FAILED`, `IN_PROGRESS`, or `SKIPPED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message that explains the `ErrorCode`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Specifies the error code that was raised.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   A timestamp of when the status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupingStatusesItem AWS API Documentation
+    #
+    class GroupingStatusesItem < Struct.new(
+      :resource_arn,
+      :action,
+      :status,
+      :error_message,
+      :error_code,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -639,7 +851,7 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group
+    #   The name or the Amazon resource name (ARN) of the resource group.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -773,6 +985,89 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # A filter name and value pair that is used to obtain more specific
+    # results from the list of grouping statuses.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Filter names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   One or more filter values. Allowed filter values vary by resource
+    #   filter name, and are case-sensitive.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupingStatusesFilter AWS API Documentation
+    #
+    class ListGroupingStatusesFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   The application group identifier, expressed as an Amazon resource
+    #   name (ARN) or the application group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources and their statuses returned in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filter name and value pair that is used to return more specific
+    #   results from a list of resources.
+    #   @return [Array<Types::ListGroupingStatusesFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value provided by a previous call's `NextToken` response to
+    #   indicate where the output should continue from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupingStatusesInput AWS API Documentation
+    #
+    class ListGroupingStatusesInput < Struct.new(
+      :group,
+      :max_results,
+      :filters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   The application group identifier, expressed as an Amazon resource
+    #   name (ARN) or the application group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_statuses
+    #   Returns details about the grouping or ungrouping status of the
+    #   resources in the specified application group.
+    #   @return [Array<Types::GroupingStatusesItem>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupingStatusesOutput AWS API Documentation
+    #
+    class ListGroupingStatusesOutput < Struct.new(
+      :group,
+      :grouping_statuses,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filters
     #   Filters, formatted as GroupFilter objects, that you want to apply to
     #   a `ListGroups` operation.
@@ -786,6 +1081,8 @@ module Aws::ResourceGroups
     #   * `configuration-type` - Filter the results to include only those
     #     groups that have the specified configuration types attached. The
     #     current supported values are:
+    #
+    #     * `AWS::ResourceGroups::ApplicationGroup`
     #
     #     * `AWS::AppRegistry::Application`
     #
@@ -859,6 +1156,74 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # Returns tag-sync tasks filtered by the Amazon resource name (ARN) or
+    # name of a specified application group.
+    #
+    # @!attribute [rw] group_arn
+    #   The Amazon resource name (ARN) of the application group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the application group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListTagSyncTasksFilter AWS API Documentation
+    #
+    class ListTagSyncTasksFilter < Struct.new(
+      :group_arn,
+      :group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   The Amazon resource name (ARN) or name of the application group for
+    #   which you want to return a list of tag-sync tasks.
+    #   @return [Array<Types::ListTagSyncTasksFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be included in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value provided by a previous call's `NextToken` response to
+    #   indicate where the output should continue from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListTagSyncTasksInput AWS API Documentation
+    #
+    class ListTagSyncTasksInput < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_sync_tasks
+    #   A list of tag-sync tasks and information about each task.
+    #   @return [Array<Types::TagSyncTaskItem>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListTagSyncTasksOutput AWS API Documentation
+    #
+    class ListTagSyncTasksOutput < Struct.new(
+      :tag_sync_tasks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request uses an HTTP method that isn't allowed for the specified
     # resource.
     #
@@ -905,8 +1270,8 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] group
-    #   The name or ARN of the resource group with the configuration that
-    #   you want to update.
+    #   The name or Amazon resource name (ARN) of the resource group with
+    #   the configuration that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -986,7 +1351,7 @@ module Aws::ResourceGroups
     # A structure that contains the ARN of a resource and its resource type.
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of a resource.
+    #   The Amazon resource name (ARN) of a resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1041,8 +1406,8 @@ module Aws::ResourceGroups
     #
     #   * <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> Specifies that you
     #     want the group to contain the members of an CloudFormation stack.
-    #     The `Query` contains a `StackIdentifier` element with an ARN for a
-    #     CloudFormation stack.
+    #     The `Query` contains a `StackIdentifier` element with an Amazon
+    #     resource name (ARN) for a CloudFormation stack.
     #
     #   * <i> <code>TAG_FILTERS_1_0:</code> </i> Specifies that you want the
     #     group to include resource that have tags that match the query.
@@ -1220,8 +1585,83 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # @!attribute [rw] group
+    #   The Amazon resource name (ARN) or name of the application group for
+    #   which you want to create a tag-sync task.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key. Resources tagged with this tag key-value pair will be
+    #   added to the application. If a resource with this tag is later
+    #   untagged, the tag-sync task removes the resource from the
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value. Resources tagged with this tag key-value pair will be
+    #   added to the application. If a resource with this tag is later
+    #   untagged, the tag-sync task removes the resource from the
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon resource name (ARN) of the role assumed by the service to
+    #   tag and untag resources on your behalf.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/StartTagSyncTaskInput AWS API Documentation
+    #
+    class StartTagSyncTaskInput < Struct.new(
+      :group,
+      :tag_key,
+      :tag_value,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_arn
+    #   The Amazon resource name (ARN) of the application group for which
+    #   you want to add or remove resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the application group to onboard and sync resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_arn
+    #   The Amazon resource name (ARN) of the new tag-sync task.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key of the tag-sync task.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value of the tag-sync task.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon resource name (ARN) of the role assumed by the service to
+    #   tag and untag resources on your behalf.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/StartTagSyncTaskOutput AWS API Documentation
+    #
+    class StartTagSyncTaskOutput < Struct.new(
+      :group_arn,
+      :group_name,
+      :task_arn,
+      :tag_key,
+      :tag_value,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
-    #   The ARN of the resource group to which to add tags.
+    #   The Amazon resource name (ARN) of the resource group to which to add
+    #   tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1239,7 +1679,7 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the tagged resource.
+    #   The Amazon resource name (ARN) of the tagged resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1251,6 +1691,73 @@ module Aws::ResourceGroups
     class TagOutput < Struct.new(
       :arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon resource name (ARN) of the tag-sync task.
+    #
+    # @!attribute [rw] group_arn
+    #   The Amazon resource name (ARN) of the application group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the application group.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_arn
+    #   The Amazon resource name (ARN) of the tag-sync task.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon resource name (ARN) of the role assumed by the service to
+    #   tag and untag resources on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the tag-sync task.
+    #
+    #   Valid values include:
+    #
+    #   * `ACTIVE` - The tag-sync task is actively managing resources in the
+    #     application by adding or removing the `awsApplication` tag from
+    #     resources when they are tagged or untagged with the specified tag
+    #     key-value pair.
+    #
+    #   * `ERROR` - The tag-sync task is not actively managing resources in
+    #     the application. Review the `ErrorMessage` for more information
+    #     about resolving the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The specific error message in cases where the tag-sync task status
+    #   is `Error`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the tag-sync task was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TagSyncTaskItem AWS API Documentation
+    #
+    class TagSyncTaskItem < Struct.new(
+      :group_arn,
+      :group_name,
+      :task_arn,
+      :tag_key,
+      :tag_value,
+      :role_arn,
+      :status,
+      :error_message,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1284,12 +1791,13 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group from which to remove the
-    #   resources.
+    #   The name or the Amazon resource name (ARN) of the resource group
+    #   from which to remove the resources.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The ARNs of the resources to be removed from the group.
+    #   The Amazon resource names (ARNs) of the resources to be removed from
+    #   the group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UngroupResourcesInput AWS API Documentation
@@ -1331,9 +1839,9 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the resource group from which to remove tags. The command
-    #   removed both the specified keys and any values associated with those
-    #   keys.
+    #   The Amazon resource name (ARN) of the resource group from which to
+    #   remove tags. The command removed both the specified keys and any
+    #   values associated with those keys.
     #   @return [String]
     #
     # @!attribute [rw] keys
@@ -1350,7 +1858,8 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the resource group from which tags have been removed.
+    #   The Amazon resource name (ARN) of the resource group from which tags
+    #   have been removed.
     #   @return [String]
     #
     # @!attribute [rw] keys
@@ -1369,6 +1878,9 @@ module Aws::ResourceGroups
     # @!attribute [rw] group_lifecycle_events_desired_status
     #   Specifies whether you want to turn [group lifecycle events][1] on or
     #   off.
+    #
+    #   You can't turn on group lifecycle events if your resource groups
+    #   quota is greater than 2,000.
     #
     #
     #
@@ -1401,7 +1913,7 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group to modify.
+    #   The name or the ARN of the resource group to update.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1410,12 +1922,31 @@ module Aws::ResourceGroups
     #   periods, and spaces.
     #   @return [String]
     #
+    # @!attribute [rw] criticality
+    #   The critical rank of the application group on a scale of 1 to 10,
+    #   with a rank of 1 being the most critical, and a rank of 10 being
+    #   least critical.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner
+    #   A name, email address or other identifier for the person or group
+    #   who is considered as the owner of this application group within your
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the application group, which you can change at any time.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupInput AWS API Documentation
     #
     class UpdateGroupInput < Struct.new(
       :group_name,
       :group,
-      :description)
+      :description,
+      :criticality,
+      :owner,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1437,7 +1968,8 @@ module Aws::ResourceGroups
     #   @return [String]
     #
     # @!attribute [rw] group
-    #   The name or the ARN of the resource group to query.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   query.
     #   @return [String]
     #
     # @!attribute [rw] resource_query

@@ -87,6 +87,112 @@ module Aws
                                                ) -> _CreateBillOfMaterialsImportJobResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBillOfMaterialsImportJobResponseSuccess
 
+      interface _CreateDataIntegrationFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataIntegrationFlowResponse]
+        def instance_id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#create_data_integration_flow-instance_method
+      def create_data_integration_flow: (
+                                          instance_id: ::String,
+                                          name: ::String,
+                                          sources: Array[
+                                            {
+                                              source_type: ("S3" | "DATASET"),
+                                              source_name: ::String,
+                                              s3_source: {
+                                                bucket_name: ::String,
+                                                prefix: ::String,
+                                                options: {
+                                                  file_type: ("CSV" | "PARQUET" | "JSON")?
+                                                }?
+                                              }?,
+                                              dataset_source: {
+                                                dataset_identifier: ::String,
+                                                options: {
+                                                  load_type: ("INCREMENTAL" | "REPLACE")?,
+                                                  dedupe_records: bool?
+                                                }?
+                                              }?
+                                            },
+                                          ],
+                                          transformation: {
+                                            transformation_type: ("SQL" | "NONE"),
+                                            sql_transformation: {
+                                              query: ::String
+                                            }?
+                                          },
+                                          target: {
+                                            target_type: ("S3" | "DATASET"),
+                                            s3_target: {
+                                              bucket_name: ::String,
+                                              prefix: ::String,
+                                              options: {
+                                                file_type: ("CSV" | "PARQUET" | "JSON")?
+                                              }?
+                                            }?,
+                                            dataset_target: {
+                                              dataset_identifier: ::String,
+                                              options: {
+                                                load_type: ("INCREMENTAL" | "REPLACE")?,
+                                                dedupe_records: bool?
+                                              }?
+                                            }?
+                                          },
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateDataIntegrationFlowResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataIntegrationFlowResponseSuccess
+
+      interface _CreateDataLakeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataLakeDatasetResponse]
+        def dataset: () -> Types::DataLakeDataset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#create_data_lake_dataset-instance_method
+      def create_data_lake_dataset: (
+                                      instance_id: ::String,
+                                      namespace: ::String,
+                                      name: ::String,
+                                      ?schema: {
+                                        name: ::String,
+                                        fields: Array[
+                                          {
+                                            name: ::String,
+                                            type: ("INT" | "DOUBLE" | "STRING" | "TIMESTAMP"),
+                                            is_required: bool
+                                          },
+                                        ]
+                                      },
+                                      ?description: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateDataLakeDatasetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeDatasetResponseSuccess
+
+      interface _DeleteDataIntegrationFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataIntegrationFlowResponse]
+        def instance_id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#delete_data_integration_flow-instance_method
+      def delete_data_integration_flow: (
+                                          instance_id: ::String,
+                                          name: ::String
+                                        ) -> _DeleteDataIntegrationFlowResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataIntegrationFlowResponseSuccess
+
+      interface _DeleteDataLakeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataLakeDatasetResponse]
+        def instance_id: () -> ::String
+        def namespace: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#delete_data_lake_dataset-instance_method
+      def delete_data_lake_dataset: (
+                                      instance_id: ::String,
+                                      namespace: ::String,
+                                      name: ::String
+                                    ) -> _DeleteDataLakeDatasetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeDatasetResponseSuccess
+
       interface _GetBillOfMaterialsImportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBillOfMaterialsImportJobResponse]
         def job: () -> Types::BillOfMaterialsImportJob
@@ -97,6 +203,66 @@ module Aws
                                               job_id: ::String
                                             ) -> _GetBillOfMaterialsImportJobResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillOfMaterialsImportJobResponseSuccess
+
+      interface _GetDataIntegrationFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataIntegrationFlowResponse]
+        def flow: () -> Types::DataIntegrationFlow
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#get_data_integration_flow-instance_method
+      def get_data_integration_flow: (
+                                       instance_id: ::String,
+                                       name: ::String
+                                     ) -> _GetDataIntegrationFlowResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataIntegrationFlowResponseSuccess
+
+      interface _GetDataLakeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakeDatasetResponse]
+        def dataset: () -> Types::DataLakeDataset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#get_data_lake_dataset-instance_method
+      def get_data_lake_dataset: (
+                                   instance_id: ::String,
+                                   namespace: ::String,
+                                   name: ::String
+                                 ) -> _GetDataLakeDatasetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakeDatasetResponseSuccess
+
+      interface _ListDataIntegrationFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataIntegrationFlowsResponse]
+        def flows: () -> ::Array[Types::DataIntegrationFlow]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#list_data_integration_flows-instance_method
+      def list_data_integration_flows: (
+                                         instance_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListDataIntegrationFlowsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataIntegrationFlowsResponseSuccess
+
+      interface _ListDataLakeDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataLakeDatasetsResponse]
+        def datasets: () -> ::Array[Types::DataLakeDataset]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#list_data_lake_datasets-instance_method
+      def list_data_lake_datasets: (
+                                     instance_id: ::String,
+                                     namespace: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListDataLakeDatasetsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataLakeDatasetsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
       interface _SendDataIntegrationEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendDataIntegrationEventResponse]
@@ -112,6 +278,93 @@ module Aws
                                          ?client_token: ::String
                                        ) -> _SendDataIntegrationEventResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDataIntegrationEventResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDataIntegrationFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataIntegrationFlowResponse]
+        def flow: () -> Types::DataIntegrationFlow
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#update_data_integration_flow-instance_method
+      def update_data_integration_flow: (
+                                          instance_id: ::String,
+                                          name: ::String,
+                                          ?sources: Array[
+                                            {
+                                              source_type: ("S3" | "DATASET"),
+                                              source_name: ::String,
+                                              s3_source: {
+                                                bucket_name: ::String,
+                                                prefix: ::String,
+                                                options: {
+                                                  file_type: ("CSV" | "PARQUET" | "JSON")?
+                                                }?
+                                              }?,
+                                              dataset_source: {
+                                                dataset_identifier: ::String,
+                                                options: {
+                                                  load_type: ("INCREMENTAL" | "REPLACE")?,
+                                                  dedupe_records: bool?
+                                                }?
+                                              }?
+                                            },
+                                          ],
+                                          ?transformation: {
+                                            transformation_type: ("SQL" | "NONE"),
+                                            sql_transformation: {
+                                              query: ::String
+                                            }?
+                                          },
+                                          ?target: {
+                                            target_type: ("S3" | "DATASET"),
+                                            s3_target: {
+                                              bucket_name: ::String,
+                                              prefix: ::String,
+                                              options: {
+                                                file_type: ("CSV" | "PARQUET" | "JSON")?
+                                              }?
+                                            }?,
+                                            dataset_target: {
+                                              dataset_identifier: ::String,
+                                              options: {
+                                                load_type: ("INCREMENTAL" | "REPLACE")?,
+                                                dedupe_records: bool?
+                                              }?
+                                            }?
+                                          }
+                                        ) -> _UpdateDataIntegrationFlowResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataIntegrationFlowResponseSuccess
+
+      interface _UpdateDataLakeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataLakeDatasetResponse]
+        def dataset: () -> Types::DataLakeDataset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#update_data_lake_dataset-instance_method
+      def update_data_lake_dataset: (
+                                      instance_id: ::String,
+                                      namespace: ::String,
+                                      name: ::String,
+                                      ?description: ::String
+                                    ) -> _UpdateDataLakeDatasetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataLakeDatasetResponseSuccess
     end
   end
 end

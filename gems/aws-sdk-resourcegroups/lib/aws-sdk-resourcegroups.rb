@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:resourcegroups)
 # structure.
 #
 #     resource_groups = Aws::ResourceGroups::Client.new
-#     resp = resource_groups.create_group(params)
+#     resp = resource_groups.cancel_tag_sync_task(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::ResourceGroups
   autoload :EndpointProvider, 'aws-sdk-resourcegroups/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-resourcegroups/endpoints'
 
-  GEM_VERSION = '1.72.0'
+  GEM_VERSION = '1.73.0'
 
 end
 

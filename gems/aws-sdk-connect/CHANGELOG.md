@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2024-09-30)
+------------------
+
+* Feature - Amazon Connect introduces StartOutboundChatContact API allowing customers to initiate outbound chat contacts
+
 1.178.0 (2024-09-24)
 ------------------
 

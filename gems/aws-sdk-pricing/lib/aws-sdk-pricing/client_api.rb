@@ -172,9 +172,11 @@ module Aws::Pricing
 
       api.metadata = {
         "apiVersion" => "2017-10-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.pricing",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWS Pricing",
         "serviceFullName" => "AWS Price List Service",
         "serviceId" => "Pricing",

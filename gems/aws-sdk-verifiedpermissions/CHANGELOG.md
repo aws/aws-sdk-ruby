@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2024-09-30)
+------------------
+
+* Feature - Add examples for API operations in model.
+
 1.34.0 (2024-09-24)
 ------------------
 

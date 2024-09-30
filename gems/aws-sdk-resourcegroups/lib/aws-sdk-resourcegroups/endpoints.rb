@@ -12,6 +12,17 @@ module Aws::ResourceGroups
   # @api private
   module Endpoints
 
+    class CancelTagSyncTask
+      def self.build(context)
+        Aws::ResourceGroups::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class CreateGroup
       def self.build(context)
         Aws::ResourceGroups::EndpointParameters.new(
@@ -78,6 +89,17 @@ module Aws::ResourceGroups
       end
     end
 
+    class GetTagSyncTask
+      def self.build(context)
+        Aws::ResourceGroups::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class GetTags
       def self.build(context)
         Aws::ResourceGroups::EndpointParameters.new(
@@ -111,7 +133,29 @@ module Aws::ResourceGroups
       end
     end
 
+    class ListGroupingStatuses
+      def self.build(context)
+        Aws::ResourceGroups::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class ListGroups
+      def self.build(context)
+        Aws::ResourceGroups::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListTagSyncTasks
       def self.build(context)
         Aws::ResourceGroups::EndpointParameters.new(
           region: context.config.region,
@@ -134,6 +178,17 @@ module Aws::ResourceGroups
     end
 
     class SearchResources
+      def self.build(context)
+        Aws::ResourceGroups::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class StartTagSyncTask
       def self.build(context)
         Aws::ResourceGroups::EndpointParameters.new(
           region: context.config.region,

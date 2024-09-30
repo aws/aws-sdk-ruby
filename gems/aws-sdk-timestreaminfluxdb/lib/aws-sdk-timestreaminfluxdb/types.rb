@@ -145,6 +145,17 @@ module Aws::TimestreamInfluxDB
     #   A list of key-value pairs to associate with the DB instance.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] port
+    #   The port number on which InfluxDB accepts connections.
+    #
+    #   Valid Values: 1024-65535
+    #
+    #   Default: 8086
+    #
+    #   Constraints: The value can't be 2375-2376, 7788-7799, 8090, or
+    #   51678-51680
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstanceInput AWS API Documentation
     #
     class CreateDbInstanceInput < Struct.new(
@@ -162,7 +173,8 @@ module Aws::TimestreamInfluxDB
       :db_parameter_group_identifier,
       :deployment_type,
       :log_delivery_configuration,
-      :tags)
+      :tags,
+      :port)
       SENSITIVE = [:username, :password]
       include Aws::Structure
     end
@@ -189,6 +201,11 @@ module Aws::TimestreamInfluxDB
     #   The endpoint used to connect to InfluxDB. The default InfluxDB port
     #   is 8086.
     #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number on which InfluxDB accepts connections. The default
+    #   value is 8086.
+    #   @return [Integer]
     #
     # @!attribute [rw] db_instance_type
     #   The Timestream for InfluxDB instance type that InfluxDB runs on.
@@ -254,6 +271,7 @@ module Aws::TimestreamInfluxDB
       :arn,
       :status,
       :endpoint,
+      :port,
       :db_instance_type,
       :db_storage_type,
       :allocated_storage,
@@ -357,6 +375,10 @@ module Aws::TimestreamInfluxDB
     #   is 8086.
     #   @return [String]
     #
+    # @!attribute [rw] port
+    #   The port number on which InfluxDB accepts connections.
+    #   @return [Integer]
+    #
     # @!attribute [rw] db_instance_type
     #   The Timestream for InfluxDB instance type to run InfluxDB on.
     #   @return [String]
@@ -382,6 +404,7 @@ module Aws::TimestreamInfluxDB
       :arn,
       :status,
       :endpoint,
+      :port,
       :db_instance_type,
       :db_storage_type,
       :allocated_storage,
@@ -454,6 +477,10 @@ module Aws::TimestreamInfluxDB
     #   is 8086.
     #   @return [String]
     #
+    # @!attribute [rw] port
+    #   The port number on which InfluxDB accepts connections.
+    #   @return [Integer]
+    #
     # @!attribute [rw] db_instance_type
     #   The Timestream for InfluxDB instance type that InfluxDB runs on.
     #   @return [String]
@@ -518,6 +545,7 @@ module Aws::TimestreamInfluxDB
       :arn,
       :status,
       :endpoint,
+      :port,
       :db_instance_type,
       :db_storage_type,
       :allocated_storage,
@@ -530,6 +558,25 @@ module Aws::TimestreamInfluxDB
       :secondary_availability_zone,
       :log_delivery_configuration,
       :influx_auth_parameters_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Duration for InfluxDB parameters in Timestream for InfluxDB.
+    #
+    # @!attribute [rw] duration_type
+    #   The type of duration for InfluxDB parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of duration for InfluxDB parameters.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/Duration AWS API Documentation
+    #
+    class Duration < Struct.new(
+      :duration_type,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -568,6 +615,10 @@ module Aws::TimestreamInfluxDB
     #   The endpoint used to connect to InfluxDB. The default InfluxDB port
     #   is 8086.
     #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number on which InfluxDB accepts connections.
+    #   @return [Integer]
     #
     # @!attribute [rw] db_instance_type
     #   The Timestream for InfluxDB instance type that InfluxDB runs on.
@@ -633,6 +684,7 @@ module Aws::TimestreamInfluxDB
       :arn,
       :status,
       :endpoint,
+      :port,
       :db_instance_type,
       :db_storage_type,
       :allocated_storage,
@@ -750,6 +802,221 @@ module Aws::TimestreamInfluxDB
     #   [1]: https://docs.influxdata.com/influxdb/v2/reference/internals/metrics/
     #   @return [Boolean]
     #
+    # @!attribute [rw] http_idle_timeout
+    #   Maximum duration the server should keep established connections
+    #   alive while waiting for new requests. Set to 0 for no timeout.
+    #
+    #   Default: 3 minutes
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] http_read_header_timeout
+    #   Maximum duration the server should try to read HTTP headers for new
+    #   requests. Set to 0 for no timeout.
+    #
+    #   Default: 10 seconds
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] http_read_timeout
+    #   Maximum duration the server should try to read the entirety of new
+    #   requests. Set to 0 for no timeout.
+    #
+    #   Default: 0
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] http_write_timeout
+    #   Maximum duration the server should spend processing and responding
+    #   to write requests. Set to 0 for no timeout.
+    #
+    #   Default: 0
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] influxql_max_select_buckets
+    #   Maximum number of group by time buckets a SELECT statement can
+    #   create. 0 allows an unlimited number of buckets.
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] influxql_max_select_point
+    #   Maximum number of points a SELECT statement can process. 0 allows an
+    #   unlimited number of points. InfluxDB checks the point count every
+    #   second (so queries exceeding the maximum aren’t immediately
+    #   aborted).
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] influxql_max_select_series
+    #   Maximum number of series a SELECT statement can return. 0 allows an
+    #   unlimited number of series.
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pprof_disabled
+    #   Disable the /debug/pprof HTTP endpoint. This endpoint provides
+    #   runtime profiling data and can be helpful when debugging.
+    #
+    #   Default: false
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] query_initial_memory_bytes
+    #   Initial bytes of memory allocated for a query.
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_max_memory_bytes
+    #   Maximum number of queries allowed in execution queue. When queue
+    #   limit is reached, new queries are rejected. Setting to 0 allows an
+    #   unlimited number of queries in the queue.
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_memory_bytes
+    #   Maximum bytes of memory allowed for a single query. Must be greater
+    #   or equal to queryInitialMemoryBytes.
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_length
+    #   Specifies the Time to Live (TTL) in minutes for newly created user
+    #   sessions.
+    #
+    #   Default: 60
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_renew_disabled
+    #   Disables automatically extending a user’s session TTL on each
+    #   request. By default, every request sets the session’s expiration
+    #   time to five minutes from now. When disabled, sessions expire after
+    #   the specified [session length][1] and the user is redirected to the
+    #   login page, even if recently active.
+    #
+    #   Default: false
+    #
+    #
+    #
+    #   [1]: https://docs.influxdata.com/influxdb/v2/reference/config-options/#session-length
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] storage_cache_max_memory_size
+    #   Maximum size (in bytes) a shard’s cache can reach before it starts
+    #   rejecting writes. Must be greater than
+    #   storageCacheSnapShotMemorySize and lower than instance’s total
+    #   memory capacity. We recommend setting it to below 15% of the total
+    #   memory capacity.
+    #
+    #   Default: 1073741824
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_cache_snapshot_memory_size
+    #   Size (in bytes) at which the storage engine will snapshot the cache
+    #   and write it to a TSM file to make more memory available. Must not
+    #   be greater than storageCacheMaxMemorySize.
+    #
+    #   Default: 26214400
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_cache_snapshot_write_cold_duration
+    #   Duration at which the storage engine will snapshot the cache and
+    #   write it to a new TSM file if the shard hasn’t received writes or
+    #   deletes.
+    #
+    #   Default: 10 minutes
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] storage_compact_full_write_cold_duration
+    #   Duration at which the storage engine will compact all TSM files in a
+    #   shard if it hasn't received writes or deletes.
+    #
+    #   Default: 4 hours
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] storage_compact_throughput_burst
+    #   Rate limit (in bytes per second) that TSM compactions can write to
+    #   disk.
+    #
+    #   Default: 50331648
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_max_concurrent_compactions
+    #   Maximum number of full and level compactions that can run
+    #   concurrently. A value of 0 results in 50% of runtime.GOMAXPROCS(0)
+    #   used at runtime. Any number greater than zero limits compactions to
+    #   that value. This setting does not apply to cache snapshotting.
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_max_index_log_file_size
+    #   Size (in bytes) at which an index write-ahead log (WAL) file will
+    #   compact into an index file. Lower sizes will cause log files to be
+    #   compacted more quickly and result in lower heap usage at the expense
+    #   of write throughput.
+    #
+    #   Default: 1048576
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_no_validate_field_size
+    #   Skip field size validation on incoming write requests.
+    #
+    #   Default: false
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] storage_retention_check_interval
+    #   Interval of retention policy enforcement checks. Must be greater
+    #   than 0.
+    #
+    #   Default: 30 minutes
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] storage_series_file_max_concurrent_snapshot_compactions
+    #   Maximum number of snapshot compactions that can run concurrently
+    #   across all series partitions in a database.
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_series_id_set_cache_size
+    #   Size of the internal cache used in the TSI index to store previously
+    #   calculated series results. Cached results are returned quickly
+    #   rather than needing to be recalculated when a subsequent query with
+    #   the same tag key/value predicate is executed. Setting this value to
+    #   0 will disable the cache and may decrease query performance.
+    #
+    #   Default: 100
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_wal_max_concurrent_writes
+    #   Maximum number writes to the WAL directory to attempt at the same
+    #   time. Setting this value to 0 results in number of processing units
+    #   available x2.
+    #
+    #   Default: 0
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_wal_max_write_delay
+    #   Maximum amount of time a write request to the WAL directory will
+    #   wait when the [maximum number of concurrent active writes to the WAL
+    #   directory has been met][1]. Set to 0 to disable the timeout.
+    #
+    #   Default: 10 minutes
+    #
+    #
+    #
+    #   [1]: https://docs.influxdata.com/influxdb/v2/reference/config-options/#storage-wal-max-concurrent-writes
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] ui_disabled
+    #   Disable the InfluxDB user interface (UI). The UI is enabled by
+    #   default.
+    #
+    #   Default: false
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/InfluxDBv2Parameters AWS API Documentation
     #
     class InfluxDBv2Parameters < Struct.new(
@@ -759,7 +1026,34 @@ module Aws::TimestreamInfluxDB
       :query_concurrency,
       :query_queue_size,
       :tracing_type,
-      :metrics_disabled)
+      :metrics_disabled,
+      :http_idle_timeout,
+      :http_read_header_timeout,
+      :http_read_timeout,
+      :http_write_timeout,
+      :influxql_max_select_buckets,
+      :influxql_max_select_point,
+      :influxql_max_select_series,
+      :pprof_disabled,
+      :query_initial_memory_bytes,
+      :query_max_memory_bytes,
+      :query_memory_bytes,
+      :session_length,
+      :session_renew_disabled,
+      :storage_cache_max_memory_size,
+      :storage_cache_snapshot_memory_size,
+      :storage_cache_snapshot_write_cold_duration,
+      :storage_compact_full_write_cold_duration,
+      :storage_compact_throughput_burst,
+      :storage_max_concurrent_compactions,
+      :storage_max_index_log_file_size,
+      :storage_no_validate_field_size,
+      :storage_retention_check_interval,
+      :storage_series_file_max_concurrent_snapshot_compactions,
+      :storage_series_id_set_cache_size,
+      :storage_wal_max_concurrent_writes,
+      :storage_wal_max_write_delay,
+      :ui_disabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1046,6 +1340,19 @@ module Aws::TimestreamInfluxDB
     #   concurrency.
     #   @return [String]
     #
+    # @!attribute [rw] port
+    #   The port number on which InfluxDB accepts connections.
+    #
+    #   If you change the Port value, your database restarts immediately.
+    #
+    #   Valid Values: 1024-65535
+    #
+    #   Default: 8086
+    #
+    #   Constraints: The value can't be 2375-2376, 7788-7799, 8090, or
+    #   51678-51680
+    #   @return [Integer]
+    #
     # @!attribute [rw] db_instance_type
     #   The Timestream for InfluxDB DB instance type to run InfluxDB on.
     #   @return [String]
@@ -1061,6 +1368,7 @@ module Aws::TimestreamInfluxDB
       :identifier,
       :log_delivery_configuration,
       :db_parameter_group_identifier,
+      :port,
       :db_instance_type,
       :deployment_type)
       SENSITIVE = []
@@ -1089,6 +1397,10 @@ module Aws::TimestreamInfluxDB
     #   The endpoint used to connect to InfluxDB. The default InfluxDB port
     #   is 8086.
     #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number on which InfluxDB accepts connections.
+    #   @return [Integer]
     #
     # @!attribute [rw] db_instance_type
     #   The Timestream for InfluxDB instance type that InfluxDB runs on.
@@ -1154,6 +1466,7 @@ module Aws::TimestreamInfluxDB
       :arn,
       :status,
       :endpoint,
+      :port,
       :db_instance_type,
       :db_storage_type,
       :allocated_storage,

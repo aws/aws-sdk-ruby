@@ -1810,7 +1810,7 @@ module Aws::Connect
     end
 
     class Endpoint
-      attr_accessor type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW")
+      attr_accessor type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW" | "CONNECT_PHONENUMBER_ARN")
       attr_accessor address: ::String
       SENSITIVE: []
     end
@@ -4574,6 +4574,27 @@ module Aws::Connect
 
     class StartContactStreamingResponse
       attr_accessor streaming_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartOutboundChatContactRequest
+      attr_accessor source_endpoint: Types::Endpoint
+      attr_accessor destination_endpoint: Types::Endpoint
+      attr_accessor instance_id: ::String
+      attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor contact_flow_id: ::String
+      attr_accessor chat_duration_in_minutes: ::Integer
+      attr_accessor participant_details: Types::ParticipantDetails
+      attr_accessor initial_system_message: Types::ChatMessage
+      attr_accessor related_contact_id: ::String
+      attr_accessor supported_messaging_content_types: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartOutboundChatContactResponse
+      attr_accessor contact_id: ::String
       SENSITIVE: []
     end
 

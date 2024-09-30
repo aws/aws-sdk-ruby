@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2024-09-30)
+------------------
+
+* Feature - Add support for custom models via provisioned throughput for Bedrock Model Evaluation
+
 1.24.0 (2024-09-24)
 ------------------
 

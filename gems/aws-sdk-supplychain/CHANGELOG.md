@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-09-30)
+------------------
+
+* Feature - Release DataLakeDataset, DataIntegrationFlow and ResourceTagging APIs for AWS Supply Chain
+
 1.15.0 (2024-09-24)
 ------------------
 
