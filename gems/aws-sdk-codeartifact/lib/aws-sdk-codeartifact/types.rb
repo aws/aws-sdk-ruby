@@ -1821,13 +1821,18 @@ module Aws::CodeArtifact
     #   one endpoint for each package format.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_type
+    #   A string that specifies the type of endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/GetRepositoryEndpointRequest AWS API Documentation
     #
     class GetRepositoryEndpointRequest < Struct.new(
       :domain,
       :domain_owner,
       :repository,
-      :format)
+      :format,
+      :endpoint_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3884,6 +3889,14 @@ module Aws::CodeArtifact
     #     distributable format, such as a JAR file.
     #
     #   * `nuget`: A NuGet package.
+    #
+    #   * `generic`: A generic package.
+    #
+    #   * `ruby`: A Ruby package.
+    #
+    #   * `swift`: A Swift package.
+    #
+    #   * `cargo`: A Cargo package.
     #   @return [String]
     #
     # @!attribute [rw] status

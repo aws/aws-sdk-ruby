@@ -170,6 +170,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::BedrockAgent::Endpoints::PrepareFlow.build(context)
           when :start_ingestion_job
             Aws::BedrockAgent::Endpoints::StartIngestionJob.build(context)
+          when :stop_ingestion_job
+            Aws::BedrockAgent::Endpoints::StopIngestionJob.build(context)
           when :tag_resource
             Aws::BedrockAgent::Endpoints::TagResource.build(context)
           when :untag_resource

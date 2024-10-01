@@ -435,6 +435,7 @@ module Aws
                                  max_capacity: ::Float?
                                },
                                ?network_type: ::String,
+                               ?cluster_scalability_type: ("standard" | "limitless"),
                                ?db_system_id: ::String,
                                ?manage_master_user_password: bool,
                                ?master_user_secret_kms_key_id: ::String,
@@ -756,6 +757,7 @@ module Aws
         def publicly_accessible: () -> bool
         def endpoint: () -> ::String
         def db_shard_group_arn: () -> ::String
+        def tag_list: () -> ::Array[Types::Tag]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_db_shard_group-instance_method
       def create_db_shard_group: (
@@ -764,7 +766,13 @@ module Aws
                                    ?compute_redundancy: ::Integer,
                                    max_acu: ::Float,
                                    ?min_acu: ::Float,
-                                   ?publicly_accessible: bool
+                                   ?publicly_accessible: bool,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]
                                  ) -> _CreateDBShardGroupResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBShardGroupResponseSuccess
 
@@ -1101,6 +1109,7 @@ module Aws
         def publicly_accessible: () -> bool
         def endpoint: () -> ::String
         def db_shard_group_arn: () -> ::String
+        def tag_list: () -> ::Array[Types::Tag]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#delete_db_shard_group-instance_method
       def delete_db_shard_group: (
@@ -2556,6 +2565,7 @@ module Aws
         def publicly_accessible: () -> bool
         def endpoint: () -> ::String
         def db_shard_group_arn: () -> ::String
+        def tag_list: () -> ::Array[Types::Tag]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_db_shard_group-instance_method
       def modify_db_shard_group: (
@@ -2775,6 +2785,7 @@ module Aws
         def publicly_accessible: () -> bool
         def endpoint: () -> ::String
         def db_shard_group_arn: () -> ::String
+        def tag_list: () -> ::Array[Types::Tag]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#reboot_db_shard_group-instance_method
       def reboot_db_shard_group: (

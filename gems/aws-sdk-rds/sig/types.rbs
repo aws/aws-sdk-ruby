@@ -388,6 +388,7 @@ module Aws::RDS
       attr_accessor enable_limitless_database: bool
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor network_type: ::String
+      attr_accessor cluster_scalability_type: ("standard" | "limitless")
       attr_accessor db_system_id: ::String
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
@@ -621,6 +622,7 @@ module Aws::RDS
       attr_accessor max_acu: ::Float
       attr_accessor min_acu: ::Float
       attr_accessor publicly_accessible: bool
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -822,6 +824,7 @@ module Aws::RDS
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor limitless_database: Types::LimitlessDatabase
       attr_accessor storage_throughput: ::Integer
+      attr_accessor cluster_scalability_type: ("standard" | "limitless")
       attr_accessor certificate_details: Types::CertificateDetails
       attr_accessor engine_lifecycle_support: ::String
       SENSITIVE: []
@@ -1491,6 +1494,7 @@ module Aws::RDS
       attr_accessor publicly_accessible: bool
       attr_accessor endpoint: ::String
       attr_accessor db_shard_group_arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

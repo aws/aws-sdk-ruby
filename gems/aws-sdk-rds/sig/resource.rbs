@@ -146,6 +146,7 @@ module Aws
                                  max_capacity: ::Float?
                                },
                                ?network_type: ::String,
+                               ?cluster_scalability_type: ("standard" | "limitless"),
                                ?db_system_id: ::String,
                                ?manage_master_user_password: bool,
                                ?master_user_secret_kms_key_id: ::String,

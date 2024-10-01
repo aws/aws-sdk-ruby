@@ -2915,6 +2915,19 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #   @return [String]
     #
+    # @!attribute [rw] cluster_scalability_type
+    #   Specifies the scalability mode of the Aurora DB cluster. When set to
+    #   `limitless`, the cluster operates as an Aurora Limitless Database.
+    #   When set to `standard` (the default), the cluster uses normal DB
+    #   instance creation.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #   <note markdown="1"> You can't modify this setting after you create the DB cluster.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] db_system_id
     #   Reserved for future use.
     #   @return [String]
@@ -3085,6 +3098,7 @@ module Aws::RDS
       :enable_limitless_database,
       :serverless_v2_scaling_configuration,
       :network_type,
+      :cluster_scalability_type,
       :db_system_id,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
@@ -5935,6 +5949,19 @@ module Aws::RDS
     #     attached to it, the DB shard group is public.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBShardGroupMessage AWS API Documentation
     #
     class CreateDBShardGroupMessage < Struct.new(
@@ -5943,7 +5970,8 @@ module Aws::RDS
       :compute_redundancy,
       :max_acu,
       :min_acu,
-      :publicly_accessible)
+      :publicly_accessible,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7183,6 +7211,13 @@ module Aws::RDS
     #   This setting is only for non-Aurora Multi-AZ DB clusters.
     #   @return [Integer]
     #
+    # @!attribute [rw] cluster_scalability_type
+    #   The scalability mode of the Aurora DB cluster. When set to
+    #   `limitless`, the cluster operates as an Aurora Limitless Database.
+    #   When set to `standard` (the default), the cluster uses normal DB
+    #   instance creation.
+    #   @return [String]
+    #
     # @!attribute [rw] certificate_details
     #   The details of the DB instance’s server certificate.
     #
@@ -7284,6 +7319,7 @@ module Aws::RDS
       :aws_backup_recovery_point_arn,
       :limitless_database,
       :storage_throughput,
+      :cluster_scalability_type,
       :certificate_details,
       :engine_lifecycle_support)
       SENSITIVE = []
@@ -10613,6 +10649,19 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the DB shard group.
     #   @return [String]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBShardGroup AWS API Documentation
     #
     class DBShardGroup < Struct.new(
@@ -10625,7 +10674,8 @@ module Aws::RDS
       :status,
       :publicly_accessible,
       :endpoint,
-      :db_shard_group_arn)
+      :db_shard_group_arn,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -451,7 +451,8 @@ module Aws
                                      domain: ::String,
                                      ?domain_owner: ::String,
                                      repository: ::String,
-                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
+                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
+                                     ?endpoint_type: ("dualstack" | "ipv4")
                                    ) -> _GetRepositoryEndpointResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryEndpointResponseSuccess
 

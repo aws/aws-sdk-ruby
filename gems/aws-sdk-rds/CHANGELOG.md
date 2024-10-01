@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.252.0 (2024-10-01)
+------------------
+
+* Feature - This release provides additional support for enabling Aurora Limitless Database DB clusters.
+
 1.251.0 (2024-09-24)
 ------------------
 

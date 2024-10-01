@@ -73,6 +73,7 @@ module Aws::RDS
     ClientPasswordAuthType = Shapes::StringShape.new(name: 'ClientPasswordAuthType')
     CloudwatchLogsExportConfiguration = Shapes::StructureShape.new(name: 'CloudwatchLogsExportConfiguration')
     ClusterPendingModifiedValues = Shapes::StructureShape.new(name: 'ClusterPendingModifiedValues')
+    ClusterScalabilityType = Shapes::StringShape.new(name: 'ClusterScalabilityType')
     ConnectionPoolConfiguration = Shapes::StructureShape.new(name: 'ConnectionPoolConfiguration')
     ConnectionPoolConfigurationInfo = Shapes::StructureShape.new(name: 'ConnectionPoolConfigurationInfo')
     ContextAttribute = Shapes::StructureShape.new(name: 'ContextAttribute')
@@ -1072,6 +1073,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:enable_limitless_database, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLimitlessDatabase"))
     CreateDBClusterMessage.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: "ServerlessV2ScalingConfiguration"))
     CreateDBClusterMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    CreateDBClusterMessage.add_member(:cluster_scalability_type, Shapes::ShapeRef.new(shape: ClusterScalabilityType, location_name: "ClusterScalabilityType"))
     CreateDBClusterMessage.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
     CreateDBClusterMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     CreateDBClusterMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
@@ -1269,6 +1271,7 @@ module Aws::RDS
     CreateDBShardGroupMessage.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, required: true, location_name: "MaxACU"))
     CreateDBShardGroupMessage.add_member(:min_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinACU"))
     CreateDBShardGroupMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
+    CreateDBShardGroupMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDBShardGroupMessage.struct_class = Types::CreateDBShardGroupMessage
 
     CreateDBSnapshotMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))
@@ -1436,6 +1439,7 @@ module Aws::RDS
     DBCluster.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
     DBCluster.add_member(:limitless_database, Shapes::ShapeRef.new(shape: LimitlessDatabase, location_name: "LimitlessDatabase"))
     DBCluster.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    DBCluster.add_member(:cluster_scalability_type, Shapes::ShapeRef.new(shape: ClusterScalabilityType, location_name: "ClusterScalabilityType"))
     DBCluster.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     DBCluster.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     DBCluster.struct_class = Types::DBCluster
@@ -2026,6 +2030,7 @@ module Aws::RDS
     DBShardGroup.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     DBShardGroup.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
     DBShardGroup.add_member(:db_shard_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBShardGroupArn"))
+    DBShardGroup.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBShardGroup.struct_class = Types::DBShardGroup
 
     DBShardGroupAlreadyExistsFault.struct_class = Types::DBShardGroupAlreadyExistsFault
@@ -4709,6 +4714,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedDBEngineVersionFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
       end)
 
       api.add_operation(:create_db_snapshot, Seahorse::Model::Operation.new.tap do |o|

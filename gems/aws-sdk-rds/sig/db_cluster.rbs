@@ -249,6 +249,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#storage_throughput-instance_method
       def storage_throughput: () -> ::Integer
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#cluster_scalability_type-instance_method
+      def cluster_scalability_type: () -> ("standard" | "limitless")
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#certificate_details-instance_method
       def certificate_details: () -> Types::CertificateDetails
 
@@ -336,6 +339,7 @@ module Aws
                       max_capacity: ::Float?
                     },
                     ?network_type: ::String,
+                    ?cluster_scalability_type: ("standard" | "limitless"),
                     ?db_system_id: ::String,
                     ?manage_master_user_password: bool,
                     ?master_user_secret_kms_key_id: ::String,

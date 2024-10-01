@@ -407,6 +407,8 @@ module Aws::BedrockAgent
     StartIngestionJobRequest = Shapes::StructureShape.new(name: 'StartIngestionJobRequest')
     StartIngestionJobResponse = Shapes::StructureShape.new(name: 'StartIngestionJobResponse')
     StepType = Shapes::StringShape.new(name: 'StepType')
+    StopIngestionJobRequest = Shapes::StructureShape.new(name: 'StopIngestionJobRequest')
+    StopIngestionJobResponse = Shapes::StructureShape.new(name: 'StopIngestionJobResponse')
     StopSequences = Shapes::ListShape.new(name: 'StopSequences')
     StorageConfiguration = Shapes::StructureShape.new(name: 'StorageConfiguration')
     StorageDays = Shapes::IntegerShape.new(name: 'StorageDays')
@@ -1748,6 +1750,14 @@ module Aws::BedrockAgent
     StartIngestionJobResponse.add_member(:ingestion_job, Shapes::ShapeRef.new(shape: IngestionJob, required: true, location_name: "ingestionJob"))
     StartIngestionJobResponse.struct_class = Types::StartIngestionJobResponse
 
+    StopIngestionJobRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
+    StopIngestionJobRequest.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ingestionJobId"))
+    StopIngestionJobRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    StopIngestionJobRequest.struct_class = Types::StopIngestionJobRequest
+
+    StopIngestionJobResponse.add_member(:ingestion_job, Shapes::ShapeRef.new(shape: IngestionJob, required: true, location_name: "ingestionJob"))
+    StopIngestionJobResponse.struct_class = Types::StopIngestionJobResponse
+
     StopSequences.member = Shapes::ShapeRef.new(shape: String)
 
     StorageConfiguration.add_member(:mongo_db_atlas_configuration, Shapes::ShapeRef.new(shape: MongoDbAtlasConfiguration, location_name: "mongoDbAtlasConfiguration"))
@@ -2746,6 +2756,20 @@ module Aws::BedrockAgent
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:stop_ingestion_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopIngestionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/ingestionjobs/{ingestionJobId}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopIngestionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopIngestionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

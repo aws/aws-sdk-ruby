@@ -1215,6 +1215,18 @@ module Aws
                                ) -> _StartIngestionJobResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIngestionJobResponseSuccess
 
+      interface _StopIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopIngestionJobResponse]
+        def ingestion_job: () -> Types::IngestionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#stop_ingestion_job-instance_method
+      def stop_ingestion_job: (
+                                data_source_id: ::String,
+                                ingestion_job_id: ::String,
+                                knowledge_base_id: ::String
+                              ) -> _StopIngestionJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopIngestionJobResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end

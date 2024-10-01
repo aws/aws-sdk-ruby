@@ -701,6 +701,15 @@ module Aws::RDS
       data[:storage_throughput]
     end
 
+    # The scalability mode of the Aurora DB cluster. When set to
+    # `limitless`, the cluster operates as an Aurora Limitless Database.
+    # When set to `standard` (the default), the cluster uses normal DB
+    # instance creation.
+    # @return [String]
+    def cluster_scalability_type
+      data[:cluster_scalability_type]
+    end
+
     # The details of the DB instance’s server certificate.
     #
     # For more information, see [Using SSL/TLS to encrypt a connection to a
@@ -932,6 +941,7 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     cluster_scalability_type: "standard", # accepts standard, limitless
     #     db_system_id: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
@@ -1658,6 +1668,17 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [String] :cluster_scalability_type
+    #   Specifies the scalability mode of the Aurora DB cluster. When set to
+    #   `limitless`, the cluster operates as an Aurora Limitless Database.
+    #   When set to `standard` (the default), the cluster uses normal DB
+    #   instance creation.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #   <note markdown="1"> You can't modify this setting after you create the DB cluster.
+    #
+    #    </note>
     # @option options [String] :db_system_id
     #   Reserved for future use.
     # @option options [Boolean] :manage_master_user_password
