@@ -45,6 +45,17 @@ module Aws::B2bi
       end
     end
 
+    class CreateStarterMappingTemplate
+      def self.build(context)
+        Aws::B2bi::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class CreateTransformer
       def self.build(context)
         Aws::B2bi::EndpointParameters.new(
@@ -222,6 +233,17 @@ module Aws::B2bi
     end
 
     class TagResource
+      def self.build(context)
+        Aws::B2bi::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class TestConversion
       def self.build(context)
         Aws::B2bi::EndpointParameters.new(
           region: context.config.region,

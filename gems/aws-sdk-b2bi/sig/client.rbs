@@ -92,6 +92,7 @@ module Aws
                                type: ("edi"),
                                configuration: {
                                  edi: {
+                                   capability_direction: ("INBOUND" | "OUTBOUND")?,
                                    type: {
                                      x12_details: {
                                        transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
@@ -134,6 +135,7 @@ module Aws
         def email: () -> ::String
         def phone: () -> ::String
         def capabilities: () -> ::Array[::String]
+        def capability_options: () -> Types::CapabilityOptions
         def trading_partner_id: () -> ::String
         def created_at: () -> ::Time
       end
@@ -144,6 +146,34 @@ module Aws
                                 email: ::String,
                                 ?phone: ::String,
                                 capabilities: Array[::String],
+                                ?capability_options: {
+                                  outbound_edi: {
+                                    x12: {
+                                      common: {
+                                        interchange_control_headers: {
+                                          sender_id_qualifier: ::String?,
+                                          sender_id: ::String?,
+                                          receiver_id_qualifier: ::String?,
+                                          receiver_id: ::String?,
+                                          repetition_separator: ::String?,
+                                          acknowledgment_requested_code: ::String?,
+                                          usage_indicator_code: ::String?
+                                        }?,
+                                        functional_group_headers: {
+                                          application_sender_code: ::String?,
+                                          application_receiver_code: ::String?,
+                                          responsible_agency_code: ::String?
+                                        }?,
+                                        delimiters: {
+                                          component_separator: ::String?,
+                                          data_element_separator: ::String?,
+                                          segment_terminator: ::String?
+                                        }?,
+                                        validate_edi: bool?
+                                      }?
+                                    }?
+                                  }?
+                                },
                                 ?client_token: ::String,
                                 ?tags: Array[
                                   {
@@ -183,37 +213,92 @@ module Aws
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
 
+      interface _CreateStarterMappingTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStarterMappingTemplateResponse]
+        def mapping_template: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#create_starter_mapping_template-instance_method
+      def create_starter_mapping_template: (
+                                             ?output_sample_location: {
+                                               bucket_name: ::String?,
+                                               key: ::String?
+                                             },
+                                             mapping_type: ("JSONATA" | "XSLT"),
+                                             template_details: {
+                                               x12: {
+                                                 transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
+                                                 version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
+                                               }?
+                                             }
+                                           ) -> _CreateStarterMappingTemplateResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStarterMappingTemplateResponseSuccess
+
       interface _CreateTransformerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransformerResponse]
         def transformer_id: () -> ::String
         def transformer_arn: () -> ::String
         def name: () -> ::String
-        def file_format: () -> ("XML" | "JSON")
-        def mapping_template: () -> ::String
         def status: () -> ("active" | "inactive")
+        def created_at: () -> ::Time
+        def file_format: () -> ("XML" | "JSON" | "NOT_USED")
+        def mapping_template: () -> ::String
         def edi_type: () -> Types::EdiType
         def sample_document: () -> ::String
-        def created_at: () -> ::Time
+        def input_conversion: () -> Types::InputConversion
+        def mapping: () -> Types::Mapping
+        def output_conversion: () -> Types::OutputConversion
+        def sample_documents: () -> Types::SampleDocuments
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#create_transformer-instance_method
       def create_transformer: (
                                 name: ::String,
-                                file_format: ("XML" | "JSON"),
-                                mapping_template: ::String,
-                                edi_type: {
-                                  x12_details: {
-                                    transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
-                                    version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
-                                  }?
-                                },
-                                ?sample_document: ::String,
                                 ?client_token: ::String,
                                 ?tags: Array[
                                   {
                                     key: ::String,
                                     value: ::String
                                   },
-                                ]
+                                ],
+                                ?file_format: ("XML" | "JSON" | "NOT_USED"),
+                                ?mapping_template: ::String,
+                                ?edi_type: {
+                                  x12_details: {
+                                    transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
+                                    version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
+                                  }?
+                                },
+                                ?sample_document: ::String,
+                                ?input_conversion: {
+                                  from_format: ("X12"),
+                                  format_options: {
+                                    x12: {
+                                      transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
+                                      version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
+                                    }?
+                                  }?
+                                },
+                                ?mapping: {
+                                  template_language: ("XSLT" | "JSONATA"),
+                                  template: ::String?
+                                },
+                                ?output_conversion: {
+                                  to_format: ("X12"),
+                                  format_options: {
+                                    x12: {
+                                      transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
+                                      version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
+                                    }?
+                                  }?
+                                },
+                                ?sample_documents: {
+                                  bucket_name: ::String,
+                                  keys: Array[
+                                    {
+                                      input: ::String?,
+                                      output: ::String?
+                                    },
+                                  ]
+                                }
                               ) -> _CreateTransformerResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTransformerResponseSuccess
 
@@ -267,6 +352,7 @@ module Aws
         def email: () -> ::String
         def phone: () -> ::String
         def capabilities: () -> ::Array[::String]
+        def capability_options: () -> Types::CapabilityOptions
         def trading_partner_id: () -> ::String
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
@@ -301,13 +387,17 @@ module Aws
         def transformer_id: () -> ::String
         def transformer_arn: () -> ::String
         def name: () -> ::String
-        def file_format: () -> ("XML" | "JSON")
-        def mapping_template: () -> ::String
         def status: () -> ("active" | "inactive")
-        def edi_type: () -> Types::EdiType
-        def sample_document: () -> ::String
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
+        def file_format: () -> ("XML" | "JSON" | "NOT_USED")
+        def mapping_template: () -> ::String
+        def edi_type: () -> Types::EdiType
+        def sample_document: () -> ::String
+        def input_conversion: () -> Types::InputConversion
+        def mapping: () -> Types::Mapping
+        def output_conversion: () -> Types::OutputConversion
+        def sample_documents: () -> Types::SampleDocuments
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#get_transformer-instance_method
       def get_transformer: (
@@ -418,6 +508,37 @@ module Aws
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _TestConversionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestConversionResponse]
+        def converted_file_content: () -> ::String
+        def validation_messages: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#test_conversion-instance_method
+      def test_conversion: (
+                             source: {
+                               file_format: ("JSON" | "XML"),
+                               input_file: {
+                                 file_content: ::String?
+                               }
+                             },
+                             target: {
+                               file_format: ("X12"),
+                               format_details: {
+                                 x12: {
+                                   transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
+                                   version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
+                                 }?
+                               }?,
+                               output_sample_file: {
+                                 file_location: {
+                                   bucket_name: ::String?,
+                                   key: ::String?
+                                 }?
+                               }?
+                             }
+                           ) -> _TestConversionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestConversionResponseSuccess
+
       interface _TestMappingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TestMappingResponse]
         def mapped_file_content: () -> ::String
@@ -426,7 +547,7 @@ module Aws
       def test_mapping: (
                           input_file_content: ::String,
                           mapping_template: ::String,
-                          file_format: ("XML" | "JSON")
+                          file_format: ("XML" | "JSON" | "NOT_USED")
                         ) -> _TestMappingResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestMappingResponseSuccess
 
@@ -440,7 +561,7 @@ module Aws
                             bucket_name: ::String?,
                             key: ::String?
                           },
-                          file_format: ("XML" | "JSON"),
+                          file_format: ("XML" | "JSON" | "NOT_USED"),
                           edi_type: {
                             x12_details: {
                               transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
@@ -474,6 +595,7 @@ module Aws
                                ?name: ::String,
                                ?configuration: {
                                  edi: {
+                                   capability_direction: ("INBOUND" | "OUTBOUND")?,
                                    type: {
                                      x12_details: {
                                        transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
@@ -509,6 +631,7 @@ module Aws
         def email: () -> ::String
         def phone: () -> ::String
         def capabilities: () -> ::Array[::String]
+        def capability_options: () -> Types::CapabilityOptions
         def trading_partner_id: () -> ::String
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
@@ -517,7 +640,35 @@ module Aws
       def update_partnership: (
                                 partnership_id: ::String,
                                 ?name: ::String,
-                                ?capabilities: Array[::String]
+                                ?capabilities: Array[::String],
+                                ?capability_options: {
+                                  outbound_edi: {
+                                    x12: {
+                                      common: {
+                                        interchange_control_headers: {
+                                          sender_id_qualifier: ::String?,
+                                          sender_id: ::String?,
+                                          receiver_id_qualifier: ::String?,
+                                          receiver_id: ::String?,
+                                          repetition_separator: ::String?,
+                                          acknowledgment_requested_code: ::String?,
+                                          usage_indicator_code: ::String?
+                                        }?,
+                                        functional_group_headers: {
+                                          application_sender_code: ::String?,
+                                          application_receiver_code: ::String?,
+                                          responsible_agency_code: ::String?
+                                        }?,
+                                        delimiters: {
+                                          component_separator: ::String?,
+                                          data_element_separator: ::String?,
+                                          segment_terminator: ::String?
+                                        }?,
+                                        validate_edi: bool?
+                                      }?
+                                    }?
+                                  }?
+                                }
                               ) -> _UpdatePartnershipResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePartnershipResponseSuccess
 
@@ -549,28 +700,63 @@ module Aws
         def transformer_id: () -> ::String
         def transformer_arn: () -> ::String
         def name: () -> ::String
-        def file_format: () -> ("XML" | "JSON")
-        def mapping_template: () -> ::String
         def status: () -> ("active" | "inactive")
-        def edi_type: () -> Types::EdiType
-        def sample_document: () -> ::String
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
+        def file_format: () -> ("XML" | "JSON" | "NOT_USED")
+        def mapping_template: () -> ::String
+        def edi_type: () -> Types::EdiType
+        def sample_document: () -> ::String
+        def input_conversion: () -> Types::InputConversion
+        def mapping: () -> Types::Mapping
+        def output_conversion: () -> Types::OutputConversion
+        def sample_documents: () -> Types::SampleDocuments
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#update_transformer-instance_method
       def update_transformer: (
                                 transformer_id: ::String,
                                 ?name: ::String,
-                                ?file_format: ("XML" | "JSON"),
-                                ?mapping_template: ::String,
                                 ?status: ("active" | "inactive"),
+                                ?file_format: ("XML" | "JSON" | "NOT_USED"),
+                                ?mapping_template: ::String,
                                 ?edi_type: {
                                   x12_details: {
                                     transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
                                     version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
                                   }?
                                 },
-                                ?sample_document: ::String
+                                ?sample_document: ::String,
+                                ?input_conversion: {
+                                  from_format: ("X12"),
+                                  format_options: {
+                                    x12: {
+                                      transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
+                                      version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
+                                    }?
+                                  }?
+                                },
+                                ?mapping: {
+                                  template_language: ("XSLT" | "JSONATA"),
+                                  template: ::String?
+                                },
+                                ?output_conversion: {
+                                  to_format: ("X12"),
+                                  format_options: {
+                                    x12: {
+                                      transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")?,
+                                      version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")?
+                                    }?
+                                  }?
+                                },
+                                ?sample_documents: {
+                                  bucket_name: ::String,
+                                  keys: Array[
+                                    {
+                                      input: ::String?,
+                                      output: ::String?
+                                    },
+                                  ]
+                                }
                               ) -> _UpdateTransformerResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTransformerResponseSuccess
     end

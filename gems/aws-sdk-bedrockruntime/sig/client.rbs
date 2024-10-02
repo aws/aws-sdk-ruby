@@ -84,6 +84,7 @@ module Aws
         def action: () -> ("NONE" | "GUARDRAIL_INTERVENED")
         def outputs: () -> ::Array[Types::GuardrailOutputContent]
         def assessments: () -> ::Array[Types::GuardrailAssessment]
+        def guardrail_coverage: () -> Types::GuardrailCoverage
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#apply_guardrail-instance_method
       def apply_guardrail: (

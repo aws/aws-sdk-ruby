@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2024-10-02)
+------------------
+
+* Feature - This release introduces a header representing the minimum object size limit for Lifecycle transitions.
+
 1.166.0 (2024-09-24)
 ------------------
 

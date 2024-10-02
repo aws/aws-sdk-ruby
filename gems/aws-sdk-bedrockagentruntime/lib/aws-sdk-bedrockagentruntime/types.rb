@@ -591,21 +591,21 @@ module Aws::BedrockAgentRuntime
     end
 
     # The configurations of the external source wrapper object in the
-    # retrieveAndGenerate function.
+    # `retrieveAndGenerate` function.
     #
     # @!attribute [rw] generation_configuration
     #   The prompt used with the external source wrapper object with the
-    #   retrieveAndGenerate function.
+    #   `retrieveAndGenerate` function.
     #   @return [Types::ExternalSourcesGenerationConfiguration]
     #
     # @!attribute [rw] model_arn
-    #   The modelArn used with the external source wrapper object in the
-    #   retrieveAndGenerate function.
+    #   The model Amazon Resource Name (ARN) for the external source wrapper
+    #   object in the `retrieveAndGenerate` function.
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   The document used with the external source wrapper object in the
-    #   retrieveAndGenerate function.
+    #   The document for the external source wrapper object in the
+    #   `retrieveAndGenerate` function.
     #   @return [Array<Types::ExternalSource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ExternalSourcesRetrieveAndGenerateConfiguration AWS API Documentation
@@ -2457,10 +2457,18 @@ module Aws::BedrockAgentRuntime
 
     # The foundation model output from the post-processing step.
     #
+    # @!attribute [rw] metadata
+    #   Provides details of the foundation model.
+    #   @return [Types::Metadata]
+    #
     # @!attribute [rw] parsed_response
     #   Details about the response from the Lambda parsing of the output of
     #   the post-processing step.
     #   @return [Types::PostProcessingParsedResponse]
+    #
+    # @!attribute [rw] raw_response
+    #   Contains the raw output from the foundation model.
+    #   @return [Types::RawResponse]
     #
     # @!attribute [rw] trace_id
     #   The unique identifier of the trace.
@@ -2469,9 +2477,11 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/PostProcessingModelInvocationOutput AWS API Documentation
     #
     class PostProcessingModelInvocationOutput < Struct.new(
+      :metadata,
       :parsed_response,
+      :raw_response,
       :trace_id)
-      SENSITIVE = [:parsed_response]
+      SENSITIVE = [:metadata, :parsed_response, :raw_response]
       include Aws::Structure
     end
 
@@ -2532,10 +2542,18 @@ module Aws::BedrockAgentRuntime
 
     # The foundation model output from the pre-processing step.
     #
+    # @!attribute [rw] metadata
+    #   Provides details of the foundation model.
+    #   @return [Types::Metadata]
+    #
     # @!attribute [rw] parsed_response
     #   Details about the response from the Lambda parsing of the output of
     #   the pre-processing step.
     #   @return [Types::PreProcessingParsedResponse]
+    #
+    # @!attribute [rw] raw_response
+    #   Contains the raw output from the foundation model.
+    #   @return [Types::RawResponse]
     #
     # @!attribute [rw] trace_id
     #   The unique identifier of the trace.
@@ -2544,9 +2562,11 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/PreProcessingModelInvocationOutput AWS API Documentation
     #
     class PreProcessingModelInvocationOutput < Struct.new(
+      :metadata,
       :parsed_response,
+      :raw_response,
       :trace_id)
-      SENSITIVE = [:parsed_response]
+      SENSITIVE = [:metadata, :parsed_response, :raw_response]
       include Aws::Structure
     end
 
@@ -3144,16 +3164,21 @@ module Aws::BedrockAgentRuntime
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
     # @!attribute [rw] external_sources_configuration
-    #   The configuration used with the external source wrapper object in
-    #   the retrieveAndGenerate function.
+    #   The configuration for the external source wrapper object in the
+    #   `retrieveAndGenerate` function.
     #   @return [Types::ExternalSourcesRetrieveAndGenerateConfiguration]
     #
     # @!attribute [rw] knowledge_base_configuration
-    #   Contains details about the resource being queried.
+    #   Contains details about the knowledge base for retrieving information
+    #   and generating responses.
     #   @return [Types::KnowledgeBaseRetrieveAndGenerateConfiguration]
     #
     # @!attribute [rw] type
-    #   The type of resource that is queried by the request.
+    #   The type of resource that contains your data for retrieving
+    #   information and generating responses.
+    #
+    #   If you choose ot use `EXTERNAL_SOURCES`, then currently only Claude
+    #   3 Sonnet models for knowledge bases are supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerateConfiguration AWS API Documentation

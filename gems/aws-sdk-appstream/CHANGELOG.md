@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-10-02)
+------------------
+
+* Feature - Added support for Automatic Time Zone Redirection on Amazon AppStream 2.0
+
 1.100.0 (2024-09-24)
 ------------------
 

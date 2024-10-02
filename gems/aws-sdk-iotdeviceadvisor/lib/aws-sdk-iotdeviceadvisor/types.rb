@@ -31,9 +31,19 @@ module Aws::IoTDeviceAdvisor
     #   The tags to be attached to the suite definition.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] client_token
+    #   The client token for the test suite definition creation. This token
+    #   is used for tracking test suite definition creation using retries
+    #   and obtaining its status. This parameter is optional.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     class CreateSuiteDefinitionRequest < Struct.new(
       :suite_definition_configuration,
-      :tags)
+      :tags,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end

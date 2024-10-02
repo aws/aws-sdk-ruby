@@ -4559,13 +4559,20 @@ module Aws::SageMaker
     #   CodeEditor applications.
     #   @return [Types::AppLifecycleManagement]
     #
+    # @!attribute [rw] built_in_lifecycle_config_arn
+    #   The lifecycle configuration that runs before the default lifecycle
+    #   configuration. It can override changes made in the default lifecycle
+    #   configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeEditorAppSettings AWS API Documentation
     #
     class CodeEditorAppSettings < Struct.new(
       :default_resource_spec,
       :custom_images,
       :lifecycle_config_arns,
-      :app_lifecycle_management)
+      :app_lifecycle_management,
+      :built_in_lifecycle_config_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12415,6 +12422,11 @@ module Aws::SageMaker
     #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] built_in_lifecycle_config_arn
+    #   The lifecycle configuration that runs before the default lifecycle
+    #   configuration
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppResponse AWS API Documentation
     #
     class DescribeAppResponse < Struct.new(
@@ -12429,7 +12441,8 @@ module Aws::SageMaker
       :last_user_activity_timestamp,
       :creation_time,
       :failure_reason,
-      :resource_spec)
+      :resource_spec,
+      :built_in_lifecycle_config_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25191,6 +25204,12 @@ module Aws::SageMaker
     #   EMR clusters or Amazon EMR Serverless applications.
     #   @return [Types::EmrSettings]
     #
+    # @!attribute [rw] built_in_lifecycle_config_arn
+    #   The lifecycle configuration that runs before the default lifecycle
+    #   configuration. It can override changes made in the default lifecycle
+    #   configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterLabAppSettings AWS API Documentation
     #
     class JupyterLabAppSettings < Struct.new(
@@ -25199,7 +25218,8 @@ module Aws::SageMaker
       :lifecycle_config_arns,
       :code_repositories,
       :app_lifecycle_management,
-      :emr_settings)
+      :emr_settings,
+      :built_in_lifecycle_config_arn)
       SENSITIVE = []
       include Aws::Structure
     end

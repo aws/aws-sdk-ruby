@@ -3059,6 +3059,7 @@ module Aws::SageMaker
     CodeEditorAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     CodeEditorAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     CodeEditorAppSettings.add_member(:app_lifecycle_management, Shapes::ShapeRef.new(shape: AppLifecycleManagement, location_name: "AppLifecycleManagement"))
+    CodeEditorAppSettings.add_member(:built_in_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "BuiltInLifecycleConfigArn"))
     CodeEditorAppSettings.struct_class = Types::CodeEditorAppSettings
 
     CodeRepositories.member = Shapes::ShapeRef.new(shape: CodeRepository)
@@ -4403,6 +4404,7 @@ module Aws::SageMaker
     DescribeAppResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeAppResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeAppResponse.add_member(:resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "ResourceSpec"))
+    DescribeAppResponse.add_member(:built_in_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "BuiltInLifecycleConfigArn"))
     DescribeAppResponse.struct_class = Types::DescribeAppResponse
 
     DescribeArtifactRequest.add_member(:artifact_arn, Shapes::ShapeRef.new(shape: ArtifactArn, required: true, location_name: "ArtifactArn"))
@@ -6531,6 +6533,7 @@ module Aws::SageMaker
     JupyterLabAppSettings.add_member(:code_repositories, Shapes::ShapeRef.new(shape: CodeRepositories, location_name: "CodeRepositories"))
     JupyterLabAppSettings.add_member(:app_lifecycle_management, Shapes::ShapeRef.new(shape: AppLifecycleManagement, location_name: "AppLifecycleManagement"))
     JupyterLabAppSettings.add_member(:emr_settings, Shapes::ShapeRef.new(shape: EmrSettings, location_name: "EmrSettings"))
+    JupyterLabAppSettings.add_member(:built_in_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "BuiltInLifecycleConfigArn"))
     JupyterLabAppSettings.struct_class = Types::JupyterLabAppSettings
 
     JupyterServerAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))

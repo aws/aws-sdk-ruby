@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2024-10-02)
+------------------
+
+* Feature - WSP is being rebranded to become DCV.
+
 1.120.0 (2024-09-24)
 ------------------
 

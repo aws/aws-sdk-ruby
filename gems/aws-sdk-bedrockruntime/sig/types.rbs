@@ -29,6 +29,7 @@ module Aws::BedrockRuntime
       attr_accessor action: ("NONE" | "GUARDRAIL_INTERVENED")
       attr_accessor outputs: ::Array[Types::GuardrailOutputContent]
       attr_accessor assessments: ::Array[Types::GuardrailAssessment]
+      attr_accessor guardrail_coverage: Types::GuardrailCoverage
       SENSITIVE: []
     end
 
@@ -208,6 +209,7 @@ module Aws::BedrockRuntime
       attr_accessor word_policy: Types::GuardrailWordPolicyAssessment
       attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicyAssessment
       attr_accessor contextual_grounding_policy: Types::GuardrailContextualGroundingPolicyAssessment
+      attr_accessor invocation_metrics: Types::GuardrailInvocationMetrics
       SENSITIVE: []
     end
 
@@ -232,6 +234,7 @@ module Aws::BedrockRuntime
     class GuardrailContentFilter
       attr_accessor type: ("INSULTS" | "HATE" | "SEXUAL" | "VIOLENCE" | "MISCONDUCT" | "PROMPT_ATTACK")
       attr_accessor confidence: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor filter_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
       attr_accessor action: ("BLOCKED")
       SENSITIVE: []
     end
@@ -271,9 +274,21 @@ module Aws::BedrockRuntime
       SENSITIVE: []
     end
 
+    class GuardrailCoverage
+      attr_accessor text_characters: Types::GuardrailTextCharactersCoverage
+      SENSITIVE: []
+    end
+
     class GuardrailCustomWord
       attr_accessor match: ::String
       attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailInvocationMetrics
+      attr_accessor guardrail_processing_latency: ::Integer
+      attr_accessor usage: Types::GuardrailUsage
+      attr_accessor guardrail_coverage: Types::GuardrailCoverage
       SENSITIVE: []
     end
 
@@ -321,6 +336,12 @@ module Aws::BedrockRuntime
     class GuardrailTextBlock
       attr_accessor text: ::String
       attr_accessor qualifiers: ::Array[("grounding_source" | "query" | "guard_content")]
+      SENSITIVE: []
+    end
+
+    class GuardrailTextCharactersCoverage
+      attr_accessor guarded: ::Integer
+      attr_accessor total: ::Integer
       SENSITIVE: []
     end
 

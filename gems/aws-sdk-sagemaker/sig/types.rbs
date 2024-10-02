@@ -808,6 +808,7 @@ module Aws::SageMaker
       attr_accessor custom_images: ::Array[Types::CustomImage]
       attr_accessor lifecycle_config_arns: ::Array[::String]
       attr_accessor app_lifecycle_management: Types::AppLifecycleManagement
+      attr_accessor built_in_lifecycle_config_arn: ::String
       SENSITIVE: []
     end
 
@@ -2574,6 +2575,7 @@ module Aws::SageMaker
       attr_accessor creation_time: ::Time
       attr_accessor failure_reason: ::String
       attr_accessor resource_spec: Types::ResourceSpec
+      attr_accessor built_in_lifecycle_config_arn: ::String
       SENSITIVE: []
     end
 
@@ -5087,6 +5089,7 @@ module Aws::SageMaker
       attr_accessor code_repositories: ::Array[Types::CodeRepository]
       attr_accessor app_lifecycle_management: Types::AppLifecycleManagement
       attr_accessor emr_settings: Types::EmrSettings
+      attr_accessor built_in_lifecycle_config_arn: ::String
       SENSITIVE: []
     end
 

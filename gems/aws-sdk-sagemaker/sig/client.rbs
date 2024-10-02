@@ -1085,7 +1085,8 @@ module Aws
                                    min_idle_timeout_in_minutes: ::Integer?,
                                    max_idle_timeout_in_minutes: ::Integer?
                                  }?
-                               }?
+                               }?,
+                               built_in_lifecycle_config_arn: ::String?
                              }?,
                              jupyter_lab_app_settings: {
                                default_resource_spec: {
@@ -1119,7 +1120,8 @@ module Aws
                                emr_settings: {
                                  assumable_role_arns: Array[::String]?,
                                  execution_role_arns: Array[::String]?
-                               }?
+                               }?,
+                               built_in_lifecycle_config_arn: ::String?
                              }?,
                              space_storage_settings: {
                                default_ebs_storage_settings: {
@@ -1258,7 +1260,8 @@ module Aws
                                emr_settings: {
                                  assumable_role_arns: Array[::String]?,
                                  execution_role_arns: Array[::String]?
-                               }?
+                               }?,
+                               built_in_lifecycle_config_arn: ::String?
                              }?,
                              space_storage_settings: {
                                default_ebs_storage_settings: {
@@ -4178,7 +4181,8 @@ module Aws
                                          min_idle_timeout_in_minutes: ::Integer?,
                                          max_idle_timeout_in_minutes: ::Integer?
                                        }?
-                                     }?
+                                     }?,
+                                     built_in_lifecycle_config_arn: ::String?
                                    }?,
                                    jupyter_lab_app_settings: {
                                      default_resource_spec: {
@@ -4212,7 +4216,8 @@ module Aws
                                      emr_settings: {
                                        assumable_role_arns: Array[::String]?,
                                        execution_role_arns: Array[::String]?
-                                     }?
+                                     }?,
+                                     built_in_lifecycle_config_arn: ::String?
                                    }?,
                                    space_storage_settings: {
                                      default_ebs_storage_settings: {
@@ -4802,6 +4807,7 @@ module Aws
         def creation_time: () -> ::Time
         def failure_reason: () -> ::String
         def resource_spec: () -> Types::ResourceSpec
+        def built_in_lifecycle_config_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_app-instance_method
       def describe_app: (
@@ -8314,7 +8320,8 @@ module Aws
                                    min_idle_timeout_in_minutes: ::Integer?,
                                    max_idle_timeout_in_minutes: ::Integer?
                                  }?
-                               }?
+                               }?,
+                               built_in_lifecycle_config_arn: ::String?
                              }?,
                              jupyter_lab_app_settings: {
                                default_resource_spec: {
@@ -8348,7 +8355,8 @@ module Aws
                                emr_settings: {
                                  assumable_role_arns: Array[::String]?,
                                  execution_role_arns: Array[::String]?
-                               }?
+                               }?,
+                               built_in_lifecycle_config_arn: ::String?
                              }?,
                              space_storage_settings: {
                                default_ebs_storage_settings: {
@@ -8475,7 +8483,8 @@ module Aws
                                emr_settings: {
                                  assumable_role_arns: Array[::String]?,
                                  execution_role_arns: Array[::String]?
-                               }?
+                               }?,
+                               built_in_lifecycle_config_arn: ::String?
                              }?,
                              space_storage_settings: {
                                default_ebs_storage_settings: {
@@ -9438,7 +9447,8 @@ module Aws
                                          min_idle_timeout_in_minutes: ::Integer?,
                                          max_idle_timeout_in_minutes: ::Integer?
                                        }?
-                                     }?
+                                     }?,
+                                     built_in_lifecycle_config_arn: ::String?
                                    }?,
                                    jupyter_lab_app_settings: {
                                      default_resource_spec: {
@@ -9472,7 +9482,8 @@ module Aws
                                      emr_settings: {
                                        assumable_role_arns: Array[::String]?,
                                        execution_role_arns: Array[::String]?
-                                     }?
+                                     }?,
+                                     built_in_lifecycle_config_arn: ::String?
                                    }?,
                                    space_storage_settings: {
                                      default_ebs_storage_settings: {

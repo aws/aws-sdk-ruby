@@ -478,6 +478,7 @@ module Aws::BedrockRuntime
     #   * {Types::ApplyGuardrailResponse#action #action} => String
     #   * {Types::ApplyGuardrailResponse#outputs #outputs} => Array&lt;Types::GuardrailOutputContent&gt;
     #   * {Types::ApplyGuardrailResponse#assessments #assessments} => Array&lt;Types::GuardrailAssessment&gt;
+    #   * {Types::ApplyGuardrailResponse#guardrail_coverage #guardrail_coverage} => Types::GuardrailCoverage
     #
     # @example Request syntax with placeholder values
     #
@@ -514,6 +515,7 @@ module Aws::BedrockRuntime
     #   resp.assessments[0].content_policy.filters #=> Array
     #   resp.assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
     #   resp.assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.assessments[0].content_policy.filters[0].filter_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
     #   resp.assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
     #   resp.assessments[0].word_policy.custom_words #=> Array
     #   resp.assessments[0].word_policy.custom_words[0].match #=> String
@@ -536,6 +538,17 @@ module Aws::BedrockRuntime
     #   resp.assessments[0].contextual_grounding_policy.filters[0].threshold #=> Float
     #   resp.assessments[0].contextual_grounding_policy.filters[0].score #=> Float
     #   resp.assessments[0].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
+    #   resp.assessments[0].invocation_metrics.guardrail_processing_latency #=> Integer
+    #   resp.assessments[0].invocation_metrics.usage.topic_policy_units #=> Integer
+    #   resp.assessments[0].invocation_metrics.usage.content_policy_units #=> Integer
+    #   resp.assessments[0].invocation_metrics.usage.word_policy_units #=> Integer
+    #   resp.assessments[0].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
+    #   resp.assessments[0].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
+    #   resp.assessments[0].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   resp.assessments[0].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
+    #   resp.assessments[0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
+    #   resp.guardrail_coverage.text_characters.guarded #=> Integer
+    #   resp.guardrail_coverage.text_characters.total #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ApplyGuardrail AWS API Documentation
     #
@@ -822,6 +835,7 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.input_assessment["String"].content_policy.filters #=> Array
     #   resp.trace.guardrail.input_assessment["String"].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
     #   resp.trace.guardrail.input_assessment["String"].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.trace.guardrail.input_assessment["String"].content_policy.filters[0].filter_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
     #   resp.trace.guardrail.input_assessment["String"].content_policy.filters[0].action #=> String, one of "BLOCKED"
     #   resp.trace.guardrail.input_assessment["String"].word_policy.custom_words #=> Array
     #   resp.trace.guardrail.input_assessment["String"].word_policy.custom_words[0].match #=> String
@@ -844,6 +858,15 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].threshold #=> Float
     #   resp.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].score #=> Float
     #   resp.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_processing_latency #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.topic_policy_units #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.content_policy_units #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.word_policy_units #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.trace.guardrail.output_assessments #=> Hash
     #   resp.trace.guardrail.output_assessments["String"] #=> Array
     #   resp.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
@@ -853,6 +876,7 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters #=> Array
     #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
     #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].filter_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
     #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].action #=> String, one of "BLOCKED"
     #   resp.trace.guardrail.output_assessments["String"][0].word_policy.custom_words #=> Array
     #   resp.trace.guardrail.output_assessments["String"][0].word_policy.custom_words[0].match #=> String
@@ -875,6 +899,15 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].threshold #=> Float
     #   resp.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].score #=> Float
     #   resp.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_processing_latency #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.topic_policy_units #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.content_policy_units #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.word_policy_units #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/Converse AWS API Documentation
     #
@@ -1339,6 +1372,7 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.input_assessment["String"].content_policy.filters #=> Array
     #   event.trace.guardrail.input_assessment["String"].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
     #   event.trace.guardrail.input_assessment["String"].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail.input_assessment["String"].content_policy.filters[0].filter_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
     #   event.trace.guardrail.input_assessment["String"].content_policy.filters[0].action #=> String, one of "BLOCKED"
     #   event.trace.guardrail.input_assessment["String"].word_policy.custom_words #=> Array
     #   event.trace.guardrail.input_assessment["String"].word_policy.custom_words[0].match #=> String
@@ -1361,6 +1395,15 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].threshold #=> Float
     #   event.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].score #=> Float
     #   event.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_processing_latency #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.topic_policy_units #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.content_policy_units #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.word_policy_units #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   event.trace.guardrail.output_assessments #=> Hash
     #   event.trace.guardrail.output_assessments["String"] #=> Array
     #   event.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
@@ -1370,6 +1413,7 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters #=> Array
     #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
     #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].filter_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
     #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].action #=> String, one of "BLOCKED"
     #   event.trace.guardrail.output_assessments["String"][0].word_policy.custom_words #=> Array
     #   event.trace.guardrail.output_assessments["String"][0].word_policy.custom_words[0].match #=> String
@@ -1392,6 +1436,15 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].threshold #=> Float
     #   event.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].score #=> Float
     #   event.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_processing_latency #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.topic_policy_units #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.content_policy_units #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.word_policy_units #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #
     #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -1876,7 +1929,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

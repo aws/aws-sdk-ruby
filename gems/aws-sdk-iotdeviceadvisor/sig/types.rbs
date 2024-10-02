@@ -16,6 +16,7 @@ module Aws::IoTDeviceAdvisor
     class CreateSuiteDefinitionRequest
       attr_accessor suite_definition_configuration: Types::SuiteDefinitionConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 

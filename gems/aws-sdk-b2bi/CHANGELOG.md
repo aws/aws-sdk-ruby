@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-10-02)
+------------------
+
+* Feature - Added and updated APIs to support outbound EDI transformations
+
 1.20.0 (2024-09-24)
 ------------------
 

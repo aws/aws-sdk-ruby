@@ -76,6 +76,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::B2bi::Endpoints::CreatePartnership.build(context)
           when :create_profile
             Aws::B2bi::Endpoints::CreateProfile.build(context)
+          when :create_starter_mapping_template
+            Aws::B2bi::Endpoints::CreateStarterMappingTemplate.build(context)
           when :create_transformer
             Aws::B2bi::Endpoints::CreateTransformer.build(context)
           when :delete_capability
@@ -110,6 +112,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::B2bi::Endpoints::StartTransformerJob.build(context)
           when :tag_resource
             Aws::B2bi::Endpoints::TagResource.build(context)
+          when :test_conversion
+            Aws::B2bi::Endpoints::TestConversion.build(context)
           when :test_mapping
             Aws::B2bi::Endpoints::TestMapping.build(context)
           when :test_parsing

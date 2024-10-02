@@ -220,6 +220,12 @@
         "SignatureVersion4"
       ]
     },
+    "ClientToken":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[\\u0021-\\u007E]+$"
+    },
     "ConflictException":{
       "type":"structure",
       "members":{
@@ -233,7 +239,11 @@
       "required":["suiteDefinitionConfiguration"],
       "members":{
         "suiteDefinitionConfiguration":{"shape":"SuiteDefinitionConfiguration"},
-        "tags":{"shape":"TagMap"}
+        "tags":{"shape":"TagMap"},
+        "clientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
       }
     },
     "CreateSuiteDefinitionResponse":{

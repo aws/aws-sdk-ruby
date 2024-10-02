@@ -622,9 +622,11 @@ module Aws::BedrockAgentRuntime
     end
 
     class PostProcessingModelInvocationOutput
+      attr_accessor metadata: Types::Metadata
       attr_accessor parsed_response: Types::PostProcessingParsedResponse
+      attr_accessor raw_response: Types::RawResponse
       attr_accessor trace_id: ::String
-      SENSITIVE: [:parsed_response]
+      SENSITIVE: [:metadata, :parsed_response, :raw_response]
     end
 
     class PostProcessingParsedResponse
@@ -647,9 +649,11 @@ module Aws::BedrockAgentRuntime
     end
 
     class PreProcessingModelInvocationOutput
+      attr_accessor metadata: Types::Metadata
       attr_accessor parsed_response: Types::PreProcessingParsedResponse
+      attr_accessor raw_response: Types::RawResponse
       attr_accessor trace_id: ::String
-      SENSITIVE: [:parsed_response]
+      SENSITIVE: [:metadata, :parsed_response, :raw_response]
     end
 
     class PreProcessingParsedResponse

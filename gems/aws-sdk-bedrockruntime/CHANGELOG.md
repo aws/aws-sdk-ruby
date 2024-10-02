@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-10-02)
+------------------
+
+* Feature - Added new fields to Amazon Bedrock Guardrails trace
+
 1.25.0 (2024-09-24)
 ------------------
 
