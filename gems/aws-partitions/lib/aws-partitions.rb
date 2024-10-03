@@ -477,6 +477,7 @@ module Aws
             'MarketplaceDeployment' => 'deployment-marketplace',
             'MarketplaceEntitlementService' => 'entitlement.marketplace',
             'MarketplaceMetering' => 'metering.marketplace',
+            'MarketplaceReporting' => 'reporting-marketplace',
             'MediaConnect' => 'mediaconnect',
             'MediaConvert' => 'mediaconvert',
             'MediaLive' => 'medialive',

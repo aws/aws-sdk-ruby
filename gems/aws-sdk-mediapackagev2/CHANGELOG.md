@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-10-03)
+------------------
+
+* Feature - Added support for ClipStartTime on the FilterConfiguration object on OriginEndpoint manifest settings objects. Added support for EXT-X-START tags on produced HLS child playlists.
+
 1.28.0 (2024-09-24)
 ------------------
 

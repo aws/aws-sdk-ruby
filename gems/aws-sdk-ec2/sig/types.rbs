@@ -10584,6 +10584,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ModifyInstanceCpuOptionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor core_count: ::Integer
+      attr_accessor threads_per_core: ::Integer
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceCpuOptionsResult
+      attr_accessor instance_id: ::String
+      attr_accessor core_count: ::Integer
+      attr_accessor threads_per_core: ::Integer
+      SENSITIVE: []
+    end
+
     class ModifyInstanceCreditSpecificationRequest
       attr_accessor dry_run: bool
       attr_accessor client_token: ::String

@@ -4397,7 +4397,7 @@ module Aws::EC2
     #   The product code. This must be a product code that you own.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -10926,7 +10926,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -12077,12 +12077,12 @@ module Aws::EC2
     #
     # @option params [required, String] :bucket
     #   The name of the Amazon S3 bucket in which to store the Spot Instance
-    #   data feed. For more information about bucket names, see [Rules for
-    #   bucket naming][1] in the *Amazon S3 Developer Guide*.
+    #   data feed. For more information about bucket names, see [Bucket naming
+    #   rules][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17523,7 +17523,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -24331,7 +24331,7 @@ module Aws::EC2
     #   Note: The `enaSupport` attribute is not supported at this time.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -24618,7 +24618,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -24962,7 +24962,7 @@ module Aws::EC2
     #   continues from the end of the items returned by the previous request.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -25119,7 +25119,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -26100,7 +26100,7 @@ module Aws::EC2
     #   Default: Describes all your instances.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -30667,7 +30667,7 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -41860,7 +41860,7 @@ module Aws::EC2
     #   The ID of the instance.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -41928,7 +41928,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshoot-unreachable-instance.html#instance-console-console-output
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -41978,7 +41978,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -42326,7 +42326,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -42574,7 +42574,7 @@ module Aws::EC2
     #   The ID of the instance from which to retrieve the UEFI data.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -44077,7 +44077,7 @@ module Aws::EC2
     #   The ID of the Windows instance.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -46822,7 +46822,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -47665,7 +47665,7 @@ module Aws::EC2
     #   this parameter for Spot Instances.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -47893,6 +47893,69 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # By default, all vCPUs for the instance type are active when you launch
+    # an instance. When you configure the number of active vCPUs for the
+    # instance, it can help you save on licensing costs and optimize
+    # performance. The base cost of the instance remains unchanged.
+    #
+    # The number of active vCPUs equals the number of threads per CPU core
+    # multiplied by the number of cores.
+    #
+    # <note markdown="1"> Some instance type options do not support this capability. For more
+    # information, see [Supported CPU options][1] in the *Amazon EC2 User
+    # Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance to update.
+    #
+    # @option params [required, Integer] :core_count
+    #   The number of CPU cores to activate for the specified instance.
+    #
+    # @option params [required, Integer] :threads_per_core
+    #   The number of threads to run for each CPU core.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceCpuOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceCpuOptionsResult#instance_id #instance_id} => String
+    #   * {Types::ModifyInstanceCpuOptionsResult#core_count #core_count} => Integer
+    #   * {Types::ModifyInstanceCpuOptionsResult#threads_per_core #threads_per_core} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_cpu_options({
+    #     instance_id: "InstanceId", # required
+    #     core_count: 1, # required
+    #     threads_per_core: 1, # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.core_count #=> Integer
+    #   resp.threads_per_core #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCpuOptions AWS API Documentation
+    #
+    # @overload modify_instance_cpu_options(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_cpu_options(params = {}, options = {})
+      req = build_request(:modify_instance_cpu_options, params)
+      req.send_request(options)
+    end
+
     # Modifies the credit option for CPU usage on a running or stopped
     # burstable performance instance. The credit options are `standard` and
     # `unlimited`.
@@ -47905,7 +47968,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -47961,7 +48024,7 @@ module Aws::EC2
     # Modifies the start time for a scheduled Amazon EC2 instance event.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -48215,7 +48278,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -52406,7 +52469,7 @@ module Aws::EC2
     #   The IDs of the instances.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -53403,7 +53466,7 @@ module Aws::EC2
     #   The instance IDs.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -54835,7 +54898,7 @@ module Aws::EC2
     #   Descriptive text about the health state of your instance.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -56022,7 +56085,7 @@ module Aws::EC2
     #   `sourceDestCheck`.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -57034,7 +57097,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -58077,7 +58140,7 @@ module Aws::EC2
     #   The ID of the instance.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -58138,7 +58201,7 @@ module Aws::EC2
     #   Reserved.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -59301,7 +59364,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -59500,7 +59563,7 @@ module Aws::EC2
     #   request into smaller batches.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -59777,7 +59840,7 @@ module Aws::EC2
     #   The IDs of the instances.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -60123,7 +60186,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.478.0'
+      context[:gem_version] = '1.479.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -99,6 +99,8 @@ module Aws::CodePipeline
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Code = Shapes::StringShape.new(name: 'Code')
+    Command = Shapes::StringShape.new(name: 'Command')
+    CommandList = Shapes::ListShape.new(name: 'CommandList')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConcurrentPipelineExecutionsLimitExceededException = Shapes::StructureShape.new(name: 'ConcurrentPipelineExecutionsLimitExceededException')
     Condition = Shapes::StructureShape.new(name: 'Condition')
@@ -145,6 +147,8 @@ module Aws::CodePipeline
     FailureConditions = Shapes::StructureShape.new(name: 'FailureConditions')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     FailureType = Shapes::StringShape.new(name: 'FailureType')
+    FilePath = Shapes::StringShape.new(name: 'FilePath')
+    FilePathList = Shapes::ListShape.new(name: 'FilePathList')
     GetActionTypeInput = Shapes::StructureShape.new(name: 'GetActionTypeInput')
     GetActionTypeOutput = Shapes::StructureShape.new(name: 'GetActionTypeOutput')
     GetJobDetailsInput = Shapes::StructureShape.new(name: 'GetJobDetailsInput')
@@ -237,6 +241,8 @@ module Aws::CodePipeline
     NotLatestPipelineExecutionException = Shapes::StructureShape.new(name: 'NotLatestPipelineExecutionException')
     OutputArtifact = Shapes::StructureShape.new(name: 'OutputArtifact')
     OutputArtifactList = Shapes::ListShape.new(name: 'OutputArtifactList')
+    OutputVariable = Shapes::StringShape.new(name: 'OutputVariable')
+    OutputVariableList = Shapes::ListShape.new(name: 'OutputVariableList')
     OutputVariablesKey = Shapes::StringShape.new(name: 'OutputVariablesKey')
     OutputVariablesMap = Shapes::MapShape.new(name: 'OutputVariablesMap')
     OutputVariablesSizeExceededException = Shapes::StructureShape.new(name: 'OutputVariablesSizeExceededException')
@@ -473,8 +479,10 @@ module Aws::CodePipeline
     ActionDeclaration.add_member(:action_type_id, Shapes::ShapeRef.new(shape: ActionTypeId, required: true, location_name: "actionTypeId"))
     ActionDeclaration.add_member(:run_order, Shapes::ShapeRef.new(shape: ActionRunOrder, location_name: "runOrder"))
     ActionDeclaration.add_member(:configuration, Shapes::ShapeRef.new(shape: ActionConfigurationMap, location_name: "configuration"))
+    ActionDeclaration.add_member(:commands, Shapes::ShapeRef.new(shape: CommandList, location_name: "commands"))
     ActionDeclaration.add_member(:output_artifacts, Shapes::ShapeRef.new(shape: OutputArtifactList, location_name: "outputArtifacts"))
     ActionDeclaration.add_member(:input_artifacts, Shapes::ShapeRef.new(shape: InputArtifactList, location_name: "inputArtifacts"))
+    ActionDeclaration.add_member(:output_variables, Shapes::ShapeRef.new(shape: OutputVariableList, location_name: "outputVariables"))
     ActionDeclaration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     ActionDeclaration.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegionName, location_name: "region"))
     ActionDeclaration.add_member(:namespace, Shapes::ShapeRef.new(shape: ActionNamespace, location_name: "namespace"))
@@ -672,6 +680,8 @@ module Aws::CodePipeline
     BlockerDeclaration.add_member(:type, Shapes::ShapeRef.new(shape: BlockerType, required: true, location_name: "type"))
     BlockerDeclaration.struct_class = Types::BlockerDeclaration
 
+    CommandList.member = Shapes::ShapeRef.new(shape: Command)
+
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
@@ -790,6 +800,8 @@ module Aws::CodePipeline
     FailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
     FailureDetails.add_member(:external_execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "externalExecutionId"))
     FailureDetails.struct_class = Types::FailureDetails
+
+    FilePathList.member = Shapes::ShapeRef.new(shape: FilePath)
 
     GetActionTypeInput.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, required: true, location_name: "category"))
     GetActionTypeInput.add_member(:owner, Shapes::ShapeRef.new(shape: ActionTypeOwner, required: true, location_name: "owner"))
@@ -1033,9 +1045,12 @@ module Aws::CodePipeline
     NotLatestPipelineExecutionException.struct_class = Types::NotLatestPipelineExecutionException
 
     OutputArtifact.add_member(:name, Shapes::ShapeRef.new(shape: ArtifactName, required: true, location_name: "name"))
+    OutputArtifact.add_member(:files, Shapes::ShapeRef.new(shape: FilePathList, location_name: "files"))
     OutputArtifact.struct_class = Types::OutputArtifact
 
     OutputArtifactList.member = Shapes::ShapeRef.new(shape: OutputArtifact)
+
+    OutputVariableList.member = Shapes::ShapeRef.new(shape: OutputVariable)
 
     OutputVariablesMap.key = Shapes::ShapeRef.new(shape: OutputVariablesKey)
     OutputVariablesMap.value = Shapes::ShapeRef.new(shape: OutputVariablesValue)

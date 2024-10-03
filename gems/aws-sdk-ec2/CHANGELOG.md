@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.479.0 (2024-10-03)
+------------------
+
+* Feature - This release includes a new API for modifying instance cpu-options after launch.
+
 1.478.0 (2024-09-25)
 ------------------
 

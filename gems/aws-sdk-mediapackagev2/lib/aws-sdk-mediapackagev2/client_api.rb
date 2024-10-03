@@ -76,6 +76,7 @@ module Aws::MediaPackageV2
     FilterConfiguration = Shapes::StructureShape.new(name: 'FilterConfiguration')
     FilterConfigurationManifestFilterString = Shapes::StringShape.new(name: 'FilterConfigurationManifestFilterString')
     FilterConfigurationTimeDelaySecondsInteger = Shapes::IntegerShape.new(name: 'FilterConfigurationTimeDelaySecondsInteger')
+    Float = Shapes::FloatShape.new(name: 'Float')
     ForceEndpointErrorConfiguration = Shapes::StructureShape.new(name: 'ForceEndpointErrorConfiguration')
     GetChannelGroupRequest = Shapes::StructureShape.new(name: 'GetChannelGroupRequest')
     GetChannelGroupResponse = Shapes::StructureShape.new(name: 'GetChannelGroupResponse')
@@ -142,6 +143,7 @@ module Aws::MediaPackageV2
     SpekeKeyProviderResourceIdString = Shapes::StringShape.new(name: 'SpekeKeyProviderResourceIdString')
     SpekeKeyProviderRoleArnString = Shapes::StringShape.new(name: 'SpekeKeyProviderRoleArnString')
     SpekeKeyProviderUrlString = Shapes::StringShape.new(name: 'SpekeKeyProviderUrlString')
+    StartTag = Shapes::StructureShape.new(name: 'StartTag')
     String = Shapes::StringShape.new(name: 'String')
     TagArn = Shapes::StringShape.new(name: 'TagArn')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -244,6 +246,7 @@ module Aws::MediaPackageV2
     CreateHlsManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ManifestName, required: true, location_name: "ManifestName"))
     CreateHlsManifestConfiguration.add_member(:child_manifest_name, Shapes::ShapeRef.new(shape: ManifestName, location_name: "ChildManifestName"))
     CreateHlsManifestConfiguration.add_member(:scte_hls, Shapes::ShapeRef.new(shape: ScteHls, location_name: "ScteHls"))
+    CreateHlsManifestConfiguration.add_member(:start_tag, Shapes::ShapeRef.new(shape: StartTag, location_name: "StartTag"))
     CreateHlsManifestConfiguration.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: CreateHlsManifestConfigurationManifestWindowSecondsInteger, location_name: "ManifestWindowSeconds"))
     CreateHlsManifestConfiguration.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: CreateHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger, location_name: "ProgramDateTimeIntervalSeconds"))
     CreateHlsManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
@@ -254,6 +257,7 @@ module Aws::MediaPackageV2
     CreateLowLatencyHlsManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ManifestName, required: true, location_name: "ManifestName"))
     CreateLowLatencyHlsManifestConfiguration.add_member(:child_manifest_name, Shapes::ShapeRef.new(shape: ManifestName, location_name: "ChildManifestName"))
     CreateLowLatencyHlsManifestConfiguration.add_member(:scte_hls, Shapes::ShapeRef.new(shape: ScteHls, location_name: "ScteHls"))
+    CreateLowLatencyHlsManifestConfiguration.add_member(:start_tag, Shapes::ShapeRef.new(shape: StartTag, location_name: "StartTag"))
     CreateLowLatencyHlsManifestConfiguration.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifestConfigurationManifestWindowSecondsInteger, location_name: "ManifestWindowSeconds"))
     CreateLowLatencyHlsManifestConfiguration.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger, location_name: "ProgramDateTimeIntervalSeconds"))
     CreateLowLatencyHlsManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
@@ -351,6 +355,7 @@ module Aws::MediaPackageV2
     FilterConfiguration.add_member(:start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Start"))
     FilterConfiguration.add_member(:end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "End"))
     FilterConfiguration.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: FilterConfigurationTimeDelaySecondsInteger, location_name: "TimeDelaySeconds"))
+    FilterConfiguration.add_member(:clip_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ClipStartTime"))
     FilterConfiguration.struct_class = Types::FilterConfiguration
 
     ForceEndpointErrorConfiguration.add_member(:endpoint_error_conditions, Shapes::ShapeRef.new(shape: EndpointErrorConditions, location_name: "EndpointErrorConditions"))
@@ -417,6 +422,7 @@ module Aws::MediaPackageV2
     GetHlsManifestConfiguration.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "ProgramDateTimeIntervalSeconds"))
     GetHlsManifestConfiguration.add_member(:scte_hls, Shapes::ShapeRef.new(shape: ScteHls, location_name: "ScteHls"))
     GetHlsManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
+    GetHlsManifestConfiguration.add_member(:start_tag, Shapes::ShapeRef.new(shape: StartTag, location_name: "StartTag"))
     GetHlsManifestConfiguration.struct_class = Types::GetHlsManifestConfiguration
 
     GetHlsManifests.member = Shapes::ShapeRef.new(shape: GetHlsManifestConfiguration)
@@ -428,6 +434,7 @@ module Aws::MediaPackageV2
     GetLowLatencyHlsManifestConfiguration.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "ProgramDateTimeIntervalSeconds"))
     GetLowLatencyHlsManifestConfiguration.add_member(:scte_hls, Shapes::ShapeRef.new(shape: ScteHls, location_name: "ScteHls"))
     GetLowLatencyHlsManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
+    GetLowLatencyHlsManifestConfiguration.add_member(:start_tag, Shapes::ShapeRef.new(shape: StartTag, location_name: "StartTag"))
     GetLowLatencyHlsManifestConfiguration.struct_class = Types::GetLowLatencyHlsManifestConfiguration
 
     GetLowLatencyHlsManifests.member = Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifestConfiguration)
@@ -594,6 +601,10 @@ module Aws::MediaPackageV2
     SpekeKeyProvider.struct_class = Types::SpekeKeyProvider
 
     SpekeKeyProviderDrmSystemsList.member = Shapes::ShapeRef.new(shape: DrmSystem)
+
+    StartTag.add_member(:time_offset, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "TimeOffset"))
+    StartTag.add_member(:precise, Shapes::ShapeRef.new(shape: Boolean, location_name: "Precise"))
+    StartTag.struct_class = Types::StartTag
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 

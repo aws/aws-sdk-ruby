@@ -408,6 +408,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics        | aws-sdk-marketplacecommerceanalytics        | 2015-07-01  |
 | AWS Marketplace Deployment Service                    | Aws::MarketplaceDeployment               | aws-sdk-marketplacedeployment               | 2023-01-25  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService       | aws-sdk-marketplaceentitlementservice       | 2017-01-11  |
+| AWS Marketplace Reporting Service                     | Aws::MarketplaceReporting                | aws-sdk-marketplacereporting                | 2018-05-10  |
 | AWS MediaConnect                                      | Aws::MediaConnect                        | aws-sdk-mediaconnect                        | 2018-11-14  |
 | AWS MediaTailor                                       | Aws::MediaTailor                         | aws-sdk-mediatailor                         | 2018-04-23  |
 | AWS Migration Hub                                     | Aws::MigrationHub                        | aws-sdk-migrationhub                        | 2017-05-31  |

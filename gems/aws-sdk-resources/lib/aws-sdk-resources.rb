@@ -240,6 +240,7 @@ module Aws
   autoload :MarketplaceDeployment, 'aws-sdk-marketplacedeployment'
   autoload :MarketplaceEntitlementService, 'aws-sdk-marketplaceentitlementservice'
   autoload :MarketplaceMetering, 'aws-sdk-marketplacemetering'
+  autoload :MarketplaceReporting, 'aws-sdk-marketplacereporting'
   autoload :MediaConnect, 'aws-sdk-mediaconnect'
   autoload :MediaConvert, 'aws-sdk-mediaconvert'
   autoload :MediaLive, 'aws-sdk-medialive'

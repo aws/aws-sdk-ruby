@@ -102,6 +102,7 @@ module Aws::MediaPackageV2
       attr_accessor manifest_name: ::String
       attr_accessor child_manifest_name: ::String
       attr_accessor scte_hls: Types::ScteHls
+      attr_accessor start_tag: Types::StartTag
       attr_accessor manifest_window_seconds: ::Integer
       attr_accessor program_date_time_interval_seconds: ::Integer
       attr_accessor filter_configuration: Types::FilterConfiguration
@@ -112,6 +113,7 @@ module Aws::MediaPackageV2
       attr_accessor manifest_name: ::String
       attr_accessor child_manifest_name: ::String
       attr_accessor scte_hls: Types::ScteHls
+      attr_accessor start_tag: Types::StartTag
       attr_accessor manifest_window_seconds: ::Integer
       attr_accessor program_date_time_interval_seconds: ::Integer
       attr_accessor filter_configuration: Types::FilterConfiguration
@@ -232,6 +234,7 @@ module Aws::MediaPackageV2
       attr_accessor start: ::Time
       attr_accessor end: ::Time
       attr_accessor time_delay_seconds: ::Integer
+      attr_accessor clip_start_time: ::Time
       SENSITIVE: []
     end
 
@@ -314,6 +317,7 @@ module Aws::MediaPackageV2
       attr_accessor program_date_time_interval_seconds: ::Integer
       attr_accessor scte_hls: Types::ScteHls
       attr_accessor filter_configuration: Types::FilterConfiguration
+      attr_accessor start_tag: Types::StartTag
       SENSITIVE: []
     end
 
@@ -325,6 +329,7 @@ module Aws::MediaPackageV2
       attr_accessor program_date_time_interval_seconds: ::Integer
       attr_accessor scte_hls: Types::ScteHls
       attr_accessor filter_configuration: Types::FilterConfiguration
+      attr_accessor start_tag: Types::StartTag
       SENSITIVE: []
     end
 
@@ -533,6 +538,12 @@ module Aws::MediaPackageV2
       SENSITIVE: []
     end
 
+    class StartTag
+      attr_accessor time_offset: ::Float
+      attr_accessor precise: bool
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -629,7 +640,7 @@ module Aws::MediaPackageV2
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS" | "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION" | "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY")
+      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS" | "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION" | "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY" | "CLIP_START_TIME_WITH_START_OR_END" | "START_TAG_TIME_OFFSET_INVALID")
       SENSITIVE: []
     end
   end

@@ -2131,6 +2131,8 @@ module Aws::EC2
     ModifyInstanceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyInstanceAttributeRequest')
     ModifyInstanceCapacityReservationAttributesRequest = Shapes::StructureShape.new(name: 'ModifyInstanceCapacityReservationAttributesRequest')
     ModifyInstanceCapacityReservationAttributesResult = Shapes::StructureShape.new(name: 'ModifyInstanceCapacityReservationAttributesResult')
+    ModifyInstanceCpuOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceCpuOptionsRequest')
+    ModifyInstanceCpuOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceCpuOptionsResult')
     ModifyInstanceCreditSpecificationRequest = Shapes::StructureShape.new(name: 'ModifyInstanceCreditSpecificationRequest')
     ModifyInstanceCreditSpecificationResult = Shapes::StructureShape.new(name: 'ModifyInstanceCreditSpecificationResult')
     ModifyInstanceEventStartTimeRequest = Shapes::StructureShape.new(name: 'ModifyInstanceEventStartTimeRequest')
@@ -11632,6 +11634,17 @@ module Aws::EC2
     ModifyInstanceCapacityReservationAttributesResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyInstanceCapacityReservationAttributesResult.struct_class = Types::ModifyInstanceCapacityReservationAttributesResult
 
+    ModifyInstanceCpuOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    ModifyInstanceCpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "CoreCount"))
+    ModifyInstanceCpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ThreadsPerCore"))
+    ModifyInstanceCpuOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceCpuOptionsRequest.struct_class = Types::ModifyInstanceCpuOptionsRequest
+
+    ModifyInstanceCpuOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "instanceId"))
+    ModifyInstanceCpuOptionsResult.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "coreCount"))
+    ModifyInstanceCpuOptionsResult.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
+    ModifyInstanceCpuOptionsResult.struct_class = Types::ModifyInstanceCpuOptionsResult
+
     ModifyInstanceCreditSpecificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyInstanceCreditSpecificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     ModifyInstanceCreditSpecificationRequest.add_member(:instance_credit_specifications, Shapes::ShapeRef.new(shape: InstanceCreditSpecificationListRequest, required: true, location_name: "InstanceCreditSpecification"))
@@ -20742,6 +20755,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyInstanceCapacityReservationAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyInstanceCapacityReservationAttributesResult)
+      end)
+
+      api.add_operation(:modify_instance_cpu_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceCpuOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceCpuOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceCpuOptionsResult)
       end)
 
       api.add_operation(:modify_instance_credit_specification, Seahorse::Model::Operation.new.tap do |o|

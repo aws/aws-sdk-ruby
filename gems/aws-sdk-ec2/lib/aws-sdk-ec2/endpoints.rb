@@ -5578,6 +5578,17 @@ module Aws::EC2
       end
     end
 
+    class ModifyInstanceCpuOptions
+      def self.build(context)
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class ModifyInstanceCreditSpecification
       def self.build(context)
         Aws::EC2::EndpointParameters.new(

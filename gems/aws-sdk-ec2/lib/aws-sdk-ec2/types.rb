@@ -5957,7 +5957,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -7839,8 +7839,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The value is `Windows` for Windows instances. Otherwise, the value
-    #   is blank.
+    #   The value is `windows` for Windows instances in an EC2 Fleet.
+    #   Otherwise, the value is blank.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetInstance AWS API Documentation
@@ -10154,7 +10154,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -10824,12 +10824,12 @@ module Aws::EC2
     #
     # @!attribute [rw] bucket
     #   The name of the Amazon S3 bucket in which to store the Spot Instance
-    #   data feed. For more information about bucket names, see [Rules for
-    #   bucket naming][1] in the *Amazon S3 Developer Guide*.
+    #   data feed. For more information about bucket names, see [Bucket
+    #   naming rules][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -12055,22 +12055,23 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
-    #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway to simplify security group management.
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
     #
-    #   This option is disabled by default.
+    #    </note>
+    #
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
     #
     #   If you don't enable or disable SecurityGroupReferencingSupport in
     #   the request, the attachment will inherit the security group
     #   referencing support setting on the transit gateway.
-    #
-    #   For more information about security group referencing, see [Security
-    #   group referencing ][1] in the *Amazon Web Services Transit Gateways
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
@@ -14958,7 +14959,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -18748,8 +18749,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The value is `Windows` for Windows instances. Otherwise, the value
-    #   is blank.
+    #   The value is `windows` for Windows instances in an EC2 Fleet.
+    #   Otherwise, the value is blank.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsInstances AWS API Documentation
@@ -19776,7 +19777,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -19885,7 +19886,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -20157,7 +20158,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -20202,7 +20203,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -21043,7 +21044,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -23453,7 +23454,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -34742,7 +34743,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -34788,7 +34789,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -34831,7 +34832,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -35107,7 +35108,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -35264,7 +35265,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -35996,7 +35997,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -47836,7 +47837,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -48358,7 +48359,7 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -48529,8 +48530,62 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The ID of the instance to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores to activate for the specified instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads to run for each CPU core.
+    #   @return [Integer]
+    #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCpuOptionsRequest AWS API Documentation
+    #
+    class ModifyInstanceCpuOptionsRequest < Struct.new(
+      :instance_id,
+      :core_count,
+      :threads_per_core,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores that are running for the specified instance
+    #   after the update.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads that are running per CPU core for the
+    #   specified instance after the update.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCpuOptionsResult AWS API Documentation
+    #
+    class ModifyInstanceCpuOptionsResult < Struct.new(
+      :instance_id,
+      :core_count,
+      :threads_per_core)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -48580,7 +48635,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -48772,7 +48827,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -50229,18 +50284,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway to simplify security group management.
-    #
-    #   This option is disabled by default.
-    #
-    #   For more information about security group referencing, see [Security
-    #   group referencing][1] in the *Amazon Web Services Transit Gateways
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
     #   @return [String]
     #
     # @!attribute [rw] auto_accept_shared_attachments
@@ -50435,18 +50491,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway to simplify security group management.
-    #
-    #   This option is disabled by default.
-    #
-    #   For more information about security group referencing, see [Security
-    #   group referencing][1] in the *Amazon Web Services Transit Gateways
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
@@ -52027,7 +52084,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -55751,7 +55808,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -56989,7 +57046,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -58512,7 +58569,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -59876,7 +59933,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -61468,7 +61525,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -63690,7 +63747,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -63943,7 +64000,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -64843,7 +64900,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -65939,18 +65996,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway to simplify security group management.
-    #
-    #   This option is enabled by default.
-    #
-    #   For more information about security group referencing, see [Security
-    #   group referencing][1] in the *Amazon Web Services Transit Gateways
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
     #   @return [String]
     #
     # @!attribute [rw] multicast_support
@@ -66336,18 +66394,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway to simplify security group management.
-    #
-    #   This option is disabled by default.
-    #
-    #   For more information about security group referencing, see [Security
-    #   group referencing][1] in the *Amazon Web Services Transit Gateways
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
     #   @return [String]
     #
     # @!attribute [rw] multicast_support
@@ -66728,18 +66787,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway to simplify security group management.
-    #
-    #   This option is disabled by default.
-    #
-    #   For more information about security group referencing, see [Security
-    #   group referencing][1] in the *Amazon Web Services Transit Gateways
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
@@ -67090,7 +67150,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.

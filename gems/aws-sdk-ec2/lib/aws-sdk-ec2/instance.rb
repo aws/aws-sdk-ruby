@@ -730,7 +730,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -959,7 +959,7 @@ module Aws::EC2
     #
     #   Note: The `enaSupport` attribute is not supported at this time.
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1111,7 +1111,7 @@ module Aws::EC2
     #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
     #   this parameter for Spot Instances.
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1206,7 +1206,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1226,7 +1226,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1246,7 +1246,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1273,7 +1273,7 @@ module Aws::EC2
     # @option options [String] :description
     #   Descriptive text about the health state of your instance.
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1332,7 +1332,7 @@ module Aws::EC2
     #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
     #   `sourceDestCheck`.
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1352,7 +1352,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1375,7 +1375,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1398,7 +1398,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1424,7 +1424,7 @@ module Aws::EC2
     # @option options [String] :additional_info
     #   Reserved.
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1457,7 +1457,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1484,7 +1484,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1504,7 +1504,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1924,7 +1924,7 @@ module Aws::EC2
       #   })
       # @param options ({})
       # @option options [Boolean] :dry_run
-      #   Checks whether you have the required permissions for the action,
+      #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1950,7 +1950,7 @@ module Aws::EC2
       #   })
       # @param options ({})
       # @option options [Boolean] :dry_run
-      #   Checks whether you have the required permissions for the action,
+      #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1979,7 +1979,7 @@ module Aws::EC2
       # @option options [String] :additional_info
       #   Reserved.
       # @option options [Boolean] :dry_run
-      #   Checks whether you have the required permissions for the action,
+      #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -2018,7 +2018,7 @@ module Aws::EC2
       #
       #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
       # @option options [Boolean] :dry_run
-      #   Checks whether you have the required permissions for the action,
+      #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -2051,7 +2051,7 @@ module Aws::EC2
       #   })
       # @param options ({})
       # @option options [Boolean] :dry_run
-      #   Checks whether you have the required permissions for the action,
+      #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -2077,7 +2077,7 @@ module Aws::EC2
       #   })
       # @param options ({})
       # @option options [Boolean] :dry_run
-      #   Checks whether you have the required permissions for the action,
+      #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.

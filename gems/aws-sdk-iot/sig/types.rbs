@@ -555,6 +555,11 @@ module Aws::IoT
     class ClearDefaultAuthorizerResponse < Aws::EmptyStructure
     end
 
+    class ClientCertificateConfig
+      attr_accessor client_certificate_callback_arn: ::String
+      SENSITIVE: []
+    end
+
     class CloudwatchAlarmAction
       attr_accessor role_arn: ::String
       attr_accessor alarm_name: ::String
@@ -735,6 +740,9 @@ module Aws::IoT
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor tls_config: Types::TlsConfig
       attr_accessor server_certificate_config: Types::ServerCertificateConfig
+      attr_accessor authentication_type: ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT")
+      attr_accessor application_protocol: ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT")
+      attr_accessor client_certificate_config: Types::ClientCertificateConfig
       SENSITIVE: []
     end
 
@@ -1613,6 +1621,9 @@ module Aws::IoT
       attr_accessor last_status_change_date: ::Time
       attr_accessor tls_config: Types::TlsConfig
       attr_accessor server_certificate_config: Types::ServerCertificateConfig
+      attr_accessor authentication_type: ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT")
+      attr_accessor application_protocol: ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT")
+      attr_accessor client_certificate_config: Types::ClientCertificateConfig
       SENSITIVE: []
     end
 
@@ -4714,6 +4725,9 @@ module Aws::IoT
       attr_accessor remove_authorizer_config: bool
       attr_accessor tls_config: Types::TlsConfig
       attr_accessor server_certificate_config: Types::ServerCertificateConfig
+      attr_accessor authentication_type: ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT")
+      attr_accessor application_protocol: ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT")
+      attr_accessor client_certificate_config: Types::ClientCertificateConfig
       SENSITIVE: []
     end
 

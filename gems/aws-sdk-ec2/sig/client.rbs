@@ -10117,6 +10117,21 @@ module Aws
                                                            ) -> _ModifyInstanceCapacityReservationAttributesResponseSuccess
                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyInstanceCapacityReservationAttributesResponseSuccess
 
+      interface _ModifyInstanceCpuOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyInstanceCpuOptionsResult]
+        def instance_id: () -> ::String
+        def core_count: () -> ::Integer
+        def threads_per_core: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_instance_cpu_options-instance_method
+      def modify_instance_cpu_options: (
+                                         instance_id: ::String,
+                                         core_count: ::Integer,
+                                         threads_per_core: ::Integer,
+                                         ?dry_run: bool
+                                       ) -> _ModifyInstanceCpuOptionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyInstanceCpuOptionsResponseSuccess
+
       interface _ModifyInstanceCreditSpecificationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyInstanceCreditSpecificationResult]
         def successful_instance_credit_specifications: () -> ::Array[Types::SuccessfulInstanceCreditSpecificationItem]

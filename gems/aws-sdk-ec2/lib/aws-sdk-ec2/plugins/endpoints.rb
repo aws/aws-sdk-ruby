@@ -1082,6 +1082,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::EC2::Endpoints::ModifyInstanceAttribute.build(context)
           when :modify_instance_capacity_reservation_attributes
             Aws::EC2::Endpoints::ModifyInstanceCapacityReservationAttributes.build(context)
+          when :modify_instance_cpu_options
+            Aws::EC2::Endpoints::ModifyInstanceCpuOptions.build(context)
           when :modify_instance_credit_specification
             Aws::EC2::Endpoints::ModifyInstanceCreditSpecification.build(context)
           when :modify_instance_event_start_time

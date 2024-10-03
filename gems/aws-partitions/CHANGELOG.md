@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.984.0 (2024-10-03)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::MarketplaceReporting`.
+
 1.983.0 (2024-10-02)
 ------------------
 

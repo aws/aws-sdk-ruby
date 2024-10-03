@@ -670,7 +670,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -1588,7 +1588,7 @@ module Aws::EC2
     #
     #   Default: Describes all your instances.
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.

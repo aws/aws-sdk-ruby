@@ -65,8 +65,10 @@ module Aws::CodePipeline
       attr_accessor action_type_id: Types::ActionTypeId
       attr_accessor run_order: ::Integer
       attr_accessor configuration: ::Hash[::String, ::String]
+      attr_accessor commands: ::Array[::String]
       attr_accessor output_artifacts: ::Array[Types::OutputArtifact]
       attr_accessor input_artifacts: ::Array[Types::InputArtifact]
+      attr_accessor output_variables: ::Array[::String]
       attr_accessor role_arn: ::String
       attr_accessor region: ::String
       attr_accessor namespace: ::String
@@ -803,6 +805,7 @@ module Aws::CodePipeline
 
     class OutputArtifact
       attr_accessor name: ::String
+      attr_accessor files: ::Array[::String]
       SENSITIVE: []
     end
 

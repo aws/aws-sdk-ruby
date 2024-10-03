@@ -1016,6 +1016,11 @@ module Aws::QuickSight
     #   resources are parameterized in the returned CloudFormation template.
     #   @return [Array<Types::AssetBundleExportJobDashboardOverrideProperties>]
     #
+    # @!attribute [rw] folders
+    #   An optional list of structures that controls how `Folder` resources
+    #   are parameterized in the returned CloudFormation template.
+    #   @return [Array<Types::AssetBundleExportJobFolderOverrideProperties>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleCloudFormationOverridePropertyConfiguration AWS API Documentation
     #
     class AssetBundleCloudFormationOverridePropertyConfiguration < Struct.new(
@@ -1026,7 +1031,8 @@ module Aws::QuickSight
       :data_sets,
       :themes,
       :analyses,
-      :dashboards)
+      :dashboards,
+      :folders)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1139,6 +1145,28 @@ module Aws::QuickSight
       :arn,
       :type,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls how a specific `Folder` resource is parameterized in the
+    # returned CloudFormation template.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the specific `Folder` resource whose override properties
+    #   are configured in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A list of `Folder` resource properties to generate variables for in
+    #   the returned CloudFormation template.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobFolderOverrideProperties AWS API Documentation
+    #
+    class AssetBundleExportJobFolderOverrideProperties < Struct.new(
+      :arn,
+      :properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1664,6 +1692,74 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The override parameters for a single folder that is being imported.
+    #
+    # @!attribute [rw] folder_id
+    #   The ID of the folder that you want to apply overrides to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_folder_arn
+    #   A new parent folder arn. This change can only be applied if the
+    #   import creates a brand new folder. Existing folders cannot be moved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobFolderOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobFolderOverrideParameters < Struct.new(
+      :folder_id,
+      :name,
+      :parent_folder_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of permissions to be applied to a list
+    # of folder IDs.
+    #
+    # @!attribute [rw] folder_ids
+    #   A list of folder IDs that you want to apply overrides to. You can
+    #   use `*` to override all folders in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] permissions
+    #   A structure that contains the permissions for the resource that you
+    #   want to override in an asset bundle import job.
+    #   @return [Types::AssetBundleResourcePermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobFolderOverridePermissions AWS API Documentation
+    #
+    class AssetBundleImportJobFolderOverridePermissions < Struct.new(
+      :folder_ids,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of tags to be assigned to a list of
+    # folder IDs.
+    #
+    # @!attribute [rw] folder_ids
+    #   A list of folder IDs that you want to apply overrides to. You can
+    #   use `*` to override all folders in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags for the folders that you want to apply overrides to.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobFolderOverrideTags AWS API Documentation
+    #
+    class AssetBundleImportJobFolderOverrideTags < Struct.new(
+      :folder_ids,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of overrides that modify the asset bundle resource
     # configuration before the resource is imported.
     #
@@ -1707,6 +1803,11 @@ module Aws::QuickSight
     #   in the asset bundle that is imported.
     #   @return [Array<Types::AssetBundleImportJobDashboardOverrideParameters>]
     #
+    # @!attribute [rw] folders
+    #   A list of overrides for any `Folder` resources that are present in
+    #   the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobFolderOverrideParameters>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobOverrideParameters AWS API Documentation
     #
     class AssetBundleImportJobOverrideParameters < Struct.new(
@@ -1717,7 +1818,8 @@ module Aws::QuickSight
       :data_sets,
       :themes,
       :analyses,
-      :dashboards)
+      :dashboards,
+      :folders)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1751,6 +1853,11 @@ module Aws::QuickSight
     #   are present in the asset bundle that is imported.
     #   @return [Array<Types::AssetBundleImportJobDashboardOverridePermissions>]
     #
+    # @!attribute [rw] folders
+    #   A list of permissions for the folders that you want to apply
+    #   overrides to.
+    #   @return [Array<Types::AssetBundleImportJobFolderOverridePermissions>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobOverridePermissions AWS API Documentation
     #
     class AssetBundleImportJobOverridePermissions < Struct.new(
@@ -1758,7 +1865,8 @@ module Aws::QuickSight
       :data_sets,
       :themes,
       :analyses,
-      :dashboards)
+      :dashboards,
+      :folders)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1797,6 +1905,11 @@ module Aws::QuickSight
     #   present in the asset bundle that is imported.
     #   @return [Array<Types::AssetBundleImportJobDashboardOverrideTags>]
     #
+    # @!attribute [rw] folders
+    #   A list of tag overrides for any `Folder` resources that are present
+    #   in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobFolderOverrideTags>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobOverrideTags AWS API Documentation
     #
     class AssetBundleImportJobOverrideTags < Struct.new(
@@ -1805,7 +1918,8 @@ module Aws::QuickSight
       :data_sets,
       :themes,
       :analyses,
-      :dashboards)
+      :dashboards,
+      :folders)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11632,6 +11746,14 @@ module Aws::QuickSight
     #   `ValidationStrategy` is set to `FALSE`.
     #   @return [Array<Types::AssetBundleExportJobWarning>]
     #
+    # @!attribute [rw] include_folder_memberships
+    #   The include folder memberships flag.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_folder_members
+    #   A setting that determines whether folder members are included.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleExportJobResponse AWS API Documentation
     #
     class DescribeAssetBundleExportJobResponse < Struct.new(
@@ -11651,7 +11773,9 @@ module Aws::QuickSight
       :include_permissions,
       :include_tags,
       :validation_strategy,
-      :warnings)
+      :warnings,
+      :include_folder_memberships,
+      :include_folder_members)
       SENSITIVE = [:download_url]
       include Aws::Structure
     end
@@ -27863,6 +27987,17 @@ module Aws::QuickSight
     #   is `FALSE`.
     #   @return [Types::AssetBundleExportJobValidationStrategy]
     #
+    # @!attribute [rw] include_folder_memberships
+    #   A Boolean that determines if the exported asset carries over
+    #   information about the folders that the asset is a member of.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_folder_members
+    #   A setting that indicates whether you want to include folder assets.
+    #   You can also use this setting to recusrsively include all subfolders
+    #   of an exported folder.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleExportJobRequest AWS API Documentation
     #
     class StartAssetBundleExportJobRequest < Struct.new(
@@ -27874,7 +28009,9 @@ module Aws::QuickSight
       :cloud_formation_override_property_configuration,
       :include_permissions,
       :include_tags,
-      :validation_strategy)
+      :validation_strategy,
+      :include_folder_memberships,
+      :include_folder_members)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30544,6 +30681,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Configuration options for a `Topic`.
+    #
+    # @!attribute [rw] q_business_insights_enabled
+    #   Enables Amazon Q Business Insights for a `Topic`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicConfigOptions AWS API Documentation
+    #
+    class TopicConfigOptions < Struct.new(
+      :q_business_insights_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The definition for a `TopicConstantValue`.
     #
     # @!attribute [rw] constant_type
@@ -30618,13 +30769,18 @@ module Aws::QuickSight
     #   The data sets that the topic is associated with.
     #   @return [Array<Types::DatasetMetadata>]
     #
+    # @!attribute [rw] config_options
+    #   Configuration options for a `Topic`.
+    #   @return [Types::TopicConfigOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicDetails AWS API Documentation
     #
     class TopicDetails < Struct.new(
       :name,
       :description,
       :user_experience_version,
-      :data_sets)
+      :data_sets,
+      :config_options)
       SENSITIVE = []
       include Aws::Structure
     end

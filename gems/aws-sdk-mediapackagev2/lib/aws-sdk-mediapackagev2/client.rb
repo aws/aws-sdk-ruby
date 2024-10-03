@@ -1289,6 +1289,10 @@ module Aws::MediaPackageV2
     #         scte_hls: {
     #           ad_marker_hls: "DATERANGE", # accepts DATERANGE
     #         },
+    #         start_tag: {
+    #           time_offset: 1.0, # required
+    #           precise: false,
+    #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
@@ -1296,6 +1300,7 @@ module Aws::MediaPackageV2
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
+    #           clip_start_time: Time.now,
     #         },
     #       },
     #     ],
@@ -1306,6 +1311,10 @@ module Aws::MediaPackageV2
     #         scte_hls: {
     #           ad_marker_hls: "DATERANGE", # accepts DATERANGE
     #         },
+    #         start_tag: {
+    #           time_offset: 1.0, # required
+    #           precise: false,
+    #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
@@ -1313,6 +1322,7 @@ module Aws::MediaPackageV2
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
+    #           clip_start_time: Time.now,
     #         },
     #       },
     #     ],
@@ -1325,6 +1335,7 @@ module Aws::MediaPackageV2
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
+    #           clip_start_time: Time.now,
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -1389,6 +1400,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].start_tag.time_offset #=> Float
+    #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -1400,6 +1414,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
+    #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.dash_manifests #=> Array
     #   resp.dash_manifests[0].manifest_name #=> String
     #   resp.dash_manifests[0].url #=> String
@@ -1408,6 +1425,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -2073,6 +2091,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].start_tag.time_offset #=> Float
+    #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -2084,6 +2105,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
+    #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.dash_manifests #=> Array
     #   resp.dash_manifests[0].manifest_name #=> String
     #   resp.dash_manifests[0].url #=> String
@@ -2092,6 +2116,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -3261,6 +3286,10 @@ module Aws::MediaPackageV2
     #         scte_hls: {
     #           ad_marker_hls: "DATERANGE", # accepts DATERANGE
     #         },
+    #         start_tag: {
+    #           time_offset: 1.0, # required
+    #           precise: false,
+    #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
@@ -3268,6 +3297,7 @@ module Aws::MediaPackageV2
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
+    #           clip_start_time: Time.now,
     #         },
     #       },
     #     ],
@@ -3278,6 +3308,10 @@ module Aws::MediaPackageV2
     #         scte_hls: {
     #           ad_marker_hls: "DATERANGE", # accepts DATERANGE
     #         },
+    #         start_tag: {
+    #           time_offset: 1.0, # required
+    #           precise: false,
+    #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
@@ -3285,6 +3319,7 @@ module Aws::MediaPackageV2
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
+    #           clip_start_time: Time.now,
     #         },
     #       },
     #     ],
@@ -3297,6 +3332,7 @@ module Aws::MediaPackageV2
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
+    #           clip_start_time: Time.now,
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -3359,6 +3395,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].start_tag.time_offset #=> Float
+    #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -3370,6 +3409,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
+    #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.etag #=> String
@@ -3383,6 +3425,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -3421,7 +3464,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

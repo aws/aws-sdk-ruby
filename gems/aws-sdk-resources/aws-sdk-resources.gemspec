@@ -250,6 +250,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-marketplacedeployment', '~> 1')
   spec.add_dependency('aws-sdk-marketplaceentitlementservice', '~> 1')
   spec.add_dependency('aws-sdk-marketplacemetering', '~> 1')
+  spec.add_dependency('aws-sdk-marketplacereporting', '~> 1')
   spec.add_dependency('aws-sdk-mediaconnect', '~> 1')
   spec.add_dependency('aws-sdk-mediaconvert', '~> 1')
   spec.add_dependency('aws-sdk-medialive', '~> 1')
