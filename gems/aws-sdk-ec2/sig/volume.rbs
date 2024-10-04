@@ -18,32 +18,8 @@ module Aws
       def id: () -> String
       alias volume_id id
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#attachments-instance_method
-      def attachments: () -> ::Array[Types::VolumeAttachment]
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#availability_zone-instance_method
-      def availability_zone: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#create_time-instance_method
-      def create_time: () -> ::Time
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#encrypted-instance_method
-      def encrypted: () -> bool
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#kms_key_id-instance_method
-      def kms_key_id: () -> ::String
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#outpost_arn-instance_method
       def outpost_arn: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#size-instance_method
-      def size: () -> ::Integer
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#snapshot_id-instance_method
-      def snapshot_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#state-instance_method
-      def state: () -> ("creating" | "available" | "in-use" | "deleting" | "deleted" | "error")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#iops-instance_method
       def iops: () -> ::Integer
@@ -65,6 +41,30 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#sse_type-instance_method
       def sse_type: () -> ("sse-ebs" | "sse-kms" | "none")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#size-instance_method
+      def size: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#snapshot_id-instance_method
+      def snapshot_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#availability_zone-instance_method
+      def availability_zone: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#state-instance_method
+      def state: () -> ("creating" | "available" | "in-use" | "deleting" | "deleted" | "error")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#create_time-instance_method
+      def create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#attachments-instance_method
+      def attachments: () -> ::Array[Types::VolumeAttachment]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#encrypted-instance_method
+      def encrypted: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#kms_key_id-instance_method
+      def kms_key_id: () -> ::String
 
       def client: () -> Client
 
@@ -145,15 +145,15 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#describe_status-instance_method
       def describe_status: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?dry_run: bool,
                              ?filters: Array[
                                {
                                  name: ::String?,
                                  values: Array[::String]?
                                },
-                             ],
-                             ?max_results: ::Integer,
-                             ?next_token: ::String,
-                             ?dry_run: bool
+                             ]
                            ) -> Types::DescribeVolumeStatusResult
                          | (?Hash[Symbol, untyped]) -> Types::DescribeVolumeStatusResult
 
@@ -183,16 +183,16 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#snapshots-instance_method
       def snapshots: (
+                       ?owner_ids: Array[::String],
+                       ?restorable_by_user_ids: Array[::String],
+                       ?snapshot_ids: Array[::String],
+                       ?dry_run: bool,
                        ?filters: Array[
                          {
                            name: ::String?,
                            values: Array[::String]?
                          },
-                       ],
-                       ?owner_ids: Array[::String],
-                       ?restorable_by_user_ids: Array[::String],
-                       ?snapshot_ids: Array[::String],
-                       ?dry_run: bool
+                       ]
                      ) -> Snapshot::Collection
                    | (?Hash[Symbol, untyped]) -> Snapshot::Collection
 

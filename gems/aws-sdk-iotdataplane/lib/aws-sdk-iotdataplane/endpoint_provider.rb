@@ -32,7 +32,7 @@ module Aws::IoTDataPlane
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
               if Aws::Endpoints::Matchers.string_equals?(region, "ca-central-1")
                 return Aws::Endpoints::Endpoint.new(url: "https://data.iot-fips.ca-central-1.amazonaws.com", headers: {}, properties: {})
               end

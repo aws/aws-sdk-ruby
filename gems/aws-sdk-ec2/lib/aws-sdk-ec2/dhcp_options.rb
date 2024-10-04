@@ -35,12 +35,6 @@ module Aws::EC2
     end
     alias :dhcp_options_id :id
 
-    # The DHCP options in the set.
-    # @return [Array<Types::DhcpConfiguration>]
-    def dhcp_configurations
-      data[:dhcp_configurations]
-    end
-
     # The ID of the Amazon Web Services account that owns the DHCP options
     # set.
     # @return [String]
@@ -52,6 +46,12 @@ module Aws::EC2
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
+    end
+
+    # The DHCP options in the set.
+    # @return [Array<Types::DhcpConfiguration>]
+    def dhcp_configurations
+      data[:dhcp_configurations]
     end
 
     # @!endgroup

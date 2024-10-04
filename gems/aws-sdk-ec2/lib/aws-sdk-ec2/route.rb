@@ -277,14 +277,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   route.delete({
-    #     destination_ipv_6_cidr_block: "String",
     #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
+    #     destination_ipv_6_cidr_block: "String",
     #   })
     # @param [Hash] options ({})
-    # @option options [String] :destination_ipv_6_cidr_block
-    #   The IPv6 CIDR range for the route. The value you specify must match
-    #   the CIDR for the route exactly.
     # @option options [String] :destination_prefix_list_id
     #   The ID of the prefix list for the route.
     # @option options [Boolean] :dry_run
@@ -292,6 +289,9 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :destination_ipv_6_cidr_block
+    #   The IPv6 CIDR range for the route. The value you specify must match
+    #   the CIDR for the route exactly.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(
@@ -307,60 +307,60 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   route.replace({
-    #     destination_ipv_6_cidr_block: "String",
     #     destination_prefix_list_id: "PrefixListResourceId",
-    #     dry_run: false,
     #     vpc_endpoint_id: "VpcEndpointId",
-    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
-    #     gateway_id: "RouteGatewayId",
-    #     instance_id: "InstanceId",
     #     local_target: false,
-    #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
     #     local_gateway_id: "LocalGatewayId",
     #     carrier_gateway_id: "CarrierGatewayId",
+    #     core_network_arn: "CoreNetworkArn",
+    #     dry_run: false,
+    #     gateway_id: "RouteGatewayId",
+    #     destination_ipv_6_cidr_block: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     instance_id: "InstanceId",
     #     network_interface_id: "NetworkInterfaceId",
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
-    #     core_network_arn: "CoreNetworkArn",
+    #     nat_gateway_id: "NatGatewayId",
     #   })
     # @param [Hash] options ({})
-    # @option options [String] :destination_ipv_6_cidr_block
-    #   The IPv6 CIDR address block used for the destination match. The value
-    #   that you provide must match the CIDR of an existing route in the
-    #   table.
     # @option options [String] :destination_prefix_list_id
     #   The ID of the prefix list for the route.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :vpc_endpoint_id
     #   The ID of a VPC endpoint. Supported for Gateway Load Balancer
     #   endpoints only.
-    # @option options [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
-    # @option options [String] :gateway_id
-    #   The ID of an internet gateway or virtual private gateway.
-    # @option options [String] :instance_id
-    #   The ID of a NAT instance in your VPC.
     # @option options [Boolean] :local_target
     #   Specifies whether to reset the local route to its default target
     #   (`local`).
-    # @option options [String] :nat_gateway_id
-    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @option options [String] :transit_gateway_id
     #   The ID of a transit gateway.
     # @option options [String] :local_gateway_id
     #   The ID of the local gateway.
     # @option options [String] :carrier_gateway_id
     #   \[IPv4 traffic only\] The ID of a carrier gateway.
+    # @option options [String] :core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :gateway_id
+    #   The ID of an internet gateway or virtual private gateway.
+    # @option options [String] :destination_ipv_6_cidr_block
+    #   The IPv6 CIDR address block used for the destination match. The value
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
+    # @option options [String] :egress_only_internet_gateway_id
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
+    # @option options [String] :instance_id
+    #   The ID of a NAT instance in your VPC.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
-    # @option options [String] :core_network_arn
-    #   The Amazon Resource Name (ARN) of the core network.
+    # @option options [String] :nat_gateway_id
+    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @return [EmptyStructure]
     def replace(options = {})
       options = options.merge(

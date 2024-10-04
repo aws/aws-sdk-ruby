@@ -35,58 +35,6 @@ module Aws::EC2
     end
     alias :image_id :id
 
-    # The architecture of the image.
-    # @return [String]
-    def architecture
-      data[:architecture]
-    end
-
-    # The date and time the image was created.
-    # @return [String]
-    def creation_date
-      data[:creation_date]
-    end
-
-    # The location of the AMI.
-    # @return [String]
-    def image_location
-      data[:image_location]
-    end
-
-    # The type of image.
-    # @return [String]
-    def image_type
-      data[:image_type]
-    end
-
-    # Indicates whether the image has public launch permissions. The value
-    # is `true` if this image has public launch permissions or `false` if it
-    # has only implicit and explicit launch permissions.
-    # @return [Boolean]
-    def public
-      data[:public]
-    end
-
-    # The kernel associated with the image, if any. Only applicable for
-    # machine images.
-    # @return [String]
-    def kernel_id
-      data[:kernel_id]
-    end
-
-    # The ID of the Amazon Web Services account that owns the image.
-    # @return [String]
-    def owner_id
-      data[:owner_id]
-    end
-
-    # This value is set to `windows` for Windows AMIs; otherwise, it is
-    # blank.
-    # @return [String]
-    def platform
-      data[:platform]
-    end
-
     # The platform details associated with the billing code of the AMI. For
     # more information, see [Understand AMI billing information][1] in the
     # *Amazon EC2 User Guide*.
@@ -117,26 +65,6 @@ module Aws::EC2
     # @return [String]
     def usage_operation
       data[:usage_operation]
-    end
-
-    # Any product codes associated with the AMI.
-    # @return [Array<Types::ProductCode>]
-    def product_codes
-      data[:product_codes]
-    end
-
-    # The RAM disk associated with the image, if any. Only applicable for
-    # machine images.
-    # @return [String]
-    def ramdisk_id
-      data[:ramdisk_id]
-    end
-
-    # The current state of the AMI. If the state is `available`, the image
-    # is successfully registered and can be used to launch an instance.
-    # @return [String]
-    def state
-      data[:state]
     end
 
     # Any block device mapping entries.
@@ -292,6 +220,78 @@ module Aws::EC2
     # @return [String]
     def last_launched_time
       data[:last_launched_time]
+    end
+
+    # The location of the AMI.
+    # @return [String]
+    def image_location
+      data[:image_location]
+    end
+
+    # The current state of the AMI. If the state is `available`, the image
+    # is successfully registered and can be used to launch an instance.
+    # @return [String]
+    def state
+      data[:state]
+    end
+
+    # The ID of the Amazon Web Services account that owns the image.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
+    # The date and time the image was created.
+    # @return [String]
+    def creation_date
+      data[:creation_date]
+    end
+
+    # Indicates whether the image has public launch permissions. The value
+    # is `true` if this image has public launch permissions or `false` if it
+    # has only implicit and explicit launch permissions.
+    # @return [Boolean]
+    def public
+      data[:public]
+    end
+
+    # Any product codes associated with the AMI.
+    # @return [Array<Types::ProductCode>]
+    def product_codes
+      data[:product_codes]
+    end
+
+    # The architecture of the image.
+    # @return [String]
+    def architecture
+      data[:architecture]
+    end
+
+    # The type of image.
+    # @return [String]
+    def image_type
+      data[:image_type]
+    end
+
+    # The kernel associated with the image, if any. Only applicable for
+    # machine images.
+    # @return [String]
+    def kernel_id
+      data[:kernel_id]
+    end
+
+    # The RAM disk associated with the image, if any. Only applicable for
+    # machine images.
+    # @return [String]
+    def ramdisk_id
+      data[:ramdisk_id]
+    end
+
+    # This value is set to `windows` for Windows AMIs; otherwise, it is
+    # blank.
+    # @return [String]
+    def platform
+      data[:platform]
     end
 
     # @!endgroup
@@ -608,18 +608,18 @@ module Aws::EC2
     #     launch_permission: {
     #       add: [
     #         {
-    #           group: "all", # accepts all
-    #           user_id: "String",
     #           organization_arn: "String",
     #           organizational_unit_arn: "String",
+    #           user_id: "String",
+    #           group: "all", # accepts all
     #         },
     #       ],
     #       remove: [
     #         {
-    #           group: "all", # accepts all
-    #           user_id: "String",
     #           organization_arn: "String",
     #           organizational_unit_arn: "String",
+    #           user_id: "String",
+    #           group: "all", # accepts all
     #         },
     #       ],
     #     },
@@ -628,10 +628,10 @@ module Aws::EC2
     #     user_groups: ["String"],
     #     user_ids: ["String"],
     #     value: "String",
-    #     dry_run: false,
     #     organization_arns: ["String"],
     #     organizational_unit_arns: ["String"],
     #     imds_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :attribute
@@ -656,11 +656,6 @@ module Aws::EC2
     # @option options [String] :value
     #   The value of the attribute being modified. This parameter can be used
     #   only when the `Attribute` parameter is `description` or `imdsSupport`.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :organization_arns
     #   The Amazon Resource Name (ARN) of an organization. This parameter can
     #   be used only when the `Attribute` parameter is `launchPermission`.
@@ -683,6 +678,11 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(image_id: @id)

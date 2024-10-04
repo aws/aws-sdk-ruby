@@ -18,38 +18,17 @@ module Aws
       def id: () -> String
       alias subnet_id id
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#availability_zone-instance_method
-      def availability_zone: () -> ::String
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#availability_zone_id-instance_method
       def availability_zone_id: () -> ::String
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#available_ip_address_count-instance_method
-      def available_ip_address_count: () -> ::Integer
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#cidr_block-instance_method
-      def cidr_block: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#default_for_az-instance_method
-      def default_for_az: () -> bool
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#enable_lni_at_device_index-instance_method
       def enable_lni_at_device_index: () -> ::Integer
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#map_public_ip_on_launch-instance_method
-      def map_public_ip_on_launch: () -> bool
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#map_customer_owned_ip_on_launch-instance_method
       def map_customer_owned_ip_on_launch: () -> bool
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#customer_owned_ipv_4_pool-instance_method
       def customer_owned_ipv_4_pool: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#state-instance_method
-      def state: () -> ("pending" | "available" | "unavailable")
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#vpc_id-instance_method
-      def vpc_id: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#owner_id-instance_method
       def owner_id: () -> ::String
@@ -78,6 +57,27 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#private_dns_name_options_on_launch-instance_method
       def private_dns_name_options_on_launch: () -> Types::PrivateDnsNameOptionsOnLaunch
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#state-instance_method
+      def state: () -> ("pending" | "available" | "unavailable")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#vpc_id-instance_method
+      def vpc_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#cidr_block-instance_method
+      def cidr_block: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#available_ip_address_count-instance_method
+      def available_ip_address_count: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#availability_zone-instance_method
+      def availability_zone: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#default_for_az-instance_method
+      def default_for_az: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#map_public_ip_on_launch-instance_method
+      def map_public_ip_on_launch: () -> bool
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#load-instance_method
@@ -95,8 +95,6 @@ module Aws
       def create_instances: (
                               ?block_device_mappings: Array[
                                 {
-                                  device_name: ::String?,
-                                  virtual_name: ::String?,
                                   ebs: {
                                     delete_on_termination: bool?,
                                     iops: ::Integer?,
@@ -108,7 +106,9 @@ module Aws
                                     outpost_arn: ::String?,
                                     encrypted: bool?
                                   }?,
-                                  no_device: ::String?
+                                  no_device: ::String?,
+                                  device_name: ::String?,
+                                  virtual_name: ::String?
                                 },
                               ],
                               ?image_id: ::String,
@@ -128,7 +128,6 @@ module Aws
                                 enabled: bool
                               },
                               ?placement: {
-                                availability_zone: ::String?,
                                 affinity: ::String?,
                                 group_name: ::String?,
                                 partition_number: ::Integer?,
@@ -136,76 +135,13 @@ module Aws
                                 tenancy: ("default" | "dedicated" | "host")?,
                                 spread_domain: ::String?,
                                 host_resource_group_arn: ::String?,
-                                group_id: ::String?
+                                group_id: ::String?,
+                                availability_zone: ::String?
                               },
                               ?ramdisk_id: ::String,
                               ?security_group_ids: Array[::String],
                               ?security_groups: Array[::String],
                               ?user_data: ::String,
-                              ?additional_info: ::String,
-                              ?client_token: ::String,
-                              ?disable_api_termination: bool,
-                              ?dry_run: bool,
-                              ?ebs_optimized: bool,
-                              ?iam_instance_profile: {
-                                arn: ::String?,
-                                name: ::String?
-                              },
-                              ?instance_initiated_shutdown_behavior: ("stop" | "terminate"),
-                              ?network_interfaces: Array[
-                                {
-                                  associate_public_ip_address: bool?,
-                                  delete_on_termination: bool?,
-                                  description: ::String?,
-                                  device_index: ::Integer?,
-                                  groups: Array[::String]?,
-                                  ipv_6_address_count: ::Integer?,
-                                  ipv_6_addresses: Array[
-                                    {
-                                      ipv_6_address: ::String?,
-                                      is_primary_ipv_6: bool?
-                                    },
-                                  ]?,
-                                  network_interface_id: ::String?,
-                                  private_ip_address: ::String?,
-                                  private_ip_addresses: Array[
-                                    {
-                                      primary: bool?,
-                                      private_ip_address: ::String?
-                                    },
-                                  ]?,
-                                  secondary_private_ip_address_count: ::Integer?,
-                                  subnet_id: ::String?,
-                                  associate_carrier_ip_address: bool?,
-                                  interface_type: ::String?,
-                                  network_card_index: ::Integer?,
-                                  ipv_4_prefixes: Array[
-                                    {
-                                      ipv_4_prefix: ::String?
-                                    },
-                                  ]?,
-                                  ipv_4_prefix_count: ::Integer?,
-                                  ipv_6_prefixes: Array[
-                                    {
-                                      ipv_6_prefix: ::String?
-                                    },
-                                  ]?,
-                                  ipv_6_prefix_count: ::Integer?,
-                                  primary_ipv_6: bool?,
-                                  ena_srd_specification: {
-                                    ena_srd_enabled: bool?,
-                                    ena_srd_udp_specification: {
-                                      ena_srd_udp_enabled: bool?
-                                    }?
-                                  }?,
-                                  connection_tracking_specification: {
-                                    tcp_established_timeout: ::Integer?,
-                                    udp_stream_timeout: ::Integer?,
-                                    udp_timeout: ::Integer?
-                                  }?
-                                },
-                              ],
-                              ?private_ip_address: ::String,
                               ?elastic_gpu_specification: Array[
                                 {
                                   type: ::String
@@ -285,30 +221,76 @@ module Aws
                                 auto_recovery: ("disabled" | "default")?
                               },
                               ?disable_api_stop: bool,
-                              ?enable_primary_ipv_6: bool
+                              ?enable_primary_ipv_6: bool,
+                              ?dry_run: bool,
+                              ?disable_api_termination: bool,
+                              ?instance_initiated_shutdown_behavior: ("stop" | "terminate"),
+                              ?private_ip_address: ::String,
+                              ?client_token: ::String,
+                              ?additional_info: ::String,
+                              ?network_interfaces: Array[
+                                {
+                                  associate_public_ip_address: bool?,
+                                  delete_on_termination: bool?,
+                                  description: ::String?,
+                                  device_index: ::Integer?,
+                                  groups: Array[::String]?,
+                                  ipv_6_address_count: ::Integer?,
+                                  ipv_6_addresses: Array[
+                                    {
+                                      ipv_6_address: ::String?,
+                                      is_primary_ipv_6: bool?
+                                    },
+                                  ]?,
+                                  network_interface_id: ::String?,
+                                  private_ip_address: ::String?,
+                                  private_ip_addresses: Array[
+                                    {
+                                      primary: bool?,
+                                      private_ip_address: ::String?
+                                    },
+                                  ]?,
+                                  secondary_private_ip_address_count: ::Integer?,
+                                  subnet_id: ::String?,
+                                  associate_carrier_ip_address: bool?,
+                                  interface_type: ::String?,
+                                  network_card_index: ::Integer?,
+                                  ipv_4_prefixes: Array[
+                                    {
+                                      ipv_4_prefix: ::String?
+                                    },
+                                  ]?,
+                                  ipv_4_prefix_count: ::Integer?,
+                                  ipv_6_prefixes: Array[
+                                    {
+                                      ipv_6_prefix: ::String?
+                                    },
+                                  ]?,
+                                  ipv_6_prefix_count: ::Integer?,
+                                  primary_ipv_6: bool?,
+                                  ena_srd_specification: {
+                                    ena_srd_enabled: bool?,
+                                    ena_srd_udp_specification: {
+                                      ena_srd_udp_enabled: bool?
+                                    }?
+                                  }?,
+                                  connection_tracking_specification: {
+                                    tcp_established_timeout: ::Integer?,
+                                    udp_stream_timeout: ::Integer?,
+                                    udp_timeout: ::Integer?
+                                  }?
+                                },
+                              ],
+                              ?iam_instance_profile: {
+                                arn: ::String?,
+                                name: ::String?
+                              },
+                              ?ebs_optimized: bool
                             ) -> Instance::Collection
                           | (?Hash[Symbol, untyped]) -> Instance::Collection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#create_network_interface-instance_method
       def create_network_interface: (
-                                      ?description: ::String,
-                                      ?dry_run: bool,
-                                      ?groups: Array[::String],
-                                      ?ipv_6_address_count: ::Integer,
-                                      ?ipv_6_addresses: Array[
-                                        {
-                                          ipv_6_address: ::String?,
-                                          is_primary_ipv_6: bool?
-                                        },
-                                      ],
-                                      ?private_ip_address: ::String,
-                                      ?private_ip_addresses: Array[
-                                        {
-                                          primary: bool?,
-                                          private_ip_address: ::String?
-                                        },
-                                      ],
-                                      ?secondary_private_ip_address_count: ::Integer,
                                       ?ipv_4_prefixes: Array[
                                         {
                                           ipv_4_prefix: ::String?
@@ -339,7 +321,25 @@ module Aws
                                         tcp_established_timeout: ::Integer?,
                                         udp_stream_timeout: ::Integer?,
                                         udp_timeout: ::Integer?
-                                      }
+                                      },
+                                      ?description: ::String,
+                                      ?private_ip_address: ::String,
+                                      ?groups: Array[::String],
+                                      ?private_ip_addresses: Array[
+                                        {
+                                          primary: bool?,
+                                          private_ip_address: ::String?
+                                        },
+                                      ],
+                                      ?secondary_private_ip_address_count: ::Integer,
+                                      ?ipv_6_addresses: Array[
+                                        {
+                                          ipv_6_address: ::String?,
+                                          is_primary_ipv_6: bool?
+                                        },
+                                      ],
+                                      ?ipv_6_address_count: ::Integer,
+                                      ?dry_run: bool
                                     ) -> NetworkInterface
                                   | (?Hash[Symbol, untyped]) -> NetworkInterface
 
@@ -375,14 +375,14 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#instances-instance_method
       def instances: (
+                       ?instance_ids: Array[::String],
+                       ?dry_run: bool,
                        ?filters: Array[
                          {
                            name: ::String?,
                            values: Array[::String]?
                          },
-                       ],
-                       ?instance_ids: Array[::String],
-                       ?dry_run: bool
+                       ]
                      ) -> Instance::Collection
                    | (?Hash[Symbol, untyped]) -> Instance::Collection
 
@@ -401,14 +401,14 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#network_interfaces-instance_method
       def network_interfaces: (
+                                ?dry_run: bool,
+                                ?network_interface_ids: Array[::String],
                                 ?filters: Array[
                                   {
                                     name: ::String?,
                                     values: Array[::String]?
                                   },
-                                ],
-                                ?dry_run: bool,
-                                ?network_interface_ids: Array[::String]
+                                ]
                               ) -> NetworkInterface::Collection
                             | (?Hash[Symbol, untyped]) -> NetworkInterface::Collection
 

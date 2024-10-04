@@ -108,26 +108,26 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#assign_private_ip_addresses-instance_method
       def assign_private_ip_addresses: (
-                                         ?allow_reassignment: bool,
+                                         ?ipv_4_prefixes: Array[::String],
+                                         ?ipv_4_prefix_count: ::Integer,
                                          ?private_ip_addresses: Array[::String],
                                          ?secondary_private_ip_address_count: ::Integer,
-                                         ?ipv_4_prefixes: Array[::String],
-                                         ?ipv_4_prefix_count: ::Integer
+                                         ?allow_reassignment: bool
                                        ) -> Types::AssignPrivateIpAddressesResult
                                      | (?Hash[Symbol, untyped]) -> Types::AssignPrivateIpAddressesResult
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#attach-instance_method
       def attach: (
-                    device_index: ::Integer,
-                    ?dry_run: bool,
-                    instance_id: ::String,
                     ?network_card_index: ::Integer,
                     ?ena_srd_specification: {
                       ena_srd_enabled: bool?,
                       ena_srd_udp_specification: {
                         ena_srd_udp_enabled: bool?
                       }?
-                    }
+                    },
+                    ?dry_run: bool,
+                    instance_id: ::String,
+                    device_index: ::Integer
                   ) -> Types::AttachNetworkInterfaceResult
                 | (?Hash[Symbol, untyped]) -> Types::AttachNetworkInterfaceResult
 
@@ -163,8 +163,8 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#describe_attribute-instance_method
       def describe_attribute: (
-                                ?attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment" | "associatePublicIpAddress"),
-                                ?dry_run: bool
+                                ?dry_run: bool,
+                                ?attribute: ("description" | "groupSet" | "sourceDestCheck" | "attachment" | "associatePublicIpAddress")
                               ) -> Types::DescribeNetworkInterfaceAttributeResult
                             | (?Hash[Symbol, untyped]) -> Types::DescribeNetworkInterfaceAttributeResult
 
@@ -177,16 +177,6 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#modify_attribute-instance_method
       def modify_attribute: (
-                              ?attachment: {
-                                attachment_id: ::String?,
-                                delete_on_termination: bool?
-                              },
-                              ?description: untyped,
-                              ?dry_run: bool,
-                              ?groups: Array[::String],
-                              ?source_dest_check: {
-                                value: bool?
-                              },
                               ?ena_srd_specification: {
                                 ena_srd_enabled: bool?,
                                 ena_srd_udp_specification: {
@@ -199,7 +189,17 @@ module Aws
                                 udp_stream_timeout: ::Integer?,
                                 udp_timeout: ::Integer?
                               },
-                              ?associate_public_ip_address: bool
+                              ?associate_public_ip_address: bool,
+                              ?dry_run: bool,
+                              ?description: untyped,
+                              ?source_dest_check: {
+                                value: bool?
+                              },
+                              ?groups: Array[::String],
+                              ?attachment: {
+                                attachment_id: ::String?,
+                                delete_on_termination: bool?
+                              }
                             ) -> ::Aws::EmptyStructure
                           | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 
@@ -212,8 +212,8 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#unassign_private_ip_addresses-instance_method
       def unassign_private_ip_addresses: (
-                                           ?private_ip_addresses: Array[::String],
-                                           ?ipv_4_prefixes: Array[::String]
+                                           ?ipv_4_prefixes: Array[::String],
+                                           ?private_ip_addresses: Array[::String]
                                          ) -> ::Aws::EmptyStructure
                                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 

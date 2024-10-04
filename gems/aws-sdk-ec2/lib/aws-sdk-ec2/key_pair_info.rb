@@ -41,33 +41,6 @@ module Aws::EC2
       data[:key_pair_id]
     end
 
-    # If you used CreateKeyPair to create the key pair:
-    #
-    # * For RSA key pairs, the key fingerprint is the SHA-1 digest of the
-    #   DER encoded private key.
-    #
-    # * For ED25519 key pairs, the key fingerprint is the base64-encoded
-    #   SHA-256 digest, which is the default for OpenSSH, starting with
-    #   [OpenSSH 6.8][1].
-    #
-    # If you used ImportKeyPair to provide Amazon Web Services the public
-    # key:
-    #
-    # * For RSA key pairs, the key fingerprint is the MD5 public key
-    #   fingerprint as specified in section 4 of RFC4716.
-    #
-    # * For ED25519 key pairs, the key fingerprint is the base64-encoded
-    #   SHA-256 digest, which is the default for OpenSSH, starting with
-    #   [OpenSSH 6.8][1].
-    #
-    #
-    #
-    # [1]: http://www.openssh.com/txt/release-6.8
-    # @return [String]
-    def key_fingerprint
-      data[:key_fingerprint]
-    end
-
     # The type of key pair.
     # @return [String]
     def key_type
@@ -100,6 +73,33 @@ module Aws::EC2
     # @return [Time]
     def create_time
       data[:create_time]
+    end
+
+    # If you used CreateKeyPair to create the key pair:
+    #
+    # * For RSA key pairs, the key fingerprint is the SHA-1 digest of the
+    #   DER encoded private key.
+    #
+    # * For ED25519 key pairs, the key fingerprint is the base64-encoded
+    #   SHA-256 digest, which is the default for OpenSSH, starting with
+    #   [OpenSSH 6.8][1].
+    #
+    # If you used ImportKeyPair to provide Amazon Web Services the public
+    # key:
+    #
+    # * For RSA key pairs, the key fingerprint is the MD5 public key
+    #   fingerprint as specified in section 4 of RFC4716.
+    #
+    # * For ED25519 key pairs, the key fingerprint is the base64-encoded
+    #   SHA-256 digest, which is the default for OpenSSH, starting with
+    #   [OpenSSH 6.8][1].
+    #
+    #
+    #
+    # [1]: http://www.openssh.com/txt/release-6.8
+    # @return [String]
+    def key_fingerprint
+      data[:key_fingerprint]
     end
 
     # @!endgroup

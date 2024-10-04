@@ -78,7 +78,7 @@ module Aws::EC2
   autoload :VpcPeeringConnection, 'aws-sdk-ec2/vpc_peering_connection'
   autoload :VpcAddress, 'aws-sdk-ec2/vpc_address'
 
-  GEM_VERSION = '1.479.0'
+  GEM_VERSION = '1.480.0'
 
 end
 

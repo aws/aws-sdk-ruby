@@ -51,21 +51,21 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkAcl.html#create_entry-instance_method
       def create_entry: (
-                          ?cidr_block: ::String,
                           ?dry_run: bool,
+                          rule_number: ::Integer,
+                          protocol: ::String,
+                          rule_action: ("allow" | "deny"),
                           egress: bool,
+                          ?cidr_block: ::String,
+                          ?ipv_6_cidr_block: ::String,
                           ?icmp_type_code: {
                             code: ::Integer?,
                             type: ::Integer?
                           },
-                          ?ipv_6_cidr_block: ::String,
                           ?port_range: {
                             from: ::Integer?,
                             to: ::Integer?
-                          },
-                          protocol: ::String,
-                          rule_action: ("allow" | "deny"),
-                          rule_number: ::Integer
+                          }
                         ) -> ::Aws::EmptyStructure
                       | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 
@@ -102,35 +102,35 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkAcl.html#delete_entry-instance_method
       def delete_entry: (
                           ?dry_run: bool,
-                          egress: bool,
-                          rule_number: ::Integer
+                          rule_number: ::Integer,
+                          egress: bool
                         ) -> ::Aws::EmptyStructure
                       | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkAcl.html#replace_association-instance_method
       def replace_association: (
-                                 association_id: ::String,
-                                 ?dry_run: bool
+                                 ?dry_run: bool,
+                                 association_id: ::String
                                ) -> Types::ReplaceNetworkAclAssociationResult
                              | (?Hash[Symbol, untyped]) -> Types::ReplaceNetworkAclAssociationResult
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkAcl.html#replace_entry-instance_method
       def replace_entry: (
-                           ?cidr_block: ::String,
                            ?dry_run: bool,
+                           rule_number: ::Integer,
+                           protocol: ::String,
+                           rule_action: ("allow" | "deny"),
                            egress: bool,
+                           ?cidr_block: ::String,
+                           ?ipv_6_cidr_block: ::String,
                            ?icmp_type_code: {
                              code: ::Integer?,
                              type: ::Integer?
                            },
-                           ?ipv_6_cidr_block: ::String,
                            ?port_range: {
                              from: ::Integer?,
                              to: ::Integer?
-                           },
-                           protocol: ::String,
-                           rule_action: ("allow" | "deny"),
-                           rule_number: ::Integer
+                           }
                          ) -> ::Aws::EmptyStructure
                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 

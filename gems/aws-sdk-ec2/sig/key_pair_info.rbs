@@ -21,9 +21,6 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#key_pair_id-instance_method
       def key_pair_id: () -> ::String
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#key_fingerprint-instance_method
-      def key_fingerprint: () -> ::String
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#key_type-instance_method
       def key_type: () -> ("rsa" | "ed25519")
 
@@ -35,6 +32,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#create_time-instance_method
       def create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#key_fingerprint-instance_method
+      def key_fingerprint: () -> ::String
 
       def client: () -> Client
 

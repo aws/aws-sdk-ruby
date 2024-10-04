@@ -18,15 +18,6 @@ module Aws
       def id: () -> String
       alias vpc_id id
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#cidr_block-instance_method
-      def cidr_block: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#dhcp_options_id-instance_method
-      def dhcp_options_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#state-instance_method
-      def state: () -> ("pending" | "available")
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#owner_id-instance_method
       def owner_id: () -> ::String
 
@@ -44,6 +35,15 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#tags-instance_method
       def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#state-instance_method
+      def state: () -> ("pending" | "available")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#cidr_block-instance_method
+      def cidr_block: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#dhcp_options_id-instance_method
+      def dhcp_options_id: () -> ::String
 
       def client: () -> Client
 
@@ -79,8 +79,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#attach_classic_link_instance-instance_method
       def attach_classic_link_instance: (
                                           ?dry_run: bool,
-                                          groups: Array[::String],
-                                          instance_id: ::String
+                                          instance_id: ::String,
+                                          groups: Array[::String]
                                         ) -> Types::AttachClassicLinkVpcResult
                                       | (?Hash[Symbol, untyped]) -> Types::AttachClassicLinkVpcResult
 
@@ -93,7 +93,6 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#create_network_acl-instance_method
       def create_network_acl: (
-                                ?dry_run: bool,
                                 ?tag_specifications: Array[
                                   {
                                     resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "ipam-external-resource-verification-token")?,
@@ -105,13 +104,13 @@ module Aws
                                     ]?
                                   },
                                 ],
-                                ?client_token: ::String
+                                ?client_token: ::String,
+                                ?dry_run: bool
                               ) -> NetworkAcl
                             | (?Hash[Symbol, untyped]) -> NetworkAcl
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#create_route_table-instance_method
       def create_route_table: (
-                                ?dry_run: bool,
                                 ?tag_specifications: Array[
                                   {
                                     resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "ipam-external-resource-verification-token")?,
@@ -123,7 +122,8 @@ module Aws
                                     ]?
                                   },
                                 ],
-                                ?client_token: ::String
+                                ?client_token: ::String,
+                                ?dry_run: bool
                               ) -> RouteTable
                             | (?Hash[Symbol, untyped]) -> RouteTable
 
@@ -164,12 +164,12 @@ module Aws
                            ?cidr_block: ::String,
                            ?ipv_6_cidr_block: ::String,
                            ?outpost_arn: ::String,
-                           ?dry_run: bool,
                            ?ipv_6_native: bool,
                            ?ipv_4_ipam_pool_id: ::String,
                            ?ipv_4_netmask_length: ::Integer,
                            ?ipv_6_ipam_pool_id: ::String,
-                           ?ipv_6_netmask_length: ::Integer
+                           ?ipv_6_netmask_length: ::Integer,
+                           ?dry_run: bool
                          ) -> Subnet
                        | (?Hash[Symbol, untyped]) -> Subnet
 
@@ -252,9 +252,6 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#request_vpc_peering_connection-instance_method
       def request_vpc_peering_connection: (
-                                            ?dry_run: bool,
-                                            ?peer_owner_id: ::String,
-                                            ?peer_vpc_id: ::String,
                                             ?peer_region: ::String,
                                             ?tag_specifications: Array[
                                               {
@@ -266,20 +263,23 @@ module Aws
                                                   },
                                                 ]?
                                               },
-                                            ]
+                                            ],
+                                            ?dry_run: bool,
+                                            ?peer_vpc_id: ::String,
+                                            ?peer_owner_id: ::String
                                           ) -> VpcPeeringConnection
                                         | (?Hash[Symbol, untyped]) -> VpcPeeringConnection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#accepted_vpc_peering_connections-instance_method
       def accepted_vpc_peering_connections: (
+                                              ?dry_run: bool,
+                                              ?vpc_peering_connection_ids: Array[::String],
                                               ?filters: Array[
                                                 {
                                                   name: ::String?,
                                                   values: Array[::String]?
                                                 },
-                                              ],
-                                              ?dry_run: bool,
-                                              ?vpc_peering_connection_ids: Array[::String]
+                                              ]
                                             ) -> VpcPeeringConnection::Collection
                                           | (?Hash[Symbol, untyped]) -> VpcPeeringConnection::Collection
 
@@ -288,93 +288,93 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#instances-instance_method
       def instances: (
+                       ?instance_ids: Array[::String],
+                       ?dry_run: bool,
                        ?filters: Array[
                          {
                            name: ::String?,
                            values: Array[::String]?
                          },
-                       ],
-                       ?instance_ids: Array[::String],
-                       ?dry_run: bool
+                       ]
                      ) -> Instance::Collection
                    | (?Hash[Symbol, untyped]) -> Instance::Collection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#internet_gateways-instance_method
       def internet_gateways: (
+                               ?dry_run: bool,
+                               ?internet_gateway_ids: Array[::String],
                                ?filters: Array[
                                  {
                                    name: ::String?,
                                    values: Array[::String]?
                                  },
-                               ],
-                               ?dry_run: bool,
-                               ?internet_gateway_ids: Array[::String]
+                               ]
                              ) -> InternetGateway::Collection
                            | (?Hash[Symbol, untyped]) -> InternetGateway::Collection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#network_acls-instance_method
       def network_acls: (
+                          ?dry_run: bool,
+                          ?network_acl_ids: Array[::String],
                           ?filters: Array[
                             {
                               name: ::String?,
                               values: Array[::String]?
                             },
-                          ],
-                          ?dry_run: bool,
-                          ?network_acl_ids: Array[::String]
+                          ]
                         ) -> NetworkAcl::Collection
                       | (?Hash[Symbol, untyped]) -> NetworkAcl::Collection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#network_interfaces-instance_method
       def network_interfaces: (
+                                ?dry_run: bool,
+                                ?network_interface_ids: Array[::String],
                                 ?filters: Array[
                                   {
                                     name: ::String?,
                                     values: Array[::String]?
                                   },
-                                ],
-                                ?dry_run: bool,
-                                ?network_interface_ids: Array[::String]
+                                ]
                               ) -> NetworkInterface::Collection
                             | (?Hash[Symbol, untyped]) -> NetworkInterface::Collection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#requested_vpc_peering_connections-instance_method
       def requested_vpc_peering_connections: (
+                                               ?dry_run: bool,
+                                               ?vpc_peering_connection_ids: Array[::String],
                                                ?filters: Array[
                                                  {
                                                    name: ::String?,
                                                    values: Array[::String]?
                                                  },
-                                               ],
-                                               ?dry_run: bool,
-                                               ?vpc_peering_connection_ids: Array[::String]
+                                               ]
                                              ) -> VpcPeeringConnection::Collection
                                            | (?Hash[Symbol, untyped]) -> VpcPeeringConnection::Collection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#route_tables-instance_method
       def route_tables: (
+                          ?dry_run: bool,
+                          ?route_table_ids: Array[::String],
                           ?filters: Array[
                             {
                               name: ::String?,
                               values: Array[::String]?
                             },
-                          ],
-                          ?dry_run: bool,
-                          ?route_table_ids: Array[::String]
+                          ]
                         ) -> RouteTable::Collection
                       | (?Hash[Symbol, untyped]) -> RouteTable::Collection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#security_groups-instance_method
       def security_groups: (
+                             ?group_ids: Array[::String],
+                             ?group_names: Array[::String],
+                             ?dry_run: bool,
                              ?filters: Array[
                                {
                                  name: ::String?,
                                  values: Array[::String]?
                                },
-                             ],
-                             ?group_ids: Array[::String],
-                             ?group_names: Array[::String],
-                             ?dry_run: bool
+                             ]
                            ) -> SecurityGroup::Collection
                          | (?Hash[Symbol, untyped]) -> SecurityGroup::Collection
 

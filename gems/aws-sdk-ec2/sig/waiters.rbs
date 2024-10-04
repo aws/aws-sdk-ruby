@@ -15,13 +15,13 @@ module Aws
 
         def wait: (
                     ?bundle_ids: Array[::String],
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?dry_run: bool
+                    ]
                   ) -> Client::_DescribeBundleTasksResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeBundleTasksResponseSuccess
       end
@@ -31,8 +31,8 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
-                    ?conversion_task_ids: Array[::String],
-                    ?dry_run: bool
+                    ?dry_run: bool,
+                    ?conversion_task_ids: Array[::String]
                   ) -> Client::_DescribeConversionTasksResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeConversionTasksResponseSuccess
       end
@@ -42,8 +42,8 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
-                    ?conversion_task_ids: Array[::String],
-                    ?dry_run: bool
+                    ?dry_run: bool,
+                    ?conversion_task_ids: Array[::String]
                   ) -> Client::_DescribeConversionTasksResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeConversionTasksResponseSuccess
       end
@@ -53,8 +53,8 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
-                    ?conversion_task_ids: Array[::String],
-                    ?dry_run: bool
+                    ?dry_run: bool,
+                    ?conversion_task_ids: Array[::String]
                   ) -> Client::_DescribeConversionTasksResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeConversionTasksResponseSuccess
       end
@@ -81,13 +81,13 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
-                    ?export_task_ids: Array[::String],
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ]
+                    ],
+                    ?export_task_ids: Array[::String]
                   ) -> Client::_DescribeExportTasksResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeExportTasksResponseSuccess
       end
@@ -97,13 +97,13 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
-                    ?export_task_ids: Array[::String],
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ]
+                    ],
+                    ?export_task_ids: Array[::String]
                   ) -> Client::_DescribeExportTasksResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeExportTasksResponseSuccess
       end
@@ -114,19 +114,19 @@ module Aws
 
         def wait: (
                     ?executable_users: Array[::String],
+                    ?image_ids: Array[::String],
+                    ?owners: Array[::String],
+                    ?include_deprecated: bool,
+                    ?include_disabled: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?image_ids: Array[::String],
-                    ?owners: Array[::String],
-                    ?include_deprecated: bool,
-                    ?include_disabled: bool,
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ]
                   ) -> Client::_DescribeImagesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeImagesResponseSuccess
       end
@@ -137,19 +137,19 @@ module Aws
 
         def wait: (
                     ?executable_users: Array[::String],
+                    ?image_ids: Array[::String],
+                    ?owners: Array[::String],
+                    ?include_deprecated: bool,
+                    ?include_disabled: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?image_ids: Array[::String],
-                    ?owners: Array[::String],
-                    ?include_deprecated: bool,
-                    ?include_disabled: bool,
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ]
                   ) -> Client::_DescribeImagesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeImagesResponseSuccess
       end
@@ -159,16 +159,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?instance_ids: Array[::String],
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?instance_ids: Array[::String],
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
                   ) -> Client::_DescribeInstancesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
       end
@@ -178,16 +178,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?instance_ids: Array[::String],
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?instance_ids: Array[::String],
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
                   ) -> Client::_DescribeInstancesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
       end
@@ -197,16 +197,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?instance_ids: Array[::String],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?instance_ids: Array[::String],
-                    ?max_results: ::Integer,
-                    ?next_token: ::String,
-                    ?dry_run: bool,
                     ?include_all_instances: bool
                   ) -> Client::_DescribeInstanceStatusResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeInstanceStatusResponseSuccess
@@ -217,16 +217,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?instance_ids: Array[::String],
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?instance_ids: Array[::String],
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
                   ) -> Client::_DescribeInstancesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
       end
@@ -236,16 +236,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?instance_ids: Array[::String],
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?instance_ids: Array[::String],
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
                   ) -> Client::_DescribeInstancesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
       end
@@ -255,16 +255,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?dry_run: bool,
+                    ?internet_gateway_ids: Array[::String],
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?dry_run: bool,
-                    ?internet_gateway_ids: Array[::String],
-                    ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ]
                   ) -> Client::_DescribeInternetGatewaysResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeInternetGatewaysResponseSuccess
       end
@@ -274,16 +274,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?key_names: Array[::String],
+                    ?key_pair_ids: Array[::String],
+                    ?include_public_key: bool,
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?key_names: Array[::String],
-                    ?key_pair_ids: Array[::String],
-                    ?dry_run: bool,
-                    ?include_public_key: bool
+                    ]
                   ) -> Client::_DescribeKeyPairsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeKeyPairsResponseSuccess
       end
@@ -331,16 +331,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?dry_run: bool,
+                    ?network_interface_ids: Array[::String],
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?dry_run: bool,
-                    ?network_interface_ids: Array[::String],
-                    ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ]
                   ) -> Client::_DescribeNetworkInterfacesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeNetworkInterfacesResponseSuccess
       end
@@ -361,17 +361,17 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?group_ids: Array[::String],
+                    ?group_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?group_ids: Array[::String],
-                    ?group_names: Array[::String],
-                    ?dry_run: bool,
-                    ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ]
                   ) -> Client::_DescribeSecurityGroupsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeSecurityGroupsResponseSuccess
       end
@@ -381,18 +381,18 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
-                    ?filters: Array[
-                      {
-                        name: ::String?,
-                        values: Array[::String]?
-                      },
-                    ],
                     ?max_results: ::Integer,
                     ?next_token: ::String,
                     ?owner_ids: Array[::String],
                     ?restorable_by_user_ids: Array[::String],
                     ?snapshot_ids: Array[::String],
-                    ?dry_run: bool
+                    ?dry_run: bool,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
                   ) -> Client::_DescribeSnapshotsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeSnapshotsResponseSuccess
       end
@@ -421,16 +421,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?dry_run: bool,
+                    ?spot_instance_request_ids: Array[::String],
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?dry_run: bool,
-                    ?spot_instance_request_ids: Array[::String],
-                    ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ]
                   ) -> Client::_DescribeSpotInstanceRequestsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeSpotInstanceRequestsResponseSuccess
       end
@@ -466,9 +466,9 @@ module Aws
                       },
                     ],
                     ?subnet_ids: Array[::String],
-                    ?dry_run: bool,
                     ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ?max_results: ::Integer,
+                    ?dry_run: bool
                   ) -> Client::_DescribeSubnetsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeSubnetsResponseSuccess
       end
@@ -478,16 +478,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?instance_ids: Array[::String],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?instance_ids: Array[::String],
-                    ?max_results: ::Integer,
-                    ?next_token: ::String,
-                    ?dry_run: bool,
                     ?include_all_instances: bool
                   ) -> Client::_DescribeInstanceStatusResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeInstanceStatusResponseSuccess
@@ -498,16 +498,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?volume_ids: Array[::String],
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?volume_ids: Array[::String],
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
                   ) -> Client::_DescribeVolumesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVolumesResponseSuccess
       end
@@ -517,16 +517,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?volume_ids: Array[::String],
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?volume_ids: Array[::String],
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
                   ) -> Client::_DescribeVolumesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVolumesResponseSuccess
       end
@@ -536,16 +536,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?volume_ids: Array[::String],
+                    ?dry_run: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
                     ],
-                    ?volume_ids: Array[::String],
-                    ?dry_run: bool,
-                    ?max_results: ::Integer,
-                    ?next_token: ::String
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
                   ) -> Client::_DescribeVolumesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVolumesResponseSuccess
       end
@@ -562,9 +562,9 @@ module Aws
                       },
                     ],
                     ?vpc_ids: Array[::String],
-                    ?dry_run: bool,
                     ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ?max_results: ::Integer,
+                    ?dry_run: bool
                   ) -> Client::_DescribeVpcsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcsResponseSuccess
       end
@@ -581,9 +581,9 @@ module Aws
                       },
                     ],
                     ?vpc_ids: Array[::String],
-                    ?dry_run: bool,
                     ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ?max_results: ::Integer,
+                    ?dry_run: bool
                   ) -> Client::_DescribeVpcsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcsResponseSuccess
       end
@@ -593,16 +593,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?dry_run: bool,
+                    ?vpc_peering_connection_ids: Array[::String],
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?dry_run: bool,
-                    ?vpc_peering_connection_ids: Array[::String],
-                    ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ]
                   ) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
       end
@@ -612,16 +612,16 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?dry_run: bool,
+                    ?vpc_peering_connection_ids: Array[::String],
                     ?filters: Array[
                       {
                         name: ::String?,
                         values: Array[::String]?
                       },
-                    ],
-                    ?dry_run: bool,
-                    ?vpc_peering_connection_ids: Array[::String],
-                    ?next_token: ::String,
-                    ?max_results: ::Integer
+                    ]
                   ) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
       end
