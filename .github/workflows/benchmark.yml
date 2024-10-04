@@ -73,7 +73,7 @@ jobs:
         run: bundle exec rake benchmark:check-regressions
 
       - name: Comment on PR
-        if: ${{ steps.regressions.outputs.message }}
+        if: ${{ github.event_name == 'pull_request' && steps.regressions.outputs.message }}
         uses: thollander/actions-comment-pull-request@main
         with:
           message: ${{ steps.regressions.outputs.message }}
