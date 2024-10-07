@@ -70,6 +70,14 @@ The endpoint provider used to resolve endpoints. Any object that responds to
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :create_ai_agent
+            Aws::QConnect::Endpoints::CreateAIAgent.build(context)
+          when :create_ai_agent_version
+            Aws::QConnect::Endpoints::CreateAIAgentVersion.build(context)
+          when :create_ai_prompt
+            Aws::QConnect::Endpoints::CreateAIPrompt.build(context)
+          when :create_ai_prompt_version
+            Aws::QConnect::Endpoints::CreateAIPromptVersion.build(context)
           when :create_assistant
             Aws::QConnect::Endpoints::CreateAssistant.build(context)
           when :create_assistant_association
@@ -84,6 +92,14 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QConnect::Endpoints::CreateQuickResponse.build(context)
           when :create_session
             Aws::QConnect::Endpoints::CreateSession.build(context)
+          when :delete_ai_agent
+            Aws::QConnect::Endpoints::DeleteAIAgent.build(context)
+          when :delete_ai_agent_version
+            Aws::QConnect::Endpoints::DeleteAIAgentVersion.build(context)
+          when :delete_ai_prompt
+            Aws::QConnect::Endpoints::DeleteAIPrompt.build(context)
+          when :delete_ai_prompt_version
+            Aws::QConnect::Endpoints::DeleteAIPromptVersion.build(context)
           when :delete_assistant
             Aws::QConnect::Endpoints::DeleteAssistant.build(context)
           when :delete_assistant_association
@@ -98,6 +114,10 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QConnect::Endpoints::DeleteKnowledgeBase.build(context)
           when :delete_quick_response
             Aws::QConnect::Endpoints::DeleteQuickResponse.build(context)
+          when :get_ai_agent
+            Aws::QConnect::Endpoints::GetAIAgent.build(context)
+          when :get_ai_prompt
+            Aws::QConnect::Endpoints::GetAIPrompt.build(context)
           when :get_assistant
             Aws::QConnect::Endpoints::GetAssistant.build(context)
           when :get_assistant_association
@@ -118,6 +138,14 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QConnect::Endpoints::GetRecommendations.build(context)
           when :get_session
             Aws::QConnect::Endpoints::GetSession.build(context)
+          when :list_ai_agent_versions
+            Aws::QConnect::Endpoints::ListAIAgentVersions.build(context)
+          when :list_ai_agents
+            Aws::QConnect::Endpoints::ListAIAgents.build(context)
+          when :list_ai_prompt_versions
+            Aws::QConnect::Endpoints::ListAIPromptVersions.build(context)
+          when :list_ai_prompts
+            Aws::QConnect::Endpoints::ListAIPrompts.build(context)
           when :list_assistant_associations
             Aws::QConnect::Endpoints::ListAssistantAssociations.build(context)
           when :list_assistants
@@ -140,6 +168,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QConnect::Endpoints::PutFeedback.build(context)
           when :query_assistant
             Aws::QConnect::Endpoints::QueryAssistant.build(context)
+          when :remove_assistant_ai_agent
+            Aws::QConnect::Endpoints::RemoveAssistantAIAgent.build(context)
           when :remove_knowledge_base_template_uri
             Aws::QConnect::Endpoints::RemoveKnowledgeBaseTemplateUri.build(context)
           when :search_content
@@ -156,6 +186,12 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QConnect::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::QConnect::Endpoints::UntagResource.build(context)
+          when :update_ai_agent
+            Aws::QConnect::Endpoints::UpdateAIAgent.build(context)
+          when :update_ai_prompt
+            Aws::QConnect::Endpoints::UpdateAIPrompt.build(context)
+          when :update_assistant_ai_agent
+            Aws::QConnect::Endpoints::UpdateAssistantAIAgent.build(context)
           when :update_content
             Aws::QConnect::Endpoints::UpdateContent.build(context)
           when :update_knowledge_base_template_uri
@@ -164,6 +200,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QConnect::Endpoints::UpdateQuickResponse.build(context)
           when :update_session
             Aws::QConnect::Endpoints::UpdateSession.build(context)
+          when :update_session_data
+            Aws::QConnect::Endpoints::UpdateSessionData.build(context)
           end
         end
       end

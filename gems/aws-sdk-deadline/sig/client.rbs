@@ -383,8 +383,8 @@ module Aws
                         farm_id: ::String,
                         queue_id: ::String,
                         ?client_token: ::String,
-                        template: ::String,
-                        template_type: ("JSON" | "YAML"),
+                        ?template: ::String,
+                        ?template_type: ("JSON" | "YAML"),
                         priority: ::Integer,
                         ?parameters: Hash[::String, {
                             int: ::String?,
@@ -408,7 +408,8 @@ module Aws
                         ?storage_profile_id: ::String,
                         ?target_task_run_status: ("READY" | "SUSPENDED"),
                         ?max_failed_tasks_count: ::Integer,
-                        ?max_retries_per_task: ::Integer
+                        ?max_retries_per_task: ::Integer,
+                        ?source_job_id: ::String
                       ) -> _CreateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
 
@@ -784,6 +785,7 @@ module Aws
         def parameters: () -> ::Hash[::String, Types::JobParameter]
         def attachments: () -> Types::Attachments
         def description: () -> ::String
+        def source_job_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_job-instance_method
       def get_job: (
@@ -1159,6 +1161,21 @@ module Aws
                               ?max_results: ::Integer
                             ) -> _ListJobMembersResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobMembersResponseSuccess
+
+      interface _ListJobParameterDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobParameterDefinitionsResponse]
+        def job_parameter_definitions: () -> ::Array[untyped]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_job_parameter_definitions-instance_method
+      def list_job_parameter_definitions: (
+                                            farm_id: ::String,
+                                            job_id: ::String,
+                                            queue_id: ::String,
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListJobParameterDefinitionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobParameterDefinitionsResponseSuccess
 
       interface _ListJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResponse]

@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:qconnect)
 # structure.
 #
 #     q_connect = Aws::QConnect::Client.new
-#     resp = q_connect.create_assistant(params)
+#     resp = q_connect.create_ai_agent(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::QConnect
   autoload :EndpointProvider, 'aws-sdk-qconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-qconnect/endpoints'
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end
 

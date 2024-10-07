@@ -14,9 +14,30 @@ module Aws::QConnect
 
     include Seahorse::Model
 
+    AIAgentAssociationConfigurationType = Shapes::StringShape.new(name: 'AIAgentAssociationConfigurationType')
+    AIAgentConfiguration = Shapes::UnionShape.new(name: 'AIAgentConfiguration')
+    AIAgentConfigurationData = Shapes::StructureShape.new(name: 'AIAgentConfigurationData')
+    AIAgentConfigurationMap = Shapes::MapShape.new(name: 'AIAgentConfigurationMap')
+    AIAgentData = Shapes::StructureShape.new(name: 'AIAgentData')
+    AIAgentSummary = Shapes::StructureShape.new(name: 'AIAgentSummary')
+    AIAgentSummaryList = Shapes::ListShape.new(name: 'AIAgentSummaryList')
+    AIAgentType = Shapes::StringShape.new(name: 'AIAgentType')
+    AIAgentVersionSummariesList = Shapes::ListShape.new(name: 'AIAgentVersionSummariesList')
+    AIAgentVersionSummary = Shapes::StructureShape.new(name: 'AIAgentVersionSummary')
+    AIPromptAPIFormat = Shapes::StringShape.new(name: 'AIPromptAPIFormat')
+    AIPromptData = Shapes::StructureShape.new(name: 'AIPromptData')
+    AIPromptModelIdentifier = Shapes::StringShape.new(name: 'AIPromptModelIdentifier')
+    AIPromptSummary = Shapes::StructureShape.new(name: 'AIPromptSummary')
+    AIPromptSummaryList = Shapes::ListShape.new(name: 'AIPromptSummaryList')
+    AIPromptTemplateConfiguration = Shapes::UnionShape.new(name: 'AIPromptTemplateConfiguration')
+    AIPromptTemplateType = Shapes::StringShape.new(name: 'AIPromptTemplateType')
+    AIPromptType = Shapes::StringShape.new(name: 'AIPromptType')
+    AIPromptVersionSummariesList = Shapes::ListShape.new(name: 'AIPromptVersionSummariesList')
+    AIPromptVersionSummary = Shapes::StructureShape.new(name: 'AIPromptVersionSummary')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmazonConnectGuideAssociationData = Shapes::StructureShape.new(name: 'AmazonConnectGuideAssociationData')
     AndConditions = Shapes::ListShape.new(name: 'AndConditions')
+    AnswerRecommendationAIAgentConfiguration = Shapes::StructureShape.new(name: 'AnswerRecommendationAIAgentConfiguration')
     AppIntegrationsConfiguration = Shapes::StructureShape.new(name: 'AppIntegrationsConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssistantAssociationData = Shapes::StructureShape.new(name: 'AssistantAssociationData')
@@ -32,10 +53,19 @@ module Aws::QConnect
     AssistantStatus = Shapes::StringShape.new(name: 'AssistantStatus')
     AssistantSummary = Shapes::StructureShape.new(name: 'AssistantSummary')
     AssistantType = Shapes::StringShape.new(name: 'AssistantType')
+    AssociationConfiguration = Shapes::StructureShape.new(name: 'AssociationConfiguration')
+    AssociationConfigurationData = Shapes::UnionShape.new(name: 'AssociationConfigurationData')
+    AssociationConfigurationList = Shapes::ListShape.new(name: 'AssociationConfigurationList')
     AssociationType = Shapes::StringShape.new(name: 'AssociationType')
+    BedrockFoundationModelConfigurationForParsing = Shapes::StructureShape.new(name: 'BedrockFoundationModelConfigurationForParsing')
+    BedrockModelArnForParsing = Shapes::StringShape.new(name: 'BedrockModelArnForParsing')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Channel = Shapes::StringShape.new(name: 'Channel')
     Channels = Shapes::ListShape.new(name: 'Channels')
+    ChunkingConfiguration = Shapes::StructureShape.new(name: 'ChunkingConfiguration')
+    ChunkingStrategy = Shapes::StringShape.new(name: 'ChunkingStrategy')
+    CitationSpan = Shapes::StructureShape.new(name: 'CitationSpan')
+    CitationSpanOffset = Shapes::IntegerShape.new(name: 'CitationSpanOffset')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Configuration = Shapes::UnionShape.new(name: 'Configuration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -59,6 +89,14 @@ module Aws::QConnect
     ContentSummaryList = Shapes::ListShape.new(name: 'ContentSummaryList')
     ContentTitle = Shapes::StringShape.new(name: 'ContentTitle')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CreateAIAgentRequest = Shapes::StructureShape.new(name: 'CreateAIAgentRequest')
+    CreateAIAgentResponse = Shapes::StructureShape.new(name: 'CreateAIAgentResponse')
+    CreateAIAgentVersionRequest = Shapes::StructureShape.new(name: 'CreateAIAgentVersionRequest')
+    CreateAIAgentVersionResponse = Shapes::StructureShape.new(name: 'CreateAIAgentVersionResponse')
+    CreateAIPromptRequest = Shapes::StructureShape.new(name: 'CreateAIPromptRequest')
+    CreateAIPromptResponse = Shapes::StructureShape.new(name: 'CreateAIPromptResponse')
+    CreateAIPromptVersionRequest = Shapes::StructureShape.new(name: 'CreateAIPromptVersionRequest')
+    CreateAIPromptVersionResponse = Shapes::StructureShape.new(name: 'CreateAIPromptVersionResponse')
     CreateAssistantAssociationRequest = Shapes::StructureShape.new(name: 'CreateAssistantAssociationRequest')
     CreateAssistantAssociationResponse = Shapes::StructureShape.new(name: 'CreateAssistantAssociationResponse')
     CreateAssistantRequest = Shapes::StructureShape.new(name: 'CreateAssistantRequest')
@@ -77,6 +115,14 @@ module Aws::QConnect
     DataReference = Shapes::UnionShape.new(name: 'DataReference')
     DataSummary = Shapes::StructureShape.new(name: 'DataSummary')
     DataSummaryList = Shapes::ListShape.new(name: 'DataSummaryList')
+    DeleteAIAgentRequest = Shapes::StructureShape.new(name: 'DeleteAIAgentRequest')
+    DeleteAIAgentResponse = Shapes::StructureShape.new(name: 'DeleteAIAgentResponse')
+    DeleteAIAgentVersionRequest = Shapes::StructureShape.new(name: 'DeleteAIAgentVersionRequest')
+    DeleteAIAgentVersionResponse = Shapes::StructureShape.new(name: 'DeleteAIAgentVersionResponse')
+    DeleteAIPromptRequest = Shapes::StructureShape.new(name: 'DeleteAIPromptRequest')
+    DeleteAIPromptResponse = Shapes::StructureShape.new(name: 'DeleteAIPromptResponse')
+    DeleteAIPromptVersionRequest = Shapes::StructureShape.new(name: 'DeleteAIPromptVersionRequest')
+    DeleteAIPromptVersionResponse = Shapes::StructureShape.new(name: 'DeleteAIPromptVersionResponse')
     DeleteAssistantAssociationRequest = Shapes::StructureShape.new(name: 'DeleteAssistantAssociationRequest')
     DeleteAssistantAssociationResponse = Shapes::StructureShape.new(name: 'DeleteAssistantAssociationResponse')
     DeleteAssistantRequest = Shapes::StructureShape.new(name: 'DeleteAssistantRequest')
@@ -96,14 +142,22 @@ module Aws::QConnect
     DocumentText = Shapes::StructureShape.new(name: 'DocumentText')
     ExternalSource = Shapes::StringShape.new(name: 'ExternalSource')
     ExternalSourceConfiguration = Shapes::StructureShape.new(name: 'ExternalSourceConfiguration')
+    FailureReason = Shapes::ListShape.new(name: 'FailureReason')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterField = Shapes::StringShape.new(name: 'FilterField')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
+    FixedSizeChunkingConfiguration = Shapes::StructureShape.new(name: 'FixedSizeChunkingConfiguration')
+    FixedSizeChunkingConfigurationMaxTokensInteger = Shapes::IntegerShape.new(name: 'FixedSizeChunkingConfigurationMaxTokensInteger')
+    FixedSizeChunkingConfigurationOverlapPercentageInteger = Shapes::IntegerShape.new(name: 'FixedSizeChunkingConfigurationOverlapPercentageInteger')
     GenerativeContentFeedbackData = Shapes::StructureShape.new(name: 'GenerativeContentFeedbackData')
     GenerativeDataDetails = Shapes::StructureShape.new(name: 'GenerativeDataDetails')
     GenerativeReference = Shapes::StructureShape.new(name: 'GenerativeReference')
     GenericArn = Shapes::StringShape.new(name: 'GenericArn')
+    GetAIAgentRequest = Shapes::StructureShape.new(name: 'GetAIAgentRequest')
+    GetAIAgentResponse = Shapes::StructureShape.new(name: 'GetAIAgentResponse')
+    GetAIPromptRequest = Shapes::StructureShape.new(name: 'GetAIPromptRequest')
+    GetAIPromptResponse = Shapes::StructureShape.new(name: 'GetAIPromptResponse')
     GetAssistantAssociationRequest = Shapes::StructureShape.new(name: 'GetAssistantAssociationRequest')
     GetAssistantAssociationResponse = Shapes::StructureShape.new(name: 'GetAssistantAssociationResponse')
     GetAssistantRequest = Shapes::StructureShape.new(name: 'GetAssistantRequest')
@@ -129,6 +183,11 @@ module Aws::QConnect
     GroupingValue = Shapes::StringShape.new(name: 'GroupingValue')
     GroupingValues = Shapes::ListShape.new(name: 'GroupingValues')
     Headers = Shapes::MapShape.new(name: 'Headers')
+    HierarchicalChunkingConfiguration = Shapes::StructureShape.new(name: 'HierarchicalChunkingConfiguration')
+    HierarchicalChunkingConfigurationOverlapTokensInteger = Shapes::IntegerShape.new(name: 'HierarchicalChunkingConfigurationOverlapTokensInteger')
+    HierarchicalChunkingLevelConfiguration = Shapes::StructureShape.new(name: 'HierarchicalChunkingLevelConfiguration')
+    HierarchicalChunkingLevelConfigurationMaxTokensInteger = Shapes::IntegerShape.new(name: 'HierarchicalChunkingLevelConfigurationMaxTokensInteger')
+    HierarchicalChunkingLevelConfigurations = Shapes::ListShape.new(name: 'HierarchicalChunkingLevelConfigurations')
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightOffset = Shapes::IntegerShape.new(name: 'HighlightOffset')
     Highlights = Shapes::ListShape.new(name: 'Highlights')
@@ -137,13 +196,25 @@ module Aws::QConnect
     ImportJobStatus = Shapes::StringShape.new(name: 'ImportJobStatus')
     ImportJobSummary = Shapes::StructureShape.new(name: 'ImportJobSummary')
     ImportJobType = Shapes::StringShape.new(name: 'ImportJobType')
+    IntentDetectedDataDetails = Shapes::StructureShape.new(name: 'IntentDetectedDataDetails')
+    IntentInputData = Shapes::StructureShape.new(name: 'IntentInputData')
+    KnowledgeBaseAssociationConfigurationData = Shapes::StructureShape.new(name: 'KnowledgeBaseAssociationConfigurationData')
     KnowledgeBaseAssociationData = Shapes::StructureShape.new(name: 'KnowledgeBaseAssociationData')
     KnowledgeBaseData = Shapes::StructureShape.new(name: 'KnowledgeBaseData')
     KnowledgeBaseList = Shapes::ListShape.new(name: 'KnowledgeBaseList')
+    KnowledgeBaseSearchType = Shapes::StringShape.new(name: 'KnowledgeBaseSearchType')
     KnowledgeBaseStatus = Shapes::StringShape.new(name: 'KnowledgeBaseStatus')
     KnowledgeBaseSummary = Shapes::StructureShape.new(name: 'KnowledgeBaseSummary')
     KnowledgeBaseType = Shapes::StringShape.new(name: 'KnowledgeBaseType')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
+    ListAIAgentVersionsRequest = Shapes::StructureShape.new(name: 'ListAIAgentVersionsRequest')
+    ListAIAgentVersionsResponse = Shapes::StructureShape.new(name: 'ListAIAgentVersionsResponse')
+    ListAIAgentsRequest = Shapes::StructureShape.new(name: 'ListAIAgentsRequest')
+    ListAIAgentsResponse = Shapes::StructureShape.new(name: 'ListAIAgentsResponse')
+    ListAIPromptVersionsRequest = Shapes::StructureShape.new(name: 'ListAIPromptVersionsRequest')
+    ListAIPromptVersionsResponse = Shapes::StructureShape.new(name: 'ListAIPromptVersionsResponse')
+    ListAIPromptsRequest = Shapes::StructureShape.new(name: 'ListAIPromptsRequest')
+    ListAIPromptsResponse = Shapes::StructureShape.new(name: 'ListAIPromptsResponse')
     ListAssistantAssociationsRequest = Shapes::StructureShape.new(name: 'ListAssistantAssociationsRequest')
     ListAssistantAssociationsResponse = Shapes::StructureShape.new(name: 'ListAssistantAssociationsResponse')
     ListAssistantsRequest = Shapes::StructureShape.new(name: 'ListAssistantsRequest')
@@ -161,9 +232,12 @@ module Aws::QConnect
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LlmModelId = Shapes::StringShape.new(name: 'LlmModelId')
+    ManagedSourceConfiguration = Shapes::UnionShape.new(name: 'ManagedSourceConfiguration')
+    ManualSearchAIAgentConfiguration = Shapes::StructureShape.new(name: 'ManualSearchAIAgentConfiguration')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NonEmptySensitiveString = Shapes::StringShape.new(name: 'NonEmptySensitiveString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotifyRecommendationsReceivedError = Shapes::StructureShape.new(name: 'NotifyRecommendationsReceivedError')
     NotifyRecommendationsReceivedErrorList = Shapes::ListShape.new(name: 'NotifyRecommendationsReceivedErrorList')
@@ -174,6 +248,11 @@ module Aws::QConnect
     OrCondition = Shapes::UnionShape.new(name: 'OrCondition')
     OrConditions = Shapes::ListShape.new(name: 'OrConditions')
     Order = Shapes::StringShape.new(name: 'Order')
+    Origin = Shapes::StringShape.new(name: 'Origin')
+    ParsingConfiguration = Shapes::StructureShape.new(name: 'ParsingConfiguration')
+    ParsingPrompt = Shapes::StructureShape.new(name: 'ParsingPrompt')
+    ParsingPromptText = Shapes::StringShape.new(name: 'ParsingPromptText')
+    ParsingStrategy = Shapes::StringShape.new(name: 'ParsingStrategy')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Priority = Shapes::StringShape.new(name: 'Priority')
     PutFeedbackRequest = Shapes::StructureShape.new(name: 'PutFeedbackRequest')
@@ -185,10 +264,12 @@ module Aws::QConnect
     QueryConditionExpression = Shapes::ListShape.new(name: 'QueryConditionExpression')
     QueryConditionFieldName = Shapes::StringShape.new(name: 'QueryConditionFieldName')
     QueryConditionItem = Shapes::StructureShape.new(name: 'QueryConditionItem')
+    QueryInputData = Shapes::UnionShape.new(name: 'QueryInputData')
     QueryRecommendationTriggerData = Shapes::StructureShape.new(name: 'QueryRecommendationTriggerData')
     QueryResultType = Shapes::StringShape.new(name: 'QueryResultType')
     QueryResultsList = Shapes::ListShape.new(name: 'QueryResultsList')
     QueryText = Shapes::StringShape.new(name: 'QueryText')
+    QueryTextInputData = Shapes::StructureShape.new(name: 'QueryTextInputData')
     QuickResponseContent = Shapes::StringShape.new(name: 'QuickResponseContent')
     QuickResponseContentProvider = Shapes::UnionShape.new(name: 'QuickResponseContentProvider')
     QuickResponseContents = Shapes::StructureShape.new(name: 'QuickResponseContents')
@@ -225,15 +306,21 @@ module Aws::QConnect
     RecommendationTriggerList = Shapes::ListShape.new(name: 'RecommendationTriggerList')
     RecommendationTriggerType = Shapes::StringShape.new(name: 'RecommendationTriggerType')
     RecommendationType = Shapes::StringShape.new(name: 'RecommendationType')
+    ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
     Relevance = Shapes::StringShape.new(name: 'Relevance')
     RelevanceLevel = Shapes::StringShape.new(name: 'RelevanceLevel')
     RelevanceScore = Shapes::FloatShape.new(name: 'RelevanceScore')
+    RemoveAssistantAIAgentRequest = Shapes::StructureShape.new(name: 'RemoveAssistantAIAgentRequest')
+    RemoveAssistantAIAgentResponse = Shapes::StructureShape.new(name: 'RemoveAssistantAIAgentResponse')
     RemoveKnowledgeBaseTemplateUriRequest = Shapes::StructureShape.new(name: 'RemoveKnowledgeBaseTemplateUriRequest')
     RemoveKnowledgeBaseTemplateUriResponse = Shapes::StructureShape.new(name: 'RemoveKnowledgeBaseTemplateUriResponse')
     RenderingConfiguration = Shapes::StructureShape.new(name: 'RenderingConfiguration')
     RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultData = Shapes::StructureShape.new(name: 'ResultData')
+    RuntimeSessionData = Shapes::StructureShape.new(name: 'RuntimeSessionData')
+    RuntimeSessionDataList = Shapes::ListShape.new(name: 'RuntimeSessionDataList')
+    RuntimeSessionDataValue = Shapes::UnionShape.new(name: 'RuntimeSessionDataValue')
     SearchContentRequest = Shapes::StructureShape.new(name: 'SearchContentRequest')
     SearchContentResponse = Shapes::StructureShape.new(name: 'SearchContentResponse')
     SearchExpression = Shapes::StructureShape.new(name: 'SearchExpression')
@@ -241,10 +328,17 @@ module Aws::QConnect
     SearchQuickResponsesResponse = Shapes::StructureShape.new(name: 'SearchQuickResponsesResponse')
     SearchSessionsRequest = Shapes::StructureShape.new(name: 'SearchSessionsRequest')
     SearchSessionsResponse = Shapes::StructureShape.new(name: 'SearchSessionsResponse')
+    SeedUrl = Shapes::StructureShape.new(name: 'SeedUrl')
+    SeedUrls = Shapes::ListShape.new(name: 'SeedUrls')
+    SemanticChunkingConfiguration = Shapes::StructureShape.new(name: 'SemanticChunkingConfiguration')
+    SemanticChunkingConfigurationBreakpointPercentileThresholdInteger = Shapes::IntegerShape.new(name: 'SemanticChunkingConfigurationBreakpointPercentileThresholdInteger')
+    SemanticChunkingConfigurationBufferSizeInteger = Shapes::IntegerShape.new(name: 'SemanticChunkingConfigurationBufferSizeInteger')
+    SemanticChunkingConfigurationMaxTokensInteger = Shapes::IntegerShape.new(name: 'SemanticChunkingConfigurationMaxTokensInteger')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionData = Shapes::StructureShape.new(name: 'SessionData')
+    SessionDataNamespace = Shapes::StringShape.new(name: 'SessionDataNamespace')
     SessionIntegrationConfiguration = Shapes::StructureShape.new(name: 'SessionIntegrationConfiguration')
     SessionSummaries = Shapes::ListShape.new(name: 'SessionSummaries')
     SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
@@ -256,7 +350,9 @@ module Aws::QConnect
     StartContentUploadResponse = Shapes::StructureShape.new(name: 'StartContentUploadResponse')
     StartImportJobRequest = Shapes::StructureShape.new(name: 'StartImportJobRequest')
     StartImportJobResponse = Shapes::StructureShape.new(name: 'StartImportJobResponse')
+    Status = Shapes::StringShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
+    SyncStatus = Shapes::StringShape.new(name: 'SyncStatus')
     SyntheticTimestamp_epoch_seconds = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_epoch_seconds', timestampFormat: "unixTimestamp")
     TagCondition = Shapes::StructureShape.new(name: 'TagCondition')
     TagFilter = Shapes::UnionShape.new(name: 'TagFilter')
@@ -267,27 +363,152 @@ module Aws::QConnect
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
+    TextAIPrompt = Shapes::StringShape.new(name: 'TextAIPrompt')
     TextData = Shapes::StructureShape.new(name: 'TextData')
+    TextFullAIPromptEditTemplateConfiguration = Shapes::StructureShape.new(name: 'TextFullAIPromptEditTemplateConfiguration')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeToLive = Shapes::IntegerShape.new(name: 'TimeToLive')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAIAgentRequest = Shapes::StructureShape.new(name: 'UpdateAIAgentRequest')
+    UpdateAIAgentResponse = Shapes::StructureShape.new(name: 'UpdateAIAgentResponse')
+    UpdateAIPromptRequest = Shapes::StructureShape.new(name: 'UpdateAIPromptRequest')
+    UpdateAIPromptResponse = Shapes::StructureShape.new(name: 'UpdateAIPromptResponse')
+    UpdateAssistantAIAgentRequest = Shapes::StructureShape.new(name: 'UpdateAssistantAIAgentRequest')
+    UpdateAssistantAIAgentResponse = Shapes::StructureShape.new(name: 'UpdateAssistantAIAgentResponse')
     UpdateContentRequest = Shapes::StructureShape.new(name: 'UpdateContentRequest')
     UpdateContentResponse = Shapes::StructureShape.new(name: 'UpdateContentResponse')
     UpdateKnowledgeBaseTemplateUriRequest = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriRequest')
     UpdateKnowledgeBaseTemplateUriResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriResponse')
     UpdateQuickResponseRequest = Shapes::StructureShape.new(name: 'UpdateQuickResponseRequest')
     UpdateQuickResponseResponse = Shapes::StructureShape.new(name: 'UpdateQuickResponseResponse')
+    UpdateSessionDataRequest = Shapes::StructureShape.new(name: 'UpdateSessionDataRequest')
+    UpdateSessionDataResponse = Shapes::StructureShape.new(name: 'UpdateSessionDataResponse')
     UpdateSessionRequest = Shapes::StructureShape.new(name: 'UpdateSessionRequest')
     UpdateSessionResponse = Shapes::StructureShape.new(name: 'UpdateSessionResponse')
     UploadId = Shapes::StringShape.new(name: 'UploadId')
     Uri = Shapes::StringShape.new(name: 'Uri')
     Url = Shapes::StringShape.new(name: 'Url')
+    UrlConfiguration = Shapes::StructureShape.new(name: 'UrlConfiguration')
+    UrlFilterList = Shapes::ListShape.new(name: 'UrlFilterList')
+    UrlFilterPattern = Shapes::StringShape.new(name: 'UrlFilterPattern')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
     UuidOrArn = Shapes::StringShape.new(name: 'UuidOrArn')
+    UuidOrArnOrEitherWithQualifier = Shapes::StringShape.new(name: 'UuidOrArnOrEitherWithQualifier')
+    UuidWithQualifier = Shapes::StringShape.new(name: 'UuidWithQualifier')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VectorIngestionConfiguration = Shapes::StructureShape.new(name: 'VectorIngestionConfiguration')
+    Version = Shapes::IntegerShape.new(name: 'Version')
+    VisibilityStatus = Shapes::StringShape.new(name: 'VisibilityStatus')
     WaitTimeSeconds = Shapes::IntegerShape.new(name: 'WaitTimeSeconds')
+    WebCrawlerConfiguration = Shapes::StructureShape.new(name: 'WebCrawlerConfiguration')
+    WebCrawlerLimits = Shapes::StructureShape.new(name: 'WebCrawlerLimits')
+    WebCrawlerLimitsRateLimitInteger = Shapes::IntegerShape.new(name: 'WebCrawlerLimitsRateLimitInteger')
+    WebScopeType = Shapes::StringShape.new(name: 'WebScopeType')
+    WebUrl = Shapes::StringShape.new(name: 'WebUrl')
+
+    AIAgentConfiguration.add_member(:answer_recommendation_ai_agent_configuration, Shapes::ShapeRef.new(shape: AnswerRecommendationAIAgentConfiguration, location_name: "answerRecommendationAIAgentConfiguration"))
+    AIAgentConfiguration.add_member(:manual_search_ai_agent_configuration, Shapes::ShapeRef.new(shape: ManualSearchAIAgentConfiguration, location_name: "manualSearchAIAgentConfiguration"))
+    AIAgentConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AIAgentConfiguration.add_member_subclass(:answer_recommendation_ai_agent_configuration, Types::AIAgentConfiguration::AnswerRecommendationAiAgentConfiguration)
+    AIAgentConfiguration.add_member_subclass(:manual_search_ai_agent_configuration, Types::AIAgentConfiguration::ManualSearchAiAgentConfiguration)
+    AIAgentConfiguration.add_member_subclass(:unknown, Types::AIAgentConfiguration::Unknown)
+    AIAgentConfiguration.struct_class = Types::AIAgentConfiguration
+
+    AIAgentConfigurationData.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, required: true, location_name: "aiAgentId"))
+    AIAgentConfigurationData.struct_class = Types::AIAgentConfigurationData
+
+    AIAgentConfigurationMap.key = Shapes::ShapeRef.new(shape: AIAgentType)
+    AIAgentConfigurationMap.value = Shapes::ShapeRef.new(shape: AIAgentConfigurationData)
+
+    AIAgentData.add_member(:ai_agent_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "aiAgentArn"))
+    AIAgentData.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "aiAgentId"))
+    AIAgentData.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))
+    AIAgentData.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
+    AIAgentData.add_member(:configuration, Shapes::ShapeRef.new(shape: AIAgentConfiguration, required: true, location_name: "configuration"))
+    AIAgentData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AIAgentData.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIAgentData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    AIAgentData.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location_name: "origin"))
+    AIAgentData.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    AIAgentData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AIAgentData.add_member(:type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location_name: "type"))
+    AIAgentData.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
+    AIAgentData.struct_class = Types::AIAgentData
+
+    AIAgentSummary.add_member(:ai_agent_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "aiAgentArn"))
+    AIAgentSummary.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "aiAgentId"))
+    AIAgentSummary.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))
+    AIAgentSummary.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
+    AIAgentSummary.add_member(:configuration, Shapes::ShapeRef.new(shape: AIAgentConfiguration, location_name: "configuration"))
+    AIAgentSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AIAgentSummary.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIAgentSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    AIAgentSummary.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location_name: "origin"))
+    AIAgentSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    AIAgentSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AIAgentSummary.add_member(:type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location_name: "type"))
+    AIAgentSummary.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
+    AIAgentSummary.struct_class = Types::AIAgentSummary
+
+    AIAgentSummaryList.member = Shapes::ShapeRef.new(shape: AIAgentSummary)
+
+    AIAgentVersionSummariesList.member = Shapes::ShapeRef.new(shape: AIAgentVersionSummary)
+
+    AIAgentVersionSummary.add_member(:ai_agent_summary, Shapes::ShapeRef.new(shape: AIAgentSummary, location_name: "aiAgentSummary"))
+    AIAgentVersionSummary.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
+    AIAgentVersionSummary.struct_class = Types::AIAgentVersionSummary
+
+    AIPromptData.add_member(:ai_prompt_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "aiPromptArn"))
+    AIPromptData.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "aiPromptId"))
+    AIPromptData.add_member(:api_format, Shapes::ShapeRef.new(shape: AIPromptAPIFormat, required: true, location_name: "apiFormat"))
+    AIPromptData.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))
+    AIPromptData.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
+    AIPromptData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AIPromptData.add_member(:model_id, Shapes::ShapeRef.new(shape: AIPromptModelIdentifier, required: true, location_name: "modelId"))
+    AIPromptData.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIPromptData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    AIPromptData.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location_name: "origin"))
+    AIPromptData.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    AIPromptData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AIPromptData.add_member(:template_configuration, Shapes::ShapeRef.new(shape: AIPromptTemplateConfiguration, required: true, location_name: "templateConfiguration"))
+    AIPromptData.add_member(:template_type, Shapes::ShapeRef.new(shape: AIPromptTemplateType, required: true, location_name: "templateType"))
+    AIPromptData.add_member(:type, Shapes::ShapeRef.new(shape: AIPromptType, required: true, location_name: "type"))
+    AIPromptData.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
+    AIPromptData.struct_class = Types::AIPromptData
+
+    AIPromptSummary.add_member(:ai_prompt_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "aiPromptArn"))
+    AIPromptSummary.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "aiPromptId"))
+    AIPromptSummary.add_member(:api_format, Shapes::ShapeRef.new(shape: AIPromptAPIFormat, required: true, location_name: "apiFormat"))
+    AIPromptSummary.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))
+    AIPromptSummary.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
+    AIPromptSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AIPromptSummary.add_member(:model_id, Shapes::ShapeRef.new(shape: AIPromptModelIdentifier, required: true, location_name: "modelId"))
+    AIPromptSummary.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIPromptSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    AIPromptSummary.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location_name: "origin"))
+    AIPromptSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    AIPromptSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AIPromptSummary.add_member(:template_type, Shapes::ShapeRef.new(shape: AIPromptTemplateType, required: true, location_name: "templateType"))
+    AIPromptSummary.add_member(:type, Shapes::ShapeRef.new(shape: AIPromptType, required: true, location_name: "type"))
+    AIPromptSummary.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
+    AIPromptSummary.struct_class = Types::AIPromptSummary
+
+    AIPromptSummaryList.member = Shapes::ShapeRef.new(shape: AIPromptSummary)
+
+    AIPromptTemplateConfiguration.add_member(:text_full_ai_prompt_edit_template_configuration, Shapes::ShapeRef.new(shape: TextFullAIPromptEditTemplateConfiguration, location_name: "textFullAIPromptEditTemplateConfiguration"))
+    AIPromptTemplateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AIPromptTemplateConfiguration.add_member_subclass(:text_full_ai_prompt_edit_template_configuration, Types::AIPromptTemplateConfiguration::TextFullAiPromptEditTemplateConfiguration)
+    AIPromptTemplateConfiguration.add_member_subclass(:unknown, Types::AIPromptTemplateConfiguration::Unknown)
+    AIPromptTemplateConfiguration.struct_class = Types::AIPromptTemplateConfiguration
+
+    AIPromptVersionSummariesList.member = Shapes::ShapeRef.new(shape: AIPromptVersionSummary)
+
+    AIPromptVersionSummary.add_member(:ai_prompt_summary, Shapes::ShapeRef.new(shape: AIPromptSummary, location_name: "aiPromptSummary"))
+    AIPromptVersionSummary.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
+    AIPromptVersionSummary.struct_class = Types::AIPromptVersionSummary
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -296,6 +517,12 @@ module Aws::QConnect
     AmazonConnectGuideAssociationData.struct_class = Types::AmazonConnectGuideAssociationData
 
     AndConditions.member = Shapes::ShapeRef.new(shape: TagCondition)
+
+    AnswerRecommendationAIAgentConfiguration.add_member(:answer_generation_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "answerGenerationAIPromptId"))
+    AnswerRecommendationAIAgentConfiguration.add_member(:association_configurations, Shapes::ShapeRef.new(shape: AssociationConfigurationList, location_name: "associationConfigurations"))
+    AnswerRecommendationAIAgentConfiguration.add_member(:intent_labeling_generation_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "intentLabelingGenerationAIPromptId"))
+    AnswerRecommendationAIAgentConfiguration.add_member(:query_reformulation_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "queryReformulationAIPromptId"))
+    AnswerRecommendationAIAgentConfiguration.struct_class = Types::AnswerRecommendationAIAgentConfiguration
 
     AppIntegrationsConfiguration.add_member(:app_integration_arn, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "appIntegrationArn"))
     AppIntegrationsConfiguration.add_member(:object_fields, Shapes::ShapeRef.new(shape: ObjectFieldsList, location_name: "objectFields"))
@@ -336,6 +563,7 @@ module Aws::QConnect
     AssistantCapabilityConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: AssistantCapabilityType, location_name: "type"))
     AssistantCapabilityConfiguration.struct_class = Types::AssistantCapabilityConfiguration
 
+    AssistantData.add_member(:ai_agent_configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: "aiAgentConfiguration"))
     AssistantData.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))
     AssistantData.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
     AssistantData.add_member(:capability_configuration, Shapes::ShapeRef.new(shape: AssistantCapabilityConfiguration, location_name: "capabilityConfiguration"))
@@ -353,6 +581,7 @@ module Aws::QConnect
 
     AssistantList.member = Shapes::ShapeRef.new(shape: AssistantSummary)
 
+    AssistantSummary.add_member(:ai_agent_configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: "aiAgentConfiguration"))
     AssistantSummary.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))
     AssistantSummary.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
     AssistantSummary.add_member(:capability_configuration, Shapes::ShapeRef.new(shape: AssistantCapabilityConfiguration, location_name: "capabilityConfiguration"))
@@ -365,7 +594,34 @@ module Aws::QConnect
     AssistantSummary.add_member(:type, Shapes::ShapeRef.new(shape: AssistantType, required: true, location_name: "type"))
     AssistantSummary.struct_class = Types::AssistantSummary
 
+    AssociationConfiguration.add_member(:association_configuration_data, Shapes::ShapeRef.new(shape: AssociationConfigurationData, location_name: "associationConfigurationData"))
+    AssociationConfiguration.add_member(:association_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "associationId"))
+    AssociationConfiguration.add_member(:association_type, Shapes::ShapeRef.new(shape: AIAgentAssociationConfigurationType, location_name: "associationType"))
+    AssociationConfiguration.struct_class = Types::AssociationConfiguration
+
+    AssociationConfigurationData.add_member(:knowledge_base_association_configuration_data, Shapes::ShapeRef.new(shape: KnowledgeBaseAssociationConfigurationData, location_name: "knowledgeBaseAssociationConfigurationData"))
+    AssociationConfigurationData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AssociationConfigurationData.add_member_subclass(:knowledge_base_association_configuration_data, Types::AssociationConfigurationData::KnowledgeBaseAssociationConfigurationData)
+    AssociationConfigurationData.add_member_subclass(:unknown, Types::AssociationConfigurationData::Unknown)
+    AssociationConfigurationData.struct_class = Types::AssociationConfigurationData
+
+    AssociationConfigurationList.member = Shapes::ShapeRef.new(shape: AssociationConfiguration)
+
+    BedrockFoundationModelConfigurationForParsing.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArnForParsing, required: true, location_name: "modelArn"))
+    BedrockFoundationModelConfigurationForParsing.add_member(:parsing_prompt, Shapes::ShapeRef.new(shape: ParsingPrompt, location_name: "parsingPrompt"))
+    BedrockFoundationModelConfigurationForParsing.struct_class = Types::BedrockFoundationModelConfigurationForParsing
+
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
+
+    ChunkingConfiguration.add_member(:chunking_strategy, Shapes::ShapeRef.new(shape: ChunkingStrategy, required: true, location_name: "chunkingStrategy"))
+    ChunkingConfiguration.add_member(:fixed_size_chunking_configuration, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfiguration, location_name: "fixedSizeChunkingConfiguration"))
+    ChunkingConfiguration.add_member(:hierarchical_chunking_configuration, Shapes::ShapeRef.new(shape: HierarchicalChunkingConfiguration, location_name: "hierarchicalChunkingConfiguration"))
+    ChunkingConfiguration.add_member(:semantic_chunking_configuration, Shapes::ShapeRef.new(shape: SemanticChunkingConfiguration, location_name: "semanticChunkingConfiguration"))
+    ChunkingConfiguration.struct_class = Types::ChunkingConfiguration
+
+    CitationSpan.add_member(:begin_offset_inclusive, Shapes::ShapeRef.new(shape: CitationSpanOffset, location_name: "beginOffsetInclusive"))
+    CitationSpan.add_member(:end_offset_exclusive, Shapes::ShapeRef.new(shape: CitationSpanOffset, location_name: "endOffsetExclusive"))
+    CitationSpan.struct_class = Types::CitationSpan
 
     Configuration.add_member(:connect_configuration, Shapes::ShapeRef.new(shape: ConnectConfiguration, location_name: "connectConfiguration"))
     Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -447,6 +703,8 @@ module Aws::QConnect
     ContentReference.add_member(:content_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "contentId"))
     ContentReference.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "knowledgeBaseArn"))
     ContentReference.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "knowledgeBaseId"))
+    ContentReference.add_member(:reference_type, Shapes::ShapeRef.new(shape: ReferenceType, location_name: "referenceType"))
+    ContentReference.add_member(:source_url, Shapes::ShapeRef.new(shape: String, location_name: "sourceURL"))
     ContentReference.struct_class = Types::ContentReference
 
     ContentSummary.add_member(:content_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "contentArn"))
@@ -463,6 +721,55 @@ module Aws::QConnect
     ContentSummary.struct_class = Types::ContentSummary
 
     ContentSummaryList.member = Shapes::ShapeRef.new(shape: ContentSummary)
+
+    CreateAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    CreateAIAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIAgentRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AIAgentConfiguration, required: true, location_name: "configuration"))
+    CreateAIAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAIAgentRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateAIAgentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateAIAgentRequest.add_member(:type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location_name: "type"))
+    CreateAIAgentRequest.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
+    CreateAIAgentRequest.struct_class = Types::CreateAIAgentRequest
+
+    CreateAIAgentResponse.add_member(:ai_agent, Shapes::ShapeRef.new(shape: AIAgentData, location_name: "aiAgent"))
+    CreateAIAgentResponse.struct_class = Types::CreateAIAgentResponse
+
+    CreateAIAgentVersionRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
+    CreateAIAgentVersionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    CreateAIAgentVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIAgentVersionRequest.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    CreateAIAgentVersionRequest.struct_class = Types::CreateAIAgentVersionRequest
+
+    CreateAIAgentVersionResponse.add_member(:ai_agent, Shapes::ShapeRef.new(shape: AIAgentData, location_name: "aiAgent"))
+    CreateAIAgentVersionResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
+    CreateAIAgentVersionResponse.struct_class = Types::CreateAIAgentVersionResponse
+
+    CreateAIPromptRequest.add_member(:api_format, Shapes::ShapeRef.new(shape: AIPromptAPIFormat, required: true, location_name: "apiFormat"))
+    CreateAIPromptRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    CreateAIPromptRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIPromptRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAIPromptRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: AIPromptModelIdentifier, required: true, location_name: "modelId"))
+    CreateAIPromptRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateAIPromptRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateAIPromptRequest.add_member(:template_configuration, Shapes::ShapeRef.new(shape: AIPromptTemplateConfiguration, required: true, location_name: "templateConfiguration"))
+    CreateAIPromptRequest.add_member(:template_type, Shapes::ShapeRef.new(shape: AIPromptTemplateType, required: true, location_name: "templateType"))
+    CreateAIPromptRequest.add_member(:type, Shapes::ShapeRef.new(shape: AIPromptType, required: true, location_name: "type"))
+    CreateAIPromptRequest.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
+    CreateAIPromptRequest.struct_class = Types::CreateAIPromptRequest
+
+    CreateAIPromptResponse.add_member(:ai_prompt, Shapes::ShapeRef.new(shape: AIPromptData, location_name: "aiPrompt"))
+    CreateAIPromptResponse.struct_class = Types::CreateAIPromptResponse
+
+    CreateAIPromptVersionRequest.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiPromptId"))
+    CreateAIPromptVersionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    CreateAIPromptVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIPromptVersionRequest.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    CreateAIPromptVersionRequest.struct_class = Types::CreateAIPromptVersionRequest
+
+    CreateAIPromptVersionResponse.add_member(:ai_prompt, Shapes::ShapeRef.new(shape: AIPromptData, location_name: "aiPrompt"))
+    CreateAIPromptVersionResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
+    CreateAIPromptVersionResponse.struct_class = Types::CreateAIPromptVersionResponse
 
     CreateAssistantAssociationRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAssistantAssociationRequest.add_member(:association, Shapes::ShapeRef.new(shape: AssistantAssociationInputData, required: true, location_name: "association"))
@@ -517,6 +824,7 @@ module Aws::QConnect
     CreateKnowledgeBaseRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
     CreateKnowledgeBaseRequest.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, location_name: "sourceConfiguration"))
     CreateKnowledgeBaseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateKnowledgeBaseRequest.add_member(:vector_ingestion_configuration, Shapes::ShapeRef.new(shape: VectorIngestionConfiguration, location_name: "vectorIngestionConfiguration"))
     CreateKnowledgeBaseRequest.struct_class = Types::CreateKnowledgeBaseRequest
 
     CreateKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBaseData, location_name: "knowledgeBase"))
@@ -539,6 +847,7 @@ module Aws::QConnect
     CreateQuickResponseResponse.add_member(:quick_response, Shapes::ShapeRef.new(shape: QuickResponseData, location_name: "quickResponse"))
     CreateQuickResponseResponse.struct_class = Types::CreateQuickResponseResponse
 
+    CreateSessionRequest.add_member(:ai_agent_configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: "aiAgentConfiguration"))
     CreateSessionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -552,10 +861,12 @@ module Aws::QConnect
 
     DataDetails.add_member(:content_data, Shapes::ShapeRef.new(shape: ContentDataDetails, location_name: "contentData"))
     DataDetails.add_member(:generative_data, Shapes::ShapeRef.new(shape: GenerativeDataDetails, location_name: "generativeData"))
+    DataDetails.add_member(:intent_detected_data, Shapes::ShapeRef.new(shape: IntentDetectedDataDetails, location_name: "intentDetectedData"))
     DataDetails.add_member(:source_content_data, Shapes::ShapeRef.new(shape: SourceContentDataDetails, location_name: "sourceContentData"))
     DataDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     DataDetails.add_member_subclass(:content_data, Types::DataDetails::ContentData)
     DataDetails.add_member_subclass(:generative_data, Types::DataDetails::GenerativeData)
+    DataDetails.add_member_subclass(:intent_detected_data, Types::DataDetails::IntentDetectedData)
     DataDetails.add_member_subclass(:source_content_data, Types::DataDetails::SourceContentData)
     DataDetails.add_member_subclass(:unknown, Types::DataDetails::Unknown)
     DataDetails.struct_class = Types::DataDetails
@@ -573,6 +884,32 @@ module Aws::QConnect
     DataSummary.struct_class = Types::DataSummary
 
     DataSummaryList.member = Shapes::ShapeRef.new(shape: DataSummary)
+
+    DeleteAIAgentRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
+    DeleteAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    DeleteAIAgentRequest.struct_class = Types::DeleteAIAgentRequest
+
+    DeleteAIAgentResponse.struct_class = Types::DeleteAIAgentResponse
+
+    DeleteAIAgentVersionRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
+    DeleteAIAgentVersionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    DeleteAIAgentVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location: "uri", location_name: "versionNumber"))
+    DeleteAIAgentVersionRequest.struct_class = Types::DeleteAIAgentVersionRequest
+
+    DeleteAIAgentVersionResponse.struct_class = Types::DeleteAIAgentVersionResponse
+
+    DeleteAIPromptRequest.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiPromptId"))
+    DeleteAIPromptRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    DeleteAIPromptRequest.struct_class = Types::DeleteAIPromptRequest
+
+    DeleteAIPromptResponse.struct_class = Types::DeleteAIPromptResponse
+
+    DeleteAIPromptVersionRequest.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiPromptId"))
+    DeleteAIPromptVersionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    DeleteAIPromptVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location: "uri", location_name: "versionNumber"))
+    DeleteAIPromptVersionRequest.struct_class = Types::DeleteAIPromptVersionRequest
+
+    DeleteAIPromptVersionResponse.struct_class = Types::DeleteAIPromptVersionResponse
 
     DeleteAssistantAssociationRequest.add_member(:assistant_association_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantAssociationId"))
     DeleteAssistantAssociationRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
@@ -628,12 +965,18 @@ module Aws::QConnect
     ExternalSourceConfiguration.add_member(:source, Shapes::ShapeRef.new(shape: ExternalSource, required: true, location_name: "source"))
     ExternalSourceConfiguration.struct_class = Types::ExternalSourceConfiguration
 
+    FailureReason.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     Filter.add_member(:field, Shapes::ShapeRef.new(shape: FilterField, required: true, location_name: "field"))
     Filter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "operator"))
     Filter.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "value"))
     Filter.struct_class = Types::Filter
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
+
+    FixedSizeChunkingConfiguration.add_member(:max_tokens, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfigurationMaxTokensInteger, required: true, location_name: "maxTokens"))
+    FixedSizeChunkingConfiguration.add_member(:overlap_percentage, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfigurationOverlapPercentageInteger, required: true, location_name: "overlapPercentage"))
+    FixedSizeChunkingConfiguration.struct_class = Types::FixedSizeChunkingConfiguration
 
     GenerativeContentFeedbackData.add_member(:relevance, Shapes::ShapeRef.new(shape: Relevance, required: true, location_name: "relevance"))
     GenerativeContentFeedbackData.struct_class = Types::GenerativeContentFeedbackData
@@ -646,6 +989,22 @@ module Aws::QConnect
     GenerativeReference.add_member(:generation_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "generationId"))
     GenerativeReference.add_member(:model_id, Shapes::ShapeRef.new(shape: LlmModelId, location_name: "modelId"))
     GenerativeReference.struct_class = Types::GenerativeReference
+
+    GetAIAgentRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
+    GetAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    GetAIAgentRequest.struct_class = Types::GetAIAgentRequest
+
+    GetAIAgentResponse.add_member(:ai_agent, Shapes::ShapeRef.new(shape: AIAgentData, location_name: "aiAgent"))
+    GetAIAgentResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
+    GetAIAgentResponse.struct_class = Types::GetAIAgentResponse
+
+    GetAIPromptRequest.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiPromptId"))
+    GetAIPromptRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    GetAIPromptRequest.struct_class = Types::GetAIPromptRequest
+
+    GetAIPromptResponse.add_member(:ai_prompt, Shapes::ShapeRef.new(shape: AIPromptData, location_name: "aiPrompt"))
+    GetAIPromptResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
+    GetAIPromptResponse.struct_class = Types::GetAIPromptResponse
 
     GetAssistantAssociationRequest.add_member(:assistant_association_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantAssociationId"))
     GetAssistantAssociationRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
@@ -728,6 +1087,15 @@ module Aws::QConnect
     Headers.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     Headers.value = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    HierarchicalChunkingConfiguration.add_member(:level_configurations, Shapes::ShapeRef.new(shape: HierarchicalChunkingLevelConfigurations, required: true, location_name: "levelConfigurations"))
+    HierarchicalChunkingConfiguration.add_member(:overlap_tokens, Shapes::ShapeRef.new(shape: HierarchicalChunkingConfigurationOverlapTokensInteger, required: true, location_name: "overlapTokens"))
+    HierarchicalChunkingConfiguration.struct_class = Types::HierarchicalChunkingConfiguration
+
+    HierarchicalChunkingLevelConfiguration.add_member(:max_tokens, Shapes::ShapeRef.new(shape: HierarchicalChunkingLevelConfigurationMaxTokensInteger, required: true, location_name: "maxTokens"))
+    HierarchicalChunkingLevelConfiguration.struct_class = Types::HierarchicalChunkingLevelConfiguration
+
+    HierarchicalChunkingLevelConfigurations.member = Shapes::ShapeRef.new(shape: HierarchicalChunkingLevelConfiguration)
+
     Highlight.add_member(:begin_offset_inclusive, Shapes::ShapeRef.new(shape: HighlightOffset, location_name: "beginOffsetInclusive"))
     Highlight.add_member(:end_offset_exclusive, Shapes::ShapeRef.new(shape: HighlightOffset, location_name: "endOffsetExclusive"))
     Highlight.struct_class = Types::Highlight
@@ -763,11 +1131,25 @@ module Aws::QConnect
     ImportJobSummary.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
     ImportJobSummary.struct_class = Types::ImportJobSummary
 
+    IntentDetectedDataDetails.add_member(:intent, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "intent"))
+    IntentDetectedDataDetails.add_member(:intent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "intentId"))
+    IntentDetectedDataDetails.struct_class = Types::IntentDetectedDataDetails
+
+    IntentInputData.add_member(:intent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "intentId"))
+    IntentInputData.struct_class = Types::IntentInputData
+
+    KnowledgeBaseAssociationConfigurationData.add_member(:content_tag_filter, Shapes::ShapeRef.new(shape: TagFilter, location_name: "contentTagFilter"))
+    KnowledgeBaseAssociationConfigurationData.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    KnowledgeBaseAssociationConfigurationData.add_member(:override_knowledge_base_search_type, Shapes::ShapeRef.new(shape: KnowledgeBaseSearchType, location_name: "overrideKnowledgeBaseSearchType"))
+    KnowledgeBaseAssociationConfigurationData.struct_class = Types::KnowledgeBaseAssociationConfigurationData
+
     KnowledgeBaseAssociationData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "knowledgeBaseArn"))
     KnowledgeBaseAssociationData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "knowledgeBaseId"))
     KnowledgeBaseAssociationData.struct_class = Types::KnowledgeBaseAssociationData
 
     KnowledgeBaseData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    KnowledgeBaseData.add_member(:ingestion_failure_reasons, Shapes::ShapeRef.new(shape: FailureReason, location_name: "ingestionFailureReasons"))
+    KnowledgeBaseData.add_member(:ingestion_status, Shapes::ShapeRef.new(shape: SyncStatus, location_name: "ingestionStatus"))
     KnowledgeBaseData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
     KnowledgeBaseData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
     KnowledgeBaseData.add_member(:knowledge_base_type, Shapes::ShapeRef.new(shape: KnowledgeBaseType, required: true, location_name: "knowledgeBaseType"))
@@ -778,6 +1160,7 @@ module Aws::QConnect
     KnowledgeBaseData.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, location_name: "sourceConfiguration"))
     KnowledgeBaseData.add_member(:status, Shapes::ShapeRef.new(shape: KnowledgeBaseStatus, required: true, location_name: "status"))
     KnowledgeBaseData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    KnowledgeBaseData.add_member(:vector_ingestion_configuration, Shapes::ShapeRef.new(shape: VectorIngestionConfiguration, location_name: "vectorIngestionConfiguration"))
     KnowledgeBaseData.struct_class = Types::KnowledgeBaseData
 
     KnowledgeBaseList.member = Shapes::ShapeRef.new(shape: KnowledgeBaseSummary)
@@ -792,7 +1175,50 @@ module Aws::QConnect
     KnowledgeBaseSummary.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, location_name: "sourceConfiguration"))
     KnowledgeBaseSummary.add_member(:status, Shapes::ShapeRef.new(shape: KnowledgeBaseStatus, required: true, location_name: "status"))
     KnowledgeBaseSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    KnowledgeBaseSummary.add_member(:vector_ingestion_configuration, Shapes::ShapeRef.new(shape: VectorIngestionConfiguration, location_name: "vectorIngestionConfiguration"))
     KnowledgeBaseSummary.struct_class = Types::KnowledgeBaseSummary
+
+    ListAIAgentVersionsRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
+    ListAIAgentVersionsRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    ListAIAgentVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAIAgentVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAIAgentVersionsRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location: "querystring", location_name: "origin"))
+    ListAIAgentVersionsRequest.struct_class = Types::ListAIAgentVersionsRequest
+
+    ListAIAgentVersionsResponse.add_member(:ai_agent_version_summaries, Shapes::ShapeRef.new(shape: AIAgentVersionSummariesList, required: true, location_name: "aiAgentVersionSummaries"))
+    ListAIAgentVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAIAgentVersionsResponse.struct_class = Types::ListAIAgentVersionsResponse
+
+    ListAIAgentsRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    ListAIAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAIAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAIAgentsRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location: "querystring", location_name: "origin"))
+    ListAIAgentsRequest.struct_class = Types::ListAIAgentsRequest
+
+    ListAIAgentsResponse.add_member(:ai_agent_summaries, Shapes::ShapeRef.new(shape: AIAgentSummaryList, required: true, location_name: "aiAgentSummaries"))
+    ListAIAgentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAIAgentsResponse.struct_class = Types::ListAIAgentsResponse
+
+    ListAIPromptVersionsRequest.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiPromptId"))
+    ListAIPromptVersionsRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    ListAIPromptVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAIPromptVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAIPromptVersionsRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location: "querystring", location_name: "origin"))
+    ListAIPromptVersionsRequest.struct_class = Types::ListAIPromptVersionsRequest
+
+    ListAIPromptVersionsResponse.add_member(:ai_prompt_version_summaries, Shapes::ShapeRef.new(shape: AIPromptVersionSummariesList, required: true, location_name: "aiPromptVersionSummaries"))
+    ListAIPromptVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAIPromptVersionsResponse.struct_class = Types::ListAIPromptVersionsResponse
+
+    ListAIPromptsRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    ListAIPromptsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAIPromptsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAIPromptsRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location: "querystring", location_name: "origin"))
+    ListAIPromptsRequest.struct_class = Types::ListAIPromptsRequest
+
+    ListAIPromptsResponse.add_member(:ai_prompt_summaries, Shapes::ShapeRef.new(shape: AIPromptSummaryList, required: true, location_name: "aiPromptSummaries"))
+    ListAIPromptsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAIPromptsResponse.struct_class = Types::ListAIPromptsResponse
 
     ListAssistantAssociationsRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     ListAssistantAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -862,6 +1288,16 @@ module Aws::QConnect
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ManagedSourceConfiguration.add_member(:web_crawler_configuration, Shapes::ShapeRef.new(shape: WebCrawlerConfiguration, location_name: "webCrawlerConfiguration"))
+    ManagedSourceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ManagedSourceConfiguration.add_member_subclass(:web_crawler_configuration, Types::ManagedSourceConfiguration::WebCrawlerConfiguration)
+    ManagedSourceConfiguration.add_member_subclass(:unknown, Types::ManagedSourceConfiguration::Unknown)
+    ManagedSourceConfiguration.struct_class = Types::ManagedSourceConfiguration
+
+    ManualSearchAIAgentConfiguration.add_member(:answer_generation_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "answerGenerationAIPromptId"))
+    ManualSearchAIAgentConfiguration.add_member(:association_configurations, Shapes::ShapeRef.new(shape: AssociationConfigurationList, location_name: "associationConfigurations"))
+    ManualSearchAIAgentConfiguration.struct_class = Types::ManualSearchAIAgentConfiguration
+
     NotifyRecommendationsReceivedError.add_member(:message, Shapes::ShapeRef.new(shape: NotifyRecommendationsReceivedErrorMessage, location_name: "message"))
     NotifyRecommendationsReceivedError.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
     NotifyRecommendationsReceivedError.struct_class = Types::NotifyRecommendationsReceivedError
@@ -889,6 +1325,13 @@ module Aws::QConnect
 
     OrConditions.member = Shapes::ShapeRef.new(shape: OrCondition)
 
+    ParsingConfiguration.add_member(:bedrock_foundation_model_configuration, Shapes::ShapeRef.new(shape: BedrockFoundationModelConfigurationForParsing, location_name: "bedrockFoundationModelConfiguration"))
+    ParsingConfiguration.add_member(:parsing_strategy, Shapes::ShapeRef.new(shape: ParsingStrategy, required: true, location_name: "parsingStrategy"))
+    ParsingConfiguration.struct_class = Types::ParsingConfiguration
+
+    ParsingPrompt.add_member(:parsing_prompt_text, Shapes::ShapeRef.new(shape: ParsingPromptText, required: true, location_name: "parsingPromptText"))
+    ParsingPrompt.struct_class = Types::ParsingPrompt
+
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
 
@@ -908,8 +1351,10 @@ module Aws::QConnect
     QueryAssistantRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     QueryAssistantRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     QueryAssistantRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    QueryAssistantRequest.add_member(:override_knowledge_base_search_type, Shapes::ShapeRef.new(shape: KnowledgeBaseSearchType, location_name: "overrideKnowledgeBaseSearchType"))
     QueryAssistantRequest.add_member(:query_condition, Shapes::ShapeRef.new(shape: QueryConditionExpression, location_name: "queryCondition"))
-    QueryAssistantRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: QueryText, required: true, location_name: "queryText"))
+    QueryAssistantRequest.add_member(:query_input_data, Shapes::ShapeRef.new(shape: QueryInputData, location_name: "queryInputData"))
+    QueryAssistantRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: QueryText, location_name: "queryText"))
     QueryAssistantRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: UuidOrArn, location_name: "sessionId"))
     QueryAssistantRequest.struct_class = Types::QueryAssistantRequest
 
@@ -930,10 +1375,21 @@ module Aws::QConnect
     QueryConditionItem.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "value"))
     QueryConditionItem.struct_class = Types::QueryConditionItem
 
+    QueryInputData.add_member(:intent_input_data, Shapes::ShapeRef.new(shape: IntentInputData, location_name: "intentInputData"))
+    QueryInputData.add_member(:query_text_input_data, Shapes::ShapeRef.new(shape: QueryTextInputData, location_name: "queryTextInputData"))
+    QueryInputData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    QueryInputData.add_member_subclass(:intent_input_data, Types::QueryInputData::IntentInputData)
+    QueryInputData.add_member_subclass(:query_text_input_data, Types::QueryInputData::QueryTextInputData)
+    QueryInputData.add_member_subclass(:unknown, Types::QueryInputData::Unknown)
+    QueryInputData.struct_class = Types::QueryInputData
+
     QueryRecommendationTriggerData.add_member(:text, Shapes::ShapeRef.new(shape: QueryText, location_name: "text"))
     QueryRecommendationTriggerData.struct_class = Types::QueryRecommendationTriggerData
 
     QueryResultsList.member = Shapes::ShapeRef.new(shape: ResultData)
+
+    QueryTextInputData.add_member(:text, Shapes::ShapeRef.new(shape: QueryText, required: true, location_name: "text"))
+    QueryTextInputData.struct_class = Types::QueryTextInputData
 
     QuickResponseContentProvider.add_member(:content, Shapes::ShapeRef.new(shape: QuickResponseContent, location_name: "content"))
     QuickResponseContentProvider.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1074,6 +1530,12 @@ module Aws::QConnect
 
     RecommendationTriggerList.member = Shapes::ShapeRef.new(shape: RecommendationTrigger)
 
+    RemoveAssistantAIAgentRequest.add_member(:ai_agent_type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location: "querystring", location_name: "aiAgentType"))
+    RemoveAssistantAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    RemoveAssistantAIAgentRequest.struct_class = Types::RemoveAssistantAIAgentRequest
+
+    RemoveAssistantAIAgentResponse.struct_class = Types::RemoveAssistantAIAgentResponse
+
     RemoveKnowledgeBaseTemplateUriRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     RemoveKnowledgeBaseTemplateUriRequest.struct_class = Types::RemoveKnowledgeBaseTemplateUriRequest
 
@@ -1095,6 +1557,18 @@ module Aws::QConnect
     ResultData.add_member(:result_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "resultId"))
     ResultData.add_member(:type, Shapes::ShapeRef.new(shape: QueryResultType, location_name: "type"))
     ResultData.struct_class = Types::ResultData
+
+    RuntimeSessionData.add_member(:key, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, required: true, location_name: "key"))
+    RuntimeSessionData.add_member(:value, Shapes::ShapeRef.new(shape: RuntimeSessionDataValue, required: true, location_name: "value"))
+    RuntimeSessionData.struct_class = Types::RuntimeSessionData
+
+    RuntimeSessionDataList.member = Shapes::ShapeRef.new(shape: RuntimeSessionData)
+
+    RuntimeSessionDataValue.add_member(:string_value, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, location_name: "stringValue"))
+    RuntimeSessionDataValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RuntimeSessionDataValue.add_member_subclass(:string_value, Types::RuntimeSessionDataValue::StringValue)
+    RuntimeSessionDataValue.add_member_subclass(:unknown, Types::RuntimeSessionDataValue::Unknown)
+    RuntimeSessionDataValue.struct_class = Types::RuntimeSessionDataValue
 
     SearchContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     SearchContentRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1130,12 +1604,23 @@ module Aws::QConnect
     SearchSessionsResponse.add_member(:session_summaries, Shapes::ShapeRef.new(shape: SessionSummaries, required: true, location_name: "sessionSummaries"))
     SearchSessionsResponse.struct_class = Types::SearchSessionsResponse
 
+    SeedUrl.add_member(:url, Shapes::ShapeRef.new(shape: WebUrl, location_name: "url"))
+    SeedUrl.struct_class = Types::SeedUrl
+
+    SeedUrls.member = Shapes::ShapeRef.new(shape: SeedUrl)
+
+    SemanticChunkingConfiguration.add_member(:breakpoint_percentile_threshold, Shapes::ShapeRef.new(shape: SemanticChunkingConfigurationBreakpointPercentileThresholdInteger, required: true, location_name: "breakpointPercentileThreshold"))
+    SemanticChunkingConfiguration.add_member(:buffer_size, Shapes::ShapeRef.new(shape: SemanticChunkingConfigurationBufferSizeInteger, required: true, location_name: "bufferSize"))
+    SemanticChunkingConfiguration.add_member(:max_tokens, Shapes::ShapeRef.new(shape: SemanticChunkingConfigurationMaxTokensInteger, required: true, location_name: "maxTokens"))
+    SemanticChunkingConfiguration.struct_class = Types::SemanticChunkingConfiguration
+
     ServerSideEncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
     ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SessionData.add_member(:ai_agent_configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: "aiAgentConfiguration"))
     SessionData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     SessionData.add_member(:integration_configuration, Shapes::ShapeRef.new(shape: SessionIntegrationConfiguration, location_name: "integrationConfiguration"))
     SessionData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -1157,11 +1642,14 @@ module Aws::QConnect
     SessionSummary.struct_class = Types::SessionSummary
 
     SourceConfiguration.add_member(:app_integrations, Shapes::ShapeRef.new(shape: AppIntegrationsConfiguration, location_name: "appIntegrations"))
+    SourceConfiguration.add_member(:managed_source_configuration, Shapes::ShapeRef.new(shape: ManagedSourceConfiguration, location_name: "managedSourceConfiguration"))
     SourceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SourceConfiguration.add_member_subclass(:app_integrations, Types::SourceConfiguration::AppIntegrations)
+    SourceConfiguration.add_member_subclass(:managed_source_configuration, Types::SourceConfiguration::ManagedSourceConfiguration)
     SourceConfiguration.add_member_subclass(:unknown, Types::SourceConfiguration::Unknown)
     SourceConfiguration.struct_class = Types::SourceConfiguration
 
+    SourceContentDataDetails.add_member(:citation_span, Shapes::ShapeRef.new(shape: CitationSpan, location_name: "citationSpan"))
     SourceContentDataDetails.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
     SourceContentDataDetails.add_member(:ranking_data, Shapes::ShapeRef.new(shape: RankingData, required: true, location_name: "rankingData"))
     SourceContentDataDetails.add_member(:text_data, Shapes::ShapeRef.new(shape: TextData, required: true, location_name: "textData"))
@@ -1219,6 +1707,9 @@ module Aws::QConnect
     TextData.add_member(:title, Shapes::ShapeRef.new(shape: DocumentText, location_name: "title"))
     TextData.struct_class = Types::TextData
 
+    TextFullAIPromptEditTemplateConfiguration.add_member(:text, Shapes::ShapeRef.new(shape: TextAIPrompt, required: true, location_name: "text"))
+    TextFullAIPromptEditTemplateConfiguration.struct_class = Types::TextFullAIPromptEditTemplateConfiguration
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -1231,6 +1722,36 @@ module Aws::QConnect
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAIAgentRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
+    UpdateAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    UpdateAIAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAIAgentRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AIAgentConfiguration, location_name: "configuration"))
+    UpdateAIAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAIAgentRequest.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
+    UpdateAIAgentRequest.struct_class = Types::UpdateAIAgentRequest
+
+    UpdateAIAgentResponse.add_member(:ai_agent, Shapes::ShapeRef.new(shape: AIAgentData, location_name: "aiAgent"))
+    UpdateAIAgentResponse.struct_class = Types::UpdateAIAgentResponse
+
+    UpdateAIPromptRequest.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiPromptId"))
+    UpdateAIPromptRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    UpdateAIPromptRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAIPromptRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAIPromptRequest.add_member(:template_configuration, Shapes::ShapeRef.new(shape: AIPromptTemplateConfiguration, location_name: "templateConfiguration"))
+    UpdateAIPromptRequest.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
+    UpdateAIPromptRequest.struct_class = Types::UpdateAIPromptRequest
+
+    UpdateAIPromptResponse.add_member(:ai_prompt, Shapes::ShapeRef.new(shape: AIPromptData, location_name: "aiPrompt"))
+    UpdateAIPromptResponse.struct_class = Types::UpdateAIPromptResponse
+
+    UpdateAssistantAIAgentRequest.add_member(:ai_agent_type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location_name: "aiAgentType"))
+    UpdateAssistantAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    UpdateAssistantAIAgentRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationData, required: true, location_name: "configuration"))
+    UpdateAssistantAIAgentRequest.struct_class = Types::UpdateAssistantAIAgentRequest
+
+    UpdateAssistantAIAgentResponse.add_member(:assistant, Shapes::ShapeRef.new(shape: AssistantData, location_name: "assistant"))
+    UpdateAssistantAIAgentResponse.struct_class = Types::UpdateAssistantAIAgentResponse
 
     UpdateContentRequest.add_member(:content_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentId"))
     UpdateContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -1271,6 +1792,19 @@ module Aws::QConnect
     UpdateQuickResponseResponse.add_member(:quick_response, Shapes::ShapeRef.new(shape: QuickResponseData, location_name: "quickResponse"))
     UpdateQuickResponseResponse.struct_class = Types::UpdateQuickResponseResponse
 
+    UpdateSessionDataRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    UpdateSessionDataRequest.add_member(:data, Shapes::ShapeRef.new(shape: RuntimeSessionDataList, required: true, location_name: "data"))
+    UpdateSessionDataRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: SessionDataNamespace, location_name: "namespace"))
+    UpdateSessionDataRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "sessionId"))
+    UpdateSessionDataRequest.struct_class = Types::UpdateSessionDataRequest
+
+    UpdateSessionDataResponse.add_member(:data, Shapes::ShapeRef.new(shape: RuntimeSessionDataList, required: true, location_name: "data"))
+    UpdateSessionDataResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: SessionDataNamespace, required: true, location_name: "namespace"))
+    UpdateSessionDataResponse.add_member(:session_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "sessionArn"))
+    UpdateSessionDataResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "sessionId"))
+    UpdateSessionDataResponse.struct_class = Types::UpdateSessionDataResponse
+
+    UpdateSessionRequest.add_member(:ai_agent_configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: "aiAgentConfiguration"))
     UpdateSessionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     UpdateSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "sessionId"))
@@ -1280,8 +1814,27 @@ module Aws::QConnect
     UpdateSessionResponse.add_member(:session, Shapes::ShapeRef.new(shape: SessionData, location_name: "session"))
     UpdateSessionResponse.struct_class = Types::UpdateSessionResponse
 
+    UrlConfiguration.add_member(:seed_urls, Shapes::ShapeRef.new(shape: SeedUrls, location_name: "seedUrls"))
+    UrlConfiguration.struct_class = Types::UrlConfiguration
+
+    UrlFilterList.member = Shapes::ShapeRef.new(shape: UrlFilterPattern)
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    VectorIngestionConfiguration.add_member(:chunking_configuration, Shapes::ShapeRef.new(shape: ChunkingConfiguration, location_name: "chunkingConfiguration"))
+    VectorIngestionConfiguration.add_member(:parsing_configuration, Shapes::ShapeRef.new(shape: ParsingConfiguration, location_name: "parsingConfiguration"))
+    VectorIngestionConfiguration.struct_class = Types::VectorIngestionConfiguration
+
+    WebCrawlerConfiguration.add_member(:crawler_limits, Shapes::ShapeRef.new(shape: WebCrawlerLimits, location_name: "crawlerLimits"))
+    WebCrawlerConfiguration.add_member(:exclusion_filters, Shapes::ShapeRef.new(shape: UrlFilterList, location_name: "exclusionFilters"))
+    WebCrawlerConfiguration.add_member(:inclusion_filters, Shapes::ShapeRef.new(shape: UrlFilterList, location_name: "inclusionFilters"))
+    WebCrawlerConfiguration.add_member(:scope, Shapes::ShapeRef.new(shape: WebScopeType, location_name: "scope"))
+    WebCrawlerConfiguration.add_member(:url_configuration, Shapes::ShapeRef.new(shape: UrlConfiguration, required: true, location_name: "urlConfiguration"))
+    WebCrawlerConfiguration.struct_class = Types::WebCrawlerConfiguration
+
+    WebCrawlerLimits.add_member(:rate_limit, Shapes::ShapeRef.new(shape: WebCrawlerLimitsRateLimitInteger, location_name: "rateLimit"))
+    WebCrawlerLimits.struct_class = Types::WebCrawlerLimits
 
 
     # @api private
@@ -1291,15 +1844,73 @@ module Aws::QConnect
 
       api.metadata = {
         "apiVersion" => "2020-10-19",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "wisdom",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Q Connect",
         "serviceId" => "QConnect",
         "signatureVersion" => "v4",
         "signingName" => "wisdom",
         "uid" => "qconnect-2020-10-19",
       }
+
+      api.add_operation(:create_ai_agent, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAIAgent"
+        o.http_method = "POST"
+        o.http_request_uri = "/assistants/{assistantId}/aiagents"
+        o.input = Shapes::ShapeRef.new(shape: CreateAIAgentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAIAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_ai_agent_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAIAgentVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/assistants/{assistantId}/aiagents/{aiAgentId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: CreateAIAgentVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAIAgentVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_ai_prompt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAIPrompt"
+        o.http_method = "POST"
+        o.http_request_uri = "/assistants/{assistantId}/aiprompts"
+        o.input = Shapes::ShapeRef.new(shape: CreateAIPromptRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAIPromptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_ai_prompt_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAIPromptVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/assistants/{assistantId}/aiprompts/{aiPromptId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: CreateAIPromptVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAIPromptVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
 
       api.add_operation(:create_assistant, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAssistant"
@@ -1390,6 +2001,56 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_ai_agent, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAIAgent"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/assistants/{assistantId}/aiagents/{aiAgentId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAIAgentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAIAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_ai_agent_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAIAgentVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/assistants/{assistantId}/aiagents/{aiAgentId}/versions/{versionNumber}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAIAgentVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAIAgentVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_ai_prompt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAIPrompt"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/assistants/{assistantId}/aiprompts/{aiPromptId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAIPromptRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAIPromptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_ai_prompt_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAIPromptVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/assistants/{assistantId}/aiprompts/{aiPromptId}/versions/{versionNumber}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAIPromptVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAIPromptVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_assistant, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAssistant"
         o.http_method = "DELETE"
@@ -1467,6 +2128,30 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_ai_agent, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAIAgent"
+        o.http_method = "GET"
+        o.http_request_uri = "/assistants/{assistantId}/aiagents/{aiAgentId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAIAgentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAIAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_ai_prompt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAIPrompt"
+        o.http_method = "GET"
+        o.http_request_uri = "/assistants/{assistantId}/aiprompts/{aiPromptId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAIPromptRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAIPromptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_assistant, Seahorse::Model::Operation.new.tap do |o|
@@ -1578,6 +2263,78 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_ai_agent_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAIAgentVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/assistants/{assistantId}/aiagents/{aiAgentId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListAIAgentVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAIAgentVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ai_agents, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAIAgents"
+        o.http_method = "GET"
+        o.http_request_uri = "/assistants/{assistantId}/aiagents"
+        o.input = Shapes::ShapeRef.new(shape: ListAIAgentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAIAgentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ai_prompt_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAIPromptVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/assistants/{assistantId}/aiprompts/{aiPromptId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListAIPromptVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAIPromptVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ai_prompts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAIPrompts"
+        o.http_method = "GET"
+        o.http_request_uri = "/assistants/{assistantId}/aiprompts"
+        o.input = Shapes::ShapeRef.new(shape: ListAIPromptsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAIPromptsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_assistant_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -1746,6 +2503,18 @@ module Aws::QConnect
         )
       end)
 
+      api.add_operation(:remove_assistant_ai_agent, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveAssistantAIAgent"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/assistants/{assistantId}/aiagentConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: RemoveAssistantAIAgentRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveAssistantAIAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:remove_knowledge_base_template_uri, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RemoveKnowledgeBaseTemplateUri"
         o.http_method = "DELETE"
@@ -1852,6 +2621,44 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:update_ai_agent, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAIAgent"
+        o.http_method = "POST"
+        o.http_request_uri = "/assistants/{assistantId}/aiagents/{aiAgentId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAIAgentRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAIAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_ai_prompt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAIPrompt"
+        o.http_method = "POST"
+        o.http_request_uri = "/assistants/{assistantId}/aiprompts/{aiPromptId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAIPromptRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAIPromptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_assistant_ai_agent, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAssistantAIAgent"
+        o.http_method = "POST"
+        o.http_request_uri = "/assistants/{assistantId}/aiagentConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAssistantAIAgentRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAssistantAIAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:update_content, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateContent"
         o.http_method = "POST"
@@ -1894,6 +2701,17 @@ module Aws::QConnect
         o.http_request_uri = "/assistants/{assistantId}/sessions/{sessionId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_session_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSessionData"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/assistants/{assistantId}/sessions/{sessionId}/data"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSessionDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSessionDataResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

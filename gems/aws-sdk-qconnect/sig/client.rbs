@@ -75,6 +75,160 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateAIAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAIAgentResponse]
+        def ai_agent: () -> Types::AIAgentData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_ai_agent-instance_method
+      def create_ai_agent: (
+                             assistant_id: ::String,
+                             ?client_token: ::String,
+                             configuration: {
+                               answer_recommendation_ai_agent_configuration: {
+                                 answer_generation_ai_prompt_id: ::String?,
+                                 association_configurations: Array[
+                                   {
+                                     association_configuration_data: {
+                                       knowledge_base_association_configuration_data: {
+                                         content_tag_filter: {
+                                           and_conditions: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           or_conditions: Array[
+                                             {
+                                               and_conditions: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?,
+                                               tag_condition: {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               }?
+                                             },
+                                           ]?,
+                                           tag_condition: {
+                                             key: ::String,
+                                             value: ::String?
+                                           }?
+                                         }?,
+                                         max_results: ::Integer?,
+                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+                                       }?
+                                     }?,
+                                     association_id: ::String?,
+                                     association_type: ("KNOWLEDGE_BASE")?
+                                   },
+                                 ]?,
+                                 intent_labeling_generation_ai_prompt_id: ::String?,
+                                 query_reformulation_ai_prompt_id: ::String?
+                               }?,
+                               manual_search_ai_agent_configuration: {
+                                 answer_generation_ai_prompt_id: ::String?,
+                                 association_configurations: Array[
+                                   {
+                                     association_configuration_data: {
+                                       knowledge_base_association_configuration_data: {
+                                         content_tag_filter: {
+                                           and_conditions: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           or_conditions: Array[
+                                             {
+                                               and_conditions: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?,
+                                               tag_condition: {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               }?
+                                             },
+                                           ]?,
+                                           tag_condition: {
+                                             key: ::String,
+                                             value: ::String?
+                                           }?
+                                         }?,
+                                         max_results: ::Integer?,
+                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+                                       }?
+                                     }?,
+                                     association_id: ::String?,
+                                     association_type: ("KNOWLEDGE_BASE")?
+                                   },
+                                 ]?
+                               }?
+                             },
+                             ?description: ::String,
+                             name: ::String,
+                             ?tags: Hash[::String, ::String],
+                             type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION"),
+                             visibility_status: ("SAVED" | "PUBLISHED")
+                           ) -> _CreateAIAgentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAIAgentResponseSuccess
+
+      interface _CreateAIAgentVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAIAgentVersionResponse]
+        def ai_agent: () -> Types::AIAgentData
+        def version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_ai_agent_version-instance_method
+      def create_ai_agent_version: (
+                                     ai_agent_id: ::String,
+                                     assistant_id: ::String,
+                                     ?client_token: ::String,
+                                     ?modified_time: ::Time
+                                   ) -> _CreateAIAgentVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAIAgentVersionResponseSuccess
+
+      interface _CreateAIPromptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAIPromptResponse]
+        def ai_prompt: () -> Types::AIPromptData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_ai_prompt-instance_method
+      def create_ai_prompt: (
+                              api_format: ("ANTHROPIC_CLAUDE_MESSAGES" | "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"),
+                              assistant_id: ::String,
+                              ?client_token: ::String,
+                              ?description: ::String,
+                              model_id: ::String,
+                              name: ::String,
+                              ?tags: Hash[::String, ::String],
+                              template_configuration: {
+                                text_full_ai_prompt_edit_template_configuration: {
+                                  text: ::String
+                                }?
+                              },
+                              template_type: ("TEXT"),
+                              type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION"),
+                              visibility_status: ("SAVED" | "PUBLISHED")
+                            ) -> _CreateAIPromptResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAIPromptResponseSuccess
+
+      interface _CreateAIPromptVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAIPromptVersionResponse]
+        def ai_prompt: () -> Types::AIPromptData
+        def version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_ai_prompt_version-instance_method
+      def create_ai_prompt_version: (
+                                      ai_prompt_id: ::String,
+                                      assistant_id: ::String,
+                                      ?client_token: ::String,
+                                      ?modified_time: ::Time
+                                    ) -> _CreateAIPromptVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAIPromptVersionResponseSuccess
+
       interface _CreateAssistantResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssistantResponse]
         def assistant: () -> Types::AssistantData
@@ -152,7 +306,7 @@ module Aws
       def create_knowledge_base: (
                                    ?client_token: ::String,
                                    ?description: ::String,
-                                   knowledge_base_type: ("EXTERNAL" | "CUSTOM" | "QUICK_RESPONSES"),
+                                   knowledge_base_type: ("EXTERNAL" | "CUSTOM" | "QUICK_RESPONSES" | "MESSAGE_TEMPLATES" | "MANAGED"),
                                    name: ::String,
                                    ?rendering_configuration: {
                                      template_uri: ::String?
@@ -164,9 +318,57 @@ module Aws
                                      app_integrations: {
                                        app_integration_arn: ::String,
                                        object_fields: Array[::String]?
+                                     }?,
+                                     managed_source_configuration: {
+                                       web_crawler_configuration: {
+                                         crawler_limits: {
+                                           rate_limit: ::Integer?
+                                         }?,
+                                         exclusion_filters: Array[::String]?,
+                                         inclusion_filters: Array[::String]?,
+                                         scope: ("HOST_ONLY" | "SUBDOMAINS")?,
+                                         url_configuration: {
+                                           seed_urls: Array[
+                                             {
+                                               url: ::String?
+                                             },
+                                           ]?
+                                         }
+                                       }?
                                      }?
                                    },
-                                   ?tags: Hash[::String, ::String]
+                                   ?tags: Hash[::String, ::String],
+                                   ?vector_ingestion_configuration: {
+                                     chunking_configuration: {
+                                       chunking_strategy: ("FIXED_SIZE" | "NONE" | "HIERARCHICAL" | "SEMANTIC"),
+                                       fixed_size_chunking_configuration: {
+                                         max_tokens: ::Integer,
+                                         overlap_percentage: ::Integer
+                                       }?,
+                                       hierarchical_chunking_configuration: {
+                                         level_configurations: Array[
+                                           {
+                                             max_tokens: ::Integer
+                                           },
+                                         ],
+                                         overlap_tokens: ::Integer
+                                       }?,
+                                       semantic_chunking_configuration: {
+                                         breakpoint_percentile_threshold: ::Integer,
+                                         buffer_size: ::Integer,
+                                         max_tokens: ::Integer
+                                       }?
+                                     }?,
+                                     parsing_configuration: {
+                                       bedrock_foundation_model_configuration: {
+                                         model_arn: ::String,
+                                         parsing_prompt: {
+                                           parsing_prompt_text: ::String
+                                         }?
+                                       }?,
+                                       parsing_strategy: ("BEDROCK_FOUNDATION_MODEL")
+                                     }?
+                                   }
                                  ) -> _CreateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseResponseSuccess
 
@@ -202,6 +404,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_session-instance_method
       def create_session: (
+                            ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION"), {
+                                ai_agent_id: ::String
+                              }],
                             assistant_id: ::String,
                             ?client_token: ::String,
                             ?description: ::String,
@@ -235,6 +440,48 @@ module Aws
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateSessionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionResponseSuccess
+
+      interface _DeleteAIAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAIAgentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#delete_ai_agent-instance_method
+      def delete_ai_agent: (
+                             ai_agent_id: ::String,
+                             assistant_id: ::String
+                           ) -> _DeleteAIAgentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAIAgentResponseSuccess
+
+      interface _DeleteAIAgentVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAIAgentVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#delete_ai_agent_version-instance_method
+      def delete_ai_agent_version: (
+                                     ai_agent_id: ::String,
+                                     assistant_id: ::String,
+                                     version_number: ::Integer
+                                   ) -> _DeleteAIAgentVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAIAgentVersionResponseSuccess
+
+      interface _DeleteAIPromptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAIPromptResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#delete_ai_prompt-instance_method
+      def delete_ai_prompt: (
+                              ai_prompt_id: ::String,
+                              assistant_id: ::String
+                            ) -> _DeleteAIPromptResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAIPromptResponseSuccess
+
+      interface _DeleteAIPromptVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAIPromptVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#delete_ai_prompt_version-instance_method
+      def delete_ai_prompt_version: (
+                                      ai_prompt_id: ::String,
+                                      assistant_id: ::String,
+                                      version_number: ::Integer
+                                    ) -> _DeleteAIPromptVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAIPromptVersionResponseSuccess
 
       interface _DeleteAssistantResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssistantResponse]
@@ -304,6 +551,30 @@ module Aws
                                    quick_response_id: ::String
                                  ) -> _DeleteQuickResponseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQuickResponseResponseSuccess
+
+      interface _GetAIAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAIAgentResponse]
+        def ai_agent: () -> Types::AIAgentData
+        def version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#get_ai_agent-instance_method
+      def get_ai_agent: (
+                          ai_agent_id: ::String,
+                          assistant_id: ::String
+                        ) -> _GetAIAgentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAIAgentResponseSuccess
+
+      interface _GetAIPromptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAIPromptResponse]
+        def ai_prompt: () -> Types::AIPromptData
+        def version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#get_ai_prompt-instance_method
+      def get_ai_prompt: (
+                           ai_prompt_id: ::String,
+                           assistant_id: ::String
+                         ) -> _GetAIPromptResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAIPromptResponseSuccess
 
       interface _GetAssistantResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAssistantResponse]
@@ -416,6 +687,64 @@ module Aws
                          session_id: ::String
                        ) -> _GetSessionResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
+
+      interface _ListAIAgentVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAIAgentVersionsResponse]
+        def ai_agent_version_summaries: () -> ::Array[Types::AIAgentVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_ai_agent_versions-instance_method
+      def list_ai_agent_versions: (
+                                    ai_agent_id: ::String,
+                                    assistant_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?origin: ("SYSTEM" | "CUSTOMER")
+                                  ) -> _ListAIAgentVersionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAIAgentVersionsResponseSuccess
+
+      interface _ListAIAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAIAgentsResponse]
+        def ai_agent_summaries: () -> ::Array[Types::AIAgentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_ai_agents-instance_method
+      def list_ai_agents: (
+                            assistant_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?origin: ("SYSTEM" | "CUSTOMER")
+                          ) -> _ListAIAgentsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAIAgentsResponseSuccess
+
+      interface _ListAIPromptVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAIPromptVersionsResponse]
+        def ai_prompt_version_summaries: () -> ::Array[Types::AIPromptVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_ai_prompt_versions-instance_method
+      def list_ai_prompt_versions: (
+                                     ai_prompt_id: ::String,
+                                     assistant_id: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?origin: ("SYSTEM" | "CUSTOMER")
+                                   ) -> _ListAIPromptVersionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAIPromptVersionsResponseSuccess
+
+      interface _ListAIPromptsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAIPromptsResponse]
+        def ai_prompt_summaries: () -> ::Array[Types::AIPromptSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_ai_prompts-instance_method
+      def list_ai_prompts: (
+                             assistant_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?origin: ("SYSTEM" | "CUSTOMER")
+                           ) -> _ListAIPromptsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAIPromptsResponseSuccess
 
       interface _ListAssistantAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssistantAssociationsResponse]
@@ -561,6 +890,7 @@ module Aws
                              assistant_id: ::String,
                              ?max_results: ::Integer,
                              ?next_token: ::String,
+                             ?override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC"),
                              ?query_condition: Array[
                                {
                                  single: {
@@ -570,10 +900,28 @@ module Aws
                                  }?
                                },
                              ],
-                             query_text: ::String,
+                             ?query_input_data: {
+                               intent_input_data: {
+                                 intent_id: ::String
+                               }?,
+                               query_text_input_data: {
+                                 text: ::String
+                               }?
+                             },
+                             ?query_text: ::String,
                              ?session_id: ::String
                            ) -> _QueryAssistantResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryAssistantResponseSuccess
+
+      interface _RemoveAssistantAIAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveAssistantAIAgentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#remove_assistant_ai_agent-instance_method
+      def remove_assistant_ai_agent: (
+                                       ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION"),
+                                       assistant_id: ::String
+                                     ) -> _RemoveAssistantAIAgentResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveAssistantAIAgentResponseSuccess
 
       interface _RemoveKnowledgeBaseTemplateUriResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RemoveKnowledgeBaseTemplateUriResponse]
@@ -722,6 +1070,139 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateAIAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAIAgentResponse]
+        def ai_agent: () -> Types::AIAgentData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_ai_agent-instance_method
+      def update_ai_agent: (
+                             ai_agent_id: ::String,
+                             assistant_id: ::String,
+                             ?client_token: ::String,
+                             ?configuration: {
+                               answer_recommendation_ai_agent_configuration: {
+                                 answer_generation_ai_prompt_id: ::String?,
+                                 association_configurations: Array[
+                                   {
+                                     association_configuration_data: {
+                                       knowledge_base_association_configuration_data: {
+                                         content_tag_filter: {
+                                           and_conditions: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           or_conditions: Array[
+                                             {
+                                               and_conditions: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?,
+                                               tag_condition: {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               }?
+                                             },
+                                           ]?,
+                                           tag_condition: {
+                                             key: ::String,
+                                             value: ::String?
+                                           }?
+                                         }?,
+                                         max_results: ::Integer?,
+                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+                                       }?
+                                     }?,
+                                     association_id: ::String?,
+                                     association_type: ("KNOWLEDGE_BASE")?
+                                   },
+                                 ]?,
+                                 intent_labeling_generation_ai_prompt_id: ::String?,
+                                 query_reformulation_ai_prompt_id: ::String?
+                               }?,
+                               manual_search_ai_agent_configuration: {
+                                 answer_generation_ai_prompt_id: ::String?,
+                                 association_configurations: Array[
+                                   {
+                                     association_configuration_data: {
+                                       knowledge_base_association_configuration_data: {
+                                         content_tag_filter: {
+                                           and_conditions: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           or_conditions: Array[
+                                             {
+                                               and_conditions: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?,
+                                               tag_condition: {
+                                                 key: ::String,
+                                                 value: ::String?
+                                               }?
+                                             },
+                                           ]?,
+                                           tag_condition: {
+                                             key: ::String,
+                                             value: ::String?
+                                           }?
+                                         }?,
+                                         max_results: ::Integer?,
+                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+                                       }?
+                                     }?,
+                                     association_id: ::String?,
+                                     association_type: ("KNOWLEDGE_BASE")?
+                                   },
+                                 ]?
+                               }?
+                             },
+                             ?description: ::String,
+                             visibility_status: ("SAVED" | "PUBLISHED")
+                           ) -> _UpdateAIAgentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAIAgentResponseSuccess
+
+      interface _UpdateAIPromptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAIPromptResponse]
+        def ai_prompt: () -> Types::AIPromptData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_ai_prompt-instance_method
+      def update_ai_prompt: (
+                              ai_prompt_id: ::String,
+                              assistant_id: ::String,
+                              ?client_token: ::String,
+                              ?description: ::String,
+                              ?template_configuration: {
+                                text_full_ai_prompt_edit_template_configuration: {
+                                  text: ::String
+                                }?
+                              },
+                              visibility_status: ("SAVED" | "PUBLISHED")
+                            ) -> _UpdateAIPromptResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAIPromptResponseSuccess
+
+      interface _UpdateAssistantAIAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssistantAIAgentResponse]
+        def assistant: () -> Types::AssistantData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_assistant_ai_agent-instance_method
+      def update_assistant_ai_agent: (
+                                       ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION"),
+                                       assistant_id: ::String,
+                                       configuration: {
+                                         ai_agent_id: ::String
+                                       }
+                                     ) -> _UpdateAssistantAIAgentResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssistantAIAgentResponseSuccess
+
       interface _UpdateContentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContentResponse]
         def content: () -> Types::ContentData
@@ -784,6 +1265,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_session-instance_method
       def update_session: (
+                            ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION"), {
+                                ai_agent_id: ::String
+                              }],
                             assistant_id: ::String,
                             ?description: ::String,
                             session_id: ::String,
@@ -815,6 +1299,28 @@ module Aws
                             }
                           ) -> _UpdateSessionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSessionResponseSuccess
+
+      interface _UpdateSessionDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSessionDataResponse]
+        def namespace: () -> ("Custom")
+        def session_arn: () -> ::String
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_session_data-instance_method
+      def update_session_data: (
+                                 assistant_id: ::String,
+                                 data: Array[
+                                   {
+                                     key: ::String,
+                                     value: {
+                                       string_value: ::String?
+                                     }
+                                   },
+                                 ],
+                                 ?namespace: ("Custom"),
+                                 session_id: ::String
+                               ) -> _UpdateSessionDataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSessionDataResponseSuccess
     end
   end
 end
