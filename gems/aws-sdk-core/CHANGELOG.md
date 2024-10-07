@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - reduce memory usage by not using legacy endpoint data unless required.
+
 3.209.1 (2024-09-25)
 ------------------
 

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add partition metadata module, allowing access without loading entire partitions.json.
+
 1.985.0 (2024-10-04)
 ------------------
 

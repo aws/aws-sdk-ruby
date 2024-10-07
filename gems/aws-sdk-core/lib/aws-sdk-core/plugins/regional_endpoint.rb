@@ -20,7 +20,7 @@ a default `:region` is searched for in the following locations:
 * `ENV['AWS_DEFAULT_REGION']`
 * `~/.aws/credentials`
 * `~/.aws/config`
-        DOCS
+             DOCS
         resolve_region(cfg)
       end
 
@@ -35,7 +35,7 @@ in the following locations:
 * `Aws.config[:sigv4a_signing_region_set]`
 * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
 * `~/.aws/config`
-        DOCS
+             DOCS
         resolve_sigv4a_signing_region_set(cfg)
       end
 
@@ -44,7 +44,7 @@ in the following locations:
         docstring: <<-DOCS) do |cfg|
 When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
 will be used if available.
-        DOCS
+             DOCS
         resolve_use_dualstack_endpoint(cfg)
       end
 
@@ -54,7 +54,7 @@ will be used if available.
 When set to `true`, fips compatible endpoints will be used if available.
 When a `fips` region is used, the region is normalized and this config
 is set to `true`.
-        DOCS
+             DOCS
         resolve_use_fips_endpoint(cfg)
       end
 
@@ -67,7 +67,7 @@ is set to `true`.
         docstring: <<-DOCS) do |cfg|
 Setting to true disables use of endpoint URLs provided via environment 
 variables and the shared configuration file.
-        DOCS
+             DOCS
         resolve_ignore_configured_endpoint_urls(cfg)
       end
 
@@ -75,7 +75,7 @@ variables and the shared configuration file.
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
 to test or custom endpoints. This should be a valid HTTP(S) URI.
-        DOCS
+      DOCS
         resolve_endpoint(cfg)
       end
 
@@ -150,7 +150,18 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           # that a custom endpoint has NOT been configured by the user
           cfg.override_config(:regional_endpoint, true)
 
-          resolve_legacy_endpoint(cfg)
+          # preserve legacy (pre EP2) client.config.endpoint still resolves a value
+          # when needed.
+          struct = cfg.instance_variable_get(:@struct)
+          if struct
+            # need a separate proc to get namespace/private access to resolve_legacy_endpoint
+            b = proc { resolve_legacy_endpoint(struct) }
+            struct.define_singleton_method(:endpoint) { @endpoint ||= b.call }
+            nil
+          else
+            # backup in case internal details of config resolver change
+            resolve_legacy_endpoint(cfg)
+          end
         end
 
         # get a custom configured endpoint from ENV or configuration
@@ -213,7 +224,7 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
             sts_regional = cfg.sts_regional_endpoints
           end
 
-          Aws::Partitions::EndpointProvider.resolve(
+          endpoint = Aws::Partitions::EndpointProvider.resolve(
             cfg.region,
             endpoint_prefix,
             sts_regional,
@@ -222,6 +233,7 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
               fips: cfg.use_fips_endpoint
             }
           )
+          URI(endpoint)
         end
       end
     end
