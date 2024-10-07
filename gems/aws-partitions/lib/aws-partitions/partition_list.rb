@@ -90,7 +90,6 @@ module Aws
           else
             regions[region_name] = Region.new(
               name: region_name,
-
               description: region['description'],
               partition_name: partition_name,
               services: Set.new
