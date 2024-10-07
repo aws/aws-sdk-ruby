@@ -503,6 +503,7 @@ module Aws::Redshift
     RevokeSnapshotAccessResult = Shapes::StructureShape.new(name: 'RevokeSnapshotAccessResult')
     RotateEncryptionKeyMessage = Shapes::StructureShape.new(name: 'RotateEncryptionKeyMessage')
     RotateEncryptionKeyResult = Shapes::StructureShape.new(name: 'RotateEncryptionKeyResult')
+    S3KeyPrefixValue = Shapes::StringShape.new(name: 'S3KeyPrefixValue')
     SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault', error: {"code"=>"SNSInvalidTopic", "httpStatusCode"=>400, "senderFault"=>true})
     SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault', error: {"code"=>"SNSNoAuthorization", "httpStatusCode"=>400, "senderFault"=>true})
     SNSTopicArnNotFoundFault = Shapes::StructureShape.new(name: 'SNSTopicArnNotFoundFault', error: {"code"=>"SNSTopicArnNotFound", "httpStatusCode"=>404, "senderFault"=>true})
@@ -1637,7 +1638,7 @@ module Aws::Redshift
 
     EnableLoggingMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     EnableLoggingMessage.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
-    EnableLoggingMessage.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: String, location_name: "S3KeyPrefix"))
+    EnableLoggingMessage.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefixValue, location_name: "S3KeyPrefix"))
     EnableLoggingMessage.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "LogDestinationType"))
     EnableLoggingMessage.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "LogExports"))
     EnableLoggingMessage.struct_class = Types::EnableLoggingMessage
@@ -1985,7 +1986,7 @@ module Aws::Redshift
 
     LoggingStatus.add_member(:logging_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "LoggingEnabled"))
     LoggingStatus.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
-    LoggingStatus.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: String, location_name: "S3KeyPrefix"))
+    LoggingStatus.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefixValue, location_name: "S3KeyPrefix"))
     LoggingStatus.add_member(:last_successful_delivery_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastSuccessfulDeliveryTime"))
     LoggingStatus.add_member(:last_failure_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastFailureTime"))
     LoggingStatus.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: String, location_name: "LastFailureMessage"))

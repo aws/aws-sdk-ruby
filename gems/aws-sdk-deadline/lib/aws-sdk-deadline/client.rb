@@ -1285,10 +1285,10 @@ module Aws::Deadline
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :template
+    # @option params [String] :template
     #   The job template to use for this job.
     #
-    # @option params [required, String] :template_type
+    # @option params [String] :template_type
     #   The file type for the job template.
     #
     # @option params [required, Integer] :priority
@@ -1317,6 +1317,9 @@ module Aws::Deadline
     # @option params [Integer] :max_retries_per_task
     #   The maximum number of retries for each task.
     #
+    # @option params [String] :source_job_id
+    #   The job ID for the source job.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_id #job_id} => String
@@ -1327,8 +1330,8 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     client_token: "ClientToken",
-    #     template: "JobTemplate", # required
-    #     template_type: "JSON", # required, accepts JSON, YAML
+    #     template: "JobTemplate",
+    #     template_type: "JSON", # accepts JSON, YAML
     #     priority: 1, # required
     #     parameters: {
     #       "String" => {
@@ -1355,6 +1358,7 @@ module Aws::Deadline
     #     target_task_run_status: "READY", # accepts READY, SUSPENDED
     #     max_failed_tasks_count: 1,
     #     max_retries_per_task: 1,
+    #     source_job_id: "JobId",
     #   })
     #
     # @example Response structure
@@ -2462,6 +2466,7 @@ module Aws::Deadline
     #   * {Types::GetJobResponse#parameters #parameters} => Hash&lt;String,Types::JobParameter&gt;
     #   * {Types::GetJobResponse#attachments #attachments} => Types::Attachments
     #   * {Types::GetJobResponse#description #description} => String
+    #   * {Types::GetJobResponse#source_job_id #source_job_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2506,6 +2511,7 @@ module Aws::Deadline
     #   resp.attachments.manifests[0].input_manifest_hash #=> String
     #   resp.attachments.file_system #=> String, one of "COPIED", "VIRTUAL"
     #   resp.description #=> String
+    #   resp.source_job_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3756,6 +3762,56 @@ module Aws::Deadline
       req.send_request(options)
     end
 
+    # Lists parameter definitions of a job.
+    #
+    # @option params [required, String] :farm_id
+    #   The farm ID of the job to list.
+    #
+    # @option params [required, String] :job_id
+    #   The job ID to include on the list.
+    #
+    # @option params [required, String] :queue_id
+    #   The queue ID to include on the list.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #
+    # @return [Types::ListJobParameterDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobParameterDefinitionsResponse#job_parameter_definitions #job_parameter_definitions} => Array&lt;Hash,Array,String,Numeric,Boolean&gt;
+    #   * {Types::ListJobParameterDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_job_parameter_definitions({
+    #     farm_id: "FarmId", # required
+    #     job_id: "JobId", # required
+    #     queue_id: "QueueId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_parameter_definitions #=> Array
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListJobParameterDefinitions AWS API Documentation
+    #
+    # @overload list_job_parameter_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_job_parameter_definitions(params = {}, options = {})
+      req = build_request(:list_job_parameter_definitions, params)
+      req.send_request(options)
+    end
+
     # Lists jobs.
     #
     # @option params [required, String] :farm_id
@@ -3812,6 +3868,7 @@ module Aws::Deadline
     #   resp.jobs[0].task_run_status_counts["TaskRunStatus"] #=> Integer
     #   resp.jobs[0].max_failed_tasks_count #=> Integer
     #   resp.jobs[0].max_retries_per_task #=> Integer
+    #   resp.jobs[0].source_job_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListJobs AWS API Documentation
@@ -4941,6 +4998,7 @@ module Aws::Deadline
     #   resp.jobs[0].job_parameters["String"].float #=> String
     #   resp.jobs[0].job_parameters["String"].string #=> String
     #   resp.jobs[0].job_parameters["String"].path #=> String
+    #   resp.jobs[0].source_job_id #=> String
     #   resp.next_item_offset #=> Integer
     #   resp.total_results #=> Integer
     #
@@ -6354,7 +6412,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

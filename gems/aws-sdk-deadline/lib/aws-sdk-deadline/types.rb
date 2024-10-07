@@ -1147,6 +1147,10 @@ module Aws::Deadline
     #   The maximum number of retries for each task.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_job_id
+    #   The job ID for the source job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -1161,7 +1165,8 @@ module Aws::Deadline
       :storage_profile_id,
       :target_task_run_status,
       :max_failed_tasks_count,
-      :max_retries_per_task)
+      :max_retries_per_task,
+      :source_job_id)
       SENSITIVE = [:template, :parameters]
       include Aws::Structure
     end
@@ -2992,6 +2997,10 @@ module Aws::Deadline
     #   interpret the content of this field.
     #   @return [String]
     #
+    # @!attribute [rw] source_job_id
+    #   The job ID for the source job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetJobResponse AWS API Documentation
     #
     class GetJobResponse < Struct.new(
@@ -3014,7 +3023,8 @@ module Aws::Deadline
       :max_retries_per_task,
       :parameters,
       :attachments,
-      :description)
+      :description,
+      :source_job_id)
       SENSITIVE = [:parameters, :description]
       include Aws::Structure
     end
@@ -4619,6 +4629,10 @@ module Aws::Deadline
     #   The job parameters.
     #   @return [Hash<String,Types::JobParameter>]
     #
+    # @!attribute [rw] source_job_id
+    #   The job ID for the source job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/JobSearchSummary AWS API Documentation
     #
     class JobSearchSummary < Struct.new(
@@ -4637,7 +4651,8 @@ module Aws::Deadline
       :created_at,
       :ended_at,
       :started_at,
-      :job_parameters)
+      :job_parameters,
+      :source_job_id)
       SENSITIVE = [:job_parameters]
       include Aws::Structure
     end
@@ -4729,6 +4744,10 @@ module Aws::Deadline
     #   The maximum number of retries for a job.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_job_id
+    #   The job ID for the source job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/JobSummary AWS API Documentation
     #
     class JobSummary < Struct.new(
@@ -4747,7 +4766,8 @@ module Aws::Deadline
       :target_task_run_status,
       :task_run_status_counts,
       :max_failed_tasks_count,
-      :max_retries_per_task)
+      :max_retries_per_task,
+      :source_job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5140,6 +5160,63 @@ module Aws::Deadline
     #
     class ListJobMembersResponse < Struct.new(
       :members,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] farm_id
+    #   The farm ID of the job to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The job ID to include on the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The queue ID to include on the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListJobParameterDefinitionsRequest AWS API Documentation
+    #
+    class ListJobParameterDefinitionsRequest < Struct.new(
+      :farm_id,
+      :job_id,
+      :queue_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_parameter_definitions
+    #   Lists parameter definitions of a job.
+    #   @return [Array<Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] next_token
+    #   If Deadline Cloud returns `nextToken`, then there are more results
+    #   available. The value of `nextToken` is a unique pagination token for
+    #   each page. To retrieve the next page, call the operation again using
+    #   the returned token. Keep all other arguments unchanged. If no
+    #   results remain, then `nextToken` is set to `null`. Each pagination
+    #   token expires after 24 hours. If you provide a token that isn't
+    #   valid, then you receive an HTTP 400 `ValidationException` error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListJobParameterDefinitionsResponse AWS API Documentation
+    #
+    class ListJobParameterDefinitionsResponse < Struct.new(
+      :job_parameter_definitions,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

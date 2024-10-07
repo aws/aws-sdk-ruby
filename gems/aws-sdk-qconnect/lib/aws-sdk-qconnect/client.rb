@@ -447,6 +447,485 @@ module Aws::QConnect
 
     # @!group API Operations
 
+    # Creates an Amazon Q in Connect AI Agent.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the AWS SDK populates
+    #   this field. For more information about idempotency, see [Making
+    #   retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, Types::AIAgentConfiguration] :configuration
+    #   The configuration of the AI Agent.
+    #
+    # @option params [String] :description
+    #   The description of the AI Agent.
+    #
+    # @option params [required, String] :name
+    #   The name of the AI Agent.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @option params [required, String] :type
+    #   The type of the AI Agent.
+    #
+    # @option params [required, String] :visibility_status
+    #   The visibility status of the AI Agent.
+    #
+    # @return [Types::CreateAIAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAIAgentResponse#ai_agent #ai_agent} => Types::AIAgentData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ai_agent({
+    #     assistant_id: "UuidOrArn", # required
+    #     client_token: "ClientToken",
+    #     configuration: { # required
+    #       answer_recommendation_ai_agent_configuration: {
+    #         answer_generation_ai_prompt_id: "UuidWithQualifier",
+    #         association_configurations: [
+    #           {
+    #             association_configuration_data: {
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue",
+    #                     },
+    #                   ],
+    #                   or_conditions: [
+    #                     {
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue",
+    #                         },
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue",
+    #                       },
+    #                     },
+    #                   ],
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue",
+    #                   },
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               },
+    #             },
+    #             association_id: "Uuid",
+    #             association_type: "KNOWLEDGE_BASE", # accepts KNOWLEDGE_BASE
+    #           },
+    #         ],
+    #         intent_labeling_generation_ai_prompt_id: "UuidWithQualifier",
+    #         query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #       },
+    #       manual_search_ai_agent_configuration: {
+    #         answer_generation_ai_prompt_id: "UuidWithQualifier",
+    #         association_configurations: [
+    #           {
+    #             association_configuration_data: {
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue",
+    #                     },
+    #                   ],
+    #                   or_conditions: [
+    #                     {
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue",
+    #                         },
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue",
+    #                       },
+    #                     },
+    #                   ],
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue",
+    #                   },
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               },
+    #             },
+    #             association_id: "Uuid",
+    #             association_type: "KNOWLEDGE_BASE", # accepts KNOWLEDGE_BASE
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     description: "Description",
+    #     name: "Name", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION
+    #     visibility_status: "SAVED", # required, accepts SAVED, PUBLISHED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_agent.ai_agent_arn #=> String
+    #   resp.ai_agent.ai_agent_id #=> String
+    #   resp.ai_agent.assistant_arn #=> String
+    #   resp.ai_agent.assistant_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.intent_labeling_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.description #=> String
+    #   resp.ai_agent.modified_time #=> Time
+    #   resp.ai_agent.name #=> String
+    #   resp.ai_agent.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_agent.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_agent.tags #=> Hash
+    #   resp.ai_agent.tags["TagKey"] #=> String
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION"
+    #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIAgent AWS API Documentation
+    #
+    # @overload create_ai_agent(params = {})
+    # @param [Hash] params ({})
+    def create_ai_agent(params = {}, options = {})
+      req = build_request(:create_ai_agent, params)
+      req.send_request(options)
+    end
+
+    # Creates and Amazon Q in Connect AI Agent version.
+    #
+    # @option params [required, String] :ai_agent_id
+    #   The identifier of the Amazon Q in Connect AI Agent.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the AWS SDK populates
+    #   this field. For more information about idempotency, see [Making
+    #   retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :modified_time
+    #   The modification time of the AI Agent should be tracked for version
+    #   creation. This field should be specified to avoid version creation
+    #   when simultaneous update to the underlying AI Agent are possible. The
+    #   value should be the modifiedTime returned from the request to create
+    #   or update an AI Agent so that version creation can fail if an update
+    #   to the AI Agent post the specified modification time has been made.
+    #
+    # @return [Types::CreateAIAgentVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAIAgentVersionResponse#ai_agent #ai_agent} => Types::AIAgentData
+    #   * {Types::CreateAIAgentVersionResponse#version_number #version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ai_agent_version({
+    #     ai_agent_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #     client_token: "ClientToken",
+    #     modified_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_agent.ai_agent_arn #=> String
+    #   resp.ai_agent.ai_agent_id #=> String
+    #   resp.ai_agent.assistant_arn #=> String
+    #   resp.ai_agent.assistant_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.intent_labeling_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.description #=> String
+    #   resp.ai_agent.modified_time #=> Time
+    #   resp.ai_agent.name #=> String
+    #   resp.ai_agent.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_agent.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_agent.tags #=> Hash
+    #   resp.ai_agent.tags["TagKey"] #=> String
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION"
+    #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #   resp.version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIAgentVersion AWS API Documentation
+    #
+    # @overload create_ai_agent_version(params = {})
+    # @param [Hash] params ({})
+    def create_ai_agent_version(params = {}, options = {})
+      req = build_request(:create_ai_agent_version, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon Q in Connect AI Prompt.
+    #
+    # @option params [required, String] :api_format
+    #   The API Format of the AI Prompt.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the AWS SDK populates
+    #   this field. For more information about idempotency, see [Making
+    #   retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [String] :description
+    #   The description of the AI Prompt.
+    #
+    # @option params [required, String] :model_id
+    #   The identifier of the model used for this AI Prompt. Model Ids
+    #   supported are: `CLAUDE_3_HAIKU_20240307_V1`
+    #
+    # @option params [required, String] :name
+    #   The name of the AI Prompt.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @option params [required, Types::AIPromptTemplateConfiguration] :template_configuration
+    #   The configuration of the prompt template for this AI Prompt.
+    #
+    # @option params [required, String] :template_type
+    #   The type of the prompt template for this AI Prompt.
+    #
+    # @option params [required, String] :type
+    #   The type of this AI Prompt.
+    #
+    # @option params [required, String] :visibility_status
+    #   The visibility status of the AI Prompt.
+    #
+    # @return [Types::CreateAIPromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAIPromptResponse#ai_prompt #ai_prompt} => Types::AIPromptData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ai_prompt({
+    #     api_format: "ANTHROPIC_CLAUDE_MESSAGES", # required, accepts ANTHROPIC_CLAUDE_MESSAGES, ANTHROPIC_CLAUDE_TEXT_COMPLETIONS
+    #     assistant_id: "UuidOrArn", # required
+    #     client_token: "ClientToken",
+    #     description: "Description",
+    #     model_id: "AIPromptModelIdentifier", # required
+    #     name: "Name", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     template_configuration: { # required
+    #       text_full_ai_prompt_edit_template_configuration: {
+    #         text: "TextAIPrompt", # required
+    #       },
+    #     },
+    #     template_type: "TEXT", # required, accepts TEXT
+    #     type: "ANSWER_GENERATION", # required, accepts ANSWER_GENERATION, INTENT_LABELING_GENERATION, QUERY_REFORMULATION
+    #     visibility_status: "SAVED", # required, accepts SAVED, PUBLISHED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_prompt.ai_prompt_arn #=> String
+    #   resp.ai_prompt.ai_prompt_id #=> String
+    #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+    #   resp.ai_prompt.assistant_arn #=> String
+    #   resp.ai_prompt.assistant_id #=> String
+    #   resp.ai_prompt.description #=> String
+    #   resp.ai_prompt.model_id #=> String
+    #   resp.ai_prompt.modified_time #=> Time
+    #   resp.ai_prompt.name #=> String
+    #   resp.ai_prompt.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_prompt.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_prompt.tags #=> Hash
+    #   resp.ai_prompt.tags["TagKey"] #=> String
+    #   resp.ai_prompt.template_configuration.text_full_ai_prompt_edit_template_configuration.text #=> String
+    #   resp.ai_prompt.template_type #=> String, one of "TEXT"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION"
+    #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIPrompt AWS API Documentation
+    #
+    # @overload create_ai_prompt(params = {})
+    # @param [Hash] params ({})
+    def create_ai_prompt(params = {}, options = {})
+      req = build_request(:create_ai_prompt, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon Q in Connect AI Prompt version.
+    #
+    # @option params [required, String] :ai_prompt_id
+    #   The identifier of the Amazon Q in Connect AI prompt.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the AWS SDK populates
+    #   this field. For more information about idempotency, see [Making
+    #   retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :modified_time
+    #   The time the AI Prompt was last modified.
+    #
+    # @return [Types::CreateAIPromptVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAIPromptVersionResponse#ai_prompt #ai_prompt} => Types::AIPromptData
+    #   * {Types::CreateAIPromptVersionResponse#version_number #version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ai_prompt_version({
+    #     ai_prompt_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #     client_token: "ClientToken",
+    #     modified_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_prompt.ai_prompt_arn #=> String
+    #   resp.ai_prompt.ai_prompt_id #=> String
+    #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+    #   resp.ai_prompt.assistant_arn #=> String
+    #   resp.ai_prompt.assistant_id #=> String
+    #   resp.ai_prompt.description #=> String
+    #   resp.ai_prompt.model_id #=> String
+    #   resp.ai_prompt.modified_time #=> Time
+    #   resp.ai_prompt.name #=> String
+    #   resp.ai_prompt.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_prompt.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_prompt.tags #=> Hash
+    #   resp.ai_prompt.tags["TagKey"] #=> String
+    #   resp.ai_prompt.template_configuration.text_full_ai_prompt_edit_template_configuration.text #=> String
+    #   resp.ai_prompt.template_type #=> String, one of "TEXT"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION"
+    #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #   resp.version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIPromptVersion AWS API Documentation
+    #
+    # @overload create_ai_prompt_version(params = {})
+    # @param [Hash] params ({})
+    def create_ai_prompt_version(params = {}, options = {})
+      req = build_request(:create_ai_prompt_version, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Q in Connect assistant.
     #
     # @option params [String] :client_token
@@ -515,6 +994,8 @@ module Aws::QConnect
     #
     # @example Response structure
     #
+    #   resp.assistant.ai_agent_configuration #=> Hash
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.assistant.assistant_arn #=> String
     #   resp.assistant.assistant_id #=> String
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
@@ -889,6 +1370,9 @@ module Aws::QConnect
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #
+    # @option params [Types::VectorIngestionConfiguration] :vector_ingestion_configuration
+    #   Contains details about how to ingest the documents in a data source.
+    #
     # @return [Types::CreateKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateKnowledgeBaseResponse#knowledge_base #knowledge_base} => Types::KnowledgeBaseData
@@ -898,7 +1382,7 @@ module Aws::QConnect
     #   resp = client.create_knowledge_base({
     #     client_token: "NonEmptyString",
     #     description: "Description",
-    #     knowledge_base_type: "EXTERNAL", # required, accepts EXTERNAL, CUSTOM, QUICK_RESPONSES
+    #     knowledge_base_type: "EXTERNAL", # required, accepts EXTERNAL, CUSTOM, QUICK_RESPONSES, MESSAGE_TEMPLATES, MANAGED
     #     name: "Name", # required
     #     rendering_configuration: {
     #       template_uri: "Uri",
@@ -911,18 +1395,69 @@ module Aws::QConnect
     #         app_integration_arn: "GenericArn", # required
     #         object_fields: ["NonEmptyString"],
     #       },
+    #       managed_source_configuration: {
+    #         web_crawler_configuration: {
+    #           crawler_limits: {
+    #             rate_limit: 1,
+    #           },
+    #           exclusion_filters: ["UrlFilterPattern"],
+    #           inclusion_filters: ["UrlFilterPattern"],
+    #           scope: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS
+    #           url_configuration: { # required
+    #             seed_urls: [
+    #               {
+    #                 url: "WebUrl",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     vector_ingestion_configuration: {
+    #       chunking_configuration: {
+    #         chunking_strategy: "FIXED_SIZE", # required, accepts FIXED_SIZE, NONE, HIERARCHICAL, SEMANTIC
+    #         fixed_size_chunking_configuration: {
+    #           max_tokens: 1, # required
+    #           overlap_percentage: 1, # required
+    #         },
+    #         hierarchical_chunking_configuration: {
+    #           level_configurations: [ # required
+    #             {
+    #               max_tokens: 1, # required
+    #             },
+    #           ],
+    #           overlap_tokens: 1, # required
+    #         },
+    #         semantic_chunking_configuration: {
+    #           breakpoint_percentile_threshold: 1, # required
+    #           buffer_size: 1, # required
+    #           max_tokens: 1, # required
+    #         },
+    #       },
+    #       parsing_configuration: {
+    #         bedrock_foundation_model_configuration: {
+    #           model_arn: "BedrockModelArnForParsing", # required
+    #           parsing_prompt: {
+    #             parsing_prompt_text: "ParsingPromptText", # required
+    #           },
+    #         },
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.knowledge_base.description #=> String
+    #   resp.knowledge_base.ingestion_failure_reasons #=> Array
+    #   resp.knowledge_base.ingestion_failure_reasons[0] #=> String
+    #   resp.knowledge_base.ingestion_status #=> String, one of "SYNC_FAILED", "SYNCING_IN_PROGRESS", "SYNC_SUCCESS", "CREATE_IN_PROGRESS"
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES"
+    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES", "MESSAGE_TEMPLATES", "MANAGED"
     #   resp.knowledge_base.last_content_modification_time #=> Time
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
@@ -930,9 +1465,29 @@ module Aws::QConnect
     #   resp.knowledge_base.source_configuration.app_integrations.app_integration_arn #=> String
     #   resp.knowledge_base.source_configuration.app_integrations.object_fields #=> Array
     #   resp.knowledge_base.source_configuration.app_integrations.object_fields[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.crawler_limits.rate_limit #=> Integer
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls[0].url #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
     #   resp.knowledge_base.tags #=> Hash
     #   resp.knowledge_base.tags["TagKey"] #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE", "HIERARCHICAL", "SEMANTIC"
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations #=> Array
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations[0].max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.overlap_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.breakpoint_percentile_threshold #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.buffer_size #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateKnowledgeBase AWS API Documentation
     #
@@ -1071,6 +1626,11 @@ module Aws::QConnect
     # Connect session for each contact on which Amazon Q in Connect is
     # enabled.
     #
+    # @option params [Hash<String,Types::AIAgentConfigurationData>] :ai_agent_configuration
+    #   The configuration of the AI Agents (mapped by AI Agent Type to AI
+    #   Agent version) that should be used by Amazon Q in Connect for this
+    #   Session.
+    #
     # @option params [required, String] :assistant_id
     #   The identifier of the Amazon Q in Connect assistant. Can be either the
     #   ID or the ARN. URLs cannot contain the ARN.
@@ -1107,6 +1667,11 @@ module Aws::QConnect
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_session({
+    #     ai_agent_configuration: {
+    #       "MANUAL_SEARCH" => {
+    #         ai_agent_id: "UuidWithQualifier", # required
+    #       },
+    #     },
     #     assistant_id: "UuidOrArn", # required
     #     client_token: "ClientToken",
     #     description: "Description",
@@ -1144,6 +1709,8 @@ module Aws::QConnect
     #
     # @example Response structure
     #
+    #   resp.session.ai_agent_configuration #=> Hash
+    #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.session.description #=> String
     #   resp.session.integration_configuration.topic_integration_arn #=> String
     #   resp.session.name #=> String
@@ -1169,6 +1736,125 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def create_session(params = {}, options = {})
       req = build_request(:create_session, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Q in Connect AI Agent.
+    #
+    # @option params [required, String] :ai_agent_id
+    #   The identifier of the Amazon Q in Connect AI Agent. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ai_agent({
+    #     ai_agent_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteAIAgent AWS API Documentation
+    #
+    # @overload delete_ai_agent(params = {})
+    # @param [Hash] params ({})
+    def delete_ai_agent(params = {}, options = {})
+      req = build_request(:delete_ai_agent, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Q in Connect AI Agent Version.
+    #
+    # @option params [required, String] :ai_agent_id
+    #   The identifier of the Amazon Q in Connect AI Agent. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number of the AI Agent version.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ai_agent_version({
+    #     ai_agent_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteAIAgentVersion AWS API Documentation
+    #
+    # @overload delete_ai_agent_version(params = {})
+    # @param [Hash] params ({})
+    def delete_ai_agent_version(params = {}, options = {})
+      req = build_request(:delete_ai_agent_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Q in Connect AI Prompt.
+    #
+    # @option params [required, String] :ai_prompt_id
+    #   The identifier of the Amazon Q in Connect AI prompt. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ai_prompt({
+    #     ai_prompt_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteAIPrompt AWS API Documentation
+    #
+    # @overload delete_ai_prompt(params = {})
+    # @param [Hash] params ({})
+    def delete_ai_prompt(params = {}, options = {})
+      req = build_request(:delete_ai_prompt, params)
+      req.send_request(options)
+    end
+
+    # Delete and Amazon Q in Connect AI Prompt version.
+    #
+    # @option params [required, String] :ai_prompt_id
+    #   The identifier of the Amazon Q in Connect AI prompt.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number of the AI Prompt version to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ai_prompt_version({
+    #     ai_prompt_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteAIPromptVersion AWS API Documentation
+    #
+    # @overload delete_ai_prompt_version(params = {})
+    # @param [Hash] params ({})
+    def delete_ai_prompt_version(params = {}, options = {})
+      req = build_request(:delete_ai_prompt_version, params)
       req.send_request(options)
     end
 
@@ -1382,6 +2068,142 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Gets an Amazon Q in Connect AI Agent.
+    #
+    # @option params [required, String] :ai_agent_id
+    #   The identifier of the Amazon Q in Connect AI Agent (with or without a
+    #   version qualifier). Can be either the ID or the ARN. URLs cannot
+    #   contain the ARN.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @return [Types::GetAIAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAIAgentResponse#ai_agent #ai_agent} => Types::AIAgentData
+    #   * {Types::GetAIAgentResponse#version_number #version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ai_agent({
+    #     ai_agent_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_agent.ai_agent_arn #=> String
+    #   resp.ai_agent.ai_agent_id #=> String
+    #   resp.ai_agent.assistant_arn #=> String
+    #   resp.ai_agent.assistant_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.intent_labeling_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.description #=> String
+    #   resp.ai_agent.modified_time #=> Time
+    #   resp.ai_agent.name #=> String
+    #   resp.ai_agent.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_agent.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_agent.tags #=> Hash
+    #   resp.ai_agent.tags["TagKey"] #=> String
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION"
+    #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #   resp.version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetAIAgent AWS API Documentation
+    #
+    # @overload get_ai_agent(params = {})
+    # @param [Hash] params ({})
+    def get_ai_agent(params = {}, options = {})
+      req = build_request(:get_ai_agent, params)
+      req.send_request(options)
+    end
+
+    # Gets and Amazon Q in Connect AI Prompt.
+    #
+    # @option params [required, String] :ai_prompt_id
+    #   The identifier of the Amazon Q in Connect AI prompt.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @return [Types::GetAIPromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAIPromptResponse#ai_prompt #ai_prompt} => Types::AIPromptData
+    #   * {Types::GetAIPromptResponse#version_number #version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ai_prompt({
+    #     ai_prompt_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_prompt.ai_prompt_arn #=> String
+    #   resp.ai_prompt.ai_prompt_id #=> String
+    #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+    #   resp.ai_prompt.assistant_arn #=> String
+    #   resp.ai_prompt.assistant_id #=> String
+    #   resp.ai_prompt.description #=> String
+    #   resp.ai_prompt.model_id #=> String
+    #   resp.ai_prompt.modified_time #=> Time
+    #   resp.ai_prompt.name #=> String
+    #   resp.ai_prompt.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_prompt.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_prompt.tags #=> Hash
+    #   resp.ai_prompt.tags["TagKey"] #=> String
+    #   resp.ai_prompt.template_configuration.text_full_ai_prompt_edit_template_configuration.text #=> String
+    #   resp.ai_prompt.template_type #=> String, one of "TEXT"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION"
+    #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #   resp.version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetAIPrompt AWS API Documentation
+    #
+    # @overload get_ai_prompt(params = {})
+    # @param [Hash] params ({})
+    def get_ai_prompt(params = {}, options = {})
+      req = build_request(:get_ai_prompt, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about an assistant.
     #
     # @option params [required, String] :assistant_id
@@ -1400,6 +2222,8 @@ module Aws::QConnect
     #
     # @example Response structure
     #
+    #   resp.assistant.ai_agent_configuration #=> Hash
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.assistant.assistant_arn #=> String
     #   resp.assistant.assistant_id #=> String
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
@@ -1678,9 +2502,12 @@ module Aws::QConnect
     # @example Response structure
     #
     #   resp.knowledge_base.description #=> String
+    #   resp.knowledge_base.ingestion_failure_reasons #=> Array
+    #   resp.knowledge_base.ingestion_failure_reasons[0] #=> String
+    #   resp.knowledge_base.ingestion_status #=> String, one of "SYNC_FAILED", "SYNCING_IN_PROGRESS", "SYNC_SUCCESS", "CREATE_IN_PROGRESS"
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES"
+    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES", "MESSAGE_TEMPLATES", "MANAGED"
     #   resp.knowledge_base.last_content_modification_time #=> Time
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
@@ -1688,9 +2515,29 @@ module Aws::QConnect
     #   resp.knowledge_base.source_configuration.app_integrations.app_integration_arn #=> String
     #   resp.knowledge_base.source_configuration.app_integrations.object_fields #=> Array
     #   resp.knowledge_base.source_configuration.app_integrations.object_fields[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.crawler_limits.rate_limit #=> Integer
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls[0].url #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
     #   resp.knowledge_base.tags #=> Hash
     #   resp.knowledge_base.tags["TagKey"] #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE", "HIERARCHICAL", "SEMANTIC"
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations #=> Array
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations[0].max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.overlap_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.breakpoint_percentile_threshold #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.buffer_size #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetKnowledgeBase AWS API Documentation
     #
@@ -1825,6 +2672,10 @@ module Aws::QConnect
     #   resp.recommendations[0].data.details.generative_data.ranking_data.relevance_score #=> Float
     #   resp.recommendations[0].data.details.generative_data.references #=> Array
     #   resp.recommendations[0].data.details.generative_data.references[0] #=> Types::DataSummary
+    #   resp.recommendations[0].data.details.intent_detected_data.intent #=> String
+    #   resp.recommendations[0].data.details.intent_detected_data.intent_id #=> String
+    #   resp.recommendations[0].data.details.source_content_data.citation_span.begin_offset_inclusive #=> Integer
+    #   resp.recommendations[0].data.details.source_content_data.citation_span.end_offset_exclusive #=> Integer
     #   resp.recommendations[0].data.details.source_content_data.id #=> String
     #   resp.recommendations[0].data.details.source_content_data.ranking_data.relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.recommendations[0].data.details.source_content_data.ranking_data.relevance_score #=> Float
@@ -1841,12 +2692,16 @@ module Aws::QConnect
     #   resp.recommendations[0].data.reference.content_reference.content_id #=> String
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_arn #=> String
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_id #=> String
+    #   resp.recommendations[0].data.reference.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE"
+    #   resp.recommendations[0].data.reference.content_reference.source_url #=> String
     #   resp.recommendations[0].data.reference.generative_reference.generation_id #=> String
     #   resp.recommendations[0].data.reference.generative_reference.model_id #=> String
     #   resp.recommendations[0].document.content_reference.content_arn #=> String
     #   resp.recommendations[0].document.content_reference.content_id #=> String
     #   resp.recommendations[0].document.content_reference.knowledge_base_arn #=> String
     #   resp.recommendations[0].document.content_reference.knowledge_base_id #=> String
+    #   resp.recommendations[0].document.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE"
+    #   resp.recommendations[0].document.content_reference.source_url #=> String
     #   resp.recommendations[0].document.excerpt.highlights #=> Array
     #   resp.recommendations[0].document.excerpt.highlights[0].begin_offset_inclusive #=> Integer
     #   resp.recommendations[0].document.excerpt.highlights[0].end_offset_exclusive #=> Integer
@@ -1858,7 +2713,7 @@ module Aws::QConnect
     #   resp.recommendations[0].recommendation_id #=> String
     #   resp.recommendations[0].relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.recommendations[0].relevance_score #=> Float
-    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER"
+    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT"
     #   resp.triggers #=> Array
     #   resp.triggers[0].data.query.text #=> String
     #   resp.triggers[0].id #=> String
@@ -1899,6 +2754,8 @@ module Aws::QConnect
     #
     # @example Response structure
     #
+    #   resp.session.ai_agent_configuration #=> Hash
+    #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.session.description #=> String
     #   resp.session.integration_configuration.topic_integration_arn #=> String
     #   resp.session.name #=> String
@@ -1924,6 +2781,344 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def get_session(params = {}, options = {})
       req = build_request(:get_session, params)
+      req.send_request(options)
+    end
+
+    # List AI Agent versions.
+    #
+    # @option params [required, String] :ai_agent_id
+    #   The identifier of the Amazon Q in Connect AI Agent for which versions
+    #   are to be listed.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [String] :origin
+    #   The origin of the AI Agent versions to be listed. `SYSTEM` for a
+    #   default AI Agent created by Q in Connect or `CUSTOMER` for an AI Agent
+    #   created by calling AI Agent creation APIs.
+    #
+    # @return [Types::ListAIAgentVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAIAgentVersionsResponse#ai_agent_version_summaries #ai_agent_version_summaries} => Array&lt;Types::AIAgentVersionSummary&gt;
+    #   * {Types::ListAIAgentVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ai_agent_versions({
+    #     ai_agent_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     origin: "SYSTEM", # accepts SYSTEM, CUSTOMER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_agent_version_summaries #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.ai_agent_arn #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.ai_agent_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.assistant_arn #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.assistant_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.intent_labeling_generation_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.answer_recommendation_ai_agent_configuration.query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.description #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.modified_time #=> Time
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.name #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.tags #=> Hash
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.tags["TagKey"] #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION"
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #   resp.ai_agent_version_summaries[0].version_number #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAIAgentVersions AWS API Documentation
+    #
+    # @overload list_ai_agent_versions(params = {})
+    # @param [Hash] params ({})
+    def list_ai_agent_versions(params = {}, options = {})
+      req = build_request(:list_ai_agent_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists AI Agents.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [String] :origin
+    #   The origin of the AI Agents to be listed. `SYSTEM` for a default AI
+    #   Agent created by Q in Connect or `CUSTOMER` for an AI Agent created by
+    #   calling AI Agent creation APIs.
+    #
+    # @return [Types::ListAIAgentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAIAgentsResponse#ai_agent_summaries #ai_agent_summaries} => Array&lt;Types::AIAgentSummary&gt;
+    #   * {Types::ListAIAgentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ai_agents({
+    #     assistant_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     origin: "SYSTEM", # accepts SYSTEM, CUSTOMER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_agent_summaries #=> Array
+    #   resp.ai_agent_summaries[0].ai_agent_arn #=> String
+    #   resp.ai_agent_summaries[0].ai_agent_id #=> String
+    #   resp.ai_agent_summaries[0].assistant_arn #=> String
+    #   resp.ai_agent_summaries[0].assistant_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.intent_labeling_generation_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.answer_recommendation_ai_agent_configuration.query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent_summaries[0].description #=> String
+    #   resp.ai_agent_summaries[0].modified_time #=> Time
+    #   resp.ai_agent_summaries[0].name #=> String
+    #   resp.ai_agent_summaries[0].origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_agent_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_agent_summaries[0].tags #=> Hash
+    #   resp.ai_agent_summaries[0].tags["TagKey"] #=> String
+    #   resp.ai_agent_summaries[0].type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION"
+    #   resp.ai_agent_summaries[0].visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAIAgents AWS API Documentation
+    #
+    # @overload list_ai_agents(params = {})
+    # @param [Hash] params ({})
+    def list_ai_agents(params = {}, options = {})
+      req = build_request(:list_ai_agents, params)
+      req.send_request(options)
+    end
+
+    # Lists AI Prompt versions.
+    #
+    # @option params [required, String] :ai_prompt_id
+    #   The identifier of the Amazon Q in Connect AI prompt for which versions
+    #   are to be listed.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [String] :origin
+    #   The origin of the AI Prompt versions to be listed. `SYSTEM` for a
+    #   default AI Agent created by Q in Connect or `CUSTOMER` for an AI Agent
+    #   created by calling AI Agent creation APIs.
+    #
+    # @return [Types::ListAIPromptVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAIPromptVersionsResponse#ai_prompt_version_summaries #ai_prompt_version_summaries} => Array&lt;Types::AIPromptVersionSummary&gt;
+    #   * {Types::ListAIPromptVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ai_prompt_versions({
+    #     ai_prompt_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     origin: "SYSTEM", # accepts SYSTEM, CUSTOMER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_prompt_version_summaries #=> Array
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.ai_prompt_arn #=> String
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.ai_prompt_id #=> String
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.assistant_arn #=> String
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.assistant_id #=> String
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.description #=> String
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.model_id #=> String
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.modified_time #=> Time
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.name #=> String
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.tags #=> Hash
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.tags["TagKey"] #=> String
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.template_type #=> String, one of "TEXT"
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION"
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #   resp.ai_prompt_version_summaries[0].version_number #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAIPromptVersions AWS API Documentation
+    #
+    # @overload list_ai_prompt_versions(params = {})
+    # @param [Hash] params ({})
+    def list_ai_prompt_versions(params = {}, options = {})
+      req = build_request(:list_ai_prompt_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the AI Prompts available on the Amazon Q in Connect assistant.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [String] :origin
+    #   The origin of the AI Prompts to be listed. `SYSTEM` for a default AI
+    #   Agent created by Q in Connect or `CUSTOMER` for an AI Agent created by
+    #   calling AI Agent creation APIs.
+    #
+    # @return [Types::ListAIPromptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAIPromptsResponse#ai_prompt_summaries #ai_prompt_summaries} => Array&lt;Types::AIPromptSummary&gt;
+    #   * {Types::ListAIPromptsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ai_prompts({
+    #     assistant_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     origin: "SYSTEM", # accepts SYSTEM, CUSTOMER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_prompt_summaries #=> Array
+    #   resp.ai_prompt_summaries[0].ai_prompt_arn #=> String
+    #   resp.ai_prompt_summaries[0].ai_prompt_id #=> String
+    #   resp.ai_prompt_summaries[0].api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+    #   resp.ai_prompt_summaries[0].assistant_arn #=> String
+    #   resp.ai_prompt_summaries[0].assistant_id #=> String
+    #   resp.ai_prompt_summaries[0].description #=> String
+    #   resp.ai_prompt_summaries[0].model_id #=> String
+    #   resp.ai_prompt_summaries[0].modified_time #=> Time
+    #   resp.ai_prompt_summaries[0].name #=> String
+    #   resp.ai_prompt_summaries[0].origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_prompt_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_prompt_summaries[0].tags #=> Hash
+    #   resp.ai_prompt_summaries[0].tags["TagKey"] #=> String
+    #   resp.ai_prompt_summaries[0].template_type #=> String, one of "TEXT"
+    #   resp.ai_prompt_summaries[0].type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION"
+    #   resp.ai_prompt_summaries[0].visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAIPrompts AWS API Documentation
+    #
+    # @overload list_ai_prompts(params = {})
+    # @param [Hash] params ({})
+    def list_ai_prompts(params = {}, options = {})
+      req = build_request(:list_ai_prompts, params)
       req.send_request(options)
     end
 
@@ -2006,6 +3201,8 @@ module Aws::QConnect
     # @example Response structure
     #
     #   resp.assistant_summaries #=> Array
+    #   resp.assistant_summaries[0].ai_agent_configuration #=> Hash
+    #   resp.assistant_summaries[0].ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.assistant_summaries[0].assistant_arn #=> String
     #   resp.assistant_summaries[0].assistant_id #=> String
     #   resp.assistant_summaries[0].capability_configuration.type #=> String, one of "V1", "V2"
@@ -2234,16 +3431,36 @@ module Aws::QConnect
     #   resp.knowledge_base_summaries[0].description #=> String
     #   resp.knowledge_base_summaries[0].knowledge_base_arn #=> String
     #   resp.knowledge_base_summaries[0].knowledge_base_id #=> String
-    #   resp.knowledge_base_summaries[0].knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES"
+    #   resp.knowledge_base_summaries[0].knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES", "MESSAGE_TEMPLATES", "MANAGED"
     #   resp.knowledge_base_summaries[0].name #=> String
     #   resp.knowledge_base_summaries[0].rendering_configuration.template_uri #=> String
     #   resp.knowledge_base_summaries[0].server_side_encryption_configuration.kms_key_id #=> String
     #   resp.knowledge_base_summaries[0].source_configuration.app_integrations.app_integration_arn #=> String
     #   resp.knowledge_base_summaries[0].source_configuration.app_integrations.object_fields #=> Array
     #   resp.knowledge_base_summaries[0].source_configuration.app_integrations.object_fields[0] #=> String
+    #   resp.knowledge_base_summaries[0].source_configuration.managed_source_configuration.web_crawler_configuration.crawler_limits.rate_limit #=> Integer
+    #   resp.knowledge_base_summaries[0].source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters #=> Array
+    #   resp.knowledge_base_summaries[0].source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters[0] #=> String
+    #   resp.knowledge_base_summaries[0].source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters #=> Array
+    #   resp.knowledge_base_summaries[0].source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters[0] #=> String
+    #   resp.knowledge_base_summaries[0].source_configuration.managed_source_configuration.web_crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
+    #   resp.knowledge_base_summaries[0].source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls #=> Array
+    #   resp.knowledge_base_summaries[0].source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls[0].url #=> String
     #   resp.knowledge_base_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
     #   resp.knowledge_base_summaries[0].tags #=> Hash
     #   resp.knowledge_base_summaries[0].tags["TagKey"] #=> String
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE", "HIERARCHICAL", "SEMANTIC"
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations #=> Array
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations[0].max_tokens #=> Integer
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.overlap_tokens #=> Integer
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.breakpoint_percentile_threshold #=> Integer
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.buffer_size #=> Integer
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
+    #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListKnowledgeBases AWS API Documentation
@@ -2471,10 +3688,18 @@ module Aws::QConnect
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
+    # @option params [String] :override_knowledge_base_search_type
+    #   The search type to be used against the Knowledge Base for this
+    #   request. The values can be `SEMANTIC` which uses vector embeddings or
+    #   `HYBRID` which use vector embeddings and raw text.
+    #
     # @option params [Array<Types::QueryCondition>] :query_condition
     #   Information about how to query content.
     #
-    # @option params [required, String] :query_text
+    # @option params [Types::QueryInputData] :query_input_data
+    #   Information about the query.
+    #
+    # @option params [String] :query_text
     #   The text to search for.
     #
     # @option params [String] :session_id
@@ -2494,6 +3719,7 @@ module Aws::QConnect
     #     assistant_id: "UuidOrArn", # required
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
     #     query_condition: [
     #       {
     #         single: {
@@ -2503,7 +3729,15 @@ module Aws::QConnect
     #         },
     #       },
     #     ],
-    #     query_text: "QueryText", # required
+    #     query_input_data: {
+    #       intent_input_data: {
+    #         intent_id: "Uuid", # required
+    #       },
+    #       query_text_input_data: {
+    #         text: "QueryText", # required
+    #       },
+    #     },
+    #     query_text: "QueryText",
     #     session_id: "UuidOrArn",
     #   })
     #
@@ -2526,6 +3760,10 @@ module Aws::QConnect
     #   resp.results[0].data.details.generative_data.ranking_data.relevance_score #=> Float
     #   resp.results[0].data.details.generative_data.references #=> Array
     #   resp.results[0].data.details.generative_data.references[0] #=> Types::DataSummary
+    #   resp.results[0].data.details.intent_detected_data.intent #=> String
+    #   resp.results[0].data.details.intent_detected_data.intent_id #=> String
+    #   resp.results[0].data.details.source_content_data.citation_span.begin_offset_inclusive #=> Integer
+    #   resp.results[0].data.details.source_content_data.citation_span.end_offset_exclusive #=> Integer
     #   resp.results[0].data.details.source_content_data.id #=> String
     #   resp.results[0].data.details.source_content_data.ranking_data.relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.results[0].data.details.source_content_data.ranking_data.relevance_score #=> Float
@@ -2542,12 +3780,16 @@ module Aws::QConnect
     #   resp.results[0].data.reference.content_reference.content_id #=> String
     #   resp.results[0].data.reference.content_reference.knowledge_base_arn #=> String
     #   resp.results[0].data.reference.content_reference.knowledge_base_id #=> String
+    #   resp.results[0].data.reference.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE"
+    #   resp.results[0].data.reference.content_reference.source_url #=> String
     #   resp.results[0].data.reference.generative_reference.generation_id #=> String
     #   resp.results[0].data.reference.generative_reference.model_id #=> String
     #   resp.results[0].document.content_reference.content_arn #=> String
     #   resp.results[0].document.content_reference.content_id #=> String
     #   resp.results[0].document.content_reference.knowledge_base_arn #=> String
     #   resp.results[0].document.content_reference.knowledge_base_id #=> String
+    #   resp.results[0].document.content_reference.reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE"
+    #   resp.results[0].document.content_reference.source_url #=> String
     #   resp.results[0].document.excerpt.highlights #=> Array
     #   resp.results[0].document.excerpt.highlights[0].begin_offset_inclusive #=> Integer
     #   resp.results[0].document.excerpt.highlights[0].end_offset_exclusive #=> Integer
@@ -2558,7 +3800,7 @@ module Aws::QConnect
     #   resp.results[0].document.title.text #=> String
     #   resp.results[0].relevance_score #=> Float
     #   resp.results[0].result_id #=> String
-    #   resp.results[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_ANSWER"
+    #   resp.results[0].type #=> String, one of "KNOWLEDGE_CONTENT", "INTENT_ANSWER", "GENERATIVE_ANSWER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/QueryAssistant AWS API Documentation
     #
@@ -2566,6 +3808,35 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def query_assistant(params = {}, options = {})
       req = build_request(:query_assistant, params)
+      req.send_request(options)
+    end
+
+    # Removes the AI Agent that is set for use by defafult on an Amazon Q in
+    # Connect Assistant.
+    #
+    # @option params [required, String] :ai_agent_type
+    #   The type of the AI Agent being removed for use by default from the
+    #   Amazon Q in Connect Assistant.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_assistant_ai_agent({
+    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION
+    #     assistant_id: "UuidOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RemoveAssistantAIAgent AWS API Documentation
+    #
+    # @overload remove_assistant_ai_agent(params = {})
+    # @param [Hash] params ({})
+    def remove_assistant_ai_agent(params = {}, options = {})
+      req = build_request(:remove_assistant_ai_agent, params)
       req.send_request(options)
     end
 
@@ -3045,6 +4316,331 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Updates an AI Agent.
+    #
+    # @option params [required, String] :ai_agent_id
+    #   The identifier of the Amazon Q in Connect AI Agent.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the AWS SDK populates
+    #   this field. For more information about idempotency, see [Making
+    #   retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Types::AIAgentConfiguration] :configuration
+    #   The configuration of the Amazon Q in Connect AI Agent.
+    #
+    # @option params [String] :description
+    #   The description of the Amazon Q in Connect AI Agent.
+    #
+    # @option params [required, String] :visibility_status
+    #   The visbility status of the Amazon Q in Connect AI Agent.
+    #
+    # @return [Types::UpdateAIAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAIAgentResponse#ai_agent #ai_agent} => Types::AIAgentData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ai_agent({
+    #     ai_agent_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #     client_token: "ClientToken",
+    #     configuration: {
+    #       answer_recommendation_ai_agent_configuration: {
+    #         answer_generation_ai_prompt_id: "UuidWithQualifier",
+    #         association_configurations: [
+    #           {
+    #             association_configuration_data: {
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue",
+    #                     },
+    #                   ],
+    #                   or_conditions: [
+    #                     {
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue",
+    #                         },
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue",
+    #                       },
+    #                     },
+    #                   ],
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue",
+    #                   },
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               },
+    #             },
+    #             association_id: "Uuid",
+    #             association_type: "KNOWLEDGE_BASE", # accepts KNOWLEDGE_BASE
+    #           },
+    #         ],
+    #         intent_labeling_generation_ai_prompt_id: "UuidWithQualifier",
+    #         query_reformulation_ai_prompt_id: "UuidWithQualifier",
+    #       },
+    #       manual_search_ai_agent_configuration: {
+    #         answer_generation_ai_prompt_id: "UuidWithQualifier",
+    #         association_configurations: [
+    #           {
+    #             association_configuration_data: {
+    #               knowledge_base_association_configuration_data: {
+    #                 content_tag_filter: {
+    #                   and_conditions: [
+    #                     {
+    #                       key: "TagKey", # required
+    #                       value: "TagValue",
+    #                     },
+    #                   ],
+    #                   or_conditions: [
+    #                     {
+    #                       and_conditions: [
+    #                         {
+    #                           key: "TagKey", # required
+    #                           value: "TagValue",
+    #                         },
+    #                       ],
+    #                       tag_condition: {
+    #                         key: "TagKey", # required
+    #                         value: "TagValue",
+    #                       },
+    #                     },
+    #                   ],
+    #                   tag_condition: {
+    #                     key: "TagKey", # required
+    #                     value: "TagValue",
+    #                   },
+    #                 },
+    #                 max_results: 1,
+    #                 override_knowledge_base_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #               },
+    #             },
+    #             association_id: "Uuid",
+    #             association_type: "KNOWLEDGE_BASE", # accepts KNOWLEDGE_BASE
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     description: "Description",
+    #     visibility_status: "SAVED", # required, accepts SAVED, PUBLISHED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_agent.ai_agent_arn #=> String
+    #   resp.ai_agent.ai_agent_id #=> String
+    #   resp.ai_agent.assistant_arn #=> String
+    #   resp.ai_agent.assistant_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.intent_labeling_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.answer_recommendation_ai_agent_configuration.query_reformulation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions #=> Array
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].and_conditions[0].value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions[0].tag_condition.value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.key #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition.value #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.max_results #=> Integer
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_configuration_data.knowledge_base_association_configuration_data.override_knowledge_base_search_type #=> String, one of "HYBRID", "SEMANTIC"
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_id #=> String
+    #   resp.ai_agent.configuration.manual_search_ai_agent_configuration.association_configurations[0].association_type #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.ai_agent.description #=> String
+    #   resp.ai_agent.modified_time #=> Time
+    #   resp.ai_agent.name #=> String
+    #   resp.ai_agent.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_agent.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_agent.tags #=> Hash
+    #   resp.ai_agent.tags["TagKey"] #=> String
+    #   resp.ai_agent.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION"
+    #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateAIAgent AWS API Documentation
+    #
+    # @overload update_ai_agent(params = {})
+    # @param [Hash] params ({})
+    def update_ai_agent(params = {}, options = {})
+      req = build_request(:update_ai_agent, params)
+      req.send_request(options)
+    end
+
+    # Updates an AI Prompt.
+    #
+    # @option params [required, String] :ai_prompt_id
+    #   The identifier of the Amazon Q in Connect AI Prompt.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the AWS SDK populates
+    #   this field. For more information about idempotency, see [Making
+    #   retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [String] :description
+    #   The description of the Amazon Q in Connect AI Prompt.
+    #
+    # @option params [Types::AIPromptTemplateConfiguration] :template_configuration
+    #   The configuration of the prompt template for this AI Prompt.
+    #
+    # @option params [required, String] :visibility_status
+    #   The visibility status of the Amazon Q in Connect AI prompt.
+    #
+    # @return [Types::UpdateAIPromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAIPromptResponse#ai_prompt #ai_prompt} => Types::AIPromptData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ai_prompt({
+    #     ai_prompt_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     assistant_id: "UuidOrArn", # required
+    #     client_token: "ClientToken",
+    #     description: "Description",
+    #     template_configuration: {
+    #       text_full_ai_prompt_edit_template_configuration: {
+    #         text: "TextAIPrompt", # required
+    #       },
+    #     },
+    #     visibility_status: "SAVED", # required, accepts SAVED, PUBLISHED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_prompt.ai_prompt_arn #=> String
+    #   resp.ai_prompt.ai_prompt_id #=> String
+    #   resp.ai_prompt.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+    #   resp.ai_prompt.assistant_arn #=> String
+    #   resp.ai_prompt.assistant_id #=> String
+    #   resp.ai_prompt.description #=> String
+    #   resp.ai_prompt.model_id #=> String
+    #   resp.ai_prompt.modified_time #=> Time
+    #   resp.ai_prompt.name #=> String
+    #   resp.ai_prompt.origin #=> String, one of "SYSTEM", "CUSTOMER"
+    #   resp.ai_prompt.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.ai_prompt.tags #=> Hash
+    #   resp.ai_prompt.tags["TagKey"] #=> String
+    #   resp.ai_prompt.template_configuration.text_full_ai_prompt_edit_template_configuration.text #=> String
+    #   resp.ai_prompt.template_type #=> String, one of "TEXT"
+    #   resp.ai_prompt.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION"
+    #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateAIPrompt AWS API Documentation
+    #
+    # @overload update_ai_prompt(params = {})
+    # @param [Hash] params ({})
+    def update_ai_prompt(params = {}, options = {})
+      req = build_request(:update_ai_prompt, params)
+      req.send_request(options)
+    end
+
+    # Updates the AI Agent that is set for use by defafult on an Amazon Q in
+    # Connect Assistant.
+    #
+    # @option params [required, String] :ai_agent_type
+    #   The type of the AI Agent being updated for use by default on the
+    #   Amazon Q in Connect Assistant.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, Types::AIAgentConfigurationData] :configuration
+    #   The configuration of the AI Agent being updated for use by default on
+    #   the Amazon Q in Connect Assistant.
+    #
+    # @return [Types::UpdateAssistantAIAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAssistantAIAgentResponse#assistant #assistant} => Types::AssistantData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_assistant_ai_agent({
+    #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION
+    #     assistant_id: "UuidOrArn", # required
+    #     configuration: { # required
+    #       ai_agent_id: "UuidWithQualifier", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assistant.ai_agent_configuration #=> Hash
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.assistant_arn #=> String
+    #   resp.assistant.assistant_id #=> String
+    #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
+    #   resp.assistant.description #=> String
+    #   resp.assistant.integration_configuration.topic_integration_arn #=> String
+    #   resp.assistant.name #=> String
+    #   resp.assistant.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.assistant.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.assistant.tags #=> Hash
+    #   resp.assistant.tags["TagKey"] #=> String
+    #   resp.assistant.type #=> String, one of "AGENT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateAssistantAIAgent AWS API Documentation
+    #
+    # @overload update_assistant_ai_agent(params = {})
+    # @param [Hash] params ({})
+    def update_assistant_ai_agent(params = {}, options = {})
+      req = build_request(:update_assistant_ai_agent, params)
+      req.send_request(options)
+    end
+
     # Updates information about the content.
     #
     # @option params [required, String] :content_id
@@ -3164,9 +4760,12 @@ module Aws::QConnect
     # @example Response structure
     #
     #   resp.knowledge_base.description #=> String
+    #   resp.knowledge_base.ingestion_failure_reasons #=> Array
+    #   resp.knowledge_base.ingestion_failure_reasons[0] #=> String
+    #   resp.knowledge_base.ingestion_status #=> String, one of "SYNC_FAILED", "SYNCING_IN_PROGRESS", "SYNC_SUCCESS", "CREATE_IN_PROGRESS"
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES"
+    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES", "MESSAGE_TEMPLATES", "MANAGED"
     #   resp.knowledge_base.last_content_modification_time #=> Time
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
@@ -3174,9 +4773,29 @@ module Aws::QConnect
     #   resp.knowledge_base.source_configuration.app_integrations.app_integration_arn #=> String
     #   resp.knowledge_base.source_configuration.app_integrations.object_fields #=> Array
     #   resp.knowledge_base.source_configuration.app_integrations.object_fields[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.crawler_limits.rate_limit #=> Integer
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls[0].url #=> String
     #   resp.knowledge_base.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
     #   resp.knowledge_base.tags #=> Hash
     #   resp.knowledge_base.tags["TagKey"] #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE", "HIERARCHICAL", "SEMANTIC"
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations #=> Array
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations[0].max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.overlap_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.breakpoint_percentile_threshold #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.buffer_size #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateKnowledgeBaseTemplateUri AWS API Documentation
     #
@@ -3311,6 +4930,11 @@ module Aws::QConnect
     # Q in Connect session for each contact on which Amazon Q in Connect is
     # enabled.
     #
+    # @option params [Hash<String,Types::AIAgentConfigurationData>] :ai_agent_configuration
+    #   The configuration of the AI Agents (mapped by AI Agent Type to AI
+    #   Agent version) that should be used by Amazon Q in Connect for this
+    #   Session.
+    #
     # @option params [required, String] :assistant_id
     #   The identifier of the Amazon Q in Connect assistant. Can be either the
     #   ID or the ARN. URLs cannot contain the ARN.
@@ -3332,6 +4956,11 @@ module Aws::QConnect
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_session({
+    #     ai_agent_configuration: {
+    #       "MANUAL_SEARCH" => {
+    #         ai_agent_id: "UuidWithQualifier", # required
+    #       },
+    #     },
     #     assistant_id: "UuidOrArn", # required
     #     description: "Description",
     #     session_id: "UuidOrArn", # required
@@ -3365,6 +4994,8 @@ module Aws::QConnect
     #
     # @example Response structure
     #
+    #   resp.session.ai_agent_configuration #=> Hash
+    #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
     #   resp.session.description #=> String
     #   resp.session.integration_configuration.topic_integration_arn #=> String
     #   resp.session.name #=> String
@@ -3393,6 +5024,64 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Updates the data stored on an Amazon Q in Connect Session.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, Array<Types::RuntimeSessionData>] :data
+    #   The data stored on the Amazon Q in Connect Session.
+    #
+    # @option params [String] :namespace
+    #   The namespace into which the session data is stored. Supported
+    #   namespaces are: Custom
+    #
+    # @option params [required, String] :session_id
+    #   The identifier of the session. Can be either the ID or the ARN. URLs
+    #   cannot contain the ARN.
+    #
+    # @return [Types::UpdateSessionDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSessionDataResponse#data #data} => Array&lt;Types::RuntimeSessionData&gt;
+    #   * {Types::UpdateSessionDataResponse#namespace #namespace} => String
+    #   * {Types::UpdateSessionDataResponse#session_arn #session_arn} => String
+    #   * {Types::UpdateSessionDataResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_session_data({
+    #     assistant_id: "UuidOrArn", # required
+    #     data: [ # required
+    #       {
+    #         key: "NonEmptySensitiveString", # required
+    #         value: { # required
+    #           string_value: "NonEmptySensitiveString",
+    #         },
+    #       },
+    #     ],
+    #     namespace: "Custom", # accepts Custom
+    #     session_id: "UuidOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data #=> Array
+    #   resp.data[0].key #=> String
+    #   resp.data[0].value.string_value #=> String
+    #   resp.namespace #=> String, one of "Custom"
+    #   resp.session_arn #=> String
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateSessionData AWS API Documentation
+    #
+    # @overload update_session_data(params = {})
+    # @param [Hash] params ({})
+    def update_session_data(params = {}, options = {})
+      req = build_request(:update_session_data, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3411,7 +5100,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

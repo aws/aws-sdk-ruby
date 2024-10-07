@@ -12,6 +12,50 @@ module Aws::QConnect
   # @api private
   module Endpoints
 
+    class CreateAIAgent
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class CreateAIAgentVersion
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class CreateAIPrompt
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class CreateAIPromptVersion
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class CreateAssistant
       def self.build(context)
         Aws::QConnect::EndpointParameters.new(
@@ -89,6 +133,50 @@ module Aws::QConnect
       end
     end
 
+    class DeleteAIAgent
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DeleteAIAgentVersion
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DeleteAIPrompt
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DeleteAIPromptVersion
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class DeleteAssistant
       def self.build(context)
         Aws::QConnect::EndpointParameters.new(
@@ -156,6 +244,28 @@ module Aws::QConnect
     end
 
     class DeleteQuickResponse
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class GetAIAgent
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class GetAIPrompt
       def self.build(context)
         Aws::QConnect::EndpointParameters.new(
           region: context.config.region,
@@ -266,6 +376,50 @@ module Aws::QConnect
     end
 
     class GetSession
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListAIAgentVersions
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListAIAgents
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListAIPromptVersions
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListAIPrompts
       def self.build(context)
         Aws::QConnect::EndpointParameters.new(
           region: context.config.region,
@@ -397,6 +551,17 @@ module Aws::QConnect
       end
     end
 
+    class RemoveAssistantAIAgent
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class RemoveKnowledgeBaseTemplateUri
       def self.build(context)
         Aws::QConnect::EndpointParameters.new(
@@ -485,6 +650,39 @@ module Aws::QConnect
       end
     end
 
+    class UpdateAIAgent
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class UpdateAIPrompt
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class UpdateAssistantAIAgent
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class UpdateContent
       def self.build(context)
         Aws::QConnect::EndpointParameters.new(
@@ -519,6 +717,17 @@ module Aws::QConnect
     end
 
     class UpdateSession
+      def self.build(context)
+        Aws::QConnect::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class UpdateSessionData
       def self.build(context)
         Aws::QConnect::EndpointParameters.new(
           region: context.config.region,

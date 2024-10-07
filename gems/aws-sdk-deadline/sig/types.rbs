@@ -348,6 +348,7 @@ module Aws::Deadline
       attr_accessor target_task_run_status: ("READY" | "SUSPENDED")
       attr_accessor max_failed_tasks_count: ::Integer
       attr_accessor max_retries_per_task: ::Integer
+      attr_accessor source_job_id: ::String
       SENSITIVE: [:template, :parameters]
     end
 
@@ -897,6 +898,7 @@ module Aws::Deadline
       attr_accessor parameters: ::Hash[::String, Types::JobParameter]
       attr_accessor attachments: Types::Attachments
       attr_accessor description: ::String
+      attr_accessor source_job_id: ::String
       SENSITIVE: [:parameters, :description]
     end
 
@@ -1339,6 +1341,7 @@ module Aws::Deadline
       attr_accessor ended_at: ::Time
       attr_accessor started_at: ::Time
       attr_accessor job_parameters: ::Hash[::String, Types::JobParameter]
+      attr_accessor source_job_id: ::String
       SENSITIVE: [:job_parameters]
     end
 
@@ -1359,6 +1362,7 @@ module Aws::Deadline
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
       attr_accessor max_failed_tasks_count: ::Integer
       attr_accessor max_retries_per_task: ::Integer
+      attr_accessor source_job_id: ::String
       SENSITIVE: []
     end
 
@@ -1463,6 +1467,21 @@ module Aws::Deadline
 
     class ListJobMembersResponse
       attr_accessor members: ::Array[Types::JobMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobParameterDefinitionsRequest
+      attr_accessor farm_id: ::String
+      attr_accessor job_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListJobParameterDefinitionsResponse
+      attr_accessor job_parameter_definitions: ::Array[untyped]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

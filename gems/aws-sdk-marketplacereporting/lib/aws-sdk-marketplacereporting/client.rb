@@ -450,6 +450,13 @@ module Aws::MarketplaceReporting
     # Generates an embedding URL for an Amazon QuickSight dashboard for an
     # anonymous user.
     #
+    # <note markdown="1"> This API is available only to Amazon Web Services Organization
+    # management accounts or delegated administrators registered for the
+    # procurement insights
+    # (`procurement-insights.marketplace.amazonaws.com`) feature.
+    #
+    #  </note>
+    #
     # The following rules apply to a generated URL:
     #
     # * It contains a temporary bearer token, valid for 5 minutes after it
@@ -557,7 +564,7 @@ module Aws::MarketplaceReporting
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacereporting'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

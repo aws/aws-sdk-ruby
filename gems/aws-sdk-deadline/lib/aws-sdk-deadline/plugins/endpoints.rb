@@ -192,6 +192,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Deadline::Endpoints::ListFleets.build(context)
           when :list_job_members
             Aws::Deadline::Endpoints::ListJobMembers.build(context)
+          when :list_job_parameter_definitions
+            Aws::Deadline::Endpoints::ListJobParameterDefinitions.build(context)
           when :list_jobs
             Aws::Deadline::Endpoints::ListJobs.build(context)
           when :list_license_endpoints
