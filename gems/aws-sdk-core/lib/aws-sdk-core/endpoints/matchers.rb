@@ -95,14 +95,6 @@ module Aws
       # aws.partition(value: string) Option<Partition>
       def self.aws_partition(value)
         Aws::Partitions::Metadata.partition(value)
-        # partition =
-        #   Aws::Partitions.find { |p| p.region?(value) } ||
-        #   Aws::Partitions.find { |p| value.match(p.region_regex) } ||
-        #   Aws::Partitions.find { |p| p.name == 'aws' }
-        #
-        # return nil unless partition
-        #
-        # partition.metadata
       end
 
       # aws.parseArn(value: string) Option<ARN>
