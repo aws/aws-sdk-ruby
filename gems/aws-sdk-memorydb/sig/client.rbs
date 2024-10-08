@@ -156,6 +156,7 @@ module Aws
                             ],
                             ?snapshot_window: ::String,
                             acl_name: ::String,
+                            ?engine: ::String,
                             ?engine_version: ::String,
                             ?auto_minor_version_upgrade: bool,
                             ?data_tiering: bool
@@ -332,6 +333,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_engine_versions-instance_method
       def describe_engine_versions: (
+                                      ?engine: ::String,
                                       ?engine_version: ::String,
                                       ?parameter_group_family: ::String,
                                       ?max_results: ::Integer,
@@ -596,6 +598,7 @@ module Aws
                             ?snapshot_window: ::String,
                             ?snapshot_retention_limit: ::Integer,
                             ?node_type: ::String,
+                            ?engine: ::String,
                             ?engine_version: ::String,
                             ?replica_configuration: {
                               replica_count: ::Integer?

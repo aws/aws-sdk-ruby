@@ -1322,6 +1322,7 @@ module Aws::ElastiCache
     ModifyCacheClusterMessage.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     ModifyCacheClusterMessage.add_member(:notification_topic_status, Shapes::ShapeRef.new(shape: String, location_name: "NotificationTopicStatus"))
     ModifyCacheClusterMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyImmediately"))
+    ModifyCacheClusterMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ModifyCacheClusterMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     ModifyCacheClusterMessage.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
     ModifyCacheClusterMessage.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
@@ -1351,6 +1352,7 @@ module Aws::ElastiCache
     ModifyGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
     ModifyGlobalReplicationGroupMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
     ModifyGlobalReplicationGroupMessage.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
+    ModifyGlobalReplicationGroupMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ModifyGlobalReplicationGroupMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     ModifyGlobalReplicationGroupMessage.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     ModifyGlobalReplicationGroupMessage.add_member(:global_replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupDescription"))
@@ -1374,6 +1376,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     ModifyReplicationGroupMessage.add_member(:notification_topic_status, Shapes::ShapeRef.new(shape: String, location_name: "NotificationTopicStatus"))
     ModifyReplicationGroupMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyImmediately"))
+    ModifyReplicationGroupMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ModifyReplicationGroupMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     ModifyReplicationGroupMessage.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
     ModifyReplicationGroupMessage.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
@@ -1413,6 +1416,8 @@ module Aws::ElastiCache
     ModifyServerlessCacheRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdsList, location_name: "SecurityGroupIds"))
     ModifyServerlessCacheRequest.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ModifyServerlessCacheRequest.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
+    ModifyServerlessCacheRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ModifyServerlessCacheRequest.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MajorEngineVersion"))
     ModifyServerlessCacheRequest.struct_class = Types::ModifyServerlessCacheRequest
 
     ModifyServerlessCacheResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
@@ -1642,6 +1647,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     ReplicationGroup.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
     ReplicationGroup.add_member(:cluster_mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "ClusterMode"))
+    ReplicationGroup.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault

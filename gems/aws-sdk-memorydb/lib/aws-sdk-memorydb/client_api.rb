@@ -298,6 +298,7 @@ module Aws::MemoryDB
     Cluster.add_member(:availability_mode, Shapes::ShapeRef.new(shape: AZStatus, location_name: "AvailabilityMode"))
     Cluster.add_member(:cluster_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ClusterEndpoint"))
     Cluster.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    Cluster.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     Cluster.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     Cluster.add_member(:engine_patch_version, Shapes::ShapeRef.new(shape: String, location_name: "EnginePatchVersion"))
     Cluster.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
@@ -322,6 +323,7 @@ module Aws::MemoryDB
     ClusterConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ClusterConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ClusterConfiguration.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    ClusterConfiguration.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ClusterConfiguration.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     ClusterConfiguration.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceWindow"))
     ClusterConfiguration.add_member(:topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "TopicArn"))
@@ -385,6 +387,7 @@ module Aws::MemoryDB
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateClusterRequest.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
     CreateClusterRequest.add_member(:acl_name, Shapes::ShapeRef.new(shape: ACLName, required: true, location_name: "ACLName"))
+    CreateClusterRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     CreateClusterRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     CreateClusterRequest.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
     CreateClusterRequest.add_member(:data_tiering, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DataTiering"))
@@ -487,6 +490,7 @@ module Aws::MemoryDB
     DescribeClustersResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: ClusterList, location_name: "Clusters"))
     DescribeClustersResponse.struct_class = Types::DescribeClustersResponse
 
+    DescribeEngineVersionsRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     DescribeEngineVersionsRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     DescribeEngineVersionsRequest.add_member(:parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupFamily"))
     DescribeEngineVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxResults"))
@@ -602,6 +606,7 @@ module Aws::MemoryDB
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
     Endpoint.struct_class = Types::Endpoint
 
+    EngineVersionInfo.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     EngineVersionInfo.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     EngineVersionInfo.add_member(:engine_patch_version, Shapes::ShapeRef.new(shape: String, location_name: "EnginePatchVersion"))
     EngineVersionInfo.add_member(:parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupFamily"))
@@ -812,6 +817,7 @@ module Aws::MemoryDB
     ServiceUpdate.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ServiceUpdate.add_member(:status, Shapes::ShapeRef.new(shape: ServiceUpdateStatus, location_name: "Status"))
     ServiceUpdate.add_member(:type, Shapes::ShapeRef.new(shape: ServiceUpdateType, location_name: "Type"))
+    ServiceUpdate.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ServiceUpdate.add_member(:nodes_updated, Shapes::ShapeRef.new(shape: String, location_name: "NodesUpdated"))
     ServiceUpdate.add_member(:auto_update_start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "AutoUpdateStartDate"))
     ServiceUpdate.struct_class = Types::ServiceUpdate
@@ -957,6 +963,7 @@ module Aws::MemoryDB
     UpdateClusterRequest.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
     UpdateClusterRequest.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     UpdateClusterRequest.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
+    UpdateClusterRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     UpdateClusterRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     UpdateClusterRequest.add_member(:replica_configuration, Shapes::ShapeRef.new(shape: ReplicaConfigurationRequest, location_name: "ReplicaConfiguration"))
     UpdateClusterRequest.add_member(:shard_configuration, Shapes::ShapeRef.new(shape: ShardConfigurationRequest, location_name: "ShardConfiguration"))

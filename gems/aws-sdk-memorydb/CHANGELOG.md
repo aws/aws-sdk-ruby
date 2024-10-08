@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2024-10-08)
+------------------
+
+* Feature - Amazon MemoryDB SDK now supports all APIs for newly launched Valkey engine. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.
+
 1.37.0 (2024-09-24)
 ------------------
 

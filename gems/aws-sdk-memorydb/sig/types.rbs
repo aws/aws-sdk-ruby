@@ -81,6 +81,7 @@ module Aws::MemoryDB
       attr_accessor availability_mode: ("singleaz" | "multiaz")
       attr_accessor cluster_endpoint: Types::Endpoint
       attr_accessor node_type: ::String
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor engine_patch_version: ::String
       attr_accessor parameter_group_name: ::String
@@ -108,6 +109,7 @@ module Aws::MemoryDB
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor node_type: ::String
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor maintenance_window: ::String
       attr_accessor topic_arn: ::String
@@ -181,6 +183,7 @@ module Aws::MemoryDB
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor snapshot_window: ::String
       attr_accessor acl_name: ::String
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor data_tiering: bool
@@ -336,6 +339,7 @@ module Aws::MemoryDB
     end
 
     class DescribeEngineVersionsRequest
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor parameter_group_family: ::String
       attr_accessor max_results: ::Integer
@@ -494,6 +498,7 @@ module Aws::MemoryDB
     end
 
     class EngineVersionInfo
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor engine_patch_version: ::String
       attr_accessor parameter_group_family: ::String
@@ -743,6 +748,7 @@ module Aws::MemoryDB
       attr_accessor description: ::String
       attr_accessor status: ("available" | "in-progress" | "complete" | "scheduled")
       attr_accessor type: ("security-update")
+      attr_accessor engine: ::String
       attr_accessor nodes_updated: ::String
       attr_accessor auto_update_start_date: ::Time
       SENSITIVE: []
@@ -918,6 +924,7 @@ module Aws::MemoryDB
       attr_accessor snapshot_window: ::String
       attr_accessor snapshot_retention_limit: ::Integer
       attr_accessor node_type: ::String
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor replica_configuration: Types::ReplicaConfigurationRequest
       attr_accessor shard_configuration: Types::ShardConfigurationRequest

@@ -1163,6 +1163,7 @@ module Aws::ElastiCache
       attr_accessor cache_parameter_group_name: ::String
       attr_accessor notification_topic_status: ::String
       attr_accessor apply_immediately: bool
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor snapshot_retention_limit: ::Integer
@@ -1202,6 +1203,7 @@ module Aws::ElastiCache
       attr_accessor global_replication_group_id: ::String
       attr_accessor apply_immediately: bool
       attr_accessor cache_node_type: ::String
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor cache_parameter_group_name: ::String
       attr_accessor global_replication_group_description: ::String
@@ -1229,6 +1231,7 @@ module Aws::ElastiCache
       attr_accessor cache_parameter_group_name: ::String
       attr_accessor notification_topic_status: ::String
       attr_accessor apply_immediately: bool
+      attr_accessor engine: ::String
       attr_accessor engine_version: ::String
       attr_accessor auto_minor_version_upgrade: bool
       attr_accessor snapshot_retention_limit: ::Integer
@@ -1276,6 +1279,8 @@ module Aws::ElastiCache
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor snapshot_retention_limit: ::Integer
       attr_accessor daily_snapshot_time: ::String
+      attr_accessor engine: ::String
+      attr_accessor major_engine_version: ::String
       SENSITIVE: []
     end
 
@@ -1516,6 +1521,7 @@ module Aws::ElastiCache
       attr_accessor ip_discovery: ("ipv4" | "ipv6")
       attr_accessor transit_encryption_mode: ("preferred" | "required")
       attr_accessor cluster_mode: ("enabled" | "disabled" | "compatible")
+      attr_accessor engine: ::String
       SENSITIVE: []
     end
 
