@@ -5,11 +5,13 @@ module Aws
     # @api private
     module Metadata
       class << self
-        def aws_partition(value)
+
+        # aws.partition(region: string) Option<Partition>
+        def partition(region)
           partition =
-            partitions.find { |p| p['regions']&.fetch(value, nil) } ||
-              partitions.find { |p| value.match(p['regionRegex']) } ||
-              partitions.find { |p| p['id'] == 'aws' }
+            partitions.find { |p| p['regions']&.fetch(region, nil) } ||
+            partitions.find { |p| region.match(p['regionRegex']) } ||
+            partitions.find { |p| p['id'] == 'aws' }
 
           return nil unless partition
 

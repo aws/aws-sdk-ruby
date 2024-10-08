@@ -94,7 +94,7 @@ module Aws
 
       # aws.partition(value: string) Option<Partition>
       def self.aws_partition(value)
-        Aws::Partitions::Metadata.aws_partition(value)
+        Aws::Partitions::Metadata.partition(value)
         # partition =
         #   Aws::Partitions.find { |p| p.region?(value) } ||
         #   Aws::Partitions.find { |p| value.match(p.region_regex) } ||
