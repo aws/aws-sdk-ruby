@@ -510,6 +510,7 @@ module Aws::MemoryDB
     #   resp.processed_clusters[0].cluster_endpoint.address #=> String
     #   resp.processed_clusters[0].cluster_endpoint.port #=> Integer
     #   resp.processed_clusters[0].node_type #=> String
+    #   resp.processed_clusters[0].engine #=> String
     #   resp.processed_clusters[0].engine_version #=> String
     #   resp.processed_clusters[0].engine_patch_version #=> String
     #   resp.processed_clusters[0].parameter_group_name #=> String
@@ -601,6 +602,7 @@ module Aws::MemoryDB
     #   resp.snapshot.cluster_configuration.name #=> String
     #   resp.snapshot.cluster_configuration.description #=> String
     #   resp.snapshot.cluster_configuration.node_type #=> String
+    #   resp.snapshot.cluster_configuration.engine #=> String
     #   resp.snapshot.cluster_configuration.engine_version #=> String
     #   resp.snapshot.cluster_configuration.maintenance_window #=> String
     #   resp.snapshot.cluster_configuration.topic_arn #=> String
@@ -788,8 +790,12 @@ module Aws::MemoryDB
     # @option params [required, String] :acl_name
     #   The name of the Access Control List to associate with the cluster.
     #
+    # @option params [String] :engine
+    #   The name of the engine to be used for the nodes in this cluster. The
+    #   value must be set to either Redis or Valkey.
+    #
     # @option params [String] :engine_version
-    #   The version number of the Redis OSS engine to be used for the cluster.
+    #   The version number of the engine to be used for the cluster.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   When set to true, the cluster will automatically receive minor engine
@@ -835,6 +841,7 @@ module Aws::MemoryDB
     #     ],
     #     snapshot_window: "String",
     #     acl_name: "ACLName", # required
+    #     engine: "String",
     #     engine_version: "String",
     #     auto_minor_version_upgrade: false,
     #     data_tiering: false,
@@ -867,6 +874,7 @@ module Aws::MemoryDB
     #   resp.cluster.cluster_endpoint.address #=> String
     #   resp.cluster.cluster_endpoint.port #=> Integer
     #   resp.cluster.node_type #=> String
+    #   resp.cluster.engine #=> String
     #   resp.cluster.engine_version #=> String
     #   resp.cluster.engine_patch_version #=> String
     #   resp.cluster.parameter_group_name #=> String
@@ -998,6 +1006,7 @@ module Aws::MemoryDB
     #   resp.snapshot.cluster_configuration.name #=> String
     #   resp.snapshot.cluster_configuration.description #=> String
     #   resp.snapshot.cluster_configuration.node_type #=> String
+    #   resp.snapshot.cluster_configuration.engine #=> String
     #   resp.snapshot.cluster_configuration.engine_version #=> String
     #   resp.snapshot.cluster_configuration.maintenance_window #=> String
     #   resp.snapshot.cluster_configuration.topic_arn #=> String
@@ -1201,12 +1210,6 @@ module Aws::MemoryDB
     # Deletes a cluster. It also deletes all associated nodes and node
     # endpoints
     #
-    # <note markdown="1"> `CreateSnapshot` permission is required to create a final snapshot.
-    # Without this permission, the API call will fail with an `Access
-    # Denied` exception.
-    #
-    #  </note>
-    #
     # @option params [required, String] :cluster_name
     #   The name of the cluster to be deleted
     #
@@ -1253,6 +1256,7 @@ module Aws::MemoryDB
     #   resp.cluster.cluster_endpoint.address #=> String
     #   resp.cluster.cluster_endpoint.port #=> Integer
     #   resp.cluster.node_type #=> String
+    #   resp.cluster.engine #=> String
     #   resp.cluster.engine_version #=> String
     #   resp.cluster.engine_patch_version #=> String
     #   resp.cluster.parameter_group_name #=> String
@@ -1342,6 +1346,7 @@ module Aws::MemoryDB
     #   resp.snapshot.cluster_configuration.name #=> String
     #   resp.snapshot.cluster_configuration.description #=> String
     #   resp.snapshot.cluster_configuration.node_type #=> String
+    #   resp.snapshot.cluster_configuration.engine #=> String
     #   resp.snapshot.cluster_configuration.engine_version #=> String
     #   resp.snapshot.cluster_configuration.maintenance_window #=> String
     #   resp.snapshot.cluster_configuration.topic_arn #=> String
@@ -1567,6 +1572,7 @@ module Aws::MemoryDB
     #   resp.clusters[0].cluster_endpoint.address #=> String
     #   resp.clusters[0].cluster_endpoint.port #=> Integer
     #   resp.clusters[0].node_type #=> String
+    #   resp.clusters[0].engine #=> String
     #   resp.clusters[0].engine_version #=> String
     #   resp.clusters[0].engine_patch_version #=> String
     #   resp.clusters[0].parameter_group_name #=> String
@@ -1596,10 +1602,13 @@ module Aws::MemoryDB
       req.send_request(options)
     end
 
-    # Returns a list of the available Redis OSS engine versions.
+    # Returns a list of the available engine versions.
+    #
+    # @option params [String] :engine
+    #   The engine version to return. Valid values are either valkey or redis.
     #
     # @option params [String] :engine_version
-    #   The Redis OSS engine version
+    #   The engine version.
     #
     # @option params [String] :parameter_group_family
     #   The name of a specific parameter group family to return details for.
@@ -1630,6 +1639,7 @@ module Aws::MemoryDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_engine_versions({
+    #     engine: "String",
     #     engine_version: "String",
     #     parameter_group_family: "String",
     #     max_results: 1,
@@ -1641,6 +1651,7 @@ module Aws::MemoryDB
     #
     #   resp.next_token #=> String
     #   resp.engine_versions #=> Array
+    #   resp.engine_versions[0].engine #=> String
     #   resp.engine_versions[0].engine_version #=> String
     #   resp.engine_versions[0].engine_patch_version #=> String
     #   resp.engine_versions[0].parameter_group_family #=> String
@@ -2046,6 +2057,7 @@ module Aws::MemoryDB
     #   resp.service_updates[0].description #=> String
     #   resp.service_updates[0].status #=> String, one of "available", "in-progress", "complete", "scheduled"
     #   resp.service_updates[0].type #=> String, one of "security-update"
+    #   resp.service_updates[0].engine #=> String
     #   resp.service_updates[0].nodes_updated #=> String
     #   resp.service_updates[0].auto_update_start_date #=> Time
     #
@@ -2123,6 +2135,7 @@ module Aws::MemoryDB
     #   resp.snapshots[0].cluster_configuration.name #=> String
     #   resp.snapshots[0].cluster_configuration.description #=> String
     #   resp.snapshots[0].cluster_configuration.node_type #=> String
+    #   resp.snapshots[0].cluster_configuration.engine #=> String
     #   resp.snapshots[0].cluster_configuration.engine_version #=> String
     #   resp.snapshots[0].cluster_configuration.maintenance_window #=> String
     #   resp.snapshots[0].cluster_configuration.topic_arn #=> String
@@ -2319,6 +2332,7 @@ module Aws::MemoryDB
     #   resp.cluster.cluster_endpoint.address #=> String
     #   resp.cluster.cluster_endpoint.port #=> Integer
     #   resp.cluster.node_type #=> String
+    #   resp.cluster.engine #=> String
     #   resp.cluster.engine_version #=> String
     #   resp.cluster.engine_patch_version #=> String
     #   resp.cluster.parameter_group_name #=> String
@@ -2730,6 +2744,10 @@ module Aws::MemoryDB
     # @option params [String] :node_type
     #   A valid node type that you want to scale this cluster up or down to.
     #
+    # @option params [String] :engine
+    #   The name of the engine to be used for the nodes in this cluster. The
+    #   value must be set to either Redis or Valkey.
+    #
     # @option params [String] :engine_version
     #   The upgraded version of the engine to be run on the nodes. You can
     #   upgrade to a newer engine version, but you cannot downgrade to an
@@ -2763,6 +2781,7 @@ module Aws::MemoryDB
     #     snapshot_window: "String",
     #     snapshot_retention_limit: 1,
     #     node_type: "String",
+    #     engine: "String",
     #     engine_version: "String",
     #     replica_configuration: {
     #       replica_count: 1,
@@ -2800,6 +2819,7 @@ module Aws::MemoryDB
     #   resp.cluster.cluster_endpoint.address #=> String
     #   resp.cluster.cluster_endpoint.port #=> Integer
     #   resp.cluster.node_type #=> String
+    #   resp.cluster.engine #=> String
     #   resp.cluster.engine_version #=> String
     #   resp.cluster.engine_patch_version #=> String
     #   resp.cluster.parameter_group_name #=> String
@@ -2987,7 +3007,7 @@ module Aws::MemoryDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

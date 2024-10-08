@@ -238,12 +238,16 @@ module Aws::MemoryDB
     #   The cluster's node type
     #   @return [String]
     #
+    # @!attribute [rw] engine
+    #   The Redis OSS or Valkey engine used by the cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_version
-    #   The Redis OSS engine version used by the cluster
+    #   The Redis engine version used by the cluster
     #   @return [String]
     #
     # @!attribute [rw] engine_patch_version
-    #   The Redis OSS engine patch version used by the cluster
+    #   The engine patch version used by the cluster
     #   @return [String]
     #
     # @!attribute [rw] parameter_group_name
@@ -335,6 +339,7 @@ module Aws::MemoryDB
       :availability_mode,
       :cluster_endpoint,
       :node_type,
+      :engine,
       :engine_version,
       :engine_patch_version,
       :parameter_group_name,
@@ -374,8 +379,13 @@ module Aws::MemoryDB
     #   The node type used for the cluster
     #   @return [String]
     #
+    # @!attribute [rw] engine
+    #   The configuration for the Redis OSS or Valkey engine used by the
+    #   cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_version
-    #   The Redis OSS engine version used by the cluster
+    #   The engine version used by the cluster
     #   @return [String]
     #
     # @!attribute [rw] maintenance_window
@@ -425,6 +435,7 @@ module Aws::MemoryDB
       :name,
       :description,
       :node_type,
+      :engine,
       :engine_version,
       :maintenance_window,
       :topic_arn,
@@ -684,9 +695,13 @@ module Aws::MemoryDB
     #   The name of the Access Control List to associate with the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] engine
+    #   The name of the engine to be used for the nodes in this cluster. The
+    #   value must be set to either Redis or Valkey.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_version
-    #   The version number of the Redis OSS engine to be used for the
-    #   cluster.
+    #   The version number of the engine to be used for the cluster.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -726,6 +741,7 @@ module Aws::MemoryDB
       :tags,
       :snapshot_window,
       :acl_name,
+      :engine,
       :engine_version,
       :auto_minor_version_upgrade,
       :data_tiering)
@@ -1175,8 +1191,13 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
+    # @!attribute [rw] engine
+    #   The engine version to return. Valid values are either valkey or
+    #   redis.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_version
-    #   The Redis OSS engine version
+    #   The engine version.
     #   @return [String]
     #
     # @!attribute [rw] parameter_group_family
@@ -1207,6 +1228,7 @@ module Aws::MemoryDB
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/DescribeEngineVersionsRequest AWS API Documentation
     #
     class DescribeEngineVersionsRequest < Struct.new(
+      :engine,
       :engine_version,
       :parameter_group_family,
       :max_results,
@@ -1847,7 +1869,11 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # Provides details of the Redis OSS engine version
+    # Provides details of the engine version.
+    #
+    # @!attribute [rw] engine
+    #   The version of the Redis OSS or Valkey engine used by the cluster.
+    #   @return [String]
     #
     # @!attribute [rw] engine_version
     #   The engine version
@@ -1865,6 +1891,7 @@ module Aws::MemoryDB
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/EngineVersionInfo AWS API Documentation
     #
     class EngineVersionInfo < Struct.new(
+      :engine,
       :engine_version,
       :engine_patch_version,
       :parameter_group_family)
@@ -2568,6 +2595,11 @@ module Aws::MemoryDB
     #   Reflects the nature of the service update
     #   @return [String]
     #
+    # @!attribute [rw] engine
+    #   The MemoryDB engine to which the update applies. The values are
+    #   either Redis or Valkey.
+    #   @return [String]
+    #
     # @!attribute [rw] nodes_updated
     #   A list of nodes updated by the service update
     #   @return [String]
@@ -2585,6 +2617,7 @@ module Aws::MemoryDB
       :description,
       :status,
       :type,
+      :engine,
       :nodes_updated,
       :auto_update_start_date)
       SENSITIVE = []
@@ -3117,6 +3150,11 @@ module Aws::MemoryDB
     #   A valid node type that you want to scale this cluster up or down to.
     #   @return [String]
     #
+    # @!attribute [rw] engine
+    #   The name of the engine to be used for the nodes in this cluster. The
+    #   value must be set to either Redis or Valkey.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_version
     #   The upgraded version of the engine to be run on the nodes. You can
     #   upgrade to a newer engine version, but you cannot downgrade to an
@@ -3150,6 +3188,7 @@ module Aws::MemoryDB
       :snapshot_window,
       :snapshot_retention_limit,
       :node_type,
+      :engine,
       :engine_version,
       :replica_configuration,
       :shard_configuration,

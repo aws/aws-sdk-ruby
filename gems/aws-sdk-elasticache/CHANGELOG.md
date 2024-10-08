@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2024-10-08)
+------------------
+
+* Feature - AWS ElastiCache SDK now supports using APIs with newly launched Valkey engine. Please refer to updated AWS ElastiCache public documentation for detailed information on API usage.
+
 1.115.0 (2024-09-24)
 ------------------
 
