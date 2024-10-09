@@ -19,6 +19,7 @@ module AwsSdkCodeGenerator
       # @option options [Hash] :waiters
       # @option options [Hash] :client_examples
       # @option options [Array<CodegeneratedPlugin] :codegenerated_plugins
+      # @option options [Boolean] :legacy_endpoints
       def initialize(options)
         @service_identifier = options.fetch(:service_identifier)
         @service_name = options.fetch(:service_name)
@@ -38,6 +39,7 @@ module AwsSdkCodeGenerator
         @operations = ClientOperationList.new(options).to_a
         @waiters = Waiter.build_list(options[:waiters])
         @custom = options.fetch(:custom)
+        @legacy_endpoints = options.fetch(:legacy_endpoints, true)
       end
 
       # @return [String]
@@ -77,6 +79,14 @@ module AwsSdkCodeGenerator
         @plugins.map(&:class_name) + @codegenerated_plugins.map(&:class_name)
       end
 
+      # @return [Array<String>]
+      def remove_plugin_class_names
+        # these differ from PluginList's set of remove_plugins
+        # these apply to default plugins in Seahorse::Client::Base
+        unless @legacy_endpoints
+          ['Seahorse::Client::Plugins::Endpoint']
+        end
+      end
       # @return [Array<Waiter>]
       def waiters
         @waiters

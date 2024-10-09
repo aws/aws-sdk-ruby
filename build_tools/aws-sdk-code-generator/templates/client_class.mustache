@@ -32,6 +32,10 @@ module {{module_name}}
     add_plugin({{{.}}})
     {{/plugin_class_names}}
 
+    {{#remove_plugin_class_names}}
+    remove_plugin({{{.}}})
+    {{/remove_plugin_class_names}}
+
     {{#client_constructor}}
     # @overload initialize(options)
     #   @param [Hash] options
