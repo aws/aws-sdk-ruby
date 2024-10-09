@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb', 'sig/**/*.rbs', 'ca-bundle.crt']
 
   spec.add_dependency('jmespath', '~> 1', '>= 1.6.1') # necessary for secure jmespath JSON parsing
-  spec.add_dependency('aws-partitions', '~> 1', '>= 1.988.0') # necessary for new endpoint resolution
+  spec.add_dependency('aws-partitions', '~> 1', '>= 1.989.0') # necessary for new endpoint resolution
   spec.add_dependency('aws-sigv4', '~> 1.9') # necessary for s3 express auth/native sigv4a support
   spec.add_dependency('aws-eventstream', '~> 1', '>= 1.3.0') # necessary for binary eventstream
 

@@ -106,7 +106,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#create_custom_action_type-instance_method
       def create_custom_action_type: (
-                                       category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                       category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
                                        provider: ::String,
                                        version: ::String,
                                        ?settings: {
@@ -182,7 +182,7 @@ module Aws
                                      {
                                        name: ::String,
                                        action_type_id: {
-                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
                                          owner: ("AWS" | "ThirdParty" | "Custom"),
                                          provider: ::String,
                                          version: ::String
@@ -351,7 +351,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#delete_custom_action_type-instance_method
       def delete_custom_action_type: (
-                                       category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                       category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
                                        provider: ::String,
                                        version: ::String
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -404,7 +404,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#get_action_type-instance_method
       def get_action_type: (
-                             category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                             category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
                              owner: ::String,
                              provider: ::String,
                              version: ::String
@@ -604,7 +604,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#poll_for_jobs-instance_method
       def poll_for_jobs: (
                            action_type_id: {
-                             category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                             category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
                              owner: ("AWS" | "ThirdParty" | "Custom"),
                              provider: ::String,
                              version: ::String
@@ -621,7 +621,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#poll_for_third_party_jobs-instance_method
       def poll_for_third_party_jobs: (
                                        action_type_id: {
-                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
                                          owner: ("AWS" | "ThirdParty" | "Custom"),
                                          provider: ::String,
                                          version: ::String
@@ -872,7 +872,7 @@ module Aws
                                     job_timeout: ::Integer?
                                   },
                                   id: {
-                                    category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                    category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
                                     owner: ::String,
                                     provider: ::String,
                                     version: ::String
@@ -946,7 +946,7 @@ module Aws
                                      {
                                        name: ::String,
                                        action_type_id: {
-                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval"),
+                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
                                          owner: ("AWS" | "ThirdParty" | "Custom"),
                                          provider: ::String,
                                          version: ::String
