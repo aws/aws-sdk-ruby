@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix RPCv2 protocol to always send an Accept header for CBOR.
+
 3.209.1 (2024-09-25)
 ------------------
 
