@@ -79,6 +79,17 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         resolve_endpoint(cfg)
       end
 
+      DefaultEndpointParameters = Struct.new(
+        :region,
+        :use_dual_stack,
+        :use_fips,
+        :endpoint
+        ) do
+        def method_missing(method_name, *_args)
+          nil
+        end
+      end
+
       def after_initialize(client)
         region = client.config.region
         raise Errors::MissingRegionError if region.nil? || region == ''
@@ -150,16 +161,20 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           # that a custom endpoint has NOT been configured by the user
           cfg.override_config(:regional_endpoint, true)
 
-          # preserve legacy (pre EP2) client.config.endpoint still resolves a value
-          # when needed.
-          struct = cfg.instance_variable_get(:@struct)
-          if struct
-            # need a separate proc to get namespace/private access to resolve_legacy_endpoint
-            b = proc { resolve_legacy_endpoint(struct) }
-            struct.define_singleton_method(:endpoint) { @endpoint ||= b.call }
-            nil
+          # preserve legacy (pre EP2) client.config.endpoint
+          if cfg.respond_to?(:endpoint_provider) && (endpoint_provider = cfg.endpoint_provider)
+            params = DefaultEndpointParameters.new
+            params.region = cfg.region
+            params.use_dual_stack = cfg.use_dualstack_endpoint
+            params.use_fips = cfg.use_fips_endpoint
+            begin
+              endpoint = endpoint_provider.resolve_endpoint(params)
+              endpoint.url
+            rescue ArgumentError
+              # fallback to legacy
+              resolve_legacy_endpoint(cfg)
+            end
           else
-            # backup in case internal details of config resolver change
             resolve_legacy_endpoint(cfg)
           end
         end
