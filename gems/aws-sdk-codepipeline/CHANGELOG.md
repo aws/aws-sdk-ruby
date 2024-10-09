@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-10-09)
+------------------
+
+* Feature - AWS CodePipeline introduces a Compute category
+
 1.86.0 (2024-10-03)
 ------------------
 

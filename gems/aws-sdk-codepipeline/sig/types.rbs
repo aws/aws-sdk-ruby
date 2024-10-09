@@ -195,7 +195,7 @@ module Aws::CodePipeline
     end
 
     class ActionTypeId
-      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute")
       attr_accessor owner: ("AWS" | "ThirdParty" | "Custom")
       attr_accessor provider: ::String
       attr_accessor version: ::String
@@ -203,7 +203,7 @@ module Aws::CodePipeline
     end
 
     class ActionTypeIdentifier
-      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute")
       attr_accessor owner: ::String
       attr_accessor provider: ::String
       attr_accessor version: ::String
@@ -346,7 +346,7 @@ module Aws::CodePipeline
     end
 
     class CreateCustomActionTypeInput
-      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute")
       attr_accessor provider: ::String
       attr_accessor version: ::String
       attr_accessor settings: Types::ActionTypeSettings
@@ -384,7 +384,7 @@ module Aws::CodePipeline
     end
 
     class DeleteCustomActionTypeInput
-      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute")
       attr_accessor provider: ::String
       attr_accessor version: ::String
       SENSITIVE: []
@@ -476,7 +476,7 @@ module Aws::CodePipeline
     end
 
     class GetActionTypeInput
-      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval")
+      attr_accessor category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute")
       attr_accessor owner: ::String
       attr_accessor provider: ::String
       attr_accessor version: ::String

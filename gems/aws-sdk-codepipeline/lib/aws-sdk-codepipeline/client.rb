@@ -583,7 +583,7 @@ module Aws::CodePipeline
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_custom_action_type({
-    #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval, Compute
     #     provider: "ActionProvider", # required
     #     version: "Version", # required
     #     settings: {
@@ -621,7 +621,7 @@ module Aws::CodePipeline
     #
     # @example Response structure
     #
-    #   resp.action_type.id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.action_type.id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.action_type.id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.action_type.id.provider #=> String
     #   resp.action_type.id.version #=> String
@@ -712,7 +712,7 @@ module Aws::CodePipeline
     #             {
     #               name: "ActionName", # required
     #               action_type_id: { # required
-    #                 category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #                 category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval, Compute
     #                 owner: "AWS", # required, accepts AWS, ThirdParty, Custom
     #                 provider: "ActionProvider", # required
     #                 version: "Version", # required
@@ -906,7 +906,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].blockers[0].type #=> String, one of "Schedule"
     #   resp.pipeline.stages[0].actions #=> Array
     #   resp.pipeline.stages[0].actions[0].name #=> String
-    #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.pipeline.stages[0].actions[0].action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.pipeline.stages[0].actions[0].action_type_id.provider #=> String
     #   resp.pipeline.stages[0].actions[0].action_type_id.version #=> String
@@ -1046,7 +1046,7 @@ module Aws::CodePipeline
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_custom_action_type({
-    #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval, Compute
     #     provider: "ActionProvider", # required
     #     version: "Version", # required
     #   })
@@ -1251,7 +1251,7 @@ module Aws::CodePipeline
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_action_type({
-    #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval, Compute
     #     owner: "ActionTypeOwner", # required
     #     provider: "ActionProvider", # required
     #     version: "Version", # required
@@ -1268,7 +1268,7 @@ module Aws::CodePipeline
     #   resp.action_type.executor.type #=> String, one of "JobWorker", "Lambda"
     #   resp.action_type.executor.policy_statements_template #=> String
     #   resp.action_type.executor.job_timeout #=> Integer
-    #   resp.action_type.id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.action_type.id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.action_type.id.owner #=> String
     #   resp.action_type.id.provider #=> String
     #   resp.action_type.id.version #=> String
@@ -1323,7 +1323,7 @@ module Aws::CodePipeline
     # @example Response structure
     #
     #   resp.job_details.id #=> String
-    #   resp.job_details.data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.job_details.data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.job_details.data.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.job_details.data.action_type_id.provider #=> String
     #   resp.job_details.data.action_type_id.version #=> String
@@ -1409,7 +1409,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].blockers[0].type #=> String, one of "Schedule"
     #   resp.pipeline.stages[0].actions #=> Array
     #   resp.pipeline.stages[0].actions[0].name #=> String
-    #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.pipeline.stages[0].actions[0].action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.pipeline.stages[0].actions[0].action_type_id.provider #=> String
     #   resp.pipeline.stages[0].actions[0].action_type_id.version #=> String
@@ -1755,7 +1755,7 @@ module Aws::CodePipeline
     # @example Response structure
     #
     #   resp.job_details.id #=> String
-    #   resp.job_details.data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.job_details.data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.job_details.data.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.job_details.data.action_type_id.provider #=> String
     #   resp.job_details.data.action_type_id.version #=> String
@@ -1850,7 +1850,7 @@ module Aws::CodePipeline
     #   resp.action_execution_details[0].last_update_time #=> Time
     #   resp.action_execution_details[0].updated_by #=> String
     #   resp.action_execution_details[0].status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
-    #   resp.action_execution_details[0].input.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.action_execution_details[0].input.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.action_execution_details[0].input.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.action_execution_details[0].input.action_type_id.provider #=> String
     #   resp.action_execution_details[0].input.action_type_id.version #=> String
@@ -1920,7 +1920,7 @@ module Aws::CodePipeline
     # @example Response structure
     #
     #   resp.action_types #=> Array
-    #   resp.action_types[0].id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.action_types[0].id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.action_types[0].id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.action_types[0].id.provider #=> String
     #   resp.action_types[0].id.version #=> String
@@ -2383,7 +2383,7 @@ module Aws::CodePipeline
     #
     #   resp = client.poll_for_jobs({
     #     action_type_id: { # required
-    #       category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #       category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval, Compute
     #       owner: "AWS", # required, accepts AWS, ThirdParty, Custom
     #       provider: "ActionProvider", # required
     #       version: "Version", # required
@@ -2398,7 +2398,7 @@ module Aws::CodePipeline
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].id #=> String
-    #   resp.jobs[0].data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.jobs[0].data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.jobs[0].data.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.jobs[0].data.action_type_id.provider #=> String
     #   resp.jobs[0].data.action_type_id.version #=> String
@@ -2462,7 +2462,7 @@ module Aws::CodePipeline
     #
     #   resp = client.poll_for_third_party_jobs({
     #     action_type_id: { # required
-    #       category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #       category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval, Compute
     #       owner: "AWS", # required, accepts AWS, ThirdParty, Custom
     #       provider: "ActionProvider", # required
     #       version: "Version", # required
@@ -3178,7 +3178,7 @@ module Aws::CodePipeline
     #         job_timeout: 1,
     #       },
     #       id: { # required
-    #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval, Compute
     #         owner: "ActionTypeOwner", # required
     #         provider: "ActionProvider", # required
     #         version: "Version", # required
@@ -3271,7 +3271,7 @@ module Aws::CodePipeline
     #             {
     #               name: "ActionName", # required
     #               action_type_id: { # required
-    #                 category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #                 category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval, Compute
     #                 owner: "AWS", # required, accepts AWS, ThirdParty, Custom
     #                 provider: "ActionProvider", # required
     #                 version: "Version", # required
@@ -3459,7 +3459,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].blockers[0].type #=> String, one of "Schedule"
     #   resp.pipeline.stages[0].actions #=> Array
     #   resp.pipeline.stages[0].actions[0].name #=> String
-    #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval", "Compute"
     #   resp.pipeline.stages[0].actions[0].action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.pipeline.stages[0].actions[0].action_type_id.provider #=> String
     #   resp.pipeline.stages[0].actions[0].action_type_id.version #=> String
@@ -3588,7 +3588,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
