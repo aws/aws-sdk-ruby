@@ -27,9 +27,6 @@ module Aws::S3
       use_arn_region = parameters.use_arn_region
       use_s3_express_control_endpoint = parameters.use_s3_express_control_endpoint
       disable_s3_express_session_auth = parameters.disable_s3_express_session_auth
-      require 'byebug'
-      byebug
-
       if Aws::Endpoints::Matchers.set?(region)
         if Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
           raise ArgumentError, "Accelerate cannot be used with FIPS"
