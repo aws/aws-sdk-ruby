@@ -83,6 +83,9 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         region = client.config.region
         raise Errors::MissingRegionError if region.nil? || region == ''
 
+        # resolve a default endpoint to preserve legacy behavior
+        initialize_default_endpoint(client) if client.config.endpoint.nil?
+
         region_set = client.config.sigv4a_signing_region_set
         return if region_set.nil?
         raise Errors::InvalidRegionSetError unless region_set.is_a?(Array)
@@ -91,6 +94,66 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         raise Errors::InvalidRegionSetError if region_set.empty?
 
         client.config.sigv4a_signing_region_set = region_set
+      end
+
+      private
+
+      def initialize_default_endpoint(client)
+        client_module = Object.const_get(client.class.name.rpartition('::').first)
+        if client.config.respond_to?(:endpoint_provider) &&
+          client_module.const_defined?(:EndpointParameters) &&
+          (param_class = client_module.const_get(:EndpointParameters)) &&
+          (endpoint_provider = client.config.endpoint_provider)
+
+          params = build_parameters(param_class.new, client.config)
+          begin
+            endpoint = endpoint_provider.resolve_endpoint(params)
+            client.config.endpoint = endpoint.url
+          rescue ArgumentError
+            # fallback to legacy
+            client.config.endpoint = resolve_legacy_endpoint(client.config)
+          end
+        else
+          # fallback to legacy
+          client.config.endpoint = resolve_legacy_endpoint(client.config)
+        end
+      end
+
+      def build_parameters(params, config)
+        # generic parameters set for most (but not all) services
+        params.region = config.region if params.respond_to?(:region=)
+        params.use_dual_stack = config.use_dualstack_endpoint if params.respond_to?(:use_dual_stack=)
+        params.use_fips = config.use_fips_endpoint if params.respond_to?(:use_fips=)
+
+        # service specific
+        if config.respond_to?(:sts_regional_endpoints) && params.respond_to?(:use_global_endpoint=)
+          params.use_global_endpoint = (config.sts_regional_endpoints == 'legacy')
+        end
+
+        if config.respond_to?(:s3_us_east_1_regional_endpoint) && params.respond_to?(:use_global_endpoint=)
+          params.use_global_endpoint = (config.s3_us_east_1_regional_endpoint == 'legacy')
+        end
+
+        params
+      end
+
+      # set a default endpoint in config using legacy (endpoints.json) resolver
+      def resolve_legacy_endpoint(cfg)
+        endpoint_prefix = cfg.api.metadata['endpointPrefix']
+        if cfg.respond_to?(:sts_regional_endpoints)
+          sts_regional = cfg.sts_regional_endpoints
+        end
+
+        endpoint = Aws::Partitions::EndpointProvider.resolve(
+          cfg.region,
+          endpoint_prefix,
+          sts_regional,
+          {
+            dualstack: cfg.use_dualstack_endpoint,
+            fips: cfg.use_fips_endpoint
+          }
+        )
+        URI(endpoint)
       end
 
       class << self
@@ -150,11 +213,7 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           # that a custom endpoint has NOT been configured by the user
           cfg.override_config(:regional_endpoint, true)
 
-          # preserve legacy (pre EP2) client.config.endpoint still resolves a value
-          # when needed.
-          # need a separate proc to get namespace/private access to resolve_legacy_endpoint
-          b = proc { resolve_legacy_endpoint(cfg.struct) }
-          cfg.struct.define_singleton_method(:endpoint) { @endpoint ||= b.call }
+          # a default endpoint is resolved in after_initialize
           nil
         end
 
@@ -209,25 +268,6 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
             cfg.override_config(:use_fips_endpoint, true)
             cfg.override_config(:region, new_region)
           end
-        end
-
-        # set a default endpoint in config using legacy (endpoints.json) resolver
-        def resolve_legacy_endpoint(cfg)
-          endpoint_prefix = cfg.api.metadata['endpointPrefix']
-          if cfg.respond_to?(:sts_regional_endpoints)
-            sts_regional = cfg.sts_regional_endpoints
-          end
-
-          endpoint = Aws::Partitions::EndpointProvider.resolve(
-            cfg.region,
-            endpoint_prefix,
-            sts_regional,
-            {
-              dualstack: cfg.use_dualstack_endpoint,
-              fips: cfg.use_fips_endpoint
-            }
-          )
-          URI(endpoint)
         end
       end
     end

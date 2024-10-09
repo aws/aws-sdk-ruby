@@ -187,8 +187,6 @@ module Seahorse
           @members = Set.new(@struct.members)
         end
 
-        attr_reader :struct
-
         def resolve
           @members.each { |opt_name| value_at(opt_name) }
         end
