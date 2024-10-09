@@ -24,12 +24,10 @@ be a URI formatted like:
         end
 
         def after_initialize(client)
-          endpoint = client.config.endpoint
-          if endpoint.nil?
-            msg = "missing required option `:endpoint'"
-            raise ArgumentError, msg
-          end
+          # validate endpoint only if user set a custom endpoint
+          return if client.config.respond_to?(:regional_endpoint) && client.config.regional_endpoint
 
+          endpoint = client.config.endpoint
           endpoint = URI.parse(endpoint.to_s)
           if URI::HTTPS === endpoint or URI::HTTP === endpoint
             client.config.endpoint = endpoint
@@ -42,7 +40,11 @@ be a URI formatted like:
         class Handler < Client::Handler
 
           def call(context)
-            context.http_request.endpoint = URI.parse(context.config.endpoint.to_s)
+            if !context.config.respond_to?(:regional_endpoint) || # generic
+               !context.config.regional_endpoint || # custom endpoint
+               !context.config.respond_to?(:endpoint_provider) # legacy/pre-ep2/no rules
+              context.http_request.endpoint = URI.parse(context.config.endpoint.to_s)
+            end
             @handler.call(context)
           end
 
