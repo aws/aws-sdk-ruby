@@ -152,16 +152,10 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
 
           # preserve legacy (pre EP2) client.config.endpoint still resolves a value
           # when needed.
-          struct = cfg.instance_variable_get(:@struct)
-          if struct
-            # need a separate proc to get namespace/private access to resolve_legacy_endpoint
-            b = proc { resolve_legacy_endpoint(struct) }
-            struct.define_singleton_method(:endpoint) { @endpoint ||= b.call }
-            nil
-          else
-            # backup in case internal details of config resolver change
-            resolve_legacy_endpoint(cfg)
-          end
+          # need a separate proc to get namespace/private access to resolve_legacy_endpoint
+          b = proc { resolve_legacy_endpoint(cfg.struct) }
+          cfg.struct.define_singleton_method(:endpoint) { @endpoint ||= b.call }
+          nil
         end
 
         # get a custom configured endpoint from ENV or configuration
