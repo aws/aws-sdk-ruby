@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.989.0 (2024-10-10)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SocialMessaging`.
+
 1.988.0 (2024-10-09)
 ------------------
 

@@ -366,6 +366,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Elemental MediaPackage v2                         | Aws::MediaPackageV2                      | aws-sdk-mediapackagev2                      | 2022-12-25  |
 | AWS Elemental MediaStore                              | Aws::MediaStore                          | aws-sdk-mediastore                          | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | Aws::MediaStoreData                      | aws-sdk-mediastoredata                      | 2017-09-01  |
+| AWS End User Messaging Social                         | Aws::SocialMessaging                     | aws-sdk-socialmessaging                     | 2024-01-01  |
 | AWS EntityResolution                                  | Aws::EntityResolution                    | aws-sdk-entityresolution                    | 2018-05-10  |
 | AWS Fault Injection Simulator                         | Aws::FIS                                 | aws-sdk-fis                                 | 2020-12-01  |
 | AWS Free Tier                                         | Aws::FreeTier                            | aws-sdk-freetier                            | 2023-09-07  |

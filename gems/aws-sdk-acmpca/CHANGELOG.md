@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2024-10-10)
+------------------
+
+* Feature - Documentation updates for AWS Private CA.
+
 1.82.0 (2024-09-24)
 ------------------
 

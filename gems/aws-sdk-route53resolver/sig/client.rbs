@@ -274,7 +274,8 @@ module Aws
                                       ip: ::String?,
                                       port: ::Integer?,
                                       ipv_6: ::String?,
-                                      protocol: ("DoH" | "Do53" | "DoH-FIPS")?
+                                      protocol: ("DoH" | "Do53" | "DoH-FIPS")?,
+                                      server_name_indication: ::String?
                                     },
                                   ],
                                   ?resolver_endpoint_id: ::String,
@@ -1008,7 +1009,8 @@ module Aws
                                         ip: ::String?,
                                         port: ::Integer?,
                                         ipv_6: ::String?,
-                                        protocol: ("DoH" | "Do53" | "DoH-FIPS")?
+                                        protocol: ("DoH" | "Do53" | "DoH-FIPS")?,
+                                        server_name_indication: ::String?
                                       },
                                     ]?,
                                     resolver_endpoint_id: ::String?

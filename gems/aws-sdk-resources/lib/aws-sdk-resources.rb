@@ -361,6 +361,7 @@ module Aws
   autoload :SimpleDB, 'aws-sdk-simpledb'
   autoload :SnowDeviceManagement, 'aws-sdk-snowdevicemanagement'
   autoload :Snowball, 'aws-sdk-snowball'
+  autoload :SocialMessaging, 'aws-sdk-socialmessaging'
   autoload :SsmSap, 'aws-sdk-ssmsap'
   autoload :States, 'aws-sdk-states'
   autoload :StorageGateway, 'aws-sdk-storagegateway'

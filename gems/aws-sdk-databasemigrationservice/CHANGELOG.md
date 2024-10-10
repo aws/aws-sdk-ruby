@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-10-10)
+------------------
+
+* Feature - Introduces DescribeDataMigrations, CreateDataMigration, ModifyDataMigration, DeleteDataMigration, StartDataMigration, StopDataMigration operations to SDK. Provides FailedDependencyFault error message.
+
 1.106.0 (2024-09-24)
 ------------------
 

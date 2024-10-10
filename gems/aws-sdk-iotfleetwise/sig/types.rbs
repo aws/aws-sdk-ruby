@@ -145,7 +145,7 @@ module Aws::IoTFleetWise
       attr_accessor minimum_trigger_interval_ms: ::Integer
       attr_accessor trigger_mode: ("ALWAYS" | "RISING_EDGE")
       attr_accessor condition_language_version: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:expression]
     end
 
     class ConflictException
@@ -172,7 +172,7 @@ module Aws::IoTFleetWise
       attr_accessor data_extra_dimensions: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor data_destination_configs: ::Array[Types::DataDestinationConfig]
-      SENSITIVE: []
+      SENSITIVE: [:signals_to_collect, :data_extra_dimensions]
     end
 
     class CreateCampaignResponse
@@ -454,7 +454,7 @@ module Aws::IoTFleetWise
       attr_accessor creation_time: ::Time
       attr_accessor last_modification_time: ::Time
       attr_accessor data_destination_configs: ::Array[Types::DataDestinationConfig]
-      SENSITIVE: []
+      SENSITIVE: [:signals_to_collect, :data_extra_dimensions]
     end
 
     class GetDecoderManifestRequest
@@ -1135,7 +1135,7 @@ module Aws::IoTFleetWise
       attr_accessor description: ::String
       attr_accessor data_extra_dimensions: ::Array[::String]
       attr_accessor action: ("APPROVE" | "SUSPEND" | "RESUME" | "UPDATE")
-      SENSITIVE: []
+      SENSITIVE: [:data_extra_dimensions]
     end
 
     class UpdateCampaignResponse

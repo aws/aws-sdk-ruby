@@ -78,6 +78,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DatabaseMigrationService::Endpoints::BatchStartRecommendations.build(context)
           when :cancel_replication_task_assessment_run
             Aws::DatabaseMigrationService::Endpoints::CancelReplicationTaskAssessmentRun.build(context)
+          when :create_data_migration
+            Aws::DatabaseMigrationService::Endpoints::CreateDataMigration.build(context)
           when :create_data_provider
             Aws::DatabaseMigrationService::Endpoints::CreateDataProvider.build(context)
           when :create_endpoint
@@ -102,6 +104,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DatabaseMigrationService::Endpoints::DeleteCertificate.build(context)
           when :delete_connection
             Aws::DatabaseMigrationService::Endpoints::DeleteConnection.build(context)
+          when :delete_data_migration
+            Aws::DatabaseMigrationService::Endpoints::DeleteDataMigration.build(context)
           when :delete_data_provider
             Aws::DatabaseMigrationService::Endpoints::DeleteDataProvider.build(context)
           when :delete_endpoint
@@ -136,6 +140,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DatabaseMigrationService::Endpoints::DescribeConnections.build(context)
           when :describe_conversion_configuration
             Aws::DatabaseMigrationService::Endpoints::DescribeConversionConfiguration.build(context)
+          when :describe_data_migrations
+            Aws::DatabaseMigrationService::Endpoints::DescribeDataMigrations.build(context)
           when :describe_data_providers
             Aws::DatabaseMigrationService::Endpoints::DescribeDataProviders.build(context)
           when :describe_endpoint_settings
@@ -220,6 +226,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DatabaseMigrationService::Endpoints::ListTagsForResource.build(context)
           when :modify_conversion_configuration
             Aws::DatabaseMigrationService::Endpoints::ModifyConversionConfiguration.build(context)
+          when :modify_data_migration
+            Aws::DatabaseMigrationService::Endpoints::ModifyDataMigration.build(context)
           when :modify_data_provider
             Aws::DatabaseMigrationService::Endpoints::ModifyDataProvider.build(context)
           when :modify_endpoint
@@ -252,6 +260,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DatabaseMigrationService::Endpoints::RemoveTagsFromResource.build(context)
           when :run_fleet_advisor_lsa_analysis
             Aws::DatabaseMigrationService::Endpoints::RunFleetAdvisorLsaAnalysis.build(context)
+          when :start_data_migration
+            Aws::DatabaseMigrationService::Endpoints::StartDataMigration.build(context)
           when :start_extension_pack_association
             Aws::DatabaseMigrationService::Endpoints::StartExtensionPackAssociation.build(context)
           when :start_metadata_model_assessment
@@ -274,6 +284,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DatabaseMigrationService::Endpoints::StartReplicationTaskAssessment.build(context)
           when :start_replication_task_assessment_run
             Aws::DatabaseMigrationService::Endpoints::StartReplicationTaskAssessmentRun.build(context)
+          when :stop_data_migration
+            Aws::DatabaseMigrationService::Endpoints::StopDataMigration.build(context)
           when :stop_replication
             Aws::DatabaseMigrationService::Endpoints::StopReplication.build(context)
           when :stop_replication_task

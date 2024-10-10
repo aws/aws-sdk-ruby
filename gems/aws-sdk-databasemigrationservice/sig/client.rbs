@@ -132,6 +132,37 @@ module Aws
                                                   ) -> _CancelReplicationTaskAssessmentRunResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelReplicationTaskAssessmentRunResponseSuccess
 
+      interface _CreateDataMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataMigrationResponse]
+        def data_migration: () -> Types::DataMigration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_data_migration-instance_method
+      def create_data_migration: (
+                                   ?data_migration_name: ::String,
+                                   migration_project_identifier: ::String,
+                                   data_migration_type: ("full-load" | "cdc" | "full-load-and-cdc"),
+                                   service_access_role_arn: ::String,
+                                   ?enable_cloudwatch_logs: bool,
+                                   ?source_data_settings: Array[
+                                     {
+                                       cdc_start_position: ::String?,
+                                       cdc_start_time: ::Time?,
+                                       cdc_stop_time: ::Time?,
+                                       slot_name: ::String?
+                                     },
+                                   ],
+                                   ?number_of_jobs: ::Integer,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?,
+                                       resource_arn: ::String?
+                                     },
+                                   ],
+                                   ?selection_rules: ::String
+                                 ) -> _CreateDataMigrationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataMigrationResponseSuccess
+
       interface _CreateDataProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataProviderResponse]
         def data_provider: () -> Types::DataProvider
@@ -809,6 +840,16 @@ module Aws
                              ) -> _DeleteConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
 
+      interface _DeleteDataMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataMigrationResponse]
+        def data_migration: () -> Types::DataMigration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_data_migration-instance_method
+      def delete_data_migration: (
+                                   data_migration_identifier: ::String
+                                 ) -> _DeleteDataMigrationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataMigrationResponseSuccess
+
       interface _DeleteDataProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataProviderResponse]
         def data_provider: () -> Types::DataProvider
@@ -997,6 +1038,26 @@ module Aws
                                                migration_project_identifier: ::String
                                              ) -> _DescribeConversionConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConversionConfigurationResponseSuccess
+
+      interface _DescribeDataMigrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataMigrationsResponse]
+        def data_migrations: () -> ::Array[Types::DataMigration]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_data_migrations-instance_method
+      def describe_data_migrations: (
+                                      ?filters: Array[
+                                        {
+                                          name: ::String,
+                                          values: Array[::String]
+                                        },
+                                      ],
+                                      ?max_records: ::Integer,
+                                      ?marker: ::String,
+                                      ?without_settings: bool,
+                                      ?without_statistics: bool
+                                    ) -> _DescribeDataMigrationsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataMigrationsResponseSuccess
 
       interface _DescribeDataProvidersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataProvidersResponse]
@@ -1710,6 +1771,30 @@ module Aws
                                            ) -> _ModifyConversionConfigurationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyConversionConfigurationResponseSuccess
 
+      interface _ModifyDataMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDataMigrationResponse]
+        def data_migration: () -> Types::DataMigration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_data_migration-instance_method
+      def modify_data_migration: (
+                                   data_migration_identifier: ::String,
+                                   ?data_migration_name: ::String,
+                                   ?enable_cloudwatch_logs: bool,
+                                   ?service_access_role_arn: ::String,
+                                   ?data_migration_type: ("full-load" | "cdc" | "full-load-and-cdc"),
+                                   ?source_data_settings: Array[
+                                     {
+                                       cdc_start_position: ::String?,
+                                       cdc_start_time: ::Time?,
+                                       cdc_stop_time: ::Time?,
+                                       slot_name: ::String?
+                                     },
+                                   ],
+                                   ?number_of_jobs: ::Integer,
+                                   ?selection_rules: ::String
+                                 ) -> _ModifyDataMigrationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDataMigrationResponseSuccess
+
       interface _ModifyDataProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDataProviderResponse]
         def data_provider: () -> Types::DataProvider
@@ -2370,6 +2455,17 @@ module Aws
       def run_fleet_advisor_lsa_analysis: () -> _RunFleetAdvisorLsaAnalysisResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RunFleetAdvisorLsaAnalysisResponseSuccess
 
+      interface _StartDataMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDataMigrationResponse]
+        def data_migration: () -> Types::DataMigration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_data_migration-instance_method
+      def start_data_migration: (
+                                  data_migration_identifier: ::String,
+                                  start_type: ("reload-target" | "resume-processing" | "start-replication")
+                                ) -> _StartDataMigrationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataMigrationResponseSuccess
+
       interface _StartExtensionPackAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartExtensionPackAssociationResponse]
         def request_identifier: () -> ::String
@@ -2505,6 +2601,16 @@ module Aws
                                                    ?exclude: Array[::String]
                                                  ) -> _StartReplicationTaskAssessmentRunResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReplicationTaskAssessmentRunResponseSuccess
+
+      interface _StopDataMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDataMigrationResponse]
+        def data_migration: () -> Types::DataMigration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#stop_data_migration-instance_method
+      def stop_data_migration: (
+                                 data_migration_identifier: ::String
+                               ) -> _StopDataMigrationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDataMigrationResponseSuccess
 
       interface _StopReplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopReplicationResponse]

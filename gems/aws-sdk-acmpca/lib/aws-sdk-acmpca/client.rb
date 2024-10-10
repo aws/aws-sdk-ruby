@@ -491,14 +491,14 @@ module Aws::ACMPCA
     #   signing algorithm, and X.500 certificate subject information.
     #
     # @option params [Types::RevocationConfiguration] :revocation_configuration
-    #   Contains information to enable Online Certificate Status Protocol
-    #   (OCSP) support, to enable a certificate revocation list (CRL), to
-    #   enable both, or to enable neither. The default is for both certificate
-    #   validation mechanisms to be disabled.
+    #   Contains information to enable support for Online Certificate Status
+    #   Protocol (OCSP), certificate revocation list (CRL), both protocols, or
+    #   neither. By default, both certificate validation mechanisms are
+    #   disabled.
     #
-    #   <note markdown="1"> The following requirements apply to revocation configurations.
+    #   The following requirements apply to revocation configurations.
     #
-    #    * A configuration disabling CRLs or OCSP must contain only the
+    #   * A configuration disabling CRLs or OCSP must contain only the
     #     `Enabled=False` parameter, and will fail if other parameters such as
     #     `CustomCname` or `ExpirationInDays` are included.
     #
@@ -511,8 +511,6 @@ module Aws::ACMPCA
     #
     #   * In a CRL or OCSP configuration, the value of a CNAME parameter must
     #     not include a protocol prefix such as "http://" or "https://".
-    #
-    #    </note>
     #
     #   For more information, see the [OcspConfiguration][3] and
     #   [CrlConfiguration][4] types.
@@ -713,17 +711,13 @@ module Aws::ACMPCA
     end
 
     # Creates an audit report that lists every time that your CA private key
-    # is used. The report is saved in the Amazon S3 bucket that you specify
-    # on input. The [IssueCertificate][1] and [RevokeCertificate][2] actions
-    # use the private key.
+    # is used to issue a certificate. The [IssueCertificate][1] and
+    # [RevokeCertificate][2] actions use the private key.
     #
-    # <note markdown="1"> Both Amazon Web Services Private CA and the IAM principal must have
-    # permission to write to the S3 bucket that you specify. If the IAM
-    # principal making the call does not have permission to write to the
-    # bucket, then an exception is thrown. For more information, see [Access
-    # policies for CRLs in Amazon S3][3].
-    #
-    #  </note>
+    # To save the audit report to your designated Amazon S3 bucket, you must
+    # create a bucket policy that grants Amazon Web Services Private CA
+    # permission to access and write to it. For an example policy, see
+    # [Prepare an Amazon S3 bucket for audit reports][3].
     #
     # Amazon Web Services Private CA assets that are stored in Amazon S3 can
     # be protected with encryption. For more information, see [Encrypting
@@ -737,7 +731,7 @@ module Aws::ACMPCA
     #
     # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html
     # [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html
-    # [3]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies
+    # [3]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaAuditReport.html#s3-access
     # [4]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaAuditReport.html#audit-report-encryption
     #
     # @option params [required, String] :certificate_authority_arn
@@ -1549,44 +1543,46 @@ module Aws::ACMPCA
     # Amazon Web Services Private CA allows the following extensions to be
     # marked critical in the imported CA certificate or chain.
     #
-    # * Basic constraints (*must* be marked critical)
-    #
-    # * Subject alternative names
-    #
-    # * Key usage
-    #
-    # * Extended key usage
-    #
     # * Authority key identifier
     #
-    # * Subject key identifier
-    #
-    # * Issuer alternative name
-    #
-    # * Subject directory attributes
-    #
-    # * Subject information access
+    # * Basic constraints (*must* be marked critical)
     #
     # * Certificate policies
     #
-    # * Policy mappings
+    # * Extended key usage
     #
     # * Inhibit anyPolicy
+    #
+    # * Issuer alternative name
+    #
+    # * Key usage
+    #
+    # * Name constraints
+    #
+    # * Policy mappings
+    #
+    # * Subject alternative name
+    #
+    # * Subject directory attributes
+    #
+    # * Subject key identifier
+    #
+    # * Subject information access
     #
     # Amazon Web Services Private CA rejects the following extensions when
     # they are marked critical in an imported CA certificate or chain.
     #
-    # * Name constraints
-    #
-    # * Policy constraints
+    # * Authority information access
     #
     # * CRL distribution points
     #
-    # * Authority information access
-    #
     # * Freshest CRL
     #
-    # * Any other extension
+    # * Policy constraints
+    #
+    # Amazon Web Services Private Certificate Authority will also reject any
+    # other extension marked as critical not contained on the preceding list
+    # of allowed extensions.
     #
     #
     #
@@ -2572,15 +2568,15 @@ module Aws::ACMPCA
     #   `
     #
     # @option params [Types::RevocationConfiguration] :revocation_configuration
-    #   Contains information to enable Online Certificate Status Protocol
-    #   (OCSP) support, to enable a certificate revocation list (CRL), to
-    #   enable both, or to enable neither. If this parameter is not supplied,
-    #   existing capibilites remain unchanged. For more information, see the
-    #   [OcspConfiguration][1] and [CrlConfiguration][2] types.
+    #   Contains information to enable support for Online Certificate Status
+    #   Protocol (OCSP), certificate revocation list (CRL), both protocols, or
+    #   neither. If you don't supply this parameter, existing capibilites
+    #   remain unchanged. For more information, see the [OcspConfiguration][1]
+    #   and [CrlConfiguration][2] types.
     #
-    #   <note markdown="1"> The following requirements apply to revocation configurations.
+    #   The following requirements apply to revocation configurations.
     #
-    #    * A configuration disabling CRLs or OCSP must contain only the
+    #   * A configuration disabling CRLs or OCSP must contain only the
     #     `Enabled=False` parameter, and will fail if other parameters such as
     #     `CustomCname` or `ExpirationInDays` are included.
     #
@@ -2594,7 +2590,17 @@ module Aws::ACMPCA
     #   * In a CRL or OCSP configuration, the value of a CNAME parameter must
     #     not include a protocol prefix such as "http://" or "https://".
     #
-    #    </note>
+    #   If you update the `S3BucketName` of [CrlConfiguration][2], you can
+    #   break revocation for existing certificates. In other words, if you
+    #   call [UpdateCertificateAuthority][5] to update the CRL
+    #   configuration's S3 bucket name, Amazon Web Services Private CA only
+    #   writes CRLs to the new S3 bucket. Certificates issued prior to this
+    #   point will have the old S3 bucket name in your CRL Distribution Point
+    #   (CDP) extension, essentially breaking revocation. If you must update
+    #   the S3 bucket, you'll need to reissue old certificates to keep the
+    #   revocation working. Alternatively, you can use a [CustomCname][6] in
+    #   your CRL configuration if you might need to change the S3 bucket name
+    #   in the future.
     #
     #
     #
@@ -2602,6 +2608,8 @@ module Aws::ACMPCA
     #   [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html
     #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #   [4]: https://www.ietf.org/rfc/rfc2396.txt
+    #   [5]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
+    #   [6]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html#privateca-Type-CrlConfiguration-CustomCname
     #
     # @option params [String] :status
     #   Status of your private CA.
@@ -2658,7 +2666,7 @@ module Aws::ACMPCA
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

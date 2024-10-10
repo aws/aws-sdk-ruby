@@ -753,13 +753,15 @@ module Aws::NeptuneGraph
     #
     # @option params [String] :format
     #   Specifies the format of S3 data to be imported. Valid values are
-    #   `CSV`, which identifies the [Gremlin CSV format][1] or `OPENCYPHER`,
-    #   which identies the [openCypher load format][2].
+    #   `CSV`, which identifies the [Gremlin CSV format][1], `OPEN_CYPHER`,
+    #   which identifies the [openCypher load format][2], or `ntriples`, which
+    #   identifies the [RDF n-triples][3] format.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
     #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
+    #   [3]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html
     #
     # @option params [String] :blank_node_handling
     #   The method to handle blank nodes in the dataset. Currently, only
@@ -2136,7 +2138,7 @@ module Aws::NeptuneGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

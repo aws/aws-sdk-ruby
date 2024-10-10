@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2024-10-10)
+------------------
+
+* Feature - This is a documentation only release that updates to documentation to let customers know that Amazon Elastic Inference is no longer available.
+
 1.161.0 (2024-09-24)
 ------------------
 

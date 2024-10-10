@@ -72,6 +72,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
           case context.operation_name
           when :accept_address_transfer
             Aws::EC2::Endpoints::AcceptAddressTransfer.build(context)
+          when :accept_capacity_reservation_billing_ownership
+            Aws::EC2::Endpoints::AcceptCapacityReservationBillingOwnership.build(context)
           when :accept_reserved_instances_exchange_quote
             Aws::EC2::Endpoints::AcceptReservedInstancesExchangeQuote.build(context)
           when :accept_transit_gateway_multicast_domain_associations
@@ -102,6 +104,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::EC2::Endpoints::AssignPrivateNatGatewayAddress.build(context)
           when :associate_address
             Aws::EC2::Endpoints::AssociateAddress.build(context)
+          when :associate_capacity_reservation_billing_owner
+            Aws::EC2::Endpoints::AssociateCapacityReservationBillingOwner.build(context)
           when :associate_client_vpn_target_network
             Aws::EC2::Endpoints::AssociateClientVpnTargetNetwork.build(context)
           when :associate_dhcp_options
@@ -534,6 +538,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::EC2::Endpoints::DescribeByoipCidrs.build(context)
           when :describe_capacity_block_offerings
             Aws::EC2::Endpoints::DescribeCapacityBlockOfferings.build(context)
+          when :describe_capacity_reservation_billing_requests
+            Aws::EC2::Endpoints::DescribeCapacityReservationBillingRequests.build(context)
           when :describe_capacity_reservation_fleets
             Aws::EC2::Endpoints::DescribeCapacityReservationFleets.build(context)
           when :describe_capacity_reservations
@@ -864,6 +870,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::EC2::Endpoints::DisableVpcClassicLinkDnsSupport.build(context)
           when :disassociate_address
             Aws::EC2::Endpoints::DisassociateAddress.build(context)
+          when :disassociate_capacity_reservation_billing_owner
+            Aws::EC2::Endpoints::DisassociateCapacityReservationBillingOwner.build(context)
           when :disassociate_client_vpn_target_network
             Aws::EC2::Endpoints::DisassociateClientVpnTargetNetwork.build(context)
           when :disassociate_enclave_certificate_iam_role
@@ -1218,6 +1226,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::EC2::Endpoints::RegisterTransitGatewayMulticastGroupMembers.build(context)
           when :register_transit_gateway_multicast_group_sources
             Aws::EC2::Endpoints::RegisterTransitGatewayMulticastGroupSources.build(context)
+          when :reject_capacity_reservation_billing_ownership
+            Aws::EC2::Endpoints::RejectCapacityReservationBillingOwnership.build(context)
           when :reject_transit_gateway_multicast_domain_associations
             Aws::EC2::Endpoints::RejectTransitGatewayMulticastDomainAssociations.build(context)
           when :reject_transit_gateway_peering_attachment

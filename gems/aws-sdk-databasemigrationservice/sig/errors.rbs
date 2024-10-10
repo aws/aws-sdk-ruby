@@ -17,6 +17,9 @@ module Aws
       class CollectorNotFoundFault < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class FailedDependencyFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InsufficientResourceCapacityFault < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

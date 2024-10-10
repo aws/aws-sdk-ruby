@@ -1166,6 +1166,9 @@
   "Snowball": {
     "models": "snowball/2016-06-30"
   },
+  "SocialMessaging": {
+    "models": "socialmessaging/2024-01-01"
+  },
   "SsmSap": {
     "models": "ssm-sap/2018-05-10"
   },

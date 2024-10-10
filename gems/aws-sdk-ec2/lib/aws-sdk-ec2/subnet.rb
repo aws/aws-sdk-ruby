@@ -650,14 +650,9 @@ module Aws::EC2
     # @option options [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
     #
-    #   <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to new customers.
-    #   For more information, see [Amazon Elastic Inference FAQs][1].
+    #   <note markdown="1"> Amazon Elastic Inference is no longer available.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/machine-learning/elastic-inference/faqs/
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources that are created during instance
     #   launch.
@@ -1237,9 +1232,6 @@ module Aws::EC2
     #
     #   * `iam-instance-profile.id` - The instance profile associated with the
     #     instance. Specified as an ID.
-    #
-    #   * `iam-instance-profile.name` - The instance profile associated with
-    #     the instance. Specified as an name.
     #
     #   * `image-id` - The ID of the image used to launch the instance.
     #
