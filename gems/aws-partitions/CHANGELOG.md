@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.987.0 (2024-10-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.986.0 (2024-10-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.985.0 (2024-10-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.984.0 (2024-10-03)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::MarketplaceReporting`.
+
+1.983.0 (2024-10-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.982.0 (2024-10-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.981.0 (2024-09-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.980.0 (2024-09-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.979.0 (2024-09-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.978.0 (2024-09-24)
 ------------------
 

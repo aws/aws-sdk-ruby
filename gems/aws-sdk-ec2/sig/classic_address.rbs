@@ -17,9 +17,6 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#public_ip-instance_method
       def public_ip: () -> String
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#instance_id-instance_method
-      def instance_id: () -> ::String
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#allocation_id-instance_method
       def allocation_id: () -> ::String
 
@@ -56,6 +53,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#carrier_ip-instance_method
       def carrier_ip: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#instance_id-instance_method
+      def instance_id: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#load-instance_method
@@ -73,10 +73,10 @@ module Aws
       def associate: (
                        ?allocation_id: ::String,
                        ?instance_id: ::String,
-                       ?allow_reassociation: bool,
                        ?dry_run: bool,
                        ?network_interface_id: ::String,
-                       ?private_ip_address: ::String
+                       ?private_ip_address: ::String,
+                       ?allow_reassociation: bool
                      ) -> Types::AssociateAddressResult
                    | (?Hash[Symbol, untyped]) -> Types::AssociateAddressResult
 

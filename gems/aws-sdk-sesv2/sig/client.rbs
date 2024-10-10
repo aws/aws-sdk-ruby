@@ -111,7 +111,8 @@ module Aws
       def create_configuration_set: (
                                       configuration_set_name: ::String,
                                       ?tracking_options: {
-                                        custom_redirect_domain: ::String
+                                        custom_redirect_domain: ::String,
+                                        https_policy: ("REQUIRE" | "REQUIRE_OPEN_ONLY" | "OPTIONAL")?
                                       },
                                       ?delivery_options: {
                                         tls_policy: ("REQUIRE" | "OPTIONAL")?,
@@ -1093,7 +1094,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_tracking_options-instance_method
       def put_configuration_set_tracking_options: (
                                                     configuration_set_name: ::String,
-                                                    ?custom_redirect_domain: ::String
+                                                    ?custom_redirect_domain: ::String,
+                                                    ?https_policy: ("REQUIRE" | "REQUIRE_OPEN_ONLY" | "OPTIONAL")
                                                   ) -> _PutConfigurationSetTrackingOptionsResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetTrackingOptionsResponseSuccess
 

@@ -5595,11 +5595,21 @@ module Aws::SESV2
     #   The domain to use to track open and click events.
     #   @return [String]
     #
+    # @!attribute [rw] https_policy
+    #   The https policy to use for tracking open and click events. If the
+    #   value is OPTIONAL or HttpsPolicy is not specified, the open trackers
+    #   use HTTP and click tracker use the original protocol of the link. If
+    #   the value is REQUIRE, both open and click tracker uses HTTPS and if
+    #   the value is REQUIRE\_OPEN\_ONLY open tracker uses HTTPS and link
+    #   tracker is same as original protocol of the link.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetTrackingOptionsRequest AWS API Documentation
     #
     class PutConfigurationSetTrackingOptionsRequest < Struct.new(
       :configuration_set_name,
-      :custom_redirect_domain)
+      :custom_redirect_domain,
+      :https_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7034,10 +7044,15 @@ module Aws::SESV2
     #   The domain to use for tracking open and click events.
     #   @return [String]
     #
+    # @!attribute [rw] https_policy
+    #   The https policy to use for tracking open and click events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TrackingOptions AWS API Documentation
     #
     class TrackingOptions < Struct.new(
-      :custom_redirect_domain)
+      :custom_redirect_domain,
+      :https_policy)
       SENSITIVE = []
       include Aws::Structure
     end

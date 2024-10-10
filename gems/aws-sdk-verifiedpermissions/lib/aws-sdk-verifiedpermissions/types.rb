@@ -3225,9 +3225,9 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] policy_type
     #   The type of the policy. This is one of the following values:
     #
-    #   * `static`
+    #   * `STATIC`
     #
-    #   * `templateLinked`
+    #   * `TEMPLATE_LINKED`
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -3462,12 +3462,14 @@ module Aws::VerifiedPermissions
     #
     # @!attribute [rw] cedar_json
     #   A JSON string representation of the schema supported by applications
-    #   that use this policy store. For more information, see [Policy store
-    #   schema][1] in the *Amazon Verified Permissions User Guide*.
+    #   that use this policy store. To delete the schema, run [PutSchema][1]
+    #   with `\{\}` for this parameter. For more information, see [Policy
+    #   store schema][2] in the *Amazon Verified Permissions User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/schema.html
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PutSchema.html
+    #   [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/schema.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/SchemaDefinition AWS API Documentation
@@ -3498,7 +3500,7 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   The code for the Amazon Web Service that owns the quota.
+    #   The code for the Amazon Web Services service that owns the quota.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
@@ -3701,7 +3703,7 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   The code for the Amazon Web Service that owns the quota.
+    #   The code for the Amazon Web Services service that owns the quota.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
@@ -3811,13 +3813,6 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] update_configuration
     #   Specifies the details required to communicate with the identity
     #   provider (IdP) associated with this identity source.
-    #
-    #   <note markdown="1"> At this time, the only valid member of this structure is a Amazon
-    #   Cognito user pool configuration.
-    #
-    #    You must specify a `userPoolArn`, and optionally, a `ClientId`.
-    #
-    #    </note>
     #   @return [Types::UpdateConfiguration]
     #
     # @!attribute [rw] principal_entity_type

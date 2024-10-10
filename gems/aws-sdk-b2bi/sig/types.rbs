@@ -24,6 +24,11 @@ module Aws::B2bi
       end
     end
 
+    class CapabilityOptions
+      attr_accessor outbound_edi: Types::OutboundEdiOptions
+      SENSITIVE: []
+    end
+
     class CapabilitySummary
       attr_accessor capability_id: ::String
       attr_accessor name: ::String
@@ -36,6 +41,30 @@ module Aws::B2bi
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class ConversionSource
+      attr_accessor file_format: ("JSON" | "XML")
+      attr_accessor input_file: Types::InputFileSource
+      SENSITIVE: []
+    end
+
+    class ConversionTarget
+      attr_accessor file_format: ("X12")
+      attr_accessor format_details: Types::ConversionTargetFormatDetails
+      attr_accessor output_sample_file: Types::OutputSampleFileSource
+      SENSITIVE: []
+    end
+
+    class ConversionTargetFormatDetails
+      attr_accessor x12: Types::X12Details
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class X12 < ConversionTargetFormatDetails
+      end
+      class Unknown < ConversionTargetFormatDetails
+      end
     end
 
     class CreateCapabilityRequest
@@ -65,6 +94,7 @@ module Aws::B2bi
       attr_accessor email: ::String
       attr_accessor phone: ::String
       attr_accessor capabilities: ::Array[::String]
+      attr_accessor capability_options: Types::CapabilityOptions
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:email, :phone]
@@ -78,6 +108,7 @@ module Aws::B2bi
       attr_accessor email: ::String
       attr_accessor phone: ::String
       attr_accessor capabilities: ::Array[::String]
+      attr_accessor capability_options: Types::CapabilityOptions
       attr_accessor trading_partner_id: ::String
       attr_accessor created_at: ::Time
       SENSITIVE: [:email, :phone]
@@ -107,14 +138,30 @@ module Aws::B2bi
       SENSITIVE: [:phone, :email]
     end
 
+    class CreateStarterMappingTemplateRequest
+      attr_accessor output_sample_location: Types::S3Location
+      attr_accessor mapping_type: ("JSONATA" | "XSLT")
+      attr_accessor template_details: Types::TemplateDetails
+      SENSITIVE: []
+    end
+
+    class CreateStarterMappingTemplateResponse
+      attr_accessor mapping_template: ::String
+      SENSITIVE: []
+    end
+
     class CreateTransformerRequest
       attr_accessor name: ::String
-      attr_accessor file_format: ("XML" | "JSON")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
       attr_accessor mapping_template: ::String
       attr_accessor edi_type: Types::EdiType
       attr_accessor sample_document: ::String
-      attr_accessor client_token: ::String
-      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor input_conversion: Types::InputConversion
+      attr_accessor mapping: Types::Mapping
+      attr_accessor output_conversion: Types::OutputConversion
+      attr_accessor sample_documents: Types::SampleDocuments
       SENSITIVE: []
     end
 
@@ -122,12 +169,16 @@ module Aws::B2bi
       attr_accessor transformer_id: ::String
       attr_accessor transformer_arn: ::String
       attr_accessor name: ::String
-      attr_accessor file_format: ("XML" | "JSON")
-      attr_accessor mapping_template: ::String
       attr_accessor status: ("active" | "inactive")
+      attr_accessor created_at: ::Time
+      attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
+      attr_accessor mapping_template: ::String
       attr_accessor edi_type: Types::EdiType
       attr_accessor sample_document: ::String
-      attr_accessor created_at: ::Time
+      attr_accessor input_conversion: Types::InputConversion
+      attr_accessor mapping: Types::Mapping
+      attr_accessor output_conversion: Types::OutputConversion
+      attr_accessor sample_documents: Types::SampleDocuments
       SENSITIVE: []
     end
 
@@ -152,6 +203,7 @@ module Aws::B2bi
     end
 
     class EdiConfiguration
+      attr_accessor capability_direction: ("INBOUND" | "OUTBOUND")
       attr_accessor type: Types::EdiType
       attr_accessor input_location: Types::S3Location
       attr_accessor output_location: Types::S3Location
@@ -167,6 +219,17 @@ module Aws::B2bi
       class X12Details < EdiType
       end
       class Unknown < EdiType
+      end
+    end
+
+    class FormatOptions
+      attr_accessor x12: Types::X12Details
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class X12 < FormatOptions
+      end
+      class Unknown < FormatOptions
       end
     end
 
@@ -200,6 +263,7 @@ module Aws::B2bi
       attr_accessor email: ::String
       attr_accessor phone: ::String
       attr_accessor capabilities: ::Array[::String]
+      attr_accessor capability_options: Types::CapabilityOptions
       attr_accessor trading_partner_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
@@ -247,14 +311,35 @@ module Aws::B2bi
       attr_accessor transformer_id: ::String
       attr_accessor transformer_arn: ::String
       attr_accessor name: ::String
-      attr_accessor file_format: ("XML" | "JSON")
-      attr_accessor mapping_template: ::String
       attr_accessor status: ("active" | "inactive")
-      attr_accessor edi_type: Types::EdiType
-      attr_accessor sample_document: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
+      attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
+      attr_accessor mapping_template: ::String
+      attr_accessor edi_type: Types::EdiType
+      attr_accessor sample_document: ::String
+      attr_accessor input_conversion: Types::InputConversion
+      attr_accessor mapping: Types::Mapping
+      attr_accessor output_conversion: Types::OutputConversion
+      attr_accessor sample_documents: Types::SampleDocuments
       SENSITIVE: []
+    end
+
+    class InputConversion
+      attr_accessor from_format: ("X12")
+      attr_accessor format_options: Types::FormatOptions
+      SENSITIVE: []
+    end
+
+    class InputFileSource
+      attr_accessor file_content: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FileContent < InputFileSource
+      end
+      class Unknown < InputFileSource
+      end
     end
 
     class InternalServerException
@@ -322,11 +407,46 @@ module Aws::B2bi
       SENSITIVE: []
     end
 
+    class Mapping
+      attr_accessor template_language: ("XSLT" | "JSONATA")
+      attr_accessor template: ::String
+      SENSITIVE: []
+    end
+
+    class OutboundEdiOptions
+      attr_accessor x12: Types::X12Envelope
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class X12 < OutboundEdiOptions
+      end
+      class Unknown < OutboundEdiOptions
+      end
+    end
+
+    class OutputConversion
+      attr_accessor to_format: ("X12")
+      attr_accessor format_options: Types::FormatOptions
+      SENSITIVE: []
+    end
+
+    class OutputSampleFileSource
+      attr_accessor file_location: Types::S3Location
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FileLocation < OutputSampleFileSource
+      end
+      class Unknown < OutputSampleFileSource
+      end
+    end
+
     class PartnershipSummary
       attr_accessor profile_id: ::String
       attr_accessor partnership_id: ::String
       attr_accessor name: ::String
       attr_accessor capabilities: ::Array[::String]
+      attr_accessor capability_options: Types::CapabilityOptions
       attr_accessor trading_partner_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
@@ -352,6 +472,18 @@ module Aws::B2bi
     class S3Location
       attr_accessor bucket_name: ::String
       attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class SampleDocumentKeys
+      attr_accessor input: ::String
+      attr_accessor output: ::String
+      SENSITIVE: []
+    end
+
+    class SampleDocuments
+      attr_accessor bucket_name: ::String
+      attr_accessor keys: ::Array[Types::SampleDocumentKeys]
       SENSITIVE: []
     end
 
@@ -389,10 +521,33 @@ module Aws::B2bi
       SENSITIVE: []
     end
 
+    class TemplateDetails
+      attr_accessor x12: Types::X12Details
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class X12 < TemplateDetails
+      end
+      class Unknown < TemplateDetails
+      end
+    end
+
+    class TestConversionRequest
+      attr_accessor source: Types::ConversionSource
+      attr_accessor target: Types::ConversionTarget
+      SENSITIVE: []
+    end
+
+    class TestConversionResponse
+      attr_accessor converted_file_content: ::String
+      attr_accessor validation_messages: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class TestMappingRequest
       attr_accessor input_file_content: ::String
       attr_accessor mapping_template: ::String
-      attr_accessor file_format: ("XML" | "JSON")
+      attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
       SENSITIVE: []
     end
 
@@ -403,7 +558,7 @@ module Aws::B2bi
 
     class TestParsingRequest
       attr_accessor input_file: Types::S3Location
-      attr_accessor file_format: ("XML" | "JSON")
+      attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
       attr_accessor edi_type: Types::EdiType
       SENSITIVE: []
     end
@@ -422,13 +577,17 @@ module Aws::B2bi
     class TransformerSummary
       attr_accessor transformer_id: ::String
       attr_accessor name: ::String
-      attr_accessor file_format: ("XML" | "JSON")
-      attr_accessor mapping_template: ::String
       attr_accessor status: ("active" | "inactive")
-      attr_accessor edi_type: Types::EdiType
-      attr_accessor sample_document: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
+      attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
+      attr_accessor mapping_template: ::String
+      attr_accessor edi_type: Types::EdiType
+      attr_accessor sample_document: ::String
+      attr_accessor input_conversion: Types::InputConversion
+      attr_accessor mapping: Types::Mapping
+      attr_accessor output_conversion: Types::OutputConversion
+      attr_accessor sample_documents: Types::SampleDocuments
       SENSITIVE: []
     end
 
@@ -462,6 +621,7 @@ module Aws::B2bi
       attr_accessor partnership_id: ::String
       attr_accessor name: ::String
       attr_accessor capabilities: ::Array[::String]
+      attr_accessor capability_options: Types::CapabilityOptions
       SENSITIVE: []
     end
 
@@ -473,6 +633,7 @@ module Aws::B2bi
       attr_accessor email: ::String
       attr_accessor phone: ::String
       attr_accessor capabilities: ::Array[::String]
+      attr_accessor capability_options: Types::CapabilityOptions
       attr_accessor trading_partner_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
@@ -505,11 +666,15 @@ module Aws::B2bi
     class UpdateTransformerRequest
       attr_accessor transformer_id: ::String
       attr_accessor name: ::String
-      attr_accessor file_format: ("XML" | "JSON")
-      attr_accessor mapping_template: ::String
       attr_accessor status: ("active" | "inactive")
+      attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
+      attr_accessor mapping_template: ::String
       attr_accessor edi_type: Types::EdiType
       attr_accessor sample_document: ::String
+      attr_accessor input_conversion: Types::InputConversion
+      attr_accessor mapping: Types::Mapping
+      attr_accessor output_conversion: Types::OutputConversion
+      attr_accessor sample_documents: Types::SampleDocuments
       SENSITIVE: []
     end
 
@@ -517,13 +682,17 @@ module Aws::B2bi
       attr_accessor transformer_id: ::String
       attr_accessor transformer_arn: ::String
       attr_accessor name: ::String
-      attr_accessor file_format: ("XML" | "JSON")
-      attr_accessor mapping_template: ::String
       attr_accessor status: ("active" | "inactive")
-      attr_accessor edi_type: Types::EdiType
-      attr_accessor sample_document: ::String
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
+      attr_accessor file_format: ("XML" | "JSON" | "NOT_USED")
+      attr_accessor mapping_template: ::String
+      attr_accessor edi_type: Types::EdiType
+      attr_accessor sample_document: ::String
+      attr_accessor input_conversion: Types::InputConversion
+      attr_accessor mapping: Types::Mapping
+      attr_accessor output_conversion: Types::OutputConversion
+      attr_accessor sample_documents: Types::SampleDocuments
       SENSITIVE: []
     end
 
@@ -532,9 +701,47 @@ module Aws::B2bi
       SENSITIVE: []
     end
 
+    class X12Delimiters
+      attr_accessor component_separator: ::String
+      attr_accessor data_element_separator: ::String
+      attr_accessor segment_terminator: ::String
+      SENSITIVE: []
+    end
+
     class X12Details
       attr_accessor transaction_set: ("X12_110" | "X12_180" | "X12_204" | "X12_210" | "X12_211" | "X12_214" | "X12_215" | "X12_259" | "X12_260" | "X12_266" | "X12_269" | "X12_270" | "X12_271" | "X12_274" | "X12_275" | "X12_276" | "X12_277" | "X12_278" | "X12_310" | "X12_315" | "X12_322" | "X12_404" | "X12_410" | "X12_417" | "X12_421" | "X12_426" | "X12_810" | "X12_820" | "X12_824" | "X12_830" | "X12_832" | "X12_834" | "X12_835" | "X12_837" | "X12_844" | "X12_846" | "X12_849" | "X12_850" | "X12_852" | "X12_855" | "X12_856" | "X12_860" | "X12_861" | "X12_864" | "X12_865" | "X12_869" | "X12_870" | "X12_940" | "X12_945" | "X12_990" | "X12_997" | "X12_999" | "X12_270_X279" | "X12_271_X279" | "X12_275_X210" | "X12_275_X211" | "X12_276_X212" | "X12_277_X212" | "X12_277_X214" | "X12_277_X364" | "X12_278_X217" | "X12_820_X218" | "X12_820_X306" | "X12_824_X186" | "X12_834_X220" | "X12_834_X307" | "X12_834_X318" | "X12_835_X221" | "X12_837_X222" | "X12_837_X223" | "X12_837_X224" | "X12_837_X291" | "X12_837_X292" | "X12_837_X298" | "X12_999_X231")
       attr_accessor version: ("VERSION_4010" | "VERSION_4030" | "VERSION_5010" | "VERSION_5010_HIPAA")
+      SENSITIVE: []
+    end
+
+    class X12Envelope
+      attr_accessor common: Types::X12OutboundEdiHeaders
+      SENSITIVE: []
+    end
+
+    class X12FunctionalGroupHeaders
+      attr_accessor application_sender_code: ::String
+      attr_accessor application_receiver_code: ::String
+      attr_accessor responsible_agency_code: ::String
+      SENSITIVE: []
+    end
+
+    class X12InterchangeControlHeaders
+      attr_accessor sender_id_qualifier: ::String
+      attr_accessor sender_id: ::String
+      attr_accessor receiver_id_qualifier: ::String
+      attr_accessor receiver_id: ::String
+      attr_accessor repetition_separator: ::String
+      attr_accessor acknowledgment_requested_code: ::String
+      attr_accessor usage_indicator_code: ::String
+      SENSITIVE: []
+    end
+
+    class X12OutboundEdiHeaders
+      attr_accessor interchange_control_headers: Types::X12InterchangeControlHeaders
+      attr_accessor functional_group_headers: Types::X12FunctionalGroupHeaders
+      attr_accessor delimiters: Types::X12Delimiters
+      attr_accessor validate_edi: bool
       SENSITIVE: []
     end
   end

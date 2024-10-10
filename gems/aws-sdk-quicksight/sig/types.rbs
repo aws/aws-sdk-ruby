@@ -246,6 +246,7 @@ module Aws::QuickSight
       attr_accessor themes: ::Array[Types::AssetBundleExportJobThemeOverrideProperties]
       attr_accessor analyses: ::Array[Types::AssetBundleExportJobAnalysisOverrideProperties]
       attr_accessor dashboards: ::Array[Types::AssetBundleExportJobDashboardOverrideProperties]
+      attr_accessor folders: ::Array[Types::AssetBundleExportJobFolderOverrideProperties]
       SENSITIVE: []
     end
 
@@ -277,6 +278,12 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor type: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssetBundleExportJobFolderOverrideProperties
+      attr_accessor arn: ::String
+      attr_accessor properties: ::Array[("Name" | "ParentFolderArn")]
       SENSITIVE: []
     end
 
@@ -422,6 +429,25 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AssetBundleImportJobFolderOverrideParameters
+      attr_accessor folder_id: ::String
+      attr_accessor name: ::String
+      attr_accessor parent_folder_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssetBundleImportJobFolderOverridePermissions
+      attr_accessor folder_ids: ::Array[::String]
+      attr_accessor permissions: Types::AssetBundleResourcePermissions
+      SENSITIVE: []
+    end
+
+    class AssetBundleImportJobFolderOverrideTags
+      attr_accessor folder_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class AssetBundleImportJobOverrideParameters
       attr_accessor resource_id_override_configuration: Types::AssetBundleImportJobResourceIdOverrideConfiguration
       attr_accessor vpc_connections: ::Array[Types::AssetBundleImportJobVPCConnectionOverrideParameters]
@@ -431,6 +457,7 @@ module Aws::QuickSight
       attr_accessor themes: ::Array[Types::AssetBundleImportJobThemeOverrideParameters]
       attr_accessor analyses: ::Array[Types::AssetBundleImportJobAnalysisOverrideParameters]
       attr_accessor dashboards: ::Array[Types::AssetBundleImportJobDashboardOverrideParameters]
+      attr_accessor folders: ::Array[Types::AssetBundleImportJobFolderOverrideParameters]
       SENSITIVE: []
     end
 
@@ -440,6 +467,7 @@ module Aws::QuickSight
       attr_accessor themes: ::Array[Types::AssetBundleImportJobThemeOverridePermissions]
       attr_accessor analyses: ::Array[Types::AssetBundleImportJobAnalysisOverridePermissions]
       attr_accessor dashboards: ::Array[Types::AssetBundleImportJobDashboardOverridePermissions]
+      attr_accessor folders: ::Array[Types::AssetBundleImportJobFolderOverridePermissions]
       SENSITIVE: []
     end
 
@@ -450,6 +478,7 @@ module Aws::QuickSight
       attr_accessor themes: ::Array[Types::AssetBundleImportJobThemeOverrideTags]
       attr_accessor analyses: ::Array[Types::AssetBundleImportJobAnalysisOverrideTags]
       attr_accessor dashboards: ::Array[Types::AssetBundleImportJobDashboardOverrideTags]
+      attr_accessor folders: ::Array[Types::AssetBundleImportJobFolderOverrideTags]
       SENSITIVE: []
     end
 
@@ -2932,6 +2961,8 @@ module Aws::QuickSight
       attr_accessor include_tags: bool
       attr_accessor validation_strategy: Types::AssetBundleExportJobValidationStrategy
       attr_accessor warnings: ::Array[Types::AssetBundleExportJobWarning]
+      attr_accessor include_folder_memberships: bool
+      attr_accessor include_folder_members: ("RECURSE" | "ONE_LEVEL" | "NONE")
       SENSITIVE: [:download_url]
     end
 
@@ -3269,6 +3300,18 @@ module Aws::QuickSight
 
     class DescribeNamespaceResponse
       attr_accessor namespace: Types::NamespaceInfoV2
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeQPersonalizationConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQPersonalizationConfigurationResponse
+      attr_accessor personalization_mode: ("ENABLED" | "DISABLED")
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -7101,6 +7144,8 @@ module Aws::QuickSight
       attr_accessor include_permissions: bool
       attr_accessor include_tags: bool
       attr_accessor validation_strategy: Types::AssetBundleExportJobValidationStrategy
+      attr_accessor include_folder_memberships: bool
+      attr_accessor include_folder_members: ("RECURSE" | "ONE_LEVEL" | "NONE")
       SENSITIVE: []
     end
 
@@ -7786,6 +7831,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class TopicConfigOptions
+      attr_accessor q_business_insights_enabled: bool
+      SENSITIVE: []
+    end
+
     class TopicConstantValue
       attr_accessor constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")
       attr_accessor value: ::String
@@ -7806,6 +7856,7 @@ module Aws::QuickSight
       attr_accessor description: ::String
       attr_accessor user_experience_version: ("LEGACY" | "NEW_READER_EXPERIENCE")
       attr_accessor data_sets: ::Array[Types::DatasetMetadata]
+      attr_accessor config_options: Types::TopicConfigOptions
       SENSITIVE: []
     end
 
@@ -8507,6 +8558,19 @@ module Aws::QuickSight
     end
 
     class UpdatePublicSharingSettingsResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateQPersonalizationConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor personalization_mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateQPersonalizationConfigurationResponse
+      attr_accessor personalization_mode: ("ENABLED" | "DISABLED")
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []

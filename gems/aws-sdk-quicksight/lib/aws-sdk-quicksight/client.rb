@@ -3757,6 +3757,9 @@ module Aws::QuickSight
     #           ],
     #         },
     #       ],
+    #       config_options: {
+    #         q_business_insights_enabled: false,
+    #       },
     #     },
     #     tags: [
     #       {
@@ -5419,6 +5422,8 @@ module Aws::QuickSight
     #   * {Types::DescribeAssetBundleExportJobResponse#include_tags #include_tags} => Boolean
     #   * {Types::DescribeAssetBundleExportJobResponse#validation_strategy #validation_strategy} => Types::AssetBundleExportJobValidationStrategy
     #   * {Types::DescribeAssetBundleExportJobResponse#warnings #warnings} => Array&lt;Types::AssetBundleExportJobWarning&gt;
+    #   * {Types::DescribeAssetBundleExportJobResponse#include_folder_memberships #include_folder_memberships} => Boolean
+    #   * {Types::DescribeAssetBundleExportJobResponse#include_folder_members #include_folder_members} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5472,6 +5477,10 @@ module Aws::QuickSight
     #   resp.cloud_formation_override_property_configuration.dashboards[0].arn #=> String
     #   resp.cloud_formation_override_property_configuration.dashboards[0].properties #=> Array
     #   resp.cloud_formation_override_property_configuration.dashboards[0].properties[0] #=> String, one of "Name"
+    #   resp.cloud_formation_override_property_configuration.folders #=> Array
+    #   resp.cloud_formation_override_property_configuration.folders[0].arn #=> String
+    #   resp.cloud_formation_override_property_configuration.folders[0].properties #=> Array
+    #   resp.cloud_formation_override_property_configuration.folders[0].properties[0] #=> String, one of "Name", "ParentFolderArn"
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #   resp.include_permissions #=> Boolean
@@ -5480,6 +5489,8 @@ module Aws::QuickSight
     #   resp.warnings #=> Array
     #   resp.warnings[0].arn #=> String
     #   resp.warnings[0].message #=> String
+    #   resp.include_folder_memberships #=> Boolean
+    #   resp.include_folder_members #=> String, one of "RECURSE", "ONE_LEVEL", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleExportJob AWS API Documentation
     #
@@ -5652,6 +5663,10 @@ module Aws::QuickSight
     #   resp.override_parameters.dashboards #=> Array
     #   resp.override_parameters.dashboards[0].dashboard_id #=> String
     #   resp.override_parameters.dashboards[0].name #=> String
+    #   resp.override_parameters.folders #=> Array
+    #   resp.override_parameters.folders[0].folder_id #=> String
+    #   resp.override_parameters.folders[0].name #=> String
+    #   resp.override_parameters.folders[0].parent_folder_arn #=> String
     #   resp.failure_action #=> String, one of "DO_NOTHING", "ROLLBACK"
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -5694,6 +5709,13 @@ module Aws::QuickSight
     #   resp.override_permissions.dashboards[0].link_sharing_configuration.permissions.principals[0] #=> String
     #   resp.override_permissions.dashboards[0].link_sharing_configuration.permissions.actions #=> Array
     #   resp.override_permissions.dashboards[0].link_sharing_configuration.permissions.actions[0] #=> String
+    #   resp.override_permissions.folders #=> Array
+    #   resp.override_permissions.folders[0].folder_ids #=> Array
+    #   resp.override_permissions.folders[0].folder_ids[0] #=> String
+    #   resp.override_permissions.folders[0].permissions.principals #=> Array
+    #   resp.override_permissions.folders[0].permissions.principals[0] #=> String
+    #   resp.override_permissions.folders[0].permissions.actions #=> Array
+    #   resp.override_permissions.folders[0].permissions.actions[0] #=> String
     #   resp.override_tags.vpc_connections #=> Array
     #   resp.override_tags.vpc_connections[0].vpc_connection_ids #=> Array
     #   resp.override_tags.vpc_connections[0].vpc_connection_ids[0] #=> String
@@ -5730,6 +5752,12 @@ module Aws::QuickSight
     #   resp.override_tags.dashboards[0].tags #=> Array
     #   resp.override_tags.dashboards[0].tags[0].key #=> String
     #   resp.override_tags.dashboards[0].tags[0].value #=> String
+    #   resp.override_tags.folders #=> Array
+    #   resp.override_tags.folders[0].folder_ids #=> Array
+    #   resp.override_tags.folders[0].folder_ids[0] #=> String
+    #   resp.override_tags.folders[0].tags #=> Array
+    #   resp.override_tags.folders[0].tags[0].key #=> String
+    #   resp.override_tags.folders[0].tags[0].value #=> String
     #   resp.override_validation_strategy.strict_mode_for_all_resources #=> Boolean
     #   resp.warnings #=> Array
     #   resp.warnings[0].arn #=> String
@@ -7063,6 +7091,39 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes a personalization configuration.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   personalization configuration that the user wants described.
+    #
+    # @return [Types::DescribeQPersonalizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQPersonalizationConfigurationResponse#personalization_mode #personalization_mode} => String
+    #   * {Types::DescribeQPersonalizationConfigurationResponse#request_id #request_id} => String
+    #   * {Types::DescribeQPersonalizationConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_q_personalization_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.personalization_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeQPersonalizationConfiguration AWS API Documentation
+    #
+    # @overload describe_q_personalization_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_q_personalization_configuration(params = {}, options = {})
+      req = build_request(:describe_q_personalization_configuration, params)
+      req.send_request(options)
+    end
+
     # Provides a summary of a refresh schedule.
     #
     # @option params [required, String] :aws_account_id
@@ -7747,6 +7808,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].named_entities[0].definition[0].metric.aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "CUSTOM"
     #   resp.topic.data_sets[0].named_entities[0].definition[0].metric.aggregation_function_parameters #=> Hash
     #   resp.topic.data_sets[0].named_entities[0].definition[0].metric.aggregation_function_parameters["LimitedString"] #=> String
+    #   resp.topic.config_options.q_business_insights_enabled #=> Boolean
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -11607,6 +11669,15 @@ module Aws::QuickSight
     #   as warnings. The default value for `StrictModeForAllResources` is
     #   `FALSE`.
     #
+    # @option params [Boolean] :include_folder_memberships
+    #   A Boolean that determines if the exported asset carries over
+    #   information about the folders that the asset is a member of.
+    #
+    # @option params [String] :include_folder_members
+    #   A setting that indicates whether you want to include folder assets.
+    #   You can also use this setting to recusrsively include all subfolders
+    #   of an exported folder.
+    #
     # @return [Types::StartAssetBundleExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartAssetBundleExportJobResponse#arn #arn} => String
@@ -11668,12 +11739,20 @@ module Aws::QuickSight
     #           properties: ["Name"], # required, accepts Name
     #         },
     #       ],
+    #       folders: [
+    #         {
+    #           arn: "Arn", # required
+    #           properties: ["Name"], # required, accepts Name, ParentFolderArn
+    #         },
+    #       ],
     #     },
     #     include_permissions: false,
     #     include_tags: false,
     #     validation_strategy: {
     #       strict_mode_for_all_resources: false,
     #     },
+    #     include_folder_memberships: false,
+    #     include_folder_members: "RECURSE", # accepts RECURSE, ONE_LEVEL, NONE
     #   })
     #
     # @example Response structure
@@ -11954,6 +12033,13 @@ module Aws::QuickSight
     #           name: "ResourceName",
     #         },
     #       ],
+    #       folders: [
+    #         {
+    #           folder_id: "ResourceId", # required
+    #           name: "ResourceName",
+    #           parent_folder_arn: "Arn",
+    #         },
+    #       ],
     #     },
     #     failure_action: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK
     #     override_permissions: {
@@ -12005,6 +12091,15 @@ module Aws::QuickSight
     #               principals: ["Principal"], # required
     #               actions: ["String"], # required
     #             },
+    #           },
+    #         },
+    #       ],
+    #       folders: [
+    #         {
+    #           folder_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           permissions: {
+    #             principals: ["Principal"], # required
+    #             actions: ["String"], # required
     #           },
     #         },
     #       ],
@@ -12068,6 +12163,17 @@ module Aws::QuickSight
     #       dashboards: [
     #         {
     #           dashboard_ids: ["AssetBundleRestrictiveResourceId"], # required
+    #           tags: [ # required
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       folders: [
+    #         {
+    #           folder_ids: ["AssetBundleRestrictiveResourceId"], # required
     #           tags: [ # required
     #             {
     #               key: "TagKey", # required
@@ -14120,6 +14226,45 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates a personalization configuration.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account account that contains the
+    #   personalization configuration that the user wants to update.
+    #
+    # @option params [required, String] :personalization_mode
+    #   An option to allow Amazon QuickSight to customize data stories with
+    #   user specific metadata, specifically location and job information, in
+    #   your IAM Identity Center instance.
+    #
+    # @return [Types::UpdateQPersonalizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateQPersonalizationConfigurationResponse#personalization_mode #personalization_mode} => String
+    #   * {Types::UpdateQPersonalizationConfigurationResponse#request_id #request_id} => String
+    #   * {Types::UpdateQPersonalizationConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_q_personalization_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     personalization_mode: "ENABLED", # required, accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.personalization_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateQPersonalizationConfiguration AWS API Documentation
+    #
+    # @overload update_q_personalization_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_q_personalization_configuration(params = {}, options = {})
+      req = build_request(:update_q_personalization_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates a refresh schedule for a dataset.
     #
     # @option params [required, String] :data_set_id
@@ -14954,6 +15099,9 @@ module Aws::QuickSight
     #           ],
     #         },
     #       ],
+    #       config_options: {
+    #         q_business_insights_enabled: false,
+    #       },
     #     },
     #   })
     #
@@ -15333,7 +15481,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

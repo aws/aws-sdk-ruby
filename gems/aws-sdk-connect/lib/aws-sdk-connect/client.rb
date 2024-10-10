@@ -496,9 +496,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Associates the specified dataset for a Amazon Connect instance with
     # the target account. You can associate only one dataset in a single
     # call.
@@ -1129,9 +1126,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Associates a list of analytics datasets for a given Amazon Connect
     # instance to a target account. You can associate multiple datasets in a
     # single call.
@@ -1186,9 +1180,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Removes a list of analytics datasets associated with a given Amazon
     # Connect instance. You can disassociate multiple datasets in a single
     # call.
@@ -1402,11 +1393,11 @@ module Aws::Connect
     #     contact_data_request_list: [ # required
     #       {
     #         system_endpoint: {
-    #           type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW
+    #           type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW, CONNECT_PHONENUMBER_ARN
     #           address: "EndpointAddress",
     #         },
     #         customer_endpoint: {
-    #           type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW
+    #           type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW, CONNECT_PHONENUMBER_ARN
     #           address: "EndpointAddress",
     #         },
     #         request_identifier: "RequestIdentifier",
@@ -4629,10 +4620,10 @@ module Aws::Connect
     #
     # Describes the specified contact.
     #
-    # Contact information remains available in Amazon Connect for 24 months,
-    # and then it is deleted.
-    #
-    #  Only data from November 12, 2021, and later is returned by this API.
+    # Contact information remains available in Amazon Connect for 24 months
+    # from the InitiationTimestamp, and then it is deleted. Only contact
+    # information that is available in Amazon Connect is returned by this
+    # API
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -6026,9 +6017,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Removes the dataset ID associated with a given Amazon Connect
     # instance.
     #
@@ -8242,8 +8230,8 @@ module Aws::Connect
     #     Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Contacts removed from queue in X seconds][51]
     #
@@ -8255,8 +8243,8 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue` enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Contacts resolved in X][52]
     #
@@ -8537,8 +8525,8 @@ module Aws::Connect
     #     Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Service level X][72]
     #
@@ -8603,8 +8591,8 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Contacts abandoned in X seconds][76]
     #
@@ -8616,8 +8604,8 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Contacts answered in X seconds][77]
     #
@@ -9226,9 +9214,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Lists the association status of requested dataset ID for a given
     # Amazon Connect instance.
     #
@@ -14630,6 +14615,174 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Initiates a new outbound SMS contact to a customer. Response of this
+    # API provides the ContactId of the outbound SMS contact created.
+    #
+    # **SourceEndpoint** only supports Endpoints with
+    # `CONNECT_PHONENUMBER_ARN` as Type and **DestinationEndpoint** only
+    # supports Endpoints with `TELEPHONE_NUMBER` as Type. **ContactFlowId**
+    # initiates the flow to manage the new SMS contact created.
+    #
+    # This API can be used to initiate outbound SMS contacts for an agent or
+    # it can also deflect an ongoing contact to an outbound SMS contact by
+    # using the [StartOutboundChatContact][1] Flow Action.
+    #
+    # For more information about using SMS in Amazon Connect, see the
+    # following topics in the *Amazon Connect Administrator Guide*:
+    #
+    # * [Set up SMS messaging][2]
+    #
+    # * [Request an SMS-enabled phone number through AWS End User Messaging
+    #   SMS][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-sms-messaging.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/sms-number.html
+    #
+    # @option params [required, Types::Endpoint] :source_endpoint
+    #   Information about the endpoint.
+    #
+    # @option params [required, Types::Endpoint] :destination_endpoint
+    #   Information about the endpoint.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, Hash<String,Types::SegmentAttributeValue>] :segment_attributes
+    #   A set of system defined key-value pairs stored on individual contact
+    #   segments using an attribute map. The attributes are standard Amazon
+    #   Connect attributes. They can be accessed in flows.
+    #
+    #   * Attribute keys can include only alphanumeric, `-`, and `_`.
+    #
+    #   * This field can be used to show channel subtype, such as
+    #     `connect:Guide` and `connect:SMS`.
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in flows just
+    #   like any other contact attributes.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the flow for the call. To see the ContactFlowId in
+    #   the Amazon Connect console user interface, on the navigation menu go
+    #   to **Routing, Contact Flows**. Choose the flow. On the flow page,
+    #   under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
+    #
+    #   * arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**123ec456-a007-89c0-1234-xxxxxxxxxxxx**
+    #
+    #   ^
+    #
+    # @option params [Integer] :chat_duration_in_minutes
+    #   The total duration of the newly started chat session. If not
+    #   specified, the chat session duration defaults to 25 hour. The minimum
+    #   configurable time is 60 minutes. The maximum configurable time is
+    #   10,080 minutes (7 days).
+    #
+    # @option params [Types::ParticipantDetails] :participant_details
+    #   The customer's details.
+    #
+    # @option params [Types::ChatMessage] :initial_system_message
+    #   A chat message.
+    #
+    # @option params [String] :related_contact_id
+    #   The unique identifier for an Amazon Connect contact. This identifier
+    #   is related to the contact starting.
+    #
+    # @option params [Array<String>] :supported_messaging_content_types
+    #   The supported chat message content types. Supported types are:
+    #
+    #   * `text/plain`
+    #
+    #   * `text/markdown`
+    #
+    #   * `application/json,
+    #     application/vnd.amazonaws.connect.message.interactive`
+    #
+    #   * `application/vnd.amazonaws.connect.message.interactive.response`
+    #
+    #   Content types must always contain `text/plain`. You can then put any
+    #   other supported type in the list. For example, all the following lists
+    #   are valid because they contain `text/plain`:
+    #
+    #   * `[text/plain, text/markdown, application/json]`
+    #
+    #   * `[text/markdown, text/plain]`
+    #
+    #   * `[text/plain, application/json,
+    #     application/vnd.amazonaws.connect.message.interactive.response]`
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the AWS SDK populates
+    #   this field. For more information about idempotency, see [Making
+    #   retries safe with idempotent APIs][1]. The token is valid for 7 days
+    #   after creation. If a contact is already started, the contact ID is
+    #   returned.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::StartOutboundChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartOutboundChatContactResponse#contact_id #contact_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_outbound_chat_contact({
+    #     source_endpoint: { # required
+    #       type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW, CONNECT_PHONENUMBER_ARN
+    #       address: "EndpointAddress",
+    #     },
+    #     destination_endpoint: { # required
+    #       type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW, CONNECT_PHONENUMBER_ARN
+    #       address: "EndpointAddress",
+    #     },
+    #     instance_id: "InstanceId", # required
+    #     segment_attributes: { # required
+    #       "SegmentAttributeName" => {
+    #         value_string: "SegmentAttributeValueString",
+    #       },
+    #     },
+    #     attributes: {
+    #       "AttributeName" => "AttributeValue",
+    #     },
+    #     contact_flow_id: "ContactFlowId", # required
+    #     chat_duration_in_minutes: 1,
+    #     participant_details: {
+    #       display_name: "DisplayName", # required
+    #     },
+    #     initial_system_message: {
+    #       content_type: "ChatContentType", # required
+    #       content: "ChatContent", # required
+    #     },
+    #     related_contact_id: "ContactId",
+    #     supported_messaging_content_types: ["SupportedMessagingContentType"],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundChatContact AWS API Documentation
+    #
+    # @overload start_outbound_chat_contact(params = {})
+    # @param [Hash] params ({})
+    def start_outbound_chat_contact(params = {}, options = {})
+      req = build_request(:start_outbound_chat_contact, params)
+      req.send_request(options)
+    end
+
     # Places an outbound call to a contact, and then initiates the flow. It
     # performs the actions in the flow that's specified (in
     # `ContactFlowId`).
@@ -18319,7 +18472,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.180.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

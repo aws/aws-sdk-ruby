@@ -1221,7 +1221,8 @@ module Aws::WorkSpaces
     #   this value. For more information, see [Amazon WorkSpaces Core][1].
     #
     # * You don't need to specify the `PCOIP` protocol for Linux bundles
-    #   because `WSP` is the default protocol for those bundles.
+    #   because `DCV` (formerly WSP) is the default protocol for those
+    #   bundles.
     #
     # * User-decoupled WorkSpaces are only supported by Amazon WorkSpaces
     #   Core.
@@ -3322,13 +3323,13 @@ module Aws::WorkSpaces
     # @option params [required, String] :ingestion_process
     #   The ingestion process to be used when importing the image, depending
     #   on which protocol you want to use for your BYOL Workspace image,
-    #   either PCoIP, WorkSpaces Streaming Protocol (WSP), or bring your own
-    #   protocol (BYOP). To use WSP, specify a value that ends in `_WSP`. To
-    #   use PCoIP, specify a value that does not end in `_WSP`. To use BYOP,
-    #   specify a value that ends in `_BYOP`.
+    #   either PCoIP, DCV, or bring your own protocol (BYOP). To use WSP,
+    #   specify a value that ends in `_DCV`. To use PCoIP, specify a value
+    #   that does not end in `_DCV`. To use BYOP, specify a value that ends in
+    #   `_BYOP`.
     #
     #   For non-GPU-enabled bundles (bundles other than Graphics or
-    #   GraphicsPro), specify `BYOL_REGULAR`, `BYOL_REGULAR_WSP`, or
+    #   GraphicsPro), specify `BYOL_REGULAR`, `BYOL_REGULAR_DCV`, or
     #   `BYOL_REGULAR_BYOP`, depending on the protocol.
     #
     #   <note markdown="1"> The `BYOL_REGULAR_BYOP` and `BYOL_GRAPHICS_G4DN_BYOP` values are only
@@ -3360,9 +3361,10 @@ module Aws::WorkSpaces
     #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
     #     this time.
     #
-    #   * During the image import process, non-GPU WSP WorkSpaces with Windows
-    #     11 support only `Microsoft_Office_2019`. GPU WSP WorkSpaces with
-    #     Windows 11 do not support Office installation.
+    #   * During the image import process, non-GPU DCV (formerly WSP)
+    #     WorkSpaces with Windows 11 support only `Microsoft_Office_2019`. GPU
+    #     DCV (formerly WSP) WorkSpaces with Windows 11 do not support Office
+    #     installation.
     #
     #    </note>
     #
@@ -4805,7 +4807,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

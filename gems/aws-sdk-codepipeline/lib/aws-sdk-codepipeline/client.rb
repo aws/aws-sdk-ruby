@@ -721,9 +721,11 @@ module Aws::CodePipeline
     #               configuration: {
     #                 "ActionConfigurationKey" => "ActionConfigurationValue",
     #               },
+    #               commands: ["Command"],
     #               output_artifacts: [
     #                 {
     #                   name: "ArtifactName", # required
+    #                   files: ["FilePath"],
     #                 },
     #               ],
     #               input_artifacts: [
@@ -731,6 +733,7 @@ module Aws::CodePipeline
     #                   name: "ArtifactName", # required
     #                 },
     #               ],
+    #               output_variables: ["OutputVariable"],
     #               role_arn: "RoleArn",
     #               region: "AWSRegionName",
     #               namespace: "ActionNamespace",
@@ -910,10 +913,16 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].run_order #=> Integer
     #   resp.pipeline.stages[0].actions[0].configuration #=> Hash
     #   resp.pipeline.stages[0].actions[0].configuration["ActionConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].actions[0].commands #=> Array
+    #   resp.pipeline.stages[0].actions[0].commands[0] #=> String
     #   resp.pipeline.stages[0].actions[0].output_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].output_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].actions[0].output_artifacts[0].files #=> Array
+    #   resp.pipeline.stages[0].actions[0].output_artifacts[0].files[0] #=> String
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].actions[0].output_variables #=> Array
+    #   resp.pipeline.stages[0].actions[0].output_variables[0] #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
@@ -1407,10 +1416,16 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].run_order #=> Integer
     #   resp.pipeline.stages[0].actions[0].configuration #=> Hash
     #   resp.pipeline.stages[0].actions[0].configuration["ActionConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].actions[0].commands #=> Array
+    #   resp.pipeline.stages[0].actions[0].commands[0] #=> String
     #   resp.pipeline.stages[0].actions[0].output_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].output_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].actions[0].output_artifacts[0].files #=> Array
+    #   resp.pipeline.stages[0].actions[0].output_artifacts[0].files[0] #=> String
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].actions[0].output_variables #=> Array
+    #   resp.pipeline.stages[0].actions[0].output_variables[0] #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
@@ -3265,9 +3280,11 @@ module Aws::CodePipeline
     #               configuration: {
     #                 "ActionConfigurationKey" => "ActionConfigurationValue",
     #               },
+    #               commands: ["Command"],
     #               output_artifacts: [
     #                 {
     #                   name: "ArtifactName", # required
+    #                   files: ["FilePath"],
     #                 },
     #               ],
     #               input_artifacts: [
@@ -3275,6 +3292,7 @@ module Aws::CodePipeline
     #                   name: "ArtifactName", # required
     #                 },
     #               ],
+    #               output_variables: ["OutputVariable"],
     #               role_arn: "RoleArn",
     #               region: "AWSRegionName",
     #               namespace: "ActionNamespace",
@@ -3448,10 +3466,16 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].run_order #=> Integer
     #   resp.pipeline.stages[0].actions[0].configuration #=> Hash
     #   resp.pipeline.stages[0].actions[0].configuration["ActionConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].actions[0].commands #=> Array
+    #   resp.pipeline.stages[0].actions[0].commands[0] #=> String
     #   resp.pipeline.stages[0].actions[0].output_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].output_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].actions[0].output_artifacts[0].files #=> Array
+    #   resp.pipeline.stages[0].actions[0].output_artifacts[0].files[0] #=> String
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].actions[0].output_variables #=> Array
+    #   resp.pipeline.stages[0].actions[0].output_variables[0] #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
@@ -3564,7 +3588,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

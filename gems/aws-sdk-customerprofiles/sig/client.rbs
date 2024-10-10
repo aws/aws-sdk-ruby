@@ -617,6 +617,7 @@ module Aws
         def object_type_names: () -> ::Hash[::String, ::String]
         def workflow_id: () -> ::String
         def is_unstructured: () -> bool
+        def role_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_integration-instance_method
       def get_integration: (
@@ -957,6 +958,7 @@ module Aws
         def object_type_names: () -> ::Hash[::String, ::String]
         def workflow_id: () -> ::String
         def is_unstructured: () -> bool
+        def role_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#put_integration-instance_method
       def put_integration: (
@@ -1025,7 +1027,8 @@ module Aws
                                  }?
                                }
                              },
-                             ?object_type_names: Hash[::String, ::String]
+                             ?object_type_names: Hash[::String, ::String],
+                             ?role_arn: ::String
                            ) -> _PutIntegrationResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntegrationResponseSuccess
 

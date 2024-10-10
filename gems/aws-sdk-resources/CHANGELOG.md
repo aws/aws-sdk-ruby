@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.208.0 (2024-10-03)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-marketplacereporting` gem.
+
 3.207.0 (2024-09-18)
 ------------------
 

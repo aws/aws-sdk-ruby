@@ -22,6 +22,8 @@ module Aws::Chatbot
       attr_accessor configuration_name: ::String
       attr_accessor logging_level: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor state: ::String
+      attr_accessor state_reason: ::String
       SENSITIVE: [:webhook_description]
     end
 
@@ -29,6 +31,8 @@ module Aws::Chatbot
       attr_accessor tenant_id: ::String
       attr_accessor team_id: ::String
       attr_accessor team_name: ::String
+      attr_accessor state: ::String
+      attr_accessor state_reason: ::String
       SENSITIVE: []
     end
 
@@ -407,6 +411,8 @@ module Aws::Chatbot
       attr_accessor guardrail_policy_arns: ::Array[::String]
       attr_accessor user_authorization_required: bool
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor state: ::String
+      attr_accessor state_reason: ::String
       SENSITIVE: [:slack_channel_name]
     end
 
@@ -422,6 +428,8 @@ module Aws::Chatbot
     class SlackWorkspace
       attr_accessor slack_team_id: ::String
       attr_accessor slack_team_name: ::String
+      attr_accessor state: ::String
+      attr_accessor state_reason: ::String
       SENSITIVE: []
     end
 
@@ -454,6 +462,8 @@ module Aws::Chatbot
       attr_accessor guardrail_policy_arns: ::Array[::String]
       attr_accessor user_authorization_required: bool
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor state: ::String
+      attr_accessor state_reason: ::String
       SENSITIVE: [:channel_name, :team_name]
     end
 

@@ -60,14 +60,14 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#instances-instance_method
       def instances: (
+                       ?instance_ids: Array[::String],
+                       ?dry_run: bool,
                        ?filters: Array[
                          {
                            name: ::String?,
                            values: Array[::String]?
                          },
-                       ],
-                       ?instance_ids: Array[::String],
-                       ?dry_run: bool
+                       ]
                      ) -> Instance::Collection
                    | (?Hash[Symbol, untyped]) -> Instance::Collection
 

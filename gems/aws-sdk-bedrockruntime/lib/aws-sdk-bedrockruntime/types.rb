@@ -75,13 +75,18 @@ module Aws::BedrockRuntime
     #   The assessment details in the response from the guardrail.
     #   @return [Array<Types::GuardrailAssessment>]
     #
+    # @!attribute [rw] guardrail_coverage
+    #   The guardrail coverage details in the apply guardrail response.
+    #   @return [Types::GuardrailCoverage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ApplyGuardrailResponse AWS API Documentation
     #
     class ApplyGuardrailResponse < Struct.new(
       :usage,
       :action,
       :outputs,
-      :assessments)
+      :assessments,
+      :guardrail_coverage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -749,6 +754,10 @@ module Aws::BedrockRuntime
     #   The contextual grounding policy used for the guardrail assessment.
     #   @return [Types::GuardrailContextualGroundingPolicyAssessment]
     #
+    # @!attribute [rw] invocation_metrics
+    #   The invocation metrics for the guardrail assessment.
+    #   @return [Types::GuardrailInvocationMetrics]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailAssessment AWS API Documentation
     #
     class GuardrailAssessment < Struct.new(
@@ -756,7 +765,8 @@ module Aws::BedrockRuntime
       :content_policy,
       :word_policy,
       :sensitive_information_policy,
-      :contextual_grounding_policy)
+      :contextual_grounding_policy,
+      :invocation_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -821,6 +831,10 @@ module Aws::BedrockRuntime
     #   The guardrail confidence.
     #   @return [String]
     #
+    # @!attribute [rw] filter_strength
+    #   The filter strength setting for the guardrail content filter.
+    #   @return [String]
+    #
     # @!attribute [rw] action
     #   The guardrail action.
     #   @return [String]
@@ -830,6 +844,7 @@ module Aws::BedrockRuntime
     class GuardrailContentFilter < Struct.new(
       :type,
       :confidence,
+      :filter_strength,
       :action)
       SENSITIVE = []
       include Aws::Structure
@@ -944,6 +959,20 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # The action of the guardrail coverage details.
+    #
+    # @!attribute [rw] text_characters
+    #   The text characters of the guardrail coverage details.
+    #   @return [Types::GuardrailTextCharactersCoverage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailCoverage AWS API Documentation
+    #
+    class GuardrailCoverage < Struct.new(
+      :text_characters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A custom word configured in a guardrail.
     #
     # @!attribute [rw] match
@@ -959,6 +988,30 @@ module Aws::BedrockRuntime
     class GuardrailCustomWord < Struct.new(
       :match,
       :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The invocation metrics for the guardrail.
+    #
+    # @!attribute [rw] guardrail_processing_latency
+    #   The processing latency details for the guardrail invocation metrics.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] usage
+    #   The usage details for the guardrail invocation metrics.
+    #   @return [Types::GuardrailUsage]
+    #
+    # @!attribute [rw] guardrail_coverage
+    #   The coverage details for the guardrail invocation metrics.
+    #   @return [Types::GuardrailCoverage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailInvocationMetrics AWS API Documentation
+    #
+    class GuardrailInvocationMetrics < Struct.new(
+      :guardrail_processing_latency,
+      :usage,
+      :guardrail_coverage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1122,6 +1175,25 @@ module Aws::BedrockRuntime
     class GuardrailTextBlock < Struct.new(
       :text,
       :qualifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The guardrail coverage for the text characters.
+    #
+    # @!attribute [rw] guarded
+    #   The text characters that were guarded by the guardrail coverage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total
+    #   The total text characters by the guardrail coverage.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailTextCharactersCoverage AWS API Documentation
+    #
+    class GuardrailTextCharactersCoverage < Struct.new(
+      :guarded,
+      :total)
       SENSITIVE = []
       include Aws::Structure
     end

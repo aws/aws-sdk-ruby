@@ -74,6 +74,7 @@ module Aws::CodeArtifact
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     DomainSummary = Shapes::StructureShape.new(name: 'DomainSummary')
     DomainSummaryList = Shapes::ListShape.new(name: 'DomainSummaryList')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExternalConnectionName = Shapes::StringShape.new(name: 'ExternalConnectionName')
     ExternalConnectionStatus = Shapes::StringShape.new(name: 'ExternalConnectionStatus')
@@ -537,6 +538,7 @@ module Aws::CodeArtifact
     GetRepositoryEndpointRequest.add_member(:domain_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "domain-owner"))
     GetRepositoryEndpointRequest.add_member(:repository, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location: "querystring", location_name: "repository"))
     GetRepositoryEndpointRequest.add_member(:format, Shapes::ShapeRef.new(shape: PackageFormat, required: true, location: "querystring", location_name: "format"))
+    GetRepositoryEndpointRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location: "querystring", location_name: "endpointType"))
     GetRepositoryEndpointRequest.struct_class = Types::GetRepositoryEndpointRequest
 
     GetRepositoryEndpointResult.add_member(:repository_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "repositoryEndpoint"))

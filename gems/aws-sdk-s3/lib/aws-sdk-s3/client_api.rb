@@ -464,6 +464,7 @@ module Aws::S3
     PutBucketEncryptionRequest = Shapes::StructureShape.new(name: 'PutBucketEncryptionRequest')
     PutBucketIntelligentTieringConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketIntelligentTieringConfigurationRequest')
     PutBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketInventoryConfigurationRequest')
+    PutBucketLifecycleConfigurationOutput = Shapes::StructureShape.new(name: 'PutBucketLifecycleConfigurationOutput')
     PutBucketLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleConfigurationRequest')
     PutBucketLifecycleRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleRequest')
     PutBucketLoggingRequest = Shapes::StructureShape.new(name: 'PutBucketLoggingRequest')
@@ -603,6 +604,7 @@ module Aws::S3
     TopicConfigurationDeprecated = Shapes::StructureShape.new(name: 'TopicConfigurationDeprecated')
     TopicConfigurationList = Shapes::ListShape.new(name: 'TopicConfigurationList', flattened: true)
     Transition = Shapes::StructureShape.new(name: 'Transition')
+    TransitionDefaultMinimumObjectSize = Shapes::StringShape.new(name: 'TransitionDefaultMinimumObjectSize')
     TransitionList = Shapes::ListShape.new(name: 'TransitionList', flattened: true)
     TransitionStorageClass = Shapes::StringShape.new(name: 'TransitionStorageClass')
     Type = Shapes::StringShape.new(name: 'Type')
@@ -1191,6 +1193,7 @@ module Aws::S3
     GetBucketInventoryConfigurationRequest.struct_class = Types::GetBucketInventoryConfigurationRequest
 
     GetBucketLifecycleConfigurationOutput.add_member(:rules, Shapes::ShapeRef.new(shape: LifecycleRules, location_name: "Rule"))
+    GetBucketLifecycleConfigurationOutput.add_member(:transition_default_minimum_object_size, Shapes::ShapeRef.new(shape: TransitionDefaultMinimumObjectSize, location: "header", location_name: "x-amz-transition-default-minimum-object-size"))
     GetBucketLifecycleConfigurationOutput.struct_class = Types::GetBucketLifecycleConfigurationOutput
 
     GetBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
@@ -2130,10 +2133,14 @@ module Aws::S3
     PutBucketInventoryConfigurationRequest[:payload] = :inventory_configuration
     PutBucketInventoryConfigurationRequest[:payload_member] = PutBucketInventoryConfigurationRequest.member(:inventory_configuration)
 
+    PutBucketLifecycleConfigurationOutput.add_member(:transition_default_minimum_object_size, Shapes::ShapeRef.new(shape: TransitionDefaultMinimumObjectSize, location: "header", location_name: "x-amz-transition-default-minimum-object-size"))
+    PutBucketLifecycleConfigurationOutput.struct_class = Types::PutBucketLifecycleConfigurationOutput
+
     PutBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     PutBucketLifecycleConfigurationRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
     PutBucketLifecycleConfigurationRequest.add_member(:lifecycle_configuration, Shapes::ShapeRef.new(shape: BucketLifecycleConfiguration, location_name: "LifecycleConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketLifecycleConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    PutBucketLifecycleConfigurationRequest.add_member(:transition_default_minimum_object_size, Shapes::ShapeRef.new(shape: TransitionDefaultMinimumObjectSize, location: "header", location_name: "x-amz-transition-default-minimum-object-size"))
     PutBucketLifecycleConfigurationRequest.struct_class = Types::PutBucketLifecycleConfigurationRequest
     PutBucketLifecycleConfigurationRequest[:payload] = :lifecycle_configuration
     PutBucketLifecycleConfigurationRequest[:payload_member] = PutBucketLifecycleConfigurationRequest.member(:lifecycle_configuration)
@@ -3529,7 +3536,7 @@ module Aws::S3
           "requestChecksumRequired" => true,
         }
         o.input = Shapes::ShapeRef.new(shape: PutBucketLifecycleConfigurationRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: PutBucketLifecycleConfigurationOutput)
       end)
 
       api.add_operation(:put_bucket_logging, Seahorse::Model::Operation.new.tap do |o|

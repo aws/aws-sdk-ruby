@@ -1,0 +1,20 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "GetBuyerDashboardUnauthorized",
+    "operationName" : "GetBuyerDashboard",
+    "input" : {
+      "dashboardIdentifier" : "arn:aws:aws-marketplace::021234567890:AWSMarketplace/ReportingData/Agreement_V1/Dashboard/AgreementSummary_V1",
+      "embeddingDomains" : [ "https://localhost:8080" ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

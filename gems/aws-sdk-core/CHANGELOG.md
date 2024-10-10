@@ -5,6 +5,11 @@ Unreleased Changes
 
 * Feature - Always validate response checksums for operations that support or require it. Supported config options are `WHEN_SUPPORTED` and `WHEN_REQUIRED`. The default value is `WHEN_SUPPORTED`. This option is configured in code with `:response_checksum_calculation`, in the shared config file as `response_checksum_calculation`, and in the ENV as `ENV['AWS_RESPONSE_CHECKSUM_CALCULATION']`.
 
+3.209.1 (2024-09-25)
+------------------
+
+* Issue - Add all core plugins to autoloads.
+
 3.209.0 (2024-09-24)
 ------------------
 

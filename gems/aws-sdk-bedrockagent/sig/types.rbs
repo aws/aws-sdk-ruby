@@ -1036,7 +1036,7 @@ module Aws::BedrockAgent
       attr_accessor knowledge_base_id: ::String
       attr_accessor started_at: ::Time
       attr_accessor statistics: Types::IngestionJobStatistics
-      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -1072,7 +1072,7 @@ module Aws::BedrockAgent
       attr_accessor knowledge_base_id: ::String
       attr_accessor started_at: ::Time
       attr_accessor statistics: Types::IngestionJobStatistics
-      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -1674,6 +1674,18 @@ module Aws::BedrockAgent
     end
 
     class StartIngestionJobResponse
+      attr_accessor ingestion_job: Types::IngestionJob
+      SENSITIVE: []
+    end
+
+    class StopIngestionJobRequest
+      attr_accessor data_source_id: ::String
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopIngestionJobResponse
       attr_accessor ingestion_job: Types::IngestionJob
       SENSITIVE: []
     end

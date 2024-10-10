@@ -535,6 +535,16 @@ module Aws::TimestreamInfluxDB
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs to associate with the DB instance.
     #
+    # @option params [Integer] :port
+    #   The port number on which InfluxDB accepts connections.
+    #
+    #   Valid Values: 1024-65535
+    #
+    #   Default: 8086
+    #
+    #   Constraints: The value can't be 2375-2376, 7788-7799, 8090, or
+    #   51678-51680
+    #
     # @return [Types::CreateDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDbInstanceOutput#id #id} => String
@@ -542,6 +552,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::CreateDbInstanceOutput#arn #arn} => String
     #   * {Types::CreateDbInstanceOutput#status #status} => String
     #   * {Types::CreateDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::CreateDbInstanceOutput#port #port} => Integer
     #   * {Types::CreateDbInstanceOutput#db_instance_type #db_instance_type} => String
     #   * {Types::CreateDbInstanceOutput#db_storage_type #db_storage_type} => String
     #   * {Types::CreateDbInstanceOutput#allocated_storage #allocated_storage} => Integer
@@ -580,6 +591,7 @@ module Aws::TimestreamInfluxDB
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     port: 1,
     #   })
     #
     # @example Response structure
@@ -589,6 +601,7 @@ module Aws::TimestreamInfluxDB
     #   resp.arn #=> String
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.endpoint #=> String
+    #   resp.port #=> Integer
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
     #   resp.allocated_storage #=> Integer
@@ -652,6 +665,57 @@ module Aws::TimestreamInfluxDB
     #         query_queue_size: 1,
     #         tracing_type: "log", # accepts log, jaeger
     #         metrics_disabled: false,
+    #         http_idle_timeout: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           value: 1, # required
+    #         },
+    #         http_read_header_timeout: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           value: 1, # required
+    #         },
+    #         http_read_timeout: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           value: 1, # required
+    #         },
+    #         http_write_timeout: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           value: 1, # required
+    #         },
+    #         influxql_max_select_buckets: 1,
+    #         influxql_max_select_point: 1,
+    #         influxql_max_select_series: 1,
+    #         pprof_disabled: false,
+    #         query_initial_memory_bytes: 1,
+    #         query_max_memory_bytes: 1,
+    #         query_memory_bytes: 1,
+    #         session_length: 1,
+    #         session_renew_disabled: false,
+    #         storage_cache_max_memory_size: 1,
+    #         storage_cache_snapshot_memory_size: 1,
+    #         storage_cache_snapshot_write_cold_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           value: 1, # required
+    #         },
+    #         storage_compact_full_write_cold_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           value: 1, # required
+    #         },
+    #         storage_compact_throughput_burst: 1,
+    #         storage_max_concurrent_compactions: 1,
+    #         storage_max_index_log_file_size: 1,
+    #         storage_no_validate_field_size: false,
+    #         storage_retention_check_interval: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           value: 1, # required
+    #         },
+    #         storage_series_file_max_concurrent_snapshot_compactions: 1,
+    #         storage_series_id_set_cache_size: 1,
+    #         storage_wal_max_concurrent_writes: 1,
+    #         storage_wal_max_write_delay: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds
+    #           value: 1, # required
+    #         },
+    #         ui_disabled: false,
     #       },
     #     },
     #     tags: {
@@ -672,6 +736,41 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_2.query_queue_size #=> Integer
     #   resp.parameters.influx_d_bv_2.tracing_type #=> String, one of "log", "jaeger"
     #   resp.parameters.influx_d_bv_2.metrics_disabled #=> Boolean
+    #   resp.parameters.influx_d_bv_2.http_idle_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_idle_timeout.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.http_read_header_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_read_header_timeout.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.http_read_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_read_timeout.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.http_write_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_write_timeout.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.influxql_max_select_buckets #=> Integer
+    #   resp.parameters.influx_d_bv_2.influxql_max_select_point #=> Integer
+    #   resp.parameters.influx_d_bv_2.influxql_max_select_series #=> Integer
+    #   resp.parameters.influx_d_bv_2.pprof_disabled #=> Boolean
+    #   resp.parameters.influx_d_bv_2.query_initial_memory_bytes #=> Integer
+    #   resp.parameters.influx_d_bv_2.query_max_memory_bytes #=> Integer
+    #   resp.parameters.influx_d_bv_2.query_memory_bytes #=> Integer
+    #   resp.parameters.influx_d_bv_2.session_length #=> Integer
+    #   resp.parameters.influx_d_bv_2.session_renew_disabled #=> Boolean
+    #   resp.parameters.influx_d_bv_2.storage_cache_max_memory_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_memory_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_compact_throughput_burst #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_max_concurrent_compactions #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_max_index_log_file_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_no_validate_field_size #=> Boolean
+    #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_series_file_max_concurrent_snapshot_compactions #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_series_id_set_cache_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_wal_max_concurrent_writes #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.ui_disabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbParameterGroup AWS API Documentation
     #
@@ -694,6 +793,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::DeleteDbInstanceOutput#arn #arn} => String
     #   * {Types::DeleteDbInstanceOutput#status #status} => String
     #   * {Types::DeleteDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::DeleteDbInstanceOutput#port #port} => Integer
     #   * {Types::DeleteDbInstanceOutput#db_instance_type #db_instance_type} => String
     #   * {Types::DeleteDbInstanceOutput#db_storage_type #db_storage_type} => String
     #   * {Types::DeleteDbInstanceOutput#allocated_storage #allocated_storage} => Integer
@@ -720,6 +820,7 @@ module Aws::TimestreamInfluxDB
     #   resp.arn #=> String
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.endpoint #=> String
+    #   resp.port #=> Integer
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
     #   resp.allocated_storage #=> Integer
@@ -757,6 +858,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbInstanceOutput#arn #arn} => String
     #   * {Types::GetDbInstanceOutput#status #status} => String
     #   * {Types::GetDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::GetDbInstanceOutput#port #port} => Integer
     #   * {Types::GetDbInstanceOutput#db_instance_type #db_instance_type} => String
     #   * {Types::GetDbInstanceOutput#db_storage_type #db_storage_type} => String
     #   * {Types::GetDbInstanceOutput#allocated_storage #allocated_storage} => Integer
@@ -783,6 +885,7 @@ module Aws::TimestreamInfluxDB
     #   resp.arn #=> String
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.endpoint #=> String
+    #   resp.port #=> Integer
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
     #   resp.allocated_storage #=> Integer
@@ -840,6 +943,41 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_2.query_queue_size #=> Integer
     #   resp.parameters.influx_d_bv_2.tracing_type #=> String, one of "log", "jaeger"
     #   resp.parameters.influx_d_bv_2.metrics_disabled #=> Boolean
+    #   resp.parameters.influx_d_bv_2.http_idle_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_idle_timeout.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.http_read_header_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_read_header_timeout.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.http_read_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_read_timeout.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.http_write_timeout.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.http_write_timeout.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.influxql_max_select_buckets #=> Integer
+    #   resp.parameters.influx_d_bv_2.influxql_max_select_point #=> Integer
+    #   resp.parameters.influx_d_bv_2.influxql_max_select_series #=> Integer
+    #   resp.parameters.influx_d_bv_2.pprof_disabled #=> Boolean
+    #   resp.parameters.influx_d_bv_2.query_initial_memory_bytes #=> Integer
+    #   resp.parameters.influx_d_bv_2.query_max_memory_bytes #=> Integer
+    #   resp.parameters.influx_d_bv_2.query_memory_bytes #=> Integer
+    #   resp.parameters.influx_d_bv_2.session_length #=> Integer
+    #   resp.parameters.influx_d_bv_2.session_renew_disabled #=> Boolean
+    #   resp.parameters.influx_d_bv_2.storage_cache_max_memory_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_memory_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_cache_snapshot_write_cold_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_compact_full_write_cold_duration.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_compact_throughput_burst #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_max_concurrent_compactions #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_max_index_log_file_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_no_validate_field_size #=> Boolean
+    #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_retention_check_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_series_file_max_concurrent_snapshot_compactions #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_series_id_set_cache_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_wal_max_concurrent_writes #=> Integer
+    #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds"
+    #   resp.parameters.influx_d_bv_2.storage_wal_max_write_delay.value #=> Integer
+    #   resp.parameters.influx_d_bv_2.ui_disabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbParameterGroup AWS API Documentation
     #
@@ -884,6 +1022,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].arn #=> String
     #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.items[0].endpoint #=> String
+    #   resp.items[0].port #=> Integer
     #   resp.items[0].db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.items[0].db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
     #   resp.items[0].allocated_storage #=> Integer
@@ -1041,6 +1180,18 @@ module Aws::TimestreamInfluxDB
     #   parameter groups specify how the database is configured. For example,
     #   DB parameter groups can specify the limit for query concurrency.
     #
+    # @option params [Integer] :port
+    #   The port number on which InfluxDB accepts connections.
+    #
+    #   If you change the Port value, your database restarts immediately.
+    #
+    #   Valid Values: 1024-65535
+    #
+    #   Default: 8086
+    #
+    #   Constraints: The value can't be 2375-2376, 7788-7799, 8090, or
+    #   51678-51680
+    #
     # @option params [String] :db_instance_type
     #   The Timestream for InfluxDB DB instance type to run InfluxDB on.
     #
@@ -1055,6 +1206,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::UpdateDbInstanceOutput#arn #arn} => String
     #   * {Types::UpdateDbInstanceOutput#status #status} => String
     #   * {Types::UpdateDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::UpdateDbInstanceOutput#port #port} => Integer
     #   * {Types::UpdateDbInstanceOutput#db_instance_type #db_instance_type} => String
     #   * {Types::UpdateDbInstanceOutput#db_storage_type #db_storage_type} => String
     #   * {Types::UpdateDbInstanceOutput#allocated_storage #allocated_storage} => Integer
@@ -1079,6 +1231,7 @@ module Aws::TimestreamInfluxDB
     #       },
     #     },
     #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
+    #     port: 1,
     #     db_instance_type: "db.influx.medium", # accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge
     #     deployment_type: "SINGLE_AZ", # accepts SINGLE_AZ, WITH_MULTIAZ_STANDBY
     #   })
@@ -1090,6 +1243,7 @@ module Aws::TimestreamInfluxDB
     #   resp.arn #=> String
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.endpoint #=> String
+    #   resp.port #=> Integer
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
     #   resp.allocated_storage #=> Integer
@@ -1133,7 +1287,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

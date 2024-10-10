@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2024-09-30)
+------------------
+
+* Feature - This update includes new APIs to support application groups and to allow users to manage resource tag-sync tasks in applications.
+
 1.72.0 (2024-09-24)
 ------------------
 

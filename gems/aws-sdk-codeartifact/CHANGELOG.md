@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2024-10-01)
+------------------
+
+* Feature - Add support for the dual stack endpoints.
+
 1.53.0 (2024-09-24)
 ------------------
 

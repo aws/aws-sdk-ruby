@@ -1315,6 +1315,7 @@ module Aws::SESV2
     class PutConfigurationSetTrackingOptionsRequest
       attr_accessor configuration_set_name: ::String
       attr_accessor custom_redirect_domain: ::String
+      attr_accessor https_policy: ("REQUIRE" | "REQUIRE_OPEN_ONLY" | "OPTIONAL")
       SENSITIVE: []
     end
 
@@ -1634,6 +1635,7 @@ module Aws::SESV2
 
     class TrackingOptions
       attr_accessor custom_redirect_domain: ::String
+      attr_accessor https_policy: ("REQUIRE" | "REQUIRE_OPEN_ONLY" | "OPTIONAL")
       SENSITIVE: []
     end
 

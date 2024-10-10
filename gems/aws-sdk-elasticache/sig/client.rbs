@@ -1076,6 +1076,7 @@ module Aws
                                   ?cache_parameter_group_name: ::String,
                                   ?notification_topic_status: ::String,
                                   ?apply_immediately: bool,
+                                  ?engine: ::String,
                                   ?engine_version: ::String,
                                   ?auto_minor_version_upgrade: bool,
                                   ?snapshot_retention_limit: ::Integer,
@@ -1140,6 +1141,7 @@ module Aws
                                              global_replication_group_id: ::String,
                                              apply_immediately: bool,
                                              ?cache_node_type: ::String,
+                                             ?engine: ::String,
                                              ?engine_version: ::String,
                                              ?cache_parameter_group_name: ::String,
                                              ?global_replication_group_description: ::String,
@@ -1167,6 +1169,7 @@ module Aws
                                       ?cache_parameter_group_name: ::String,
                                       ?notification_topic_status: ::String,
                                       ?apply_immediately: bool,
+                                      ?engine: ::String,
                                       ?engine_version: ::String,
                                       ?auto_minor_version_upgrade: bool,
                                       ?snapshot_retention_limit: ::Integer,
@@ -1243,7 +1246,9 @@ module Aws
                                      ?user_group_id: ::String,
                                      ?security_group_ids: Array[::String],
                                      ?snapshot_retention_limit: ::Integer,
-                                     ?daily_snapshot_time: ::String
+                                     ?daily_snapshot_time: ::String,
+                                     ?engine: ::String,
+                                     ?major_engine_version: ::String
                                    ) -> _ModifyServerlessCacheResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyServerlessCacheResponseSuccess
 

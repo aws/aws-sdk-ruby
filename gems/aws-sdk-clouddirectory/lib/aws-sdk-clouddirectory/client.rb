@@ -466,6 +466,26 @@ module Aws::CloudDirectory
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add a facet to an object
+    #
+    #   resp = client.add_facet_to_object({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     object_attribute_list: [
+    #     ], 
+    #     object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWmspn1fxfQmSQaaVKSbvEiQ", 
+    #     }, 
+    #     schema_facet: {
+    #       facet_name: "node1", 
+    #       schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_facet_to_object({
@@ -521,6 +541,20 @@ module Aws::CloudDirectory
     #   * {Types::ApplySchemaResponse#applied_schema_arn #applied_schema_arn} => String
     #   * {Types::ApplySchemaResponse#directory_arn #directory_arn} => String
     #
+    #
+    # @example Example: To apply a schema
+    #
+    #   resp = client.apply_schema({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI", 
+    #     published_schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:schema/published/org/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     applied_schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI/schema/org/1", 
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.apply_schema({
@@ -566,6 +600,25 @@ module Aws::CloudDirectory
     #
     #   * {Types::AttachObjectResponse#attached_object_identifier #attached_object_identifier} => String
     #
+    #
+    # @example Example: To attach an object
+    #
+    #   resp = client.attach_object({
+    #     child_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #     }, 
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     link_name: "link2", 
+    #     parent_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attached_object_identifier: "AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_object({
@@ -608,6 +661,23 @@ module Aws::CloudDirectory
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To attach a policy to an object
+    #
+    #   resp = client.attach_policy({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWQoovm1s3Ts2v0NKrzdVnPw", 
+    #     }, 
+    #     policy_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWgcBsTVmcQEWs6jlygfhuew", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_policy({
@@ -644,6 +714,24 @@ module Aws::CloudDirectory
     # @return [Types::AttachToIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AttachToIndexResponse#attached_object_identifier #attached_object_identifier} => String
+    #
+    #
+    # @example Example: To attach a index to an object
+    #
+    #   resp = client.attach_to_index({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     index_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q", 
+    #     }, 
+    #     target_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attached_object_identifier: "AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -697,6 +785,55 @@ module Aws::CloudDirectory
     # @return [Types::AttachTypedLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AttachTypedLinkResponse#typed_link_specifier #typed_link_specifier} => Types::TypedLinkSpecifier
+    #
+    #
+    # @example Example: To attach a typed link to an object
+    #
+    #   resp = client.attach_typed_link({
+    #     attributes: [
+    #       {
+    #         attribute_name: "22", 
+    #         value: {
+    #           binary_value: "c3Ry", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     source_object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #     }, 
+    #     target_object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #     }, 
+    #     typed_link_facet: {
+    #       schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #       typed_link_name: "exampletypedlink8", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     typed_link_specifier: {
+    #       identity_attribute_values: [
+    #         {
+    #           attribute_name: "22", 
+    #           value: {
+    #             binary_value: "c3Ry", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       source_object_reference: {
+    #         selector: "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #       }, 
+    #       target_object_reference: {
+    #         selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #       }, 
+    #       typed_link_facet: {
+    #         schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #         typed_link_name: "exampletypedlink8", 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -766,6 +903,22 @@ module Aws::CloudDirectory
     # @return [Types::BatchReadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchReadResponse#responses #responses} => Array&lt;Types::BatchReadOperationResponse&gt;
+    #
+    #
+    # @example Example: To run a batch read command
+    #
+    #   resp = client.batch_read({
+    #     consistency_level: "EVENTUAL", 
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     operations: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     responses: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1118,6 +1271,21 @@ module Aws::CloudDirectory
     #
     #   * {Types::BatchWriteResponse#responses #responses} => Array&lt;Types::BatchWriteOperationResponse&gt;
     #
+    #
+    # @example Example: To run a batch write command
+    #
+    #   resp = client.batch_write({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     operations: [
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     responses: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_write({
@@ -1434,6 +1602,22 @@ module Aws::CloudDirectory
     #   * {Types::CreateDirectoryResponse#object_identifier #object_identifier} => String
     #   * {Types::CreateDirectoryResponse#applied_schema_arn #applied_schema_arn} => String
     #
+    #
+    # @example Example: To create a new Cloud Directory
+    #
+    #   resp = client.create_directory({
+    #     name: "ExampleCD", 
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:schema/published/person/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     applied_schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI/schema/person/1", 
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI", 
+    #     name: "ExampleCD", 
+    #     object_identifier: "AQHzK-KsptZGU78KjmnwGH6i-4guCM3uQFOTA9_NjeHDrg", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_directory({
@@ -1505,6 +1689,19 @@ module Aws::CloudDirectory
     #   during data plane operations.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create a facet
+    #
+    #   resp = client.create_facet({
+    #     name: "node1", 
+    #     object_type: "NODE", 
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1581,6 +1778,24 @@ module Aws::CloudDirectory
     #
     #   * {Types::CreateIndexResponse#object_identifier #object_identifier} => String
     #
+    #
+    # @example Example: To create an index
+    #
+    #   resp = client.create_index({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #     is_unique: true, 
+    #     link_name: "Examplelink", 
+    #     ordered_indexed_attribute_list: [
+    #     ], 
+    #     parent_reference: {
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     object_identifier: "AQF0Fw173YJDlpLUV1eB50WvYsWFtVoUSmOzZjz_BLULIA", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_index({
@@ -1640,6 +1855,24 @@ module Aws::CloudDirectory
     # @return [Types::CreateObjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateObjectResponse#object_identifier #object_identifier} => String
+    #
+    #
+    # @example Example: To create an object
+    #
+    #   resp = client.create_object({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #     schema_facets: [
+    #       {
+    #         facet_name: "Organization_Person", 
+    #         schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8/schema/ExampleOrgPersonSchema/1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     object_identifier: "AQF0Fw173YJDlpLUV1eB50WvScvjsYXcS3K2nP1HwDuuYQ", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1709,6 +1942,18 @@ module Aws::CloudDirectory
     #
     #   * {Types::CreateSchemaResponse#schema_arn #schema_arn} => String
     #
+    #
+    # @example Example: To create a schema
+    #
+    #   resp = client.create_schema({
+    #     name: "Customers", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:schema/development/Customers", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_schema({
@@ -1742,6 +1987,30 @@ module Aws::CloudDirectory
     #   Facet structure that is associated with the typed link facet.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create a typed link facet
+    #
+    #   resp = client.create_typed_link_facet({
+    #     facet: {
+    #       attributes: [
+    #         {
+    #           name: "1", 
+    #           required_behavior: "REQUIRED_ALWAYS", 
+    #           type: "BINARY", 
+    #         }, 
+    #       ], 
+    #       identity_attribute_order: [
+    #         "1", 
+    #       ], 
+    #       name: "FacetExample", 
+    #     }, 
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:schema/development/typedlinkschema", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1796,6 +2065,18 @@ module Aws::CloudDirectory
     #
     #   * {Types::DeleteDirectoryResponse#directory_arn #directory_arn} => String
     #
+    #
+    # @example Example: To delete a directory
+    #
+    #   resp = client.delete_directory({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_directory({
@@ -1827,6 +2108,18 @@ module Aws::CloudDirectory
     #   The name of the facet to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a facet
+    #
+    #   resp = client.delete_facet({
+    #     name: "Organization", 
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorgtest", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1862,6 +2155,20 @@ module Aws::CloudDirectory
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an object
+    #
+    #   resp = client.delete_object({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI", 
+    #     object_reference: {
+    #       selector: "$AQHzK-KsptZGU78KjmnwGH6i8H-voMZDSNCqfx-fRUcBFg", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_object({
@@ -1890,6 +2197,18 @@ module Aws::CloudDirectory
     # @return [Types::DeleteSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteSchemaResponse#schema_arn #schema_arn} => String
+    #
+    #
+    # @example Example: To delete a schema
+    #
+    #   resp = client.delete_schema({
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorgtest", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorgtest", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1925,6 +2244,18 @@ module Aws::CloudDirectory
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a typed link facet
+    #
+    #   resp = client.delete_typed_link_facet({
+    #     name: "ExampleFacet", 
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:schema/development/typedlinkschematest", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_typed_link_facet({
@@ -1956,6 +2287,24 @@ module Aws::CloudDirectory
     # @return [Types::DetachFromIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetachFromIndexResponse#detached_object_identifier #detached_object_identifier} => String
+    #
+    #
+    # @example Example: To detach an object from an index
+    #
+    #   resp = client.detach_from_index({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     index_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q", 
+    #     }, 
+    #     target_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     detached_object_identifier: "AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2000,6 +2349,22 @@ module Aws::CloudDirectory
     #
     #   * {Types::DetachObjectResponse#detached_object_identifier #detached_object_identifier} => String
     #
+    #
+    # @example Example: To detach an object from its parent object
+    #
+    #   resp = client.detach_object({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     link_name: "link2", 
+    #     parent_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     detached_object_identifier: "AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_object({
@@ -2038,6 +2403,23 @@ module Aws::CloudDirectory
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To detach a policy from an object
+    #
+    #   resp = client.detach_policy({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWQoovm1s3Ts2v0NKrzdVnPw", 
+    #     }, 
+    #     policy_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWgcBsTVmcQEWs6jlygfhuew", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_policy({
@@ -2074,6 +2456,33 @@ module Aws::CloudDirectory
     #   Used to accept a typed link specifier as input.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To detach a typed link from an object
+    #
+    #   resp = client.detach_typed_link({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     typed_link_specifier: {
+    #       identity_attribute_values: [
+    #         {
+    #           attribute_name: "22", 
+    #           value: {
+    #             binary_value: "c3Ry", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       source_object_reference: {
+    #         selector: "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #       }, 
+    #       target_object_reference: {
+    #         selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #       }, 
+    #       typed_link_facet: {
+    #         schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #         typed_link_name: "exampletypedlink8", 
+    #       }, 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2125,6 +2534,18 @@ module Aws::CloudDirectory
     #
     #   * {Types::DisableDirectoryResponse#directory_arn #directory_arn} => String
     #
+    #
+    # @example Example: To disable a directory
+    #
+    #   resp = client.disable_directory({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_directory({
@@ -2153,6 +2574,18 @@ module Aws::CloudDirectory
     # @return [Types::EnableDirectoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EnableDirectoryResponse#directory_arn #directory_arn} => String
+    #
+    #
+    # @example Example: To enable a disabled directory
+    #
+    #   resp = client.enable_directory({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2211,6 +2644,23 @@ module Aws::CloudDirectory
     #
     #   * {Types::GetDirectoryResponse#directory #directory} => Types::Directory
     #
+    #
+    # @example Example: To get information about a directory
+    #
+    #   resp = client.get_directory({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory: {
+    #       creation_date_time: Time.parse(1506115781.186), 
+    #       directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #       name: "ExampleCD", 
+    #       state: "ENABLED", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_directory({
@@ -2247,6 +2697,22 @@ module Aws::CloudDirectory
     # @return [Types::GetFacetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFacetResponse#facet #facet} => Types::Facet
+    #
+    #
+    # @example Example: To get information about a facet
+    #
+    #   resp = client.get_facet({
+    #     name: "node2", 
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     facet: {
+    #       name: "node2", 
+    #       object_type: "NODE", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2426,6 +2892,28 @@ module Aws::CloudDirectory
     #   * {Types::GetObjectInformationResponse#schema_facets #schema_facets} => Array&lt;Types::SchemaFacet&gt;
     #   * {Types::GetObjectInformationResponse#object_identifier #object_identifier} => String
     #
+    #
+    # @example Example: To get information about an object
+    #
+    #   resp = client.get_object_information({
+    #     consistency_level: "SERIALIZABLE", 
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWmspn1fxfQmSQaaVKSbvEiQ", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     object_identifier: "AQGG_ADlfNZBzYHY_JgDt3TWmspn1fxfQmSQaaVKSbvEiQ", 
+    #     schema_facets: [
+    #       {
+    #         facet_name: "node2", 
+    #         schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_object_information({
@@ -2467,6 +2955,19 @@ module Aws::CloudDirectory
     #   * {Types::GetSchemaAsJsonResponse#name #name} => String
     #   * {Types::GetSchemaAsJsonResponse#document #document} => String
     #
+    #
+    # @example Example: To get schema information and display it in JSON format
+    #
+    #   resp = client.get_schema_as_json({
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     document: "{\"sourceSchemaArn\":\"arn:aws:clouddirectory:us-west-2:45132example:schema/published/org/1\",\"facets\":{\"node2\":{\"facetAttributes\":{},\"objectType\":\"NODE\"},\"Organization\":{\"facetAttributes\":{\"account_id\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"account_name\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"telephone_number\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"description\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_country\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_state\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_street2\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_street1\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"web_site\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"email\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_city\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"organization_status\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_postal_code\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"}},\"objectType\":\"LEAF_NODE\"},\"nodex\":{\"facetAttributes\":{},\"objectType\":\"NODE\"},\"Legal_Entity\":{\"facetAttributes\":{\"industry_vertical\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"registered_company_name\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"billing_currency\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_country\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_state\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_street2\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_street1\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"tax_id\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_city\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_postal_code\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"}},\"objectType\":\"LEAF_NODE\"},\"policyfacet\":{\"facetAttributes\":{},\"objectType\":\"POLICY\"},\"node1\":{\"facetAttributes\":{},\"objectType\":\"NODE\"}},\"typedLinkFacets\":{\"exampletypedlink\":{\"facetAttributes\":{\"1\":{\"attributeDefinition\":{\"attributeType\":\"BINARY\",\"isImmutable\":false,\"attributeRules\":{}},\"requiredBehavior\":\"REQUIRED_ALWAYS\"}},\"identityAttributeOrder\":[\"1\"]},\"exampletypedlink8\":{\"facetAttributes\":{\"22\":{\"attributeDefinition\":{\"attributeType\":\"BINARY\",\"isImmutable\":false,\"attributeRules\":{}},\"requiredBehavior\":\"REQUIRED_ALWAYS\"}},\"identityAttributeOrder\":[\"22\"]}}}", 
+    #     name: "org", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_schema_as_json({
@@ -2504,6 +3005,21 @@ module Aws::CloudDirectory
     # @return [Types::GetTypedLinkFacetInformationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTypedLinkFacetInformationResponse#identity_attribute_order #identity_attribute_order} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To get information about a typed link facet
+    #
+    #   resp = client.get_typed_link_facet_information({
+    #     name: "exampletypedlink8", 
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     identity_attribute_order: [
+    #       "22", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2548,6 +3064,20 @@ module Aws::CloudDirectory
     #   * {Types::ListAppliedSchemaArnsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list applied schema ARNs for a specified directory
+    #
+    #   resp = client.list_applied_schema_arns({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     schema_arns: [
+    #       "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2596,6 +3126,27 @@ module Aws::CloudDirectory
     #   * {Types::ListAttachedIndicesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the indices attached to an object
+    #
+    #   resp = client.list_attached_indices({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     target_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     index_attachments: [
+    #       {
+    #         indexed_attributes: [
+    #         ], 
+    #         object_identifier: "AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2649,6 +3200,24 @@ module Aws::CloudDirectory
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list all development schema arns in your AWS account
+    #
+    #   resp = client.list_development_schema_arns({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     schema_arns: [
+    #       "arn:aws:clouddirectory:us-west-2:45132example:schema/development/typedlinkschematest", 
+    #       "arn:aws:clouddirectory:us-west-2:45132example:schema/development/testCDschema", 
+    #       "arn:aws:clouddirectory:us-west-2:45132example:schema/development/Customers", 
+    #       "arn:aws:clouddirectory:us-west-2:45132example:schema/development/CourseCatalog", 
+    #       "arn:aws:clouddirectory:us-west-2:45132example:schema/development/Consumers", 
+    #       "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorg", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_development_schema_arns({
@@ -2689,6 +3258,48 @@ module Aws::CloudDirectory
     #   * {Types::ListDirectoriesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list all directories in your AWS account
+    #
+    #   resp = client.list_directories({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directories: [
+    #       {
+    #         creation_date_time: Time.parse(1506121791.167), 
+    #         directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/Ae89hOKmw0bRpvYgW8EAsus", 
+    #         name: "ExampleCD4", 
+    #         state: "ENABLED", 
+    #       }, 
+    #       {
+    #         creation_date_time: Time.parse(1485473189.746), 
+    #         directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8", 
+    #         name: "testCD", 
+    #         state: "DELETED", 
+    #       }, 
+    #       {
+    #         creation_date_time: Time.parse(1506115781.186), 
+    #         directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #         name: "ExampleCD", 
+    #         state: "ENABLED", 
+    #       }, 
+    #       {
+    #         creation_date_time: Time.parse(1506118003.859), 
+    #         directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI", 
+    #         name: "ExampleCD2", 
+    #         state: "ENABLED", 
+    #       }, 
+    #       {
+    #         creation_date_time: Time.parse(1485477107.925), 
+    #         directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AWeI1yjiB0SylWVTvQklCD0", 
+    #         name: "testCD2", 
+    #         state: "DELETED", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2736,6 +3347,191 @@ module Aws::CloudDirectory
     #   * {Types::ListFacetAttributesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list facet attributes
+    #
+    #   resp = client.list_facet_attributes({
+    #     name: "Organization", 
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: [
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "account_id", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "account_name", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "description", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "email", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "mailing_address_city", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "mailing_address_country", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "mailing_address_postal_code", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "mailing_address_state", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "mailing_address_street1", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #       {
+    #         attribute_definition: {
+    #           is_immutable: false, 
+    #           rules: {
+    #             "nameLength" => {
+    #               parameters: {
+    #                 "max" => "1024", 
+    #                 "min" => "1", 
+    #               }, 
+    #               type: "STRING_LENGTH", 
+    #             }, 
+    #           }, 
+    #           type: "STRING", 
+    #         }, 
+    #         name: "mailing_address_street2", 
+    #         required_behavior: "NOT_REQUIRED", 
+    #       }, 
+    #     ], 
+    #     next_token: "V0b3JnYW5pemF0aW9uX3N0YXR1cw==", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2792,6 +3588,25 @@ module Aws::CloudDirectory
     #   * {Types::ListFacetNamesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list facet names
+    #
+    #   resp = client.list_facet_names({
+    #     schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     facet_names: [
+    #       "Legal_Entity", 
+    #       "Organization", 
+    #       "node1", 
+    #       "node2", 
+    #       "nodex", 
+    #       "policyfacet", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2855,6 +3670,83 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListIncomingTypedLinksResponse#link_specifiers #link_specifiers} => Array&lt;Types::TypedLinkSpecifier&gt;
     #   * {Types::ListIncomingTypedLinksResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list incoming typed links
+    #
+    #   resp = client.list_incoming_typed_links({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     link_specifiers: [
+    #       {
+    #         identity_attribute_values: [
+    #           {
+    #             attribute_name: "22", 
+    #             value: {
+    #               binary_value: "", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         source_object_reference: {
+    #           selector: "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #         }, 
+    #         target_object_reference: {
+    #           selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #         }, 
+    #         typed_link_facet: {
+    #           schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #           typed_link_name: "exampletypedlink8", 
+    #         }, 
+    #       }, 
+    #       {
+    #         identity_attribute_values: [
+    #           {
+    #             attribute_name: "22", 
+    #             value: {
+    #               binary_value: "MA==", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         source_object_reference: {
+    #           selector: "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #         }, 
+    #         target_object_reference: {
+    #           selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #         }, 
+    #         typed_link_facet: {
+    #           schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #           typed_link_name: "exampletypedlink8", 
+    #         }, 
+    #       }, 
+    #       {
+    #         identity_attribute_values: [
+    #           {
+    #             attribute_name: "22", 
+    #             value: {
+    #               binary_value: "c3Ry", 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         source_object_reference: {
+    #           selector: "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #         }, 
+    #         target_object_reference: {
+    #           selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #         }, 
+    #         typed_link_facet: {
+    #           schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #           typed_link_name: "exampletypedlink8", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     next_token: "", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2952,6 +3844,36 @@ module Aws::CloudDirectory
     #   * {Types::ListIndexResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list an index
+    #
+    #   resp = client.list_index({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     index_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     index_attachments: [
+    #       {
+    #         indexed_attributes: [
+    #           {
+    #             key: {
+    #               facet_name: "Organization", 
+    #               name: "description", 
+    #               schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1", 
+    #             }, 
+    #             value: {
+    #             }, 
+    #           }, 
+    #         ], 
+    #         object_identifier: "AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3093,6 +4015,42 @@ module Aws::CloudDirectory
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list object attributes
+    #
+    #   resp = client.list_object_attributes({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     attributes: [
+    #       {
+    #         key: {
+    #           facet_name: "INDEX", 
+    #           name: "index_is_unique", 
+    #           schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/CloudDirectory/1.0", 
+    #         }, 
+    #         value: {
+    #           boolean_value: true, 
+    #         }, 
+    #       }, 
+    #       {
+    #         key: {
+    #           facet_name: "INDEX", 
+    #           name: "ordered_indexed_attributes", 
+    #           schema_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/CloudDirectory/1.0", 
+    #         }, 
+    #         value: {
+    #           string_value: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1*Organization*description", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_object_attributes({
@@ -3160,6 +4118,23 @@ module Aws::CloudDirectory
     #   * {Types::ListObjectChildrenResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list an objects children
+    #
+    #   resp = client.list_object_children({
+    #     directory_arn: "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY", 
+    #     object_reference: {
+    #       selector: "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     children: {
+    #       "link2" => "AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4412,7 +5387,7 @@ module Aws::CloudDirectory
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

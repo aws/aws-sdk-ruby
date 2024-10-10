@@ -1187,7 +1187,10 @@ module Aws::BedrockAgentRuntime
     #   event.trace.post_processing_trace.model_invocation_input.text #=> String
     #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.raw_response.content #=> String
     #   event.trace.post_processing_trace.model_invocation_output.trace_id #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.maximum_length #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_input.inference_configuration.stop_sequences #=> Array
@@ -1201,8 +1204,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
     #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.rationale #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.raw_response.content #=> String
     #   event.trace.pre_processing_trace.model_invocation_output.trace_id #=> String
     #
     #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
@@ -1899,7 +1905,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

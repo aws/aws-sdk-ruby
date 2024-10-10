@@ -18,14 +18,14 @@ module Aws
       def id: () -> String
       alias dhcp_options_id id
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/DhcpOptions.html#dhcp_configurations-instance_method
-      def dhcp_configurations: () -> ::Array[Types::DhcpConfiguration]
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/DhcpOptions.html#owner_id-instance_method
       def owner_id: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/DhcpOptions.html#tags-instance_method
       def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/DhcpOptions.html#dhcp_configurations-instance_method
+      def dhcp_configurations: () -> ::Array[Types::DhcpConfiguration]
 
       def client: () -> Client
 

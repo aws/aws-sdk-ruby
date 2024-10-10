@@ -496,8 +496,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] sbom
-    #   The Amazon S3 location for the software bill of materials associated
-    #   with a software package version.
+    #   A specific software bill of matrerials associated with a software
+    #   package version.
     #   @return [Types::Sbom]
     #
     # @!attribute [rw] client_token
@@ -527,14 +527,14 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] sbom
-    #   The Amazon S3 location for the software bill of materials associated
-    #   with a software package version.
+    #   A specific software bill of matrerials associated with a software
+    #   package version.
     #   @return [Types::Sbom]
     #
     # @!attribute [rw] sbom_validation_status
-    #   The status of the initial validation for the SBOM against the
-    #   Software Package Data Exchange (SPDX) and CycloneDX industry
-    #   standard format.
+    #   The status of the initial validation for the software bill of
+    #   materials against the Software Package Data Exchange (SPDX) and
+    #   CycloneDX industry standard formats.
     #   @return [String]
     #
     class AssociateSbomWithPackageVersionResponse < Struct.new(
@@ -2025,6 +2025,20 @@ module Aws::IoT
 
     class ClearDefaultAuthorizerResponse < Aws::EmptyStructure; end
 
+    # An object that speciﬁes the client certificate conﬁguration for a
+    # domain.
+    #
+    # @!attribute [rw] client_certificate_callback_arn
+    #   The ARN of the Lambda function that IoT invokes after mutual TLS
+    #   authentication during the connection.
+    #   @return [String]
+    #
+    class ClientCertificateConfig < Struct.new(
+      :client_certificate_callback_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an action that updates a CloudWatch alarm.
     #
     # @!attribute [rw] role_arn
@@ -2667,6 +2681,83 @@ module Aws::IoT
     #   The server certificate configuration.
     #   @return [Types::ServerCertificateConfig]
     #
+    # @!attribute [rw] authentication_type
+    #   An enumerated string that speciﬁes the authentication type.
+    #
+    #   * `CUSTOM_AUTH_X509` - Use custom authentication and authorization
+    #     with additional details from the X.509 client certificate.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `CUSTOM_AUTH` - Use custom authentication and authorization. For
+    #     more information, see [Custom authentication and
+    #     authorization][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_X509` - Use X.509 client certificates without custom
+    #     authentication and authorization. For more information, see [X.509
+    #     client certificates][2].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_SIGV4` - Use Amazon Web Services Signature Version 4. For
+    #     more information, see [IAM users, groups, and roles][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT` - Use a combination of port and Application Layer
+    #     Protocol Negotiation (ALPN) to specify authentication type. For
+    #     more information, see [Device communication protocols][3].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html
+    #   [3]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #   @return [String]
+    #
+    # @!attribute [rw] application_protocol
+    #   An enumerated string that speciﬁes the application-layer protocol.
+    #
+    #   * `SECURE_MQTT` - MQTT over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `MQTT_WSS` - MQTT over WebSocket.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `HTTPS` - HTTP over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT` - Use a combination of port and Application Layer
+    #     Protocol Negotiation (ALPN) to specify application\_layer
+    #     protocol. For more information, see [Device communication
+    #     protocols][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_certificate_config
+    #   An object that speciﬁes the client certificate conﬁguration for a
+    #   domain.
+    #   @return [Types::ClientCertificateConfig]
+    #
     class CreateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       :domain_name,
@@ -2676,7 +2767,10 @@ module Aws::IoT
       :service_type,
       :tags,
       :tls_config,
-      :server_certificate_config)
+      :server_certificate_config,
+      :authentication_type,
+      :application_protocol,
+      :client_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3433,7 +3527,7 @@ module Aws::IoT
     #
     # @!attribute [rw] recipe
     #   The inline job document associated with a software package version
-    #   used for a quick job deployment via IoT Jobs.
+    #   used for a quick job deployment.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5509,6 +5603,83 @@ module Aws::IoT
     #   The server certificate configuration.
     #   @return [Types::ServerCertificateConfig]
     #
+    # @!attribute [rw] authentication_type
+    #   An enumerated string that speciﬁes the authentication type.
+    #
+    #   * `CUSTOM_AUTH_X509` - Use custom authentication and authorization
+    #     with additional details from the X.509 client certificate.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `CUSTOM_AUTH` - Use custom authentication and authorization. For
+    #     more information, see [Custom authentication and
+    #     authorization][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_X509` - Use X.509 client certificates without custom
+    #     authentication and authorization. For more information, see [X.509
+    #     client certificates][2].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_SIGV4` - Use Amazon Web Services Signature Version 4. For
+    #     more information, see [IAM users, groups, and roles][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT` - Use a combination of port and Application Layer
+    #     Protocol Negotiation (ALPN) to specify authentication type. For
+    #     more information, see [Device communication protocols][3].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html
+    #   [3]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #   @return [String]
+    #
+    # @!attribute [rw] application_protocol
+    #   An enumerated string that speciﬁes the application-layer protocol.
+    #
+    #   * `SECURE_MQTT` - MQTT over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `MQTT_WSS` - MQTT over WebSocket.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `HTTPS` - HTTP over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT` - Use a combination of port and Application Layer
+    #     Protocol Negotiation (ALPN) to specify application\_layer
+    #     protocol. For more information, see [Device communication
+    #     protocols][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_certificate_config
+    #   An object that speciﬁes the client certificate conﬁguration for a
+    #   domain.
+    #   @return [Types::ClientCertificateConfig]
+    #
     class DescribeDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn,
@@ -5520,7 +5691,10 @@ module Aws::IoT
       :domain_type,
       :last_status_change_date,
       :tls_config,
-      :server_certificate_config)
+      :server_certificate_config,
+      :authentication_type,
+      :application_protocol,
+      :client_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7688,7 +7862,7 @@ module Aws::IoT
     #
     # @!attribute [rw] recipe
     #   The inline job document associated with a software package version
-    #   used for a quick job deployment via IoT Jobs.
+    #   used for a quick job deployment.
     #   @return [String]
     #
     class GetPackageVersionResponse < Struct.new(
@@ -12623,8 +12797,8 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # The Amazon S3 location for the artifacts associated with a software
-    # package version.
+    # A specific package version artifact associated with a software package
+    # version.
     #
     # @!attribute [rw] s3_location
     #   The S3 location.
@@ -13643,8 +13817,8 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # The Amazon S3 location for the software bill of materials associated
-    # with a software package version.
+    # A specific software bill of matrerials associated with a software
+    # package version.
     #
     # @!attribute [rw] s3_location
     #   The S3 location.
@@ -14928,7 +15102,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] thing_group_names
-    #   Thing group names.
+    #   Thing group and billing group names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] attributes
@@ -16266,13 +16440,93 @@ module Aws::IoT
     #   The server certificate configuration.
     #   @return [Types::ServerCertificateConfig]
     #
+    # @!attribute [rw] authentication_type
+    #   An enumerated string that speciﬁes the authentication type.
+    #
+    #   * `CUSTOM_AUTH_X509` - Use custom authentication and authorization
+    #     with additional details from the X.509 client certificate.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `CUSTOM_AUTH` - Use custom authentication and authorization. For
+    #     more information, see [Custom authentication and
+    #     authorization][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_X509` - Use X.509 client certificates without custom
+    #     authentication and authorization. For more information, see [X.509
+    #     client certificates][2].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_SIGV4` - Use Amazon Web Services Signature Version 4. For
+    #     more information, see [IAM users, groups, and roles][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT ` - Use a combination of port and Application Layer
+    #     Protocol Negotiation (ALPN) to specify authentication type. For
+    #     more information, see [Device communication protocols][3].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html
+    #   [3]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #   @return [String]
+    #
+    # @!attribute [rw] application_protocol
+    #   An enumerated string that speciﬁes the application-layer protocol.
+    #
+    #   * `SECURE_MQTT` - MQTT over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `MQTT_WSS` - MQTT over WebSocket.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `HTTPS` - HTTP over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT` - Use a combination of port and Application Layer
+    #     Protocol Negotiation (ALPN) to specify application\_layer
+    #     protocol. For more information, see [Device communication
+    #     protocols][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_certificate_config
+    #   An object that speciﬁes the client certificate conﬁguration for a
+    #   domain.
+    #   @return [Types::ClientCertificateConfig]
+    #
     class UpdateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       :authorizer_config,
       :domain_configuration_status,
       :remove_authorizer_config,
       :tls_config,
-      :server_certificate_config)
+      :server_certificate_config,
+      :authentication_type,
+      :application_protocol,
+      :client_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16645,7 +16899,7 @@ module Aws::IoT
     #
     # @!attribute [rw] recipe
     #   The inline job document associated with a software package version
-    #   used for a quick job deployment via IoT Jobs.
+    #   used for a quick job deployment.
     #   @return [String]
     #
     # @!attribute [rw] client_token

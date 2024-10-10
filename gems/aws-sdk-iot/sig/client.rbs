@@ -429,6 +429,11 @@ module Aws
                                          },
                                          ?server_certificate_config: {
                                            enable_ocsp_check: bool?
+                                         },
+                                         ?authentication_type: ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT"),
+                                         ?application_protocol: ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT"),
+                                         ?client_certificate_config: {
+                                           client_certificate_callback_arn: ::String?
                                          }
                                        ) -> _CreateDomainConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainConfigurationResponseSuccess
@@ -2101,6 +2106,9 @@ module Aws
         def last_status_change_date: () -> ::Time
         def tls_config: () -> Types::TlsConfig
         def server_certificate_config: () -> Types::ServerCertificateConfig
+        def authentication_type: () -> ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT")
+        def application_protocol: () -> ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT")
+        def client_certificate_config: () -> Types::ClientCertificateConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#describe_domain_configuration-instance_method
       def describe_domain_configuration: (
@@ -4495,6 +4503,11 @@ module Aws
                                          },
                                          ?server_certificate_config: {
                                            enable_ocsp_check: bool?
+                                         },
+                                         ?authentication_type: ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT"),
+                                         ?application_protocol: ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT"),
+                                         ?client_certificate_config: {
+                                           client_certificate_callback_arn: ::String?
                                          }
                                        ) -> _UpdateDomainConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigurationResponseSuccess

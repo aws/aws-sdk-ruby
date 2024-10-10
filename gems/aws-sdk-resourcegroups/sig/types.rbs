@@ -20,12 +20,20 @@ module Aws::ResourceGroups
       SENSITIVE: []
     end
 
+    class CancelTagSyncTaskInput
+      attr_accessor task_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateGroupInput
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor resource_query: Types::ResourceQuery
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor configuration: ::Array[Types::GroupConfigurationItem]
+      attr_accessor criticality: ::Integer
+      attr_accessor owner: ::String
+      attr_accessor display_name: ::String
       SENSITIVE: []
     end
 
@@ -97,6 +105,24 @@ module Aws::ResourceGroups
       SENSITIVE: []
     end
 
+    class GetTagSyncTaskInput
+      attr_accessor task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagSyncTaskOutput
+      attr_accessor group_arn: ::String
+      attr_accessor group_name: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("ACTIVE" | "ERROR")
+      attr_accessor error_message: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetTagsInput
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -112,6 +138,10 @@ module Aws::ResourceGroups
       attr_accessor group_arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor criticality: ::Integer
+      attr_accessor owner: ::String
+      attr_accessor display_name: ::String
+      attr_accessor application_tag: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -136,7 +166,7 @@ module Aws::ResourceGroups
     end
 
     class GroupFilter
-      attr_accessor name: ("resource-type" | "configuration-type")
+      attr_accessor name: ("resource-type" | "configuration-type" | "owner" | "display-name" | "criticality")
       attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
@@ -144,6 +174,10 @@ module Aws::ResourceGroups
     class GroupIdentifier
       attr_accessor group_name: ::String
       attr_accessor group_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor criticality: ::Integer
+      attr_accessor owner: ::String
+      attr_accessor display_name: ::String
       SENSITIVE: []
     end
 
@@ -163,6 +197,16 @@ module Aws::ResourceGroups
       attr_accessor succeeded: ::Array[::String]
       attr_accessor failed: ::Array[Types::FailedResource]
       attr_accessor pending: ::Array[Types::PendingResource]
+      SENSITIVE: []
+    end
+
+    class GroupingStatusesItem
+      attr_accessor resource_arn: ::String
+      attr_accessor action: ("GROUP" | "UNGROUP")
+      attr_accessor status: ("SUCCESS" | "FAILED" | "IN_PROGRESS" | "SKIPPED")
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -194,6 +238,27 @@ module Aws::ResourceGroups
       SENSITIVE: []
     end
 
+    class ListGroupingStatusesFilter
+      attr_accessor name: ("status" | "resource-arn")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListGroupingStatusesInput
+      attr_accessor group: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::ListGroupingStatusesFilter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupingStatusesOutput
+      attr_accessor group: ::String
+      attr_accessor grouping_statuses: ::Array[Types::GroupingStatusesItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListGroupsInput
       attr_accessor filters: ::Array[Types::GroupFilter]
       attr_accessor max_results: ::Integer
@@ -204,6 +269,25 @@ module Aws::ResourceGroups
     class ListGroupsOutput
       attr_accessor group_identifiers: ::Array[Types::GroupIdentifier]
       attr_accessor groups: ::Array[Types::Group]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagSyncTasksFilter
+      attr_accessor group_arn: ::String
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagSyncTasksInput
+      attr_accessor filters: ::Array[Types::ListTagSyncTasksFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagSyncTasksOutput
+      attr_accessor tag_sync_tasks: ::Array[Types::TagSyncTaskItem]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -275,6 +359,24 @@ module Aws::ResourceGroups
       SENSITIVE: []
     end
 
+    class StartTagSyncTaskInput
+      attr_accessor group: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartTagSyncTaskOutput
+      attr_accessor group_arn: ::String
+      attr_accessor group_name: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
     class TagInput
       attr_accessor arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -284,6 +386,19 @@ module Aws::ResourceGroups
     class TagOutput
       attr_accessor arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagSyncTaskItem
+      attr_accessor group_arn: ::String
+      attr_accessor group_name: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("ACTIVE" | "ERROR")
+      attr_accessor error_message: ::String
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 
@@ -336,6 +451,9 @@ module Aws::ResourceGroups
       attr_accessor group_name: ::String
       attr_accessor group: ::String
       attr_accessor description: ::String
+      attr_accessor criticality: ::Integer
+      attr_accessor owner: ::String
+      attr_accessor display_name: ::String
       SENSITIVE: []
     end
 

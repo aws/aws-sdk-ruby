@@ -571,8 +571,8 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Associates a software bill of materials (SBOM) with a specific
-    # software package version.
+    # Associates the selected software bill of materials (SBOM) with a
+    # specific software package version.
     #
     # Requires permission to access the [AssociateSbomWithPackageVersion][1]
     # action.
@@ -588,8 +588,8 @@ module Aws::IoT
     #   The name of the new package version.
     #
     # @option params [required, Types::Sbom] :sbom
-    #   The Amazon S3 location for the software bill of materials associated
-    #   with a software package version.
+    #   A specific software bill of matrerials associated with a software
+    #   package version.
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -1298,7 +1298,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a billing group.
+    # Creates a billing group. If this call is made multiple times using the
+    # same billing group name and configuration, the call will succeed. If
+    # this call is made with the same billing group name but different
+    # configuration a `ResourceAlreadyExistsException` is thrown.
     #
     # Requires permission to access the [CreateBillingGroup][1] action.
     #
@@ -1715,6 +1718,78 @@ module Aws::IoT
     # @option params [Types::ServerCertificateConfig] :server_certificate_config
     #   The server certificate configuration.
     #
+    # @option params [String] :authentication_type
+    #   An enumerated string that speciﬁes the authentication type.
+    #
+    #   * `CUSTOM_AUTH_X509` - Use custom authentication and authorization
+    #     with additional details from the X.509 client certificate.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `CUSTOM_AUTH` - Use custom authentication and authorization. For
+    #     more information, see [Custom authentication and authorization][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_X509` - Use X.509 client certificates without custom
+    #     authentication and authorization. For more information, see [X.509
+    #     client certificates][2].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_SIGV4` - Use Amazon Web Services Signature Version 4. For more
+    #     information, see [IAM users, groups, and roles][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT` - Use a combination of port and Application Layer Protocol
+    #     Negotiation (ALPN) to specify authentication type. For more
+    #     information, see [Device communication protocols][3].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html
+    #   [3]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #
+    # @option params [String] :application_protocol
+    #   An enumerated string that speciﬁes the application-layer protocol.
+    #
+    #   * `SECURE_MQTT` - MQTT over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `MQTT_WSS` - MQTT over WebSocket.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `HTTPS` - HTTP over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT` - Use a combination of port and Application Layer Protocol
+    #     Negotiation (ALPN) to specify application\_layer protocol. For more
+    #     information, see [Device communication protocols][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #
+    # @option params [Types::ClientCertificateConfig] :client_certificate_config
+    #   An object that speciﬁes the client certificate conﬁguration for a
+    #   domain.
+    #
     # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -1743,6 +1818,11 @@ module Aws::IoT
     #     },
     #     server_certificate_config: {
     #       enable_ocsp_check: false,
+    #     },
+    #     authentication_type: "CUSTOM_AUTH_X509", # accepts CUSTOM_AUTH_X509, CUSTOM_AUTH, AWS_X509, AWS_SIGV4, DEFAULT
+    #     application_protocol: "SECURE_MQTT", # accepts SECURE_MQTT, MQTT_WSS, HTTPS, DEFAULT
+    #     client_certificate_config: {
+    #       client_certificate_callback_arn: "ClientCertificateCallbackArn",
     #     },
     #   })
     #
@@ -2693,7 +2773,7 @@ module Aws::IoT
     #
     # @option params [String] :recipe
     #   The inline job document associated with a software package version
-    #   used for a quick job deployment via IoT Jobs.
+    #   used for a quick job deployment.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata that can be used to manage the package version.
@@ -3073,9 +3153,17 @@ module Aws::IoT
     #
     # Requires permission to access the [CreateRoleAlias][1] action.
     #
+    # The value of [ `credentialDurationSeconds` ][2] must be less than or
+    # equal to the maximum session duration of the IAM role that the role
+    # alias references. For more information, see [ Modifying a role maximum
+    # session duration (Amazon Web Services API)][3] from the Amazon Web
+    # Services Identity and Access Management User Guide.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/iot/latest/apireference/API_CreateRoleAlias.html#iot-CreateRoleAlias-request-credentialDurationSeconds
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-api.html#roles-modify_max-session-duration-api
     #
     # @option params [required, String] :role_alias
     #   The role alias that points to a role ARN. This allows you to change
@@ -3543,7 +3631,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a new thing type.
+    # Creates a new thing type. If this call is made multiple times using
+    # the same thing type name and configuration, the call will succeed. If
+    # this call is made with the same thing type name but different
+    # configuration a `ResourceAlreadyExistsException` is thrown.
     #
     # Requires permission to access the [CreateThingType][1] action.
     #
@@ -6021,6 +6112,9 @@ module Aws::IoT
     #   * {Types::DescribeDomainConfigurationResponse#last_status_change_date #last_status_change_date} => Time
     #   * {Types::DescribeDomainConfigurationResponse#tls_config #tls_config} => Types::TlsConfig
     #   * {Types::DescribeDomainConfigurationResponse#server_certificate_config #server_certificate_config} => Types::ServerCertificateConfig
+    #   * {Types::DescribeDomainConfigurationResponse#authentication_type #authentication_type} => String
+    #   * {Types::DescribeDomainConfigurationResponse#application_protocol #application_protocol} => String
+    #   * {Types::DescribeDomainConfigurationResponse#client_certificate_config #client_certificate_config} => Types::ClientCertificateConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -6045,6 +6139,9 @@ module Aws::IoT
     #   resp.last_status_change_date #=> Time
     #   resp.tls_config.security_policy #=> String
     #   resp.server_certificate_config.enable_ocsp_check #=> Boolean
+    #   resp.authentication_type #=> String, one of "CUSTOM_AUTH_X509", "CUSTOM_AUTH", "AWS_X509", "AWS_SIGV4", "DEFAULT"
+    #   resp.application_protocol #=> String, one of "SECURE_MQTT", "MQTT_WSS", "HTTPS", "DEFAULT"
+    #   resp.client_certificate_config.client_certificate_callback_arn #=> String
     #
     # @overload describe_domain_configuration(params = {})
     # @param [Hash] params ({})
@@ -7229,8 +7326,8 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Disassociates a software bill of materials (SBOM) from a specific
-    # software package version.
+    # Disassociates the selected software bill of materials (SBOM) from a
+    # specific software package version.
     #
     # Requires permission to access the
     # [DisassociateSbomWithPackageVersion][1] action.
@@ -14086,6 +14183,78 @@ module Aws::IoT
     # @option params [Types::ServerCertificateConfig] :server_certificate_config
     #   The server certificate configuration.
     #
+    # @option params [String] :authentication_type
+    #   An enumerated string that speciﬁes the authentication type.
+    #
+    #   * `CUSTOM_AUTH_X509` - Use custom authentication and authorization
+    #     with additional details from the X.509 client certificate.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `CUSTOM_AUTH` - Use custom authentication and authorization. For
+    #     more information, see [Custom authentication and authorization][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_X509` - Use X.509 client certificates without custom
+    #     authentication and authorization. For more information, see [X.509
+    #     client certificates][2].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AWS_SIGV4` - Use Amazon Web Services Signature Version 4. For more
+    #     information, see [IAM users, groups, and roles][1].
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT ` - Use a combination of port and Application Layer
+    #     Protocol Negotiation (ALPN) to specify authentication type. For more
+    #     information, see [Device communication protocols][3].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html
+    #   [3]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #
+    # @option params [String] :application_protocol
+    #   An enumerated string that speciﬁes the application-layer protocol.
+    #
+    #   * `SECURE_MQTT` - MQTT over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `MQTT_WSS` - MQTT over WebSocket.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `HTTPS` - HTTP over TLS.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `DEFAULT` - Use a combination of port and Application Layer Protocol
+    #     Negotiation (ALPN) to specify application\_layer protocol. For more
+    #     information, see [Device communication protocols][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+    #
+    # @option params [Types::ClientCertificateConfig] :client_certificate_config
+    #   An object that speciﬁes the client certificate conﬁguration for a
+    #   domain.
+    #
     # @return [Types::UpdateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -14106,6 +14275,11 @@ module Aws::IoT
     #     },
     #     server_certificate_config: {
     #       enable_ocsp_check: false,
+    #     },
+    #     authentication_type: "CUSTOM_AUTH_X509", # accepts CUSTOM_AUTH_X509, CUSTOM_AUTH, AWS_X509, AWS_SIGV4, DEFAULT
+    #     application_protocol: "SECURE_MQTT", # accepts SECURE_MQTT, MQTT_WSS, HTTPS, DEFAULT
+    #     client_certificate_config: {
+    #       client_certificate_callback_arn: "ClientCertificateCallbackArn",
     #     },
     #   })
     #
@@ -14672,7 +14846,7 @@ module Aws::IoT
     #
     # @option params [String] :recipe
     #   The inline job document associated with a software package version
-    #   used for a quick job deployment via IoT Jobs.
+    #   used for a quick job deployment.
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -14777,9 +14951,17 @@ module Aws::IoT
     #
     # Requires permission to access the [UpdateRoleAlias][1] action.
     #
+    # The value of [ `credentialDurationSeconds` ][2] must be less than or
+    # equal to the maximum session duration of the IAM role that the role
+    # alias references. For more information, see [ Modifying a role maximum
+    # session duration (Amazon Web Services API)][3] from the Amazon Web
+    # Services Identity and Access Management User Guide.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/iot/latest/apireference/API_UpdateRoleAlias.html#iot-UpdateRoleAlias-request-credentialDurationSeconds
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-api.html#roles-modify_max-session-duration-api
     #
     # @option params [required, String] :role_alias
     #   The role alias to update.
@@ -15431,7 +15613,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

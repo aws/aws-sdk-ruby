@@ -35,6 +35,18 @@ module Aws::EC2
     end
     alias :key_name :name
 
+    # The ID of the key pair.
+    # @return [String]
+    def key_pair_id
+      data[:key_pair_id]
+    end
+
+    # Any tags applied to the key pair.
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
     # * For RSA key pairs, the key fingerprint is the SHA-1 digest of the
     #   DER encoded private key.
     #
@@ -50,18 +62,6 @@ module Aws::EC2
     # @return [String]
     def key_material
       data[:key_material]
-    end
-
-    # The ID of the key pair.
-    # @return [String]
-    def key_pair_id
-      data[:key_pair_id]
-    end
-
-    # Any tags applied to the key pair.
-    # @return [Array<Types::Tag>]
-    def tags
-      data[:tags]
     end
 
     # @!endgroup

@@ -417,6 +417,7 @@ module Aws::CodeArtifact
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
       attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
+      attr_accessor endpoint_type: ("dualstack" | "ipv4")
       SENSITIVE: []
     end
 

@@ -34,18 +34,6 @@ module Aws::EC2
       @allocation_id
     end
 
-    # The ID of the instance that the address is associated with (if any).
-    # @return [String]
-    def instance_id
-      data[:instance_id]
-    end
-
-    # The Elastic IP address.
-    # @return [String]
-    def public_ip
-      data[:public_ip]
-    end
-
     # The ID representing the association of the address with an instance.
     # @return [String]
     def association_id
@@ -115,6 +103,18 @@ module Aws::EC2
     # @return [String]
     def carrier_ip
       data[:carrier_ip]
+    end
+
+    # The ID of the instance that the address is associated with (if any).
+    # @return [String]
+    def instance_id
+      data[:instance_id]
+    end
+
+    # The Elastic IP address.
+    # @return [String]
+    def public_ip
+      data[:public_ip]
     end
 
     # @!endgroup
@@ -260,10 +260,10 @@ module Aws::EC2
     #   vpc_address.associate({
     #     instance_id: "InstanceId",
     #     public_ip: "EipAllocationPublicIp",
-    #     allow_reassociation: false,
     #     dry_run: false,
     #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
+    #     allow_reassociation: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :instance_id
@@ -272,10 +272,6 @@ module Aws::EC2
     #   network interface ID, but not both.
     # @option options [String] :public_ip
     #   Deprecated.
-    # @option options [Boolean] :allow_reassociation
-    #   Reassociation is automatic, but you can specify false to ensure the
-    #   operation fails if the Elastic IP address is already associated with
-    #   another resource.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -291,6 +287,10 @@ module Aws::EC2
     #   The primary or secondary private IP address to associate with the
     #   Elastic IP address. If no private IP address is specified, the Elastic
     #   IP address is associated with the primary private IP address.
+    # @option options [Boolean] :allow_reassociation
+    #   Reassociation is automatic, but you can specify false to ensure the
+    #   operation fails if the Elastic IP address is already associated with
+    #   another resource.
     # @return [Types::AssociateAddressResult]
     def associate(options = {})
       options = options.merge(allocation_id: @allocation_id)

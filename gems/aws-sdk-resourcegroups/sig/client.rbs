@@ -75,6 +75,12 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#cancel_tag_sync_task-instance_method
+      def cancel_tag_sync_task: (
+                                  task_arn: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _CreateGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupOutput]
         def group: () -> Types::Group
@@ -101,7 +107,10 @@ module Aws
                                 },
                               ]?
                             },
-                          ]
+                          ],
+                          ?criticality: ::Integer,
+                          ?owner: ::String,
+                          ?display_name: ::String
                         ) -> _CreateGroupResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
 
@@ -156,6 +165,24 @@ module Aws
                            ) -> _GetGroupQueryResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupQueryResponseSuccess
 
+      interface _GetTagSyncTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTagSyncTaskOutput]
+        def group_arn: () -> ::String
+        def group_name: () -> ::String
+        def task_arn: () -> ::String
+        def tag_key: () -> ::String
+        def tag_value: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "ERROR")
+        def error_message: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#get_tag_sync_task-instance_method
+      def get_tag_sync_task: (
+                               task_arn: ::String
+                             ) -> _GetTagSyncTaskResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTagSyncTaskResponseSuccess
+
       interface _GetTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTagsOutput]
         def arn: () -> ::String
@@ -202,6 +229,26 @@ module Aws
                                 ) -> _ListGroupResourcesResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupResourcesResponseSuccess
 
+      interface _ListGroupingStatusesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupingStatusesOutput]
+        def group: () -> ::String
+        def grouping_statuses: () -> ::Array[Types::GroupingStatusesItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#list_grouping_statuses-instance_method
+      def list_grouping_statuses: (
+                                    group: ::String,
+                                    ?max_results: ::Integer,
+                                    ?filters: Array[
+                                      {
+                                        name: ("status" | "resource-arn"),
+                                        values: Array[::String]
+                                      },
+                                    ],
+                                    ?next_token: ::String
+                                  ) -> _ListGroupingStatusesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupingStatusesResponseSuccess
+
       interface _ListGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsOutput]
         def group_identifiers: () -> ::Array[Types::GroupIdentifier]
@@ -212,7 +259,7 @@ module Aws
       def list_groups: (
                          ?filters: Array[
                            {
-                             name: ("resource-type" | "configuration-type"),
+                             name: ("resource-type" | "configuration-type" | "owner" | "display-name" | "criticality"),
                              values: Array[::String]
                            },
                          ],
@@ -220,6 +267,24 @@ module Aws
                          ?next_token: ::String
                        ) -> _ListGroupsResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
+
+      interface _ListTagSyncTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagSyncTasksOutput]
+        def tag_sync_tasks: () -> ::Array[Types::TagSyncTaskItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#list_tag_sync_tasks-instance_method
+      def list_tag_sync_tasks: (
+                                 ?filters: Array[
+                                   {
+                                     group_arn: ::String?,
+                                     group_name: ::String?
+                                   },
+                                 ],
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListTagSyncTasksResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagSyncTasksResponseSuccess
 
       interface _PutGroupConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutGroupConfigurationOutput]
@@ -257,6 +322,24 @@ module Aws
                               ?next_token: ::String
                             ) -> _SearchResourcesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchResourcesResponseSuccess
+
+      interface _StartTagSyncTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTagSyncTaskOutput]
+        def group_arn: () -> ::String
+        def group_name: () -> ::String
+        def task_arn: () -> ::String
+        def tag_key: () -> ::String
+        def tag_value: () -> ::String
+        def role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#start_tag_sync_task-instance_method
+      def start_tag_sync_task: (
+                                 group: ::String,
+                                 tag_key: ::String,
+                                 tag_value: ::String,
+                                 role_arn: ::String
+                               ) -> _StartTagSyncTaskResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTagSyncTaskResponseSuccess
 
       interface _TagResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagOutput]
@@ -313,7 +396,10 @@ module Aws
       def update_group: (
                           ?group_name: ::String,
                           ?group: ::String,
-                          ?description: ::String
+                          ?description: ::String,
+                          ?criticality: ::Integer,
+                          ?owner: ::String,
+                          ?display_name: ::String
                         ) -> _UpdateGroupResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupResponseSuccess
 

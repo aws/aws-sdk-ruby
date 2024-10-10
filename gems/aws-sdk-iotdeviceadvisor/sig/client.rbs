@@ -99,7 +99,8 @@ module Aws
                                        device_permission_role_arn: ::String,
                                        protocol: ("MqttV3_1_1" | "MqttV5" | "MqttV3_1_1_OverWebSocket" | "MqttV5_OverWebSocket")?
                                      },
-                                     ?tags: Hash[::String, ::String]
+                                     ?tags: Hash[::String, ::String],
+                                     ?client_token: ::String
                                    ) -> _CreateSuiteDefinitionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSuiteDefinitionResponseSuccess
 

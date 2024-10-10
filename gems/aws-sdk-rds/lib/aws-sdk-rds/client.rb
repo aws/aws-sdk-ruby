@@ -3379,6 +3379,18 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [String] :cluster_scalability_type
+    #   Specifies the scalability mode of the Aurora DB cluster. When set to
+    #   `limitless`, the cluster operates as an Aurora Limitless Database.
+    #   When set to `standard` (the default), the cluster uses normal DB
+    #   instance creation.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #   <note markdown="1"> You can't modify this setting after you create the DB cluster.
+    #
+    #    </note>
+    #
     # @option params [String] :db_system_id
     #   Reserved for future use.
     #
@@ -3692,6 +3704,7 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     cluster_scalability_type: "standard", # accepts standard, limitless
     #     db_system_id: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
@@ -3837,6 +3850,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -7438,6 +7452,18 @@ module Aws::RDS
     #   * If the subnets are part of a VPC that has an internet gateway
     #     attached to it, the DB shard group is public.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+    #
     # @return [Types::DBShardGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBShardGroup#db_shard_group_resource_id #db_shard_group_resource_id} => String
@@ -7450,6 +7476,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DBShardGroup#endpoint #endpoint} => String
     #   * {Types::DBShardGroup#db_shard_group_arn #db_shard_group_arn} => String
+    #   * {Types::DBShardGroup#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7460,6 +7487,12 @@ module Aws::RDS
     #     max_acu: 1.0, # required
     #     min_acu: 1.0,
     #     publicly_accessible: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7474,6 +7507,9 @@ module Aws::RDS
     #   resp.publicly_accessible #=> Boolean
     #   resp.endpoint #=> String
     #   resp.db_shard_group_arn #=> String
+    #   resp.tag_list #=> Array
+    #   resp.tag_list[0].key #=> String
+    #   resp.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBShardGroup AWS API Documentation
     #
@@ -9179,6 +9215,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -10117,6 +10154,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DBShardGroup#endpoint #endpoint} => String
     #   * {Types::DBShardGroup#db_shard_group_arn #db_shard_group_arn} => String
+    #   * {Types::DBShardGroup#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -10136,6 +10174,9 @@ module Aws::RDS
     #   resp.publicly_accessible #=> Boolean
     #   resp.endpoint #=> String
     #   resp.db_shard_group_arn #=> String
+    #   resp.tag_list #=> Array
+    #   resp.tag_list[0].key #=> String
+    #   resp.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBShardGroup AWS API Documentation
     #
@@ -12618,6 +12659,7 @@ module Aws::RDS
     #   resp.db_clusters[0].limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_clusters[0].limitless_database.min_required_acu #=> Float
     #   resp.db_clusters[0].storage_throughput #=> Integer
+    #   resp.db_clusters[0].cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_clusters[0].certificate_details.ca_identifier #=> String
     #   resp.db_clusters[0].certificate_details.valid_till #=> Time
     #   resp.db_clusters[0].engine_lifecycle_support #=> String
@@ -14426,6 +14468,9 @@ module Aws::RDS
     #   resp.db_shard_groups[0].publicly_accessible #=> Boolean
     #   resp.db_shard_groups[0].endpoint #=> String
     #   resp.db_shard_groups[0].db_shard_group_arn #=> String
+    #   resp.db_shard_groups[0].tag_list #=> Array
+    #   resp.db_shard_groups[0].tag_list[0].key #=> String
+    #   resp.db_shard_groups[0].tag_list[0].value #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBShardGroups AWS API Documentation
@@ -17931,6 +17976,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -19620,6 +19666,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -21864,6 +21911,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DBShardGroup#endpoint #endpoint} => String
     #   * {Types::DBShardGroup#db_shard_group_arn #db_shard_group_arn} => String
+    #   * {Types::DBShardGroup#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -21886,6 +21934,9 @@ module Aws::RDS
     #   resp.publicly_accessible #=> Boolean
     #   resp.endpoint #=> String
     #   resp.db_shard_group_arn #=> String
+    #   resp.tag_list #=> Array
+    #   resp.tag_list[0].key #=> String
+    #   resp.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBShardGroup AWS API Documentation
     #
@@ -23340,6 +23391,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -23640,6 +23692,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -23921,6 +23974,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DBShardGroup#endpoint #endpoint} => String
     #   * {Types::DBShardGroup#db_shard_group_arn #db_shard_group_arn} => String
+    #   * {Types::DBShardGroup#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -23940,6 +23994,9 @@ module Aws::RDS
     #   resp.publicly_accessible #=> Boolean
     #   resp.endpoint #=> String
     #   resp.db_shard_group_arn #=> String
+    #   resp.tag_list #=> Array
+    #   resp.tag_list[0].key #=> String
+    #   resp.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBShardGroup AWS API Documentation
     #
@@ -25222,6 +25279,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -25980,6 +26038,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -26717,6 +26776,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -29764,6 +29824,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -30605,6 +30666,7 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_lifecycle_support #=> String
@@ -31466,7 +31528,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.251.0'
+      context[:gem_version] = '1.252.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

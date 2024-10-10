@@ -182,13 +182,18 @@ module Aws
                                         scte_hls: {
                                           ad_marker_hls: ("DATERANGE")?
                                         }?,
+                                        start_tag: {
+                                          time_offset: ::Float,
+                                          precise: bool?
+                                        }?,
                                         manifest_window_seconds: ::Integer?,
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
-                                          time_delay_seconds: ::Integer?
+                                          time_delay_seconds: ::Integer?,
+                                          clip_start_time: ::Time?
                                         }?
                                       },
                                     ],
@@ -199,13 +204,18 @@ module Aws
                                         scte_hls: {
                                           ad_marker_hls: ("DATERANGE")?
                                         }?,
+                                        start_tag: {
+                                          time_offset: ::Float,
+                                          precise: bool?
+                                        }?,
                                         manifest_window_seconds: ::Integer?,
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
-                                          time_delay_seconds: ::Integer?
+                                          time_delay_seconds: ::Integer?,
+                                          clip_start_time: ::Time?
                                         }?
                                       },
                                     ],
@@ -217,7 +227,8 @@ module Aws
                                           manifest_filter: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
-                                          time_delay_seconds: ::Integer?
+                                          time_delay_seconds: ::Integer?,
+                                          clip_start_time: ::Time?
                                         }?,
                                         min_update_period_seconds: ::Integer?,
                                         min_buffer_time_seconds: ::Integer?,
@@ -573,13 +584,18 @@ module Aws
                                         scte_hls: {
                                           ad_marker_hls: ("DATERANGE")?
                                         }?,
+                                        start_tag: {
+                                          time_offset: ::Float,
+                                          precise: bool?
+                                        }?,
                                         manifest_window_seconds: ::Integer?,
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
-                                          time_delay_seconds: ::Integer?
+                                          time_delay_seconds: ::Integer?,
+                                          clip_start_time: ::Time?
                                         }?
                                       },
                                     ],
@@ -590,13 +606,18 @@ module Aws
                                         scte_hls: {
                                           ad_marker_hls: ("DATERANGE")?
                                         }?,
+                                        start_tag: {
+                                          time_offset: ::Float,
+                                          precise: bool?
+                                        }?,
                                         manifest_window_seconds: ::Integer?,
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
-                                          time_delay_seconds: ::Integer?
+                                          time_delay_seconds: ::Integer?,
+                                          clip_start_time: ::Time?
                                         }?
                                       },
                                     ],
@@ -608,7 +629,8 @@ module Aws
                                           manifest_filter: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
-                                          time_delay_seconds: ::Integer?
+                                          time_delay_seconds: ::Integer?,
+                                          clip_start_time: ::Time?
                                         }?,
                                         min_update_period_seconds: ::Integer?,
                                         min_buffer_time_seconds: ::Integer?,

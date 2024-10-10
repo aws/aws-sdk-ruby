@@ -982,21 +982,27 @@ module Aws::EC2
     #   Amazon EC2 select an address from the address pool. Alternatively,
     #   specify a specific address from the address pool.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the Elastic IP address.
+    #
+    # @option params [String] :ipam_pool_id
+    #   The ID of an IPAM pool which has an Amazon-provided or BYOIP public
+    #   IPv4 CIDR provisioned to it. For more information, see [Allocate
+    #   sequential Elastic IP addresses from an IPAM pool][1] in the *Amazon
+    #   VPC IPAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-eip-pool.html
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to assign to the Elastic IP address.
-    #
-    # @option params [String] :ipam_pool_id
-    #   The ID of an IPAM pool.
-    #
     # @return [Types::AllocateAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::AllocateAddressResult#public_ip #public_ip} => String
     #   * {Types::AllocateAddressResult#allocation_id #allocation_id} => String
     #   * {Types::AllocateAddressResult#public_ipv_4_pool #public_ipv_4_pool} => String
     #   * {Types::AllocateAddressResult#network_border_group #network_border_group} => String
@@ -1004,6 +1010,7 @@ module Aws::EC2
     #   * {Types::AllocateAddressResult#customer_owned_ip #customer_owned_ip} => String
     #   * {Types::AllocateAddressResult#customer_owned_ipv_4_pool #customer_owned_ipv_4_pool} => String
     #   * {Types::AllocateAddressResult#carrier_ip #carrier_ip} => String
+    #   * {Types::AllocateAddressResult#public_ip #public_ip} => String
     #
     #
     # @example Example: To allocate an Elastic IP address
@@ -1030,7 +1037,6 @@ module Aws::EC2
     #     public_ipv_4_pool: "Ipv4PoolEc2Id",
     #     network_border_group: "String",
     #     customer_owned_ipv_4_pool: "String",
-    #     dry_run: false,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -1043,11 +1049,11 @@ module Aws::EC2
     #       },
     #     ],
     #     ipam_pool_id: "IpamPoolId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
-    #   resp.public_ip #=> String
     #   resp.allocation_id #=> String
     #   resp.public_ipv_4_pool #=> String
     #   resp.network_border_group #=> String
@@ -1055,6 +1061,7 @@ module Aws::EC2
     #   resp.customer_owned_ip #=> String
     #   resp.customer_owned_ipv_4_pool #=> String
     #   resp.carrier_ip #=> String
+    #   resp.public_ip #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddress AWS API Documentation
     #
@@ -1069,41 +1076,6 @@ module Aws::EC2
     # supported instance type or instance family, the Availability Zone in
     # which to allocate the host, and the number of hosts to allocate.
     #
-    # @option params [String] :auto_placement
-    #   Indicates whether the host accepts any untargeted instance launches
-    #   that match its instance type configuration, or if it only accepts Host
-    #   tenancy instance launches that specify its unique host ID. For more
-    #   information, see [ Understanding auto-placement and affinity][1] in
-    #   the *Amazon EC2 User Guide*.
-    #
-    #   Default: `off`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-understanding
-    #
-    # @option params [required, String] :availability_zone
-    #   The Availability Zone in which to allocate the Dedicated Host.
-    #
-    # @option params [String] :client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-    #
-    # @option params [String] :instance_type
-    #   Specifies the instance type to be supported by the Dedicated Hosts. If
-    #   you specify an instance type, the Dedicated Hosts support instances of
-    #   the specified instance type only.
-    #
-    #   If you want the Dedicated Hosts to support multiple instance types in
-    #   a specific instance family, omit this parameter and specify
-    #   **InstanceFamily** instead. You cannot specify **InstanceType** and
-    #   **InstanceFamily** in the same request.
-    #
     # @option params [String] :instance_family
     #   Specifies the instance family to be supported by the Dedicated Hosts.
     #   If you specify an instance family, the Dedicated Hosts support
@@ -1113,15 +1085,6 @@ module Aws::EC2
     #   only, omit this parameter and specify **InstanceType** instead. You
     #   cannot specify **InstanceFamily** and **InstanceType** in the same
     #   request.
-    #
-    # @option params [Integer] :quantity
-    #   The number of Dedicated Hosts to allocate to your account with these
-    #   parameters. If you are allocating the Dedicated Hosts on an Outpost,
-    #   and you specify **AssetIds**, you can omit this parameter. In this
-    #   case, Amazon EC2 allocates a Dedicated Host on each specified hardware
-    #   asset. If you specify both **AssetIds** and **Quantity**, then the
-    #   value that you specify for **Quantity** must be equal to the number of
-    #   asset IDs specified.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the Dedicated Host during creation.
@@ -1168,6 +1131,50 @@ module Aws::EC2
     #   * If you specify both **AssetIds** and **Quantity**, then the value
     #     for **Quantity** must be equal to the number of asset IDs specified.
     #
+    # @option params [String] :auto_placement
+    #   Indicates whether the host accepts any untargeted instance launches
+    #   that match its instance type configuration, or if it only accepts Host
+    #   tenancy instance launches that specify its unique host ID. For more
+    #   information, see [ Understanding auto-placement and affinity][1] in
+    #   the *Amazon EC2 User Guide*.
+    #
+    #   Default: `off`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-understanding
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :instance_type
+    #   Specifies the instance type to be supported by the Dedicated Hosts. If
+    #   you specify an instance type, the Dedicated Hosts support instances of
+    #   the specified instance type only.
+    #
+    #   If you want the Dedicated Hosts to support multiple instance types in
+    #   a specific instance family, omit this parameter and specify
+    #   **InstanceFamily** instead. You cannot specify **InstanceType** and
+    #   **InstanceFamily** in the same request.
+    #
+    # @option params [Integer] :quantity
+    #   The number of Dedicated Hosts to allocate to your account with these
+    #   parameters. If you are allocating the Dedicated Hosts on an Outpost,
+    #   and you specify **AssetIds**, you can omit this parameter. In this
+    #   case, Amazon EC2 allocates a Dedicated Host on each specified hardware
+    #   asset. If you specify both **AssetIds** and **Quantity**, then the
+    #   value that you specify for **Quantity** must be equal to the number of
+    #   asset IDs specified.
+    #
+    # @option params [required, String] :availability_zone
+    #   The Availability Zone in which to allocate the Dedicated Host.
+    #
     # @return [Types::AllocateHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllocateHostsResult#host_ids #host_ids} => Array&lt;String&gt;
@@ -1175,12 +1182,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.allocate_hosts({
-    #     auto_placement: "on", # accepts on, off
-    #     availability_zone: "String", # required
-    #     client_token: "String",
-    #     instance_type: "String",
     #     instance_family: "String",
-    #     quantity: 1,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -1196,6 +1198,11 @@ module Aws::EC2
     #     outpost_arn: "String",
     #     host_maintenance: "on", # accepts on, off
     #     asset_ids: ["AssetId"],
+    #     auto_placement: "on", # accepts on, off
+    #     client_token: "String",
+    #     instance_type: "String",
+    #     quantity: 1,
+    #     availability_zone: "String", # required
     #   })
     #
     # @example Response structure
@@ -1397,18 +1404,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #
-    # @option params [Integer] :ipv_6_address_count
-    #   The number of additional IPv6 addresses to assign to the network
-    #   interface. The specified number of IPv6 addresses are assigned in
-    #   addition to the existing IPv6 addresses that are already assigned to
-    #   the network interface. Amazon EC2 automatically selects the IPv6
-    #   addresses from the subnet range. You can't use this option if
-    #   specifying specific IPv6 addresses.
-    #
-    # @option params [Array<String>] :ipv_6_addresses
-    #   The IPv6 addresses to be assigned to the network interface. You can't
-    #   use this option if you're specifying a number of IPv6 addresses.
-    #
     # @option params [Integer] :ipv_6_prefix_count
     #   The number of IPv6 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
@@ -1421,6 +1416,18 @@ module Aws::EC2
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
     #
+    # @option params [Array<String>] :ipv_6_addresses
+    #   The IPv6 addresses to be assigned to the network interface. You can't
+    #   use this option if you're specifying a number of IPv6 addresses.
+    #
+    # @option params [Integer] :ipv_6_address_count
+    #   The number of additional IPv6 addresses to assign to the network
+    #   interface. The specified number of IPv6 addresses are assigned in
+    #   addition to the existing IPv6 addresses that are already assigned to
+    #   the network interface. Amazon EC2 automatically selects the IPv6
+    #   addresses from the subnet range. You can't use this option if
+    #   specifying specific IPv6 addresses.
+    #
     # @return [Types::AssignIpv6AddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssignIpv6AddressesResult#assigned_ipv_6_addresses #assigned_ipv_6_addresses} => Array&lt;String&gt;
@@ -1430,11 +1437,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.assign_ipv_6_addresses({
-    #     ipv_6_address_count: 1,
-    #     ipv_6_addresses: ["String"],
     #     ipv_6_prefix_count: 1,
     #     ipv_6_prefixes: ["String"],
     #     network_interface_id: "NetworkInterfaceId", # required
+    #     ipv_6_addresses: ["String"],
+    #     ipv_6_address_count: 1,
     #   })
     #
     # @example Response structure
@@ -1486,10 +1493,14 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #
-    # @option params [Boolean] :allow_reassignment
-    #   Indicates whether to allow an IP address that is already assigned to
-    #   another network interface or instance to be reassigned to the
-    #   specified network interface.
+    # @option params [Array<String>] :ipv_4_prefixes
+    #   One or more IPv4 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
+    #
+    # @option params [Integer] :ipv_4_prefix_count
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
+    #   assigns to the network interface. You cannot use this option if you
+    #   use the `Ipv4 Prefixes` option.
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
@@ -1507,14 +1518,10 @@ module Aws::EC2
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
     #
-    # @option params [Array<String>] :ipv_4_prefixes
-    #   One or more IPv4 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv4PrefixCount` option.
-    #
-    # @option params [Integer] :ipv_4_prefix_count
-    #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv4 Prefixes` option.
+    # @option params [Boolean] :allow_reassignment
+    #   Indicates whether to allow an IP address that is already assigned to
+    #   another network interface or instance to be reassigned to the
+    #   specified network interface.
     #
     # @return [Types::AssignPrivateIpAddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1548,12 +1555,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.assign_private_ip_addresses({
-    #     allow_reassignment: false,
+    #     ipv_4_prefixes: ["String"],
+    #     ipv_4_prefix_count: 1,
     #     network_interface_id: "NetworkInterfaceId", # required
     #     private_ip_addresses: ["String"],
     #     secondary_private_ip_address_count: 1,
-    #     ipv_4_prefixes: ["String"],
-    #     ipv_4_prefix_count: 1,
+    #     allow_reassignment: false,
     #   })
     #
     # @example Response structure
@@ -1579,7 +1586,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -1674,11 +1681,6 @@ module Aws::EC2
     # @option params [String] :public_ip
     #   Deprecated.
     #
-    # @option params [Boolean] :allow_reassociation
-    #   Reassociation is automatic, but you can specify false to ensure the
-    #   operation fails if the Elastic IP address is already associated with
-    #   another resource.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1696,6 +1698,11 @@ module Aws::EC2
     #   The primary or secondary private IP address to associate with the
     #   Elastic IP address. If no private IP address is specified, the Elastic
     #   IP address is associated with the primary private IP address.
+    #
+    # @option params [Boolean] :allow_reassociation
+    #   Reassociation is automatic, but you can specify false to ensure the
+    #   operation fails if the Elastic IP address is already associated with
+    #   another resource.
     #
     # @return [Types::AssociateAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1736,10 +1743,10 @@ module Aws::EC2
     #     allocation_id: "AllocationId",
     #     instance_id: "InstanceId",
     #     public_ip: "EipAllocationPublicIp",
-    #     allow_reassociation: false,
     #     dry_run: false,
     #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
+    #     allow_reassociation: false,
     #   })
     #
     # @example Response structure
@@ -2248,9 +2255,9 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips
-    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -2318,20 +2325,20 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
+    # @option params [String] :gateway_id
+    #   The ID of the internet gateway or virtual private gateway.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, String] :route_table_id
-    #   The ID of the route table.
-    #
     # @option params [String] :subnet_id
     #   The ID of the subnet.
     #
-    # @option params [String] :gateway_id
-    #   The ID of the internet gateway or virtual private gateway.
+    # @option params [required, String] :route_table_id
+    #   The ID of the route table.
     #
     # @return [Types::AssociateRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2356,10 +2363,10 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_route_table({
-    #     dry_run: false,
-    #     route_table_id: "RouteTableId", # required
-    #     subnet_id: "SubnetId",
     #     gateway_id: "RouteGatewayId",
+    #     dry_run: false,
+    #     subnet_id: "SubnetId",
+    #     route_table_id: "RouteTableId", # required
     #   })
     #
     # @example Response structure
@@ -2380,17 +2387,17 @@ module Aws::EC2
     # Associates a CIDR block with your subnet. You can only associate a
     # single IPv6 CIDR block with your subnet.
     #
-    # @option params [String] :ipv_6_cidr_block
-    #   The IPv6 CIDR block for your subnet.
-    #
-    # @option params [required, String] :subnet_id
-    #   The ID of your subnet.
-    #
     # @option params [String] :ipv_6_ipam_pool_id
     #   An IPv6 IPAM pool ID.
     #
     # @option params [Integer] :ipv_6_netmask_length
     #   An IPv6 netmask length.
+    #
+    # @option params [required, String] :subnet_id
+    #   The ID of your subnet.
+    #
+    # @option params [String] :ipv_6_cidr_block
+    #   The IPv6 CIDR block for your subnet.
     #
     # @return [Types::AssociateSubnetCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2400,10 +2407,10 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_subnet_cidr_block({
-    #     ipv_6_cidr_block: "String",
-    #     subnet_id: "SubnetId", # required
     #     ipv_6_ipam_pool_id: "IpamPoolId",
     #     ipv_6_netmask_length: 1,
+    #     subnet_id: "SubnetId", # required
+    #     ipv_6_cidr_block: "String",
     #   })
     #
     # @example Response structure
@@ -2673,16 +2680,8 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html
     #
-    # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
-    #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
-    #   for the VPC. You cannot specify the range of IPv6 addresses or the
-    #   size of the CIDR block.
-    #
     # @option params [String] :cidr_block
     #   An IPv4 CIDR block to associate with the VPC.
-    #
-    # @option params [required, String] :vpc_id
-    #   The ID of the VPC.
     #
     # @option params [String] :ipv_6_cidr_block_network_border_group
     #   The name of the location from which we advertise the IPV6 CIDR block.
@@ -2741,6 +2740,14 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC.
+    #
+    # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
+    #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+    #   for the VPC. You cannot specify the range of IPv6 addresses or the
+    #   size of the CIDR block.
+    #
     # @return [Types::AssociateVpcCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateVpcCidrBlockResult#ipv_6_cidr_block_association #ipv_6_cidr_block_association} => Types::VpcIpv6CidrBlockAssociation
@@ -2750,9 +2757,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_vpc_cidr_block({
-    #     amazon_provided_ipv_6_cidr_block: false,
     #     cidr_block: "String",
-    #     vpc_id: "VpcId", # required
     #     ipv_6_cidr_block_network_border_group: "String",
     #     ipv_6_pool: "Ipv6PoolEc2Id",
     #     ipv_6_cidr_block: "String",
@@ -2760,6 +2765,8 @@ module Aws::EC2
     #     ipv_4_netmask_length: 1,
     #     ipv_6_ipam_pool_id: "IpamPoolId",
     #     ipv_6_netmask_length: 1,
+    #     vpc_id: "VpcId", # required
+    #     amazon_provided_ipv_6_cidr_block: false,
     #   })
     #
     # @example Response structure
@@ -2811,15 +2818,15 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, Array<String>] :groups
-    #   The IDs of the security groups. You cannot specify security groups
-    #   from a different VPC.
-    #
     # @option params [required, String] :instance_id
     #   The ID of the EC2-Classic instance.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the ClassicLink-enabled VPC.
+    #
+    # @option params [required, Array<String>] :groups
+    #   The IDs of the security groups. You cannot specify security groups
+    #   from a different VPC.
     #
     # @return [Types::AttachClassicLinkVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2829,9 +2836,9 @@ module Aws::EC2
     #
     #   resp = client.attach_classic_link_vpc({
     #     dry_run: false,
-    #     groups: ["SecurityGroupId"], # required
     #     instance_id: "InstanceId", # required
     #     vpc_id: "VpcId", # required
+    #     groups: ["SecurityGroupId"], # required
     #   })
     #
     # @example Response structure
@@ -2899,21 +2906,6 @@ module Aws::EC2
 
     # Attaches a network interface to an instance.
     #
-    # @option params [required, Integer] :device_index
-    #   The index of the device for the network interface attachment.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :instance_id
-    #   The ID of the instance.
-    #
-    # @option params [required, String] :network_interface_id
-    #   The ID of the network interface.
-    #
     # @option params [Integer] :network_card_index
     #   The index of the network card. Some instance types support multiple
     #   network cards. The primary network interface must be assigned to
@@ -2922,6 +2914,21 @@ module Aws::EC2
     # @option params [Types::EnaSrdSpecification] :ena_srd_specification
     #   Configures ENA Express for the network interface that this action
     #   attaches to the instance.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :network_interface_id
+    #   The ID of the network interface.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance.
+    #
+    # @option params [required, Integer] :device_index
+    #   The index of the device for the network interface attachment.
     #
     # @return [Types::AttachNetworkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2947,10 +2954,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_network_interface({
-    #     device_index: 1, # required
-    #     dry_run: false,
-    #     instance_id: "InstanceId", # required
-    #     network_interface_id: "NetworkInterfaceId", # required
     #     network_card_index: 1,
     #     ena_srd_specification: {
     #       ena_srd_enabled: false,
@@ -2958,6 +2961,10 @@ module Aws::EC2
     #         ena_srd_udp_enabled: false,
     #       },
     #     },
+    #     dry_run: false,
+    #     network_interface_id: "NetworkInterfaceId", # required
+    #     instance_id: "InstanceId", # required
+    #     device_index: 1, # required
     #   })
     #
     # @example Response structure
@@ -3114,14 +3121,14 @@ module Aws::EC2
     #
     # @return [Types::VolumeAttachment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::VolumeAttachment#attach_time #attach_time} => Time
-    #   * {Types::VolumeAttachment#device #device} => String
-    #   * {Types::VolumeAttachment#instance_id #instance_id} => String
-    #   * {Types::VolumeAttachment#state #state} => String
-    #   * {Types::VolumeAttachment#volume_id #volume_id} => String
     #   * {Types::VolumeAttachment#delete_on_termination #delete_on_termination} => Boolean
     #   * {Types::VolumeAttachment#associated_resource #associated_resource} => String
     #   * {Types::VolumeAttachment#instance_owning_service #instance_owning_service} => String
+    #   * {Types::VolumeAttachment#volume_id #volume_id} => String
+    #   * {Types::VolumeAttachment#instance_id #instance_id} => String
+    #   * {Types::VolumeAttachment#device #device} => String
+    #   * {Types::VolumeAttachment#state #state} => String
+    #   * {Types::VolumeAttachment#attach_time #attach_time} => Time
     #
     #
     # @example Example: To attach a volume to an instance
@@ -3154,14 +3161,14 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.attach_time #=> Time
-    #   resp.device #=> String
-    #   resp.instance_id #=> String
-    #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
-    #   resp.volume_id #=> String
     #   resp.delete_on_termination #=> Boolean
     #   resp.associated_resource #=> String
     #   resp.instance_owning_service #=> String
+    #   resp.volume_id #=> String
+    #   resp.instance_id #=> String
+    #   resp.device #=> String
+    #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
+    #   resp.attach_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVolume AWS API Documentation
     #
@@ -3172,8 +3179,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Attaches a virtual private gateway to a VPC. You can attach one
-    # virtual private gateway to one VPC at a time.
+    # Attaches an available virtual private gateway to a VPC. You can attach
+    # one virtual private gateway to one VPC at a time.
     #
     # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
     # the *Amazon Web Services Site-to-Site VPN User Guide*.
@@ -3208,8 +3215,8 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.vpc_attachment.state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.vpc_attachment.vpc_id #=> String
+    #   resp.vpc_attachment.state #=> String, one of "attaching", "attached", "detaching", "detached"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVpnGateway AWS API Documentation
     #
@@ -3325,6 +3332,9 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html
     # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags applied to the security group rule.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -3334,29 +3344,26 @@ module Aws::EC2
     # @option params [required, String] :group_id
     #   The ID of the security group.
     #
-    # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   The permissions for the security group rules.
-    #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags applied to the security group rule.
-    #
-    # @option params [String] :cidr_ip
-    #   Not supported. Use IP permissions instead.
-    #
-    # @option params [Integer] :from_port
-    #   Not supported. Use IP permissions instead.
-    #
-    # @option params [String] :ip_protocol
-    #   Not supported. Use IP permissions instead.
-    #
-    # @option params [Integer] :to_port
-    #   Not supported. Use IP permissions instead.
-    #
     # @option params [String] :source_security_group_name
     #   Not supported. Use IP permissions instead.
     #
     # @option params [String] :source_security_group_owner_id
     #   Not supported. Use IP permissions instead.
+    #
+    # @option params [String] :ip_protocol
+    #   Not supported. Use IP permissions instead.
+    #
+    # @option params [Integer] :from_port
+    #   Not supported. Use IP permissions instead.
+    #
+    # @option params [Integer] :to_port
+    #   Not supported. Use IP permissions instead.
+    #
+    # @option params [String] :cidr_ip
+    #   Not supported. Use IP permissions instead.
+    #
+    # @option params [Array<Types::IpPermission>] :ip_permissions
+    #   The permissions for the security group rules.
     #
     # @return [Types::AuthorizeSecurityGroupEgressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3415,44 +3422,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.authorize_security_group_egress({
-    #     dry_run: false,
-    #     group_id: "SecurityGroupId", # required
-    #     ip_permissions: [
-    #       {
-    #         from_port: 1,
-    #         ip_protocol: "String",
-    #         ip_ranges: [
-    #           {
-    #             cidr_ip: "String",
-    #             description: "String",
-    #           },
-    #         ],
-    #         ipv_6_ranges: [
-    #           {
-    #             cidr_ipv_6: "String",
-    #             description: "String",
-    #           },
-    #         ],
-    #         prefix_list_ids: [
-    #           {
-    #             description: "String",
-    #             prefix_list_id: "String",
-    #           },
-    #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #           },
-    #         ],
-    #       },
-    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -3464,12 +3433,50 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
-    #     cidr_ip: "String",
-    #     from_port: 1,
-    #     ip_protocol: "String",
-    #     to_port: 1,
+    #     dry_run: false,
+    #     group_id: "SecurityGroupId", # required
     #     source_security_group_name: "String",
     #     source_security_group_owner_id: "String",
+    #     ip_protocol: "String",
+    #     from_port: 1,
+    #     to_port: 1,
+    #     cidr_ip: "String",
+    #     ip_permissions: [
+    #       {
+    #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
+    #         ip_ranges: [
+    #           {
+    #             description: "String",
+    #             cidr_ip: "String",
+    #           },
+    #         ],
+    #         ipv_6_ranges: [
+    #           {
+    #             description: "String",
+    #             cidr_ipv_6: "String",
+    #           },
+    #         ],
+    #         prefix_list_ids: [
+    #           {
+    #             description: "String",
+    #             prefix_list_id: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3602,14 +3609,14 @@ module Aws::EC2
     #   To specify multiple rules and descriptions for the rules, use IP
     #   permissions instead.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags applied to the security group rule.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags applied to the security group rule.
     #
     # @return [Types::AuthorizeSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3705,18 +3712,30 @@ module Aws::EC2
     #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
-    #         from_port: 1,
     #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
     #         ip_ranges: [
     #           {
-    #             cidr_ip: "String",
     #             description: "String",
+    #             cidr_ip: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
-    #             cidr_ipv_6: "String",
     #             description: "String",
+    #             cidr_ipv_6: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
@@ -3725,25 +3744,12 @@ module Aws::EC2
     #             prefix_list_id: "String",
     #           },
     #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #           },
-    #         ],
     #       },
     #     ],
     #     ip_protocol: "String",
     #     source_security_group_name: "String",
     #     source_security_group_owner_id: "String",
     #     to_port: 1,
-    #     dry_run: false,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -3755,6 +3761,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -3839,19 +3846,19 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.bundle_task.bundle_id #=> String
-    #   resp.bundle_task.bundle_task_error.code #=> String
-    #   resp.bundle_task.bundle_task_error.message #=> String
     #   resp.bundle_task.instance_id #=> String
-    #   resp.bundle_task.progress #=> String
-    #   resp.bundle_task.start_time #=> Time
+    #   resp.bundle_task.bundle_id #=> String
     #   resp.bundle_task.state #=> String, one of "pending", "waiting-for-shutdown", "bundling", "storing", "cancelling", "complete", "failed"
+    #   resp.bundle_task.start_time #=> Time
+    #   resp.bundle_task.update_time #=> Time
     #   resp.bundle_task.storage.s3.aws_access_key_id #=> String
     #   resp.bundle_task.storage.s3.bucket #=> String
     #   resp.bundle_task.storage.s3.prefix #=> String
     #   resp.bundle_task.storage.s3.upload_policy #=> String
     #   resp.bundle_task.storage.s3.upload_policy_signature #=> String
-    #   resp.bundle_task.update_time #=> Time
+    #   resp.bundle_task.progress #=> String
+    #   resp.bundle_task.bundle_task_error.code #=> String
+    #   resp.bundle_task.bundle_task_error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstance AWS API Documentation
     #
@@ -3887,19 +3894,19 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.bundle_task.bundle_id #=> String
-    #   resp.bundle_task.bundle_task_error.code #=> String
-    #   resp.bundle_task.bundle_task_error.message #=> String
     #   resp.bundle_task.instance_id #=> String
-    #   resp.bundle_task.progress #=> String
-    #   resp.bundle_task.start_time #=> Time
+    #   resp.bundle_task.bundle_id #=> String
     #   resp.bundle_task.state #=> String, one of "pending", "waiting-for-shutdown", "bundling", "storing", "cancelling", "complete", "failed"
+    #   resp.bundle_task.start_time #=> Time
+    #   resp.bundle_task.update_time #=> Time
     #   resp.bundle_task.storage.s3.aws_access_key_id #=> String
     #   resp.bundle_task.storage.s3.bucket #=> String
     #   resp.bundle_task.storage.s3.prefix #=> String
     #   resp.bundle_task.storage.s3.upload_policy #=> String
     #   resp.bundle_task.storage.s3.upload_policy_signature #=> String
-    #   resp.bundle_task.update_time #=> Time
+    #   resp.bundle_task.progress #=> String
+    #   resp.bundle_task.bundle_task_error.code #=> String
+    #   resp.bundle_task.bundle_task_error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTask AWS API Documentation
     #
@@ -4012,14 +4019,14 @@ module Aws::EC2
     # conversion is complete or is in the process of transferring the final
     # disk image, the command fails and returns an exception.
     #
-    # @option params [required, String] :conversion_task_id
-    #   The ID of the conversion task.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :conversion_task_id
+    #   The ID of the conversion task.
     #
     # @option params [String] :reason_message
     #   The reason for canceling the conversion task.
@@ -4029,8 +4036,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_conversion_task({
-    #     conversion_task_id: "ConversionTaskId", # required
     #     dry_run: false,
+    #     conversion_task_id: "ConversionTaskId", # required
     #     reason_message: "String",
     #   })
     #
@@ -4397,15 +4404,15 @@ module Aws::EC2
     #   The product code. This must be a product code that you own.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::ConfirmProductInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ConfirmProductInstanceResult#owner_id #owner_id} => String
     #   * {Types::ConfirmProductInstanceResult#return #return} => Boolean
+    #   * {Types::ConfirmProductInstanceResult#owner_id #owner_id} => String
     #
     #
     # @example Example: To confirm the product instance
@@ -4432,8 +4439,8 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.owner_id #=> String
     #   resp.return #=> Boolean
+    #   resp.owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConfirmProductInstance AWS API Documentation
     #
@@ -4599,12 +4606,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [Boolean] :copy_image_tags
     #   Indicates whether to include your user-defined AMI tags when copying
     #   the AMI.
@@ -4635,6 +4636,12 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::CopyImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4668,7 +4675,6 @@ module Aws::EC2
     #     source_image_id: "String", # required
     #     source_region: "String", # required
     #     destination_outpost_arn: "String",
-    #     dry_run: false,
     #     copy_image_tags: false,
     #     tag_specifications: [
     #       {
@@ -4681,6 +4687,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -4830,8 +4837,8 @@ module Aws::EC2
     #
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CopySnapshotResult#snapshot_id #snapshot_id} => String
     #   * {Types::CopySnapshotResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CopySnapshotResult#snapshot_id #snapshot_id} => String
     #
     #
     # @example Example: To copy a snapshot
@@ -4903,10 +4910,10 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.snapshot_id #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.snapshot_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshot AWS API Documentation
     #
@@ -5965,12 +5972,6 @@ module Aws::EC2
     #   RFC1918 private IPv4 address. If `OutsideIpAddressType` is set to
     #   `PublicIpv4`, you can use a public IPv4 address.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [Integer] :bgp_asn_extended
     #   For customer gateway devices that support BGP, specify the device's
     #   ASN. You must specify either `BgpAsn` or `BgpAsnExtended` when
@@ -5978,6 +5979,12 @@ module Aws::EC2
     #   `2,147,483,647`, you must use `BgpAsnExtended`.
     #
     #   Valid values: `2,147,483,648` to `4,294,967,295`
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::CreateCustomerGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6025,23 +6032,23 @@ module Aws::EC2
     #     ],
     #     device_name: "String",
     #     ip_address: "String",
-    #     dry_run: false,
     #     bgp_asn_extended: 1,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
-    #   resp.customer_gateway.bgp_asn #=> String
-    #   resp.customer_gateway.customer_gateway_id #=> String
-    #   resp.customer_gateway.ip_address #=> String
     #   resp.customer_gateway.certificate_arn #=> String
-    #   resp.customer_gateway.state #=> String
-    #   resp.customer_gateway.type #=> String
     #   resp.customer_gateway.device_name #=> String
     #   resp.customer_gateway.tags #=> Array
     #   resp.customer_gateway.tags[0].key #=> String
     #   resp.customer_gateway.tags[0].value #=> String
     #   resp.customer_gateway.bgp_asn_extended #=> String
+    #   resp.customer_gateway.customer_gateway_id #=> String
+    #   resp.customer_gateway.state #=> String
+    #   resp.customer_gateway.type #=> String
+    #   resp.customer_gateway.ip_address #=> String
+    #   resp.customer_gateway.bgp_asn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGateway AWS API Documentation
     #
@@ -6059,7 +6066,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-subnet
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/work-with-default-vpc.html#create-default-subnet
     #
     # @option params [required, String] :availability_zone
     #   The Availability Zone in which to create the default subnet.
@@ -6089,18 +6096,10 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.subnet.availability_zone #=> String
     #   resp.subnet.availability_zone_id #=> String
-    #   resp.subnet.available_ip_address_count #=> Integer
-    #   resp.subnet.cidr_block #=> String
-    #   resp.subnet.default_for_az #=> Boolean
     #   resp.subnet.enable_lni_at_device_index #=> Integer
-    #   resp.subnet.map_public_ip_on_launch #=> Boolean
     #   resp.subnet.map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnet.customer_owned_ipv_4_pool #=> String
-    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
-    #   resp.subnet.subnet_id #=> String
-    #   resp.subnet.vpc_id #=> String
     #   resp.subnet.owner_id #=> String
     #   resp.subnet.assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnet.ipv_6_cidr_block_association_set #=> Array
@@ -6120,6 +6119,14 @@ module Aws::EC2
     #   resp.subnet.private_dns_name_options_on_launch.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
+    #   resp.subnet.subnet_id #=> String
+    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
+    #   resp.subnet.vpc_id #=> String
+    #   resp.subnet.cidr_block #=> String
+    #   resp.subnet.available_ip_address_count #=> Integer
+    #   resp.subnet.availability_zone #=> String
+    #   resp.subnet.default_for_az #=> Boolean
+    #   resp.subnet.map_public_ip_on_launch #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnet AWS API Documentation
     #
@@ -6161,10 +6168,6 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.vpc.cidr_block #=> String
-    #   resp.vpc.dhcp_options_id #=> String
-    #   resp.vpc.state #=> String, one of "pending", "available"
-    #   resp.vpc.vpc_id #=> String
     #   resp.vpc.owner_id #=> String
     #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpc.ipv_6_cidr_block_association_set #=> Array
@@ -6185,6 +6188,10 @@ module Aws::EC2
     #   resp.vpc.tags #=> Array
     #   resp.vpc.tags[0].key #=> String
     #   resp.vpc.tags[0].value #=> String
+    #   resp.vpc.vpc_id #=> String
+    #   resp.vpc.state #=> String, one of "pending", "available"
+    #   resp.vpc.cidr_block #=> String
+    #   resp.vpc.dhcp_options_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultVpc AWS API Documentation
     #
@@ -6327,15 +6334,15 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.dhcp_options.dhcp_configurations #=> Array
-    #   resp.dhcp_options.dhcp_configurations[0].key #=> String
-    #   resp.dhcp_options.dhcp_configurations[0].values #=> Array
-    #   resp.dhcp_options.dhcp_configurations[0].values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.dhcp_options.dhcp_options_id #=> String
     #   resp.dhcp_options.owner_id #=> String
     #   resp.dhcp_options.tags #=> Array
     #   resp.dhcp_options.tags[0].key #=> String
     #   resp.dhcp_options.tags[0].value #=> String
+    #   resp.dhcp_options.dhcp_options_id #=> String
+    #   resp.dhcp_options.dhcp_configurations #=> Array
+    #   resp.dhcp_options.dhcp_configurations[0].key #=> String
+    #   resp.dhcp_options.dhcp_configurations[0].values #=> Array
+    #   resp.dhcp_options.dhcp_configurations[0].values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDhcpOptions AWS API Documentation
     #
@@ -6586,7 +6593,6 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
     #             placement: {
-    #               availability_zone: "String",
     #               affinity: "String",
     #               group_name: "PlacementGroupName",
     #               partition_number: 1,
@@ -6595,6 +6601,7 @@ module Aws::EC2
     #               spread_domain: "String",
     #               host_resource_group_arn: "String",
     #               group_id: "PlacementGroupId",
+    #               availability_zone: "String",
     #             },
     #             instance_requirements: {
     #               v_cpu_count: { # required
@@ -6826,7 +6833,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html
     #
     # @option params [Boolean] :dry_run
@@ -6922,7 +6929,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
@@ -7114,59 +7121,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html
     #
-    # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mappings.
-    #
-    #   When using the CreateImage action:
-    #
-    #   * You can't change the volume size using the VolumeSize parameter. If
-    #     you want a different volume size, you must first change the volume
-    #     size of the source instance.
-    #
-    #   * You can't modify the encryption status of existing volumes or
-    #     snapshots. To create an AMI with volumes or snapshots that have a
-    #     different encryption status (for example, where the source volume
-    #     and snapshots are unencrypted, and you want to create an AMI with
-    #     encrypted volumes or snapshots), use the CopyImage action.
-    #
-    #   * The only option that can be changed for existing mappings or
-    #     snapshots is `DeleteOnTermination`.
-    #
-    # @option params [String] :description
-    #   A description for the new image.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :instance_id
-    #   The ID of the instance.
-    #
-    # @option params [required, String] :name
-    #   A name for the new image.
-    #
-    #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
-    #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
-    #   single quotes ('), at-signs (@), or underscores(\_)
-    #
-    # @option params [Boolean] :no_reboot
-    #   Indicates whether or not the instance should be automatically rebooted
-    #   before creating the image. Specify one of the following values:
-    #
-    #   * `true` - The instance is not rebooted before creating the image.
-    #     This creates crash-consistent snapshots that include only the data
-    #     that has been written to the volumes at the time the snapshots are
-    #     created. Buffered data and data in memory that has not yet been
-    #     written to the volumes is not included in the snapshots.
-    #
-    #   * `false` - The instance is rebooted before creating the image. This
-    #     ensures that all buffered data and data in memory is written to the
-    #     volumes before the snapshots are created.
-    #
-    #   Default: `false`
-    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the AMI and snapshots on creation. You can tag
     #   the AMI, the snapshots, or both.
@@ -7186,6 +7140,59 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance.
+    #
+    # @option params [required, String] :name
+    #   A name for the new image.
+    #
+    #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
+    #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
+    #   single quotes ('), at-signs (@), or underscores(\_)
+    #
+    # @option params [String] :description
+    #   A description for the new image.
+    #
+    # @option params [Boolean] :no_reboot
+    #   Indicates whether or not the instance should be automatically rebooted
+    #   before creating the image. Specify one of the following values:
+    #
+    #   * `true` - The instance is not rebooted before creating the image.
+    #     This creates crash-consistent snapshots that include only the data
+    #     that has been written to the volumes at the time the snapshots are
+    #     created. Buffered data and data in memory that has not yet been
+    #     written to the volumes is not included in the snapshots.
+    #
+    #   * `false` - The instance is rebooted before creating the image. This
+    #     ensures that all buffered data and data in memory is written to the
+    #     volumes before the snapshots are created.
+    #
+    #   Default: `false`
+    #
+    # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
+    #   The block device mappings.
+    #
+    #   When using the CreateImage action:
+    #
+    #   * You can't change the volume size using the VolumeSize parameter. If
+    #     you want a different volume size, you must first change the volume
+    #     size of the source instance.
+    #
+    #   * You can't modify the encryption status of existing volumes or
+    #     snapshots. To create an AMI with volumes or snapshots that have a
+    #     different encryption status (for example, where the source volume
+    #     and snapshots are unencrypted, and you want to create an AMI with
+    #     encrypted volumes or snapshots), use the CopyImage action.
+    #
+    #   * The only option that can be changed for existing mappings or
+    #     snapshots is `DeleteOnTermination`.
     #
     # @return [Types::CreateImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7224,10 +7231,24 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_image({
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     instance_id: "InstanceId", # required
+    #     name: "String", # required
+    #     description: "String",
+    #     no_reboot: false,
     #     block_device_mappings: [
     #       {
-    #         device_name: "String",
-    #         virtual_name: "String",
     #         ebs: {
     #           delete_on_termination: false,
     #           iops: 1,
@@ -7240,22 +7261,8 @@ module Aws::EC2
     #           encrypted: false,
     #         },
     #         no_device: "String",
-    #       },
-    #     ],
-    #     description: "String",
-    #     dry_run: false,
-    #     instance_id: "InstanceId", # required
-    #     name: "String", # required
-    #     no_reboot: false,
-    #     tag_specifications: [
-    #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
+    #         device_name: "String",
+    #         virtual_name: "String",
     #       },
     #     ],
     #   })
@@ -7528,12 +7535,12 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the export instance task during creation.
+    #
     # @option params [String] :description
     #   A description for the conversion task or the resource being exported.
     #   The maximum length is 255 characters.
-    #
-    # @option params [required, Types::ExportToS3TaskSpecification] :export_to_s3_task
-    #   The format and location for an export instance task.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -7541,8 +7548,8 @@ module Aws::EC2
     # @option params [required, String] :target_environment
     #   The target virtualization environment.
     #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the export instance task during creation.
+    # @option params [required, Types::ExportToS3TaskSpecification] :export_to_s3_task
+    #   The format and location for an export instance task.
     #
     # @return [Types::CreateInstanceExportTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7551,15 +7558,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_instance_export_task({
-    #     description: "String",
-    #     export_to_s3_task: { # required
-    #       container_format: "ova", # accepts ova
-    #       disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
-    #       s3_bucket: "String",
-    #       s3_prefix: "String",
-    #     },
-    #     instance_id: "InstanceId", # required
-    #     target_environment: "citrix", # required, accepts citrix, vmware, microsoft
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -7571,6 +7569,15 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     description: "String",
+    #     instance_id: "InstanceId", # required
+    #     target_environment: "citrix", # required, accepts citrix, vmware, microsoft
+    #     export_to_s3_task: { # required
+    #       disk_image_format: "VMDK", # accepts VMDK, RAW, VHD
+    #       container_format: "ova", # accepts ova
+    #       s3_bucket: "String",
+    #       s3_prefix: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -7922,7 +7929,7 @@ module Aws::EC2
     #   IPAM's home region cannot use CIDRs from this pool.
     #
     #   Possible values: Any Amazon Web Services Region or supported Amazon
-    #   Web Services Local Zone.
+    #   Web Services Local Zone. Default is `none` and means any locale.
     #
     #
     #
@@ -8318,12 +8325,6 @@ module Aws::EC2
     #
     #   Constraints: Up to 255 ASCII characters
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [String] :key_type
     #   The type of key pair. Note that ED25519 keys are not supported for
     #   Windows instances.
@@ -8338,13 +8339,19 @@ module Aws::EC2
     #
     #   Default: `pem`
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @return [Types::KeyPair] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::KeyPair#key_fingerprint #key_fingerprint} => String
-    #   * {Types::KeyPair#key_material #key_material} => String
-    #   * {Types::KeyPair#key_name #key_name} => String
     #   * {Types::KeyPair#key_pair_id #key_pair_id} => String
     #   * {Types::KeyPair#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::KeyPair#key_name #key_name} => String
+    #   * {Types::KeyPair#key_fingerprint #key_fingerprint} => String
+    #   * {Types::KeyPair#key_material #key_material} => String
     #
     #
     # @example Example: To create a key pair
@@ -8359,7 +8366,6 @@ module Aws::EC2
     #
     #   resp = client.create_key_pair({
     #     key_name: "String", # required
-    #     dry_run: false,
     #     key_type: "rsa", # accepts rsa, ed25519
     #     tag_specifications: [
     #       {
@@ -8373,17 +8379,18 @@ module Aws::EC2
     #       },
     #     ],
     #     key_format: "pem", # accepts pem, ppk
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
-    #   resp.key_fingerprint #=> String
-    #   resp.key_material #=> String
-    #   resp.key_name #=> String
     #   resp.key_pair_id #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.key_name #=> String
+    #   resp.key_fingerprint #=> String
+    #   resp.key_material #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPair AWS API Documentation
     #
@@ -9703,7 +9710,7 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html
     #
     # @option params [String] :allocation_id
     #   \[Public NAT gateways only\] The allocation ID of an Elastic IP
@@ -9753,7 +9760,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #
     # @option params [Array<String>] :secondary_private_ip_addresses
     #   Secondary private IPv4 addresses. For more information about secondary
@@ -9762,7 +9769,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #
     # @option params [Integer] :secondary_private_ip_address_count
     #   \[Private NAT gateway only\] The number of secondary private IPv4
@@ -9772,7 +9779,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #
     # @return [Types::CreateNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9881,15 +9888,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :vpc_id
-    #   The ID of the VPC.
-    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
     #
@@ -9904,6 +9902,15 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC.
     #
     # @return [Types::CreateNetworkAclResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9951,8 +9958,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_network_acl({
-    #     dry_run: false,
-    #     vpc_id: "VpcId", # required
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -9965,6 +9970,8 @@ module Aws::EC2
     #       },
     #     ],
     #     client_token: "String",
+    #     dry_run: false,
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -10025,37 +10032,21 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
-    # @option params [String] :cidr_block
-    #   The IPv4 network range to allow or deny, in CIDR notation (for example
-    #   `172.16.0.0/24`). We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, Boolean] :egress
-    #   Indicates whether this is an egress rule (rule is applied to traffic
-    #   leaving the subnet).
-    #
-    # @option params [Types::IcmpTypeCode] :icmp_type_code
-    #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
-    #   block.
-    #
-    # @option params [String] :ipv_6_cidr_block
-    #   The IPv6 network range to allow or deny, in CIDR notation (for example
-    #   `2001:db8:1234:1a00::/64`).
-    #
     # @option params [required, String] :network_acl_id
     #   The ID of the network ACL.
     #
-    # @option params [Types::PortRange] :port_range
-    #   TCP or UDP protocols: The range of ports the rule applies to. Required
-    #   if specifying protocol 6 (TCP) or 17 (UDP).
+    # @option params [required, Integer] :rule_number
+    #   The rule number for the entry (for example, 100). ACL entries are
+    #   processed in ascending order by rule number.
+    #
+    #   Constraints: Positive integer from 1 to 32766. The range 32767 to
+    #   65535 is reserved for internal use.
     #
     # @option params [required, String] :protocol
     #   The protocol number. A value of "-1" means all protocols. If you
@@ -10070,12 +10061,28 @@ module Aws::EC2
     # @option params [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
     #
-    # @option params [required, Integer] :rule_number
-    #   The rule number for the entry (for example, 100). ACL entries are
-    #   processed in ascending order by rule number.
+    # @option params [required, Boolean] :egress
+    #   Indicates whether this is an egress rule (rule is applied to traffic
+    #   leaving the subnet).
     #
-    #   Constraints: Positive integer from 1 to 32766. The range 32767 to
-    #   65535 is reserved for internal use.
+    # @option params [String] :cidr_block
+    #   The IPv4 network range to allow or deny, in CIDR notation (for example
+    #   `172.16.0.0/24`). We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
+    #
+    # @option params [String] :ipv_6_cidr_block
+    #   The IPv6 network range to allow or deny, in CIDR notation (for example
+    #   `2001:db8:1234:1a00::/64`).
+    #
+    # @option params [Types::IcmpTypeCode] :icmp_type_code
+    #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
+    #   block.
+    #
+    # @option params [Types::PortRange] :port_range
+    #   TCP or UDP protocols: The range of ports the rule applies to. Required
+    #   if specifying protocol 6 (TCP) or 17 (UDP).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -10101,22 +10108,22 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_network_acl_entry({
-    #     cidr_block: "String",
     #     dry_run: false,
+    #     network_acl_id: "NetworkAclId", # required
+    #     rule_number: 1, # required
+    #     protocol: "String", # required
+    #     rule_action: "allow", # required, accepts allow, deny
     #     egress: false, # required
+    #     cidr_block: "String",
+    #     ipv_6_cidr_block: "String",
     #     icmp_type_code: {
     #       code: 1,
     #       type: 1,
     #     },
-    #     ipv_6_cidr_block: "String",
-    #     network_acl_id: "NetworkAclId", # required
     #     port_range: {
     #       from: 1,
     #       to: 1,
     #     },
-    #     protocol: "String", # required
-    #     rule_action: "allow", # required, accepts allow, deny
-    #     rule_number: 1, # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclEntry AWS API Documentation
@@ -10541,62 +10548,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
     #
-    # @option params [String] :description
-    #   A description for the network interface.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :groups
-    #   The IDs of one or more security groups.
-    #
-    # @option params [Integer] :ipv_6_address_count
-    #   The number of IPv6 addresses to assign to a network interface. Amazon
-    #   EC2 automatically selects the IPv6 addresses from the subnet range.
-    #
-    #   You can't specify a count of IPv6 addresses using this parameter if
-    #   you've specified one of the following: specific IPv6 addresses,
-    #   specific IPv6 prefixes, or a count of IPv6 prefixes.
-    #
-    #   If your subnet has the `AssignIpv6AddressOnCreation` attribute set,
-    #   you can override that setting by specifying 0 as the IPv6 address
-    #   count.
-    #
-    # @option params [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   The IPv6 addresses from the IPv6 CIDR block range of your subnet.
-    #
-    #   You can't specify IPv6 addresses using this parameter if you've
-    #   specified one of the following: a count of IPv6 addresses, specific
-    #   IPv6 prefixes, or a count of IPv6 prefixes.
-    #
-    # @option params [String] :private_ip_address
-    #   The primary private IPv4 address of the network interface. If you
-    #   don't specify an IPv4 address, Amazon EC2 selects one for you from
-    #   the subnet's IPv4 CIDR range. If you specify an IP address, you
-    #   cannot indicate any IP addresses specified in `privateIpAddresses` as
-    #   primary (only one IP address can be designated as primary).
-    #
-    # @option params [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
-    #   The private IPv4 addresses.
-    #
-    #   You can't specify private IPv4 addresses if you've specified one of
-    #   the following: a count of private IPv4 addresses, specific IPv4
-    #   prefixes, or a count of IPv4 prefixes.
-    #
-    # @option params [Integer] :secondary_private_ip_address_count
-    #   The number of secondary private IPv4 addresses to assign to a network
-    #   interface. When you specify a number of secondary IPv4 addresses,
-    #   Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR
-    #   range. You can't specify this option and specify more than one
-    #   private IP address using `privateIpAddresses`.
-    #
-    #   You can't specify a count of private IPv4 addresses if you've
-    #   specified one of the following: specific private IPv4 addresses,
-    #   specific IPv4 prefixes, or a count of IPv4 prefixes.
-    #
     # @option params [Array<Types::Ipv4PrefixSpecificationRequest>] :ipv_4_prefixes
     #   The IPv4 prefixes assigned to the network interface.
     #
@@ -10632,9 +10583,6 @@ module Aws::EC2
     #
     #   The only supported values are `interface`, `efa`, and `trunk`.
     #
-    # @option params [required, String] :subnet_id
-    #   The ID of the subnet to associate with the network interface.
-    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new network interface.
     #
@@ -10669,6 +10617,65 @@ module Aws::EC2
     #
     # @option params [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
     #   A connection tracking specification for the network interface.
+    #
+    # @option params [required, String] :subnet_id
+    #   The ID of the subnet to associate with the network interface.
+    #
+    # @option params [String] :description
+    #   A description for the network interface.
+    #
+    # @option params [String] :private_ip_address
+    #   The primary private IPv4 address of the network interface. If you
+    #   don't specify an IPv4 address, Amazon EC2 selects one for you from
+    #   the subnet's IPv4 CIDR range. If you specify an IP address, you
+    #   cannot indicate any IP addresses specified in `privateIpAddresses` as
+    #   primary (only one IP address can be designated as primary).
+    #
+    # @option params [Array<String>] :groups
+    #   The IDs of one or more security groups.
+    #
+    # @option params [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
+    #   The private IPv4 addresses.
+    #
+    #   You can't specify private IPv4 addresses if you've specified one of
+    #   the following: a count of private IPv4 addresses, specific IPv4
+    #   prefixes, or a count of IPv4 prefixes.
+    #
+    # @option params [Integer] :secondary_private_ip_address_count
+    #   The number of secondary private IPv4 addresses to assign to a network
+    #   interface. When you specify a number of secondary IPv4 addresses,
+    #   Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR
+    #   range. You can't specify this option and specify more than one
+    #   private IP address using `privateIpAddresses`.
+    #
+    #   You can't specify a count of private IPv4 addresses if you've
+    #   specified one of the following: specific private IPv4 addresses,
+    #   specific IPv4 prefixes, or a count of IPv4 prefixes.
+    #
+    # @option params [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
+    #   The IPv6 addresses from the IPv6 CIDR block range of your subnet.
+    #
+    #   You can't specify IPv6 addresses using this parameter if you've
+    #   specified one of the following: a count of IPv6 addresses, specific
+    #   IPv6 prefixes, or a count of IPv6 prefixes.
+    #
+    # @option params [Integer] :ipv_6_address_count
+    #   The number of IPv6 addresses to assign to a network interface. Amazon
+    #   EC2 automatically selects the IPv6 addresses from the subnet range.
+    #
+    #   You can't specify a count of IPv6 addresses using this parameter if
+    #   you've specified one of the following: specific IPv6 addresses,
+    #   specific IPv6 prefixes, or a count of IPv6 prefixes.
+    #
+    #   If your subnet has the `AssignIpv6AddressOnCreation` attribute set,
+    #   you can override that setting by specifying 0 as the IPv6 address
+    #   count.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::CreateNetworkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10723,24 +10730,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_network_interface({
-    #     description: "String",
-    #     dry_run: false,
-    #     groups: ["SecurityGroupId"],
-    #     ipv_6_address_count: 1,
-    #     ipv_6_addresses: [
-    #       {
-    #         ipv_6_address: "String",
-    #         is_primary_ipv_6: false,
-    #       },
-    #     ],
-    #     private_ip_address: "String",
-    #     private_ip_addresses: [
-    #       {
-    #         primary: false,
-    #         private_ip_address: "String",
-    #       },
-    #     ],
-    #     secondary_private_ip_address_count: 1,
     #     ipv_4_prefixes: [
     #       {
     #         ipv_4_prefix: "String",
@@ -10754,7 +10743,6 @@ module Aws::EC2
     #     ],
     #     ipv_6_prefix_count: 1,
     #     interface_type: "efa", # accepts efa, branch, trunk
-    #     subnet_id: "SubnetId", # required
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -10773,6 +10761,25 @@ module Aws::EC2
     #       udp_stream_timeout: 1,
     #       udp_timeout: 1,
     #     },
+    #     subnet_id: "SubnetId", # required
+    #     description: "String",
+    #     private_ip_address: "String",
+    #     groups: ["SecurityGroupId"],
+    #     private_ip_addresses: [
+    #       {
+    #         primary: false,
+    #         private_ip_address: "String",
+    #       },
+    #     ],
+    #     secondary_private_ip_address_count: 1,
+    #     ipv_6_addresses: [
+    #       {
+    #         ipv_6_address: "String",
+    #         is_primary_ipv_6: false,
+    #       },
+    #     ],
+    #     ipv_6_address_count: 1,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -10800,8 +10807,8 @@ module Aws::EC2
     #   resp.network_interface.connection_tracking_configuration.udp_timeout #=> Integer
     #   resp.network_interface.description #=> String
     #   resp.network_interface.groups #=> Array
-    #   resp.network_interface.groups[0].group_name #=> String
     #   resp.network_interface.groups[0].group_id #=> String
+    #   resp.network_interface.groups[0].group_name #=> String
     #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa", "trunk", "load_balancer", "network_load_balancer", "vpc_endpoint", "branch", "transit_gateway", "lambda", "quicksight", "global_accelerator_managed", "api_gateway_managed", "gateway_load_balancer", "gateway_load_balancer_endpoint", "iot_rules_managed", "aws_codestar_connections_managed"
     #   resp.network_interface.ipv_6_addresses #=> Array
     #   resp.network_interface.ipv_6_addresses[0].ipv_6_address #=> String
@@ -10925,21 +10932,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [String] :group_name
-    #   A name for the placement group. Must be unique within the scope of
-    #   your account for the Region.
-    #
-    #   Constraints: Up to 255 ASCII characters
-    #
-    # @option params [String] :strategy
-    #   The placement strategy.
-    #
     # @option params [Integer] :partition_count
     #   The number of partitions. Valid only when **Strategy** is set to
     #   `partition`.
@@ -10953,6 +10945,21 @@ module Aws::EC2
     #   * Host – You can use `host` only with Outpost placement groups.
     #
     #   * Rack – No usage restrictions.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :group_name
+    #   A name for the placement group. Must be unique within the scope of
+    #   your account for the Region.
+    #
+    #   Constraints: Up to 255 ASCII characters
+    #
+    # @option params [String] :strategy
+    #   The placement strategy.
     #
     # @return [Types::CreatePlacementGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10975,9 +10982,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_placement_group({
-    #     dry_run: false,
-    #     group_name: "String",
-    #     strategy: "cluster", # accepts cluster, spread, partition
     #     partition_count: 1,
     #     tag_specifications: [
     #       {
@@ -10991,6 +10995,9 @@ module Aws::EC2
     #       },
     #     ],
     #     spread_level: "host", # accepts host, rack
+    #     dry_run: false,
+    #     group_name: "String",
+    #     strategy: "cluster", # accepts cluster, spread, partition
     #   })
     #
     # @example Response structure
@@ -11229,14 +11236,8 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
     #
-    # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   your listings. This helps avoid duplicate listings. For more
-    #   information, see [Ensuring Idempotency][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    # @option params [required, String] :reserved_instances_id
+    #   The ID of the active Standard Reserved Instance.
     #
     # @option params [required, Integer] :instance_count
     #   The number of instances that are a part of a Reserved Instance account
@@ -11248,8 +11249,14 @@ module Aws::EC2
     #   A list specifying the price of the Standard Reserved Instance for each
     #   month remaining in the Reserved Instance term.
     #
-    # @option params [required, String] :reserved_instances_id
-    #   The ID of the active Standard Reserved Instance.
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   your listings. This helps avoid duplicate listings. For more
+    #   information, see [Ensuring Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::CreateReservedInstancesListingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11258,16 +11265,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_reserved_instances_listing({
-    #     client_token: "String", # required
+    #     reserved_instances_id: "ReservationId", # required
     #     instance_count: 1, # required
     #     price_schedules: [ # required
     #       {
-    #         currency_code: "USD", # accepts USD
-    #         price: 1.0,
     #         term: 1,
+    #         price: 1.0,
+    #         currency_code: "USD", # accepts USD
     #       },
     #     ],
-    #     reserved_instances_id: "ReservationId", # required
+    #     client_token: "String", # required
     #   })
     #
     # @example Response structure
@@ -11408,43 +11415,12 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
-    # @option params [String] :destination_cidr_block
-    #   The IPv4 CIDR address block used for the destination match. Routing
-    #   decisions are based on the most specific match. We modify the
-    #   specified CIDR block to its canonical form; for example, if you
-    #   specify `100.68.0.18/18`, we modify it to `100.68.0.0/18`.
-    #
-    # @option params [String] :destination_ipv_6_cidr_block
-    #   The IPv6 CIDR block used for the destination match. Routing decisions
-    #   are based on the most specific match.
-    #
     # @option params [String] :destination_prefix_list_id
     #   The ID of a prefix list used for the destination match.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :vpc_endpoint_id
     #   The ID of a VPC endpoint. Supported for Gateway Load Balancer
     #   endpoints only.
-    #
-    # @option params [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
-    #
-    # @option params [String] :gateway_id
-    #   The ID of an internet gateway or virtual private gateway attached to
-    #   your VPC.
-    #
-    # @option params [String] :instance_id
-    #   The ID of a NAT instance in your VPC. The operation fails if you
-    #   specify an instance ID unless exactly one network interface is
-    #   attached.
-    #
-    # @option params [String] :nat_gateway_id
-    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     #
     # @option params [String] :transit_gateway_id
     #   The ID of a transit gateway.
@@ -11458,17 +11434,48 @@ module Aws::EC2
     #   You can only use this option when the VPC contains a subnet which is
     #   associated with a Wavelength Zone.
     #
-    # @option params [String] :network_interface_id
-    #   The ID of a network interface.
+    # @option params [String] :core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :route_table_id
     #   The ID of the route table for the route.
     #
+    # @option params [String] :destination_cidr_block
+    #   The IPv4 CIDR address block used for the destination match. Routing
+    #   decisions are based on the most specific match. We modify the
+    #   specified CIDR block to its canonical form; for example, if you
+    #   specify `100.68.0.18/18`, we modify it to `100.68.0.0/18`.
+    #
+    # @option params [String] :gateway_id
+    #   The ID of an internet gateway or virtual private gateway attached to
+    #   your VPC.
+    #
+    # @option params [String] :destination_ipv_6_cidr_block
+    #   The IPv6 CIDR block used for the destination match. Routing decisions
+    #   are based on the most specific match.
+    #
+    # @option params [String] :egress_only_internet_gateway_id
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
+    #
+    # @option params [String] :instance_id
+    #   The ID of a NAT instance in your VPC. The operation fails if you
+    #   specify an instance ID unless exactly one network interface is
+    #   attached.
+    #
+    # @option params [String] :network_interface_id
+    #   The ID of a network interface.
+    #
     # @option params [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
     #
-    # @option params [String] :core_network_arn
-    #   The Amazon Resource Name (ARN) of the core network.
+    # @option params [String] :nat_gateway_id
+    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     #
     # @return [Types::CreateRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11489,22 +11496,22 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_route({
-    #     destination_cidr_block: "String",
-    #     destination_ipv_6_cidr_block: "String",
     #     destination_prefix_list_id: "PrefixListResourceId",
-    #     dry_run: false,
     #     vpc_endpoint_id: "VpcEndpointId",
-    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
-    #     gateway_id: "RouteGatewayId",
-    #     instance_id: "InstanceId",
-    #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
     #     local_gateway_id: "LocalGatewayId",
     #     carrier_gateway_id: "CarrierGatewayId",
-    #     network_interface_id: "NetworkInterfaceId",
-    #     route_table_id: "RouteTableId", # required
-    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #     core_network_arn: "CoreNetworkArn",
+    #     dry_run: false,
+    #     route_table_id: "RouteTableId", # required
+    #     destination_cidr_block: "String",
+    #     gateway_id: "RouteGatewayId",
+    #     destination_ipv_6_cidr_block: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     instance_id: "InstanceId",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #     nat_gateway_id: "NatGatewayId",
     #   })
     #
     # @example Response structure
@@ -11530,15 +11537,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :vpc_id
-    #   The ID of the VPC.
-    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
     #
@@ -11553,6 +11551,15 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC.
     #
     # @return [Types::CreateRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11592,8 +11599,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_route_table({
-    #     dry_run: false,
-    #     vpc_id: "VpcId", # required
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -11606,6 +11611,8 @@ module Aws::EC2
     #       },
     #     ],
     #     client_token: "String",
+    #     dry_run: false,
+    #     vpc_id: "VpcId", # required
     #   })
     #
     # @example Response structure
@@ -11857,24 +11864,24 @@ module Aws::EC2
     #
     # @return [Types::Snapshot] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Snapshot#data_encryption_key_id #data_encryption_key_id} => String
-    #   * {Types::Snapshot#description #description} => String
-    #   * {Types::Snapshot#encrypted #encrypted} => Boolean
-    #   * {Types::Snapshot#kms_key_id #kms_key_id} => String
-    #   * {Types::Snapshot#owner_id #owner_id} => String
-    #   * {Types::Snapshot#progress #progress} => String
-    #   * {Types::Snapshot#snapshot_id #snapshot_id} => String
-    #   * {Types::Snapshot#start_time #start_time} => Time
-    #   * {Types::Snapshot#state #state} => String
-    #   * {Types::Snapshot#state_message #state_message} => String
-    #   * {Types::Snapshot#volume_id #volume_id} => String
-    #   * {Types::Snapshot#volume_size #volume_size} => Integer
     #   * {Types::Snapshot#owner_alias #owner_alias} => String
     #   * {Types::Snapshot#outpost_arn #outpost_arn} => String
     #   * {Types::Snapshot#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Snapshot#storage_tier #storage_tier} => String
     #   * {Types::Snapshot#restore_expiry_time #restore_expiry_time} => Time
     #   * {Types::Snapshot#sse_type #sse_type} => String
+    #   * {Types::Snapshot#snapshot_id #snapshot_id} => String
+    #   * {Types::Snapshot#volume_id #volume_id} => String
+    #   * {Types::Snapshot#state #state} => String
+    #   * {Types::Snapshot#state_message #state_message} => String
+    #   * {Types::Snapshot#start_time #start_time} => Time
+    #   * {Types::Snapshot#progress #progress} => String
+    #   * {Types::Snapshot#owner_id #owner_id} => String
+    #   * {Types::Snapshot#description #description} => String
+    #   * {Types::Snapshot#volume_size #volume_size} => Integer
+    #   * {Types::Snapshot#encrypted #encrypted} => Boolean
+    #   * {Types::Snapshot#kms_key_id #kms_key_id} => String
+    #   * {Types::Snapshot#data_encryption_key_id #data_encryption_key_id} => String
     #
     #
     # @example Example: To create a snapshot
@@ -11922,18 +11929,6 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.data_encryption_key_id #=> String
-    #   resp.description #=> String
-    #   resp.encrypted #=> Boolean
-    #   resp.kms_key_id #=> String
-    #   resp.owner_id #=> String
-    #   resp.progress #=> String
-    #   resp.snapshot_id #=> String
-    #   resp.start_time #=> Time
-    #   resp.state #=> String, one of "pending", "completed", "error", "recoverable", "recovering"
-    #   resp.state_message #=> String
-    #   resp.volume_id #=> String
-    #   resp.volume_size #=> Integer
     #   resp.owner_alias #=> String
     #   resp.outpost_arn #=> String
     #   resp.tags #=> Array
@@ -11942,6 +11937,18 @@ module Aws::EC2
     #   resp.storage_tier #=> String, one of "archive", "standard"
     #   resp.restore_expiry_time #=> Time
     #   resp.sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
+    #   resp.snapshot_id #=> String
+    #   resp.volume_id #=> String
+    #   resp.state #=> String, one of "pending", "completed", "error", "recoverable", "recovering"
+    #   resp.state_message #=> String
+    #   resp.start_time #=> Time
+    #   resp.progress #=> String
+    #   resp.owner_id #=> String
+    #   resp.description #=> String
+    #   resp.volume_size #=> Integer
+    #   resp.encrypted #=> Boolean
+    #   resp.kms_key_id #=> String
+    #   resp.data_encryption_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshot AWS API Documentation
     #
@@ -12075,20 +12082,20 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html
     #
-    # @option params [required, String] :bucket
-    #   The name of the Amazon S3 bucket in which to store the Spot Instance
-    #   data feed. For more information about bucket names, see [Rules for
-    #   bucket naming][1] in the *Amazon S3 Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket in which to store the Spot Instance
+    #   data feed. For more information about bucket names, see [Bucket naming
+    #   rules][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #
     # @option params [String] :prefix
     #   The prefix for the data feed file names.
@@ -12120,8 +12127,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_spot_datafeed_subscription({
-    #     bucket: "String", # required
     #     dry_run: false,
+    #     bucket: "String", # required
     #     prefix: "String",
     #   })
     #
@@ -12283,12 +12290,6 @@ module Aws::EC2
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [Boolean] :ipv_6_native
     #   Indicates whether to create an IPv6 only subnet.
     #
@@ -12303,6 +12304,12 @@ module Aws::EC2
     #
     # @option params [Integer] :ipv_6_netmask_length
     #   An IPv6 netmask length for the subnet.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::CreateSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12351,28 +12358,20 @@ module Aws::EC2
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
-    #     dry_run: false,
     #     ipv_6_native: false,
     #     ipv_4_ipam_pool_id: "IpamPoolId",
     #     ipv_4_netmask_length: 1,
     #     ipv_6_ipam_pool_id: "IpamPoolId",
     #     ipv_6_netmask_length: 1,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
-    #   resp.subnet.availability_zone #=> String
     #   resp.subnet.availability_zone_id #=> String
-    #   resp.subnet.available_ip_address_count #=> Integer
-    #   resp.subnet.cidr_block #=> String
-    #   resp.subnet.default_for_az #=> Boolean
     #   resp.subnet.enable_lni_at_device_index #=> Integer
-    #   resp.subnet.map_public_ip_on_launch #=> Boolean
     #   resp.subnet.map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnet.customer_owned_ipv_4_pool #=> String
-    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
-    #   resp.subnet.subnet_id #=> String
-    #   resp.subnet.vpc_id #=> String
     #   resp.subnet.owner_id #=> String
     #   resp.subnet.assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnet.ipv_6_cidr_block_association_set #=> Array
@@ -12392,6 +12391,14 @@ module Aws::EC2
     #   resp.subnet.private_dns_name_options_on_launch.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
+    #   resp.subnet.subnet_id #=> String
+    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
+    #   resp.subnet.vpc_id #=> String
+    #   resp.subnet.cidr_block #=> String
+    #   resp.subnet.available_ip_address_count #=> Integer
+    #   resp.subnet.availability_zone #=> String
+    #   resp.subnet.default_for_az #=> Boolean
+    #   resp.subnet.map_public_ip_on_launch #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnet AWS API Documentation
     #
@@ -12403,13 +12410,14 @@ module Aws::EC2
     end
 
     # Creates a subnet CIDR reservation. For more information, see [Subnet
-    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Assign
-    # prefixes to network interfaces][2] in the *Amazon EC2 User Guide*.
+    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Manage
+    # prefixes for your network interfaces][2] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-prefixes.html
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
@@ -14494,12 +14502,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the volume during creation.
     #
@@ -14535,18 +14537,15 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @return [Types::Volume] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Volume#attachments #attachments} => Array&lt;Types::VolumeAttachment&gt;
-    #   * {Types::Volume#availability_zone #availability_zone} => String
-    #   * {Types::Volume#create_time #create_time} => Time
-    #   * {Types::Volume#encrypted #encrypted} => Boolean
-    #   * {Types::Volume#kms_key_id #kms_key_id} => String
     #   * {Types::Volume#outpost_arn #outpost_arn} => String
-    #   * {Types::Volume#size #size} => Integer
-    #   * {Types::Volume#snapshot_id #snapshot_id} => String
-    #   * {Types::Volume#state #state} => String
-    #   * {Types::Volume#volume_id #volume_id} => String
     #   * {Types::Volume#iops #iops} => Integer
     #   * {Types::Volume#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Volume#volume_type #volume_type} => String
@@ -14554,6 +14553,15 @@ module Aws::EC2
     #   * {Types::Volume#multi_attach_enabled #multi_attach_enabled} => Boolean
     #   * {Types::Volume#throughput #throughput} => Integer
     #   * {Types::Volume#sse_type #sse_type} => String
+    #   * {Types::Volume#volume_id #volume_id} => String
+    #   * {Types::Volume#size #size} => Integer
+    #   * {Types::Volume#snapshot_id #snapshot_id} => String
+    #   * {Types::Volume#availability_zone #availability_zone} => String
+    #   * {Types::Volume#state #state} => String
+    #   * {Types::Volume#create_time #create_time} => Time
+    #   * {Types::Volume#attachments #attachments} => Array&lt;Types::VolumeAttachment&gt;
+    #   * {Types::Volume#encrypted #encrypted} => Boolean
+    #   * {Types::Volume#kms_key_id #kms_key_id} => String
     #
     #
     # @example Example: To create a new volume
@@ -14618,7 +14626,6 @@ module Aws::EC2
     #     size: 1,
     #     snapshot_id: "SnapshotId",
     #     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
-    #     dry_run: false,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -14633,28 +14640,12 @@ module Aws::EC2
     #     multi_attach_enabled: false,
     #     throughput: 1,
     #     client_token: "String",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
-    #   resp.attachments #=> Array
-    #   resp.attachments[0].attach_time #=> Time
-    #   resp.attachments[0].device #=> String
-    #   resp.attachments[0].instance_id #=> String
-    #   resp.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
-    #   resp.attachments[0].volume_id #=> String
-    #   resp.attachments[0].delete_on_termination #=> Boolean
-    #   resp.attachments[0].associated_resource #=> String
-    #   resp.attachments[0].instance_owning_service #=> String
-    #   resp.availability_zone #=> String
-    #   resp.create_time #=> Time
-    #   resp.encrypted #=> Boolean
-    #   resp.kms_key_id #=> String
     #   resp.outpost_arn #=> String
-    #   resp.size #=> Integer
-    #   resp.snapshot_id #=> String
-    #   resp.state #=> String, one of "creating", "available", "in-use", "deleting", "deleted", "error"
-    #   resp.volume_id #=> String
     #   resp.iops #=> Integer
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
@@ -14664,6 +14655,23 @@ module Aws::EC2
     #   resp.multi_attach_enabled #=> Boolean
     #   resp.throughput #=> Integer
     #   resp.sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
+    #   resp.volume_id #=> String
+    #   resp.size #=> Integer
+    #   resp.snapshot_id #=> String
+    #   resp.availability_zone #=> String
+    #   resp.state #=> String, one of "creating", "available", "in-use", "deleting", "deleted", "error"
+    #   resp.create_time #=> Time
+    #   resp.attachments #=> Array
+    #   resp.attachments[0].delete_on_termination #=> Boolean
+    #   resp.attachments[0].associated_resource #=> String
+    #   resp.attachments[0].instance_owning_service #=> String
+    #   resp.attachments[0].volume_id #=> String
+    #   resp.attachments[0].instance_id #=> String
+    #   resp.attachments[0].device #=> String
+    #   resp.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
+    #   resp.attachments[0].attach_time #=> Time
+    #   resp.encrypted #=> Boolean
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolume AWS API Documentation
     #
@@ -14705,11 +14713,6 @@ module Aws::EC2
     #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
     #   form; for example, if you specify `100.68.0.18/18`, we modify it to
     #   `100.68.0.0/18`.
-    #
-    # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
-    #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
-    #   for the VPC. You cannot specify the range of IP addresses, or the size
-    #   of the CIDR block.
     #
     # @option params [String] :ipv_6_pool
     #   The ID of an IPv6 address pool from which to allocate the IPv6 CIDR
@@ -14763,6 +14766,16 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
     #
+    # @option params [String] :ipv_6_cidr_block_network_border_group
+    #   The name of the location from which we advertise the IPV6 CIDR block.
+    #   Use this parameter to limit the address to this location.
+    #
+    #   You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this
+    #   parameter.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the VPC.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -14782,15 +14795,10 @@ module Aws::EC2
     #
     #   Default: `default`
     #
-    # @option params [String] :ipv_6_cidr_block_network_border_group
-    #   The name of the location from which we advertise the IPV6 CIDR block.
-    #   Use this parameter to limit the address to this location.
-    #
-    #   You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this
-    #   parameter.
-    #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to assign to the VPC.
+    # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
+    #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+    #   for the VPC. You cannot specify the range of IP addresses, or the size
+    #   of the CIDR block.
     #
     # @return [Types::CreateVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14820,15 +14828,12 @@ module Aws::EC2
     #
     #   resp = client.create_vpc({
     #     cidr_block: "String",
-    #     amazon_provided_ipv_6_cidr_block: false,
     #     ipv_6_pool: "Ipv6PoolEc2Id",
     #     ipv_6_cidr_block: "String",
     #     ipv_4_ipam_pool_id: "IpamPoolId",
     #     ipv_4_netmask_length: 1,
     #     ipv_6_ipam_pool_id: "IpamPoolId",
     #     ipv_6_netmask_length: 1,
-    #     dry_run: false,
-    #     instance_tenancy: "default", # accepts default, dedicated, host
     #     ipv_6_cidr_block_network_border_group: "String",
     #     tag_specifications: [
     #       {
@@ -14841,14 +14846,13 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     dry_run: false,
+    #     instance_tenancy: "default", # accepts default, dedicated, host
+    #     amazon_provided_ipv_6_cidr_block: false,
     #   })
     #
     # @example Response structure
     #
-    #   resp.vpc.cidr_block #=> String
-    #   resp.vpc.dhcp_options_id #=> String
-    #   resp.vpc.state #=> String, one of "pending", "available"
-    #   resp.vpc.vpc_id #=> String
     #   resp.vpc.owner_id #=> String
     #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpc.ipv_6_cidr_block_association_set #=> Array
@@ -14869,6 +14873,10 @@ module Aws::EC2
     #   resp.vpc.tags #=> Array
     #   resp.vpc.tags[0].key #=> String
     #   resp.vpc.tags[0].value #=> String
+    #   resp.vpc.vpc_id #=> String
+    #   resp.vpc.state #=> String, one of "pending", "available"
+    #   resp.vpc.cidr_block #=> String
+    #   resp.vpc.dhcp_options_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpc AWS API Documentation
     #
@@ -15277,25 +15285,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [String] :peer_owner_id
-    #   The Amazon Web Services account ID of the owner of the accepter VPC.
-    #
-    #   Default: Your Amazon Web Services account ID
-    #
-    # @option params [String] :peer_vpc_id
-    #   The ID of the VPC with which you are creating the VPC peering
-    #   connection. You must specify this parameter in the request.
-    #
-    # @option params [required, String] :vpc_id
-    #   The ID of the requester VPC. You must specify this parameter in the
-    #   request.
-    #
     # @option params [String] :peer_region
     #   The Region code for the accepter VPC, if the accepter VPC is located
     #   in a Region other than the Region in which you make the request.
@@ -15305,6 +15294,25 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the peering connection.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the requester VPC. You must specify this parameter in the
+    #   request.
+    #
+    # @option params [String] :peer_vpc_id
+    #   The ID of the VPC with which you are creating the VPC peering
+    #   connection. You must specify this parameter in the request.
+    #
+    # @option params [String] :peer_owner_id
+    #   The Amazon Web Services account ID of the owner of the accepter VPC.
+    #
+    #   Default: Your Amazon Web Services account ID
+    #
     # @return [Types::CreateVpcPeeringConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcPeeringConnectionResult#vpc_peering_connection #vpc_peering_connection} => Types::VpcPeeringConnection
@@ -15312,10 +15320,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_vpc_peering_connection({
-    #     dry_run: false,
-    #     peer_owner_id: "String",
-    #     peer_vpc_id: "String",
-    #     vpc_id: "VpcId", # required
     #     peer_region: "String",
     #     tag_specifications: [
     #       {
@@ -15328,6 +15332,10 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     dry_run: false,
+    #     vpc_id: "VpcId", # required
+    #     peer_vpc_id: "String",
+    #     peer_owner_id: "String",
     #   })
     #
     # @example Response structure
@@ -15410,6 +15418,9 @@ module Aws::EC2
     #   The ID of the transit gateway. If you specify a transit gateway, you
     #   cannot specify a virtual private gateway.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the VPN connection.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -15418,9 +15429,6 @@ module Aws::EC2
     #
     # @option params [Types::VpnConnectionOptionsSpecification] :options
     #   The options for the VPN connection.
-    #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the VPN connection.
     #
     # @return [Types::CreateVpnConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15433,10 +15441,20 @@ module Aws::EC2
     #     type: "String", # required
     #     vpn_gateway_id: "VpnGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #     options: {
     #       enable_acceleration: false,
-    #       static_routes_only: false,
     #       tunnel_inside_ip_version: "ipv4", # accepts ipv4, ipv6
     #       tunnel_options: [
     #         {
@@ -15502,29 +15520,13 @@ module Aws::EC2
     #       remote_ipv_6_network_cidr: "String",
     #       outside_ip_address_type: "String",
     #       transport_transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #       static_routes_only: false,
     #     },
-    #     tag_specifications: [
-    #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
-    #         tags: [
-    #           {
-    #             key: "String",
-    #             value: "String",
-    #           },
-    #         ],
-    #       },
-    #     ],
     #   })
     #
     # @example Response structure
     #
-    #   resp.vpn_connection.customer_gateway_configuration #=> String
-    #   resp.vpn_connection.customer_gateway_id #=> String
     #   resp.vpn_connection.category #=> String
-    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
-    #   resp.vpn_connection.vpn_connection_id #=> String
-    #   resp.vpn_connection.vpn_gateway_id #=> String
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
@@ -15583,6 +15585,12 @@ module Aws::EC2
     #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
     #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnection AWS API Documentation
     #
@@ -15690,17 +15698,17 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.vpn_gateway.availability_zone #=> String
-    #   resp.vpn_gateway.state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.vpn_gateway.type #=> String, one of "ipsec.1"
-    #   resp.vpn_gateway.vpc_attachments #=> Array
-    #   resp.vpn_gateway.vpc_attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
-    #   resp.vpn_gateway.vpc_attachments[0].vpc_id #=> String
-    #   resp.vpn_gateway.vpn_gateway_id #=> String
     #   resp.vpn_gateway.amazon_side_asn #=> Integer
     #   resp.vpn_gateway.tags #=> Array
     #   resp.vpn_gateway.tags[0].key #=> String
     #   resp.vpn_gateway.tags[0].value #=> String
+    #   resp.vpn_gateway.vpn_gateway_id #=> String
+    #   resp.vpn_gateway.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_gateway.type #=> String, one of "ipsec.1"
+    #   resp.vpn_gateway.availability_zone #=> String
+    #   resp.vpn_gateway.vpc_attachments #=> Array
+    #   resp.vpn_gateway.vpc_attachments[0].vpc_id #=> String
+    #   resp.vpn_gateway.vpc_attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnGateway AWS API Documentation
     #
@@ -17251,14 +17259,14 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, Boolean] :egress
-    #   Indicates whether the rule is an egress rule.
-    #
     # @option params [required, String] :network_acl_id
     #   The ID of the network ACL.
     #
     # @option params [required, Integer] :rule_number
     #   The rule number of the entry to delete.
+    #
+    # @option params [required, Boolean] :egress
+    #   Indicates whether the rule is an egress rule.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -17277,9 +17285,9 @@ module Aws::EC2
     #
     #   resp = client.delete_network_acl_entry({
     #     dry_run: false,
-    #     egress: false, # required
     #     network_acl_id: "NetworkAclId", # required
     #     rule_number: 1, # required
+    #     egress: false, # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclEntry AWS API Documentation
@@ -17523,7 +17531,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -17655,14 +17663,6 @@ module Aws::EC2
 
     # Deletes the specified route from the specified route table.
     #
-    # @option params [String] :destination_cidr_block
-    #   The IPv4 CIDR range for the route. The value you specify must match
-    #   the CIDR for the route exactly.
-    #
-    # @option params [String] :destination_ipv_6_cidr_block
-    #   The IPv6 CIDR range for the route. The value you specify must match
-    #   the CIDR for the route exactly.
-    #
     # @option params [String] :destination_prefix_list_id
     #   The ID of the prefix list for the route.
     #
@@ -17674,6 +17674,14 @@ module Aws::EC2
     #
     # @option params [required, String] :route_table_id
     #   The ID of the route table.
+    #
+    # @option params [String] :destination_cidr_block
+    #   The IPv4 CIDR range for the route. The value you specify must match
+    #   the CIDR for the route exactly.
+    #
+    # @option params [String] :destination_ipv_6_cidr_block
+    #   The IPv6 CIDR range for the route. The value you specify must match
+    #   the CIDR for the route exactly.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -17690,11 +17698,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_route({
-    #     destination_cidr_block: "String",
-    #     destination_ipv_6_cidr_block: "String",
     #     destination_prefix_list_id: "PrefixListResourceId",
     #     dry_run: false,
     #     route_table_id: "RouteTableId", # required
+    #     destination_cidr_block: "String",
+    #     destination_ipv_6_cidr_block: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRoute AWS API Documentation
@@ -19053,7 +19061,10 @@ module Aws::EC2
     # delete all security groups associated with the VPC (except the default
     # one), delete all route tables associated with the VPC (except the
     # default one), and so on. When you delete the VPC, it deletes the
-    # VPC's default security group, network ACL, and route table.
+    # default security group, network ACL, and route table for the VPC.
+    #
+    # If you created a flow log for the VPC that you are deleting, note that
+    # flow logs for deleted VPCs are eventually automatically removed.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -19781,14 +19792,14 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits
     #
-    # @option params [Array<String>] :attribute_names
-    #   The account attribute names.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :attribute_names
+    #   The account attribute names.
     #
     # @return [Types::DescribeAccountAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19889,8 +19900,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_account_attributes({
-    #     attribute_names: ["supported-platforms"], # accepts supported-platforms, default-vpc
     #     dry_run: false,
+    #     attribute_names: ["supported-platforms"], # accepts supported-platforms, default-vpc
     #   })
     #
     # @example Response structure
@@ -19982,6 +19993,17 @@ module Aws::EC2
     # Describes the specified Elastic IP addresses or all of your Elastic IP
     # addresses.
     #
+    # @option params [Array<String>] :public_ips
+    #   One or more Elastic IP addresses.
+    #
+    #   Default: Describes all your Elastic IP addresses.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
@@ -20017,19 +20039,8 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    # @option params [Array<String>] :public_ips
-    #   One or more Elastic IP addresses.
-    #
-    #   Default: Describes all your Elastic IP addresses.
-    #
     # @option params [Array<String>] :allocation_ids
     #   Information about the allocation IDs.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::DescribeAddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20067,22 +20078,20 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_addresses({
+    #     public_ips: ["String"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     public_ips: ["String"],
     #     allocation_ids: ["AllocationId"],
-    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.addresses #=> Array
-    #   resp.addresses[0].instance_id #=> String
-    #   resp.addresses[0].public_ip #=> String
     #   resp.addresses[0].allocation_id #=> String
     #   resp.addresses[0].association_id #=> String
     #   resp.addresses[0].domain #=> String, one of "vpc", "standard"
@@ -20097,6 +20106,8 @@ module Aws::EC2
     #   resp.addresses[0].customer_owned_ip #=> String
     #   resp.addresses[0].customer_owned_ipv_4_pool #=> String
     #   resp.addresses[0].carrier_ip #=> String
+    #   resp.addresses[0].instance_id #=> String
+    #   resp.addresses[0].public_ip #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddresses AWS API Documentation
     #
@@ -20244,6 +20255,26 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
     #
+    # @option params [Array<String>] :zone_names
+    #   The names of the Availability Zones, Local Zones, and Wavelength
+    #   Zones.
+    #
+    # @option params [Array<String>] :zone_ids
+    #   The IDs of the Availability Zones, Local Zones, and Wavelength Zones.
+    #
+    # @option params [Boolean] :all_availability_zones
+    #   Include all Availability Zones, Local Zones, and Wavelength Zones
+    #   regardless of your opt-in status.
+    #
+    #   If you do not use this parameter, the results include only the zones
+    #   for the Regions where you have chosen the option to opt in.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -20282,26 +20313,6 @@ module Aws::EC2
     #
     #   * `zone-type` - The type of zone (`availability-zone` \| `local-zone`
     #     \| `wavelength-zone`).
-    #
-    # @option params [Array<String>] :zone_names
-    #   The names of the Availability Zones, Local Zones, and Wavelength
-    #   Zones.
-    #
-    # @option params [Array<String>] :zone_ids
-    #   The IDs of the Availability Zones, Local Zones, and Wavelength Zones.
-    #
-    # @option params [Boolean] :all_availability_zones
-    #   Include all Availability Zones, Local Zones, and Wavelength Zones
-    #   regardless of your opt-in status.
-    #
-    #   If you do not use this parameter, the results include only the zones
-    #   for the Regions where you have chosen the option to opt in.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::DescribeAvailabilityZonesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20353,22 +20364,21 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_availability_zones({
+    #     zone_names: ["String"],
+    #     zone_ids: ["String"],
+    #     all_availability_zones: false,
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     zone_names: ["String"],
-    #     zone_ids: ["String"],
-    #     all_availability_zones: false,
-    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.availability_zones #=> Array
-    #   resp.availability_zones[0].state #=> String, one of "available", "information", "impaired", "unavailable", "constrained"
     #   resp.availability_zones[0].opt_in_status #=> String, one of "opt-in-not-required", "opted-in", "not-opted-in"
     #   resp.availability_zones[0].messages #=> Array
     #   resp.availability_zones[0].messages[0].message #=> String
@@ -20380,6 +20390,7 @@ module Aws::EC2
     #   resp.availability_zones[0].zone_type #=> String
     #   resp.availability_zones[0].parent_zone_name #=> String
     #   resp.availability_zones[0].parent_zone_id #=> String
+    #   resp.availability_zones[0].state #=> String, one of "available", "information", "impaired", "unavailable", "constrained"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZones AWS API Documentation
     #
@@ -20469,6 +20480,12 @@ module Aws::EC2
     #
     #   Default: Describes all your bundle tasks.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -20496,12 +20513,6 @@ module Aws::EC2
     #
     #   * `update-time` - The time of the most recent update for the task.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @return [Types::DescribeBundleTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeBundleTasksResult#bundle_tasks #bundle_tasks} => Array&lt;Types::BundleTask&gt;
@@ -20510,31 +20521,31 @@ module Aws::EC2
     #
     #   resp = client.describe_bundle_tasks({
     #     bundle_ids: ["BundleId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.bundle_tasks #=> Array
-    #   resp.bundle_tasks[0].bundle_id #=> String
-    #   resp.bundle_tasks[0].bundle_task_error.code #=> String
-    #   resp.bundle_tasks[0].bundle_task_error.message #=> String
     #   resp.bundle_tasks[0].instance_id #=> String
-    #   resp.bundle_tasks[0].progress #=> String
-    #   resp.bundle_tasks[0].start_time #=> Time
+    #   resp.bundle_tasks[0].bundle_id #=> String
     #   resp.bundle_tasks[0].state #=> String, one of "pending", "waiting-for-shutdown", "bundling", "storing", "cancelling", "complete", "failed"
+    #   resp.bundle_tasks[0].start_time #=> Time
+    #   resp.bundle_tasks[0].update_time #=> Time
     #   resp.bundle_tasks[0].storage.s3.aws_access_key_id #=> String
     #   resp.bundle_tasks[0].storage.s3.bucket #=> String
     #   resp.bundle_tasks[0].storage.s3.prefix #=> String
     #   resp.bundle_tasks[0].storage.s3.upload_policy #=> String
     #   resp.bundle_tasks[0].storage.s3.upload_policy_signature #=> String
-    #   resp.bundle_tasks[0].update_time #=> Time
+    #   resp.bundle_tasks[0].progress #=> String
+    #   resp.bundle_tasks[0].bundle_task_error.code #=> String
+    #   resp.bundle_tasks[0].bundle_task_error.message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -21059,6 +21070,16 @@ module Aws::EC2
     # ClassicLink. You cannot use this request to return information about
     # other instances.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :instance_ids
+    #   The instance IDs. Must be instances linked to a VPC through
+    #   ClassicLink.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -21079,15 +21100,9 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC to which the instance is linked.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :instance_ids
-    #   The instance IDs. Must be instances linked to a VPC through
-    #   ClassicLink.
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -21101,10 +21116,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
     # @return [Types::DescribeClassicLinkInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeClassicLinkInstancesResult#instances #instances} => Array&lt;Types::ClassicLinkInstance&gt;
@@ -21115,24 +21126,24 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_classic_link_instances({
+    #     dry_run: false,
+    #     instance_ids: ["InstanceId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     instance_ids: ["InstanceId"],
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.instances #=> Array
     #   resp.instances[0].groups #=> Array
-    #   resp.instances[0].groups[0].group_name #=> String
     #   resp.instances[0].groups[0].group_id #=> String
+    #   resp.instances[0].groups[0].group_name #=> String
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].tags #=> Array
     #   resp.instances[0].tags[0].key #=> String
@@ -21641,14 +21652,14 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
-    # @option params [Array<String>] :conversion_task_ids
-    #   The conversion task IDs.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :conversion_task_ids
+    #   The conversion task IDs.
     #
     # @return [Types::DescribeConversionTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21657,8 +21668,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_conversion_tasks({
-    #     conversion_task_ids: ["ConversionTaskId"],
     #     dry_run: false,
+    #     conversion_task_ids: ["ConversionTaskId"],
     #   })
     #
     # @example Response structure
@@ -21803,17 +21814,17 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.customer_gateways #=> Array
-    #   resp.customer_gateways[0].bgp_asn #=> String
-    #   resp.customer_gateways[0].customer_gateway_id #=> String
-    #   resp.customer_gateways[0].ip_address #=> String
     #   resp.customer_gateways[0].certificate_arn #=> String
-    #   resp.customer_gateways[0].state #=> String
-    #   resp.customer_gateways[0].type #=> String
     #   resp.customer_gateways[0].device_name #=> String
     #   resp.customer_gateways[0].tags #=> Array
     #   resp.customer_gateways[0].tags[0].key #=> String
     #   resp.customer_gateways[0].tags[0].value #=> String
     #   resp.customer_gateways[0].bgp_asn_extended #=> String
+    #   resp.customer_gateways[0].customer_gateway_id #=> String
+    #   resp.customer_gateways[0].state #=> String
+    #   resp.customer_gateways[0].type #=> String
+    #   resp.customer_gateways[0].ip_address #=> String
+    #   resp.customer_gateways[0].bgp_asn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -21844,6 +21855,25 @@ module Aws::EC2
     # @option params [Array<String>] :dhcp_options_ids
     #   The IDs of DHCP option sets.
     #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -21866,29 +21896,10 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
     # @return [Types::DescribeDhcpOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeDhcpOptionsResult#dhcp_options #dhcp_options} => Array&lt;Types::DhcpOptions&gt;
     #   * {Types::DescribeDhcpOptionsResult#next_token #next_token} => String
+    #   * {Types::DescribeDhcpOptionsResult#dhcp_options #dhcp_options} => Array&lt;Types::DhcpOptions&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -21929,30 +21940,30 @@ module Aws::EC2
     #
     #   resp = client.describe_dhcp_options({
     #     dhcp_options_ids: ["DhcpOptionsId"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.dhcp_options #=> Array
-    #   resp.dhcp_options[0].dhcp_configurations #=> Array
-    #   resp.dhcp_options[0].dhcp_configurations[0].key #=> String
-    #   resp.dhcp_options[0].dhcp_configurations[0].values #=> Array
-    #   resp.dhcp_options[0].dhcp_configurations[0].values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.dhcp_options[0].dhcp_options_id #=> String
     #   resp.dhcp_options[0].owner_id #=> String
     #   resp.dhcp_options[0].tags #=> Array
     #   resp.dhcp_options[0].tags[0].key #=> String
     #   resp.dhcp_options[0].tags[0].value #=> String
-    #   resp.next_token #=> String
+    #   resp.dhcp_options[0].dhcp_options_id #=> String
+    #   resp.dhcp_options[0].dhcp_configurations #=> Array
+    #   resp.dhcp_options[0].dhcp_configurations[0].key #=> String
+    #   resp.dhcp_options[0].dhcp_configurations[0].values #=> Array
+    #   resp.dhcp_options[0].dhcp_configurations[0].values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptions AWS API Documentation
     #
@@ -22208,11 +22219,11 @@ module Aws::EC2
     # Describes the specified export instance tasks or all of your export
     # instance tasks.
     #
-    # @option params [Array<String>] :export_task_ids
-    #   The export task IDs.
-    #
     # @option params [Array<Types::Filter>] :filters
     #   the filters for the export tasks.
+    #
+    # @option params [Array<String>] :export_task_ids
+    #   The export task IDs.
     #
     # @return [Types::DescribeExportTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -22221,13 +22232,13 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_export_tasks({
-    #     export_task_ids: ["ExportTaskId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     export_task_ids: ["ExportTaskId"],
     #   })
     #
     # @example Response structure
@@ -23365,6 +23376,23 @@ module Aws::EC2
     # Dedicated Host. Dedicated Hosts that have recently been released are
     # listed with the state `released`.
     #
+    # @option params [Array<String>] :host_ids
+    #   The IDs of the Dedicated Hosts. The IDs are used for targeted instance
+    #   launches.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error.
+    #
+    #   You cannot specify this parameter and the host IDs parameter in the
+    #   same request.
+    #
     # @option params [Array<Types::Filter>] :filter
     #   The filters.
     #
@@ -23390,23 +23418,6 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    # @option params [Array<String>] :host_ids
-    #   The IDs of the Dedicated Hosts. The IDs are used for targeted instance
-    #   launches.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
-    #
-    #   You cannot specify this parameter and the host IDs parameter in the
-    #   same request.
-    #
-    # @option params [String] :next_token
-    #   The token to use to retrieve the next page of results.
-    #
     # @return [Types::DescribeHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeHostsResult#hosts #hosts} => Array&lt;Types::Host&gt;
@@ -23417,15 +23428,15 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hosts({
+    #     host_ids: ["DedicatedHostId"],
+    #     next_token: "String",
+    #     max_results: 1,
     #     filter: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     host_ids: ["DedicatedHostId"],
-    #     max_results: 1,
-    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -23660,10 +23671,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
     #
-    # @option params [required, String] :principal_arn
-    #   The ARN of the principal, which can be an IAM role, IAM user, or the
-    #   root user.
-    #
     # @option params [String] :resource
     #   The type of resource: `bundle` \| `conversion-task` \|
     #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
@@ -23676,6 +23683,10 @@ module Aws::EC2
     #   \| `vpc` \| `vpc-cidr-block-association` \| `vpc-endpoint` \|
     #   `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`
     #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the principal, which can be an IAM role, IAM user, or the
+    #   root user.
+    #
     # @return [Types::DescribeIdentityIdFormatResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeIdentityIdFormatResult#statuses #statuses} => Array&lt;Types::IdFormat&gt;
@@ -23683,8 +23694,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_identity_id_format({
-    #     principal_arn: "String", # required
     #     resource: "String",
+    #     principal_arn: "String", # required
     #   })
     #
     # @example Response structure
@@ -23731,10 +23742,6 @@ module Aws::EC2
     #
     # @return [Types::ImageAttribute] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ImageAttribute#block_device_mappings #block_device_mappings} => Array&lt;Types::BlockDeviceMapping&gt;
-    #   * {Types::ImageAttribute#image_id #image_id} => String
-    #   * {Types::ImageAttribute#launch_permissions #launch_permissions} => Array&lt;Types::LaunchPermission&gt;
-    #   * {Types::ImageAttribute#product_codes #product_codes} => Array&lt;Types::ProductCode&gt;
     #   * {Types::ImageAttribute#description #description} => Types::AttributeValue
     #   * {Types::ImageAttribute#kernel_id #kernel_id} => Types::AttributeValue
     #   * {Types::ImageAttribute#ramdisk_id #ramdisk_id} => Types::AttributeValue
@@ -23745,6 +23752,10 @@ module Aws::EC2
     #   * {Types::ImageAttribute#last_launched_time #last_launched_time} => Types::AttributeValue
     #   * {Types::ImageAttribute#imds_support #imds_support} => Types::AttributeValue
     #   * {Types::ImageAttribute#deregistration_protection #deregistration_protection} => Types::AttributeValue
+    #   * {Types::ImageAttribute#image_id #image_id} => String
+    #   * {Types::ImageAttribute#launch_permissions #launch_permissions} => Array&lt;Types::LaunchPermission&gt;
+    #   * {Types::ImageAttribute#product_codes #product_codes} => Array&lt;Types::ProductCode&gt;
+    #   * {Types::ImageAttribute#block_device_mappings #block_device_mappings} => Array&lt;Types::BlockDeviceMapping&gt;
     #
     #
     # @example Example: To describe the launch permissions for an AMI
@@ -23776,28 +23787,6 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.block_device_mappings #=> Array
-    #   resp.block_device_mappings[0].device_name #=> String
-    #   resp.block_device_mappings[0].virtual_name #=> String
-    #   resp.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
-    #   resp.block_device_mappings[0].ebs.iops #=> Integer
-    #   resp.block_device_mappings[0].ebs.snapshot_id #=> String
-    #   resp.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
-    #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
-    #   resp.block_device_mappings[0].ebs.throughput #=> Integer
-    #   resp.block_device_mappings[0].ebs.outpost_arn #=> String
-    #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
-    #   resp.block_device_mappings[0].no_device #=> String
-    #   resp.image_id #=> String
-    #   resp.launch_permissions #=> Array
-    #   resp.launch_permissions[0].group #=> String, one of "all"
-    #   resp.launch_permissions[0].user_id #=> String
-    #   resp.launch_permissions[0].organization_arn #=> String
-    #   resp.launch_permissions[0].organizational_unit_arn #=> String
-    #   resp.product_codes #=> Array
-    #   resp.product_codes[0].product_code_id #=> String
-    #   resp.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
     #   resp.description #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.kernel_id #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.ramdisk_id #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -23808,6 +23797,28 @@ module Aws::EC2
     #   resp.last_launched_time #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.imds_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.deregistration_protection #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.image_id #=> String
+    #   resp.launch_permissions #=> Array
+    #   resp.launch_permissions[0].organization_arn #=> String
+    #   resp.launch_permissions[0].organizational_unit_arn #=> String
+    #   resp.launch_permissions[0].user_id #=> String
+    #   resp.launch_permissions[0].group #=> String, one of "all"
+    #   resp.product_codes #=> Array
+    #   resp.product_codes[0].product_code_id #=> String
+    #   resp.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+    #   resp.block_device_mappings #=> Array
+    #   resp.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
+    #   resp.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.block_device_mappings[0].ebs.snapshot_id #=> String
+    #   resp.block_device_mappings[0].ebs.volume_size #=> Integer
+    #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
+    #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.block_device_mappings[0].ebs.throughput #=> Integer
+    #   resp.block_device_mappings[0].ebs.outpost_arn #=> String
+    #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.block_device_mappings[0].no_device #=> String
+    #   resp.block_device_mappings[0].device_name #=> String
+    #   resp.block_device_mappings[0].virtual_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImageAttribute AWS API Documentation
     #
@@ -23856,6 +23867,52 @@ module Aws::EC2
     #     also returned.
     #
     #   * If you specify `all`, all public AMIs are returned.
+    #
+    # @option params [Array<String>] :image_ids
+    #   The image IDs.
+    #
+    #   Default: Describes all images available to you.
+    #
+    # @option params [Array<String>] :owners
+    #   Scopes the results to images with the specified owners. You can
+    #   specify a combination of Amazon Web Services account IDs, `self`,
+    #   `amazon`, and `aws-marketplace`. If you omit this parameter, the
+    #   results include all images for which you have launch permissions,
+    #   regardless of ownership.
+    #
+    # @option params [Boolean] :include_deprecated
+    #   Specifies whether to include deprecated AMIs.
+    #
+    #   Default: No deprecated AMIs are included in the response.
+    #
+    #   <note markdown="1"> If you are the AMI owner, all deprecated AMIs appear in the response
+    #   regardless of what you specify for this parameter.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :include_disabled
+    #   Specifies whether to include disabled AMIs.
+    #
+    #   Default: No disabled AMIs are included in the response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -23963,56 +24020,10 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
     #
-    # @option params [Array<String>] :image_ids
-    #   The image IDs.
-    #
-    #   Default: Describes all images available to you.
-    #
-    # @option params [Array<String>] :owners
-    #   Scopes the results to images with the specified owners. You can
-    #   specify a combination of Amazon Web Services account IDs, `self`,
-    #   `amazon`, and `aws-marketplace`. If you omit this parameter, the
-    #   results include all images for which you have launch permissions,
-    #   regardless of ownership.
-    #
-    # @option params [Boolean] :include_deprecated
-    #   Specifies whether to include deprecated AMIs.
-    #
-    #   Default: No deprecated AMIs are included in the response.
-    #
-    #   <note markdown="1"> If you are the AMI owner, all deprecated AMIs appear in the response
-    #   regardless of what you specify for this parameter.
-    #
-    #    </note>
-    #
-    # @option params [Boolean] :include_disabled
-    #   Specifies whether to include disabled AMIs.
-    #
-    #   Default: No disabled AMIs are included in the response.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
     # @return [Types::DescribeImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeImagesResult#images #images} => Array&lt;Types::Image&gt;
     #   * {Types::DescribeImagesResult#next_token #next_token} => String
+    #   * {Types::DescribeImagesResult#images #images} => Array&lt;Types::Image&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -24064,43 +24075,28 @@ module Aws::EC2
     #
     #   resp = client.describe_images({
     #     executable_users: ["String"],
+    #     image_ids: ["ImageId"],
+    #     owners: ["String"],
+    #     include_deprecated: false,
+    #     include_disabled: false,
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     image_ids: ["ImageId"],
-    #     owners: ["String"],
-    #     include_deprecated: false,
-    #     include_disabled: false,
-    #     dry_run: false,
-    #     max_results: 1,
-    #     next_token: "String",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.images #=> Array
-    #   resp.images[0].architecture #=> String, one of "i386", "x86_64", "arm64", "x86_64_mac", "arm64_mac"
-    #   resp.images[0].creation_date #=> String
-    #   resp.images[0].image_id #=> String
-    #   resp.images[0].image_location #=> String
-    #   resp.images[0].image_type #=> String, one of "machine", "kernel", "ramdisk"
-    #   resp.images[0].public #=> Boolean
-    #   resp.images[0].kernel_id #=> String
-    #   resp.images[0].owner_id #=> String
-    #   resp.images[0].platform #=> String, one of "Windows"
     #   resp.images[0].platform_details #=> String
     #   resp.images[0].usage_operation #=> String
-    #   resp.images[0].product_codes #=> Array
-    #   resp.images[0].product_codes[0].product_code_id #=> String
-    #   resp.images[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
-    #   resp.images[0].ramdisk_id #=> String
-    #   resp.images[0].state #=> String, one of "pending", "available", "invalid", "deregistered", "transient", "failed", "error", "disabled"
     #   resp.images[0].block_device_mappings #=> Array
-    #   resp.images[0].block_device_mappings[0].device_name #=> String
-    #   resp.images[0].block_device_mappings[0].virtual_name #=> String
     #   resp.images[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.images[0].block_device_mappings[0].ebs.iops #=> Integer
     #   resp.images[0].block_device_mappings[0].ebs.snapshot_id #=> String
@@ -24111,6 +24107,8 @@ module Aws::EC2
     #   resp.images[0].block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.images[0].block_device_mappings[0].no_device #=> String
+    #   resp.images[0].block_device_mappings[0].device_name #=> String
+    #   resp.images[0].block_device_mappings[0].virtual_name #=> String
     #   resp.images[0].description #=> String
     #   resp.images[0].ena_support #=> Boolean
     #   resp.images[0].hypervisor #=> String, one of "ovm", "xen"
@@ -24132,7 +24130,20 @@ module Aws::EC2
     #   resp.images[0].source_instance_id #=> String
     #   resp.images[0].deregistration_protection #=> String
     #   resp.images[0].last_launched_time #=> String
-    #   resp.next_token #=> String
+    #   resp.images[0].image_id #=> String
+    #   resp.images[0].image_location #=> String
+    #   resp.images[0].state #=> String, one of "pending", "available", "invalid", "deregistered", "transient", "failed", "error", "disabled"
+    #   resp.images[0].owner_id #=> String
+    #   resp.images[0].creation_date #=> String
+    #   resp.images[0].public #=> Boolean
+    #   resp.images[0].product_codes #=> Array
+    #   resp.images[0].product_codes[0].product_code_id #=> String
+    #   resp.images[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+    #   resp.images[0].architecture #=> String, one of "i386", "x86_64", "arm64", "x86_64_mac", "arm64_mac"
+    #   resp.images[0].image_type #=> String, one of "machine", "kernel", "ramdisk"
+    #   resp.images[0].kernel_id #=> String
+    #   resp.images[0].ramdisk_id #=> String
+    #   resp.images[0].platform #=> String, one of "Windows"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -24325,13 +24336,8 @@ module Aws::EC2
     # `rootDeviceName` \| `blockDeviceMapping` \| `productCodes` \|
     # `sourceDestCheck` \| `groupSet` \| `ebsOptimized` \| `sriovNetSupport`
     #
-    # @option params [required, String] :attribute
-    #   The instance attribute.
-    #
-    #   Note: The `enaSupport` attribute is not supported at this time.
-    #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -24339,9 +24345,13 @@ module Aws::EC2
     # @option params [required, String] :instance_id
     #   The ID of the instance.
     #
+    # @option params [required, String] :attribute
+    #   The instance attribute.
+    #
+    #   Note: The `enaSupport` attribute is not supported at this time.
+    #
     # @return [Types::InstanceAttribute] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::InstanceAttribute#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
     #   * {Types::InstanceAttribute#block_device_mappings #block_device_mappings} => Array&lt;Types::InstanceBlockDeviceMapping&gt;
     #   * {Types::InstanceAttribute#disable_api_termination #disable_api_termination} => Types::AttributeBooleanValue
     #   * {Types::InstanceAttribute#ena_support #ena_support} => Types::AttributeBooleanValue
@@ -24358,6 +24368,7 @@ module Aws::EC2
     #   * {Types::InstanceAttribute#sriov_net_support #sriov_net_support} => Types::AttributeValue
     #   * {Types::InstanceAttribute#user_data #user_data} => Types::AttributeValue
     #   * {Types::InstanceAttribute#disable_api_stop #disable_api_stop} => Types::AttributeBooleanValue
+    #   * {Types::InstanceAttribute#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
     #
     #
     # @example Example: To describe the instance type
@@ -24431,16 +24442,13 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #   })
     #
     # @example Response structure
     #
-    #   resp.groups #=> Array
-    #   resp.groups[0].group_name #=> String
-    #   resp.groups[0].group_id #=> String
     #   resp.block_device_mappings #=> Array
     #   resp.block_device_mappings[0].device_name #=> String
     #   resp.block_device_mappings[0].ebs.attach_time #=> Time
@@ -24466,6 +24474,9 @@ module Aws::EC2
     #   resp.sriov_net_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.user_data #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.disable_api_stop.value #=> Boolean
+    #   resp.groups #=> Array
+    #   resp.groups[0].group_id #=> String
+    #   resp.groups[0].group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceAttribute AWS API Documentation
     #
@@ -24618,7 +24629,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -24885,6 +24896,35 @@ module Aws::EC2
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
     #
+    # @option params [Array<String>] :instance_ids
+    #   The instance IDs.
+    #
+    #   Default: Describes all your instances.
+    #
+    #   Constraints: Maximum 100 explicitly specified instance IDs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You cannot specify this parameter and the instance IDs parameter in
+    #   the same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -24937,35 +24977,6 @@ module Aws::EC2
     #   * `attached-ebs-status.status` - The status of the attached EBS volume
     #     for the instance (`ok` \| `impaired` \| `initializing` \|
     #     `insufficient-data` \| `not-applicable`).
-    #
-    # @option params [Array<String>] :instance_ids
-    #   The instance IDs.
-    #
-    #   Default: Describes all your instances.
-    #
-    #   Constraints: Maximum 100 explicitly specified instance IDs.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #   You cannot specify this parameter and the instance IDs parameter in
-    #   the same request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Boolean] :include_all_instances
     #   When `true`, includes the health status for all instances. When
@@ -25026,16 +25037,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_status({
+    #     instance_ids: ["InstanceId"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["InstanceId"],
-    #     max_results: 1,
-    #     next_token: "String",
-    #     dry_run: false,
     #     include_all_instances: false,
     #   })
     #
@@ -25107,7 +25118,7 @@ module Aws::EC2
     #     `hpc7g.4xlarge` \| `hpc7g.8xlarge` \| `hpc7g.16xlarge`
     #
     #   * `p3dn.24xlarge` \| `p4d.24xlarge` \| `p4de.24xlarge` \|
-    #     `p5.48xlarge`
+    #     `p5.48xlarge` \| `p5e.48xlarge`
     #
     #   * `trn1.2xlarge` \| `trn1.32xlarge` \| `trn1n.32xlarge`
     #
@@ -25119,7 +25130,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -25664,6 +25675,17 @@ module Aws::EC2
     #
     #  </note>
     #
+    # @option params [Array<String>] :instance_ids
+    #   The instance IDs.
+    #
+    #   Default: Describes all your instances.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -26094,16 +26116,9 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     #
-    # @option params [Array<String>] :instance_ids
-    #   The instance IDs.
-    #
-    #   Default: Describes all your instances.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -26117,14 +26132,10 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
     # @return [Types::DescribeInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeInstancesResult#reservations #reservations} => Array&lt;Types::Reservation&gt;
     #   * {Types::DescribeInstancesResult#next_token #next_token} => String
+    #   * {Types::DescribeInstancesResult#reservations #reservations} => Array&lt;Types::Reservation&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -26194,56 +26205,29 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instances({
+    #     instance_ids: ["InstanceId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["InstanceId"],
-    #     dry_run: false,
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.reservations #=> Array
+    #   resp.reservations[0].reservation_id #=> String
+    #   resp.reservations[0].owner_id #=> String
+    #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].groups #=> Array
-    #   resp.reservations[0].groups[0].group_name #=> String
     #   resp.reservations[0].groups[0].group_id #=> String
+    #   resp.reservations[0].groups[0].group_name #=> String
     #   resp.reservations[0].instances #=> Array
-    #   resp.reservations[0].instances[0].ami_launch_index #=> Integer
-    #   resp.reservations[0].instances[0].image_id #=> String
-    #   resp.reservations[0].instances[0].instance_id #=> String
-    #   resp.reservations[0].instances[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge"
-    #   resp.reservations[0].instances[0].kernel_id #=> String
-    #   resp.reservations[0].instances[0].key_name #=> String
-    #   resp.reservations[0].instances[0].launch_time #=> Time
-    #   resp.reservations[0].instances[0].monitoring.state #=> String, one of "disabled", "disabling", "enabled", "pending"
-    #   resp.reservations[0].instances[0].placement.availability_zone #=> String
-    #   resp.reservations[0].instances[0].placement.affinity #=> String
-    #   resp.reservations[0].instances[0].placement.group_name #=> String
-    #   resp.reservations[0].instances[0].placement.partition_number #=> Integer
-    #   resp.reservations[0].instances[0].placement.host_id #=> String
-    #   resp.reservations[0].instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
-    #   resp.reservations[0].instances[0].placement.spread_domain #=> String
-    #   resp.reservations[0].instances[0].placement.host_resource_group_arn #=> String
-    #   resp.reservations[0].instances[0].placement.group_id #=> String
-    #   resp.reservations[0].instances[0].platform #=> String, one of "Windows"
-    #   resp.reservations[0].instances[0].private_dns_name #=> String
-    #   resp.reservations[0].instances[0].private_ip_address #=> String
-    #   resp.reservations[0].instances[0].product_codes #=> Array
-    #   resp.reservations[0].instances[0].product_codes[0].product_code_id #=> String
-    #   resp.reservations[0].instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
-    #   resp.reservations[0].instances[0].public_dns_name #=> String
-    #   resp.reservations[0].instances[0].public_ip_address #=> String
-    #   resp.reservations[0].instances[0].ramdisk_id #=> String
-    #   resp.reservations[0].instances[0].state.code #=> Integer
-    #   resp.reservations[0].instances[0].state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
-    #   resp.reservations[0].instances[0].state_transition_reason #=> String
-    #   resp.reservations[0].instances[0].subnet_id #=> String
-    #   resp.reservations[0].instances[0].vpc_id #=> String
     #   resp.reservations[0].instances[0].architecture #=> String, one of "i386", "x86_64", "arm64", "x86_64_mac", "arm64_mac"
     #   resp.reservations[0].instances[0].block_device_mappings #=> Array
     #   resp.reservations[0].instances[0].block_device_mappings[0].device_name #=> String
@@ -26286,8 +26270,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].network_interfaces[0].attachment.ena_srd_specification.ena_srd_udp_specification.ena_srd_udp_enabled #=> Boolean
     #   resp.reservations[0].instances[0].network_interfaces[0].description #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].groups #=> Array
-    #   resp.reservations[0].instances[0].network_interfaces[0].groups[0].group_name #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].groups[0].group_id #=> String
+    #   resp.reservations[0].instances[0].network_interfaces[0].groups[0].group_name #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.reservations[0].instances[0].network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].ipv_6_addresses[0].is_primary_ipv_6 #=> Boolean
@@ -26321,8 +26305,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].root_device_name #=> String
     #   resp.reservations[0].instances[0].root_device_type #=> String, one of "ebs", "instance-store"
     #   resp.reservations[0].instances[0].security_groups #=> Array
-    #   resp.reservations[0].instances[0].security_groups[0].group_name #=> String
     #   resp.reservations[0].instances[0].security_groups[0].group_id #=> String
+    #   resp.reservations[0].instances[0].security_groups[0].group_name #=> String
     #   resp.reservations[0].instances[0].source_dest_check #=> Boolean
     #   resp.reservations[0].instances[0].spot_instance_request_id #=> String
     #   resp.reservations[0].instances[0].sriov_net_support #=> String
@@ -26360,10 +26344,37 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].tpm_support #=> String
     #   resp.reservations[0].instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
     #   resp.reservations[0].instances[0].current_instance_boot_mode #=> String, one of "legacy-bios", "uefi"
-    #   resp.reservations[0].owner_id #=> String
-    #   resp.reservations[0].requester_id #=> String
-    #   resp.reservations[0].reservation_id #=> String
-    #   resp.next_token #=> String
+    #   resp.reservations[0].instances[0].instance_id #=> String
+    #   resp.reservations[0].instances[0].image_id #=> String
+    #   resp.reservations[0].instances[0].state.code #=> Integer
+    #   resp.reservations[0].instances[0].state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
+    #   resp.reservations[0].instances[0].private_dns_name #=> String
+    #   resp.reservations[0].instances[0].public_dns_name #=> String
+    #   resp.reservations[0].instances[0].state_transition_reason #=> String
+    #   resp.reservations[0].instances[0].key_name #=> String
+    #   resp.reservations[0].instances[0].ami_launch_index #=> Integer
+    #   resp.reservations[0].instances[0].product_codes #=> Array
+    #   resp.reservations[0].instances[0].product_codes[0].product_code_id #=> String
+    #   resp.reservations[0].instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+    #   resp.reservations[0].instances[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge"
+    #   resp.reservations[0].instances[0].launch_time #=> Time
+    #   resp.reservations[0].instances[0].placement.affinity #=> String
+    #   resp.reservations[0].instances[0].placement.group_name #=> String
+    #   resp.reservations[0].instances[0].placement.partition_number #=> Integer
+    #   resp.reservations[0].instances[0].placement.host_id #=> String
+    #   resp.reservations[0].instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.reservations[0].instances[0].placement.spread_domain #=> String
+    #   resp.reservations[0].instances[0].placement.host_resource_group_arn #=> String
+    #   resp.reservations[0].instances[0].placement.group_id #=> String
+    #   resp.reservations[0].instances[0].placement.availability_zone #=> String
+    #   resp.reservations[0].instances[0].kernel_id #=> String
+    #   resp.reservations[0].instances[0].ramdisk_id #=> String
+    #   resp.reservations[0].instances[0].platform #=> String, one of "Windows"
+    #   resp.reservations[0].instances[0].monitoring.state #=> String, one of "disabled", "disabling", "enabled", "pending"
+    #   resp.reservations[0].instances[0].subnet_id #=> String
+    #   resp.reservations[0].instances[0].vpc_id #=> String
+    #   resp.reservations[0].instances[0].private_ip_address #=> String
+    #   resp.reservations[0].instances[0].public_ip_address #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -26386,6 +26397,30 @@ module Aws::EC2
     # internet gateways. Alternatively, you can specify specific internet
     # gateway IDs or filter the results to include only the internet
     # gateways that match specific criteria.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :internet_gateway_ids
+    #   The IDs of the internet gateways.
+    #
+    #   Default: Describes all your internet gateways.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -26410,30 +26445,6 @@ module Aws::EC2
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :internet_gateway_ids
-    #   The IDs of the internet gateways.
-    #
-    #   Default: Describes all your internet gateways.
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -26478,16 +26489,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_internet_gateways({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #     internet_gateway_ids: ["InternetGatewayId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     internet_gateway_ids: ["InternetGatewayId"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -27150,6 +27161,25 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
     #
+    # @option params [Array<String>] :key_names
+    #   The key pair names.
+    #
+    #   Default: Describes all of your key pairs.
+    #
+    # @option params [Array<String>] :key_pair_ids
+    #   The IDs of the key pairs.
+    #
+    # @option params [Boolean] :include_public_key
+    #   If `true`, the public key material is included in the response.
+    #
+    #   Default: `false`
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -27168,25 +27198,6 @@ module Aws::EC2
     #     as the filter value. For example, to find all resources that have a
     #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
     #     for the filter name and `TeamA` for the filter value.
-    #
-    # @option params [Array<String>] :key_names
-    #   The key pair names.
-    #
-    #   Default: Describes all of your key pairs.
-    #
-    # @option params [Array<String>] :key_pair_ids
-    #   The IDs of the key pairs.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Boolean] :include_public_key
-    #   If `true`, the public key material is included in the response.
-    #
-    #   Default: `false`
     #
     # @return [Types::DescribeKeyPairsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -27216,30 +27227,30 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_key_pairs({
+    #     key_names: ["KeyPairName"],
+    #     key_pair_ids: ["KeyPairId"],
+    #     include_public_key: false,
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     key_names: ["KeyPairName"],
-    #     key_pair_ids: ["KeyPairId"],
-    #     dry_run: false,
-    #     include_public_key: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.key_pairs #=> Array
     #   resp.key_pairs[0].key_pair_id #=> String
-    #   resp.key_pairs[0].key_fingerprint #=> String
-    #   resp.key_pairs[0].key_name #=> String
     #   resp.key_pairs[0].key_type #=> String, one of "rsa", "ed25519"
     #   resp.key_pairs[0].tags #=> Array
     #   resp.key_pairs[0].tags[0].key #=> String
     #   resp.key_pairs[0].tags[0].value #=> String
     #   resp.key_pairs[0].public_key #=> String
     #   resp.key_pairs[0].create_time #=> Time
+    #   resp.key_pairs[0].key_name #=> String
+    #   resp.key_pairs[0].key_fingerprint #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -28464,6 +28475,18 @@ module Aws::EC2
     # restored to the EC2-Classic platform. This request does not return
     # information about any other Elastic IP addresses in your account.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :public_ips
+    #   One or more Elastic IP addresses.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -28471,12 +28494,6 @@ module Aws::EC2
     #     (`MovingToVpc` \| `RestoringToClassic`).
     #
     #   ^
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
@@ -28486,12 +28503,6 @@ module Aws::EC2
     #   outside of this range, an error is returned.
     #
     #   Default: If no value is provided, the default is 1000.
-    #
-    # @option params [String] :next_token
-    #   The token for the next page of results.
-    #
-    # @option params [Array<String>] :public_ips
-    #   One or more Elastic IP addresses.
     #
     # @return [Types::DescribeMovingAddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -28521,16 +28532,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_moving_addresses({
+    #     dry_run: false,
+    #     public_ips: ["String"],
+    #     next_token: "String",
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
     #     max_results: 1,
-    #     next_token: "String",
-    #     public_ips: ["String"],
     #   })
     #
     # @example Response structure
@@ -28715,6 +28726,28 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :network_acl_ids
+    #   The IDs of the network ACLs.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -28773,28 +28806,6 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC for the network ACL.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :network_acl_ids
-    #   The IDs of the network ACLs.
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
     # @return [Types::DescribeNetworkAclsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeNetworkAclsResult#network_acls #network_acls} => Array&lt;Types::NetworkAcl&gt;
@@ -28852,16 +28863,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_network_acls({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #     network_acl_ids: ["NetworkAclId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     network_acl_ids: ["NetworkAclId"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -30088,9 +30099,6 @@ module Aws::EC2
     # Describes a network interface attribute. You can specify only one
     # attribute at a time.
     #
-    # @option params [String] :attribute
-    #   The attribute of the network interface. This parameter is required.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -30099,6 +30107,9 @@ module Aws::EC2
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
+    #
+    # @option params [String] :attribute
+    #   The attribute of the network interface. This parameter is required.
     #
     # @return [Types::DescribeNetworkInterfaceAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30190,9 +30201,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_network_interface_attribute({
-    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment, associatePublicIpAddress
     #     dry_run: false,
     #     network_interface_id: "NetworkInterfaceId", # required
+    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment, associatePublicIpAddress
     #   })
     #
     # @example Response structure
@@ -30209,8 +30220,8 @@ module Aws::EC2
     #   resp.attachment.ena_srd_specification.ena_srd_udp_specification.ena_srd_udp_enabled #=> Boolean
     #   resp.description #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.groups #=> Array
-    #   resp.groups[0].group_name #=> String
     #   resp.groups[0].group_id #=> String
+    #   resp.groups[0].group_name #=> String
     #   resp.network_interface_id #=> String
     #   resp.source_dest_check.value #=> Boolean
     #   resp.associate_public_ip_address #=> Boolean
@@ -30312,6 +30323,32 @@ module Aws::EC2
     #
     # We strongly recommend using only paginated requests. Unpaginated
     # requests are susceptible to throttling and timeouts.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. You cannot specify this parameter and the network
+    #   interface IDs parameter in the same request. For more information, see
+    #   [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :network_interface_ids
+    #   The network interface IDs.
+    #
+    #   Default: Describes all your network interfaces.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -30429,32 +30466,6 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC for the network interface.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :network_interface_ids
-    #   The network interface IDs.
-    #
-    #   Default: Describes all your network interfaces.
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. You cannot specify this parameter and the network
-    #   interface IDs parameter in the same request. For more information, see
-    #   [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
     # @return [Types::DescribeNetworkInterfacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeNetworkInterfacesResult#network_interfaces #network_interfaces} => Array&lt;Types::NetworkInterface&gt;
@@ -30530,16 +30541,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_network_interfaces({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     network_interface_ids: ["NetworkInterfaceId"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -30568,8 +30579,8 @@ module Aws::EC2
     #   resp.network_interfaces[0].connection_tracking_configuration.udp_timeout #=> Integer
     #   resp.network_interfaces[0].description #=> String
     #   resp.network_interfaces[0].groups #=> Array
-    #   resp.network_interfaces[0].groups[0].group_name #=> String
     #   resp.network_interfaces[0].groups[0].group_id #=> String
+    #   resp.network_interfaces[0].groups[0].group_name #=> String
     #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa", "trunk", "load_balancer", "network_load_balancer", "vpc_endpoint", "branch", "transit_gateway", "lambda", "quicksight", "global_accelerator_managed", "api_gateway_managed", "gateway_load_balancer", "gateway_load_balancer_endpoint", "iot_rules_managed", "aws_codestar_connections_managed"
     #   resp.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
@@ -30640,6 +30651,27 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
+    # @option params [Array<String>] :group_ids
+    #   The IDs of the placement groups.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :group_names
+    #   The names of the placement groups.
+    #
+    #   Constraints:
+    #
+    #   * You can specify a name only if the placement group is owned by your
+    #     account.
+    #
+    #   * If a placement group is *shared* with your account, specifying the
+    #     name results in an error. You must use the `GroupId` parameter
+    #     instead.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -30666,27 +30698,6 @@ module Aws::EC2
     #     filter to find all resources that have a tag with a specific key,
     #     regardless of the tag value.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :group_names
-    #   The names of the placement groups.
-    #
-    #   Constraints:
-    #
-    #   * You can specify a name only if the placement group is owned by your
-    #     account.
-    #
-    #   * If a placement group is *shared* with your account, specifying the
-    #     name results in an error. You must use the `GroupId` parameter
-    #     instead.
-    #
-    # @option params [Array<String>] :group_ids
-    #   The IDs of the placement groups.
-    #
     # @return [Types::DescribePlacementGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribePlacementGroupsResult#placement_groups #placement_groups} => Array&lt;Types::PlacementGroup&gt;
@@ -30694,15 +30705,15 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_placement_groups({
+    #     group_ids: ["PlacementGroupId"],
+    #     dry_run: false,
+    #     group_names: ["PlacementGroupName"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     group_names: ["PlacementGroupName"],
-    #     group_ids: ["PlacementGroupId"],
     #   })
     #
     # @example Response structure
@@ -30976,6 +30987,20 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-endpoints.html
     # [2]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
     #
+    # @option params [Array<String>] :region_names
+    #   The names of the Regions. You can specify any Regions, whether they
+    #   are enabled and disabled for your account.
+    #
+    # @option params [Boolean] :all_regions
+    #   Indicates whether to display all Regions, including Regions that are
+    #   disabled for your account.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -30986,20 +31011,6 @@ module Aws::EC2
     #     (`opt-in-not-required` \| `opted-in` \| `not-opted-in`).
     #
     #   * `region-name` - The name of the Region (for example, `us-east-1`).
-    #
-    # @option params [Array<String>] :region_names
-    #   The names of the Regions. You can specify any Regions, whether they
-    #   are enabled and disabled for your account.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Boolean] :all_regions
-    #   Indicates whether to display all Regions, including Regions that are
-    #   disabled for your account.
     #
     # @return [Types::DescribeRegionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -31066,23 +31077,23 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_regions({
+    #     region_names: ["String"],
+    #     all_regions: false,
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     region_names: ["String"],
-    #     dry_run: false,
-    #     all_regions: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.regions #=> Array
-    #   resp.regions[0].endpoint #=> String
-    #   resp.regions[0].region_name #=> String
     #   resp.regions[0].opt_in_status #=> String
+    #   resp.regions[0].region_name #=> String
+    #   resp.regions[0].endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegions AWS API Documentation
     #
@@ -31192,6 +31203,21 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
     #
+    # @option params [String] :offering_class
+    #   Describes whether the Reserved Instance is Standard or Convertible.
+    #
+    # @option params [Array<String>] :reserved_instances_ids
+    #   One or more Reserved Instance IDs.
+    #
+    #   Default: Describes all your Reserved Instances, or only those
+    #   otherwise specified.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -31242,21 +31268,6 @@ module Aws::EC2
     #   * `usage-price` - The usage price of the Reserved Instance, per hour
     #     (for example, 0.84).
     #
-    # @option params [String] :offering_class
-    #   Describes whether the Reserved Instance is Standard or Convertible.
-    #
-    # @option params [Array<String>] :reserved_instances_ids
-    #   One or more Reserved Instance IDs.
-    #
-    #   Default: Describes all your Reserved Instances, or only those
-    #   otherwise specified.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [String] :offering_type
     #   The Reserved Instance offering type. If you are using tools that
     #   predate the 2011-11-01 API version, you only have access to the
@@ -31269,32 +31280,21 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_instances({
+    #     offering_class: "standard", # accepts standard, convertible
+    #     reserved_instances_ids: ["ReservationId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     offering_class: "standard", # accepts standard, convertible
-    #     reserved_instances_ids: ["ReservationId"],
-    #     dry_run: false,
     #     offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
     #   })
     #
     # @example Response structure
     #
     #   resp.reserved_instances #=> Array
-    #   resp.reserved_instances[0].availability_zone #=> String
-    #   resp.reserved_instances[0].duration #=> Integer
-    #   resp.reserved_instances[0].end #=> Time
-    #   resp.reserved_instances[0].fixed_price #=> Float
-    #   resp.reserved_instances[0].instance_count #=> Integer
-    #   resp.reserved_instances[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge"
-    #   resp.reserved_instances[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
-    #   resp.reserved_instances[0].reserved_instances_id #=> String
-    #   resp.reserved_instances[0].start #=> Time
-    #   resp.reserved_instances[0].state #=> String, one of "payment-pending", "active", "payment-failed", "retired", "queued", "queued-deleted"
-    #   resp.reserved_instances[0].usage_price #=> Float
     #   resp.reserved_instances[0].currency_code #=> String, one of "USD"
     #   resp.reserved_instances[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.reserved_instances[0].offering_class #=> String, one of "standard", "convertible"
@@ -31306,6 +31306,17 @@ module Aws::EC2
     #   resp.reserved_instances[0].tags #=> Array
     #   resp.reserved_instances[0].tags[0].key #=> String
     #   resp.reserved_instances[0].tags[0].value #=> String
+    #   resp.reserved_instances[0].reserved_instances_id #=> String
+    #   resp.reserved_instances[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge"
+    #   resp.reserved_instances[0].availability_zone #=> String
+    #   resp.reserved_instances[0].start #=> Time
+    #   resp.reserved_instances[0].end #=> Time
+    #   resp.reserved_instances[0].duration #=> Integer
+    #   resp.reserved_instances[0].usage_price #=> Float
+    #   resp.reserved_instances[0].fixed_price #=> Float
+    #   resp.reserved_instances[0].instance_count #=> Integer
+    #   resp.reserved_instances[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
+    #   resp.reserved_instances[0].state #=> String, one of "payment-pending", "active", "payment-failed", "retired", "queued", "queued-deleted"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstances AWS API Documentation
     #
@@ -31350,6 +31361,12 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
     #
+    # @option params [String] :reserved_instances_id
+    #   One or more Reserved Instance IDs.
+    #
+    # @option params [String] :reserved_instances_listing_id
+    #   One or more Reserved Instance listing IDs.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -31363,12 +31380,6 @@ module Aws::EC2
     #
     #   * `status-message` - The reason for the status.
     #
-    # @option params [String] :reserved_instances_id
-    #   One or more Reserved Instance IDs.
-    #
-    # @option params [String] :reserved_instances_listing_id
-    #   One or more Reserved Instance listing IDs.
-    #
     # @return [Types::DescribeReservedInstancesListingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeReservedInstancesListingsResult#reserved_instances_listings #reserved_instances_listings} => Array&lt;Types::ReservedInstancesListing&gt;
@@ -31376,14 +31387,14 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_instances_listings({
+    #     reserved_instances_id: "ReservationId",
+    #     reserved_instances_listing_id: "ReservedInstancesListingId",
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     reserved_instances_id: "ReservationId",
-    #     reserved_instances_listing_id: "ReservedInstancesListingId",
     #   })
     #
     # @example Response structure
@@ -31435,6 +31446,12 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html
     #
+    # @option params [Array<String>] :reserved_instances_modification_ids
+    #   IDs for the submitted modification request.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -31471,12 +31488,6 @@ module Aws::EC2
     #   * `update-date` - The time when the modification request was last
     #     updated.
     #
-    # @option params [Array<String>] :reserved_instances_modification_ids
-    #   IDs for the submitted modification request.
-    #
-    # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
-    #
     # @return [Types::DescribeReservedInstancesModificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeReservedInstancesModificationsResult#next_token #next_token} => String
@@ -31487,14 +31498,14 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_instances_modifications({
+    #     reserved_instances_modification_ids: ["ReservedInstancesModificationId"],
+    #     next_token: "String",
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     reserved_instances_modification_ids: ["ReservedInstancesModificationId"],
-    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -31554,43 +31565,6 @@ module Aws::EC2
     # @option params [String] :availability_zone
     #   The Availability Zone in which the Reserved Instance can be used.
     #
-    # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
-    #
-    #   * `availability-zone` - The Availability Zone where the Reserved
-    #     Instance can be used.
-    #
-    #   * `duration` - The duration of the Reserved Instance (for example, one
-    #     year or three years), in seconds (`31536000` \| `94608000`).
-    #
-    #   * `fixed-price` - The purchase price of the Reserved Instance (for
-    #     example, 9800.0).
-    #
-    #   * `instance-type` - The instance type that is covered by the
-    #     reservation.
-    #
-    #   * `marketplace` - Set to `true` to show only Reserved Instance
-    #     Marketplace offerings. When this filter is not used, which is the
-    #     default behavior, all offerings from both Amazon Web Services and
-    #     the Reserved Instance Marketplace are listed.
-    #
-    #   * `product-description` - The Reserved Instance product platform
-    #     description (`Linux/UNIX` \| `Linux with SQL Server Standard` \|
-    #     `Linux with SQL Server Web` \| `Linux with SQL Server Enterprise` \|
-    #     `SUSE Linux` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise
-    #     Linux with HA` \| `Windows` \| `Windows with SQL Server Standard` \|
-    #     `Windows with SQL Server Web` \| `Windows with SQL Server
-    #     Enterprise`).
-    #
-    #   * `reserved-instances-offering-id` - The Reserved Instances offering
-    #     ID.
-    #
-    #   * `scope` - The scope of the Reserved Instance (`Availability Zone` or
-    #     `Region`).
-    #
-    #   * `usage-price` - The usage price of the Reserved Instance, per hour
-    #     (for example, 0.84).
-    #
     # @option params [Boolean] :include_marketplace
     #   Include Reserved Instance Marketplace offerings in the response.
     #
@@ -31638,6 +31612,43 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `availability-zone` - The Availability Zone where the Reserved
+    #     Instance can be used.
+    #
+    #   * `duration` - The duration of the Reserved Instance (for example, one
+    #     year or three years), in seconds (`31536000` \| `94608000`).
+    #
+    #   * `fixed-price` - The purchase price of the Reserved Instance (for
+    #     example, 9800.0).
+    #
+    #   * `instance-type` - The instance type that is covered by the
+    #     reservation.
+    #
+    #   * `marketplace` - Set to `true` to show only Reserved Instance
+    #     Marketplace offerings. When this filter is not used, which is the
+    #     default behavior, all offerings from both Amazon Web Services and
+    #     the Reserved Instance Marketplace are listed.
+    #
+    #   * `product-description` - The Reserved Instance product platform
+    #     description (`Linux/UNIX` \| `Linux with SQL Server Standard` \|
+    #     `Linux with SQL Server Web` \| `Linux with SQL Server Enterprise` \|
+    #     `SUSE Linux` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise
+    #     Linux with HA` \| `Windows` \| `Windows with SQL Server Standard` \|
+    #     `Windows with SQL Server Web` \| `Windows with SQL Server
+    #     Enterprise`).
+    #
+    #   * `reserved-instances-offering-id` - The Reserved Instances offering
+    #     ID.
+    #
+    #   * `scope` - The scope of the Reserved Instance (`Availability Zone` or
+    #     `Region`).
+    #
+    #   * `usage-price` - The usage price of the Reserved Instance, per hour
+    #     (for example, 0.84).
+    #
     # @option params [String] :instance_tenancy
     #   The tenancy of the instances covered by the reservation. A Reserved
     #   Instance with a tenancy of `dedicated` is applied to instances that
@@ -31648,6 +31659,14 @@ module Aws::EC2
     #
     #   Default: `default`
     #
+    # @option params [String] :offering_type
+    #   The Reserved Instance offering type. If you are using tools that
+    #   predate the 2011-11-01 API version, you only have access to the
+    #   `Medium Utilization` Reserved Instance offering type.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results of the initial request can be seen by
@@ -31656,18 +31675,10 @@ module Aws::EC2
     #
     #   Default: 100
     #
-    # @option params [String] :next_token
-    #   The token to retrieve the next page of results.
-    #
-    # @option params [String] :offering_type
-    #   The Reserved Instance offering type. If you are using tools that
-    #   predate the 2011-11-01 API version, you only have access to the
-    #   `Medium Utilization` Reserved Instance offering type.
-    #
     # @return [Types::DescribeReservedInstancesOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeReservedInstancesOfferingsResult#reserved_instances_offerings #reserved_instances_offerings} => Array&lt;Types::ReservedInstancesOffering&gt;
     #   * {Types::DescribeReservedInstancesOfferingsResult#next_token #next_token} => String
+    #   * {Types::DescribeReservedInstancesOfferingsResult#reserved_instances_offerings #reserved_instances_offerings} => Array&lt;Types::ReservedInstancesOffering&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -31675,12 +31686,6 @@ module Aws::EC2
     #
     #   resp = client.describe_reserved_instances_offerings({
     #     availability_zone: "String",
-    #     filters: [
-    #       {
-    #         name: "String",
-    #         values: ["String"],
-    #       },
-    #     ],
     #     include_marketplace: false,
     #     instance_type: "a1.medium", # accepts a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c5ad.large, c5ad.xlarge, c5ad.2xlarge, c5ad.4xlarge, c5ad.8xlarge, c5ad.12xlarge, c5ad.16xlarge, c5ad.24xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, c5n.metal, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, c6g.metal, c6gd.medium, c6gd.large, c6gd.xlarge, c6gd.2xlarge, c6gd.4xlarge, c6gd.8xlarge, c6gd.12xlarge, c6gd.16xlarge, c6gd.metal, c6gn.medium, c6gn.large, c6gn.xlarge, c6gn.2xlarge, c6gn.4xlarge, c6gn.8xlarge, c6gn.12xlarge, c6gn.16xlarge, c6i.large, c6i.xlarge, c6i.2xlarge, c6i.4xlarge, c6i.8xlarge, c6i.12xlarge, c6i.16xlarge, c6i.24xlarge, c6i.32xlarge, c6i.metal, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge, cr1.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, d3.xlarge, d3.2xlarge, d3.4xlarge, d3.8xlarge, d3en.xlarge, d3en.2xlarge, d3en.4xlarge, d3en.6xlarge, d3en.8xlarge, d3en.12xlarge, dl1.24xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4ad.xlarge, g4ad.2xlarge, g4ad.4xlarge, g4ad.8xlarge, g4ad.16xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g4dn.metal, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.12xlarge, g5.16xlarge, g5.24xlarge, g5.48xlarge, g5g.xlarge, g5g.2xlarge, g5g.4xlarge, g5g.8xlarge, g5g.16xlarge, g5g.metal, hi1.4xlarge, hpc6a.48xlarge, hs1.8xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, im4gn.large, im4gn.xlarge, im4gn.2xlarge, im4gn.4xlarge, im4gn.8xlarge, im4gn.16xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge, is4gen.medium, is4gen.large, is4gen.xlarge, is4gen.2xlarge, is4gen.4xlarge, is4gen.8xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5dn.metal, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, m5n.metal, m5zn.large, m5zn.xlarge, m5zn.2xlarge, m5zn.3xlarge, m5zn.6xlarge, m5zn.12xlarge, m5zn.metal, m6a.large, m6a.xlarge, m6a.2xlarge, m6a.4xlarge, m6a.8xlarge, m6a.12xlarge, m6a.16xlarge, m6a.24xlarge, m6a.32xlarge, m6a.48xlarge, m6g.metal, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge, m6gd.metal, m6gd.medium, m6gd.large, m6gd.xlarge, m6gd.2xlarge, m6gd.4xlarge, m6gd.8xlarge, m6gd.12xlarge, m6gd.16xlarge, m6i.large, m6i.xlarge, m6i.2xlarge, m6i.4xlarge, m6i.8xlarge, m6i.12xlarge, m6i.16xlarge, m6i.24xlarge, m6i.32xlarge, m6i.metal, mac1.metal, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, p4d.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, r5b.large, r5b.xlarge, r5b.2xlarge, r5b.4xlarge, r5b.8xlarge, r5b.12xlarge, r5b.16xlarge, r5b.24xlarge, r5b.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5dn.metal, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, r5n.metal, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, r6g.metal, r6gd.medium, r6gd.large, r6gd.xlarge, r6gd.2xlarge, r6gd.4xlarge, r6gd.8xlarge, r6gd.12xlarge, r6gd.16xlarge, r6gd.metal, r6i.large, r6i.xlarge, r6i.2xlarge, r6i.4xlarge, r6i.8xlarge, r6i.12xlarge, r6i.16xlarge, r6i.24xlarge, r6i.32xlarge, r6i.metal, t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, t4g.nano, t4g.micro, t4g.small, t4g.medium, t4g.large, t4g.xlarge, t4g.2xlarge, u-6tb1.56xlarge, u-6tb1.112xlarge, u-9tb1.112xlarge, u-12tb1.112xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, vt1.3xlarge, vt1.6xlarge, vt1.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, x2iezn.2xlarge, x2iezn.4xlarge, x2iezn.6xlarge, x2iezn.8xlarge, x2iezn.12xlarge, x2iezn.metal, x2gd.medium, x2gd.large, x2gd.xlarge, x2gd.2xlarge, x2gd.4xlarge, x2gd.8xlarge, x2gd.12xlarge, x2gd.16xlarge, x2gd.metal, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, x2idn.16xlarge, x2idn.24xlarge, x2idn.32xlarge, x2iedn.xlarge, x2iedn.2xlarge, x2iedn.4xlarge, x2iedn.8xlarge, x2iedn.16xlarge, x2iedn.24xlarge, x2iedn.32xlarge, c6a.large, c6a.xlarge, c6a.2xlarge, c6a.4xlarge, c6a.8xlarge, c6a.12xlarge, c6a.16xlarge, c6a.24xlarge, c6a.32xlarge, c6a.48xlarge, c6a.metal, m6a.metal, i4i.large, i4i.xlarge, i4i.2xlarge, i4i.4xlarge, i4i.8xlarge, i4i.16xlarge, i4i.32xlarge, i4i.metal, x2idn.metal, x2iedn.metal, c7g.medium, c7g.large, c7g.xlarge, c7g.2xlarge, c7g.4xlarge, c7g.8xlarge, c7g.12xlarge, c7g.16xlarge, mac2.metal, c6id.large, c6id.xlarge, c6id.2xlarge, c6id.4xlarge, c6id.8xlarge, c6id.12xlarge, c6id.16xlarge, c6id.24xlarge, c6id.32xlarge, c6id.metal, m6id.large, m6id.xlarge, m6id.2xlarge, m6id.4xlarge, m6id.8xlarge, m6id.12xlarge, m6id.16xlarge, m6id.24xlarge, m6id.32xlarge, m6id.metal, r6id.large, r6id.xlarge, r6id.2xlarge, r6id.4xlarge, r6id.8xlarge, r6id.12xlarge, r6id.16xlarge, r6id.24xlarge, r6id.32xlarge, r6id.metal, r6a.large, r6a.xlarge, r6a.2xlarge, r6a.4xlarge, r6a.8xlarge, r6a.12xlarge, r6a.16xlarge, r6a.24xlarge, r6a.32xlarge, r6a.48xlarge, r6a.metal, p4de.24xlarge, u-3tb1.56xlarge, u-18tb1.112xlarge, u-24tb1.112xlarge, trn1.2xlarge, trn1.32xlarge, hpc6id.32xlarge, c6in.large, c6in.xlarge, c6in.2xlarge, c6in.4xlarge, c6in.8xlarge, c6in.12xlarge, c6in.16xlarge, c6in.24xlarge, c6in.32xlarge, m6in.large, m6in.xlarge, m6in.2xlarge, m6in.4xlarge, m6in.8xlarge, m6in.12xlarge, m6in.16xlarge, m6in.24xlarge, m6in.32xlarge, m6idn.large, m6idn.xlarge, m6idn.2xlarge, m6idn.4xlarge, m6idn.8xlarge, m6idn.12xlarge, m6idn.16xlarge, m6idn.24xlarge, m6idn.32xlarge, r6in.large, r6in.xlarge, r6in.2xlarge, r6in.4xlarge, r6in.8xlarge, r6in.12xlarge, r6in.16xlarge, r6in.24xlarge, r6in.32xlarge, r6idn.large, r6idn.xlarge, r6idn.2xlarge, r6idn.4xlarge, r6idn.8xlarge, r6idn.12xlarge, r6idn.16xlarge, r6idn.24xlarge, r6idn.32xlarge, c7g.metal, m7g.medium, m7g.large, m7g.xlarge, m7g.2xlarge, m7g.4xlarge, m7g.8xlarge, m7g.12xlarge, m7g.16xlarge, m7g.metal, r7g.medium, r7g.large, r7g.xlarge, r7g.2xlarge, r7g.4xlarge, r7g.8xlarge, r7g.12xlarge, r7g.16xlarge, r7g.metal, c6in.metal, m6in.metal, m6idn.metal, r6in.metal, r6idn.metal, inf2.xlarge, inf2.8xlarge, inf2.24xlarge, inf2.48xlarge, trn1n.32xlarge, i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge, i4g.16xlarge, hpc7g.4xlarge, hpc7g.8xlarge, hpc7g.16xlarge, c7gn.medium, c7gn.large, c7gn.xlarge, c7gn.2xlarge, c7gn.4xlarge, c7gn.8xlarge, c7gn.12xlarge, c7gn.16xlarge, p5.48xlarge, m7i.large, m7i.xlarge, m7i.2xlarge, m7i.4xlarge, m7i.8xlarge, m7i.12xlarge, m7i.16xlarge, m7i.24xlarge, m7i.48xlarge, m7i-flex.large, m7i-flex.xlarge, m7i-flex.2xlarge, m7i-flex.4xlarge, m7i-flex.8xlarge, m7a.medium, m7a.large, m7a.xlarge, m7a.2xlarge, m7a.4xlarge, m7a.8xlarge, m7a.12xlarge, m7a.16xlarge, m7a.24xlarge, m7a.32xlarge, m7a.48xlarge, m7a.metal-48xl, hpc7a.12xlarge, hpc7a.24xlarge, hpc7a.48xlarge, hpc7a.96xlarge, c7gd.medium, c7gd.large, c7gd.xlarge, c7gd.2xlarge, c7gd.4xlarge, c7gd.8xlarge, c7gd.12xlarge, c7gd.16xlarge, m7gd.medium, m7gd.large, m7gd.xlarge, m7gd.2xlarge, m7gd.4xlarge, m7gd.8xlarge, m7gd.12xlarge, m7gd.16xlarge, r7gd.medium, r7gd.large, r7gd.xlarge, r7gd.2xlarge, r7gd.4xlarge, r7gd.8xlarge, r7gd.12xlarge, r7gd.16xlarge, r7a.medium, r7a.large, r7a.xlarge, r7a.2xlarge, r7a.4xlarge, r7a.8xlarge, r7a.12xlarge, r7a.16xlarge, r7a.24xlarge, r7a.32xlarge, r7a.48xlarge, c7i.large, c7i.xlarge, c7i.2xlarge, c7i.4xlarge, c7i.8xlarge, c7i.12xlarge, c7i.16xlarge, c7i.24xlarge, c7i.48xlarge, mac2-m2pro.metal, r7iz.large, r7iz.xlarge, r7iz.2xlarge, r7iz.4xlarge, r7iz.8xlarge, r7iz.12xlarge, r7iz.16xlarge, r7iz.32xlarge, c7a.medium, c7a.large, c7a.xlarge, c7a.2xlarge, c7a.4xlarge, c7a.8xlarge, c7a.12xlarge, c7a.16xlarge, c7a.24xlarge, c7a.32xlarge, c7a.48xlarge, c7a.metal-48xl, r7a.metal-48xl, r7i.large, r7i.xlarge, r7i.2xlarge, r7i.4xlarge, r7i.8xlarge, r7i.12xlarge, r7i.16xlarge, r7i.24xlarge, r7i.48xlarge, dl2q.24xlarge, mac2-m2.metal, i4i.12xlarge, i4i.24xlarge, c7i.metal-24xl, c7i.metal-48xl, m7i.metal-24xl, m7i.metal-48xl, r7i.metal-24xl, r7i.metal-48xl, r7iz.metal-16xl, r7iz.metal-32xl, c7gd.metal, m7gd.metal, r7gd.metal, g6.xlarge, g6.2xlarge, g6.4xlarge, g6.8xlarge, g6.12xlarge, g6.16xlarge, g6.24xlarge, g6.48xlarge, gr6.4xlarge, gr6.8xlarge, c7i-flex.large, c7i-flex.xlarge, c7i-flex.2xlarge, c7i-flex.4xlarge, c7i-flex.8xlarge, u7i-12tb.224xlarge, u7in-16tb.224xlarge, u7in-24tb.224xlarge, u7in-32tb.224xlarge, u7ib-12tb.224xlarge, c7gn.metal, r8g.medium, r8g.large, r8g.xlarge, r8g.2xlarge, r8g.4xlarge, r8g.8xlarge, r8g.12xlarge, r8g.16xlarge, r8g.24xlarge, r8g.48xlarge, r8g.metal-24xl, r8g.metal-48xl, mac2-m1ultra.metal, g6e.xlarge, g6e.2xlarge, g6e.4xlarge, g6e.8xlarge, g6e.12xlarge, g6e.16xlarge, g6e.24xlarge, g6e.48xlarge
     #     max_duration: 1,
@@ -31690,22 +31695,22 @@ module Aws::EC2
     #     product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
     #     reserved_instances_offering_ids: ["ReservedInstancesOfferingId"],
     #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
     #     instance_tenancy: "default", # accepts default, dedicated, host
-    #     max_results: 1,
-    #     next_token: "String",
     #     offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.reserved_instances_offerings #=> Array
-    #   resp.reserved_instances_offerings[0].availability_zone #=> String
-    #   resp.reserved_instances_offerings[0].duration #=> Integer
-    #   resp.reserved_instances_offerings[0].fixed_price #=> Float
-    #   resp.reserved_instances_offerings[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge"
-    #   resp.reserved_instances_offerings[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
-    #   resp.reserved_instances_offerings[0].reserved_instances_offering_id #=> String
-    #   resp.reserved_instances_offerings[0].usage_price #=> Float
     #   resp.reserved_instances_offerings[0].currency_code #=> String, one of "USD"
     #   resp.reserved_instances_offerings[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.reserved_instances_offerings[0].marketplace #=> Boolean
@@ -31718,7 +31723,13 @@ module Aws::EC2
     #   resp.reserved_instances_offerings[0].recurring_charges[0].amount #=> Float
     #   resp.reserved_instances_offerings[0].recurring_charges[0].frequency #=> String, one of "Hourly"
     #   resp.reserved_instances_offerings[0].scope #=> String, one of "Availability Zone", "Region"
-    #   resp.next_token #=> String
+    #   resp.reserved_instances_offerings[0].reserved_instances_offering_id #=> String
+    #   resp.reserved_instances_offerings[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge"
+    #   resp.reserved_instances_offerings[0].availability_zone #=> String
+    #   resp.reserved_instances_offerings[0].duration #=> Integer
+    #   resp.reserved_instances_offerings[0].usage_price #=> Float
+    #   resp.reserved_instances_offerings[0].fixed_price #=> Float
+    #   resp.reserved_instances_offerings[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesOfferings AWS API Documentation
     #
@@ -31745,6 +31756,28 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :route_table_ids
+    #   The IDs of the route tables.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -31820,28 +31853,6 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :route_table_ids
-    #   The IDs of the route tables.
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
     # @return [Types::DescribeRouteTablesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRouteTablesResult#route_tables #route_tables} => Array&lt;Types::RouteTable&gt;
@@ -31891,16 +31902,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_route_tables({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #     route_table_ids: ["RouteTableId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     route_table_ids: ["RouteTableId"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -32322,6 +32333,39 @@ module Aws::EC2
     # Describes the specified security groups or all of your security
     # groups.
     #
+    # @option params [Array<String>] :group_ids
+    #   The IDs of the security groups. Required for security groups in a
+    #   nondefault VPC.
+    #
+    #   Default: Describes all of your security groups.
+    #
+    # @option params [Array<String>] :group_names
+    #   \[Default VPC\] The names of the security groups. You can specify
+    #   either the security group name or the security group ID.
+    #
+    #   Default: Describes all of your security groups.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. This value can be between 5 and 1000. If this parameter is
+    #   not specified, then all items are returned. For more information, see
+    #   [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters. If using multiple filters for rules, the results include
     #   security groups for which any combination of rules - not necessarily a
@@ -32405,43 +32449,10 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC specified when the security group was
     #     created.
     #
-    # @option params [Array<String>] :group_ids
-    #   The IDs of the security groups. Required for security groups in a
-    #   nondefault VPC.
-    #
-    #   Default: Describes all of your security groups.
-    #
-    # @option params [Array<String>] :group_names
-    #   \[Default VPC\] The names of the security groups. You can specify
-    #   either the security group name or the security group ID.
-    #
-    #   Default: Describes all of your security groups.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1000. If this parameter is
-    #   not specified, then all items are returned. For more information, see
-    #   [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
     # @return [Types::DescribeSecurityGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeSecurityGroupsResult#security_groups #security_groups} => Array&lt;Types::SecurityGroup&gt;
     #   * {Types::DescribeSecurityGroupsResult#next_token #next_token} => String
+    #   * {Types::DescribeSecurityGroupsResult#security_groups #security_groups} => Array&lt;Types::SecurityGroup&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -32482,73 +32493,73 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_security_groups({
+    #     group_ids: ["SecurityGroupId"],
+    #     group_names: ["SecurityGroupName"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     group_ids: ["SecurityGroupId"],
-    #     group_names: ["SecurityGroupName"],
-    #     dry_run: false,
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.security_groups #=> Array
-    #   resp.security_groups[0].description #=> String
-    #   resp.security_groups[0].group_name #=> String
-    #   resp.security_groups[0].ip_permissions #=> Array
-    #   resp.security_groups[0].ip_permissions[0].from_port #=> Integer
-    #   resp.security_groups[0].ip_permissions[0].ip_protocol #=> String
-    #   resp.security_groups[0].ip_permissions[0].ip_ranges #=> Array
-    #   resp.security_groups[0].ip_permissions[0].ip_ranges[0].cidr_ip #=> String
-    #   resp.security_groups[0].ip_permissions[0].ip_ranges[0].description #=> String
-    #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges #=> Array
-    #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
-    #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges[0].description #=> String
-    #   resp.security_groups[0].ip_permissions[0].prefix_list_ids #=> Array
-    #   resp.security_groups[0].ip_permissions[0].prefix_list_ids[0].description #=> String
-    #   resp.security_groups[0].ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
-    #   resp.security_groups[0].ip_permissions[0].to_port #=> Integer
-    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs #=> Array
-    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].description #=> String
-    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].group_id #=> String
-    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].group_name #=> String
-    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
-    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].user_id #=> String
-    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].vpc_id #=> String
-    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
-    #   resp.security_groups[0].owner_id #=> String
     #   resp.security_groups[0].group_id #=> String
     #   resp.security_groups[0].ip_permissions_egress #=> Array
-    #   resp.security_groups[0].ip_permissions_egress[0].from_port #=> Integer
     #   resp.security_groups[0].ip_permissions_egress[0].ip_protocol #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges #=> Array
-    #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges[0].cidr_ip #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges[0].description #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges #=> Array
-    #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges[0].description #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids #=> Array
-    #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids[0].description #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].from_port #=> Integer
     #   resp.security_groups[0].ip_permissions_egress[0].to_port #=> Integer
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs #=> Array
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].description #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].group_id #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].group_name #=> String
-    #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].group_id #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].vpc_id #=> String
     #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges #=> Array
+    #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges[0].description #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges #=> Array
+    #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges[0].description #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids #=> Array
+    #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids[0].description #=> String
+    #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids[0].prefix_list_id #=> String
     #   resp.security_groups[0].tags #=> Array
     #   resp.security_groups[0].tags[0].key #=> String
     #   resp.security_groups[0].tags[0].value #=> String
     #   resp.security_groups[0].vpc_id #=> String
-    #   resp.next_token #=> String
+    #   resp.security_groups[0].owner_id #=> String
+    #   resp.security_groups[0].group_name #=> String
+    #   resp.security_groups[0].description #=> String
+    #   resp.security_groups[0].ip_permissions #=> Array
+    #   resp.security_groups[0].ip_permissions[0].ip_protocol #=> String
+    #   resp.security_groups[0].ip_permissions[0].from_port #=> Integer
+    #   resp.security_groups[0].ip_permissions[0].to_port #=> Integer
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs #=> Array
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].description #=> String
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].group_id #=> String
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].vpc_id #=> String
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
+    #   resp.security_groups[0].ip_permissions[0].ip_ranges #=> Array
+    #   resp.security_groups[0].ip_permissions[0].ip_ranges[0].description #=> String
+    #   resp.security_groups[0].ip_permissions[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges #=> Array
+    #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges[0].description #=> String
+    #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.security_groups[0].ip_permissions[0].prefix_list_ids #=> Array
+    #   resp.security_groups[0].ip_permissions[0].prefix_list_ids[0].description #=> String
+    #   resp.security_groups[0].ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -32588,9 +32599,9 @@ module Aws::EC2
     #
     # @return [Types::DescribeSnapshotAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeSnapshotAttributeResult#create_volume_permissions #create_volume_permissions} => Array&lt;Types::CreateVolumePermission&gt;
     #   * {Types::DescribeSnapshotAttributeResult#product_codes #product_codes} => Array&lt;Types::ProductCode&gt;
     #   * {Types::DescribeSnapshotAttributeResult#snapshot_id #snapshot_id} => String
+    #   * {Types::DescribeSnapshotAttributeResult#create_volume_permissions #create_volume_permissions} => Array&lt;Types::CreateVolumePermission&gt;
     #
     #
     # @example Example: To describe snapshot attributes
@@ -32620,13 +32631,13 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.create_volume_permissions #=> Array
-    #   resp.create_volume_permissions[0].group #=> String, one of "all"
-    #   resp.create_volume_permissions[0].user_id #=> String
     #   resp.product_codes #=> Array
     #   resp.product_codes[0].product_code_id #=> String
     #   resp.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
     #   resp.snapshot_id #=> String
+    #   resp.create_volume_permissions #=> Array
+    #   resp.create_volume_permissions[0].user_id #=> String
+    #   resp.create_volume_permissions[0].group #=> String, one of "all"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttribute AWS API Documentation
     #
@@ -32782,6 +32793,40 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Array<String>] :owner_ids
+    #   Scopes the results to snapshots with the specified owners. You can
+    #   specify a combination of Amazon Web Services account IDs, `self`, and
+    #   `amazon`.
+    #
+    # @option params [Array<String>] :restorable_by_user_ids
+    #   The IDs of the Amazon Web Services accounts that can create volumes
+    #   from the snapshot.
+    #
+    # @option params [Array<String>] :snapshot_ids
+    #   The snapshot IDs.
+    #
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -32825,44 +32870,10 @@ module Aws::EC2
     #
     #   * `volume-size` - The size of the volume, in GiB.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Array<String>] :owner_ids
-    #   Scopes the results to snapshots with the specified owners. You can
-    #   specify a combination of Amazon Web Services account IDs, `self`, and
-    #   `amazon`.
-    #
-    # @option params [Array<String>] :restorable_by_user_ids
-    #   The IDs of the Amazon Web Services accounts that can create volumes
-    #   from the snapshot.
-    #
-    # @option params [Array<String>] :snapshot_ids
-    #   The snapshot IDs.
-    #
-    #   Default: Describes the snapshots for which you have create volume
-    #   permissions.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @return [Types::DescribeSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeSnapshotsResult#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
     #   * {Types::DescribeSnapshotsResult#next_token #next_token} => String
+    #   * {Types::DescribeSnapshotsResult#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -32932,35 +32943,24 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_snapshots({
-    #     filters: [
-    #       {
-    #         name: "String",
-    #         values: ["String"],
-    #       },
-    #     ],
     #     max_results: 1,
     #     next_token: "String",
     #     owner_ids: ["String"],
     #     restorable_by_user_ids: ["String"],
     #     snapshot_ids: ["SnapshotId"],
     #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.snapshots #=> Array
-    #   resp.snapshots[0].data_encryption_key_id #=> String
-    #   resp.snapshots[0].description #=> String
-    #   resp.snapshots[0].encrypted #=> Boolean
-    #   resp.snapshots[0].kms_key_id #=> String
-    #   resp.snapshots[0].owner_id #=> String
-    #   resp.snapshots[0].progress #=> String
-    #   resp.snapshots[0].snapshot_id #=> String
-    #   resp.snapshots[0].start_time #=> Time
-    #   resp.snapshots[0].state #=> String, one of "pending", "completed", "error", "recoverable", "recovering"
-    #   resp.snapshots[0].state_message #=> String
-    #   resp.snapshots[0].volume_id #=> String
-    #   resp.snapshots[0].volume_size #=> Integer
     #   resp.snapshots[0].owner_alias #=> String
     #   resp.snapshots[0].outpost_arn #=> String
     #   resp.snapshots[0].tags #=> Array
@@ -32969,7 +32969,18 @@ module Aws::EC2
     #   resp.snapshots[0].storage_tier #=> String, one of "archive", "standard"
     #   resp.snapshots[0].restore_expiry_time #=> Time
     #   resp.snapshots[0].sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
-    #   resp.next_token #=> String
+    #   resp.snapshots[0].snapshot_id #=> String
+    #   resp.snapshots[0].volume_id #=> String
+    #   resp.snapshots[0].state #=> String, one of "pending", "completed", "error", "recoverable", "recovering"
+    #   resp.snapshots[0].state_message #=> String
+    #   resp.snapshots[0].start_time #=> Time
+    #   resp.snapshots[0].progress #=> String
+    #   resp.snapshots[0].owner_id #=> String
+    #   resp.snapshots[0].description #=> String
+    #   resp.snapshots[0].volume_size #=> Integer
+    #   resp.snapshots[0].encrypted #=> Boolean
+    #   resp.snapshots[0].kms_key_id #=> String
+    #   resp.snapshots[0].data_encryption_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -33052,6 +33063,13 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [required, String] :spot_fleet_request_id
+    #   The ID of the Spot Fleet request.
+    #
+    # @option params [String] :next_token
+    #   The token to include in another request to get the next page of items.
+    #   This value is `null` when there are no more items to return.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
@@ -33060,13 +33078,6 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
-    # @option params [String] :next_token
-    #   The token to include in another request to get the next page of items.
-    #   This value is `null` when there are no more items to return.
-    #
-    # @option params [required, String] :spot_fleet_request_id
-    #   The ID of the Spot Fleet request.
     #
     # @return [Types::DescribeSpotFleetInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -33099,9 +33110,9 @@ module Aws::EC2
     #
     #   resp = client.describe_spot_fleet_instances({
     #     dry_run: false,
-    #     max_results: 1,
-    #     next_token: "String",
     #     spot_fleet_request_id: "SpotFleetRequestId", # required
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -33144,8 +33155,19 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [required, String] :spot_fleet_request_id
+    #   The ID of the Spot Fleet request.
+    #
     # @option params [String] :event_type
     #   The type of events to describe. By default, all events are described.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The starting date and time for the events, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
+    #
+    # @option params [String] :next_token
+    #   The token to include in another request to get the next page of items.
+    #   This value is `null` when there are no more items to return.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -33155,17 +33177,6 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
-    # @option params [String] :next_token
-    #   The token to include in another request to get the next page of items.
-    #   This value is `null` when there are no more items to return.
-    #
-    # @option params [required, String] :spot_fleet_request_id
-    #   The ID of the Spot Fleet request.
-    #
-    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The starting date and time for the events, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     #
     # @return [Types::DescribeSpotFleetRequestHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -33228,11 +33239,11 @@ module Aws::EC2
     #
     #   resp = client.describe_spot_fleet_request_history({
     #     dry_run: false,
-    #     event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error, information
-    #     max_results: 1,
-    #     next_token: "String",
     #     spot_fleet_request_id: "SpotFleetRequestId", # required
+    #     event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error, information
     #     start_time: Time.now, # required
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -33268,6 +33279,13 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Array<String>] :spot_fleet_request_ids
+    #   The IDs of the Spot Fleet requests.
+    #
+    # @option params [String] :next_token
+    #   The token to include in another request to get the next page of items.
+    #   This value is `null` when there are no more items to return.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
@@ -33276,13 +33294,6 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
-    # @option params [String] :next_token
-    #   The token to include in another request to get the next page of items.
-    #   This value is `null` when there are no more items to return.
-    #
-    # @option params [Array<String>] :spot_fleet_request_ids
-    #   The IDs of the Spot Fleet requests.
     #
     # @return [Types::DescribeSpotFleetRequestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -33351,9 +33362,9 @@ module Aws::EC2
     #
     #   resp = client.describe_spot_fleet_requests({
     #     dry_run: false,
-    #     max_results: 1,
-    #     next_token: "String",
     #     spot_fleet_request_ids: ["SpotFleetRequestId"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -33372,13 +33383,8 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_fulfilled_capacity #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.iam_fleet_role #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups[0].group_name #=> String
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups[0].group_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].addressing_type #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].device_name #=> String
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].virtual_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.iops #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.snapshot_id #=> String
@@ -33389,6 +33395,8 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].no_device #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].device_name #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].virtual_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].ebs_optimized #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].iam_instance_profile.arn #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].iam_instance_profile.name #=> String
@@ -33484,6 +33492,9 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.allowed_instance_types #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.allowed_instance_types[0] #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups[0].group_id #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups[0].group_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_name #=> String
@@ -33597,6 +33608,28 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :spot_instance_request_ids
+    #   The IDs of the Spot Instance requests.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -33720,28 +33753,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-request-status.html
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :spot_instance_request_ids
-    #   The IDs of the Spot Instance requests.
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
     # @return [Types::DescribeSpotInstanceRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSpotInstanceRequestsResult#spot_instance_requests #spot_instance_requests} => Array&lt;Types::SpotInstanceRequest&gt;
@@ -33806,16 +33817,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_spot_instance_requests({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #     spot_instance_request_ids: ["SpotInstanceRequestId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     spot_instance_request_ids: ["SpotInstanceRequestId"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -33830,13 +33841,8 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].instance_id #=> String
     #   resp.spot_instance_requests[0].launch_group #=> String
     #   resp.spot_instance_requests[0].launch_specification.user_data #=> String
-    #   resp.spot_instance_requests[0].launch_specification.security_groups #=> Array
-    #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_name #=> String
-    #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.addressing_type #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings #=> Array
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].device_name #=> String
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].virtual_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
@@ -33847,6 +33853,8 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].device_name #=> String
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].virtual_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.name #=> String
@@ -33892,6 +33900,9 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.spot_instance_requests[0].launch_specification.ramdisk_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.subnet_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.security_groups #=> Array
+    #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.monitoring.enabled #=> Boolean
     #   resp.spot_instance_requests[0].launched_availability_zone #=> String
     #   resp.spot_instance_requests[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
@@ -33936,6 +33947,28 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The date and time, up to the past 90 days, from which to start
+    #   retrieving the price history data, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The date and time, up to the current date, from which to stop
+    #   retrieving the price history data, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
+    #
+    # @option params [Array<String>] :instance_types
+    #   Filters the results by the specified instance types.
+    #
+    # @option params [Array<String>] :product_descriptions
+    #   Filters the results by the specified basic product descriptions.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -33961,20 +33994,6 @@ module Aws::EC2
     # @option params [String] :availability_zone
     #   Filters the results by the specified Availability Zone.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time, up to the current date, from which to stop
-    #   retrieving the price history data, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
-    #
-    # @option params [Array<String>] :instance_types
-    #   Filters the results by the specified instance types.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
@@ -33987,14 +34006,6 @@ module Aws::EC2
     # @option params [String] :next_token
     #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Array<String>] :product_descriptions
-    #   Filters the results by the specified basic product descriptions.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   The date and time, up to the past 90 days, from which to start
-    #   retrieving the price history data, in UTC format (for example,
-    #   *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
     #
     # @return [Types::DescribeSpotPriceHistoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -34043,6 +34054,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_spot_price_history({
+    #     dry_run: false,
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     instance_types: ["a1.medium"], # accepts a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c5ad.large, c5ad.xlarge, c5ad.2xlarge, c5ad.4xlarge, c5ad.8xlarge, c5ad.12xlarge, c5ad.16xlarge, c5ad.24xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, c5n.metal, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, c6g.metal, c6gd.medium, c6gd.large, c6gd.xlarge, c6gd.2xlarge, c6gd.4xlarge, c6gd.8xlarge, c6gd.12xlarge, c6gd.16xlarge, c6gd.metal, c6gn.medium, c6gn.large, c6gn.xlarge, c6gn.2xlarge, c6gn.4xlarge, c6gn.8xlarge, c6gn.12xlarge, c6gn.16xlarge, c6i.large, c6i.xlarge, c6i.2xlarge, c6i.4xlarge, c6i.8xlarge, c6i.12xlarge, c6i.16xlarge, c6i.24xlarge, c6i.32xlarge, c6i.metal, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge, cr1.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, d3.xlarge, d3.2xlarge, d3.4xlarge, d3.8xlarge, d3en.xlarge, d3en.2xlarge, d3en.4xlarge, d3en.6xlarge, d3en.8xlarge, d3en.12xlarge, dl1.24xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4ad.xlarge, g4ad.2xlarge, g4ad.4xlarge, g4ad.8xlarge, g4ad.16xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g4dn.metal, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.12xlarge, g5.16xlarge, g5.24xlarge, g5.48xlarge, g5g.xlarge, g5g.2xlarge, g5g.4xlarge, g5g.8xlarge, g5g.16xlarge, g5g.metal, hi1.4xlarge, hpc6a.48xlarge, hs1.8xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, im4gn.large, im4gn.xlarge, im4gn.2xlarge, im4gn.4xlarge, im4gn.8xlarge, im4gn.16xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge, is4gen.medium, is4gen.large, is4gen.xlarge, is4gen.2xlarge, is4gen.4xlarge, is4gen.8xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5dn.metal, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, m5n.metal, m5zn.large, m5zn.xlarge, m5zn.2xlarge, m5zn.3xlarge, m5zn.6xlarge, m5zn.12xlarge, m5zn.metal, m6a.large, m6a.xlarge, m6a.2xlarge, m6a.4xlarge, m6a.8xlarge, m6a.12xlarge, m6a.16xlarge, m6a.24xlarge, m6a.32xlarge, m6a.48xlarge, m6g.metal, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge, m6gd.metal, m6gd.medium, m6gd.large, m6gd.xlarge, m6gd.2xlarge, m6gd.4xlarge, m6gd.8xlarge, m6gd.12xlarge, m6gd.16xlarge, m6i.large, m6i.xlarge, m6i.2xlarge, m6i.4xlarge, m6i.8xlarge, m6i.12xlarge, m6i.16xlarge, m6i.24xlarge, m6i.32xlarge, m6i.metal, mac1.metal, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, p4d.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, r5b.large, r5b.xlarge, r5b.2xlarge, r5b.4xlarge, r5b.8xlarge, r5b.12xlarge, r5b.16xlarge, r5b.24xlarge, r5b.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5dn.metal, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, r5n.metal, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, r6g.metal, r6gd.medium, r6gd.large, r6gd.xlarge, r6gd.2xlarge, r6gd.4xlarge, r6gd.8xlarge, r6gd.12xlarge, r6gd.16xlarge, r6gd.metal, r6i.large, r6i.xlarge, r6i.2xlarge, r6i.4xlarge, r6i.8xlarge, r6i.12xlarge, r6i.16xlarge, r6i.24xlarge, r6i.32xlarge, r6i.metal, t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, t4g.nano, t4g.micro, t4g.small, t4g.medium, t4g.large, t4g.xlarge, t4g.2xlarge, u-6tb1.56xlarge, u-6tb1.112xlarge, u-9tb1.112xlarge, u-12tb1.112xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, vt1.3xlarge, vt1.6xlarge, vt1.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, x2iezn.2xlarge, x2iezn.4xlarge, x2iezn.6xlarge, x2iezn.8xlarge, x2iezn.12xlarge, x2iezn.metal, x2gd.medium, x2gd.large, x2gd.xlarge, x2gd.2xlarge, x2gd.4xlarge, x2gd.8xlarge, x2gd.12xlarge, x2gd.16xlarge, x2gd.metal, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, x2idn.16xlarge, x2idn.24xlarge, x2idn.32xlarge, x2iedn.xlarge, x2iedn.2xlarge, x2iedn.4xlarge, x2iedn.8xlarge, x2iedn.16xlarge, x2iedn.24xlarge, x2iedn.32xlarge, c6a.large, c6a.xlarge, c6a.2xlarge, c6a.4xlarge, c6a.8xlarge, c6a.12xlarge, c6a.16xlarge, c6a.24xlarge, c6a.32xlarge, c6a.48xlarge, c6a.metal, m6a.metal, i4i.large, i4i.xlarge, i4i.2xlarge, i4i.4xlarge, i4i.8xlarge, i4i.16xlarge, i4i.32xlarge, i4i.metal, x2idn.metal, x2iedn.metal, c7g.medium, c7g.large, c7g.xlarge, c7g.2xlarge, c7g.4xlarge, c7g.8xlarge, c7g.12xlarge, c7g.16xlarge, mac2.metal, c6id.large, c6id.xlarge, c6id.2xlarge, c6id.4xlarge, c6id.8xlarge, c6id.12xlarge, c6id.16xlarge, c6id.24xlarge, c6id.32xlarge, c6id.metal, m6id.large, m6id.xlarge, m6id.2xlarge, m6id.4xlarge, m6id.8xlarge, m6id.12xlarge, m6id.16xlarge, m6id.24xlarge, m6id.32xlarge, m6id.metal, r6id.large, r6id.xlarge, r6id.2xlarge, r6id.4xlarge, r6id.8xlarge, r6id.12xlarge, r6id.16xlarge, r6id.24xlarge, r6id.32xlarge, r6id.metal, r6a.large, r6a.xlarge, r6a.2xlarge, r6a.4xlarge, r6a.8xlarge, r6a.12xlarge, r6a.16xlarge, r6a.24xlarge, r6a.32xlarge, r6a.48xlarge, r6a.metal, p4de.24xlarge, u-3tb1.56xlarge, u-18tb1.112xlarge, u-24tb1.112xlarge, trn1.2xlarge, trn1.32xlarge, hpc6id.32xlarge, c6in.large, c6in.xlarge, c6in.2xlarge, c6in.4xlarge, c6in.8xlarge, c6in.12xlarge, c6in.16xlarge, c6in.24xlarge, c6in.32xlarge, m6in.large, m6in.xlarge, m6in.2xlarge, m6in.4xlarge, m6in.8xlarge, m6in.12xlarge, m6in.16xlarge, m6in.24xlarge, m6in.32xlarge, m6idn.large, m6idn.xlarge, m6idn.2xlarge, m6idn.4xlarge, m6idn.8xlarge, m6idn.12xlarge, m6idn.16xlarge, m6idn.24xlarge, m6idn.32xlarge, r6in.large, r6in.xlarge, r6in.2xlarge, r6in.4xlarge, r6in.8xlarge, r6in.12xlarge, r6in.16xlarge, r6in.24xlarge, r6in.32xlarge, r6idn.large, r6idn.xlarge, r6idn.2xlarge, r6idn.4xlarge, r6idn.8xlarge, r6idn.12xlarge, r6idn.16xlarge, r6idn.24xlarge, r6idn.32xlarge, c7g.metal, m7g.medium, m7g.large, m7g.xlarge, m7g.2xlarge, m7g.4xlarge, m7g.8xlarge, m7g.12xlarge, m7g.16xlarge, m7g.metal, r7g.medium, r7g.large, r7g.xlarge, r7g.2xlarge, r7g.4xlarge, r7g.8xlarge, r7g.12xlarge, r7g.16xlarge, r7g.metal, c6in.metal, m6in.metal, m6idn.metal, r6in.metal, r6idn.metal, inf2.xlarge, inf2.8xlarge, inf2.24xlarge, inf2.48xlarge, trn1n.32xlarge, i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge, i4g.16xlarge, hpc7g.4xlarge, hpc7g.8xlarge, hpc7g.16xlarge, c7gn.medium, c7gn.large, c7gn.xlarge, c7gn.2xlarge, c7gn.4xlarge, c7gn.8xlarge, c7gn.12xlarge, c7gn.16xlarge, p5.48xlarge, m7i.large, m7i.xlarge, m7i.2xlarge, m7i.4xlarge, m7i.8xlarge, m7i.12xlarge, m7i.16xlarge, m7i.24xlarge, m7i.48xlarge, m7i-flex.large, m7i-flex.xlarge, m7i-flex.2xlarge, m7i-flex.4xlarge, m7i-flex.8xlarge, m7a.medium, m7a.large, m7a.xlarge, m7a.2xlarge, m7a.4xlarge, m7a.8xlarge, m7a.12xlarge, m7a.16xlarge, m7a.24xlarge, m7a.32xlarge, m7a.48xlarge, m7a.metal-48xl, hpc7a.12xlarge, hpc7a.24xlarge, hpc7a.48xlarge, hpc7a.96xlarge, c7gd.medium, c7gd.large, c7gd.xlarge, c7gd.2xlarge, c7gd.4xlarge, c7gd.8xlarge, c7gd.12xlarge, c7gd.16xlarge, m7gd.medium, m7gd.large, m7gd.xlarge, m7gd.2xlarge, m7gd.4xlarge, m7gd.8xlarge, m7gd.12xlarge, m7gd.16xlarge, r7gd.medium, r7gd.large, r7gd.xlarge, r7gd.2xlarge, r7gd.4xlarge, r7gd.8xlarge, r7gd.12xlarge, r7gd.16xlarge, r7a.medium, r7a.large, r7a.xlarge, r7a.2xlarge, r7a.4xlarge, r7a.8xlarge, r7a.12xlarge, r7a.16xlarge, r7a.24xlarge, r7a.32xlarge, r7a.48xlarge, c7i.large, c7i.xlarge, c7i.2xlarge, c7i.4xlarge, c7i.8xlarge, c7i.12xlarge, c7i.16xlarge, c7i.24xlarge, c7i.48xlarge, mac2-m2pro.metal, r7iz.large, r7iz.xlarge, r7iz.2xlarge, r7iz.4xlarge, r7iz.8xlarge, r7iz.12xlarge, r7iz.16xlarge, r7iz.32xlarge, c7a.medium, c7a.large, c7a.xlarge, c7a.2xlarge, c7a.4xlarge, c7a.8xlarge, c7a.12xlarge, c7a.16xlarge, c7a.24xlarge, c7a.32xlarge, c7a.48xlarge, c7a.metal-48xl, r7a.metal-48xl, r7i.large, r7i.xlarge, r7i.2xlarge, r7i.4xlarge, r7i.8xlarge, r7i.12xlarge, r7i.16xlarge, r7i.24xlarge, r7i.48xlarge, dl2q.24xlarge, mac2-m2.metal, i4i.12xlarge, i4i.24xlarge, c7i.metal-24xl, c7i.metal-48xl, m7i.metal-24xl, m7i.metal-48xl, r7i.metal-24xl, r7i.metal-48xl, r7iz.metal-16xl, r7iz.metal-32xl, c7gd.metal, m7gd.metal, r7gd.metal, g6.xlarge, g6.2xlarge, g6.4xlarge, g6.8xlarge, g6.12xlarge, g6.16xlarge, g6.24xlarge, g6.48xlarge, gr6.4xlarge, gr6.8xlarge, c7i-flex.large, c7i-flex.xlarge, c7i-flex.2xlarge, c7i-flex.4xlarge, c7i-flex.8xlarge, u7i-12tb.224xlarge, u7in-16tb.224xlarge, u7in-24tb.224xlarge, u7in-32tb.224xlarge, u7ib-12tb.224xlarge, c7gn.metal, r8g.medium, r8g.large, r8g.xlarge, r8g.2xlarge, r8g.4xlarge, r8g.8xlarge, r8g.12xlarge, r8g.16xlarge, r8g.24xlarge, r8g.48xlarge, r8g.metal-24xl, r8g.metal-48xl, mac2-m1ultra.metal, g6e.xlarge, g6e.2xlarge, g6e.4xlarge, g6e.8xlarge, g6e.12xlarge, g6e.16xlarge, g6e.24xlarge, g6e.48xlarge
+    #     product_descriptions: ["String"],
     #     filters: [
     #       {
     #         name: "String",
@@ -34050,13 +34066,8 @@ module Aws::EC2
     #       },
     #     ],
     #     availability_zone: "String",
-    #     dry_run: false,
-    #     end_time: Time.now,
-    #     instance_types: ["a1.medium"], # accepts a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c5ad.large, c5ad.xlarge, c5ad.2xlarge, c5ad.4xlarge, c5ad.8xlarge, c5ad.12xlarge, c5ad.16xlarge, c5ad.24xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, c5n.metal, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, c6g.metal, c6gd.medium, c6gd.large, c6gd.xlarge, c6gd.2xlarge, c6gd.4xlarge, c6gd.8xlarge, c6gd.12xlarge, c6gd.16xlarge, c6gd.metal, c6gn.medium, c6gn.large, c6gn.xlarge, c6gn.2xlarge, c6gn.4xlarge, c6gn.8xlarge, c6gn.12xlarge, c6gn.16xlarge, c6i.large, c6i.xlarge, c6i.2xlarge, c6i.4xlarge, c6i.8xlarge, c6i.12xlarge, c6i.16xlarge, c6i.24xlarge, c6i.32xlarge, c6i.metal, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge, cr1.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, d3.xlarge, d3.2xlarge, d3.4xlarge, d3.8xlarge, d3en.xlarge, d3en.2xlarge, d3en.4xlarge, d3en.6xlarge, d3en.8xlarge, d3en.12xlarge, dl1.24xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4ad.xlarge, g4ad.2xlarge, g4ad.4xlarge, g4ad.8xlarge, g4ad.16xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g4dn.metal, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.12xlarge, g5.16xlarge, g5.24xlarge, g5.48xlarge, g5g.xlarge, g5g.2xlarge, g5g.4xlarge, g5g.8xlarge, g5g.16xlarge, g5g.metal, hi1.4xlarge, hpc6a.48xlarge, hs1.8xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, im4gn.large, im4gn.xlarge, im4gn.2xlarge, im4gn.4xlarge, im4gn.8xlarge, im4gn.16xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge, is4gen.medium, is4gen.large, is4gen.xlarge, is4gen.2xlarge, is4gen.4xlarge, is4gen.8xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5dn.metal, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, m5n.metal, m5zn.large, m5zn.xlarge, m5zn.2xlarge, m5zn.3xlarge, m5zn.6xlarge, m5zn.12xlarge, m5zn.metal, m6a.large, m6a.xlarge, m6a.2xlarge, m6a.4xlarge, m6a.8xlarge, m6a.12xlarge, m6a.16xlarge, m6a.24xlarge, m6a.32xlarge, m6a.48xlarge, m6g.metal, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge, m6gd.metal, m6gd.medium, m6gd.large, m6gd.xlarge, m6gd.2xlarge, m6gd.4xlarge, m6gd.8xlarge, m6gd.12xlarge, m6gd.16xlarge, m6i.large, m6i.xlarge, m6i.2xlarge, m6i.4xlarge, m6i.8xlarge, m6i.12xlarge, m6i.16xlarge, m6i.24xlarge, m6i.32xlarge, m6i.metal, mac1.metal, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, p4d.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, r5b.large, r5b.xlarge, r5b.2xlarge, r5b.4xlarge, r5b.8xlarge, r5b.12xlarge, r5b.16xlarge, r5b.24xlarge, r5b.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5dn.metal, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, r5n.metal, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, r6g.metal, r6gd.medium, r6gd.large, r6gd.xlarge, r6gd.2xlarge, r6gd.4xlarge, r6gd.8xlarge, r6gd.12xlarge, r6gd.16xlarge, r6gd.metal, r6i.large, r6i.xlarge, r6i.2xlarge, r6i.4xlarge, r6i.8xlarge, r6i.12xlarge, r6i.16xlarge, r6i.24xlarge, r6i.32xlarge, r6i.metal, t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, t4g.nano, t4g.micro, t4g.small, t4g.medium, t4g.large, t4g.xlarge, t4g.2xlarge, u-6tb1.56xlarge, u-6tb1.112xlarge, u-9tb1.112xlarge, u-12tb1.112xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, vt1.3xlarge, vt1.6xlarge, vt1.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, x2iezn.2xlarge, x2iezn.4xlarge, x2iezn.6xlarge, x2iezn.8xlarge, x2iezn.12xlarge, x2iezn.metal, x2gd.medium, x2gd.large, x2gd.xlarge, x2gd.2xlarge, x2gd.4xlarge, x2gd.8xlarge, x2gd.12xlarge, x2gd.16xlarge, x2gd.metal, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, x2idn.16xlarge, x2idn.24xlarge, x2idn.32xlarge, x2iedn.xlarge, x2iedn.2xlarge, x2iedn.4xlarge, x2iedn.8xlarge, x2iedn.16xlarge, x2iedn.24xlarge, x2iedn.32xlarge, c6a.large, c6a.xlarge, c6a.2xlarge, c6a.4xlarge, c6a.8xlarge, c6a.12xlarge, c6a.16xlarge, c6a.24xlarge, c6a.32xlarge, c6a.48xlarge, c6a.metal, m6a.metal, i4i.large, i4i.xlarge, i4i.2xlarge, i4i.4xlarge, i4i.8xlarge, i4i.16xlarge, i4i.32xlarge, i4i.metal, x2idn.metal, x2iedn.metal, c7g.medium, c7g.large, c7g.xlarge, c7g.2xlarge, c7g.4xlarge, c7g.8xlarge, c7g.12xlarge, c7g.16xlarge, mac2.metal, c6id.large, c6id.xlarge, c6id.2xlarge, c6id.4xlarge, c6id.8xlarge, c6id.12xlarge, c6id.16xlarge, c6id.24xlarge, c6id.32xlarge, c6id.metal, m6id.large, m6id.xlarge, m6id.2xlarge, m6id.4xlarge, m6id.8xlarge, m6id.12xlarge, m6id.16xlarge, m6id.24xlarge, m6id.32xlarge, m6id.metal, r6id.large, r6id.xlarge, r6id.2xlarge, r6id.4xlarge, r6id.8xlarge, r6id.12xlarge, r6id.16xlarge, r6id.24xlarge, r6id.32xlarge, r6id.metal, r6a.large, r6a.xlarge, r6a.2xlarge, r6a.4xlarge, r6a.8xlarge, r6a.12xlarge, r6a.16xlarge, r6a.24xlarge, r6a.32xlarge, r6a.48xlarge, r6a.metal, p4de.24xlarge, u-3tb1.56xlarge, u-18tb1.112xlarge, u-24tb1.112xlarge, trn1.2xlarge, trn1.32xlarge, hpc6id.32xlarge, c6in.large, c6in.xlarge, c6in.2xlarge, c6in.4xlarge, c6in.8xlarge, c6in.12xlarge, c6in.16xlarge, c6in.24xlarge, c6in.32xlarge, m6in.large, m6in.xlarge, m6in.2xlarge, m6in.4xlarge, m6in.8xlarge, m6in.12xlarge, m6in.16xlarge, m6in.24xlarge, m6in.32xlarge, m6idn.large, m6idn.xlarge, m6idn.2xlarge, m6idn.4xlarge, m6idn.8xlarge, m6idn.12xlarge, m6idn.16xlarge, m6idn.24xlarge, m6idn.32xlarge, r6in.large, r6in.xlarge, r6in.2xlarge, r6in.4xlarge, r6in.8xlarge, r6in.12xlarge, r6in.16xlarge, r6in.24xlarge, r6in.32xlarge, r6idn.large, r6idn.xlarge, r6idn.2xlarge, r6idn.4xlarge, r6idn.8xlarge, r6idn.12xlarge, r6idn.16xlarge, r6idn.24xlarge, r6idn.32xlarge, c7g.metal, m7g.medium, m7g.large, m7g.xlarge, m7g.2xlarge, m7g.4xlarge, m7g.8xlarge, m7g.12xlarge, m7g.16xlarge, m7g.metal, r7g.medium, r7g.large, r7g.xlarge, r7g.2xlarge, r7g.4xlarge, r7g.8xlarge, r7g.12xlarge, r7g.16xlarge, r7g.metal, c6in.metal, m6in.metal, m6idn.metal, r6in.metal, r6idn.metal, inf2.xlarge, inf2.8xlarge, inf2.24xlarge, inf2.48xlarge, trn1n.32xlarge, i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge, i4g.16xlarge, hpc7g.4xlarge, hpc7g.8xlarge, hpc7g.16xlarge, c7gn.medium, c7gn.large, c7gn.xlarge, c7gn.2xlarge, c7gn.4xlarge, c7gn.8xlarge, c7gn.12xlarge, c7gn.16xlarge, p5.48xlarge, m7i.large, m7i.xlarge, m7i.2xlarge, m7i.4xlarge, m7i.8xlarge, m7i.12xlarge, m7i.16xlarge, m7i.24xlarge, m7i.48xlarge, m7i-flex.large, m7i-flex.xlarge, m7i-flex.2xlarge, m7i-flex.4xlarge, m7i-flex.8xlarge, m7a.medium, m7a.large, m7a.xlarge, m7a.2xlarge, m7a.4xlarge, m7a.8xlarge, m7a.12xlarge, m7a.16xlarge, m7a.24xlarge, m7a.32xlarge, m7a.48xlarge, m7a.metal-48xl, hpc7a.12xlarge, hpc7a.24xlarge, hpc7a.48xlarge, hpc7a.96xlarge, c7gd.medium, c7gd.large, c7gd.xlarge, c7gd.2xlarge, c7gd.4xlarge, c7gd.8xlarge, c7gd.12xlarge, c7gd.16xlarge, m7gd.medium, m7gd.large, m7gd.xlarge, m7gd.2xlarge, m7gd.4xlarge, m7gd.8xlarge, m7gd.12xlarge, m7gd.16xlarge, r7gd.medium, r7gd.large, r7gd.xlarge, r7gd.2xlarge, r7gd.4xlarge, r7gd.8xlarge, r7gd.12xlarge, r7gd.16xlarge, r7a.medium, r7a.large, r7a.xlarge, r7a.2xlarge, r7a.4xlarge, r7a.8xlarge, r7a.12xlarge, r7a.16xlarge, r7a.24xlarge, r7a.32xlarge, r7a.48xlarge, c7i.large, c7i.xlarge, c7i.2xlarge, c7i.4xlarge, c7i.8xlarge, c7i.12xlarge, c7i.16xlarge, c7i.24xlarge, c7i.48xlarge, mac2-m2pro.metal, r7iz.large, r7iz.xlarge, r7iz.2xlarge, r7iz.4xlarge, r7iz.8xlarge, r7iz.12xlarge, r7iz.16xlarge, r7iz.32xlarge, c7a.medium, c7a.large, c7a.xlarge, c7a.2xlarge, c7a.4xlarge, c7a.8xlarge, c7a.12xlarge, c7a.16xlarge, c7a.24xlarge, c7a.32xlarge, c7a.48xlarge, c7a.metal-48xl, r7a.metal-48xl, r7i.large, r7i.xlarge, r7i.2xlarge, r7i.4xlarge, r7i.8xlarge, r7i.12xlarge, r7i.16xlarge, r7i.24xlarge, r7i.48xlarge, dl2q.24xlarge, mac2-m2.metal, i4i.12xlarge, i4i.24xlarge, c7i.metal-24xl, c7i.metal-48xl, m7i.metal-24xl, m7i.metal-48xl, r7i.metal-24xl, r7i.metal-48xl, r7iz.metal-16xl, r7iz.metal-32xl, c7gd.metal, m7gd.metal, r7gd.metal, g6.xlarge, g6.2xlarge, g6.4xlarge, g6.8xlarge, g6.12xlarge, g6.16xlarge, g6.24xlarge, g6.48xlarge, gr6.4xlarge, gr6.8xlarge, c7i-flex.large, c7i-flex.xlarge, c7i-flex.2xlarge, c7i-flex.4xlarge, c7i-flex.8xlarge, u7i-12tb.224xlarge, u7in-16tb.224xlarge, u7in-24tb.224xlarge, u7in-32tb.224xlarge, u7ib-12tb.224xlarge, c7gn.metal, r8g.medium, r8g.large, r8g.xlarge, r8g.2xlarge, r8g.4xlarge, r8g.8xlarge, r8g.12xlarge, r8g.16xlarge, r8g.24xlarge, r8g.48xlarge, r8g.metal-24xl, r8g.metal-48xl, mac2-m1ultra.metal, g6e.xlarge, g6e.2xlarge, g6e.4xlarge, g6e.8xlarge, g6e.12xlarge, g6e.16xlarge, g6e.24xlarge, g6e.48xlarge
     #     max_results: 1,
     #     next_token: "String",
-    #     product_descriptions: ["String"],
-    #     start_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -34139,12 +34150,12 @@ module Aws::EC2
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].to_port #=> Integer
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs #=> Array
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].description #=> String
-    #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
-    #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
-    #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].vpc_id #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #   resp.stale_security_group_set[0].stale_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress #=> Array
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].from_port #=> Integer
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].ip_protocol #=> String
@@ -34155,12 +34166,12 @@ module Aws::EC2
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].to_port #=> Integer
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs #=> Array
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].description #=> String
-    #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].group_id #=> String
-    #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].group_name #=> String
-    #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].group_id #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].vpc_id #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
     #   resp.stale_security_group_set[0].vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroups AWS API Documentation
@@ -34389,12 +34400,6 @@ module Aws::EC2
     #
     #   Default: Describes all your subnets.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [String] :next_token
     #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous request.
@@ -34408,10 +34413,16 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @return [Types::DescribeSubnetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeSubnetsResult#subnets #subnets} => Array&lt;Types::Subnet&gt;
     #   * {Types::DescribeSubnetsResult#next_token #next_token} => String
+    #   * {Types::DescribeSubnetsResult#subnets #subnets} => Array&lt;Types::Subnet&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -34457,26 +34468,19 @@ module Aws::EC2
     #       },
     #     ],
     #     subnet_ids: ["SubnetId"],
-    #     dry_run: false,
     #     next_token: "String",
     #     max_results: 1,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.subnets #=> Array
-    #   resp.subnets[0].availability_zone #=> String
     #   resp.subnets[0].availability_zone_id #=> String
-    #   resp.subnets[0].available_ip_address_count #=> Integer
-    #   resp.subnets[0].cidr_block #=> String
-    #   resp.subnets[0].default_for_az #=> Boolean
     #   resp.subnets[0].enable_lni_at_device_index #=> Integer
-    #   resp.subnets[0].map_public_ip_on_launch #=> Boolean
     #   resp.subnets[0].map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnets[0].customer_owned_ipv_4_pool #=> String
-    #   resp.subnets[0].state #=> String, one of "pending", "available", "unavailable"
-    #   resp.subnets[0].subnet_id #=> String
-    #   resp.subnets[0].vpc_id #=> String
     #   resp.subnets[0].owner_id #=> String
     #   resp.subnets[0].assign_ipv_6_address_on_creation #=> Boolean
     #   resp.subnets[0].ipv_6_cidr_block_association_set #=> Array
@@ -34496,7 +34500,14 @@ module Aws::EC2
     #   resp.subnets[0].private_dns_name_options_on_launch.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.subnets[0].private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
     #   resp.subnets[0].private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
-    #   resp.next_token #=> String
+    #   resp.subnets[0].subnet_id #=> String
+    #   resp.subnets[0].state #=> String, one of "pending", "available", "unavailable"
+    #   resp.subnets[0].vpc_id #=> String
+    #   resp.subnets[0].cidr_block #=> String
+    #   resp.subnets[0].available_ip_address_count #=> Integer
+    #   resp.subnets[0].availability_zone #=> String
+    #   resp.subnets[0].default_for_az #=> Boolean
+    #   resp.subnets[0].map_public_ip_on_launch #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -36484,6 +36495,30 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-status.html
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Array<String>] :volume_ids
+    #   The IDs of the volumes.
+    #
+    #   Default: Describes all your volumes.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -36518,30 +36553,6 @@ module Aws::EC2
     #
     #   * `volume-status.status` - The status of the volume (`ok` \|
     #     `impaired` \| `warning` \| `insufficient-data`).
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Array<String>] :volume_ids
-    #   The IDs of the volumes.
-    #
-    #   Default: Describes all your volumes.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Types::DescribeVolumeStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -36613,16 +36624,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_volume_status({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     volume_ids: ["VolumeId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
-    #     next_token: "String",
-    #     volume_ids: ["VolumeId"],
-    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -36684,6 +36695,16 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html
     #
+    # @option params [Array<String>] :volume_ids
+    #   The volume IDs. If not specified, then all volumes are included in the
+    #   response.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -36739,15 +36760,9 @@ module Aws::EC2
     #   * `volume-type` - The Amazon EBS volume type (`gp2` \| `gp3` \| `io1`
     #     \| `io2` \| `st1` \| `sc1`\| `standard`)
     #
-    # @option params [Array<String>] :volume_ids
-    #   The volume IDs. If not specified, then all volumes are included in the
-    #   response.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -36758,14 +36773,10 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
     # @return [Types::DescribeVolumesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeVolumesResult#volumes #volumes} => Array&lt;Types::Volume&gt;
     #   * {Types::DescribeVolumesResult#next_token #next_token} => String
+    #   * {Types::DescribeVolumesResult#volumes #volumes} => Array&lt;Types::Volume&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -36853,39 +36864,23 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_volumes({
+    #     volume_ids: ["VolumeId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     volume_ids: ["VolumeId"],
-    #     dry_run: false,
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.volumes #=> Array
-    #   resp.volumes[0].attachments #=> Array
-    #   resp.volumes[0].attachments[0].attach_time #=> Time
-    #   resp.volumes[0].attachments[0].device #=> String
-    #   resp.volumes[0].attachments[0].instance_id #=> String
-    #   resp.volumes[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
-    #   resp.volumes[0].attachments[0].volume_id #=> String
-    #   resp.volumes[0].attachments[0].delete_on_termination #=> Boolean
-    #   resp.volumes[0].attachments[0].associated_resource #=> String
-    #   resp.volumes[0].attachments[0].instance_owning_service #=> String
-    #   resp.volumes[0].availability_zone #=> String
-    #   resp.volumes[0].create_time #=> Time
-    #   resp.volumes[0].encrypted #=> Boolean
-    #   resp.volumes[0].kms_key_id #=> String
     #   resp.volumes[0].outpost_arn #=> String
-    #   resp.volumes[0].size #=> Integer
-    #   resp.volumes[0].snapshot_id #=> String
-    #   resp.volumes[0].state #=> String, one of "creating", "available", "in-use", "deleting", "deleted", "error"
-    #   resp.volumes[0].volume_id #=> String
     #   resp.volumes[0].iops #=> Integer
     #   resp.volumes[0].tags #=> Array
     #   resp.volumes[0].tags[0].key #=> String
@@ -36895,7 +36890,23 @@ module Aws::EC2
     #   resp.volumes[0].multi_attach_enabled #=> Boolean
     #   resp.volumes[0].throughput #=> Integer
     #   resp.volumes[0].sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
-    #   resp.next_token #=> String
+    #   resp.volumes[0].volume_id #=> String
+    #   resp.volumes[0].size #=> Integer
+    #   resp.volumes[0].snapshot_id #=> String
+    #   resp.volumes[0].availability_zone #=> String
+    #   resp.volumes[0].state #=> String, one of "creating", "available", "in-use", "deleting", "deleted", "error"
+    #   resp.volumes[0].create_time #=> Time
+    #   resp.volumes[0].attachments #=> Array
+    #   resp.volumes[0].attachments[0].delete_on_termination #=> Boolean
+    #   resp.volumes[0].attachments[0].associated_resource #=> String
+    #   resp.volumes[0].attachments[0].instance_owning_service #=> String
+    #   resp.volumes[0].attachments[0].volume_id #=> String
+    #   resp.volumes[0].attachments[0].instance_id #=> String
+    #   resp.volumes[0].attachments[0].device #=> String
+    #   resp.volumes[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
+    #   resp.volumes[0].attachments[0].attach_time #=> Time
+    #   resp.volumes[0].encrypted #=> Boolean
+    #   resp.volumes[0].kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -36976,8 +36987,8 @@ module Aws::EC2
     #
     # @return [Types::DescribeVolumesModificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeVolumesModificationsResult#volumes_modifications #volumes_modifications} => Array&lt;Types::VolumeModification&gt;
     #   * {Types::DescribeVolumesModificationsResult#next_token #next_token} => String
+    #   * {Types::DescribeVolumesModificationsResult#volumes_modifications #volumes_modifications} => Array&lt;Types::VolumeModification&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -36998,6 +37009,7 @@ module Aws::EC2
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.volumes_modifications #=> Array
     #   resp.volumes_modifications[0].volume_id #=> String
     #   resp.volumes_modifications[0].modification_state #=> String, one of "modifying", "optimizing", "completed", "failed"
@@ -37015,7 +37027,6 @@ module Aws::EC2
     #   resp.volumes_modifications[0].progress #=> Integer
     #   resp.volumes_modifications[0].start_time #=> Time
     #   resp.volumes_modifications[0].end_time #=> Time
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModifications AWS API Documentation
     #
@@ -37043,10 +37054,10 @@ module Aws::EC2
     #
     # @return [Types::DescribeVpcAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeVpcAttributeResult#vpc_id #vpc_id} => String
     #   * {Types::DescribeVpcAttributeResult#enable_dns_hostnames #enable_dns_hostnames} => Types::AttributeBooleanValue
     #   * {Types::DescribeVpcAttributeResult#enable_dns_support #enable_dns_support} => Types::AttributeBooleanValue
     #   * {Types::DescribeVpcAttributeResult#enable_network_address_usage_metrics #enable_network_address_usage_metrics} => Types::AttributeBooleanValue
+    #   * {Types::DescribeVpcAttributeResult#vpc_id #vpc_id} => String
     #
     #
     # @example Example: To describe the enableDnsSupport attribute
@@ -37096,10 +37107,10 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.vpc_id #=> String
     #   resp.enable_dns_hostnames.value #=> Boolean
     #   resp.enable_dns_support.value #=> Boolean
     #   resp.enable_network_address_usage_metrics.value #=> Boolean
+    #   resp.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttribute AWS API Documentation
     #
@@ -37115,6 +37126,15 @@ module Aws::EC2
     #  </note>
     #
     # Describes the ClassicLink status of the specified VPCs.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :vpc_ids
+    #   The VPCs for which you want to describe the ClassicLink status.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -37132,15 +37152,6 @@ module Aws::EC2
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :vpc_ids
-    #   The VPCs for which you want to describe the ClassicLink status.
-    #
     # @return [Types::DescribeVpcClassicLinkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeVpcClassicLinkResult#vpcs #vpcs} => Array&lt;Types::VpcClassicLink&gt;
@@ -37148,14 +37159,14 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_classic_link({
+    #     dry_run: false,
+    #     vpc_ids: ["VpcId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     vpc_ids: ["VpcId"],
     #   })
     #
     # @example Response structure
@@ -37187,6 +37198,9 @@ module Aws::EC2
     # VPC resolves to its private IP address when addressed from a linked
     # EC2-Classic instance.
     #
+    # @option params [Array<String>] :vpc_ids
+    #   The IDs of the VPCs.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
@@ -37200,9 +37214,6 @@ module Aws::EC2
     #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous request.
     #
-    # @option params [Array<String>] :vpc_ids
-    #   The IDs of the VPCs.
-    #
     # @return [Types::DescribeVpcClassicLinkDnsSupportResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeVpcClassicLinkDnsSupportResult#next_token #next_token} => String
@@ -37213,9 +37224,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_classic_link_dns_support({
+    #     vpc_ids: ["VpcId"],
     #     max_results: 1,
     #     next_token: "DescribeVpcClassicLinkDnsSupportNextToken",
-    #     vpc_ids: ["VpcId"],
     #   })
     #
     # @example Response structure
@@ -37821,6 +37832,30 @@ module Aws::EC2
     # VPC peering connection IDs or filter the results to include only the
     # VPC peering connections that match specific criteria.
     #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :vpc_peering_connection_ids
+    #   The IDs of the VPC peering connections.
+    #
+    #   Default: Describes all your VPC peering connections.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -37862,30 +37897,6 @@ module Aws::EC2
     #
     #   * `vpc-peering-connection-id` - The ID of the VPC peering connection.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :vpc_peering_connection_ids
-    #   The IDs of the VPC peering connections.
-    #
-    #   Default: Describes all your VPC peering connections.
-    #
-    # @option params [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    #
     # @return [Types::DescribeVpcPeeringConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeVpcPeeringConnectionsResult#vpc_peering_connections #vpc_peering_connections} => Array&lt;Types::VpcPeeringConnection&gt;
@@ -37896,16 +37907,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_peering_connections({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -38014,12 +38025,6 @@ module Aws::EC2
     # @option params [Array<String>] :vpc_ids
     #   The IDs of the VPCs.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [String] :next_token
     #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous request.
@@ -38033,10 +38038,16 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @return [Types::DescribeVpcsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeVpcsResult#vpcs #vpcs} => Array&lt;Types::Vpc&gt;
     #   * {Types::DescribeVpcsResult#next_token #next_token} => String
+    #   * {Types::DescribeVpcsResult#vpcs #vpcs} => Array&lt;Types::Vpc&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -38081,18 +38092,15 @@ module Aws::EC2
     #       },
     #     ],
     #     vpc_ids: ["VpcId"],
-    #     dry_run: false,
     #     next_token: "String",
     #     max_results: 1,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.vpcs #=> Array
-    #   resp.vpcs[0].cidr_block #=> String
-    #   resp.vpcs[0].dhcp_options_id #=> String
-    #   resp.vpcs[0].state #=> String, one of "pending", "available"
-    #   resp.vpcs[0].vpc_id #=> String
     #   resp.vpcs[0].owner_id #=> String
     #   resp.vpcs[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.vpcs[0].ipv_6_cidr_block_association_set #=> Array
@@ -38113,7 +38121,10 @@ module Aws::EC2
     #   resp.vpcs[0].tags #=> Array
     #   resp.vpcs[0].tags[0].key #=> String
     #   resp.vpcs[0].tags[0].value #=> String
-    #   resp.next_token #=> String
+    #   resp.vpcs[0].vpc_id #=> String
+    #   resp.vpcs[0].state #=> String, one of "pending", "available"
+    #   resp.vpcs[0].cidr_block #=> String
+    #   resp.vpcs[0].dhcp_options_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -38213,13 +38224,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.vpn_connections #=> Array
-    #   resp.vpn_connections[0].customer_gateway_configuration #=> String
-    #   resp.vpn_connections[0].customer_gateway_id #=> String
     #   resp.vpn_connections[0].category #=> String
-    #   resp.vpn_connections[0].state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.vpn_connections[0].type #=> String, one of "ipsec.1"
-    #   resp.vpn_connections[0].vpn_connection_id #=> String
-    #   resp.vpn_connections[0].vpn_gateway_id #=> String
     #   resp.vpn_connections[0].transit_gateway_id #=> String
     #   resp.vpn_connections[0].core_network_arn #=> String
     #   resp.vpn_connections[0].core_network_attachment_arn #=> String
@@ -38278,6 +38283,12 @@ module Aws::EC2
     #   resp.vpn_connections[0].vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connections[0].vgw_telemetry[0].status_message #=> String
     #   resp.vpn_connections[0].vgw_telemetry[0].certificate_arn #=> String
+    #   resp.vpn_connections[0].vpn_connection_id #=> String
+    #   resp.vpn_connections[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connections[0].customer_gateway_configuration #=> String
+    #   resp.vpn_connections[0].type #=> String, one of "ipsec.1"
+    #   resp.vpn_connections[0].customer_gateway_id #=> String
+    #   resp.vpn_connections[0].vpn_gateway_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -38367,17 +38378,17 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.vpn_gateways #=> Array
-    #   resp.vpn_gateways[0].availability_zone #=> String
-    #   resp.vpn_gateways[0].state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.vpn_gateways[0].type #=> String, one of "ipsec.1"
-    #   resp.vpn_gateways[0].vpc_attachments #=> Array
-    #   resp.vpn_gateways[0].vpc_attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
-    #   resp.vpn_gateways[0].vpc_attachments[0].vpc_id #=> String
-    #   resp.vpn_gateways[0].vpn_gateway_id #=> String
     #   resp.vpn_gateways[0].amazon_side_asn #=> Integer
     #   resp.vpn_gateways[0].tags #=> Array
     #   resp.vpn_gateways[0].tags[0].key #=> String
     #   resp.vpn_gateways[0].tags[0].value #=> String
+    #   resp.vpn_gateways[0].vpn_gateway_id #=> String
+    #   resp.vpn_gateways[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_gateways[0].type #=> String, one of "ipsec.1"
+    #   resp.vpn_gateways[0].availability_zone #=> String
+    #   resp.vpn_gateways[0].vpc_attachments #=> Array
+    #   resp.vpn_gateways[0].vpc_attachments[0].vpc_id #=> String
+    #   resp.vpn_gateways[0].vpc_attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnGateways AWS API Documentation
     #
@@ -38481,14 +38492,14 @@ module Aws::EC2
 
     # Detaches a network interface from an instance.
     #
-    # @option params [required, String] :attachment_id
-    #   The ID of the attachment.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment.
     #
     # @option params [Boolean] :force
     #   Specifies whether to force a detachment.
@@ -38527,8 +38538,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_network_interface({
-    #     attachment_id: "NetworkInterfaceAttachmentId", # required
     #     dry_run: false,
+    #     attachment_id: "NetworkInterfaceAttachmentId", # required
     #     force: false,
     #   })
     #
@@ -38684,14 +38695,14 @@ module Aws::EC2
     #
     # @return [Types::VolumeAttachment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::VolumeAttachment#attach_time #attach_time} => Time
-    #   * {Types::VolumeAttachment#device #device} => String
-    #   * {Types::VolumeAttachment#instance_id #instance_id} => String
-    #   * {Types::VolumeAttachment#state #state} => String
-    #   * {Types::VolumeAttachment#volume_id #volume_id} => String
     #   * {Types::VolumeAttachment#delete_on_termination #delete_on_termination} => Boolean
     #   * {Types::VolumeAttachment#associated_resource #associated_resource} => String
     #   * {Types::VolumeAttachment#instance_owning_service #instance_owning_service} => String
+    #   * {Types::VolumeAttachment#volume_id #volume_id} => String
+    #   * {Types::VolumeAttachment#instance_id #instance_id} => String
+    #   * {Types::VolumeAttachment#device #device} => String
+    #   * {Types::VolumeAttachment#state #state} => String
+    #   * {Types::VolumeAttachment#attach_time #attach_time} => Time
     #
     #
     # @example Example: To detach a volume from an instance
@@ -38723,14 +38734,14 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.attach_time #=> Time
-    #   resp.device #=> String
-    #   resp.instance_id #=> String
-    #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
-    #   resp.volume_id #=> String
     #   resp.delete_on_termination #=> Boolean
     #   resp.associated_resource #=> String
     #   resp.instance_owning_service #=> String
+    #   resp.volume_id #=> String
+    #   resp.instance_id #=> String
+    #   resp.device #=> String
+    #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
+    #   resp.attach_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolume AWS API Documentation
     #
@@ -39937,7 +39948,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -40004,15 +40015,15 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
-    # @option params [required, String] :association_id
-    #   The association ID representing the current association between the
-    #   route table and subnet or gateway.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :association_id
+    #   The association ID representing the current association between the
+    #   route table and subnet or gateway.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -40028,8 +40039,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_route_table({
-    #     association_id: "RouteTableAssociationId", # required
     #     dry_run: false,
+    #     association_id: "RouteTableAssociationId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateRouteTable AWS API Documentation
@@ -41859,22 +41870,22 @@ module Aws::EC2
     # @option params [required, String] :instance_id
     #   The ID of the instance.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [Boolean] :latest
     #   When enabled, retrieves the latest console output for the instance.
     #
     #   Default: disabled (`false`)
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @return [Types::GetConsoleOutputResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetConsoleOutputResult#instance_id #instance_id} => String
-    #   * {Types::GetConsoleOutputResult#output #output} => String
     #   * {Types::GetConsoleOutputResult#timestamp #timestamp} => Time
+    #   * {Types::GetConsoleOutputResult#output #output} => String
     #
     #
     # @example Example: To get the console output
@@ -41896,15 +41907,15 @@ module Aws::EC2
     #
     #   resp = client.get_console_output({
     #     instance_id: "InstanceId", # required
-    #     dry_run: false,
     #     latest: false,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.instance_id #=> String
-    #   resp.output #=> String
     #   resp.timestamp #=> Time
+    #   resp.output #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutput AWS API Documentation
     #
@@ -41928,7 +41939,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshoot-unreachable-instance.html#instance-console-console-output
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -41978,7 +41989,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -42326,7 +42337,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -42574,7 +42585,7 @@ module Aws::EC2
     #   The ID of the instance from which to retrieve the UEFI data.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -42914,6 +42925,7 @@ module Aws::EC2
     #   resp.ipam_discovered_resource_cidrs[0].resource_tags[0].value #=> String
     #   resp.ipam_discovered_resource_cidrs[0].ip_usage #=> Float
     #   resp.ipam_discovered_resource_cidrs[0].vpc_id #=> String
+    #   resp.ipam_discovered_resource_cidrs[0].subnet_id #=> String
     #   resp.ipam_discovered_resource_cidrs[0].network_interface_attachment_status #=> String, one of "available", "in-use"
     #   resp.ipam_discovered_resource_cidrs[0].sample_time #=> Time
     #   resp.ipam_discovered_resource_cidrs[0].availability_zone_id #=> String
@@ -44077,7 +44089,7 @@ module Aws::EC2
     #   The ID of the Windows instance.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -44085,8 +44097,8 @@ module Aws::EC2
     # @return [Types::GetPasswordDataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPasswordDataResult#instance_id #instance_id} => String
-    #   * {Types::GetPasswordDataResult#password_data #password_data} => String
     #   * {Types::GetPasswordDataResult#timestamp #timestamp} => Time
+    #   * {Types::GetPasswordDataResult#password_data #password_data} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -44098,8 +44110,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.instance_id #=> String
-    #   resp.password_data #=> String
     #   resp.timestamp #=> Time
+    #   resp.password_data #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -45692,20 +45704,20 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
-    # @option params [String] :description
-    #   A description for the instance being imported.
-    #
-    # @option params [Array<Types::DiskImage>] :disk_images
-    #   The disk image.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :description
+    #   A description for the instance being imported.
+    #
     # @option params [Types::ImportInstanceLaunchSpecification] :launch_specification
     #   The launch specification.
+    #
+    # @option params [Array<Types::DiskImage>] :disk_images
+    #   The disk image.
     #
     # @option params [required, String] :platform
     #   The instance operating system.
@@ -45717,31 +45729,18 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_instance({
-    #     description: "String",
-    #     disk_images: [
-    #       {
-    #         description: "String",
-    #         image: {
-    #           bytes: 1, # required
-    #           format: "VMDK", # required, accepts VMDK, RAW, VHD
-    #           import_manifest_url: "ImportManifestUrl", # required
-    #         },
-    #         volume: {
-    #           size: 1, # required
-    #         },
-    #       },
-    #     ],
     #     dry_run: false,
+    #     description: "String",
     #     launch_specification: {
-    #       additional_info: "String",
     #       architecture: "i386", # accepts i386, x86_64, arm64, x86_64_mac, arm64_mac
-    #       group_ids: ["SecurityGroupId"],
     #       group_names: ["SecurityGroupName"],
-    #       instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #       group_ids: ["SecurityGroupId"],
+    #       additional_info: "String",
+    #       user_data: {
+    #         data: "String",
+    #       },
     #       instance_type: "a1.medium", # accepts a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c5ad.large, c5ad.xlarge, c5ad.2xlarge, c5ad.4xlarge, c5ad.8xlarge, c5ad.12xlarge, c5ad.16xlarge, c5ad.24xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, c5n.metal, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, c6g.metal, c6gd.medium, c6gd.large, c6gd.xlarge, c6gd.2xlarge, c6gd.4xlarge, c6gd.8xlarge, c6gd.12xlarge, c6gd.16xlarge, c6gd.metal, c6gn.medium, c6gn.large, c6gn.xlarge, c6gn.2xlarge, c6gn.4xlarge, c6gn.8xlarge, c6gn.12xlarge, c6gn.16xlarge, c6i.large, c6i.xlarge, c6i.2xlarge, c6i.4xlarge, c6i.8xlarge, c6i.12xlarge, c6i.16xlarge, c6i.24xlarge, c6i.32xlarge, c6i.metal, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge, cr1.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, d3.xlarge, d3.2xlarge, d3.4xlarge, d3.8xlarge, d3en.xlarge, d3en.2xlarge, d3en.4xlarge, d3en.6xlarge, d3en.8xlarge, d3en.12xlarge, dl1.24xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4ad.xlarge, g4ad.2xlarge, g4ad.4xlarge, g4ad.8xlarge, g4ad.16xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g4dn.metal, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.12xlarge, g5.16xlarge, g5.24xlarge, g5.48xlarge, g5g.xlarge, g5g.2xlarge, g5g.4xlarge, g5g.8xlarge, g5g.16xlarge, g5g.metal, hi1.4xlarge, hpc6a.48xlarge, hs1.8xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, im4gn.large, im4gn.xlarge, im4gn.2xlarge, im4gn.4xlarge, im4gn.8xlarge, im4gn.16xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge, is4gen.medium, is4gen.large, is4gen.xlarge, is4gen.2xlarge, is4gen.4xlarge, is4gen.8xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5dn.metal, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, m5n.metal, m5zn.large, m5zn.xlarge, m5zn.2xlarge, m5zn.3xlarge, m5zn.6xlarge, m5zn.12xlarge, m5zn.metal, m6a.large, m6a.xlarge, m6a.2xlarge, m6a.4xlarge, m6a.8xlarge, m6a.12xlarge, m6a.16xlarge, m6a.24xlarge, m6a.32xlarge, m6a.48xlarge, m6g.metal, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge, m6gd.metal, m6gd.medium, m6gd.large, m6gd.xlarge, m6gd.2xlarge, m6gd.4xlarge, m6gd.8xlarge, m6gd.12xlarge, m6gd.16xlarge, m6i.large, m6i.xlarge, m6i.2xlarge, m6i.4xlarge, m6i.8xlarge, m6i.12xlarge, m6i.16xlarge, m6i.24xlarge, m6i.32xlarge, m6i.metal, mac1.metal, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, p4d.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, r5b.large, r5b.xlarge, r5b.2xlarge, r5b.4xlarge, r5b.8xlarge, r5b.12xlarge, r5b.16xlarge, r5b.24xlarge, r5b.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5dn.metal, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, r5n.metal, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, r6g.metal, r6gd.medium, r6gd.large, r6gd.xlarge, r6gd.2xlarge, r6gd.4xlarge, r6gd.8xlarge, r6gd.12xlarge, r6gd.16xlarge, r6gd.metal, r6i.large, r6i.xlarge, r6i.2xlarge, r6i.4xlarge, r6i.8xlarge, r6i.12xlarge, r6i.16xlarge, r6i.24xlarge, r6i.32xlarge, r6i.metal, t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, t4g.nano, t4g.micro, t4g.small, t4g.medium, t4g.large, t4g.xlarge, t4g.2xlarge, u-6tb1.56xlarge, u-6tb1.112xlarge, u-9tb1.112xlarge, u-12tb1.112xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, vt1.3xlarge, vt1.6xlarge, vt1.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, x2iezn.2xlarge, x2iezn.4xlarge, x2iezn.6xlarge, x2iezn.8xlarge, x2iezn.12xlarge, x2iezn.metal, x2gd.medium, x2gd.large, x2gd.xlarge, x2gd.2xlarge, x2gd.4xlarge, x2gd.8xlarge, x2gd.12xlarge, x2gd.16xlarge, x2gd.metal, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, x2idn.16xlarge, x2idn.24xlarge, x2idn.32xlarge, x2iedn.xlarge, x2iedn.2xlarge, x2iedn.4xlarge, x2iedn.8xlarge, x2iedn.16xlarge, x2iedn.24xlarge, x2iedn.32xlarge, c6a.large, c6a.xlarge, c6a.2xlarge, c6a.4xlarge, c6a.8xlarge, c6a.12xlarge, c6a.16xlarge, c6a.24xlarge, c6a.32xlarge, c6a.48xlarge, c6a.metal, m6a.metal, i4i.large, i4i.xlarge, i4i.2xlarge, i4i.4xlarge, i4i.8xlarge, i4i.16xlarge, i4i.32xlarge, i4i.metal, x2idn.metal, x2iedn.metal, c7g.medium, c7g.large, c7g.xlarge, c7g.2xlarge, c7g.4xlarge, c7g.8xlarge, c7g.12xlarge, c7g.16xlarge, mac2.metal, c6id.large, c6id.xlarge, c6id.2xlarge, c6id.4xlarge, c6id.8xlarge, c6id.12xlarge, c6id.16xlarge, c6id.24xlarge, c6id.32xlarge, c6id.metal, m6id.large, m6id.xlarge, m6id.2xlarge, m6id.4xlarge, m6id.8xlarge, m6id.12xlarge, m6id.16xlarge, m6id.24xlarge, m6id.32xlarge, m6id.metal, r6id.large, r6id.xlarge, r6id.2xlarge, r6id.4xlarge, r6id.8xlarge, r6id.12xlarge, r6id.16xlarge, r6id.24xlarge, r6id.32xlarge, r6id.metal, r6a.large, r6a.xlarge, r6a.2xlarge, r6a.4xlarge, r6a.8xlarge, r6a.12xlarge, r6a.16xlarge, r6a.24xlarge, r6a.32xlarge, r6a.48xlarge, r6a.metal, p4de.24xlarge, u-3tb1.56xlarge, u-18tb1.112xlarge, u-24tb1.112xlarge, trn1.2xlarge, trn1.32xlarge, hpc6id.32xlarge, c6in.large, c6in.xlarge, c6in.2xlarge, c6in.4xlarge, c6in.8xlarge, c6in.12xlarge, c6in.16xlarge, c6in.24xlarge, c6in.32xlarge, m6in.large, m6in.xlarge, m6in.2xlarge, m6in.4xlarge, m6in.8xlarge, m6in.12xlarge, m6in.16xlarge, m6in.24xlarge, m6in.32xlarge, m6idn.large, m6idn.xlarge, m6idn.2xlarge, m6idn.4xlarge, m6idn.8xlarge, m6idn.12xlarge, m6idn.16xlarge, m6idn.24xlarge, m6idn.32xlarge, r6in.large, r6in.xlarge, r6in.2xlarge, r6in.4xlarge, r6in.8xlarge, r6in.12xlarge, r6in.16xlarge, r6in.24xlarge, r6in.32xlarge, r6idn.large, r6idn.xlarge, r6idn.2xlarge, r6idn.4xlarge, r6idn.8xlarge, r6idn.12xlarge, r6idn.16xlarge, r6idn.24xlarge, r6idn.32xlarge, c7g.metal, m7g.medium, m7g.large, m7g.xlarge, m7g.2xlarge, m7g.4xlarge, m7g.8xlarge, m7g.12xlarge, m7g.16xlarge, m7g.metal, r7g.medium, r7g.large, r7g.xlarge, r7g.2xlarge, r7g.4xlarge, r7g.8xlarge, r7g.12xlarge, r7g.16xlarge, r7g.metal, c6in.metal, m6in.metal, m6idn.metal, r6in.metal, r6idn.metal, inf2.xlarge, inf2.8xlarge, inf2.24xlarge, inf2.48xlarge, trn1n.32xlarge, i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge, i4g.16xlarge, hpc7g.4xlarge, hpc7g.8xlarge, hpc7g.16xlarge, c7gn.medium, c7gn.large, c7gn.xlarge, c7gn.2xlarge, c7gn.4xlarge, c7gn.8xlarge, c7gn.12xlarge, c7gn.16xlarge, p5.48xlarge, m7i.large, m7i.xlarge, m7i.2xlarge, m7i.4xlarge, m7i.8xlarge, m7i.12xlarge, m7i.16xlarge, m7i.24xlarge, m7i.48xlarge, m7i-flex.large, m7i-flex.xlarge, m7i-flex.2xlarge, m7i-flex.4xlarge, m7i-flex.8xlarge, m7a.medium, m7a.large, m7a.xlarge, m7a.2xlarge, m7a.4xlarge, m7a.8xlarge, m7a.12xlarge, m7a.16xlarge, m7a.24xlarge, m7a.32xlarge, m7a.48xlarge, m7a.metal-48xl, hpc7a.12xlarge, hpc7a.24xlarge, hpc7a.48xlarge, hpc7a.96xlarge, c7gd.medium, c7gd.large, c7gd.xlarge, c7gd.2xlarge, c7gd.4xlarge, c7gd.8xlarge, c7gd.12xlarge, c7gd.16xlarge, m7gd.medium, m7gd.large, m7gd.xlarge, m7gd.2xlarge, m7gd.4xlarge, m7gd.8xlarge, m7gd.12xlarge, m7gd.16xlarge, r7gd.medium, r7gd.large, r7gd.xlarge, r7gd.2xlarge, r7gd.4xlarge, r7gd.8xlarge, r7gd.12xlarge, r7gd.16xlarge, r7a.medium, r7a.large, r7a.xlarge, r7a.2xlarge, r7a.4xlarge, r7a.8xlarge, r7a.12xlarge, r7a.16xlarge, r7a.24xlarge, r7a.32xlarge, r7a.48xlarge, c7i.large, c7i.xlarge, c7i.2xlarge, c7i.4xlarge, c7i.8xlarge, c7i.12xlarge, c7i.16xlarge, c7i.24xlarge, c7i.48xlarge, mac2-m2pro.metal, r7iz.large, r7iz.xlarge, r7iz.2xlarge, r7iz.4xlarge, r7iz.8xlarge, r7iz.12xlarge, r7iz.16xlarge, r7iz.32xlarge, c7a.medium, c7a.large, c7a.xlarge, c7a.2xlarge, c7a.4xlarge, c7a.8xlarge, c7a.12xlarge, c7a.16xlarge, c7a.24xlarge, c7a.32xlarge, c7a.48xlarge, c7a.metal-48xl, r7a.metal-48xl, r7i.large, r7i.xlarge, r7i.2xlarge, r7i.4xlarge, r7i.8xlarge, r7i.12xlarge, r7i.16xlarge, r7i.24xlarge, r7i.48xlarge, dl2q.24xlarge, mac2-m2.metal, i4i.12xlarge, i4i.24xlarge, c7i.metal-24xl, c7i.metal-48xl, m7i.metal-24xl, m7i.metal-48xl, r7i.metal-24xl, r7i.metal-48xl, r7iz.metal-16xl, r7iz.metal-32xl, c7gd.metal, m7gd.metal, r7gd.metal, g6.xlarge, g6.2xlarge, g6.4xlarge, g6.8xlarge, g6.12xlarge, g6.16xlarge, g6.24xlarge, g6.48xlarge, gr6.4xlarge, gr6.8xlarge, c7i-flex.large, c7i-flex.xlarge, c7i-flex.2xlarge, c7i-flex.4xlarge, c7i-flex.8xlarge, u7i-12tb.224xlarge, u7in-16tb.224xlarge, u7in-24tb.224xlarge, u7in-32tb.224xlarge, u7ib-12tb.224xlarge, c7gn.metal, r8g.medium, r8g.large, r8g.xlarge, r8g.2xlarge, r8g.4xlarge, r8g.8xlarge, r8g.12xlarge, r8g.16xlarge, r8g.24xlarge, r8g.48xlarge, r8g.metal-24xl, r8g.metal-48xl, mac2-m1ultra.metal, g6e.xlarge, g6e.2xlarge, g6e.4xlarge, g6e.8xlarge, g6e.12xlarge, g6e.16xlarge, g6e.24xlarge, g6e.48xlarge
-    #       monitoring: false,
     #       placement: {
-    #         availability_zone: "String",
     #         affinity: "String",
     #         group_name: "PlacementGroupName",
     #         partition_number: 1,
@@ -45750,13 +45749,26 @@ module Aws::EC2
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
     #         group_id: "PlacementGroupId",
+    #         availability_zone: "String",
     #       },
-    #       private_ip_address: "String",
+    #       monitoring: false,
     #       subnet_id: "SubnetId",
-    #       user_data: {
-    #         data: "String",
-    #       },
+    #       instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #       private_ip_address: "String",
     #     },
+    #     disk_images: [
+    #       {
+    #         description: "String",
+    #         image: {
+    #           format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #           bytes: 1, # required
+    #           import_manifest_url: "ImportManifestUrl", # required
+    #         },
+    #         volume: {
+    #           size: 1, # required
+    #         },
+    #       },
+    #     ],
     #     platform: "Windows", # required, accepts Windows
     #   })
     #
@@ -45818,6 +45830,9 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the imported key pair.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -45831,9 +45846,6 @@ module Aws::EC2
     #   The public key. For API calls, the text must be base64-encoded. For
     #   command line tools, base64 encoding is performed for you.
     #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the imported key pair.
-    #
     # @return [Types::ImportKeyPairResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportKeyPairResult#key_fingerprint #key_fingerprint} => String
@@ -45844,9 +45856,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_key_pair({
-    #     dry_run: false,
-    #     key_name: "String", # required
-    #     public_key_material: "data", # required
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -45858,6 +45867,9 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     dry_run: false,
+    #     key_name: "String", # required
+    #     public_key_material: "data", # required
     #   })
     #
     # @example Response structure
@@ -46049,20 +46061,20 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
-    # @option params [required, String] :availability_zone
-    #   The Availability Zone for the resulting EBS volume.
-    #
-    # @option params [String] :description
-    #   A description of the volume.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [required, String] :availability_zone
+    #   The Availability Zone for the resulting EBS volume.
+    #
     # @option params [required, Types::DiskImageDetail] :image
     #   The disk image.
+    #
+    # @option params [String] :description
+    #   A description of the volume.
     #
     # @option params [required, Types::VolumeDetail] :volume
     #   The volume size.
@@ -46074,14 +46086,14 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_volume({
-    #     availability_zone: "String", # required
-    #     description: "String",
     #     dry_run: false,
+    #     availability_zone: "String", # required
     #     image: { # required
-    #       bytes: 1, # required
     #       format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #       bytes: 1, # required
     #       import_manifest_url: "ImportManifestUrl", # required
     #     },
+    #     description: "String",
     #     volume: { # required
     #       size: 1, # required
     #     },
@@ -46822,7 +46834,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -47020,7 +47032,6 @@ module Aws::EC2
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
     #             placement: {
-    #               availability_zone: "String",
     #               affinity: "String",
     #               group_name: "PlacementGroupName",
     #               partition_number: 1,
@@ -47029,6 +47040,7 @@ module Aws::EC2
     #               spread_domain: "String",
     #               host_resource_group_arn: "String",
     #               group_id: "PlacementGroupId",
+    #               availability_zone: "String",
     #             },
     #             instance_requirements: {
     #               v_cpu_count: { # required
@@ -47218,12 +47230,6 @@ module Aws::EC2
     # either multiple instance types in an instance family, or to support a
     # specific instance type only.
     #
-    # @option params [String] :auto_placement
-    #   Specify whether to enable or disable auto-placement.
-    #
-    # @option params [required, Array<String>] :host_ids
-    #   The IDs of the Dedicated Hosts to modify.
-    #
     # @option params [String] :host_recovery
     #   Indicates whether to enable or disable host recovery for the Dedicated
     #   Host. For more information, see [Host recovery][1] in the *Amazon EC2
@@ -47262,6 +47268,12 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html
     #
+    # @option params [required, Array<String>] :host_ids
+    #   The IDs of the Dedicated Hosts to modify.
+    #
+    # @option params [String] :auto_placement
+    #   Specify whether to enable or disable auto-placement.
+    #
     # @return [Types::ModifyHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyHostsResult#successful #successful} => Array&lt;String&gt;
@@ -47270,12 +47282,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_hosts({
-    #     auto_placement: "on", # accepts on, off
-    #     host_ids: ["DedicatedHostId"], # required
     #     host_recovery: "on", # accepts on, off
     #     instance_type: "String",
     #     instance_family: "String",
     #     host_maintenance: "on", # accepts on, off
+    #     host_ids: ["DedicatedHostId"], # required
+    #     auto_placement: "on", # accepts on, off
     #   })
     #
     # @example Response structure
@@ -47400,11 +47412,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
     #
-    # @option params [required, String] :principal_arn
-    #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. Specify `all` to modify the ID format for all IAM users,
-    #   IAM roles, and the root user of the account.
-    #
     # @option params [required, String] :resource
     #   The type of resource: `bundle` \| `conversion-task` \|
     #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
@@ -47424,14 +47431,19 @@ module Aws::EC2
     #   Indicates whether the resource should use longer IDs (17-character
     #   IDs)
     #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the principal, which can be an IAM user, IAM role, or the
+    #   root user. Specify `all` to modify the ID format for all IAM users,
+    #   IAM roles, and the root user of the account.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_identity_id_format({
-    #     principal_arn: "String", # required
     #     resource: "String", # required
     #     use_long_ids: false, # required
+    #     principal_arn: "String", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdentityIdFormat AWS API Documentation
@@ -47490,12 +47502,6 @@ module Aws::EC2
     #   The value of the attribute being modified. This parameter can be used
     #   only when the `Attribute` parameter is `description` or `imdsSupport`.
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [Array<String>] :organization_arns
     #   The Amazon Resource Name (ARN) of an organization. This parameter can
     #   be used only when the `Attribute` parameter is `launchPermission`.
@@ -47520,6 +47526,12 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -47571,18 +47583,18 @@ module Aws::EC2
     #     launch_permission: {
     #       add: [
     #         {
-    #           group: "all", # accepts all
-    #           user_id: "String",
     #           organization_arn: "String",
     #           organizational_unit_arn: "String",
+    #           user_id: "String",
+    #           group: "all", # accepts all
     #         },
     #       ],
     #       remove: [
     #         {
-    #           group: "all", # accepts all
-    #           user_id: "String",
     #           organization_arn: "String",
     #           organizational_unit_arn: "String",
+    #           user_id: "String",
+    #           group: "all", # accepts all
     #         },
     #       ],
     #     },
@@ -47591,10 +47603,10 @@ module Aws::EC2
     #     user_groups: ["String"],
     #     user_ids: ["String"],
     #     value: "String",
-    #     dry_run: false,
     #     organization_arns: ["String"],
     #     organizational_unit_arns: ["String"],
     #     imds_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     dry_run: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttribute AWS API Documentation
@@ -47632,6 +47644,25 @@ module Aws::EC2
     #   You must disable source/destination checks if the instance runs
     #   services such as network address translation, routing, or firewalls.
     #
+    # @option params [Types::AttributeBooleanValue] :disable_api_stop
+    #   Indicates whether an instance is enabled for stop protection. For more
+    #   information, see [Enable stop protection for your instance][1].
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance.
+    #
     # @option params [String] :attribute
     #   The name of the attribute to modify.
     #
@@ -47641,6 +47672,11 @@ module Aws::EC2
     #   `userData` \| `sourceDestCheck` \| `groupSet` \| `ebsOptimized` \|
     #   `sriovNetSupport` \| `enaSupport` \| `nvmeSupport` \| `disableApiStop`
     #   \| `enclaveOptions`
+    #
+    # @option params [String] :value
+    #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
+    #   `userData`, `disableApiTermination`, or
+    #   `instanceInitiatedShutdownBehavior` attribute.
     #
     # @option params [Array<Types::InstanceBlockDeviceMappingSpecification>] :block_device_mappings
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
@@ -47663,38 +47699,6 @@ module Aws::EC2
     #   If the value is `true`, you can't terminate the instance using the
     #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
     #   this parameter for Spot Instances.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Types::AttributeBooleanValue] :ebs_optimized
-    #   Specifies whether the instance is optimized for Amazon EBS I/O. This
-    #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal EBS I/O performance.
-    #   This optimization isn't available with all instance types. Additional
-    #   usage charges apply when using an EBS Optimized instance.
-    #
-    # @option params [Types::AttributeBooleanValue] :ena_support
-    #   Set to `true` to enable enhanced networking with ENA for the instance.
-    #
-    #   This option is supported only for HVM instances. Specifying this
-    #   option with a PV instance can make it unreachable.
-    #
-    # @option params [Array<String>] :groups
-    #   Replaces the security groups of the instance with the specified
-    #   security groups. You must specify the ID of at least one security
-    #   group, even if it's just the default security group for the VPC.
-    #
-    # @option params [required, String] :instance_id
-    #   The ID of the instance.
-    #
-    # @option params [Types::AttributeValue] :instance_initiated_shutdown_behavior
-    #   Specifies whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
     #
     # @option params [Types::AttributeValue] :instance_type
     #   Changes the instance type to the specified value. For more
@@ -47724,16 +47728,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
     #
-    # @option params [Types::AttributeValue] :sriov_net_support
-    #   Set to `simple` to enable enhanced networking with the Intel 82599
-    #   Virtual Function interface for the instance.
-    #
-    #   There is no way to disable enhanced networking with the Intel 82599
-    #   Virtual Function interface at this time.
-    #
-    #   This option is supported only for HVM instances. Specifying this
-    #   option with a PV instance can make it unreachable.
-    #
     # @option params [Types::BlobAttributeValue] :user_data
     #   Changes the instance's user data to the specified value. User data
     #   must be base64-encoded. Depending on the tool or SDK that you're
@@ -47744,20 +47738,38 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
     #
-    # @option params [String] :value
-    #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
-    #   `userData`, `disableApiTermination`, or
-    #   `instanceInitiatedShutdownBehavior` attribute.
+    # @option params [Types::AttributeValue] :instance_initiated_shutdown_behavior
+    #   Specifies whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
     #
-    # @option params [Types::AttributeBooleanValue] :disable_api_stop
-    #   Indicates whether an instance is enabled for stop protection. For more
-    #   information, see [Enable stop protection for your instance][1].
+    # @option params [Array<String>] :groups
+    #   Replaces the security groups of the instance with the specified
+    #   security groups. You must specify the ID of at least one security
+    #   group, even if it's just the default security group for the VPC.
     #
+    # @option params [Types::AttributeBooleanValue] :ebs_optimized
+    #   Specifies whether the instance is optimized for Amazon EBS I/O. This
+    #   optimization provides dedicated throughput to Amazon EBS and an
+    #   optimized configuration stack to provide optimal EBS I/O performance.
+    #   This optimization isn't available with all instance types. Additional
+    #   usage charges apply when using an EBS Optimized instance.
     #
+    # @option params [Types::AttributeValue] :sriov_net_support
+    #   Set to `simple` to enable enhanced networking with the Intel 82599
+    #   Virtual Function interface for the instance.
     #
+    #   There is no way to disable enhanced networking with the Intel 82599
+    #   Virtual Function interface at this time.
     #
+    #   This option is supported only for HVM instances. Specifying this
+    #   option with a PV instance can make it unreachable.
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
+    # @option params [Types::AttributeBooleanValue] :ena_support
+    #   Set to `true` to enable enhanced networking with ENA for the instance.
+    #
+    #   This option is supported only for HVM instances. Specifying this
+    #   option with a PV instance can make it unreachable.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -47798,40 +47810,40 @@ module Aws::EC2
     #     source_dest_check: {
     #       value: false,
     #     },
+    #     disable_api_stop: {
+    #       value: false,
+    #     },
+    #     dry_run: false,
+    #     instance_id: "InstanceId", # required
     #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
+    #     value: "String",
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
     #         ebs: {
-    #           delete_on_termination: false,
     #           volume_id: "VolumeId",
+    #           delete_on_termination: false,
     #         },
-    #         no_device: "String",
     #         virtual_name: "String",
+    #         no_device: "String",
     #       },
     #     ],
     #     disable_api_termination: {
     #       value: false,
     #     },
-    #     dry_run: false,
-    #     ebs_optimized: {
-    #       value: false,
-    #     },
-    #     ena_support: {
-    #       value: false,
-    #     },
-    #     groups: ["SecurityGroupId"],
-    #     instance_id: "InstanceId", # required
-    #     instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     kernel: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     ramdisk: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     sriov_net_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     user_data: {
     #       value: "data",
     #     },
-    #     value: "String",
-    #     disable_api_stop: {
+    #     instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     groups: ["SecurityGroupId"],
+    #     ebs_optimized: {
+    #       value: false,
+    #     },
+    #     sriov_net_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     ena_support: {
     #       value: false,
     #     },
     #   })
@@ -47893,6 +47905,69 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # By default, all vCPUs for the instance type are active when you launch
+    # an instance. When you configure the number of active vCPUs for the
+    # instance, it can help you save on licensing costs and optimize
+    # performance. The base cost of the instance remains unchanged.
+    #
+    # The number of active vCPUs equals the number of threads per CPU core
+    # multiplied by the number of cores.
+    #
+    # <note markdown="1"> Some instance type options do not support this capability. For more
+    # information, see [Supported CPU options][1] in the *Amazon EC2 User
+    # Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance to update.
+    #
+    # @option params [required, Integer] :core_count
+    #   The number of CPU cores to activate for the specified instance.
+    #
+    # @option params [required, Integer] :threads_per_core
+    #   The number of threads to run for each CPU core.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceCpuOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceCpuOptionsResult#instance_id #instance_id} => String
+    #   * {Types::ModifyInstanceCpuOptionsResult#core_count #core_count} => Integer
+    #   * {Types::ModifyInstanceCpuOptionsResult#threads_per_core #threads_per_core} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_cpu_options({
+    #     instance_id: "InstanceId", # required
+    #     core_count: 1, # required
+    #     threads_per_core: 1, # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.core_count #=> Integer
+    #   resp.threads_per_core #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCpuOptions AWS API Documentation
+    #
+    # @overload modify_instance_cpu_options(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_cpu_options(params = {}, options = {})
+      req = build_request(:modify_instance_cpu_options, params)
+      req.send_request(options)
+    end
+
     # Modifies the credit option for CPU usage on a running or stopped
     # burstable performance instance. The credit options are `standard` and
     # `unlimited`.
@@ -47905,7 +47980,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -47961,7 +48036,7 @@ module Aws::EC2
     # Modifies the start time for a scheduled Amazon EC2 instance event.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -48215,7 +48290,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -48396,14 +48471,6 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
-    # @option params [String] :affinity
-    #   The affinity setting for the instance. For more information, see [Host
-    #   affinity][1] in the *Amazon EC2 User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-affinity
-    #
     # @option params [String] :group_name
     #   The name of the placement group in which to place the instance. For
     #   spread placement groups, the instance must have a tenancy of
@@ -48413,8 +48480,17 @@ module Aws::EC2
     #   To remove an instance from a placement group, specify an empty string
     #   ("").
     #
-    # @option params [String] :host_id
-    #   The ID of the Dedicated Host with which to associate the instance.
+    # @option params [Integer] :partition_number
+    #   The number of the partition in which to place the instance. Valid only
+    #   if the placement group strategy is set to `partition`.
+    #
+    # @option params [String] :host_resource_group_arn
+    #   The ARN of the host resource group in which to place the instance. The
+    #   instance must have a tenancy of `host` to specify this parameter.
+    #
+    # @option params [String] :group_id
+    #   The Group Id of a placement group. You must specify the Placement
+    #   Group **Group Id** to launch an instance in a shared placement group.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance that you are modifying.
@@ -48429,17 +48505,16 @@ module Aws::EC2
     #
     #    </note>
     #
-    # @option params [Integer] :partition_number
-    #   The number of the partition in which to place the instance. Valid only
-    #   if the placement group strategy is set to `partition`.
+    # @option params [String] :affinity
+    #   The affinity setting for the instance. For more information, see [Host
+    #   affinity][1] in the *Amazon EC2 User Guide*.
     #
-    # @option params [String] :host_resource_group_arn
-    #   The ARN of the host resource group in which to place the instance. The
-    #   instance must have a tenancy of `host` to specify this parameter.
     #
-    # @option params [String] :group_id
-    #   The Group Id of a placement group. You must specify the Placement
-    #   Group **Group Id** to launch an instance in a shared placement group.
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-affinity
+    #
+    # @option params [String] :host_id
+    #   The ID of the Dedicated Host with which to associate the instance.
     #
     # @return [Types::ModifyInstancePlacementResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -48448,14 +48523,14 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_instance_placement({
-    #     affinity: "default", # accepts default, host
     #     group_name: "PlacementGroupName",
-    #     host_id: "DedicatedHostId",
-    #     instance_id: "InstanceId", # required
-    #     tenancy: "default", # accepts default, dedicated, host
     #     partition_number: 1,
     #     host_resource_group_arn: "String",
     #     group_id: "PlacementGroupId",
+    #     instance_id: "InstanceId", # required
+    #     tenancy: "default", # accepts default, dedicated, host
+    #     affinity: "default", # accepts default, host
+    #     host_id: "DedicatedHostId",
     #   })
     #
     # @example Response structure
@@ -49171,37 +49246,6 @@ module Aws::EC2
     # only one attribute at a time. You can use this action to attach and
     # detach security groups from an existing EC2 instance.
     #
-    # @option params [Types::NetworkInterfaceAttachmentChanges] :attachment
-    #   Information about the interface attachment. If modifying the `delete
-    #   on termination` attribute, you must specify the ID of the interface
-    #   attachment.
-    #
-    # @option params [Types::AttributeValue] :description
-    #   A description for the network interface.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :groups
-    #   Changes the security groups for the network interface. The new set of
-    #   groups you specify replaces the current set. You must specify at least
-    #   one group, even if it's just the default security group in the VPC.
-    #   You must specify the ID of the security group, not the name.
-    #
-    # @option params [required, String] :network_interface_id
-    #   The ID of the network interface.
-    #
-    # @option params [Types::AttributeBooleanValue] :source_dest_check
-    #   Enable or disable source/destination checks, which ensure that the
-    #   instance is either the source or the destination of any traffic that
-    #   it receives. If the value is `true`, source/destination checks are
-    #   enabled; otherwise, they are disabled. The default value is `true`.
-    #   You must disable source/destination checks if the instance runs
-    #   services such as network address translation, routing, or firewalls.
-    #
     # @option params [Types::EnaSrdSpecification] :ena_srd_specification
     #   Updates the ENA Express configuration for the network interface that’s
     #   attached to the instance.
@@ -49230,6 +49274,37 @@ module Aws::EC2
     #   Indicates whether to assign a public IPv4 address to a network
     #   interface. This option can be enabled for any network interface but
     #   will only apply to the primary network interface (eth0).
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :network_interface_id
+    #   The ID of the network interface.
+    #
+    # @option params [Types::AttributeValue] :description
+    #   A description for the network interface.
+    #
+    # @option params [Types::AttributeBooleanValue] :source_dest_check
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
+    #
+    # @option params [Array<String>] :groups
+    #   Changes the security groups for the network interface. The new set of
+    #   groups you specify replaces the current set. You must specify at least
+    #   one group, even if it's just the default security group in the VPC.
+    #   You must specify the ID of the security group, not the name.
+    #
+    # @option params [Types::NetworkInterfaceAttachmentChanges] :attachment
+    #   Information about the interface attachment. If modifying the `delete
+    #   on termination` attribute, you must specify the ID of the interface
+    #   attachment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -49283,17 +49358,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_network_interface_attribute({
-    #     attachment: {
-    #       attachment_id: "NetworkInterfaceAttachmentId",
-    #       delete_on_termination: false,
-    #     },
-    #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     dry_run: false,
-    #     groups: ["SecurityGroupId"],
-    #     network_interface_id: "NetworkInterfaceId", # required
-    #     source_dest_check: {
-    #       value: false,
-    #     },
     #     ena_srd_specification: {
     #       ena_srd_enabled: false,
     #       ena_srd_udp_specification: {
@@ -49307,6 +49371,17 @@ module Aws::EC2
     #       udp_timeout: 1,
     #     },
     #     associate_public_ip_address: false,
+    #     dry_run: false,
+    #     network_interface_id: "NetworkInterfaceId", # required
+    #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     source_dest_check: {
+    #       value: false,
+    #     },
+    #     groups: ["SecurityGroupId"],
+    #     attachment: {
+    #       attachment_id: "NetworkInterfaceAttachmentId",
+    #       delete_on_termination: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttribute AWS API Documentation
@@ -49573,14 +49648,14 @@ module Aws::EC2
     #     create_volume_permission: {
     #       add: [
     #         {
-    #           group: "all", # accepts all
     #           user_id: "String",
+    #           group: "all", # accepts all
     #         },
     #       ],
     #       remove: [
     #         {
-    #           group: "all", # accepts all
     #           user_id: "String",
+    #           group: "all", # accepts all
     #         },
     #       ],
     #     },
@@ -49685,18 +49760,17 @@ module Aws::EC2
     # If you are finished with your Spot Fleet for now, but will use it
     # again later, you can set the target capacity to 0.
     #
-    # @option params [String] :excess_capacity_termination_policy
-    #   Indicates whether running instances should be terminated if the target
-    #   capacity of the Spot Fleet request is decreased below the current size
-    #   of the Spot Fleet.
-    #
-    #   Supported only for fleets of type `maintain`.
-    #
     # @option params [Array<Types::LaunchTemplateConfig>] :launch_template_configs
     #   The launch template and overrides. You can only use this parameter if
     #   you specified a launch template (`LaunchTemplateConfigs`) in your Spot
     #   Fleet request. If you specified `LaunchSpecifications` in your Spot
     #   Fleet request, then omit this parameter.
+    #
+    # @option params [Integer] :on_demand_target_capacity
+    #   The number of On-Demand Instances in the fleet.
+    #
+    # @option params [String] :context
+    #   Reserved.
     #
     # @option params [required, String] :spot_fleet_request_id
     #   The ID of the Spot Fleet request.
@@ -49704,11 +49778,12 @@ module Aws::EC2
     # @option params [Integer] :target_capacity
     #   The size of the fleet.
     #
-    # @option params [Integer] :on_demand_target_capacity
-    #   The number of On-Demand Instances in the fleet.
+    # @option params [String] :excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the target
+    #   capacity of the Spot Fleet request is decreased below the current size
+    #   of the Spot Fleet.
     #
-    # @option params [String] :context
-    #   Reserved.
+    #   Supported only for fleets of type `maintain`.
     #
     # @return [Types::ModifySpotFleetRequestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -49748,7 +49823,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_spot_fleet_request({
-    #     excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #     launch_template_configs: [
     #       {
     #         launch_template_specification: {
@@ -49821,10 +49895,11 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
-    #     spot_fleet_request_id: "SpotFleetRequestId", # required
-    #     target_capacity: 1,
     #     on_demand_target_capacity: 1,
     #     context: "String",
+    #     spot_fleet_request_id: "SpotFleetRequestId", # required
+    #     target_capacity: 1,
+    #     excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #   })
     #
     # @example Response structure
@@ -49910,13 +49985,11 @@ module Aws::EC2
     #   in this subnet should return synthetic IPv6 addresses for IPv4-only
     #   destinations.
     #
-    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
+    #   You must first configure a NAT gateway in a public subnet (separate
     #   from the subnet containing the IPv6-only workloads). For example, the
     #   subnet containing the NAT gateway should have a `0.0.0.0/0` route
     #   pointing to the internet gateway. For more information, see [Configure
     #   DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
-    #
-    #    </note>
     #
     #
     #
@@ -51905,13 +51978,7 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.vpn_connection.customer_gateway_configuration #=> String
-    #   resp.vpn_connection.customer_gateway_id #=> String
     #   resp.vpn_connection.category #=> String
-    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
-    #   resp.vpn_connection.vpn_connection_id #=> String
-    #   resp.vpn_connection.vpn_gateway_id #=> String
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
@@ -51970,6 +52037,12 @@ module Aws::EC2
     #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
     #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnection AWS API Documentation
     #
@@ -52035,13 +52108,7 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.vpn_connection.customer_gateway_configuration #=> String
-    #   resp.vpn_connection.customer_gateway_id #=> String
     #   resp.vpn_connection.category #=> String
-    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
-    #   resp.vpn_connection.vpn_connection_id #=> String
-    #   resp.vpn_connection.vpn_gateway_id #=> String
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
@@ -52100,6 +52167,12 @@ module Aws::EC2
     #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
     #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionOptions AWS API Documentation
     #
@@ -52138,13 +52211,7 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.vpn_connection.customer_gateway_configuration #=> String
-    #   resp.vpn_connection.customer_gateway_id #=> String
     #   resp.vpn_connection.category #=> String
-    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
-    #   resp.vpn_connection.vpn_connection_id #=> String
-    #   resp.vpn_connection.vpn_gateway_id #=> String
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
@@ -52203,6 +52270,12 @@ module Aws::EC2
     #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
     #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificate AWS API Documentation
     #
@@ -52316,13 +52389,7 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.vpn_connection.customer_gateway_configuration #=> String
-    #   resp.vpn_connection.customer_gateway_id #=> String
     #   resp.vpn_connection.category #=> String
-    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
-    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
-    #   resp.vpn_connection.vpn_connection_id #=> String
-    #   resp.vpn_connection.vpn_gateway_id #=> String
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
@@ -52381,6 +52448,12 @@ module Aws::EC2
     #   resp.vpn_connection.vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connection.vgw_telemetry[0].status_message #=> String
     #   resp.vpn_connection.vgw_telemetry[0].certificate_arn #=> String
+    #   resp.vpn_connection.vpn_connection_id #=> String
+    #   resp.vpn_connection.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.vpn_connection.customer_gateway_configuration #=> String
+    #   resp.vpn_connection.type #=> String, one of "ipsec.1"
+    #   resp.vpn_connection.customer_gateway_id #=> String
+    #   resp.vpn_connection.vpn_gateway_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptions AWS API Documentation
     #
@@ -52406,7 +52479,7 @@ module Aws::EC2
     #   The IDs of the instances.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -53253,6 +53326,10 @@ module Aws::EC2
     # @option params [required, String] :reserved_instances_offering_id
     #   The ID of the Reserved Instance offering to purchase.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :purchase_time
+    #   The time at which to purchase the Reserved Instance, in UTC format
+    #   (for example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -53264,10 +53341,6 @@ module Aws::EC2
     #   total order and ensure that the Reserved Instances are not purchased
     #   at unexpected prices.
     #
-    # @option params [Time,DateTime,Date,Integer,String] :purchase_time
-    #   The time at which to purchase the Reserved Instance, in UTC format
-    #   (for example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).
-    #
     # @return [Types::PurchaseReservedInstancesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseReservedInstancesOfferingResult#reserved_instances_id #reserved_instances_id} => String
@@ -53277,12 +53350,12 @@ module Aws::EC2
     #   resp = client.purchase_reserved_instances_offering({
     #     instance_count: 1, # required
     #     reserved_instances_offering_id: "ReservedInstancesOfferingId", # required
+    #     purchase_time: Time.now,
     #     dry_run: false,
     #     limit_price: {
     #       amount: 1.0,
     #       currency_code: "USD", # accepts USD
     #     },
-    #     purchase_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -53403,7 +53476,7 @@ module Aws::EC2
     #   The instance IDs.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -53518,54 +53591,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     #
-    # @option params [String] :architecture
-    #   The architecture of the AMI.
-    #
-    #   Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
-    #   AMIs, the architecture specified in the manifest file.
-    #
-    # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mapping entries.
-    #
-    #   If you specify an Amazon EBS volume using the ID of an Amazon EBS
-    #   snapshot, you can't specify the encryption state of the volume.
-    #
-    #   If you create an AMI on an Outpost, then all backing snapshots must be
-    #   on the same Outpost or in the Region of that Outpost. AMIs on an
-    #   Outpost that include local snapshots can be used to launch instances
-    #   on the same Outpost only. For more information, [Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon EBS User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
-    #
-    # @option params [String] :description
-    #   A description for your AMI.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Boolean] :ena_support
-    #   Set to `true` to enable enhanced networking with ENA for the AMI and
-    #   any instances that you launch from the AMI.
-    #
-    #   This option is supported only for HVM AMIs. Specifying this option
-    #   with a PV AMI can make instances launched from the AMI unreachable.
-    #
-    # @option params [String] :kernel_id
-    #   The ID of the kernel.
-    #
-    # @option params [required, String] :name
-    #   A name for your AMI.
-    #
-    #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
-    #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
-    #   single quotes ('), at-signs (@), or underscores(\_)
-    #
     # @option params [Array<String>] :billing_products
     #   The billing product codes. Your account must be authorized to specify
     #   billing product codes.
@@ -53581,27 +53606,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html
     #   [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html
-    #
-    # @option params [String] :ramdisk_id
-    #   The ID of the RAM disk.
-    #
-    # @option params [String] :root_device_name
-    #   The device name of the root device volume (for example, `/dev/sda1`).
-    #
-    # @option params [String] :sriov_net_support
-    #   Set to `simple` to enable enhanced networking with the Intel 82599
-    #   Virtual Function interface for the AMI and any instances that you
-    #   launch from the AMI.
-    #
-    #   There is no way to disable `sriovNetSupport` at this time.
-    #
-    #   This option is supported only for HVM AMIs. Specifying this option
-    #   with a PV AMI can make instances launched from the AMI unreachable.
-    #
-    # @option params [String] :virtualization_type
-    #   The type of virtualization (`hvm` \| `paravirtual`).
-    #
-    #   Default: `paravirtual`
     #
     # @option params [String] :boot_mode
     #   The boot mode of the AMI. A value of `uefi-preferred` indicates that
@@ -53669,6 +53673,75 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :name
+    #   A name for your AMI.
+    #
+    #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
+    #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
+    #   single quotes ('), at-signs (@), or underscores(\_)
+    #
+    # @option params [String] :description
+    #   A description for your AMI.
+    #
+    # @option params [String] :architecture
+    #   The architecture of the AMI.
+    #
+    #   Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
+    #   AMIs, the architecture specified in the manifest file.
+    #
+    # @option params [String] :kernel_id
+    #   The ID of the kernel.
+    #
+    # @option params [String] :ramdisk_id
+    #   The ID of the RAM disk.
+    #
+    # @option params [String] :root_device_name
+    #   The device name of the root device volume (for example, `/dev/sda1`).
+    #
+    # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
+    #   The block device mapping entries.
+    #
+    #   If you specify an Amazon EBS volume using the ID of an Amazon EBS
+    #   snapshot, you can't specify the encryption state of the volume.
+    #
+    #   If you create an AMI on an Outpost, then all backing snapshots must be
+    #   on the same Outpost or in the Region of that Outpost. AMIs on an
+    #   Outpost that include local snapshots can be used to launch instances
+    #   on the same Outpost only. For more information, [Amazon EBS local
+    #   snapshots on Outposts][1] in the *Amazon EBS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
+    #
+    # @option params [String] :virtualization_type
+    #   The type of virtualization (`hvm` \| `paravirtual`).
+    #
+    #   Default: `paravirtual`
+    #
+    # @option params [String] :sriov_net_support
+    #   Set to `simple` to enable enhanced networking with the Intel 82599
+    #   Virtual Function interface for the AMI and any instances that you
+    #   launch from the AMI.
+    #
+    #   There is no way to disable `sriovNetSupport` at this time.
+    #
+    #   This option is supported only for HVM AMIs. Specifying this option
+    #   with a PV AMI can make instances launched from the AMI unreachable.
+    #
+    # @option params [Boolean] :ena_support
+    #   Set to `true` to enable enhanced networking with ENA for the AMI and
+    #   any instances that you launch from the AMI.
+    #
+    #   This option is supported only for HVM AMIs. Specifying this option
+    #   with a PV AMI can make instances launched from the AMI unreachable.
+    #
     # @return [Types::RegisterImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterImageResult#image_id #image_id} => String
@@ -53677,35 +53750,7 @@ module Aws::EC2
     #
     #   resp = client.register_image({
     #     image_location: "String",
-    #     architecture: "i386", # accepts i386, x86_64, arm64, x86_64_mac, arm64_mac
-    #     block_device_mappings: [
-    #       {
-    #         device_name: "String",
-    #         virtual_name: "String",
-    #         ebs: {
-    #           delete_on_termination: false,
-    #           iops: 1,
-    #           snapshot_id: "SnapshotId",
-    #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
-    #           kms_key_id: "String",
-    #           throughput: 1,
-    #           outpost_arn: "String",
-    #           encrypted: false,
-    #         },
-    #         no_device: "String",
-    #       },
-    #     ],
-    #     description: "String",
-    #     dry_run: false,
-    #     ena_support: false,
-    #     kernel_id: "KernelId",
-    #     name: "String", # required
     #     billing_products: ["String"],
-    #     ramdisk_id: "RamdiskId",
-    #     root_device_name: "String",
-    #     sriov_net_support: "String",
-    #     virtualization_type: "String",
     #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi, uefi-preferred
     #     tpm_support: "v2.0", # accepts v2.0
     #     uefi_data: "StringType",
@@ -53721,6 +53766,34 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     dry_run: false,
+    #     name: "String", # required
+    #     description: "String",
+    #     architecture: "i386", # accepts i386, x86_64, arm64, x86_64_mac, arm64_mac
+    #     kernel_id: "KernelId",
+    #     ramdisk_id: "RamdiskId",
+    #     root_device_name: "String",
+    #     block_device_mappings: [
+    #       {
+    #         ebs: {
+    #           delete_on_termination: false,
+    #           iops: 1,
+    #           snapshot_id: "SnapshotId",
+    #           volume_size: 1,
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
+    #           kms_key_id: "String",
+    #           throughput: 1,
+    #           outpost_arn: "String",
+    #           encrypted: false,
+    #         },
+    #         no_device: "String",
+    #         device_name: "String",
+    #         virtual_name: "String",
+    #       },
+    #     ],
+    #     virtualization_type: "String",
+    #     sriov_net_support: "String",
+    #     ena_support: false,
     #   })
     #
     # @example Response structure
@@ -54376,15 +54449,15 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
-    # @option params [required, String] :association_id
-    #   The ID of the current association between the original network ACL and
-    #   the subnet.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the current association between the original network ACL and
+    #   the subnet.
     #
     # @option params [required, String] :network_acl_id
     #   The ID of the new network ACL to associate with the subnet.
@@ -54411,8 +54484,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.replace_network_acl_association({
-    #     association_id: "NetworkAclAssociationId", # required
     #     dry_run: false,
+    #     association_id: "NetworkAclAssociationId", # required
     #     network_acl_id: "NetworkAclId", # required
     #   })
     #
@@ -54436,36 +54509,17 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
-    # @option params [String] :cidr_block
-    #   The IPv4 network range to allow or deny, in CIDR notation (for example
-    #   `172.16.0.0/24`).
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, Boolean] :egress
-    #   Indicates whether to replace the egress rule.
-    #
-    #   Default: If no value is specified, we replace the ingress rule.
-    #
-    # @option params [Types::IcmpTypeCode] :icmp_type_code
-    #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
-    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
-    #   block.
-    #
-    # @option params [String] :ipv_6_cidr_block
-    #   The IPv6 network range to allow or deny, in CIDR notation (for example
-    #   `2001:bd8:1234:1a00::/64`).
-    #
     # @option params [required, String] :network_acl_id
     #   The ID of the ACL.
     #
-    # @option params [Types::PortRange] :port_range
-    #   TCP or UDP protocols: The range of ports the rule applies to. Required
-    #   if specifying protocol 6 (TCP) or 17 (UDP).
+    # @option params [required, Integer] :rule_number
+    #   The rule number of the entry to replace.
     #
     # @option params [required, String] :protocol
     #   The protocol number. A value of "-1" means all protocols. If you
@@ -54480,8 +54534,27 @@ module Aws::EC2
     # @option params [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
     #
-    # @option params [required, Integer] :rule_number
-    #   The rule number of the entry to replace.
+    # @option params [required, Boolean] :egress
+    #   Indicates whether to replace the egress rule.
+    #
+    #   Default: If no value is specified, we replace the ingress rule.
+    #
+    # @option params [String] :cidr_block
+    #   The IPv4 network range to allow or deny, in CIDR notation (for example
+    #   `172.16.0.0/24`).
+    #
+    # @option params [String] :ipv_6_cidr_block
+    #   The IPv6 network range to allow or deny, in CIDR notation (for example
+    #   `2001:bd8:1234:1a00::/64`).
+    #
+    # @option params [Types::IcmpTypeCode] :icmp_type_code
+    #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+    #   specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR
+    #   block.
+    #
+    # @option params [Types::PortRange] :port_range
+    #   TCP or UDP protocols: The range of ports the rule applies to. Required
+    #   if specifying protocol 6 (TCP) or 17 (UDP).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -54507,22 +54580,22 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.replace_network_acl_entry({
-    #     cidr_block: "String",
     #     dry_run: false,
+    #     network_acl_id: "NetworkAclId", # required
+    #     rule_number: 1, # required
+    #     protocol: "String", # required
+    #     rule_action: "allow", # required, accepts allow, deny
     #     egress: false, # required
+    #     cidr_block: "String",
+    #     ipv_6_cidr_block: "String",
     #     icmp_type_code: {
     #       code: 1,
     #       type: 1,
     #     },
-    #     ipv_6_cidr_block: "String",
-    #     network_acl_id: "NetworkAclId", # required
     #     port_range: {
     #       from: 1,
     #       to: 1,
     #     },
-    #     protocol: "String", # required
-    #     rule_action: "allow", # required, accepts allow, deny
-    #     rule_number: 1, # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclEntry AWS API Documentation
@@ -54547,44 +54620,16 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
-    # @option params [String] :destination_cidr_block
-    #   The IPv4 CIDR address block used for the destination match. The value
-    #   that you provide must match the CIDR of an existing route in the
-    #   table.
-    #
-    # @option params [String] :destination_ipv_6_cidr_block
-    #   The IPv6 CIDR address block used for the destination match. The value
-    #   that you provide must match the CIDR of an existing route in the
-    #   table.
-    #
     # @option params [String] :destination_prefix_list_id
     #   The ID of the prefix list for the route.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :vpc_endpoint_id
     #   The ID of a VPC endpoint. Supported for Gateway Load Balancer
     #   endpoints only.
     #
-    # @option params [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
-    #
-    # @option params [String] :gateway_id
-    #   The ID of an internet gateway or virtual private gateway.
-    #
-    # @option params [String] :instance_id
-    #   The ID of a NAT instance in your VPC.
-    #
     # @option params [Boolean] :local_target
     #   Specifies whether to reset the local route to its default target
     #   (`local`).
-    #
-    # @option params [String] :nat_gateway_id
-    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     #
     # @option params [String] :transit_gateway_id
     #   The ID of a transit gateway.
@@ -54595,17 +54640,45 @@ module Aws::EC2
     # @option params [String] :carrier_gateway_id
     #   \[IPv4 traffic only\] The ID of a carrier gateway.
     #
-    # @option params [String] :network_interface_id
-    #   The ID of a network interface.
+    # @option params [String] :core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :route_table_id
     #   The ID of the route table.
     #
+    # @option params [String] :destination_cidr_block
+    #   The IPv4 CIDR address block used for the destination match. The value
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
+    #
+    # @option params [String] :gateway_id
+    #   The ID of an internet gateway or virtual private gateway.
+    #
+    # @option params [String] :destination_ipv_6_cidr_block
+    #   The IPv6 CIDR address block used for the destination match. The value
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
+    #
+    # @option params [String] :egress_only_internet_gateway_id
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
+    #
+    # @option params [String] :instance_id
+    #   The ID of a NAT instance in your VPC.
+    #
+    # @option params [String] :network_interface_id
+    #   The ID of a network interface.
+    #
     # @option params [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
     #
-    # @option params [String] :core_network_arn
-    #   The Amazon Resource Name (ARN) of the core network.
+    # @option params [String] :nat_gateway_id
+    #   \[IPv4 traffic only\] The ID of a NAT gateway.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -54624,23 +54697,23 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.replace_route({
-    #     destination_cidr_block: "String",
-    #     destination_ipv_6_cidr_block: "String",
     #     destination_prefix_list_id: "PrefixListResourceId",
-    #     dry_run: false,
     #     vpc_endpoint_id: "VpcEndpointId",
-    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
-    #     gateway_id: "RouteGatewayId",
-    #     instance_id: "InstanceId",
     #     local_target: false,
-    #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
     #     local_gateway_id: "LocalGatewayId",
     #     carrier_gateway_id: "CarrierGatewayId",
-    #     network_interface_id: "NetworkInterfaceId",
-    #     route_table_id: "RouteTableId", # required
-    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #     core_network_arn: "CoreNetworkArn",
+    #     dry_run: false,
+    #     route_table_id: "RouteTableId", # required
+    #     destination_cidr_block: "String",
+    #     gateway_id: "RouteGatewayId",
+    #     destination_ipv_6_cidr_block: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     instance_id: "InstanceId",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #     nat_gateway_id: "NatGatewayId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRoute AWS API Documentation
@@ -54666,14 +54739,14 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
-    # @option params [required, String] :association_id
-    #   The association ID.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :association_id
+    #   The association ID.
     #
     # @option params [required, String] :route_table_id
     #   The ID of the new route table to associate with the subnet.
@@ -54701,8 +54774,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.replace_route_table_association({
-    #     association_id: "RouteTableAssociationId", # required
     #     dry_run: false,
+    #     association_id: "RouteTableAssociationId", # required
     #     route_table_id: "RouteTableId", # required
     #   })
     #
@@ -54831,20 +54904,23 @@ module Aws::EC2
     # Use of this action does not change the value returned by
     # DescribeInstanceStatus.
     #
-    # @option params [String] :description
-    #   Descriptive text about the health state of your instance.
-    #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The time at which the reported instance health state ended.
-    #
     # @option params [required, Array<String>] :instances
     #   The instances.
+    #
+    # @option params [required, String] :status
+    #   The status of all instances listed.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The time at which the reported instance health state began.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The time at which the reported instance health state ended.
     #
     # @option params [required, Array<String>] :reason_codes
     #   The reason codes that describe the health state of your instance.
@@ -54874,24 +54950,21 @@ module Aws::EC2
     #
     #   * `other`: \[explain using the description parameter\]
     #
-    # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   The time at which the reported instance health state began.
-    #
-    # @option params [required, String] :status
-    #   The status of all instances listed.
+    # @option params [String] :description
+    #   Descriptive text about the health state of your instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.report_instance_status({
-    #     description: "String",
     #     dry_run: false,
-    #     end_time: Time.now,
     #     instances: ["InstanceId"], # required
-    #     reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
-    #     start_time: Time.now,
     #     status: "ok", # required, accepts ok, impaired
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
+    #     description: "ReportInstanceStatusRequestDescription",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReportInstanceStatus AWS API Documentation
@@ -55126,17 +55199,9 @@ module Aws::EC2
     #       iam_fleet_role: "String", # required
     #       launch_specifications: [
     #         {
-    #           security_groups: [
-    #             {
-    #               group_name: "String",
-    #               group_id: "String",
-    #             },
-    #           ],
     #           addressing_type: "String",
     #           block_device_mappings: [
     #             {
-    #               device_name: "String",
-    #               virtual_name: "String",
     #               ebs: {
     #                 delete_on_termination: false,
     #                 iops: 1,
@@ -55149,6 +55214,8 @@ module Aws::EC2
     #                 encrypted: false,
     #               },
     #               no_device: "String",
+    #               device_name: "String",
+    #               virtual_name: "String",
     #             },
     #           ],
     #           ebs_optimized: false,
@@ -55290,6 +55357,12 @@ module Aws::EC2
     #             allowed_instance_types: ["AllowedInstanceType"],
     #             max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #           },
+    #           security_groups: [
+    #             {
+    #               group_id: "String",
+    #               group_name: "String",
+    #             },
+    #           ],
     #         },
     #       ],
     #       launch_template_configs: [
@@ -55436,31 +55509,37 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use
     #
-    # @option params [String] :availability_zone_group
-    #   The user-specified name for a logical grouping of requests.
+    # @option params [Types::RequestSpotLaunchSpecification] :launch_specification
+    #   The launch specification.
     #
-    #   When you specify an Availability Zone group in a Spot Instance
-    #   request, all Spot Instances in the request are launched in the same
-    #   Availability Zone. Instance proximity is maintained with this
-    #   parameter, but the choice of Availability Zone is not. The group
-    #   applies only to requests for Spot Instances of the same instance type.
-    #   Any additional Spot Instance requests that are specified with the same
-    #   Availability Zone group name are launched in that same Availability
-    #   Zone, as long as at least one instance from the group is still active.
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The key-value pair for tagging the Spot Instance request on creation.
+    #   The value for `ResourceType` must be `spot-instances-request`,
+    #   otherwise the Spot Instance request fails. To tag the Spot Instance
+    #   request after it has been created, see [CreateTags][1].
     #
-    #   If there is no active instance running in the Availability Zone group
-    #   that you specify for a new Spot Instance request (all instances are
-    #   terminated, the request is expired, or the maximum price you specified
-    #   falls below current Spot price), then Amazon EC2 launches the instance
-    #   in any Availability Zone where the constraint can be met.
-    #   Consequently, the subsequent set of Spot Instances could be placed in
-    #   a different zone from the original request, even if you specified the
-    #   same Availability Zone group.
     #
-    #   Default: Instances are launched in any available Availability Zone.
     #
-    # @option params [Integer] :block_duration_minutes
-    #   Deprecated.
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #
+    # @option params [String] :instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :spot_price
+    #   The maximum price per unit hour that you are willing to pay for a Spot
+    #   Instance. We do not recommend using this parameter because it can lead
+    #   to increased interruptions. If you do not specify this parameter, you
+    #   will pay the current Spot price.
+    #
+    #   If you specify a maximum price, your instances will be interrupted
+    #   more frequently than if you do not specify this parameter.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -55472,34 +55551,10 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
     # @option params [Integer] :instance_count
     #   The maximum number of Spot Instances to launch.
     #
     #   Default: 1
-    #
-    # @option params [String] :launch_group
-    #   The instance launch group. Launch groups are Spot Instances that
-    #   launch together and terminate together.
-    #
-    #   Default: Instances are launched and terminated individually
-    #
-    # @option params [Types::RequestSpotLaunchSpecification] :launch_specification
-    #   The launch specification.
-    #
-    # @option params [String] :spot_price
-    #   The maximum price per unit hour that you are willing to pay for a Spot
-    #   Instance. We do not recommend using this parameter because it can lead
-    #   to increased interruptions. If you do not specify this parameter, you
-    #   will pay the current Spot price.
-    #
-    #   If you specify a maximum price, your instances will be interrupted
-    #   more frequently than if you do not specify this parameter.
     #
     # @option params [String] :type
     #   The Spot Instance request type.
@@ -55530,19 +55585,37 @@ module Aws::EC2
     #     and time is reached. By default, the request is valid for 7 days
     #     from the date the request was created.
     #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The key-value pair for tagging the Spot Instance request on creation.
-    #   The value for `ResourceType` must be `spot-instances-request`,
-    #   otherwise the Spot Instance request fails. To tag the Spot Instance
-    #   request after it has been created, see [CreateTags][1].
+    # @option params [String] :launch_group
+    #   The instance launch group. Launch groups are Spot Instances that
+    #   launch together and terminate together.
     #
+    #   Default: Instances are launched and terminated individually
     #
+    # @option params [String] :availability_zone_group
+    #   The user-specified name for a logical grouping of requests.
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #   When you specify an Availability Zone group in a Spot Instance
+    #   request, all Spot Instances in the request are launched in the same
+    #   Availability Zone. Instance proximity is maintained with this
+    #   parameter, but the choice of Availability Zone is not. The group
+    #   applies only to requests for Spot Instances of the same instance type.
+    #   Any additional Spot Instance requests that are specified with the same
+    #   Availability Zone group name are launched in that same Availability
+    #   Zone, as long as at least one instance from the group is still active.
     #
-    # @option params [String] :instance_interruption_behavior
-    #   The behavior when a Spot Instance is interrupted. The default is
-    #   `terminate`.
+    #   If there is no active instance running in the Availability Zone group
+    #   that you specify for a new Spot Instance request (all instances are
+    #   terminated, the request is expired, or the maximum price you specified
+    #   falls below current Spot price), then Amazon EC2 launches the instance
+    #   in any Availability Zone where the constraint can be met.
+    #   Consequently, the subsequent set of Spot Instances could be placed in
+    #   a different zone from the original request, even if you specified the
+    #   same Availability Zone group.
+    #
+    #   Default: Instances are launched in any available Availability Zone.
+    #
+    # @option params [Integer] :block_duration_minutes
+    #   Deprecated.
     #
     # @return [Types::RequestSpotInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -55601,20 +55674,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.request_spot_instances({
-    #     availability_zone_group: "String",
-    #     block_duration_minutes: 1,
-    #     client_token: "String",
-    #     dry_run: false,
-    #     instance_count: 1,
-    #     launch_group: "String",
     #     launch_specification: {
     #       security_group_ids: ["SecurityGroupId"],
     #       security_groups: ["String"],
     #       addressing_type: "String",
     #       block_device_mappings: [
     #         {
-    #           device_name: "String",
-    #           virtual_name: "String",
     #           ebs: {
     #             delete_on_termination: false,
     #             iops: 1,
@@ -55627,6 +55692,8 @@ module Aws::EC2
     #             encrypted: false,
     #           },
     #           no_device: "String",
+    #           device_name: "String",
+    #           virtual_name: "String",
     #         },
     #       ],
     #       ebs_optimized: false,
@@ -55703,10 +55770,6 @@ module Aws::EC2
     #       subnet_id: "SubnetId",
     #       user_data: "SensitiveUserData",
     #     },
-    #     spot_price: "String",
-    #     type: "one-time", # accepts one-time, persistent
-    #     valid_from: Time.now,
-    #     valid_until: Time.now,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -55719,6 +55782,16 @@ module Aws::EC2
     #       },
     #     ],
     #     instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #     dry_run: false,
+    #     spot_price: "String",
+    #     client_token: "String",
+    #     instance_count: 1,
+    #     type: "one-time", # accepts one-time, persistent
+    #     valid_from: Time.now,
+    #     valid_until: Time.now,
+    #     launch_group: "String",
+    #     availability_zone_group: "String",
+    #     block_duration_minutes: 1,
     #   })
     #
     # @example Response structure
@@ -55733,13 +55806,8 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].instance_id #=> String
     #   resp.spot_instance_requests[0].launch_group #=> String
     #   resp.spot_instance_requests[0].launch_specification.user_data #=> String
-    #   resp.spot_instance_requests[0].launch_specification.security_groups #=> Array
-    #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_name #=> String
-    #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.addressing_type #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings #=> Array
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].device_name #=> String
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].virtual_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
@@ -55750,6 +55818,8 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].device_name #=> String
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].virtual_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.name #=> String
@@ -55795,6 +55865,9 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.spot_instance_requests[0].launch_specification.ramdisk_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.subnet_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.security_groups #=> Array
+    #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.monitoring.enabled #=> Boolean
     #   resp.spot_instance_requests[0].launched_availability_zone #=> String
     #   resp.spot_instance_requests[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
@@ -56015,20 +56088,20 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
     #
-    # @option params [required, String] :attribute
-    #   The attribute to reset.
-    #
-    #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
-    #   `sourceDestCheck`.
-    #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
+    #
+    # @option params [required, String] :attribute
+    #   The attribute to reset.
+    #
+    #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
+    #   `sourceDestCheck`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -56049,9 +56122,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.reset_instance_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetInstanceAttribute AWS API Documentation
@@ -56494,6 +56567,9 @@ module Aws::EC2
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
     #
+    # @option params [Array<String>] :security_group_rule_ids
+    #   The IDs of the security group rules.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -56503,26 +56579,6 @@ module Aws::EC2
     # @option params [required, String] :group_id
     #   The ID of the security group.
     #
-    # @option params [Array<Types::IpPermission>] :ip_permissions
-    #   The sets of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range in the same set of permissions.
-    #
-    # @option params [Array<String>] :security_group_rule_ids
-    #   The IDs of the security group rules.
-    #
-    # @option params [String] :cidr_ip
-    #   Not supported. Use a set of IP permissions to specify the CIDR.
-    #
-    # @option params [Integer] :from_port
-    #   Not supported. Use a set of IP permissions to specify the port.
-    #
-    # @option params [String] :ip_protocol
-    #   Not supported. Use a set of IP permissions to specify the protocol
-    #   name or number.
-    #
-    # @option params [Integer] :to_port
-    #   Not supported. Use a set of IP permissions to specify the port.
-    #
     # @option params [String] :source_security_group_name
     #   Not supported. Use a set of IP permissions to specify a destination
     #   security group.
@@ -56530,6 +56586,23 @@ module Aws::EC2
     # @option params [String] :source_security_group_owner_id
     #   Not supported. Use a set of IP permissions to specify a destination
     #   security group.
+    #
+    # @option params [String] :ip_protocol
+    #   Not supported. Use a set of IP permissions to specify the protocol
+    #   name or number.
+    #
+    # @option params [Integer] :from_port
+    #   Not supported. Use a set of IP permissions to specify the port.
+    #
+    # @option params [Integer] :to_port
+    #   Not supported. Use a set of IP permissions to specify the port.
+    #
+    # @option params [String] :cidr_ip
+    #   Not supported. Use a set of IP permissions to specify the CIDR.
+    #
+    # @option params [Array<Types::IpPermission>] :ip_permissions
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     #
     # @return [Types::RevokeSecurityGroupEgressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -56539,22 +56612,41 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.revoke_security_group_egress({
+    #     security_group_rule_ids: ["String"],
     #     dry_run: false,
     #     group_id: "SecurityGroupId", # required
+    #     source_security_group_name: "String",
+    #     source_security_group_owner_id: "String",
+    #     ip_protocol: "String",
+    #     from_port: 1,
+    #     to_port: 1,
+    #     cidr_ip: "String",
     #     ip_permissions: [
     #       {
-    #         from_port: 1,
     #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
     #         ip_ranges: [
     #           {
-    #             cidr_ip: "String",
     #             description: "String",
+    #             cidr_ip: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
-    #             cidr_ipv_6: "String",
     #             description: "String",
+    #             cidr_ipv_6: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
@@ -56563,53 +56655,34 @@ module Aws::EC2
     #             prefix_list_id: "String",
     #           },
     #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #           },
-    #         ],
     #       },
     #     ],
-    #     security_group_rule_ids: ["String"],
-    #     cidr_ip: "String",
-    #     from_port: 1,
-    #     ip_protocol: "String",
-    #     to_port: 1,
-    #     source_security_group_name: "String",
-    #     source_security_group_owner_id: "String",
     #   })
     #
     # @example Response structure
     #
     #   resp.return #=> Boolean
     #   resp.unknown_ip_permissions #=> Array
-    #   resp.unknown_ip_permissions[0].from_port #=> Integer
     #   resp.unknown_ip_permissions[0].ip_protocol #=> String
-    #   resp.unknown_ip_permissions[0].ip_ranges #=> Array
-    #   resp.unknown_ip_permissions[0].ip_ranges[0].cidr_ip #=> String
-    #   resp.unknown_ip_permissions[0].ip_ranges[0].description #=> String
-    #   resp.unknown_ip_permissions[0].ipv_6_ranges #=> Array
-    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
-    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].description #=> String
-    #   resp.unknown_ip_permissions[0].prefix_list_ids #=> Array
-    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].description #=> String
-    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.unknown_ip_permissions[0].from_port #=> Integer
     #   resp.unknown_ip_permissions[0].to_port #=> Integer
     #   resp.unknown_ip_permissions[0].user_id_group_pairs #=> Array
     #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].description #=> String
-    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
-    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
-    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
     #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
     #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].vpc_id #=> String
     #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
+    #   resp.unknown_ip_permissions[0].ip_ranges #=> Array
+    #   resp.unknown_ip_permissions[0].ip_ranges[0].description #=> String
+    #   resp.unknown_ip_permissions[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges #=> Array
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].description #=> String
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.unknown_ip_permissions[0].prefix_list_ids #=> Array
+    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].description #=> String
+    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgress AWS API Documentation
     #
@@ -56690,14 +56763,14 @@ module Aws::EC2
     #   If the protocol is TCP or UDP, this is the end of the port range. If
     #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
     #
+    # @option params [Array<String>] :security_group_rule_ids
+    #   The IDs of the security group rules.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Array<String>] :security_group_rule_ids
-    #   The IDs of the security group rules.
     #
     # @return [Types::RevokeSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -56713,18 +56786,30 @@ module Aws::EC2
     #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
-    #         from_port: 1,
     #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
     #         ip_ranges: [
     #           {
-    #             cidr_ip: "String",
     #             description: "String",
+    #             cidr_ip: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
-    #             cidr_ipv_6: "String",
     #             description: "String",
+    #             cidr_ipv_6: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
@@ -56733,52 +56818,40 @@ module Aws::EC2
     #             prefix_list_id: "String",
     #           },
     #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #           },
-    #         ],
     #       },
     #     ],
     #     ip_protocol: "String",
     #     source_security_group_name: "String",
     #     source_security_group_owner_id: "String",
     #     to_port: 1,
-    #     dry_run: false,
     #     security_group_rule_ids: ["String"],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.return #=> Boolean
     #   resp.unknown_ip_permissions #=> Array
-    #   resp.unknown_ip_permissions[0].from_port #=> Integer
     #   resp.unknown_ip_permissions[0].ip_protocol #=> String
-    #   resp.unknown_ip_permissions[0].ip_ranges #=> Array
-    #   resp.unknown_ip_permissions[0].ip_ranges[0].cidr_ip #=> String
-    #   resp.unknown_ip_permissions[0].ip_ranges[0].description #=> String
-    #   resp.unknown_ip_permissions[0].ipv_6_ranges #=> Array
-    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
-    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].description #=> String
-    #   resp.unknown_ip_permissions[0].prefix_list_ids #=> Array
-    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].description #=> String
-    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.unknown_ip_permissions[0].from_port #=> Integer
     #   resp.unknown_ip_permissions[0].to_port #=> Integer
     #   resp.unknown_ip_permissions[0].user_id_group_pairs #=> Array
     #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].description #=> String
-    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
-    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
-    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
     #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].group_id #=> String
     #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].vpc_id #=> String
     #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #   resp.unknown_ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
+    #   resp.unknown_ip_permissions[0].ip_ranges #=> Array
+    #   resp.unknown_ip_permissions[0].ip_ranges[0].description #=> String
+    #   resp.unknown_ip_permissions[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges #=> Array
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].description #=> String
+    #   resp.unknown_ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.unknown_ip_permissions[0].prefix_list_ids #=> Array
+    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].description #=> String
+    #   resp.unknown_ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngress AWS API Documentation
     #
@@ -56999,82 +57072,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
     #
-    # @option params [String] :additional_info
-    #   Reserved.
-    #
-    # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. If you do not specify a client token, a
-    #   randomly generated token is used for the request to ensure
-    #   idempotency.
-    #
-    #   For more information, see [Ensuring Idempotency][1].
-    #
-    #   Constraints: Maximum 64 ASCII characters
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-    #
-    # @option params [Boolean] :disable_api_termination
-    #   If you set this parameter to `true`, you can't terminate the instance
-    #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
-    #   change this attribute after launch, use [ModifyInstanceAttribute][1].
-    #   Alternatively, if you set `InstanceInitiatedShutdownBehavior` to
-    #   `terminate`, you can terminate the instance by running the shutdown
-    #   command from the instance.
-    #
-    #   Default: `false`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [Boolean] :ebs_optimized
-    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
-    #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal Amazon EBS I/O
-    #   performance. This optimization isn't available with all instance
-    #   types. Additional usage charges apply when using an EBS-optimized
-    #   instance.
-    #
-    #   Default: `false`
-    #
-    # @option params [Types::IamInstanceProfileSpecification] :iam_instance_profile
-    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
-    #
-    # @option params [String] :instance_initiated_shutdown_behavior
-    #   Indicates whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
-    #
-    #   Default: `stop`
-    #
-    # @option params [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   The network interfaces to associate with the instance.
-    #
-    # @option params [String] :private_ip_address
-    #   The primary IPv4 address. You must specify a value from the IPv4
-    #   address range of the subnet.
-    #
-    #   Only one private IP address can be designated as primary. You can't
-    #   specify this option if you've specified the option to designate a
-    #   private IP address as the primary IP address in a network interface
-    #   specification. You cannot specify this option if you're launching
-    #   more than one instance in the request.
-    #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
-    #
     # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
     #   An elastic GPU to associate with the instance.
     #
@@ -57229,13 +57226,89 @@ module Aws::EC2
     #   first IPv6 GUA address associated with the ENI becomes the primary
     #   IPv6 address.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :disable_api_termination
+    #   If you set this parameter to `true`, you can't terminate the instance
+    #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
+    #   change this attribute after launch, use [ModifyInstanceAttribute][1].
+    #   Alternatively, if you set `InstanceInitiatedShutdownBehavior` to
+    #   `terminate`, you can terminate the instance by running the shutdown
+    #   command from the instance.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
+    #
+    # @option params [String] :instance_initiated_shutdown_behavior
+    #   Indicates whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #
+    #   Default: `stop`
+    #
+    # @option params [String] :private_ip_address
+    #   The primary IPv4 address. You must specify a value from the IPv4
+    #   address range of the subnet.
+    #
+    #   Only one private IP address can be designated as primary. You can't
+    #   specify this option if you've specified the option to designate a
+    #   private IP address as the primary IP address in a network interface
+    #   specification. You cannot specify this option if you're launching
+    #   more than one instance in the request.
+    #
+    #   You cannot specify this option and the network interfaces option in
+    #   the same request.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring Idempotency][1].
+    #
+    #   Constraints: Maximum 64 ASCII characters
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :additional_info
+    #   Reserved.
+    #
+    # @option params [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
+    #   The network interfaces to associate with the instance.
+    #
+    # @option params [Types::IamInstanceProfileSpecification] :iam_instance_profile
+    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
+    #
+    # @option params [Boolean] :ebs_optimized
+    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
+    #   optimization provides dedicated throughput to Amazon EBS and an
+    #   optimized configuration stack to provide optimal Amazon EBS I/O
+    #   performance. This optimization isn't available with all instance
+    #   types. Additional usage charges apply when using an EBS-optimized
+    #   instance.
+    #
+    #   Default: `false`
+    #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Reservation#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
-    #   * {Types::Reservation#instances #instances} => Array&lt;Types::Instance&gt;
+    #   * {Types::Reservation#reservation_id #reservation_id} => String
     #   * {Types::Reservation#owner_id #owner_id} => String
     #   * {Types::Reservation#requester_id #requester_id} => String
-    #   * {Types::Reservation#reservation_id #reservation_id} => String
+    #   * {Types::Reservation#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
+    #   * {Types::Reservation#instances #instances} => Array&lt;Types::Instance&gt;
     #
     #
     # @example Example: To launch an instance
@@ -57283,8 +57356,6 @@ module Aws::EC2
     #   resp = client.run_instances({
     #     block_device_mappings: [
     #       {
-    #         device_name: "String",
-    #         virtual_name: "String",
     #         ebs: {
     #           delete_on_termination: false,
     #           iops: 1,
@@ -57297,6 +57368,8 @@ module Aws::EC2
     #           encrypted: false,
     #         },
     #         no_device: "String",
+    #         device_name: "String",
+    #         virtual_name: "String",
     #       },
     #     ],
     #     image_id: "ImageId",
@@ -57316,7 +57389,6 @@ module Aws::EC2
     #       enabled: false, # required
     #     },
     #     placement: {
-    #       availability_zone: "String",
     #       affinity: "String",
     #       group_name: "PlacementGroupName",
     #       partition_number: 1,
@@ -57325,76 +57397,13 @@ module Aws::EC2
     #       spread_domain: "String",
     #       host_resource_group_arn: "String",
     #       group_id: "PlacementGroupId",
+    #       availability_zone: "String",
     #     },
     #     ramdisk_id: "RamdiskId",
     #     security_group_ids: ["SecurityGroupId"],
     #     security_groups: ["SecurityGroupName"],
     #     subnet_id: "SubnetId",
     #     user_data: "RunInstancesUserData",
-    #     additional_info: "String",
-    #     client_token: "String",
-    #     disable_api_termination: false,
-    #     dry_run: false,
-    #     ebs_optimized: false,
-    #     iam_instance_profile: {
-    #       arn: "String",
-    #       name: "String",
-    #     },
-    #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #     network_interfaces: [
-    #       {
-    #         associate_public_ip_address: false,
-    #         delete_on_termination: false,
-    #         description: "String",
-    #         device_index: 1,
-    #         groups: ["SecurityGroupId"],
-    #         ipv_6_address_count: 1,
-    #         ipv_6_addresses: [
-    #           {
-    #             ipv_6_address: "String",
-    #             is_primary_ipv_6: false,
-    #           },
-    #         ],
-    #         network_interface_id: "NetworkInterfaceId",
-    #         private_ip_address: "String",
-    #         private_ip_addresses: [
-    #           {
-    #             primary: false,
-    #             private_ip_address: "String",
-    #           },
-    #         ],
-    #         secondary_private_ip_address_count: 1,
-    #         subnet_id: "String",
-    #         associate_carrier_ip_address: false,
-    #         interface_type: "String",
-    #         network_card_index: 1,
-    #         ipv_4_prefixes: [
-    #           {
-    #             ipv_4_prefix: "String",
-    #           },
-    #         ],
-    #         ipv_4_prefix_count: 1,
-    #         ipv_6_prefixes: [
-    #           {
-    #             ipv_6_prefix: "String",
-    #           },
-    #         ],
-    #         ipv_6_prefix_count: 1,
-    #         primary_ipv_6: false,
-    #         ena_srd_specification: {
-    #           ena_srd_enabled: false,
-    #           ena_srd_udp_specification: {
-    #             ena_srd_udp_enabled: false,
-    #           },
-    #         },
-    #         connection_tracking_specification: {
-    #           tcp_established_timeout: 1,
-    #           udp_stream_timeout: 1,
-    #           udp_timeout: 1,
-    #         },
-    #       },
-    #     ],
-    #     private_ip_address: "String",
     #     elastic_gpu_specification: [
     #       {
     #         type: "String", # required
@@ -57475,45 +57484,81 @@ module Aws::EC2
     #     },
     #     disable_api_stop: false,
     #     enable_primary_ipv_6: false,
+    #     dry_run: false,
+    #     disable_api_termination: false,
+    #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #     private_ip_address: "String",
+    #     client_token: "String",
+    #     additional_info: "String",
+    #     network_interfaces: [
+    #       {
+    #         associate_public_ip_address: false,
+    #         delete_on_termination: false,
+    #         description: "String",
+    #         device_index: 1,
+    #         groups: ["SecurityGroupId"],
+    #         ipv_6_address_count: 1,
+    #         ipv_6_addresses: [
+    #           {
+    #             ipv_6_address: "String",
+    #             is_primary_ipv_6: false,
+    #           },
+    #         ],
+    #         network_interface_id: "NetworkInterfaceId",
+    #         private_ip_address: "String",
+    #         private_ip_addresses: [
+    #           {
+    #             primary: false,
+    #             private_ip_address: "String",
+    #           },
+    #         ],
+    #         secondary_private_ip_address_count: 1,
+    #         subnet_id: "String",
+    #         associate_carrier_ip_address: false,
+    #         interface_type: "String",
+    #         network_card_index: 1,
+    #         ipv_4_prefixes: [
+    #           {
+    #             ipv_4_prefix: "String",
+    #           },
+    #         ],
+    #         ipv_4_prefix_count: 1,
+    #         ipv_6_prefixes: [
+    #           {
+    #             ipv_6_prefix: "String",
+    #           },
+    #         ],
+    #         ipv_6_prefix_count: 1,
+    #         primary_ipv_6: false,
+    #         ena_srd_specification: {
+    #           ena_srd_enabled: false,
+    #           ena_srd_udp_specification: {
+    #             ena_srd_udp_enabled: false,
+    #           },
+    #         },
+    #         connection_tracking_specification: {
+    #           tcp_established_timeout: 1,
+    #           udp_stream_timeout: 1,
+    #           udp_timeout: 1,
+    #         },
+    #       },
+    #     ],
+    #     iam_instance_profile: {
+    #       arn: "String",
+    #       name: "String",
+    #     },
+    #     ebs_optimized: false,
     #   })
     #
     # @example Response structure
     #
+    #   resp.reservation_id #=> String
+    #   resp.owner_id #=> String
+    #   resp.requester_id #=> String
     #   resp.groups #=> Array
-    #   resp.groups[0].group_name #=> String
     #   resp.groups[0].group_id #=> String
+    #   resp.groups[0].group_name #=> String
     #   resp.instances #=> Array
-    #   resp.instances[0].ami_launch_index #=> Integer
-    #   resp.instances[0].image_id #=> String
-    #   resp.instances[0].instance_id #=> String
-    #   resp.instances[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge"
-    #   resp.instances[0].kernel_id #=> String
-    #   resp.instances[0].key_name #=> String
-    #   resp.instances[0].launch_time #=> Time
-    #   resp.instances[0].monitoring.state #=> String, one of "disabled", "disabling", "enabled", "pending"
-    #   resp.instances[0].placement.availability_zone #=> String
-    #   resp.instances[0].placement.affinity #=> String
-    #   resp.instances[0].placement.group_name #=> String
-    #   resp.instances[0].placement.partition_number #=> Integer
-    #   resp.instances[0].placement.host_id #=> String
-    #   resp.instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
-    #   resp.instances[0].placement.spread_domain #=> String
-    #   resp.instances[0].placement.host_resource_group_arn #=> String
-    #   resp.instances[0].placement.group_id #=> String
-    #   resp.instances[0].platform #=> String, one of "Windows"
-    #   resp.instances[0].private_dns_name #=> String
-    #   resp.instances[0].private_ip_address #=> String
-    #   resp.instances[0].product_codes #=> Array
-    #   resp.instances[0].product_codes[0].product_code_id #=> String
-    #   resp.instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
-    #   resp.instances[0].public_dns_name #=> String
-    #   resp.instances[0].public_ip_address #=> String
-    #   resp.instances[0].ramdisk_id #=> String
-    #   resp.instances[0].state.code #=> Integer
-    #   resp.instances[0].state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
-    #   resp.instances[0].state_transition_reason #=> String
-    #   resp.instances[0].subnet_id #=> String
-    #   resp.instances[0].vpc_id #=> String
     #   resp.instances[0].architecture #=> String, one of "i386", "x86_64", "arm64", "x86_64_mac", "arm64_mac"
     #   resp.instances[0].block_device_mappings #=> Array
     #   resp.instances[0].block_device_mappings[0].device_name #=> String
@@ -57556,8 +57601,8 @@ module Aws::EC2
     #   resp.instances[0].network_interfaces[0].attachment.ena_srd_specification.ena_srd_udp_specification.ena_srd_udp_enabled #=> Boolean
     #   resp.instances[0].network_interfaces[0].description #=> String
     #   resp.instances[0].network_interfaces[0].groups #=> Array
-    #   resp.instances[0].network_interfaces[0].groups[0].group_name #=> String
     #   resp.instances[0].network_interfaces[0].groups[0].group_id #=> String
+    #   resp.instances[0].network_interfaces[0].groups[0].group_name #=> String
     #   resp.instances[0].network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.instances[0].network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.instances[0].network_interfaces[0].ipv_6_addresses[0].is_primary_ipv_6 #=> Boolean
@@ -57591,8 +57636,8 @@ module Aws::EC2
     #   resp.instances[0].root_device_name #=> String
     #   resp.instances[0].root_device_type #=> String, one of "ebs", "instance-store"
     #   resp.instances[0].security_groups #=> Array
-    #   resp.instances[0].security_groups[0].group_name #=> String
     #   resp.instances[0].security_groups[0].group_id #=> String
+    #   resp.instances[0].security_groups[0].group_name #=> String
     #   resp.instances[0].source_dest_check #=> Boolean
     #   resp.instances[0].spot_instance_request_id #=> String
     #   resp.instances[0].sriov_net_support #=> String
@@ -57630,9 +57675,37 @@ module Aws::EC2
     #   resp.instances[0].tpm_support #=> String
     #   resp.instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
     #   resp.instances[0].current_instance_boot_mode #=> String, one of "legacy-bios", "uefi"
-    #   resp.owner_id #=> String
-    #   resp.requester_id #=> String
-    #   resp.reservation_id #=> String
+    #   resp.instances[0].instance_id #=> String
+    #   resp.instances[0].image_id #=> String
+    #   resp.instances[0].state.code #=> Integer
+    #   resp.instances[0].state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
+    #   resp.instances[0].private_dns_name #=> String
+    #   resp.instances[0].public_dns_name #=> String
+    #   resp.instances[0].state_transition_reason #=> String
+    #   resp.instances[0].key_name #=> String
+    #   resp.instances[0].ami_launch_index #=> Integer
+    #   resp.instances[0].product_codes #=> Array
+    #   resp.instances[0].product_codes[0].product_code_id #=> String
+    #   resp.instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+    #   resp.instances[0].instance_type #=> String, one of "a1.medium", "a1.large", "a1.xlarge", "a1.2xlarge", "a1.4xlarge", "a1.metal", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5.metal", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c5d.metal", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "c5n.metal", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "c6g.metal", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6gd.metal", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "c6i.32xlarge", "c6i.metal", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge", "cr1.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "d3.xlarge", "d3.2xlarge", "d3.4xlarge", "d3.8xlarge", "d3en.xlarge", "d3en.2xlarge", "d3en.4xlarge", "d3en.6xlarge", "d3en.8xlarge", "d3en.12xlarge", "dl1.24xlarge", "f1.2xlarge", "f1.4xlarge", "f1.16xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "g3s.xlarge", "g4ad.xlarge", "g4ad.2xlarge", "g4ad.4xlarge", "g4ad.8xlarge", "g4ad.16xlarge", "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge", "g4dn.metal", "g5.xlarge", "g5.2xlarge", "g5.4xlarge", "g5.8xlarge", "g5.12xlarge", "g5.16xlarge", "g5.24xlarge", "g5.48xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "g5g.metal", "hi1.4xlarge", "hpc6a.48xlarge", "hs1.8xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "i3.metal", "i3en.large", "i3en.xlarge", "i3en.2xlarge", "i3en.3xlarge", "i3en.6xlarge", "i3en.12xlarge", "i3en.24xlarge", "i3en.metal", "im4gn.large", "im4gn.xlarge", "im4gn.2xlarge", "im4gn.4xlarge", "im4gn.8xlarge", "im4gn.16xlarge", "inf1.xlarge", "inf1.2xlarge", "inf1.6xlarge", "inf1.24xlarge", "is4gen.medium", "is4gen.large", "is4gen.xlarge", "is4gen.2xlarge", "is4gen.4xlarge", "is4gen.8xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5.metal", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5d.metal", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5dn.metal", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m5n.metal", "m5zn.large", "m5zn.xlarge", "m5zn.2xlarge", "m5zn.3xlarge", "m5zn.6xlarge", "m5zn.12xlarge", "m5zn.metal", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6g.metal", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "m6gd.metal", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m6i.24xlarge", "m6i.32xlarge", "m6i.metal", "mac1.metal", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "p3dn.24xlarge", "p4d.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5.metal", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "r5b.large", "r5b.xlarge", "r5b.2xlarge", "r5b.4xlarge", "r5b.8xlarge", "r5b.12xlarge", "r5b.16xlarge", "r5b.24xlarge", "r5b.metal", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "r5d.metal", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5dn.metal", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r5n.metal", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "r6g.metal", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r6gd.metal", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "r6i.24xlarge", "r6i.32xlarge", "r6i.metal", "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "t3.nano", "t3.micro", "t3.small", "t3.medium", "t3.large", "t3.xlarge", "t3.2xlarge", "t3a.nano", "t3a.micro", "t3a.small", "t3a.medium", "t3a.large", "t3a.xlarge", "t3a.2xlarge", "t4g.nano", "t4g.micro", "t4g.small", "t4g.medium", "t4g.large", "t4g.xlarge", "t4g.2xlarge", "u-6tb1.56xlarge", "u-6tb1.112xlarge", "u-9tb1.112xlarge", "u-12tb1.112xlarge", "u-6tb1.metal", "u-9tb1.metal", "u-12tb1.metal", "u-18tb1.metal", "u-24tb1.metal", "vt1.3xlarge", "vt1.6xlarge", "vt1.24xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "x2iezn.2xlarge", "x2iezn.4xlarge", "x2iezn.6xlarge", "x2iezn.8xlarge", "x2iezn.12xlarge", "x2iezn.metal", "x2gd.medium", "x2gd.large", "x2gd.xlarge", "x2gd.2xlarge", "x2gd.4xlarge", "x2gd.8xlarge", "x2gd.12xlarge", "x2gd.16xlarge", "x2gd.metal", "z1d.large", "z1d.xlarge", "z1d.2xlarge", "z1d.3xlarge", "z1d.6xlarge", "z1d.12xlarge", "z1d.metal", "x2idn.16xlarge", "x2idn.24xlarge", "x2idn.32xlarge", "x2iedn.xlarge", "x2iedn.2xlarge", "x2iedn.4xlarge", "x2iedn.8xlarge", "x2iedn.16xlarge", "x2iedn.24xlarge", "x2iedn.32xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6a.metal", "m6a.metal", "i4i.large", "i4i.xlarge", "i4i.2xlarge", "i4i.4xlarge", "i4i.8xlarge", "i4i.16xlarge", "i4i.32xlarge", "i4i.metal", "x2idn.metal", "x2iedn.metal", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "mac2.metal", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c6id.metal", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6id.metal", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6id.metal", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6a.metal", "p4de.24xlarge", "u-3tb1.56xlarge", "u-18tb1.112xlarge", "u-24tb1.112xlarge", "trn1.2xlarge", "trn1.32xlarge", "hpc6id.32xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c6in.24xlarge", "c6in.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "c7g.metal", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "m7g.metal", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "r7g.metal", "c6in.metal", "m6in.metal", "m6idn.metal", "r6in.metal", "r6idn.metal", "inf2.xlarge", "inf2.8xlarge", "inf2.24xlarge", "inf2.48xlarge", "trn1n.32xlarge", "i4g.large", "i4g.xlarge", "i4g.2xlarge", "i4g.4xlarge", "i4g.8xlarge", "i4g.16xlarge", "hpc7g.4xlarge", "hpc7g.8xlarge", "hpc7g.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "p5.48xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "m7i.24xlarge", "m7i.48xlarge", "m7i-flex.large", "m7i-flex.xlarge", "m7i-flex.2xlarge", "m7i-flex.4xlarge", "m7i-flex.8xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7a.metal-48xl", "hpc7a.12xlarge", "hpc7a.24xlarge", "hpc7a.48xlarge", "hpc7a.96xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "c7i.24xlarge", "c7i.48xlarge", "mac2-m2pro.metal", "r7iz.large", "r7iz.xlarge", "r7iz.2xlarge", "r7iz.4xlarge", "r7iz.8xlarge", "r7iz.12xlarge", "r7iz.16xlarge", "r7iz.32xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7a.metal-48xl", "r7a.metal-48xl", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "dl2q.24xlarge", "mac2-m2.metal", "i4i.12xlarge", "i4i.24xlarge", "c7i.metal-24xl", "c7i.metal-48xl", "m7i.metal-24xl", "m7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl", "r7iz.metal-16xl", "r7iz.metal-32xl", "c7gd.metal", "m7gd.metal", "r7gd.metal", "g6.xlarge", "g6.2xlarge", "g6.4xlarge", "g6.8xlarge", "g6.12xlarge", "g6.16xlarge", "g6.24xlarge", "g6.48xlarge", "gr6.4xlarge", "gr6.8xlarge", "c7i-flex.large", "c7i-flex.xlarge", "c7i-flex.2xlarge", "c7i-flex.4xlarge", "c7i-flex.8xlarge", "u7i-12tb.224xlarge", "u7in-16tb.224xlarge", "u7in-24tb.224xlarge", "u7in-32tb.224xlarge", "u7ib-12tb.224xlarge", "c7gn.metal", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "r8g.metal-24xl", "r8g.metal-48xl", "mac2-m1ultra.metal", "g6e.xlarge", "g6e.2xlarge", "g6e.4xlarge", "g6e.8xlarge", "g6e.12xlarge", "g6e.16xlarge", "g6e.24xlarge", "g6e.48xlarge"
+    #   resp.instances[0].launch_time #=> Time
+    #   resp.instances[0].placement.affinity #=> String
+    #   resp.instances[0].placement.group_name #=> String
+    #   resp.instances[0].placement.partition_number #=> Integer
+    #   resp.instances[0].placement.host_id #=> String
+    #   resp.instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.instances[0].placement.spread_domain #=> String
+    #   resp.instances[0].placement.host_resource_group_arn #=> String
+    #   resp.instances[0].placement.group_id #=> String
+    #   resp.instances[0].placement.availability_zone #=> String
+    #   resp.instances[0].kernel_id #=> String
+    #   resp.instances[0].ramdisk_id #=> String
+    #   resp.instances[0].platform #=> String, one of "Windows"
+    #   resp.instances[0].monitoring.state #=> String, one of "disabled", "disabling", "enabled", "pending"
+    #   resp.instances[0].subnet_id #=> String
+    #   resp.instances[0].vpc_id #=> String
+    #   resp.instances[0].private_ip_address #=> String
+    #   resp.instances[0].public_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstances AWS API Documentation
     #
@@ -58077,7 +58150,7 @@ module Aws::EC2
     #   The ID of the instance.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -58138,7 +58211,7 @@ module Aws::EC2
     #   Reserved.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -58186,9 +58259,9 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.starting_instances #=> Array
+    #   resp.starting_instances[0].instance_id #=> String
     #   resp.starting_instances[0].current_state.code #=> Integer
     #   resp.starting_instances[0].current_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
-    #   resp.starting_instances[0].instance_id #=> String
     #   resp.starting_instances[0].previous_state.code #=> Integer
     #   resp.starting_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
     #
@@ -59301,7 +59374,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -59358,9 +59431,9 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.stopping_instances #=> Array
+    #   resp.stopping_instances[0].instance_id #=> String
     #   resp.stopping_instances[0].current_state.code #=> Integer
     #   resp.stopping_instances[0].current_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
-    #   resp.stopping_instances[0].instance_id #=> String
     #   resp.stopping_instances[0].previous_state.code #=> Integer
     #   resp.stopping_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
     #
@@ -59500,7 +59573,7 @@ module Aws::EC2
     #   request into smaller batches.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -59547,9 +59620,9 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.terminating_instances #=> Array
+    #   resp.terminating_instances[0].instance_id #=> String
     #   resp.terminating_instances[0].current_state.code #=> Integer
     #   resp.terminating_instances[0].current_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
-    #   resp.terminating_instances[0].instance_id #=> String
     #   resp.terminating_instances[0].previous_state.code #=> Integer
     #   resp.terminating_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
     #
@@ -59565,14 +59638,14 @@ module Aws::EC2
     # Unassigns one or more IPv6 addresses IPv4 Prefix Delegation prefixes
     # from a network interface.
     #
-    # @option params [Array<String>] :ipv_6_addresses
-    #   The IPv6 addresses to unassign from the network interface.
-    #
     # @option params [Array<String>] :ipv_6_prefixes
     #   The IPv6 prefixes to unassign from the network interface.
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
+    #
+    # @option params [Array<String>] :ipv_6_addresses
+    #   The IPv6 addresses to unassign from the network interface.
     #
     # @return [Types::UnassignIpv6AddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -59583,9 +59656,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.unassign_ipv_6_addresses({
-    #     ipv_6_addresses: ["String"],
     #     ipv_6_prefixes: ["String"],
     #     network_interface_id: "NetworkInterfaceId", # required
+    #     ipv_6_addresses: ["String"],
     #   })
     #
     # @example Response structure
@@ -59608,6 +59681,9 @@ module Aws::EC2
     # Unassigns one or more secondary private IP addresses, or IPv4 Prefix
     # Delegation prefixes from a network interface.
     #
+    # @option params [Array<String>] :ipv_4_prefixes
+    #   The IPv4 prefixes to unassign from the network interface.
+    #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
     #
@@ -59615,9 +59691,6 @@ module Aws::EC2
     #   The secondary private IP addresses to unassign from the network
     #   interface. You can specify this option multiple times to unassign more
     #   than one IP address.
-    #
-    # @option params [Array<String>] :ipv_4_prefixes
-    #   The IPv4 prefixes to unassign from the network interface.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -59636,9 +59709,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.unassign_private_ip_addresses({
+    #     ipv_4_prefixes: ["String"],
     #     network_interface_id: "NetworkInterfaceId", # required
     #     private_ip_addresses: ["String"],
-    #     ipv_4_prefixes: ["String"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateIpAddresses AWS API Documentation
@@ -59672,7 +59745,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -59777,7 +59850,7 @@ module Aws::EC2
     #   The IDs of the instances.
     #
     # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -59875,36 +59948,36 @@ module Aws::EC2
     #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
-    #         from_port: 1,
     #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
     #         ip_ranges: [
     #           {
-    #             cidr_ip: "String",
     #             description: "String",
+    #             cidr_ip: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
-    #             cidr_ipv_6: "String",
     #             description: "String",
+    #             cidr_ipv_6: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
     #             description: "String",
     #             prefix_list_id: "String",
-    #           },
-    #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
     #           },
     #         ],
     #       },
@@ -59998,36 +60071,36 @@ module Aws::EC2
     #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
-    #         from_port: 1,
     #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
     #         ip_ranges: [
     #           {
-    #             cidr_ip: "String",
     #             description: "String",
+    #             cidr_ip: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
-    #             cidr_ipv_6: "String",
     #             description: "String",
+    #             cidr_ipv_6: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
     #           {
     #             description: "String",
     #             prefix_list_id: "String",
-    #           },
-    #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
     #           },
     #         ],
     #       },
@@ -60123,7 +60196,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.477.0'
+      context[:gem_version] = '1.480.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

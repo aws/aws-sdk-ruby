@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-10-01)
+------------------
+
+* Feature - This release adds support to stop an ongoing ingestion job using the StopIngestionJob API in Agents for Amazon Bedrock.
+
 1.27.0 (2024-09-24)
 ------------------
 

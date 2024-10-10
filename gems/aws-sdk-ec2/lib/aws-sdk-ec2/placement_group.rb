@@ -224,7 +224,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
+    #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
@@ -242,16 +242,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instances = placement_group.instances({
+    #     instance_ids: ["InstanceId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["InstanceId"],
-    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :instance_ids
+    #   The instance IDs.
+    #
+    #   Default: Describes all your instances.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -681,15 +690,6 @@ module Aws::EC2
     #     (`paravirtual` \| `hvm`).
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
-    # @option options [Array<String>] :instance_ids
-    #   The instance IDs.
-    #
-    #   Default: Describes all your instances.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|

@@ -2106,6 +2106,7 @@ module Aws::SageMaker
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TagPropagation = Shapes::StringShape.new(name: 'TagPropagation')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetAttributeName = Shapes::StringShape.new(name: 'TargetAttributeName')
     TargetDevice = Shapes::StringShape.new(name: 'TargetDevice')
@@ -3058,6 +3059,7 @@ module Aws::SageMaker
     CodeEditorAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     CodeEditorAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     CodeEditorAppSettings.add_member(:app_lifecycle_management, Shapes::ShapeRef.new(shape: AppLifecycleManagement, location_name: "AppLifecycleManagement"))
+    CodeEditorAppSettings.add_member(:built_in_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "BuiltInLifecycleConfigArn"))
     CodeEditorAppSettings.struct_class = Types::CodeEditorAppSettings
 
     CodeRepositories.member = Shapes::ShapeRef.new(shape: CodeRepository)
@@ -3345,6 +3347,7 @@ module Aws::SageMaker
     CreateDomainRequest.add_member(:home_efs_file_system_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, deprecated: true, location_name: "HomeEfsFileSystemKmsKeyId", metadata: {"deprecatedMessage"=>"This property is deprecated, use KmsKeyId instead."}))
     CreateDomainRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateDomainRequest.add_member(:app_security_group_management, Shapes::ShapeRef.new(shape: AppSecurityGroupManagement, location_name: "AppSecurityGroupManagement"))
+    CreateDomainRequest.add_member(:tag_propagation, Shapes::ShapeRef.new(shape: TagPropagation, location_name: "TagPropagation"))
     CreateDomainRequest.add_member(:default_space_settings, Shapes::ShapeRef.new(shape: DefaultSpaceSettings, location_name: "DefaultSpaceSettings"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
@@ -4401,6 +4404,7 @@ module Aws::SageMaker
     DescribeAppResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeAppResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeAppResponse.add_member(:resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "ResourceSpec"))
+    DescribeAppResponse.add_member(:built_in_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "BuiltInLifecycleConfigArn"))
     DescribeAppResponse.struct_class = Types::DescribeAppResponse
 
     DescribeArtifactRequest.add_member(:artifact_arn, Shapes::ShapeRef.new(shape: ArtifactArn, required: true, location_name: "ArtifactArn"))
@@ -4614,6 +4618,7 @@ module Aws::SageMaker
     DescribeDomainResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     DescribeDomainResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeDomainResponse.add_member(:app_security_group_management, Shapes::ShapeRef.new(shape: AppSecurityGroupManagement, location_name: "AppSecurityGroupManagement"))
+    DescribeDomainResponse.add_member(:tag_propagation, Shapes::ShapeRef.new(shape: TagPropagation, location_name: "TagPropagation"))
     DescribeDomainResponse.add_member(:default_space_settings, Shapes::ShapeRef.new(shape: DefaultSpaceSettings, location_name: "DefaultSpaceSettings"))
     DescribeDomainResponse.struct_class = Types::DescribeDomainResponse
 
@@ -6528,6 +6533,7 @@ module Aws::SageMaker
     JupyterLabAppSettings.add_member(:code_repositories, Shapes::ShapeRef.new(shape: CodeRepositories, location_name: "CodeRepositories"))
     JupyterLabAppSettings.add_member(:app_lifecycle_management, Shapes::ShapeRef.new(shape: AppLifecycleManagement, location_name: "AppLifecycleManagement"))
     JupyterLabAppSettings.add_member(:emr_settings, Shapes::ShapeRef.new(shape: EmrSettings, location_name: "EmrSettings"))
+    JupyterLabAppSettings.add_member(:built_in_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "BuiltInLifecycleConfigArn"))
     JupyterLabAppSettings.struct_class = Types::JupyterLabAppSettings
 
     JupyterServerAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
@@ -10051,6 +10057,7 @@ module Aws::SageMaker
     UpdateDomainRequest.add_member(:default_space_settings, Shapes::ShapeRef.new(shape: DefaultSpaceSettings, location_name: "DefaultSpaceSettings"))
     UpdateDomainRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: Subnets, location_name: "SubnetIds"))
     UpdateDomainRequest.add_member(:app_network_access_type, Shapes::ShapeRef.new(shape: AppNetworkAccessType, location_name: "AppNetworkAccessType"))
+    UpdateDomainRequest.add_member(:tag_propagation, Shapes::ShapeRef.new(shape: TagPropagation, location_name: "TagPropagation"))
     UpdateDomainRequest.struct_class = Types::UpdateDomainRequest
 
     UpdateDomainResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))

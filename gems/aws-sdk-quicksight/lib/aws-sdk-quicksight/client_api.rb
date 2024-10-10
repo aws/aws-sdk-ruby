@@ -99,6 +99,10 @@ module Aws::QuickSight
     AssetBundleExportJobDataSourcePropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobDataSourcePropertyToOverrideList')
     AssetBundleExportJobError = Shapes::StructureShape.new(name: 'AssetBundleExportJobError')
     AssetBundleExportJobErrorList = Shapes::ListShape.new(name: 'AssetBundleExportJobErrorList')
+    AssetBundleExportJobFolderOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobFolderOverrideProperties')
+    AssetBundleExportJobFolderOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobFolderOverridePropertiesList')
+    AssetBundleExportJobFolderPropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobFolderPropertyToOverride')
+    AssetBundleExportJobFolderPropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobFolderPropertyToOverrideList')
     AssetBundleExportJobRefreshScheduleOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobRefreshScheduleOverrideProperties')
     AssetBundleExportJobRefreshScheduleOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobRefreshScheduleOverridePropertiesList')
     AssetBundleExportJobRefreshSchedulePropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobRefreshSchedulePropertyToOverride')
@@ -148,6 +152,12 @@ module Aws::QuickSight
     AssetBundleImportJobDataSourceOverrideTagsList = Shapes::ListShape.new(name: 'AssetBundleImportJobDataSourceOverrideTagsList')
     AssetBundleImportJobError = Shapes::StructureShape.new(name: 'AssetBundleImportJobError')
     AssetBundleImportJobErrorList = Shapes::ListShape.new(name: 'AssetBundleImportJobErrorList')
+    AssetBundleImportJobFolderOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobFolderOverrideParameters')
+    AssetBundleImportJobFolderOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobFolderOverrideParametersList')
+    AssetBundleImportJobFolderOverridePermissions = Shapes::StructureShape.new(name: 'AssetBundleImportJobFolderOverridePermissions')
+    AssetBundleImportJobFolderOverridePermissionsList = Shapes::ListShape.new(name: 'AssetBundleImportJobFolderOverridePermissionsList')
+    AssetBundleImportJobFolderOverrideTags = Shapes::StructureShape.new(name: 'AssetBundleImportJobFolderOverrideTags')
+    AssetBundleImportJobFolderOverrideTagsList = Shapes::ListShape.new(name: 'AssetBundleImportJobFolderOverrideTagsList')
     AssetBundleImportJobOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobOverrideParameters')
     AssetBundleImportJobOverridePermissions = Shapes::StructureShape.new(name: 'AssetBundleImportJobOverridePermissions')
     AssetBundleImportJobOverrideTags = Shapes::StructureShape.new(name: 'AssetBundleImportJobOverrideTags')
@@ -680,6 +690,8 @@ module Aws::QuickSight
     DescribeKeyRegistrationResponse = Shapes::StructureShape.new(name: 'DescribeKeyRegistrationResponse')
     DescribeNamespaceRequest = Shapes::StructureShape.new(name: 'DescribeNamespaceRequest')
     DescribeNamespaceResponse = Shapes::StructureShape.new(name: 'DescribeNamespaceResponse')
+    DescribeQPersonalizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeQPersonalizationConfigurationRequest')
+    DescribeQPersonalizationConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeQPersonalizationConfigurationResponse')
     DescribeRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleRequest')
     DescribeRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleResponse')
     DescribeRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'DescribeRoleCustomPermissionRequest')
@@ -940,6 +952,7 @@ module Aws::QuickSight
     IdentityStore = Shapes::StringShape.new(name: 'IdentityStore')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     IdentityTypeNotSupportedException = Shapes::StructureShape.new(name: 'IdentityTypeNotSupportedException')
+    IncludeFolderMembers = Shapes::StringShape.new(name: 'IncludeFolderMembers')
     IncrementalRefresh = Shapes::StructureShape.new(name: 'IncrementalRefresh')
     Ingestion = Shapes::StructureShape.new(name: 'Ingestion')
     IngestionErrorType = Shapes::StringShape.new(name: 'IngestionErrorType')
@@ -1215,6 +1228,7 @@ module Aws::QuickSight
     PeriodToDateComputation = Shapes::StructureShape.new(name: 'PeriodToDateComputation')
     PeriodsBackward = Shapes::IntegerShape.new(name: 'PeriodsBackward')
     PeriodsForward = Shapes::IntegerShape.new(name: 'PeriodsForward')
+    PersonalizationMode = Shapes::StringShape.new(name: 'PersonalizationMode')
     PhysicalTable = Shapes::StructureShape.new(name: 'PhysicalTable')
     PhysicalTableId = Shapes::StringShape.new(name: 'PhysicalTableId')
     PhysicalTableMap = Shapes::MapShape.new(name: 'PhysicalTableMap')
@@ -1694,6 +1708,7 @@ module Aws::QuickSight
     TopicCategoryFilterConstant = Shapes::StructureShape.new(name: 'TopicCategoryFilterConstant')
     TopicColumn = Shapes::StructureShape.new(name: 'TopicColumn')
     TopicColumns = Shapes::ListShape.new(name: 'TopicColumns')
+    TopicConfigOptions = Shapes::StructureShape.new(name: 'TopicConfigOptions')
     TopicConstantValue = Shapes::StructureShape.new(name: 'TopicConstantValue')
     TopicDateRangeFilter = Shapes::StructureShape.new(name: 'TopicDateRangeFilter')
     TopicDetails = Shapes::StructureShape.new(name: 'TopicDetails')
@@ -1813,6 +1828,8 @@ module Aws::QuickSight
     UpdateLinkPermissionList = Shapes::ListShape.new(name: 'UpdateLinkPermissionList')
     UpdatePublicSharingSettingsRequest = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsRequest')
     UpdatePublicSharingSettingsResponse = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsResponse')
+    UpdateQPersonalizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateQPersonalizationConfigurationRequest')
+    UpdateQPersonalizationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateQPersonalizationConfigurationResponse')
     UpdateRefreshScheduleRequest = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleRequest')
     UpdateRefreshScheduleResponse = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleResponse')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
@@ -2119,6 +2136,7 @@ module Aws::QuickSight
     AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:themes, Shapes::ShapeRef.new(shape: AssetBundleExportJobThemeOverridePropertiesList, location_name: "Themes"))
     AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:analyses, Shapes::ShapeRef.new(shape: AssetBundleExportJobAnalysisOverridePropertiesList, location_name: "Analyses"))
     AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:dashboards, Shapes::ShapeRef.new(shape: AssetBundleExportJobDashboardOverridePropertiesList, location_name: "Dashboards"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:folders, Shapes::ShapeRef.new(shape: AssetBundleExportJobFolderOverridePropertiesList, location_name: "Folders"))
     AssetBundleCloudFormationOverridePropertyConfiguration.struct_class = Types::AssetBundleCloudFormationOverridePropertyConfiguration
 
     AssetBundleExportJobAnalysisOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -2159,6 +2177,14 @@ module Aws::QuickSight
     AssetBundleExportJobError.struct_class = Types::AssetBundleExportJobError
 
     AssetBundleExportJobErrorList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobError)
+
+    AssetBundleExportJobFolderOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    AssetBundleExportJobFolderOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobFolderPropertyToOverrideList, required: true, location_name: "Properties"))
+    AssetBundleExportJobFolderOverrideProperties.struct_class = Types::AssetBundleExportJobFolderOverrideProperties
+
+    AssetBundleExportJobFolderOverridePropertiesList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobFolderOverrideProperties)
+
+    AssetBundleExportJobFolderPropertyToOverrideList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobFolderPropertyToOverride)
 
     AssetBundleExportJobRefreshScheduleOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     AssetBundleExportJobRefreshScheduleOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobRefreshSchedulePropertyToOverrideList, required: true, location_name: "Properties"))
@@ -2300,6 +2326,25 @@ module Aws::QuickSight
 
     AssetBundleImportJobErrorList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobError)
 
+    AssetBundleImportJobFolderOverrideParameters.add_member(:folder_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FolderId"))
+    AssetBundleImportJobFolderOverrideParameters.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AssetBundleImportJobFolderOverrideParameters.add_member(:parent_folder_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ParentFolderArn"))
+    AssetBundleImportJobFolderOverrideParameters.struct_class = Types::AssetBundleImportJobFolderOverrideParameters
+
+    AssetBundleImportJobFolderOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobFolderOverrideParameters)
+
+    AssetBundleImportJobFolderOverridePermissions.add_member(:folder_ids, Shapes::ShapeRef.new(shape: AssetBundleRestrictiveResourceIdList, required: true, location_name: "FolderIds"))
+    AssetBundleImportJobFolderOverridePermissions.add_member(:permissions, Shapes::ShapeRef.new(shape: AssetBundleResourcePermissions, location_name: "Permissions"))
+    AssetBundleImportJobFolderOverridePermissions.struct_class = Types::AssetBundleImportJobFolderOverridePermissions
+
+    AssetBundleImportJobFolderOverridePermissionsList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobFolderOverridePermissions)
+
+    AssetBundleImportJobFolderOverrideTags.add_member(:folder_ids, Shapes::ShapeRef.new(shape: AssetBundleRestrictiveResourceIdList, required: true, location_name: "FolderIds"))
+    AssetBundleImportJobFolderOverrideTags.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    AssetBundleImportJobFolderOverrideTags.struct_class = Types::AssetBundleImportJobFolderOverrideTags
+
+    AssetBundleImportJobFolderOverrideTagsList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobFolderOverrideTags)
+
     AssetBundleImportJobOverrideParameters.add_member(:resource_id_override_configuration, Shapes::ShapeRef.new(shape: AssetBundleImportJobResourceIdOverrideConfiguration, location_name: "ResourceIdOverrideConfiguration"))
     AssetBundleImportJobOverrideParameters.add_member(:vpc_connections, Shapes::ShapeRef.new(shape: AssetBundleImportJobVPCConnectionOverrideParametersList, location_name: "VPCConnections"))
     AssetBundleImportJobOverrideParameters.add_member(:refresh_schedules, Shapes::ShapeRef.new(shape: AssetBundleImportJobRefreshScheduleOverrideParametersList, location_name: "RefreshSchedules"))
@@ -2308,6 +2353,7 @@ module Aws::QuickSight
     AssetBundleImportJobOverrideParameters.add_member(:themes, Shapes::ShapeRef.new(shape: AssetBundleImportJobThemeOverrideParametersList, location_name: "Themes"))
     AssetBundleImportJobOverrideParameters.add_member(:analyses, Shapes::ShapeRef.new(shape: AssetBundleImportJobAnalysisOverrideParametersList, location_name: "Analyses"))
     AssetBundleImportJobOverrideParameters.add_member(:dashboards, Shapes::ShapeRef.new(shape: AssetBundleImportJobDashboardOverrideParametersList, location_name: "Dashboards"))
+    AssetBundleImportJobOverrideParameters.add_member(:folders, Shapes::ShapeRef.new(shape: AssetBundleImportJobFolderOverrideParametersList, location_name: "Folders"))
     AssetBundleImportJobOverrideParameters.struct_class = Types::AssetBundleImportJobOverrideParameters
 
     AssetBundleImportJobOverridePermissions.add_member(:data_sources, Shapes::ShapeRef.new(shape: AssetBundleImportJobDataSourceOverridePermissionsList, location_name: "DataSources"))
@@ -2315,6 +2361,7 @@ module Aws::QuickSight
     AssetBundleImportJobOverridePermissions.add_member(:themes, Shapes::ShapeRef.new(shape: AssetBundleImportJobThemeOverridePermissionsList, location_name: "Themes"))
     AssetBundleImportJobOverridePermissions.add_member(:analyses, Shapes::ShapeRef.new(shape: AssetBundleImportJobAnalysisOverridePermissionsList, location_name: "Analyses"))
     AssetBundleImportJobOverridePermissions.add_member(:dashboards, Shapes::ShapeRef.new(shape: AssetBundleImportJobDashboardOverridePermissionsList, location_name: "Dashboards"))
+    AssetBundleImportJobOverridePermissions.add_member(:folders, Shapes::ShapeRef.new(shape: AssetBundleImportJobFolderOverridePermissionsList, location_name: "Folders"))
     AssetBundleImportJobOverridePermissions.struct_class = Types::AssetBundleImportJobOverridePermissions
 
     AssetBundleImportJobOverrideTags.add_member(:vpc_connections, Shapes::ShapeRef.new(shape: AssetBundleImportJobVPCConnectionOverrideTagsList, location_name: "VPCConnections"))
@@ -2323,6 +2370,7 @@ module Aws::QuickSight
     AssetBundleImportJobOverrideTags.add_member(:themes, Shapes::ShapeRef.new(shape: AssetBundleImportJobThemeOverrideTagsList, location_name: "Themes"))
     AssetBundleImportJobOverrideTags.add_member(:analyses, Shapes::ShapeRef.new(shape: AssetBundleImportJobAnalysisOverrideTagsList, location_name: "Analyses"))
     AssetBundleImportJobOverrideTags.add_member(:dashboards, Shapes::ShapeRef.new(shape: AssetBundleImportJobDashboardOverrideTagsList, location_name: "Dashboards"))
+    AssetBundleImportJobOverrideTags.add_member(:folders, Shapes::ShapeRef.new(shape: AssetBundleImportJobFolderOverrideTagsList, location_name: "Folders"))
     AssetBundleImportJobOverrideTags.struct_class = Types::AssetBundleImportJobOverrideTags
 
     AssetBundleImportJobOverrideValidationStrategy.add_member(:strict_mode_for_all_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "StrictModeForAllResources"))
@@ -4302,6 +4350,8 @@ module Aws::QuickSight
     DescribeAssetBundleExportJobResponse.add_member(:include_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeTags"))
     DescribeAssetBundleExportJobResponse.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: AssetBundleExportJobValidationStrategy, location_name: "ValidationStrategy"))
     DescribeAssetBundleExportJobResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: AssetBundleExportJobWarningList, location_name: "Warnings"))
+    DescribeAssetBundleExportJobResponse.add_member(:include_folder_memberships, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeFolderMemberships"))
+    DescribeAssetBundleExportJobResponse.add_member(:include_folder_members, Shapes::ShapeRef.new(shape: IncludeFolderMembers, location_name: "IncludeFolderMembers"))
     DescribeAssetBundleExportJobResponse.struct_class = Types::DescribeAssetBundleExportJobResponse
 
     DescribeAssetBundleImportJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -4558,6 +4608,14 @@ module Aws::QuickSight
     DescribeNamespaceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeNamespaceResponse.struct_class = Types::DescribeNamespaceResponse
+
+    DescribeQPersonalizationConfigurationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeQPersonalizationConfigurationRequest.struct_class = Types::DescribeQPersonalizationConfigurationRequest
+
+    DescribeQPersonalizationConfigurationResponse.add_member(:personalization_mode, Shapes::ShapeRef.new(shape: PersonalizationMode, location_name: "PersonalizationMode"))
+    DescribeQPersonalizationConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeQPersonalizationConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeQPersonalizationConfigurationResponse.struct_class = Types::DescribeQPersonalizationConfigurationResponse
 
     DescribeRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
@@ -7588,6 +7646,8 @@ module Aws::QuickSight
     StartAssetBundleExportJobRequest.add_member(:include_permissions, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludePermissions"))
     StartAssetBundleExportJobRequest.add_member(:include_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeTags"))
     StartAssetBundleExportJobRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: AssetBundleExportJobValidationStrategy, location_name: "ValidationStrategy"))
+    StartAssetBundleExportJobRequest.add_member(:include_folder_memberships, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeFolderMemberships"))
+    StartAssetBundleExportJobRequest.add_member(:include_folder_members, Shapes::ShapeRef.new(shape: IncludeFolderMembers, location_name: "IncludeFolderMembers"))
     StartAssetBundleExportJobRequest.struct_class = Types::StartAssetBundleExportJobRequest
 
     StartAssetBundleExportJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -8152,6 +8212,9 @@ module Aws::QuickSight
 
     TopicColumns.member = Shapes::ShapeRef.new(shape: TopicColumn)
 
+    TopicConfigOptions.add_member(:q_business_insights_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "QBusinessInsightsEnabled"))
+    TopicConfigOptions.struct_class = Types::TopicConfigOptions
+
     TopicConstantValue.add_member(:constant_type, Shapes::ShapeRef.new(shape: ConstantType, location_name: "ConstantType"))
     TopicConstantValue.add_member(:value, Shapes::ShapeRef.new(shape: ConstantValueString, location_name: "Value"))
     TopicConstantValue.add_member(:minimum, Shapes::ShapeRef.new(shape: ConstantValueString, location_name: "Minimum"))
@@ -8167,6 +8230,7 @@ module Aws::QuickSight
     TopicDetails.add_member(:description, Shapes::ShapeRef.new(shape: LimitedString, location_name: "Description"))
     TopicDetails.add_member(:user_experience_version, Shapes::ShapeRef.new(shape: TopicUserExperienceVersion, location_name: "UserExperienceVersion"))
     TopicDetails.add_member(:data_sets, Shapes::ShapeRef.new(shape: Datasets, location_name: "DataSets"))
+    TopicDetails.add_member(:config_options, Shapes::ShapeRef.new(shape: TopicConfigOptions, location_name: "ConfigOptions"))
     TopicDetails.struct_class = Types::TopicDetails
 
     TopicFilter.add_member(:filter_description, Shapes::ShapeRef.new(shape: LimitedString, location_name: "FilterDescription"))
@@ -8740,6 +8804,15 @@ module Aws::QuickSight
     UpdatePublicSharingSettingsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdatePublicSharingSettingsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdatePublicSharingSettingsResponse.struct_class = Types::UpdatePublicSharingSettingsResponse
+
+    UpdateQPersonalizationConfigurationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateQPersonalizationConfigurationRequest.add_member(:personalization_mode, Shapes::ShapeRef.new(shape: PersonalizationMode, required: true, location_name: "PersonalizationMode"))
+    UpdateQPersonalizationConfigurationRequest.struct_class = Types::UpdateQPersonalizationConfigurationRequest
+
+    UpdateQPersonalizationConfigurationResponse.add_member(:personalization_mode, Shapes::ShapeRef.new(shape: PersonalizationMode, location_name: "PersonalizationMode"))
+    UpdateQPersonalizationConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateQPersonalizationConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateQPersonalizationConfigurationResponse.struct_class = Types::UpdateQPersonalizationConfigurationResponse
 
     UpdateRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
     UpdateRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -10350,6 +10423,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
+      api.add_operation(:describe_q_personalization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQPersonalizationConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/q-personalization-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQPersonalizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQPersonalizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:describe_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeRefreshSchedule"
         o.http_method = "GET"
@@ -11781,6 +11868,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_q_personalization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQPersonalizationConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/q-personalization-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQPersonalizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateQPersonalizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:update_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|

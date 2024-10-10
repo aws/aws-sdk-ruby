@@ -35,30 +35,6 @@ module Aws::EC2
     end
     alias :group_id :id
 
-    # A description of the security group.
-    # @return [String]
-    def description
-      data[:description]
-    end
-
-    # The name of the security group.
-    # @return [String]
-    def group_name
-      data[:group_name]
-    end
-
-    # The inbound rules associated with the security group.
-    # @return [Array<Types::IpPermission>]
-    def ip_permissions
-      data[:ip_permissions]
-    end
-
-    # The Amazon Web Services account ID of the owner of the security group.
-    # @return [String]
-    def owner_id
-      data[:owner_id]
-    end
-
     # The outbound rules associated with the security group.
     # @return [Array<Types::IpPermission>]
     def ip_permissions_egress
@@ -75,6 +51,30 @@ module Aws::EC2
     # @return [String]
     def vpc_id
       data[:vpc_id]
+    end
+
+    # The Amazon Web Services account ID of the owner of the security group.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
+    # The name of the security group.
+    # @return [String]
+    def group_name
+      data[:group_name]
+    end
+
+    # A description of the security group.
+    # @return [String]
+    def description
+      data[:description]
+    end
+
+    # The inbound rules associated with the security group.
+    # @return [Array<Types::IpPermission>]
+    def ip_permissions
+      data[:ip_permissions]
     end
 
     # @!endgroup
@@ -218,43 +218,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   security_group.authorize_egress({
-    #     dry_run: false,
-    #     ip_permissions: [
-    #       {
-    #         from_port: 1,
-    #         ip_protocol: "String",
-    #         ip_ranges: [
-    #           {
-    #             cidr_ip: "String",
-    #             description: "String",
-    #           },
-    #         ],
-    #         ipv_6_ranges: [
-    #           {
-    #             cidr_ipv_6: "String",
-    #             description: "String",
-    #           },
-    #         ],
-    #         prefix_list_ids: [
-    #           {
-    #             description: "String",
-    #             prefix_list_id: "String",
-    #           },
-    #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #           },
-    #         ],
-    #       },
-    #     ],
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -266,35 +229,72 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
-    #     cidr_ip: "String",
-    #     from_port: 1,
-    #     ip_protocol: "String",
-    #     to_port: 1,
+    #     dry_run: false,
     #     source_security_group_name: "String",
     #     source_security_group_owner_id: "String",
+    #     ip_protocol: "String",
+    #     from_port: 1,
+    #     to_port: 1,
+    #     cidr_ip: "String",
+    #     ip_permissions: [
+    #       {
+    #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
+    #         ip_ranges: [
+    #           {
+    #             description: "String",
+    #             cidr_ip: "String",
+    #           },
+    #         ],
+    #         ipv_6_ranges: [
+    #           {
+    #             description: "String",
+    #             cidr_ipv_6: "String",
+    #           },
+    #         ],
+    #         prefix_list_ids: [
+    #           {
+    #             description: "String",
+    #             prefix_list_id: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags applied to the security group rule.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   The permissions for the security group rules.
-    # @option options [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags applied to the security group rule.
-    # @option options [String] :cidr_ip
-    #   Not supported. Use IP permissions instead.
-    # @option options [Integer] :from_port
-    #   Not supported. Use IP permissions instead.
-    # @option options [String] :ip_protocol
-    #   Not supported. Use IP permissions instead.
-    # @option options [Integer] :to_port
-    #   Not supported. Use IP permissions instead.
     # @option options [String] :source_security_group_name
     #   Not supported. Use IP permissions instead.
     # @option options [String] :source_security_group_owner_id
     #   Not supported. Use IP permissions instead.
+    # @option options [String] :ip_protocol
+    #   Not supported. Use IP permissions instead.
+    # @option options [Integer] :from_port
+    #   Not supported. Use IP permissions instead.
+    # @option options [Integer] :to_port
+    #   Not supported. Use IP permissions instead.
+    # @option options [String] :cidr_ip
+    #   Not supported. Use IP permissions instead.
+    # @option options [Array<Types::IpPermission>] :ip_permissions
+    #   The permissions for the security group rules.
     # @return [Types::AuthorizeSecurityGroupEgressResult]
     def authorize_egress(options = {})
       options = options.merge(group_id: @id)
@@ -312,18 +312,30 @@ module Aws::EC2
     #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
-    #         from_port: 1,
     #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
     #         ip_ranges: [
     #           {
-    #             cidr_ip: "String",
     #             description: "String",
+    #             cidr_ip: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
-    #             cidr_ipv_6: "String",
     #             description: "String",
+    #             cidr_ipv_6: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
@@ -332,25 +344,12 @@ module Aws::EC2
     #             prefix_list_id: "String",
     #           },
     #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #           },
-    #         ],
     #       },
     #     ],
     #     ip_protocol: "String",
     #     source_security_group_name: "String",
     #     source_security_group_owner_id: "String",
     #     to_port: 1,
-    #     dry_run: false,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -362,6 +361,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :cidr_ip
@@ -420,13 +420,13 @@ module Aws::EC2
     #
     #   To specify multiple rules and descriptions for the rules, use IP
     #   permissions instead.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags applied to the security group rule.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags applied to the security group rule.
     # @return [Types::AuthorizeSecurityGroupIngressResult]
     def authorize_ingress(options = {})
       options = options.merge(group_id: @id)
@@ -550,21 +550,40 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   security_group.revoke_egress({
+    #     security_group_rule_ids: ["String"],
     #     dry_run: false,
+    #     source_security_group_name: "String",
+    #     source_security_group_owner_id: "String",
+    #     ip_protocol: "String",
+    #     from_port: 1,
+    #     to_port: 1,
+    #     cidr_ip: "String",
     #     ip_permissions: [
     #       {
-    #         from_port: 1,
     #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
     #         ip_ranges: [
     #           {
-    #             cidr_ip: "String",
     #             description: "String",
+    #             cidr_ip: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
-    #             cidr_ipv_6: "String",
     #             description: "String",
+    #             cidr_ipv_6: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
@@ -573,54 +592,35 @@ module Aws::EC2
     #             prefix_list_id: "String",
     #           },
     #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #           },
-    #         ],
     #       },
     #     ],
-    #     security_group_rule_ids: ["String"],
-    #     cidr_ip: "String",
-    #     from_port: 1,
-    #     ip_protocol: "String",
-    #     to_port: 1,
-    #     source_security_group_name: "String",
-    #     source_security_group_owner_id: "String",
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :security_group_rule_ids
+    #   The IDs of the security group rules.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   The sets of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range in the same set of permissions.
-    # @option options [Array<String>] :security_group_rule_ids
-    #   The IDs of the security group rules.
-    # @option options [String] :cidr_ip
-    #   Not supported. Use a set of IP permissions to specify the CIDR.
-    # @option options [Integer] :from_port
-    #   Not supported. Use a set of IP permissions to specify the port.
-    # @option options [String] :ip_protocol
-    #   Not supported. Use a set of IP permissions to specify the protocol
-    #   name or number.
-    # @option options [Integer] :to_port
-    #   Not supported. Use a set of IP permissions to specify the port.
     # @option options [String] :source_security_group_name
     #   Not supported. Use a set of IP permissions to specify a destination
     #   security group.
     # @option options [String] :source_security_group_owner_id
     #   Not supported. Use a set of IP permissions to specify a destination
     #   security group.
+    # @option options [String] :ip_protocol
+    #   Not supported. Use a set of IP permissions to specify the protocol
+    #   name or number.
+    # @option options [Integer] :from_port
+    #   Not supported. Use a set of IP permissions to specify the port.
+    # @option options [Integer] :to_port
+    #   Not supported. Use a set of IP permissions to specify the port.
+    # @option options [String] :cidr_ip
+    #   Not supported. Use a set of IP permissions to specify the CIDR.
+    # @option options [Array<Types::IpPermission>] :ip_permissions
+    #   The sets of IP permissions. You can't specify a destination security
+    #   group and a CIDR IP address range in the same set of permissions.
     # @return [Types::RevokeSecurityGroupEgressResult]
     def revoke_egress(options = {})
       options = options.merge(group_id: @id)
@@ -638,18 +638,30 @@ module Aws::EC2
     #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
-    #         from_port: 1,
     #         ip_protocol: "String",
+    #         from_port: 1,
+    #         to_port: 1,
+    #         user_id_group_pairs: [
+    #           {
+    #             description: "String",
+    #             user_id: "String",
+    #             group_name: "String",
+    #             group_id: "String",
+    #             vpc_id: "String",
+    #             vpc_peering_connection_id: "String",
+    #             peering_status: "String",
+    #           },
+    #         ],
     #         ip_ranges: [
     #           {
-    #             cidr_ip: "String",
     #             description: "String",
+    #             cidr_ip: "String",
     #           },
     #         ],
     #         ipv_6_ranges: [
     #           {
-    #             cidr_ipv_6: "String",
     #             description: "String",
+    #             cidr_ipv_6: "String",
     #           },
     #         ],
     #         prefix_list_ids: [
@@ -658,26 +670,14 @@ module Aws::EC2
     #             prefix_list_id: "String",
     #           },
     #         ],
-    #         to_port: 1,
-    #         user_id_group_pairs: [
-    #           {
-    #             description: "String",
-    #             group_id: "String",
-    #             group_name: "String",
-    #             peering_status: "String",
-    #             user_id: "String",
-    #             vpc_id: "String",
-    #             vpc_peering_connection_id: "String",
-    #           },
-    #         ],
     #       },
     #     ],
     #     ip_protocol: "String",
     #     source_security_group_name: "String",
     #     source_security_group_owner_id: "String",
     #     to_port: 1,
-    #     dry_run: false,
     #     security_group_rule_ids: ["String"],
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :cidr_ip
@@ -713,13 +713,13 @@ module Aws::EC2
     # @option options [Integer] :to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
     #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
+    # @option options [Array<String>] :security_group_rule_ids
+    #   The IDs of the security group rules.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :security_group_rule_ids
-    #   The IDs of the security group rules.
     # @return [Types::RevokeSecurityGroupIngressResult]
     def revoke_ingress(options = {})
       options = options.merge(group_id: @id)

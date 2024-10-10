@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-09-26)
+------------------
+
+* Feature - Add support for policy operations on the CHATBOT_POLICY policy type.
+
 1.103.0 (2024-09-24)
 ------------------
 

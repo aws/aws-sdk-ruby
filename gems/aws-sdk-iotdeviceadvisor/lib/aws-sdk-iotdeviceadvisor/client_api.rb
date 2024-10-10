@@ -16,6 +16,7 @@ module Aws::IoTDeviceAdvisor
 
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AuthenticationMethod = Shapes::StringShape.new(name: 'AuthenticationMethod')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateSuiteDefinitionRequest = Shapes::StructureShape.new(name: 'CreateSuiteDefinitionRequest')
     CreateSuiteDefinitionResponse = Shapes::StructureShape.new(name: 'CreateSuiteDefinitionResponse')
@@ -101,6 +102,7 @@ module Aws::IoTDeviceAdvisor
 
     CreateSuiteDefinitionRequest.add_member(:suite_definition_configuration, Shapes::ShapeRef.new(shape: SuiteDefinitionConfiguration, required: true, location_name: "suiteDefinitionConfiguration"))
     CreateSuiteDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSuiteDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateSuiteDefinitionRequest.struct_class = Types::CreateSuiteDefinitionRequest
 
     CreateSuiteDefinitionResponse.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, location_name: "suiteDefinitionId"))

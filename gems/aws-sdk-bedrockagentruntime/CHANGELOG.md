@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-10-02)
+------------------
+
+* Feature - Added raw model response and usage metrics to PreProcessing and PostProcessing Trace
+
 1.26.0 (2024-09-24)
 ------------------
 

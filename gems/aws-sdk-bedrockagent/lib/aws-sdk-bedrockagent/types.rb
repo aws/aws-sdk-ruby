@@ -3671,8 +3671,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The unique identifier of the knowledge base that the data source was
-    #   added to.
+    #   The unique identifier of the knowledge base for the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetDataSourceRequest AWS API Documentation
@@ -3953,16 +3952,18 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] data_source_id
-    #   The unique identifier of the data source in the ingestion job.
+    #   The unique identifier of the data source for the data ingestion job
+    #   you want to get information on.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_job_id
-    #   The unique identifier of the ingestion job.
+    #   The unique identifier of the data ingestion job you want to get
+    #   information on.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The unique identifier of the knowledge base for which the ingestion
-    #   job applies.
+    #   The unique identifier of the knowledge base for the data ingestion
+    #   job you want to get information on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetIngestionJobRequest AWS API Documentation
@@ -3976,7 +3977,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] ingestion_job
-    #   Contains details about the ingestion job.
+    #   Contains details about the data ingestion job.
     #   @return [Types::IngestionJob]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetIngestionJobResponse AWS API Documentation
@@ -3988,8 +3989,8 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] knowledge_base_id
-    #   The unique identifier of the knowledge base for which to get
-    #   information.
+    #   The unique identifier of the knowledge base you want to get
+    #   information on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetKnowledgeBaseRequest AWS API Documentation
@@ -4212,8 +4213,9 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains details about an ingestion job, which converts a data source
-    # to embeddings for a vector store in knowledge base.
+    # Contains details about a data ingestion job. Data sources are ingested
+    # into a knowledge base so that Large Language Models (LLMs) can use
+    # your data.
     #
     # This data type is used in the following API operations:
     #
@@ -4230,40 +4232,45 @@ module Aws::BedrockAgent
     # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax
     #
     # @!attribute [rw] data_source_id
-    #   The unique identifier of the ingested data source.
+    #   The unique identifier of the data source for the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the ingestion job.
+    #   The description of the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] failure_reasons
-    #   A list of reasons that the ingestion job failed.
+    #   A list of reasons that the data ingestion job failed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ingestion_job_id
-    #   The unique identifier of the ingestion job.
+    #   The unique identifier of the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The unique identifier of the knowledge base to which the data source
-    #   is being added.
+    #   The unique identifier of the knowledge for the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] started_at
-    #   The time at which the ingestion job started.
+    #   The time the data ingestion job started.
+    #
+    #   If you stop a data ingestion job, the `startedAt` time is the time
+    #   the job was started before the job was stopped.
     #   @return [Time]
     #
     # @!attribute [rw] statistics
-    #   Contains statistics about the ingestion job.
+    #   Contains statistics about the data ingestion job.
     #   @return [Types::IngestionJobStatistics]
     #
     # @!attribute [rw] status
-    #   The status of the ingestion job.
+    #   The status of the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The time at which the ingestion job was last updated.
+    #   The time the data ingestion job was last updated.
+    #
+    #   If you stop a data ingestion job, the `updatedAt` time is the time
+    #   the job was stopped.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJob AWS API Documentation
@@ -4282,18 +4289,18 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Defines a filter by which to filter the results.
+    # The definition of a filter to filter the data.
     #
     # @!attribute [rw] attribute
-    #   The attribute by which to filter the results.
+    #   The name of field or attribute to apply the filter.
     #   @return [String]
     #
     # @!attribute [rw] operator
-    #   The operation to carry out between the attribute and the values.
+    #   The operation to apply to the field or attribute.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   A list of values for the attribute.
+    #   A list of values that belong to the field or attribute.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJobFilter AWS API Documentation
@@ -4306,14 +4313,14 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Parameters by which to sort the results.
+    # The parameters of sorting the data.
     #
     # @!attribute [rw] attribute
-    #   The attribute by which to sort the results.
+    #   The name of field or attribute to apply sorting of data.
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   The order by which to sort the results.
+    #   The order for sorting the data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJobSortBy AWS API Documentation
@@ -4325,10 +4332,10 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains the statistics for the ingestion job.
+    # Contains the statistics for the data ingestion job.
     #
     # @!attribute [rw] number_of_documents_deleted
-    #   The number of source documents that was deleted.
+    #   The number of source documents that were deleted.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_documents_failed
@@ -4373,39 +4380,39 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains details about an ingestion job.
+    # Contains details about a data ingestion job.
     #
     # @!attribute [rw] data_source_id
-    #   The unique identifier of the data source in the ingestion job.
+    #   The unique identifier of the data source for the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the ingestion job.
+    #   The description of the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_job_id
-    #   The unique identifier of the ingestion job.
+    #   The unique identifier of the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The unique identifier of the knowledge base to which the data source
-    #   is added.
+    #   The unique identifier of the knowledge base for the data ingestion
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] started_at
-    #   The time at which the ingestion job was started.
+    #   The time the data ingestion job started.
     #   @return [Time]
     #
     # @!attribute [rw] statistics
-    #   Contains statistics for the ingestion job.
+    #   Contains statistics for the data ingestion job.
     #   @return [Types::IngestionJobStatistics]
     #
     # @!attribute [rw] status
-    #   The status of the ingestion job.
+    #   The status of the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The time at which the ingestion job was last updated.
+    #   The time the data ingestion job was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJobSummary AWS API Documentation
@@ -4479,7 +4486,7 @@ module Aws::BedrockAgent
     # Contains information about a knowledge base.
     #
     # @!attribute [rw] created_at
-    #   The time at which the knowledge base was created.
+    #   The time the knowledge base was created.
     #   @return [Time]
     #
     # @!attribute [rw] description
@@ -4534,7 +4541,7 @@ module Aws::BedrockAgent
     #   @return [Types::StorageConfiguration]
     #
     # @!attribute [rw] updated_at
-    #   The time at which the knowledge base was last updated.
+    #   The time the knowledge base was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBase AWS API Documentation
@@ -4555,8 +4562,8 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains details about the embeddings configuration of the knowledge
-    # base.
+    # Contains details about the vector embeddings configuration of the
+    # knowledge base.
     #
     # @!attribute [rw] type
     #   The type of data that the data source is converted into for the
@@ -4564,8 +4571,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] vector_knowledge_base_configuration
-    #   Contains details about the embeddings model that'sused to convert
-    #   the data source.
+    #   Contains details about the model that's used to convert the data
+    #   source into vector embeddings.
     #   @return [Types::VectorKnowledgeBaseConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBaseConfiguration AWS API Documentation
@@ -4629,7 +4636,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The time at which the knowledge base was last updated.
+    #   The time the knowledge base was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBaseSummary AWS API Documentation
@@ -5137,16 +5144,16 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] data_source_id
-    #   The unique identifier of the data source for which to return
+    #   The unique identifier of the data source for the list of data
     #   ingestion jobs.
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Contains a definition of a filter for which to filter the results.
+    #   Contains information about the filters for filtering the data.
     #   @return [Array<Types::IngestionJobFilter>]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The unique identifier of the knowledge base for which to return
+    #   The unique identifier of the knowledge base for the list of data
     #   ingestion jobs.
     #   @return [String]
     #
@@ -5165,7 +5172,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] sort_by
-    #   Contains details about how to sort the results.
+    #   Contains details about how to sort the data.
     #   @return [Types::IngestionJobSortBy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListIngestionJobsRequest AWS API Documentation
@@ -5182,8 +5189,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] ingestion_job_summaries
-    #   A list of objects, each of which contains information about an
-    #   ingestion job.
+    #   A list of data ingestion jobs with information about each job.
     #   @return [Array<Types::IngestionJobSummary>]
     #
     # @!attribute [rw] next_token
@@ -5226,8 +5232,8 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] knowledge_base_summaries
-    #   A list of objects, each of which contains information about a
-    #   knowledge base.
+    #   A list of knowledge bases with information about each knowledge
+    #   base.
     #   @return [Array<Types::KnowledgeBaseSummary>]
     #
     # @!attribute [rw] next_token
@@ -6783,16 +6789,17 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
-    #   The unique identifier of the data source to ingest.
+    #   The unique identifier of the data source you want to ingest into
+    #   your knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the ingestion job.
+    #   A description of the data ingestion job.
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The unique identifier of the knowledge base to which to add the data
-    #   source.
+    #   The unique identifier of the knowledge base for the data ingestion
+    #   job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StartIngestionJobRequest AWS API Documentation
@@ -6807,12 +6814,48 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] ingestion_job
-    #   An object containing information about the ingestion job.
+    #   Contains information about the data ingestion job.
     #   @return [Types::IngestionJob]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StartIngestionJobResponse AWS API Documentation
     #
     class StartIngestionJobResponse < Struct.new(
+      :ingestion_job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_source_id
+    #   The unique identifier of the data source for the data ingestion job
+    #   you want to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_job_id
+    #   The unique identifier of the data ingestion job you want to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base for the data ingestion
+    #   job you want to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StopIngestionJobRequest AWS API Documentation
+    #
+    class StopIngestionJobRequest < Struct.new(
+      :data_source_id,
+      :ingestion_job_id,
+      :knowledge_base_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_job
+    #   Contains information about the stopped data ingestion job.
+    #   @return [Types::IngestionJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StopIngestionJobResponse AWS API Documentation
+    #
+    class StopIngestionJobResponse < Struct.new(
       :ingestion_job)
       SENSITIVE = []
       include Aws::Structure

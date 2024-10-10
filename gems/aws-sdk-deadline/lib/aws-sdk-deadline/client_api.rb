@@ -273,6 +273,8 @@ module Aws::Deadline
     JobMembers = Shapes::ListShape.new(name: 'JobMembers')
     JobName = Shapes::StringShape.new(name: 'JobName')
     JobParameter = Shapes::UnionShape.new(name: 'JobParameter')
+    JobParameterDefinition = Shapes::DocumentShape.new(name: 'JobParameterDefinition', document: true)
+    JobParameterDefinitions = Shapes::ListShape.new(name: 'JobParameterDefinitions')
     JobParameters = Shapes::MapShape.new(name: 'JobParameters')
     JobPriority = Shapes::IntegerShape.new(name: 'JobPriority')
     JobRunAsUser = Shapes::StructureShape.new(name: 'JobRunAsUser')
@@ -304,6 +306,8 @@ module Aws::Deadline
     ListFleetsResponse = Shapes::StructureShape.new(name: 'ListFleetsResponse')
     ListJobMembersRequest = Shapes::StructureShape.new(name: 'ListJobMembersRequest')
     ListJobMembersResponse = Shapes::StructureShape.new(name: 'ListJobMembersResponse')
+    ListJobParameterDefinitionsRequest = Shapes::StructureShape.new(name: 'ListJobParameterDefinitionsRequest')
+    ListJobParameterDefinitionsResponse = Shapes::StructureShape.new(name: 'ListJobParameterDefinitionsResponse')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     ListLicenseEndpointsRequest = Shapes::StructureShape.new(name: 'ListLicenseEndpointsRequest')
@@ -863,8 +867,8 @@ module Aws::Deadline
     CreateJobRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     CreateJobRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     CreateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
-    CreateJobRequest.add_member(:template, Shapes::ShapeRef.new(shape: JobTemplate, required: true, location_name: "template"))
-    CreateJobRequest.add_member(:template_type, Shapes::ShapeRef.new(shape: JobTemplateType, required: true, location_name: "templateType"))
+    CreateJobRequest.add_member(:template, Shapes::ShapeRef.new(shape: JobTemplate, location_name: "template"))
+    CreateJobRequest.add_member(:template_type, Shapes::ShapeRef.new(shape: JobTemplateType, location_name: "templateType"))
     CreateJobRequest.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, required: true, location_name: "priority"))
     CreateJobRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: JobParameters, location_name: "parameters"))
     CreateJobRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
@@ -872,6 +876,7 @@ module Aws::Deadline
     CreateJobRequest.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: CreateJobTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     CreateJobRequest.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
     CreateJobRequest.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
+    CreateJobRequest.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
@@ -1300,6 +1305,7 @@ module Aws::Deadline
     GetJobResponse.add_member(:parameters, Shapes::ShapeRef.new(shape: JobParameters, location_name: "parameters"))
     GetJobResponse.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     GetJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, location_name: "description"))
+    GetJobResponse.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     GetJobResponse.struct_class = Types::GetJobResponse
 
     GetLicenseEndpointRequest.add_member(:license_endpoint_id, Shapes::ShapeRef.new(shape: LicenseEndpointId, required: true, location: "uri", location_name: "licenseEndpointId"))
@@ -1631,6 +1637,8 @@ module Aws::Deadline
     JobParameter.add_member_subclass(:unknown, Types::JobParameter::Unknown)
     JobParameter.struct_class = Types::JobParameter
 
+    JobParameterDefinitions.member = Shapes::ShapeRef.new(shape: JobParameterDefinition)
+
     JobParameters.key = Shapes::ShapeRef.new(shape: String)
     JobParameters.value = Shapes::ShapeRef.new(shape: JobParameter)
 
@@ -1657,6 +1665,7 @@ module Aws::Deadline
     JobSearchSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: EndedAt, location_name: "endedAt"))
     JobSearchSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: StartedAt, location_name: "startedAt"))
     JobSearchSummary.add_member(:job_parameters, Shapes::ShapeRef.new(shape: JobParameters, location_name: "jobParameters"))
+    JobSearchSummary.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     JobSearchSummary.struct_class = Types::JobSearchSummary
 
     JobSummaries.member = Shapes::ShapeRef.new(shape: JobSummary)
@@ -1677,6 +1686,7 @@ module Aws::Deadline
     JobSummary.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, location_name: "taskRunStatusCounts"))
     JobSummary.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
     JobSummary.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
+    JobSummary.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     JobSummary.struct_class = Types::JobSummary
 
     LicenseEndpointSummaries.member = Shapes::ShapeRef.new(shape: LicenseEndpointSummary)
@@ -1757,6 +1767,17 @@ module Aws::Deadline
     ListJobMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: JobMembers, required: true, location_name: "members"))
     ListJobMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListJobMembersResponse.struct_class = Types::ListJobMembersResponse
+
+    ListJobParameterDefinitionsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    ListJobParameterDefinitionsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    ListJobParameterDefinitionsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
+    ListJobParameterDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListJobParameterDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListJobParameterDefinitionsRequest.struct_class = Types::ListJobParameterDefinitionsRequest
+
+    ListJobParameterDefinitionsResponse.add_member(:job_parameter_definitions, Shapes::ShapeRef.new(shape: JobParameterDefinitions, required: true, location_name: "jobParameterDefinitions"))
+    ListJobParameterDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListJobParameterDefinitionsResponse.struct_class = Types::ListJobParameterDefinitionsResponse
 
     ListJobsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListJobsRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: IdentityCenterPrincipalId, location: "querystring", location_name: "principalId"))
@@ -3805,6 +3826,28 @@ module Aws::Deadline
         }
         o.input = Shapes::ShapeRef.new(shape: ListJobMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListJobMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_job_parameter_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListJobParameterDefinitions"
+        o.http_method = "GET"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/queues/{queueId}/jobs/{jobId}/parameter-definitions"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListJobParameterDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListJobParameterDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

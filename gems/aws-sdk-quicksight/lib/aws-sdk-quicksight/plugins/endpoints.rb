@@ -228,6 +228,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QuickSight::Endpoints::DescribeKeyRegistration.build(context)
           when :describe_namespace
             Aws::QuickSight::Endpoints::DescribeNamespace.build(context)
+          when :describe_q_personalization_configuration
+            Aws::QuickSight::Endpoints::DescribeQPersonalizationConfiguration.build(context)
           when :describe_refresh_schedule
             Aws::QuickSight::Endpoints::DescribeRefreshSchedule.build(context)
           when :describe_role_custom_permission
@@ -398,6 +400,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QuickSight::Endpoints::UpdateKeyRegistration.build(context)
           when :update_public_sharing_settings
             Aws::QuickSight::Endpoints::UpdatePublicSharingSettings.build(context)
+          when :update_q_personalization_configuration
+            Aws::QuickSight::Endpoints::UpdateQPersonalizationConfiguration.build(context)
           when :update_refresh_schedule
             Aws::QuickSight::Endpoints::UpdateRefreshSchedule.build(context)
           when :update_role_custom_permission

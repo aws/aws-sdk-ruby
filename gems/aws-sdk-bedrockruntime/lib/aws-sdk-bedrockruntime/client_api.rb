@@ -61,6 +61,7 @@ module Aws::BedrockRuntime
     GuardrailContentFilter = Shapes::StructureShape.new(name: 'GuardrailContentFilter')
     GuardrailContentFilterConfidence = Shapes::StringShape.new(name: 'GuardrailContentFilterConfidence')
     GuardrailContentFilterList = Shapes::ListShape.new(name: 'GuardrailContentFilterList')
+    GuardrailContentFilterStrength = Shapes::StringShape.new(name: 'GuardrailContentFilterStrength')
     GuardrailContentFilterType = Shapes::StringShape.new(name: 'GuardrailContentFilterType')
     GuardrailContentPolicyAction = Shapes::StringShape.new(name: 'GuardrailContentPolicyAction')
     GuardrailContentPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailContentPolicyAssessment')
@@ -80,9 +81,11 @@ module Aws::BedrockRuntime
     GuardrailConverseContentQualifier = Shapes::StringShape.new(name: 'GuardrailConverseContentQualifier')
     GuardrailConverseContentQualifierList = Shapes::ListShape.new(name: 'GuardrailConverseContentQualifierList')
     GuardrailConverseTextBlock = Shapes::StructureShape.new(name: 'GuardrailConverseTextBlock')
+    GuardrailCoverage = Shapes::StructureShape.new(name: 'GuardrailCoverage')
     GuardrailCustomWord = Shapes::StructureShape.new(name: 'GuardrailCustomWord')
     GuardrailCustomWordList = Shapes::ListShape.new(name: 'GuardrailCustomWordList')
     GuardrailIdentifier = Shapes::StringShape.new(name: 'GuardrailIdentifier')
+    GuardrailInvocationMetrics = Shapes::StructureShape.new(name: 'GuardrailInvocationMetrics')
     GuardrailManagedWord = Shapes::StructureShape.new(name: 'GuardrailManagedWord')
     GuardrailManagedWordList = Shapes::ListShape.new(name: 'GuardrailManagedWordList')
     GuardrailManagedWordType = Shapes::StringShape.new(name: 'GuardrailManagedWordType')
@@ -92,6 +95,7 @@ module Aws::BedrockRuntime
     GuardrailPiiEntityFilter = Shapes::StructureShape.new(name: 'GuardrailPiiEntityFilter')
     GuardrailPiiEntityFilterList = Shapes::ListShape.new(name: 'GuardrailPiiEntityFilterList')
     GuardrailPiiEntityType = Shapes::StringShape.new(name: 'GuardrailPiiEntityType')
+    GuardrailProcessingLatency = Shapes::IntegerShape.new(name: 'GuardrailProcessingLatency')
     GuardrailRegexFilter = Shapes::StructureShape.new(name: 'GuardrailRegexFilter')
     GuardrailRegexFilterList = Shapes::ListShape.new(name: 'GuardrailRegexFilterList')
     GuardrailSensitiveInformationPolicyAction = Shapes::StringShape.new(name: 'GuardrailSensitiveInformationPolicyAction')
@@ -101,6 +105,7 @@ module Aws::BedrockRuntime
     GuardrailStreamConfiguration = Shapes::StructureShape.new(name: 'GuardrailStreamConfiguration')
     GuardrailStreamProcessingMode = Shapes::StringShape.new(name: 'GuardrailStreamProcessingMode')
     GuardrailTextBlock = Shapes::StructureShape.new(name: 'GuardrailTextBlock')
+    GuardrailTextCharactersCoverage = Shapes::StructureShape.new(name: 'GuardrailTextCharactersCoverage')
     GuardrailTopic = Shapes::StructureShape.new(name: 'GuardrailTopic')
     GuardrailTopicList = Shapes::ListShape.new(name: 'GuardrailTopicList')
     GuardrailTopicPolicyAction = Shapes::StringShape.new(name: 'GuardrailTopicPolicyAction')
@@ -155,6 +160,8 @@ module Aws::BedrockRuntime
     String = Shapes::StringShape.new(name: 'String')
     SystemContentBlock = Shapes::UnionShape.new(name: 'SystemContentBlock')
     SystemContentBlocks = Shapes::ListShape.new(name: 'SystemContentBlocks')
+    TextCharactersGuarded = Shapes::IntegerShape.new(name: 'TextCharactersGuarded')
+    TextCharactersTotal = Shapes::IntegerShape.new(name: 'TextCharactersTotal')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TokenUsage = Shapes::StructureShape.new(name: 'TokenUsage')
     TokenUsageInputTokensInteger = Shapes::IntegerShape.new(name: 'TokenUsageInputTokensInteger')
@@ -193,6 +200,7 @@ module Aws::BedrockRuntime
     ApplyGuardrailResponse.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailAction, required: true, location_name: "action"))
     ApplyGuardrailResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: GuardrailOutputContentList, required: true, location_name: "outputs"))
     ApplyGuardrailResponse.add_member(:assessments, Shapes::ShapeRef.new(shape: GuardrailAssessmentList, required: true, location_name: "assessments"))
+    ApplyGuardrailResponse.add_member(:guardrail_coverage, Shapes::ShapeRef.new(shape: GuardrailCoverage, location_name: "guardrailCoverage"))
     ApplyGuardrailResponse.struct_class = Types::ApplyGuardrailResponse
 
     AutoToolChoice.struct_class = Types::AutoToolChoice
@@ -329,6 +337,7 @@ module Aws::BedrockRuntime
     GuardrailAssessment.add_member(:word_policy, Shapes::ShapeRef.new(shape: GuardrailWordPolicyAssessment, location_name: "wordPolicy"))
     GuardrailAssessment.add_member(:sensitive_information_policy, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyAssessment, location_name: "sensitiveInformationPolicy"))
     GuardrailAssessment.add_member(:contextual_grounding_policy, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyAssessment, location_name: "contextualGroundingPolicy"))
+    GuardrailAssessment.add_member(:invocation_metrics, Shapes::ShapeRef.new(shape: GuardrailInvocationMetrics, location_name: "invocationMetrics"))
     GuardrailAssessment.struct_class = Types::GuardrailAssessment
 
     GuardrailAssessmentList.member = Shapes::ShapeRef.new(shape: GuardrailAssessment)
@@ -354,6 +363,7 @@ module Aws::BedrockRuntime
 
     GuardrailContentFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailContentFilterType, required: true, location_name: "type"))
     GuardrailContentFilter.add_member(:confidence, Shapes::ShapeRef.new(shape: GuardrailContentFilterConfidence, required: true, location_name: "confidence"))
+    GuardrailContentFilter.add_member(:filter_strength, Shapes::ShapeRef.new(shape: GuardrailContentFilterStrength, location_name: "filterStrength"))
     GuardrailContentFilter.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailContentPolicyAction, required: true, location_name: "action"))
     GuardrailContentFilter.struct_class = Types::GuardrailContentFilter
 
@@ -387,11 +397,19 @@ module Aws::BedrockRuntime
     GuardrailConverseTextBlock.add_member(:qualifiers, Shapes::ShapeRef.new(shape: GuardrailConverseContentQualifierList, location_name: "qualifiers"))
     GuardrailConverseTextBlock.struct_class = Types::GuardrailConverseTextBlock
 
+    GuardrailCoverage.add_member(:text_characters, Shapes::ShapeRef.new(shape: GuardrailTextCharactersCoverage, location_name: "textCharacters"))
+    GuardrailCoverage.struct_class = Types::GuardrailCoverage
+
     GuardrailCustomWord.add_member(:match, Shapes::ShapeRef.new(shape: String, required: true, location_name: "match"))
     GuardrailCustomWord.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailWordPolicyAction, required: true, location_name: "action"))
     GuardrailCustomWord.struct_class = Types::GuardrailCustomWord
 
     GuardrailCustomWordList.member = Shapes::ShapeRef.new(shape: GuardrailCustomWord)
+
+    GuardrailInvocationMetrics.add_member(:guardrail_processing_latency, Shapes::ShapeRef.new(shape: GuardrailProcessingLatency, location_name: "guardrailProcessingLatency"))
+    GuardrailInvocationMetrics.add_member(:usage, Shapes::ShapeRef.new(shape: GuardrailUsage, location_name: "usage"))
+    GuardrailInvocationMetrics.add_member(:guardrail_coverage, Shapes::ShapeRef.new(shape: GuardrailCoverage, location_name: "guardrailCoverage"))
+    GuardrailInvocationMetrics.struct_class = Types::GuardrailInvocationMetrics
 
     GuardrailManagedWord.add_member(:match, Shapes::ShapeRef.new(shape: String, required: true, location_name: "match"))
     GuardrailManagedWord.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailManagedWordType, required: true, location_name: "type"))
@@ -433,6 +451,10 @@ module Aws::BedrockRuntime
     GuardrailTextBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "text"))
     GuardrailTextBlock.add_member(:qualifiers, Shapes::ShapeRef.new(shape: GuardrailContentQualifierList, location_name: "qualifiers"))
     GuardrailTextBlock.struct_class = Types::GuardrailTextBlock
+
+    GuardrailTextCharactersCoverage.add_member(:guarded, Shapes::ShapeRef.new(shape: TextCharactersGuarded, location_name: "guarded"))
+    GuardrailTextCharactersCoverage.add_member(:total, Shapes::ShapeRef.new(shape: TextCharactersTotal, location_name: "total"))
+    GuardrailTextCharactersCoverage.struct_class = Types::GuardrailTextCharactersCoverage
 
     GuardrailTopic.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     GuardrailTopic.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailTopicType, required: true, location_name: "type"))

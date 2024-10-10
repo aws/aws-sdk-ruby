@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2024-10-02)
+------------------
+
+* Feature - Add clientToken attribute and implement idempotency for CreateSuiteDefinition.
+
 1.42.0 (2024-09-24)
 ------------------
 

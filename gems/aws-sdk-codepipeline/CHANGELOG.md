@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2024-10-03)
+------------------
+
+* Feature - AWS CodePipeline introduces Commands action that enables you to easily run shell commands as part of your pipeline execution.
+
 1.85.0 (2024-09-24)
 ------------------
 

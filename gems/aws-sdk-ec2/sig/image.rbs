@@ -18,44 +18,11 @@ module Aws
       def id: () -> String
       alias image_id id
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#architecture-instance_method
-      def architecture: () -> ("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#creation_date-instance_method
-      def creation_date: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_location-instance_method
-      def image_location: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_type-instance_method
-      def image_type: () -> ("machine" | "kernel" | "ramdisk")
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#public-instance_method
-      def public: () -> bool
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#kernel_id-instance_method
-      def kernel_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#owner_id-instance_method
-      def owner_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#platform-instance_method
-      def platform: () -> ("Windows")
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#platform_details-instance_method
       def platform_details: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#usage_operation-instance_method
       def usage_operation: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#product_codes-instance_method
-      def product_codes: () -> ::Array[Types::ProductCode]
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#ramdisk_id-instance_method
-      def ramdisk_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#state-instance_method
-      def state: () -> ("pending" | "available" | "invalid" | "deregistered" | "transient" | "failed" | "error" | "disabled")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#block_device_mappings-instance_method
       def block_device_mappings: () -> ::Array[Types::BlockDeviceMapping]
@@ -113,6 +80,39 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#last_launched_time-instance_method
       def last_launched_time: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_location-instance_method
+      def image_location: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#state-instance_method
+      def state: () -> ("pending" | "available" | "invalid" | "deregistered" | "transient" | "failed" | "error" | "disabled")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#owner_id-instance_method
+      def owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#creation_date-instance_method
+      def creation_date: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#public-instance_method
+      def public: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#product_codes-instance_method
+      def product_codes: () -> ::Array[Types::ProductCode]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#architecture-instance_method
+      def architecture: () -> ("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_type-instance_method
+      def image_type: () -> ("machine" | "kernel" | "ramdisk")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#kernel_id-instance_method
+      def kernel_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#ramdisk_id-instance_method
+      def ramdisk_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#platform-instance_method
+      def platform: () -> ("Windows")
 
       def client: () -> Client
 
@@ -178,18 +178,18 @@ module Aws
                               ?launch_permission: {
                                 add: Array[
                                   {
-                                    group: ("all")?,
-                                    user_id: ::String?,
                                     organization_arn: ::String?,
-                                    organizational_unit_arn: ::String?
+                                    organizational_unit_arn: ::String?,
+                                    user_id: ::String?,
+                                    group: ("all")?
                                   },
                                 ]?,
                                 remove: Array[
                                   {
-                                    group: ("all")?,
-                                    user_id: ::String?,
                                     organization_arn: ::String?,
-                                    organizational_unit_arn: ::String?
+                                    organizational_unit_arn: ::String?,
+                                    user_id: ::String?,
+                                    group: ("all")?
                                   },
                                 ]?
                               },
@@ -198,10 +198,10 @@ module Aws
                               ?user_groups: Array[::String],
                               ?user_ids: Array[::String],
                               ?value: ::String,
-                              ?dry_run: bool,
                               ?organization_arns: Array[::String],
                               ?organizational_unit_arns: Array[::String],
-                              ?imds_support: untyped
+                              ?imds_support: untyped,
+                              ?dry_run: bool
                             ) -> ::Aws::EmptyStructure
                           | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 

@@ -575,6 +575,7 @@ module Aws::B2bi
     #     type: "edi", # required, accepts edi
     #     configuration: { # required
     #       edi: {
+    #         capability_direction: "INBOUND", # accepts INBOUND, OUTBOUND
     #         type: { # required
     #           x12_details: {
     #             transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
@@ -613,6 +614,7 @@ module Aws::B2bi
     #   resp.capability_arn #=> String
     #   resp.name #=> String
     #   resp.type #=> String, one of "edi"
+    #   resp.configuration.edi.capability_direction #=> String, one of "INBOUND", "OUTBOUND"
     #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.configuration.edi.type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
     #   resp.configuration.edi.input_location.bucket_name #=> String
@@ -655,6 +657,10 @@ module Aws::B2bi
     # @option params [required, Array<String>] :capabilities
     #   Specifies a list of the capabilities associated with this partnership.
     #
+    # @option params [Types::CapabilityOptions] :capability_options
+    #   Specify the structure that contains the details for the associated
+    #   capabilities.
+    #
     # @option params [String] :client_token
     #   Reserved for future use.
     #
@@ -675,6 +681,7 @@ module Aws::B2bi
     #   * {Types::CreatePartnershipResponse#email #email} => String
     #   * {Types::CreatePartnershipResponse#phone #phone} => String
     #   * {Types::CreatePartnershipResponse#capabilities #capabilities} => Array&lt;String&gt;
+    #   * {Types::CreatePartnershipResponse#capability_options #capability_options} => Types::CapabilityOptions
     #   * {Types::CreatePartnershipResponse#trading_partner_id #trading_partner_id} => String
     #   * {Types::CreatePartnershipResponse#created_at #created_at} => Time
     #
@@ -721,6 +728,34 @@ module Aws::B2bi
     #     email: "Email", # required
     #     phone: "Phone",
     #     capabilities: ["CapabilityId"], # required
+    #     capability_options: {
+    #       outbound_edi: {
+    #         x12: {
+    #           common: {
+    #             interchange_control_headers: {
+    #               sender_id_qualifier: "X12IdQualifier",
+    #               sender_id: "X12SenderId",
+    #               receiver_id_qualifier: "X12IdQualifier",
+    #               receiver_id: "X12ReceiverId",
+    #               repetition_separator: "X12RepetitionSeparator",
+    #               acknowledgment_requested_code: "X12AcknowledgmentRequestedCode",
+    #               usage_indicator_code: "X12UsageIndicatorCode",
+    #             },
+    #             functional_group_headers: {
+    #               application_sender_code: "X12ApplicationSenderCode",
+    #               application_receiver_code: "X12ApplicationReceiverCode",
+    #               responsible_agency_code: "X12ResponsibleAgencyCode",
+    #             },
+    #             delimiters: {
+    #               component_separator: "X12ComponentSeparator",
+    #               data_element_separator: "X12DataElementSeparator",
+    #               segment_terminator: "X12SegmentTerminator",
+    #             },
+    #             validate_edi: false,
+    #           },
+    #         },
+    #       },
+    #     },
     #     client_token: "String",
     #     tags: [
     #       {
@@ -740,6 +775,20 @@ module Aws::B2bi
     #   resp.phone #=> String
     #   resp.capabilities #=> Array
     #   resp.capabilities[0] #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.sender_id_qualifier #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.sender_id #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.receiver_id_qualifier #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.receiver_id #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.repetition_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.acknowledgment_requested_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.usage_indicator_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.application_sender_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.application_receiver_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.responsible_agency_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.component_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.data_element_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.segment_terminator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.validate_edi #=> Boolean
     #   resp.trading_partner_id #=> String
     #   resp.created_at #=> Time
     #
@@ -863,30 +912,124 @@ module Aws::B2bi
       req.send_request(options)
     end
 
-    # Creates a transformer. A transformer describes how to process the
-    # incoming EDI documents and extract the necessary information to the
-    # output file.
+    # Amazon Web Services B2B Data Interchange uses a mapping template in
+    # JSONata or XSLT format to transform a customer input file into a JSON
+    # or XML file that can be converted to EDI.
+    #
+    # If you provide a sample EDI file with the same structure as the EDI
+    # files that you wish to generate, then the service can generate a
+    # mapping template. The starter template contains placeholder values
+    # which you can replace with JSONata or XSLT expressions to take data
+    # from your input file and insert it into the JSON or XML file that is
+    # used to generate the EDI.
+    #
+    # If you do not provide a sample EDI file, then the service can generate
+    # a mapping template based on the EDI settings in the `templateDetails`
+    # parameter.
+    #
+    # Currently, we only support generating a template that can generate the
+    # input to produce an Outbound X12 EDI file.
+    #
+    # @option params [Types::S3Location] :output_sample_location
+    #   Specify the location of the sample EDI file that is used to generate
+    #   the mapping template.
+    #
+    # @option params [required, String] :mapping_type
+    #   Specify the format for the mapping template: either JSONATA or XSLT.
+    #
+    # @option params [required, Types::TemplateDetails] :template_details
+    #   Describes the details needed for generating the template. Specify the
+    #   X12 transaction set and version for which the template is used:
+    #   currently, we only support X12.
+    #
+    # @return [Types::CreateStarterMappingTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStarterMappingTemplateResponse#mapping_template #mapping_template} => String
+    #
+    #
+    # @example Example: Sample CreateStarterMappingTemplate call
+    #
+    #   resp = client.create_starter_mapping_template({
+    #     mapping_type: "JSONATA", 
+    #     output_sample_location: {
+    #       key: "output-sample-key", 
+    #       bucket_name: "output-sample-bucket", 
+    #     }, 
+    #     template_details: {
+    #       x12: {
+    #         version: "VERSION_4010", 
+    #         transaction_set: "X12_110", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     mapping_template: "Example Mapping Template", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_starter_mapping_template({
+    #     output_sample_location: {
+    #       bucket_name: "BucketName",
+    #       key: "S3Key",
+    #     },
+    #     mapping_type: "JSONATA", # required, accepts JSONATA, XSLT
+    #     template_details: { # required
+    #       x12: {
+    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
+    #         version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010, VERSION_5010_HIPAA
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mapping_template #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/CreateStarterMappingTemplate AWS API Documentation
+    #
+    # @overload create_starter_mapping_template(params = {})
+    # @param [Hash] params ({})
+    def create_starter_mapping_template(params = {}, options = {})
+      req = build_request(:create_starter_mapping_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a transformer. Amazon Web Services B2B Data Interchange
+    # currently supports two scenarios:
+    #
+    # * *Inbound EDI*: the Amazon Web Services customer receives an EDI file
+    #   from their trading partner. Amazon Web Services B2B Data Interchange
+    #   converts this EDI file into a JSON or XML file with a
+    #   service-defined structure. A mapping template provided by the
+    #   customer, in JSONata or XSLT format, is optionally applied to this
+    #   file to produce a JSON or XML file with the structure the customer
+    #   requires.
+    #
+    # * *Outbound EDI*: the Amazon Web Services customer has a JSON or XML
+    #   file containing data that they wish to use in an EDI file. A mapping
+    #   template, provided by the customer (in either JSONata or XSLT
+    #   format) is applied to this file to generate a JSON or XML file in
+    #   the service-defined structure. This file is then converted to an EDI
+    #   file.
+    #
+    # <note markdown="1"> The following fields are provided for backwards compatibility only:
+    # `fileFormat`, `mappingTemplate`, `ediType`, and `sampleDocument`.
+    #
+    #  * Use the `mapping` data type in place of `mappingTemplate` and
+    #   `fileFormat`
+    #
+    # * Use the `sampleDocuments` data type in place of `sampleDocument`
+    #
+    # * Use either the `inputConversion` or `outputConversion` in place of
+    #   `ediType`
+    #
+    #  </note>
     #
     # @option params [required, String] :name
     #   Specifies the name of the transformer, used to identify it.
-    #
-    # @option params [required, String] :file_format
-    #   Specifies that the currently supported file formats for EDI
-    #   transformations are `JSON` and `XML`.
-    #
-    # @option params [required, String] :mapping_template
-    #   Specifies the mapping template for the transformer. This template is
-    #   used to map the parsed EDI file using JSONata or XSLT.
-    #
-    # @option params [required, Types::EdiType] :edi_type
-    #   Specifies the details for the EDI standard that is being used for the
-    #   transformer. Currently, only X12 is supported. X12 is a set of
-    #   standards and corresponding messages that define specific business
-    #   documents.
-    #
-    # @option params [String] :sample_document
-    #   Specifies a sample EDI document that is used by a transformer as a
-    #   guide for processing the EDI data.
     #
     # @option params [String] :client_token
     #   Reserved for future use.
@@ -899,33 +1042,93 @@ module Aws::B2bi
     #   group and search for resources by type. You can attach this metadata
     #   to resources (capabilities, partnerships, and so on) for any purpose.
     #
+    # @option params [String] :file_format
+    #   Specifies that the currently supported file formats for EDI
+    #   transformations are `JSON` and `XML`.
+    #
+    # @option params [String] :mapping_template
+    #   Specifies the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
+    #
+    #   <note markdown="1"> This parameter is available for backwards compatibility. Use the
+    #   [Mapping][1] data type instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html
+    #
+    # @option params [Types::EdiType] :edi_type
+    #   Specifies the details for the EDI standard that is being used for the
+    #   transformer. Currently, only X12 is supported. X12 is a set of
+    #   standards and corresponding messages that define specific business
+    #   documents.
+    #
+    # @option params [String] :sample_document
+    #   Specifies a sample EDI document that is used by a transformer as a
+    #   guide for processing the EDI data.
+    #
+    # @option params [Types::InputConversion] :input_conversion
+    #   Specify the `InputConversion` object, which contains the format
+    #   options for the inbound transformation.
+    #
+    # @option params [Types::Mapping] :mapping
+    #   Specify the structure that contains the mapping template and its
+    #   language (either XSLT or JSONATA).
+    #
+    # @option params [Types::OutputConversion] :output_conversion
+    #   A structure that contains the `OutputConversion` object, which
+    #   contains the format options for the outbound transformation.
+    #
+    # @option params [Types::SampleDocuments] :sample_documents
+    #   Specify a structure that contains the Amazon S3 bucket and an array of
+    #   the corresponding keys used to identify the location for your sample
+    #   documents.
+    #
     # @return [Types::CreateTransformerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTransformerResponse#transformer_id #transformer_id} => String
     #   * {Types::CreateTransformerResponse#transformer_arn #transformer_arn} => String
     #   * {Types::CreateTransformerResponse#name #name} => String
+    #   * {Types::CreateTransformerResponse#status #status} => String
+    #   * {Types::CreateTransformerResponse#created_at #created_at} => Time
     #   * {Types::CreateTransformerResponse#file_format #file_format} => String
     #   * {Types::CreateTransformerResponse#mapping_template #mapping_template} => String
-    #   * {Types::CreateTransformerResponse#status #status} => String
     #   * {Types::CreateTransformerResponse#edi_type #edi_type} => Types::EdiType
     #   * {Types::CreateTransformerResponse#sample_document #sample_document} => String
-    #   * {Types::CreateTransformerResponse#created_at #created_at} => Time
+    #   * {Types::CreateTransformerResponse#input_conversion #input_conversion} => Types::InputConversion
+    #   * {Types::CreateTransformerResponse#mapping #mapping} => Types::Mapping
+    #   * {Types::CreateTransformerResponse#output_conversion #output_conversion} => Types::OutputConversion
+    #   * {Types::CreateTransformerResponse#sample_documents #sample_documents} => Types::SampleDocuments
     #
     #
     # @example Example: Sample CreateTransformer call
     #
     #   resp = client.create_transformer({
-    #     name: "transformJSON", 
+    #     name: "transformX12", 
     #     client_token: "foo", 
-    #     edi_type: {
-    #       x12_details: {
-    #         version: "VERSION_4010", 
-    #         transaction_set: "X12_110", 
+    #     input_conversion: {
+    #       format_options: {
+    #         x12: {
+    #           version: "VERSION_4010", 
+    #           transaction_set: "X12_110", 
+    #         }, 
     #       }, 
+    #       from_format: "X12", 
     #     }, 
-    #     file_format: "JSON", 
-    #     mapping_template: "{}", 
-    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     mapping: {
+    #       template: "{}", 
+    #       template_language: "JSONATA", 
+    #     }, 
+    #     sample_documents: {
+    #       bucket_name: "test-bucket", 
+    #       keys: [
+    #         {
+    #           input: "sampleDoc.txt", 
+    #         }, 
+    #       ], 
+    #     }, 
     #     tags: [
     #       {
     #         key: "sampleKey", 
@@ -936,17 +1139,29 @@ module Aws::B2bi
     #
     #   resp.to_h outputs the following:
     #   {
-    #     name: "transformJSON", 
+    #     name: "transformX12", 
     #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
-    #     edi_type: {
-    #       x12_details: {
-    #         version: "VERSION_4010", 
-    #         transaction_set: "X12_110", 
+    #     input_conversion: {
+    #       format_options: {
+    #         x12: {
+    #           version: "VERSION_4010", 
+    #           transaction_set: "X12_110", 
+    #         }, 
     #       }, 
+    #       from_format: "X12", 
     #     }, 
-    #     file_format: "JSON", 
-    #     mapping_template: "$", 
-    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     mapping: {
+    #       template: "{}", 
+    #       template_language: "JSONATA", 
+    #     }, 
+    #     sample_documents: {
+    #       bucket_name: "test-bucket", 
+    #       keys: [
+    #         {
+    #           input: "sampleDoc.txt", 
+    #         }, 
+    #       ], 
+    #     }, 
     #     status: "inactive", 
     #     transformer_arn: "arn:aws:b2bi:us-west-2:123456789012:transformer/tr-974c129999f84d8c9", 
     #     transformer_id: "tr-974c129999f84d8c9", 
@@ -956,15 +1171,6 @@ module Aws::B2bi
     #
     #   resp = client.create_transformer({
     #     name: "TransformerName", # required
-    #     file_format: "XML", # required, accepts XML, JSON
-    #     mapping_template: "MappingTemplate", # required
-    #     edi_type: { # required
-    #       x12_details: {
-    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
-    #         version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010, VERSION_5010_HIPAA
-    #       },
-    #     },
-    #     sample_document: "FileLocation",
     #     client_token: "String",
     #     tags: [
     #       {
@@ -972,6 +1178,46 @@ module Aws::B2bi
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     file_format: "XML", # accepts XML, JSON, NOT_USED
+    #     mapping_template: "MappingTemplate",
+    #     edi_type: {
+    #       x12_details: {
+    #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
+    #         version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010, VERSION_5010_HIPAA
+    #       },
+    #     },
+    #     sample_document: "FileLocation",
+    #     input_conversion: {
+    #       from_format: "X12", # required, accepts X12
+    #       format_options: {
+    #         x12: {
+    #           transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
+    #           version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010, VERSION_5010_HIPAA
+    #         },
+    #       },
+    #     },
+    #     mapping: {
+    #       template_language: "XSLT", # required, accepts XSLT, JSONATA
+    #       template: "MappingTemplate",
+    #     },
+    #     output_conversion: {
+    #       to_format: "X12", # required, accepts X12
+    #       format_options: {
+    #         x12: {
+    #           transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
+    #           version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010, VERSION_5010_HIPAA
+    #         },
+    #       },
+    #     },
+    #     sample_documents: {
+    #       bucket_name: "BucketName", # required
+    #       keys: [ # required
+    #         {
+    #           input: "S3Key",
+    #           output: "S3Key",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -979,13 +1225,25 @@ module Aws::B2bi
     #   resp.transformer_id #=> String
     #   resp.transformer_arn #=> String
     #   resp.name #=> String
-    #   resp.file_format #=> String, one of "XML", "JSON"
-    #   resp.mapping_template #=> String
     #   resp.status #=> String, one of "active", "inactive"
+    #   resp.created_at #=> Time
+    #   resp.file_format #=> String, one of "XML", "JSON", "NOT_USED"
+    #   resp.mapping_template #=> String
     #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.edi_type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
     #   resp.sample_document #=> String
-    #   resp.created_at #=> Time
+    #   resp.input_conversion.from_format #=> String, one of "X12"
+    #   resp.input_conversion.format_options.x12.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
+    #   resp.input_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.mapping.template_language #=> String, one of "XSLT", "JSONATA"
+    #   resp.mapping.template #=> String
+    #   resp.output_conversion.to_format #=> String, one of "X12"
+    #   resp.output_conversion.format_options.x12.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
+    #   resp.output_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.sample_documents.bucket_name #=> String
+    #   resp.sample_documents.keys #=> Array
+    #   resp.sample_documents.keys[0].input #=> String
+    #   resp.sample_documents.keys[0].output #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/CreateTransformer AWS API Documentation
     #
@@ -1088,9 +1346,10 @@ module Aws::B2bi
       req.send_request(options)
     end
 
-    # Deletes the specified transformer. A transformer describes how to
-    # process the incoming EDI documents and extract the necessary
-    # information to the output file.
+    # Deletes the specified transformer. A transformer can take an EDI file
+    # as input and transform it into a JSON-or XML-formatted document.
+    # Alternatively, a transformer can take a JSON-or XML-formatted document
+    # as input and transform it into an EDI file.
     #
     # @option params [required, String] :transformer_id
     #   Specifies the system-assigned unique identifier for the transformer.
@@ -1191,6 +1450,7 @@ module Aws::B2bi
     #   resp.capability_arn #=> String
     #   resp.name #=> String
     #   resp.type #=> String, one of "edi"
+    #   resp.configuration.edi.capability_direction #=> String, one of "INBOUND", "OUTBOUND"
     #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.configuration.edi.type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
     #   resp.configuration.edi.input_location.bucket_name #=> String
@@ -1230,6 +1490,7 @@ module Aws::B2bi
     #   * {Types::GetPartnershipResponse#email #email} => String
     #   * {Types::GetPartnershipResponse#phone #phone} => String
     #   * {Types::GetPartnershipResponse#capabilities #capabilities} => Array&lt;String&gt;
+    #   * {Types::GetPartnershipResponse#capability_options #capability_options} => Types::CapabilityOptions
     #   * {Types::GetPartnershipResponse#trading_partner_id #trading_partner_id} => String
     #   * {Types::GetPartnershipResponse#created_at #created_at} => Time
     #   * {Types::GetPartnershipResponse#modified_at #modified_at} => Time
@@ -1273,6 +1534,20 @@ module Aws::B2bi
     #   resp.phone #=> String
     #   resp.capabilities #=> Array
     #   resp.capabilities[0] #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.sender_id_qualifier #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.sender_id #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.receiver_id_qualifier #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.receiver_id #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.repetition_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.acknowledgment_requested_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.usage_indicator_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.application_sender_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.application_receiver_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.responsible_agency_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.component_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.data_element_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.segment_terminator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.validate_edi #=> Boolean
     #   resp.trading_partner_id #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -1355,8 +1630,10 @@ module Aws::B2bi
     end
 
     # Retrieves the details for the transformer specified by the transformer
-    # ID. A transformer describes how to process the incoming EDI documents
-    # and extract the necessary information to the output file.
+    # ID. A transformer can take an EDI file as input and transform it into
+    # a JSON-or XML-formatted document. Alternatively, a transformer can
+    # take a JSON-or XML-formatted document as input and transform it into
+    # an EDI file.
     #
     # @option params [required, String] :transformer_id
     #   Specifies the system-assigned unique identifier for the transformer.
@@ -1366,13 +1643,17 @@ module Aws::B2bi
     #   * {Types::GetTransformerResponse#transformer_id #transformer_id} => String
     #   * {Types::GetTransformerResponse#transformer_arn #transformer_arn} => String
     #   * {Types::GetTransformerResponse#name #name} => String
-    #   * {Types::GetTransformerResponse#file_format #file_format} => String
-    #   * {Types::GetTransformerResponse#mapping_template #mapping_template} => String
     #   * {Types::GetTransformerResponse#status #status} => String
-    #   * {Types::GetTransformerResponse#edi_type #edi_type} => Types::EdiType
-    #   * {Types::GetTransformerResponse#sample_document #sample_document} => String
     #   * {Types::GetTransformerResponse#created_at #created_at} => Time
     #   * {Types::GetTransformerResponse#modified_at #modified_at} => Time
+    #   * {Types::GetTransformerResponse#file_format #file_format} => String
+    #   * {Types::GetTransformerResponse#mapping_template #mapping_template} => String
+    #   * {Types::GetTransformerResponse#edi_type #edi_type} => Types::EdiType
+    #   * {Types::GetTransformerResponse#sample_document #sample_document} => String
+    #   * {Types::GetTransformerResponse#input_conversion #input_conversion} => Types::InputConversion
+    #   * {Types::GetTransformerResponse#mapping #mapping} => Types::Mapping
+    #   * {Types::GetTransformerResponse#output_conversion #output_conversion} => Types::OutputConversion
+    #   * {Types::GetTransformerResponse#sample_documents #sample_documents} => Types::SampleDocuments
     #
     #
     # @example Example: Sample GetTransformer call
@@ -1383,18 +1664,29 @@ module Aws::B2bi
     #
     #   resp.to_h outputs the following:
     #   {
-    #     name: "transformJSON", 
+    #     name: "transformX12", 
     #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
-    #     edi_type: {
-    #       x12_details: {
-    #         version: "VERSION_4010", 
-    #         transaction_set: "X12_110", 
+    #     input_conversion: {
+    #       format_options: {
+    #         x12: {
+    #           version: "VERSION_4010", 
+    #           transaction_set: "X12_110", 
+    #         }, 
     #       }, 
+    #       from_format: "X12", 
     #     }, 
-    #     file_format: "JSON", 
-    #     mapping_template: "$", 
-    #     modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
-    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     mapping: {
+    #       template: "{}", 
+    #       template_language: "JSONATA", 
+    #     }, 
+    #     sample_documents: {
+    #       bucket_name: "test-bucket", 
+    #       keys: [
+    #         {
+    #           input: "sampleDoc.txt", 
+    #         }, 
+    #       ], 
+    #     }, 
     #     status: "inactive", 
     #     transformer_arn: "arn:aws:b2bi:us-west-2:123456789012:transformer/tr-974c129999f84d8c9", 
     #     transformer_id: "tr-974c129999f84d8c9", 
@@ -1411,14 +1703,26 @@ module Aws::B2bi
     #   resp.transformer_id #=> String
     #   resp.transformer_arn #=> String
     #   resp.name #=> String
-    #   resp.file_format #=> String, one of "XML", "JSON"
-    #   resp.mapping_template #=> String
     #   resp.status #=> String, one of "active", "inactive"
+    #   resp.created_at #=> Time
+    #   resp.modified_at #=> Time
+    #   resp.file_format #=> String, one of "XML", "JSON", "NOT_USED"
+    #   resp.mapping_template #=> String
     #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.edi_type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
     #   resp.sample_document #=> String
-    #   resp.created_at #=> Time
-    #   resp.modified_at #=> Time
+    #   resp.input_conversion.from_format #=> String, one of "X12"
+    #   resp.input_conversion.format_options.x12.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
+    #   resp.input_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.mapping.template_language #=> String, one of "XSLT", "JSONATA"
+    #   resp.mapping.template #=> String
+    #   resp.output_conversion.to_format #=> String, one of "X12"
+    #   resp.output_conversion.format_options.x12.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
+    #   resp.output_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.sample_documents.bucket_name #=> String
+    #   resp.sample_documents.keys #=> Array
+    #   resp.sample_documents.keys[0].input #=> String
+    #   resp.sample_documents.keys[0].output #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/GetTransformer AWS API Documentation
     #
@@ -1626,6 +1930,20 @@ module Aws::B2bi
     #   resp.partnerships[0].name #=> String
     #   resp.partnerships[0].capabilities #=> Array
     #   resp.partnerships[0].capabilities[0] #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.interchange_control_headers.sender_id_qualifier #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.interchange_control_headers.sender_id #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.interchange_control_headers.receiver_id_qualifier #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.interchange_control_headers.receiver_id #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.interchange_control_headers.repetition_separator #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.interchange_control_headers.acknowledgment_requested_code #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.interchange_control_headers.usage_indicator_code #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.functional_group_headers.application_sender_code #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.functional_group_headers.application_receiver_code #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.functional_group_headers.responsible_agency_code #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.delimiters.component_separator #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.delimiters.data_element_separator #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.delimiters.segment_terminator #=> String
+    #   resp.partnerships[0].capability_options.outbound_edi.x12.common.validate_edi #=> Boolean
     #   resp.partnerships[0].trading_partner_id #=> String
     #   resp.partnerships[0].created_at #=> Time
     #   resp.partnerships[0].modified_at #=> Time
@@ -1762,9 +2080,10 @@ module Aws::B2bi
       req.send_request(options)
     end
 
-    # Lists the available transformers. A transformer describes how to
-    # process the incoming EDI documents and extract the necessary
-    # information to the output file.
+    # Lists the available transformers. A transformer can take an EDI file
+    # as input and transform it into a JSON-or XML-formatted document.
+    # Alternatively, a transformer can take a JSON-or XML-formatted document
+    # as input and transform it into an EDI file.
     #
     # @option params [String] :next_token
     #   When additional results are obtained from the command, a `NextToken`
@@ -1825,14 +2144,26 @@ module Aws::B2bi
     #   resp.transformers #=> Array
     #   resp.transformers[0].transformer_id #=> String
     #   resp.transformers[0].name #=> String
-    #   resp.transformers[0].file_format #=> String, one of "XML", "JSON"
-    #   resp.transformers[0].mapping_template #=> String
     #   resp.transformers[0].status #=> String, one of "active", "inactive"
+    #   resp.transformers[0].created_at #=> Time
+    #   resp.transformers[0].modified_at #=> Time
+    #   resp.transformers[0].file_format #=> String, one of "XML", "JSON", "NOT_USED"
+    #   resp.transformers[0].mapping_template #=> String
     #   resp.transformers[0].edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.transformers[0].edi_type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
     #   resp.transformers[0].sample_document #=> String
-    #   resp.transformers[0].created_at #=> Time
-    #   resp.transformers[0].modified_at #=> Time
+    #   resp.transformers[0].input_conversion.from_format #=> String, one of "X12"
+    #   resp.transformers[0].input_conversion.format_options.x12.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
+    #   resp.transformers[0].input_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.transformers[0].mapping.template_language #=> String, one of "XSLT", "JSONATA"
+    #   resp.transformers[0].mapping.template #=> String
+    #   resp.transformers[0].output_conversion.to_format #=> String, one of "X12"
+    #   resp.transformers[0].output_conversion.format_options.x12.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
+    #   resp.transformers[0].output_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.transformers[0].sample_documents.bucket_name #=> String
+    #   resp.transformers[0].sample_documents.keys #=> Array
+    #   resp.transformers[0].sample_documents.keys[0].input #=> String
+    #   resp.transformers[0].sample_documents.keys[0].output #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/ListTransformers AWS API Documentation
@@ -1846,7 +2177,7 @@ module Aws::B2bi
 
     # Runs a job, using a transformer, to parse input EDI (electronic data
     # interchange) file into the output structures used by Amazon Web
-    # Services B2BI Data Interchange.
+    # Services B2B Data Interchange.
     #
     # If you only want to transform EDI (electronic data interchange)
     # documents, you don't need to create profiles, partnerships or
@@ -1975,6 +2306,91 @@ module Aws::B2bi
       req.send_request(options)
     end
 
+    # This operation mimics the latter half of a typical Outbound EDI
+    # request. It takes an input JSON/XML in the B2Bi shape as input,
+    # converts it to an X12 EDI string, and return that string.
+    #
+    # @option params [required, Types::ConversionSource] :source
+    #   Specify the source file for an outbound EDI request.
+    #
+    # @option params [required, Types::ConversionTarget] :target
+    #   Specify the format (X12 is the only currently supported format), and
+    #   other details for the conversion target.
+    #
+    # @return [Types::TestConversionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestConversionResponse#converted_file_content #converted_file_content} => String
+    #   * {Types::TestConversionResponse#validation_messages #validation_messages} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: Sample TestConversion call
+    #
+    #   resp = client.test_conversion({
+    #     source: {
+    #       file_format: "JSON", 
+    #       input_file: {
+    #         file_content: "Sample file content", 
+    #       }, 
+    #     }, 
+    #     target: {
+    #       file_format: "X12", 
+    #       format_details: {
+    #         x12: {
+    #           version: "VERSION_4010", 
+    #           transaction_set: "X12_110", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     converted_file_content: "Sample converted file content", 
+    #     validation_messages: [
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_conversion({
+    #     source: { # required
+    #       file_format: "JSON", # required, accepts JSON, XML
+    #       input_file: { # required
+    #         file_content: "InputFileSourceFileContentString",
+    #       },
+    #     },
+    #     target: { # required
+    #       file_format: "X12", # required, accepts X12
+    #       format_details: {
+    #         x12: {
+    #           transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
+    #           version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010, VERSION_5010_HIPAA
+    #         },
+    #       },
+    #       output_sample_file: {
+    #         file_location: {
+    #           bucket_name: "BucketName",
+    #           key: "S3Key",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.converted_file_content #=> String
+    #   resp.validation_messages #=> Array
+    #   resp.validation_messages[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/TestConversion AWS API Documentation
+    #
+    # @overload test_conversion(params = {})
+    # @param [Hash] params ({})
+    def test_conversion(params = {}, options = {})
+      req = build_request(:test_conversion, params)
+      req.send_request(options)
+    end
+
     # Maps the input file according to the provided template file. The API
     # call downloads the file contents from the Amazon S3 location, and
     # passes the contents in as a string, to the `inputFileContent`
@@ -1987,6 +2403,15 @@ module Aws::B2bi
     # @option params [required, String] :mapping_template
     #   Specifies the mapping template for the transformer. This template is
     #   used to map the parsed EDI file using JSONata or XSLT.
+    #
+    #   <note markdown="1"> This parameter is available for backwards compatibility. Use the
+    #   [Mapping][1] data type instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html
     #
     # @option params [required, String] :file_format
     #   Specifies that the currently supported file formats for EDI
@@ -2015,7 +2440,7 @@ module Aws::B2bi
     #   resp = client.test_mapping({
     #     input_file_content: "TestMappingInputFileContent", # required
     #     mapping_template: "MappingTemplate", # required
-    #     file_format: "XML", # required, accepts XML, JSON
+    #     file_format: "XML", # required, accepts XML, JSON, NOT_USED
     #   })
     #
     # @example Response structure
@@ -2081,7 +2506,7 @@ module Aws::B2bi
     #       bucket_name: "BucketName",
     #       key: "S3Key",
     #     },
-    #     file_format: "XML", # required, accepts XML, JSON
+    #     file_format: "XML", # required, accepts XML, JSON, NOT_USED
     #     edi_type: { # required
     #       x12_details: {
     #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
@@ -2249,6 +2674,7 @@ module Aws::B2bi
     #     name: "CapabilityName",
     #     configuration: {
     #       edi: {
+    #         capability_direction: "INBOUND", # accepts INBOUND, OUTBOUND
     #         type: { # required
     #           x12_details: {
     #             transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
@@ -2280,6 +2706,7 @@ module Aws::B2bi
     #   resp.capability_arn #=> String
     #   resp.name #=> String
     #   resp.type #=> String, one of "edi"
+    #   resp.configuration.edi.capability_direction #=> String, one of "INBOUND", "OUTBOUND"
     #   resp.configuration.edi.type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.configuration.edi.type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
     #   resp.configuration.edi.input_location.bucket_name #=> String
@@ -2316,6 +2743,10 @@ module Aws::B2bi
     # @option params [Array<String>] :capabilities
     #   List of the capabilities associated with this partnership.
     #
+    # @option params [Types::CapabilityOptions] :capability_options
+    #   To update, specify the structure that contains the details for the
+    #   associated capabilities.
+    #
     # @return [Types::UpdatePartnershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePartnershipResponse#profile_id #profile_id} => String
@@ -2325,6 +2756,7 @@ module Aws::B2bi
     #   * {Types::UpdatePartnershipResponse#email #email} => String
     #   * {Types::UpdatePartnershipResponse#phone #phone} => String
     #   * {Types::UpdatePartnershipResponse#capabilities #capabilities} => Array&lt;String&gt;
+    #   * {Types::UpdatePartnershipResponse#capability_options #capability_options} => Types::CapabilityOptions
     #   * {Types::UpdatePartnershipResponse#trading_partner_id #trading_partner_id} => String
     #   * {Types::UpdatePartnershipResponse#created_at #created_at} => Time
     #   * {Types::UpdatePartnershipResponse#modified_at #modified_at} => Time
@@ -2362,6 +2794,34 @@ module Aws::B2bi
     #     partnership_id: "PartnershipId", # required
     #     name: "PartnerName",
     #     capabilities: ["CapabilityId"],
+    #     capability_options: {
+    #       outbound_edi: {
+    #         x12: {
+    #           common: {
+    #             interchange_control_headers: {
+    #               sender_id_qualifier: "X12IdQualifier",
+    #               sender_id: "X12SenderId",
+    #               receiver_id_qualifier: "X12IdQualifier",
+    #               receiver_id: "X12ReceiverId",
+    #               repetition_separator: "X12RepetitionSeparator",
+    #               acknowledgment_requested_code: "X12AcknowledgmentRequestedCode",
+    #               usage_indicator_code: "X12UsageIndicatorCode",
+    #             },
+    #             functional_group_headers: {
+    #               application_sender_code: "X12ApplicationSenderCode",
+    #               application_receiver_code: "X12ApplicationReceiverCode",
+    #               responsible_agency_code: "X12ResponsibleAgencyCode",
+    #             },
+    #             delimiters: {
+    #               component_separator: "X12ComponentSeparator",
+    #               data_element_separator: "X12DataElementSeparator",
+    #               segment_terminator: "X12SegmentTerminator",
+    #             },
+    #             validate_edi: false,
+    #           },
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2374,6 +2834,20 @@ module Aws::B2bi
     #   resp.phone #=> String
     #   resp.capabilities #=> Array
     #   resp.capabilities[0] #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.sender_id_qualifier #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.sender_id #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.receiver_id_qualifier #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.receiver_id #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.repetition_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.acknowledgment_requested_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.interchange_control_headers.usage_indicator_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.application_sender_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.application_receiver_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.functional_group_headers.responsible_agency_code #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.component_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.data_element_separator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.delimiters.segment_terminator #=> String
+    #   resp.capability_options.outbound_edi.x12.common.validate_edi #=> Boolean
     #   resp.trading_partner_id #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -2475,15 +2949,21 @@ module Aws::B2bi
       req.send_request(options)
     end
 
-    # Updates the specified parameters for a transformer. A transformer
-    # describes how to process the incoming EDI documents and extract the
-    # necessary information to the output file.
+    # Updates the specified parameters for a transformer. A transformer can
+    # take an EDI file as input and transform it into a JSON-or
+    # XML-formatted document. Alternatively, a transformer can take a
+    # JSON-or XML-formatted document as input and transform it into an EDI
+    # file.
     #
     # @option params [required, String] :transformer_id
     #   Specifies the system-assigned unique identifier for the transformer.
     #
     # @option params [String] :name
     #   Specify a new name for the transformer, if you want to update it.
+    #
+    # @option params [String] :status
+    #   Specifies the transformer's status. You can update the state of the
+    #   transformer, from `active` to `inactive`, or `inactive` to `active`.
     #
     # @option params [String] :file_format
     #   Specifies that the currently supported file formats for EDI
@@ -2493,9 +2973,14 @@ module Aws::B2bi
     #   Specifies the mapping template for the transformer. This template is
     #   used to map the parsed EDI file using JSONata or XSLT.
     #
-    # @option params [String] :status
-    #   Specifies the transformer's status. You can update the state of the
-    #   transformer, from `active` to `inactive`, or `inactive` to `active`.
+    #   <note markdown="1"> This parameter is available for backwards compatibility. Use the
+    #   [Mapping][1] data type instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html
     #
     # @option params [Types::EdiType] :edi_type
     #   Specifies the details for the EDI standard that is being used for the
@@ -2507,53 +2992,98 @@ module Aws::B2bi
     #   Specifies a sample EDI document that is used by a transformer as a
     #   guide for processing the EDI data.
     #
+    # @option params [Types::InputConversion] :input_conversion
+    #   To update, specify the `InputConversion` object, which contains the
+    #   format options for the inbound transformation.
+    #
+    # @option params [Types::Mapping] :mapping
+    #   Specify the structure that contains the mapping template and its
+    #   language (either XSLT or JSONATA).
+    #
+    # @option params [Types::OutputConversion] :output_conversion
+    #   To update, specify the `OutputConversion` object, which contains the
+    #   format options for the outbound transformation.
+    #
+    # @option params [Types::SampleDocuments] :sample_documents
+    #   Specify a structure that contains the Amazon S3 bucket and an array of
+    #   the corresponding keys used to identify the location for your sample
+    #   documents.
+    #
     # @return [Types::UpdateTransformerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTransformerResponse#transformer_id #transformer_id} => String
     #   * {Types::UpdateTransformerResponse#transformer_arn #transformer_arn} => String
     #   * {Types::UpdateTransformerResponse#name #name} => String
-    #   * {Types::UpdateTransformerResponse#file_format #file_format} => String
-    #   * {Types::UpdateTransformerResponse#mapping_template #mapping_template} => String
     #   * {Types::UpdateTransformerResponse#status #status} => String
-    #   * {Types::UpdateTransformerResponse#edi_type #edi_type} => Types::EdiType
-    #   * {Types::UpdateTransformerResponse#sample_document #sample_document} => String
     #   * {Types::UpdateTransformerResponse#created_at #created_at} => Time
     #   * {Types::UpdateTransformerResponse#modified_at #modified_at} => Time
+    #   * {Types::UpdateTransformerResponse#file_format #file_format} => String
+    #   * {Types::UpdateTransformerResponse#mapping_template #mapping_template} => String
+    #   * {Types::UpdateTransformerResponse#edi_type #edi_type} => Types::EdiType
+    #   * {Types::UpdateTransformerResponse#sample_document #sample_document} => String
+    #   * {Types::UpdateTransformerResponse#input_conversion #input_conversion} => Types::InputConversion
+    #   * {Types::UpdateTransformerResponse#mapping #mapping} => Types::Mapping
+    #   * {Types::UpdateTransformerResponse#output_conversion #output_conversion} => Types::OutputConversion
+    #   * {Types::UpdateTransformerResponse#sample_documents #sample_documents} => Types::SampleDocuments
     #
     #
     # @example Example: Sample UpdateTransformer call
     #
     #   resp = client.update_transformer({
-    #     name: "transformJSON", 
-    #     edi_type: {
-    #       x12_details: {
-    #         version: "VERSION_4010", 
-    #         transaction_set: "X12_110", 
+    #     name: "transformX12", 
+    #     input_conversion: {
+    #       format_options: {
+    #         x12: {
+    #           version: "VERSION_4010", 
+    #           transaction_set: "X12_110", 
+    #         }, 
     #       }, 
+    #       from_format: "X12", 
     #     }, 
-    #     file_format: "JSON", 
-    #     mapping_template: "{}", 
-    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     mapping: {
+    #       template: "{}", 
+    #       template_language: "JSONATA", 
+    #     }, 
+    #     sample_documents: {
+    #       bucket_name: "test-bucket", 
+    #       keys: [
+    #         {
+    #           input: "sampleDoc.txt", 
+    #         }, 
+    #       ], 
+    #     }, 
     #     status: "inactive", 
     #     transformer_id: "tr-974c129999f84d8c9", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     name: "transformJSON", 
+    #     name: "transformX12", 
     #     created_at: Time.parse("2023-11-01T21:51:05.504Z"), 
-    #     edi_type: {
-    #       x12_details: {
-    #         version: "VERSION_4010", 
-    #         transaction_set: "X12_110", 
+    #     input_conversion: {
+    #       format_options: {
+    #         x12: {
+    #           version: "VERSION_4010", 
+    #           transaction_set: "X12_110", 
+    #         }, 
     #       }, 
+    #       from_format: "X12", 
     #     }, 
-    #     file_format: "JSON", 
-    #     mapping_template: "$", 
-    #     modified_at: Time.parse("2023-11-01T21:51:05.504Z"), 
-    #     sample_document: "s3://test-bucket/sampleDoc.txt", 
+    #     mapping: {
+    #       template: "{}", 
+    #       template_language: "JSONATA", 
+    #     }, 
+    #     modified_at: Time.parse("2023-11-02T22:31:05.504Z"), 
+    #     sample_documents: {
+    #       bucket_name: "test-bucket", 
+    #       keys: [
+    #         {
+    #           input: "sampleDoc.txt", 
+    #         }, 
+    #       ], 
+    #     }, 
     #     status: "inactive", 
-    #     transformer_arn: "arn:aws:b2bi:us-west-2:607686414464:transformer/tr-974c129999f84d8c9", 
+    #     transformer_arn: "arn:aws:b2bi:us-west-2:123456789012:transformer/tr-974c129999f84d8c9", 
     #     transformer_id: "tr-974c129999f84d8c9", 
     #   }
     #
@@ -2562,9 +3092,9 @@ module Aws::B2bi
     #   resp = client.update_transformer({
     #     transformer_id: "TransformerId", # required
     #     name: "TransformerName",
-    #     file_format: "XML", # accepts XML, JSON
-    #     mapping_template: "MappingTemplate",
     #     status: "active", # accepts active, inactive
+    #     file_format: "XML", # accepts XML, JSON, NOT_USED
+    #     mapping_template: "MappingTemplate",
     #     edi_type: {
     #       x12_details: {
     #         transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
@@ -2572,6 +3102,37 @@ module Aws::B2bi
     #       },
     #     },
     #     sample_document: "FileLocation",
+    #     input_conversion: {
+    #       from_format: "X12", # required, accepts X12
+    #       format_options: {
+    #         x12: {
+    #           transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
+    #           version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010, VERSION_5010_HIPAA
+    #         },
+    #       },
+    #     },
+    #     mapping: {
+    #       template_language: "XSLT", # required, accepts XSLT, JSONATA
+    #       template: "MappingTemplate",
+    #     },
+    #     output_conversion: {
+    #       to_format: "X12", # required, accepts X12
+    #       format_options: {
+    #         x12: {
+    #           transaction_set: "X12_110", # accepts X12_110, X12_180, X12_204, X12_210, X12_211, X12_214, X12_215, X12_259, X12_260, X12_266, X12_269, X12_270, X12_271, X12_274, X12_275, X12_276, X12_277, X12_278, X12_310, X12_315, X12_322, X12_404, X12_410, X12_417, X12_421, X12_426, X12_810, X12_820, X12_824, X12_830, X12_832, X12_834, X12_835, X12_837, X12_844, X12_846, X12_849, X12_850, X12_852, X12_855, X12_856, X12_860, X12_861, X12_864, X12_865, X12_869, X12_870, X12_940, X12_945, X12_990, X12_997, X12_999, X12_270_X279, X12_271_X279, X12_275_X210, X12_275_X211, X12_276_X212, X12_277_X212, X12_277_X214, X12_277_X364, X12_278_X217, X12_820_X218, X12_820_X306, X12_824_X186, X12_834_X220, X12_834_X307, X12_834_X318, X12_835_X221, X12_837_X222, X12_837_X223, X12_837_X224, X12_837_X291, X12_837_X292, X12_837_X298, X12_999_X231
+    #           version: "VERSION_4010", # accepts VERSION_4010, VERSION_4030, VERSION_5010, VERSION_5010_HIPAA
+    #         },
+    #       },
+    #     },
+    #     sample_documents: {
+    #       bucket_name: "BucketName", # required
+    #       keys: [ # required
+    #         {
+    #           input: "S3Key",
+    #           output: "S3Key",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -2579,14 +3140,26 @@ module Aws::B2bi
     #   resp.transformer_id #=> String
     #   resp.transformer_arn #=> String
     #   resp.name #=> String
-    #   resp.file_format #=> String, one of "XML", "JSON"
-    #   resp.mapping_template #=> String
     #   resp.status #=> String, one of "active", "inactive"
+    #   resp.created_at #=> Time
+    #   resp.modified_at #=> Time
+    #   resp.file_format #=> String, one of "XML", "JSON", "NOT_USED"
+    #   resp.mapping_template #=> String
     #   resp.edi_type.x12_details.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
     #   resp.edi_type.x12_details.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
     #   resp.sample_document #=> String
-    #   resp.created_at #=> Time
-    #   resp.modified_at #=> Time
+    #   resp.input_conversion.from_format #=> String, one of "X12"
+    #   resp.input_conversion.format_options.x12.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
+    #   resp.input_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.mapping.template_language #=> String, one of "XSLT", "JSONATA"
+    #   resp.mapping.template #=> String
+    #   resp.output_conversion.to_format #=> String, one of "X12"
+    #   resp.output_conversion.format_options.x12.transaction_set #=> String, one of "X12_110", "X12_180", "X12_204", "X12_210", "X12_211", "X12_214", "X12_215", "X12_259", "X12_260", "X12_266", "X12_269", "X12_270", "X12_271", "X12_274", "X12_275", "X12_276", "X12_277", "X12_278", "X12_310", "X12_315", "X12_322", "X12_404", "X12_410", "X12_417", "X12_421", "X12_426", "X12_810", "X12_820", "X12_824", "X12_830", "X12_832", "X12_834", "X12_835", "X12_837", "X12_844", "X12_846", "X12_849", "X12_850", "X12_852", "X12_855", "X12_856", "X12_860", "X12_861", "X12_864", "X12_865", "X12_869", "X12_870", "X12_940", "X12_945", "X12_990", "X12_997", "X12_999", "X12_270_X279", "X12_271_X279", "X12_275_X210", "X12_275_X211", "X12_276_X212", "X12_277_X212", "X12_277_X214", "X12_277_X364", "X12_278_X217", "X12_820_X218", "X12_820_X306", "X12_824_X186", "X12_834_X220", "X12_834_X307", "X12_834_X318", "X12_835_X221", "X12_837_X222", "X12_837_X223", "X12_837_X224", "X12_837_X291", "X12_837_X292", "X12_837_X298", "X12_999_X231"
+    #   resp.output_conversion.format_options.x12.version #=> String, one of "VERSION_4010", "VERSION_4030", "VERSION_5010", "VERSION_5010_HIPAA"
+    #   resp.sample_documents.bucket_name #=> String
+    #   resp.sample_documents.keys #=> Array
+    #   resp.sample_documents.keys[0].input #=> String
+    #   resp.sample_documents.keys[0].output #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/UpdateTransformer AWS API Documentation
     #
@@ -2615,7 +3188,7 @@ module Aws::B2bi
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-b2bi'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

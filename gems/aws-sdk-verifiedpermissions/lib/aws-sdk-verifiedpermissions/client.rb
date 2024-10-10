@@ -502,6 +502,172 @@ module Aws::VerifiedPermissions
     #
     #   * {Types::BatchIsAuthorizedOutput#results #results} => Array&lt;Types::BatchIsAuthorizedOutputItem&gt;
     #
+    #
+    # @example Example: Batch - Example 1
+    #
+    #   # The following example requests two authorization decisions for two principals                     of type Usernamed
+    #   # Alice and Annalisa.
+    #
+    #   resp = client.batch_is_authorized({
+    #     entities: {
+    #       entity_list: [
+    #         {
+    #           attributes: {
+    #             "Account" => {
+    #               entity_identifier: {
+    #                 entity_id: "1234", 
+    #                 entity_type: "PhotoFlash::Account", 
+    #               }, 
+    #             }, 
+    #             "Email" => {
+    #               string: "", 
+    #             }, 
+    #           }, 
+    #           identifier: {
+    #             entity_id: "Alice", 
+    #             entity_type: "PhotoFlash::User", 
+    #           }, 
+    #           parents: [
+    #           ], 
+    #         }, 
+    #         {
+    #           attributes: {
+    #             "Account" => {
+    #               entity_identifier: {
+    #                 entity_id: "5678", 
+    #                 entity_type: "PhotoFlash::Account", 
+    #               }, 
+    #             }, 
+    #             "Email" => {
+    #               string: "", 
+    #             }, 
+    #           }, 
+    #           identifier: {
+    #             entity_id: "Annalisa", 
+    #             entity_type: "PhotoFlash::User", 
+    #           }, 
+    #           parents: [
+    #           ], 
+    #         }, 
+    #         {
+    #           attributes: {
+    #             "IsPrivate" => {
+    #               boolean: false, 
+    #             }, 
+    #             "Name" => {
+    #               string: "", 
+    #             }, 
+    #           }, 
+    #           identifier: {
+    #             entity_id: "VacationPhoto94.jpg", 
+    #             entity_type: "PhotoFlash::Photo", 
+    #           }, 
+    #           parents: [
+    #             {
+    #               entity_id: "1234", 
+    #               entity_type: "PhotoFlash::Account", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         {
+    #           attributes: {
+    #             "Name" => {
+    #               string: "", 
+    #             }, 
+    #           }, 
+    #           identifier: {
+    #             entity_id: "1234", 
+    #             entity_type: "PhotoFlash::Account", 
+    #           }, 
+    #           parents: [
+    #           ], 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     requests: [
+    #       {
+    #         action: {
+    #           action_id: "ViewPhoto", 
+    #           action_type: "PhotoFlash::Action", 
+    #         }, 
+    #         principal: {
+    #           entity_id: "Alice", 
+    #           entity_type: "PhotoFlash::User", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "VacationPhoto94.jpg", 
+    #           entity_type: "PhotoFlash::Photo", 
+    #         }, 
+    #       }, 
+    #       {
+    #         action: {
+    #           action_id: "DeletePhoto", 
+    #           action_type: "PhotoFlash::Action", 
+    #         }, 
+    #         principal: {
+    #           entity_id: "Annalisa", 
+    #           entity_type: "PhotoFlash::User", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "VacationPhoto94.jpg", 
+    #           entity_type: "PhotoFlash::Photo", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     results: [
+    #       {
+    #         errors: [
+    #         ], 
+    #         decision: "ALLOW", 
+    #         determining_policies: [
+    #           {
+    #             policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #           }, 
+    #         ], 
+    #         request: {
+    #           action: {
+    #             action_id: "ViewPhoto", 
+    #             action_type: "PhotoFlash::Action", 
+    #           }, 
+    #           principal: {
+    #             entity_id: "alice", 
+    #             entity_type: "PhotoFlash::User", 
+    #           }, 
+    #           resource: {
+    #             entity_id: "VacationPhoto94.jpg", 
+    #             entity_type: "PhotoFlash::Photo", 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       {
+    #         errors: [
+    #         ], 
+    #         decision: "DENY", 
+    #         determining_policies: [
+    #         ], 
+    #         request: {
+    #           action: {
+    #             action_id: "DeletePhoto", 
+    #             action_type: "PhotoFlash::Action", 
+    #           }, 
+    #           principal: {
+    #             entity_id: "annalisa", 
+    #             entity_type: "PhotoFlash::User", 
+    #           }, 
+    #           resource: {
+    #             entity_id: "VacationPhoto94.jpg", 
+    #             entity_type: "PhotoFlash::Photo", 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_is_authorized({
@@ -650,6 +816,144 @@ module Aws::VerifiedPermissions
     #   * {Types::BatchIsAuthorizedWithTokenOutput#principal #principal} => Types::EntityIdentifier
     #   * {Types::BatchIsAuthorizedWithTokenOutput#results #results} => Array&lt;Types::BatchIsAuthorizedWithTokenOutputItem&gt;
     #
+    #
+    # @example Example: Batch - Example 1
+    #
+    #   # The following example requests three authorization decisions for two resources                     and two actions in
+    #   # different photo albums.
+    #
+    #   resp = client.batch_is_authorized_with_token({
+    #     entities: {
+    #       entity_list: [
+    #         {
+    #           identifier: {
+    #             entity_id: "VacationPhoto94.jpg", 
+    #             entity_type: "PhotoFlash::Photo", 
+    #           }, 
+    #           parents: [
+    #             {
+    #               entity_id: "MyExampleAlbum1", 
+    #               entity_type: "PhotoFlash::Album", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         {
+    #           identifier: {
+    #             entity_id: "OfficePhoto94.jpg", 
+    #             entity_type: "PhotoFlash::Photo", 
+    #           }, 
+    #           parents: [
+    #             {
+    #               entity_id: "MyExampleAlbum2", 
+    #               entity_type: "PhotoFlash::Album", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     identity_token: "eyJra12345EXAMPLE", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     requests: [
+    #       {
+    #         action: {
+    #           action_id: "ViewPhoto", 
+    #           action_type: "PhotoFlash::Action", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "VacationPhoto94.jpg", 
+    #           entity_type: "PhotoFlash::Photo", 
+    #         }, 
+    #       }, 
+    #       {
+    #         action: {
+    #           action_id: "SharePhoto", 
+    #           action_type: "PhotoFlash::Action", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "VacationPhoto94.jpg", 
+    #           entity_type: "PhotoFlash::Photo", 
+    #         }, 
+    #       }, 
+    #       {
+    #         action: {
+    #           action_id: "ViewPhoto", 
+    #           action_type: "PhotoFlash::Action", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "OfficePhoto94.jpg", 
+    #           entity_type: "PhotoFlash::Photo", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     principal: {
+    #       entity_id: "us-east-1_EXAMPLE|a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #       entity_type: "PhotoFlash::User", 
+    #     }, 
+    #     results: [
+    #       {
+    #         errors: [
+    #         ], 
+    #         decision: "ALLOW", 
+    #         determining_policies: [
+    #           {
+    #             policy_id: "9wYixMplbbZQb5fcZHyJhY", 
+    #           }, 
+    #         ], 
+    #         request: {
+    #           action: {
+    #             action_id: "ViewPhoto", 
+    #             action_type: "PhotoFlash::Action", 
+    #           }, 
+    #           resource: {
+    #             entity_id: "VacationPhoto94.jpg", 
+    #             entity_type: "PhotoFlash::Photo", 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       {
+    #         errors: [
+    #         ], 
+    #         decision: "ALLOW", 
+    #         determining_policies: [
+    #           {
+    #             policy_id: "9wYixMplbbZQb5fcZHyJhY", 
+    #           }, 
+    #         ], 
+    #         request: {
+    #           action: {
+    #             action_id: "SharePhoto", 
+    #             action_type: "PhotoFlash::Action", 
+    #           }, 
+    #           resource: {
+    #             entity_id: "VacationPhoto94.jpg", 
+    #             entity_type: "PhotoFlash::Photo", 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       {
+    #         errors: [
+    #         ], 
+    #         decision: "DENY", 
+    #         determining_policies: [
+    #         ], 
+    #         request: {
+    #           action: {
+    #             action_id: "ViewPhoto", 
+    #             action_type: "PhotoFlash::Action", 
+    #           }, 
+    #           resource: {
+    #             entity_id: "OfficePhoto94.jpg", 
+    #             entity_type: "PhotoFlash::Photo", 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_is_authorized_with_token({
@@ -746,7 +1050,7 @@ module Aws::VerifiedPermissions
     #   `MyCorp::User::us-east-1_EXAMPLE|a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #
     # * OpenID Connect (OIDC) provider: `Namespace::[Entity
-    #   type]::[principalIdClaim]|[user principal attribute]`, for example
+    #   type]::[entityIdPrefix]|[user principal attribute]`, for example
     #   `MyCorp::User::MyOIDCProvider|a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     #
     #  </note>
@@ -810,6 +1114,35 @@ module Aws::VerifiedPermissions
     #   * {Types::CreateIdentitySourceOutput#identity_source_id #identity_source_id} => String
     #   * {Types::CreateIdentitySourceOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::CreateIdentitySourceOutput#policy_store_id #policy_store_id} => String
+    #
+    #
+    # @example Example: To create an identity source
+    #
+    #   # The following ``create-identity-source`` example creates an identity source that lets you reference identities stored in
+    #   # the specified Amazon Cognito user pool. Those identities are available in Verified Permissions as entities of type
+    #   # ``User``. 
+    #
+    #   resp = client.create_identity_source({
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111", 
+    #     configuration: {
+    #       cognito_user_pool_configuration: {
+    #         client_ids: [
+    #           "a1b2c3d4e5f6g7h8i9j0kalbmc", 
+    #         ], 
+    #         user_pool_arn: "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5", 
+    #       }, 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     principal_entity_type: "User", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     identity_source_id: "ISEXAMPLEabcdefg111111", 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -938,6 +1271,111 @@ module Aws::VerifiedPermissions
     #   * {Types::CreatePolicyOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::CreatePolicyOutput#effect #effect} => String
     #
+    #
+    # @example Example: To create a static policy
+    #
+    #   # The following example request creates a static policy with a policy scope that specifies both a principal and a
+    #   # resource. The response includes both the Principal and Resource elements because both were specified in the request
+    #   # policy scope.
+    #
+    #   resp = client.create_policy({
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111", 
+    #     definition: {
+    #       static: {
+    #         description: "Grant members of janeFriends UserGroup access to the vacationFolder Album", 
+    #         statement: "permit( principal in UserGroup::\"janeFriends\", action, resource in Album::\"vacationFolder\" );", 
+    #       }, 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_type: "STATIC", 
+    #     principal: {
+    #       entity_id: "janeFriends", 
+    #       entity_type: "UserGroup", 
+    #     }, 
+    #     resource: {
+    #       entity_id: "vacationFolder", 
+    #       entity_type: "Album", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create a static policy
+    #
+    #   # The following example request creates a static policy with a policy scope that specifies both a principal and a
+    #   # resource. The response includes both the Principal and Resource elements because both were specified in the request
+    #   # policy scope.
+    #
+    #   resp = client.create_policy({
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111", 
+    #     definition: {
+    #       static: {
+    #         description: "Grant members of janeFriends UserGroup access to the vacationFolder Album", 
+    #         statement: "permit( principal in UserGroup::\"janeFriends\", action, resource in Album::\"vacationFolder\" );", 
+    #       }, 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_type: "STATIC", 
+    #     principal: {
+    #       entity_id: "janeFriends", 
+    #       entity_type: "UserGroup", 
+    #     }, 
+    #     resource: {
+    #       entity_id: "vacationFolder", 
+    #       entity_type: "Album", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create a template-linked policy
+    #
+    #   # The following example creates a template-linked policy using the specified policy template and associates the specified
+    #   # principal to use with the new template-linked policy.
+    #
+    #   resp = client.create_policy({
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111", 
+    #     definition: {
+    #       template_linked: {
+    #         policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #         principal: {
+    #           entity_id: "alice", 
+    #           entity_type: "User", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_id: "Et9KxMplyaDdyurDw8TeFa", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_type: "TEMPLATE_LINKED", 
+    #     principal: {
+    #       entity_id: "alice", 
+    #       entity_type: "User", 
+    #     }, 
+    #     resource: {
+    #       entity_id: "VacationPhoto94.jpg", 
+    #       entity_type: "Photo", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_policy({
@@ -1060,6 +1498,26 @@ module Aws::VerifiedPermissions
     #   * {Types::CreatePolicyStoreOutput#created_date #created_date} => Time
     #   * {Types::CreatePolicyStoreOutput#last_updated_date #last_updated_date} => Time
     #
+    #
+    # @example Example: To create policy store
+    #
+    #   # The following example creates a new policy store with strict validation turned on.
+    #
+    #   resp = client.create_policy_store({
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111", 
+    #     validation_settings: {
+    #       mode: "STRICT", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a", 
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_policy_store({
@@ -1146,6 +1604,26 @@ module Aws::VerifiedPermissions
     #   * {Types::CreatePolicyTemplateOutput#created_date #created_date} => Time
     #   * {Types::CreatePolicyTemplateOutput#last_updated_date #last_updated_date} => Time
     #
+    #
+    # @example Example: To create a policy template
+    #
+    #   # The following example creates a policy template that has a placeholder for the principal.
+    #
+    #   resp = client.create_policy_template({
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111", 
+    #     description: "Template for research dept", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     statement: "\"AccessVacation\"\npermit(\n    principal in ?principal,\n    action == Action::\"view\",\n    resource == Photo::\"VacationPhoto94.jpg\"\n)\nwhen {\n    principal has department && principal.department == \"research\"\n};", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_policy_template({
@@ -1190,6 +1668,20 @@ module Aws::VerifiedPermissions
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an identity source
+    #
+    #   # The following example request deletes the specified identity source.
+    #
+    #   resp = client.delete_identity_source({
+    #     identity_source_id: "ISEXAMPLEabcdefg111111", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_identity_source({
@@ -1221,6 +1713,20 @@ module Aws::VerifiedPermissions
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a policy
+    #
+    #   # The following example deletes the specified policy from its policy store.
+    #
+    #   resp = client.delete_policy({
+    #     policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_policy({
@@ -1247,6 +1753,19 @@ module Aws::VerifiedPermissions
     #   Specifies the ID of the policy store that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a policy store
+    #
+    #   # The following example deletes the specified policy store.
+    #
+    #   resp = client.delete_policy_store({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1278,6 +1797,21 @@ module Aws::VerifiedPermissions
     #   Specifies the ID of the policy template that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a policy template
+    #
+    #   # The following example deletes a policy template. Before you can perform this operation, you must first delete any
+    #   # template-linked policies that were instantiated from this policy template. To delete them, use DeletePolicy.
+    #
+    #   resp = client.delete_policy_template({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1313,6 +1847,33 @@ module Aws::VerifiedPermissions
     #   * {Types::GetIdentitySourceOutput#policy_store_id #policy_store_id} => String
     #   * {Types::GetIdentitySourceOutput#principal_entity_type #principal_entity_type} => String
     #   * {Types::GetIdentitySourceOutput#configuration #configuration} => Types::ConfigurationDetail
+    #
+    #
+    # @example Example: To retrieve details about an identity source
+    #
+    #   # The following example retrieves the details for the specified identity source.
+    #
+    #   resp = client.get_identity_source({
+    #     identity_source_id: "ISEXAMPLEabcdefg111111", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     details: {
+    #       client_ids: [
+    #         "a1b2c3d4e5f6g7h8i9j0kalbmc", 
+    #       ], 
+    #       discovery_url: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5", 
+    #       open_id_issuer: "COGNITO", 
+    #       user_pool_arn: "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5", 
+    #     }, 
+    #     identity_source_id: "ISEXAMPLEabcdefg111111", 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     principal_entity_type: "AWS::Cognito", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1380,6 +1941,37 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::GetPolicyOutput#effect #effect} => String
     #
+    #
+    # @example Example: To retrieve details about a policy
+    #
+    #   # The following example retrieves information about the specified policy contained in the specified policy store. In this
+    #   # example, the requested policy is a template-linked policy, so it returns the ID of the policy template, and the specific
+    #   # principal and resource used by this policy.
+    #
+    #   resp = client.get_policy({
+    #     policy_id: "9wYixMplbbZQb5fcZHyJhY", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     definition: {
+    #       static: {
+    #         description: "Grant everyone of janeFriends UserGroup access to the vacationFolder Album", 
+    #         statement: "permit(principal, action, resource in Album::\"publicFolder\");", 
+    #       }, 
+    #     }, 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_type: "STATIC", 
+    #     resource: {
+    #       entity_id: "publicFolder", 
+    #       entity_type: "Album", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_policy({
@@ -1433,6 +2025,26 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyStoreOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::GetPolicyStoreOutput#description #description} => String
     #
+    #
+    # @example Example: GetPolicyStore
+    #
+    #   # The following example retrieves details about the specified policy store.
+    #
+    #   resp = client.get_policy_store({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a", 
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     validation_settings: {
+    #       mode: "STRICT", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_policy_store({
@@ -1477,6 +2089,26 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyTemplateOutput#created_date #created_date} => Time
     #   * {Types::GetPolicyTemplateOutput#last_updated_date #last_updated_date} => Time
     #
+    #
+    # @example Example: GetPolicyTemplate
+    #
+    #   # The following example displays the details of the specified policy template.
+    #
+    #   resp = client.get_policy_template({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     description: "Template for research dept", 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #     statement: "permit(\n  principal ?principal,\n  action == Action::\"view\",\n  resource in ?resource\n) when {\n  principal has department && principal.department == \"research\" \n};", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_policy_template({
@@ -1515,6 +2147,29 @@ module Aws::VerifiedPermissions
     #   * {Types::GetSchemaOutput#created_date #created_date} => Time
     #   * {Types::GetSchemaOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::GetSchemaOutput#namespaces #namespaces} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: GetSchema
+    #
+    #   # The following example retrieves the current schema stored in the specified policy store.
+    #   # Note
+    #   # The JSON in the parameters of this operation are strings that can contain embedded quotation marks (") within the
+    #   # outermost quotation mark pair. This requires that you stringify the JSON object by preceding all embedded quotation
+    #   # marks with a backslash character ( \" ) and combining all lines into a single text line with no line breaks.
+    #   # Example strings might be displayed wrapped across multiple lines here for readability, but the operation requires the
+    #   # parameters be submitted as single line strings.
+    #
+    #   resp = client.get_schema({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     schema: "{\n\"My::Application\": {\n\"actions\": {\n\"remoteAccess\": {\n\"appliesTo\": {\n\"principalTypes\":   [\"Employee\"]\n}\n}\n},\n\"entityTypes\":   {\n\"Employee\": {\n\"shape\": {\n\"attributes\": {\n\"jobLevel\": { \"type\": \"Long\" },\n\"name\": { \"type\":\"String\" }\n},\n\"type\": \"Record\"\n}\n}\n}\n}\n  }", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1585,6 +2240,72 @@ module Aws::VerifiedPermissions
     #   * {Types::IsAuthorizedOutput#determining_policies #determining_policies} => Array&lt;Types::DeterminingPolicyItem&gt;
     #   * {Types::IsAuthorizedOutput#errors #errors} => Array&lt;Types::EvaluationErrorItem&gt;
     #
+    #
+    # @example Example: IsAuthorized - Example 1
+    #
+    #   # The following example requests an authorization decision for a principal of type User named Alice, who wants to perform
+    #   # the updatePhoto operation, on a resource of type Photo named VacationPhoto94.jpg.
+    #   # The response shows that the request was allowed by one policy.
+    #
+    #   resp = client.is_authorized({
+    #     action: {
+    #       action_id: "view", 
+    #       action_type: "Action", 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     principal: {
+    #       entity_id: "alice", 
+    #       entity_type: "User", 
+    #     }, 
+    #     resource: {
+    #       entity_id: "VacationPhoto94.jpg", 
+    #       entity_type: "Photo", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     decision: "ALLOW", 
+    #     determining_policies: [
+    #       {
+    #         policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: IsAuthorized - Example 2
+    #
+    #   # The following example is the same as the previous example, except that the principal is User::"bob", and the policy
+    #   # store doesn't contain any policy that allows that user access to Album::"alice_folder". The output infers that the Deny
+    #   # was implicit because the list of DeterminingPolicies is empty.
+    #
+    #   resp = client.is_authorized({
+    #     action: {
+    #       action_id: "view", 
+    #       action_type: "Action", 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     principal: {
+    #       entity_id: "bob", 
+    #       entity_type: "User", 
+    #     }, 
+    #     resource: {
+    #       entity_id: "VacationPhoto94.jpg", 
+    #       entity_type: "Photo", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     decision: "DENY", 
+    #     determining_policies: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.is_authorized({
@@ -1654,9 +2375,6 @@ module Aws::VerifiedPermissions
     # `Allow` or `Deny`, along with a list of the policies that resulted in
     # the decision.
     #
-    # At this time, Verified Permissions accepts tokens from only Amazon
-    # Cognito.
-    #
     # Verified Permissions validates each token that is specified in a
     # request by checking its expiration date and its signature.
     #
@@ -1725,6 +2443,44 @@ module Aws::VerifiedPermissions
     #   * {Types::IsAuthorizedWithTokenOutput#determining_policies #determining_policies} => Array&lt;Types::DeterminingPolicyItem&gt;
     #   * {Types::IsAuthorizedWithTokenOutput#errors #errors} => Array&lt;Types::EvaluationErrorItem&gt;
     #   * {Types::IsAuthorizedWithTokenOutput#principal #principal} => Types::EntityIdentifier
+    #
+    #
+    # @example Example: IsAuthorizedWithToken - Example 1
+    #
+    #   # The following example requests an authorization decision for a user who was authenticated by Amazon Cognito. The request
+    #   # uses the identity token provided by Amazon Cognito instead of the access token. In this example, the specified
+    #   # information store is configured to return principals as entities of type CognitoUser. The policy store contains a policy
+    #   # with the following statement.
+    #   # permit(
+    #   # principal == CognitoUser::"us-east-1_1a2b3c4d5|a1b2c3d4e5f6g7h8i9j0kalbmc",
+    #   # action,
+    #   # resource == Photo::"VacationPhoto94.jpg"
+    #   # );
+    #
+    #   resp = client.is_authorized_with_token({
+    #     action: {
+    #       action_id: "View", 
+    #       action_type: "Action", 
+    #     }, 
+    #     identity_token: "EgZjxMPlbWUyBggAEEUYOdIBCDM3NDlqMGo3qAIAsAIA", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     resource: {
+    #       entity_id: "vacationPhoto94.jpg", 
+    #       entity_type: "Photo", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     decision: "ALLOW", 
+    #     determining_policies: [
+    #       {
+    #         policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1824,6 +2580,36 @@ module Aws::VerifiedPermissions
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: ListIdentitySources
+    #
+    #   # The following example request creates lists the identity sources currently defined in the specified policy store.
+    #
+    #   resp = client.list_identity_sources({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     identity_sources: [
+    #       {
+    #         created_date: Time.parse("2023-05-19T20:29:23.66812Z"), 
+    #         details: {
+    #           client_ids: [
+    #             "a1b2c3d4e5f6g7h8i9j0kalbmc", 
+    #           ], 
+    #           discovery_url: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5", 
+    #           open_id_issuer: "COGNITO", 
+    #           user_pool_arn: "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5", 
+    #         }, 
+    #         identity_source_id: "ISEXAMPLEabcdefg111111", 
+    #         last_updated_date: Time.parse("2023-05-19T20:29:23.66812Z"), 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #         principal_entity_type: "User", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_identity_sources({
@@ -1915,6 +2701,163 @@ module Aws::VerifiedPermissions
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: ListPolicies - Example 1
+    #
+    #   # The following example lists all policies in the policy store.
+    #
+    #   resp = client.list_policies({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policies: [
+    #       {
+    #         created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #         definition: {
+    #           static: {
+    #             description: "Grant members of janeFriends UserGroup access to the vacationFolder Album", 
+    #           }, 
+    #         }, 
+    #         last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #         policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #         policy_type: "STATIC", 
+    #         principal: {
+    #           entity_id: "janeFriends", 
+    #           entity_type: "UserGroup", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "vacationFolder", 
+    #           entity_type: "Album", 
+    #         }, 
+    #       }, 
+    #       {
+    #         created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #         definition: {
+    #           static: {
+    #             description: "Grant everyone access to the publicFolder Album", 
+    #           }, 
+    #         }, 
+    #         last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #         policy_id: "Et9KxMplyaDdyurDw8TeFa", 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #         policy_type: "STATIC", 
+    #         resource: {
+    #           entity_id: "publicFolder", 
+    #           entity_type: "Album", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: ListPolicies - Example 2
+    #
+    #   # The following example lists all policies for a specified principal.
+    #
+    #   resp = client.list_policies({
+    #     filter: {
+    #       principal: {
+    #         identifier: {
+    #           entity_id: "alice", 
+    #           entity_type: "User", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policies: [
+    #       {
+    #         created_date: Time.parse("2022-12-09T22:55:16.067533Z"), 
+    #         definition: {
+    #           static: {
+    #             description: "An example policy", 
+    #           }, 
+    #         }, 
+    #         last_updated_date: Time.parse("2022-12-09T22:55:16.067533Z"), 
+    #         policy_id: "Et9KxMplyaDdyurDw8TeFa", 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #         policy_type: "STATIC", 
+    #         principal: {
+    #           entity_id: "alice", 
+    #           entity_type: "User", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "bob_folder", 
+    #           entity_type: "Album", 
+    #         }, 
+    #       }, 
+    #       {
+    #         created_date: Time.parse("2022-12-09T23:00:24.66266Z"), 
+    #         definition: {
+    #           static: {
+    #           }, 
+    #         }, 
+    #         last_updated_date: Time.parse("2022-12-09T23:00:24.66266Z"), 
+    #         policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #         policy_type: "STATIC", 
+    #         principal: {
+    #           entity_id: "alice", 
+    #           entity_type: "User", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "alice_folder", 
+    #           entity_type: "Album", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: ListPolicies - Example 3
+    #
+    #   # The following example uses the Filter parameter to list only the template-linked policies in the specified policy store.
+    #
+    #   resp = client.list_policies({
+    #     filter: {
+    #       policy_type: "TEMPLATE_LINKED", 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policies: [
+    #       {
+    #         created_date: Time.parse("2023-06-13T16:03:07.620867Z"), 
+    #         definition: {
+    #           template_linked: {
+    #             policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #             principal: {
+    #               entity_id: "alice", 
+    #               entity_type: "User", 
+    #             }, 
+    #             resource: {
+    #               entity_id: "pic.jpg", 
+    #               entity_type: "Photo", 
+    #             }, 
+    #           }, 
+    #         }, 
+    #         last_updated_date: Time.parse("2023-06-13T16:03:07.620867Z"), 
+    #         policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #         policy_type: "TEMPLATE_LINKED", 
+    #         principal: {
+    #           entity_id: "alice", 
+    #           entity_type: "User", 
+    #         }, 
+    #         resource: {
+    #           entity_id: "pic.jpg", 
+    #           entity_type: "Photo", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies({
@@ -2005,6 +2948,30 @@ module Aws::VerifiedPermissions
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: ListPolicyStores
+    #
+    #   # The following example lists all policy stores in the AWS account in the AWS Region in which you call the operation.
+    #
+    #   resp = client.list_policy_stores({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_stores: [
+    #       {
+    #         arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a", 
+    #         created_date: Time.parse("2023-05-16T17:41:29.103459Z"), 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:verifiedpermissions::123456789012:policy-store/PSEXAMPLEabcdefg222222", 
+    #         created_date: Time.parse("2023-05-16T18:23:04.985521Z"), 
+    #         policy_store_id: "PSEXAMPLEabcdefg222222", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policy_stores({
@@ -2066,6 +3033,35 @@ module Aws::VerifiedPermissions
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: ListPolicyTemplates
+    #
+    #   # The following example retrieves a list of all of the policy templates in the specified policy store.
+    #
+    #   resp = client.list_policy_templates({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy_templates: [
+    #       {
+    #         created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #         description: "Generic template", 
+    #         last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #         policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #       }, 
+    #       {
+    #         created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #         description: "Template for research dept", 
+    #         last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #         policy_template_id: "PTEXAMPLEabcdefg222222", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policy_templates({
@@ -2123,6 +3119,35 @@ module Aws::VerifiedPermissions
     #   * {Types::PutSchemaOutput#created_date #created_date} => Time
     #   * {Types::PutSchemaOutput#last_updated_date #last_updated_date} => Time
     #
+    #
+    # @example Example: PutSchema
+    #
+    #   # The following example creates a new schema, or updates an existing schema, in the specified policy store. Note that the
+    #   # schema text is shown line wrapped for readability. You should submit the entire schema text as a single line of text.
+    #   # Note
+    #   # The JSON in the parameters of this operation are strings that can contain embedded quotation marks (") within the
+    #   # outermost quotation mark pair. This requires that you stringify the JSON object by preceding all embedded quotation
+    #   # marks with a backslash character ( \" ) and combining all lines into a single text line with no line breaks.
+    #   # Example strings might be displayed wrapped across multiple lines here for readability, but the operation requires the
+    #   # parameters be submitted as single line strings.
+    #
+    #   resp = client.put_schema({
+    #     definition: {
+    #       cedar_json: "{\"MySampleNamespace\": {\"actions\": {\"remoteAccess\": {\"appliesTo\": {\"principalTypes\": [\"Employee\"]}}},\"entityTypes\": {\"Employee\": {\"shape\": {\"attributes\": {\"jobLevel\": {\"type\": \"Long\"},\"name\": {\"type\": \"String\"}},\"type\": \"Record\"}}}}}", 
+    #     }, 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2023-06-13T19:28:06.003726Z"), 
+    #     last_updated_date: Time.parse("2023-06-13T19:28:06.003726Z"), 
+    #     namespaces: [
+    #       "My::Sample::Namespace", 
+    #     ], 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_schema({
@@ -2172,13 +3197,6 @@ module Aws::VerifiedPermissions
     #   Specifies the details required to communicate with the identity
     #   provider (IdP) associated with this identity source.
     #
-    #   <note markdown="1"> At this time, the only valid member of this structure is a Amazon
-    #   Cognito user pool configuration.
-    #
-    #    You must specify a `userPoolArn`, and optionally, a `ClientId`.
-    #
-    #    </note>
-    #
     # @option params [String] :principal_entity_type
     #   Specifies the data type of principals generated for identities
     #   authenticated by the identity source.
@@ -2189,6 +3207,32 @@ module Aws::VerifiedPermissions
     #   * {Types::UpdateIdentitySourceOutput#identity_source_id #identity_source_id} => String
     #   * {Types::UpdateIdentitySourceOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::UpdateIdentitySourceOutput#policy_store_id #policy_store_id} => String
+    #
+    #
+    # @example Example: UpdateIdentitySource
+    #
+    #   # The following example updates the configuration of the specified identity source with a new configuration.
+    #
+    #   resp = client.update_identity_source({
+    #     identity_source_id: "ISEXAMPLEabcdefg111111", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     update_configuration: {
+    #       cognito_user_pool_configuration: {
+    #         client_ids: [
+    #           "a1b2c3d4e5f6g7h8i9j0kalbmc", 
+    #         ], 
+    #         user_pool_arn: "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2023-05-19T20:30:28.173926Z"), 
+    #     identity_source_id: "ISEXAMPLEabcdefg111111", 
+    #     last_updated_date: Time.parse("2023-05-22T20:45:59.962216Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2334,6 +3378,34 @@ module Aws::VerifiedPermissions
     #   * {Types::UpdatePolicyOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::UpdatePolicyOutput#effect #effect} => String
     #
+    #
+    # @example Example: UpdatePolicy
+    #
+    #   # The following example replaces the definition of the specified static policy with a new one.
+    #
+    #   resp = client.update_policy({
+    #     definition: {
+    #       static: {
+    #         statement: "permit(principal, action, resource in Album::\"public_folder\");", 
+    #       }, 
+    #     }, 
+    #     policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"), 
+    #     policy_id: "9wYxMpljbbZQb5fcZHyJhY", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_type: "STATIC", 
+    #     resource: {
+    #       entity_id: "public_folder", 
+    #       entity_type: "Album", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_policy({
@@ -2399,6 +3471,26 @@ module Aws::VerifiedPermissions
     #   * {Types::UpdatePolicyStoreOutput#arn #arn} => String
     #   * {Types::UpdatePolicyStoreOutput#created_date #created_date} => Time
     #   * {Types::UpdatePolicyStoreOutput#last_updated_date #last_updated_date} => Time
+    #
+    #
+    # @example Example: UpdatePolicyStore
+    #
+    #   # The following example turns off the validation settings for a policy store.
+    #
+    #   resp = client.update_policy_store({
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     validation_settings: {
+    #       mode: "OFF", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a", 
+    #     created_date: Time.parse("2023-05-17T18:36:10.134448Z"), 
+    #     last_updated_date: Time.parse("2023-05-23T18:18:12.443083Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2481,6 +3573,34 @@ module Aws::VerifiedPermissions
     #   * {Types::UpdatePolicyTemplateOutput#created_date #created_date} => Time
     #   * {Types::UpdatePolicyTemplateOutput#last_updated_date #last_updated_date} => Time
     #
+    #
+    # @example Example: UpdatePolicyTemplate
+    #
+    #   # The following example updates a policy template with both a new description and a new policy body. The effect,
+    #   # principal, and resource are the same as the original policy template. Only the action in the head, and the when and
+    #   # unless clauses can be different.
+    #   # Note
+    #   # The JSON in the parameters of this operation are strings that can contain embedded quotation marks (") within the
+    #   # outermost quotation mark pair. This requires that you stringify the JSON object by preceding all embedded quotation
+    #   # marks with a backslash character ( \" ) and combining all lines into a single text line with no line breaks.
+    #   # Example strings might be displayed wrapped across multiple lines here for readability, but the operation requires the
+    #   # parameters be submitted as single line strings.
+    #
+    #   resp = client.update_policy_template({
+    #     description: "My updated template description", 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #     statement: "\"ResearchAccess\"\npermit(\nprincipal in ?principal,\naction == Action::\"view\",\nresource in ?resource\"\n)\nwhen {\nprincipal has department && principal.department == \"research\"\n};", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_date: Time.parse("2023-05-17T18:58:48.795411Z"), 
+    #     last_updated_date: Time.parse("2023-05-17T19:18:48.870209Z"), 
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     policy_template_id: "PTEXAMPLEabcdefg111111", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_policy_template({
@@ -2524,7 +3644,7 @@ module Aws::VerifiedPermissions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

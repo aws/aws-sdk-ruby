@@ -2255,6 +2255,9 @@ module Aws::CodeArtifact
     #   Returns which endpoint of a repository to return. A repository has one
     #   endpoint for each package format.
     #
+    # @option params [String] :endpoint_type
+    #   A string that specifies the type of endpoint.
+    #
     # @return [Types::GetRepositoryEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRepositoryEndpointResult#repository_endpoint #repository_endpoint} => String
@@ -2266,6 +2269,7 @@ module Aws::CodeArtifact
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
     #     format: "npm", # required, accepts npm, pypi, maven, nuget, generic, ruby, swift, cargo
+    #     endpoint_type: "dualstack", # accepts dualstack, ipv4
     #   })
     #
     # @example Response structure
@@ -4017,7 +4021,7 @@ module Aws::CodeArtifact
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

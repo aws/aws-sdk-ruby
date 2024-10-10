@@ -4559,13 +4559,20 @@ module Aws::SageMaker
     #   CodeEditor applications.
     #   @return [Types::AppLifecycleManagement]
     #
+    # @!attribute [rw] built_in_lifecycle_config_arn
+    #   The lifecycle configuration that runs before the default lifecycle
+    #   configuration. It can override changes made in the default lifecycle
+    #   configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeEditorAppSettings AWS API Documentation
     #
     class CodeEditorAppSettings < Struct.new(
       :default_resource_spec,
       :custom_images,
       :lifecycle_config_arns,
-      :app_lifecycle_management)
+      :app_lifecycle_management,
+      :built_in_lifecycle_config_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6217,6 +6224,11 @@ module Aws::SageMaker
     #   value must be set to `Service`.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation
+    #   Indicates whether custom tag propagation is supported for the
+    #   domain. Defaults to `DISABLED`.
+    #   @return [String]
+    #
     # @!attribute [rw] default_space_settings
     #   The default settings used to create a space.
     #   @return [Types::DefaultSpaceSettings]
@@ -6235,6 +6247,7 @@ module Aws::SageMaker
       :home_efs_file_system_kms_key_id,
       :kms_key_id,
       :app_security_group_management,
+      :tag_propagation,
       :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -12409,6 +12422,11 @@ module Aws::SageMaker
     #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] built_in_lifecycle_config_arn
+    #   The lifecycle configuration that runs before the default lifecycle
+    #   configuration
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppResponse AWS API Documentation
     #
     class DescribeAppResponse < Struct.new(
@@ -12423,7 +12441,8 @@ module Aws::SageMaker
       :last_user_activity_timestamp,
       :creation_time,
       :failure_reason,
-      :resource_spec)
+      :resource_spec,
+      :built_in_lifecycle_config_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13494,6 +13513,11 @@ module Aws::SageMaker
     #   is provided.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation
+    #   Indicates whether custom tag propagation is supported for the
+    #   domain.
+    #   @return [String]
+    #
     # @!attribute [rw] default_space_settings
     #   The default settings used to create a space.
     #   @return [Types::DefaultSpaceSettings]
@@ -13522,6 +13546,7 @@ module Aws::SageMaker
       :vpc_id,
       :kms_key_id,
       :app_security_group_management,
+      :tag_propagation,
       :default_space_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -25179,6 +25204,12 @@ module Aws::SageMaker
     #   EMR clusters or Amazon EMR Serverless applications.
     #   @return [Types::EmrSettings]
     #
+    # @!attribute [rw] built_in_lifecycle_config_arn
+    #   The lifecycle configuration that runs before the default lifecycle
+    #   configuration. It can override changes made in the default lifecycle
+    #   configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterLabAppSettings AWS API Documentation
     #
     class JupyterLabAppSettings < Struct.new(
@@ -25187,7 +25218,8 @@ module Aws::SageMaker
       :lifecycle_config_arns,
       :code_repositories,
       :app_lifecycle_management,
-      :emr_settings)
+      :emr_settings,
+      :built_in_lifecycle_config_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45318,6 +45350,11 @@ module Aws::SageMaker
     #   is provided as part of the same request.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation
+    #   Indicates whether custom tag propagation is supported for the
+    #   domain. Defaults to `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDomainRequest AWS API Documentation
     #
     class UpdateDomainRequest < Struct.new(
@@ -45327,7 +45364,8 @@ module Aws::SageMaker
       :app_security_group_management,
       :default_space_settings,
       :subnet_ids,
-      :app_network_access_type)
+      :app_network_access_type,
+      :tag_propagation)
       SENSITIVE = []
       include Aws::Structure
     end

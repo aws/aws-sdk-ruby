@@ -40,6 +40,26 @@ module Aws::S3
       data[:rules]
     end
 
+    # Indicates which default minimum object size behavior is applied to the
+    # lifecycle configuration.
+    #
+    # * `all_storage_classes_128K` - Objects smaller than 128 KB will not
+    #   transition to any storage class by default.
+    #
+    # * `varies_by_storage_class` - Objects smaller than 128 KB will
+    #   transition to Glacier Flexible Retrieval or Glacier Deep Archive
+    #   storage classes. By default, all other storage classes will prevent
+    #   transitions smaller than 128 KB.
+    #
+    # To customize the minimum object size for any transition you can add a
+    # filter that specifies a custom `ObjectSizeGreaterThan` or
+    # `ObjectSizeLessThan` in the body of your transition rule. Custom
+    # filters always take precedence over the default transition behavior.
+    # @return [String]
+    def transition_default_minimum_object_size
+      data[:transition_default_minimum_object_size]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -257,6 +277,7 @@ module Aws::S3
     #       ],
     #     },
     #     expected_bucket_owner: "AccountId",
+    #     transition_default_minimum_object_size: "varies_by_storage_class", # accepts varies_by_storage_class, all_storage_classes_128K
     #   })
     # @param [Hash] options ({})
     # @option options [String] :checksum_algorithm
@@ -280,7 +301,23 @@ module Aws::S3
     #   The account ID of the expected bucket owner. If the account ID that
     #   you provide does not match the actual owner of the bucket, the request
     #   fails with the HTTP status code `403 Forbidden` (access denied).
-    # @return [EmptyStructure]
+    # @option options [String] :transition_default_minimum_object_size
+    #   Indicates which default minimum object size behavior is applied to the
+    #   lifecycle configuration.
+    #
+    #   * `all_storage_classes_128K` - Objects smaller than 128 KB will not
+    #     transition to any storage class by default.
+    #
+    #   * `varies_by_storage_class` - Objects smaller than 128 KB will
+    #     transition to Glacier Flexible Retrieval or Glacier Deep Archive
+    #     storage classes. By default, all other storage classes will prevent
+    #     transitions smaller than 128 KB.
+    #
+    #   To customize the minimum object size for any transition you can add a
+    #   filter that specifies a custom `ObjectSizeGreaterThan` or
+    #   `ObjectSizeLessThan` in the body of your transition rule. Custom
+    #   filters always take precedence over the default transition behavior.
+    # @return [Types::PutBucketLifecycleConfigurationOutput]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

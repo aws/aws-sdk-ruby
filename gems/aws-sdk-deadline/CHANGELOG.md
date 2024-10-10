@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2024-10-07)
+------------------
+
+* Feature - Add support for using the template from a previous job during job creation and listing parameter definitions for a job.
+
 1.14.0 (2024-09-24)
 ------------------
 

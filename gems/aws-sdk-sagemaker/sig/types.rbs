@@ -808,6 +808,7 @@ module Aws::SageMaker
       attr_accessor custom_images: ::Array[Types::CustomImage]
       attr_accessor lifecycle_config_arns: ::Array[::String]
       attr_accessor app_lifecycle_management: Types::AppLifecycleManagement
+      attr_accessor built_in_lifecycle_config_arn: ::String
       SENSITIVE: []
     end
 
@@ -1155,6 +1156,7 @@ module Aws::SageMaker
       attr_accessor home_efs_file_system_kms_key_id: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor app_security_group_management: ("Service" | "Customer")
+      attr_accessor tag_propagation: ("ENABLED" | "DISABLED")
       attr_accessor default_space_settings: Types::DefaultSpaceSettings
       SENSITIVE: []
     end
@@ -2573,6 +2575,7 @@ module Aws::SageMaker
       attr_accessor creation_time: ::Time
       attr_accessor failure_reason: ::String
       attr_accessor resource_spec: Types::ResourceSpec
+      attr_accessor built_in_lifecycle_config_arn: ::String
       SENSITIVE: []
     end
 
@@ -2834,6 +2837,7 @@ module Aws::SageMaker
       attr_accessor vpc_id: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor app_security_group_management: ("Service" | "Customer")
+      attr_accessor tag_propagation: ("ENABLED" | "DISABLED")
       attr_accessor default_space_settings: Types::DefaultSpaceSettings
       SENSITIVE: []
     end
@@ -5085,6 +5089,7 @@ module Aws::SageMaker
       attr_accessor code_repositories: ::Array[Types::CodeRepository]
       attr_accessor app_lifecycle_management: Types::AppLifecycleManagement
       attr_accessor emr_settings: Types::EmrSettings
+      attr_accessor built_in_lifecycle_config_arn: ::String
       SENSITIVE: []
     end
 
@@ -9428,6 +9433,7 @@ module Aws::SageMaker
       attr_accessor default_space_settings: Types::DefaultSpaceSettings
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor app_network_access_type: ("PublicInternetOnly" | "VpcOnly")
+      attr_accessor tag_propagation: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

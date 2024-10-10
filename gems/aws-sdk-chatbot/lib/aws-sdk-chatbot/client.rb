@@ -521,6 +521,8 @@ module Aws::Chatbot
     #   resp.webhook_configuration.tags #=> Array
     #   resp.webhook_configuration.tags[0].tag_key #=> String
     #   resp.webhook_configuration.tags[0].tag_value #=> String
+    #   resp.webhook_configuration.state #=> String
+    #   resp.webhook_configuration.state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateChimeWebhookConfiguration AWS API Documentation
     #
@@ -636,6 +638,8 @@ module Aws::Chatbot
     #   resp.channel_configuration.tags #=> Array
     #   resp.channel_configuration.tags[0].tag_key #=> String
     #   resp.channel_configuration.tags[0].tag_value #=> String
+    #   resp.channel_configuration.state #=> String
+    #   resp.channel_configuration.state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateMicrosoftTeamsChannelConfiguration AWS API Documentation
     #
@@ -736,6 +740,8 @@ module Aws::Chatbot
     #   resp.channel_configuration.tags #=> Array
     #   resp.channel_configuration.tags[0].tag_key #=> String
     #   resp.channel_configuration.tags[0].tag_value #=> String
+    #   resp.channel_configuration.state #=> String
+    #   resp.channel_configuration.state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateSlackChannelConfiguration AWS API Documentation
     #
@@ -979,6 +985,8 @@ module Aws::Chatbot
     #   resp.webhook_configurations[0].tags #=> Array
     #   resp.webhook_configurations[0].tags[0].tag_key #=> String
     #   resp.webhook_configurations[0].tags[0].tag_value #=> String
+    #   resp.webhook_configurations[0].state #=> String
+    #   resp.webhook_configurations[0].state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeChimeWebhookConfigurations AWS API Documentation
     #
@@ -1042,6 +1050,8 @@ module Aws::Chatbot
     #   resp.slack_channel_configurations[0].tags #=> Array
     #   resp.slack_channel_configurations[0].tags[0].tag_key #=> String
     #   resp.slack_channel_configurations[0].tags[0].tag_value #=> String
+    #   resp.slack_channel_configurations[0].state #=> String
+    #   resp.slack_channel_configurations[0].state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeSlackChannelConfigurations AWS API Documentation
     #
@@ -1136,6 +1146,8 @@ module Aws::Chatbot
     #   resp.slack_workspaces #=> Array
     #   resp.slack_workspaces[0].slack_team_id #=> String
     #   resp.slack_workspaces[0].slack_team_name #=> String
+    #   resp.slack_workspaces[0].state #=> String
+    #   resp.slack_workspaces[0].state_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeSlackWorkspaces AWS API Documentation
@@ -1202,6 +1214,8 @@ module Aws::Chatbot
     #   resp.channel_configuration.tags #=> Array
     #   resp.channel_configuration.tags[0].tag_key #=> String
     #   resp.channel_configuration.tags[0].tag_value #=> String
+    #   resp.channel_configuration.state #=> String
+    #   resp.channel_configuration.state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/GetMicrosoftTeamsChannelConfiguration AWS API Documentation
     #
@@ -1275,6 +1289,8 @@ module Aws::Chatbot
     #   resp.team_channel_configurations[0].tags #=> Array
     #   resp.team_channel_configurations[0].tags[0].tag_key #=> String
     #   resp.team_channel_configurations[0].tags[0].tag_value #=> String
+    #   resp.team_channel_configurations[0].state #=> String
+    #   resp.team_channel_configurations[0].state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListMicrosoftTeamsChannelConfigurations AWS API Documentation
     #
@@ -1318,6 +1334,8 @@ module Aws::Chatbot
     #   resp.configured_teams[0].tenant_id #=> String
     #   resp.configured_teams[0].team_id #=> String
     #   resp.configured_teams[0].team_name #=> String
+    #   resp.configured_teams[0].state #=> String
+    #   resp.configured_teams[0].state_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListMicrosoftTeamsConfiguredTeams AWS API Documentation
@@ -1586,6 +1604,8 @@ module Aws::Chatbot
     #   resp.webhook_configuration.tags #=> Array
     #   resp.webhook_configuration.tags[0].tag_key #=> String
     #   resp.webhook_configuration.tags[0].tag_value #=> String
+    #   resp.webhook_configuration.state #=> String
+    #   resp.webhook_configuration.state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateChimeWebhookConfiguration AWS API Documentation
     #
@@ -1670,6 +1690,8 @@ module Aws::Chatbot
     #   resp.channel_configuration.tags #=> Array
     #   resp.channel_configuration.tags[0].tag_key #=> String
     #   resp.channel_configuration.tags[0].tag_value #=> String
+    #   resp.channel_configuration.state #=> String
+    #   resp.channel_configuration.state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateMicrosoftTeamsChannelConfiguration AWS API Documentation
     #
@@ -1757,6 +1779,8 @@ module Aws::Chatbot
     #   resp.channel_configuration.tags #=> Array
     #   resp.channel_configuration.tags[0].tag_key #=> String
     #   resp.channel_configuration.tags[0].tag_value #=> String
+    #   resp.channel_configuration.state #=> String
+    #   resp.channel_configuration.state_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateSlackChannelConfiguration AWS API Documentation
     #
@@ -1785,7 +1809,7 @@ module Aws::Chatbot
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chatbot'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

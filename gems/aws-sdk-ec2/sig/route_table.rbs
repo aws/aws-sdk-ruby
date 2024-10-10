@@ -45,29 +45,29 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTable.html#associate_with_subnet-instance_method
       def associate_with_subnet: (
+                                   ?gateway_id: ::String,
                                    ?dry_run: bool,
-                                   ?subnet_id: ::String,
-                                   ?gateway_id: ::String
+                                   ?subnet_id: ::String
                                  ) -> RouteTableAssociation
                                | (?Hash[Symbol, untyped]) -> RouteTableAssociation
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTable.html#create_route-instance_method
       def create_route: (
-                          ?destination_cidr_block: ::String,
-                          ?destination_ipv_6_cidr_block: ::String,
                           ?destination_prefix_list_id: ::String,
-                          ?dry_run: bool,
                           ?vpc_endpoint_id: ::String,
-                          ?egress_only_internet_gateway_id: ::String,
-                          ?gateway_id: ::String,
-                          ?instance_id: ::String,
-                          ?nat_gateway_id: ::String,
                           ?transit_gateway_id: ::String,
                           ?local_gateway_id: ::String,
                           ?carrier_gateway_id: ::String,
+                          ?core_network_arn: ::String,
+                          ?dry_run: bool,
+                          ?destination_cidr_block: ::String,
+                          ?gateway_id: ::String,
+                          ?destination_ipv_6_cidr_block: ::String,
+                          ?egress_only_internet_gateway_id: ::String,
+                          ?instance_id: ::String,
                           ?network_interface_id: ::String,
                           ?vpc_peering_connection_id: ::String,
-                          ?core_network_arn: ::String
+                          ?nat_gateway_id: ::String
                         ) -> Route
                       | (?Hash[Symbol, untyped]) -> Route
 

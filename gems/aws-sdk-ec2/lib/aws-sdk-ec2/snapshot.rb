@@ -35,85 +35,6 @@ module Aws::EC2
     end
     alias :snapshot_id :id
 
-    # The data encryption key identifier for the snapshot. This value is a
-    # unique identifier that corresponds to the data encryption key that was
-    # used to encrypt the original volume or snapshot copy. Because data
-    # encryption keys are inherited by volumes created from snapshots, and
-    # vice versa, if snapshots share the same data encryption key
-    # identifier, then they belong to the same volume/snapshot lineage. This
-    # parameter is only returned by DescribeSnapshots.
-    # @return [String]
-    def data_encryption_key_id
-      data[:data_encryption_key_id]
-    end
-
-    # The description for the snapshot.
-    # @return [String]
-    def description
-      data[:description]
-    end
-
-    # Indicates whether the snapshot is encrypted.
-    # @return [Boolean]
-    def encrypted
-      data[:encrypted]
-    end
-
-    # The Amazon Resource Name (ARN) of the KMS key that was used to protect
-    # the volume encryption key for the parent volume.
-    # @return [String]
-    def kms_key_id
-      data[:kms_key_id]
-    end
-
-    # The ID of the Amazon Web Services account that owns the EBS snapshot.
-    # @return [String]
-    def owner_id
-      data[:owner_id]
-    end
-
-    # The progress of the snapshot, as a percentage.
-    # @return [String]
-    def progress
-      data[:progress]
-    end
-
-    # The time stamp when the snapshot was initiated.
-    # @return [Time]
-    def start_time
-      data[:start_time]
-    end
-
-    # The snapshot state.
-    # @return [String]
-    def state
-      data[:state]
-    end
-
-    # Encrypted Amazon EBS snapshots are copied asynchronously. If a
-    # snapshot copy operation fails (for example, if the proper KMS
-    # permissions are not obtained) this field displays error state details
-    # to help you diagnose why the error occurred. This parameter is only
-    # returned by DescribeSnapshots.
-    # @return [String]
-    def state_message
-      data[:state_message]
-    end
-
-    # The ID of the volume that was used to create the snapshot. Snapshots
-    # created by the CopySnapshot action have an arbitrary volume ID that
-    # should not be used for any purpose.
-    # @return [String]
-    def volume_id
-      data[:volume_id]
-    end
-
-    # The size of the volume, in GiB.
-    # @return [Integer]
-    def volume_size
-      data[:volume_size]
-    end
-
     # The Amazon Web Services owner alias, from an Amazon-maintained list
     # (`amazon`). This is not the user-configured Amazon Web Services
     # account alias set using the IAM console.
@@ -161,6 +82,85 @@ module Aws::EC2
     # @return [String]
     def sse_type
       data[:sse_type]
+    end
+
+    # The ID of the volume that was used to create the snapshot. Snapshots
+    # created by the CopySnapshot action have an arbitrary volume ID that
+    # should not be used for any purpose.
+    # @return [String]
+    def volume_id
+      data[:volume_id]
+    end
+
+    # The snapshot state.
+    # @return [String]
+    def state
+      data[:state]
+    end
+
+    # Encrypted Amazon EBS snapshots are copied asynchronously. If a
+    # snapshot copy operation fails (for example, if the proper KMS
+    # permissions are not obtained) this field displays error state details
+    # to help you diagnose why the error occurred. This parameter is only
+    # returned by DescribeSnapshots.
+    # @return [String]
+    def state_message
+      data[:state_message]
+    end
+
+    # The time stamp when the snapshot was initiated.
+    # @return [Time]
+    def start_time
+      data[:start_time]
+    end
+
+    # The progress of the snapshot, as a percentage.
+    # @return [String]
+    def progress
+      data[:progress]
+    end
+
+    # The ID of the Amazon Web Services account that owns the EBS snapshot.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
+    # The description for the snapshot.
+    # @return [String]
+    def description
+      data[:description]
+    end
+
+    # The size of the volume, in GiB.
+    # @return [Integer]
+    def volume_size
+      data[:volume_size]
+    end
+
+    # Indicates whether the snapshot is encrypted.
+    # @return [Boolean]
+    def encrypted
+      data[:encrypted]
+    end
+
+    # The Amazon Resource Name (ARN) of the KMS key that was used to protect
+    # the volume encryption key for the parent volume.
+    # @return [String]
+    def kms_key_id
+      data[:kms_key_id]
+    end
+
+    # The data encryption key identifier for the snapshot. This value is a
+    # unique identifier that corresponds to the data encryption key that was
+    # used to encrypt the original volume or snapshot copy. Because data
+    # encryption keys are inherited by volumes created from snapshots, and
+    # vice versa, if snapshots share the same data encryption key
+    # identifier, then they belong to the same volume/snapshot lineage. This
+    # parameter is only returned by DescribeSnapshots.
+    # @return [String]
+    def data_encryption_key_id
+      data[:data_encryption_key_id]
     end
 
     # @!endgroup
@@ -576,14 +576,14 @@ module Aws::EC2
     #     create_volume_permission: {
     #       add: [
     #         {
-    #           group: "all", # accepts all
     #           user_id: "String",
+    #           group: "all", # accepts all
     #         },
     #       ],
     #       remove: [
     #         {
-    #           group: "all", # accepts all
     #           user_id: "String",
+    #           group: "all", # accepts all
     #         },
     #       ],
     #     },

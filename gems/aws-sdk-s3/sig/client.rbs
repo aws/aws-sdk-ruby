@@ -564,6 +564,7 @@ module Aws
       interface _GetBucketLifecycleConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketLifecycleConfigurationOutput]
         def rules: () -> ::Array[Types::LifecycleRule]
+        def transition_default_minimum_object_size: () -> ("varies_by_storage_class" | "all_storage_classes_128K")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#get_bucket_lifecycle_configuration-instance_method
       def get_bucket_lifecycle_configuration: (
@@ -1464,6 +1465,10 @@ module Aws
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _PutBucketLifecycleConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutBucketLifecycleConfigurationOutput]
+        def transition_default_minimum_object_size: () -> ("varies_by_storage_class" | "all_storage_classes_128K")
+      end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#put_bucket_lifecycle_configuration-instance_method
       def put_bucket_lifecycle_configuration: (
                                                 bucket: ::String,
@@ -1523,9 +1528,10 @@ module Aws
                                                     },
                                                   ]
                                                 },
-                                                ?expected_bucket_owner: ::String
-                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                ?expected_bucket_owner: ::String,
+                                                ?transition_default_minimum_object_size: ("varies_by_storage_class" | "all_storage_classes_128K")
+                                              ) -> _PutBucketLifecycleConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBucketLifecycleConfigurationResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#put_bucket_logging-instance_method
       def put_bucket_logging: (

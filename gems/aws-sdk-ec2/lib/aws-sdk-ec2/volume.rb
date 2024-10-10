@@ -35,63 +35,10 @@ module Aws::EC2
     end
     alias :volume_id :id
 
-    # <note markdown="1"> This parameter is not returned by CreateVolume.
-    #
-    #  </note>
-    #
-    # Information about the volume attachments.
-    # @return [Array<Types::VolumeAttachment>]
-    def attachments
-      data[:attachments]
-    end
-
-    # The Availability Zone for the volume.
-    # @return [String]
-    def availability_zone
-      data[:availability_zone]
-    end
-
-    # The time stamp when volume creation was initiated.
-    # @return [Time]
-    def create_time
-      data[:create_time]
-    end
-
-    # Indicates whether the volume is encrypted.
-    # @return [Boolean]
-    def encrypted
-      data[:encrypted]
-    end
-
-    # The Amazon Resource Name (ARN) of the KMS key that was used to protect
-    # the volume encryption key for the volume.
-    # @return [String]
-    def kms_key_id
-      data[:kms_key_id]
-    end
-
     # The Amazon Resource Name (ARN) of the Outpost.
     # @return [String]
     def outpost_arn
       data[:outpost_arn]
-    end
-
-    # The size of the volume, in GiBs.
-    # @return [Integer]
-    def size
-      data[:size]
-    end
-
-    # The snapshot from which the volume was created, if applicable.
-    # @return [String]
-    def snapshot_id
-      data[:snapshot_id]
-    end
-
-    # The volume state.
-    # @return [String]
-    def state
-      data[:state]
     end
 
     # The number of I/O operations per second (IOPS). For `gp3`, `io1`, and
@@ -146,6 +93,59 @@ module Aws::EC2
     # @return [String]
     def sse_type
       data[:sse_type]
+    end
+
+    # The size of the volume, in GiBs.
+    # @return [Integer]
+    def size
+      data[:size]
+    end
+
+    # The snapshot from which the volume was created, if applicable.
+    # @return [String]
+    def snapshot_id
+      data[:snapshot_id]
+    end
+
+    # The Availability Zone for the volume.
+    # @return [String]
+    def availability_zone
+      data[:availability_zone]
+    end
+
+    # The volume state.
+    # @return [String]
+    def state
+      data[:state]
+    end
+
+    # The time stamp when volume creation was initiated.
+    # @return [Time]
+    def create_time
+      data[:create_time]
+    end
+
+    # <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #  </note>
+    #
+    # Information about the volume attachments.
+    # @return [Array<Types::VolumeAttachment>]
+    def attachments
+      data[:attachments]
+    end
+
+    # Indicates whether the volume is encrypted.
+    # @return [Boolean]
+    def encrypted
+      data[:encrypted]
+    end
+
+    # The Amazon Resource Name (ARN) of the KMS key that was used to protect
+    # the volume encryption key for the volume.
+    # @return [String]
+    def kms_key_id
+      data[:kms_key_id]
     end
 
     # @!endgroup
@@ -506,17 +506,33 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume.describe_status({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
-    #     next_token: "String",
-    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    # @option options [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -551,22 +567,6 @@ module Aws::EC2
     #
     #   * `volume-status.status` - The status of the volume (`ok` \|
     #     `impaired` \| `warning` \| `insufficient-data`).
-    # @option options [Integer] :max_results
-    #   The maximum number of items to return for this request. To get the
-    #   next page of items, make another request with the token returned in
-    #   the output. For more information, see [Pagination][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
-    # @option options [String] :next_token
-    #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned by the previous request.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Types::DescribeVolumeStatusResult]
     def describe_status(options = {})
       options = Aws::Util.deep_merge(options, volume_ids: [@id])
@@ -664,18 +664,35 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   snapshots = volume.snapshots({
+    #     owner_ids: ["String"],
+    #     restorable_by_user_ids: ["String"],
+    #     snapshot_ids: ["SnapshotId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     owner_ids: ["String"],
-    #     restorable_by_user_ids: ["String"],
-    #     snapshot_ids: ["SnapshotId"],
-    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :owner_ids
+    #   Scopes the results to snapshots with the specified owners. You can
+    #   specify a combination of Amazon Web Services account IDs, `self`, and
+    #   `amazon`.
+    # @option options [Array<String>] :restorable_by_user_ids
+    #   The IDs of the Amazon Web Services accounts that can create volumes
+    #   from the snapshot.
+    # @option options [Array<String>] :snapshot_ids
+    #   The snapshot IDs.
+    #
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -718,23 +735,6 @@ module Aws::EC2
     #   * `volume-id` - The ID of the volume the snapshot is for.
     #
     #   * `volume-size` - The size of the volume, in GiB.
-    # @option options [Array<String>] :owner_ids
-    #   Scopes the results to snapshots with the specified owners. You can
-    #   specify a combination of Amazon Web Services account IDs, `self`, and
-    #   `amazon`.
-    # @option options [Array<String>] :restorable_by_user_ids
-    #   The IDs of the Amazon Web Services accounts that can create volumes
-    #   from the snapshot.
-    # @option options [Array<String>] :snapshot_ids
-    #   The snapshot IDs.
-    #
-    #   Default: Describes the snapshots for which you have create volume
-    #   permissions.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Snapshot::Collection]
     def snapshots(options = {})
       batches = Enumerator.new do |y|

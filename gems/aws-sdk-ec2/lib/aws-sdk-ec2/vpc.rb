@@ -35,24 +35,6 @@ module Aws::EC2
     end
     alias :vpc_id :id
 
-    # The primary IPv4 CIDR block for the VPC.
-    # @return [String]
-    def cidr_block
-      data[:cidr_block]
-    end
-
-    # The ID of the set of DHCP options you've associated with the VPC.
-    # @return [String]
-    def dhcp_options_id
-      data[:dhcp_options_id]
-    end
-
-    # The current state of the VPC.
-    # @return [String]
-    def state
-      data[:state]
-    end
-
     # The ID of the Amazon Web Services account that owns the VPC.
     # @return [String]
     def owner_id
@@ -87,6 +69,24 @@ module Aws::EC2
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
+    end
+
+    # The current state of the VPC.
+    # @return [String]
+    def state
+      data[:state]
+    end
+
+    # The primary IPv4 CIDR block for the VPC.
+    # @return [String]
+    def cidr_block
+      data[:cidr_block]
+    end
+
+    # The ID of the set of DHCP options you've associated with the VPC.
+    # @return [String]
+    def dhcp_options_id
+      data[:dhcp_options_id]
     end
 
     # @!endgroup
@@ -307,8 +307,8 @@ module Aws::EC2
     #
     #   vpc.attach_classic_link_instance({
     #     dry_run: false,
-    #     groups: ["SecurityGroupId"], # required
     #     instance_id: "InstanceId", # required
+    #     groups: ["SecurityGroupId"], # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -316,11 +316,11 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [required, String] :instance_id
+    #   The ID of the EC2-Classic instance.
     # @option options [required, Array<String>] :groups
     #   The IDs of the security groups. You cannot specify security groups
     #   from a different VPC.
-    # @option options [required, String] :instance_id
-    #   The ID of the EC2-Classic instance.
     # @return [Types::AttachClassicLinkVpcResult]
     def attach_classic_link_instance(options = {})
       options = options.merge(vpc_id: @id)
@@ -356,7 +356,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   networkacl = vpc.create_network_acl({
-    #     dry_run: false,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -369,13 +368,9 @@ module Aws::EC2
     #       },
     #     ],
     #     client_token: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
     # @option options [String] :client_token
@@ -386,6 +381,11 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       options = options.merge(vpc_id: @id)
@@ -402,7 +402,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   routetable = vpc.create_route_table({
-    #     dry_run: false,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -415,13 +414,9 @@ module Aws::EC2
     #       },
     #     ],
     #     client_token: "String",
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
     # @option options [String] :client_token
@@ -432,6 +427,11 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [RouteTable]
     def create_route_table(options = {})
       options = options.merge(vpc_id: @id)
@@ -516,12 +516,12 @@ module Aws::EC2
     #     cidr_block: "String",
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
-    #     dry_run: false,
     #     ipv_6_native: false,
     #     ipv_4_ipam_pool_id: "IpamPoolId",
     #     ipv_4_netmask_length: 1,
     #     ipv_6_ipam_pool_id: "IpamPoolId",
     #     ipv_6_netmask_length: 1,
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -559,11 +559,6 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
     #   Outpost ARN, you must also specify the Availability Zone of the
     #   Outpost subnet.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Boolean] :ipv_6_native
     #   Indicates whether to create an IPv6 only subnet.
     # @option options [String] :ipv_4_ipam_pool_id
@@ -574,6 +569,11 @@ module Aws::EC2
     #   An IPv6 IPAM pool ID for the subnet.
     # @option options [Integer] :ipv_6_netmask_length
     #   An IPv6 netmask length for the subnet.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Subnet]
     def create_subnet(options = {})
       options = options.merge(vpc_id: @id)
@@ -849,9 +849,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpcpeeringconnection = vpc.request_vpc_peering_connection({
-    #     dry_run: false,
-    #     peer_owner_id: "String",
-    #     peer_vpc_id: "String",
     #     peer_region: "String",
     #     tag_specifications: [
     #       {
@@ -864,20 +861,11 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     dry_run: false,
+    #     peer_vpc_id: "String",
+    #     peer_owner_id: "String",
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :peer_owner_id
-    #   The Amazon Web Services account ID of the owner of the accepter VPC.
-    #
-    #   Default: Your Amazon Web Services account ID
-    # @option options [String] :peer_vpc_id
-    #   The ID of the VPC with which you are creating the VPC peering
-    #   connection. You must specify this parameter in the request.
     # @option options [String] :peer_region
     #   The Region code for the accepter VPC, if the accepter VPC is located
     #   in a Region other than the Region in which you make the request.
@@ -885,6 +873,18 @@ module Aws::EC2
     #   Default: The Region in which you make the request.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the peering connection.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :peer_vpc_id
+    #   The ID of the VPC with which you are creating the VPC peering
+    #   connection. You must specify this parameter in the request.
+    # @option options [String] :peer_owner_id
+    #   The Amazon Web Services account ID of the owner of the accepter VPC.
+    #
+    #   Default: Your Amazon Web Services account ID
     # @return [VpcPeeringConnection]
     def request_vpc_peering_connection(options = {})
       options = options.merge(vpc_id: @id)
@@ -903,16 +903,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   accepted_vpc_peering_connections = vpc.accepted_vpc_peering_connections({
+    #     dry_run: false,
+    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :vpc_peering_connection_ids
+    #   The IDs of the VPC peering connections.
+    #
+    #   Default: Describes all your VPC peering connections.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -953,15 +962,6 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     #   * `vpc-peering-connection-id` - The ID of the VPC peering connection.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :vpc_peering_connection_ids
-    #   The IDs of the VPC peering connections.
-    #
-    #   Default: Describes all your VPC peering connections.
     # @return [VpcPeeringConnection::Collection]
     def accepted_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
@@ -1002,16 +1002,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instances = vpc.instances({
+    #     instance_ids: ["InstanceId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["InstanceId"],
-    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :instance_ids
+    #   The instance IDs.
+    #
+    #   Default: Describes all your instances.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -1441,15 +1450,6 @@ module Aws::EC2
     #     (`paravirtual` \| `hvm`).
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
-    # @option options [Array<String>] :instance_ids
-    #   The instance IDs.
-    #
-    #   Default: Describes all your instances.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|
@@ -1480,16 +1480,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   internet_gateways = vpc.internet_gateways({
+    #     dry_run: false,
+    #     internet_gateway_ids: ["InternetGatewayId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     internet_gateway_ids: ["InternetGatewayId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :internet_gateway_ids
+    #   The IDs of the internet gateways.
+    #
+    #   Default: Describes all your internet gateways.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -1513,15 +1522,6 @@ module Aws::EC2
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :internet_gateway_ids
-    #   The IDs of the internet gateways.
-    #
-    #   Default: Describes all your internet gateways.
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
@@ -1550,16 +1550,23 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_acls = vpc.network_acls({
+    #     dry_run: false,
+    #     network_acl_ids: ["NetworkAclId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     network_acl_ids: ["NetworkAclId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :network_acl_ids
+    #   The IDs of the network ACLs.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -1617,13 +1624,6 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the network ACL.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :network_acl_ids
-    #   The IDs of the network ACLs.
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
@@ -1652,16 +1652,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interfaces = vpc.network_interfaces({
+    #     dry_run: false,
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     network_interface_ids: ["NetworkInterfaceId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :network_interface_ids
+    #   The network interface IDs.
+    #
+    #   Default: Describes all your network interfaces.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -1777,15 +1786,6 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the network interface.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :network_interface_ids
-    #   The network interface IDs.
-    #
-    #   Default: Describes all your network interfaces.
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
@@ -1814,16 +1814,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   requested_vpc_peering_connections = vpc.requested_vpc_peering_connections({
+    #     dry_run: false,
+    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :vpc_peering_connection_ids
+    #   The IDs of the VPC peering connections.
+    #
+    #   Default: Describes all your VPC peering connections.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -1864,15 +1873,6 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     #   * `vpc-peering-connection-id` - The ID of the VPC peering connection.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :vpc_peering_connection_ids
-    #   The IDs of the VPC peering connections.
-    #
-    #   Default: Describes all your VPC peering connections.
     # @return [VpcPeeringConnection::Collection]
     def requested_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
@@ -1901,16 +1901,23 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   route_tables = vpc.route_tables({
+    #     dry_run: false,
+    #     route_table_ids: ["RouteTableId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     route_table_ids: ["RouteTableId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :route_table_ids
+    #   The IDs of the route tables.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -1984,13 +1991,6 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :route_table_ids
-    #   The IDs of the route tables.
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
@@ -2019,17 +2019,32 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   security_groups = vpc.security_groups({
+    #     group_ids: ["SecurityGroupId"],
+    #     group_names: ["SecurityGroupName"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     group_ids: ["SecurityGroupId"],
-    #     group_names: ["SecurityGroupName"],
-    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :group_ids
+    #   The IDs of the security groups. Required for security groups in a
+    #   nondefault VPC.
+    #
+    #   Default: Describes all of your security groups.
+    # @option options [Array<String>] :group_names
+    #   \[Default VPC\] The names of the security groups. You can specify
+    #   either the security group name or the security group ID.
+    #
+    #   Default: Describes all of your security groups.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filters
     #   The filters. If using multiple filters for rules, the results include
     #   security groups for which any combination of rules - not necessarily a
@@ -2112,21 +2127,6 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC specified when the security group was
     #     created.
-    # @option options [Array<String>] :group_ids
-    #   The IDs of the security groups. Required for security groups in a
-    #   nondefault VPC.
-    #
-    #   Default: Describes all of your security groups.
-    # @option options [Array<String>] :group_names
-    #   \[Default VPC\] The names of the security groups. You can specify
-    #   either the security group name or the security group ID.
-    #
-    #   Default: Describes all of your security groups.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|

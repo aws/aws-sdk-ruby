@@ -9796,8 +9796,8 @@ module Aws::Connect
     #     Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Contacts removed from queue in X seconds][51]
     #
@@ -9809,8 +9809,8 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue` enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Contacts resolved in X][52]
     #
@@ -10091,8 +10091,8 @@ module Aws::Connect
     #     Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Service level X][72]
     #
@@ -10157,8 +10157,8 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Contacts abandoned in X seconds][76]
     #
@@ -10170,8 +10170,8 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
+    #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
+    #     (for "Less than") or `LTE` (for "Less than equal").
     #
     #     UI name: [Contacts answered in X seconds][77]
     #
@@ -14514,6 +14514,7 @@ module Aws::Connect
     #
     #   Valid metric filter values for `INITIATION_METHOD`: `INBOUND` \|
     #   `OUTBOUND` \| `TRANSFER` \| `QUEUE_TRANSFER` \| `CALLBACK` \| `API`
+    #   \| `WEBRTC_API` \| `MONITOR` \| `DISCONNECT` \| `EXTERNAL_OUTBOUND`
     #
     #   Valid metric filter values for `DISCONNECT_REASON`:
     #   `CUSTOMER_DISCONNECT` \| `AGENT_DISCONNECT` \|
@@ -14813,7 +14814,7 @@ module Aws::Connect
     #
     # * Duration labels, such as `NON_TALK_TIME`, `CONTACT_DURATION`,
     #   `AGENT_INTERACTION_DURATION`, `CUSTOMER_HOLD_TIME` have a minimum
-    #   value of 0 and maximum value of 28800.
+    #   value of 0 and maximum value of 63072000.
     #
     # * Percentages have a minimum value of 0 and maximum value of 100.
     #
@@ -19573,6 +19574,140 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_endpoint
+    #   Information about the endpoint.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] destination_endpoint
+    #   Information about the endpoint.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_attributes
+    #   A set of system defined key-value pairs stored on individual contact
+    #   segments using an attribute map. The attributes are standard Amazon
+    #   Connect attributes. They can be accessed in flows.
+    #
+    #   * Attribute keys can include only alphanumeric, `-`, and `_`.
+    #
+    #   * This field can be used to show channel subtype, such as
+    #     `connect:Guide` and `connect:SMS`.
+    #   @return [Hash<String,Types::SegmentAttributeValue>]
+    #
+    # @!attribute [rw] attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   just like any other contact attributes.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow for the call. To see the ContactFlowId in
+    #   the Amazon Connect console user interface, on the navigation menu go
+    #   to **Routing, Contact Flows**. Choose the flow. On the flow page,
+    #   under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
+    #
+    #   * arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**123ec456-a007-89c0-1234-xxxxxxxxxxxx**
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_duration_in_minutes
+    #   The total duration of the newly started chat session. If not
+    #   specified, the chat session duration defaults to 25 hour. The
+    #   minimum configurable time is 60 minutes. The maximum configurable
+    #   time is 10,080 minutes (7 days).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] participant_details
+    #   The customer's details.
+    #   @return [Types::ParticipantDetails]
+    #
+    # @!attribute [rw] initial_system_message
+    #   A chat message.
+    #   @return [Types::ChatMessage]
+    #
+    # @!attribute [rw] related_contact_id
+    #   The unique identifier for an Amazon Connect contact. This identifier
+    #   is related to the contact starting.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_messaging_content_types
+    #   The supported chat message content types. Supported types are:
+    #
+    #   * `text/plain`
+    #
+    #   * `text/markdown`
+    #
+    #   * `application/json,
+    #     application/vnd.amazonaws.connect.message.interactive`
+    #
+    #   * `application/vnd.amazonaws.connect.message.interactive.response`
+    #
+    #   Content types must always contain `text/plain`. You can then put any
+    #   other supported type in the list. For example, all the following
+    #   lists are valid because they contain `text/plain`:
+    #
+    #   * `[text/plain, text/markdown, application/json]`
+    #
+    #   * `[text/markdown, text/plain]`
+    #
+    #   * `[text/plain, application/json,
+    #     application/vnd.amazonaws.connect.message.interactive.response]`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the AWS SDK populates
+    #   this field. For more information about idempotency, see [Making
+    #   retries safe with idempotent APIs][1]. The token is valid for 7 days
+    #   after creation. If a contact is already started, the contact ID is
+    #   returned.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundChatContactRequest AWS API Documentation
+    #
+    class StartOutboundChatContactRequest < Struct.new(
+      :source_endpoint,
+      :destination_endpoint,
+      :instance_id,
+      :segment_attributes,
+      :attributes,
+      :contact_flow_id,
+      :chat_duration_in_minutes,
+      :participant_details,
+      :initial_system_message,
+      :related_contact_id,
+      :supported_messaging_content_types,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_id
+    #   The identifier of this contact within the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundChatContactResponse AWS API Documentation
+    #
+    class StartOutboundChatContactResponse < Struct.new(
+      :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of a voice contact that is shown to an agent in the Contact
     #   Control Panel (CCP).
@@ -20609,8 +20744,8 @@ module Aws::Connect
     # Contains information about the threshold for service level metrics.
     #
     # @!attribute [rw] comparison
-    #   The type of comparison. Only "less than" (LT) and "greater than"
-    #   (GT) comparisons are supported.
+    #   The type of comparison. Currently, "less than" (LT), "less than
+    #   equal" (LTE), and "greater than" (GT) comparisons are supported.
     #   @return [String]
     #
     # @!attribute [rw] threshold_value

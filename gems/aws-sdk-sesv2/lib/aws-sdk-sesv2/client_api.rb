@@ -243,6 +243,7 @@ module Aws::SESV2
     GetSuppressedDestinationResponse = Shapes::StructureShape.new(name: 'GetSuppressedDestinationResponse')
     GuardianAttributes = Shapes::StructureShape.new(name: 'GuardianAttributes')
     GuardianOptions = Shapes::StructureShape.new(name: 'GuardianOptions')
+    HttpsPolicy = Shapes::StringShape.new(name: 'HttpsPolicy')
     Identity = Shapes::StringShape.new(name: 'Identity')
     IdentityInfo = Shapes::StructureShape.new(name: 'IdentityInfo')
     IdentityInfoList = Shapes::ListShape.new(name: 'IdentityInfoList')
@@ -1522,6 +1523,7 @@ module Aws::SESV2
 
     PutConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
     PutConfigurationSetTrackingOptionsRequest.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, location_name: "CustomRedirectDomain"))
+    PutConfigurationSetTrackingOptionsRequest.add_member(:https_policy, Shapes::ShapeRef.new(shape: HttpsPolicy, location_name: "HttpsPolicy"))
     PutConfigurationSetTrackingOptionsRequest.struct_class = Types::PutConfigurationSetTrackingOptionsRequest
 
     PutConfigurationSetTrackingOptionsResponse.struct_class = Types::PutConfigurationSetTrackingOptionsResponse
@@ -1757,6 +1759,7 @@ module Aws::SESV2
     Topics.member = Shapes::ShapeRef.new(shape: Topic)
 
     TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, required: true, location_name: "CustomRedirectDomain"))
+    TrackingOptions.add_member(:https_policy, Shapes::ShapeRef.new(shape: HttpsPolicy, location_name: "HttpsPolicy"))
     TrackingOptions.struct_class = Types::TrackingOptions
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "querystring", location_name: "ResourceArn"))

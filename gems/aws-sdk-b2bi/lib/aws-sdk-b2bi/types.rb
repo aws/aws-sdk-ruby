@@ -49,6 +49,20 @@ module Aws::B2bi
       class Unknown < CapabilityConfiguration; end
     end
 
+    # Contains the details for an Outbound EDI capability.
+    #
+    # @!attribute [rw] outbound_edi
+    #   A structure that contains the outbound EDI options.
+    #   @return [Types::OutboundEdiOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/CapabilityOptions AWS API Documentation
+    #
+    class CapabilityOptions < Struct.new(
+      :outbound_edi)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns the capability summary details. A trading capability contains
     # the information required to transform incoming EDI documents into JSON
     # or XML outputs.
@@ -100,6 +114,83 @@ module Aws::B2bi
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Describes the input for an outbound transformation.
+    #
+    # @!attribute [rw] file_format
+    #   The format for the input file: either JSON or XML.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_file
+    #   File to be converted
+    #   @return [Types::InputFileSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/ConversionSource AWS API Documentation
+    #
+    class ConversionSource < Struct.new(
+      :file_format,
+      :input_file)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provide a sample of what the output of the transformation should look
+    # like.
+    #
+    # @!attribute [rw] file_format
+    #   Currently, only X12 format is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] format_details
+    #   A structure that contains the formatting details for the conversion
+    #   target.
+    #   @return [Types::ConversionTargetFormatDetails]
+    #
+    # @!attribute [rw] output_sample_file
+    #   Customer uses this to provide a sample on what should file look like
+    #   after conversion X12 EDI use case around this would be discovering
+    #   the file syntax
+    #   @return [Types::OutputSampleFileSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/ConversionTarget AWS API Documentation
+    #
+    class ConversionTarget < Struct.new(
+      :file_format,
+      :format_details,
+      :output_sample_file)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a structure describing the X12 details for the conversion
+    # target.
+    #
+    # @note ConversionTargetFormatDetails is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] x12
+    #   A structure that contains the X12 transaction set and version. The
+    #   X12 structure is used when the system transforms an EDI (electronic
+    #   data interchange) file.
+    #
+    #   <note markdown="1"> If an EDI input file contains more than one transaction, each
+    #   transaction must have the same transaction set and version, for
+    #   example 214/4010. If not, the transformer cannot parse the file.
+    #
+    #    </note>
+    #   @return [Types::X12Details]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/ConversionTargetFormatDetails AWS API Documentation
+    #
+    class ConversionTargetFormatDetails < Struct.new(
+      :x12,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class X12 < ConversionTargetFormatDetails; end
+      class Unknown < ConversionTargetFormatDetails; end
     end
 
     # @!attribute [rw] name
@@ -219,6 +310,11 @@ module Aws::B2bi
     #   partnership.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] capability_options
+    #   Specify the structure that contains the details for the associated
+    #   capabilities.
+    #   @return [Types::CapabilityOptions]
+    #
     # @!attribute [rw] client_token
     #   Reserved for future use.
     #
@@ -241,6 +337,7 @@ module Aws::B2bi
       :email,
       :phone,
       :capabilities,
+      :capability_options,
       :client_token,
       :tags)
       SENSITIVE = [:email, :phone]
@@ -278,6 +375,11 @@ module Aws::B2bi
     #   Returns one or more capabilities associated with this partnership.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] capability_options
+    #   Returns the structure that contains the details for the associated
+    #   capabilities.
+    #   @return [Types::CapabilityOptions]
+    #
     # @!attribute [rw] trading_partner_id
     #   Returns the unique, system-generated identifier for a trading
     #   partner.
@@ -297,6 +399,7 @@ module Aws::B2bi
       :email,
       :phone,
       :capabilities,
+      :capability_options,
       :trading_partner_id,
       :created_at)
       SENSITIVE = [:email, :phone]
@@ -403,30 +506,45 @@ module Aws::B2bi
       include Aws::Structure
     end
 
+    # @!attribute [rw] output_sample_location
+    #   Specify the location of the sample EDI file that is used to generate
+    #   the mapping template.
+    #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] mapping_type
+    #   Specify the format for the mapping template: either JSONATA or XSLT.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_details
+    #   Describes the details needed for generating the template. Specify
+    #   the X12 transaction set and version for which the template is used:
+    #   currently, we only support X12.
+    #   @return [Types::TemplateDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/CreateStarterMappingTemplateRequest AWS API Documentation
+    #
+    class CreateStarterMappingTemplateRequest < Struct.new(
+      :output_sample_location,
+      :mapping_type,
+      :template_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mapping_template
+    #   Returns a string that represents the mapping template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/CreateStarterMappingTemplateResponse AWS API Documentation
+    #
+    class CreateStarterMappingTemplateResponse < Struct.new(
+      :mapping_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   Specifies the name of the transformer, used to identify it.
-    #   @return [String]
-    #
-    # @!attribute [rw] file_format
-    #   Specifies that the currently supported file formats for EDI
-    #   transformations are `JSON` and `XML`.
-    #   @return [String]
-    #
-    # @!attribute [rw] mapping_template
-    #   Specifies the mapping template for the transformer. This template is
-    #   used to map the parsed EDI file using JSONata or XSLT.
-    #   @return [String]
-    #
-    # @!attribute [rw] edi_type
-    #   Specifies the details for the EDI standard that is being used for
-    #   the transformer. Currently, only X12 is supported. X12 is a set of
-    #   standards and corresponding messages that define specific business
-    #   documents.
-    #   @return [Types::EdiType]
-    #
-    # @!attribute [rw] sample_document
-    #   Specifies a sample EDI document that is used by a transformer as a
-    #   guide for processing the EDI data.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -443,16 +561,72 @@ module Aws::B2bi
     #   purpose.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] file_format
+    #   Specifies that the currently supported file formats for EDI
+    #   transformations are `JSON` and `XML`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mapping_template
+    #   Specifies the mapping template for the transformer. This template is
+    #   used to map the parsed EDI file using JSONata or XSLT.
+    #
+    #   <note markdown="1"> This parameter is available for backwards compatibility. Use the
+    #   [Mapping][1] data type instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html
+    #   @return [String]
+    #
+    # @!attribute [rw] edi_type
+    #   Specifies the details for the EDI standard that is being used for
+    #   the transformer. Currently, only X12 is supported. X12 is a set of
+    #   standards and corresponding messages that define specific business
+    #   documents.
+    #   @return [Types::EdiType]
+    #
+    # @!attribute [rw] sample_document
+    #   Specifies a sample EDI document that is used by a transformer as a
+    #   guide for processing the EDI data.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_conversion
+    #   Specify the `InputConversion` object, which contains the format
+    #   options for the inbound transformation.
+    #   @return [Types::InputConversion]
+    #
+    # @!attribute [rw] mapping
+    #   Specify the structure that contains the mapping template and its
+    #   language (either XSLT or JSONATA).
+    #   @return [Types::Mapping]
+    #
+    # @!attribute [rw] output_conversion
+    #   A structure that contains the `OutputConversion` object, which
+    #   contains the format options for the outbound transformation.
+    #   @return [Types::OutputConversion]
+    #
+    # @!attribute [rw] sample_documents
+    #   Specify a structure that contains the Amazon S3 bucket and an array
+    #   of the corresponding keys used to identify the location for your
+    #   sample documents.
+    #   @return [Types::SampleDocuments]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/CreateTransformerRequest AWS API Documentation
     #
     class CreateTransformerRequest < Struct.new(
       :name,
+      :client_token,
+      :tags,
       :file_format,
       :mapping_template,
       :edi_type,
       :sample_document,
-      :client_token,
-      :tags)
+      :input_conversion,
+      :mapping,
+      :output_conversion,
+      :sample_documents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -471,6 +645,16 @@ module Aws::B2bi
     #   Returns the name of the transformer, used to identify it.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Returns the state of the newly created transformer. The transformer
+    #   can be either `active` or `inactive`. For the transformer to be used
+    #   in a capability, its status must `active`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Returns a timestamp for creation date and time of the transformer.
+    #   @return [Time]
+    #
     # @!attribute [rw] file_format
     #   Returns that the currently supported file formats for EDI
     #   transformations are `JSON` and `XML`.
@@ -479,12 +663,6 @@ module Aws::B2bi
     # @!attribute [rw] mapping_template
     #   Returns the mapping template for the transformer. This template is
     #   used to map the parsed EDI file using JSONata or XSLT.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   Returns the state of the newly created transformer. The transformer
-    #   can be either `active` or `inactive`. For the transformer to be used
-    #   in a capability, its status must `active`.
     #   @return [String]
     #
     # @!attribute [rw] edi_type
@@ -499,9 +677,26 @@ module Aws::B2bi
     #   guide for processing the EDI data.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   Returns a timestamp for creation date and time of the transformer.
-    #   @return [Time]
+    # @!attribute [rw] input_conversion
+    #   Returns the `InputConversion` object, which contains the format
+    #   options for the inbound transformation.
+    #   @return [Types::InputConversion]
+    #
+    # @!attribute [rw] mapping
+    #   Returns the structure that contains the mapping template and its
+    #   language (either XSLT or JSONATA).
+    #   @return [Types::Mapping]
+    #
+    # @!attribute [rw] output_conversion
+    #   Returns the `OutputConversion` object, which contains the format
+    #   options for the outbound transformation.
+    #   @return [Types::OutputConversion]
+    #
+    # @!attribute [rw] sample_documents
+    #   Returns a structure that contains the Amazon S3 bucket and an array
+    #   of the corresponding keys used to identify the location for your
+    #   sample documents.
+    #   @return [Types::SampleDocuments]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/CreateTransformerResponse AWS API Documentation
     #
@@ -509,12 +704,16 @@ module Aws::B2bi
       :transformer_id,
       :transformer_arn,
       :name,
+      :status,
+      :created_at,
       :file_format,
       :mapping_template,
-      :status,
       :edi_type,
       :sample_document,
-      :created_at)
+      :input_conversion,
+      :mapping,
+      :output_conversion,
+      :sample_documents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -570,6 +769,11 @@ module Aws::B2bi
     # Specifies the details for the EDI (electronic data interchange)
     # transformation.
     #
+    # @!attribute [rw] capability_direction
+    #   Specifies whether this is capability is for inbound or outbound
+    #   transformations.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   Returns the type of the capability. Currently, only `edi` is
     #   supported.
@@ -592,6 +796,7 @@ module Aws::B2bi
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/EdiConfiguration AWS API Documentation
     #
     class EdiConfiguration < Struct.new(
+      :capability_direction,
       :type,
       :input_location,
       :output_location,
@@ -627,6 +832,37 @@ module Aws::B2bi
 
       class X12Details < EdiType; end
       class Unknown < EdiType; end
+    end
+
+    # A structure that contains the X12 transaction set and version.
+    #
+    # @note FormatOptions is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FormatOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FormatOptions corresponding to the set member.
+    #
+    # @!attribute [rw] x12
+    #   A structure that contains the X12 transaction set and version. The
+    #   X12 structure is used when the system transforms an EDI (electronic
+    #   data interchange) file.
+    #
+    #   <note markdown="1"> If an EDI input file contains more than one transaction, each
+    #   transaction must have the same transaction set and version, for
+    #   example 214/4010. If not, the transformer cannot parse the file.
+    #
+    #    </note>
+    #   @return [Types::X12Details]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/FormatOptions AWS API Documentation
+    #
+    class FormatOptions < Struct.new(
+      :x12,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class X12 < FormatOptions; end
+      class Unknown < FormatOptions; end
     end
 
     # @!attribute [rw] capability_id
@@ -737,6 +973,10 @@ module Aws::B2bi
     #   Returns one or more capabilities associated with this partnership.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] capability_options
+    #   Contains the details for an Outbound EDI capability.
+    #   @return [Types::CapabilityOptions]
+    #
     # @!attribute [rw] trading_partner_id
     #   Returns the unique identifier for the partner for this partnership.
     #   @return [String]
@@ -760,6 +1000,7 @@ module Aws::B2bi
       :email,
       :phone,
       :capabilities,
+      :capability_options,
       :trading_partner_id,
       :created_at,
       :modified_at)
@@ -908,6 +1149,20 @@ module Aws::B2bi
     #   Returns the name of the transformer, used to identify it.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Returns the state of the newly created transformer. The transformer
+    #   can be either `active` or `inactive`. For the transformer to be used
+    #   in a capability, its status must `active`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Returns a timestamp for creation date and time of the transformer.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   Returns a timestamp for last time the transformer was modified.
+    #   @return [Time]
+    #
     # @!attribute [rw] file_format
     #   Returns that the currently supported file formats for EDI
     #   transformations are `JSON` and `XML`.
@@ -916,12 +1171,6 @@ module Aws::B2bi
     # @!attribute [rw] mapping_template
     #   Returns the mapping template for the transformer. This template is
     #   used to map the parsed EDI file using JSONata or XSLT.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   Returns the state of the newly created transformer. The transformer
-    #   can be either `active` or `inactive`. For the transformer to be used
-    #   in a capability, its status must `active`.
     #   @return [String]
     #
     # @!attribute [rw] edi_type
@@ -936,13 +1185,26 @@ module Aws::B2bi
     #   guide for processing the EDI data.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   Returns a timestamp for creation date and time of the transformer.
-    #   @return [Time]
+    # @!attribute [rw] input_conversion
+    #   Returns the `InputConversion` object, which contains the format
+    #   options for the inbound transformation.
+    #   @return [Types::InputConversion]
     #
-    # @!attribute [rw] modified_at
-    #   Returns a timestamp for last time the transformer was modified.
-    #   @return [Time]
+    # @!attribute [rw] mapping
+    #   Returns the structure that contains the mapping template and its
+    #   language (either XSLT or JSONATA).
+    #   @return [Types::Mapping]
+    #
+    # @!attribute [rw] output_conversion
+    #   Returns the `OutputConversion` object, which contains the format
+    #   options for the outbound transformation.
+    #   @return [Types::OutputConversion]
+    #
+    # @!attribute [rw] sample_documents
+    #   Returns a structure that contains the Amazon S3 bucket and an array
+    #   of the corresponding keys used to identify the location for your
+    #   sample documents.
+    #   @return [Types::SampleDocuments]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/GetTransformerResponse AWS API Documentation
     #
@@ -950,15 +1212,64 @@ module Aws::B2bi
       :transformer_id,
       :transformer_arn,
       :name,
+      :status,
+      :created_at,
+      :modified_at,
       :file_format,
       :mapping_template,
-      :status,
       :edi_type,
       :sample_document,
-      :created_at,
-      :modified_at)
+      :input_conversion,
+      :mapping,
+      :output_conversion,
+      :sample_documents)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains the input formatting options for an inbound transformer
+    # (takes an X12-formatted EDI document as input and converts it to JSON
+    # or XML.
+    #
+    # @!attribute [rw] from_format
+    #   The format for the transformer input: currently on `X12` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] format_options
+    #   A structure that contains the formatting options for an inbound
+    #   transformer.
+    #   @return [Types::FormatOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/InputConversion AWS API Documentation
+    #
+    class InputConversion < Struct.new(
+      :from_format,
+      :format_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input file to use for an outbound transformation.
+    #
+    # @note InputFileSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] file_content
+    #   Specify the input contents, as a string, for the source of an
+    #   outbound transformation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/InputFileSource AWS API Documentation
+    #
+    class InputFileSource < Struct.new(
+      :file_content,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FileContent < InputFileSource; end
+      class Unknown < InputFileSource; end
     end
 
     # This exception is thrown when an error occurs in the Amazon Web
@@ -1180,6 +1491,99 @@ module Aws::B2bi
       include Aws::Structure
     end
 
+    # Specifies the mapping template for the transformer. This template is
+    # used to map the parsed EDI file using JSONata or XSLT.
+    #
+    # @!attribute [rw] template_language
+    #   The transformation language for the template, either XSLT or
+    #   JSONATA.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   A string that represents the mapping template, in the transformation
+    #   language specified in `templateLanguage`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/Mapping AWS API Documentation
+    #
+    class Mapping < Struct.new(
+      :template_language,
+      :template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for outbound EDI options.
+    #
+    # @note OutboundEdiOptions is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note OutboundEdiOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutboundEdiOptions corresponding to the set member.
+    #
+    # @!attribute [rw] x12
+    #   A structure that contains an X12 envelope structure.
+    #   @return [Types::X12Envelope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/OutboundEdiOptions AWS API Documentation
+    #
+    class OutboundEdiOptions < Struct.new(
+      :x12,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class X12 < OutboundEdiOptions; end
+      class Unknown < OutboundEdiOptions; end
+    end
+
+    # Contains the formatting options for an outbound transformer (takes
+    # JSON or XML as input and converts it to an EDI document (currently
+    # only X12 format is supported).
+    #
+    # @!attribute [rw] to_format
+    #   The format for the output from an outbound transformer: only X12 is
+    #   currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] format_options
+    #   A structure that contains the X12 transaction set and version for
+    #   the transformer output.
+    #   @return [Types::FormatOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/OutputConversion AWS API Documentation
+    #
+    class OutputConversion < Struct.new(
+      :to_format,
+      :format_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the location of a sample file used for outbound
+    # transformations.
+    #
+    # @note OutputSampleFileSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] file_location
+    #   Specifies the details for the Amazon S3 file location that is being
+    #   used with Amazon Web Services B2B Data Interchange. File locations
+    #   in Amazon S3 are identified using a combination of the bucket and
+    #   key.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/OutputSampleFileSource AWS API Documentation
+    #
+    class OutputSampleFileSource < Struct.new(
+      :file_location,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FileLocation < OutputSampleFileSource; end
+      class Unknown < OutputSampleFileSource; end
+    end
+
     # A structure that contains the details for a partnership. A partnership
     # represents the connection between you and your trading partner. It
     # ties together a profile and one or more trading capabilities.
@@ -1200,6 +1604,10 @@ module Aws::B2bi
     # @!attribute [rw] capabilities
     #   Returns one or more capabilities associated with this partnership.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] capability_options
+    #   Contains the details for an Outbound EDI capability.
+    #   @return [Types::CapabilityOptions]
     #
     # @!attribute [rw] trading_partner_id
     #   Returns the unique, system-generated identifier for a trading
@@ -1222,6 +1630,7 @@ module Aws::B2bi
       :partnership_id,
       :name,
       :capabilities,
+      :capability_options,
       :trading_partner_id,
       :created_at,
       :modified_at)
@@ -1291,7 +1700,7 @@ module Aws::B2bi
     end
 
     # Specifies the details for the Amazon S3 file location that is being
-    # used with Amazon Web Services B2BI Data Interchange. File locations in
+    # used with Amazon Web Services B2B Data Interchange. File locations in
     # Amazon S3 are identified using a combination of the bucket and key.
     #
     # @!attribute [rw] bucket_name
@@ -1307,6 +1716,49 @@ module Aws::B2bi
     class S3Location < Struct.new(
       :bucket_name,
       :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of the Amazon S3 keys used to identify the location for your
+    # sample documents.
+    #
+    # @!attribute [rw] input
+    #   An array of keys for your input sample documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   An array of keys for your output sample documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/SampleDocumentKeys AWS API Documentation
+    #
+    class SampleDocumentKeys < Struct.new(
+      :input,
+      :output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a structure that contains the Amazon S3 bucket and an array
+    # of the corresponding keys used to identify the location for your
+    # sample documents.
+    #
+    # @!attribute [rw] bucket_name
+    #   Contains the Amazon S3 bucket that is used to hold your sample
+    #   documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] keys
+    #   Contains an array of the Amazon S3 keys used to identify the
+    #   location for your sample documents.
+    #   @return [Array<Types::SampleDocumentKeys>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/SampleDocuments AWS API Documentation
+    #
+    class SampleDocuments < Struct.new(
+      :bucket_name,
+      :keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1442,6 +1894,72 @@ module Aws::B2bi
       include Aws::Structure
     end
 
+    # A data structure that contains the information to use when generating
+    # a mapping template.
+    #
+    # @note TemplateDetails is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] x12
+    #   A structure that contains the X12 transaction set and version. The
+    #   X12 structure is used when the system transforms an EDI (electronic
+    #   data interchange) file.
+    #
+    #   <note markdown="1"> If an EDI input file contains more than one transaction, each
+    #   transaction must have the same transaction set and version, for
+    #   example 214/4010. If not, the transformer cannot parse the file.
+    #
+    #    </note>
+    #   @return [Types::X12Details]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/TemplateDetails AWS API Documentation
+    #
+    class TemplateDetails < Struct.new(
+      :x12,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class X12 < TemplateDetails; end
+      class Unknown < TemplateDetails; end
+    end
+
+    # @!attribute [rw] source
+    #   Specify the source file for an outbound EDI request.
+    #   @return [Types::ConversionSource]
+    #
+    # @!attribute [rw] target
+    #   Specify the format (X12 is the only currently supported format), and
+    #   other details for the conversion target.
+    #   @return [Types::ConversionTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/TestConversionRequest AWS API Documentation
+    #
+    class TestConversionRequest < Struct.new(
+      :source,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] converted_file_content
+    #   Returns the converted file content.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_messages
+    #   Returns an array of strings, each containing a message that Amazon
+    #   Web Services B2B Data Interchange generates during the conversion.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/TestConversionResponse AWS API Documentation
+    #
+    class TestConversionResponse < Struct.new(
+      :converted_file_content,
+      :validation_messages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] input_file_content
     #   Specify the contents of the EDI (electronic data interchange) XML or
     #   JSON file that is used as input for the transform.
@@ -1450,6 +1968,15 @@ module Aws::B2bi
     # @!attribute [rw] mapping_template
     #   Specifies the mapping template for the transformer. This template is
     #   used to map the parsed EDI file using JSONata or XSLT.
+    #
+    #   <note markdown="1"> This parameter is available for backwards compatibility. Use the
+    #   [Mapping][1] data type instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html
     #   @return [String]
     #
     # @!attribute [rw] file_format
@@ -1539,9 +2066,10 @@ module Aws::B2bi
       include Aws::Structure
     end
 
-    # Contains the details for a transformer object. A transformer describes
-    # how to process the incoming EDI documents and extract the necessary
-    # information to the output file.
+    # Contains the details for a transformer object. A transformer can take
+    # an EDI file as input and transform it into a JSON-or XML-formatted
+    # document. Alternatively, a transformer can take a JSON-or
+    # XML-formatted document as input and transform it into an EDI file.
     #
     # @!attribute [rw] transformer_id
     #   Returns the system-assigned unique identifier for the transformer.
@@ -1551,6 +2079,22 @@ module Aws::B2bi
     #   Returns the descriptive name for the transformer.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Returns the state of the newly created transformer. The transformer
+    #   can be either `active` or `inactive`. For the transformer to be used
+    #   in a capability, its status must `active`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Returns a timestamp indicating when the transformer was created. For
+    #   example, `2023-07-20T19:58:44.624Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   Returns a timestamp representing the date and time for the most
+    #   recent change for the transformer object.
+    #   @return [Time]
+    #
     # @!attribute [rw] file_format
     #   Returns that the currently supported file formats for EDI
     #   transformations are `JSON` and `XML`.
@@ -1559,12 +2103,6 @@ module Aws::B2bi
     # @!attribute [rw] mapping_template
     #   Returns the mapping template for the transformer. This template is
     #   used to map the parsed EDI file using JSONata or XSLT.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   Returns the state of the newly created transformer. The transformer
-    #   can be either `active` or `inactive`. For the transformer to be used
-    #   in a capability, its status must `active`.
     #   @return [String]
     #
     # @!attribute [rw] edi_type
@@ -1579,28 +2117,43 @@ module Aws::B2bi
     #   guide for processing the EDI data.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   Returns a timestamp indicating when the transformer was created. For
-    #   example, `2023-07-20T19:58:44.624Z`.
-    #   @return [Time]
+    # @!attribute [rw] input_conversion
+    #   Returns a structure that contains the format options for the
+    #   transformation.
+    #   @return [Types::InputConversion]
     #
-    # @!attribute [rw] modified_at
-    #   Returns a timestamp representing the date and time for the most
-    #   recent change for the transformer object.
-    #   @return [Time]
+    # @!attribute [rw] mapping
+    #   Returns the structure that contains the mapping template and its
+    #   language (either XSLT or JSONATA).
+    #   @return [Types::Mapping]
+    #
+    # @!attribute [rw] output_conversion
+    #   Returns the `OutputConversion` object, which contains the format
+    #   options for the outbound transformation.
+    #   @return [Types::OutputConversion]
+    #
+    # @!attribute [rw] sample_documents
+    #   Returns a structure that contains the Amazon S3 bucket and an array
+    #   of the corresponding keys used to identify the location for your
+    #   sample documents.
+    #   @return [Types::SampleDocuments]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/TransformerSummary AWS API Documentation
     #
     class TransformerSummary < Struct.new(
       :transformer_id,
       :name,
+      :status,
+      :created_at,
+      :modified_at,
       :file_format,
       :mapping_template,
-      :status,
       :edi_type,
       :sample_document,
-      :created_at,
-      :modified_at)
+      :input_conversion,
+      :mapping,
+      :output_conversion,
+      :sample_documents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1723,12 +2276,18 @@ module Aws::B2bi
     #   List of the capabilities associated with this partnership.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] capability_options
+    #   To update, specify the structure that contains the details for the
+    #   associated capabilities.
+    #   @return [Types::CapabilityOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/UpdatePartnershipRequest AWS API Documentation
     #
     class UpdatePartnershipRequest < Struct.new(
       :partnership_id,
       :name,
-      :capabilities)
+      :capabilities,
+      :capability_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1764,6 +2323,11 @@ module Aws::B2bi
     #   Returns one or more capabilities associated with this partnership.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] capability_options
+    #   Returns the structure that contains the details for the associated
+    #   capabilities.
+    #   @return [Types::CapabilityOptions]
+    #
     # @!attribute [rw] trading_partner_id
     #   Returns the unique, system-generated identifier for a trading
     #   partner.
@@ -1789,6 +2353,7 @@ module Aws::B2bi
       :email,
       :phone,
       :capabilities,
+      :capability_options,
       :trading_partner_id,
       :created_at,
       :modified_at)
@@ -1893,6 +2458,11 @@ module Aws::B2bi
     #   Specify a new name for the transformer, if you want to update it.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Specifies the transformer's status. You can update the state of the
+    #   transformer, from `active` to `inactive`, or `inactive` to `active`.
+    #   @return [String]
+    #
     # @!attribute [rw] file_format
     #   Specifies that the currently supported file formats for EDI
     #   transformations are `JSON` and `XML`.
@@ -1901,11 +2471,15 @@ module Aws::B2bi
     # @!attribute [rw] mapping_template
     #   Specifies the mapping template for the transformer. This template is
     #   used to map the parsed EDI file using JSONata or XSLT.
-    #   @return [String]
     #
-    # @!attribute [rw] status
-    #   Specifies the transformer's status. You can update the state of the
-    #   transformer, from `active` to `inactive`, or `inactive` to `active`.
+    #   <note markdown="1"> This parameter is available for backwards compatibility. Use the
+    #   [Mapping][1] data type instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html
     #   @return [String]
     #
     # @!attribute [rw] edi_type
@@ -1920,16 +2494,41 @@ module Aws::B2bi
     #   guide for processing the EDI data.
     #   @return [String]
     #
+    # @!attribute [rw] input_conversion
+    #   To update, specify the `InputConversion` object, which contains the
+    #   format options for the inbound transformation.
+    #   @return [Types::InputConversion]
+    #
+    # @!attribute [rw] mapping
+    #   Specify the structure that contains the mapping template and its
+    #   language (either XSLT or JSONATA).
+    #   @return [Types::Mapping]
+    #
+    # @!attribute [rw] output_conversion
+    #   To update, specify the `OutputConversion` object, which contains the
+    #   format options for the outbound transformation.
+    #   @return [Types::OutputConversion]
+    #
+    # @!attribute [rw] sample_documents
+    #   Specify a structure that contains the Amazon S3 bucket and an array
+    #   of the corresponding keys used to identify the location for your
+    #   sample documents.
+    #   @return [Types::SampleDocuments]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/UpdateTransformerRequest AWS API Documentation
     #
     class UpdateTransformerRequest < Struct.new(
       :transformer_id,
       :name,
+      :status,
       :file_format,
       :mapping_template,
-      :status,
       :edi_type,
-      :sample_document)
+      :sample_document,
+      :input_conversion,
+      :mapping,
+      :output_conversion,
+      :sample_documents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1948,6 +2547,20 @@ module Aws::B2bi
     #   Returns the name of the transformer.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Returns the state of the newly created transformer. The transformer
+    #   can be either `active` or `inactive`. For the transformer to be used
+    #   in a capability, its status must `active`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Returns a timestamp for creation date and time of the transformer.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   Returns a timestamp for last time the transformer was modified.
+    #   @return [Time]
+    #
     # @!attribute [rw] file_format
     #   Returns that the currently supported file formats for EDI
     #   transformations are `JSON` and `XML`.
@@ -1956,12 +2569,6 @@ module Aws::B2bi
     # @!attribute [rw] mapping_template
     #   Returns the mapping template for the transformer. This template is
     #   used to map the parsed EDI file using JSONata or XSLT.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   Returns the state of the newly created transformer. The transformer
-    #   can be either `active` or `inactive`. For the transformer to be used
-    #   in a capability, its status must `active`.
     #   @return [String]
     #
     # @!attribute [rw] edi_type
@@ -1976,13 +2583,26 @@ module Aws::B2bi
     #   guide for processing the EDI data.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   Returns a timestamp for creation date and time of the transformer.
-    #   @return [Time]
+    # @!attribute [rw] input_conversion
+    #   Returns the `InputConversion` object, which contains the format
+    #   options for the inbound transformation.
+    #   @return [Types::InputConversion]
     #
-    # @!attribute [rw] modified_at
-    #   Returns a timestamp for last time the transformer was modified.
-    #   @return [Time]
+    # @!attribute [rw] mapping
+    #   Returns the structure that contains the mapping template and its
+    #   language (either XSLT or JSONATA).
+    #   @return [Types::Mapping]
+    #
+    # @!attribute [rw] output_conversion
+    #   Returns the `OutputConversion` object, which contains the format
+    #   options for the outbound transformation.
+    #   @return [Types::OutputConversion]
+    #
+    # @!attribute [rw] sample_documents
+    #   Returns a structure that contains the Amazon S3 bucket and an array
+    #   of the corresponding keys used to identify the location for your
+    #   sample documents.
+    #   @return [Types::SampleDocuments]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/UpdateTransformerResponse AWS API Documentation
     #
@@ -1990,13 +2610,17 @@ module Aws::B2bi
       :transformer_id,
       :transformer_arn,
       :name,
+      :status,
+      :created_at,
+      :modified_at,
       :file_format,
       :mapping_template,
-      :status,
       :edi_type,
       :sample_document,
-      :created_at,
-      :modified_at)
+      :input_conversion,
+      :mapping,
+      :output_conversion,
+      :sample_documents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2011,6 +2635,34 @@ module Aws::B2bi
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # In X12 EDI messages, delimiters are used to mark the end of segments
+    # or elements, and are defined in the interchange control header. The
+    # delimiters are part of the message's syntax and divide up its
+    # different elements.
+    #
+    # @!attribute [rw] component_separator
+    #   The component, or sub-element, separator. The default value is `:`
+    #   (colon).
+    #   @return [String]
+    #
+    # @!attribute [rw] data_element_separator
+    #   The data element separator. The default value is `*` (asterisk).
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_terminator
+    #   The segment terminator. The default value is `~` (tilde).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12Delimiters AWS API Documentation
+    #
+    class X12Delimiters < Struct.new(
+      :component_separator,
+      :data_element_separator,
+      :segment_terminator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2033,7 +2685,6 @@ module Aws::B2bi
     #
     # @!attribute [rw] version
     #   Returns the version to use for the specified X12 transaction set.
-    #   </p>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12Details AWS API Documentation
@@ -2041,6 +2692,168 @@ module Aws::B2bi
     class X12Details < Struct.new(
       :transaction_set,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A wrapper structure for an X12 definition object.
+    #
+    # the X12 envelope ensures the integrity of the data and the efficiency
+    # of the information exchange. The X12 message structure has
+    # hierarchical levels. From highest to the lowest, they are:
+    #
+    # * Interchange Envelope
+    #
+    # * Functional Group
+    #
+    # * Transaction Set
+    #
+    # @!attribute [rw] common
+    #   A container for the X12 outbound EDI headers.
+    #   @return [Types::X12OutboundEdiHeaders]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12Envelope AWS API Documentation
+    #
+    class X12Envelope < Struct.new(
+      :common)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Part of the X12 message structure. These are the functional group
+    # headers for the X12 EDI object.
+    #
+    # @!attribute [rw] application_sender_code
+    #   A value representing the code used to identify the party
+    #   transmitting a message, at position GS-02.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_receiver_code
+    #   A value representing the code used to identify the party receiving a
+    #   message, at position GS-03.
+    #   @return [String]
+    #
+    # @!attribute [rw] responsible_agency_code
+    #   A code that identifies the issuer of the standard, at position
+    #   GS-07.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12FunctionalGroupHeaders AWS API Documentation
+    #
+    class X12FunctionalGroupHeaders < Struct.new(
+      :application_sender_code,
+      :application_receiver_code,
+      :responsible_agency_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # In X12, the Interchange Control Header is the first segment of an EDI
+    # document and is part of the Interchange Envelope. It contains
+    # information about the sender and receiver, the date and time of
+    # transmission, and the X12 version being used. It also includes
+    # delivery information, such as the sender and receiver IDs.
+    #
+    # @!attribute [rw] sender_id_qualifier
+    #   Located at position ISA-05 in the header. Qualifier for the sender
+    #   ID. Together, the ID and qualifier uniquely identify the sending
+    #   trading partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_id
+    #   Located at position ISA-06 in the header. This value (along with the
+    #   `senderIdQualifier`) identifies the sender of the interchange.
+    #   @return [String]
+    #
+    # @!attribute [rw] receiver_id_qualifier
+    #   Located at position ISA-07 in the header. Qualifier for the receiver
+    #   ID. Together, the ID and qualifier uniquely identify the receiving
+    #   trading partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] receiver_id
+    #   Located at position ISA-08 in the header. This value (along with the
+    #   `receiverIdQualifier`) identifies the intended recipient of the
+    #   interchange.
+    #   @return [String]
+    #
+    # @!attribute [rw] repetition_separator
+    #   Located at position ISA-11 in the header. This string makes it
+    #   easier when you need to group similar adjacent element values
+    #   together without using extra segments.
+    #
+    #   <note markdown="1"> This parameter is only honored for version greater than 401
+    #   (`VERSION_4010` and higher).
+    #
+    #    For versions less than 401, this field is called [StandardsId][1],
+    #   in which case our service sets the value to `U`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://www.stedi.com/edi/x12-004010/segment/ISA#ISA-11
+    #   @return [String]
+    #
+    # @!attribute [rw] acknowledgment_requested_code
+    #   Located at position ISA-14 in the header. The value "1" indicates
+    #   that the sender is requesting an interchange acknowledgment at
+    #   receipt of the interchange. The value "0" is used otherwise.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_indicator_code
+    #   Located at position ISA-15 in the header. Specifies how this
+    #   interchange is being used:
+    #
+    #   * `T` indicates this interchange is for testing.
+    #
+    #   * `P` indicates this interchange is for production.
+    #
+    #   * `I` indicates this interchange is informational.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12InterchangeControlHeaders AWS API Documentation
+    #
+    class X12InterchangeControlHeaders < Struct.new(
+      :sender_id_qualifier,
+      :sender_id,
+      :receiver_id_qualifier,
+      :receiver_id,
+      :repetition_separator,
+      :acknowledgment_requested_code,
+      :usage_indicator_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing the details for an outbound EDI object.
+    #
+    # @!attribute [rw] interchange_control_headers
+    #   In X12 EDI messages, delimiters are used to mark the end of segments
+    #   or elements, and are defined in the interchange control header.
+    #   @return [Types::X12InterchangeControlHeaders]
+    #
+    # @!attribute [rw] functional_group_headers
+    #   The functional group headers for the X12 object.
+    #   @return [Types::X12FunctionalGroupHeaders]
+    #
+    # @!attribute [rw] delimiters
+    #   The delimiters, for example semicolon (`;`), that separates sections
+    #   of the headers for the X12 object.
+    #   @return [Types::X12Delimiters]
+    #
+    # @!attribute [rw] validate_edi
+    #   Specifies whether or not to validate the EDI for this X12 object:
+    #   `TRUE` or `FALSE`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/X12OutboundEdiHeaders AWS API Documentation
+    #
+    class X12OutboundEdiHeaders < Struct.new(
+      :interchange_control_headers,
+      :functional_group_headers,
+      :delimiters,
+      :validate_edi)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -489,6 +489,13 @@ module Aws::MediaPackageV2
     #   The SCTE configuration.
     #   @return [Types::ScteHls]
     #
+    # @!attribute [rw] start_tag
+    #   To insert an EXT-X-START tag in your HLS playlist, specify a
+    #   StartTag configuration object with a valid TimeOffset. When you do,
+    #   you can also optionally specify whether to include a PRECISE value
+    #   in the EXT-X-START tag.
+    #   @return [Types::StartTag]
+    #
     # @!attribute [rw] manifest_window_seconds
     #   The total duration (in seconds) of the manifest's content.
     #   @return [Integer]
@@ -518,6 +525,7 @@ module Aws::MediaPackageV2
       :manifest_name,
       :child_manifest_name,
       :scte_hls,
+      :start_tag,
       :manifest_window_seconds,
       :program_date_time_interval_seconds,
       :filter_configuration)
@@ -551,6 +559,13 @@ module Aws::MediaPackageV2
     #   The SCTE configuration.
     #   @return [Types::ScteHls]
     #
+    # @!attribute [rw] start_tag
+    #   To insert an EXT-X-START tag in your HLS playlist, specify a
+    #   StartTag configuration object with a valid TimeOffset. When you do,
+    #   you can also optionally specify whether to include a PRECISE value
+    #   in the EXT-X-START tag.
+    #   @return [Types::StartTag]
+    #
     # @!attribute [rw] manifest_window_seconds
     #   The total duration (in seconds) of the manifest's content.
     #   @return [Integer]
@@ -580,6 +595,7 @@ module Aws::MediaPackageV2
       :manifest_name,
       :child_manifest_name,
       :scte_hls,
+      :start_tag,
       :manifest_window_seconds,
       :program_date_time_interval_seconds,
       :filter_configuration)
@@ -1111,13 +1127,21 @@ module Aws::MediaPackageV2
     #   use time delay query parameters for this manifest's endpoint URL.
     #   @return [Integer]
     #
+    # @!attribute [rw] clip_start_time
+    #   Optionally specify the clip start time for all of your manifest
+    #   egress requests. When you include clip start time, note that you
+    #   cannot use clip start time query parameters for this manifest's
+    #   endpoint URL.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/FilterConfiguration AWS API Documentation
     #
     class FilterConfiguration < Struct.new(
       :manifest_filter,
       :start,
       :end,
-      :time_delay_seconds)
+      :time_delay_seconds,
+      :clip_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1506,6 +1530,13 @@ module Aws::MediaPackageV2
     #   requests for this manifest.
     #   @return [Types::FilterConfiguration]
     #
+    # @!attribute [rw] start_tag
+    #   To insert an EXT-X-START tag in your HLS playlist, specify a
+    #   StartTag configuration object with a valid TimeOffset. When you do,
+    #   you can also optionally specify whether to include a PRECISE value
+    #   in the EXT-X-START tag.
+    #   @return [Types::StartTag]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetHlsManifestConfiguration AWS API Documentation
     #
     class GetHlsManifestConfiguration < Struct.new(
@@ -1515,7 +1546,8 @@ module Aws::MediaPackageV2
       :manifest_window_seconds,
       :program_date_time_interval_seconds,
       :scte_hls,
-      :filter_configuration)
+      :filter_configuration,
+      :start_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1573,6 +1605,13 @@ module Aws::MediaPackageV2
     #   requests for this manifest.
     #   @return [Types::FilterConfiguration]
     #
+    # @!attribute [rw] start_tag
+    #   To insert an EXT-X-START tag in your HLS playlist, specify a
+    #   StartTag configuration object with a valid TimeOffset. When you do,
+    #   you can also optionally specify whether to include a PRECISE value
+    #   in the EXT-X-START tag.
+    #   @return [Types::StartTag]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetLowLatencyHlsManifestConfiguration AWS API Documentation
     #
     class GetLowLatencyHlsManifestConfiguration < Struct.new(
@@ -1582,7 +1621,8 @@ module Aws::MediaPackageV2
       :manifest_window_seconds,
       :program_date_time_interval_seconds,
       :scte_hls,
-      :filter_configuration)
+      :filter_configuration,
+      :start_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2416,6 +2456,36 @@ module Aws::MediaPackageV2
       :drm_systems,
       :role_arn,
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # To insert an EXT-X-START tag in your HLS playlist, specify a StartTag
+    # configuration object with a valid TimeOffset. When you do, you can
+    # also optionally specify whether to include a PRECISE value in the
+    # EXT-X-START tag.
+    #
+    # @!attribute [rw] time_offset
+    #   Specify the value for TIME-OFFSET within your EXT-X-START tag. Enter
+    #   a signed floating point value which, if positive, must be less than
+    #   the configured manifest duration minus three times the configured
+    #   segment target duration. If negative, the absolute value must be
+    #   larger than three times the configured segment target duration, and
+    #   the absolute value must be smaller than the configured manifest
+    #   duration.
+    #   @return [Float]
+    #
+    # @!attribute [rw] precise
+    #   Specify the value for PRECISE within your EXT-X-START tag. Leave
+    #   blank, or choose false, to use the default value NO. Choose yes to
+    #   use the value YES.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/StartTag AWS API Documentation
+    #
+    class StartTag < Struct.new(
+      :time_offset,
+      :precise)
       SENSITIVE = []
       include Aws::Structure
     end

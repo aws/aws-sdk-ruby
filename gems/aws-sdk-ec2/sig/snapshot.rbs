@@ -18,39 +18,6 @@ module Aws
       def id: () -> String
       alias snapshot_id id
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#data_encryption_key_id-instance_method
-      def data_encryption_key_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#description-instance_method
-      def description: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#encrypted-instance_method
-      def encrypted: () -> bool
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#kms_key_id-instance_method
-      def kms_key_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#owner_id-instance_method
-      def owner_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#progress-instance_method
-      def progress: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#start_time-instance_method
-      def start_time: () -> ::Time
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#state-instance_method
-      def state: () -> ("pending" | "completed" | "error" | "recoverable" | "recovering")
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#state_message-instance_method
-      def state_message: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#volume_id-instance_method
-      def volume_id: () -> ::String
-
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#volume_size-instance_method
-      def volume_size: () -> ::Integer
-
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#owner_alias-instance_method
       def owner_alias: () -> ::String
 
@@ -68,6 +35,39 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#sse_type-instance_method
       def sse_type: () -> ("sse-ebs" | "sse-kms" | "none")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#volume_id-instance_method
+      def volume_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#state-instance_method
+      def state: () -> ("pending" | "completed" | "error" | "recoverable" | "recovering")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#state_message-instance_method
+      def state_message: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#start_time-instance_method
+      def start_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#progress-instance_method
+      def progress: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#owner_id-instance_method
+      def owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#volume_size-instance_method
+      def volume_size: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#encrypted-instance_method
+      def encrypted: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#kms_key_id-instance_method
+      def kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#data_encryption_key_id-instance_method
+      def data_encryption_key_id: () -> ::String
 
       def client: () -> Client
 
@@ -153,14 +153,14 @@ module Aws
                               ?create_volume_permission: {
                                 add: Array[
                                   {
-                                    group: ("all")?,
-                                    user_id: ::String?
+                                    user_id: ::String?,
+                                    group: ("all")?
                                   },
                                 ]?,
                                 remove: Array[
                                   {
-                                    group: ("all")?,
-                                    user_id: ::String?
+                                    user_id: ::String?,
+                                    group: ("all")?
                                   },
                                 ]?
                               },

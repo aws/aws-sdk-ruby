@@ -462,6 +462,14 @@ module Aws::IoTDeviceAdvisor
     # @option params [Hash<String,String>] :tags
     #   The tags to be attached to the suite definition.
     #
+    # @option params [String] :client_token
+    #   The client token for the test suite definition creation. This token is
+    #   used for tracking test suite definition creation using retries and
+    #   obtaining its status. This parameter is optional.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateSuiteDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSuiteDefinitionResponse#suite_definition_id #suite_definition_id} => String
@@ -490,6 +498,7 @@ module Aws::IoTDeviceAdvisor
     #     tags: {
     #       "String128" => "String256",
     #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -1126,7 +1135,7 @@ module Aws::IoTDeviceAdvisor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotdeviceadvisor'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

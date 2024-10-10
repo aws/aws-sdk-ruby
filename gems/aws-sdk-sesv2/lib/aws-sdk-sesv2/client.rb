@@ -579,6 +579,7 @@ module Aws::SESV2
     #     configuration_set_name: "ConfigurationSetName", # required
     #     tracking_options: {
     #       custom_redirect_domain: "CustomRedirectDomain", # required
+    #       https_policy: "REQUIRE", # accepts REQUIRE, REQUIRE_OPEN_ONLY, OPTIONAL
     #     },
     #     delivery_options: {
     #       tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
@@ -1763,6 +1764,7 @@ module Aws::SESV2
     #
     #   resp.configuration_set_name #=> String
     #   resp.tracking_options.custom_redirect_domain #=> String
+    #   resp.tracking_options.https_policy #=> String, one of "REQUIRE", "REQUIRE_OPEN_ONLY", "OPTIONAL"
     #   resp.delivery_options.tls_policy #=> String, one of "REQUIRE", "OPTIONAL"
     #   resp.delivery_options.sending_pool_name #=> String
     #   resp.reputation_options.reputation_metrics_enabled #=> Boolean
@@ -3876,6 +3878,14 @@ module Aws::SESV2
     # @option params [String] :custom_redirect_domain
     #   The domain to use to track open and click events.
     #
+    # @option params [String] :https_policy
+    #   The https policy to use for tracking open and click events. If the
+    #   value is OPTIONAL or HttpsPolicy is not specified, the open trackers
+    #   use HTTP and click tracker use the original protocol of the link. If
+    #   the value is REQUIRE, both open and click tracker uses HTTPS and if
+    #   the value is REQUIRE\_OPEN\_ONLY open tracker uses HTTPS and link
+    #   tracker is same as original protocol of the link.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3883,6 +3893,7 @@ module Aws::SESV2
     #   resp = client.put_configuration_set_tracking_options({
     #     configuration_set_name: "ConfigurationSetName", # required
     #     custom_redirect_domain: "CustomRedirectDomain",
+    #     https_policy: "REQUIRE", # accepts REQUIRE, REQUIRE_OPEN_ONLY, OPTIONAL
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetTrackingOptions AWS API Documentation
@@ -5165,7 +5176,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

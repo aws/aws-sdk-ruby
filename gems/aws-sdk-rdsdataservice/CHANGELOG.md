@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-09-26)
+------------------
+
+* Feature - Documentation update for RDS Data API to reflect support for Aurora MySQL Serverless v2 and Provisioned DB clusters.
+
 1.63.0 (2024-09-24)
 ------------------
 

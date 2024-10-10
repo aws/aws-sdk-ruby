@@ -83,6 +83,7 @@ module Aws
         def arn: () -> ::String
         def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
         def endpoint: () -> ::String
+        def port: () -> ::Integer
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
@@ -117,7 +118,8 @@ module Aws
                                     enabled: bool
                                   }
                                 },
-                                ?tags: Hash[::String, ::String]
+                                ?tags: Hash[::String, ::String],
+                                ?port: ::Integer
                               ) -> _CreateDbInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDbInstanceResponseSuccess
 
@@ -141,7 +143,58 @@ module Aws
                                            query_concurrency: ::Integer?,
                                            query_queue_size: ::Integer?,
                                            tracing_type: ("log" | "jaeger")?,
-                                           metrics_disabled: bool?
+                                           metrics_disabled: bool?,
+                                           http_idle_timeout: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             value: ::Integer
+                                           }?,
+                                           http_read_header_timeout: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             value: ::Integer
+                                           }?,
+                                           http_read_timeout: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             value: ::Integer
+                                           }?,
+                                           http_write_timeout: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             value: ::Integer
+                                           }?,
+                                           influxql_max_select_buckets: ::Integer?,
+                                           influxql_max_select_point: ::Integer?,
+                                           influxql_max_select_series: ::Integer?,
+                                           pprof_disabled: bool?,
+                                           query_initial_memory_bytes: ::Integer?,
+                                           query_max_memory_bytes: ::Integer?,
+                                           query_memory_bytes: ::Integer?,
+                                           session_length: ::Integer?,
+                                           session_renew_disabled: bool?,
+                                           storage_cache_max_memory_size: ::Integer?,
+                                           storage_cache_snapshot_memory_size: ::Integer?,
+                                           storage_cache_snapshot_write_cold_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             value: ::Integer
+                                           }?,
+                                           storage_compact_full_write_cold_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             value: ::Integer
+                                           }?,
+                                           storage_compact_throughput_burst: ::Integer?,
+                                           storage_max_concurrent_compactions: ::Integer?,
+                                           storage_max_index_log_file_size: ::Integer?,
+                                           storage_no_validate_field_size: bool?,
+                                           storage_retention_check_interval: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             value: ::Integer
+                                           }?,
+                                           storage_series_file_max_concurrent_snapshot_compactions: ::Integer?,
+                                           storage_series_id_set_cache_size: ::Integer?,
+                                           storage_wal_max_concurrent_writes: ::Integer?,
+                                           storage_wal_max_write_delay: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds"),
+                                             value: ::Integer
+                                           }?,
+                                           ui_disabled: bool?
                                          }?
                                        },
                                        ?tags: Hash[::String, ::String]
@@ -155,6 +208,7 @@ module Aws
         def arn: () -> ::String
         def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
         def endpoint: () -> ::String
+        def port: () -> ::Integer
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
@@ -181,6 +235,7 @@ module Aws
         def arn: () -> ::String
         def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
         def endpoint: () -> ::String
+        def port: () -> ::Integer
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
@@ -269,6 +324,7 @@ module Aws
         def arn: () -> ::String
         def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
         def endpoint: () -> ::String
+        def port: () -> ::Integer
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
         def allocated_storage: () -> ::Integer
@@ -292,6 +348,7 @@ module Aws
                                   }
                                 },
                                 ?db_parameter_group_identifier: ::String,
+                                ?port: ::Integer,
                                 ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge"),
                                 ?deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
                               ) -> _UpdateDbInstanceResponseSuccess

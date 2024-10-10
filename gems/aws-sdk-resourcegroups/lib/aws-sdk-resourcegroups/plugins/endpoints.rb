@@ -70,6 +70,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :cancel_tag_sync_task
+            Aws::ResourceGroups::Endpoints::CancelTagSyncTask.build(context)
           when :create_group
             Aws::ResourceGroups::Endpoints::CreateGroup.build(context)
           when :delete_group
@@ -82,18 +84,26 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::ResourceGroups::Endpoints::GetGroupConfiguration.build(context)
           when :get_group_query
             Aws::ResourceGroups::Endpoints::GetGroupQuery.build(context)
+          when :get_tag_sync_task
+            Aws::ResourceGroups::Endpoints::GetTagSyncTask.build(context)
           when :get_tags
             Aws::ResourceGroups::Endpoints::GetTags.build(context)
           when :group_resources
             Aws::ResourceGroups::Endpoints::GroupResources.build(context)
           when :list_group_resources
             Aws::ResourceGroups::Endpoints::ListGroupResources.build(context)
+          when :list_grouping_statuses
+            Aws::ResourceGroups::Endpoints::ListGroupingStatuses.build(context)
           when :list_groups
             Aws::ResourceGroups::Endpoints::ListGroups.build(context)
+          when :list_tag_sync_tasks
+            Aws::ResourceGroups::Endpoints::ListTagSyncTasks.build(context)
           when :put_group_configuration
             Aws::ResourceGroups::Endpoints::PutGroupConfiguration.build(context)
           when :search_resources
             Aws::ResourceGroups::Endpoints::SearchResources.build(context)
+          when :start_tag_sync_task
+            Aws::ResourceGroups::Endpoints::StartTagSyncTask.build(context)
           when :tag
             Aws::ResourceGroups::Endpoints::Tag.build(context)
           when :ungroup_resources

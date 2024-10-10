@@ -342,17 +342,20 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.assign_private_ip_addresses({
-    #     allow_reassignment: false,
-    #     private_ip_addresses: ["String"],
-    #     secondary_private_ip_address_count: 1,
     #     ipv_4_prefixes: ["String"],
     #     ipv_4_prefix_count: 1,
+    #     private_ip_addresses: ["String"],
+    #     secondary_private_ip_address_count: 1,
+    #     allow_reassignment: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [Boolean] :allow_reassignment
-    #   Indicates whether to allow an IP address that is already assigned to
-    #   another network interface or instance to be reassigned to the
-    #   specified network interface.
+    # @option options [Array<String>] :ipv_4_prefixes
+    #   One or more IPv4 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
+    # @option options [Integer] :ipv_4_prefix_count
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
+    #   assigns to the network interface. You cannot use this option if you
+    #   use the `Ipv4 Prefixes` option.
     # @option options [Array<String>] :private_ip_addresses
     #   The IP addresses to be assigned as a secondary private IP address to
     #   the network interface. You can't specify this parameter when also
@@ -364,13 +367,10 @@ module Aws::EC2
     #   The number of secondary IP addresses to assign to the network
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
-    # @option options [Array<String>] :ipv_4_prefixes
-    #   One or more IPv4 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv4PrefixCount` option.
-    # @option options [Integer] :ipv_4_prefix_count
-    #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv4 Prefixes` option.
+    # @option options [Boolean] :allow_reassignment
+    #   Indicates whether to allow an IP address that is already assigned to
+    #   another network interface or instance to be reassigned to the
+    #   specified network interface.
     # @return [Types::AssignPrivateIpAddressesResult]
     def assign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
@@ -383,9 +383,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.attach({
-    #     device_index: 1, # required
-    #     dry_run: false,
-    #     instance_id: "InstanceId", # required
     #     network_card_index: 1,
     #     ena_srd_specification: {
     #       ena_srd_enabled: false,
@@ -393,17 +390,11 @@ module Aws::EC2
     #         ena_srd_udp_enabled: false,
     #       },
     #     },
+    #     dry_run: false,
+    #     instance_id: "InstanceId", # required
+    #     device_index: 1, # required
     #   })
     # @param [Hash] options ({})
-    # @option options [required, Integer] :device_index
-    #   The index of the device for the network interface attachment.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :instance_id
-    #   The ID of the instance.
     # @option options [Integer] :network_card_index
     #   The index of the network card. Some instance types support multiple
     #   network cards. The primary network interface must be assigned to
@@ -411,6 +402,15 @@ module Aws::EC2
     # @option options [Types::EnaSrdSpecification] :ena_srd_specification
     #   Configures ENA Express for the network interface that this action
     #   attaches to the instance.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [required, String] :instance_id
+    #   The ID of the instance.
+    # @option options [required, Integer] :device_index
+    #   The index of the device for the network interface attachment.
     # @return [Types::AttachNetworkInterfaceResult]
     def attach(options = {})
       options = options.merge(network_interface_id: @id)
@@ -529,17 +529,17 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.describe_attribute({
-    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment, associatePublicIpAddress
     #     dry_run: false,
+    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment, associatePublicIpAddress
     #   })
     # @param [Hash] options ({})
-    # @option options [String] :attribute
-    #   The attribute of the network interface. This parameter is required.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :attribute
+    #   The attribute of the network interface. This parameter is required.
     # @return [Types::DescribeNetworkInterfaceAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(network_interface_id: @id)
@@ -595,16 +595,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.modify_attribute({
-    #     attachment: {
-    #       attachment_id: "NetworkInterfaceAttachmentId",
-    #       delete_on_termination: false,
-    #     },
-    #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     dry_run: false,
-    #     groups: ["SecurityGroupId"],
-    #     source_dest_check: {
-    #       value: false,
-    #     },
     #     ena_srd_specification: {
     #       ena_srd_enabled: false,
     #       ena_srd_udp_specification: {
@@ -618,31 +608,18 @@ module Aws::EC2
     #       udp_timeout: 1,
     #     },
     #     associate_public_ip_address: false,
+    #     dry_run: false,
+    #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     source_dest_check: {
+    #       value: false,
+    #     },
+    #     groups: ["SecurityGroupId"],
+    #     attachment: {
+    #       attachment_id: "NetworkInterfaceAttachmentId",
+    #       delete_on_termination: false,
+    #     },
     #   })
     # @param [Hash] options ({})
-    # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
-    #   Information about the interface attachment. If modifying the `delete
-    #   on termination` attribute, you must specify the ID of the interface
-    #   attachment.
-    # @option options [Types::AttributeValue] :description
-    #   A description for the network interface.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :groups
-    #   Changes the security groups for the network interface. The new set of
-    #   groups you specify replaces the current set. You must specify at least
-    #   one group, even if it's just the default security group in the VPC.
-    #   You must specify the ID of the security group, not the name.
-    # @option options [Types::AttributeBooleanValue] :source_dest_check
-    #   Enable or disable source/destination checks, which ensure that the
-    #   instance is either the source or the destination of any traffic that
-    #   it receives. If the value is `true`, source/destination checks are
-    #   enabled; otherwise, they are disabled. The default value is `true`.
-    #   You must disable source/destination checks if the instance runs
-    #   services such as network address translation, routing, or firewalls.
     # @option options [Types::EnaSrdSpecification] :ena_srd_specification
     #   Updates the ENA Express configuration for the network interface that’s
     #   attached to the instance.
@@ -668,6 +645,29 @@ module Aws::EC2
     #   Indicates whether to assign a public IPv4 address to a network
     #   interface. This option can be enabled for any network interface but
     #   will only apply to the primary network interface (eth0).
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Types::AttributeValue] :description
+    #   A description for the network interface.
+    # @option options [Types::AttributeBooleanValue] :source_dest_check
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
+    # @option options [Array<String>] :groups
+    #   Changes the security groups for the network interface. The new set of
+    #   groups you specify replaces the current set. You must specify at least
+    #   one group, even if it's just the default security group in the VPC.
+    #   You must specify the ID of the security group, not the name.
+    # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
+    #   Information about the interface attachment. If modifying the `delete
+    #   on termination` attribute, you must specify the ID of the interface
+    #   attachment.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)
@@ -703,16 +703,16 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.unassign_private_ip_addresses({
-    #     private_ip_addresses: ["String"],
     #     ipv_4_prefixes: ["String"],
+    #     private_ip_addresses: ["String"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :ipv_4_prefixes
+    #   The IPv4 prefixes to unassign from the network interface.
     # @option options [Array<String>] :private_ip_addresses
     #   The secondary private IP addresses to unassign from the network
     #   interface. You can specify this option multiple times to unassign more
     #   than one IP address.
-    # @option options [Array<String>] :ipv_4_prefixes
-    #   The IPv4 prefixes to unassign from the network interface.
     # @return [EmptyStructure]
     def unassign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)

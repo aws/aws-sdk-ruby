@@ -447,6 +447,36 @@ module Aws::ResourceGroups
 
     # @!group API Operations
 
+    # Cancels the specified tag-sync task.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:CancelTagSyncTask` on the application group
+    #
+    # * `resource-groups:DeleteGroup`
+    #
+    # @option params [required, String] :task_arn
+    #   The Amazon resource name (ARN) of the tag-sync task.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_tag_sync_task({
+    #     task_arn: "TagSyncTaskArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CancelTagSyncTask AWS API Documentation
+    #
+    # @overload cancel_tag_sync_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_tag_sync_task(params = {}, options = {})
+      req = build_request(:cancel_tag_sync_task, params)
+      req.send_request(options)
+    end
+
     # Creates a resource group with the specified name and description. You
     # can optionally include either a resource query or a service
     # configuration. For more information about constructing a resource
@@ -515,6 +545,19 @@ module Aws::ResourceGroups
     #
     #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
+    # @option params [Integer] :criticality
+    #   The critical rank of the application group on a scale of 1 to 10, with
+    #   a rank of 1 being the most critical, and a rank of 10 being least
+    #   critical.
+    #
+    # @option params [String] :owner
+    #   A name, email address or other identifier for the person or group who
+    #   is considered as the owner of this application group within your
+    #   organization.
+    #
+    # @option params [String] :display_name
+    #   The name of the application group, which you can change at any time.
+    #
     # @return [Types::CreateGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGroupOutput#group #group} => Types::Group
@@ -525,7 +568,7 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_group({
-    #     name: "GroupName", # required
+    #     name: "CreateGroupName", # required
     #     description: "Description",
     #     resource_query: {
     #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
@@ -545,6 +588,9 @@ module Aws::ResourceGroups
     #         ],
     #       },
     #     ],
+    #     criticality: 1,
+    #     owner: "Owner",
+    #     display_name: "DisplayName",
     #   })
     #
     # @example Response structure
@@ -552,6 +598,11 @@ module Aws::ResourceGroups
     #   resp.group.group_arn #=> String
     #   resp.group.name #=> String
     #   resp.group.description #=> String
+    #   resp.group.criticality #=> Integer
+    #   resp.group.owner #=> String
+    #   resp.group.display_name #=> String
+    #   resp.group.application_tag #=> Hash
+    #   resp.group.application_tag["ApplicationTagKey"] #=> String
     #   resp.resource_query.type #=> String, one of "TAG_FILTERS_1_0", "CLOUDFORMATION_STACK_1_0"
     #   resp.resource_query.query #=> String
     #   resp.tags #=> Hash
@@ -596,7 +647,8 @@ module Aws::ResourceGroups
     #   Deprecated - don't use this parameter. Use `Group` instead.
     #
     # @option params [String] :group
-    #   The name or the ARN of the resource group to delete.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   delete.
     #
     # @return [Types::DeleteGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -606,7 +658,7 @@ module Aws::ResourceGroups
     #
     #   resp = client.delete_group({
     #     group_name: "GroupName",
-    #     group: "GroupString",
+    #     group: "GroupStringV2",
     #   })
     #
     # @example Response structure
@@ -614,6 +666,11 @@ module Aws::ResourceGroups
     #   resp.group.group_arn #=> String
     #   resp.group.name #=> String
     #   resp.group.description #=> String
+    #   resp.group.criticality #=> Integer
+    #   resp.group.owner #=> String
+    #   resp.group.display_name #=> String
+    #   resp.group.application_tag #=> Hash
+    #   resp.group.application_tag["ApplicationTagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/DeleteGroup AWS API Documentation
     #
@@ -659,7 +716,8 @@ module Aws::ResourceGroups
     #   Deprecated - don't use this parameter. Use `Group` instead.
     #
     # @option params [String] :group
-    #   The name or the ARN of the resource group to retrieve.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   retrieve.
     #
     # @return [Types::GetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -669,7 +727,7 @@ module Aws::ResourceGroups
     #
     #   resp = client.get_group({
     #     group_name: "GroupName",
-    #     group: "GroupString",
+    #     group: "GroupStringV2",
     #   })
     #
     # @example Response structure
@@ -677,6 +735,11 @@ module Aws::ResourceGroups
     #   resp.group.group_arn #=> String
     #   resp.group.name #=> String
     #   resp.group.description #=> String
+    #   resp.group.criticality #=> Integer
+    #   resp.group.owner #=> String
+    #   resp.group.display_name #=> String
+    #   resp.group.application_tag #=> Hash
+    #   resp.group.application_tag["ApplicationTagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroup AWS API Documentation
     #
@@ -704,8 +767,8 @@ module Aws::ResourceGroups
     # [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
     # @option params [String] :group
-    #   The name or the ARN of the resource group for which you want to
-    #   retrive the service configuration.
+    #   The name or the Amazon resource name (ARN) of the resource group for
+    #   which you want to retrive the service configuration.
     #
     # @return [Types::GetGroupConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -763,7 +826,8 @@ module Aws::ResourceGroups
     #   Don't use this parameter. Use `Group` instead.
     #
     # @option params [String] :group
-    #   The name or the ARN of the resource group to query.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   query.
     #
     # @return [Types::GetGroupQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -791,8 +855,60 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
+    # Returns information about a specified tag-sync task.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:GetTagSyncTask` on the application group
+    #
+    # ^
+    #
+    # @option params [required, String] :task_arn
+    #   The Amazon resource name (ARN) of the tag-sync task.
+    #
+    # @return [Types::GetTagSyncTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTagSyncTaskOutput#group_arn #group_arn} => String
+    #   * {Types::GetTagSyncTaskOutput#group_name #group_name} => String
+    #   * {Types::GetTagSyncTaskOutput#task_arn #task_arn} => String
+    #   * {Types::GetTagSyncTaskOutput#tag_key #tag_key} => String
+    #   * {Types::GetTagSyncTaskOutput#tag_value #tag_value} => String
+    #   * {Types::GetTagSyncTaskOutput#role_arn #role_arn} => String
+    #   * {Types::GetTagSyncTaskOutput#status #status} => String
+    #   * {Types::GetTagSyncTaskOutput#error_message #error_message} => String
+    #   * {Types::GetTagSyncTaskOutput#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_tag_sync_task({
+    #     task_arn: "TagSyncTaskArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_arn #=> String
+    #   resp.group_name #=> String
+    #   resp.task_arn #=> String
+    #   resp.tag_key #=> String
+    #   resp.tag_value #=> String
+    #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "ERROR"
+    #   resp.error_message #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagSyncTask AWS API Documentation
+    #
+    # @overload get_tag_sync_task(params = {})
+    # @param [Hash] params ({})
+    def get_tag_sync_task(params = {}, options = {})
+      req = build_request(:get_tag_sync_task, params)
+      req.send_request(options)
+    end
+
     # Returns a list of tags that are associated with a resource group,
-    # specified by an ARN.
+    # specified by an Amazon resource name (ARN).
     #
     # **Minimum permissions**
     #
@@ -803,7 +919,8 @@ module Aws::ResourceGroups
     # ^
     #
     # @option params [required, String] :arn
-    #   The ARN of the resource group whose tags you want to retrieve.
+    #   The Amazon resource name (ARN) of the resource group whose tags you
+    #   want to retrieve.
     #
     # @return [Types::GetTagsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -813,7 +930,7 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_tags({
-    #     arn: "GroupArn", # required
+    #     arn: "GroupArnV2", # required
     #   })
     #
     # @example Response structure
@@ -833,14 +950,15 @@ module Aws::ResourceGroups
 
     # Adds the specified resources to the specified group.
     #
-    # You can use this operation with only resource groups that are
-    # configured with the following types:
+    # You can only use this operation with the following groups:
     #
     #  * `AWS::EC2::HostManagement`
     #
     # * `AWS::EC2::CapacityReservationPool`
     #
-    #  Other resource group type and resource types aren't currently
+    # * `AWS::ResourceGroups::ApplicationGroup`
+    #
+    #  Other resource group types and resource types are not currently
     # supported by this operation.
     #
     # **Minimum permissions**
@@ -852,10 +970,12 @@ module Aws::ResourceGroups
     # ^
     #
     # @option params [required, String] :group
-    #   The name or the ARN of the resource group to add resources to.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   add resources to.
     #
     # @option params [required, Array<String>] :resource_arns
-    #   The list of ARNs of the resources to be added to the group.
+    #   The list of Amazon resource names (ARNs) of the resources to be added
+    #   to the group.
     #
     # @return [Types::GroupResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -866,7 +986,7 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.group_resources({
-    #     group: "GroupString", # required
+    #     group: "GroupStringV2", # required
     #     resource_arns: ["ResourceArn"], # required
     #   })
     #
@@ -890,8 +1010,8 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns a list of ARNs of the resources that are members of a
-    # specified resource group.
+    # Returns a list of Amazon resource names (ARNs) of the resources that
+    # are members of a specified resource group.
     #
     # **Minimum permissions**
     #
@@ -910,7 +1030,7 @@ module Aws::ResourceGroups
     #   <code>Group</code> request field instead.</b> </i>
     #
     # @option params [String] :group
-    #   The name or the ARN of the resource group
+    #   The name or the Amazon resource name (ARN) of the resource group.
     #
     # @option params [Array<Types::ResourceFilter>] :filters
     #   Filters, formatted as ResourceFilter objects, that you want to apply
@@ -974,7 +1094,7 @@ module Aws::ResourceGroups
     #
     #   resp = client.list_group_resources({
     #     group_name: "GroupName",
-    #     group: "GroupString",
+    #     group: "GroupStringV2",
     #     filters: [
     #       {
     #         name: "resource-type", # required, accepts resource-type
@@ -1008,6 +1128,71 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
+    # Returns the status of the last grouping or ungrouping action for each
+    # resource in the specified application group.
+    #
+    # @option params [required, String] :group
+    #   The application group identifier, expressed as an Amazon resource name
+    #   (ARN) or the application group name.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources and their statuses returned in the
+    #   response.
+    #
+    # @option params [Array<Types::ListGroupingStatusesFilter>] :filters
+    #   The filter name and value pair that is used to return more specific
+    #   results from a list of resources.
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value provided by a previous call's `NextToken` response to indicate
+    #   where the output should continue from.
+    #
+    # @return [Types::ListGroupingStatusesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGroupingStatusesOutput#group #group} => String
+    #   * {Types::ListGroupingStatusesOutput#grouping_statuses #grouping_statuses} => Array&lt;Types::GroupingStatusesItem&gt;
+    #   * {Types::ListGroupingStatusesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_grouping_statuses({
+    #     group: "GroupStringV2", # required
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "status", # required, accepts status, resource-arn
+    #         values: ["ListGroupingStatusesFilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group #=> String
+    #   resp.grouping_statuses #=> Array
+    #   resp.grouping_statuses[0].resource_arn #=> String
+    #   resp.grouping_statuses[0].action #=> String, one of "GROUP", "UNGROUP"
+    #   resp.grouping_statuses[0].status #=> String, one of "SUCCESS", "FAILED", "IN_PROGRESS", "SKIPPED"
+    #   resp.grouping_statuses[0].error_message #=> String
+    #   resp.grouping_statuses[0].error_code #=> String
+    #   resp.grouping_statuses[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupingStatuses AWS API Documentation
+    #
+    # @overload list_grouping_statuses(params = {})
+    # @param [Hash] params ({})
+    def list_grouping_statuses(params = {}, options = {})
+      req = build_request(:list_grouping_statuses, params)
+      req.send_request(options)
+    end
+
     # Returns a list of existing Resource Groups in your account.
     #
     # **Minimum permissions**
@@ -1031,6 +1216,8 @@ module Aws::ResourceGroups
     #   * `configuration-type` - Filter the results to include only those
     #     groups that have the specified configuration types attached. The
     #     current supported values are:
+    #
+    #     * `AWS::ResourceGroups::ApplicationGroup`
     #
     #     * `AWS::AppRegistry::Application`
     #
@@ -1076,7 +1263,7 @@ module Aws::ResourceGroups
     #   resp = client.list_groups({
     #     filters: [
     #       {
-    #         name: "resource-type", # required, accepts resource-type, configuration-type
+    #         name: "resource-type", # required, accepts resource-type, configuration-type, owner, display-name, criticality
     #         values: ["GroupFilterValue"], # required
     #       },
     #     ],
@@ -1089,10 +1276,19 @@ module Aws::ResourceGroups
     #   resp.group_identifiers #=> Array
     #   resp.group_identifiers[0].group_name #=> String
     #   resp.group_identifiers[0].group_arn #=> String
+    #   resp.group_identifiers[0].description #=> String
+    #   resp.group_identifiers[0].criticality #=> Integer
+    #   resp.group_identifiers[0].owner #=> String
+    #   resp.group_identifiers[0].display_name #=> String
     #   resp.groups #=> Array
     #   resp.groups[0].group_arn #=> String
     #   resp.groups[0].name #=> String
     #   resp.groups[0].description #=> String
+    #   resp.groups[0].criticality #=> Integer
+    #   resp.groups[0].owner #=> String
+    #   resp.groups[0].display_name #=> String
+    #   resp.groups[0].application_tag #=> Hash
+    #   resp.groups[0].application_tag["ApplicationTagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroups AWS API Documentation
@@ -1101,6 +1297,74 @@ module Aws::ResourceGroups
     # @param [Hash] params ({})
     def list_groups(params = {}, options = {})
       req = build_request(:list_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of tag-sync tasks.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:ListTagSyncTasks` with the group passed in the
+    #   filters as the resource or * if using no filters
+    #
+    # ^
+    #
+    # @option params [Array<Types::ListTagSyncTasksFilter>] :filters
+    #   The Amazon resource name (ARN) or name of the application group for
+    #   which you want to return a list of tag-sync tasks.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the response.
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value provided by a previous call's `NextToken` response to indicate
+    #   where the output should continue from.
+    #
+    # @return [Types::ListTagSyncTasksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagSyncTasksOutput#tag_sync_tasks #tag_sync_tasks} => Array&lt;Types::TagSyncTaskItem&gt;
+    #   * {Types::ListTagSyncTasksOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tag_sync_tasks({
+    #     filters: [
+    #       {
+    #         group_arn: "GroupArnV2",
+    #         group_name: "GroupName",
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_sync_tasks #=> Array
+    #   resp.tag_sync_tasks[0].group_arn #=> String
+    #   resp.tag_sync_tasks[0].group_name #=> String
+    #   resp.tag_sync_tasks[0].task_arn #=> String
+    #   resp.tag_sync_tasks[0].tag_key #=> String
+    #   resp.tag_sync_tasks[0].tag_value #=> String
+    #   resp.tag_sync_tasks[0].role_arn #=> String
+    #   resp.tag_sync_tasks[0].status #=> String, one of "ACTIVE", "ERROR"
+    #   resp.tag_sync_tasks[0].error_message #=> String
+    #   resp.tag_sync_tasks[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListTagSyncTasks AWS API Documentation
+    #
+    # @overload list_tag_sync_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_tag_sync_tasks(params = {}, options = {})
+      req = build_request(:list_tag_sync_tasks, params)
       req.send_request(options)
     end
 
@@ -1117,8 +1381,8 @@ module Aws::ResourceGroups
     # ^
     #
     # @option params [String] :group
-    #   The name or ARN of the resource group with the configuration that you
-    #   want to update.
+    #   The name or Amazon resource name (ARN) of the resource group with the
+    #   configuration that you want to update.
     #
     # @option params [Array<Types::GroupConfigurationItem>] :configuration
     #   The new configuration to associate with the specified group. A
@@ -1244,9 +1508,76 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Adds tags to a resource group with the specified ARN. Existing tags on
-    # a resource group are not changed if they are not specified in the
-    # request parameters.
+    # Creates a new tag-sync task to onboard and sync resources tagged with
+    # a specific tag key-value pair to an application.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * `resource-groups:StartTagSyncTask` on the application group
+    #
+    # * `resource-groups:CreateGroup`
+    #
+    # * `iam:PassRole` on the role provided in the request
+    #
+    # @option params [required, String] :group
+    #   The Amazon resource name (ARN) or name of the application group for
+    #   which you want to create a tag-sync task.
+    #
+    # @option params [required, String] :tag_key
+    #   The tag key. Resources tagged with this tag key-value pair will be
+    #   added to the application. If a resource with this tag is later
+    #   untagged, the tag-sync task removes the resource from the application.
+    #
+    # @option params [required, String] :tag_value
+    #   The tag value. Resources tagged with this tag key-value pair will be
+    #   added to the application. If a resource with this tag is later
+    #   untagged, the tag-sync task removes the resource from the application.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon resource name (ARN) of the role assumed by the service to
+    #   tag and untag resources on your behalf.
+    #
+    # @return [Types::StartTagSyncTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTagSyncTaskOutput#group_arn #group_arn} => String
+    #   * {Types::StartTagSyncTaskOutput#group_name #group_name} => String
+    #   * {Types::StartTagSyncTaskOutput#task_arn #task_arn} => String
+    #   * {Types::StartTagSyncTaskOutput#tag_key #tag_key} => String
+    #   * {Types::StartTagSyncTaskOutput#tag_value #tag_value} => String
+    #   * {Types::StartTagSyncTaskOutput#role_arn #role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_tag_sync_task({
+    #     group: "GroupStringV2", # required
+    #     tag_key: "TagKey", # required
+    #     tag_value: "TagValue", # required
+    #     role_arn: "RoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_arn #=> String
+    #   resp.group_name #=> String
+    #   resp.task_arn #=> String
+    #   resp.tag_key #=> String
+    #   resp.tag_value #=> String
+    #   resp.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/StartTagSyncTask AWS API Documentation
+    #
+    # @overload start_tag_sync_task(params = {})
+    # @param [Hash] params ({})
+    def start_tag_sync_task(params = {}, options = {})
+      req = build_request(:start_tag_sync_task, params)
+      req.send_request(options)
+    end
+
+    # Adds tags to a resource group with the specified Amazon resource name
+    # (ARN). Existing tags on a resource group are not changed if they are
+    # not specified in the request parameters.
     #
     # Do not store personally identifiable information (PII) or other
     # confidential or sensitive information in tags. We use tags to provide
@@ -1262,7 +1593,8 @@ module Aws::ResourceGroups
     # ^
     #
     # @option params [required, String] :arn
-    #   The ARN of the resource group to which to add tags.
+    #   The Amazon resource name (ARN) of the resource group to which to add
+    #   tags.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags to add to the specified resource group. A tag is a
@@ -1276,7 +1608,7 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag({
-    #     arn: "GroupArn", # required
+    #     arn: "GroupArnV2", # required
     #     tags: { # required
     #       "TagKey" => "TagValue",
     #     },
@@ -1312,11 +1644,12 @@ module Aws::ResourceGroups
     # ^
     #
     # @option params [required, String] :group
-    #   The name or the ARN of the resource group from which to remove the
-    #   resources.
+    #   The name or the Amazon resource name (ARN) of the resource group from
+    #   which to remove the resources.
     #
     # @option params [required, Array<String>] :resource_arns
-    #   The ARNs of the resources to be removed from the group.
+    #   The Amazon resource names (ARNs) of the resources to be removed from
+    #   the group.
     #
     # @return [Types::UngroupResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1327,7 +1660,7 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.ungroup_resources({
-    #     group: "GroupString", # required
+    #     group: "GroupStringV2", # required
     #     resource_arns: ["ResourceArn"], # required
     #   })
     #
@@ -1362,9 +1695,9 @@ module Aws::ResourceGroups
     # ^
     #
     # @option params [required, String] :arn
-    #   The ARN of the resource group from which to remove tags. The command
-    #   removed both the specified keys and any values associated with those
-    #   keys.
+    #   The Amazon resource name (ARN) of the resource group from which to
+    #   remove tags. The command removed both the specified keys and any
+    #   values associated with those keys.
     #
     # @option params [required, Array<String>] :keys
     #   The keys of the tags to be removed.
@@ -1377,7 +1710,7 @@ module Aws::ResourceGroups
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag({
-    #     arn: "GroupArn", # required
+    #     arn: "GroupArnV2", # required
     #     keys: ["TagKey"], # required
     #   })
     #
@@ -1406,6 +1739,9 @@ module Aws::ResourceGroups
     # @option params [String] :group_lifecycle_events_desired_status
     #   Specifies whether you want to turn [group lifecycle events][1] on or
     #   off.
+    #
+    #   You can't turn on group lifecycle events if your resource groups
+    #   quota is greater than 2,000.
     #
     #
     #
@@ -1451,12 +1787,25 @@ module Aws::ResourceGroups
     #   Don't use this parameter. Use `Group` instead.
     #
     # @option params [String] :group
-    #   The name or the ARN of the resource group to modify.
+    #   The name or the ARN of the resource group to update.
     #
     # @option params [String] :description
     #   The new description that you want to update the resource group with.
     #   Descriptions can contain letters, numbers, hyphens, underscores,
     #   periods, and spaces.
+    #
+    # @option params [Integer] :criticality
+    #   The critical rank of the application group on a scale of 1 to 10, with
+    #   a rank of 1 being the most critical, and a rank of 10 being least
+    #   critical.
+    #
+    # @option params [String] :owner
+    #   A name, email address or other identifier for the person or group who
+    #   is considered as the owner of this application group within your
+    #   organization.
+    #
+    # @option params [String] :display_name
+    #   The name of the application group, which you can change at any time.
     #
     # @return [Types::UpdateGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1466,8 +1815,11 @@ module Aws::ResourceGroups
     #
     #   resp = client.update_group({
     #     group_name: "GroupName",
-    #     group: "GroupString",
+    #     group: "GroupStringV2",
     #     description: "Description",
+    #     criticality: 1,
+    #     owner: "Owner",
+    #     display_name: "DisplayName",
     #   })
     #
     # @example Response structure
@@ -1475,6 +1827,11 @@ module Aws::ResourceGroups
     #   resp.group.group_arn #=> String
     #   resp.group.name #=> String
     #   resp.group.description #=> String
+    #   resp.group.criticality #=> Integer
+    #   resp.group.owner #=> String
+    #   resp.group.display_name #=> String
+    #   resp.group.application_tag #=> Hash
+    #   resp.group.application_tag["ApplicationTagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroup AWS API Documentation
     #
@@ -1505,7 +1862,8 @@ module Aws::ResourceGroups
     #   Don't use this parameter. Use `Group` instead.
     #
     # @option params [String] :group
-    #   The name or the ARN of the resource group to query.
+    #   The name or the Amazon resource name (ARN) of the resource group to
+    #   query.
     #
     # @option params [required, Types::ResourceQuery] :resource_query
     #   The resource query to determine which Amazon Web Services resources
@@ -1564,7 +1922,7 @@ module Aws::ResourceGroups
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

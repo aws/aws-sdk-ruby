@@ -20,6 +20,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/BucketLifecycleConfiguration.html#rules-instance_method
       def rules: () -> ::Array[Types::LifecycleRule]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/BucketLifecycleConfiguration.html#transition_default_minimum_object_size-instance_method
+      def transition_default_minimum_object_size: () -> ("varies_by_storage_class" | "all_storage_classes_128K")
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/BucketLifecycleConfiguration.html#load-instance_method
@@ -97,9 +100,10 @@ module Aws
                      },
                    ]
                  },
-                 ?expected_bucket_owner: ::String
-               ) -> ::Aws::EmptyStructure
-             | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+                 ?expected_bucket_owner: ::String,
+                 ?transition_default_minimum_object_size: ("varies_by_storage_class" | "all_storage_classes_128K")
+               ) -> Types::PutBucketLifecycleConfigurationOutput
+             | (?Hash[Symbol, untyped]) -> Types::PutBucketLifecycleConfigurationOutput
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/BucketLifecycleConfiguration.html#bucket-instance_method
       def bucket: () -> Bucket

@@ -709,6 +709,7 @@ module Aws::S3
 
     class GetBucketLifecycleConfigurationOutput
       attr_accessor rules: ::Array[Types::LifecycleRule]
+      attr_accessor transition_default_minimum_object_size: ("varies_by_storage_class" | "all_storage_classes_128K")
       SENSITIVE: []
     end
 
@@ -1851,11 +1852,17 @@ module Aws::S3
       SENSITIVE: []
     end
 
+    class PutBucketLifecycleConfigurationOutput
+      attr_accessor transition_default_minimum_object_size: ("varies_by_storage_class" | "all_storage_classes_128K")
+      SENSITIVE: []
+    end
+
     class PutBucketLifecycleConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
       attr_accessor lifecycle_configuration: Types::BucketLifecycleConfiguration
       attr_accessor expected_bucket_owner: ::String
+      attr_accessor transition_default_minimum_object_size: ("varies_by_storage_class" | "all_storage_classes_128K")
       SENSITIVE: []
     end
 

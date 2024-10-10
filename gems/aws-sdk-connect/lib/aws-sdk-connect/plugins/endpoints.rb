@@ -460,6 +460,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Connect::Endpoints::StartContactRecording.build(context)
           when :start_contact_streaming
             Aws::Connect::Endpoints::StartContactStreaming.build(context)
+          when :start_outbound_chat_contact
+            Aws::Connect::Endpoints::StartOutboundChatContact.build(context)
           when :start_outbound_voice_contact
             Aws::Connect::Endpoints::StartOutboundVoiceContact.build(context)
           when :start_task_contact

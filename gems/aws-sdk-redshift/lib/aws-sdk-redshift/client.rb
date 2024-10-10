@@ -7562,23 +7562,10 @@ module Aws::Redshift
     # @option params [String] :s3_key_prefix
     #   The prefix applied to the log file names.
     #
-    #   Constraints:
-    #
-    #   * Cannot exceed 512 characters
-    #
-    #   * Cannot contain spaces( ), double quotes ("), single quotes ('), a
-    #     backslash (\\), or control characters. The hexadecimal codes for
-    #     invalid characters are:
-    #
-    #     * x00 to x20
-    #
-    #     * x22
-    #
-    #     * x27
-    #
-    #     * x5c
-    #
-    #     * x7f or larger
+    #   Valid characters are any letter from any language, any whitespace
+    #   character, any numeric character, and the following characters:
+    #   underscore (`_`), period (`.`), colon (`:`), slash (`/`), equal (`=`),
+    #   plus (`+`), backslash (``), hyphen (`-`), at symbol (`@`).
     #
     # @option params [String] :log_destination_type
     #   The log destination type. An enum with possible values of `s3` and
@@ -7604,7 +7591,7 @@ module Aws::Redshift
     #   resp = client.enable_logging({
     #     cluster_identifier: "String", # required
     #     bucket_name: "String",
-    #     s3_key_prefix: "String",
+    #     s3_key_prefix: "S3KeyPrefixValue",
     #     log_destination_type: "s3", # accepts s3, cloudwatch
     #     log_exports: ["String"],
     #   })
@@ -12446,7 +12433,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

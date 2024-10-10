@@ -869,13 +869,13 @@ module Aws::S3
       #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm ` with
       #   the supported algorithm from the following list:
       #
-      #   * CRC32
+      #   * `CRC32`
       #
-      #   * CRC32C
+      #   * `CRC32C`
       #
-      #   * SHA1
+      #   * `SHA1`
       #
-      #   * SHA256
+      #   * `SHA256`
       #
       #   For more information, see [Checking object integrity][1] in the
       #   *Amazon S3 User Guide*.

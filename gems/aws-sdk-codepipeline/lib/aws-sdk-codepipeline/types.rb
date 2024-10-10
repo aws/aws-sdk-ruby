@@ -251,6 +251,18 @@ module Aws::CodePipeline
     #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] commands
+    #   The shell commands to run with your compute action in CodePipeline.
+    #   All commands are supported except multi-line formats. While
+    #   CodeBuild logs and permissions are used, you do not need to create
+    #   any resources in CodeBuild.
+    #
+    #   <note markdown="1"> Using compute time for this action will incur separate charges in
+    #   CodeBuild.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] output_artifacts
     #   The name or ID of the result of the action declaration, such as a
     #   test or build artifact.
@@ -260,6 +272,12 @@ module Aws::CodePipeline
     #   The name or ID of the artifact consumed by the action, such as a
     #   test or build artifact.
     #   @return [Array<Types::InputArtifact>]
+    #
+    # @!attribute [rw] output_variables
+    #   The list of variables that are to be exported from the compute
+    #   action. This is specifically CodeBuild environment variables as used
+    #   for that action.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM service role that performs the declared action.
@@ -294,8 +312,10 @@ module Aws::CodePipeline
       :action_type_id,
       :run_order,
       :configuration,
+      :commands,
       :output_artifacts,
       :input_artifacts,
+      :output_variables,
       :role_arn,
       :region,
       :namespace,
@@ -3079,10 +3099,16 @@ module Aws::CodePipeline
     #   Output artifact names must be unique within a pipeline.
     #   @return [String]
     #
+    # @!attribute [rw] files
+    #   The files that you want to associate with the output artifact that
+    #   will be exported from the compute action.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/OutputArtifact AWS API Documentation
     #
     class OutputArtifact < Struct.new(
-      :name)
+      :name,
+      :files)
       SENSITIVE = []
       include Aws::Structure
     end

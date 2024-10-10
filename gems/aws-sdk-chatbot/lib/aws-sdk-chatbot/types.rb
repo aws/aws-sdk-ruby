@@ -88,6 +88,17 @@ module Aws::Chatbot
     #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] state
+    #   Either `ENABLED` or `DISABLED`. The resource returns `DISABLED` if
+    #   the organization's AWS Chatbot policy has explicitly denied that
+    #   configuration. For example, if Amazon Chime is disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   Provided if State is `DISABLED`. Provides context as to why the
+    #   resource is disabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ChimeWebhookConfiguration AWS API Documentation
     #
     class ChimeWebhookConfiguration < Struct.new(
@@ -97,7 +108,9 @@ module Aws::Chatbot
       :sns_topic_arns,
       :configuration_name,
       :logging_level,
-      :tags)
+      :tags,
+      :state,
+      :state_reason)
       SENSITIVE = [:webhook_description]
       include Aws::Structure
     end
@@ -126,12 +139,25 @@ module Aws::Chatbot
     #   The name of the Microsoft Teams Team.
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   Either `ENABLED` or `DISABLED`. The resource returns `DISABLED` if
+    #   the organization's AWS Chatbot policy has explicitly denied that
+    #   configuration. For example, if Amazon Chime is disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   Provided if State is `DISABLED`. Provides context as to why the
+    #   resource is disabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ConfiguredTeam AWS API Documentation
     #
     class ConfiguredTeam < Struct.new(
       :tenant_id,
       :team_id,
-      :team_name)
+      :team_name,
+      :state,
+      :state_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1376,6 +1402,17 @@ module Aws::Chatbot
     #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] state
+    #   Either `ENABLED` or `DISABLED`. The resource returns `DISABLED` if
+    #   the organization's AWS Chatbot policy has explicitly denied that
+    #   configuration. For example, if Amazon Chime is disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   Provided if State is `DISABLED`. Provides context as to why the
+    #   resource is disabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/SlackChannelConfiguration AWS API Documentation
     #
     class SlackChannelConfiguration < Struct.new(
@@ -1390,7 +1427,9 @@ module Aws::Chatbot
       :logging_level,
       :guardrail_policy_arns,
       :user_authorization_required,
-      :tags)
+      :tags,
+      :state,
+      :state_reason)
       SENSITIVE = [:slack_channel_name]
       include Aws::Structure
     end
@@ -1449,11 +1488,24 @@ module Aws::Chatbot
     #   The name of the Slack workspace.
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   Either `ENABLED` or `DISABLED`. The resource returns `DISABLED` if
+    #   the organization's AWS Chatbot policy has explicitly denied that
+    #   configuration. For example, if Amazon Chime is disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   Provided if State is `DISABLED`. Provides context as to why the
+    #   resource is disabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/SlackWorkspace AWS API Documentation
     #
     class SlackWorkspace < Struct.new(
       :slack_team_id,
-      :slack_team_name)
+      :slack_team_name,
+      :state,
+      :state_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1587,6 +1639,17 @@ module Aws::Chatbot
     #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] state
+    #   Either `ENABLED` or `DISABLED`. The resource returns `DISABLED` if
+    #   the organization's AWS Chatbot policy has explicitly denied that
+    #   configuration. For example, if Amazon Chime is disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   Provided if State is `DISABLED`. Provides context as to why the
+    #   resource is disabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/TeamsChannelConfiguration AWS API Documentation
     #
     class TeamsChannelConfiguration < Struct.new(
@@ -1602,7 +1665,9 @@ module Aws::Chatbot
       :logging_level,
       :guardrail_policy_arns,
       :user_authorization_required,
-      :tags)
+      :tags,
+      :state,
+      :state_reason)
       SENSITIVE = [:channel_name, :team_name]
       include Aws::Structure
     end

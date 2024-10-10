@@ -47,6 +47,7 @@ module Aws::IoT
     AllowAuthorizerOverride = Shapes::BooleanShape.new(name: 'AllowAuthorizerOverride')
     AllowAutoRegistration = Shapes::BooleanShape.new(name: 'AllowAutoRegistration')
     Allowed = Shapes::StructureShape.new(name: 'Allowed')
+    ApplicationProtocol = Shapes::StringShape.new(name: 'ApplicationProtocol')
     ApproximateSecondsBeforeTimedOut = Shapes::IntegerShape.new(name: 'ApproximateSecondsBeforeTimedOut')
     AscendingOrder = Shapes::BooleanShape.new(name: 'AscendingOrder')
     AssetId = Shapes::StringShape.new(name: 'AssetId')
@@ -116,6 +117,7 @@ module Aws::IoT
     AuthInfos = Shapes::ListShape.new(name: 'AuthInfos')
     AuthResult = Shapes::StructureShape.new(name: 'AuthResult')
     AuthResults = Shapes::ListShape.new(name: 'AuthResults')
+    AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AuthorizerArn = Shapes::StringShape.new(name: 'AuthorizerArn')
     AuthorizerConfig = Shapes::StructureShape.new(name: 'AuthorizerConfig')
     AuthorizerDescription = Shapes::StructureShape.new(name: 'AuthorizerDescription')
@@ -219,6 +221,8 @@ module Aws::IoT
     Cidrs = Shapes::ListShape.new(name: 'Cidrs')
     ClearDefaultAuthorizerRequest = Shapes::StructureShape.new(name: 'ClearDefaultAuthorizerRequest')
     ClearDefaultAuthorizerResponse = Shapes::StructureShape.new(name: 'ClearDefaultAuthorizerResponse')
+    ClientCertificateCallbackArn = Shapes::StringShape.new(name: 'ClientCertificateCallbackArn')
+    ClientCertificateConfig = Shapes::StructureShape.new(name: 'ClientCertificateConfig')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientProperties = Shapes::MapShape.new(name: 'ClientProperties')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
@@ -1878,6 +1882,9 @@ module Aws::IoT
 
     ClearDefaultAuthorizerResponse.struct_class = Types::ClearDefaultAuthorizerResponse
 
+    ClientCertificateConfig.add_member(:client_certificate_callback_arn, Shapes::ShapeRef.new(shape: ClientCertificateCallbackArn, location_name: "clientCertificateCallbackArn"))
+    ClientCertificateConfig.struct_class = Types::ClientCertificateConfig
+
     ClientProperties.key = Shapes::ShapeRef.new(shape: String)
     ClientProperties.value = Shapes::ShapeRef.new(shape: String)
 
@@ -2012,6 +2019,9 @@ module Aws::IoT
     CreateDomainConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDomainConfigurationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     CreateDomainConfigurationRequest.add_member(:server_certificate_config, Shapes::ShapeRef.new(shape: ServerCertificateConfig, location_name: "serverCertificateConfig"))
+    CreateDomainConfigurationRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
+    CreateDomainConfigurationRequest.add_member(:application_protocol, Shapes::ShapeRef.new(shape: ApplicationProtocol, location_name: "applicationProtocol"))
+    CreateDomainConfigurationRequest.add_member(:client_certificate_config, Shapes::ShapeRef.new(shape: ClientCertificateConfig, location_name: "clientCertificateConfig"))
     CreateDomainConfigurationRequest.struct_class = Types::CreateDomainConfigurationRequest
 
     CreateDomainConfigurationResponse.add_member(:domain_configuration_name, Shapes::ShapeRef.new(shape: DomainConfigurationName, location_name: "domainConfigurationName"))
@@ -2641,6 +2651,9 @@ module Aws::IoT
     DescribeDomainConfigurationResponse.add_member(:last_status_change_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastStatusChangeDate"))
     DescribeDomainConfigurationResponse.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     DescribeDomainConfigurationResponse.add_member(:server_certificate_config, Shapes::ShapeRef.new(shape: ServerCertificateConfig, location_name: "serverCertificateConfig"))
+    DescribeDomainConfigurationResponse.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
+    DescribeDomainConfigurationResponse.add_member(:application_protocol, Shapes::ShapeRef.new(shape: ApplicationProtocol, location_name: "applicationProtocol"))
+    DescribeDomainConfigurationResponse.add_member(:client_certificate_config, Shapes::ShapeRef.new(shape: ClientCertificateConfig, location_name: "clientCertificateConfig"))
     DescribeDomainConfigurationResponse.struct_class = Types::DescribeDomainConfigurationResponse
 
     DescribeEndpointRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location: "querystring", location_name: "endpointType"))
@@ -5083,6 +5096,9 @@ module Aws::IoT
     UpdateDomainConfigurationRequest.add_member(:remove_authorizer_config, Shapes::ShapeRef.new(shape: RemoveAuthorizerConfig, location_name: "removeAuthorizerConfig"))
     UpdateDomainConfigurationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     UpdateDomainConfigurationRequest.add_member(:server_certificate_config, Shapes::ShapeRef.new(shape: ServerCertificateConfig, location_name: "serverCertificateConfig"))
+    UpdateDomainConfigurationRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
+    UpdateDomainConfigurationRequest.add_member(:application_protocol, Shapes::ShapeRef.new(shape: ApplicationProtocol, location_name: "applicationProtocol"))
+    UpdateDomainConfigurationRequest.add_member(:client_certificate_config, Shapes::ShapeRef.new(shape: ClientCertificateConfig, location_name: "clientCertificateConfig"))
     UpdateDomainConfigurationRequest.struct_class = Types::UpdateDomainConfigurationRequest
 
     UpdateDomainConfigurationResponse.add_member(:domain_configuration_name, Shapes::ShapeRef.new(shape: ReservedDomainConfigurationName, location_name: "domainConfigurationName"))

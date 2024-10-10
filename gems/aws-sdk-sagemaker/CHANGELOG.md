@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.268.0 (2024-10-02)
+------------------
+
+* Feature - releasing builtinlcc to public
+
+1.267.0 (2024-09-26)
+------------------
+
+* Feature - Adding `TagPropagation` attribute to Sagemaker API
+
 1.266.0 (2024-09-24)
 ------------------
 

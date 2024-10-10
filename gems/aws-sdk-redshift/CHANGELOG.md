@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2024-10-07)
+------------------
+
+* Feature - Add validation pattern to S3KeyPrefix on the EnableLogging API
+
 1.125.0 (2024-09-24)
 ------------------
 

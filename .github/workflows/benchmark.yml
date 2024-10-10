@@ -12,6 +12,7 @@ on:
 permissions:
   id-token: write # required for OIDC
   contents: read
+  pull-requests: write
 
 jobs:
   benchmark:
@@ -65,3 +66,16 @@ jobs:
       - name: Put benchmark metrics
         if: ${{ env.AWS_ACCESS_KEY_ID != '' }}
         run: bundle exec rake benchmark:put-metrics
+
+      - name: Check for Performance Regressions
+        if: ${{ env.AWS_ACCESS_KEY_ID != '' }}
+        id: regressions
+        run: bundle exec rake benchmark:check-regressions
+
+      - name: Comment on PR
+        if: ${{ github.event_name == 'pull_request' && steps.regressions.outputs.message }}
+        uses: thollander/actions-comment-pull-request@main
+        with:
+          message: ${{ steps.regressions.outputs.message }}
+          comment_tag: performance-regression
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

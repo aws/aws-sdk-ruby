@@ -634,7 +634,7 @@ module Aws::S3
     # Contains all the possible checksum or digest values for an object.
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -649,7 +649,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -803,7 +803,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -818,7 +818,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -977,7 +977,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC32 checksum of the object.
+    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -989,7 +989,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC32C checksum of the object.
+    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -1159,7 +1159,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -1174,7 +1174,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -2273,7 +2273,7 @@ module Aws::S3
     #   @return [Time]
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. For more
     #   information, see [ Checking object integrity][1] in the *Amazon S3
     #   User Guide*.
@@ -2284,7 +2284,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. For more
     #   information, see [ Checking object integrity][1] in the *Amazon S3
     #   User Guide*.
@@ -2340,7 +2340,7 @@ module Aws::S3
     #   @return [Time]
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -2355,7 +2355,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -4414,13 +4414,13 @@ module Aws::S3
     #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm `
     #   with the supported algorithm from the following list:
     #
-    #   * CRC32
+    #   * `CRC32`
     #
-    #   * CRC32C
+    #   * `CRC32C`
     #
-    #   * SHA1
+    #   * `SHA1`
     #
-    #   * SHA256
+    #   * `SHA256`
     #
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
@@ -5933,10 +5933,29 @@ module Aws::S3
     #   Container for a lifecycle rule.
     #   @return [Array<Types::LifecycleRule>]
     #
+    # @!attribute [rw] transition_default_minimum_object_size
+    #   Indicates which default minimum object size behavior is applied to
+    #   the lifecycle configuration.
+    #
+    #   * `all_storage_classes_128K` - Objects smaller than 128 KB will not
+    #     transition to any storage class by default.
+    #
+    #   * `varies_by_storage_class` - Objects smaller than 128 KB will
+    #     transition to Glacier Flexible Retrieval or Glacier Deep Archive
+    #     storage classes. By default, all other storage classes will
+    #     prevent transitions smaller than 128 KB.
+    #
+    #   To customize the minimum object size for any transition you can add
+    #   a filter that specifies a custom `ObjectSizeGreaterThan` or
+    #   `ObjectSizeLessThan` in the body of your transition rule. Custom
+    #   filters always take precedence over the default transition behavior.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfigurationOutput AWS API Documentation
     #
     class GetBucketLifecycleConfigurationOutput < Struct.new(
-      :rules)
+      :rules,
+      :transition_default_minimum_object_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7062,7 +7081,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. For more
     #   information, see [ Checking object integrity][1] in the *Amazon S3
     #   User Guide*.
@@ -7073,7 +7092,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. For more
     #   information, see [ Checking object integrity][1] in the *Amazon S3
     #   User Guide*.
@@ -8244,7 +8263,7 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -8259,7 +8278,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -11962,7 +11981,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC32 checksum of the object.
+    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -11972,7 +11991,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -12262,7 +12281,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC32 checksum of the object.
+    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -12272,7 +12291,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -12852,6 +12871,32 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] transition_default_minimum_object_size
+    #   Indicates which default minimum object size behavior is applied to
+    #   the lifecycle configuration.
+    #
+    #   * `all_storage_classes_128K` - Objects smaller than 128 KB will not
+    #     transition to any storage class by default.
+    #
+    #   * `varies_by_storage_class` - Objects smaller than 128 KB will
+    #     transition to Glacier Flexible Retrieval or Glacier Deep Archive
+    #     storage classes. By default, all other storage classes will
+    #     prevent transitions smaller than 128 KB.
+    #
+    #   To customize the minimum object size for any transition you can add
+    #   a filter that specifies a custom `ObjectSizeGreaterThan` or
+    #   `ObjectSizeLessThan` in the body of your transition rule. Custom
+    #   filters always take precedence over the default transition behavior.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfigurationOutput AWS API Documentation
+    #
+    class PutBucketLifecycleConfigurationOutput < Struct.new(
+      :transition_default_minimum_object_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] bucket
     #   The name of the bucket for which to set the configuration.
     #   @return [String]
@@ -12884,13 +12929,32 @@ module Aws::S3
     #   denied).
     #   @return [String]
     #
+    # @!attribute [rw] transition_default_minimum_object_size
+    #   Indicates which default minimum object size behavior is applied to
+    #   the lifecycle configuration.
+    #
+    #   * `all_storage_classes_128K` - Objects smaller than 128 KB will not
+    #     transition to any storage class by default.
+    #
+    #   * `varies_by_storage_class` - Objects smaller than 128 KB will
+    #     transition to Glacier Flexible Retrieval or Glacier Deep Archive
+    #     storage classes. By default, all other storage classes will
+    #     prevent transitions smaller than 128 KB.
+    #
+    #   To customize the minimum object size for any transition you can add
+    #   a filter that specifies a custom `ObjectSizeGreaterThan` or
+    #   `ObjectSizeLessThan` in the body of your transition rule. Custom
+    #   filters always take precedence over the default transition behavior.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfigurationRequest AWS API Documentation
     #
     class PutBucketLifecycleConfigurationRequest < Struct.new(
       :bucket,
       :checksum_algorithm,
       :lifecycle_configuration,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :transition_default_minimum_object_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13189,13 +13253,13 @@ module Aws::S3
     #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm `
     #   with the supported algorithm from the following list:
     #
-    #   * CRC32
+    #   * `CRC32`
     #
-    #   * CRC32C
+    #   * `CRC32C`
     #
-    #   * SHA1
+    #   * `SHA1`
     #
-    #   * SHA256
+    #   * `SHA256`
     #
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
@@ -13991,7 +14055,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -14006,7 +14070,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -14331,13 +14395,13 @@ module Aws::S3
     #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm `
     #   with the supported algorithm from the following list:
     #
-    #   * CRC32
+    #   * `CRC32`
     #
-    #   * CRC32C
+    #   * `CRC32C`
     #
-    #   * SHA1
+    #   * `SHA1`
     #
-    #   * SHA256
+    #   * `SHA256`
     #
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
@@ -14363,7 +14427,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC32 checksum of the object.
+    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -14375,7 +14439,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC32C checksum of the object.
+    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -17317,7 +17381,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32
-    #   The base64-encoded, 32-bit CRC32 checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32 checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -17332,7 +17396,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32c
-    #   The base64-encoded, 32-bit CRC32C checksum of the object. This will
+    #   The base64-encoded, 32-bit CRC-32C checksum of the object. This will
     #   only be present if it was uploaded with the object. When you use an
     #   API operation on an object that was uploaded using multipart
     #   uploads, this value may not be a direct checksum value of the full
@@ -17522,7 +17586,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC32 checksum of the object.
+    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -17534,7 +17598,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC32C checksum of the object.
+    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -17824,7 +17888,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This
-    #   specifies the base64-encoded, 32-bit CRC32 checksum of the object
+    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object
     #   returned by the Object Lambda function. This may not match the
     #   checksum for the object stored in Amazon S3. Amazon S3 will perform
     #   validation of the checksum values only when the original `GetObject`
@@ -17845,7 +17909,7 @@ module Aws::S3
     # @!attribute [rw] checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This
-    #   specifies the base64-encoded, 32-bit CRC32C checksum of the object
+    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object
     #   returned by the Object Lambda function. This may not match the
     #   checksum for the object stored in Amazon S3. Amazon S3 will perform
     #   validation of the checksum values only when the original `GetObject`

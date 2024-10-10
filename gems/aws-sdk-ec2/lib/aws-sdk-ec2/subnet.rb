@@ -35,36 +35,10 @@ module Aws::EC2
     end
     alias :subnet_id :id
 
-    # The Availability Zone of the subnet.
-    # @return [String]
-    def availability_zone
-      data[:availability_zone]
-    end
-
     # The AZ ID of the subnet.
     # @return [String]
     def availability_zone_id
       data[:availability_zone_id]
-    end
-
-    # The number of unused private IPv4 addresses in the subnet. The IPv4
-    # addresses for any stopped instances are considered unavailable.
-    # @return [Integer]
-    def available_ip_address_count
-      data[:available_ip_address_count]
-    end
-
-    # The IPv4 CIDR block assigned to the subnet.
-    # @return [String]
-    def cidr_block
-      data[:cidr_block]
-    end
-
-    # Indicates whether this is the default subnet for the Availability
-    # Zone.
-    # @return [Boolean]
-    def default_for_az
-      data[:default_for_az]
     end
 
     # Indicates the device position for local network interfaces in this
@@ -73,22 +47,6 @@ module Aws::EC2
     # @return [Integer]
     def enable_lni_at_device_index
       data[:enable_lni_at_device_index]
-    end
-
-    # Indicates whether instances launched in this subnet receive a public
-    # IPv4 address.
-    #
-    # Amazon Web Services charges for all public IPv4 addresses, including
-    # public IPv4 addresses associated with running instances and Elastic IP
-    # addresses. For more information, see the *Public IPv4 Address* tab on
-    # the [Amazon VPC pricing page][1].
-    #
-    #
-    #
-    # [1]: http://aws.amazon.com/vpc/pricing/
-    # @return [Boolean]
-    def map_public_ip_on_launch
-      data[:map_public_ip_on_launch]
     end
 
     # Indicates whether a network interface created in this subnet
@@ -103,18 +61,6 @@ module Aws::EC2
     # @return [String]
     def customer_owned_ipv_4_pool
       data[:customer_owned_ipv_4_pool]
-    end
-
-    # The current state of the subnet.
-    # @return [String]
-    def state
-      data[:state]
-    end
-
-    # The ID of the VPC the subnet is in.
-    # @return [String]
-    def vpc_id
-      data[:vpc_id]
     end
 
     # The ID of the Amazon Web Services account that owns the subnet.
@@ -175,6 +121,60 @@ module Aws::EC2
     # @return [Types::PrivateDnsNameOptionsOnLaunch]
     def private_dns_name_options_on_launch
       data[:private_dns_name_options_on_launch]
+    end
+
+    # The current state of the subnet.
+    # @return [String]
+    def state
+      data[:state]
+    end
+
+    # The ID of the VPC the subnet is in.
+    # @return [String]
+    def vpc_id
+      data[:vpc_id]
+    end
+
+    # The IPv4 CIDR block assigned to the subnet.
+    # @return [String]
+    def cidr_block
+      data[:cidr_block]
+    end
+
+    # The number of unused private IPv4 addresses in the subnet. The IPv4
+    # addresses for any stopped instances are considered unavailable.
+    # @return [Integer]
+    def available_ip_address_count
+      data[:available_ip_address_count]
+    end
+
+    # The Availability Zone of the subnet.
+    # @return [String]
+    def availability_zone
+      data[:availability_zone]
+    end
+
+    # Indicates whether this is the default subnet for the Availability
+    # Zone.
+    # @return [Boolean]
+    def default_for_az
+      data[:default_for_az]
+    end
+
+    # Indicates whether instances launched in this subnet receive a public
+    # IPv4 address.
+    #
+    # Amazon Web Services charges for all public IPv4 addresses, including
+    # public IPv4 addresses associated with running instances and Elastic IP
+    # addresses. For more information, see the *Public IPv4 Address* tab on
+    # the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/vpc/pricing/
+    # @return [Boolean]
+    def map_public_ip_on_launch
+      data[:map_public_ip_on_launch]
     end
 
     # @!endgroup
@@ -320,8 +320,6 @@ module Aws::EC2
     #   instance = subnet.create_instances({
     #     block_device_mappings: [
     #       {
-    #         device_name: "String",
-    #         virtual_name: "String",
     #         ebs: {
     #           delete_on_termination: false,
     #           iops: 1,
@@ -334,6 +332,8 @@ module Aws::EC2
     #           encrypted: false,
     #         },
     #         no_device: "String",
+    #         device_name: "String",
+    #         virtual_name: "String",
     #       },
     #     ],
     #     image_id: "ImageId",
@@ -353,7 +353,6 @@ module Aws::EC2
     #       enabled: false, # required
     #     },
     #     placement: {
-    #       availability_zone: "String",
     #       affinity: "String",
     #       group_name: "PlacementGroupName",
     #       partition_number: 1,
@@ -362,75 +361,12 @@ module Aws::EC2
     #       spread_domain: "String",
     #       host_resource_group_arn: "String",
     #       group_id: "PlacementGroupId",
+    #       availability_zone: "String",
     #     },
     #     ramdisk_id: "RamdiskId",
     #     security_group_ids: ["SecurityGroupId"],
     #     security_groups: ["SecurityGroupName"],
     #     user_data: "RunInstancesUserData",
-    #     additional_info: "String",
-    #     client_token: "String",
-    #     disable_api_termination: false,
-    #     dry_run: false,
-    #     ebs_optimized: false,
-    #     iam_instance_profile: {
-    #       arn: "String",
-    #       name: "String",
-    #     },
-    #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #     network_interfaces: [
-    #       {
-    #         associate_public_ip_address: false,
-    #         delete_on_termination: false,
-    #         description: "String",
-    #         device_index: 1,
-    #         groups: ["SecurityGroupId"],
-    #         ipv_6_address_count: 1,
-    #         ipv_6_addresses: [
-    #           {
-    #             ipv_6_address: "String",
-    #             is_primary_ipv_6: false,
-    #           },
-    #         ],
-    #         network_interface_id: "NetworkInterfaceId",
-    #         private_ip_address: "String",
-    #         private_ip_addresses: [
-    #           {
-    #             primary: false,
-    #             private_ip_address: "String",
-    #           },
-    #         ],
-    #         secondary_private_ip_address_count: 1,
-    #         subnet_id: "String",
-    #         associate_carrier_ip_address: false,
-    #         interface_type: "String",
-    #         network_card_index: 1,
-    #         ipv_4_prefixes: [
-    #           {
-    #             ipv_4_prefix: "String",
-    #           },
-    #         ],
-    #         ipv_4_prefix_count: 1,
-    #         ipv_6_prefixes: [
-    #           {
-    #             ipv_6_prefix: "String",
-    #           },
-    #         ],
-    #         ipv_6_prefix_count: 1,
-    #         primary_ipv_6: false,
-    #         ena_srd_specification: {
-    #           ena_srd_enabled: false,
-    #           ena_srd_udp_specification: {
-    #             ena_srd_udp_enabled: false,
-    #           },
-    #         },
-    #         connection_tracking_specification: {
-    #           tcp_established_timeout: 1,
-    #           udp_stream_timeout: 1,
-    #           udp_timeout: 1,
-    #         },
-    #       },
-    #     ],
-    #     private_ip_address: "String",
     #     elastic_gpu_specification: [
     #       {
     #         type: "String", # required
@@ -511,6 +447,70 @@ module Aws::EC2
     #     },
     #     disable_api_stop: false,
     #     enable_primary_ipv_6: false,
+    #     dry_run: false,
+    #     disable_api_termination: false,
+    #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #     private_ip_address: "String",
+    #     client_token: "String",
+    #     additional_info: "String",
+    #     network_interfaces: [
+    #       {
+    #         associate_public_ip_address: false,
+    #         delete_on_termination: false,
+    #         description: "String",
+    #         device_index: 1,
+    #         groups: ["SecurityGroupId"],
+    #         ipv_6_address_count: 1,
+    #         ipv_6_addresses: [
+    #           {
+    #             ipv_6_address: "String",
+    #             is_primary_ipv_6: false,
+    #           },
+    #         ],
+    #         network_interface_id: "NetworkInterfaceId",
+    #         private_ip_address: "String",
+    #         private_ip_addresses: [
+    #           {
+    #             primary: false,
+    #             private_ip_address: "String",
+    #           },
+    #         ],
+    #         secondary_private_ip_address_count: 1,
+    #         subnet_id: "String",
+    #         associate_carrier_ip_address: false,
+    #         interface_type: "String",
+    #         network_card_index: 1,
+    #         ipv_4_prefixes: [
+    #           {
+    #             ipv_4_prefix: "String",
+    #           },
+    #         ],
+    #         ipv_4_prefix_count: 1,
+    #         ipv_6_prefixes: [
+    #           {
+    #             ipv_6_prefix: "String",
+    #           },
+    #         ],
+    #         ipv_6_prefix_count: 1,
+    #         primary_ipv_6: false,
+    #         ena_srd_specification: {
+    #           ena_srd_enabled: false,
+    #           ena_srd_udp_specification: {
+    #             ena_srd_udp_enabled: false,
+    #           },
+    #         },
+    #         connection_tracking_specification: {
+    #           tcp_established_timeout: 1,
+    #           udp_stream_timeout: 1,
+    #           udp_timeout: 1,
+    #         },
+    #       },
+    #     ],
+    #     iam_instance_profile: {
+    #       arn: "String",
+    #       name: "String",
+    #     },
+    #     ebs_optimized: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -641,70 +641,6 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
-    # @option options [String] :additional_info
-    #   Reserved.
-    # @option options [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. If you do not specify a client token, a
-    #   randomly generated token is used for the request to ensure
-    #   idempotency.
-    #
-    #   For more information, see [Ensuring Idempotency][1].
-    #
-    #   Constraints: Maximum 64 ASCII characters
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-    # @option options [Boolean] :disable_api_termination
-    #   If you set this parameter to `true`, you can't terminate the instance
-    #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
-    #   change this attribute after launch, use [ModifyInstanceAttribute][1].
-    #   Alternatively, if you set `InstanceInitiatedShutdownBehavior` to
-    #   `terminate`, you can terminate the instance by running the shutdown
-    #   command from the instance.
-    #
-    #   Default: `false`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Boolean] :ebs_optimized
-    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
-    #   optimization provides dedicated throughput to Amazon EBS and an
-    #   optimized configuration stack to provide optimal Amazon EBS I/O
-    #   performance. This optimization isn't available with all instance
-    #   types. Additional usage charges apply when using an EBS-optimized
-    #   instance.
-    #
-    #   Default: `false`
-    # @option options [Types::IamInstanceProfileSpecification] :iam_instance_profile
-    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
-    # @option options [String] :instance_initiated_shutdown_behavior
-    #   Indicates whether an instance stops or terminates when you initiate
-    #   shutdown from the instance (using the operating system command for
-    #   system shutdown).
-    #
-    #   Default: `stop`
-    # @option options [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   The network interfaces to associate with the instance.
-    # @option options [String] :private_ip_address
-    #   The primary IPv4 address. You must specify a value from the IPv4
-    #   address range of the subnet.
-    #
-    #   Only one private IP address can be designated as primary. You can't
-    #   specify this option if you've specified the option to designate a
-    #   private IP address as the primary IP address in a network interface
-    #   specification. You cannot specify this option if you're launching
-    #   more than one instance in the request.
-    #
-    #   You cannot specify this option and the network interfaces option in
-    #   the same request.
     # @option options [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
     #   An elastic GPU to associate with the instance.
     #
@@ -843,6 +779,70 @@ module Aws::EC2
     #   attached to your instance and you enable a primary IPv6 address, the
     #   first IPv6 GUA address associated with the ENI becomes the primary
     #   IPv6 address.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Boolean] :disable_api_termination
+    #   If you set this parameter to `true`, you can't terminate the instance
+    #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
+    #   change this attribute after launch, use [ModifyInstanceAttribute][1].
+    #   Alternatively, if you set `InstanceInitiatedShutdownBehavior` to
+    #   `terminate`, you can terminate the instance by running the shutdown
+    #   command from the instance.
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
+    # @option options [String] :instance_initiated_shutdown_behavior
+    #   Indicates whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #
+    #   Default: `stop`
+    # @option options [String] :private_ip_address
+    #   The primary IPv4 address. You must specify a value from the IPv4
+    #   address range of the subnet.
+    #
+    #   Only one private IP address can be designated as primary. You can't
+    #   specify this option if you've specified the option to designate a
+    #   private IP address as the primary IP address in a network interface
+    #   specification. You cannot specify this option if you're launching
+    #   more than one instance in the request.
+    #
+    #   You cannot specify this option and the network interfaces option in
+    #   the same request.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring Idempotency][1].
+    #
+    #   Constraints: Maximum 64 ASCII characters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    # @option options [String] :additional_info
+    #   Reserved.
+    # @option options [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
+    #   The network interfaces to associate with the instance.
+    # @option options [Types::IamInstanceProfileSpecification] :iam_instance_profile
+    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
+    # @option options [Boolean] :ebs_optimized
+    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
+    #   optimization provides dedicated throughput to Amazon EBS and an
+    #   optimized configuration stack to provide optimal Amazon EBS I/O
+    #   performance. This optimization isn't available with all instance
+    #   types. Additional usage charges apply when using an EBS-optimized
+    #   instance.
+    #
+    #   Default: `false`
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
@@ -863,24 +863,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   networkinterface = subnet.create_network_interface({
-    #     description: "String",
-    #     dry_run: false,
-    #     groups: ["SecurityGroupId"],
-    #     ipv_6_address_count: 1,
-    #     ipv_6_addresses: [
-    #       {
-    #         ipv_6_address: "String",
-    #         is_primary_ipv_6: false,
-    #       },
-    #     ],
-    #     private_ip_address: "String",
-    #     private_ip_addresses: [
-    #       {
-    #         primary: false,
-    #         private_ip_address: "String",
-    #       },
-    #     ],
-    #     secondary_private_ip_address_count: 1,
     #     ipv_4_prefixes: [
     #       {
     #         ipv_4_prefix: "String",
@@ -912,56 +894,26 @@ module Aws::EC2
     #       udp_stream_timeout: 1,
     #       udp_timeout: 1,
     #     },
+    #     description: "String",
+    #     private_ip_address: "String",
+    #     groups: ["SecurityGroupId"],
+    #     private_ip_addresses: [
+    #       {
+    #         primary: false,
+    #         private_ip_address: "String",
+    #       },
+    #     ],
+    #     secondary_private_ip_address_count: 1,
+    #     ipv_6_addresses: [
+    #       {
+    #         ipv_6_address: "String",
+    #         is_primary_ipv_6: false,
+    #       },
+    #     ],
+    #     ipv_6_address_count: 1,
+    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [String] :description
-    #   A description for the network interface.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :groups
-    #   The IDs of one or more security groups.
-    # @option options [Integer] :ipv_6_address_count
-    #   The number of IPv6 addresses to assign to a network interface. Amazon
-    #   EC2 automatically selects the IPv6 addresses from the subnet range.
-    #
-    #   You can't specify a count of IPv6 addresses using this parameter if
-    #   you've specified one of the following: specific IPv6 addresses,
-    #   specific IPv6 prefixes, or a count of IPv6 prefixes.
-    #
-    #   If your subnet has the `AssignIpv6AddressOnCreation` attribute set,
-    #   you can override that setting by specifying 0 as the IPv6 address
-    #   count.
-    # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   The IPv6 addresses from the IPv6 CIDR block range of your subnet.
-    #
-    #   You can't specify IPv6 addresses using this parameter if you've
-    #   specified one of the following: a count of IPv6 addresses, specific
-    #   IPv6 prefixes, or a count of IPv6 prefixes.
-    # @option options [String] :private_ip_address
-    #   The primary private IPv4 address of the network interface. If you
-    #   don't specify an IPv4 address, Amazon EC2 selects one for you from
-    #   the subnet's IPv4 CIDR range. If you specify an IP address, you
-    #   cannot indicate any IP addresses specified in `privateIpAddresses` as
-    #   primary (only one IP address can be designated as primary).
-    # @option options [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
-    #   The private IPv4 addresses.
-    #
-    #   You can't specify private IPv4 addresses if you've specified one of
-    #   the following: a count of private IPv4 addresses, specific IPv4
-    #   prefixes, or a count of IPv4 prefixes.
-    # @option options [Integer] :secondary_private_ip_address_count
-    #   The number of secondary private IPv4 addresses to assign to a network
-    #   interface. When you specify a number of secondary IPv4 addresses,
-    #   Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR
-    #   range. You can't specify this option and specify more than one
-    #   private IP address using `privateIpAddresses`.
-    #
-    #   You can't specify a count of private IPv4 addresses if you've
-    #   specified one of the following: specific private IPv4 addresses,
-    #   specific IPv4 prefixes, or a count of IPv4 prefixes.
     # @option options [Array<Types::Ipv4PrefixSpecificationRequest>] :ipv_4_prefixes
     #   The IPv4 prefixes assigned to the network interface.
     #
@@ -1020,6 +972,54 @@ module Aws::EC2
     #   the primary IPv6 address.
     # @option options [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
     #   A connection tracking specification for the network interface.
+    # @option options [String] :description
+    #   A description for the network interface.
+    # @option options [String] :private_ip_address
+    #   The primary private IPv4 address of the network interface. If you
+    #   don't specify an IPv4 address, Amazon EC2 selects one for you from
+    #   the subnet's IPv4 CIDR range. If you specify an IP address, you
+    #   cannot indicate any IP addresses specified in `privateIpAddresses` as
+    #   primary (only one IP address can be designated as primary).
+    # @option options [Array<String>] :groups
+    #   The IDs of one or more security groups.
+    # @option options [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
+    #   The private IPv4 addresses.
+    #
+    #   You can't specify private IPv4 addresses if you've specified one of
+    #   the following: a count of private IPv4 addresses, specific IPv4
+    #   prefixes, or a count of IPv4 prefixes.
+    # @option options [Integer] :secondary_private_ip_address_count
+    #   The number of secondary private IPv4 addresses to assign to a network
+    #   interface. When you specify a number of secondary IPv4 addresses,
+    #   Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR
+    #   range. You can't specify this option and specify more than one
+    #   private IP address using `privateIpAddresses`.
+    #
+    #   You can't specify a count of private IPv4 addresses if you've
+    #   specified one of the following: specific private IPv4 addresses,
+    #   specific IPv4 prefixes, or a count of IPv4 prefixes.
+    # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
+    #   The IPv6 addresses from the IPv6 CIDR block range of your subnet.
+    #
+    #   You can't specify IPv6 addresses using this parameter if you've
+    #   specified one of the following: a count of IPv6 addresses, specific
+    #   IPv6 prefixes, or a count of IPv6 prefixes.
+    # @option options [Integer] :ipv_6_address_count
+    #   The number of IPv6 addresses to assign to a network interface. Amazon
+    #   EC2 automatically selects the IPv6 addresses from the subnet range.
+    #
+    #   You can't specify a count of IPv6 addresses using this parameter if
+    #   you've specified one of the following: specific IPv6 addresses,
+    #   specific IPv6 prefixes, or a count of IPv6 prefixes.
+    #
+    #   If your subnet has the `AssignIpv6AddressOnCreation` attribute set,
+    #   you can override that setting by specifying 0 as the IPv6 address
+    #   count.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [NetworkInterface]
     def create_network_interface(options = {})
       options = options.merge(subnet_id: @id)
@@ -1144,16 +1144,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instances = subnet.instances({
+    #     instance_ids: ["InstanceId"],
+    #     dry_run: false,
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["InstanceId"],
-    #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :instance_ids
+    #   The instance IDs.
+    #
+    #   Default: Describes all your instances.
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -1583,15 +1592,6 @@ module Aws::EC2
     #     (`paravirtual` \| `hvm`).
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
-    # @option options [Array<String>] :instance_ids
-    #   The instance IDs.
-    #
-    #   Default: Describes all your instances.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|
@@ -1688,16 +1688,25 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interfaces = subnet.network_interfaces({
+    #     dry_run: false,
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     dry_run: false,
-    #     network_interface_ids: ["NetworkInterfaceId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :network_interface_ids
+    #   The network interface IDs.
+    #
+    #   Default: Describes all your network interfaces.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
@@ -1813,15 +1822,6 @@ module Aws::EC2
     #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the network interface.
-    # @option options [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [Array<String>] :network_interface_ids
-    #   The network interface IDs.
-    #
-    #   Default: Describes all your network interfaces.
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|

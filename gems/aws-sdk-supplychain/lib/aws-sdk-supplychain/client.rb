@@ -463,7 +463,15 @@ module Aws::SupplyChain
     #   permissions for AWS Supply Chain to read the file.
     #
     # @option params [String] :client_token
-    #   An idempotency token.
+    #   An idempotency token ensures the API request is only completed no more
+    #   than once. This way, retrying the request will not trigger the
+    #   operation multiple times. A client token is a unique, case-sensitive
+    #   string of 33 to 128 ASCII characters. To make an idempotent API
+    #   request, specify a client token in the request. You should not reuse
+    #   the same client token for other requests. If you retry a successful
+    #   request with the same client token, the request will succeed with no
+    #   further actions being taken, and you will receive the same API
+    #   response as the original successful request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -504,6 +512,659 @@ module Aws::SupplyChain
     # @param [Hash] params ({})
     def create_bill_of_materials_import_job(params = {}, options = {})
       req = build_request(:create_bill_of_materials_import_job, params)
+      req.send_request(options)
+    end
+
+    # Create DataIntegrationFlow to map one or more different sources to one
+    # target using the SQL transformation query.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #
+    # @option params [required, String] :name
+    #   Name of the DataIntegrationFlow.
+    #
+    # @option params [required, Array<Types::DataIntegrationFlowSource>] :sources
+    #   The source configurations for DataIntegrationFlow.
+    #
+    # @option params [required, Types::DataIntegrationFlowTransformation] :transformation
+    #   The transformation configurations for DataIntegrationFlow.
+    #
+    # @option params [required, Types::DataIntegrationFlowTarget] :target
+    #   The target configurations for DataIntegrationFlow.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags of the DataIntegrationFlow to be created
+    #
+    # @return [Types::CreateDataIntegrationFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataIntegrationFlowResponse#instance_id #instance_id} => String
+    #   * {Types::CreateDataIntegrationFlowResponse#name #name} => String
+    #
+    #
+    # @example Example: Successful CreateDataIntegrationFlow for s3 to dataset flow
+    #
+    #   resp = client.create_data_integration_flow({
+    #     name: "testStagingFlow", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #     sources: [
+    #       {
+    #         s3_source: {
+    #           bucket_name: "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f", 
+    #           prefix: "example-prefix", 
+    #         }, 
+    #         source_name: "testSourceName", 
+    #         source_type: "S3", 
+    #       }, 
+    #     ], 
+    #     tags: {
+    #       "tagKey1" => "tagValue1", 
+    #     }, 
+    #     target: {
+    #       dataset_target: {
+    #         dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset", 
+    #       }, 
+    #       target_type: "DATASET", 
+    #     }, 
+    #     transformation: {
+    #       sql_transformation: {
+    #         query: "SELECT * FROM testSourceName", 
+    #       }, 
+    #       transformation_type: "SQL", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "testStagingFlow", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #   }
+    #
+    # @example Example: Successful CreateDataIntegrationFlow for dataset to dataset flow
+    #
+    #   resp = client.create_data_integration_flow({
+    #     name: "trading-partner", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #     sources: [
+    #       {
+    #         dataset_source: {
+    #           dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset1", 
+    #         }, 
+    #         source_name: "testSourceName1", 
+    #         source_type: "DATASET", 
+    #       }, 
+    #       {
+    #         dataset_source: {
+    #           dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset2", 
+    #         }, 
+    #         source_name: "testSourceName2", 
+    #         source_type: "DATASET", 
+    #       }, 
+    #     ], 
+    #     tags: {
+    #       "tagKey1" => "tagValue1", 
+    #     }, 
+    #     target: {
+    #       dataset_target: {
+    #         dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner", 
+    #       }, 
+    #       target_type: "DATASET", 
+    #     }, 
+    #     transformation: {
+    #       sql_transformation: {
+    #         query: "SELECT S1.id AS id, S1.poc_org_unit_description AS description, S1.company_id AS company_id, S1.tpartner_type AS tpartner_type, S1.geo_id AS geo_id, S1.eff_start_date AS eff_start_date, S1.eff_end_date AS eff_end_date FROM testSourceName1 AS S1 LEFT JOIN testSourceName2 as S2 ON S1.id=S2.id", 
+    #       }, 
+    #       transformation_type: "SQL", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "trading-partner", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_integration_flow({
+    #     instance_id: "UUID", # required
+    #     name: "DataIntegrationFlowName", # required
+    #     sources: [ # required
+    #       {
+    #         source_type: "S3", # required, accepts S3, DATASET
+    #         source_name: "DataIntegrationFlowSourceName", # required
+    #         s3_source: {
+    #           bucket_name: "S3BucketName", # required
+    #           prefix: "DataIntegrationFlowS3Prefix", # required
+    #           options: {
+    #             file_type: "CSV", # accepts CSV, PARQUET, JSON
+    #           },
+    #         },
+    #         dataset_source: {
+    #           dataset_identifier: "DatasetIdentifier", # required
+    #           options: {
+    #             load_type: "INCREMENTAL", # accepts INCREMENTAL, REPLACE
+    #             dedupe_records: false,
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     transformation: { # required
+    #       transformation_type: "SQL", # required, accepts SQL, NONE
+    #       sql_transformation: {
+    #         query: "DataIntegrationFlowSQLQuery", # required
+    #       },
+    #     },
+    #     target: { # required
+    #       target_type: "S3", # required, accepts S3, DATASET
+    #       s3_target: {
+    #         bucket_name: "S3BucketName", # required
+    #         prefix: "DataIntegrationFlowS3Prefix", # required
+    #         options: {
+    #           file_type: "CSV", # accepts CSV, PARQUET, JSON
+    #         },
+    #       },
+    #       dataset_target: {
+    #         dataset_identifier: "DatasetIdentifier", # required
+    #         options: {
+    #           load_type: "INCREMENTAL", # accepts INCREMENTAL, REPLACE
+    #           dedupe_records: false,
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/CreateDataIntegrationFlow AWS API Documentation
+    #
+    # @overload create_data_integration_flow(params = {})
+    # @param [Hash] params ({})
+    def create_data_integration_flow(params = {}, options = {})
+      req = build_request(:create_data_integration_flow, params)
+      req.send_request(options)
+    end
+
+    # Create a data lake dataset.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #
+    # @option params [required, String] :namespace
+    #   The name space of the dataset.
+    #
+    #   * **asc** - For information on the Amazon Web Services Supply Chain
+    #     supported datasets see
+    #     [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
+    #
+    #   * **default** - For datasets with custom user-defined schemas.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @option params [required, String] :name
+    #   The name of the dataset. For **asc** name space, the name must be one
+    #   of the supported data entities under
+    #   [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @option params [Types::DataLakeDatasetSchema] :schema
+    #   The custom schema of the data lake dataset and is only required when
+    #   the name space is *default*.
+    #
+    # @option params [String] :description
+    #   The description of the dataset.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags of the dataset.
+    #
+    # @return [Types::CreateDataLakeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataLakeDatasetResponse#dataset #dataset} => Types::DataLakeDataset
+    #
+    #
+    # @example Example: Create an AWS Supply Chain inbound order dataset
+    #
+    #   resp = client.create_data_lake_dataset({
+    #     name: "inbound_order", 
+    #     description: "This is an AWS Supply Chain inbound order dataset", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "asc", 
+    #     tags: {
+    #       "tagKey1" => "tagValue1", 
+    #       "tagKey2" => "tagValue2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset: {
+    #       name: "inbound_order", 
+    #       arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc/datasets/inbound_order", 
+    #       created_time: Time.parse(1727116807.751), 
+    #       description: "This is an AWS Supply Chain inbound order dataset", 
+    #       instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #       last_modified_time: Time.parse(1727116807.751), 
+    #       namespace: "asc", 
+    #       schema: {
+    #         name: "InboundOrder", 
+    #         fields: [
+    #           {
+    #             name: "id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "tpartner_id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "connection_id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "order_type", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_status", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "inbound_order_url", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_creation_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "company_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "to_site_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_currency_uom", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "vendor_currency_uom", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "exchange_rate", 
+    #             type: "DOUBLE", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "exchange_rate_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm2", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm_location_1", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm_location_2", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "submitted_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_start_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_end_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "shipping_instr_code", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "payment_terms_code", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "std_terms_agreement", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "std_terms_agreement_ver", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_number", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source_update_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source_event_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "db_creation_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "db_updation_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Example: Create a custom dataset
+    #
+    #   resp = client.create_data_lake_dataset({
+    #     name: "my_dataset", 
+    #     description: "This is a custom dataset", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "default", 
+    #     schema: {
+    #       name: "MyDataset", 
+    #       fields: [
+    #         {
+    #           name: "id", 
+    #           type: "INT", 
+    #           is_required: true, 
+    #         }, 
+    #         {
+    #           name: "description", 
+    #           type: "STRING", 
+    #           is_required: true, 
+    #         }, 
+    #         {
+    #           name: "price", 
+    #           type: "DOUBLE", 
+    #           is_required: false, 
+    #         }, 
+    #         {
+    #           name: "creation_time", 
+    #           type: "TIMESTAMP", 
+    #           is_required: false, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     tags: {
+    #       "tagKey1" => "tagValue1", 
+    #       "tagKey2" => "tagValue2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset: {
+    #       name: "my_dataset", 
+    #       arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset", 
+    #       created_time: Time.parse(1727116807.751), 
+    #       description: "This is a custom dataset", 
+    #       instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #       last_modified_time: Time.parse(1727116807.751), 
+    #       namespace: "default", 
+    #       schema: {
+    #         name: "MyDataset", 
+    #         fields: [
+    #           {
+    #             name: "id", 
+    #             type: "INT", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "description", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "price", 
+    #             type: "DOUBLE", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "creation_time", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_lake_dataset({
+    #     instance_id: "UUID", # required
+    #     namespace: "DataLakeDatasetNamespace", # required
+    #     name: "DataLakeDatasetName", # required
+    #     schema: {
+    #       name: "DataLakeDatasetSchemaName", # required
+    #       fields: [ # required
+    #         {
+    #           name: "DataLakeDatasetSchemaFieldName", # required
+    #           type: "INT", # required, accepts INT, DOUBLE, STRING, TIMESTAMP
+    #           is_required: false, # required
+    #         },
+    #       ],
+    #     },
+    #     description: "DataLakeDatasetDescription",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset.instance_id #=> String
+    #   resp.dataset.namespace #=> String
+    #   resp.dataset.name #=> String
+    #   resp.dataset.arn #=> String
+    #   resp.dataset.schema.name #=> String
+    #   resp.dataset.schema.fields #=> Array
+    #   resp.dataset.schema.fields[0].name #=> String
+    #   resp.dataset.schema.fields[0].type #=> String, one of "INT", "DOUBLE", "STRING", "TIMESTAMP"
+    #   resp.dataset.schema.fields[0].is_required #=> Boolean
+    #   resp.dataset.description #=> String
+    #   resp.dataset.created_time #=> Time
+    #   resp.dataset.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/CreateDataLakeDataset AWS API Documentation
+    #
+    # @overload create_data_lake_dataset(params = {})
+    # @param [Hash] params ({})
+    def create_data_lake_dataset(params = {}, options = {})
+      req = build_request(:create_data_lake_dataset, params)
+      req.send_request(options)
+    end
+
+    # Delete the DataIntegrationFlow.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #
+    # @option params [required, String] :name
+    #   The name of the DataIntegrationFlow to be deleted.
+    #
+    # @return [Types::DeleteDataIntegrationFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataIntegrationFlowResponse#instance_id #instance_id} => String
+    #   * {Types::DeleteDataIntegrationFlowResponse#name #name} => String
+    #
+    #
+    # @example Example: Successful DeleteDataIntegrationFlow
+    #
+    #   resp = client.delete_data_integration_flow({
+    #     name: "testStagingFlow", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "testStagingFlow", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_integration_flow({
+    #     instance_id: "UUID", # required
+    #     name: "DataIntegrationFlowName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DeleteDataIntegrationFlow AWS API Documentation
+    #
+    # @overload delete_data_integration_flow(params = {})
+    # @param [Hash] params ({})
+    def delete_data_integration_flow(params = {}, options = {})
+      req = build_request(:delete_data_integration_flow, params)
+      req.send_request(options)
+    end
+
+    # Delete a data lake dataset.
+    #
+    # @option params [required, String] :instance_id
+    #   The AWS Supply Chain instance identifier.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace of the dataset. The available values are:
+    #
+    #   * asc: for [ AWS Supply Chain supported datasets ][1].
+    #
+    #   * default: for datasets with custom user-defined schemas.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @option params [required, String] :name
+    #   The name of the dataset. If the namespace is *asc*, the name must be
+    #   one of the supported [data entities ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @return [Types::DeleteDataLakeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataLakeDatasetResponse#instance_id #instance_id} => String
+    #   * {Types::DeleteDataLakeDatasetResponse#namespace #namespace} => String
+    #   * {Types::DeleteDataLakeDatasetResponse#name #name} => String
+    #
+    #
+    # @example Example: Delete an AWS Supply Chain inbound_order dataset
+    #
+    #   resp = client.delete_data_lake_dataset({
+    #     name: "inbound_order", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "asc", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "inbound_order", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "asc", 
+    #   }
+    #
+    # @example Example: Delete a custom dataset
+    #
+    #   resp = client.delete_data_lake_dataset({
+    #     name: "my_dataset", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "default", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "my_dataset", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "default", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_lake_dataset({
+    #     instance_id: "UUID", # required
+    #     namespace: "DataLakeDatasetNamespace", # required
+    #     name: "DataLakeDatasetName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.namespace #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DeleteDataLakeDataset AWS API Documentation
+    #
+    # @overload delete_data_lake_dataset(params = {})
+    # @param [Hash] params ({})
+    def delete_data_lake_dataset(params = {}, options = {})
+      req = build_request(:delete_data_lake_dataset, params)
       req.send_request(options)
     end
 
@@ -576,6 +1237,884 @@ module Aws::SupplyChain
     # @param [Hash] params ({})
     def get_bill_of_materials_import_job(params = {}, options = {})
       req = build_request(:get_bill_of_materials_import_job, params)
+      req.send_request(options)
+    end
+
+    # View the DataIntegrationFlow details.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #
+    # @option params [required, String] :name
+    #   The name of the DataIntegrationFlow created.
+    #
+    # @return [Types::GetDataIntegrationFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataIntegrationFlowResponse#flow #flow} => Types::DataIntegrationFlow
+    #
+    #
+    # @example Example: Successful GetDataIntegrationFlow
+    #
+    #   resp = client.get_data_integration_flow({
+    #     name: "testStagingFlow", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     flow: {
+    #       name: "testStagingFlow", 
+    #       created_time: Time.parse(1724956400.44), 
+    #       instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #       last_modified_time: Time.parse(1724956400.44), 
+    #       sources: [
+    #         {
+    #           s3_source: {
+    #             bucket_name: "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f", 
+    #             prefix: "example-prefix", 
+    #           }, 
+    #           source_name: "testSourceName", 
+    #           source_type: "S3", 
+    #         }, 
+    #       ], 
+    #       target: {
+    #         dataset_target: {
+    #           dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset", 
+    #         }, 
+    #         target_type: "DATASET", 
+    #       }, 
+    #       transformation: {
+    #         sql_transformation: {
+    #           query: "SELECT * FROM testSourceName", 
+    #         }, 
+    #         transformation_type: "SQL", 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_integration_flow({
+    #     instance_id: "UUID", # required
+    #     name: "DataIntegrationFlowName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow.instance_id #=> String
+    #   resp.flow.name #=> String
+    #   resp.flow.sources #=> Array
+    #   resp.flow.sources[0].source_type #=> String, one of "S3", "DATASET"
+    #   resp.flow.sources[0].source_name #=> String
+    #   resp.flow.sources[0].s3_source.bucket_name #=> String
+    #   resp.flow.sources[0].s3_source.prefix #=> String
+    #   resp.flow.sources[0].s3_source.options.file_type #=> String, one of "CSV", "PARQUET", "JSON"
+    #   resp.flow.sources[0].dataset_source.dataset_identifier #=> String
+    #   resp.flow.sources[0].dataset_source.options.load_type #=> String, one of "INCREMENTAL", "REPLACE"
+    #   resp.flow.sources[0].dataset_source.options.dedupe_records #=> Boolean
+    #   resp.flow.transformation.transformation_type #=> String, one of "SQL", "NONE"
+    #   resp.flow.transformation.sql_transformation.query #=> String
+    #   resp.flow.target.target_type #=> String, one of "S3", "DATASET"
+    #   resp.flow.target.s3_target.bucket_name #=> String
+    #   resp.flow.target.s3_target.prefix #=> String
+    #   resp.flow.target.s3_target.options.file_type #=> String, one of "CSV", "PARQUET", "JSON"
+    #   resp.flow.target.dataset_target.dataset_identifier #=> String
+    #   resp.flow.target.dataset_target.options.load_type #=> String, one of "INCREMENTAL", "REPLACE"
+    #   resp.flow.target.dataset_target.options.dedupe_records #=> Boolean
+    #   resp.flow.created_time #=> Time
+    #   resp.flow.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetDataIntegrationFlow AWS API Documentation
+    #
+    # @overload get_data_integration_flow(params = {})
+    # @param [Hash] params ({})
+    def get_data_integration_flow(params = {}, options = {})
+      req = build_request(:get_data_integration_flow, params)
+      req.send_request(options)
+    end
+
+    # Get a data lake dataset.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #
+    # @option params [required, String] :namespace
+    #   The name space of the dataset. The available values are:
+    #
+    #   * **asc** - For information on the Amazon Web Services Supply Chain
+    #     supported datasets see
+    #     [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
+    #
+    #   * **default** - For datasets with custom user-defined schemas.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @option params [required, String] :name
+    #   The name of the dataset. For **asc** name space, the name must be one
+    #   of the supported data entities under
+    #   [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @return [Types::GetDataLakeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataLakeDatasetResponse#dataset #dataset} => Types::DataLakeDataset
+    #
+    #
+    # @example Example: Get properties of an existing AWS Supply Chain inbound order dataset
+    #
+    #   resp = client.get_data_lake_dataset({
+    #     name: "inbound_order", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "asc", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset: {
+    #       name: "inbound_order", 
+    #       arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc/datasets/inbound_order", 
+    #       created_time: Time.parse(1727116807.751), 
+    #       description: "This is an AWS Supply Chain inbound order dataset", 
+    #       instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #       last_modified_time: Time.parse(1727116807.751), 
+    #       namespace: "asc", 
+    #       schema: {
+    #         name: "InboundOrder", 
+    #         fields: [
+    #           {
+    #             name: "id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "tpartner_id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "connection_id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "order_type", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_status", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "inbound_order_url", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_creation_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "company_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "to_site_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_currency_uom", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "vendor_currency_uom", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "exchange_rate", 
+    #             type: "DOUBLE", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "exchange_rate_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm2", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm_location_1", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm_location_2", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "submitted_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_start_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_end_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "shipping_instr_code", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "payment_terms_code", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "std_terms_agreement", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "std_terms_agreement_ver", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_number", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source_update_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source_event_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "db_creation_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "db_updation_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Example: Get proporties of an existing custom dataset
+    #
+    #   resp = client.get_data_lake_dataset({
+    #     name: "my_dataset", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "default", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset: {
+    #       name: "my_dataset", 
+    #       arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset", 
+    #       created_time: Time.parse(1727116807.751), 
+    #       description: "This is a custom dataset", 
+    #       instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #       last_modified_time: Time.parse(1727116807.751), 
+    #       namespace: "default", 
+    #       schema: {
+    #         name: "MyDataset", 
+    #         fields: [
+    #           {
+    #             name: "id", 
+    #             type: "INT", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "description", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "price", 
+    #             type: "DOUBLE", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "creation_time", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_lake_dataset({
+    #     instance_id: "UUID", # required
+    #     namespace: "DataLakeDatasetNamespace", # required
+    #     name: "DataLakeDatasetName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset.instance_id #=> String
+    #   resp.dataset.namespace #=> String
+    #   resp.dataset.name #=> String
+    #   resp.dataset.arn #=> String
+    #   resp.dataset.schema.name #=> String
+    #   resp.dataset.schema.fields #=> Array
+    #   resp.dataset.schema.fields[0].name #=> String
+    #   resp.dataset.schema.fields[0].type #=> String, one of "INT", "DOUBLE", "STRING", "TIMESTAMP"
+    #   resp.dataset.schema.fields[0].is_required #=> Boolean
+    #   resp.dataset.description #=> String
+    #   resp.dataset.created_time #=> Time
+    #   resp.dataset.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetDataLakeDataset AWS API Documentation
+    #
+    # @overload get_data_lake_dataset(params = {})
+    # @param [Hash] params ({})
+    def get_data_lake_dataset(params = {}, options = {})
+      req = build_request(:get_data_lake_dataset, params)
+      req.send_request(options)
+    end
+
+    # Lists all the DataIntegrationFlows in a paginated way.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to fetch the next page of the
+    #   DataIntegrationFlows.
+    #
+    # @option params [Integer] :max_results
+    #   Specify the maximum number of DataIntegrationFlows to fetch in one
+    #   paginated request.
+    #
+    # @return [Types::ListDataIntegrationFlowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataIntegrationFlowsResponse#flows #flows} => Array&lt;Types::DataIntegrationFlow&gt;
+    #   * {Types::ListDataIntegrationFlowsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Successful ListDataIntegrationFlow
+    #
+    #   resp = client.list_data_integration_flows({
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     flows: [
+    #       {
+    #         name: "testStagingFlow", 
+    #         created_time: Time.parse(1724956400.44), 
+    #         instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #         last_modified_time: Time.parse(1724956400.44), 
+    #         sources: [
+    #           {
+    #             s3_source: {
+    #               bucket_name: "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f", 
+    #               prefix: "example-prefix", 
+    #             }, 
+    #             source_name: "testSourceName", 
+    #             source_type: "S3", 
+    #           }, 
+    #         ], 
+    #         target: {
+    #           dataset_target: {
+    #             dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset", 
+    #           }, 
+    #           target_type: "DATASET", 
+    #         }, 
+    #         transformation: {
+    #           sql_transformation: {
+    #             query: "SELECT * FROM testSourceName", 
+    #           }, 
+    #           transformation_type: "SQL", 
+    #         }, 
+    #       }, 
+    #       {
+    #         name: "trading-partner", 
+    #         created_time: Time.parse(17235763506.88), 
+    #         instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #         last_modified_time: Time.parse(17235763506.88), 
+    #         sources: [
+    #           {
+    #             dataset_source: {
+    #               dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset1", 
+    #             }, 
+    #             source_name: "testSourceName1", 
+    #             source_type: "DATASET", 
+    #           }, 
+    #           {
+    #             dataset_source: {
+    #               dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset2", 
+    #             }, 
+    #             source_name: "testSourceName2", 
+    #             source_type: "DATASET", 
+    #           }, 
+    #         ], 
+    #         target: {
+    #           dataset_target: {
+    #             dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner", 
+    #           }, 
+    #           target_type: "DATASET", 
+    #         }, 
+    #         transformation: {
+    #           sql_transformation: {
+    #             query: "SELECT S1.id AS id, S1.poc_org_unit_description AS description, S1.company_id AS company_id, S1.tpartner_type AS tpartner_type, S1.geo_id AS geo_id, S1.eff_start_date AS eff_start_date, S1.eff_end_date AS eff_end_date FROM testSourceName1 AS S1 LEFT JOIN testSourceName2 as S2 ON S1.id=S2.id", 
+    #           }, 
+    #           transformation_type: "SQL", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_integration_flows({
+    #     instance_id: "UUID", # required
+    #     next_token: "DataIntegrationFlowNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flows #=> Array
+    #   resp.flows[0].instance_id #=> String
+    #   resp.flows[0].name #=> String
+    #   resp.flows[0].sources #=> Array
+    #   resp.flows[0].sources[0].source_type #=> String, one of "S3", "DATASET"
+    #   resp.flows[0].sources[0].source_name #=> String
+    #   resp.flows[0].sources[0].s3_source.bucket_name #=> String
+    #   resp.flows[0].sources[0].s3_source.prefix #=> String
+    #   resp.flows[0].sources[0].s3_source.options.file_type #=> String, one of "CSV", "PARQUET", "JSON"
+    #   resp.flows[0].sources[0].dataset_source.dataset_identifier #=> String
+    #   resp.flows[0].sources[0].dataset_source.options.load_type #=> String, one of "INCREMENTAL", "REPLACE"
+    #   resp.flows[0].sources[0].dataset_source.options.dedupe_records #=> Boolean
+    #   resp.flows[0].transformation.transformation_type #=> String, one of "SQL", "NONE"
+    #   resp.flows[0].transformation.sql_transformation.query #=> String
+    #   resp.flows[0].target.target_type #=> String, one of "S3", "DATASET"
+    #   resp.flows[0].target.s3_target.bucket_name #=> String
+    #   resp.flows[0].target.s3_target.prefix #=> String
+    #   resp.flows[0].target.s3_target.options.file_type #=> String, one of "CSV", "PARQUET", "JSON"
+    #   resp.flows[0].target.dataset_target.dataset_identifier #=> String
+    #   resp.flows[0].target.dataset_target.options.load_type #=> String, one of "INCREMENTAL", "REPLACE"
+    #   resp.flows[0].target.dataset_target.options.dedupe_records #=> Boolean
+    #   resp.flows[0].created_time #=> Time
+    #   resp.flows[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListDataIntegrationFlows AWS API Documentation
+    #
+    # @overload list_data_integration_flows(params = {})
+    # @param [Hash] params ({})
+    def list_data_integration_flows(params = {}, options = {})
+      req = build_request(:list_data_integration_flows, params)
+      req.send_request(options)
+    end
+
+    # List the data lake datasets for a specific instance and name space.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace of the dataset. The available values are:
+    #
+    #   * asc: for [ AWS Supply Chain supported datasets ][1].
+    #
+    #   * default: for datasets with custom user-defined schemas.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @option params [String] :next_token
+    #   The pagination token to fetch next page of datasets.
+    #
+    # @option params [Integer] :max_results
+    #   The max number of datasets to fetch in this paginated request.
+    #
+    # @return [Types::ListDataLakeDatasetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataLakeDatasetsResponse#datasets #datasets} => Array&lt;Types::DataLakeDataset&gt;
+    #   * {Types::ListDataLakeDatasetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List AWS Supply Chain datasets
+    #
+    #   resp = client.list_data_lake_datasets({
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "asc", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     datasets: [
+    #       {
+    #         name: "inbound_order", 
+    #         arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc/datasets/inbound_order", 
+    #         created_time: Time.parse(1727116807.751), 
+    #         description: "This is an AWS Supply Chain inbound order dataset", 
+    #         instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #         last_modified_time: Time.parse(1727116807.751), 
+    #         namespace: "asc", 
+    #         schema: {
+    #           name: "InboundOrder", 
+    #           fields: [
+    #             {
+    #               name: "id", 
+    #               type: "STRING", 
+    #               is_required: true, 
+    #             }, 
+    #             {
+    #               name: "tpartner_id", 
+    #               type: "STRING", 
+    #               is_required: true, 
+    #             }, 
+    #             {
+    #               name: "connection_id", 
+    #               type: "STRING", 
+    #               is_required: true, 
+    #             }, 
+    #             {
+    #               name: "order_type", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "order_status", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "inbound_order_url", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "order_creation_date", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "company_id", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "to_site_id", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "order_currency_uom", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "vendor_currency_uom", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "exchange_rate", 
+    #               type: "DOUBLE", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "exchange_rate_date", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "incoterm", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "incoterm2", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "incoterm_location_1", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "incoterm_location_2", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "submitted_date", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "agreement_start_date", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "agreement_end_date", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "shipping_instr_code", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "payment_terms_code", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "std_terms_agreement", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "std_terms_agreement_ver", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "agreement_number", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "source", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "source_update_dttm", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "source_event_id", 
+    #               type: "STRING", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "db_creation_dttm", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "db_updation_dttm", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List custom datasets using pagination
+    #
+    #   resp = client.list_data_lake_datasets({
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     max_results: 2, 
+    #     namespace: "default", 
+    #     next_token: "next_token_returned_from_previous_list_request", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     datasets: [
+    #       {
+    #         name: "my_dataset", 
+    #         arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset", 
+    #         created_time: Time.parse(1727116807.751), 
+    #         description: "This is a custom dataset", 
+    #         instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #         last_modified_time: Time.parse(1727116807.751), 
+    #         namespace: "default", 
+    #         schema: {
+    #           name: "MyDataset", 
+    #           fields: [
+    #             {
+    #               name: "id", 
+    #               type: "INT", 
+    #               is_required: true, 
+    #             }, 
+    #             {
+    #               name: "description", 
+    #               type: "STRING", 
+    #               is_required: true, 
+    #             }, 
+    #             {
+    #               name: "price", 
+    #               type: "DOUBLE", 
+    #               is_required: false, 
+    #             }, 
+    #             {
+    #               name: "creation_time", 
+    #               type: "TIMESTAMP", 
+    #               is_required: false, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         name: "my_dataset_2", 
+    #         arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset_2", 
+    #         created_time: Time.parse(1727116907.751), 
+    #         description: "This is a custom dataset 2", 
+    #         instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #         last_modified_time: Time.parse(1727116907.751), 
+    #         namespace: "default", 
+    #         schema: {
+    #           name: "MyDataset2", 
+    #           fields: [
+    #             {
+    #               name: "id", 
+    #               type: "INT", 
+    #               is_required: true, 
+    #             }, 
+    #             {
+    #               name: "description", 
+    #               type: "STRING", 
+    #               is_required: true, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     next_token: "next_token_for_next_list_request", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_lake_datasets({
+    #     instance_id: "UUID", # required
+    #     namespace: "DataLakeDatasetNamespace", # required
+    #     next_token: "DataLakeDatasetNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.datasets #=> Array
+    #   resp.datasets[0].instance_id #=> String
+    #   resp.datasets[0].namespace #=> String
+    #   resp.datasets[0].name #=> String
+    #   resp.datasets[0].arn #=> String
+    #   resp.datasets[0].schema.name #=> String
+    #   resp.datasets[0].schema.fields #=> Array
+    #   resp.datasets[0].schema.fields[0].name #=> String
+    #   resp.datasets[0].schema.fields[0].type #=> String, one of "INT", "DOUBLE", "STRING", "TIMESTAMP"
+    #   resp.datasets[0].schema.fields[0].is_required #=> Boolean
+    #   resp.datasets[0].description #=> String
+    #   resp.datasets[0].created_time #=> Time
+    #   resp.datasets[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListDataLakeDatasets AWS API Documentation
+    #
+    # @overload list_data_lake_datasets(params = {})
+    # @param [Hash] params ({})
+    def list_data_lake_datasets(params = {}, options = {})
+      req = build_request(:list_data_lake_datasets, params)
+      req.send_request(options)
+    end
+
+    # List all the tags for an Amazon Web ServicesSupply Chain resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Web Services Supply chain resource ARN that needs tags to
+    #   be listed.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Successful ListTagsForResource
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/data-integration-flows/my_flow1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "tagKey1" => "tagValue1", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AscResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -867,6 +2406,624 @@ module Aws::SupplyChain
       req.send_request(options)
     end
 
+    # Create tags for an Amazon Web Services Supply chain resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Web Services Supply chain resource ARN that needs to be
+    #   tagged.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags of the Amazon Web Services Supply chain resource to be
+    #   created.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Successful TagResource
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/data-integration-flows/my_flow1", 
+    #     tags: {
+    #       "tagKey1" => "tagValue1", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AscResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Delete tags for an Amazon Web Services Supply chain resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Web Services Supply chain resource ARN that needs to be
+    #   untagged.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to be deleted for an Amazon Web Services Supply
+    #   Chain resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Successful UntagResource
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/data-integration-flows/my_flow1", 
+    #     tag_keys: [
+    #       "tagKey1", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AscResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Update the DataIntegrationFlow.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #
+    # @option params [required, String] :name
+    #   The name of the DataIntegrationFlow to be updated.
+    #
+    # @option params [Array<Types::DataIntegrationFlowSource>] :sources
+    #   The new source configurations for the DataIntegrationFlow.
+    #
+    # @option params [Types::DataIntegrationFlowTransformation] :transformation
+    #   The new transformation configurations for the DataIntegrationFlow.
+    #
+    # @option params [Types::DataIntegrationFlowTarget] :target
+    #   The new target configurations for the DataIntegrationFlow.
+    #
+    # @return [Types::UpdateDataIntegrationFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataIntegrationFlowResponse#flow #flow} => Types::DataIntegrationFlow
+    #
+    #
+    # @example Example: Successful UpdateDataIntegrationFlow for s3 to dataset flow to update SQL transformation
+    #
+    #   resp = client.update_data_integration_flow({
+    #     name: "testStagingFlow", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #     sources: [
+    #       {
+    #         s3_source: {
+    #           bucket_name: "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f", 
+    #           prefix: "example-prefix", 
+    #         }, 
+    #         source_name: "testSourceName", 
+    #         source_type: "S3", 
+    #       }, 
+    #     ], 
+    #     target: {
+    #       dataset_target: {
+    #         dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset", 
+    #       }, 
+    #       target_type: "DATASET", 
+    #     }, 
+    #     transformation: {
+    #       sql_transformation: {
+    #         query: "SELECT connection_id, bukrs AS id, txtmd AS description FROM testSourceName WHERE langu = 'E'", 
+    #       }, 
+    #       transformation_type: "SQL", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     flow: {
+    #       name: "testStagingFlow", 
+    #       created_time: Time.parse(1724956400.44), 
+    #       instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #       last_modified_time: Time.parse(1732456405.77), 
+    #       sources: [
+    #         {
+    #           s3_source: {
+    #             bucket_name: "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f", 
+    #             prefix: "example-prefix", 
+    #           }, 
+    #           source_name: "testSourceName", 
+    #           source_type: "S3", 
+    #         }, 
+    #       ], 
+    #       target: {
+    #         dataset_target: {
+    #           dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset", 
+    #         }, 
+    #         target_type: "DATASET", 
+    #       }, 
+    #       transformation: {
+    #         sql_transformation: {
+    #           query: "SELECT connection_id, bukrs AS id, txtmd AS description FROM testSourceName WHERE langu = 'E'", 
+    #         }, 
+    #         transformation_type: "SQL", 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Example: Successful UpdateDataIntegrationFlow for dataset to dataset flow to update sources
+    #
+    #   resp = client.update_data_integration_flow({
+    #     name: "trading-partner", 
+    #     instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #     sources: [
+    #       {
+    #         dataset_source: {
+    #           dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset1", 
+    #         }, 
+    #         source_name: "testSourceName1", 
+    #         source_type: "DATASET", 
+    #       }, 
+    #       {
+    #         dataset_source: {
+    #           dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset2_updated", 
+    #         }, 
+    #         source_name: "testSourceName2", 
+    #         source_type: "DATASET", 
+    #       }, 
+    #     ], 
+    #     target: {
+    #       dataset_target: {
+    #         dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner", 
+    #       }, 
+    #       target_type: "DATASET", 
+    #     }, 
+    #     transformation: {
+    #       sql_transformation: {
+    #         query: "SELECT S1.id AS id, S1.poc_org_unit_description AS description, S1.company_id AS company_id, S1.tpartner_type AS tpartner_type, S1.geo_id AS geo_id, S1.eff_start_date AS eff_start_date, S1.eff_end_date AS eff_end_date FROM testSourceName1 AS S1 LEFT JOIN testSourceName2 as S2 ON S1.id=S2.id", 
+    #       }, 
+    #       transformation_type: "SQL", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     flow: {
+    #       name: "trading-partner", 
+    #       created_time: Time.parse(1724956400.44), 
+    #       instance_id: "8850c54e-e187-4fa7-89d4-6370f165174d", 
+    #       last_modified_time: Time.parse(1732456405.77), 
+    #       sources: [
+    #         {
+    #           dataset_source: {
+    #             dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset1", 
+    #           }, 
+    #           source_name: "testSourceName1", 
+    #           source_type: "DATASET", 
+    #         }, 
+    #         {
+    #           dataset_source: {
+    #             dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset2_updated", 
+    #           }, 
+    #           source_name: "testSourceName2", 
+    #           source_type: "DATASET", 
+    #         }, 
+    #       ], 
+    #       target: {
+    #         dataset_target: {
+    #           dataset_identifier: "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner", 
+    #         }, 
+    #         target_type: "DATASET", 
+    #       }, 
+    #       transformation: {
+    #         sql_transformation: {
+    #           query: "SELECT S1.id AS id, S1.poc_org_unit_description AS description, S1.company_id AS company_id, S1.tpartner_type AS tpartner_type, S1.geo_id AS geo_id, S1.eff_start_date AS eff_start_date, S1.eff_end_date AS eff_end_date FROM testSourceName1 AS S1 LEFT JOIN testSourceName2 as S2 ON S1.id=S2.id", 
+    #         }, 
+    #         transformation_type: "SQL", 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_integration_flow({
+    #     instance_id: "UUID", # required
+    #     name: "DataIntegrationFlowName", # required
+    #     sources: [
+    #       {
+    #         source_type: "S3", # required, accepts S3, DATASET
+    #         source_name: "DataIntegrationFlowSourceName", # required
+    #         s3_source: {
+    #           bucket_name: "S3BucketName", # required
+    #           prefix: "DataIntegrationFlowS3Prefix", # required
+    #           options: {
+    #             file_type: "CSV", # accepts CSV, PARQUET, JSON
+    #           },
+    #         },
+    #         dataset_source: {
+    #           dataset_identifier: "DatasetIdentifier", # required
+    #           options: {
+    #             load_type: "INCREMENTAL", # accepts INCREMENTAL, REPLACE
+    #             dedupe_records: false,
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     transformation: {
+    #       transformation_type: "SQL", # required, accepts SQL, NONE
+    #       sql_transformation: {
+    #         query: "DataIntegrationFlowSQLQuery", # required
+    #       },
+    #     },
+    #     target: {
+    #       target_type: "S3", # required, accepts S3, DATASET
+    #       s3_target: {
+    #         bucket_name: "S3BucketName", # required
+    #         prefix: "DataIntegrationFlowS3Prefix", # required
+    #         options: {
+    #           file_type: "CSV", # accepts CSV, PARQUET, JSON
+    #         },
+    #       },
+    #       dataset_target: {
+    #         dataset_identifier: "DatasetIdentifier", # required
+    #         options: {
+    #           load_type: "INCREMENTAL", # accepts INCREMENTAL, REPLACE
+    #           dedupe_records: false,
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow.instance_id #=> String
+    #   resp.flow.name #=> String
+    #   resp.flow.sources #=> Array
+    #   resp.flow.sources[0].source_type #=> String, one of "S3", "DATASET"
+    #   resp.flow.sources[0].source_name #=> String
+    #   resp.flow.sources[0].s3_source.bucket_name #=> String
+    #   resp.flow.sources[0].s3_source.prefix #=> String
+    #   resp.flow.sources[0].s3_source.options.file_type #=> String, one of "CSV", "PARQUET", "JSON"
+    #   resp.flow.sources[0].dataset_source.dataset_identifier #=> String
+    #   resp.flow.sources[0].dataset_source.options.load_type #=> String, one of "INCREMENTAL", "REPLACE"
+    #   resp.flow.sources[0].dataset_source.options.dedupe_records #=> Boolean
+    #   resp.flow.transformation.transformation_type #=> String, one of "SQL", "NONE"
+    #   resp.flow.transformation.sql_transformation.query #=> String
+    #   resp.flow.target.target_type #=> String, one of "S3", "DATASET"
+    #   resp.flow.target.s3_target.bucket_name #=> String
+    #   resp.flow.target.s3_target.prefix #=> String
+    #   resp.flow.target.s3_target.options.file_type #=> String, one of "CSV", "PARQUET", "JSON"
+    #   resp.flow.target.dataset_target.dataset_identifier #=> String
+    #   resp.flow.target.dataset_target.options.load_type #=> String, one of "INCREMENTAL", "REPLACE"
+    #   resp.flow.target.dataset_target.options.dedupe_records #=> Boolean
+    #   resp.flow.created_time #=> Time
+    #   resp.flow.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/UpdateDataIntegrationFlow AWS API Documentation
+    #
+    # @overload update_data_integration_flow(params = {})
+    # @param [Hash] params ({})
+    def update_data_integration_flow(params = {}, options = {})
+      req = build_request(:update_data_integration_flow, params)
+      req.send_request(options)
+    end
+
+    # Update a data lake dataset.
+    #
+    # @option params [required, String] :instance_id
+    #   The Amazon Web Services Chain instance identifier.
+    #
+    # @option params [required, String] :namespace
+    #   The name space of the dataset. The available values are:
+    #
+    #   * **asc** - For information on the Amazon Web Services Supply Chain
+    #     supported datasets see
+    #     [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
+    #
+    #   * **default** - For datasets with custom user-defined schemas.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @option params [required, String] :name
+    #   The name of the dataset. For **asc** name space, the name must be one
+    #   of the supported data entities under
+    #   [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+    #
+    # @option params [String] :description
+    #   The updated description of the data lake dataset.
+    #
+    # @return [Types::UpdateDataLakeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataLakeDatasetResponse#dataset #dataset} => Types::DataLakeDataset
+    #
+    #
+    # @example Example: Update description of an existing AWS Supply Chain inbound order dataset
+    #
+    #   resp = client.update_data_lake_dataset({
+    #     name: "inbound_order", 
+    #     description: "This is an updated AWS Supply Chain inbound order dataset", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "asc", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset: {
+    #       name: "inbound_order", 
+    #       arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc/datasets/inbound_order", 
+    #       created_time: Time.parse(1727116807.751), 
+    #       description: "This is an updated AWS Supply Chain inbound order dataset", 
+    #       instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #       last_modified_time: Time.parse(1727117453.568), 
+    #       namespace: "asc", 
+    #       schema: {
+    #         name: "InboundOrder", 
+    #         fields: [
+    #           {
+    #             name: "id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "tpartner_id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "connection_id", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "order_type", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_status", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "inbound_order_url", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_creation_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "company_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "to_site_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "order_currency_uom", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "vendor_currency_uom", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "exchange_rate", 
+    #             type: "DOUBLE", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "exchange_rate_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm2", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm_location_1", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "incoterm_location_2", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "submitted_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_start_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_end_date", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "shipping_instr_code", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "payment_terms_code", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "std_terms_agreement", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "std_terms_agreement_ver", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "agreement_number", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source_update_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "source_event_id", 
+    #             type: "STRING", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "db_creation_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "db_updation_dttm", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Example: Update description of an existing custom dataset
+    #
+    #   resp = client.update_data_lake_dataset({
+    #     name: "my_dataset", 
+    #     description: "This is an updated custom dataset", 
+    #     instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #     namespace: "default", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset: {
+    #       name: "my_dataset", 
+    #       arn: "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset", 
+    #       created_time: Time.parse(1727116807.751), 
+    #       description: "This is an updated custom dataset", 
+    #       instance_id: "1877dd20-dee9-4639-8e99-cb67acf21fe5", 
+    #       last_modified_time: Time.parse(1727117453.568), 
+    #       namespace: "default", 
+    #       schema: {
+    #         name: "MyDataset", 
+    #         fields: [
+    #           {
+    #             name: "id", 
+    #             type: "INT", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "description", 
+    #             type: "STRING", 
+    #             is_required: true, 
+    #           }, 
+    #           {
+    #             name: "price", 
+    #             type: "DOUBLE", 
+    #             is_required: false, 
+    #           }, 
+    #           {
+    #             name: "creation_time", 
+    #             type: "TIMESTAMP", 
+    #             is_required: false, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_lake_dataset({
+    #     instance_id: "UUID", # required
+    #     namespace: "DataLakeDatasetNamespace", # required
+    #     name: "DataLakeDatasetName", # required
+    #     description: "DataLakeDatasetDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset.instance_id #=> String
+    #   resp.dataset.namespace #=> String
+    #   resp.dataset.name #=> String
+    #   resp.dataset.arn #=> String
+    #   resp.dataset.schema.name #=> String
+    #   resp.dataset.schema.fields #=> Array
+    #   resp.dataset.schema.fields[0].name #=> String
+    #   resp.dataset.schema.fields[0].type #=> String, one of "INT", "DOUBLE", "STRING", "TIMESTAMP"
+    #   resp.dataset.schema.fields[0].is_required #=> Boolean
+    #   resp.dataset.description #=> String
+    #   resp.dataset.created_time #=> Time
+    #   resp.dataset.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/UpdateDataLakeDataset AWS API Documentation
+    #
+    # @overload update_data_lake_dataset(params = {})
+    # @param [Hash] params ({})
+    def update_data_lake_dataset(params = {}, options = {})
+      req = build_request(:update_data_lake_dataset, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -885,7 +3042,7 @@ module Aws::SupplyChain
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-supplychain'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

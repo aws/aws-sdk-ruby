@@ -1719,11 +1719,11 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Creates a knowledge base that contains data sources from which
-    # information can be queried and used by LLMs. To create a knowledge
-    # base, you must first set up your data sources and configure a
-    # supported vector store. For more information, see [Set up your data
-    # for ingestion][1].
+    # Creates a knowledge base. A knowledge base contains your data sources
+    # so that Large Language Models (LLMs) can use your data. To create a
+    # knowledge base, you must first set up your data sources and configure
+    # a supported vector store. For more information, see [Set up a
+    # knowledge base][1].
     #
     # <note markdown="1"> If you prefer to let Amazon Bedrock create and manage a vector store
     # for you in Amazon OpenSearch Service, use the console. For more
@@ -1759,7 +1759,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html
     # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create
     # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
     # [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
@@ -2886,8 +2886,7 @@ module Aws::BedrockAgent
     #   The unique identifier of the data source.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The unique identifier of the knowledge base that the data source was
-    #   added to.
+    #   The unique identifier of the knowledge base for the data source.
     #
     # @return [Types::GetDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3232,18 +3231,21 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Gets information about a ingestion job, in which a data source is
-    # added to a knowledge base.
+    # Gets information about a data ingestion job. Data sources are ingested
+    # into your knowledge base so that Large Lanaguage Models (LLMs) can use
+    # your data.
     #
     # @option params [required, String] :data_source_id
-    #   The unique identifier of the data source in the ingestion job.
+    #   The unique identifier of the data source for the data ingestion job
+    #   you want to get information on.
     #
     # @option params [required, String] :ingestion_job_id
-    #   The unique identifier of the ingestion job.
+    #   The unique identifier of the data ingestion job you want to get
+    #   information on.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The unique identifier of the knowledge base for which the ingestion
-    #   job applies.
+    #   The unique identifier of the knowledge base for the data ingestion job
+    #   you want to get information on.
     #
     # @return [Types::GetIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3273,7 +3275,7 @@ module Aws::BedrockAgent
     #   resp.ingestion_job.statistics.number_of_metadata_documents_scanned #=> Integer
     #   resp.ingestion_job.statistics.number_of_modified_documents_indexed #=> Integer
     #   resp.ingestion_job.statistics.number_of_new_documents_indexed #=> Integer
-    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
     #   resp.ingestion_job.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetIngestionJob AWS API Documentation
@@ -3288,8 +3290,8 @@ module Aws::BedrockAgent
     # Gets information about a knoweldge base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The unique identifier of the knowledge base for which to get
-    #   information.
+    #   The unique identifier of the knowledge base you want to get
+    #   information on.
     #
     # @return [Types::GetKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3932,18 +3934,18 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Lists the ingestion jobs for a data source and information about each
-    # of them.
+    # Lists the data ingestion jobs for a data source. The list also
+    # includes information about each job.
     #
     # @option params [required, String] :data_source_id
-    #   The unique identifier of the data source for which to return ingestion
-    #   jobs.
+    #   The unique identifier of the data source for the list of data
+    #   ingestion jobs.
     #
     # @option params [Array<Types::IngestionJobFilter>] :filters
-    #   Contains a definition of a filter for which to filter the results.
+    #   Contains information about the filters for filtering the data.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The unique identifier of the knowledge base for which to return
+    #   The unique identifier of the knowledge base for the list of data
     #   ingestion jobs.
     #
     # @option params [Integer] :max_results
@@ -3959,7 +3961,7 @@ module Aws::BedrockAgent
     #   results.
     #
     # @option params [Types::IngestionJobSortBy] :sort_by
-    #   Contains details about how to sort the results.
+    #   Contains details about how to sort the data.
     #
     # @return [Types::ListIngestionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4003,7 +4005,7 @@ module Aws::BedrockAgent
     #   resp.ingestion_job_summaries[0].statistics.number_of_metadata_documents_scanned #=> Integer
     #   resp.ingestion_job_summaries[0].statistics.number_of_modified_documents_indexed #=> Integer
     #   resp.ingestion_job_summaries[0].statistics.number_of_new_documents_indexed #=> Integer
-    #   resp.ingestion_job_summaries[0].status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.ingestion_job_summaries[0].status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
     #   resp.ingestion_job_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -4016,8 +4018,8 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Lists the knowledge bases in an account and information about each of
-    # them.
+    # Lists the knowledge bases in an account. The list also
+    # includesinformation about each knowledge base.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. If the total
@@ -4228,8 +4230,8 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Begins an ingestion job, in which a data source is added to a
-    # knowledge base.
+    # Begins a data ingestion job. Data sources are ingested into your
+    # knowledge base so that Large Language Models (LLMs) can use your data.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -4245,14 +4247,15 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :data_source_id
-    #   The unique identifier of the data source to ingest.
+    #   The unique identifier of the data source you want to ingest into your
+    #   knowledge base.
     #
     # @option params [String] :description
-    #   A description of the ingestion job.
+    #   A description of the data ingestion job.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The unique identifier of the knowledge base to which to add the data
-    #   source.
+    #   The unique identifier of the knowledge base for the data ingestion
+    #   job.
     #
     # @return [Types::StartIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4283,7 +4286,7 @@ module Aws::BedrockAgent
     #   resp.ingestion_job.statistics.number_of_metadata_documents_scanned #=> Integer
     #   resp.ingestion_job.statistics.number_of_modified_documents_indexed #=> Integer
     #   resp.ingestion_job.statistics.number_of_new_documents_indexed #=> Integer
-    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
     #   resp.ingestion_job.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StartIngestionJob AWS API Documentation
@@ -4292,6 +4295,61 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def start_ingestion_job(params = {}, options = {})
       req = build_request(:start_ingestion_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a currently running data ingestion job. You can send a
+    # `StartIngestionJob` request again to ingest the rest of your data when
+    # you are ready.
+    #
+    # @option params [required, String] :data_source_id
+    #   The unique identifier of the data source for the data ingestion job
+    #   you want to stop.
+    #
+    # @option params [required, String] :ingestion_job_id
+    #   The unique identifier of the data ingestion job you want to stop.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base for the data ingestion job
+    #   you want to stop.
+    #
+    # @return [Types::StopIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopIngestionJobResponse#ingestion_job #ingestion_job} => Types::IngestionJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_ingestion_job({
+    #     data_source_id: "Id", # required
+    #     ingestion_job_id: "Id", # required
+    #     knowledge_base_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_job.data_source_id #=> String
+    #   resp.ingestion_job.description #=> String
+    #   resp.ingestion_job.failure_reasons #=> Array
+    #   resp.ingestion_job.failure_reasons[0] #=> String
+    #   resp.ingestion_job.ingestion_job_id #=> String
+    #   resp.ingestion_job.knowledge_base_id #=> String
+    #   resp.ingestion_job.started_at #=> Time
+    #   resp.ingestion_job.statistics.number_of_documents_deleted #=> Integer
+    #   resp.ingestion_job.statistics.number_of_documents_failed #=> Integer
+    #   resp.ingestion_job.statistics.number_of_documents_scanned #=> Integer
+    #   resp.ingestion_job.statistics.number_of_metadata_documents_modified #=> Integer
+    #   resp.ingestion_job.statistics.number_of_metadata_documents_scanned #=> Integer
+    #   resp.ingestion_job.statistics.number_of_modified_documents_indexed #=> Integer
+    #   resp.ingestion_job.statistics.number_of_new_documents_indexed #=> Integer
+    #   resp.ingestion_job.status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
+    #   resp.ingestion_job.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StopIngestionJob AWS API Documentation
+    #
+    # @overload stop_ingestion_job(params = {})
+    # @param [Hash] params ({})
+    def stop_ingestion_job(params = {}, options = {})
+      req = build_request(:stop_ingestion_job, params)
       req.send_request(options)
     end
 
@@ -5673,7 +5731,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

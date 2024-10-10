@@ -1535,25 +1535,32 @@ module Aws::CloudTrail
     # the following:
     #
     # * If your event selector includes read-only events, write-only events,
-    #   or all events. This applies to both management events and data
-    #   events.
+    #   or all events. This applies to management events, data events, and
+    #   network activity events.
     #
     # * If your event selector includes management events.
+    #
+    # * If your event selector includes network activity events, the event
+    #   sources for which you are logging network activity events.
     #
     # * If your event selector includes data events, the resources on which
     #   you are logging data events.
     #
-    # For more information about logging management and data events, see the
-    # following topics in the *CloudTrail User Guide*:
+    # For more information about logging management, data, and network
+    # activity events, see the following topics in the *CloudTrail User
+    # Guide*:
     #
     # * [Logging management events][1]
     #
     # * [Logging data events][2]
     #
+    # * [Logging network activity events][3]
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
     # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -2628,16 +2635,33 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Configures an event selector or advanced event selectors for your
-    # trail. Use event selectors or advanced event selectors to specify
-    # management and data event settings for your trail. If you want your
-    # trail to log Insights events, be sure the event selector enables
-    # logging of the Insights event types you want configured for your
-    # trail. For more information about logging Insights events, see
-    # [Logging Insights events][1] in the *CloudTrail User Guide*. By
-    # default, trails created without specific event selectors are
-    # configured to log all read and write management events, and no data
-    # events.
+    # Configures event selectors (also referred to as *basic event
+    # selectors*) or advanced event selectors for your trail. You can use
+    # either `AdvancedEventSelectors` or `EventSelectors`, but not both. If
+    # you apply `AdvancedEventSelectors` to a trail, any existing
+    # `EventSelectors` are overwritten.
+    #
+    # You can use `AdvancedEventSelectors` to log management events, data
+    # events for all resource types, and network activity events.
+    #
+    # You can use `EventSelectors` to log management events and data events
+    # for the following resource types:
+    #
+    # * `AWS::DynamoDB::Table`
+    #
+    # * `AWS::Lambda::Function`
+    #
+    # * `AWS::S3::Object`
+    #
+    # You can't use `EventSelectors` to log network activity events.
+    #
+    # If you want your trail to log Insights events, be sure the event
+    # selector or advanced event selector enables logging of the Insights
+    # event types you want configured for your trail. For more information
+    # about logging Insights events, see [Logging Insights events][1] in the
+    # *CloudTrail User Guide*. By default, trails created without specific
+    # event selectors are configured to log all read and write management
+    # events, and no data events or network activity events.
     #
     # When an event occurs in your account, CloudTrail evaluates the event
     # selectors or advanced event selectors in all trails. For each trail,
@@ -2648,7 +2672,7 @@ module Aws::CloudTrail
     # Example
     #
     # 1.  You create an event selector for a trail and specify that you want
-    #     write-only events.
+    #     to log write-only events.
     #
     # 2.  The EC2 `GetConsoleOutput` and `RunInstances` API operations occur
     #     in your account.
@@ -2666,25 +2690,22 @@ module Aws::CloudTrail
     # which the trail was created; otherwise, an
     # `InvalidHomeRegionException` exception is thrown.
     #
-    # You can configure up to five event selectors for each trail. For more
-    # information, see [Logging management events][2], [Logging data
-    # events][3], and [Quotas in CloudTrail][4] in the *CloudTrail User
-    # Guide*.
+    # You can configure up to five event selectors for each trail.
     #
     # You can add advanced event selectors, and conditions for your advanced
     # event selectors, up to a maximum of 500 values for all conditions and
-    # selectors on a trail. You can use either `AdvancedEventSelectors` or
-    # `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
-    # to a trail, any existing `EventSelectors` are overwritten. For more
-    # information about advanced event selectors, see [Logging data
-    # events][3] in the *CloudTrail User Guide*.
+    # selectors on a trail. For more information, see [Logging management
+    # events][2], [Logging data events][3], [Logging network activity
+    # events][4], and [Quotas in CloudTrail][5] in the *CloudTrail User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
     # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
     # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
-    # [4]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
+    # [4]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html
+    # [5]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -2707,25 +2728,42 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @option params [Array<Types::EventSelector>] :event_selectors
-    #   Specifies the settings for your event selectors. You can configure up
-    #   to five event selectors for a trail. You can use either
-    #   `EventSelectors` or `AdvancedEventSelectors` in a `PutEventSelectors`
-    #   request, but not both. If you apply `EventSelectors` to a trail, any
-    #   existing `AdvancedEventSelectors` are overwritten.
+    #   Specifies the settings for your event selectors. You can use event
+    #   selectors to log management events and data events for the following
+    #   resource types:
+    #
+    #   * `AWS::DynamoDB::Table`
+    #
+    #   * `AWS::Lambda::Function`
+    #
+    #   * `AWS::S3::Object`
+    #
+    #   You can't use event selectors to log network activity events.
+    #
+    #   You can configure up to five event selectors for a trail. You can use
+    #   either `EventSelectors` or `AdvancedEventSelectors` in a
+    #   `PutEventSelectors` request, but not both. If you apply
+    #   `EventSelectors` to a trail, any existing `AdvancedEventSelectors` are
+    #   overwritten.
     #
     # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
-    #   Specifies the settings for advanced event selectors. You can add
-    #   advanced event selectors, and conditions for your advanced event
-    #   selectors, up to a maximum of 500 values for all conditions and
+    #   Specifies the settings for advanced event selectors. You can use
+    #   advanced event selectors to log management events, data events for all
+    #   resource types, and network activity events.
+    #
+    #   You can add advanced event selectors, and conditions for your advanced
+    #   event selectors, up to a maximum of 500 values for all conditions and
     #   selectors on a trail. You can use either `AdvancedEventSelectors` or
     #   `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
     #   to a trail, any existing `EventSelectors` are overwritten. For more
     #   information about advanced event selectors, see [Logging data
-    #   events][1] in the *CloudTrail User Guide*.
+    #   events][1] and [Logging network activity events][2] in the *CloudTrail
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html
     #
     # @return [Types::PutEventSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3111,7 +3149,8 @@ module Aws::CloudTrail
     # Starts the ingestion of live events on an event data store specified
     # as either an ARN or the ID portion of the ARN. To start ingestion, the
     # event data store `Status` must be `STOPPED_INGESTION` and the
-    # `eventCategory` must be `Management`, `Data`, or `ConfigurationItem`.
+    # `eventCategory` must be `Management`, `Data`, `NetworkActivity`, or
+    # `ConfigurationItem`.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store for which
@@ -3323,7 +3362,8 @@ module Aws::CloudTrail
     # Stops the ingestion of live events on an event data store specified as
     # either an ARN or the ID portion of the ARN. To stop ingestion, the
     # event data store `Status` must be `ENABLED` and the `eventCategory`
-    # must be `Management`, `Data`, or `ConfigurationItem`.
+    # must be `Management`, `Data`, `NetworkActivity`, or
+    # `ConfigurationItem`.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store for which
@@ -3491,9 +3531,9 @@ module Aws::CloudTrail
     # `TerminationProtection` is enabled.
     #
     # For event data stores for CloudTrail events, `AdvancedEventSelectors`
-    # includes or excludes management or data events in your event data
-    # store. For more information about `AdvancedEventSelectors`, see
-    # [AdvancedEventSelectors][1].
+    # includes or excludes management, data, or network activity events in
+    # your event data store. For more information about
+    # `AdvancedEventSelectors`, see [AdvancedEventSelectors][1].
     #
     # For event data stores for CloudTrail Insights events, Config
     # configuration items, Audit Manager evidence, or non-Amazon Web
@@ -3918,7 +3958,7 @@ module Aws::CloudTrail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

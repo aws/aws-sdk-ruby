@@ -3,6 +3,7 @@
 require 'aws-partitions'
 require 'seahorse'
 require 'jmespath'
+require 'aws-sigv4'
 
 require_relative 'aws-sdk-core/deprecations'
 # defaults

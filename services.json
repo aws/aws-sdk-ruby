@@ -749,6 +749,9 @@
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14"
   },
+  "MarketplaceReporting": {
+    "models": "marketplace-reporting/2018-05-10"
+  },
   "MediaConnect": {
     "models": "mediaconnect/2018-11-14"
   },

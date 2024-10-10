@@ -755,7 +755,9 @@ module Aws::BedrockAgentRuntime
     PayloadPart.add_member(:bytes, Shapes::ShapeRef.new(shape: PartBody, location_name: "bytes"))
     PayloadPart.struct_class = Types::PayloadPart
 
+    PostProcessingModelInvocationOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     PostProcessingModelInvocationOutput.add_member(:parsed_response, Shapes::ShapeRef.new(shape: PostProcessingParsedResponse, location_name: "parsedResponse"))
+    PostProcessingModelInvocationOutput.add_member(:raw_response, Shapes::ShapeRef.new(shape: RawResponse, location_name: "rawResponse"))
     PostProcessingModelInvocationOutput.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     PostProcessingModelInvocationOutput.struct_class = Types::PostProcessingModelInvocationOutput
 
@@ -770,7 +772,9 @@ module Aws::BedrockAgentRuntime
     PostProcessingTrace.add_member_subclass(:unknown, Types::PostProcessingTrace::Unknown)
     PostProcessingTrace.struct_class = Types::PostProcessingTrace
 
+    PreProcessingModelInvocationOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     PreProcessingModelInvocationOutput.add_member(:parsed_response, Shapes::ShapeRef.new(shape: PreProcessingParsedResponse, location_name: "parsedResponse"))
+    PreProcessingModelInvocationOutput.add_member(:raw_response, Shapes::ShapeRef.new(shape: RawResponse, location_name: "rawResponse"))
     PreProcessingModelInvocationOutput.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     PreProcessingModelInvocationOutput.struct_class = Types::PreProcessingModelInvocationOutput
 
