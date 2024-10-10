@@ -38,6 +38,7 @@ describe 'Plugins Interface:' do
       it 'uses endpoint provider with params to resolve endpoint' do
         expect_any_instance_of(EndpointsPlugin::EndpointProvider)
           .to receive(:resolve_endpoint)
+          .at_least(:once)
           .with(an_instance_of(EndpointsPlugin::EndpointParameters))
           .and_call_original
         client.operation
@@ -122,6 +123,10 @@ describe 'Plugins Interface:' do
 
       let(:client) do
         EndpointsPrecedence::Client.new(stub_responses: true, region: 'config')
+      end
+
+      before(:each) do
+        client # force client initialization before testing resolution
       end
 
       # Most to least
