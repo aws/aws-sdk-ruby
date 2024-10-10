@@ -127,31 +127,31 @@ module Aws
         end
       end
 
-      describe 'response_checksum_calculation' do
+      describe 'response_checksum_validation' do
         it 'is configured to always verify by default' do
-          expect(client.config.response_checksum_calculation)
+          expect(client.config.response_checksum_validation)
             .to eq('WHEN_SUPPORTED')
         end
 
         it 'can be configured using shared config' do
           allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:response_checksum_calculation)
+            .to receive(:response_checksum_validation)
             .and_return('WHEN_REQUIRED')
-          expect(client.config.response_checksum_calculation)
+          expect(client.config.response_checksum_validation)
             .to eq('WHEN_REQUIRED')
         end
 
         it 'can be configured using ENV with precedence over shared config' do
           allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:response_checksum_calculation)
+            .to receive(:response_checksum_validation)
             .and_return('WHEN_SUPPORTED')
-          ENV['AWS_RESPONSE_CHECKSUM_CALCULATION'] = 'WHEN_REQUIRED'
-          expect(client.config.response_checksum_calculation)
+          ENV['AWS_response_checksum_validation'] = 'WHEN_REQUIRED'
+          expect(client.config.response_checksum_validation)
             .to eq('WHEN_REQUIRED')
         end
 
-        it 'raises when response_checksum_calculation is not valid' do
-          ENV['AWS_RESPONSE_CHECKSUM_CALCULATION'] = 'peccy'
+        it 'raises when response_checksum_validation is not valid' do
+          ENV['AWS_response_checksum_validation'] = 'peccy'
           expect { client }.to raise_error(ArgumentError, /WHEN_SUPPORTED/)
         end
       end
@@ -373,7 +373,7 @@ module Aws
         it 'WHEN_REQUIRED; not ENABLED; does not validate the checksum' do
           client = checksum_client.new(
             stub_responses: true,
-            response_checksum_calculation: 'WHEN_REQUIRED'
+            response_checksum_validation: 'WHEN_REQUIRED'
           )
           stub_client(client)
           resp = client.http_checksum_operation
@@ -383,7 +383,7 @@ module Aws
         it 'WHEN_REQUIRED; ENABLED; validates the checksum' do
           client = checksum_client.new(
             stub_responses: true,
-            response_checksum_calculation: 'WHEN_REQUIRED'
+            response_checksum_validation: 'WHEN_REQUIRED'
           )
           stub_client(client)
           resp = client.http_checksum_operation(validation_mode: 'ENABLED')

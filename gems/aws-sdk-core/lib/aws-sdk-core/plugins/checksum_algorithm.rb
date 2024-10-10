@@ -55,7 +55,7 @@ module Aws
         resolve_request_checksum_calculation(cfg)
       end
 
-      option(:response_checksum_calculation,
+      option(:response_checksum_validation,
              doc_default: 'WHEN_SUPPORTED',
              doc_type: 'String',
              docstring: <<~DOCS) do |cfg|
@@ -69,7 +69,7 @@ module Aws
                  response payloads of operations unless the checksum algorithm is supported and
                  the `requestValidationModeMember` member is set to `ENABLED`.
              DOCS
-        resolve_response_checksum_calculation(cfg)
+        resolve_response_checksum_validation(cfg)
       end
 
       class << self
@@ -113,15 +113,15 @@ module Aws
           mode
         end
 
-        def resolve_response_checksum_calculation(cfg)
-          mode = ENV['AWS_RESPONSE_CHECKSUM_CALCULATION'] ||
-                 Aws.shared_config.response_checksum_calculation(profile: cfg.profile) ||
+        def resolve_response_checksum_validation(cfg)
+          mode = ENV['AWS_response_checksum_validation'] ||
+                 Aws.shared_config.response_checksum_validation(profile: cfg.profile) ||
                  'WHEN_SUPPORTED'
           mode = mode.upcase
           unless %w[WHEN_SUPPORTED WHEN_REQUIRED].include?(mode)
             raise ArgumentError,
-                  'expected :response_checksum_calculation or' \
-                  " ENV['AWS_RESPONSE_CHECKSUM_CALCULATION'] to be " \
+                  'expected :response_checksum_validation or' \
+                  " ENV['AWS_response_checksum_validation'] to be " \
                   '`WHEN_SUPPORTED` or `WHEN_REQUIRED`.'
           end
           mode
@@ -160,7 +160,7 @@ module Aws
           context[:http_checksum] ||= {}
 
           # Set validation mode to enabled when supported.
-          if context.config.response_checksum_calculation == 'WHEN_SUPPORTED'
+          if context.config.response_checksum_validation == 'WHEN_SUPPORTED'
             enable_request_validation_mode(context)
           end
 
@@ -229,7 +229,7 @@ module Aws
         end
 
         def add_response_config_metric(config, metrics)
-          case config.response_checksum_calculation
+          case config.response_checksum_validation
           when 'WHEN_SUPPORTED'
             metrics << 'FLEXIBLE_CHECKSUMS_RES_WHEN_SUPPORTED'
           when 'WHEN_REQUIRED'

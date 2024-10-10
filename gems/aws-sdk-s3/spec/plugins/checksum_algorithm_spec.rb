@@ -77,12 +77,6 @@ module Aws
           resp = client.get_object(bucket: bucket, key: key, checksum_mode: 'ENABLED')
           expect(resp.context[:http_checksum][:validated]).to be_nil
         end
-
-        it 'sets a default checksum algorithm for create_multipart_upload' do
-          resp = client.create_multipart_upload(bucket: bucket, key: key)
-          expect(resp.context.params[:checksum_algorithm])
-            .to eq Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM
-        end
       end
     end
   end

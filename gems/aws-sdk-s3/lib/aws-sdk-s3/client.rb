@@ -360,7 +360,7 @@ module Aws::S3
     #     where server-side-encryption is used with customer-provided keys.
     #     This should only be disabled for local testing.
     #
-    #   @option options [String] :response_checksum_calculation ("WHEN_SUPPORTED")
+    #   @option options [String] :response_checksum_validation ("WHEN_SUPPORTED")
     #     Determines when checksum validation will be performed on response payloads. Values are:
     #
     #     * `WHEN_SUPPORTED` - (default) When set, checksum validation is performed on all

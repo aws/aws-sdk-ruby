@@ -18,28 +18,11 @@ module Aws
           end
         end
 
-        # create_multipart_upload is not modeled with httpChecksum. For
-        # multipart requests, we must set a default for the checksum algorithm
-        # for it to f unction.
-        class DefaultMultipartChecksumHandler < Seahorse::Client::Handler
-          def call(context)
-            default = Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM
-            context.params[:checksum_algorithm] ||= default
-            @handler.call(context)
-          end
-        end
-
         def add_handlers(handlers, _config)
           handlers.add(
             SkipWholeMultipartGetChecksumsHandler,
             step: :initialize,
             operations: [:get_object]
-          )
-
-          handlers.add(
-            DefaultMultipartChecksumHandler,
-            step: :initialize,
-            operations: [:create_multipart_upload]
           )
         end
       end

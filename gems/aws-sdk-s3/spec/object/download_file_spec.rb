@@ -48,7 +48,6 @@ module Aws
           allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'small',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).and_return(
             client.stub_data(
@@ -62,7 +61,6 @@ module Aws
             bucket: 'bucket',
             key: 'small',
             part_number: 1,
-            checksum_mode: 'ENABLED',
             version_id: version_id
           }).and_return(
             client.stub_data(
@@ -75,7 +73,6 @@ module Aws
           allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'large',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).and_return(
             client.stub_data(
@@ -87,7 +84,6 @@ module Aws
 
           allow(client).to receive(:head_object).with({
             bucket: 'bucket',
-            checksum_mode: 'ENABLED',
             key: 'large'
           }).and_return(
             client.stub_data(
@@ -99,7 +95,6 @@ module Aws
           allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'single',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).and_return(
             client.stub_data(
@@ -114,7 +109,6 @@ module Aws
           expect(client).to receive(:get_object).with({
             bucket: 'bucket',
             key: 'small',
-            checksum_mode: 'ENABLED',
             response_target: path
           }).exactly(1).times
 
@@ -126,7 +120,6 @@ module Aws
           expect(client).to receive(:get_object).with({
             bucket: 'bucket',
             key: 'small',
-            checksum_mode: 'ENABLED',
             response_target: path,
             on_chunk_received: instance_of(Proc)
           }) do |args|
@@ -149,7 +142,6 @@ module Aws
           expect(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'large',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).exactly(1).times
 
@@ -189,7 +181,6 @@ module Aws
           expect(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'single',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).exactly(1).times
 
@@ -204,7 +195,6 @@ module Aws
           expect(client).to receive(:get_object).with({
             bucket: 'bucket',
             key: 'small',
-            checksum_mode: 'ENABLED',
             version_id: version_id,
             response_target: path
           }).exactly(1).times

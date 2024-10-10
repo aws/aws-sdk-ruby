@@ -162,12 +162,11 @@ module Aws
                 completed_part = {
                   etag: resp.etag,
                   part_number: part[:part_number]
-                }.tap do |h|
-                  # get checksum algorithm from request params (default or part)
-                  algorithm = resp.context.params[:checksum_algorithm]
-                  k = "checksum_#{algorithm.downcase}".to_sym
-                  # get the requested checksum from the response
-                  h[k] = resp.send(k)
+                }
+                # get the requested checksum from the response
+                if part[:checksum_algorithm]
+                  k = "checksum_#{part[:checksum_algorithm].downcase}".to_sym
+                  completed_part[k] = resp[k]
                 end
                 completed.push(completed_part)
               end
