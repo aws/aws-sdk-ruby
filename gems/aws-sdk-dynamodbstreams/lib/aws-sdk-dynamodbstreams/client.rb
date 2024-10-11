@@ -915,7 +915,7 @@ module Aws::DynamoDBStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodbstreams'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.68.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

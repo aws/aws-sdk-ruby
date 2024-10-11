@@ -548,6 +548,7 @@ module Aws::EMR
     #           },
     #         },
     #       },
+    #       context: "XmlStringMaxLen256",
     #     },
     #   })
     #
@@ -2065,6 +2066,7 @@ module Aws::EMR
     #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first"
     #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.capacity_reservation_options.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.capacity_reservation_options.capacity_reservation_resource_group_arn #=> String
+    #   resp.instance_fleets[0].context #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets AWS API Documentation
@@ -2780,6 +2782,7 @@ module Aws::EMR
     #           priority: 1.0,
     #         },
     #       ],
+    #       context: "XmlStringMaxLen256",
     #     },
     #   })
     #
@@ -3655,6 +3658,7 @@ module Aws::EMR
     #               },
     #             },
     #           },
+    #           context: "XmlStringMaxLen256",
     #         },
     #       ],
     #       ec2_key_name: "XmlStringMaxLen256",
@@ -4272,7 +4276,7 @@ module Aws::EMR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

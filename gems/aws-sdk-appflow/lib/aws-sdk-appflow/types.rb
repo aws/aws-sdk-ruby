@@ -4357,13 +4357,6 @@ module Aws::Appflow
     #     Salesforce account and authorize Amazon AppFlow to access your
     #     records.
     #
-    #   CLIENT\_CREDENTIALS
-    #
-    #   : Amazon AppFlow passes client credentials (a client ID and client
-    #     secret) when it requests the access token from Salesforce. You
-    #     provide these credentials to Amazon AppFlow when you define the
-    #     connection to your Salesforce account.
-    #
     #   JWT\_BEARER
     #
     #   : Amazon AppFlow passes a JSON web token (JWT) when it requests the
@@ -4372,6 +4365,10 @@ module Aws::Appflow
     #     When you use this grant type, you don't need to log in to your
     #     Salesforce account to authorize Amazon AppFlow to access your
     #     records.
+    #
+    #   <note markdown="1"> The CLIENT\_CREDENTIALS value is not supported for Salesforce.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] jwt_token
@@ -4569,13 +4566,6 @@ module Aws::Appflow
     #     Salesforce account and authorize Amazon AppFlow to access your
     #     records.
     #
-    #   CLIENT\_CREDENTIALS
-    #
-    #   : Amazon AppFlow passes client credentials (a client ID and client
-    #     secret) when it requests the access token from Salesforce. You
-    #     provide these credentials to Amazon AppFlow when you define the
-    #     connection to your Salesforce account.
-    #
     #   JWT\_BEARER
     #
     #   : Amazon AppFlow passes a JSON web token (JWT) when it requests the
@@ -4584,6 +4574,10 @@ module Aws::Appflow
     #     When you use this grant type, you don't need to log in to your
     #     Salesforce account to authorize Amazon AppFlow to access your
     #     records.
+    #
+    #   <note markdown="1"> The CLIENT\_CREDENTIALS value is not supported for Salesforce.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceMetadata AWS API Documentation
