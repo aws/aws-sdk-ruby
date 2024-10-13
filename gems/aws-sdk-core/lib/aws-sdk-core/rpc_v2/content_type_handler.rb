@@ -13,11 +13,13 @@ module Aws
         accept =
           if eventstream_output?(context)
             'application/vnd.amazon.eventstream'
+          else
+            'application/cbor'
           end
 
         headers = context.http_request.headers
         headers['Content-Type'] ||= content_type if content_type
-        headers['Accept'] ||= accept if accept
+        headers['Accept'] ||= accept
         @handler.call(context)
       end
 
