@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Nimble Studio has been removed from the SDK because it has been discontinued.  
+
 1.40.0 (2024-09-24)
 ------------------
 

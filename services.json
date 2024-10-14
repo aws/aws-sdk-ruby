@@ -825,7 +825,8 @@
     "models": "networkmonitor/2023-08-01"
   },
   "NimbleStudio": {
-    "models": "nimble/2020-08-01"
+    "models": "nimble/2020-08-01",
+    "deprecated": true
   },
   "OAM": {
     "models": "oam/2022-06-10"
