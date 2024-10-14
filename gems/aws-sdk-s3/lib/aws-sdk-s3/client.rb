@@ -40,7 +40,6 @@ require 'aws-sdk-s3/plugins/access_grants.rb'
 require 'aws-sdk-s3/plugins/arn.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
-require 'aws-sdk-s3/plugins/checksum_algorithm.rb'
 require 'aws-sdk-s3/plugins/dualstack.rb'
 require 'aws-sdk-s3/plugins/expect_100_continue.rb'
 require 'aws-sdk-s3/plugins/express_session_auth.rb'
@@ -53,6 +52,7 @@ require 'aws-sdk-s3/plugins/redirects.rb'
 require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
 require 'aws-sdk-s3/plugins/sse_cpk.rb'
+require 'aws-sdk-s3/plugins/skip_whole_multipart_get_checksums.rb'
 require 'aws-sdk-s3/plugins/streaming_retry.rb'
 require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
@@ -111,7 +111,6 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::ARN)
     add_plugin(Aws::S3::Plugins::BucketDns)
     add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
-    add_plugin(Aws::S3::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::S3::Plugins::Dualstack)
     add_plugin(Aws::S3::Plugins::Expect100Continue)
     add_plugin(Aws::S3::Plugins::ExpressSessionAuth)
@@ -124,6 +123,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::S3Signer)
     add_plugin(Aws::S3::Plugins::SseCpk)
+    add_plugin(Aws::S3::Plugins::SkipWholeMultipartGetChecksums)
     add_plugin(Aws::S3::Plugins::StreamingRetry)
     add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
@@ -240,9 +240,11 @@ module Aws::S3
     #     will use the Client Side Monitoring Agent Publisher.
     #
     #   @option options [Boolean] :compute_checksums (true)
-    #     This option is deprecated. Please use `:request_checksum_calculation`
-    #     instead. When `true`, `request_checksum_calculation` is set to `WHEN_SUPPORTED`,
-    #     and if `false` it is set to `WHEN_REQUIRED`.
+    #     When `true` a MD5 checksum will be computed and sent in the Content Md5
+    #     header for :put_object and :upload_part. When `false`, MD5 checksums
+    #     will not be computed for these operations. Checksums are still computed
+    #     for operations requiring them. Checksum errors returned by Amazon S3 are
+    #     automatically retried up to `:retry_limit` times.
     #
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
@@ -338,18 +340,6 @@ module Aws::S3
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    #   @option options [String] :request_checksum_calculation ("WHEN_SUPPORTED")
-    #     Determines when a checksum will be calculated for request payloads. Values are:
-    #
-    #     * `WHEN_SUPPORTED` - (default) When set, a checksum will be
-    #       calculated for all request payloads of operations modeled with the
-    #       `httpChecksum` trait where `requestChecksumRequired` is `true` and/or a
-    #       `requestAlgorithmMember` is modeled.
-    #     * `WHEN_REQUIRED` - When set, a checksum will only be calculated for
-    #       request payloads of operations modeled with the  `httpChecksum` trait where
-    #       `requestChecksumRequired` is `true` or where a requestAlgorithmMember
-    #       is modeled and supplied.
-    #
     #   @option options [Integer] :request_min_compression_size_bytes (10240)
     #     The minimum size in bytes that triggers compression for request
     #     bodies. The value must be non-negative integer value between 0
@@ -359,17 +349,6 @@ module Aws::S3
     #     When `true`, the endpoint **must** be HTTPS for all operations
     #     where server-side-encryption is used with customer-provided keys.
     #     This should only be disabled for local testing.
-    #
-    #   @option options [String] :response_checksum_validation ("WHEN_SUPPORTED")
-    #     Determines when checksum validation will be performed on response payloads. Values are:
-    #
-    #     * `WHEN_SUPPORTED` - (default) When set, checksum validation is performed on all
-    #       response payloads of operations modeled with the `httpChecksum` trait where
-    #       `responseAlgorithms` is modeled, except when no modeled checksum algorithms
-    #       are supported.
-    #     * `WHEN_REQUIRED` - When set, checksum validation is not performed on
-    #       response payloads of operations unless the checksum algorithm is supported and
-    #       the `requestValidationModeMember` member is set to `ENABLED`.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.

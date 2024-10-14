@@ -122,7 +122,9 @@ module Aws
       end
 
       def create_opts(options)
-        CREATE_OPTIONS.inject({}) do |hash, key|
+        default_checksum = Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM
+        opts = { checksum_algorithm: default_checksum }
+        CREATE_OPTIONS.inject(opts) do |hash, key|
           hash[key] = options[key] if options.key?(key)
           hash
         end
@@ -163,11 +165,9 @@ module Aws
                   etag: resp.etag,
                   part_number: part[:part_number]
                 }
-                # get the requested checksum from the response
-                if part[:checksum_algorithm]
-                  k = "checksum_#{part[:checksum_algorithm].downcase}".to_sym
-                  completed_part[k] = resp[k]
-                end
+                algorithm = resp.context.params[:checksum_algorithm]
+                k = "checksum_#{algorithm.downcase}".to_sym
+                completed_part[k] = resp.send(k)
                 completed.push(completed_part)
               end
               nil

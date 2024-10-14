@@ -38,16 +38,16 @@ module Aws
       DEFAULT_CHECKSUM = 'CRC32'
 
       option(:request_checksum_calculation,
-             doc_default: 'WHEN_SUPPORTED',
+             doc_default: 'when_supported',
              doc_type: 'String',
              docstring: <<~DOCS) do |cfg|
                Determines when a checksum will be calculated for request payloads. Values are:
 
-               * `WHEN_SUPPORTED` - (default) When set, a checksum will be
+               * `when_supported` - (default) When set, a checksum will be
                  calculated for all request payloads of operations modeled with the
                  `httpChecksum` trait where `requestChecksumRequired` is `true` and/or a
                  `requestAlgorithmMember` is modeled.
-               * `WHEN_REQUIRED` - When set, a checksum will only be calculated for
+               * `when_required` - When set, a checksum will only be calculated for
                  request payloads of operations modeled with the  `httpChecksum` trait where
                  `requestChecksumRequired` is `true` or where a requestAlgorithmMember
                  is modeled and supplied.
@@ -56,16 +56,16 @@ module Aws
       end
 
       option(:response_checksum_validation,
-             doc_default: 'WHEN_SUPPORTED',
+             doc_default: 'when_supported',
              doc_type: 'String',
              docstring: <<~DOCS) do |cfg|
                Determines when checksum validation will be performed on response payloads. Values are:
 
-               * `WHEN_SUPPORTED` - (default) When set, checksum validation is performed on all
+               * `when_supported` - (default) When set, checksum validation is performed on all
                  response payloads of operations modeled with the `httpChecksum` trait where
                  `responseAlgorithms` is modeled, except when no modeled checksum algorithms
                  are supported.
-               * `WHEN_REQUIRED` - When set, checksum validation is not performed on
+               * `when_required` - When set, checksum validation is not performed on
                  response payloads of operations unless the checksum algorithm is supported and
                  the `requestValidationModeMember` member is set to `ENABLED`.
              DOCS
@@ -102,13 +102,13 @@ module Aws
         def resolve_request_checksum_calculation(cfg)
           mode = ENV['AWS_REQUEST_CHECKSUM_CALCULATION'] ||
                  Aws.shared_config.request_checksum_calculation(profile: cfg.profile) ||
-                 'WHEN_SUPPORTED'
-          mode = mode.upcase
-          unless %w[WHEN_SUPPORTED WHEN_REQUIRED].include?(mode)
+                 'when_supported'
+          mode = mode.downcase
+          unless %w[when_supported when_required].include?(mode)
             raise ArgumentError,
                   'expected :request_checksum_calculation or' \
                   " ENV['AWS_REQUEST_CHECKSUM_CALCULATION'] to be " \
-                  '`WHEN_SUPPORTED` or `WHEN_REQUIRED`.'
+                  '`when_supported` or `when_required`.'
           end
           mode
         end
@@ -116,13 +116,13 @@ module Aws
         def resolve_response_checksum_validation(cfg)
           mode = ENV['AWS_response_checksum_validation'] ||
                  Aws.shared_config.response_checksum_validation(profile: cfg.profile) ||
-                 'WHEN_SUPPORTED'
-          mode = mode.upcase
-          unless %w[WHEN_SUPPORTED WHEN_REQUIRED].include?(mode)
+                 'when_supported'
+          mode = mode.downcase
+          unless %w[when_supported when_required].include?(mode)
             raise ArgumentError,
                   'expected :response_checksum_validation or' \
                   " ENV['AWS_response_checksum_validation'] to be " \
-                  '`WHEN_SUPPORTED` or `WHEN_REQUIRED`.'
+                  '`when_supported` or `when_required`.'
           end
           mode
         end
@@ -160,7 +160,7 @@ module Aws
           context[:http_checksum] ||= {}
 
           # Set validation mode to enabled when supported.
-          if context.config.response_checksum_validation == 'WHEN_SUPPORTED'
+          if context.config.response_checksum_validation == 'when_supported'
             enable_request_validation_mode(context)
           end
 
@@ -221,19 +221,19 @@ module Aws
 
         def add_request_config_metric(config, metrics)
           case config.request_checksum_calculation
-          when 'WHEN_SUPPORTED'
-            metrics << 'FLEXIBLE_CHECKSUMS_REQ_WHEN_SUPPORTED'
-          when 'WHEN_REQUIRED'
-            metrics << 'FLEXIBLE_CHECKSUMS_REQ_WHEN_REQUIRED'
+          when 'when_supported'
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_when_supported'
+          when 'when_required'
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_when_required'
           end
         end
 
         def add_response_config_metric(config, metrics)
           case config.response_checksum_validation
-          when 'WHEN_SUPPORTED'
-            metrics << 'FLEXIBLE_CHECKSUMS_RES_WHEN_SUPPORTED'
-          when 'WHEN_REQUIRED'
-            metrics << 'FLEXIBLE_CHECKSUMS_RES_WHEN_REQUIRED'
+          when 'when_supported'
+            metrics << 'FLEXIBLE_CHECKSUMS_RES_when_supported'
+          when 'when_required'
+            metrics << 'FLEXIBLE_CHECKSUMS_RES_when_required'
           end
         end
 
@@ -275,12 +275,12 @@ module Aws
         def checksum_required?(context)
           (http_checksum = context.operation.http_checksum) &&
             (checksum_required = http_checksum['requestChecksumRequired']) &&
-            (checksum_required && context.config.request_checksum_calculation == 'WHEN_REQUIRED')
+            (checksum_required && context.config.request_checksum_calculation == 'when_required')
         end
 
         def checksum_optional?(context)
           context.operation.http_checksum &&
-            context.config.request_checksum_calculation == 'WHEN_SUPPORTED'
+            context.config.request_checksum_calculation == 'when_supported'
         end
 
         def checksum_provided_as_header?(headers)

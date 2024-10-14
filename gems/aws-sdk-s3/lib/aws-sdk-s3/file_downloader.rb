@@ -28,7 +28,7 @@ module Aws
         @chunk_size = options[:chunk_size]
         @params = {
           bucket: options[:bucket],
-          key: options[:key],
+          key: options[:key]
         }
         @params[:version_id] = options[:version_id] if options[:version_id]
         @on_checksum_validated = options[:on_checksum_validated]
