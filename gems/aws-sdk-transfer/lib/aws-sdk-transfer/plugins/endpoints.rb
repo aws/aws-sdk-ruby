@@ -142,6 +142,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Transfer::Endpoints::ListConnectors.build(context)
           when :list_executions
             Aws::Transfer::Endpoints::ListExecutions.build(context)
+          when :list_file_transfer_results
+            Aws::Transfer::Endpoints::ListFileTransferResults.build(context)
           when :list_host_keys
             Aws::Transfer::Endpoints::ListHostKeys.build(context)
           when :list_profiles

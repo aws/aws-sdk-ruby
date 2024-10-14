@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-10-14)
+------------------
+
+* Feature - Mail Manager support for viewing and exporting metadata of archived messages.
+
 1.12.0 (2024-09-24)
 ------------------
 

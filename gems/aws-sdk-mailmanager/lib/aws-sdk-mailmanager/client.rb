@@ -1332,14 +1332,14 @@ module Aws::MailManager
     #   resp.filters.include #=> Array
     #   resp.filters.include[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
     #   resp.filters.include[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
-    #   resp.filters.include[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT"
+    #   resp.filters.include[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT", "ENVELOPE_TO", "ENVELOPE_FROM"
     #   resp.filters.include[0].string_expression.operator #=> String, one of "CONTAINS"
     #   resp.filters.include[0].string_expression.values #=> Array
     #   resp.filters.include[0].string_expression.values[0] #=> String
     #   resp.filters.unless #=> Array
     #   resp.filters.unless[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
     #   resp.filters.unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
-    #   resp.filters.unless[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT"
+    #   resp.filters.unless[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT", "ENVELOPE_TO", "ENVELOPE_FROM"
     #   resp.filters.unless[0].string_expression.operator #=> String, one of "CONTAINS"
     #   resp.filters.unless[0].string_expression.values #=> Array
     #   resp.filters.unless[0].string_expression.values[0] #=> String
@@ -1368,7 +1368,9 @@ module Aws::MailManager
     #
     # @return [Types::GetArchiveMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetArchiveMessageResponse#envelope #envelope} => Types::Envelope
     #   * {Types::GetArchiveMessageResponse#message_download_link #message_download_link} => String
+    #   * {Types::GetArchiveMessageResponse#metadata #metadata} => Types::Metadata
     #
     # @example Request syntax with placeholder values
     #
@@ -1378,7 +1380,19 @@ module Aws::MailManager
     #
     # @example Response structure
     #
+    #   resp.envelope.from #=> String
+    #   resp.envelope.helo #=> String
+    #   resp.envelope.to #=> Array
+    #   resp.envelope.to[0] #=> String
     #   resp.message_download_link #=> String
+    #   resp.metadata.ingress_point_id #=> String
+    #   resp.metadata.rule_set_id #=> String
+    #   resp.metadata.sender_hostname #=> String
+    #   resp.metadata.sender_ip_address #=> String
+    #   resp.metadata.timestamp #=> Time
+    #   resp.metadata.tls_cipher_suite #=> String
+    #   resp.metadata.tls_protocol #=> String
+    #   resp.metadata.traffic_policy_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetArchiveMessage AWS API Documentation
     #
@@ -1447,14 +1461,14 @@ module Aws::MailManager
     #   resp.filters.include #=> Array
     #   resp.filters.include[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
     #   resp.filters.include[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
-    #   resp.filters.include[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT"
+    #   resp.filters.include[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT", "ENVELOPE_TO", "ENVELOPE_FROM"
     #   resp.filters.include[0].string_expression.operator #=> String, one of "CONTAINS"
     #   resp.filters.include[0].string_expression.values #=> Array
     #   resp.filters.include[0].string_expression.values[0] #=> String
     #   resp.filters.unless #=> Array
     #   resp.filters.unless[0].boolean_expression.evaluate.attribute #=> String, one of "HAS_ATTACHMENTS"
     #   resp.filters.unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
-    #   resp.filters.unless[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT"
+    #   resp.filters.unless[0].string_expression.evaluate.attribute #=> String, one of "TO", "FROM", "CC", "SUBJECT", "ENVELOPE_TO", "ENVELOPE_FROM"
     #   resp.filters.unless[0].string_expression.operator #=> String, one of "CONTAINS"
     #   resp.filters.unless[0].string_expression.values #=> Array
     #   resp.filters.unless[0].string_expression.values[0] #=> String
@@ -1496,13 +1510,20 @@ module Aws::MailManager
     #   resp.rows[0].archived_message_id #=> String
     #   resp.rows[0].cc #=> String
     #   resp.rows[0].date #=> String
+    #   resp.rows[0].envelope.from #=> String
+    #   resp.rows[0].envelope.helo #=> String
+    #   resp.rows[0].envelope.to #=> Array
+    #   resp.rows[0].envelope.to[0] #=> String
     #   resp.rows[0].from #=> String
     #   resp.rows[0].has_attachments #=> Boolean
     #   resp.rows[0].in_reply_to #=> String
+    #   resp.rows[0].ingress_point_id #=> String
     #   resp.rows[0].message_id #=> String
     #   resp.rows[0].received_headers #=> Array
     #   resp.rows[0].received_headers[0] #=> String
     #   resp.rows[0].received_timestamp #=> Time
+    #   resp.rows[0].sender_hostname #=> String
+    #   resp.rows[0].sender_ip_address #=> String
     #   resp.rows[0].subject #=> String
     #   resp.rows[0].to #=> String
     #   resp.rows[0].x_mailer #=> String
@@ -2215,6 +2236,9 @@ module Aws::MailManager
     # @option params [required, Time,DateTime,Date,Integer,String] :from_timestamp
     #   The start of the timestamp range to include emails from.
     #
+    # @option params [Boolean] :include_metadata
+    #   Whether to include message metadata as JSON files in the export.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of email items to include in the export.
     #
@@ -2245,7 +2269,7 @@ module Aws::MailManager
     #           },
     #           string_expression: {
     #             evaluate: { # required
-    #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT
+    #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT, ENVELOPE_TO, ENVELOPE_FROM
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
     #             values: ["StringValue"], # required
@@ -2262,7 +2286,7 @@ module Aws::MailManager
     #           },
     #           string_expression: {
     #             evaluate: { # required
-    #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT
+    #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT, ENVELOPE_TO, ENVELOPE_FROM
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
     #             values: ["StringValue"], # required
@@ -2271,6 +2295,7 @@ module Aws::MailManager
     #       ],
     #     },
     #     from_timestamp: Time.now, # required
+    #     include_metadata: false,
     #     max_results: 1,
     #     to_timestamp: Time.now, # required
     #   })
@@ -2324,7 +2349,7 @@ module Aws::MailManager
     #           },
     #           string_expression: {
     #             evaluate: { # required
-    #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT
+    #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT, ENVELOPE_TO, ENVELOPE_FROM
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
     #             values: ["StringValue"], # required
@@ -2341,7 +2366,7 @@ module Aws::MailManager
     #           },
     #           string_expression: {
     #             evaluate: { # required
-    #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT
+    #               attribute: "TO", # accepts TO, FROM, CC, SUBJECT, ENVELOPE_TO, ENVELOPE_FROM
     #             },
     #             operator: "CONTAINS", # required, accepts CONTAINS
     #             values: ["StringValue"], # required
@@ -2858,7 +2883,7 @@ module Aws::MailManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mailmanager'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

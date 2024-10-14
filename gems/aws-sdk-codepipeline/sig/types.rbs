@@ -317,7 +317,7 @@ module Aws::CodePipeline
     end
 
     class Condition
-      attr_accessor result: ("ROLLBACK" | "FAIL")
+      attr_accessor result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")
       attr_accessor rules: ::Array[Types::RuleDeclaration]
       SENSITIVE: []
     end
@@ -463,7 +463,8 @@ module Aws::CodePipeline
     end
 
     class FailureConditions
-      attr_accessor result: ("ROLLBACK" | "FAIL")
+      attr_accessor result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")
+      attr_accessor retry_configuration: Types::RetryConfiguration
       attr_accessor conditions: ::Array[Types::Condition]
       SENSITIVE: []
     end
@@ -1059,6 +1060,11 @@ module Aws::CodePipeline
     class ResourceNotFoundException < Aws::EmptyStructure
     end
 
+    class RetryConfiguration
+      attr_accessor retry_mode: ("FAILED_ACTIONS" | "ALL_ACTIONS")
+      SENSITIVE: []
+    end
+
     class RetryStageExecutionInput
       attr_accessor pipeline_name: ::String
       attr_accessor stage_name: ::String
@@ -1069,6 +1075,13 @@ module Aws::CodePipeline
 
     class RetryStageExecutionOutput
       attr_accessor pipeline_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class RetryStageMetadata
+      attr_accessor auto_stage_retry_attempt: ::Integer
+      attr_accessor manual_stage_retry_attempt: ::Integer
+      attr_accessor latest_retry_trigger: ("AutomatedStageRetry" | "ManualStageRetry")
       SENSITIVE: []
     end
 
@@ -1259,7 +1272,7 @@ module Aws::CodePipeline
 
     class StageExecution
       attr_accessor pipeline_execution_id: ::String
-      attr_accessor status: ("Cancelled" | "InProgress" | "Failed" | "Stopped" | "Stopping" | "Succeeded")
+      attr_accessor status: ("Cancelled" | "InProgress" | "Failed" | "Stopped" | "Stopping" | "Succeeded" | "Skipped")
       attr_accessor type: ("STANDARD" | "ROLLBACK")
       SENSITIVE: []
     end
@@ -1280,6 +1293,7 @@ module Aws::CodePipeline
       attr_accessor before_entry_condition_state: Types::StageConditionState
       attr_accessor on_success_condition_state: Types::StageConditionState
       attr_accessor on_failure_condition_state: Types::StageConditionState
+      attr_accessor retry_stage_metadata: Types::RetryStageMetadata
       SENSITIVE: []
     end
 

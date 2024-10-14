@@ -85,6 +85,7 @@ module Aws::MailManager
     DropAction = Shapes::StructureShape.new(name: 'DropAction')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailReceivedHeadersList = Shapes::ListShape.new(name: 'EmailReceivedHeadersList')
+    Envelope = Shapes::StructureShape.new(name: 'Envelope')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExportDestinationConfiguration = Shapes::UnionShape.new(name: 'ExportDestinationConfiguration')
     ExportId = Shapes::StringShape.new(name: 'ExportId')
@@ -179,6 +180,7 @@ module Aws::MailManager
     MailFrom = Shapes::StringShape.new(name: 'MailFrom')
     MaxMessageSizeBytes = Shapes::IntegerShape.new(name: 'MaxMessageSizeBytes')
     MessageBody = Shapes::StructureShape.new(name: 'MessageBody')
+    Metadata = Shapes::StructureShape.new(name: 'Metadata')
     MimeHeaderAttribute = Shapes::StringShape.new(name: 'MimeHeaderAttribute')
     NameOrArn = Shapes::StringShape.new(name: 'NameOrArn')
     NoAuthentication = Shapes::StructureShape.new(name: 'NoAuthentication')
@@ -260,6 +262,7 @@ module Aws::MailManager
     SearchSummaryList = Shapes::ListShape.new(name: 'SearchSummaryList')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SendAction = Shapes::StructureShape.new(name: 'SendAction')
+    SenderIpAddress = Shapes::StringShape.new(name: 'SenderIpAddress')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmtpPassword = Shapes::StringShape.new(name: 'SmtpPassword')
     StartArchiveExportRequest = Shapes::StructureShape.new(name: 'StartArchiveExportRequest')
@@ -500,6 +503,11 @@ module Aws::MailManager
 
     EmailReceivedHeadersList.member = Shapes::ShapeRef.new(shape: String)
 
+    Envelope.add_member(:from, Shapes::ShapeRef.new(shape: String, location_name: "From"))
+    Envelope.add_member(:helo, Shapes::ShapeRef.new(shape: String, location_name: "Helo"))
+    Envelope.add_member(:to, Shapes::ShapeRef.new(shape: StringList, location_name: "To"))
+    Envelope.struct_class = Types::Envelope
+
     ExportDestinationConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3ExportDestinationConfiguration, location_name: "S3"))
     ExportDestinationConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExportDestinationConfiguration.add_member_subclass(:s3, Types::ExportDestinationConfiguration::S3)
@@ -556,7 +564,9 @@ module Aws::MailManager
     GetArchiveMessageRequest.add_member(:archived_message_id, Shapes::ShapeRef.new(shape: ArchivedMessageId, required: true, location_name: "ArchivedMessageId"))
     GetArchiveMessageRequest.struct_class = Types::GetArchiveMessageRequest
 
+    GetArchiveMessageResponse.add_member(:envelope, Shapes::ShapeRef.new(shape: Envelope, location_name: "Envelope"))
     GetArchiveMessageResponse.add_member(:message_download_link, Shapes::ShapeRef.new(shape: S3PresignedURL, location_name: "MessageDownloadLink"))
+    GetArchiveMessageResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     GetArchiveMessageResponse.struct_class = Types::GetArchiveMessageResponse
 
     GetArchiveRequest.add_member(:archive_id, Shapes::ShapeRef.new(shape: ArchiveIdString, required: true, location_name: "ArchiveId"))
@@ -802,6 +812,16 @@ module Aws::MailManager
     MessageBody.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     MessageBody.struct_class = Types::MessageBody
 
+    Metadata.add_member(:ingress_point_id, Shapes::ShapeRef.new(shape: IngressPointId, location_name: "IngressPointId"))
+    Metadata.add_member(:rule_set_id, Shapes::ShapeRef.new(shape: RuleSetId, location_name: "RuleSetId"))
+    Metadata.add_member(:sender_hostname, Shapes::ShapeRef.new(shape: String, location_name: "SenderHostname"))
+    Metadata.add_member(:sender_ip_address, Shapes::ShapeRef.new(shape: SenderIpAddress, location_name: "SenderIpAddress"))
+    Metadata.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    Metadata.add_member(:tls_cipher_suite, Shapes::ShapeRef.new(shape: String, location_name: "TlsCipherSuite"))
+    Metadata.add_member(:tls_protocol, Shapes::ShapeRef.new(shape: String, location_name: "TlsProtocol"))
+    Metadata.add_member(:traffic_policy_id, Shapes::ShapeRef.new(shape: TrafficPolicyId, location_name: "TrafficPolicyId"))
+    Metadata.struct_class = Types::Metadata
+
     NoAuthentication.struct_class = Types::NoAuthentication
 
     PolicyCondition.add_member(:boolean_expression, Shapes::ShapeRef.new(shape: IngressBooleanExpression, location_name: "BooleanExpression"))
@@ -855,12 +875,16 @@ module Aws::MailManager
     Row.add_member(:archived_message_id, Shapes::ShapeRef.new(shape: ArchivedMessageId, location_name: "ArchivedMessageId"))
     Row.add_member(:cc, Shapes::ShapeRef.new(shape: String, location_name: "Cc"))
     Row.add_member(:date, Shapes::ShapeRef.new(shape: String, location_name: "Date"))
+    Row.add_member(:envelope, Shapes::ShapeRef.new(shape: Envelope, location_name: "Envelope"))
     Row.add_member(:from, Shapes::ShapeRef.new(shape: String, location_name: "From"))
     Row.add_member(:has_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "HasAttachments"))
     Row.add_member(:in_reply_to, Shapes::ShapeRef.new(shape: String, location_name: "InReplyTo"))
+    Row.add_member(:ingress_point_id, Shapes::ShapeRef.new(shape: IngressPointId, location_name: "IngressPointId"))
     Row.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
     Row.add_member(:received_headers, Shapes::ShapeRef.new(shape: EmailReceivedHeadersList, location_name: "ReceivedHeaders"))
     Row.add_member(:received_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReceivedTimestamp"))
+    Row.add_member(:sender_hostname, Shapes::ShapeRef.new(shape: String, location_name: "SenderHostname"))
+    Row.add_member(:sender_ip_address, Shapes::ShapeRef.new(shape: SenderIpAddress, location_name: "SenderIpAddress"))
     Row.add_member(:subject, Shapes::ShapeRef.new(shape: String, location_name: "Subject"))
     Row.add_member(:to, Shapes::ShapeRef.new(shape: String, location_name: "To"))
     Row.add_member(:x_mailer, Shapes::ShapeRef.new(shape: String, location_name: "XMailer"))
@@ -1028,6 +1052,7 @@ module Aws::MailManager
     StartArchiveExportRequest.add_member(:export_destination_configuration, Shapes::ShapeRef.new(shape: ExportDestinationConfiguration, required: true, location_name: "ExportDestinationConfiguration"))
     StartArchiveExportRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ArchiveFilters, location_name: "Filters"))
     StartArchiveExportRequest.add_member(:from_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "FromTimestamp"))
+    StartArchiveExportRequest.add_member(:include_metadata, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMetadata"))
     StartArchiveExportRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ExportMaxResults, location_name: "MaxResults"))
     StartArchiveExportRequest.add_member(:to_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ToTimestamp"))
     StartArchiveExportRequest.struct_class = Types::StartArchiveExportRequest

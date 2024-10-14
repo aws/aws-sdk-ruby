@@ -209,10 +209,13 @@ module Aws
                                      },
                                    ],
                                    on_failure: {
-                                     result: ("ROLLBACK" | "FAIL")?,
+                                     result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
+                                     retry_configuration: {
+                                       retry_mode: ("FAILED_ACTIONS" | "ALL_ACTIONS")?
+                                     }?,
                                      conditions: Array[
                                        {
-                                         result: ("ROLLBACK" | "FAIL")?,
+                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
                                          rules: Array[
                                            {
                                              name: ::String,
@@ -239,7 +242,7 @@ module Aws
                                    on_success: {
                                      conditions: Array[
                                        {
-                                         result: ("ROLLBACK" | "FAIL")?,
+                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
                                          rules: Array[
                                            {
                                              name: ::String,
@@ -266,7 +269,7 @@ module Aws
                                    before_entry: {
                                      conditions: Array[
                                        {
-                                         result: ("ROLLBACK" | "FAIL")?,
+                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
                                          rules: Array[
                                            {
                                              name: ::String,
@@ -973,10 +976,13 @@ module Aws
                                      },
                                    ],
                                    on_failure: {
-                                     result: ("ROLLBACK" | "FAIL")?,
+                                     result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
+                                     retry_configuration: {
+                                       retry_mode: ("FAILED_ACTIONS" | "ALL_ACTIONS")?
+                                     }?,
                                      conditions: Array[
                                        {
-                                         result: ("ROLLBACK" | "FAIL")?,
+                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
                                          rules: Array[
                                            {
                                              name: ::String,
@@ -1003,7 +1009,7 @@ module Aws
                                    on_success: {
                                      conditions: Array[
                                        {
-                                         result: ("ROLLBACK" | "FAIL")?,
+                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
                                          rules: Array[
                                            {
                                              name: ::String,
@@ -1030,7 +1036,7 @@ module Aws
                                    before_entry: {
                                      conditions: Array[
                                        {
-                                         result: ("ROLLBACK" | "FAIL")?,
+                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
                                          rules: Array[
                                            {
                                              name: ::String,

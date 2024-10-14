@@ -150,6 +150,39 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # A structure that contains the details for files transferred using an
+    # SFTP connector, during a single transfer.
+    #
+    # @!attribute [rw] file_path
+    #   The filename and path to where the file was sent to or retrieved
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The current status for the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   For transfers that fail, this parameter contains a code indicating
+    #   the reason. For example, `RETRIEVE_FILE_NOT_FOUND`
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   For transfers that fail, this parameter describes the reason for the
+    #   failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ConnectorFileTransferResult AWS API Documentation
+    #
+    class ConnectorFileTransferResult < Struct.new(
+      :file_path,
+      :status_code,
+      :failure_code,
+      :failure_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Each step type has its own `StepDetails` structure.
     #
     # @!attribute [rw] name
@@ -398,7 +431,8 @@ module Aws::Transfer
     #   The landing directory (folder) for files transferred by using the
     #   AS2 protocol.
     #
-    #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory`.
+    #   A `BaseDirectory` example is
+    #   `/amzn-s3-demo-bucket/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] access_role
@@ -2960,14 +2994,21 @@ module Aws::Transfer
     # API and attach an Elastic IP address to your server's endpoint.
     #
     # <note markdown="1"> After May 19, 2021, you won't be able to create a server using
-    # `EndpointType=VPC_ENDPOINT` in your Amazon Web Servicesaccount if your
-    # account hasn't already done so before May 19, 2021. If you have
+    # `EndpointType=VPC_ENDPOINT` in your Amazon Web Services account if
+    # your account hasn't already done so before May 19, 2021. If you have
     # already created servers with `EndpointType=VPC_ENDPOINT` in your
-    # Amazon Web Servicesaccount on or before May 19, 2021, you will not be
+    # Amazon Web Services account on or before May 19, 2021, you will not be
     # affected. After this date, use `EndpointType`=`VPC`.
     #
     #  For more information, see
     # https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
+    #
+    #  It is recommended that you use `VPC` as the `EndpointType`. With this
+    # endpoint type, you have the option to directly associate up to three
+    # Elastic IPv4 addresses (BYO IP included) with your server's endpoint
+    # and use VPC security groups to restrict traffic by the client's
+    # public IP address. This is not possible with `EndpointType` set to
+    # `VPC_ENDPOINT`.
     #
     #  </note>
     #
@@ -3779,6 +3820,77 @@ module Aws::Transfer
       :next_token,
       :workflow_id,
       :executions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
+    #   A unique identifier for a connector. This value should match the
+    #   value supplied to the corresponding `StartFileTransfer` call.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_id
+    #   A unique identifier for a file transfer. This value should match the
+    #   value supplied to the corresponding `StartFileTransfer` call.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more file details than returned in this call, use this
+    #   value for a subsequent call to `ListFileTransferResults` to retrieve
+    #   them.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of files to return in a single page. Note that
+    #   currently you can specify a maximum of 10 file paths in a single
+    #   [StartFileTransfer][1] operation. Thus, the maximum number of file
+    #   transfer results that can be returned in a single page is 10.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_StartFileTransfer.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListFileTransferResultsRequest AWS API Documentation
+    #
+    class ListFileTransferResultsRequest < Struct.new(
+      :connector_id,
+      :transfer_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_transfer_results
+    #   Returns the details for the files transferred in the transfer
+    #   identified by the `TransferId` and `ConnectorId` specified.
+    #
+    #   * `FilePath`: the filename and path to where the file was sent to or
+    #     retrieved from.
+    #
+    #   * `StatusCode`: current status for the transfer. The status returned
+    #     is one of the following values:`QUEUED`, `IN_PROGRESS`,
+    #     `COMPLETED`, or `FAILED`
+    #
+    #   * `FailureCode`: for transfers that fail, this parameter contains a
+    #     code indicating the reason. For example, `RETRIEVE_FILE_NOT_FOUND`
+    #
+    #   * `FailureMessage`: for transfers that fail, this parameter
+    #     describes the reason for the failure.
+    #   @return [Array<Types::ConnectorFileTransferResult>]
+    #
+    # @!attribute [rw] next_token
+    #   Returns a token that you can use to call `ListFileTransferResults`
+    #   again and receive additional results, if there are any (against the
+    #   same `TransferId`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListFileTransferResultsResponse AWS API Documentation
+    #
+    class ListFileTransferResultsResponse < Struct.new(
+      :file_transfer_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5175,9 +5287,9 @@ module Aws::Transfer
     # @!attribute [rw] send_file_paths
     #   One or more source paths for the Amazon S3 storage. Each string
     #   represents a source file path for one outbound file transfer. For
-    #   example, ` DOC-EXAMPLE-BUCKET/myfile.txt `.
+    #   example, ` amzn-s3-demo-bucket/myfile.txt `.
     #
-    #   <note markdown="1"> Replace ` DOC-EXAMPLE-BUCKET ` with one of your actual buckets.
+    #   <note markdown="1"> Replace ` amzn-s3-demo-bucket ` with one of your actual buckets.
     #
     #    </note>
     #   @return [Array<String>]
@@ -5687,7 +5799,7 @@ module Aws::Transfer
     # @!attribute [rw] base_directory
     #   To change the landing directory (folder) for files that are
     #   transferred, provide the bucket folder that you want to use; for
-    #   example, `/DOC-EXAMPLE-BUCKET/home/mydirectory `.
+    #   example, `/amzn-s3-demo-bucket/home/mydirectory `.
     #   @return [String]
     #
     # @!attribute [rw] access_role
@@ -6044,10 +6156,10 @@ module Aws::Transfer
     #   Elastic IP addresses directly to it.
     #
     #   <note markdown="1"> After May 19, 2021, you won't be able to create a server using
-    #   `EndpointType=VPC_ENDPOINT` in your Amazon Web Servicesaccount if
+    #   `EndpointType=VPC_ENDPOINT` in your Amazon Web Services account if
     #   your account hasn't already done so before May 19, 2021. If you
     #   have already created servers with `EndpointType=VPC_ENDPOINT` in
-    #   your Amazon Web Servicesaccount on or before May 19, 2021, you will
+    #   your Amazon Web Services account on or before May 19, 2021, you will
     #   not be affected. After this date, use `EndpointType`=`VPC`.
     #
     #    For more information, see
@@ -6489,6 +6601,10 @@ module Aws::Transfer
     #
     #   `aws transfer update-server --server-id s-01234567890abcdef
     #   --workflow-details '\{"OnUpload":[]\}'`
+    #
+    #   <note markdown="1"> `OnUpload` can contain a maximum of one `WorkflowDetail` object.
+    #
+    #    </note>
     #   @return [Array<Types::WorkflowDetail>]
     #
     # @!attribute [rw] on_partial_upload
@@ -6498,6 +6614,11 @@ module Aws::Transfer
     #
     #   A *partial upload* occurs when a file is open when the session
     #   disconnects.
+    #
+    #   <note markdown="1"> `OnPartialUpload` can contain a maximum of one `WorkflowDetail`
+    #   object.
+    #
+    #    </note>
     #   @return [Array<Types::WorkflowDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/WorkflowDetails AWS API Documentation

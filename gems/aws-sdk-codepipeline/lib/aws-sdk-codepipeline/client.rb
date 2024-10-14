@@ -741,10 +741,13 @@ module Aws::CodePipeline
     #             },
     #           ],
     #           on_failure: {
-    #             result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #             result: "ROLLBACK", # accepts ROLLBACK, FAIL, RETRY, SKIP
+    #             retry_configuration: {
+    #               retry_mode: "FAILED_ACTIONS", # accepts FAILED_ACTIONS, ALL_ACTIONS
+    #             },
     #             conditions: [
     #               {
-    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL, RETRY, SKIP
     #                 rules: [
     #                   {
     #                     name: "RuleName", # required
@@ -773,7 +776,7 @@ module Aws::CodePipeline
     #           on_success: {
     #             conditions: [ # required
     #               {
-    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL, RETRY, SKIP
     #                 rules: [
     #                   {
     #                     name: "RuleName", # required
@@ -802,7 +805,7 @@ module Aws::CodePipeline
     #           before_entry: {
     #             conditions: [ # required
     #               {
-    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL, RETRY, SKIP
     #                 rules: [
     #                   {
     #                     name: "RuleName", # required
@@ -927,9 +930,10 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
-    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
+    #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
-    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -944,7 +948,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].region #=> String
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.stages[0].on_success.conditions #=> Array
-    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_success.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -959,7 +963,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].region #=> String
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.stages[0].before_entry.conditions #=> Array
-    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -1430,9 +1434,10 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
-    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
+    #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
-    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -1447,7 +1452,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].region #=> String
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.stages[0].on_success.conditions #=> Array
-    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_success.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -1462,7 +1467,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].region #=> String
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.stages[0].before_entry.conditions #=> Array
-    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -1612,11 +1617,11 @@ module Aws::CodePipeline
     #   resp.stage_states #=> Array
     #   resp.stage_states[0].stage_name #=> String
     #   resp.stage_states[0].inbound_execution.pipeline_execution_id #=> String
-    #   resp.stage_states[0].inbound_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].inbound_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded", "Skipped"
     #   resp.stage_states[0].inbound_execution.type #=> String, one of "STANDARD", "ROLLBACK"
     #   resp.stage_states[0].inbound_executions #=> Array
     #   resp.stage_states[0].inbound_executions[0].pipeline_execution_id #=> String
-    #   resp.stage_states[0].inbound_executions[0].status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].inbound_executions[0].status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded", "Skipped"
     #   resp.stage_states[0].inbound_executions[0].type #=> String, one of "STANDARD", "ROLLBACK"
     #   resp.stage_states[0].inbound_transition_state.enabled #=> Boolean
     #   resp.stage_states[0].inbound_transition_state.last_changed_by #=> String
@@ -1641,7 +1646,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].entity_url #=> String
     #   resp.stage_states[0].action_states[0].revision_url #=> String
     #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
-    #   resp.stage_states[0].latest_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].latest_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded", "Skipped"
     #   resp.stage_states[0].latest_execution.type #=> String, one of "STANDARD", "ROLLBACK"
     #   resp.stage_states[0].before_entry_condition_state.latest_execution.status #=> String, one of "InProgress", "Failed", "Errored", "Succeeded", "Cancelled", "Abandoned", "Overridden"
     #   resp.stage_states[0].before_entry_condition_state.latest_execution.summary #=> String
@@ -1712,6 +1717,9 @@ module Aws::CodePipeline
     #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.error_details.message #=> String
     #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].entity_url #=> String
     #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].revision_url #=> String
+    #   resp.stage_states[0].retry_stage_metadata.auto_stage_retry_attempt #=> Integer
+    #   resp.stage_states[0].retry_stage_metadata.manual_stage_retry_attempt #=> Integer
+    #   resp.stage_states[0].retry_stage_metadata.latest_retry_trigger #=> String, one of "AutomatedStageRetry", "ManualStageRetry"
     #   resp.created #=> Time
     #   resp.updated #=> Time
     #
@@ -3300,10 +3308,13 @@ module Aws::CodePipeline
     #             },
     #           ],
     #           on_failure: {
-    #             result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #             result: "ROLLBACK", # accepts ROLLBACK, FAIL, RETRY, SKIP
+    #             retry_configuration: {
+    #               retry_mode: "FAILED_ACTIONS", # accepts FAILED_ACTIONS, ALL_ACTIONS
+    #             },
     #             conditions: [
     #               {
-    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL, RETRY, SKIP
     #                 rules: [
     #                   {
     #                     name: "RuleName", # required
@@ -3332,7 +3343,7 @@ module Aws::CodePipeline
     #           on_success: {
     #             conditions: [ # required
     #               {
-    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL, RETRY, SKIP
     #                 rules: [
     #                   {
     #                     name: "RuleName", # required
@@ -3361,7 +3372,7 @@ module Aws::CodePipeline
     #           before_entry: {
     #             conditions: [ # required
     #               {
-    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL, RETRY, SKIP
     #                 rules: [
     #                   {
     #                     name: "RuleName", # required
@@ -3480,9 +3491,10 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
-    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
+    #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
-    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -3497,7 +3509,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].region #=> String
     #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.stages[0].on_success.conditions #=> Array
-    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_success.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -3512,7 +3524,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].region #=> String
     #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.stages[0].before_entry.conditions #=> Array
-    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules #=> Array
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].name #=> String
     #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
@@ -3588,7 +3600,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

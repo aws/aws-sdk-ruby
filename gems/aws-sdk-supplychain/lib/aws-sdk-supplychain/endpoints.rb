@@ -45,6 +45,17 @@ module Aws::SupplyChain
       end
     end
 
+    class CreateInstance
+      def self.build(context)
+        Aws::SupplyChain::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class DeleteDataIntegrationFlow
       def self.build(context)
         Aws::SupplyChain::EndpointParameters.new(
@@ -57,6 +68,17 @@ module Aws::SupplyChain
     end
 
     class DeleteDataLakeDataset
+      def self.build(context)
+        Aws::SupplyChain::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DeleteInstance
       def self.build(context)
         Aws::SupplyChain::EndpointParameters.new(
           region: context.config.region,
@@ -100,6 +122,17 @@ module Aws::SupplyChain
       end
     end
 
+    class GetInstance
+      def self.build(context)
+        Aws::SupplyChain::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class ListDataIntegrationFlows
       def self.build(context)
         Aws::SupplyChain::EndpointParameters.new(
@@ -112,6 +145,17 @@ module Aws::SupplyChain
     end
 
     class ListDataLakeDatasets
+      def self.build(context)
+        Aws::SupplyChain::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListInstances
       def self.build(context)
         Aws::SupplyChain::EndpointParameters.new(
           region: context.config.region,
@@ -178,6 +222,17 @@ module Aws::SupplyChain
     end
 
     class UpdateDataLakeDataset
+      def self.build(context)
+        Aws::SupplyChain::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class UpdateInstance
       def self.build(context)
         Aws::SupplyChain::EndpointParameters.new(
           region: context.config.region,
