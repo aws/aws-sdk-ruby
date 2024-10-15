@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-10-15)
+------------------
+
+* Feature - Amazon Q Business now supports embedding the Amazon Q Business web experience on third-party websites.
+
 1.18.0 (2024-09-24)
 ------------------
 

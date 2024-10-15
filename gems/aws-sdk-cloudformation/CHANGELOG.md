@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2024-10-15)
+------------------
+
+* Feature - Documentation update for AWS CloudFormation API Reference.
+
 1.120.0 (2024-09-24)
 ------------------
 

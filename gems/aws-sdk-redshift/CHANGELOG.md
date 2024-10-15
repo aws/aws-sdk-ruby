@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2024-10-15)
+------------------
+
+* Feature - This release launches the CreateIntegration, DeleteIntegration, DescribeIntegrations and ModifyIntegration APIs to create and manage Amazon Redshift Zero-ETL Integrations.
+
 1.126.0 (2024-10-07)
 ------------------
 

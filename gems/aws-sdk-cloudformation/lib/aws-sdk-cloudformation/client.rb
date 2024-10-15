@@ -463,20 +463,16 @@ module Aws::CloudFormation
     end
 
     # Activates a public third-party extension, making it available for use
-    # in stack templates. For more information, see [Using public
-    # extensions][1] in the *CloudFormation User Guide*.
-    #
-    # Once you have activated a public third-party extension in your account
-    # and Region, use [SetTypeConfiguration][2] to specify configuration
-    # properties for the extension. For more information, see [Configuring
-    # extensions at the account level][3] in the *CloudFormation User
-    # Guide*.
+    # in stack templates. Once you have activated a public third-party
+    # extension in your account and Region, use [SetTypeConfiguration][1] to
+    # specify configuration properties for the extension. For more
+    # information, see [Using public extensions][2] in the *CloudFormation
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html
     #
     # @option params [String] :type
     #   The extension type.
@@ -585,12 +581,12 @@ module Aws::CloudFormation
     # extensions, from the CloudFormation registry for the account and
     # Region.
     #
-    # For more information, see [Configuring extensions at the account
-    # level][1] in the *CloudFormation User Guide*.
+    # For more information, see [Edit configuration data for extensions in
+    # your account][1] in the *CloudFormation User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
     #
     # @option params [required, Array<Types::TypeConfigurationIdentifier>] :type_configuration_identifiers
     #   The list of identifiers for the desired extension configurations.
@@ -700,7 +696,7 @@ module Aws::CloudFormation
 
     # For a specified stack that's in the `UPDATE_ROLLBACK_FAILED` state,
     # continues rolling it back to the `UPDATE_ROLLBACK_COMPLETE` state.
-    # Depending on the cause of the failure, you can manually [ fix the
+    # Depending on the cause of the failure, you can manually [fix the
     # error][1] and continue the rollback. By continuing the rollback, you
     # can return your stack to a working state (the
     # `UPDATE_ROLLBACK_COMPLETE` state), and then try to update the stack
@@ -730,13 +726,13 @@ module Aws::CloudFormation
     #    </note>
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes to roll back the stack.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf. CloudFormation always uses this role for all future operations
-    #   on the stack. Provided that users have permission to operate on the
-    #   stack, CloudFormation uses this role even if the users don't have
-    #   permission to pass it. Ensure that the role grants least permission.
+    #   The Amazon Resource Name (ARN) of an IAM role that CloudFormation
+    #   assumes to roll back the stack. CloudFormation uses the role's
+    #   credentials to make calls on your behalf. CloudFormation always uses
+    #   this role for all future operations on the stack. Provided that users
+    #   have permission to operate on the stack, CloudFormation uses this role
+    #   even if the users don't have permission to pass it. Ensure that the
+    #   role grants least permission.
     #
     #   If you don't specify a value, CloudFormation uses the role that was
     #   previously associated with the stack. If no role is available,
@@ -777,8 +773,8 @@ module Aws::CloudFormation
     #
     #   <note markdown="1"> Don't confuse a child stack's name with its corresponding logical ID
     #   defined in the parent stack. For an example of a continue update
-    #   rollback operation with nested stacks, see [Using ResourcesToSkip to
-    #   recover a nested stacks hierarchy][2].
+    #   rollback operation with nested stacks, see [Continue rolling back from
+    #   failed nested stack updates][2].
     #
     #    </note>
     #
@@ -883,9 +879,8 @@ module Aws::CloudFormation
     #
     #     Some stack templates might include resources that can affect
     #     permissions in your Amazon Web Services account; for example, by
-    #     creating new Identity and Access Management (IAM) users. For those
-    #     stacks, you must explicitly acknowledge this by specifying one of
-    #     these capabilities.
+    #     creating new IAM users. For those stacks, you must explicitly
+    #     acknowledge this by specifying one of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -944,8 +939,8 @@ module Aws::CloudFormation
     #
     #      </note>
     #
-    #     For more information about macros, see [Using CloudFormation macros
-    #     to perform custom processing on templates][11].
+    #     For more information about macros, see [Perform custom processing on
+    #     CloudFormation templates with template macros][11].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -954,14 +949,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
     #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
@@ -973,11 +968,10 @@ module Aws::CloudFormation
     #
     #   If the list of resource types doesn't include a resource type that
     #   you're updating, the stack update fails. By default, CloudFormation
-    #   grants permissions to all resource types. Identity and Access
-    #   Management (IAM) uses this parameter for condition keys in IAM
-    #   policies for CloudFormation. For more information, see [Controlling
-    #   access with Identity and Access Management][1] in the *CloudFormation
-    #   User Guide*.
+    #   grants permissions to all resource types. IAM uses this parameter for
+    #   condition keys in IAM policies for CloudFormation. For more
+    #   information, see [Control access with Identity and Access
+    #   Management][1] in the *CloudFormation User Guide*.
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -989,13 +983,13 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes when executing the change set.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf. CloudFormation uses this role for all future operations on the
-    #   stack. Provided that users have permission to operate on the stack,
-    #   CloudFormation uses this role even if the users don't have permission
-    #   to pass it. Ensure that the role grants least permission.
+    #   The Amazon Resource Name (ARN) of an IAM role that CloudFormation
+    #   assumes when executing the change set. CloudFormation uses the role's
+    #   credentials to make calls on your behalf. CloudFormation uses this
+    #   role for all future operations on the stack. Provided that users have
+    #   permission to operate on the stack, CloudFormation uses this role even
+    #   if the users don't have permission to pass it. Ensure that the role
+    #   grants least permission.
     #
     #   If you don't specify a value, CloudFormation uses the role that was
     #   previously associated with the stack. If no role is available,
@@ -1008,9 +1002,9 @@ module Aws::CloudFormation
     #   period afterwards.
     #
     # @option params [Array<String>] :notification_arns
-    #   The Amazon Resource Names (ARNs) of Amazon Simple Notification Service
-    #   (Amazon SNS) topics that CloudFormation associates with the stack. To
-    #   remove all associated notification topics, specify an empty list.
+    #   The Amazon Resource Names (ARNs) of Amazon SNS topics that
+    #   CloudFormation associates with the stack. To remove all associated
+    #   notification topics, specify an empty list.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with this stack. CloudFormation also
@@ -1043,16 +1037,12 @@ module Aws::CloudFormation
     #
     #   If you create a change set for a new stack, CloudFormation creates a
     #   stack with a unique stack ID, but no template or resources. The stack
-    #   will be in the [REVIEW\_IN\_PROGRESS][1] state until you execute the
-    #   change set.
+    #   will be in the `REVIEW_IN_PROGRESS` state until you execute the change
+    #   set.
     #
     #   By default, CloudFormation specifies `UPDATE`. You can't use the
     #   `UPDATE` type to create a change set for a new stack or the `CREATE`
     #   type to create a change set for an existing stack.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
     #
     # @option params [Array<Types::ResourceToImport>] :resources_to_import
     #   The resources to import into your stack.
@@ -1097,8 +1087,9 @@ module Aws::CloudFormation
     #   templates. For more information, see [name type][1] in the
     #   *CloudFormation User Guide*. To import resources that do not accept
     #   custom names, such as EC2 instances, use the resource import feature
-    #   instead. For more information, see [Bringing existing resources into
-    #   CloudFormation management][2] in the *CloudFormation User Guide*.
+    #   instead. For more information, see [Import Amazon Web Services
+    #   resources into a CloudFormation stack with a resource import][2] in
+    #   the *CloudFormation User Guide*.
     #
     #    </note>
     #
@@ -1270,6 +1261,14 @@ module Aws::CloudFormation
     # successfully, the stack creation starts. You can check the status of
     # the stack through the DescribeStacks operation.
     #
+    # For more information about creating a stack and monitoring stack
+    # progress, see [Managing Amazon Web Services resources as a single unit
+    # with CloudFormation stacks][1] in the *CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
+    #
     # @option params [required, String] :stack_name
     #   The name that's associated with the stack. The name must be unique in
     #   the Region in which you are creating the stack.
@@ -1282,29 +1281,19 @@ module Aws::CloudFormation
     #
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes. For more information, go to
-    #   [Template anatomy][1] in the *CloudFormation User Guide*.
+    #   and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
-    #   bucket or a Systems Manager document. For more information, go to the
-    #   [Template anatomy][1] in the *CloudFormation User Guide*. The location
-    #   for an Amazon S3 bucket must start with `https://`.
+    #   bucket or a Systems Manager document. The location for an Amazon S3
+    #   bucket must start with `https://`.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   A list of `Parameter` structures that specify input parameters for the
@@ -1332,9 +1321,9 @@ module Aws::CloudFormation
     #   the stack will be rolled back.
     #
     # @option params [Array<String>] :notification_arns
-    #   The Amazon Simple Notification Service (Amazon SNS) topic ARNs to
-    #   publish stack related events. You can find your Amazon SNS topic ARNs
-    #   using the Amazon SNS console or your Command Line Interface (CLI).
+    #   The Amazon SNS topic ARNs to publish stack related events. You can
+    #   find your Amazon SNS topic ARNs using the Amazon SNS console or your
+    #   Command Line Interface (CLI).
     #
     # @option params [Array<String>] :capabilities
     #   In some cases, you must explicitly acknowledge that your stack
@@ -1345,9 +1334,8 @@ module Aws::CloudFormation
     #
     #     Some stack templates might include resources that can affect
     #     permissions in your Amazon Web Services account; for example, by
-    #     creating new Identity and Access Management (IAM) users. For those
-    #     stacks, you must explicitly acknowledge this by specifying one of
-    #     these capabilities.
+    #     creating new IAM users. For those stacks, you must explicitly
+    #     acknowledge this by specifying one of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -1378,8 +1366,8 @@ module Aws::CloudFormation
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
-    #     CloudFormation Templates][8].
+    #     For more information, see [Acknowledging IAM resources in
+    #     CloudFormation templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
     #
@@ -1408,8 +1396,8 @@ module Aws::CloudFormation
     #     can update the function operation without CloudFormation being
     #     notified.
     #
-    #     For more information, see [Using CloudFormation macros to perform
-    #     custom processing on templates][11].
+    #     For more information, see [Perform custom processing on
+    #     CloudFormation templates with template macros][11].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -1418,14 +1406,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
     #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
@@ -1443,10 +1431,10 @@ module Aws::CloudFormation
     #
     #   If the list of resource types doesn't include a resource that you're
     #   creating, the stack creation fails. By default, CloudFormation grants
-    #   permissions to all resource types. Identity and Access Management
-    #   (IAM) uses this parameter for CloudFormation-specific condition keys
-    #   in IAM policies. For more information, see [Controlling Access with
-    #   Identity and Access Management][1].
+    #   permissions to all resource types. IAM uses this parameter for
+    #   CloudFormation-specific condition keys in IAM policies. For more
+    #   information, see [Control access with Identity and Access
+    #   Management][1].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -1458,13 +1446,13 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes to create the stack.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf. CloudFormation always uses this role for all future operations
-    #   on the stack. Provided that users have permission to operate on the
-    #   stack, CloudFormation uses this role even if the users don't have
-    #   permission to pass it. Ensure that the role grants least privilege.
+    #   The Amazon Resource Name (ARN) of an IAM role that CloudFormation
+    #   assumes to create the stack. CloudFormation uses the role's
+    #   credentials to make calls on your behalf. CloudFormation always uses
+    #   this role for all future operations on the stack. Provided that users
+    #   have permission to operate on the stack, CloudFormation uses this role
+    #   even if the users don't have permission to pass it. Ensure that the
+    #   role grants least privilege.
     #
     #   If you don't specify a value, CloudFormation uses the role that was
     #   previously associated with the stack. If no role is available,
@@ -1479,9 +1467,9 @@ module Aws::CloudFormation
     #   Default: `ROLLBACK`
     #
     # @option params [String] :stack_policy_body
-    #   Structure containing the stack policy body. For more information, go
-    #   to [ Prevent Updates to Stack Resources][1] in the *CloudFormation
-    #   User Guide*. You can specify either the `StackPolicyBody` or the
+    #   Structure containing the stack policy body. For more information, see
+    #   [Prevent updates to stack resources][1] in the *CloudFormation User
+    #   Guide*. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
     #
@@ -1525,9 +1513,9 @@ module Aws::CloudFormation
     #   Whether to enable termination protection on the specified stack. If a
     #   user attempts to delete a stack with termination protection enabled,
     #   the operation fails and the stack remains unchanged. For more
-    #   information, see [Protecting a Stack From Being Deleted][1] in the
-    #   *CloudFormation User Guide*. Termination protection is deactivated on
-    #   stacks by default.
+    #   information, see [Protect CloudFormation stacks from being deleted][1]
+    #   in the *CloudFormation User Guide*. Termination protection is
+    #   deactivated on stacks by default.
     #
     #   For [nested stacks][2], termination protection is set on the root
     #   stack and can't be changed directly on the nested stack.
@@ -1778,29 +1766,18 @@ module Aws::CloudFormation
     #
     # @option params [String] :template_body
     #   The structure that contains the template body, with a minimum length
-    #   of 1 byte and a maximum length of 51,200 bytes. For more information,
-    #   see [Template Anatomy][1] in the *CloudFormation User Guide*.
+    #   of 1 byte and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [String] :template_url
     #   The location of the file that contains the template body. The URL must
     #   point to a template (maximum size: 460,800 bytes) that's located in
-    #   an Amazon S3 bucket or a Systems Manager document. For more
-    #   information, see [Template Anatomy][1] in the *CloudFormation User
-    #   Guide*.
+    #   an Amazon S3 bucket or a Systems Manager document.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [String] :stack_id
     #   The stack ID you are importing into a new stack set. Specify the
@@ -1818,9 +1795,8 @@ module Aws::CloudFormation
     #
     #     Some stack templates might include resources that can affect
     #     permissions in your Amazon Web Services account; for example, by
-    #     creating new Identity and Access Management (IAM) users. For those
-    #     stack sets, you must explicitly acknowledge this by specifying one
-    #     of these capabilities.
+    #     creating new IAM users. For those stack sets, you must explicitly
+    #     acknowledge this by specifying one of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -1851,8 +1827,8 @@ module Aws::CloudFormation
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
-    #     CloudFormation Templates][8].
+    #     For more information, see [Acknowledging IAM resources in
+    #     CloudFormation templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
     #
@@ -1874,14 +1850,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
     #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
@@ -2174,6 +2150,13 @@ module Aws::CloudFormation
     # deletion starts. Deleted stacks don't show up in the DescribeStacks
     # operation if the deletion has been completed successfully.
     #
+    # For more information about deleting a stack, see [Delete a stack from
+    # the CloudFormation console][1] in the *CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-delete-stack.html
+    #
     # @option params [required, String] :stack_name
     #   The name or the unique stack ID that's associated with the stack.
     #
@@ -2187,10 +2170,9 @@ module Aws::CloudFormation
     #   as a non-empty S3 bucket, but you want to delete the stack.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes to delete the stack.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf.
+    #   The Amazon Resource Name (ARN) of an IAM role that CloudFormation
+    #   assumes to delete the stack. CloudFormation uses the role's
+    #   credentials to make calls on your behalf.
     #
     #   If you don't specify a value, CloudFormation uses the role that was
     #   previously associated with the stack. If no role is available,
@@ -2283,7 +2265,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
     #
     # @option params [String] :operation_id
     #   The unique identifier for this stack set operation.
@@ -2481,8 +2463,8 @@ module Aws::CloudFormation
 
     # Retrieves your account's CloudFormation limits, such as the maximum
     # number of stacks that you can create in your account. For more
-    # information about account limits, see [CloudFormation Quotas][1] in
-    # the *CloudFormation User Guide*.
+    # information about account limits, see [Understand CloudFormation
+    # quotas][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -2523,8 +2505,8 @@ module Aws::CloudFormation
 
     # Returns the inputs for the change set and a list of changes that
     # CloudFormation will make if you execute the change set. For more
-    # information, see [Updating Stacks Using Change Sets][1] in the
-    # *CloudFormation User Guide*.
+    # information, see [Update CloudFormation stacks using change sets][1]
+    # in the *CloudFormation User Guide*.
     #
     #
     #
@@ -2879,7 +2861,7 @@ module Aws::CloudFormation
     # * [RegisterPublisher][1]
     #
     # * [Publishing extensions to make them available for public use][2] in
-    #   the *CloudFormation CLI User Guide*
+    #   the *CloudFormation Command Line Interface (CLI) User Guide*
     #
     #
     #
@@ -3068,8 +3050,9 @@ module Aws::CloudFormation
     # configuration, as defined in the stack template and any values
     # specified as template parameters. A stack is considered to have
     # drifted if one or more of its resources have drifted. For more
-    # information about stack and resource drift, see [Detecting Unregulated
-    # Configuration Changes to Stacks and Resources][1].
+    # information about stack and resource drift, see [Detect unmanaged
+    # configuration changes to stacks and resources with drift
+    # detection][1].
     #
     # Use DetectStackDrift to initiate a stack drift detection operation.
     # `DetectStackDrift` returns a `StackDriftDetectionId` you can use to
@@ -3127,8 +3110,8 @@ module Aws::CloudFormation
 
     # Returns all stack related events for a specified stack in reverse
     # chronological order. For more information about a stack's event
-    # history, see [CloudFormation stack creation events][1] in the
-    # *CloudFormation User Guide*.
+    # history, see [Understand CloudFormation stack creation events][1] in
+    # the *CloudFormation User Guide*.
     #
     # <note markdown="1"> You can list events for stacks that have failed to create or have been
     # deleted by specifying the unique stack identifier (stack ID).
@@ -3348,7 +3331,7 @@ module Aws::CloudFormation
     # haven't yet been checked for drift aren't included. Resources that
     # don't currently support drift detection aren't checked, and so not
     # included. For a list of resources that support drift detection, see
-    # [Resources that Support Drift Detection][1].
+    # [Resource type support for imports and drift detection][1].
     #
     # Use DetectStackResourceDrift to detect drift on individual resources,
     # or DetectStackDrift to detect drift on all supported resources for a
@@ -3356,7 +3339,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
     #
     # @option params [required, String] :stack_name
     #   The name of the stack for which you want drift information.
@@ -3451,8 +3434,8 @@ module Aws::CloudFormation
     # You must specify either `StackName` or `PhysicalResourceId`, but not
     # both. In addition, you can specify `LogicalResourceId` to filter the
     # returned result. For more information about resources, the
-    # `LogicalResourceId` and `PhysicalResourceId`, go to the
-    # [CloudFormation User Guide][1].
+    # `LogicalResourceId` and `PhysicalResourceId`, see the [CloudFormation
+    # User Guide][1].
     #
     # <note markdown="1"> A `ValidationError` is returned if you specify both `StackName` and
     # `PhysicalResourceId` in the same request.
@@ -3708,8 +3691,8 @@ module Aws::CloudFormation
 
     # Returns the description for the specified stack; if no stack name was
     # specified, then it returns the description for all the stacks created.
-    # For more information about a stack's event history, see
-    # [CloudFormation stack creation events][1] in the *CloudFormation User
+    # For more information about a stack's event history, see [Understand
+    # CloudFormation stack creation events][1] in the *CloudFormation User
     # Guide*.
     #
     # <note markdown="1"> If the stack doesn't exist, a `ValidationError` is returned.
@@ -4017,15 +4000,16 @@ module Aws::CloudFormation
     # template configuration. Only resource properties explicitly defined in
     # the stack template are checked for drift. A stack is considered to
     # have drifted if one or more of its resources differ from their
-    # expected template configurations. For more information, see [Detecting
-    # Unregulated Configuration Changes to Stacks and Resources][1].
+    # expected template configurations. For more information, see [Detect
+    # unmanaged configuration changes to stacks and resources with drift
+    # detection][1].
     #
     # Use `DetectStackDrift` to detect drift on all supported resources for
     # a given stack, or DetectStackResourceDrift to detect drift on
     # individual resources.
     #
     # For a list of stack resources that currently support drift detection,
-    # see [Resources that Support Drift Detection][2].
+    # see [Resource type support for imports and drift detection][2].
     #
     # `DetectStackDrift` can take up to several minutes, depending on the
     # number of resources contained within the stack. Use
@@ -4041,7 +4025,7 @@ module Aws::CloudFormation
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
     #
     # @option params [required, String] :stack_name
     #   The name of the stack for which you want to detect drift.
@@ -4080,8 +4064,8 @@ module Aws::CloudFormation
     # resources in which CloudFormation detects drift. Only resource
     # properties explicitly defined in the stack template are checked for
     # drift. For more information about stack and resource drift, see
-    # [Detecting Unregulated Configuration Changes to Stacks and
-    # Resources][1].
+    # [Detect unmanaged configuration changes to stacks and resources with
+    # drift detection][1].
     #
     # Use `DetectStackResourceDrift` to detect drift on individual
     # resources, or DetectStackDrift to detect drift on all resources in a
@@ -4089,12 +4073,12 @@ module Aws::CloudFormation
     #
     # Resources that don't currently support drift detection can't be
     # checked. For a list of resources that support drift detection, see
-    # [Resources that Support Drift Detection][2].
+    # [Resource type support for imports and drift detection][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
     #
     # @option params [required, String] :stack_name
     #   The name of the stack to which the resource belongs.
@@ -4199,7 +4183,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
     #
     # @option params [String] :operation_id
     #   *The ID of the stack set operation.*
@@ -4269,29 +4253,19 @@ module Aws::CloudFormation
     #
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes. (For more information, go to
-    #   [Template Anatomy][1] in the *CloudFormation User Guide*.)
+    #   and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must pass `TemplateBody` or `TemplateURL`. If both
     #   are passed, only `TemplateBody` is used.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
-    #
     # @option params [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template that's located in an Amazon S3 bucket or a Systems Manager
-    #   document. For more information, go to [Template Anatomy][1] in the
-    #   *CloudFormation User Guide*. The location for an Amazon S3 bucket must
-    #   start with `https://`.
+    #   document. The location for an Amazon S3 bucket must start with
+    #   `https://`.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   A list of `Parameter` structures that specify input parameters.
@@ -4595,31 +4569,19 @@ module Aws::CloudFormation
     #
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes. For more information about
-    #   templates, see [Template anatomy][1] in the *CloudFormation User
-    #   Guide*.
+    #   and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
-    #   bucket or a Systems Manager document. For more information about
-    #   templates, see [Template anatomy][1] in the *CloudFormation User
-    #   Guide*. The location for an Amazon S3 bucket must start with
-    #   `https://`.
+    #   bucket or a Systems Manager document. The location for an Amazon S3
+    #   bucket must start with `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [String] :stack_name
     #   The name or the stack ID that's associated with the stack, which
@@ -4760,7 +4722,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
     #
     # @option params [String] :operation_id
     #   A unique, user defined, identifier for the stack set operation.
@@ -4871,8 +4833,8 @@ module Aws::CloudFormation
     # values that you can import into other stacks. To import values, use
     # the [ Fn::ImportValue][1] function.
     #
-    # For more information, see [ CloudFormation export stack output
-    # values][2].
+    # For more information, see [Get exported outputs from a deployed
+    # CloudFormation stack][2].
     #
     #
     #
@@ -6360,7 +6322,8 @@ module Aws::CloudFormation
     # public extension in this Region. Public extensions are available for
     # use by all CloudFormation users. For more information about publishing
     # extensions, see [Publishing extensions to make them available for
-    # public use][1] in the *CloudFormation CLI User Guide*.
+    # public use][1] in the *CloudFormation Command Line Interface (CLI)
+    # User Guide*.
     #
     # To publish an extension, you must be registered as a publisher with
     # CloudFormation. For more information, see [RegisterPublisher][2].
@@ -6519,8 +6482,9 @@ module Aws::CloudFormation
     # all Amazon Web Services Regions.
     #
     # For information about requirements for registering as a public
-    # extension publisher, see [Registering your account to publish
-    # CloudFormation extensions][1] in the *CloudFormation CLI User Guide*.
+    # extension publisher, see [Prerequisite: Registering your account to
+    # publish CloudFormation extensions][1] in the *CloudFormation Command
+    # Line Interface (CLI) User Guide*.
     #
     #
     #
@@ -6545,8 +6509,9 @@ module Aws::CloudFormation
     #   verification, the Amazon Resource Name (ARN) for your connection to
     #   that account.
     #
-    #   For more information, see [Registering your account to publish
-    #   CloudFormation extensions][1] in the *CloudFormation CLI User Guide*.
+    #   For more information, see [Prerequisite: Registering your account to
+    #   publish CloudFormation extensions][1] in the *CloudFormation Command
+    #   Line Interface (CLI) User Guide*.
     #
     #
     #
@@ -6588,8 +6553,9 @@ module Aws::CloudFormation
     # * Making the extension available for use in your account.
     #
     # For more information about how to develop extensions and ready them
-    # for registration, see [Creating Resource Providers][1] in the
-    # *CloudFormation CLI User Guide*.
+    # for registration, see [Creating resource types using the
+    # CloudFormation CLI][1] in the *CloudFormation Command Line Interface
+    # (CLI) User Guide*.
     #
     # You can have a maximum of 50 resource extension versions registered at
     # a time. This maximum is per account and per Region. Use
@@ -6602,16 +6568,16 @@ module Aws::CloudFormation
     #
     # Once you have registered a private extension in your account and
     # Region, use [SetTypeConfiguration][3] to specify configuration
-    # properties for the extension. For more information, see [Configuring
-    # extensions at the account level][4] in the *CloudFormation User
-    # Guide*.
+    # properties for the extension. For more information, see [Edit
+    # configuration data for extensions in your account][4] in the
+    # *CloudFormation User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
     # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html
     # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    # [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
+    # [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
     #
     # @option params [String] :type
     #   The kind of extension.
@@ -6621,11 +6587,11 @@ module Aws::CloudFormation
     #
     #   We suggest that extension names adhere to the following patterns:
     #
-    #   * For resource types, *company\_or\_organization*::*service*::*type*.
+    #   * For resource types, `company_or_organization::service::type`.
     #
-    #   * For modules, *company\_or\_organization*::*service*::*type*::MODULE.
+    #   * For modules, `company_or_organization::service::type::MODULE`.
     #
-    #   * For hooks, *MyCompany*::*Testing*::*MyTestHook*.
+    #   * For hooks, `MyCompany::Testing::MyTestHook`.
     #
     #   <note markdown="1"> The following organization namespaces are reserved and can't be used
     #   in your extension names:
@@ -6650,7 +6616,7 @@ module Aws::CloudFormation
     #
     #   For information about generating a schema handler package for the
     #   extension you want to register, see [submit][1] in the *CloudFormation
-    #   CLI User Guide*.
+    #   Command Line Interface (CLI) User Guide*.
     #
     #   <note markdown="1"> The user registering the extension must be able to access the package
     #   in the S3 bucket. That's, the user needs to have [GetObject][2]
@@ -6757,8 +6723,8 @@ module Aws::CloudFormation
     #   The name that's associated with the stack.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   role that CloudFormation assumes to rollback the stack.
+    #   The Amazon Resource Name (ARN) of an IAM role that CloudFormation
+    #   assumes to rollback the stack.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `RollbackStack` request.
@@ -6802,9 +6768,9 @@ module Aws::CloudFormation
     #   The name or unique stack ID that you want to associate a policy with.
     #
     # @option params [String] :stack_policy_body
-    #   Structure containing the stack policy body. For more information, go
-    #   to [ Prevent updates to stack resources][1] in the *CloudFormation
-    #   User Guide*. You can specify either the `StackPolicyBody` or the
+    #   Structure containing the stack policy body. For more information, see
+    #   [Prevent updates to stack resources][1] in the *CloudFormation User
+    #   Guide*. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
     #
@@ -6842,19 +6808,20 @@ module Aws::CloudFormation
     #
     # To view the current configuration data for an extension, refer to the
     # `ConfigurationSchema` element of [DescribeType][1]. For more
-    # information, see [Configuring extensions at the account level][2] in
-    # the *CloudFormation User Guide*.
+    # information, see [Edit configuration data for extensions in your
+    # account][2] in the *CloudFormation User Guide*.
     #
     # It's strongly recommended that you use dynamic references to restrict
     # sensitive configuration definitions, such as third-party credentials.
-    # For more details on dynamic references, see [Using dynamic references
-    # to specify template values][3] in the *CloudFormation User Guide*.
+    # For more details on dynamic references, see [Specify values stored in
+    # other services using dynamic references][3] in the *CloudFormation
+    # User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
-    # [3]: https://docs.aws.amazon.com/
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
+    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html
     #
     # @option params [String] :type_arn
     #   The Amazon Resource Name (ARN) for the extension, in this account and
@@ -6879,9 +6846,9 @@ module Aws::CloudFormation
     #
     #   The configuration data must be formatted as JSON, and validate against
     #   the schema returned in the `ConfigurationSchema` response element of
-    #   [DescribeType][1]. For more information, see [Defining account-level
-    #   configuration data for an extension][2] in the *CloudFormation CLI
-    #   User Guide*.
+    #   [DescribeType][1]. For more information, see [Defining the
+    #   account-level configuration of an extension][2] in the *CloudFormation
+    #   Command Line Interface (CLI) User Guide*.
     #
     #
     #
@@ -7130,8 +7097,9 @@ module Aws::CloudFormation
     # * For modules, this includes determining if the module's model meets
     #   all necessary requirements.
     #
-    # For more information, see [Testing your public extension prior to
-    # publishing][1] in the *CloudFormation CLI User Guide*.
+    # For more information, see [Testing your public extension before
+    # publishing][1] in the *CloudFormation Command Line Interface (CLI)
+    # User Guide*.
     #
     # If you don't specify a version, CloudFormation uses the default
     # version of the extension in your account and Region for testing.
@@ -7147,8 +7115,8 @@ module Aws::CloudFormation
     #
     # An extension must have a test status of `PASSED` before it can be
     # published. For more information, see [Publishing extensions to make
-    # them available for public use][4] in the *CloudFormation CLI User
-    # Guide*.
+    # them available for public use][4] in the *CloudFormation Command Line
+    # Interface (CLI) User Guide*.
     #
     #
     #
@@ -7198,8 +7166,7 @@ module Aws::CloudFormation
     #   * `PutObject`
     #
     #   For more information, see [Actions, Resources, and Condition Keys for
-    #   Amazon S3][1] in the *Amazon Web Services Identity and Access
-    #   Management User Guide*.
+    #   Amazon S3][1] in the *Identity and Access Management User Guide*.
     #
     #
     #
@@ -7367,44 +7334,35 @@ module Aws::CloudFormation
     # To get a copy of the template for an existing stack, you can use the
     # GetTemplate action.
     #
-    # For more information about creating an update template, updating a
-    # stack, and monitoring the progress of the update, see [Updating a
-    # Stack][1].
+    # For more information about updating a stack and monitoring the
+    # progress of the update, see [Managing Amazon Web Services resources as
+    # a single unit with CloudFormation stacks][1] in the *CloudFormation
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
     #
     # @option params [required, String] :stack_name
     #   The name or unique stack ID of the stack to update.
     #
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes. (For more information, go to
-    #   [Template Anatomy][1] in the *CloudFormation User Guide*.)
+    #   and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
     #   `true`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template that's located in an Amazon S3 bucket or a Systems Manager
-    #   document. For more information, go to [Template Anatomy][1] in the
-    #   *CloudFormation User Guide*. The location for an Amazon S3 bucket must
-    #   start with `https://`.
+    #   document. The location for an Amazon S3 bucket must start with
+    #   `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
     #   `true`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [Boolean] :use_previous_template
     #   Reuse the existing template that is associated with the stack that you
@@ -7453,10 +7411,9 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your Amazon Web Services account; for example, by
-    #     creating new Identity and Access Management (IAM) users. For those
-    #     stacks, you must explicitly acknowledge this by specifying one of
-    #     these capabilities.
+    #     permissions in your Amazon Web Services account, for example, by
+    #     creating new IAM users. For those stacks, you must explicitly
+    #     acknowledge this by specifying one of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -7487,8 +7444,8 @@ module Aws::CloudFormation
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
-    #     CloudFormation Templates][8].
+    #     For more information, see [Acknowledging IAM resources in
+    #     CloudFormation templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
     #
@@ -7517,8 +7474,8 @@ module Aws::CloudFormation
     #     can update the function operation without CloudFormation being
     #     notified.
     #
-    #     For more information, see [Using CloudFormation Macros to Perform
-    #     Custom Processing on Templates][11].
+    #     For more information, see [Perform custom processing on
+    #     CloudFormation templates with template macros][11].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -7527,14 +7484,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
     #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
@@ -7546,10 +7503,10 @@ module Aws::CloudFormation
     #
     #   If the list of resource types doesn't include a resource that you're
     #   updating, the stack update fails. By default, CloudFormation grants
-    #   permissions to all resource types. Identity and Access Management
-    #   (IAM) uses this parameter for CloudFormation-specific condition keys
-    #   in IAM policies. For more information, see [Controlling Access with
-    #   Identity and Access Management][1].
+    #   permissions to all resource types. IAM uses this parameter for
+    #   CloudFormation-specific condition keys in IAM policies. For more
+    #   information, see [Control access with Identity and Access
+    #   Management][1].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -7561,13 +7518,13 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes to update the stack.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf. CloudFormation always uses this role for all future operations
-    #   on the stack. Provided that users have permission to operate on the
-    #   stack, CloudFormation uses this role even if the users don't have
-    #   permission to pass it. Ensure that the role grants least privilege.
+    #   The Amazon Resource Name (ARN) of an IAM role that CloudFormation
+    #   assumes to update the stack. CloudFormation uses the role's
+    #   credentials to make calls on your behalf. CloudFormation always uses
+    #   this role for all future operations on the stack. Provided that users
+    #   have permission to operate on the stack, CloudFormation uses this role
+    #   even if the users don't have permission to pass it. Ensure that the
+    #   role grants least privilege.
     #
     #   If you don't specify a value, CloudFormation uses the role that was
     #   previously associated with the stack. If no role is available,
@@ -7910,29 +7867,18 @@ module Aws::CloudFormation
     #
     # @option params [String] :template_body
     #   The structure that contains the template body, with a minimum length
-    #   of 1 byte and a maximum length of 51,200 bytes. For more information,
-    #   see [Template Anatomy][1] in the *CloudFormation User Guide*.
+    #   of 1 byte and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to true.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [String] :template_url
     #   The location of the file that contains the template body. The URL must
     #   point to a template (maximum size: 460,800 bytes) that is located in
-    #   an Amazon S3 bucket or a Systems Manager document. For more
-    #   information, see [Template Anatomy][1] in the *CloudFormation User
-    #   Guide*.
+    #   an Amazon S3 bucket or a Systems Manager document.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to true.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [Boolean] :use_previous_template
     #   Use the existing template that's associated with the stack set that
@@ -7952,10 +7898,9 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your Amazon Web Services account; for example, by
-    #     creating new Identity and Access Management (IAM) users. For those
-    #     stacks sets, you must explicitly acknowledge this by specifying one
-    #     of these capabilities.
+    #     permissions in your Amazon Web Services account, for example, by
+    #     creating new IAM users. For those stacks sets, you must explicitly
+    #     acknowledge this by specifying one of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -7986,8 +7931,8 @@ module Aws::CloudFormation
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
-    #     CloudFormation Templates][8].
+    #     For more information, see [Acknowledging IAM resources in
+    #     CloudFormation templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
     #
@@ -8009,14 +7954,14 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
     #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
-    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
     #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
@@ -8288,8 +8233,8 @@ module Aws::CloudFormation
     # Updates termination protection for the specified stack. If a user
     # attempts to delete a stack with termination protection enabled, the
     # operation fails and the stack remains unchanged. For more information,
-    # see [Protecting a Stack From Being Deleted][1] in the *CloudFormation
-    # User Guide*.
+    # see [Protect a CloudFormation stack from being deleted][1] in the
+    # *CloudFormation User Guide*.
     #
     # For [nested stacks][2], termination protection is set on the root
     # stack and can't be changed directly on the nested stack.
@@ -8337,29 +8282,19 @@ module Aws::CloudFormation
     #
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
-    #   and a maximum length of 51,200 bytes. For more information, go to
-    #   [Template Anatomy][1] in the *CloudFormation User Guide*.
+    #   and a maximum length of 51,200 bytes.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @option params [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that is located in an Amazon S3
-    #   bucket or a Systems Manager document. For more information, go to
-    #   [Template Anatomy][1] in the *CloudFormation User Guide*. The location
-    #   for an Amazon S3 bucket must start with `https://`.
+    #   bucket or a Systems Manager document. The location for an Amazon S3
+    #   bucket must start with `https://`.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
     # @return [Types::ValidateTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8417,7 +8352,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

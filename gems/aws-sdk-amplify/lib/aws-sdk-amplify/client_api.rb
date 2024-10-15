@@ -181,6 +181,7 @@ module Aws::Amplify
     ServiceRoleArn = Shapes::StringShape.new(name: 'ServiceRoleArn')
     Source = Shapes::StringShape.new(name: 'Source')
     SourceUrl = Shapes::StringShape.new(name: 'SourceUrl')
+    SourceUrlType = Shapes::StringShape.new(name: 'SourceUrlType')
     StackArn = Shapes::StringShape.new(name: 'StackArn')
     StackName = Shapes::StringShape.new(name: 'StackName')
     Stage = Shapes::StringShape.new(name: 'Stage')
@@ -588,6 +589,8 @@ module Aws::Amplify
     JobSummary.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "status"))
     JobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "endTime"))
     JobSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "jobType"))
+    JobSummary.add_member(:source_url, Shapes::ShapeRef.new(shape: SourceUrl, location_name: "sourceUrl"))
+    JobSummary.add_member(:source_url_type, Shapes::ShapeRef.new(shape: SourceUrlType, location_name: "sourceUrlType"))
     JobSummary.struct_class = Types::JobSummary
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -685,6 +688,7 @@ module Aws::Amplify
     StartDeploymentRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location: "uri", location_name: "branchName"))
     StartDeploymentRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     StartDeploymentRequest.add_member(:source_url, Shapes::ShapeRef.new(shape: SourceUrl, location_name: "sourceUrl"))
+    StartDeploymentRequest.add_member(:source_url_type, Shapes::ShapeRef.new(shape: SourceUrlType, location_name: "sourceUrlType"))
     StartDeploymentRequest.struct_class = Types::StartDeploymentRequest
 
     StartDeploymentResult.add_member(:job_summary, Shapes::ShapeRef.new(shape: JobSummary, required: true, location_name: "jobSummary"))

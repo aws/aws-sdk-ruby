@@ -1534,6 +1534,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @!attribute [rw] image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #   @return [String]
@@ -1566,6 +1570,7 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :proxy_configuration,
       :image_id,
       :fleet_service_role,
       :tags)
@@ -2546,6 +2551,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @!attribute [rw] image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #   @return [String]
@@ -2583,9 +2592,34 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :proxy_configuration,
       :image_id,
       :fleet_service_role,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the proxy rule for your reserved capacity instances.
+    #
+    # @!attribute [rw] type
+    #   The type of proxy rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The behavior of the proxy rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   The destination of the proxy rule.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/FleetProxyRule AWS API Documentation
+    #
+    class FleetProxyRule < Struct.new(
+      :type,
+      :effect,
+      :entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4864,6 +4898,28 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about the proxy configurations that apply network access
+    # control to your reserved capacity instances.
+    #
+    # @!attribute [rw] default_behavior
+    #   The default behavior of outgoing traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordered_proxy_rules
+    #   An array of `FleetProxyRule` objects that represent the specified
+    #   destination domains or IPs to allow or deny network access control
+    #   to.
+    #   @return [Array<Types::FleetProxyRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProxyConfiguration AWS API Documentation
+    #
+    class ProxyConfiguration < Struct.new(
+      :default_behavior,
+      :ordered_proxy_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] policy
     #   A JSON-formatted resource policy. For more information, see [Sharing
     #   a Project][1] and [Sharing a Report Group][2] in the *CodeBuild User
@@ -6537,6 +6593,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @!attribute [rw] image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #   @return [String]
@@ -6569,6 +6629,7 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :proxy_configuration,
       :image_id,
       :fleet_service_role,
       :tags)

@@ -584,6 +584,7 @@ module Aws::SESV2
     #     delivery_options: {
     #       tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #       sending_pool_name: "PoolName",
+    #       max_delivery_seconds: 1,
     #     },
     #     reputation_options: {
     #       reputation_metrics_enabled: false,
@@ -1767,6 +1768,7 @@ module Aws::SESV2
     #   resp.tracking_options.https_policy #=> String, one of "REQUIRE", "REQUIRE_OPEN_ONLY", "OPTIONAL"
     #   resp.delivery_options.tls_policy #=> String, one of "REQUIRE", "OPTIONAL"
     #   resp.delivery_options.sending_pool_name #=> String
+    #   resp.delivery_options.max_delivery_seconds #=> Integer
     #   resp.reputation_options.reputation_metrics_enabled #=> Boolean
     #   resp.reputation_options.last_fresh_start #=> Time
     #   resp.sending_options.sending_enabled #=> Boolean
@@ -3753,6 +3755,12 @@ module Aws::SESV2
     #   The name of the dedicated IP pool to associate with the configuration
     #   set.
     #
+    # @option params [Integer] :max_delivery_seconds
+    #   The maximum amount of time, in seconds, that Amazon SES API v2 will
+    #   attempt delivery of email. If specified, the value must greater than
+    #   or equal to 300 seconds (5 minutes) and less than or equal to 50400
+    #   seconds (840 minutes).
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3761,6 +3769,7 @@ module Aws::SESV2
     #     configuration_set_name: "ConfigurationSetName", # required
     #     tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #     sending_pool_name: "SendingPoolName",
+    #     max_delivery_seconds: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetDeliveryOptions AWS API Documentation
@@ -5176,7 +5185,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

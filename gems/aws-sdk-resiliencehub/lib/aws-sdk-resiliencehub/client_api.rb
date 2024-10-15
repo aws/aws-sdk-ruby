@@ -143,6 +143,8 @@ module Aws::ResilienceHub
     EntityName255 = Shapes::StringShape.new(name: 'EntityName255')
     EntityNameList = Shapes::ListShape.new(name: 'EntityNameList')
     EntityVersion = Shapes::StringShape.new(name: 'EntityVersion')
+    ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
+    ErrorDetailList = Shapes::ListShape.new(name: 'ErrorDetailList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EstimatedCostTier = Shapes::StringShape.new(name: 'EstimatedCostTier')
     EventSubscription = Shapes::StructureShape.new(name: 'EventSubscription')
@@ -372,6 +374,7 @@ module Aws::ResilienceHub
 
     App.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     App.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
+    App.add_member(:aws_application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "awsApplicationArn"))
     App.add_member(:compliance_status, Shapes::ShapeRef.new(shape: AppComplianceStatusType, location_name: "complianceStatus"))
     App.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "creationTime"))
     App.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
@@ -459,6 +462,7 @@ module Aws::ResilienceHub
 
     AppSummary.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     AppSummary.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
+    AppSummary.add_member(:aws_application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "awsApplicationArn"))
     AppSummary.add_member(:compliance_status, Shapes::ShapeRef.new(shape: AppComplianceStatusType, location_name: "complianceStatus"))
     AppSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "creationTime"))
     AppSummary.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
@@ -519,7 +523,7 @@ module Aws::ResilienceHub
     BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "entryId"))
     BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:exclude_reason, Shapes::ShapeRef.new(shape: ExcludeRecommendationReason, location_name: "excludeReason"))
     BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:excluded, Shapes::ShapeRef.new(shape: BooleanOptional, required: true, location_name: "excluded"))
-    BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:item, Shapes::ShapeRef.new(shape: UpdateRecommendationStatusItem, required: true, location_name: "item"))
+    BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:item, Shapes::ShapeRef.new(shape: UpdateRecommendationStatusItem, location_name: "item"))
     BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:reference_id, Shapes::ShapeRef.new(shape: SpecReferenceId, required: true, location_name: "referenceId"))
     BatchUpdateRecommendationStatusSuccessfulEntry.struct_class = Types::BatchUpdateRecommendationStatusSuccessfulEntry
 
@@ -571,6 +575,7 @@ module Aws::ResilienceHub
     Cost.struct_class = Types::Cost
 
     CreateAppRequest.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
+    CreateAppRequest.add_member(:aws_application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "awsApplicationArn"))
     CreateAppRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAppRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     CreateAppRequest.add_member(:event_subscriptions, Shapes::ShapeRef.new(shape: EventSubscriptionList, location_name: "eventSubscriptions"))
@@ -775,6 +780,7 @@ module Aws::ResilienceHub
 
     DescribeDraftAppVersionResourcesImportStatusResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     DescribeDraftAppVersionResourcesImportStatusResponse.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
+    DescribeDraftAppVersionResourcesImportStatusResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetailList, location_name: "errorDetails"))
     DescribeDraftAppVersionResourcesImportStatusResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String500, location_name: "errorMessage"))
     DescribeDraftAppVersionResourcesImportStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourceImportStatusType, required: true, location_name: "status"))
     DescribeDraftAppVersionResourcesImportStatusResponse.add_member(:status_change_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "statusChangeTime"))
@@ -826,6 +832,11 @@ module Aws::ResilienceHub
     EksSourceList.member = Shapes::ShapeRef.new(shape: EksSource)
 
     EntityNameList.member = Shapes::ShapeRef.new(shape: EntityName)
+
+    ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    ErrorDetail.struct_class = Types::ErrorDetail
+
+    ErrorDetailList.member = Shapes::ShapeRef.new(shape: ErrorDetail)
 
     EventSubscription.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "eventType"))
     EventSubscription.add_member(:name, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "name"))
@@ -1006,6 +1017,7 @@ module Aws::ResilienceHub
     ListAppVersionsResponse.struct_class = Types::ListAppVersionsResponse
 
     ListAppsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "appArn"))
+    ListAppsRequest.add_member(:aws_application_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "awsApplicationArn"))
     ListAppsRequest.add_member(:from_last_assessment_time, Shapes::ShapeRef.new(shape: TimeStamp, location: "querystring", location_name: "fromLastAssessmentTime"))
     ListAppsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAppsRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location: "querystring", location_name: "name"))
@@ -1444,7 +1456,7 @@ module Aws::ResilienceHub
     UpdateRecommendationStatusRequestEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "entryId"))
     UpdateRecommendationStatusRequestEntry.add_member(:exclude_reason, Shapes::ShapeRef.new(shape: ExcludeRecommendationReason, location_name: "excludeReason"))
     UpdateRecommendationStatusRequestEntry.add_member(:excluded, Shapes::ShapeRef.new(shape: BooleanOptional, required: true, location_name: "excluded"))
-    UpdateRecommendationStatusRequestEntry.add_member(:item, Shapes::ShapeRef.new(shape: UpdateRecommendationStatusItem, required: true, location_name: "item"))
+    UpdateRecommendationStatusRequestEntry.add_member(:item, Shapes::ShapeRef.new(shape: UpdateRecommendationStatusItem, location_name: "item"))
     UpdateRecommendationStatusRequestEntry.add_member(:reference_id, Shapes::ShapeRef.new(shape: SpecReferenceId, required: true, location_name: "referenceId"))
     UpdateRecommendationStatusRequestEntry.struct_class = Types::UpdateRecommendationStatusRequestEntry
 

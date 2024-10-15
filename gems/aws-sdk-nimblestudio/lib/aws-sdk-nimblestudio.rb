@@ -55,7 +55,7 @@ module Aws::NimbleStudio
   autoload :EndpointProvider, 'aws-sdk-nimblestudio/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-nimblestudio/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

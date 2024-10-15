@@ -613,6 +613,7 @@ module Aws
                                    ?subtitle: ::String,
                                    ?welcome_message: ::String,
                                    ?sample_prompts_control_mode: ("ENABLED" | "DISABLED"),
+                                   ?origins: Array[::String],
                                    ?role_arn: ::String,
                                    ?tags: Array[
                                      {
@@ -905,6 +906,7 @@ module Aws
         def subtitle: () -> ::String
         def welcome_message: () -> ::String
         def sample_prompts_control_mode: () -> ("ENABLED" | "DISABLED")
+        def origins: () -> ::Array[::String]
         def role_arn: () -> ::String
         def identity_provider_configuration: () -> Types::IdentityProviderConfiguration
         def authentication_configuration: () -> Types::WebExperienceAuthConfiguration
@@ -1512,7 +1514,8 @@ module Aws
                                        secrets_arn: ::String,
                                        secrets_role: ::String
                                      }?
-                                   }
+                                   },
+                                   ?origins: Array[::String]
                                  ) -> _UpdateWebExperienceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebExperienceResponseSuccess
     end
