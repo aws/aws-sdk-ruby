@@ -179,6 +179,16 @@ module Aws
                             subnets: Array[::String]?,
                             security_group_ids: Array[::String]?
                           },
+                          ?proxy_configuration: {
+                            default_behavior: ("ALLOW_ALL" | "DENY_ALL")?,
+                            ordered_proxy_rules: Array[
+                              {
+                                type: ("DOMAIN" | "IP"),
+                                effect: ("ALLOW" | "DENY"),
+                                entities: Array[::String]
+                              },
+                            ]?
+                          },
                           ?image_id: ::String,
                           ?fleet_service_role: ::String,
                           ?tags: Array[
@@ -391,7 +401,7 @@ module Aws
                             ?filter_groups: Array[
                               Array[
                                 {
-                                  type: ("EVENT" | "BASE_REF" | "HEAD_REF" | "ACTOR_ACCOUNT_ID" | "FILE_PATH" | "COMMIT_MESSAGE" | "WORKFLOW_NAME" | "TAG_NAME" | "RELEASE_NAME"),
+                                  type: ("EVENT" | "BASE_REF" | "HEAD_REF" | "ACTOR_ACCOUNT_ID" | "FILE_PATH" | "COMMIT_MESSAGE" | "WORKFLOW_NAME" | "TAG_NAME" | "RELEASE_NAME" | "REPOSITORY_NAME"),
                                   pattern: ::String,
                                   exclude_matched_pattern: bool?
                                 },
@@ -1077,6 +1087,16 @@ module Aws
                             subnets: Array[::String]?,
                             security_group_ids: Array[::String]?
                           },
+                          ?proxy_configuration: {
+                            default_behavior: ("ALLOW_ALL" | "DENY_ALL")?,
+                            ordered_proxy_rules: Array[
+                              {
+                                type: ("DOMAIN" | "IP"),
+                                effect: ("ALLOW" | "DENY"),
+                                entities: Array[::String]
+                              },
+                            ]?
+                          },
                           ?image_id: ::String,
                           ?fleet_service_role: ::String,
                           ?tags: Array[
@@ -1303,7 +1323,7 @@ module Aws
                             ?filter_groups: Array[
                               Array[
                                 {
-                                  type: ("EVENT" | "BASE_REF" | "HEAD_REF" | "ACTOR_ACCOUNT_ID" | "FILE_PATH" | "COMMIT_MESSAGE" | "WORKFLOW_NAME" | "TAG_NAME" | "RELEASE_NAME"),
+                                  type: ("EVENT" | "BASE_REF" | "HEAD_REF" | "ACTOR_ACCOUNT_ID" | "FILE_PATH" | "COMMIT_MESSAGE" | "WORKFLOW_NAME" | "TAG_NAME" | "RELEASE_NAME" | "REPOSITORY_NAME"),
                                   pattern: ::String,
                                   exclude_matched_pattern: bool?
                                 },

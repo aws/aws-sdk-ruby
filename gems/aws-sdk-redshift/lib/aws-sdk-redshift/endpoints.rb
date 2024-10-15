@@ -254,6 +254,17 @@ module Aws::Redshift
       end
     end
 
+    class CreateIntegration
+      def self.build(context)
+        Aws::Redshift::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class CreateRedshiftIdcApplication
       def self.build(context)
         Aws::Redshift::EndpointParameters.new(
@@ -442,6 +453,17 @@ module Aws::Redshift
     end
 
     class DeleteHsmConfiguration
+      def self.build(context)
+        Aws::Redshift::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DeleteIntegration
       def self.build(context)
         Aws::Redshift::EndpointParameters.new(
           region: context.config.region,
@@ -794,6 +816,17 @@ module Aws::Redshift
     end
 
     class DescribeInboundIntegrations
+      def self.build(context)
+        Aws::Redshift::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DescribeIntegrations
       def self.build(context)
         Aws::Redshift::EndpointParameters.new(
           region: context.config.region,
@@ -1245,6 +1278,17 @@ module Aws::Redshift
     end
 
     class ModifyEventSubscription
+      def self.build(context)
+        Aws::Redshift::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ModifyIntegration
       def self.build(context)
         Aws::Redshift::EndpointParameters.new(
           region: context.config.region,

@@ -114,6 +114,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Redshift::Endpoints::CreateHsmClientCertificate.build(context)
           when :create_hsm_configuration
             Aws::Redshift::Endpoints::CreateHsmConfiguration.build(context)
+          when :create_integration
+            Aws::Redshift::Endpoints::CreateIntegration.build(context)
           when :create_redshift_idc_application
             Aws::Redshift::Endpoints::CreateRedshiftIdcApplication.build(context)
           when :create_scheduled_action
@@ -150,6 +152,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Redshift::Endpoints::DeleteHsmClientCertificate.build(context)
           when :delete_hsm_configuration
             Aws::Redshift::Endpoints::DeleteHsmConfiguration.build(context)
+          when :delete_integration
+            Aws::Redshift::Endpoints::DeleteIntegration.build(context)
           when :delete_partner
             Aws::Redshift::Endpoints::DeletePartner.build(context)
           when :delete_redshift_idc_application
@@ -214,6 +218,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Redshift::Endpoints::DescribeHsmConfigurations.build(context)
           when :describe_inbound_integrations
             Aws::Redshift::Endpoints::DescribeInboundIntegrations.build(context)
+          when :describe_integrations
+            Aws::Redshift::Endpoints::DescribeIntegrations.build(context)
           when :describe_logging_status
             Aws::Redshift::Endpoints::DescribeLoggingStatus.build(context)
           when :describe_node_configuration_options
@@ -296,6 +302,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::Redshift::Endpoints::ModifyEndpointAccess.build(context)
           when :modify_event_subscription
             Aws::Redshift::Endpoints::ModifyEventSubscription.build(context)
+          when :modify_integration
+            Aws::Redshift::Endpoints::ModifyIntegration.build(context)
           when :modify_redshift_idc_application
             Aws::Redshift::Endpoints::ModifyRedshiftIdcApplication.build(context)
           when :modify_scheduled_action

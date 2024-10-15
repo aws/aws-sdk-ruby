@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-10-15)
+------------------
+
+* Feature - Added sourceUrlType field to StartDeployment request
+
 1.73.0 (2024-09-24)
 ------------------
 

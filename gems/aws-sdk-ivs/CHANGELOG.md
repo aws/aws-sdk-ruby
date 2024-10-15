@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2024-10-15)
+------------------
+
+* Feature - On a channel that you own, you can now replace an ongoing stream with a new stream by streaming up with the priority parameter appended to the stream key.
+
 1.61.0 (2024-09-24)
 ------------------
 

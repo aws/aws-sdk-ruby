@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2024-10-15)
+------------------
+
+* Feature - Enable proxy for reserved capacity fleet.
+
 1.132.0 (2024-09-24)
 ------------------
 

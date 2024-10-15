@@ -616,7 +616,7 @@ module Aws::ResilienceHub
     #         entry_id: "String255", # required
     #         exclude_reason: "AlreadyImplemented", # accepts AlreadyImplemented, NotRelevant, ComplexityOfImplementation
     #         excluded: false, # required
-    #         item: { # required
+    #         item: {
     #           resource_id: "String500",
     #           target_account_id: "CustomerId",
     #           target_region: "AwsRegion",
@@ -675,6 +675,16 @@ module Aws::ResilienceHub
     # @option params [String] :assessment_schedule
     #   Assessment execution schedule with 'Daily' or 'Disabled' values.
     #
+    # @option params [String] :aws_application_arn
+    #   Amazon Resource Name (ARN) of Resource Groups group that is integrated
+    #   with an AppRegistry application. For more information about ARNs, see
+    #   [ Amazon Resource Names (ARNs)][1] in the *Amazon Web Services General
+    #   Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
     # @option params [String] :client_token
     #   Used for an idempotency token. A client token is a unique,
     #   case-sensitive string of up to 64 ASCII characters. You should not
@@ -722,6 +732,7 @@ module Aws::ResilienceHub
     #
     #   resp = client.create_app({
     #     assessment_schedule: "Disabled", # accepts Disabled, Daily
+    #     aws_application_arn: "Arn",
     #     client_token: "ClientToken",
     #     description: "EntityDescription",
     #     event_subscriptions: [
@@ -747,6 +758,7 @@ module Aws::ResilienceHub
     #
     #   resp.app.app_arn #=> String
     #   resp.app.assessment_schedule #=> String, one of "Disabled", "Daily"
+    #   resp.app.aws_application_arn #=> String
     #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected", "NotApplicable", "MissingPolicy"
     #   resp.app.creation_time #=> Time
     #   resp.app.description #=> String
@@ -1666,6 +1678,7 @@ module Aws::ResilienceHub
     #
     #   resp.app.app_arn #=> String
     #   resp.app.assessment_schedule #=> String, one of "Disabled", "Daily"
+    #   resp.app.aws_application_arn #=> String
     #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected", "NotApplicable", "MissingPolicy"
     #   resp.app.creation_time #=> Time
     #   resp.app.description #=> String
@@ -2120,6 +2133,7 @@ module Aws::ResilienceHub
     #
     #   * {Types::DescribeDraftAppVersionResourcesImportStatusResponse#app_arn #app_arn} => String
     #   * {Types::DescribeDraftAppVersionResourcesImportStatusResponse#app_version #app_version} => String
+    #   * {Types::DescribeDraftAppVersionResourcesImportStatusResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::DescribeDraftAppVersionResourcesImportStatusResponse#error_message #error_message} => String
     #   * {Types::DescribeDraftAppVersionResourcesImportStatusResponse#status #status} => String
     #   * {Types::DescribeDraftAppVersionResourcesImportStatusResponse#status_change_time #status_change_time} => Time
@@ -2134,6 +2148,8 @@ module Aws::ResilienceHub
     #
     #   resp.app_arn #=> String
     #   resp.app_version #=> String
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].error_message #=> String
     #   resp.error_message #=> String
     #   resp.status #=> String, one of "Pending", "InProgress", "Failed", "Success"
     #   resp.status_change_time #=> Time
@@ -2395,8 +2411,8 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
-    # List of compliance drifts that were detected while running an
-    # assessment.
+    # Indicates the list of compliance drifts that were detected while
+    # running an assessment.
     #
     # @option params [required, String] :assessment_arn
     #   Amazon Resource Name (ARN) of the assessment. The format for this ARN
@@ -3157,6 +3173,16 @@ module Aws::ResilienceHub
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
+    # @option params [String] :aws_application_arn
+    #   Amazon Resource Name (ARN) of Resource Groups group that is integrated
+    #   with an AppRegistry application. For more information about ARNs, see
+    #   [ Amazon Resource Names (ARNs)][1] in the *Amazon Web Services General
+    #   Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
     # @option params [Time,DateTime,Date,Integer,String] :from_last_assessment_time
     #   Indicates the lower limit of the range that is used to filter
     #   applications based on their last assessment times.
@@ -3194,6 +3220,7 @@ module Aws::ResilienceHub
     #
     #   resp = client.list_apps({
     #     app_arn: "Arn",
+    #     aws_application_arn: "Arn",
     #     from_last_assessment_time: Time.now,
     #     max_results: 1,
     #     name: "EntityName",
@@ -3207,6 +3234,7 @@ module Aws::ResilienceHub
     #   resp.app_summaries #=> Array
     #   resp.app_summaries[0].app_arn #=> String
     #   resp.app_summaries[0].assessment_schedule #=> String, one of "Disabled", "Daily"
+    #   resp.app_summaries[0].aws_application_arn #=> String
     #   resp.app_summaries[0].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected", "NotApplicable", "MissingPolicy"
     #   resp.app_summaries[0].creation_time #=> Time
     #   resp.app_summaries[0].description #=> String
@@ -4520,6 +4548,7 @@ module Aws::ResilienceHub
     #
     #   resp.app.app_arn #=> String
     #   resp.app.assessment_schedule #=> String, one of "Disabled", "Daily"
+    #   resp.app.aws_application_arn #=> String
     #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected", "NotApplicable", "MissingPolicy"
     #   resp.app.creation_time #=> Time
     #   resp.app.description #=> String
@@ -4930,7 +4959,7 @@ module Aws::ResilienceHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

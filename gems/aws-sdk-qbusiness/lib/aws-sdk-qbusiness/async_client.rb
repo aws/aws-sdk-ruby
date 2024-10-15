@@ -372,7 +372,7 @@ module Aws::QBusiness
     #   The identifier of the user attached to the chat input.
     #
     # @option params [Array<String>] :user_groups
-    #   The groups that a user associated with the chat input belongs to.
+    #   The group names that a user associated with the chat input belongs to.
     #
     # @option params [String] :conversation_id
     #   The identifier of the Amazon Q Business conversation.
@@ -603,7 +603,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

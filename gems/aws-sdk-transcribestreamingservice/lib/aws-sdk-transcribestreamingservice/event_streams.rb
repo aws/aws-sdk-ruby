@@ -29,7 +29,15 @@ module Aws::TranscribeStreamingService
       # @option params [Types::PostCallAnalyticsSettings] :post_call_analytics_settings
       #   Provides additional optional settings for your Call Analytics
       #   post-call request, including encryption and output locations for your
-      #   redacted and unredacted transcript.
+      #   redacted transcript.
+      #
+      #   `PostCallAnalyticsSettings` provides you with the same insights as a
+      #   Call Analytics post-call transcription. Refer to [Post-call
+      #   analytics][1] for more information on this feature.
+      #
+      #
+      #
+      #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html
       #
       def signal_configuration_event_event(params = {})
         @event_emitter.emit(:configuration_event, params)
@@ -65,7 +73,15 @@ module Aws::TranscribeStreamingService
       # @option params [Types::PostCallAnalyticsSettings] :post_call_analytics_settings
       #   Provides additional optional settings for your Call Analytics
       #   post-call request, including encryption and output locations for your
-      #   redacted and unredacted transcript.
+      #   redacted transcript.
+      #
+      #   `PostCallAnalyticsSettings` provides you with the same insights as a
+      #   Call Analytics post-call transcription. Refer to [Post-call
+      #   analytics][1] for more information on this feature.
+      #
+      #
+      #
+      #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html
       #
       def signal_configuration_event_event(params = {})
         @event_emitter.emit(:configuration_event, params)
@@ -101,7 +117,15 @@ module Aws::TranscribeStreamingService
       # @option params [Types::PostCallAnalyticsSettings] :post_call_analytics_settings
       #   Provides additional optional settings for your Call Analytics
       #   post-call request, including encryption and output locations for your
-      #   redacted and unredacted transcript.
+      #   redacted transcript.
+      #
+      #   `PostCallAnalyticsSettings` provides you with the same insights as a
+      #   Call Analytics post-call transcription. Refer to [Post-call
+      #   analytics][1] for more information on this feature.
+      #
+      #
+      #
+      #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html
       #
       def signal_configuration_event_event(params = {})
         @event_emitter.emit(:configuration_event, params)

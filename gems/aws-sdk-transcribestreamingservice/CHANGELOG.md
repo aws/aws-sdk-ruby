@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2024-10-15)
+------------------
+
+* Feature - We are expanding support for 40 new locales in AWS Transcribe Streaming.
+
 1.70.0 (2024-09-24)
 ------------------
 
