@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2024-10-10)
+------------------
+
+* Feature - Refine campaign related API validations
+
 1.34.0 (2024-09-24)
 ------------------
 

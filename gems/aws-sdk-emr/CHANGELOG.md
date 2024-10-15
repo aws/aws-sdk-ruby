@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-10-11)
+------------------
+
+* Feature - This release provides new parameter "Context" in instance fleet clusters.
+
 1.99.0 (2024-09-24)
 ------------------
 

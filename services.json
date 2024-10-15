@@ -825,7 +825,8 @@
     "models": "networkmonitor/2023-08-01"
   },
   "NimbleStudio": {
-    "models": "nimble/2020-08-01"
+    "models": "nimble/2020-08-01",
+    "deprecated": true
   },
   "OAM": {
     "models": "oam/2022-06-10"
@@ -1165,6 +1166,9 @@
   },
   "Snowball": {
     "models": "snowball/2016-06-30"
+  },
+  "SocialMessaging": {
+    "models": "socialmessaging/2024-01-01"
   },
   "SsmSap": {
     "models": "ssm-sap/2018-05-10"

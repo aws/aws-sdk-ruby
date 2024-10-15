@@ -515,6 +515,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Accepts a request to assign billing of the available capacity of a
+    # shared Capacity Reservation to your account. For more information, see
+    # [ Billing assignment for shared Amazon EC2 Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation for which to accept the request.
+    #
+    # @return [Types::AcceptCapacityReservationBillingOwnershipResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptCapacityReservationBillingOwnershipResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_capacity_reservation_billing_ownership({
+    #     dry_run: false,
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptCapacityReservationBillingOwnership AWS API Documentation
+    #
+    # @overload accept_capacity_reservation_billing_ownership(params = {})
+    # @param [Hash] params ({})
+    def accept_capacity_reservation_billing_ownership(params = {}, options = {})
+      req = build_request(:accept_capacity_reservation_billing_ownership, params)
+      req.send_request(options)
+    end
+
     # Accepts the Convertible Reserved Instance exchange quote described in
     # the GetReservedInstancesExchangeQuote call.
     #
@@ -1586,7 +1627,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -1759,6 +1800,53 @@ module Aws::EC2
     # @param [Hash] params ({})
     def associate_address(params = {}, options = {})
       req = build_request(:associate_address, params)
+      req.send_request(options)
+    end
+
+    # Initiates a request to assign billing of the unused capacity of a
+    # shared Capacity Reservation to a consumer account that is consolidated
+    # under the same Amazon Web Services organizations payer account. For
+    # more information, see [Billing assignment for shared Amazon EC2
+    # Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [required, String] :unused_reservation_billing_owner_id
+    #   The ID of the consumer account to which assign billing.
+    #
+    # @return [Types::AssociateCapacityReservationBillingOwnerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateCapacityReservationBillingOwnerResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_capacity_reservation_billing_owner({
+    #     dry_run: false,
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #     unused_reservation_billing_owner_id: "AccountID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateCapacityReservationBillingOwner AWS API Documentation
+    #
+    # @overload associate_capacity_reservation_billing_owner(params = {})
+    # @param [Hash] params ({})
+    def associate_capacity_reservation_billing_owner(params = {}, options = {})
+      req = build_request(:associate_capacity_reservation_billing_owner, params)
       req.send_request(options)
     end
 
@@ -2255,9 +2343,9 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips
-    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -5140,6 +5228,7 @@ module Aws::EC2
     #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.capacity_reservation.unused_reservation_billing_owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation AWS API Documentation
     #
@@ -5240,6 +5329,7 @@ module Aws::EC2
     #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.source_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.source_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.source_capacity_reservation.unused_reservation_billing_owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_id #=> String
     #   resp.destination_capacity_reservation.owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_arn #=> String
@@ -5268,6 +5358,7 @@ module Aws::EC2
     #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.destination_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.destination_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.destination_capacity_reservation.unused_reservation_billing_owner_id #=> String
     #   resp.instance_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationBySplitting AWS API Documentation
@@ -6066,7 +6157,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/work-with-default-vpc.html#create-default-subnet
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-subnet
     #
     # @option params [required, String] :availability_zone
     #   The Availability Zone in which to create the default subnet.
@@ -6833,7 +6924,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html
     #
     # @option params [Boolean] :dry_run
@@ -6929,7 +7020,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
@@ -9710,7 +9801,7 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
     #
     # @option params [String] :allocation_id
     #   \[Public NAT gateways only\] The allocation ID of an Elastic IP
@@ -9760,7 +9851,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #
     # @option params [Array<String>] :secondary_private_ip_addresses
     #   Secondary private IPv4 addresses. For more information about secondary
@@ -9769,7 +9860,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #
     # @option params [Integer] :secondary_private_ip_address_count
     #   \[Private NAT gateway only\] The number of secondary private IPv4
@@ -9779,7 +9870,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #
     # @return [Types::CreateNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12410,14 +12501,13 @@ module Aws::EC2
     end
 
     # Creates a subnet CIDR reservation. For more information, see [Subnet
-    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Manage
-    # prefixes for your network interfaces][2] in the *Amazon EC2 User
-    # Guide*.
+    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Assign
+    # prefixes to network interfaces][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-prefixes.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
@@ -19061,10 +19151,7 @@ module Aws::EC2
     # delete all security groups associated with the VPC (except the default
     # one), delete all route tables associated with the VPC (except the
     # default one), and so on. When you delete the VPC, it deletes the
-    # default security group, network ACL, and route table for the VPC.
-    #
-    # If you created a flow log for the VPC that you are deleting, note that
-    # flow logs for deleted VPCs are eventually automatically removed.
+    # VPC's default security group, network ACL, and route table.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -20702,6 +20789,107 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes a request to assign the billing of the unused capacity of a
+    # Capacity Reservation. For more information, see [ Billing assignment
+    # for shared Amazon EC2 Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/transfer-billing.html
+    #
+    # @option params [Array<String>] :capacity_reservation_ids
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [required, String] :role
+    #   Specify one of the following:
+    #
+    #   * `odcr-owner` - If you are the Capacity Reservation owner, specify
+    #     this value to view requests that you have initiated. Not supported
+    #     with the `requested-by` filter.
+    #
+    #   * `unused-reservation-billing-owner` - If you are the consumer
+    #     account, specify this value to view requests that have been sent to
+    #     you. Not supported with the `unused-reservation-billing-owner`
+    #     filter.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `status` - The state of the request (`pending` \| `accepted` \|
+    #     `rejected` \| `cancelled` \| `revoked` \| `expired`).
+    #
+    #   * `requested-by` - The account ID of the Capacity Reservation owner
+    #     that initiated the request. Not supported if you specify
+    #     `requested-by` for **Role**.
+    #
+    #   * `unused-reservation-billing-owner` - The ID of the consumer account
+    #     to which the request was sent. Not supported if you specify
+    #     `unused-reservation-billing-owner` for **Role**.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeCapacityReservationBillingRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapacityReservationBillingRequestsResult#next_token #next_token} => String
+    #   * {Types::DescribeCapacityReservationBillingRequestsResult#capacity_reservation_billing_requests #capacity_reservation_billing_requests} => Array&lt;Types::CapacityReservationBillingRequest&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capacity_reservation_billing_requests({
+    #     capacity_reservation_ids: ["CapacityReservationId"],
+    #     role: "odcr-owner", # required, accepts odcr-owner, unused-reservation-billing-owner
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.capacity_reservation_billing_requests #=> Array
+    #   resp.capacity_reservation_billing_requests[0].capacity_reservation_id #=> String
+    #   resp.capacity_reservation_billing_requests[0].requested_by #=> String
+    #   resp.capacity_reservation_billing_requests[0].unused_reservation_billing_owner_id #=> String
+    #   resp.capacity_reservation_billing_requests[0].last_update_time #=> Time
+    #   resp.capacity_reservation_billing_requests[0].status #=> String, one of "pending", "accepted", "rejected", "cancelled", "revoked", "expired"
+    #   resp.capacity_reservation_billing_requests[0].status_message #=> String
+    #   resp.capacity_reservation_billing_requests[0].capacity_reservation_info.instance_type #=> String
+    #   resp.capacity_reservation_billing_requests[0].capacity_reservation_info.availability_zone #=> String
+    #   resp.capacity_reservation_billing_requests[0].capacity_reservation_info.tenancy #=> String, one of "default", "dedicated"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservationBillingRequests AWS API Documentation
+    #
+    # @overload describe_capacity_reservation_billing_requests(params = {})
+    # @param [Hash] params ({})
+    def describe_capacity_reservation_billing_requests(params = {}, options = {})
+      req = build_request(:describe_capacity_reservation_billing_requests, params)
+      req.send_request(options)
+    end
+
     # Describes one or more Capacity Reservation Fleets.
     #
     # @option params [Array<String>] :capacity_reservation_fleet_ids
@@ -20966,6 +21154,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.capacity_reservations[0].capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservations[0].reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.capacity_reservations[0].unused_reservation_billing_owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations AWS API Documentation
     #
@@ -22058,9 +22247,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4, G5, or G6 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     #
@@ -25760,9 +25947,6 @@ module Aws::EC2
     #
     #   * `iam-instance-profile.id` - The instance profile associated with the
     #     instance. Specified as an ID.
-    #
-    #   * `iam-instance-profile.name` - The instance profile associated with
-    #     the instance. Specified as an name.
     #
     #   * `image-id` - The ID of the image used to launch the instance.
     #
@@ -39602,6 +39786,52 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Cancels a pending request to assign billing of the unused capacity of
+    # a Capacity Reservation to a consumer account, or revokes a request
+    # that has already been accepted. For more information, see [Billing
+    # assignment for shared Amazon EC2 Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [required, String] :unused_reservation_billing_owner_id
+    #   The ID of the consumer account to which the request was sent.
+    #
+    # @return [Types::DisassociateCapacityReservationBillingOwnerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateCapacityReservationBillingOwnerResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_capacity_reservation_billing_owner({
+    #     dry_run: false,
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #     unused_reservation_billing_owner_id: "AccountID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateCapacityReservationBillingOwner AWS API Documentation
+    #
+    # @overload disassociate_capacity_reservation_billing_owner(params = {})
+    # @param [Hash] params ({})
+    def disassociate_capacity_reservation_billing_owner(params = {}, options = {})
+      req = build_request(:disassociate_capacity_reservation_billing_owner, params)
+      req.send_request(options)
+    end
+
     # Disassociates a target network from the specified Client VPN endpoint.
     # When you disassociate the last target network from a Client VPN, the
     # following happens:
@@ -39948,7 +40178,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -47911,7 +48141,8 @@ module Aws::EC2
     # performance. The base cost of the instance remains unchanged.
     #
     # The number of active vCPUs equals the number of threads per CPU core
-    # multiplied by the number of cores.
+    # multiplied by the number of cores. The instance must be in a `Stopped`
+    # state before you make changes.
     #
     # <note markdown="1"> Some instance type options do not support this capability. For more
     # information, see [Supported CPU options][1] in the *Amazon EC2 User
@@ -49985,11 +50216,13 @@ module Aws::EC2
     #   in this subnet should return synthetic IPv6 addresses for IPv4-only
     #   destinations.
     #
-    #   You must first configure a NAT gateway in a public subnet (separate
+    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
     #   from the subnet containing the IPv6-only workloads). For example, the
     #   subnet containing the NAT gateway should have a `0.0.0.0/0` route
     #   pointing to the internet gateway. For more information, see [Configure
     #   DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -52727,6 +52960,7 @@ module Aws::EC2
     #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.source_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.source_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.source_capacity_reservation.unused_reservation_billing_owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_id #=> String
     #   resp.destination_capacity_reservation.owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_arn #=> String
@@ -52755,6 +52989,7 @@ module Aws::EC2
     #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.destination_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.destination_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.destination_capacity_reservation.unused_reservation_billing_owner_id #=> String
     #   resp.instance_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveCapacityReservationInstances AWS API Documentation
@@ -53196,6 +53431,7 @@ module Aws::EC2
     #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.capacity_reservation.unused_reservation_billing_owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlock AWS API Documentation
     #
@@ -53975,6 +54211,47 @@ module Aws::EC2
     # @param [Hash] params ({})
     def register_transit_gateway_multicast_group_sources(params = {}, options = {})
       req = build_request(:register_transit_gateway_multicast_group_sources, params)
+      req.send_request(options)
+    end
+
+    # Rejects a request to assign billing of the available capacity of a
+    # shared Capacity Reservation to your account. For more information, see
+    # [ Billing assignment for shared Amazon EC2 Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation for which to reject the request.
+    #
+    # @return [Types::RejectCapacityReservationBillingOwnershipResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectCapacityReservationBillingOwnershipResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_capacity_reservation_billing_ownership({
+    #     dry_run: false,
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectCapacityReservationBillingOwnership AWS API Documentation
+    #
+    # @overload reject_capacity_reservation_billing_ownership(params = {})
+    # @param [Hash] params ({})
+    def reject_capacity_reservation_billing_ownership(params = {}, options = {})
+      req = build_request(:reject_capacity_reservation_billing_ownership, params)
       req.send_request(options)
     end
 
@@ -57082,14 +57359,9 @@ module Aws::EC2
     # @option params [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
     #
-    #   <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to new customers.
-    #   For more information, see [Amazon Elastic Inference FAQs][1].
+    #   <note markdown="1"> Amazon Elastic Inference is no longer available.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/machine-learning/elastic-inference/faqs/
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources that are created during instance
@@ -59745,7 +60017,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -60196,7 +60468,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.480.0'
+      context[:gem_version] = '1.481.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

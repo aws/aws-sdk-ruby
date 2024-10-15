@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-10-11)
+------------------
+
+* Feature - Documentation update: added support notices to each API action.
+
 1.76.0 (2024-09-24)
 ------------------
 

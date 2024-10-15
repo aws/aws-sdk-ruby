@@ -23,6 +23,17 @@ module Aws::EC2
       end
     end
 
+    class AcceptCapacityReservationBillingOwnership
+      def self.build(context)
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class AcceptReservedInstancesExchangeQuote
       def self.build(context)
         Aws::EC2::EndpointParameters.new(
@@ -178,6 +189,17 @@ module Aws::EC2
     end
 
     class AssociateAddress
+      def self.build(context)
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class AssociateCapacityReservationBillingOwner
       def self.build(context)
         Aws::EC2::EndpointParameters.new(
           region: context.config.region,
@@ -2564,6 +2586,17 @@ module Aws::EC2
       end
     end
 
+    class DescribeCapacityReservationBillingRequests
+      def self.build(context)
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class DescribeCapacityReservationFleets
       def self.build(context)
         Aws::EC2::EndpointParameters.new(
@@ -4369,6 +4402,17 @@ module Aws::EC2
     end
 
     class DisassociateAddress
+      def self.build(context)
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DisassociateCapacityReservationBillingOwner
       def self.build(context)
         Aws::EC2::EndpointParameters.new(
           region: context.config.region,
@@ -6316,6 +6360,17 @@ module Aws::EC2
     end
 
     class RegisterTransitGatewayMulticastGroupSources
+      def self.build(context)
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class RejectCapacityReservationBillingOwnership
       def self.build(context)
         Aws::EC2::EndpointParameters.new(
           region: context.config.region,

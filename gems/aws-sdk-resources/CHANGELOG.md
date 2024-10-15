@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.209.0 (2024-10-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-socialmessaging` gem.
+
 3.208.0 (2024-10-03)
 ------------------
 

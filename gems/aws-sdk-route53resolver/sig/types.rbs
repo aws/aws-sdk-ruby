@@ -1031,6 +1031,7 @@ module Aws::Route53Resolver
       attr_accessor port: ::Integer
       attr_accessor ipv_6: ::String
       attr_accessor protocol: ("DoH" | "Do53" | "DoH-FIPS")
+      attr_accessor server_name_indication: ::String
       SENSITIVE: []
     end
 

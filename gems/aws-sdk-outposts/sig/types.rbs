@@ -438,7 +438,7 @@ module Aws::Outposts
     class Order
       attr_accessor outpost_id: ::String
       attr_accessor order_id: ::String
-      attr_accessor status: ("RECEIVED" | "PENDING" | "PROCESSING" | "INSTALLING" | "FULFILLED" | "CANCELLED" | "PREPARING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor status: ("RECEIVED" | "PENDING" | "PROCESSING" | "INSTALLING" | "FULFILLED" | "CANCELLED" | "PREPARING" | "IN_PROGRESS" | "DELIVERED" | "COMPLETED" | "ERROR")
       attr_accessor line_items: ::Array[Types::LineItem]
       attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
       attr_accessor order_submission_date: ::Time
@@ -452,7 +452,7 @@ module Aws::Outposts
       attr_accessor outpost_id: ::String
       attr_accessor order_id: ::String
       attr_accessor order_type: ("OUTPOST" | "REPLACEMENT")
-      attr_accessor status: ("RECEIVED" | "PENDING" | "PROCESSING" | "INSTALLING" | "FULFILLED" | "CANCELLED" | "PREPARING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor status: ("RECEIVED" | "PENDING" | "PROCESSING" | "INSTALLING" | "FULFILLED" | "CANCELLED" | "PREPARING" | "IN_PROGRESS" | "DELIVERED" | "COMPLETED" | "ERROR")
       attr_accessor line_item_counts_by_status: ::Hash[("PREPARING" | "BUILDING" | "SHIPPED" | "DELIVERED" | "INSTALLING" | "INSTALLED" | "ERROR" | "CANCELLED" | "REPLACED"), ::Integer]
       attr_accessor order_submission_date: ::Time
       attr_accessor order_fulfilled_date: ::Time

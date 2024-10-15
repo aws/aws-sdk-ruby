@@ -146,6 +146,24 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class CreateDataMigrationMessage
+      attr_accessor data_migration_name: ::String
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor data_migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor enable_cloudwatch_logs: bool
+      attr_accessor source_data_settings: ::Array[Types::SourceDataSetting]
+      attr_accessor number_of_jobs: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor selection_rules: ::String
+      SENSITIVE: [:selection_rules]
+    end
+
+    class CreateDataMigrationResponse
+      attr_accessor data_migration: Types::DataMigration
+      SENSITIVE: []
+    end
+
     class CreateDataProviderMessage
       attr_accessor data_provider_name: ::String
       attr_accessor description: ::String
@@ -351,6 +369,45 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class DataMigration
+      attr_accessor data_migration_name: ::String
+      attr_accessor data_migration_arn: ::String
+      attr_accessor data_migration_create_time: ::Time
+      attr_accessor data_migration_start_time: ::Time
+      attr_accessor data_migration_end_time: ::Time
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor migration_project_arn: ::String
+      attr_accessor data_migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor data_migration_settings: Types::DataMigrationSettings
+      attr_accessor source_data_settings: ::Array[Types::SourceDataSetting]
+      attr_accessor data_migration_statistics: Types::DataMigrationStatistics
+      attr_accessor data_migration_status: ::String
+      attr_accessor public_ip_addresses: ::Array[::String]
+      attr_accessor last_failure_message: ::String
+      attr_accessor stop_reason: ::String
+      SENSITIVE: [:public_ip_addresses]
+    end
+
+    class DataMigrationSettings
+      attr_accessor number_of_jobs: ::Integer
+      attr_accessor cloudwatch_logs_enabled: bool
+      attr_accessor selection_rules: ::String
+      SENSITIVE: [:selection_rules]
+    end
+
+    class DataMigrationStatistics
+      attr_accessor tables_loaded: ::Integer
+      attr_accessor elapsed_time_millis: ::Integer
+      attr_accessor tables_loading: ::Integer
+      attr_accessor full_load_percentage: ::Integer
+      attr_accessor cdc_latency: ::Integer
+      attr_accessor tables_queued: ::Integer
+      attr_accessor tables_errored: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      SENSITIVE: []
+    end
+
     class DataProvider
       attr_accessor data_provider_name: ::String
       attr_accessor data_provider_arn: ::String
@@ -466,6 +523,16 @@ module Aws::DatabaseMigrationService
 
     class DeleteConnectionResponse
       attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class DeleteDataMigrationMessage
+      attr_accessor data_migration_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataMigrationResponse
+      attr_accessor data_migration: Types::DataMigration
       SENSITIVE: []
     end
 
@@ -637,6 +704,21 @@ module Aws::DatabaseMigrationService
     class DescribeConversionConfigurationResponse
       attr_accessor migration_project_identifier: ::String
       attr_accessor conversion_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataMigrationsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor without_settings: bool
+      attr_accessor without_statistics: bool
+      SENSITIVE: []
+    end
+
+    class DescribeDataMigrationsResponse
+      attr_accessor data_migrations: ::Array[Types::DataMigration]
+      attr_accessor marker: ::String
       SENSITIVE: []
     end
 
@@ -1323,6 +1405,11 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class FailedDependencyFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Filter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::String]
@@ -1592,6 +1679,23 @@ module Aws::DatabaseMigrationService
 
     class ModifyConversionConfigurationResponse
       attr_accessor migration_project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyDataMigrationMessage
+      attr_accessor data_migration_identifier: ::String
+      attr_accessor data_migration_name: ::String
+      attr_accessor enable_cloudwatch_logs: bool
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor data_migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor source_data_settings: ::Array[Types::SourceDataSetting]
+      attr_accessor number_of_jobs: ::Integer
+      attr_accessor selection_rules: ::String
+      SENSITIVE: [:selection_rules]
+    end
+
+    class ModifyDataMigrationResponse
+      attr_accessor data_migration: Types::DataMigration
       SENSITIVE: []
     end
 
@@ -2483,6 +2587,25 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class SourceDataSetting
+      attr_accessor cdc_start_position: ::String
+      attr_accessor cdc_start_time: ::Time
+      attr_accessor cdc_stop_time: ::Time
+      attr_accessor slot_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartDataMigrationMessage
+      attr_accessor data_migration_identifier: ::String
+      attr_accessor start_type: ("reload-target" | "resume-processing" | "start-replication")
+      SENSITIVE: []
+    end
+
+    class StartDataMigrationResponse
+      attr_accessor data_migration: Types::DataMigration
+      SENSITIVE: []
+    end
+
     class StartExtensionPackAssociationMessage
       attr_accessor migration_project_identifier: ::String
       SENSITIVE: []
@@ -2618,6 +2741,16 @@ module Aws::DatabaseMigrationService
 
     class StartReplicationTaskResponse
       attr_accessor replication_task: Types::ReplicationTask
+      SENSITIVE: []
+    end
+
+    class StopDataMigrationMessage
+      attr_accessor data_migration_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StopDataMigrationResponse
+      attr_accessor data_migration: Types::DataMigration
       SENSITIVE: []
     end
 

@@ -708,6 +708,20 @@ module Aws
                            ) -> _ListExecutionsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExecutionsResponseSuccess
 
+      interface _ListFileTransferResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFileTransferResultsResponse]
+        def file_transfer_results: () -> ::Array[Types::ConnectorFileTransferResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_file_transfer_results-instance_method
+      def list_file_transfer_results: (
+                                        connector_id: ::String,
+                                        transfer_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListFileTransferResultsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFileTransferResultsResponseSuccess
+
       interface _ListHostKeysResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListHostKeysResponse]
         def next_token: () -> ::String

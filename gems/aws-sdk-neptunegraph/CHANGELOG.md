@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2024-10-10)
+------------------
+
+* Feature - Support for 16 m-NCU graphs available through account allowlisting
+
 1.21.0 (2024-09-24)
 ------------------
 

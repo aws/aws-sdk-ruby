@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.1 (2024-10-11)
+------------------
+
+* Issue - require SimpleAttributes Plugin from AttributeTranslator.
+
 1.68.0 (2024-09-24)
 ------------------
 

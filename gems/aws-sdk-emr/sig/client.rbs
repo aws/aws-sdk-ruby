@@ -151,7 +151,8 @@ module Aws
                                         capacity_reservation_resource_group_arn: ::String?
                                       }?
                                     }?
-                                  }?
+                                  }?,
+                                  context: ::String?
                                 }
                               ) -> _AddInstanceFleetResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddInstanceFleetResponseSuccess
@@ -730,7 +731,8 @@ module Aws
                                          custom_ami_id: ::String?,
                                          priority: ::Float?
                                        },
-                                     ]?
+                                     ]?,
+                                     context: ::String?
                                    }
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1055,7 +1057,8 @@ module Aws
                                       capacity_reservation_resource_group_arn: ::String?
                                     }?
                                   }?
-                                }?
+                                }?,
+                                context: ::String?
                               },
                             ]?,
                             ec2_key_name: ::String?,

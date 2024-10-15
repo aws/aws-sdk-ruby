@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2024-10-11)
+------------------
+
+* Feature - Doc only updates for clarification around OAuth2GrantType for Salesforce.
+
 1.68.0 (2024-09-24)
 ------------------
 

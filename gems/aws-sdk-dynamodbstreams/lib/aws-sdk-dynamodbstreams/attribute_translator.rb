@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require_relative 'plugins/simple_attributes'
+
 module Aws
   module DynamoDBStreams
     # A utility class that translates DynamoDBStream events from Lambda

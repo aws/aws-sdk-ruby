@@ -466,14 +466,14 @@ module Aws::ACMPCA
     #   @return [Types::CertificateAuthorityConfiguration]
     #
     # @!attribute [rw] revocation_configuration
-    #   Contains information to enable Online Certificate Status Protocol
-    #   (OCSP) support, to enable a certificate revocation list (CRL), to
-    #   enable both, or to enable neither. The default is for both
-    #   certificate validation mechanisms to be disabled.
+    #   Contains information to enable support for Online Certificate Status
+    #   Protocol (OCSP), certificate revocation list (CRL), both protocols,
+    #   or neither. By default, both certificate validation mechanisms are
+    #   disabled.
     #
-    #   <note markdown="1"> The following requirements apply to revocation configurations.
+    #   The following requirements apply to revocation configurations.
     #
-    #    * A configuration disabling CRLs or OCSP must contain only the
+    #   * A configuration disabling CRLs or OCSP must contain only the
     #     `Enabled=False` parameter, and will fail if other parameters such
     #     as `CustomCname` or `ExpirationInDays` are included.
     #
@@ -487,8 +487,6 @@ module Aws::ACMPCA
     #   * In a CRL or OCSP configuration, the value of a CNAME parameter
     #     must not include a protocol prefix such as "http://" or
     #     "https://".
-    #
-    #    </note>
     #
     #   For more information, see the [OcspConfiguration][3] and
     #   [CrlConfiguration][4] types.
@@ -2518,16 +2516,15 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] revocation_configuration
-    #   Contains information to enable Online Certificate Status Protocol
-    #   (OCSP) support, to enable a certificate revocation list (CRL), to
-    #   enable both, or to enable neither. If this parameter is not
-    #   supplied, existing capibilites remain unchanged. For more
-    #   information, see the [OcspConfiguration][1] and
-    #   [CrlConfiguration][2] types.
+    #   Contains information to enable support for Online Certificate Status
+    #   Protocol (OCSP), certificate revocation list (CRL), both protocols,
+    #   or neither. If you don't supply this parameter, existing
+    #   capibilites remain unchanged. For more information, see the
+    #   [OcspConfiguration][1] and [CrlConfiguration][2] types.
     #
-    #   <note markdown="1"> The following requirements apply to revocation configurations.
+    #   The following requirements apply to revocation configurations.
     #
-    #    * A configuration disabling CRLs or OCSP must contain only the
+    #   * A configuration disabling CRLs or OCSP must contain only the
     #     `Enabled=False` parameter, and will fail if other parameters such
     #     as `CustomCname` or `ExpirationInDays` are included.
     #
@@ -2542,7 +2539,17 @@ module Aws::ACMPCA
     #     must not include a protocol prefix such as "http://" or
     #     "https://".
     #
-    #    </note>
+    #   If you update the `S3BucketName` of [CrlConfiguration][2], you can
+    #   break revocation for existing certificates. In other words, if you
+    #   call [UpdateCertificateAuthority][5] to update the CRL
+    #   configuration's S3 bucket name, Amazon Web Services Private CA only
+    #   writes CRLs to the new S3 bucket. Certificates issued prior to this
+    #   point will have the old S3 bucket name in your CRL Distribution
+    #   Point (CDP) extension, essentially breaking revocation. If you must
+    #   update the S3 bucket, you'll need to reissue old certificates to
+    #   keep the revocation working. Alternatively, you can use a
+    #   [CustomCname][6] in your CRL configuration if you might need to
+    #   change the S3 bucket name in the future.
     #
     #
     #
@@ -2550,6 +2557,8 @@ module Aws::ACMPCA
     #   [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html
     #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #   [4]: https://www.ietf.org/rfc/rfc2396.txt
+    #   [5]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
+    #   [6]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html#privateca-Type-CrlConfiguration-CustomCname
     #   @return [Types::RevocationConfiguration]
     #
     # @!attribute [rw] status
