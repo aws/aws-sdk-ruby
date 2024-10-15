@@ -3,6 +3,7 @@
 module Aws
   module Stubbing
     module Protocols
+      # @api private
       class RpcV2
 
         def stub_data(_api, operation, data)
@@ -16,15 +17,15 @@ module Aws
         end
 
         def stub_error(error_code)
-          http_resp = Seahorse::Client::Http::Response.new
-          http_resp.status_code = 400
-          http_resp.body = <<~JSON.strip
+          resp = Seahorse::Client::Http::Response.new
+          resp.status_code = 400
+          resp.body = Cbor.encode(
             {
-              "code": #{error_code.inspect},
-              "message": "stubbed-response-error-message"
+              'code' => error_code,
+              'message' => 'stubbed-response-error-message'
             }
-          JSON
-          http_resp
+          )
+          resp
         end
 
         private
