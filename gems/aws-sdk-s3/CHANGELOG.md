@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Default to using `CRC32` checksum validation for S3 uploads and downloads.
+
 1.167.0 (2024-10-02)
 ------------------
 

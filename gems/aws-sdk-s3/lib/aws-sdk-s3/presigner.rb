@@ -193,15 +193,14 @@ module Aws
         req, expires_in, secure, time, unsigned_headers, hoist = true
       )
         x_amz_headers = {}
-
         http_req = req.context.http_request
-
-        req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
-        req.handlers.remove(Aws::Plugins::Sign::Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
         req.handlers.remove(Aws::Rest::ContentTypeHandler)
+        req.handlers.remove(Aws::Plugins::ChecksumAlgorithm::OptionHandler)
+        req.handlers.remove(Aws::Plugins::ChecksumAlgorithm::ChecksumHandler)
         req.handlers.remove(Aws::Plugins::InvocationId::Handler)
-
+        req.handlers.remove(Aws::Plugins::Sign::Handler)
+        req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
         req.handle(step: :send) do |context|
           # if an endpoint was not provided, force secure or insecure
           if context.config.regional_endpoint

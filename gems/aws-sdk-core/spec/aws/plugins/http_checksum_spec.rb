@@ -6,44 +6,43 @@ require 'stringio'
 module Aws
   module Plugins
     describe HttpChecksum do
-      HttpChecksumClient = ApiHelper.sample_service(
-        metadata: { 'protocol' => 'rest-xml' },
-        operations: {
-          'Operation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'StructureShape' },
-            'output' => { 'shape' => 'StructureShape' }
-          },
-          'ChecksumOperation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'StructureShape' },
-            'output' => { 'shape' => 'StructureShape' },
-            'httpChecksumRequired' => { 'required' => 'true' }
-          },
-          'ChecksumStreamingOperation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'PayloadStructureShape' },
-            'output' => { 'shape' => 'PayloadStructureShape' },
-            'httpChecksumRequired' => { 'required' => 'true' }
-          },
-          'ChecksumAlgorithmOperation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'StructureShape' },
-            'output' => { 'shape' => 'StructureShape' },
-            'httpChecksum' => {
-              "requestChecksumRequired" => true,
+      let(:http_checksum_client) do
+        ApiHelper.sample_service(
+          metadata: { 'protocol' => 'rest-xml' },
+          operations: {
+            'Operation' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'input' => { 'shape' => 'StructureShape' },
+              'output' => { 'shape' => 'StructureShape' }
+            },
+            'ChecksumOperation' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'input' => { 'shape' => 'StructureShape' },
+              'output' => { 'shape' => 'StructureShape' },
+              'httpChecksumRequired' => { 'required' => 'true' }
+            },
+            'ChecksumStreamingOperation' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'input' => { 'shape' => 'PayloadStructureShape' },
+              'output' => { 'shape' => 'PayloadStructureShape' },
+              'httpChecksumRequired' => { 'required' => 'true' }
             }
           }
-        }
-      ).const_get(:Client)
-
-      let(:creds) { Aws::Credentials.new('akid', 'secret') }
-
-      let(:client) do
-        HttpChecksumClient.new(credentials: creds, stub_responses: true)
+        ).const_get(:Client)
       end
 
-      context 'checksum required operations' do
+      let(:client) do
+        http_checksum_client.new(stub_responses: true)
+      end
+
+      context 'checksum not required' do
+        it 'does not compute MD5 and does not send the content-md5 header' do
+          resp = client.operation(string: 'i am just a string')
+          expect(resp.context.http_request.headers['content-md5']).to be_nil
+        end
+      end
+
+      context 'httpChecksumRequired operations' do
         it 'computes MD5 of the http body and sends as content-md5 header' do
           resp = client.checksum_operation(string: 'md5 me captain')
           expect(resp.context.http_request.headers['content-md5']).to eq(
@@ -58,22 +57,6 @@ module Aws
           resp = client.checksum_streaming_operation(streaming_blob: body)
           expect(resp.context.http_request.headers['content-md5']).to eq(
             '+kDD2/74SZx+Rz+/Dw7I1Q=='
-          )
-        end
-      end
-
-      context 'checksum not required operations' do
-        it 'does not compute MD5 and does not send the content-md5 header' do
-          resp = client.operation(string: 'i am just a string')
-          expect(resp.context.http_request.headers['content-md5']).to be_nil
-        end
-      end
-
-      context 'httpChecksum operation' do
-        it 'computes the MD5 when another checksum has not been computed' do
-          resp = client.checksum_algorithm_operation(string: 'md5 me captain')
-          expect(resp.context.http_request.headers['content-md5']).to eq(
-            'rqd/0N8H2GgZWzmo3oY9tA=='
           )
         end
       end

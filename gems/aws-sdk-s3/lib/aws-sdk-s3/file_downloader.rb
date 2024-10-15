@@ -28,18 +28,10 @@ module Aws
         @chunk_size = options[:chunk_size]
         @params = {
           bucket: options[:bucket],
-          key: options[:key],
+          key: options[:key]
         }
         @params[:version_id] = options[:version_id] if options[:version_id]
-
-        # checksum_mode only supports the value "ENABLED"
-        # falsey values (false/nil) or "DISABLED" should be considered
-        # disabled and the api parameter should be unset.
-        if (checksum_mode = options.fetch(:checksum_mode, 'ENABLED'))
-          @params[:checksum_mode] = checksum_mode unless checksum_mode.upcase == 'DISABLED'
-        end
         @on_checksum_validated = options[:on_checksum_validated]
-
         @progress_callback = options[:progress_callback]
 
         validate!
@@ -67,11 +59,6 @@ module Aws
       private
 
       def validate!
-        if @on_checksum_validated && @params[:checksum_mode] != 'ENABLED'
-          raise ArgumentError, "You must set checksum_mode: 'ENABLED' " +
-            "when providing a on_checksum_validated callback"
-        end
-
         if @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
           raise ArgumentError, 'on_checksum_validated must be callable'
         end
@@ -164,9 +151,7 @@ module Aws
 
       def download_in_threads(pending, total_size)
         threads = []
-        if @progress_callback
-          progress = MultipartProgress.new(pending, total_size, @progress_callback)
-        end
+        progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
         @thread_count.times do
           thread = Thread.new do
             begin
@@ -208,9 +193,7 @@ module Aws
 
         return resp unless @on_checksum_validated
 
-        if resp.checksum_validated
-          @on_checksum_validated.call(resp.checksum_validated, resp)
-        end
+        @on_checksum_validated.call(resp.checksum_validated, resp) if resp.checksum_validated
 
         resp
       end
@@ -251,7 +234,7 @@ module Aws
       end
 
       # @api private
-      class  MultipartProgress
+      class MultipartProgress
         def initialize(parts, total_size, progress_callback)
           @bytes_received = Array.new(parts.size, 0)
           @part_sizes = parts.map(&:size)

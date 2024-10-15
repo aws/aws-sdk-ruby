@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module S3
     module Plugins
-      describe SkipWholeMultipartGetChecksums do
+      describe ChecksumAlgorithm do
         let(:creds) { Aws::Credentials.new('akid', 'secret') }
         let(:client) { S3::Client.new(stub_responses: true) }
         let(:bucket) { 'bucket' }

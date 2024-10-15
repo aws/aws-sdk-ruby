@@ -212,6 +212,8 @@ module Aws
       :retry_mode,
       :adaptive_retry_wait_to_fill,
       :correct_clock_skew,
+      :request_checksum_calculation,
+      :response_checksum_validation,
       :csm_client_id,
       :csm_enabled,
       :csm_host,
