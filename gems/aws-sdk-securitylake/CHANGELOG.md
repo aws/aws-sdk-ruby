@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-10-14)
+------------------
+
+* Feature - This release updates request validation regex for resource ARNs.
+
 1.30.0 (2024-09-24)
 ------------------
 

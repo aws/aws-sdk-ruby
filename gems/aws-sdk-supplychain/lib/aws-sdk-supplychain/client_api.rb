@@ -16,6 +16,7 @@ module Aws::SupplyChain
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AscResourceArn = Shapes::StringShape.new(name: 'AscResourceArn')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BillOfMaterialsImportJob = Shapes::StructureShape.new(name: 'BillOfMaterialsImportJob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -28,6 +29,8 @@ module Aws::SupplyChain
     CreateDataIntegrationFlowResponse = Shapes::StructureShape.new(name: 'CreateDataIntegrationFlowResponse')
     CreateDataLakeDatasetRequest = Shapes::StructureShape.new(name: 'CreateDataLakeDatasetRequest')
     CreateDataLakeDatasetResponse = Shapes::StructureShape.new(name: 'CreateDataLakeDatasetResponse')
+    CreateInstanceRequest = Shapes::StructureShape.new(name: 'CreateInstanceRequest')
+    CreateInstanceResponse = Shapes::StructureShape.new(name: 'CreateInstanceResponse')
     DataIntegrationEventData = Shapes::StringShape.new(name: 'DataIntegrationEventData')
     DataIntegrationEventGroupId = Shapes::StringShape.new(name: 'DataIntegrationEventGroupId')
     DataIntegrationEventType = Shapes::StringShape.new(name: 'DataIntegrationEventType')
@@ -73,17 +76,35 @@ module Aws::SupplyChain
     DeleteDataIntegrationFlowResponse = Shapes::StructureShape.new(name: 'DeleteDataIntegrationFlowResponse')
     DeleteDataLakeDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDataLakeDatasetRequest')
     DeleteDataLakeDatasetResponse = Shapes::StructureShape.new(name: 'DeleteDataLakeDatasetResponse')
+    DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
+    DeleteInstanceResponse = Shapes::StructureShape.new(name: 'DeleteInstanceResponse')
+    Double = Shapes::FloatShape.new(name: 'Double')
     GetBillOfMaterialsImportJobRequest = Shapes::StructureShape.new(name: 'GetBillOfMaterialsImportJobRequest')
     GetBillOfMaterialsImportJobResponse = Shapes::StructureShape.new(name: 'GetBillOfMaterialsImportJobResponse')
     GetDataIntegrationFlowRequest = Shapes::StructureShape.new(name: 'GetDataIntegrationFlowRequest')
     GetDataIntegrationFlowResponse = Shapes::StructureShape.new(name: 'GetDataIntegrationFlowResponse')
     GetDataLakeDatasetRequest = Shapes::StructureShape.new(name: 'GetDataLakeDatasetRequest')
     GetDataLakeDatasetResponse = Shapes::StructureShape.new(name: 'GetDataLakeDatasetResponse')
+    GetInstanceRequest = Shapes::StructureShape.new(name: 'GetInstanceRequest')
+    GetInstanceResponse = Shapes::StructureShape.new(name: 'GetInstanceResponse')
+    Instance = Shapes::StructureShape.new(name: 'Instance')
+    InstanceDescription = Shapes::StringShape.new(name: 'InstanceDescription')
+    InstanceList = Shapes::ListShape.new(name: 'InstanceList')
+    InstanceMaxResults = Shapes::IntegerShape.new(name: 'InstanceMaxResults')
+    InstanceName = Shapes::StringShape.new(name: 'InstanceName')
+    InstanceNameList = Shapes::ListShape.new(name: 'InstanceNameList')
+    InstanceNextToken = Shapes::StringShape.new(name: 'InstanceNextToken')
+    InstanceState = Shapes::StringShape.new(name: 'InstanceState')
+    InstanceStateList = Shapes::ListShape.new(name: 'InstanceStateList')
+    InstanceWebAppDnsDomain = Shapes::StringShape.new(name: 'InstanceWebAppDnsDomain')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     ListDataIntegrationFlowsRequest = Shapes::StructureShape.new(name: 'ListDataIntegrationFlowsRequest')
     ListDataIntegrationFlowsResponse = Shapes::StructureShape.new(name: 'ListDataIntegrationFlowsResponse')
     ListDataLakeDatasetsRequest = Shapes::StructureShape.new(name: 'ListDataLakeDatasetsRequest')
     ListDataLakeDatasetsResponse = Shapes::StructureShape.new(name: 'ListDataLakeDatasetsResponse')
+    ListInstancesRequest = Shapes::StructureShape.new(name: 'ListInstancesRequest')
+    ListInstancesResponse = Shapes::StructureShape.new(name: 'ListInstancesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -108,6 +129,8 @@ module Aws::SupplyChain
     UpdateDataIntegrationFlowResponse = Shapes::StructureShape.new(name: 'UpdateDataIntegrationFlowResponse')
     UpdateDataLakeDatasetRequest = Shapes::StructureShape.new(name: 'UpdateDataLakeDatasetRequest')
     UpdateDataLakeDatasetResponse = Shapes::StructureShape.new(name: 'UpdateDataLakeDatasetResponse')
+    UpdateInstanceRequest = Shapes::StructureShape.new(name: 'UpdateInstanceRequest')
+    UpdateInstanceResponse = Shapes::StructureShape.new(name: 'UpdateInstanceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -153,6 +176,16 @@ module Aws::SupplyChain
 
     CreateDataLakeDatasetResponse.add_member(:dataset, Shapes::ShapeRef.new(shape: DataLakeDataset, required: true, location_name: "dataset"))
     CreateDataLakeDatasetResponse.struct_class = Types::CreateDataLakeDatasetResponse
+
+    CreateInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, location_name: "instanceName"))
+    CreateInstanceRequest.add_member(:instance_description, Shapes::ShapeRef.new(shape: InstanceDescription, location_name: "instanceDescription"))
+    CreateInstanceRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    CreateInstanceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateInstanceRequest.struct_class = Types::CreateInstanceRequest
+
+    CreateInstanceResponse.add_member(:instance, Shapes::ShapeRef.new(shape: Instance, required: true, location_name: "instance"))
+    CreateInstanceResponse.struct_class = Types::CreateInstanceResponse
 
     DataIntegrationFlow.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "instanceId"))
     DataIntegrationFlow.add_member(:name, Shapes::ShapeRef.new(shape: DataIntegrationFlowName, required: true, location_name: "name"))
@@ -251,6 +284,12 @@ module Aws::SupplyChain
     DeleteDataLakeDatasetResponse.add_member(:name, Shapes::ShapeRef.new(shape: DataLakeDatasetName, required: true, location_name: "name"))
     DeleteDataLakeDatasetResponse.struct_class = Types::DeleteDataLakeDatasetResponse
 
+    DeleteInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "instanceId"))
+    DeleteInstanceRequest.struct_class = Types::DeleteInstanceRequest
+
+    DeleteInstanceResponse.add_member(:instance, Shapes::ShapeRef.new(shape: Instance, required: true, location_name: "instance"))
+    DeleteInstanceResponse.struct_class = Types::DeleteInstanceResponse
+
     GetBillOfMaterialsImportJobRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "instanceId"))
     GetBillOfMaterialsImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "jobId"))
     GetBillOfMaterialsImportJobRequest.struct_class = Types::GetBillOfMaterialsImportJobRequest
@@ -273,6 +312,30 @@ module Aws::SupplyChain
     GetDataLakeDatasetResponse.add_member(:dataset, Shapes::ShapeRef.new(shape: DataLakeDataset, required: true, location_name: "dataset"))
     GetDataLakeDatasetResponse.struct_class = Types::GetDataLakeDatasetResponse
 
+    GetInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "instanceId"))
+    GetInstanceRequest.struct_class = Types::GetInstanceRequest
+
+    GetInstanceResponse.add_member(:instance, Shapes::ShapeRef.new(shape: Instance, required: true, location_name: "instance"))
+    GetInstanceResponse.struct_class = Types::GetInstanceResponse
+
+    Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "instanceId"))
+    Instance.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "awsAccountId"))
+    Instance.add_member(:state, Shapes::ShapeRef.new(shape: InstanceState, required: true, location_name: "state"))
+    Instance.add_member(:web_app_dns_domain, Shapes::ShapeRef.new(shape: InstanceWebAppDnsDomain, location_name: "webAppDnsDomain"))
+    Instance.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTime"))
+    Instance.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    Instance.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, location_name: "instanceName"))
+    Instance.add_member(:instance_description, Shapes::ShapeRef.new(shape: InstanceDescription, location_name: "instanceDescription"))
+    Instance.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    Instance.add_member(:version_number, Shapes::ShapeRef.new(shape: Double, location_name: "versionNumber"))
+    Instance.struct_class = Types::Instance
+
+    InstanceList.member = Shapes::ShapeRef.new(shape: Instance)
+
+    InstanceNameList.member = Shapes::ShapeRef.new(shape: InstanceName)
+
+    InstanceStateList.member = Shapes::ShapeRef.new(shape: InstanceState)
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -294,6 +357,16 @@ module Aws::SupplyChain
     ListDataLakeDatasetsResponse.add_member(:datasets, Shapes::ShapeRef.new(shape: DataLakeDatasetList, required: true, location_name: "datasets"))
     ListDataLakeDatasetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: DataLakeDatasetNextToken, location_name: "nextToken"))
     ListDataLakeDatasetsResponse.struct_class = Types::ListDataLakeDatasetsResponse
+
+    ListInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: InstanceNextToken, location: "querystring", location_name: "nextToken"))
+    ListInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: InstanceMaxResults, location: "querystring", location_name: "maxResults"))
+    ListInstancesRequest.add_member(:instance_name_filter, Shapes::ShapeRef.new(shape: InstanceNameList, location: "querystring", location_name: "instanceNameFilter"))
+    ListInstancesRequest.add_member(:instance_state_filter, Shapes::ShapeRef.new(shape: InstanceStateList, location: "querystring", location_name: "instanceStateFilter"))
+    ListInstancesRequest.struct_class = Types::ListInstancesRequest
+
+    ListInstancesResponse.add_member(:instances, Shapes::ShapeRef.new(shape: InstanceList, required: true, location_name: "instances"))
+    ListInstancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: InstanceNextToken, location_name: "nextToken"))
+    ListInstancesResponse.struct_class = Types::ListInstancesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AscResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -356,6 +429,14 @@ module Aws::SupplyChain
 
     UpdateDataLakeDatasetResponse.add_member(:dataset, Shapes::ShapeRef.new(shape: DataLakeDataset, required: true, location_name: "dataset"))
     UpdateDataLakeDatasetResponse.struct_class = Types::UpdateDataLakeDatasetResponse
+
+    UpdateInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "instanceId"))
+    UpdateInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, location_name: "instanceName"))
+    UpdateInstanceRequest.add_member(:instance_description, Shapes::ShapeRef.new(shape: InstanceDescription, location_name: "instanceDescription"))
+    UpdateInstanceRequest.struct_class = Types::UpdateInstanceRequest
+
+    UpdateInstanceResponse.add_member(:instance, Shapes::ShapeRef.new(shape: Instance, required: true, location_name: "instance"))
+    UpdateInstanceResponse.struct_class = Types::UpdateInstanceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -424,6 +505,21 @@ module Aws::SupplyChain
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/api/instance"
+        o.input = Shapes::ShapeRef.new(shape: CreateInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInstanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_data_integration_flow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataIntegrationFlow"
         o.http_method = "DELETE"
@@ -445,6 +541,21 @@ module Aws::SupplyChain
         o.http_request_uri = "/api/datalake/instance/{instanceId}/namespaces/{namespace}/datasets/{name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDataLakeDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDataLakeDatasetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInstance"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/api/instance/{instanceId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -499,6 +610,21 @@ module Aws::SupplyChain
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:get_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInstance"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/instance/{instanceId}"
+        o.input = Shapes::ShapeRef.new(shape: GetInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInstanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:list_data_integration_flows, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDataIntegrationFlows"
         o.http_method = "GET"
@@ -529,6 +655,27 @@ module Aws::SupplyChain
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInstances"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/instance"
+        o.input = Shapes::ShapeRef.new(shape: ListInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInstancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -622,6 +769,21 @@ module Aws::SupplyChain
         o.http_request_uri = "/api/datalake/instance/{instanceId}/namespaces/{namespace}/datasets/{name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDataLakeDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDataLakeDatasetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInstance"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/api/instance/{instanceId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInstanceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

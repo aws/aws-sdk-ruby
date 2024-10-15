@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2024-10-14)
+------------------
+
+* Feature - AWS CodePipeline V2 type pipelines now support automatically retrying failed stages and skipping stage for failed entry conditions.
+
+1.87.0 (2024-10-09)
+------------------
+
+* Feature - AWS CodePipeline introduces a Compute category
+
 1.86.0 (2024-10-03)
 ------------------
 

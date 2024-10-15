@@ -1872,6 +1872,11 @@ module Aws::CodePipeline
     #   as rolling back the stage.
     #   @return [String]
     #
+    # @!attribute [rw] retry_configuration
+    #   The retry configuration specifies automatic retry for a failed
+    #   stage, along with the configured retry mode.
+    #   @return [Types::RetryConfiguration]
+    #
     # @!attribute [rw] conditions
     #   The conditions that are configured as failure conditions.
     #   @return [Array<Types::Condition>]
@@ -1880,6 +1885,7 @@ module Aws::CodePipeline
     #
     class FailureConditions < Struct.new(
       :result,
+      :retry_configuration,
       :conditions)
       SENSITIVE = []
       include Aws::Structure
@@ -4164,6 +4170,23 @@ module Aws::CodePipeline
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
+    # The retry configuration specifies automatic retry for a failed stage,
+    # along with the configured retry mode.
+    #
+    # @!attribute [rw] retry_mode
+    #   The method that you want to configure for automatic stage retry on
+    #   stage failure. You can specify to retry only failed action in the
+    #   stage or all actions in the stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryConfiguration AWS API Documentation
+    #
+    class RetryConfiguration < Struct.new(
+      :retry_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `RetryStageExecution` action.
     #
     # @!attribute [rw] pipeline_name
@@ -4205,6 +4228,35 @@ module Aws::CodePipeline
     #
     class RetryStageExecutionOutput < Struct.new(
       :pipeline_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a specific automatic retry on stage failure, including
+    # the attempt number and trigger.
+    #
+    # @!attribute [rw] auto_stage_retry_attempt
+    #   The number of attempts for a specific stage with automatic retry on
+    #   stage failure. One attempt is allowed for automatic stage retry on
+    #   failure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] manual_stage_retry_attempt
+    #   The number of attempts for a specific stage where manual retries
+    #   have been made upon stage failure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_retry_trigger
+    #   The latest trigger for a specific stage where manual or automatic
+    #   retries have been made upon stage failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageMetadata AWS API Documentation
+    #
+    class RetryStageMetadata < Struct.new(
+      :auto_stage_retry_attempt,
+      :manual_stage_retry_attempt,
+      :latest_retry_trigger)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5063,6 +5115,11 @@ module Aws::CodePipeline
     #   The state of the failure conditions for a stage.
     #   @return [Types::StageConditionState]
     #
+    # @!attribute [rw] retry_stage_metadata
+    #   he details of a specific automatic retry on stage failure, including
+    #   the attempt number and trigger.
+    #   @return [Types::RetryStageMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageState AWS API Documentation
     #
     class StageState < Struct.new(
@@ -5074,7 +5131,8 @@ module Aws::CodePipeline
       :latest_execution,
       :before_entry_condition_state,
       :on_success_condition_state,
-      :on_failure_condition_state)
+      :on_failure_condition_state,
+      :retry_stage_metadata)
       SENSITIVE = []
       include Aws::Structure
     end

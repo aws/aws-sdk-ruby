@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2024-10-10)
+------------------
+
+* Feature - Elastic Inference - Documentation update to add service shutdown notice.
+
 1.47.0 (2024-09-24)
 ------------------
 

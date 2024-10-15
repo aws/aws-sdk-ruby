@@ -70,6 +70,20 @@ module Aws::SupplyChain
       SENSITIVE: []
     end
 
+    class CreateInstanceRequest
+      attr_accessor instance_name: ::String
+      attr_accessor instance_description: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInstanceResponse
+      attr_accessor instance: Types::Instance
+      SENSITIVE: []
+    end
+
     class DataIntegrationFlow
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
@@ -195,6 +209,16 @@ module Aws::SupplyChain
       SENSITIVE: []
     end
 
+    class DeleteInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceResponse
+      attr_accessor instance: Types::Instance
+      SENSITIVE: []
+    end
+
     class GetBillOfMaterialsImportJobRequest
       attr_accessor instance_id: ::String
       attr_accessor job_id: ::String
@@ -229,6 +253,30 @@ module Aws::SupplyChain
       SENSITIVE: []
     end
 
+    class GetInstanceRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceResponse
+      attr_accessor instance: Types::Instance
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor instance_id: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor state: ("Initializing" | "Active" | "CreateFailed" | "DeleteFailed" | "Deleting" | "Deleted")
+      attr_accessor web_app_dns_domain: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor instance_name: ::String
+      attr_accessor instance_description: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor version_number: ::Float
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -257,6 +305,20 @@ module Aws::SupplyChain
 
     class ListDataLakeDatasetsResponse
       attr_accessor datasets: ::Array[Types::DataLakeDataset]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor instance_name_filter: ::Array[::String]
+      attr_accessor instance_state_filter: ::Array[("Initializing" | "Active" | "CreateFailed" | "DeleteFailed" | "Deleting" | "Deleted")]
+      SENSITIVE: []
+    end
+
+    class ListInstancesResponse
+      attr_accessor instances: ::Array[Types::Instance]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -343,6 +405,18 @@ module Aws::SupplyChain
 
     class UpdateDataLakeDatasetResponse
       attr_accessor dataset: Types::DataLakeDataset
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor instance_name: ::String
+      attr_accessor instance_description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceResponse
+      attr_accessor instance: Types::Instance
       SENSITIVE: []
     end
 

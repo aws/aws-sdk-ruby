@@ -38,6 +38,8 @@ module Aws::Transfer
     CertificateUsageType = Shapes::StringShape.new(name: 'CertificateUsageType')
     CompressionEnum = Shapes::StringShape.new(name: 'CompressionEnum')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectorFileTransferResult = Shapes::StructureShape.new(name: 'ConnectorFileTransferResult')
+    ConnectorFileTransferResults = Shapes::ListShape.new(name: 'ConnectorFileTransferResults')
     ConnectorId = Shapes::StringShape.new(name: 'ConnectorId')
     ConnectorSecurityPolicyName = Shapes::StringShape.new(name: 'ConnectorSecurityPolicyName')
     CopyStepDetails = Shapes::StructureShape.new(name: 'CopyStepDetails')
@@ -125,6 +127,7 @@ module Aws::Transfer
     ExecutionStepResult = Shapes::StructureShape.new(name: 'ExecutionStepResult')
     ExecutionStepResults = Shapes::ListShape.new(name: 'ExecutionStepResults')
     ExternalId = Shapes::StringShape.new(name: 'ExternalId')
+    FailureCode = Shapes::StringShape.new(name: 'FailureCode')
     FileLocation = Shapes::StructureShape.new(name: 'FileLocation')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     FilePaths = Shapes::ListShape.new(name: 'FilePaths')
@@ -161,6 +164,8 @@ module Aws::Transfer
     ListConnectorsResponse = Shapes::StructureShape.new(name: 'ListConnectorsResponse')
     ListExecutionsRequest = Shapes::StructureShape.new(name: 'ListExecutionsRequest')
     ListExecutionsResponse = Shapes::StructureShape.new(name: 'ListExecutionsResponse')
+    ListFileTransferResultsRequest = Shapes::StructureShape.new(name: 'ListFileTransferResultsRequest')
+    ListFileTransferResultsResponse = Shapes::StructureShape.new(name: 'ListFileTransferResultsResponse')
     ListHostKeysRequest = Shapes::StructureShape.new(name: 'ListHostKeysRequest')
     ListHostKeysResponse = Shapes::StructureShape.new(name: 'ListHostKeysResponse')
     ListProfilesRequest = Shapes::StructureShape.new(name: 'ListProfilesRequest')
@@ -303,6 +308,7 @@ module Aws::Transfer
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TlsSessionResumptionMode = Shapes::StringShape.new(name: 'TlsSessionResumptionMode')
     TransferId = Shapes::StringShape.new(name: 'TransferId')
+    TransferTableStatus = Shapes::StringShape.new(name: 'TransferTableStatus')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAccessRequest = Shapes::StructureShape.new(name: 'UpdateAccessRequest')
     UpdateAccessResponse = Shapes::StructureShape.new(name: 'UpdateAccessResponse')
@@ -358,6 +364,14 @@ module Aws::Transfer
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    ConnectorFileTransferResult.add_member(:file_path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "FilePath"))
+    ConnectorFileTransferResult.add_member(:status_code, Shapes::ShapeRef.new(shape: TransferTableStatus, required: true, location_name: "StatusCode"))
+    ConnectorFileTransferResult.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
+    ConnectorFileTransferResult.add_member(:failure_message, Shapes::ShapeRef.new(shape: Message, location_name: "FailureMessage"))
+    ConnectorFileTransferResult.struct_class = Types::ConnectorFileTransferResult
+
+    ConnectorFileTransferResults.member = Shapes::ShapeRef.new(shape: ConnectorFileTransferResult)
 
     CopyStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     CopyStepDetails.add_member(:destination_file_location, Shapes::ShapeRef.new(shape: InputFileLocation, location_name: "DestinationFileLocation"))
@@ -855,6 +869,16 @@ module Aws::Transfer
     ListExecutionsResponse.add_member(:executions, Shapes::ShapeRef.new(shape: ListedExecutions, required: true, location_name: "Executions"))
     ListExecutionsResponse.struct_class = Types::ListExecutionsResponse
 
+    ListFileTransferResultsRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
+    ListFileTransferResultsRequest.add_member(:transfer_id, Shapes::ShapeRef.new(shape: TransferId, required: true, location_name: "TransferId"))
+    ListFileTransferResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFileTransferResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListFileTransferResultsRequest.struct_class = Types::ListFileTransferResultsRequest
+
+    ListFileTransferResultsResponse.add_member(:file_transfer_results, Shapes::ShapeRef.new(shape: ConnectorFileTransferResults, required: true, location_name: "FileTransferResults"))
+    ListFileTransferResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFileTransferResultsResponse.struct_class = Types::ListFileTransferResultsResponse
+
     ListHostKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListHostKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListHostKeysRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -1304,6 +1328,7 @@ module Aws::Transfer
 
       api.metadata = {
         "apiVersion" => "2018-11-05",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "transfer",
         "jsonVersion" => "1.1",
         "protocol" => "json",
@@ -1796,6 +1821,24 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_file_transfer_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFileTransferResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFileTransferResultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFileTransferResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

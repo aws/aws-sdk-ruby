@@ -44,6 +44,17 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class AcceptCapacityReservationBillingOwnershipRequest
+      attr_accessor dry_run: bool
+      attr_accessor capacity_reservation_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptCapacityReservationBillingOwnershipResult
+      attr_accessor return: bool
+      SENSITIVE: []
+    end
+
     class AcceptReservedInstancesExchangeQuoteRequest
       attr_accessor dry_run: bool
       attr_accessor reserved_instance_ids: ::Array[::String]
@@ -472,6 +483,18 @@ module Aws::EC2
 
     class AssociateAddressResult
       attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateCapacityReservationBillingOwnerRequest
+      attr_accessor dry_run: bool
+      attr_accessor capacity_reservation_id: ::String
+      attr_accessor unused_reservation_billing_owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateCapacityReservationBillingOwnerResult
+      attr_accessor return: bool
       SENSITIVE: []
     end
 
@@ -1141,6 +1164,18 @@ module Aws::EC2
       attr_accessor placement_group_arn: ::String
       attr_accessor capacity_allocations: ::Array[Types::CapacityAllocation]
       attr_accessor reservation_type: ("default" | "capacity-block")
+      attr_accessor unused_reservation_billing_owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityReservationBillingRequest
+      attr_accessor capacity_reservation_id: ::String
+      attr_accessor requested_by: ::String
+      attr_accessor unused_reservation_billing_owner_id: ::String
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("pending" | "accepted" | "rejected" | "cancelled" | "revoked" | "expired")
+      attr_accessor status_message: ::String
+      attr_accessor capacity_reservation_info: Types::CapacityReservationInfo
       SENSITIVE: []
     end
 
@@ -1170,6 +1205,13 @@ module Aws::EC2
     class CapacityReservationGroup
       attr_accessor group_arn: ::String
       attr_accessor owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityReservationInfo
+      attr_accessor instance_type: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor tenancy: ("default" | "dedicated")
       SENSITIVE: []
     end
 
@@ -4087,6 +4129,22 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DescribeCapacityReservationBillingRequestsRequest
+      attr_accessor capacity_reservation_ids: ::Array[::String]
+      attr_accessor role: ("odcr-owner" | "unused-reservation-billing-owner")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DescribeCapacityReservationBillingRequestsResult
+      attr_accessor next_token: ::String
+      attr_accessor capacity_reservation_billing_requests: ::Array[Types::CapacityReservationBillingRequest]
+      SENSITIVE: []
+    end
+
     class DescribeCapacityReservationFleetsRequest
       attr_accessor capacity_reservation_fleet_ids: ::Array[::String]
       attr_accessor next_token: ::String
@@ -6549,6 +6607,18 @@ module Aws::EC2
       attr_accessor association_id: ::String
       attr_accessor public_ip: ::String
       attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateCapacityReservationBillingOwnerRequest
+      attr_accessor dry_run: bool
+      attr_accessor capacity_reservation_id: ::String
+      attr_accessor unused_reservation_billing_owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateCapacityReservationBillingOwnerResult
+      attr_accessor return: bool
       SENSITIVE: []
     end
 
@@ -12391,6 +12461,17 @@ module Aws::EC2
 
     class RegisterTransitGatewayMulticastGroupSourcesResult
       attr_accessor registered_multicast_group_sources: Types::TransitGatewayMulticastRegisteredGroupSources
+      SENSITIVE: []
+    end
+
+    class RejectCapacityReservationBillingOwnershipRequest
+      attr_accessor dry_run: bool
+      attr_accessor capacity_reservation_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectCapacityReservationBillingOwnershipResult
+      attr_accessor return: bool
       SENSITIVE: []
     end
 

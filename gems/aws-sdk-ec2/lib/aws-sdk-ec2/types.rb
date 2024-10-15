@@ -139,6 +139,39 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation for which to accept the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptCapacityReservationBillingOwnershipRequest AWS API Documentation
+    #
+    class AcceptCapacityReservationBillingOwnershipRequest < Struct.new(
+      :dry_run,
+      :capacity_reservation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptCapacityReservationBillingOwnershipResult AWS API Documentation
+    #
+    class AcceptCapacityReservationBillingOwnershipResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for accepting the quote.
     #
     # @!attribute [rw] dry_run
@@ -1922,6 +1955,44 @@ module Aws::EC2
     #
     class AssociateAddressResult < Struct.new(
       :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] unused_reservation_billing_owner_id
+    #   The ID of the consumer account to which assign billing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateCapacityReservationBillingOwnerRequest AWS API Documentation
+    #
+    class AssociateCapacityReservationBillingOwnerRequest < Struct.new(
+      :dry_run,
+      :capacity_reservation_id,
+      :unused_reservation_billing_owner_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateCapacityReservationBillingOwnerResult AWS API Documentation
+    #
+    class AssociateCapacityReservationBillingOwnerResult < Struct.new(
+      :return)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4588,6 +4659,11 @@ module Aws::EC2
     #   The type of Capacity Reservation.
     #   @return [String]
     #
+    # @!attribute [rw] unused_reservation_billing_owner_id
+    #   The ID of the Amazon Web Services account to which billing of the
+    #   unused capacity of the Capacity Reservation is assigned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -4614,7 +4690,62 @@ module Aws::EC2
       :capacity_reservation_fleet_id,
       :placement_group_arn,
       :capacity_allocations,
-      :reservation_type)
+      :reservation_type,
+      :unused_reservation_billing_owner_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a request to assign billing of the unused capacity
+    # of a Capacity Reservation.
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_by
+    #   The ID of the Amazon Web Services account that initiated the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] unused_reservation_billing_owner_id
+    #   The ID of the Amazon Web Services account to which the request was
+    #   sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The date and time, in UTC time format, at which the request was
+    #   initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the request. For more information, see [ View billing
+    #   assignment requests for a shared Amazon EC2 Capacity
+    #   Reservation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-billing-transfers.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Information about the status.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_info
+    #   Information about the Capacity Reservation.
+    #   @return [Types::CapacityReservationInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationBillingRequest AWS API Documentation
+    #
+    class CapacityReservationBillingRequest < Struct.new(
+      :capacity_reservation_id,
+      :requested_by,
+      :unused_reservation_billing_owner_id,
+      :last_update_time,
+      :status,
+      :status_message,
+      :capacity_reservation_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4800,6 +4931,30 @@ module Aws::EC2
     class CapacityReservationGroup < Struct.new(
       :group_arn,
       :owner_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a Capacity Reservation.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type for the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationInfo AWS API Documentation
+    #
+    class CapacityReservationInfo < Struct.new(
+      :instance_type,
+      :availability_zone,
+      :tenancy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8125,7 +8280,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
     #   @return [String]
     #
@@ -9567,7 +9722,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #   @return [Array<String>]
     #
     # @!attribute [rw] secondary_private_ip_addresses
@@ -9577,7 +9732,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #   @return [Array<String>]
     #
     # @!attribute [rw] secondary_private_ip_address_count
@@ -9588,7 +9743,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayRequest AWS API Documentation
@@ -12065,8 +12220,8 @@ module Aws::EC2
     #   Enables you to reference a security group across VPCs attached to a
     #   transit gateway to simplify security group management.
     #
-    #   This option is enabled by default. However, security group
-    #   referencing is disabled by default at the transit gateway level.
+    #   This option is set to `enable` by default. However, at the transit
+    #   gateway level the default is set to `disable`.
     #
     #   For more information about security group referencing, see [Security
     #   group referencing ][1] in the *Amazon Web Services Transit Gateways
@@ -17091,6 +17246,90 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] capacity_reservation_ids
+    #   The ID of the Capacity Reservation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role
+    #   Specify one of the following:
+    #
+    #   * `odcr-owner` - If you are the Capacity Reservation owner, specify
+    #     this value to view requests that you have initiated. Not supported
+    #     with the `requested-by` filter.
+    #
+    #   * `unused-reservation-billing-owner` - If you are the consumer
+    #     account, specify this value to view requests that have been sent
+    #     to you. Not supported with the `unused-reservation-billing-owner`
+    #     filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `status` - The state of the request (`pending` \| `accepted` \|
+    #     `rejected` \| `cancelled` \| `revoked` \| `expired`).
+    #
+    #   * `requested-by` - The account ID of the Capacity Reservation owner
+    #     that initiated the request. Not supported if you specify
+    #     `requested-by` for **Role**.
+    #
+    #   * `unused-reservation-billing-owner` - The ID of the consumer
+    #     account to which the request was sent. Not supported if you
+    #     specify `unused-reservation-billing-owner` for **Role**.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservationBillingRequestsRequest AWS API Documentation
+    #
+    class DescribeCapacityReservationBillingRequestsRequest < Struct.new(
+      :capacity_reservation_ids,
+      :role,
+      :next_token,
+      :max_results,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_billing_requests
+    #   Information about the request.
+    #   @return [Array<Types::CapacityReservationBillingRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservationBillingRequestsResult AWS API Documentation
+    #
+    class DescribeCapacityReservationBillingRequestsResult < Struct.new(
+      :next_token,
+      :capacity_reservation_billing_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] capacity_reservation_fleet_ids
     #   The IDs of the Capacity Reservation Fleets to describe.
     #   @return [Array<String>]
@@ -20690,9 +20929,6 @@ module Aws::EC2
     #
     #   * `iam-instance-profile.id` - The instance profile associated with
     #     the instance. Specified as an ID.
-    #
-    #   * `iam-instance-profile.name` - The instance profile associated with
-    #     the instance. Specified as an name.
     #
     #   * `image-id` - The ID of the image used to launch the instance.
     #
@@ -29670,6 +29906,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] unused_reservation_billing_owner_id
+    #   The ID of the consumer account to which the request was sent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateCapacityReservationBillingOwnerRequest AWS API Documentation
+    #
+    class DisassociateCapacityReservationBillingOwnerRequest < Struct.new(
+      :dry_run,
+      :capacity_reservation_id,
+      :unused_reservation_billing_owner_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateCapacityReservationBillingOwnerResult AWS API Documentation
+    #
+    class DisassociateCapacityReservationBillingOwnerResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_vpn_endpoint_id
     #   The ID of the Client VPN endpoint from which to disassociate the
     #   target network.
@@ -30916,9 +31190,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4, G5, or G6 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     #
@@ -30954,9 +31226,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4, G5, or G6 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     #
@@ -30974,9 +31244,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4, G5, or G6 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     #
@@ -30994,22 +31262,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Deprecated.
-    #
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     #
+    # Describes an elastic GPU.
+    #
     # @!attribute [rw] type
-    #   Deprecated.
-    #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
-    #
-    #    </note>
+    #   The elastic GPU type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse AWS API Documentation
@@ -31020,9 +31280,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4, G5, or G6 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     #
@@ -31072,6 +31330,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #  </note>
+    #
     # Describes an elastic inference accelerator.
     #
     # @!attribute [rw] type
@@ -31096,6 +31358,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #  </note>
+    #
     # Describes the association between an instance and an elastic inference
     # accelerator.
     #
@@ -39165,6 +39431,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #  </note>
+    #
     # Describes the Inference accelerators for the instance type.
     #
     # @!attribute [rw] accelerators
@@ -39185,6 +39455,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #  </note>
+    #
     # Describes the Inference accelerators for the instance type.
     #
     # @!attribute [rw] count
@@ -39214,6 +39488,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #  </note>
+    #
     # Describes the memory available to the inference accelerator.
     #
     # @!attribute [rw] size_in_mi_b
@@ -39273,15 +39551,17 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_associations
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuAssociation>]
     #
     # @!attribute [rw] elastic_inference_accelerator_associations
-    #   The elastic inference accelerator associated with the instance.
+    #   Deprecated
+    #
+    #   <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticInferenceAcceleratorAssociation>]
     #
     # @!attribute [rw] network_interfaces
@@ -41233,9 +41513,6 @@ module Aws::EC2
     #
     #   * For instance types with FPGA accelerators, specify `fpga`.
     #
-    #   * For instance types with inference accelerators, specify
-    #     `inference`.
-    #
     #   Default: Any accelerator type
     #   @return [Array<String>]
     #
@@ -41702,9 +41979,6 @@ module Aws::EC2
     #   * To include instance types with GPU hardware, specify `gpu`.
     #
     #   * To include instance types with FPGA hardware, specify `fpga`.
-    #
-    #   * To include instance types with inference hardware, specify
-    #     `inference`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -45002,6 +45276,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #  </note>
+    #
     # Describes an elastic inference accelerator.
     #
     # @!attribute [rw] type
@@ -45025,6 +45303,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #  </note>
+    #
     # Describes an elastic inference accelerator.
     #
     # @!attribute [rw] type
@@ -49986,11 +50268,13 @@ module Aws::EC2
     #   Resolver in this subnet should return synthetic IPv6 addresses for
     #   IPv4-only destinations.
     #
-    #   You must first configure a NAT gateway in a public subnet (separate
+    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
     #   from the subnet containing the IPv6-only workloads). For example,
     #   the subnet containing the NAT gateway should have a `0.0.0.0/0`
     #   route pointing to the internet gateway. For more information, see
     #   [Configure DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -56271,6 +56555,39 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation for which to reject the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectCapacityReservationBillingOwnershipRequest AWS API Documentation
+    #
+    class RejectCapacityReservationBillingOwnershipRequest < Struct.new(
+      :dry_run,
+      :capacity_reservation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectCapacityReservationBillingOwnershipResult AWS API Documentation
+    #
+    class RejectCapacityReservationBillingOwnershipResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transit_gateway_multicast_domain_id
     #   The ID of the transit gateway multicast domain.
     #   @return [String]
@@ -57337,31 +57654,15 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_specifications
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   An elastic inference accelerator to associate with the instance.
-    #   Elastic inference accelerators are a resource you can attach to your
-    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
-    #   workloads.
+    #   Deprecated.
     #
-    #   You cannot specify accelerators from different generations in the
-    #   same request.
-    #
-    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    #   customers to Amazon Elastic Inference (EI), and will help current
-    #   customers migrate their workloads to options that offer better price
-    #   and performance. After April 15, 2023, new customers will not be
-    #   able to launch instances with Amazon EI accelerators in Amazon
-    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
-    #   used Amazon EI at least once during the past 30-day period are
-    #   considered current customers and will be able to continue using the
-    #   service.
+    #   <note markdown="1"> Amazon Elastic Inference is no longer available.
     #
     #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAccelerator>]
@@ -58797,31 +59098,15 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_specifications
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   An elastic inference accelerator to associate with the instance.
-    #   Elastic inference accelerators are a resource you can attach to your
-    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
-    #   workloads.
+    #   Deprecated.
     #
-    #   You cannot specify accelerators from different generations in the
-    #   same request.
-    #
-    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    #   customers to Amazon Elastic Inference (EI), and will help current
-    #   customers migrate their workloads to options that offer better price
-    #   and performance. After April 15, 2023, new customers will not be
-    #   able to launch instances with Amazon EI accelerators in Amazon
-    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
-    #   used Amazon EI at least once during the past 30-day period are
-    #   considered current customers and will be able to continue using the
-    #   service.
+    #   <note markdown="1"> Amazon Elastic Inference is no longer available.
     #
     #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAcceleratorResponse>]
@@ -59909,15 +60194,9 @@ module Aws::EC2
     # @!attribute [rw] elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
     #
-    #   <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to new
-    #   customers. For more information, see [Amazon Elastic Inference
-    #   FAQs][1].
+    #   <note markdown="1"> Amazon Elastic Inference is no longer available.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/machine-learning/elastic-inference/faqs/
     #   @return [Array<Types::ElasticInferenceAccelerator>]
     #
     # @!attribute [rw] tag_specifications

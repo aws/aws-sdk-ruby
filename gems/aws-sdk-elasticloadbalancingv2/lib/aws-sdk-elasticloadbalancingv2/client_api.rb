@@ -25,6 +25,7 @@ module Aws::ElasticLoadBalancingV2
     AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
     AddTrustStoreRevocationsInput = Shapes::StructureShape.new(name: 'AddTrustStoreRevocationsInput')
     AddTrustStoreRevocationsOutput = Shapes::StructureShape.new(name: 'AddTrustStoreRevocationsOutput')
+    AdministrativeOverride = Shapes::StructureShape.new(name: 'AdministrativeOverride')
     AllocationId = Shapes::StringShape.new(name: 'AllocationId')
     AllocationIdNotFoundException = Shapes::StructureShape.new(name: 'AllocationIdNotFoundException', error: {"code"=>"AllocationIdNotFound", "httpStatusCode"=>400, "senderFault"=>true})
     AlpnPolicyName = Shapes::ListShape.new(name: 'AlpnPolicyName')
@@ -318,6 +319,8 @@ module Aws::ElasticLoadBalancingV2
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetAdministrativeOverrideReasonEnum = Shapes::StringShape.new(name: 'TargetAdministrativeOverrideReasonEnum')
+    TargetAdministrativeOverrideStateEnum = Shapes::StringShape.new(name: 'TargetAdministrativeOverrideStateEnum')
     TargetDescription = Shapes::StructureShape.new(name: 'TargetDescription')
     TargetDescriptions = Shapes::ListShape.new(name: 'TargetDescriptions')
     TargetGroup = Shapes::StructureShape.new(name: 'TargetGroup')
@@ -413,6 +416,11 @@ module Aws::ElasticLoadBalancingV2
 
     AddTrustStoreRevocationsOutput.add_member(:trust_store_revocations, Shapes::ShapeRef.new(shape: TrustStoreRevocations, location_name: "TrustStoreRevocations"))
     AddTrustStoreRevocationsOutput.struct_class = Types::AddTrustStoreRevocationsOutput
+
+    AdministrativeOverride.add_member(:state, Shapes::ShapeRef.new(shape: TargetAdministrativeOverrideStateEnum, location_name: "State"))
+    AdministrativeOverride.add_member(:reason, Shapes::ShapeRef.new(shape: TargetAdministrativeOverrideReasonEnum, location_name: "Reason"))
+    AdministrativeOverride.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    AdministrativeOverride.struct_class = Types::AdministrativeOverride
 
     AllocationIdNotFoundException.struct_class = Types::AllocationIdNotFoundException
 
@@ -1181,6 +1189,7 @@ module Aws::ElasticLoadBalancingV2
     TargetHealthDescription.add_member(:health_check_port, Shapes::ShapeRef.new(shape: HealthCheckPort, location_name: "HealthCheckPort"))
     TargetHealthDescription.add_member(:target_health, Shapes::ShapeRef.new(shape: TargetHealth, location_name: "TargetHealth"))
     TargetHealthDescription.add_member(:anomaly_detection, Shapes::ShapeRef.new(shape: AnomalyDetection, location_name: "AnomalyDetection"))
+    TargetHealthDescription.add_member(:administrative_override, Shapes::ShapeRef.new(shape: AdministrativeOverride, location_name: "AdministrativeOverride"))
     TargetHealthDescription.struct_class = Types::TargetHealthDescription
 
     TargetHealthDescriptions.member = Shapes::ShapeRef.new(shape: TargetHealthDescription)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-10-10)
+------------------
+
+* Feature - Adding new "DELIVERED" enum value for Outposts Order status
+
 1.69.0 (2024-09-24)
 ------------------
 

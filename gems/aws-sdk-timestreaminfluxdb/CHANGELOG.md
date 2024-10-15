@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2024-10-10)
+------------------
+
+* Feature - This release updates our regex based validation rules in regards to valid DbInstance and DbParameterGroup name.
+
 1.13.0 (2024-09-30)
 ------------------
 

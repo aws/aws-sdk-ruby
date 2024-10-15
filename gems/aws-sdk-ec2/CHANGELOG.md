@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.481.0 (2024-10-10)
+------------------
+
+* Feature - This release adds support for assigning the billing of shared Amazon EC2 On-Demand Capacity Reservations.
+
 1.480.0 (2024-10-04)
 ------------------
 

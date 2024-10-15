@@ -97,6 +97,17 @@ module Aws
                                    ) -> _AcceptAddressTransferResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptAddressTransferResponseSuccess
 
+      interface _AcceptCapacityReservationBillingOwnershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptCapacityReservationBillingOwnershipResult]
+        def return: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#accept_capacity_reservation_billing_ownership-instance_method
+      def accept_capacity_reservation_billing_ownership: (
+                                                           ?dry_run: bool,
+                                                           capacity_reservation_id: ::String
+                                                         ) -> _AcceptCapacityReservationBillingOwnershipResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptCapacityReservationBillingOwnershipResponseSuccess
+
       interface _AcceptReservedInstancesExchangeQuoteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AcceptReservedInstancesExchangeQuoteResult]
         def exchange_id: () -> ::String
@@ -342,6 +353,18 @@ module Aws
                                ?allow_reassociation: bool
                              ) -> _AssociateAddressResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAddressResponseSuccess
+
+      interface _AssociateCapacityReservationBillingOwnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateCapacityReservationBillingOwnerResult]
+        def return: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#associate_capacity_reservation_billing_owner-instance_method
+      def associate_capacity_reservation_billing_owner: (
+                                                          ?dry_run: bool,
+                                                          capacity_reservation_id: ::String,
+                                                          unused_reservation_billing_owner_id: ::String
+                                                        ) -> _AssociateCapacityReservationBillingOwnerResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateCapacityReservationBillingOwnerResponseSuccess
 
       interface _AssociateClientVpnTargetNetworkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateClientVpnTargetNetworkResult]
@@ -5068,6 +5091,27 @@ module Aws
                                              ) -> _DescribeCapacityBlockOfferingsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCapacityBlockOfferingsResponseSuccess
 
+      interface _DescribeCapacityReservationBillingRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCapacityReservationBillingRequestsResult]
+        def next_token: () -> ::String
+        def capacity_reservation_billing_requests: () -> ::Array[Types::CapacityReservationBillingRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_capacity_reservation_billing_requests-instance_method
+      def describe_capacity_reservation_billing_requests: (
+                                                            ?capacity_reservation_ids: Array[::String],
+                                                            role: ("odcr-owner" | "unused-reservation-billing-owner"),
+                                                            ?next_token: ::String,
+                                                            ?max_results: ::Integer,
+                                                            ?filters: Array[
+                                                              {
+                                                                name: ::String?,
+                                                                values: Array[::String]?
+                                                              },
+                                                            ],
+                                                            ?dry_run: bool
+                                                          ) -> _DescribeCapacityReservationBillingRequestsResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCapacityReservationBillingRequestsResponseSuccess
+
       interface _DescribeCapacityReservationFleetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCapacityReservationFleetsResult]
         def capacity_reservation_fleets: () -> ::Array[Types::CapacityReservationFleet]
@@ -8083,6 +8127,18 @@ module Aws
                                   ?dry_run: bool
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisassociateCapacityReservationBillingOwnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateCapacityReservationBillingOwnerResult]
+        def return: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#disassociate_capacity_reservation_billing_owner-instance_method
+      def disassociate_capacity_reservation_billing_owner: (
+                                                             ?dry_run: bool,
+                                                             capacity_reservation_id: ::String,
+                                                             unused_reservation_billing_owner_id: ::String
+                                                           ) -> _DisassociateCapacityReservationBillingOwnerResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateCapacityReservationBillingOwnerResponseSuccess
 
       interface _DisassociateClientVpnTargetNetworkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateClientVpnTargetNetworkResult]
@@ -11505,6 +11561,17 @@ module Aws
                                                               ?dry_run: bool
                                                             ) -> _RegisterTransitGatewayMulticastGroupSourcesResponseSuccess
                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTransitGatewayMulticastGroupSourcesResponseSuccess
+
+      interface _RejectCapacityReservationBillingOwnershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectCapacityReservationBillingOwnershipResult]
+        def return: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#reject_capacity_reservation_billing_ownership-instance_method
+      def reject_capacity_reservation_billing_ownership: (
+                                                           ?dry_run: bool,
+                                                           capacity_reservation_id: ::String
+                                                         ) -> _RejectCapacityReservationBillingOwnershipResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectCapacityReservationBillingOwnershipResponseSuccess
 
       interface _RejectTransitGatewayMulticastDomainAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RejectTransitGatewayMulticastDomainAssociationsResult]

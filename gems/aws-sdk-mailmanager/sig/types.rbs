@@ -112,7 +112,7 @@ module Aws::MailManager
     end
 
     class ArchiveStringToEvaluate
-      attr_accessor attribute: ("TO" | "FROM" | "CC" | "SUBJECT")
+      attr_accessor attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -290,6 +290,13 @@ module Aws::MailManager
     class DropAction < Aws::EmptyStructure
     end
 
+    class Envelope
+      attr_accessor from: ::String
+      attr_accessor helo: ::String
+      attr_accessor to: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ExportDestinationConfiguration
       attr_accessor s3: Types::S3ExportDestinationConfiguration
       attr_accessor unknown: untyped
@@ -372,7 +379,9 @@ module Aws::MailManager
     end
 
     class GetArchiveMessageResponse
+      attr_accessor envelope: Types::Envelope
       attr_accessor message_download_link: ::String
+      attr_accessor metadata: Types::Metadata
       SENSITIVE: []
     end
 
@@ -727,6 +736,18 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class Metadata
+      attr_accessor ingress_point_id: ::String
+      attr_accessor rule_set_id: ::String
+      attr_accessor sender_hostname: ::String
+      attr_accessor sender_ip_address: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor tls_cipher_suite: ::String
+      attr_accessor tls_protocol: ::String
+      attr_accessor traffic_policy_id: ::String
+      SENSITIVE: [:sender_ip_address]
+    end
+
     class NoAuthentication < Aws::EmptyStructure
     end
 
@@ -798,18 +819,22 @@ module Aws::MailManager
       attr_accessor archived_message_id: ::String
       attr_accessor cc: ::String
       attr_accessor date: ::String
+      attr_accessor envelope: Types::Envelope
       attr_accessor from: ::String
       attr_accessor has_attachments: bool
       attr_accessor in_reply_to: ::String
+      attr_accessor ingress_point_id: ::String
       attr_accessor message_id: ::String
       attr_accessor received_headers: ::Array[::String]
       attr_accessor received_timestamp: ::Time
+      attr_accessor sender_hostname: ::String
+      attr_accessor sender_ip_address: ::String
       attr_accessor subject: ::String
       attr_accessor to: ::String
       attr_accessor x_mailer: ::String
       attr_accessor x_original_mailer: ::String
       attr_accessor x_priority: ::String
-      SENSITIVE: []
+      SENSITIVE: [:sender_ip_address]
     end
 
     class Rule
@@ -1030,6 +1055,7 @@ module Aws::MailManager
       attr_accessor export_destination_configuration: Types::ExportDestinationConfiguration
       attr_accessor filters: Types::ArchiveFilters
       attr_accessor from_timestamp: ::Time
+      attr_accessor include_metadata: bool
       attr_accessor max_results: ::Integer
       attr_accessor to_timestamp: ::Time
       SENSITIVE: []

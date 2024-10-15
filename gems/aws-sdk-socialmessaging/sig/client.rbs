@@ -1,0 +1,280 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SocialMessaging
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateWhatsAppBusinessAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWhatsAppBusinessAccountOutput]
+        def signup_callback_result: () -> Types::WhatsAppSignupCallbackResult
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#associate_whats_app_business_account-instance_method
+      def associate_whats_app_business_account: (
+                                                  ?signup_callback: {
+                                                    access_token: ::String
+                                                  },
+                                                  ?setup_finalization: {
+                                                    associate_in_progress_token: ::String,
+                                                    phone_numbers: Array[
+                                                      {
+                                                        id: ::String,
+                                                        two_factor_pin: ::String,
+                                                        data_localization_region: ::String?,
+                                                        tags: Array[
+                                                          {
+                                                            key: ::String,
+                                                            value: ::String?
+                                                          },
+                                                        ]?
+                                                      },
+                                                    ],
+                                                    phone_number_parent: ::String?,
+                                                    waba: {
+                                                      id: ::String?,
+                                                      event_destinations: Array[
+                                                        {
+                                                          event_destination_arn: ::String
+                                                        },
+                                                      ]?,
+                                                      tags: Array[
+                                                        {
+                                                          key: ::String,
+                                                          value: ::String?
+                                                        },
+                                                      ]?
+                                                    }?
+                                                  }
+                                                ) -> _AssociateWhatsAppBusinessAccountResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateWhatsAppBusinessAccountResponseSuccess
+
+      interface _DeleteWhatsAppMessageMediaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWhatsAppMessageMediaOutput]
+        def success: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#delete_whats_app_message_media-instance_method
+      def delete_whats_app_message_media: (
+                                            media_id: ::String,
+                                            origination_phone_number_id: ::String
+                                          ) -> _DeleteWhatsAppMessageMediaResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWhatsAppMessageMediaResponseSuccess
+
+      interface _DisassociateWhatsAppBusinessAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateWhatsAppBusinessAccountOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#disassociate_whats_app_business_account-instance_method
+      def disassociate_whats_app_business_account: (
+                                                     id: ::String
+                                                   ) -> _DisassociateWhatsAppBusinessAccountResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateWhatsAppBusinessAccountResponseSuccess
+
+      interface _GetLinkedWhatsAppBusinessAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLinkedWhatsAppBusinessAccountOutput]
+        def account: () -> Types::LinkedWhatsAppBusinessAccount
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#get_linked_whats_app_business_account-instance_method
+      def get_linked_whats_app_business_account: (
+                                                   id: ::String
+                                                 ) -> _GetLinkedWhatsAppBusinessAccountResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkedWhatsAppBusinessAccountResponseSuccess
+
+      interface _GetLinkedWhatsAppBusinessAccountPhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLinkedWhatsAppBusinessAccountPhoneNumberOutput]
+        def phone_number: () -> Types::WhatsAppPhoneNumberDetail
+        def linked_whats_app_business_account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#get_linked_whats_app_business_account_phone_number-instance_method
+      def get_linked_whats_app_business_account_phone_number: (
+                                                                id: ::String
+                                                              ) -> _GetLinkedWhatsAppBusinessAccountPhoneNumberResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkedWhatsAppBusinessAccountPhoneNumberResponseSuccess
+
+      interface _GetWhatsAppMessageMediaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWhatsAppMessageMediaOutput]
+        def mime_type: () -> ::String
+        def file_size: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#get_whats_app_message_media-instance_method
+      def get_whats_app_message_media: (
+                                         media_id: ::String,
+                                         origination_phone_number_id: ::String,
+                                         ?metadata_only: bool,
+                                         ?destination_s3_presigned_url: {
+                                           url: ::String,
+                                           headers: Hash[::String, ::String]
+                                         },
+                                         ?destination_s3_file: {
+                                           bucket_name: ::String,
+                                           key: ::String
+                                         }
+                                       ) -> _GetWhatsAppMessageMediaResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWhatsAppMessageMediaResponseSuccess
+
+      interface _ListLinkedWhatsAppBusinessAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLinkedWhatsAppBusinessAccountsOutput]
+        def linked_accounts: () -> ::Array[Types::LinkedWhatsAppBusinessAccountSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#list_linked_whats_app_business_accounts-instance_method
+      def list_linked_whats_app_business_accounts: (
+                                                     ?next_token: ::String,
+                                                     ?max_results: ::Integer
+                                                   ) -> _ListLinkedWhatsAppBusinessAccountsResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLinkedWhatsAppBusinessAccountsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def status_code: () -> ::Integer
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PostWhatsAppMessageMediaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostWhatsAppMessageMediaOutput]
+        def media_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#post_whats_app_message_media-instance_method
+      def post_whats_app_message_media: (
+                                          origination_phone_number_id: ::String,
+                                          ?source_s3_presigned_url: {
+                                            url: ::String,
+                                            headers: Hash[::String, ::String]
+                                          },
+                                          ?source_s3_file: {
+                                            bucket_name: ::String,
+                                            key: ::String
+                                          }
+                                        ) -> _PostWhatsAppMessageMediaResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostWhatsAppMessageMediaResponseSuccess
+
+      interface _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutWhatsAppBusinessAccountEventDestinationsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#put_whats_app_business_account_event_destinations-instance_method
+      def put_whats_app_business_account_event_destinations: (
+                                                               id: ::String,
+                                                               event_destinations: Array[
+                                                                 {
+                                                                   event_destination_arn: ::String
+                                                                 },
+                                                               ]
+                                                             ) -> _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
+
+      interface _SendWhatsAppMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendWhatsAppMessageOutput]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#send_whats_app_message-instance_method
+      def send_whats_app_message: (
+                                    origination_phone_number_id: ::String,
+                                    message: ::String,
+                                    meta_api_version: ::String
+                                  ) -> _SendWhatsAppMessageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendWhatsAppMessageResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

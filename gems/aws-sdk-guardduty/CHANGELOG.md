@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-10-11)
+------------------
+
+* Feature - Added a new field for network connection details.
+
 1.103.0 (2024-09-24)
 ------------------
 

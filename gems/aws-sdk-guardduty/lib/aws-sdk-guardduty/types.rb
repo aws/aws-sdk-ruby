@@ -5868,6 +5868,11 @@ module Aws::GuardDuty
     #   The local IP information of the connection.
     #   @return [Types::LocalIpDetails]
     #
+    # @!attribute [rw] local_network_interface
+    #   The EC2 instance's local elastic network interface utilized for the
+    #   connection.
+    #   @return [String]
+    #
     # @!attribute [rw] remote_ip_details
     #   The remote IP information of the connection.
     #   @return [Types::RemoteIpDetails]
@@ -5884,6 +5889,7 @@ module Aws::GuardDuty
       :local_port_details,
       :protocol,
       :local_ip_details,
+      :local_network_interface,
       :remote_ip_details,
       :remote_port_details)
       SENSITIVE = []

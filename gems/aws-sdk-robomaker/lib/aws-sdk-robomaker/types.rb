@@ -455,8 +455,7 @@ module Aws::RoboMaker
     #   @return [Array<Types::SourceConfig>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite (ROS distribuition) used by the robot
-    #   application.
+    #   The robot software suite used by the robot application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] tags
@@ -498,8 +497,7 @@ module Aws::RoboMaker
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite (ROS distribution) used by the robot
-    #   application.
+    #   The robot software suite used by the robot application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] last_updated_at
@@ -584,8 +582,7 @@ module Aws::RoboMaker
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite (ROS distribution) used by the robot
-    #   application.
+    #   The robot software suite used by the robot application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] last_updated_at
@@ -697,8 +694,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite (ROS distribution) used by the simulation
-    #   application.
+    #   The robot software suite used by the simulation application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -750,7 +746,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite (ROS distribution).
+    #   Information about the robot software suite.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -845,7 +841,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite (ROS distribution).
+    #   Information about the robot software suite.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -2040,8 +2036,7 @@ module Aws::RoboMaker
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite (ROS distribution) used by the robot
-    #   application.
+    #   The robot software suite used by the robot application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] revision_id
@@ -2192,7 +2187,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite (ROS distribution).
+    #   Information about the robot software suite.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -4282,7 +4277,7 @@ module Aws::RoboMaker
     #   @return [Time]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about a robot software suite (ROS distribution).
+    #   Information about a robot software suite.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationSummary AWS API Documentation
@@ -4343,14 +4338,16 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # Information about a robot software suite (ROS distribution).
+    # Information about a robot software suite.
     #
     # @!attribute [rw] name
-    #   The name of the robot software suite (ROS distribution).
+    #   The name of the robot software suite. `General` is the only
+    #   supported value.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the robot software suite (ROS distribution).
+    #   The version of the robot software suite. Not applicable for General
+    #   software suite.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotSoftwareSuite AWS API Documentation
@@ -4439,6 +4436,8 @@ module Aws::RoboMaker
     #
     # @!attribute [rw] world_configs
     #   A list of world configurations.
+    #
+    #   This API is no longer supported and will throw an error if used.
     #   @return [Array<Types::WorldConfig>]
     #
     # @!attribute [rw] use_default_upload_configurations
@@ -4498,7 +4497,7 @@ module Aws::RoboMaker
     #   @return [Time]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about a robot software suite (ROS distribution).
+    #   Information about a robot software suite.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] simulation_software_suite
@@ -4890,11 +4889,13 @@ module Aws::RoboMaker
     # Information about a simulation software suite.
     #
     # @!attribute [rw] name
-    #   The name of the simulation software suite.
+    #   The name of the simulation software suite. `SimulationRuntime` is
+    #   the only supported value.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the simulation software suite.
+    #   The version of the simulation software suite. Not applicable for
+    #   `SimulationRuntime`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationSoftwareSuite AWS API Documentation
@@ -5404,8 +5405,7 @@ module Aws::RoboMaker
     #   @return [Array<Types::SourceConfig>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite (ROS distribution) used by the robot
-    #   application.
+    #   The robot software suite used by the robot application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] current_revision_id
@@ -5446,8 +5446,7 @@ module Aws::RoboMaker
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite (ROS distribution) used by the robot
-    #   application.
+    #   The robot software suite used by the robot application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] last_updated_at
@@ -5492,7 +5491,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite (ROS distribution).
+    #   Information about the robot software suite.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -5544,7 +5543,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite (ROS distribution).
+    #   Information about the robot software suite.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -5646,9 +5645,10 @@ module Aws::RoboMaker
     #   It is appended to the simulation output location to determine the
     #   final path.
     #
-    #   For example, if your simulation output location is `s3://my-bucket`
-    #   and your upload configuration name is `robot-test`, your files will
-    #   be uploaded to `s3://my-bucket/<simid>/<runid>/robot-test`.
+    #   For example, if your simulation output location is
+    #   `s3://amzn-s3-demo-bucket` and your upload configuration name is
+    #   `robot-test`, your files will be uploaded to
+    #   `s3://amzn-s3-demo-bucket/<simid>/<runid>/robot-test`.
     #   @return [String]
     #
     # @!attribute [rw] path

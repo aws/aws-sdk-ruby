@@ -651,7 +651,7 @@ module Aws::Transfer
     #   The landing directory (folder) for files transferred by using the AS2
     #   protocol.
     #
-    #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory`.
+    #   A `BaseDirectory` example is `/amzn-s3-demo-bucket/home/mydirectory`.
     #
     # @option params [required, String] :access_role
     #   Connectors are used to send files using either the AS2 or SFTP
@@ -3030,6 +3030,73 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Returns real-time updates and detailed information on the status of
+    # each individual file being transferred in a specific file transfer
+    # operation. You specify the file transfer by providing its
+    # `ConnectorId` and its `TransferId`.
+    #
+    # <note markdown="1"> File transfer results are available up to 7 days after an operation
+    # has been requested.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :connector_id
+    #   A unique identifier for a connector. This value should match the value
+    #   supplied to the corresponding `StartFileTransfer` call.
+    #
+    # @option params [required, String] :transfer_id
+    #   A unique identifier for a file transfer. This value should match the
+    #   value supplied to the corresponding `StartFileTransfer` call.
+    #
+    # @option params [String] :next_token
+    #   If there are more file details than returned in this call, use this
+    #   value for a subsequent call to `ListFileTransferResults` to retrieve
+    #   them.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of files to return in a single page. Note that
+    #   currently you can specify a maximum of 10 file paths in a single
+    #   [StartFileTransfer][1] operation. Thus, the maximum number of file
+    #   transfer results that can be returned in a single page is 10.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_StartFileTransfer.html
+    #
+    # @return [Types::ListFileTransferResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFileTransferResultsResponse#file_transfer_results #file_transfer_results} => Array&lt;Types::ConnectorFileTransferResult&gt;
+    #   * {Types::ListFileTransferResultsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_file_transfer_results({
+    #     connector_id: "ConnectorId", # required
+    #     transfer_id: "TransferId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_transfer_results #=> Array
+    #   resp.file_transfer_results[0].file_path #=> String
+    #   resp.file_transfer_results[0].status_code #=> String, one of "QUEUED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.file_transfer_results[0].failure_code #=> String
+    #   resp.file_transfer_results[0].failure_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListFileTransferResults AWS API Documentation
+    #
+    # @overload list_file_transfer_results(params = {})
+    # @param [Hash] params ({})
+    def list_file_transfer_results(params = {}, options = {})
+      req = build_request(:list_file_transfer_results, params)
+      req.send_request(options)
+    end
+
     # Returns a list of host keys for the server that's specified by the
     # `ServerId` parameter.
     #
@@ -3525,9 +3592,9 @@ module Aws::Transfer
     # @option params [Array<String>] :send_file_paths
     #   One or more source paths for the Amazon S3 storage. Each string
     #   represents a source file path for one outbound file transfer. For
-    #   example, ` DOC-EXAMPLE-BUCKET/myfile.txt `.
+    #   example, ` amzn-s3-demo-bucket/myfile.txt `.
     #
-    #   <note markdown="1"> Replace ` DOC-EXAMPLE-BUCKET ` with one of your actual buckets.
+    #   <note markdown="1"> Replace ` amzn-s3-demo-bucket ` with one of your actual buckets.
     #
     #    </note>
     #
@@ -4048,7 +4115,7 @@ module Aws::Transfer
     # @option params [String] :base_directory
     #   To change the landing directory (folder) for files that are
     #   transferred, provide the bucket folder that you want to use; for
-    #   example, `/DOC-EXAMPLE-BUCKET/home/mydirectory `.
+    #   example, `/amzn-s3-demo-bucket/home/mydirectory `.
     #
     # @option params [String] :access_role
     #   Connectors are used to send files using either the AS2 or SFTP
@@ -4417,10 +4484,10 @@ module Aws::Transfer
     #   directly to it.
     #
     #   <note markdown="1"> After May 19, 2021, you won't be able to create a server using
-    #   `EndpointType=VPC_ENDPOINT` in your Amazon Web Servicesaccount if your
-    #   account hasn't already done so before May 19, 2021. If you have
+    #   `EndpointType=VPC_ENDPOINT` in your Amazon Web Services account if
+    #   your account hasn't already done so before May 19, 2021. If you have
     #   already created servers with `EndpointType=VPC_ENDPOINT` in your
-    #   Amazon Web Servicesaccount on or before May 19, 2021, you will not be
+    #   Amazon Web Services account on or before May 19, 2021, you will not be
     #   affected. After this date, use `EndpointType`=`VPC`.
     #
     #    For more information, see
@@ -4852,7 +4919,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

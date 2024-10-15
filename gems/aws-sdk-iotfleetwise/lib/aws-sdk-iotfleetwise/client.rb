@@ -2004,7 +2004,7 @@ module Aws::IoTFleetWise
     #   resp = client.list_campaigns({
     #     next_token: "nextToken",
     #     max_results: 1,
-    #     status: "status",
+    #     status: "statusStr",
     #   })
     #
     # @example Response structure
@@ -3616,7 +3616,7 @@ module Aws::IoTFleetWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

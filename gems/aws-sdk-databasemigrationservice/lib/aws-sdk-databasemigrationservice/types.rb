@@ -484,12 +484,10 @@ module Aws::DatabaseMigrationService
     #   single DCU is 2GB of RAM, with 1 DCU as the minimum value allowed.
     #   The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128,
     #   192, 256, and 384. So, the minimum DCU value that you can specify
-    #   for DMS Serverless is 1. You don't have to specify a value for the
-    #   `MinCapacityUnits` parameter. If you don't set this value, DMS
-    #   scans the current activity of available source tables to identify an
-    #   optimum setting for this parameter. If there is no current source
-    #   activity or DMS can't otherwise identify a more appropriate value,
-    #   it sets this parameter to the minimum DCU value allowed, 1.
+    #   for DMS Serverless is 1. If you don't set this value, DMS sets this
+    #   parameter to the minimum DCU value allowed, 1. If there is no
+    #   current source activity, DMS scales down your replication until it
+    #   reaches the value specified in `MinCapacityUnits`.
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
@@ -591,6 +589,82 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] data_migration_name
+    #   A user-friendly name for the data migration. Data migration names
+    #   have the following constraints:
+    #
+    #   * Must begin with a letter, and can only contain ASCII letters,
+    #     digits, and hyphens.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    #   * Length must be from 1 to 255 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_project_identifier
+    #   An identifier for the migration project.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_migration_type
+    #   Specifies if the data migration is full-load only, change data
+    #   capture (CDC) only, or full-load and CDC.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The Amazon Resource Name (ARN) for the service access role that you
+    #   want to use to create the data migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_cloudwatch_logs
+    #   Specifies whether to enable CloudWatch logs for the data migration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source_data_settings
+    #   Specifies information about the source data provider.
+    #   @return [Array<Types::SourceDataSetting>]
+    #
+    # @!attribute [rw] number_of_jobs
+    #   The number of parallel jobs that trigger parallel threads to unload
+    #   the tables from the source, and then load them to the target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags to be assigned to the data migration.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] selection_rules
+    #   An optional JSON string specifying what tables, views, and schemas
+    #   to include or exclude from the migration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateDataMigrationMessage AWS API Documentation
+    #
+    class CreateDataMigrationMessage < Struct.new(
+      :data_migration_name,
+      :migration_project_identifier,
+      :data_migration_type,
+      :service_access_role_arn,
+      :enable_cloudwatch_logs,
+      :source_data_settings,
+      :number_of_jobs,
+      :tags,
+      :selection_rules)
+      SENSITIVE = [:selection_rules]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration
+    #   Information about the created data migration.
+    #   @return [Types::DataMigration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateDataMigrationResponse AWS API Documentation
+    #
+    class CreateDataMigrationResponse < Struct.new(
+      :data_migration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] data_provider_name
     #   A user-friendly name for the data provider.
     #   @return [String]
@@ -655,8 +729,10 @@ module Aws::DatabaseMigrationService
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
     #   `"redshift"`, `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`, `"sybase"`,
     #   `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`,
-    #   `"elasticsearch"`, `"docdb"`, `"sqlserver"`, `"neptune"`, and
-    #   `"babelfish"`.
+    #   `"elasticsearch"`, `"docdb"`, `"sqlserver"`, `"neptune"`,
+    #   `"babelfish"`, `redshift-serverless`, `aurora-serverless`,
+    #   `aurora-postgresql-serverless`, `gcp-mysql`,
+    #   `azure-sql-managed-instance`, `redis`, `dms-transfer`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -1591,7 +1667,7 @@ module Aws::DatabaseMigrationService
     #   lowercase string.
     #
     #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, spaces, underscores, or hyphens. Must not be "default".
+    #   periods, underscores, or hyphens. Must not be "default".
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
@@ -1788,6 +1864,180 @@ module Aws::DatabaseMigrationService
     #
     class CreateReplicationTaskResponse < Struct.new(
       :replication_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This object provides information about a DMS data migration.
+    #
+    # @!attribute [rw] data_migration_name
+    #   The user-friendly name for the data migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_migration_arn
+    #   The Amazon Resource Name (ARN) that identifies this replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_migration_create_time
+    #   The UTC time when DMS created the data migration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_migration_start_time
+    #   The UTC time when DMS started the data migration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_migration_end_time
+    #   The UTC time when data migration ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The IAM role that the data migration uses to access Amazon Web
+    #   Services resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_project_arn
+    #   The Amazon Resource Name (ARN) of the data migration's associated
+    #   migration project.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_migration_type
+    #   Specifies whether the data migration is full-load only, change data
+    #   capture (CDC) only, or full-load and CDC.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_migration_settings
+    #   Specifies CloudWatch settings and selection rules for the data
+    #   migration.
+    #   @return [Types::DataMigrationSettings]
+    #
+    # @!attribute [rw] source_data_settings
+    #   Specifies information about the data migration's source data
+    #   provider.
+    #   @return [Array<Types::SourceDataSetting>]
+    #
+    # @!attribute [rw] data_migration_statistics
+    #   Provides information about the data migration's run, including
+    #   start and stop time, latency, and data migration progress.
+    #   @return [Types::DataMigrationStatistics]
+    #
+    # @!attribute [rw] data_migration_status
+    #   The current status of the data migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip_addresses
+    #   The IP addresses of the endpoints for the data migration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_failure_message
+    #   Information about the data migration's most recent error or
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] stop_reason
+    #   The reason the data migration last stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DataMigration AWS API Documentation
+    #
+    class DataMigration < Struct.new(
+      :data_migration_name,
+      :data_migration_arn,
+      :data_migration_create_time,
+      :data_migration_start_time,
+      :data_migration_end_time,
+      :service_access_role_arn,
+      :migration_project_arn,
+      :data_migration_type,
+      :data_migration_settings,
+      :source_data_settings,
+      :data_migration_statistics,
+      :data_migration_status,
+      :public_ip_addresses,
+      :last_failure_message,
+      :stop_reason)
+      SENSITIVE = [:public_ip_addresses]
+      include Aws::Structure
+    end
+
+    # Options for configuring a data migration, including whether to enable
+    # CloudWatch logs, and the selection rules to use to include or exclude
+    # database objects from the migration.
+    #
+    # @!attribute [rw] number_of_jobs
+    #   The number of parallel jobs that trigger parallel threads to unload
+    #   the tables from the source, and then load them to the target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cloudwatch_logs_enabled
+    #   Whether to enable CloudWatch logging for the data migration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] selection_rules
+    #   A JSON-formatted string that defines what objects to include and
+    #   exclude from the migration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DataMigrationSettings AWS API Documentation
+    #
+    class DataMigrationSettings < Struct.new(
+      :number_of_jobs,
+      :cloudwatch_logs_enabled,
+      :selection_rules)
+      SENSITIVE = [:selection_rules]
+      include Aws::Structure
+    end
+
+    # Information about the data migration run, including start and stop
+    # time, latency, and migration progress.
+    #
+    # @!attribute [rw] tables_loaded
+    #   The number of tables loaded in the current data migration run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] elapsed_time_millis
+    #   The elapsed duration of the data migration run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tables_loading
+    #   The data migration's table loading progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] full_load_percentage
+    #   The data migration's progress in the full-load migration phase.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cdc_latency
+    #   The current latency of the change data capture (CDC) operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tables_queued
+    #   The number of tables that are waiting for processing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tables_errored
+    #   The number of tables that DMS failed to process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the migration started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stop_time
+    #   The time when the migration stopped or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DataMigrationStatistics AWS API Documentation
+    #
+    class DataMigrationStatistics < Struct.new(
+      :tables_loaded,
+      :elapsed_time_millis,
+      :tables_loading,
+      :full_load_percentage,
+      :cdc_latency,
+      :tables_queued,
+      :tables_errored,
+      :start_time,
+      :stop_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2164,6 +2414,30 @@ module Aws::DatabaseMigrationService
     #
     class DeleteConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration_identifier
+    #   The identifier (name or ARN) of the data migration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteDataMigrationMessage AWS API Documentation
+    #
+    class DeleteDataMigrationMessage < Struct.new(
+      :data_migration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration
+    #   The deleted data migration.
+    #   @return [Types::DataMigration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteDataMigrationResponse AWS API Documentation
+    #
+    class DeleteDataMigrationResponse < Struct.new(
+      :data_migration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2675,6 +2949,68 @@ module Aws::DatabaseMigrationService
     class DescribeConversionConfigurationResponse < Struct.new(
       :migration_project_identifier,
       :conversion_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters applied to the data migrations.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] without_settings
+    #   An option to set to avoid returning information about settings. Use
+    #   this to reduce overhead when setting information is too large. To
+    #   use this option, choose `true`; otherwise, choose `false` (the
+    #   default).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] without_statistics
+    #   An option to set to avoid returning information about statistics.
+    #   Use this to reduce overhead when statistics information is too
+    #   large. To use this option, choose `true`; otherwise, choose `false`
+    #   (the default).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeDataMigrationsMessage AWS API Documentation
+    #
+    class DescribeDataMigrationsMessage < Struct.new(
+      :filters,
+      :max_records,
+      :marker,
+      :without_settings,
+      :without_statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migrations
+    #   Returns information about the data migrations used in the project.
+    #   @return [Array<Types::DataMigration>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeDataMigrationsResponse AWS API Documentation
+    #
+    class DescribeDataMigrationsResponse < Struct.new(
+      :data_migrations,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5610,6 +5946,19 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # A dependency threw an exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/FailedDependencyFault AWS API Documentation
+    #
+    class FailedDependencyFault < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Identifies the name and value of a filter object. This filter is used
     # to limit the number and type of DMS objects that are returned for a
     # particular `Describe*` call or similar operation. Filters are used as
@@ -6923,6 +7272,68 @@ module Aws::DatabaseMigrationService
     #
     class ModifyConversionConfigurationResponse < Struct.new(
       :migration_project_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration_identifier
+    #   The identifier (name or ARN) of the data migration to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_migration_name
+    #   The new name for the data migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_cloudwatch_logs
+    #   Whether to enable Cloudwatch logs for the data migration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The new service access role ARN for the data migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_migration_type
+    #   The new migration type for the data migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_data_settings
+    #   The new information about the source data provider for the data
+    #   migration.
+    #   @return [Array<Types::SourceDataSetting>]
+    #
+    # @!attribute [rw] number_of_jobs
+    #   The number of parallel jobs that trigger parallel threads to unload
+    #   the tables from the source, and then load them to the target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] selection_rules
+    #   A JSON-formatted string that defines what objects to include and
+    #   exclude from the migration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyDataMigrationMessage AWS API Documentation
+    #
+    class ModifyDataMigrationMessage < Struct.new(
+      :data_migration_identifier,
+      :data_migration_name,
+      :enable_cloudwatch_logs,
+      :service_access_role_arn,
+      :data_migration_type,
+      :source_data_settings,
+      :number_of_jobs,
+      :selection_rules)
+      SENSITIVE = [:selection_rules]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration
+    #   Information about the modified data migration.
+    #   @return [Types::DataMigration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyDataMigrationResponse AWS API Documentation
+    #
+    class ModifyDataMigrationResponse < Struct.new(
+      :data_migration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12352,6 +12763,71 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Defines settings for a source data provider for a data migration.
+    #
+    # @!attribute [rw] cdc_start_position
+    #   The change data capture (CDC) start position for the source data
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_start_time
+    #   The change data capture (CDC) start time for the source data
+    #   provider.
+    #   @return [Time]
+    #
+    # @!attribute [rw] cdc_stop_time
+    #   The change data capture (CDC) stop time for the source data
+    #   provider.
+    #   @return [Time]
+    #
+    # @!attribute [rw] slot_name
+    #   The name of the replication slot on the source data provider. This
+    #   attribute is only valid for a PostgreSQL or Aurora PostgreSQL
+    #   source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SourceDataSetting AWS API Documentation
+    #
+    class SourceDataSetting < Struct.new(
+      :cdc_start_position,
+      :cdc_start_time,
+      :cdc_stop_time,
+      :slot_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration_identifier
+    #   The identifier (name or ARN) of the data migration to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_type
+    #   Specifies the start type for the data migration. Valid values
+    #   include `start-replication`, `reload-target`, and
+    #   `resume-processing`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartDataMigrationMessage AWS API Documentation
+    #
+    class StartDataMigrationMessage < Struct.new(
+      :data_migration_identifier,
+      :start_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration
+    #   The data migration that DMS started.
+    #   @return [Types::DataMigration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartDataMigrationResponse AWS API Documentation
+    #
+    class StartDataMigrationResponse < Struct.new(
+      :data_migration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] migration_project_identifier
     #   The migration project name or Amazon Resource Name (ARN).
     #   @return [String]
@@ -12873,6 +13349,30 @@ module Aws::DatabaseMigrationService
     #
     class StartReplicationTaskResponse < Struct.new(
       :replication_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration_identifier
+    #   The identifier (name or ARN) of the data migration to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopDataMigrationMessage AWS API Documentation
+    #
+    class StopDataMigrationMessage < Struct.new(
+      :data_migration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_migration
+    #   The data migration that DMS stopped.
+    #   @return [Types::DataMigration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopDataMigrationResponse AWS API Documentation
+    #
+    class StopDataMigrationResponse < Struct.new(
+      :data_migration)
       SENSITIVE = []
       include Aws::Structure
     end

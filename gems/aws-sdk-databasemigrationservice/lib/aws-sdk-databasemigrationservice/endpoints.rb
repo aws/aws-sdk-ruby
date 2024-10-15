@@ -56,6 +56,17 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class CreateDataMigration
+      def self.build(context)
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class CreateDataProvider
       def self.build(context)
         Aws::DatabaseMigrationService::EndpointParameters.new(
@@ -178,6 +189,17 @@ module Aws::DatabaseMigrationService
     end
 
     class DeleteConnection
+      def self.build(context)
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DeleteDataMigration
       def self.build(context)
         Aws::DatabaseMigrationService::EndpointParameters.new(
           region: context.config.region,
@@ -365,6 +387,17 @@ module Aws::DatabaseMigrationService
     end
 
     class DescribeConversionConfiguration
+      def self.build(context)
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class DescribeDataMigrations
       def self.build(context)
         Aws::DatabaseMigrationService::EndpointParameters.new(
           region: context.config.region,
@@ -837,6 +870,17 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class ModifyDataMigration
+      def self.build(context)
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class ModifyDataProvider
       def self.build(context)
         Aws::DatabaseMigrationService::EndpointParameters.new(
@@ -1013,6 +1057,17 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class StartDataMigration
+      def self.build(context)
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class StartExtensionPackAssociation
       def self.build(context)
         Aws::DatabaseMigrationService::EndpointParameters.new(
@@ -1124,6 +1179,17 @@ module Aws::DatabaseMigrationService
     end
 
     class StartReplicationTaskAssessmentRun
+      def self.build(context)
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class StopDataMigration
       def self.build(context)
         Aws::DatabaseMigrationService::EndpointParameters.new(
           region: context.config.region,
