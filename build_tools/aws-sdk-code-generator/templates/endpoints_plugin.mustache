@@ -86,12 +86,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
         end
 
         def parameters_for_operation(context)
-          case context.operation_name
-          {{#endpoint_classes}}
-          when :{{operation_name}}
-            {{module_name}}::Endpoints::{{class_name}}.build(context)
-          {{/endpoint_classes}}
-          end
+          operation_class = {{module_name}}::Endpoints::OPERATION_PARAM_MAP[context.operation_name]
+          operation_class ? operation_class.build(context) : {{module_name}}::EndpointParameters.create(context.config)
         end
       end
 

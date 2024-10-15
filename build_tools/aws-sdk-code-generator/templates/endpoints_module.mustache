@@ -11,19 +11,21 @@ module {{module_name}}
     {{#endpoint_classes}}
     class {{name}}
       def self.build(context)
-        {{module_name}}::EndpointParameters.new(
+        {{module_name}}::EndpointParameters.create(
+          context.config,
           {{#parameters}}
-          {{#static_string?}}
-          {{key}}: "{{{value}}}",
-          {{/static_string?}}
-          {{^static_string?}}
           {{key}}: {{{value}}},
-          {{/static_string?}}
           {{/parameters}}
         )
       end
     end
 
     {{/endpoint_classes}}
+
+    OPERATION_PARAM_MAP = {
+    {{#endpoint_classes}}
+      {{operation}}: {{name}},
+    {{/endpoint_classes}}
+    }.freeze
   end
 end

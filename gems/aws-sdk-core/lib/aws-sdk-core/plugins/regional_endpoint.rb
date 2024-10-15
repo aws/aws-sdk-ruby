@@ -103,9 +103,10 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         if client.config.respond_to?(:endpoint_provider) &&
           client_module.const_defined?(:EndpointParameters) &&
           (param_class = client_module.const_get(:EndpointParameters)) &&
+          param_class.respond_to?(:create) &&
           (endpoint_provider = client.config.endpoint_provider)
 
-          params = build_parameters(param_class.new, client.config)
+          params = param_class.create(client.config)
           begin
             endpoint = endpoint_provider.resolve_endpoint(params)
             client.config.endpoint = endpoint.url
@@ -117,24 +118,6 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           # fallback to legacy
           client.config.endpoint = resolve_legacy_endpoint(client.config)
         end
-      end
-
-      def build_parameters(params, config)
-        # generic parameters set for most (but not all) services
-        params.region = config.region if params.respond_to?(:region=)
-        params.use_dual_stack = config.use_dualstack_endpoint if params.respond_to?(:use_dual_stack=)
-        params.use_fips = config.use_fips_endpoint if params.respond_to?(:use_fips=)
-
-        # service specific
-        if config.respond_to?(:sts_regional_endpoints) && params.respond_to?(:use_global_endpoint=)
-          params.use_global_endpoint = (config.sts_regional_endpoints == 'legacy')
-        end
-
-        if config.respond_to?(:s3_us_east_1_regional_endpoint) && params.respond_to?(:use_global_endpoint=)
-          params.use_global_endpoint = (config.s3_us_east_1_regional_endpoint == 'legacy')
-        end
-
-        params
       end
 
       # set a default endpoint in config using legacy (endpoints.json) resolver
