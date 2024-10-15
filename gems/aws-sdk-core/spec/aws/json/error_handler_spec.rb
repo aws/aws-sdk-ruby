@@ -24,7 +24,7 @@ module Aws
         
       JSON
 
-      let(:unmodeled_error_resp) { <<~JSON.strip }
+      let(:un_modeled_error_resp) { <<~JSON.strip }
         {
           "__type":"UnModeledException",
           "message":"foo"
@@ -69,7 +69,7 @@ module Aws
       it 'extracts code and message for unmodeled errors' do
         client.stub_responses(
           :batch_get_item,
-          { status_code: 400, body: unmodeled_error_resp, headers: {} }
+          { status_code: 400, body: un_modeled_error_resp, headers: {} }
         )
 
         expect { client.batch_get_item(request_items: {}) }
