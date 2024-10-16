@@ -22,10 +22,20 @@ module {{module_name}}
 
     {{/endpoint_classes}}
 
-    OPERATION_PARAM_MAP = {
-    {{#endpoint_classes}}
-      {{operation}}: {{name}},
-    {{/endpoint_classes}}
-    }.freeze
+    def self.parameters_for_operation(context)
+      {{#operation_specific_parameters?}}
+      {{module_name}}::EndpointParameters.create(context.config)
+      {{/operation_specific_parameters?}}
+      {{^operation_specific_parameters?}}
+      case context.operation_name
+      {{#endpoint_classes}}
+      when :{{operation}}
+        {{name}}.build(context)
+      {{/endpoint_classes}}
+      else
+        {{module_name}}::EndpointParameters.create(context.config)
+      end
+      {{/operation_specific_parameters?}}
+    end
   end
 end

@@ -9,8 +9,7 @@ module AwsSdkCodeGenerator
         @service = options.fetch(:service)
         if (parameters = @service.endpoint_rules&.fetch('parameters'))
           @parameters = parameters.map do |k,p|
-            value, source = EndpointParameter.endpoint_parameter_value(@service,  k, p)
-            EndpointParameter.new(k, p, value, source)
+            EndpointParameter.new(k, p, @service)
           end
         end
       end

@@ -34,7 +34,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = {{module_name}}::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -83,11 +83,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
 
             context.http_request.headers[key] = value
           end
-        end
-
-        def parameters_for_operation(context)
-          operation_class = {{module_name}}::Endpoints::OPERATION_PARAM_MAP[context.operation_name]
-          operation_class ? operation_class.build(context) : {{module_name}}::EndpointParameters.create(context.config)
         end
       end
 

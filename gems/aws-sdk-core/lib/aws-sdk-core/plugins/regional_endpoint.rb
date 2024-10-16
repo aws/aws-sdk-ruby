@@ -100,24 +100,14 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
 
       def initialize_default_endpoint(client)
         client_module = Object.const_get(client.class.name.rpartition('::').first)
-        if client.config.respond_to?(:endpoint_provider) &&
-          client_module.const_defined?(:EndpointParameters) &&
-          (param_class = client_module.const_get(:EndpointParameters)) &&
-          param_class.respond_to?(:create) &&
-          (endpoint_provider = client.config.endpoint_provider)
-
-          params = param_class.create(client.config)
-          begin
-            endpoint = endpoint_provider.resolve_endpoint(params)
-            client.config.endpoint = endpoint.url
-          rescue ArgumentError
-            # fallback to legacy
-            client.config.endpoint = resolve_legacy_endpoint(client.config)
-          end
-        else
-          # fallback to legacy
-          client.config.endpoint = resolve_legacy_endpoint(client.config)
-        end
+        param_class = client_module.const_get(:EndpointParameters)
+        endpoint_provider = client.config.endpoint_provider
+        params = param_class.create(client.config)
+        endpoint = endpoint_provider.resolve_endpoint(params)
+        client.config.endpoint = endpoint.url
+      rescue ArgumentError, NameError
+        # fallback to legacy
+        client.config.endpoint = resolve_legacy_endpoint(client.config)
       end
 
       # set a default endpoint in config using legacy (endpoints.json) resolver

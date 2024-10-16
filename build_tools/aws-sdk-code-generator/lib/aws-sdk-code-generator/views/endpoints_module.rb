@@ -9,13 +9,14 @@ module AwsSdkCodeGenerator
 
         @parameters = @service.endpoint_rules.fetch('parameters', {})
 
-        @endpoint_classes = @service.api['operations'].map do
-          |name, op|
-          EndpointClass.new(
+        @endpoint_classes = @service.api['operations'].each.with_object([]) do
+          |(name, op), classes|
+          endpoint_class = EndpointClass.new(
             name: name,
             parameters: endpoint_parameters_for_operation(op)
           )
-        end.reject { |ec| ec.parameters.empty? }
+          classes << endpoint_class unless endpoint_class.parameters.empty?
+        end
       end
 
       # @return [Array<EndpointClass>]
@@ -29,6 +30,10 @@ module AwsSdkCodeGenerator
 
       def module_name
         @service.module_name
+      end
+
+      def operation_specific_parameters?
+        @endpoint_classes.empty?
       end
 
       class EndpointClass
@@ -51,18 +56,15 @@ module AwsSdkCodeGenerator
       private
 
       def endpoint_parameters_for_operation(operation)
-        @parameters.map do |param_name, param_data|
-          value, source = EndpointParameter.endpoint_parameter_value(
-            @service, param_name, param_data, operation
-          )
-
-          EndpointParameter.new(
+        @parameters.each.with_object([]) do |(param_name, param_data), parameters|
+          p = EndpointParameter.new(
             param_name,
             param_data,
-            value,
-            source
+            @service,
+            operation
           )
-        end.select { |p| p.source == 'operation' }
+          parameters << p if p.source == 'operation'
+        end
       end
     end
   end

@@ -126,7 +126,7 @@ describe 'Plugins Interface:' do
       end
 
       before(:each) do
-        client # force client initialization before testing resolution
+        client # force client initialization before testing resolution to account for config.endpoint
       end
 
       # Most to least
