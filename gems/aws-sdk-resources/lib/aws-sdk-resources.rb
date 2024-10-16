@@ -264,7 +264,6 @@ module Aws
   autoload :NetworkFirewall, 'aws-sdk-networkfirewall'
   autoload :NetworkManager, 'aws-sdk-networkmanager'
   autoload :NetworkMonitor, 'aws-sdk-networkmonitor'
-  autoload :NimbleStudio, 'aws-sdk-nimblestudio'
   autoload :OAM, 'aws-sdk-oam'
   autoload :OSIS, 'aws-sdk-osis'
   autoload :Omics, 'aws-sdk-omics'
