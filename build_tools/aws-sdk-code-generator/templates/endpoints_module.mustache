@@ -11,31 +11,19 @@ module {{module_name}}
     {{#endpoint_classes}}
     class {{name}}
       def self.build(context)
-        {{module_name}}::EndpointParameters.create(
-          context.config,
+        {{module_name}}::EndpointParameters.new(
           {{#parameters}}
+          {{#static_string?}}
+          {{key}}: "{{{value}}}",
+          {{/static_string?}}
+          {{^static_string?}}
           {{key}}: {{{value}}},
+          {{/static_string?}}
           {{/parameters}}
         )
       end
     end
 
     {{/endpoint_classes}}
-
-    def self.parameters_for_operation(context)
-      {{#operation_specific_parameters?}}
-      {{module_name}}::EndpointParameters.create(context.config)
-      {{/operation_specific_parameters?}}
-      {{^operation_specific_parameters?}}
-      case context.operation_name
-      {{#endpoint_classes}}
-      when :{{operation}}
-        {{name}}.build(context)
-      {{/endpoint_classes}}
-      else
-        {{module_name}}::EndpointParameters.create(context.config)
-      end
-      {{/operation_specific_parameters?}}
-    end
   end
 end

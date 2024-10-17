@@ -66,7 +66,7 @@ module Aws
 
     before do
       expect_any_instance_of(endpoints_service.const_get(:EndpointProvider))
-        .to receive(:resolve_endpoint).at_least(:once).and_return(endpoint)
+        .to receive(:resolve_endpoint).and_return(endpoint)
     end
 
     describe '#resolve_auth_scheme' do

@@ -11,7 +11,7 @@ module {{module_name}}
   {{/parameters}}
   EndpointParameters = Struct.new(
     {{#parameters}}
-    :{{key}},
+    :{{underscore_name}},
     {{/parameters}}
     {{^parameters}}
     nil
@@ -23,31 +23,23 @@ module {{module_name}}
     class << self
       PARAM_MAP = {
         {{#parameters}}
-        '{{name}}' => :{{key}},
+        '{{name}}' => :{{underscore_name}},
         {{/parameters}}
       }.freeze
     end
 
     def initialize(options = {})
       {{#parameters}}
-      self[:{{key}}] = options[:{{key}}]
+      self[:{{underscore_name}}] = options[:{{underscore_name}}]
       {{#default?}}
-      self[:{{key}}] = {{{default}}} if self[:{{key}}].nil?
+      self[:{{underscore_name}}] = {{{default}}} if self[:{{underscore_name}}].nil?
       {{/default?}}
-      {{#validate_required?}}
-      if self[:{{key}}].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :{{key}}"
+      {{#required}}
+      if self[:{{underscore_name}}].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :{{underscore_name}}"
       end
-      {{/validate_required?}}
+      {{/required}}
       {{/parameters}}
-    end
-
-    def self.create(config, options={})
-      new({
-        {{#config_parameters}}
-        {{key}}: {{{value}}},
-        {{/config_parameters}}
-      }.merge(options))
     end
   end
 end

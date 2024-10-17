@@ -20,7 +20,7 @@ a default `:region` is searched for in the following locations:
 * `ENV['AWS_DEFAULT_REGION']`
 * `~/.aws/credentials`
 * `~/.aws/config`
-             DOCS
+        DOCS
         resolve_region(cfg)
       end
 
@@ -35,7 +35,7 @@ in the following locations:
 * `Aws.config[:sigv4a_signing_region_set]`
 * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
 * `~/.aws/config`
-             DOCS
+        DOCS
         resolve_sigv4a_signing_region_set(cfg)
       end
 
@@ -44,7 +44,7 @@ in the following locations:
         docstring: <<-DOCS) do |cfg|
 When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
 will be used if available.
-             DOCS
+        DOCS
         resolve_use_dualstack_endpoint(cfg)
       end
 
@@ -54,7 +54,7 @@ will be used if available.
 When set to `true`, fips compatible endpoints will be used if available.
 When a `fips` region is used, the region is normalized and this config
 is set to `true`.
-             DOCS
+        DOCS
         resolve_use_fips_endpoint(cfg)
       end
 
@@ -67,7 +67,7 @@ is set to `true`.
         docstring: <<-DOCS) do |cfg|
 Setting to true disables use of endpoint URLs provided via environment 
 variables and the shared configuration file.
-             DOCS
+        DOCS
         resolve_ignore_configured_endpoint_urls(cfg)
       end
 
@@ -75,16 +75,13 @@ variables and the shared configuration file.
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
 to test or custom endpoints. This should be a valid HTTP(S) URI.
-      DOCS
+        DOCS
         resolve_endpoint(cfg)
       end
 
       def after_initialize(client)
         region = client.config.region
         raise Errors::MissingRegionError if region.nil? || region == ''
-
-        # resolve a default endpoint to preserve legacy behavior
-        initialize_default_endpoint(client) if client.config.endpoint.nil?
 
         region_set = client.config.sigv4a_signing_region_set
         return if region_set.nil?
@@ -94,39 +91,6 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         raise Errors::InvalidRegionSetError if region_set.empty?
 
         client.config.sigv4a_signing_region_set = region_set
-      end
-
-      private
-
-      def initialize_default_endpoint(client)
-        client_module = Object.const_get(client.class.name.rpartition('::').first)
-        param_class = client_module.const_get(:EndpointParameters)
-        endpoint_provider = client.config.endpoint_provider
-        params = param_class.create(client.config)
-        endpoint = endpoint_provider.resolve_endpoint(params)
-        client.config.endpoint = endpoint.url
-      rescue ArgumentError, NameError
-        # fallback to legacy
-        client.config.endpoint = resolve_legacy_endpoint(client.config)
-      end
-
-      # set a default endpoint in config using legacy (endpoints.json) resolver
-      def resolve_legacy_endpoint(cfg)
-        endpoint_prefix = cfg.api.metadata['endpointPrefix']
-        if cfg.respond_to?(:sts_regional_endpoints)
-          sts_regional = cfg.sts_regional_endpoints
-        end
-
-        endpoint = Aws::Partitions::EndpointProvider.resolve(
-          cfg.region,
-          endpoint_prefix,
-          sts_regional,
-          {
-            dualstack: cfg.use_dualstack_endpoint,
-            fips: cfg.use_fips_endpoint
-          }
-        )
-        URI(endpoint)
       end
 
       class << self
@@ -186,8 +150,7 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           # that a custom endpoint has NOT been configured by the user
           cfg.override_config(:regional_endpoint, true)
 
-          # a default endpoint is resolved in after_initialize
-          nil
+          resolve_legacy_endpoint(cfg)
         end
 
         # get a custom configured endpoint from ENV or configuration
@@ -241,6 +204,24 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
             cfg.override_config(:use_fips_endpoint, true)
             cfg.override_config(:region, new_region)
           end
+        end
+
+        # set a default endpoint in config using legacy (endpoints.json) resolver
+        def resolve_legacy_endpoint(cfg)
+          endpoint_prefix = cfg.api.metadata['endpointPrefix']
+          if cfg.respond_to?(:sts_regional_endpoints)
+            sts_regional = cfg.sts_regional_endpoints
+          end
+
+          Aws::Partitions::EndpointProvider.resolve(
+            cfg.region,
+            endpoint_prefix,
+            sts_regional,
+            {
+              dualstack: cfg.use_dualstack_endpoint,
+              fips: cfg.use_fips_endpoint
+            }
+          )
         end
       end
     end

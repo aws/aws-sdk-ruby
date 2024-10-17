@@ -5,7 +5,6 @@ require_relative 'aws-partitions/partition'
 require_relative 'aws-partitions/partition_list'
 require_relative 'aws-partitions/region'
 require_relative 'aws-partitions/service'
-require_relative 'aws-partitions/metadata'
 
 require 'json'
 
