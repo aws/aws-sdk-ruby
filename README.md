@@ -650,7 +650,6 @@ RubyGems.org page under "LINKS" section.
 | AmazonConnectCampaignService                          | Aws::ConnectCampaignService              | aws-sdk-connectcampaignservice              | 2021-01-30  |
 | AmazonMQ                                              | Aws::MQ                                  | aws-sdk-mq                                  | 2017-11-27  |
 | AmazonMWAA                                            | Aws::MWAA                                | aws-sdk-mwaa                                | 2020-07-01  |
-| AmazonNimbleStudio                                    | Aws::NimbleStudio                        | aws-sdk-nimblestudio                        | 2020-08-01  |
 | AmplifyBackend                                        | Aws::AmplifyBackend                      | aws-sdk-amplifybackend                      | 2020-08-11  |
 | AppFabric                                             | Aws::AppFabric                           | aws-sdk-appfabric                           | 2023-05-19  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling              | aws-sdk-applicationautoscaling              | 2016-02-06  |

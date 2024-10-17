@@ -123,6 +123,8 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Resource.html#buckets-instance_method
       def buckets: (
+                     ?prefix: ::String,
+                     ?bucket_region: ::String
                    ) -> Bucket::Collection
                  | (?Hash[Symbol, untyped]) -> Bucket::Collection
     end

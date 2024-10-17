@@ -502,7 +502,6 @@ module Aws
             'NetworkFirewall' => 'network-firewall',
             'NetworkManager' => 'networkmanager',
             'NetworkMonitor' => 'networkmonitor',
-            'NimbleStudio' => 'nimble',
             'OAM' => 'oam',
             'OSIS' => 'osis',
             'Omics' => 'omics',

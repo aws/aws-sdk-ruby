@@ -41,6 +41,14 @@ module Aws::S3
       data[:creation_date]
     end
 
+    # `BucketRegion` indicates the Amazon Web Services region where the
+    # bucket is located. If the request contains at least one valid
+    # parameter, it is included in the response.
+    # @return [String]
+    def bucket_region
+      data[:bucket_region]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -606,10 +614,11 @@ module Aws::S3
     #   information about REST request authentication, see [REST
     #   Authentication][1].
     #
-    #   <note markdown="1"> The `Content-MD5` header is required for any request to upload an
-    #   object with a retention period configured using Amazon S3 Object Lock.
-    #   For more information about Amazon S3 Object Lock, see [Amazon S3
-    #   Object Lock Overview][2] in the *Amazon S3 User Guide*.
+    #   <note markdown="1"> The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is required
+    #   for any request to upload an object with a retention period configured
+    #   using Amazon S3 Object Lock. For more information, see [Uploading
+    #   objects to an Object Lock enabled bucket ][2] in the *Amazon S3 User
+    #   Guide*.
     #
     #    </note>
     #
@@ -620,7 +629,7 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the contents. For more
     #   information, see
@@ -657,14 +666,21 @@ module Aws::S3
     #   provided `ChecksumAlgorithm` parameter and uses the checksum algorithm
     #   that matches the provided value in `x-amz-checksum-algorithm `.
     #
-    #   <note markdown="1"> For directory buckets, when you use Amazon Web Services SDKs, `CRC32`
-    #   is the default checksum algorithm that's used for performance.
+    #   <note markdown="1"> The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is required
+    #   for any request to upload an object with a retention period configured
+    #   using Amazon S3 Object Lock. For more information, see [Uploading
+    #   objects to an Object Lock enabled bucket ][2] in the *Amazon S3 User
+    #   Guide*.
     #
     #    </note>
+    #
+    #   For directory buckets, when you use Amazon Web Services SDKs, `CRC32`
+    #   is the default checksum algorithm that's used for performance.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object
     # @option options [String] :checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
@@ -919,14 +935,19 @@ module Aws::S3
     #   Amazon Web Services managed key (`aws/s3`) to protect the data.
     #
     #   **Directory buckets** - If you specify `x-amz-server-side-encryption`
-    #   with `aws:kms`, you must specify the `
-    #   x-amz-server-side-encryption-aws-kms-key-id` header with the ID (Key
-    #   ID or Key ARN) of the KMS symmetric encryption customer managed key to
-    #   use. Otherwise, you get an HTTP `400 Bad Request` error. Only use the
-    #   key ID or key ARN. The key alias format of the KMS key isn't
-    #   supported. Your SSE-KMS configuration can only support 1 [customer
-    #   managed key][1] per directory bucket for the lifetime of the bucket.
-    #   [Amazon Web Services managed key][2] (`aws/s3`) isn't supported.
+    #   with `aws:kms`, the ` x-amz-server-side-encryption-aws-kms-key-id`
+    #   header is implicitly assigned the ID of the KMS symmetric encryption
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. If you want to specify the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
+    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
+    #   Request` error. Only use the key ID or key ARN. The key alias format
+    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
+    #   support 1 [customer managed key][1] per directory bucket for the
+    #   lifetime of the bucket. The [Amazon Web Services managed key][2]
+    #   (`aws/s3`) isn't supported.
     #
     #
     #

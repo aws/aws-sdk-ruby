@@ -344,11 +344,18 @@ module Aws::S3
     #   changes to your bucket, such as editing its bucket policy.
     #   @return [Time]
     #
+    # @!attribute [rw] bucket_region
+    #   `BucketRegion` indicates the Amazon Web Services region where the
+    #   bucket is located. If the request contains at least one valid
+    #   parameter, it is included in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Bucket AWS API Documentation
     #
     class Bucket < Struct.new(
       :name,
-      :creation_date)
+      :creation_date,
+      :bucket_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1857,14 +1864,14 @@ module Aws::S3
     #   * To encrypt new object copies to a directory bucket with SSE-KMS,
     #     we recommend you specify SSE-KMS as the directory bucket's
     #     default encryption configuration with a KMS key (specifically, a
-    #     [customer managed key][4]). [Amazon Web Services managed key][5]
-    #     (`aws/s3`) isn't supported. Your SSE-KMS configuration can only
-    #     support 1 [customer managed key][4] per directory bucket for the
-    #     lifetime of the bucket. After you specify a customer managed key
-    #     for SSE-KMS, you can't override the customer managed key for the
-    #     bucket's SSE-KMS configuration. Then, when you perform a
-    #     `CopyObject` operation and want to specify server-side encryption
-    #     settings for new object copies with SSE-KMS in the
+    #     [customer managed key][4]). The [Amazon Web Services managed
+    #     key][5] (`aws/s3`) isn't supported. Your SSE-KMS configuration
+    #     can only support 1 [customer managed key][4] per directory bucket
+    #     for the lifetime of the bucket. After you specify a customer
+    #     managed key for SSE-KMS, you can't override the customer managed
+    #     key for the bucket's SSE-KMS configuration. Then, when you
+    #     perform a `CopyObject` operation and want to specify server-side
+    #     encryption settings for new object copies with SSE-KMS in the
     #     encryption-related request headers, you must ensure the encryption
     #     key is the same customer managed key that you specified for the
     #     directory bucket's default encryption configuration.
@@ -1990,15 +1997,20 @@ module Aws::S3
     #   User Guide*.
     #
     #   **Directory buckets** - If you specify
-    #   `x-amz-server-side-encryption` with `aws:kms`, you must specify the
-    #   ` x-amz-server-side-encryption-aws-kms-key-id` header with the ID
-    #   (Key ID or Key ARN) of the KMS symmetric encryption customer managed
-    #   key to use. Otherwise, you get an HTTP `400 Bad Request` error. Only
-    #   use the key ID or key ARN. The key alias format of the KMS key
-    #   isn't supported. Your SSE-KMS configuration can only support 1
-    #   [customer managed key][2] per directory bucket for the lifetime of
-    #   the bucket. [Amazon Web Services managed key][3] (`aws/s3`) isn't
-    #   supported.
+    #   `x-amz-server-side-encryption` with `aws:kms`, the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header is implicitly
+    #   assigned the ID of the KMS symmetric encryption customer managed key
+    #   that's configured for your directory bucket's default encryption
+    #   setting. If you want to specify the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
+    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
+    #   Request` error. Only use the key ID or key ARN. The key alias format
+    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
+    #   support 1 [customer managed key][2] per directory bucket for the
+    #   lifetime of the bucket. The [Amazon Web Services managed key][3]
+    #   (`aws/s3`) isn't supported.
     #
     #
     #
@@ -3245,15 +3257,20 @@ module Aws::S3
     #   Amazon Web Services managed key (`aws/s3`) to protect the data.
     #
     #   **Directory buckets** - If you specify
-    #   `x-amz-server-side-encryption` with `aws:kms`, you must specify the
-    #   ` x-amz-server-side-encryption-aws-kms-key-id` header with the ID
-    #   (Key ID or Key ARN) of the KMS symmetric encryption customer managed
-    #   key to use. Otherwise, you get an HTTP `400 Bad Request` error. Only
-    #   use the key ID or key ARN. The key alias format of the KMS key
-    #   isn't supported. Your SSE-KMS configuration can only support 1
-    #   [customer managed key][1] per directory bucket for the lifetime of
-    #   the bucket. [Amazon Web Services managed key][2] (`aws/s3`) isn't
-    #   supported.
+    #   `x-amz-server-side-encryption` with `aws:kms`, the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header is implicitly
+    #   assigned the ID of the KMS symmetric encryption customer managed key
+    #   that's configured for your directory bucket's default encryption
+    #   setting. If you want to specify the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
+    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
+    #   Request` error. Only use the key ID or key ARN. The key alias format
+    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
+    #   support 1 [customer managed key][1] per directory bucket for the
+    #   lifetime of the bucket. The [Amazon Web Services managed key][2]
+    #   (`aws/s3`) isn't supported.
     #
     #
     #
@@ -3491,8 +3508,8 @@ module Aws::S3
     #   must use the full Key ARN not the Key ID.
     #
     #   Your SSE-KMS configuration can only support 1 [customer managed
-    #   key][1] per directory bucket for the lifetime of the bucket. [Amazon
-    #   Web Services managed key][2] (`aws/s3`) isn't supported.
+    #   key][1] per directory bucket for the lifetime of the bucket. The
+    #   [Amazon Web Services managed key][2] (`aws/s3`) isn't supported.
     #
     #
     #
@@ -9818,12 +9835,21 @@ module Aws::S3
     #   `ContinuationToken` is obfuscated and is not a real bucket.
     #   @return [String]
     #
+    # @!attribute [rw] prefix
+    #   If `Prefix` was sent with the request, it is included in the
+    #   response.
+    #
+    #   All bucket names in the response begin with the specified bucket
+    #   name prefix.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketsOutput AWS API Documentation
     #
     class ListBucketsOutput < Struct.new(
       :buckets,
       :owner,
-      :continuation_token)
+      :continuation_token,
+      :prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9845,11 +9871,38 @@ module Aws::S3
     #   Required: No.
     #   @return [String]
     #
+    # @!attribute [rw] prefix
+    #   Limits the response to bucket names that begin with the specified
+    #   bucket name prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_region
+    #   Limits the response to buckets that are located in the specified
+    #   Amazon Web Services Region. The Amazon Web Services Region must be
+    #   expressed according to the Amazon Web Services Region code, such as
+    #   `us-west-2` for the US West (Oregon) Region. For a list of the valid
+    #   values for all of the Amazon Web Services Regions, see [Regions and
+    #   Endpoints][1].
+    #
+    #   <note markdown="1"> Requests made to a Regional endpoint that is different from the
+    #   `bucket-region` parameter are not supported. For example, if you
+    #   want to limit the response to your buckets in Region `us-west-2`,
+    #   the request must be made to an endpoint in Region `us-west-2`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketsRequest AWS API Documentation
     #
     class ListBucketsRequest < Struct.new(
       :max_buckets,
-      :continuation_token)
+      :continuation_token,
+      :prefix,
+      :bucket_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12478,7 +12531,7 @@ module Aws::S3
     # @!attribute [rw] restrict_public_buckets
     #   Specifies whether Amazon S3 should restrict public bucket policies
     #   for this bucket. Setting this element to `TRUE` restricts access to
-    #   this bucket to only Amazon Web Servicesservice principals and
+    #   this bucket to only Amazon Web Services service principals and
     #   authorized users within this account if the bucket has a public
     #   policy.
     #
@@ -14357,10 +14410,11 @@ module Aws::S3
     #   information about REST request authentication, see [REST
     #   Authentication][1].
     #
-    #   <note markdown="1"> The `Content-MD5` header is required for any request to upload an
-    #   object with a retention period configured using Amazon S3 Object
-    #   Lock. For more information about Amazon S3 Object Lock, see [Amazon
-    #   S3 Object Lock Overview][2] in the *Amazon S3 User Guide*.
+    #   <note markdown="1"> The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is
+    #   required for any request to upload an object with a retention period
+    #   configured using Amazon S3 Object Lock. For more information, see
+    #   [Uploading objects to an Object Lock enabled bucket ][2] in the
+    #   *Amazon S3 User Guide*.
     #
     #    </note>
     #
@@ -14371,7 +14425,7 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -14413,15 +14467,22 @@ module Aws::S3
     #   algorithm that matches the provided value in
     #   `x-amz-checksum-algorithm `.
     #
-    #   <note markdown="1"> For directory buckets, when you use Amazon Web Services SDKs,
-    #   `CRC32` is the default checksum algorithm that's used for
-    #   performance.
+    #   <note markdown="1"> The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is
+    #   required for any request to upload an object with a retention period
+    #   configured using Amazon S3 Object Lock. For more information, see
+    #   [Uploading objects to an Object Lock enabled bucket ][2] in the
+    #   *Amazon S3 User Guide*.
     #
     #    </note>
+    #
+    #   For directory buckets, when you use Amazon Web Services SDKs,
+    #   `CRC32` is the default checksum algorithm that's used for
+    #   performance.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object
     #   @return [String]
     #
     # @!attribute [rw] checksum_crc32
@@ -14716,15 +14777,20 @@ module Aws::S3
     #   Amazon Web Services managed key (`aws/s3`) to protect the data.
     #
     #   **Directory buckets** - If you specify
-    #   `x-amz-server-side-encryption` with `aws:kms`, you must specify the
-    #   ` x-amz-server-side-encryption-aws-kms-key-id` header with the ID
-    #   (Key ID or Key ARN) of the KMS symmetric encryption customer managed
-    #   key to use. Otherwise, you get an HTTP `400 Bad Request` error. Only
-    #   use the key ID or key ARN. The key alias format of the KMS key
-    #   isn't supported. Your SSE-KMS configuration can only support 1
-    #   [customer managed key][1] per directory bucket for the lifetime of
-    #   the bucket. [Amazon Web Services managed key][2] (`aws/s3`) isn't
-    #   supported.
+    #   `x-amz-server-side-encryption` with `aws:kms`, the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header is implicitly
+    #   assigned the ID of the KMS symmetric encryption customer managed key
+    #   that's configured for your directory bucket's default encryption
+    #   setting. If you want to specify the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
+    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
+    #   Request` error. Only use the key ID or key ARN. The key alias format
+    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
+    #   support 1 [customer managed key][1] per directory bucket for the
+    #   lifetime of the bucket. The [Amazon Web Services managed key][2]
+    #   (`aws/s3`) isn't supported.
     #
     #
     #
@@ -15835,15 +15901,7 @@ module Aws::S3
     #   @return [Types::GlacierJobParameters]
     #
     # @!attribute [rw] type
-    #   Amazon S3 Select is no longer available to new customers. Existing
-    #   customers of Amazon S3 Select can continue to use the feature as
-    #   usual. [Learn more][1]
-    #
     #   Type of restore request.
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [String]
     #
     # @!attribute [rw] tier
@@ -15855,15 +15913,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] select_parameters
-    #   Amazon S3 Select is no longer available to new customers. Existing
-    #   customers of Amazon S3 Select can continue to use the feature as
-    #   usual. [Learn more][1]
-    #
     #   Describes the parameters for Select job types.
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [Types::SelectParameters]
     #
     # @!attribute [rw] output_location
@@ -16194,12 +16244,6 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # <note markdown="1"> Learn Amazon S3 Select is no longer available to new customers.
-    # Existing customers of Amazon S3 Select can continue to use the feature
-    # as usual. [Learn more][1]
-    #
-    #  </note>
-    #
     # Request to filter the contents of an Amazon S3 object based on a
     # simple Structured Query Language (SQL) statement. In the request,
     # along with the SQL expression, you must specify a data serialization
@@ -16207,12 +16251,11 @@ module Aws::S3
     # object data into records. It returns only records that match the
     # specified SQL expression. You must also specify the data serialization
     # format for the response. For more information, see [S3Select API
-    # Documentation][2].
+    # Documentation][1].
     #
     #
     #
-    # [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
     #
     # @!attribute [rw] bucket
     #   The S3 bucket.
@@ -16324,20 +16367,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Amazon S3 Select is no longer available to new customers. Existing
-    # customers of Amazon S3 Select can continue to use the feature as
-    # usual. [Learn more][1]
-    #
     # Describes the parameters for Select job types.
-    #
-    # Learn [How to optimize querying your data in Amazon S3][1] using
-    # [Amazon Athena][2], [S3 Object Lambda][3], or client-side filtering.
-    #
-    #
-    #
-    # [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
-    # [2]: https://docs.aws.amazon.com/athena/latest/ug/what-is.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html
     #
     # @!attribute [rw] input_serialization
     #   Describes the serialization format of the object.
@@ -16348,15 +16378,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expression
-    #   Amazon S3 Select is no longer available to new customers. Existing
-    #   customers of Amazon S3 Select can continue to use the feature as
-    #   usual. [Learn more][1]
-    #
     #   The expression that is used to query the object.
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [String]
     #
     # @!attribute [rw] output_serialization
@@ -16387,8 +16409,8 @@ module Aws::S3
     #
     # * **Directory buckets** - Your SSE-KMS configuration can only support
     #   1 [customer managed key][2] per directory bucket for the lifetime of
-    #   the bucket. [Amazon Web Services managed key][3] (`aws/s3`) isn't
-    #   supported.
+    #   the bucket. The [Amazon Web Services managed key][3] (`aws/s3`)
+    #   isn't supported.
     #
     # * **Directory buckets** - For directory buckets, there are only two
     #   supported options for server-side encryption: SSE-S3 and SSE-KMS.

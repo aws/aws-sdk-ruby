@@ -188,8 +188,32 @@ module Aws::S3
 
     # @example Request syntax with placeholder values
     #
-    #   s3.buckets()
+    #   buckets = s3.buckets({
+    #     prefix: "Prefix",
+    #     bucket_region: "BucketRegion",
+    #   })
     # @param [Hash] options ({})
+    # @option options [String] :prefix
+    #   Limits the response to bucket names that begin with the specified
+    #   bucket name prefix.
+    # @option options [String] :bucket_region
+    #   Limits the response to buckets that are located in the specified
+    #   Amazon Web Services Region. The Amazon Web Services Region must be
+    #   expressed according to the Amazon Web Services Region code, such as
+    #   `us-west-2` for the US West (Oregon) Region. For a list of the valid
+    #   values for all of the Amazon Web Services Regions, see [Regions and
+    #   Endpoints][1].
+    #
+    #   <note markdown="1"> Requests made to a Regional endpoint that is different from the
+    #   `bucket-region` parameter are not supported. For example, if you want
+    #   to limit the response to your buckets in Region `us-west-2`, the
+    #   request must be made to an endpoint in Region `us-west-2`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
     # @return [Bucket::Collection]
     def buckets(options = {})
       batches = Enumerator.new do |y|
