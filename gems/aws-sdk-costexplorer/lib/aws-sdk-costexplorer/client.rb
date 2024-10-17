@@ -1007,6 +1007,8 @@ module Aws::CostExplorer
     #   * {Types::GetAnomaliesResponse#anomalies #anomalies} => Array&lt;Types::Anomaly&gt;
     #   * {Types::GetAnomaliesResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_anomalies({
@@ -1077,6 +1079,8 @@ module Aws::CostExplorer
     #
     #   * {Types::GetAnomalyMonitorsResponse#anomaly_monitors #anomaly_monitors} => Array&lt;Types::AnomalyMonitor&gt;
     #   * {Types::GetAnomalyMonitorsResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1150,6 +1154,8 @@ module Aws::CostExplorer
     #
     #   * {Types::GetAnomalySubscriptionsResponse#anomaly_subscriptions #anomaly_subscriptions} => Array&lt;Types::AnomalySubscription&gt;
     #   * {Types::GetAnomalySubscriptionsResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1349,6 +1355,8 @@ module Aws::CostExplorer
     #   * {Types::GetCostAndUsageResponse#results_by_time #results_by_time} => Array&lt;Types::ResultByTime&gt;
     #   * {Types::GetCostAndUsageResponse#dimension_value_attributes #dimension_value_attributes} => Array&lt;Types::DimensionValuesWithAttributes&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_cost_and_usage({
@@ -1531,6 +1539,8 @@ module Aws::CostExplorer
     #   * {Types::GetCostAndUsageWithResourcesResponse#group_definitions #group_definitions} => Array&lt;Types::GroupDefinition&gt;
     #   * {Types::GetCostAndUsageWithResourcesResponse#results_by_time #results_by_time} => Array&lt;Types::ResultByTime&gt;
     #   * {Types::GetCostAndUsageWithResourcesResponse#dimension_value_attributes #dimension_value_attributes} => Array&lt;Types::DimensionValuesWithAttributes&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1776,6 +1786,8 @@ module Aws::CostExplorer
     #   * {Types::GetCostCategoriesResponse#cost_category_values #cost_category_values} => Array&lt;String&gt;
     #   * {Types::GetCostCategoriesResponse#return_size #return_size} => Integer
     #   * {Types::GetCostCategoriesResponse#total_size #total_size} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2320,6 +2332,8 @@ module Aws::CostExplorer
     #   * {Types::GetDimensionValuesResponse#total_size #total_size} => Integer
     #   * {Types::GetDimensionValuesResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_dimension_values({
@@ -2561,6 +2575,8 @@ module Aws::CostExplorer
     #   * {Types::GetReservationCoverageResponse#coverages_by_time #coverages_by_time} => Array&lt;Types::CoverageByTime&gt;
     #   * {Types::GetReservationCoverageResponse#total #total} => Types::Coverage
     #   * {Types::GetReservationCoverageResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2819,6 +2835,8 @@ module Aws::CostExplorer
     #   * {Types::GetReservationPurchaseRecommendationResponse#recommendations #recommendations} => Array&lt;Types::ReservationPurchaseRecommendation&gt;
     #   * {Types::GetReservationPurchaseRecommendationResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_reservation_purchase_recommendation({
@@ -3073,6 +3091,8 @@ module Aws::CostExplorer
     #   * {Types::GetReservationUtilizationResponse#utilizations_by_time #utilizations_by_time} => Array&lt;Types::UtilizationByTime&gt;
     #   * {Types::GetReservationUtilizationResponse#total #total} => Types::ReservationAggregates
     #   * {Types::GetReservationUtilizationResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3331,6 +3351,8 @@ module Aws::CostExplorer
     #   * {Types::GetRightsizingRecommendationResponse#rightsizing_recommendations #rightsizing_recommendations} => Array&lt;Types::RightsizingRecommendation&gt;
     #   * {Types::GetRightsizingRecommendationResponse#next_page_token #next_page_token} => String
     #   * {Types::GetRightsizingRecommendationResponse#configuration #configuration} => Types::RightsizingRecommendationConfiguration
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3764,6 +3786,8 @@ module Aws::CostExplorer
     #   * {Types::GetSavingsPlansPurchaseRecommendationResponse#metadata #metadata} => Types::SavingsPlansPurchaseRecommendationMetadata
     #   * {Types::GetSavingsPlansPurchaseRecommendationResponse#savings_plans_purchase_recommendation #savings_plans_purchase_recommendation} => Types::SavingsPlansPurchaseRecommendation
     #   * {Types::GetSavingsPlansPurchaseRecommendationResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4327,6 +4351,8 @@ module Aws::CostExplorer
     #   * {Types::GetTagsResponse#return_size #return_size} => Integer
     #   * {Types::GetTagsResponse#total_size #total_size} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_tags({
@@ -4736,6 +4762,8 @@ module Aws::CostExplorer
     #
     #   * {Types::ListSavingsPlansPurchaseRecommendationGenerationResponse#generation_summary_list #generation_summary_list} => Array&lt;Types::GenerationSummary&gt;
     #   * {Types::ListSavingsPlansPurchaseRecommendationGenerationResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
