@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2024-10-17)
+------------------
+
+* Feature - This is an Amazon ECS documentation only update to address tickets.
+
 1.162.0 (2024-10-10)
 ------------------
 

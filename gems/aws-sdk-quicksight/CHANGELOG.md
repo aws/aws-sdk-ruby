@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2024-10-17)
+------------------
+
+* Feature - Add StartDashboardSnapshotJobSchedule API. RestoreAnalysis now supports restoring analysis to folders.
+
 1.131.0 (2024-10-03)
 ------------------
 

@@ -6058,11 +6058,6 @@ module Aws::BedrockAgent
     #   outputs.
     #   @return [Float]
     #
-    # @!attribute [rw] top_k
-    #   The number of most-likely candidates that the model considers for
-    #   the next token during generation.
-    #   @return [Integer]
-    #
     # @!attribute [rw] top_p
     #   The percentage of most-likely candidates that the model considers
     #   for the next token.
@@ -6074,7 +6069,6 @@ module Aws::BedrockAgent
       :max_tokens,
       :stop_sequences,
       :temperature,
-      :top_k,
       :top_p)
       SENSITIVE = []
       include Aws::Structure

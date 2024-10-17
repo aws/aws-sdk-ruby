@@ -356,6 +356,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::QuickSight::Endpoints::StartAssetBundleImportJob.build(context)
           when :start_dashboard_snapshot_job
             Aws::QuickSight::Endpoints::StartDashboardSnapshotJob.build(context)
+          when :start_dashboard_snapshot_job_schedule
+            Aws::QuickSight::Endpoints::StartDashboardSnapshotJobSchedule.build(context)
           when :tag_resource
             Aws::QuickSight::Endpoints::TagResource.build(context)
           when :untag_resource

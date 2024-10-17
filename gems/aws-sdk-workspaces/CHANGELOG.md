@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2024-10-17)
+------------------
+
+* Feature - Updated the DomainName pattern for Active Directory
+
 1.121.0 (2024-10-02)
 ------------------
 

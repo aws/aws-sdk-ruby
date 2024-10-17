@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.253.0 (2024-10-17)
+------------------
+
+* Feature - Updates Amazon RDS documentation for TAZ IAM support
+
 1.252.0 (2024-10-01)
 ------------------
 

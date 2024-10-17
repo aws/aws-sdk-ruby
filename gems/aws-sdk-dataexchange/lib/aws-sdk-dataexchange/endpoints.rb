@@ -12,7 +12,29 @@ module Aws::DataExchange
   # @api private
   module Endpoints
 
+    class AcceptDataGrant
+      def self.build(context)
+        Aws::DataExchange::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class CancelJob
+      def self.build(context)
+        Aws::DataExchange::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class CreateDataGrant
       def self.build(context)
         Aws::DataExchange::EndpointParameters.new(
           region: context.config.region,
@@ -78,6 +100,17 @@ module Aws::DataExchange
       end
     end
 
+    class DeleteDataGrant
+      def self.build(context)
+        Aws::DataExchange::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class DeleteDataSet
       def self.build(context)
         Aws::DataExchange::EndpointParameters.new(
@@ -122,6 +155,17 @@ module Aws::DataExchange
       end
     end
 
+    class GetDataGrant
+      def self.build(context)
+        Aws::DataExchange::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class GetDataSet
       def self.build(context)
         Aws::DataExchange::EndpointParameters.new(
@@ -155,7 +199,29 @@ module Aws::DataExchange
       end
     end
 
+    class GetReceivedDataGrant
+      def self.build(context)
+        Aws::DataExchange::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class GetRevision
+      def self.build(context)
+        Aws::DataExchange::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListDataGrants
       def self.build(context)
         Aws::DataExchange::EndpointParameters.new(
           region: context.config.region,
@@ -200,6 +266,17 @@ module Aws::DataExchange
     end
 
     class ListJobs
+      def self.build(context)
+        Aws::DataExchange::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListReceivedDataGrants
       def self.build(context)
         Aws::DataExchange::EndpointParameters.new(
           region: context.config.region,

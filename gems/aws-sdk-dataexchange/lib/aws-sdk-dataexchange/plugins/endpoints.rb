@@ -70,8 +70,12 @@ The endpoint provider used to resolve endpoints. Any object that responds to
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :accept_data_grant
+            Aws::DataExchange::Endpoints::AcceptDataGrant.build(context)
           when :cancel_job
             Aws::DataExchange::Endpoints::CancelJob.build(context)
+          when :create_data_grant
+            Aws::DataExchange::Endpoints::CreateDataGrant.build(context)
           when :create_data_set
             Aws::DataExchange::Endpoints::CreateDataSet.build(context)
           when :create_event_action
@@ -82,6 +86,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DataExchange::Endpoints::CreateRevision.build(context)
           when :delete_asset
             Aws::DataExchange::Endpoints::DeleteAsset.build(context)
+          when :delete_data_grant
+            Aws::DataExchange::Endpoints::DeleteDataGrant.build(context)
           when :delete_data_set
             Aws::DataExchange::Endpoints::DeleteDataSet.build(context)
           when :delete_event_action
@@ -90,14 +96,20 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DataExchange::Endpoints::DeleteRevision.build(context)
           when :get_asset
             Aws::DataExchange::Endpoints::GetAsset.build(context)
+          when :get_data_grant
+            Aws::DataExchange::Endpoints::GetDataGrant.build(context)
           when :get_data_set
             Aws::DataExchange::Endpoints::GetDataSet.build(context)
           when :get_event_action
             Aws::DataExchange::Endpoints::GetEventAction.build(context)
           when :get_job
             Aws::DataExchange::Endpoints::GetJob.build(context)
+          when :get_received_data_grant
+            Aws::DataExchange::Endpoints::GetReceivedDataGrant.build(context)
           when :get_revision
             Aws::DataExchange::Endpoints::GetRevision.build(context)
+          when :list_data_grants
+            Aws::DataExchange::Endpoints::ListDataGrants.build(context)
           when :list_data_set_revisions
             Aws::DataExchange::Endpoints::ListDataSetRevisions.build(context)
           when :list_data_sets
@@ -106,6 +118,8 @@ The endpoint provider used to resolve endpoints. Any object that responds to
             Aws::DataExchange::Endpoints::ListEventActions.build(context)
           when :list_jobs
             Aws::DataExchange::Endpoints::ListJobs.build(context)
+          when :list_received_data_grants
+            Aws::DataExchange::Endpoints::ListReceivedDataGrants.build(context)
           when :list_revision_assets
             Aws::DataExchange::Endpoints::ListRevisionAssets.build(context)
           when :list_tags_for_resource

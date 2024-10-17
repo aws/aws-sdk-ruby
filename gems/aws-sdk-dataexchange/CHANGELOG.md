@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2024-10-17)
+------------------
+
+* Feature - This release adds Data Grant support, through which customers can programmatically create data grants to share with other AWS accounts and accept data grants from other AWS accounts.
+
 1.58.0 (2024-09-24)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-10-17)
+------------------
+
+* Feature - Added the registrations status of REQUIRES_AUTHENTICATION
+
 1.27.0 (2024-09-24)
 ------------------
 

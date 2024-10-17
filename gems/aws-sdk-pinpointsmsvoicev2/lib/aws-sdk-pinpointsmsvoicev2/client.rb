@@ -1032,7 +1032,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_arn #=> String
     #   resp.registration_id #=> String
     #   resp.registration_type #=> String
-    #   resp.registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
+    #   resp.registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "REQUIRES_AUTHENTICATION", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
     #   resp.current_version_number #=> Integer
     #   resp.additional_attributes #=> Hash
     #   resp.additional_attributes["String"] #=> String
@@ -1099,17 +1099,21 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # Create a new registration attachment to use for uploading a file or a
-    # URL to a file. The maximum file size is 1MiB and valid file extensions
-    # are PDF, JPEG and PNG. For example, many sender ID registrations
-    # require a signed “letter of authorization” (LOA) to be submitted.
+    # URL to a file. The maximum file size is 500KB and valid file
+    # extensions are PDF, JPEG and PNG. For example, many sender ID
+    # registrations require a signed “letter of authorization” (LOA) to be
+    # submitted.
+    #
+    # Use either `AttachmentUrl` or `AttachmentBody` to upload your
+    # attachment. If both are specified then an exception is returned.
     #
     # @option params [String, StringIO, File] :attachment_body
-    #   The registration file to upload. The maximum file size is 1MiB and
+    #   The registration file to upload. The maximum file size is 500KB and
     #   valid file extensions are PDF, JPEG and PNG.
     #
     # @option params [String] :attachment_url
-    #   A URL to the required registration file. For example, you can provide
-    #   the S3 object URL.
+    #   Registration files have to be stored in an Amazon S3 bucket. The URI
+    #   to use when sending is in the format `s3://BucketName/FileName`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of tags (key and value pairs) to associate with the
@@ -1191,7 +1195,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_arn #=> String
     #   resp.registration_id #=> String
     #   resp.version_number #=> Integer
-    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.reviewing_timestamp #=> Time
@@ -1781,7 +1785,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_arn #=> String
     #   resp.registration_id #=> String
     #   resp.registration_type #=> String
-    #   resp.registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
+    #   resp.registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "REQUIRES_AUTHENTICATION", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
     #   resp.current_version_number #=> Integer
     #   resp.approved_version_number #=> Integer
     #   resp.latest_denied_version_number #=> Integer
@@ -2333,7 +2337,7 @@ module Aws::PinpointSMSVoiceV2
     # filters, the output includes information for all opted out destination
     # numbers in your opt-out list.
     #
-    # If you specify an opted out number that isn't valid, an error is
+    # If you specify an opted out number that isn't valid, an exception is
     # returned.
     #
     # @option params [required, String] :opt_out_list_name
@@ -2346,6 +2350,9 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [Array<String>] :opted_out_numbers
     #   An array of phone numbers to search for in the OptOutList.
+    #
+    #   If you specify an opted out number that isn't valid, an exception is
+    #   returned.
     #
     # @option params [Array<Types::OptedOutFilter>] :filters
     #   An array of OptedOutFilter objects to filter the results on.
@@ -2999,7 +3006,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_id #=> String
     #   resp.registration_versions #=> Array
     #   resp.registration_versions[0].version_number #=> Integer
-    #   resp.registration_versions[0].registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_versions[0].registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
     #   resp.registration_versions[0].registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.reviewing_timestamp #=> Time
@@ -3067,7 +3074,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registrations[0].registration_arn #=> String
     #   resp.registrations[0].registration_id #=> String
     #   resp.registrations[0].registration_type #=> String
-    #   resp.registrations[0].registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
+    #   resp.registrations[0].registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "REQUIRES_AUTHENTICATION", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
     #   resp.registrations[0].current_version_number #=> Integer
     #   resp.registrations[0].approved_version_number #=> Integer
     #   resp.registrations[0].latest_denied_version_number #=> Integer
@@ -3410,7 +3417,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_arn #=> String
     #   resp.registration_id #=> String
     #   resp.version_number #=> Integer
-    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.reviewing_timestamp #=> Time
@@ -4857,7 +4864,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_arn #=> String
     #   resp.registration_id #=> String
     #   resp.version_number #=> Integer
-    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "REQUIRES_AUTHENTICATION", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.reviewing_timestamp #=> Time
@@ -5452,7 +5459,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
