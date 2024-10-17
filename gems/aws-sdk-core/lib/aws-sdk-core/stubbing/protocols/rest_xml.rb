@@ -3,6 +3,7 @@
 module Aws
   module Stubbing
     module Protocols
+      # @api private
       class RestXml < Rest
 
         def body_for(api, operation, rules, data)
@@ -10,7 +11,7 @@ module Aws
             encode_eventstream_response(rules, data, Xml::Builder)
           else
             xml = []
-            rules.location_name = operation.name + 'Result'
+            rules.location_name = "#{operation.name}Result"
             rules['xmlNamespace'] = { 'uri' => api.metadata['xmlNamespace'] }
             Xml::Builder.new(rules, target:xml).to_xml(data)
             xml.join
@@ -18,10 +19,10 @@ module Aws
         end
 
         def stub_error(error_code)
-          http_resp = Seahorse::Client::Http::Response.new
-          http_resp.status_code = 400
-          http_resp.body = XmlError.new(error_code).to_xml
-          http_resp
+          resp = Seahorse::Client::Http::Response.new
+          resp.status_code = 400
+          resp.body = XmlError.new(error_code).to_xml
+          resp
         end
 
         def xmlns(api)

@@ -3,6 +3,7 @@
 module Aws
   module Stubbing
     module Protocols
+      # @api private
       class Query
 
         def stub_data(api, operation, data)
@@ -13,10 +14,10 @@ module Aws
         end
 
         def stub_error(error_code)
-          http_resp = Seahorse::Client::Http::Response.new
-          http_resp.status_code = 400
-          http_resp.body = XmlError.new(error_code).to_xml
-          http_resp
+          resp = Seahorse::Client::Http::Response.new
+          resp.status_code = 400
+          resp.body = XmlError.new(error_code).to_xml
+          resp
         end
 
         private
@@ -24,9 +25,9 @@ module Aws
         def build_body(api, operation, data)
           xml = []
           builder = Aws::Xml::DocBuilder.new(target: xml, indent: '  ')
-          builder.node(operation.name + 'Response', xmlns: xmlns(api)) do
+          builder.node("#{operation.name}Response", xmlns: xmlns(api)) do
             if (rules = operation.output)
-              rules.location_name = operation.name + 'Result'
+              rules.location_name = "#{operation.name}Result"
               Xml::Builder.new(rules, target: xml, pad:'  ').to_xml(data)
             end
             builder.node('ResponseMetadata') do

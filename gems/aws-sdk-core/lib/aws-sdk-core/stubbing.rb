@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Aws
-  # setup autoloading for Stubbing module
+  # @api private
   module Stubbing
     autoload :EmptyStub, 'aws-sdk-core/stubbing/empty_stub'
     autoload :DataApplicator, 'aws-sdk-core/stubbing/data_applicator'

@@ -26,7 +26,8 @@ module Aws
       def error_code(json, context)
         code =
           if aws_query_error?(context)
-            error = context.http_response.headers['x-amzn-query-error'].split(';')[0]
+            query_header = context.http_response.headers['x-amzn-query-error']
+            error, _type = query_header.split(';') # type not supported
             remove_prefix(error, context)
           else
             json['__type']

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support functionality for services that migrate from AWS Query to AWS JSON or CBOR.
+
 3.209.1 (2024-09-25)
 ------------------
 
