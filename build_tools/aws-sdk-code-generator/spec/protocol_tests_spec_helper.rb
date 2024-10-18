@@ -114,6 +114,7 @@ module ProtocolTestsHelper
         when /xml/, /ec2/, /query/
           Aws::Xml::Parser
         when /smithy-rpc-v2-cbor/
+          Aws::RpcV2 # autoload
           Aws::Cbor
         else
           raise "unsupported protocol: #{protocol}"
