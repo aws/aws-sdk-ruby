@@ -44,7 +44,7 @@ module Aws
               'smithy-protocol' => 'rpc-v2-cbor',
               'x-amzn-query-error' => 'Prefix.NonExistentQueue;Sender'
             },
-            body: Cbor.encode(
+            body: RpcV2.encode(
               {
                 "__type": 'com.amazonaws.sqs#QueueDoesNotExist',
                 "message": 'Some user-visible message'
@@ -66,7 +66,7 @@ module Aws
           {
             status_code: 400,
             headers: { 'smithy-protocol' => 'rpc-v2-cbor' },
-            body: Cbor.encode(
+            body: RpcV2.encode(
               {
                 "__type": "com.amazonaws.sqs#QueueDoesNotExist",
                 "message": "Some user-visible message"

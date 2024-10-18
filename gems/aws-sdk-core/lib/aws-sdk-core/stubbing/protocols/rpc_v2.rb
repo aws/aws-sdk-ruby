@@ -19,7 +19,7 @@ module Aws
         def stub_error(error_code)
           resp = Seahorse::Client::Http::Response.new
           resp.status_code = 400
-          resp.body = Cbor.encode(
+          resp.body = Aws::RpcV2.encode(
             {
               'code' => error_code,
               'message' => 'stubbed-response-error-message'

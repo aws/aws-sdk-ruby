@@ -53,7 +53,7 @@ module Aws
             }
 
             resp = RpcV2.new.stub_data(api, operation, data)
-            actual = normalize(Cbor.decode(resp.body.string))
+            actual = normalize(Aws::RpcV2.decode(resp.body.string))
             expect(actual).to eq(normalize(JSON.parse(<<-JSON)))
             {
               "logGroups": [
@@ -79,7 +79,7 @@ module Aws
 
           it 'can stub errors' do
             resp = RpcV2.new.stub_error('error-code')
-            actual = normalize(Cbor.decode(resp.body.string))
+            actual = normalize(Aws::RpcV2.decode(resp.body.string))
             expect(actual).to eq(normalize(JSON.parse(<<-JSON)))
               {
                 "code": "error-code",

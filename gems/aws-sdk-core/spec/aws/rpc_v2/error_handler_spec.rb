@@ -10,7 +10,7 @@ module Aws
       end
 
       let(:error_resp) do
-        Cbor.encode(
+        RpcV2.encode(
           {
             "__type": 'ServiceUnavailableException',
             "message": 'foo',
@@ -20,7 +20,7 @@ module Aws
       end
 
       let(:invalid_error_resp) do
-        Cbor.encode(
+        RpcV2.encode(
           {
             "__type": 'ServiceUnavailableException:',
             "message": 'foo',
@@ -30,7 +30,7 @@ module Aws
       end
 
       let(:un_modeled_error_resp) do
-        Cbor.encode(
+        RpcV2.encode(
           {
             "__type": 'UnModeledException',
             "message": 'foo'
@@ -39,7 +39,7 @@ module Aws
       end
 
       let(:empty_struct_error_resp) do
-        Cbor.encode(
+        RpcV2.encode(
           {
             "__type": 'EmptyStructError',
             "message": 'foo'
