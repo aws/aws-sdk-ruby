@@ -1,22 +1,21 @@
 # frozen_string_literal: true
 
 require_relative '../spec_helper'
-require 'aws-sdk-core/cbor'
 
 module Aws
-  describe Cbor do
+  describe RpcV2 do
     [:cbor].each do |engine|
       describe("ENGINE: #{engine}") do
 
         begin
-          Cbor.engine = engine
+          RpcV2.engine = engine
         rescue LoadError
           next
         end
 
         describe '.encode' do
           it 'encodes an object into bytes' do
-            expect(Cbor.encode('abc')).to eq("\x63abc")
+            expect(RpcV2.encode('abc')).to eq("\x63abc")
           end
         end
 
@@ -24,7 +23,7 @@ module Aws
           it 'decodes bytes into an object' do
             # frozen string
             bytes = StringIO.new("\x63abc").read
-            expect(Cbor.decode(bytes)).to eq('abc')
+            expect(RpcV2.decode(bytes)).to eq('abc')
           end
         end
       end
