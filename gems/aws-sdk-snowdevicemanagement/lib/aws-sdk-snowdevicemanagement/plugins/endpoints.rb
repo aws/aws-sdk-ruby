@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SnowDeviceManagement::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,37 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :cancel_task
-            Aws::SnowDeviceManagement::Endpoints::CancelTask.build(context)
-          when :create_task
-            Aws::SnowDeviceManagement::Endpoints::CreateTask.build(context)
-          when :describe_device
-            Aws::SnowDeviceManagement::Endpoints::DescribeDevice.build(context)
-          when :describe_device_ec2_instances
-            Aws::SnowDeviceManagement::Endpoints::DescribeDeviceEc2Instances.build(context)
-          when :describe_execution
-            Aws::SnowDeviceManagement::Endpoints::DescribeExecution.build(context)
-          when :describe_task
-            Aws::SnowDeviceManagement::Endpoints::DescribeTask.build(context)
-          when :list_device_resources
-            Aws::SnowDeviceManagement::Endpoints::ListDeviceResources.build(context)
-          when :list_devices
-            Aws::SnowDeviceManagement::Endpoints::ListDevices.build(context)
-          when :list_executions
-            Aws::SnowDeviceManagement::Endpoints::ListExecutions.build(context)
-          when :list_tags_for_resource
-            Aws::SnowDeviceManagement::Endpoints::ListTagsForResource.build(context)
-          when :list_tasks
-            Aws::SnowDeviceManagement::Endpoints::ListTasks.build(context)
-          when :tag_resource
-            Aws::SnowDeviceManagement::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::SnowDeviceManagement::Endpoints::UntagResource.build(context)
           end
         end
       end

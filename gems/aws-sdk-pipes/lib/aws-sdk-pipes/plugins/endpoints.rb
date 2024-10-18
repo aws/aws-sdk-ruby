@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Pipes::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,31 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_pipe
-            Aws::Pipes::Endpoints::CreatePipe.build(context)
-          when :delete_pipe
-            Aws::Pipes::Endpoints::DeletePipe.build(context)
-          when :describe_pipe
-            Aws::Pipes::Endpoints::DescribePipe.build(context)
-          when :list_pipes
-            Aws::Pipes::Endpoints::ListPipes.build(context)
-          when :list_tags_for_resource
-            Aws::Pipes::Endpoints::ListTagsForResource.build(context)
-          when :start_pipe
-            Aws::Pipes::Endpoints::StartPipe.build(context)
-          when :stop_pipe
-            Aws::Pipes::Endpoints::StopPipe.build(context)
-          when :tag_resource
-            Aws::Pipes::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Pipes::Endpoints::UntagResource.build(context)
-          when :update_pipe
-            Aws::Pipes::Endpoints::UpdatePipe.build(context)
           end
         end
       end

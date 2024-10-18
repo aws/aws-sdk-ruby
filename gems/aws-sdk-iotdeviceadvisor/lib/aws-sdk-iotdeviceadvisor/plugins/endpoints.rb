@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::IoTDeviceAdvisor::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,39 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_suite_definition
-            Aws::IoTDeviceAdvisor::Endpoints::CreateSuiteDefinition.build(context)
-          when :delete_suite_definition
-            Aws::IoTDeviceAdvisor::Endpoints::DeleteSuiteDefinition.build(context)
-          when :get_endpoint
-            Aws::IoTDeviceAdvisor::Endpoints::GetEndpoint.build(context)
-          when :get_suite_definition
-            Aws::IoTDeviceAdvisor::Endpoints::GetSuiteDefinition.build(context)
-          when :get_suite_run
-            Aws::IoTDeviceAdvisor::Endpoints::GetSuiteRun.build(context)
-          when :get_suite_run_report
-            Aws::IoTDeviceAdvisor::Endpoints::GetSuiteRunReport.build(context)
-          when :list_suite_definitions
-            Aws::IoTDeviceAdvisor::Endpoints::ListSuiteDefinitions.build(context)
-          when :list_suite_runs
-            Aws::IoTDeviceAdvisor::Endpoints::ListSuiteRuns.build(context)
-          when :list_tags_for_resource
-            Aws::IoTDeviceAdvisor::Endpoints::ListTagsForResource.build(context)
-          when :start_suite_run
-            Aws::IoTDeviceAdvisor::Endpoints::StartSuiteRun.build(context)
-          when :stop_suite_run
-            Aws::IoTDeviceAdvisor::Endpoints::StopSuiteRun.build(context)
-          when :tag_resource
-            Aws::IoTDeviceAdvisor::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::IoTDeviceAdvisor::Endpoints::UntagResource.build(context)
-          when :update_suite_definition
-            Aws::IoTDeviceAdvisor::Endpoints::UpdateSuiteDefinition.build(context)
           end
         end
       end

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Batch::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,61 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :cancel_job
-            Aws::Batch::Endpoints::CancelJob.build(context)
-          when :create_compute_environment
-            Aws::Batch::Endpoints::CreateComputeEnvironment.build(context)
-          when :create_job_queue
-            Aws::Batch::Endpoints::CreateJobQueue.build(context)
-          when :create_scheduling_policy
-            Aws::Batch::Endpoints::CreateSchedulingPolicy.build(context)
-          when :delete_compute_environment
-            Aws::Batch::Endpoints::DeleteComputeEnvironment.build(context)
-          when :delete_job_queue
-            Aws::Batch::Endpoints::DeleteJobQueue.build(context)
-          when :delete_scheduling_policy
-            Aws::Batch::Endpoints::DeleteSchedulingPolicy.build(context)
-          when :deregister_job_definition
-            Aws::Batch::Endpoints::DeregisterJobDefinition.build(context)
-          when :describe_compute_environments
-            Aws::Batch::Endpoints::DescribeComputeEnvironments.build(context)
-          when :describe_job_definitions
-            Aws::Batch::Endpoints::DescribeJobDefinitions.build(context)
-          when :describe_job_queues
-            Aws::Batch::Endpoints::DescribeJobQueues.build(context)
-          when :describe_jobs
-            Aws::Batch::Endpoints::DescribeJobs.build(context)
-          when :describe_scheduling_policies
-            Aws::Batch::Endpoints::DescribeSchedulingPolicies.build(context)
-          when :get_job_queue_snapshot
-            Aws::Batch::Endpoints::GetJobQueueSnapshot.build(context)
-          when :list_jobs
-            Aws::Batch::Endpoints::ListJobs.build(context)
-          when :list_scheduling_policies
-            Aws::Batch::Endpoints::ListSchedulingPolicies.build(context)
-          when :list_tags_for_resource
-            Aws::Batch::Endpoints::ListTagsForResource.build(context)
-          when :register_job_definition
-            Aws::Batch::Endpoints::RegisterJobDefinition.build(context)
-          when :submit_job
-            Aws::Batch::Endpoints::SubmitJob.build(context)
-          when :tag_resource
-            Aws::Batch::Endpoints::TagResource.build(context)
-          when :terminate_job
-            Aws::Batch::Endpoints::TerminateJob.build(context)
-          when :untag_resource
-            Aws::Batch::Endpoints::UntagResource.build(context)
-          when :update_compute_environment
-            Aws::Batch::Endpoints::UpdateComputeEnvironment.build(context)
-          when :update_job_queue
-            Aws::Batch::Endpoints::UpdateJobQueue.build(context)
-          when :update_scheduling_policy
-            Aws::Batch::Endpoints::UpdateSchedulingPolicy.build(context)
           end
         end
       end

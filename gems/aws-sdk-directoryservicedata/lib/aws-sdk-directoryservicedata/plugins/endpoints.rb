@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::DirectoryServiceData::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,45 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :add_group_member
-            Aws::DirectoryServiceData::Endpoints::AddGroupMember.build(context)
-          when :create_group
-            Aws::DirectoryServiceData::Endpoints::CreateGroup.build(context)
-          when :create_user
-            Aws::DirectoryServiceData::Endpoints::CreateUser.build(context)
-          when :delete_group
-            Aws::DirectoryServiceData::Endpoints::DeleteGroup.build(context)
-          when :delete_user
-            Aws::DirectoryServiceData::Endpoints::DeleteUser.build(context)
-          when :describe_group
-            Aws::DirectoryServiceData::Endpoints::DescribeGroup.build(context)
-          when :describe_user
-            Aws::DirectoryServiceData::Endpoints::DescribeUser.build(context)
-          when :disable_user
-            Aws::DirectoryServiceData::Endpoints::DisableUser.build(context)
-          when :list_group_members
-            Aws::DirectoryServiceData::Endpoints::ListGroupMembers.build(context)
-          when :list_groups
-            Aws::DirectoryServiceData::Endpoints::ListGroups.build(context)
-          when :list_groups_for_member
-            Aws::DirectoryServiceData::Endpoints::ListGroupsForMember.build(context)
-          when :list_users
-            Aws::DirectoryServiceData::Endpoints::ListUsers.build(context)
-          when :remove_group_member
-            Aws::DirectoryServiceData::Endpoints::RemoveGroupMember.build(context)
-          when :search_groups
-            Aws::DirectoryServiceData::Endpoints::SearchGroups.build(context)
-          when :search_users
-            Aws::DirectoryServiceData::Endpoints::SearchUsers.build(context)
-          when :update_group
-            Aws::DirectoryServiceData::Endpoints::UpdateGroup.build(context)
-          when :update_user
-            Aws::DirectoryServiceData::Endpoints::UpdateUser.build(context)
           end
         end
       end

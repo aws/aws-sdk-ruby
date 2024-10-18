@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Repostspace::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,33 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_space
-            Aws::Repostspace::Endpoints::CreateSpace.build(context)
-          when :delete_space
-            Aws::Repostspace::Endpoints::DeleteSpace.build(context)
-          when :deregister_admin
-            Aws::Repostspace::Endpoints::DeregisterAdmin.build(context)
-          when :get_space
-            Aws::Repostspace::Endpoints::GetSpace.build(context)
-          when :list_spaces
-            Aws::Repostspace::Endpoints::ListSpaces.build(context)
-          when :list_tags_for_resource
-            Aws::Repostspace::Endpoints::ListTagsForResource.build(context)
-          when :register_admin
-            Aws::Repostspace::Endpoints::RegisterAdmin.build(context)
-          when :send_invites
-            Aws::Repostspace::Endpoints::SendInvites.build(context)
-          when :tag_resource
-            Aws::Repostspace::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Repostspace::Endpoints::UntagResource.build(context)
-          when :update_space
-            Aws::Repostspace::Endpoints::UpdateSpace.build(context)
           end
         end
       end

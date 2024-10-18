@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2024-10-18)
+------------------
+
+* Feature - Removing FEDERATED from Create/List/Delete/GetDataCatalog API
+
 1.95.0 (2024-09-24)
 ------------------
 

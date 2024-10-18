@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ServerlessApplicationRepository::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,39 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_application
-            Aws::ServerlessApplicationRepository::Endpoints::CreateApplication.build(context)
-          when :create_application_version
-            Aws::ServerlessApplicationRepository::Endpoints::CreateApplicationVersion.build(context)
-          when :create_cloud_formation_change_set
-            Aws::ServerlessApplicationRepository::Endpoints::CreateCloudFormationChangeSet.build(context)
-          when :create_cloud_formation_template
-            Aws::ServerlessApplicationRepository::Endpoints::CreateCloudFormationTemplate.build(context)
-          when :delete_application
-            Aws::ServerlessApplicationRepository::Endpoints::DeleteApplication.build(context)
-          when :get_application
-            Aws::ServerlessApplicationRepository::Endpoints::GetApplication.build(context)
-          when :get_application_policy
-            Aws::ServerlessApplicationRepository::Endpoints::GetApplicationPolicy.build(context)
-          when :get_cloud_formation_template
-            Aws::ServerlessApplicationRepository::Endpoints::GetCloudFormationTemplate.build(context)
-          when :list_application_dependencies
-            Aws::ServerlessApplicationRepository::Endpoints::ListApplicationDependencies.build(context)
-          when :list_application_versions
-            Aws::ServerlessApplicationRepository::Endpoints::ListApplicationVersions.build(context)
-          when :list_applications
-            Aws::ServerlessApplicationRepository::Endpoints::ListApplications.build(context)
-          when :put_application_policy
-            Aws::ServerlessApplicationRepository::Endpoints::PutApplicationPolicy.build(context)
-          when :unshare_application
-            Aws::ServerlessApplicationRepository::Endpoints::UnshareApplication.build(context)
-          when :update_application
-            Aws::ServerlessApplicationRepository::Endpoints::UpdateApplication.build(context)
           end
         end
       end

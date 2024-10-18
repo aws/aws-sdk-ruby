@@ -13484,7 +13484,7 @@ module Aws::EC2
     RequestSpotLaunchSpecification.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
     RequestSpotLaunchSpecification.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     RequestSpotLaunchSpecification.add_member(:kernel_id, Shapes::ShapeRef.new(shape: KernelId, location_name: "kernelId"))
-    RequestSpotLaunchSpecification.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairName, location_name: "keyName"))
+    RequestSpotLaunchSpecification.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairNameWithResolver, location_name: "keyName"))
     RequestSpotLaunchSpecification.add_member(:monitoring, Shapes::ShapeRef.new(shape: RunInstancesMonitoringEnabled, location_name: "monitoring"))
     RequestSpotLaunchSpecification.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecificationList, location_name: "NetworkInterface"))
     RequestSpotLaunchSpecification.add_member(:placement, Shapes::ShapeRef.new(shape: SpotPlacement, location_name: "placement"))

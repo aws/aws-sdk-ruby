@@ -12,16 +12,9 @@ module Aws::MarketplaceEntitlementService
   # @api private
   module Endpoints
 
-    class GetEntitlements
-      def self.build(context)
-        Aws::MarketplaceEntitlementService::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
+    def self.parameters_for_operation(context)
+      Aws::MarketplaceEntitlementService::EndpointParameters.create(context.config)
+    end
   end
 end

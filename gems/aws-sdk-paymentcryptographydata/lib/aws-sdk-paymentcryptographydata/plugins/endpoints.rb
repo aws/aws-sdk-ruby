@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::PaymentCryptographyData::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,33 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :decrypt_data
-            Aws::PaymentCryptographyData::Endpoints::DecryptData.build(context)
-          when :encrypt_data
-            Aws::PaymentCryptographyData::Endpoints::EncryptData.build(context)
-          when :generate_card_validation_data
-            Aws::PaymentCryptographyData::Endpoints::GenerateCardValidationData.build(context)
-          when :generate_mac
-            Aws::PaymentCryptographyData::Endpoints::GenerateMac.build(context)
-          when :generate_pin_data
-            Aws::PaymentCryptographyData::Endpoints::GeneratePinData.build(context)
-          when :re_encrypt_data
-            Aws::PaymentCryptographyData::Endpoints::ReEncryptData.build(context)
-          when :translate_pin_data
-            Aws::PaymentCryptographyData::Endpoints::TranslatePinData.build(context)
-          when :verify_auth_request_cryptogram
-            Aws::PaymentCryptographyData::Endpoints::VerifyAuthRequestCryptogram.build(context)
-          when :verify_card_validation_data
-            Aws::PaymentCryptographyData::Endpoints::VerifyCardValidationData.build(context)
-          when :verify_mac
-            Aws::PaymentCryptographyData::Endpoints::VerifyMac.build(context)
-          when :verify_pin_data
-            Aws::PaymentCryptographyData::Endpoints::VerifyPinData.build(context)
           end
         end
       end

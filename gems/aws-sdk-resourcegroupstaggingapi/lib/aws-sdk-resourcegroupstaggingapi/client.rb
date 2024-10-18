@@ -1115,7 +1115,7 @@ module Aws::ResourceGroupsTaggingAPI
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourcegroupstaggingapi'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

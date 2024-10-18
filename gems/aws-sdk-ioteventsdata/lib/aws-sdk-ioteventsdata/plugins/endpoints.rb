@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::IoTEventsData::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,35 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :batch_acknowledge_alarm
-            Aws::IoTEventsData::Endpoints::BatchAcknowledgeAlarm.build(context)
-          when :batch_delete_detector
-            Aws::IoTEventsData::Endpoints::BatchDeleteDetector.build(context)
-          when :batch_disable_alarm
-            Aws::IoTEventsData::Endpoints::BatchDisableAlarm.build(context)
-          when :batch_enable_alarm
-            Aws::IoTEventsData::Endpoints::BatchEnableAlarm.build(context)
-          when :batch_put_message
-            Aws::IoTEventsData::Endpoints::BatchPutMessage.build(context)
-          when :batch_reset_alarm
-            Aws::IoTEventsData::Endpoints::BatchResetAlarm.build(context)
-          when :batch_snooze_alarm
-            Aws::IoTEventsData::Endpoints::BatchSnoozeAlarm.build(context)
-          when :batch_update_detector
-            Aws::IoTEventsData::Endpoints::BatchUpdateDetector.build(context)
-          when :describe_alarm
-            Aws::IoTEventsData::Endpoints::DescribeAlarm.build(context)
-          when :describe_detector
-            Aws::IoTEventsData::Endpoints::DescribeDetector.build(context)
-          when :list_alarms
-            Aws::IoTEventsData::Endpoints::ListAlarms.build(context)
-          when :list_detectors
-            Aws::IoTEventsData::Endpoints::ListDetectors.build(context)
           end
         end
       end

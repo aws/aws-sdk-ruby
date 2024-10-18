@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SocialMessaging::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,37 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_whats_app_business_account
-            Aws::SocialMessaging::Endpoints::AssociateWhatsAppBusinessAccount.build(context)
-          when :delete_whats_app_message_media
-            Aws::SocialMessaging::Endpoints::DeleteWhatsAppMessageMedia.build(context)
-          when :disassociate_whats_app_business_account
-            Aws::SocialMessaging::Endpoints::DisassociateWhatsAppBusinessAccount.build(context)
-          when :get_linked_whats_app_business_account
-            Aws::SocialMessaging::Endpoints::GetLinkedWhatsAppBusinessAccount.build(context)
-          when :get_linked_whats_app_business_account_phone_number
-            Aws::SocialMessaging::Endpoints::GetLinkedWhatsAppBusinessAccountPhoneNumber.build(context)
-          when :get_whats_app_message_media
-            Aws::SocialMessaging::Endpoints::GetWhatsAppMessageMedia.build(context)
-          when :list_linked_whats_app_business_accounts
-            Aws::SocialMessaging::Endpoints::ListLinkedWhatsAppBusinessAccounts.build(context)
-          when :list_tags_for_resource
-            Aws::SocialMessaging::Endpoints::ListTagsForResource.build(context)
-          when :post_whats_app_message_media
-            Aws::SocialMessaging::Endpoints::PostWhatsAppMessageMedia.build(context)
-          when :put_whats_app_business_account_event_destinations
-            Aws::SocialMessaging::Endpoints::PutWhatsAppBusinessAccountEventDestinations.build(context)
-          when :send_whats_app_message
-            Aws::SocialMessaging::Endpoints::SendWhatsAppMessage.build(context)
-          when :tag_resource
-            Aws::SocialMessaging::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::SocialMessaging::Endpoints::UntagResource.build(context)
           end
         end
       end

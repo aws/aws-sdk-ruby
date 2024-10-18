@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Account::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,35 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :accept_primary_email_update
-            Aws::Account::Endpoints::AcceptPrimaryEmailUpdate.build(context)
-          when :delete_alternate_contact
-            Aws::Account::Endpoints::DeleteAlternateContact.build(context)
-          when :disable_region
-            Aws::Account::Endpoints::DisableRegion.build(context)
-          when :enable_region
-            Aws::Account::Endpoints::EnableRegion.build(context)
-          when :get_alternate_contact
-            Aws::Account::Endpoints::GetAlternateContact.build(context)
-          when :get_contact_information
-            Aws::Account::Endpoints::GetContactInformation.build(context)
-          when :get_primary_email
-            Aws::Account::Endpoints::GetPrimaryEmail.build(context)
-          when :get_region_opt_status
-            Aws::Account::Endpoints::GetRegionOptStatus.build(context)
-          when :list_regions
-            Aws::Account::Endpoints::ListRegions.build(context)
-          when :put_alternate_contact
-            Aws::Account::Endpoints::PutAlternateContact.build(context)
-          when :put_contact_information
-            Aws::Account::Endpoints::PutContactInformation.build(context)
-          when :start_primary_email_update
-            Aws::Account::Endpoints::StartPrimaryEmailUpdate.build(context)
           end
         end
       end

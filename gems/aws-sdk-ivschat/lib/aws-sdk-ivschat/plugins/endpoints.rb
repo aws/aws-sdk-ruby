@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Ivschat::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,45 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_chat_token
-            Aws::Ivschat::Endpoints::CreateChatToken.build(context)
-          when :create_logging_configuration
-            Aws::Ivschat::Endpoints::CreateLoggingConfiguration.build(context)
-          when :create_room
-            Aws::Ivschat::Endpoints::CreateRoom.build(context)
-          when :delete_logging_configuration
-            Aws::Ivschat::Endpoints::DeleteLoggingConfiguration.build(context)
-          when :delete_message
-            Aws::Ivschat::Endpoints::DeleteMessage.build(context)
-          when :delete_room
-            Aws::Ivschat::Endpoints::DeleteRoom.build(context)
-          when :disconnect_user
-            Aws::Ivschat::Endpoints::DisconnectUser.build(context)
-          when :get_logging_configuration
-            Aws::Ivschat::Endpoints::GetLoggingConfiguration.build(context)
-          when :get_room
-            Aws::Ivschat::Endpoints::GetRoom.build(context)
-          when :list_logging_configurations
-            Aws::Ivschat::Endpoints::ListLoggingConfigurations.build(context)
-          when :list_rooms
-            Aws::Ivschat::Endpoints::ListRooms.build(context)
-          when :list_tags_for_resource
-            Aws::Ivschat::Endpoints::ListTagsForResource.build(context)
-          when :send_event
-            Aws::Ivschat::Endpoints::SendEvent.build(context)
-          when :tag_resource
-            Aws::Ivschat::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Ivschat::Endpoints::UntagResource.build(context)
-          when :update_logging_configuration
-            Aws::Ivschat::Endpoints::UpdateLoggingConfiguration.build(context)
-          when :update_room
-            Aws::Ivschat::Endpoints::UpdateRoom.build(context)
           end
         end
       end

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::AppFabric::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,63 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :batch_get_user_access_tasks
-            Aws::AppFabric::Endpoints::BatchGetUserAccessTasks.build(context)
-          when :connect_app_authorization
-            Aws::AppFabric::Endpoints::ConnectAppAuthorization.build(context)
-          when :create_app_authorization
-            Aws::AppFabric::Endpoints::CreateAppAuthorization.build(context)
-          when :create_app_bundle
-            Aws::AppFabric::Endpoints::CreateAppBundle.build(context)
-          when :create_ingestion
-            Aws::AppFabric::Endpoints::CreateIngestion.build(context)
-          when :create_ingestion_destination
-            Aws::AppFabric::Endpoints::CreateIngestionDestination.build(context)
-          when :delete_app_authorization
-            Aws::AppFabric::Endpoints::DeleteAppAuthorization.build(context)
-          when :delete_app_bundle
-            Aws::AppFabric::Endpoints::DeleteAppBundle.build(context)
-          when :delete_ingestion
-            Aws::AppFabric::Endpoints::DeleteIngestion.build(context)
-          when :delete_ingestion_destination
-            Aws::AppFabric::Endpoints::DeleteIngestionDestination.build(context)
-          when :get_app_authorization
-            Aws::AppFabric::Endpoints::GetAppAuthorization.build(context)
-          when :get_app_bundle
-            Aws::AppFabric::Endpoints::GetAppBundle.build(context)
-          when :get_ingestion
-            Aws::AppFabric::Endpoints::GetIngestion.build(context)
-          when :get_ingestion_destination
-            Aws::AppFabric::Endpoints::GetIngestionDestination.build(context)
-          when :list_app_authorizations
-            Aws::AppFabric::Endpoints::ListAppAuthorizations.build(context)
-          when :list_app_bundles
-            Aws::AppFabric::Endpoints::ListAppBundles.build(context)
-          when :list_ingestion_destinations
-            Aws::AppFabric::Endpoints::ListIngestionDestinations.build(context)
-          when :list_ingestions
-            Aws::AppFabric::Endpoints::ListIngestions.build(context)
-          when :list_tags_for_resource
-            Aws::AppFabric::Endpoints::ListTagsForResource.build(context)
-          when :start_ingestion
-            Aws::AppFabric::Endpoints::StartIngestion.build(context)
-          when :start_user_access_tasks
-            Aws::AppFabric::Endpoints::StartUserAccessTasks.build(context)
-          when :stop_ingestion
-            Aws::AppFabric::Endpoints::StopIngestion.build(context)
-          when :tag_resource
-            Aws::AppFabric::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::AppFabric::Endpoints::UntagResource.build(context)
-          when :update_app_authorization
-            Aws::AppFabric::Endpoints::UpdateAppAuthorization.build(context)
-          when :update_ingestion_destination
-            Aws::AppFabric::Endpoints::UpdateIngestionDestination.build(context)
           end
         end
       end

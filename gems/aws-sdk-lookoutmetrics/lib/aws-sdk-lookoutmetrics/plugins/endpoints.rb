@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::LookoutMetrics::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,71 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :activate_anomaly_detector
-            Aws::LookoutMetrics::Endpoints::ActivateAnomalyDetector.build(context)
-          when :back_test_anomaly_detector
-            Aws::LookoutMetrics::Endpoints::BackTestAnomalyDetector.build(context)
-          when :create_alert
-            Aws::LookoutMetrics::Endpoints::CreateAlert.build(context)
-          when :create_anomaly_detector
-            Aws::LookoutMetrics::Endpoints::CreateAnomalyDetector.build(context)
-          when :create_metric_set
-            Aws::LookoutMetrics::Endpoints::CreateMetricSet.build(context)
-          when :deactivate_anomaly_detector
-            Aws::LookoutMetrics::Endpoints::DeactivateAnomalyDetector.build(context)
-          when :delete_alert
-            Aws::LookoutMetrics::Endpoints::DeleteAlert.build(context)
-          when :delete_anomaly_detector
-            Aws::LookoutMetrics::Endpoints::DeleteAnomalyDetector.build(context)
-          when :describe_alert
-            Aws::LookoutMetrics::Endpoints::DescribeAlert.build(context)
-          when :describe_anomaly_detection_executions
-            Aws::LookoutMetrics::Endpoints::DescribeAnomalyDetectionExecutions.build(context)
-          when :describe_anomaly_detector
-            Aws::LookoutMetrics::Endpoints::DescribeAnomalyDetector.build(context)
-          when :describe_metric_set
-            Aws::LookoutMetrics::Endpoints::DescribeMetricSet.build(context)
-          when :detect_metric_set_config
-            Aws::LookoutMetrics::Endpoints::DetectMetricSetConfig.build(context)
-          when :get_anomaly_group
-            Aws::LookoutMetrics::Endpoints::GetAnomalyGroup.build(context)
-          when :get_data_quality_metrics
-            Aws::LookoutMetrics::Endpoints::GetDataQualityMetrics.build(context)
-          when :get_feedback
-            Aws::LookoutMetrics::Endpoints::GetFeedback.build(context)
-          when :get_sample_data
-            Aws::LookoutMetrics::Endpoints::GetSampleData.build(context)
-          when :list_alerts
-            Aws::LookoutMetrics::Endpoints::ListAlerts.build(context)
-          when :list_anomaly_detectors
-            Aws::LookoutMetrics::Endpoints::ListAnomalyDetectors.build(context)
-          when :list_anomaly_group_related_metrics
-            Aws::LookoutMetrics::Endpoints::ListAnomalyGroupRelatedMetrics.build(context)
-          when :list_anomaly_group_summaries
-            Aws::LookoutMetrics::Endpoints::ListAnomalyGroupSummaries.build(context)
-          when :list_anomaly_group_time_series
-            Aws::LookoutMetrics::Endpoints::ListAnomalyGroupTimeSeries.build(context)
-          when :list_metric_sets
-            Aws::LookoutMetrics::Endpoints::ListMetricSets.build(context)
-          when :list_tags_for_resource
-            Aws::LookoutMetrics::Endpoints::ListTagsForResource.build(context)
-          when :put_feedback
-            Aws::LookoutMetrics::Endpoints::PutFeedback.build(context)
-          when :tag_resource
-            Aws::LookoutMetrics::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::LookoutMetrics::Endpoints::UntagResource.build(context)
-          when :update_alert
-            Aws::LookoutMetrics::Endpoints::UpdateAlert.build(context)
-          when :update_anomaly_detector
-            Aws::LookoutMetrics::Endpoints::UpdateAnomalyDetector.build(context)
-          when :update_metric_set
-            Aws::LookoutMetrics::Endpoints::UpdateMetricSet.build(context)
           end
         end
       end

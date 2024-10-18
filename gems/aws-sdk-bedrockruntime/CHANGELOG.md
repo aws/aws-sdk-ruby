@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-10-18)
+------------------
+
+* Feature - Added converse support for custom imported models
+
 1.26.0 (2024-10-02)
 ------------------
 

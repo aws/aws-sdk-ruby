@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SQS::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,57 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :add_permission
-            Aws::SQS::Endpoints::AddPermission.build(context)
-          when :cancel_message_move_task
-            Aws::SQS::Endpoints::CancelMessageMoveTask.build(context)
-          when :change_message_visibility
-            Aws::SQS::Endpoints::ChangeMessageVisibility.build(context)
-          when :change_message_visibility_batch
-            Aws::SQS::Endpoints::ChangeMessageVisibilityBatch.build(context)
-          when :create_queue
-            Aws::SQS::Endpoints::CreateQueue.build(context)
-          when :delete_message
-            Aws::SQS::Endpoints::DeleteMessage.build(context)
-          when :delete_message_batch
-            Aws::SQS::Endpoints::DeleteMessageBatch.build(context)
-          when :delete_queue
-            Aws::SQS::Endpoints::DeleteQueue.build(context)
-          when :get_queue_attributes
-            Aws::SQS::Endpoints::GetQueueAttributes.build(context)
-          when :get_queue_url
-            Aws::SQS::Endpoints::GetQueueUrl.build(context)
-          when :list_dead_letter_source_queues
-            Aws::SQS::Endpoints::ListDeadLetterSourceQueues.build(context)
-          when :list_message_move_tasks
-            Aws::SQS::Endpoints::ListMessageMoveTasks.build(context)
-          when :list_queue_tags
-            Aws::SQS::Endpoints::ListQueueTags.build(context)
-          when :list_queues
-            Aws::SQS::Endpoints::ListQueues.build(context)
-          when :purge_queue
-            Aws::SQS::Endpoints::PurgeQueue.build(context)
-          when :receive_message
-            Aws::SQS::Endpoints::ReceiveMessage.build(context)
-          when :remove_permission
-            Aws::SQS::Endpoints::RemovePermission.build(context)
-          when :send_message
-            Aws::SQS::Endpoints::SendMessage.build(context)
-          when :send_message_batch
-            Aws::SQS::Endpoints::SendMessageBatch.build(context)
-          when :set_queue_attributes
-            Aws::SQS::Endpoints::SetQueueAttributes.build(context)
-          when :start_message_move_task
-            Aws::SQS::Endpoints::StartMessageMoveTask.build(context)
-          when :tag_queue
-            Aws::SQS::Endpoints::TagQueue.build(context)
-          when :untag_queue
-            Aws::SQS::Endpoints::UntagQueue.build(context)
           end
         end
       end

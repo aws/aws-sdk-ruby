@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ServiceDiscovery::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,65 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_http_namespace
-            Aws::ServiceDiscovery::Endpoints::CreateHttpNamespace.build(context)
-          when :create_private_dns_namespace
-            Aws::ServiceDiscovery::Endpoints::CreatePrivateDnsNamespace.build(context)
-          when :create_public_dns_namespace
-            Aws::ServiceDiscovery::Endpoints::CreatePublicDnsNamespace.build(context)
-          when :create_service
-            Aws::ServiceDiscovery::Endpoints::CreateService.build(context)
-          when :delete_namespace
-            Aws::ServiceDiscovery::Endpoints::DeleteNamespace.build(context)
-          when :delete_service
-            Aws::ServiceDiscovery::Endpoints::DeleteService.build(context)
-          when :deregister_instance
-            Aws::ServiceDiscovery::Endpoints::DeregisterInstance.build(context)
-          when :discover_instances
-            Aws::ServiceDiscovery::Endpoints::DiscoverInstances.build(context)
-          when :discover_instances_revision
-            Aws::ServiceDiscovery::Endpoints::DiscoverInstancesRevision.build(context)
-          when :get_instance
-            Aws::ServiceDiscovery::Endpoints::GetInstance.build(context)
-          when :get_instances_health_status
-            Aws::ServiceDiscovery::Endpoints::GetInstancesHealthStatus.build(context)
-          when :get_namespace
-            Aws::ServiceDiscovery::Endpoints::GetNamespace.build(context)
-          when :get_operation
-            Aws::ServiceDiscovery::Endpoints::GetOperation.build(context)
-          when :get_service
-            Aws::ServiceDiscovery::Endpoints::GetService.build(context)
-          when :list_instances
-            Aws::ServiceDiscovery::Endpoints::ListInstances.build(context)
-          when :list_namespaces
-            Aws::ServiceDiscovery::Endpoints::ListNamespaces.build(context)
-          when :list_operations
-            Aws::ServiceDiscovery::Endpoints::ListOperations.build(context)
-          when :list_services
-            Aws::ServiceDiscovery::Endpoints::ListServices.build(context)
-          when :list_tags_for_resource
-            Aws::ServiceDiscovery::Endpoints::ListTagsForResource.build(context)
-          when :register_instance
-            Aws::ServiceDiscovery::Endpoints::RegisterInstance.build(context)
-          when :tag_resource
-            Aws::ServiceDiscovery::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::ServiceDiscovery::Endpoints::UntagResource.build(context)
-          when :update_http_namespace
-            Aws::ServiceDiscovery::Endpoints::UpdateHttpNamespace.build(context)
-          when :update_instance_custom_health_status
-            Aws::ServiceDiscovery::Endpoints::UpdateInstanceCustomHealthStatus.build(context)
-          when :update_private_dns_namespace
-            Aws::ServiceDiscovery::Endpoints::UpdatePrivateDnsNamespace.build(context)
-          when :update_public_dns_namespace
-            Aws::ServiceDiscovery::Endpoints::UpdatePublicDnsNamespace.build(context)
-          when :update_service
-            Aws::ServiceDiscovery::Endpoints::UpdateService.build(context)
           end
         end
       end

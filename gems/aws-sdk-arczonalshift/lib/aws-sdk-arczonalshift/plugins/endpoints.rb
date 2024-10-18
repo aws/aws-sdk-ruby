@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ARCZonalShift::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,37 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :cancel_zonal_shift
-            Aws::ARCZonalShift::Endpoints::CancelZonalShift.build(context)
-          when :create_practice_run_configuration
-            Aws::ARCZonalShift::Endpoints::CreatePracticeRunConfiguration.build(context)
-          when :delete_practice_run_configuration
-            Aws::ARCZonalShift::Endpoints::DeletePracticeRunConfiguration.build(context)
-          when :get_autoshift_observer_notification_status
-            Aws::ARCZonalShift::Endpoints::GetAutoshiftObserverNotificationStatus.build(context)
-          when :get_managed_resource
-            Aws::ARCZonalShift::Endpoints::GetManagedResource.build(context)
-          when :list_autoshifts
-            Aws::ARCZonalShift::Endpoints::ListAutoshifts.build(context)
-          when :list_managed_resources
-            Aws::ARCZonalShift::Endpoints::ListManagedResources.build(context)
-          when :list_zonal_shifts
-            Aws::ARCZonalShift::Endpoints::ListZonalShifts.build(context)
-          when :start_zonal_shift
-            Aws::ARCZonalShift::Endpoints::StartZonalShift.build(context)
-          when :update_autoshift_observer_notification_status
-            Aws::ARCZonalShift::Endpoints::UpdateAutoshiftObserverNotificationStatus.build(context)
-          when :update_practice_run_configuration
-            Aws::ARCZonalShift::Endpoints::UpdatePracticeRunConfiguration.build(context)
-          when :update_zonal_autoshift_configuration
-            Aws::ARCZonalShift::Endpoints::UpdateZonalAutoshiftConfiguration.build(context)
-          when :update_zonal_shift
-            Aws::ARCZonalShift::Endpoints::UpdateZonalShift.build(context)
           end
         end
       end
