@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Support functionality for services that migrate from AWS Query to AWS JSON or CBOR.
 
+* Issue - Fix RPCv2 protocol to always send an Accept header for CBOR.
+
 3.210.0 (2024-10-18)
 ------------------
 
