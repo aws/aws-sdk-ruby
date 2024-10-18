@@ -1685,7 +1685,7 @@
                     },
                     "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
                 },
-                "description": "No prefix headers are serialized because the value is empty",
+                "description": "No prefix headers are serialized because the value is not present",
                 "params": {
                     "foo": "Foo",
                     "fooMap": {}
@@ -1696,6 +1696,35 @@
                     "body": "",
                     "headers": {
                         "X-Foo": "Foo"
+                    }
+                }
+            },
+            {
+                "id": "RestJsonHttpPrefixEmptyHeaders",
+                "given": {
+                    "name": "HttpPrefixHeaders",
+                    "http": {
+                        "method": "GET",
+                        "requestUri": "/HttpPrefixHeaders",
+                        "responseCode": 200
+                    },
+                    "input": {
+                        "shape": "HttpPrefixHeadersInput"
+                    },
+                    "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
+                },
+                "description": "Serialize prefix headers were the value is present but empty",
+                "params": {
+                    "fooMap": {
+                        "Abc": ""
+                    }
+                },
+                "serialized": {
+                    "method": "GET",
+                    "uri": "/HttpPrefixHeaders",
+                    "body": "",
+                    "headers": {
+                        "X-Foo-Abc": ""
                     }
                 }
             }
@@ -4362,7 +4391,7 @@
                     },
                     "documentation": "<p>Null and empty headers are not sent over the wire.</p>"
                 },
-                "description": "Do not send null values, empty strings, or empty lists over the wire in headers",
+                "description": "Do not send null values, but do send empty strings and empty lists over the wire in headers",
                 "params": {
                     "a": null,
                     "b": "",
@@ -4372,10 +4401,12 @@
                     "method": "GET",
                     "uri": "/NullAndEmptyHeadersClient",
                     "body": "",
+                    "headers": {
+                        "X-B": "",
+                        "X-C": ""
+                    },
                     "forbidHeaders": [
-                        "X-A",
-                        "X-B",
-                        "X-C"
+                        "X-A"
                     ]
                 }
             }

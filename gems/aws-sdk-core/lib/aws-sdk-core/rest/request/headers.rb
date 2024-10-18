@@ -20,7 +20,7 @@ module Aws
         def apply(http_req, params)
           @rules.shape.members.each do |name, ref|
             value = params[name]
-            next if value.nil? || ((ref.shape).is_a?(StringShape) && value.empty?)
+            next if value.nil?
 
             case ref.location
             when 'header' then apply_header_value(http_req.headers, ref, value)
@@ -51,7 +51,7 @@ module Aws
         end
 
         def list(headers, ref, values)
-          return if !values || values.empty?
+          return if values.nil?
 
           member_ref = ref.shape.member
           values = values.collect do |value|
