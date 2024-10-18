@@ -1,11 +1,10 @@
 require_relative '../../spec_helper'
-require 'aws-sdk-core/cbor/cbor_engine'
 
 module Aws
-  module Cbor
+  module RpcV2
     describe CborEngine do
       context 'decode success tests' do
-        file = File.expand_path('decode-success-tests.json', __dir__)
+        file = File.expand_path('rpcv2-decode-success-tests.json', __dir__)
         test_cases = JSON.load_file(file)
 
         def expected_value(expect)
@@ -24,7 +23,7 @@ module Aws
             end
           when 'tag'
             value = expected_value(expect['tag']['value'])
-            Tagged.new(expect['tag']['id'], value)
+            Cbor::Tagged.new(expect['tag']['id'], value)
           when 'bool' then expect['bool']
           when 'null' then nil
           when 'undefined' then :undefined
@@ -54,7 +53,7 @@ module Aws
         test_cases.each do |test_case|
           it "passes #{test_case['description']}" do
             input = [test_case['input']].pack('H*')
-            actual = Aws::Cbor::CborEngine.decode(input)
+            actual = Aws::RpcV2::CborEngine.decode(input)
             expected = expected_value(test_case['expect'])
             assert(actual, expected)
           end
@@ -62,15 +61,15 @@ module Aws
       end
 
       context 'decode error tests' do
-        file = File.expand_path('decode-error-tests.json', __dir__)
+        file = File.expand_path('rpcv2-decode-error-tests.json', __dir__)
         test_cases = JSON.load_file(file)
 
         test_cases.each do |test_case|
           it "passes #{test_case['description']}" do
             input = [test_case['input']].pack('H*')
 
-            expect { Aws::Cbor::CborEngine.decode(input) }
-              .to raise_error(Error)
+            expect { Aws::RpcV2::CborEngine.decode(input) }
+              .to raise_error(Cbor::Error)
           end
         end
       end

@@ -100,6 +100,19 @@ module Aws
             XML
           end
 
+          it 'can stub errors' do
+            resp = EC2.new.stub_error('error-code')
+            expect(resp.status_code).to eq(400)
+            expect(normalize(resp.body.string)).to eq(normalize(<<-XML))
+              <ErrorResponse>
+                <Error>
+                  <Code>error-code</Code>
+                  <Message>stubbed-response-error-message</Message>
+                </Error>
+              </ErrorResponse>
+            XML
+          end
+
         end
       end
     end

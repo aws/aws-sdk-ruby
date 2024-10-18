@@ -63,6 +63,7 @@ module Aws
 
           it 'can stub errors' do
             resp = Query.new.stub_error('error-code')
+            expect(resp.status_code).to eq(400)
             expect(normalize(resp.body.string)).to eq(normalize(<<-XML))
               <ErrorResponse>
                 <Error>
