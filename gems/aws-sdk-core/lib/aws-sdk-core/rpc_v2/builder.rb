@@ -16,7 +16,7 @@ module Aws
         # different than if the input shape is a structure with no members.
         return nil if @rules.shape.struct_class == EmptyStructure
 
-        Cbor.encode(format(@rules, params))
+        RpcV2.encode(format(@rules, params))
       end
 
       private

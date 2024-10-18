@@ -35,6 +35,7 @@
                     "uri": "/service/RpcV2Protocol/operation/EmptyInputOutput",
                     "body": "v/8=",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -76,6 +77,7 @@
                     "uri": "/service/RpcV2Protocol/operation/NoInputOutput",
                     "body": "",
                     "headers": {
+                        "Accept": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
                     "forbidHeaders": [
@@ -129,6 +131,7 @@
                     "uri": "/service/RpcV2Protocol/operation/OptionalInputOutput",
                     "body": "v/8=",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -217,6 +220,7 @@
                     "uri": "/service/RpcV2Protocol/operation/RecursiveShapes",
                     "body": "v2ZuZXN0ZWS/Y2Zvb2RGb28xZm5lc3RlZL9jYmFyZEJhcjFvcmVjdXJzaXZlTWVtYmVyv2Nmb29kRm9vMmZuZXN0ZWS/Y2JhcmRCYXIy//////8=",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -359,6 +363,7 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
                     "body": "oW5kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZQ==",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -394,6 +399,7 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
                     "body": "om5kZW5zZU51bWJlck1hcKFheABvZGVuc2VCb29sZWFuTWFwoWF49A==",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -430,6 +436,7 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
                     "body": "oWtkZW5zZVNldE1hcKJheIBheYJhYWFi",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -665,6 +672,7 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborLists",
                     "body": "v2pzdHJpbmdMaXN0gmNmb29jYmFyaXN0cmluZ1NldIJjZm9vY2JhcmtpbnRlZ2VyTGlzdIIBAmtib29sZWFuTGlzdIL19G10aW1lc3RhbXBMaXN0gsH7QdTX+/OAAADB+0HU1/vzgAAAaGVudW1MaXN0gmNGb29hMGtpbnRFbnVtTGlzdIIBAnBuZXN0ZWRTdHJpbmdMaXN0goJjZm9vY2JhcoJjYmF6Y3F1eG1zdHJ1Y3R1cmVMaXN0gqJhYWExYWJhMqJhYWEzYWJhNGhibG9iTGlzdIJDZm9vQ2Jhcv8=",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -696,6 +704,7 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborLists",
                     "body": "v2pzdHJpbmdMaXN0n///",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -727,6 +736,7 @@
                     "uri": "/service/RpcV2Protocol/operation/RpcV2CborLists",
                     "body": "oWpzdHJpbmdMaXN0gA==",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -841,6 +851,7 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -870,6 +881,7 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v/8=",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -900,6 +912,7 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v2tkb3VibGVWYWx1Zft/+AAAAAAAAGpmbG9hdFZhbHVl+n/AAAD/",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -930,6 +943,7 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v2tkb3VibGVWYWx1Zft/8AAAAAAAAGpmbG9hdFZhbHVl+n+AAAD/",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },
@@ -960,6 +974,7 @@
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
                     "body": "v2tkb3VibGVWYWx1Zfv/8AAAAAAAAGpmbG9hdFZhbHVl+v+AAAD/",
                     "headers": {
+                        "Accept": "application/cbor",
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
                     },

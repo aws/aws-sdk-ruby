@@ -27,7 +27,7 @@ module Aws
       end
 
       def extract_error(body, context)
-        data = Cbor.decode(body)
+        data = RpcV2.decode(body)
         code = error_code(data, context)
         message = data['message']
         data = parse_error_data(context, body, code)
