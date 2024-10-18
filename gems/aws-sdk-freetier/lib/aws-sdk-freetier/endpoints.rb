@@ -12,15 +12,9 @@ module Aws::FreeTier
   # @api private
   module Endpoints
 
-    class GetFreeTierUsage
-      def self.build(context)
-        Aws::FreeTier::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
+    def self.parameters_for_operation(context)
+      Aws::FreeTier::EndpointParameters.create(context.config)
+    end
   end
 end

@@ -2380,7 +2380,7 @@ module Aws::PinpointEmail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointemail'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -14,69 +14,76 @@ module Aws::CloudFrontKeyValueStore
 
     class DeleteKey
       def self.build(context)
-        Aws::CloudFrontKeyValueStore::EndpointParameters.new(
+        Aws::CloudFrontKeyValueStore::EndpointParameters.create(
+          context.config,
           kvs_arn: context.params[:kvs_arn],
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DescribeKeyValueStore
       def self.build(context)
-        Aws::CloudFrontKeyValueStore::EndpointParameters.new(
+        Aws::CloudFrontKeyValueStore::EndpointParameters.create(
+          context.config,
           kvs_arn: context.params[:kvs_arn],
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetKey
       def self.build(context)
-        Aws::CloudFrontKeyValueStore::EndpointParameters.new(
+        Aws::CloudFrontKeyValueStore::EndpointParameters.create(
+          context.config,
           kvs_arn: context.params[:kvs_arn],
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListKeys
       def self.build(context)
-        Aws::CloudFrontKeyValueStore::EndpointParameters.new(
+        Aws::CloudFrontKeyValueStore::EndpointParameters.create(
+          context.config,
           kvs_arn: context.params[:kvs_arn],
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class PutKey
       def self.build(context)
-        Aws::CloudFrontKeyValueStore::EndpointParameters.new(
+        Aws::CloudFrontKeyValueStore::EndpointParameters.create(
+          context.config,
           kvs_arn: context.params[:kvs_arn],
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class UpdateKeys
       def self.build(context)
-        Aws::CloudFrontKeyValueStore::EndpointParameters.new(
+        Aws::CloudFrontKeyValueStore::EndpointParameters.create(
+          context.config,
           kvs_arn: context.params[:kvs_arn],
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
+
+    def self.parameters_for_operation(context)
+      case context.operation_name
+      when :delete_key
+        DeleteKey.build(context)
+      when :describe_key_value_store
+        DescribeKeyValueStore.build(context)
+      when :get_key
+        GetKey.build(context)
+      when :list_keys
+        ListKeys.build(context)
+      when :put_key
+        PutKey.build(context)
+      when :update_keys
+        UpdateKeys.build(context)
+      else
+        Aws::CloudFrontKeyValueStore::EndpointParameters.create(context.config)
+      end
+    end
   end
 end

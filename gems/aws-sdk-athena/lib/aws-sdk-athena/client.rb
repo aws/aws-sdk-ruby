@@ -701,10 +701,8 @@ module Aws::Athena
     #
     # @option params [required, String] :type
     #   The type of data catalog to create: `LAMBDA` for a federated catalog,
-    #   `GLUE` for an Glue Data Catalog, and `HIVE` for an external Apache
-    #   Hive metastore. `FEDERATED` is a federated catalog for which Athena
-    #   creates the connection and the Lambda function for you based on the
-    #   parameters that you pass.
+    #   `HIVE` for an external hive metastore, or `GLUE` for an Glue Data
+    #   Catalog.
     #
     # @option params [String] :description
     #   A description of the data catalog to be created.
@@ -748,37 +746,17 @@ module Aws::Athena
     #
     #     ^
     #
-    #   * The `FEDERATED` data catalog type uses one of the following
-    #     parameters, but not both. Use `connection-arn` for an existing Glue
-    #     connection. Use `connection-type` and `connection-properties` to
-    #     specify the configuration setting for a new connection.
-    #
-    #     * `connection-arn:<glue_connection_arn_to_reuse> `
-    #
-    #     * `lambda-role-arn` (optional): The execution role to use for the
-    #       Lambda function. If not provided, one is created.
-    #
-    #     * `connection-type:MYSQL|REDSHIFT|....,
-    #       connection-properties:"<json_string>"`
-    #
-    #       For <i> <code>&lt;json_string&gt;</code> </i>, use escaped JSON
-    #       text, as in the following example.
-    #
-    #       `"\{"spill_bucket":"my_spill","spill_prefix":"athena-spill","host":"abc12345.snowflakecomputing.com","port":"1234","warehouse":"DEV_WH","database":"TEST","schema":"PUBLIC","SecretArn":"arn:aws:secretsmanager:ap-south-1:111122223333:secret:snowflake-XHb67j"\}"`
-    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of comma separated tags to add to the data catalog that is
     #   created.
     #
-    # @return [Types::CreateDataCatalogOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateDataCatalogOutput#data_catalog #data_catalog} => Types::DataCatalog
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_catalog({
     #     name: "CatalogNameString", # required
-    #     type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE, FEDERATED
+    #     type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE
     #     description: "DescriptionString",
     #     parameters: {
     #       "KeyString" => "ParametersMapValue",
@@ -790,17 +768,6 @@ module Aws::Athena
     #       },
     #     ],
     #   })
-    #
-    # @example Response structure
-    #
-    #   resp.data_catalog.name #=> String
-    #   resp.data_catalog.description #=> String
-    #   resp.data_catalog.type #=> String, one of "LAMBDA", "GLUE", "HIVE", "FEDERATED"
-    #   resp.data_catalog.parameters #=> Hash
-    #   resp.data_catalog.parameters["KeyString"] #=> String
-    #   resp.data_catalog.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "CREATE_FAILED_CLEANUP_IN_PROGRESS", "CREATE_FAILED_CLEANUP_COMPLETE", "CREATE_FAILED_CLEANUP_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
-    #   resp.data_catalog.connection_type #=> String, one of "DYNAMODB", "MYSQL", "POSTGRESQL", "REDSHIFT", "ORACLE", "SYNAPSE", "SQLSERVER", "DB2", "OPENSEARCH", "BIGQUERY", "GOOGLECLOUDSTORAGE", "HBASE", "DOCUMENTDB", "MSK", "NEPTUNE", "CMDB", "TPCDS", "REDIS", "CLOUDWATCH", "TIMESTREAM", "SAPHANA", "SNOWFLAKE", "TERADATA", "VERTICA", "CLOUDERAIMPALA", "CLOUDERAHIVE", "HORTONWORKSHIVE", "DATALAKEGEN2", "DB2AS400", "CLOUDWATCHMETRICS"
-    #   resp.data_catalog.error #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateDataCatalog AWS API Documentation
     #
@@ -1111,26 +1078,13 @@ module Aws::Athena
     # @option params [required, String] :name
     #   The name of the data catalog to delete.
     #
-    # @return [Types::DeleteDataCatalogOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DeleteDataCatalogOutput#data_catalog #data_catalog} => Types::DataCatalog
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_data_catalog({
     #     name: "CatalogNameString", # required
     #   })
-    #
-    # @example Response structure
-    #
-    #   resp.data_catalog.name #=> String
-    #   resp.data_catalog.description #=> String
-    #   resp.data_catalog.type #=> String, one of "LAMBDA", "GLUE", "HIVE", "FEDERATED"
-    #   resp.data_catalog.parameters #=> Hash
-    #   resp.data_catalog.parameters["KeyString"] #=> String
-    #   resp.data_catalog.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "CREATE_FAILED_CLEANUP_IN_PROGRESS", "CREATE_FAILED_CLEANUP_COMPLETE", "CREATE_FAILED_CLEANUP_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
-    #   resp.data_catalog.connection_type #=> String, one of "DYNAMODB", "MYSQL", "POSTGRESQL", "REDSHIFT", "ORACLE", "SYNAPSE", "SQLSERVER", "DB2", "OPENSEARCH", "BIGQUERY", "GOOGLECLOUDSTORAGE", "HBASE", "DOCUMENTDB", "MSK", "NEPTUNE", "CMDB", "TPCDS", "REDIS", "CLOUDWATCH", "TIMESTREAM", "SAPHANA", "SNOWFLAKE", "TERADATA", "VERTICA", "CLOUDERAIMPALA", "CLOUDERAHIVE", "HORTONWORKSHIVE", "DATALAKEGEN2", "DB2AS400", "CLOUDWATCHMETRICS"
-    #   resp.data_catalog.error #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteDataCatalog AWS API Documentation
     #
@@ -1483,12 +1437,9 @@ module Aws::Athena
     #
     #   resp.data_catalog.name #=> String
     #   resp.data_catalog.description #=> String
-    #   resp.data_catalog.type #=> String, one of "LAMBDA", "GLUE", "HIVE", "FEDERATED"
+    #   resp.data_catalog.type #=> String, one of "LAMBDA", "GLUE", "HIVE"
     #   resp.data_catalog.parameters #=> Hash
     #   resp.data_catalog.parameters["KeyString"] #=> String
-    #   resp.data_catalog.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "CREATE_FAILED_CLEANUP_IN_PROGRESS", "CREATE_FAILED_CLEANUP_COMPLETE", "CREATE_FAILED_CLEANUP_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
-    #   resp.data_catalog.connection_type #=> String, one of "DYNAMODB", "MYSQL", "POSTGRESQL", "REDSHIFT", "ORACLE", "SYNAPSE", "SQLSERVER", "DB2", "OPENSEARCH", "BIGQUERY", "GOOGLECLOUDSTORAGE", "HBASE", "DOCUMENTDB", "MSK", "NEPTUNE", "CMDB", "TPCDS", "REDIS", "CLOUDWATCH", "TIMESTREAM", "SAPHANA", "SNOWFLAKE", "TERADATA", "VERTICA", "CLOUDERAIMPALA", "CLOUDERAHIVE", "HORTONWORKSHIVE", "DATALAKEGEN2", "DB2AS400", "CLOUDWATCHMETRICS"
-    #   resp.data_catalog.error #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDataCatalog AWS API Documentation
     #
@@ -2315,10 +2266,7 @@ module Aws::Athena
     #
     #   resp.data_catalogs_summary #=> Array
     #   resp.data_catalogs_summary[0].catalog_name #=> String
-    #   resp.data_catalogs_summary[0].type #=> String, one of "LAMBDA", "GLUE", "HIVE", "FEDERATED"
-    #   resp.data_catalogs_summary[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "CREATE_FAILED_CLEANUP_IN_PROGRESS", "CREATE_FAILED_CLEANUP_COMPLETE", "CREATE_FAILED_CLEANUP_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED"
-    #   resp.data_catalogs_summary[0].connection_type #=> String, one of "DYNAMODB", "MYSQL", "POSTGRESQL", "REDSHIFT", "ORACLE", "SYNAPSE", "SQLSERVER", "DB2", "OPENSEARCH", "BIGQUERY", "GOOGLECLOUDSTORAGE", "HBASE", "DOCUMENTDB", "MSK", "NEPTUNE", "CMDB", "TPCDS", "REDIS", "CLOUDWATCH", "TIMESTREAM", "SAPHANA", "SNOWFLAKE", "TERADATA", "VERTICA", "CLOUDERAIMPALA", "CLOUDERAHIVE", "HORTONWORKSHIVE", "DATALAKEGEN2", "DB2AS400", "CLOUDWATCHMETRICS"
-    #   resp.data_catalogs_summary[0].error #=> String
+    #   resp.data_catalogs_summary[0].type #=> String, one of "LAMBDA", "GLUE", "HIVE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDataCatalogs AWS API Documentation
@@ -3515,7 +3463,7 @@ module Aws::Athena
     #
     #   resp = client.update_data_catalog({
     #     name: "CatalogNameString", # required
-    #     type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE, FEDERATED
+    #     type: "LAMBDA", # required, accepts LAMBDA, GLUE, HIVE
     #     description: "DescriptionString",
     #     parameters: {
     #       "KeyString" => "ParametersMapValue",
@@ -3773,7 +3721,7 @@ module Aws::Athena
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

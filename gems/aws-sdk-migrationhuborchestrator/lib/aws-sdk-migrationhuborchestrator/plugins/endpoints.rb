@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::MigrationHubOrchestrator::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,73 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_template
-            Aws::MigrationHubOrchestrator::Endpoints::CreateTemplate.build(context)
-          when :create_workflow
-            Aws::MigrationHubOrchestrator::Endpoints::CreateWorkflow.build(context)
-          when :create_workflow_step
-            Aws::MigrationHubOrchestrator::Endpoints::CreateWorkflowStep.build(context)
-          when :create_workflow_step_group
-            Aws::MigrationHubOrchestrator::Endpoints::CreateWorkflowStepGroup.build(context)
-          when :delete_template
-            Aws::MigrationHubOrchestrator::Endpoints::DeleteTemplate.build(context)
-          when :delete_workflow
-            Aws::MigrationHubOrchestrator::Endpoints::DeleteWorkflow.build(context)
-          when :delete_workflow_step
-            Aws::MigrationHubOrchestrator::Endpoints::DeleteWorkflowStep.build(context)
-          when :delete_workflow_step_group
-            Aws::MigrationHubOrchestrator::Endpoints::DeleteWorkflowStepGroup.build(context)
-          when :get_template
-            Aws::MigrationHubOrchestrator::Endpoints::GetTemplate.build(context)
-          when :get_template_step
-            Aws::MigrationHubOrchestrator::Endpoints::GetTemplateStep.build(context)
-          when :get_template_step_group
-            Aws::MigrationHubOrchestrator::Endpoints::GetTemplateStepGroup.build(context)
-          when :get_workflow
-            Aws::MigrationHubOrchestrator::Endpoints::GetWorkflow.build(context)
-          when :get_workflow_step
-            Aws::MigrationHubOrchestrator::Endpoints::GetWorkflowStep.build(context)
-          when :get_workflow_step_group
-            Aws::MigrationHubOrchestrator::Endpoints::GetWorkflowStepGroup.build(context)
-          when :list_plugins
-            Aws::MigrationHubOrchestrator::Endpoints::ListPlugins.build(context)
-          when :list_tags_for_resource
-            Aws::MigrationHubOrchestrator::Endpoints::ListTagsForResource.build(context)
-          when :list_template_step_groups
-            Aws::MigrationHubOrchestrator::Endpoints::ListTemplateStepGroups.build(context)
-          when :list_template_steps
-            Aws::MigrationHubOrchestrator::Endpoints::ListTemplateSteps.build(context)
-          when :list_templates
-            Aws::MigrationHubOrchestrator::Endpoints::ListTemplates.build(context)
-          when :list_workflow_step_groups
-            Aws::MigrationHubOrchestrator::Endpoints::ListWorkflowStepGroups.build(context)
-          when :list_workflow_steps
-            Aws::MigrationHubOrchestrator::Endpoints::ListWorkflowSteps.build(context)
-          when :list_workflows
-            Aws::MigrationHubOrchestrator::Endpoints::ListWorkflows.build(context)
-          when :retry_workflow_step
-            Aws::MigrationHubOrchestrator::Endpoints::RetryWorkflowStep.build(context)
-          when :start_workflow
-            Aws::MigrationHubOrchestrator::Endpoints::StartWorkflow.build(context)
-          when :stop_workflow
-            Aws::MigrationHubOrchestrator::Endpoints::StopWorkflow.build(context)
-          when :tag_resource
-            Aws::MigrationHubOrchestrator::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::MigrationHubOrchestrator::Endpoints::UntagResource.build(context)
-          when :update_template
-            Aws::MigrationHubOrchestrator::Endpoints::UpdateTemplate.build(context)
-          when :update_workflow
-            Aws::MigrationHubOrchestrator::Endpoints::UpdateWorkflow.build(context)
-          when :update_workflow_step
-            Aws::MigrationHubOrchestrator::Endpoints::UpdateWorkflowStep.build(context)
-          when :update_workflow_step_group
-            Aws::MigrationHubOrchestrator::Endpoints::UpdateWorkflowStepGroup.build(context)
           end
         end
       end

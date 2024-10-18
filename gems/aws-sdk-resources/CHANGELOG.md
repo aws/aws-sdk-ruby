@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.210.0 (2024-10-16)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-nimblestudio` gem.
+
 3.209.0 (2024-10-10)
 ------------------
 

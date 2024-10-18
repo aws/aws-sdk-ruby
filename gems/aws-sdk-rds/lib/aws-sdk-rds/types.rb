@@ -2480,13 +2480,15 @@ module Aws::RDS
     #   default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide*.
+    #   *Amazon Aurora User Guide* or [IAM database authentication for
+    #   MariaDB, MySQL, and PostgreSQL][2] in the *Amazon RDS User Guide*.
     #
-    #   Valid for Cluster Type: Aurora DB clusters only
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] backtrack_window
@@ -11768,7 +11770,7 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_shard_group_identifier
-    #   Teh name of the DB shard group to delete.
+    #   The name of the DB shard group to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBShardGroupMessage AWS API Documentation
@@ -13598,10 +13600,9 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_shard_group_identifier
-    #   The user-supplied DB shard group identifier or the Amazon Resource
-    #   Name (ARN) of the DB shard group. If this parameter is specified,
-    #   information for only the specific DB shard group is returned. This
-    #   parameter isn't case-sensitive.
+    #   The user-supplied DB shard group identifier. If this parameter is
+    #   specified, information for only the specific DB shard group is
+    #   returned. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -17317,13 +17318,15 @@ module Aws::RDS
     #   default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide*.
+    #   *Amazon Aurora User Guide* or [IAM database authentication for
+    #   MariaDB, MySQL, and PostgreSQL][2] in the *Amazon RDS User Guide*.
     #
-    #   Valid for Cluster Type: Aurora DB clusters only
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] backtrack_window
@@ -17659,7 +17662,7 @@ module Aws::RDS
     #   For more information, see [ Using Amazon Performance Insights][1] in
     #   the *Amazon RDS User Guide*.
     #
-    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
@@ -23194,13 +23197,15 @@ module Aws::RDS
     #   default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide*.
+    #   *Amazon Aurora User Guide* or [ IAM database authentication for
+    #   MariaDB, MySQL, and PostgreSQL][2] in the *Amazon RDS User Guide*.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] backtrack_window
@@ -23738,13 +23743,15 @@ module Aws::RDS
     #   default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide*.
+    #   *Amazon Aurora User Guide* or [ IAM database authentication for
+    #   MariaDB, MySQL, and PostgreSQL][2] in the *Amazon RDS User Guide*.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] backtrack_window
@@ -27274,11 +27281,11 @@ module Aws::RDS
     class SubscriptionNotFoundFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] blue_green_deployment_identifier
-    #   The unique identifier of the blue/green deployment.
+    #   The resource ID of the blue/green deployment.
     #
     #   Constraints:
     #
-    #   * Must match an existing blue/green deployment identifier.
+    #   * Must match an existing blue/green deployment resource ID.
     #
     #   ^
     #   @return [String]

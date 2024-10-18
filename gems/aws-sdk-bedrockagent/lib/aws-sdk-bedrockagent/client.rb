@@ -1393,7 +1393,6 @@ module Aws::BedrockAgent
     #                       max_tokens: 1,
     #                       stop_sequences: ["String"],
     #                       temperature: 1.0,
-    #                       top_k: 1,
     #                       top_p: 1.0,
     #                     },
     #                   },
@@ -1483,7 +1482,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -1684,7 +1682,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -2027,7 +2024,6 @@ module Aws::BedrockAgent
     #             max_tokens: 1,
     #             stop_sequences: ["String"],
     #             temperature: 1.0,
-    #             top_k: 1,
     #             top_p: 1.0,
     #           },
     #         },
@@ -2039,7 +2035,7 @@ module Aws::BedrockAgent
     #         ],
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
-    #         template_configuration: {
+    #         template_configuration: { # required
     #           text: {
     #             input_variables: [
     #               {
@@ -2069,7 +2065,6 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
-    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
     #   resp.variants[0].metadata #=> Array
     #   resp.variants[0].metadata[0].key #=> String
@@ -2166,7 +2161,6 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
-    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
     #   resp.variants[0].metadata #=> Array
     #   resp.variants[0].metadata[0].key #=> String
@@ -3044,7 +3038,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -3196,7 +3189,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -3232,7 +3224,7 @@ module Aws::BedrockAgent
     end
 
     # Gets information about a data ingestion job. Data sources are ingested
-    # into your knowledge base so that Large Lanaguage Models (LLMs) can use
+    # into your knowledge base so that Large Language Models (LLMs) can use
     # your data.
     #
     # @option params [required, String] :data_source_id
@@ -3417,7 +3409,6 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
-    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
     #   resp.variants[0].metadata #=> Array
     #   resp.variants[0].metadata[0].key #=> String
@@ -5211,7 +5202,6 @@ module Aws::BedrockAgent
     #                       max_tokens: 1,
     #                       stop_sequences: ["String"],
     #                       temperature: 1.0,
-    #                       top_k: 1,
     #                       top_p: 1.0,
     #                     },
     #                   },
@@ -5299,7 +5289,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -5649,7 +5638,6 @@ module Aws::BedrockAgent
     #             max_tokens: 1,
     #             stop_sequences: ["String"],
     #             temperature: 1.0,
-    #             top_k: 1,
     #             top_p: 1.0,
     #           },
     #         },
@@ -5661,7 +5649,7 @@ module Aws::BedrockAgent
     #         ],
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
-    #         template_configuration: {
+    #         template_configuration: { # required
     #           text: {
     #             input_variables: [
     #               {
@@ -5691,7 +5679,6 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
-    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
     #   resp.variants[0].metadata #=> Array
     #   resp.variants[0].metadata[0].key #=> String
@@ -5731,7 +5718,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

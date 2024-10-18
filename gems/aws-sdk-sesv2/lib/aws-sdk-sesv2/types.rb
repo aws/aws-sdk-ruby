@@ -1694,11 +1694,19 @@ module Aws::SESV2
     #   configuration set.
     #   @return [String]
     #
+    # @!attribute [rw] max_delivery_seconds
+    #   The maximum amount of time, in seconds, that Amazon SES API v2 will
+    #   attempt delivery of email. If specified, the value must greater than
+    #   or equal to 300 seconds (5 minutes) and less than or equal to 50400
+    #   seconds (840 minutes).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeliveryOptions AWS API Documentation
     #
     class DeliveryOptions < Struct.new(
       :tls_policy,
-      :sending_pool_name)
+      :sending_pool_name,
+      :max_delivery_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5471,12 +5479,20 @@ module Aws::SESV2
     #   configuration set.
     #   @return [String]
     #
+    # @!attribute [rw] max_delivery_seconds
+    #   The maximum amount of time, in seconds, that Amazon SES API v2 will
+    #   attempt delivery of email. If specified, the value must greater than
+    #   or equal to 300 seconds (5 minutes) and less than or equal to 50400
+    #   seconds (840 minutes).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetDeliveryOptionsRequest AWS API Documentation
     #
     class PutConfigurationSetDeliveryOptionsRequest < Struct.new(
       :configuration_set_name,
       :tls_policy,
-      :sending_pool_name)
+      :sending_pool_name,
+      :max_delivery_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

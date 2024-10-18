@@ -3,6 +3,17 @@ Unreleased Changes
 
 * Feature - Support functionality for services that migrate from AWS Query to AWS JSON or CBOR.
 
+3.210.0 (2024-10-18)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - reduce memory usage by not using legacy endpoint data unless required.
+
 3.209.1 (2024-09-25)
 ------------------
 

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::LookoutforVision::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,55 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_dataset
-            Aws::LookoutforVision::Endpoints::CreateDataset.build(context)
-          when :create_model
-            Aws::LookoutforVision::Endpoints::CreateModel.build(context)
-          when :create_project
-            Aws::LookoutforVision::Endpoints::CreateProject.build(context)
-          when :delete_dataset
-            Aws::LookoutforVision::Endpoints::DeleteDataset.build(context)
-          when :delete_model
-            Aws::LookoutforVision::Endpoints::DeleteModel.build(context)
-          when :delete_project
-            Aws::LookoutforVision::Endpoints::DeleteProject.build(context)
-          when :describe_dataset
-            Aws::LookoutforVision::Endpoints::DescribeDataset.build(context)
-          when :describe_model
-            Aws::LookoutforVision::Endpoints::DescribeModel.build(context)
-          when :describe_model_packaging_job
-            Aws::LookoutforVision::Endpoints::DescribeModelPackagingJob.build(context)
-          when :describe_project
-            Aws::LookoutforVision::Endpoints::DescribeProject.build(context)
-          when :detect_anomalies
-            Aws::LookoutforVision::Endpoints::DetectAnomalies.build(context)
-          when :list_dataset_entries
-            Aws::LookoutforVision::Endpoints::ListDatasetEntries.build(context)
-          when :list_model_packaging_jobs
-            Aws::LookoutforVision::Endpoints::ListModelPackagingJobs.build(context)
-          when :list_models
-            Aws::LookoutforVision::Endpoints::ListModels.build(context)
-          when :list_projects
-            Aws::LookoutforVision::Endpoints::ListProjects.build(context)
-          when :list_tags_for_resource
-            Aws::LookoutforVision::Endpoints::ListTagsForResource.build(context)
-          when :start_model
-            Aws::LookoutforVision::Endpoints::StartModel.build(context)
-          when :start_model_packaging_job
-            Aws::LookoutforVision::Endpoints::StartModelPackagingJob.build(context)
-          when :stop_model
-            Aws::LookoutforVision::Endpoints::StopModel.build(context)
-          when :tag_resource
-            Aws::LookoutforVision::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::LookoutforVision::Endpoints::UntagResource.build(context)
-          when :update_dataset_entries
-            Aws::LookoutforVision::Endpoints::UpdateDatasetEntries.build(context)
           end
         end
       end

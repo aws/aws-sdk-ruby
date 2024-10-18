@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ACM::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,41 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :add_tags_to_certificate
-            Aws::ACM::Endpoints::AddTagsToCertificate.build(context)
-          when :delete_certificate
-            Aws::ACM::Endpoints::DeleteCertificate.build(context)
-          when :describe_certificate
-            Aws::ACM::Endpoints::DescribeCertificate.build(context)
-          when :export_certificate
-            Aws::ACM::Endpoints::ExportCertificate.build(context)
-          when :get_account_configuration
-            Aws::ACM::Endpoints::GetAccountConfiguration.build(context)
-          when :get_certificate
-            Aws::ACM::Endpoints::GetCertificate.build(context)
-          when :import_certificate
-            Aws::ACM::Endpoints::ImportCertificate.build(context)
-          when :list_certificates
-            Aws::ACM::Endpoints::ListCertificates.build(context)
-          when :list_tags_for_certificate
-            Aws::ACM::Endpoints::ListTagsForCertificate.build(context)
-          when :put_account_configuration
-            Aws::ACM::Endpoints::PutAccountConfiguration.build(context)
-          when :remove_tags_from_certificate
-            Aws::ACM::Endpoints::RemoveTagsFromCertificate.build(context)
-          when :renew_certificate
-            Aws::ACM::Endpoints::RenewCertificate.build(context)
-          when :request_certificate
-            Aws::ACM::Endpoints::RequestCertificate.build(context)
-          when :resend_validation_email
-            Aws::ACM::Endpoints::ResendValidationEmail.build(context)
-          when :update_certificate_options
-            Aws::ACM::Endpoints::UpdateCertificateOptions.build(context)
           end
         end
       end

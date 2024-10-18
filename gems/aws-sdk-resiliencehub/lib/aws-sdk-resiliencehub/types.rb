@@ -235,6 +235,17 @@ module Aws::ResilienceHub
     #   Assessment execution schedule with 'Daily' or 'Disabled' values.
     #   @return [String]
     #
+    # @!attribute [rw] aws_application_arn
+    #   Amazon Resource Name (ARN) of Resource Groups group that is
+    #   integrated with an AppRegistry application. For more information
+    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *Amazon
+    #   Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] compliance_status
     #   Current status of compliance for the resiliency policy.
     #   @return [String]
@@ -319,6 +330,7 @@ module Aws::ResilienceHub
     class App < Struct.new(
       :app_arn,
       :assessment_schedule,
+      :aws_application_arn,
       :compliance_status,
       :creation_time,
       :description,
@@ -424,8 +436,13 @@ module Aws::ResilienceHub
     #   @return [Time]
     #
     # @!attribute [rw] summary
-    #   Indicates a concise summary that provides an overview of the
-    #   Resilience Hub assessment.
+    #   Indicates the AI-generated summary for the Resilience Hub
+    #   assessment, providing a concise overview that highlights the top
+    #   risks and recommendations.
+    #
+    #   <note markdown="1"> This property is available only in the US East (N. Virginia) Region.
+    #
+    #    </note>
     #   @return [Types::AssessmentSummary]
     #
     # @!attribute [rw] tags
@@ -710,6 +727,17 @@ module Aws::ResilienceHub
     #   Assessment execution schedule with 'Daily' or 'Disabled' values.
     #   @return [String]
     #
+    # @!attribute [rw] aws_application_arn
+    #   Amazon Resource Name (ARN) of Resource Groups group that is
+    #   integrated with an AppRegistry application. For more information
+    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *Amazon
+    #   Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] compliance_status
     #   The current status of compliance for the resiliency policy.
     #   @return [String]
@@ -756,6 +784,7 @@ module Aws::ResilienceHub
     class AppSummary < Struct.new(
       :app_arn,
       :assessment_schedule,
+      :aws_application_arn,
       :compliance_status,
       :creation_time,
       :description,
@@ -1228,6 +1257,17 @@ module Aws::ResilienceHub
     #   Assessment execution schedule with 'Daily' or 'Disabled' values.
     #   @return [String]
     #
+    # @!attribute [rw] aws_application_arn
+    #   Amazon Resource Name (ARN) of Resource Groups group that is
+    #   integrated with an AppRegistry application. For more information
+    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *Amazon
+    #   Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Used for an idempotency token. A client token is a unique,
     #   case-sensitive string of up to 64 ASCII characters. You should not
@@ -1279,6 +1319,7 @@ module Aws::ResilienceHub
     #
     class CreateAppRequest < Struct.new(
       :assessment_schedule,
+      :aws_application_arn,
       :client_token,
       :description,
       :event_subscriptions,
@@ -2768,8 +2809,12 @@ module Aws::ResilienceHub
     #   The version of the application.
     #   @return [String]
     #
+    # @!attribute [rw] error_details
+    #   List of errors that were encountered while importing resources.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @!attribute [rw] error_message
-    #   The returned error message for the request.
+    #   The error message returned for the resource request.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2785,6 +2830,7 @@ module Aws::ResilienceHub
     class DescribeDraftAppVersionResourcesImportStatusResponse < Struct.new(
       :app_arn,
       :app_version,
+      :error_details,
       :error_message,
       :status,
       :status_change_time)
@@ -2988,6 +3034,20 @@ module Aws::ResilienceHub
     class EksSourceClusterNamespace < Struct.new(
       :eks_cluster_arn,
       :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates the error that was encountered while importing a resource.
+    #
+    # @!attribute [rw] error_message
+    #   Provides additional information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ErrorDetail AWS API Documentation
+    #
+    class ErrorDetail < Struct.new(
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3972,6 +4032,17 @@ module Aws::ResilienceHub
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @!attribute [rw] aws_application_arn
+    #   Amazon Resource Name (ARN) of Resource Groups group that is
+    #   integrated with an AppRegistry application. For more information
+    #   about ARNs, see [ Amazon Resource Names (ARNs)][1] in the *Amazon
+    #   Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] from_last_assessment_time
     #   Indicates the lower limit of the range that is used to filter
     #   applications based on their last assessment times.
@@ -4009,6 +4080,7 @@ module Aws::ResilienceHub
     #
     class ListAppsRequest < Struct.new(
       :app_arn,
+      :aws_application_arn,
       :from_last_assessment_time,
       :max_results,
       :name,

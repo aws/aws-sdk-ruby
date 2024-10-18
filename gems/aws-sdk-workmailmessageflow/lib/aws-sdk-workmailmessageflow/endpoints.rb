@@ -12,27 +12,9 @@ module Aws::WorkMailMessageFlow
   # @api private
   module Endpoints
 
-    class GetRawMessageContent
-      def self.build(context)
-        Aws::WorkMailMessageFlow::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
-    class PutRawMessageContent
-      def self.build(context)
-        Aws::WorkMailMessageFlow::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::WorkMailMessageFlow::EndpointParameters.create(context.config)
     end
-
   end
 end

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::CloudFrontKeyValueStore::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,23 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :delete_key
-            Aws::CloudFrontKeyValueStore::Endpoints::DeleteKey.build(context)
-          when :describe_key_value_store
-            Aws::CloudFrontKeyValueStore::Endpoints::DescribeKeyValueStore.build(context)
-          when :get_key
-            Aws::CloudFrontKeyValueStore::Endpoints::GetKey.build(context)
-          when :list_keys
-            Aws::CloudFrontKeyValueStore::Endpoints::ListKeys.build(context)
-          when :put_key
-            Aws::CloudFrontKeyValueStore::Endpoints::PutKey.build(context)
-          when :update_keys
-            Aws::CloudFrontKeyValueStore::Endpoints::UpdateKeys.build(context)
           end
         end
       end

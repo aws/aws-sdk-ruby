@@ -64,7 +64,7 @@ module Aws::TranscribeStreamingService
     # One or more arguments to the `StartStreamTranscription`,
     # `StartMedicalStreamTranscription`, or
     # `StartCallAnalyticsStreamTranscription` operation was not valid. For
-    # example, `MediaEncoding` or `LanguageCode` used not valid values.
+    # example, `MediaEncoding` or `LanguageCode` used unsupported values.
     # Check the specified parameters and try your request again.
     #
     # @!attribute [rw] message
@@ -269,7 +269,15 @@ module Aws::TranscribeStreamingService
     # @!attribute [rw] post_call_analytics_settings
     #   Provides additional optional settings for your Call Analytics
     #   post-call request, including encryption and output locations for
-    #   your redacted and unredacted transcript.
+    #   your redacted transcript.
+    #
+    #   `PostCallAnalyticsSettings` provides you with the same insights as a
+    #   Call Analytics post-call transcription. Refer to [Post-call
+    #   analytics][1] for more information on this feature.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html
     #   @return [Types::PostCallAnalyticsSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/ConfigurationEvent AWS API Documentation
@@ -713,13 +721,19 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
-    # Allows you to specify additional settings for your streaming Call
-    # Analytics post-call request, including output locations for your
-    # redacted and unredacted transcript, which IAM role to use, and,
-    # optionally, which encryption key to use.
+    # Allows you to specify additional settings for your Call Analytics
+    # post-call request, including output locations for your redacted
+    # transcript, which IAM role to use, and which encryption key to use.
     #
-    # `ContentRedactionOutput`, `DataAccessRoleArn`, and `OutputLocation`
-    # are required fields.
+    # `DataAccessRoleArn` and `OutputLocation` are required fields.
+    #
+    # `PostCallAnalyticsSettings` provides you with the same insights as a
+    # Call Analytics post-call transcription. Refer to [Post-call
+    # analytics][1] for more information on this feature.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html
     #
     # @!attribute [rw] output_location
     #   The Amazon S3 location where you want your Call Analytics post-call
@@ -789,7 +803,7 @@ module Aws::TranscribeStreamingService
     #   2.  Use the ARN for the KMS key alias. For example,
     #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
-    #   Note that the user making the request must have permission to use
+    #   Note that the role making the request must have permission to use
     #   the specified KMS key.
     #   @return [String]
     #
@@ -887,11 +901,7 @@ module Aws::TranscribeStreamingService
     #   Specify the language code that represents the language spoken in
     #   your audio.
     #
-    #   If you're unsure of the language spoken in your audio, consider
-    #   using `IdentifyLanguage` to enable automatic language
-    #   identification.
-    #
-    #   For a list of languages supported with streaming Call Analytics,
+    #   For a list of languages supported with real-time Call Analytics,
     #   refer to the [Supported languages][1] table.
     #
     #
@@ -943,8 +953,6 @@ module Aws::TranscribeStreamingService
     #   Specify a name for your Call Analytics transcription session. If you
     #   don't include this parameter in your request, Amazon Transcribe
     #   generates an ID and returns it in the response.
-    #
-    #   You can use a session ID to retry a streaming session.
     #   @return [String]
     #
     # @!attribute [rw] audio_stream
@@ -1034,7 +1042,8 @@ module Aws::TranscribeStreamingService
     #
     #   Content identification is performed at the segment level; PII
     #   specified in `PiiEntityTypes` is flagged upon complete transcription
-    #   of an audio segment.
+    #   of an audio segment. If you don't include `PiiEntityTypes` in your
+    #   request, all PII is identified.
     #
     #   You can’t set `ContentIdentificationType` and `ContentRedactionType`
     #   in the same request. If you set both, your request returns a
@@ -1054,7 +1063,8 @@ module Aws::TranscribeStreamingService
     #
     #   Content redaction is performed at the segment level; PII specified
     #   in `PiiEntityTypes` is redacted upon complete transcription of an
-    #   audio segment.
+    #   audio segment. If you don't include `PiiEntityTypes` in your
+    #   request, all PII is redacted.
     #
     #   You can’t set `ContentRedactionType` and `ContentIdentificationType`
     #   in the same request. If you set both, your request returns a
@@ -1073,14 +1083,17 @@ module Aws::TranscribeStreamingService
     #   want to redact in your transcript. You can include as many types as
     #   you'd like, or you can select `ALL`.
     #
-    #   To include `PiiEntityTypes` in your Call Analytics request, you must
-    #   also include either `ContentIdentificationType` or
-    #   `ContentRedactionType`.
+    #   Values must be comma-separated and can include: `ADDRESS`,
+    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_CVV`,
+    #   `CREDIT_DEBIT_EXPIRY`, `CREDIT_DEBIT_NUMBER`, `EMAIL`, `NAME`,
+    #   `PHONE`, `PIN`, `SSN`, or `ALL`.
     #
-    #   Values must be comma-separated and can include:
-    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
-    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
-    #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, or `ALL`.
+    #   Note that if you include `PiiEntityTypes` in your request, you must
+    #   also include `ContentIdentificationType` or `ContentRedactionType`.
+    #
+    #   If you include `ContentRedactionType` or `ContentIdentificationType`
+    #   in your request, but do not include `PiiEntityTypes`, all PII is
+    #   redacted or identified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartCallAnalyticsStreamTranscriptionRequest AWS API Documentation
@@ -1105,7 +1118,7 @@ module Aws::TranscribeStreamingService
     end
 
     # @!attribute [rw] request_id
-    #   Provides the identifier for your Call Analytics streaming request.
+    #   Provides the identifier for your real-time Call Analytics request.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1134,7 +1147,7 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] call_analytics_transcript_result_stream
-    #   Provides detailed information about your Call Analytics streaming
+    #   Provides detailed information about your real-time Call Analytics
     #   session.
     #   @return [Types::CallAnalyticsTranscriptResultStream]
     #
@@ -1262,8 +1275,6 @@ module Aws::TranscribeStreamingService
     #   Specify a name for your transcription session. If you don't include
     #   this parameter in your request, Amazon Transcribe Medical generates
     #   an ID and returns it in the response.
-    #
-    #   You can use a session ID to retry a streaming session.
     #   @return [String]
     #
     # @!attribute [rw] audio_stream
@@ -1288,6 +1299,9 @@ module Aws::TranscribeStreamingService
     #   identification, your audio is transcribed in a continuous manner and
     #   your transcript is not separated by channel.
     #
+    #   If you include `EnableChannelIdentification` in your request, you
+    #   must also include `NumberOfChannels`.
+    #
     #   For more information, see [Transcribing multi-channel audio][1].
     #
     #
@@ -1296,8 +1310,13 @@ module Aws::TranscribeStreamingService
     #   @return [Boolean]
     #
     # @!attribute [rw] number_of_channels
-    #   Specify the number of channels in your audio stream. Up to two
-    #   channels are supported.
+    #   Specify the number of channels in your audio stream. This value must
+    #   be `2`, as only two channels are supported. If your audio doesn't
+    #   contain multiple channels, do not include this parameter in your
+    #   request.
+    #
+    #   If you include `NumberOfChannels` in your request, you must also
+    #   include `EnableChannelIdentification`.
     #   @return [Integer]
     #
     # @!attribute [rw] content_identification_type
@@ -1477,8 +1496,6 @@ module Aws::TranscribeStreamingService
     #   Specify a name for your transcription session. If you don't include
     #   this parameter in your request, Amazon Transcribe generates an ID
     #   and returns it in the response.
-    #
-    #   You can use a session ID to retry a streaming session.
     #   @return [String]
     #
     # @!attribute [rw] audio_stream
@@ -1549,6 +1566,9 @@ module Aws::TranscribeStreamingService
     #   identification, your audio is transcribed in a continuous manner and
     #   your transcript is not separated by channel.
     #
+    #   If you include `EnableChannelIdentification` in your request, you
+    #   must also include `NumberOfChannels`.
+    #
     #   For more information, see [Transcribing multi-channel audio][1].
     #
     #
@@ -1557,8 +1577,13 @@ module Aws::TranscribeStreamingService
     #   @return [Boolean]
     #
     # @!attribute [rw] number_of_channels
-    #   Specify the number of channels in your audio stream. Up to two
-    #   channels are supported.
+    #   Specify the number of channels in your audio stream. This value must
+    #   be `2`, as only two channels are supported. If your audio doesn't
+    #   contain multiple channels, do not include this parameter in your
+    #   request.
+    #
+    #   If you include `NumberOfChannels` in your request, you must also
+    #   include `EnableChannelIdentification`.
     #   @return [Integer]
     #
     # @!attribute [rw] enable_partial_results_stabilization
@@ -1592,7 +1617,8 @@ module Aws::TranscribeStreamingService
     #
     #   Content identification is performed at the segment level; PII
     #   specified in `PiiEntityTypes` is flagged upon complete transcription
-    #   of an audio segment.
+    #   of an audio segment. If you don't include `PiiEntityTypes` in your
+    #   request, all PII is identified.
     #
     #   You can’t set `ContentIdentificationType` and `ContentRedactionType`
     #   in the same request. If you set both, your request returns a
@@ -1612,7 +1638,8 @@ module Aws::TranscribeStreamingService
     #
     #   Content redaction is performed at the segment level; PII specified
     #   in `PiiEntityTypes` is redacted upon complete transcription of an
-    #   audio segment.
+    #   audio segment. If you don't include `PiiEntityTypes` in your
+    #   request, all PII is redacted.
     #
     #   You can’t set `ContentRedactionType` and `ContentIdentificationType`
     #   in the same request. If you set both, your request returns a
@@ -1631,13 +1658,17 @@ module Aws::TranscribeStreamingService
     #   want to redact in your transcript. You can include as many types as
     #   you'd like, or you can select `ALL`.
     #
-    #   To include `PiiEntityTypes` in your request, you must also include
-    #   either `ContentIdentificationType` or `ContentRedactionType`.
+    #   Values must be comma-separated and can include: `ADDRESS`,
+    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_CVV`,
+    #   `CREDIT_DEBIT_EXPIRY`, `CREDIT_DEBIT_NUMBER`, `EMAIL`, `NAME`,
+    #   `PHONE`, `PIN`, `SSN`, or `ALL`.
     #
-    #   Values must be comma-separated and can include:
-    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
-    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
-    #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, or `ALL`.
+    #   Note that if you include `PiiEntityTypes` in your request, you must
+    #   also include `ContentIdentificationType` or `ContentRedactionType`.
+    #
+    #   If you include `ContentRedactionType` or `ContentIdentificationType`
+    #   in your request, but do not include `PiiEntityTypes`, all PII is
+    #   redacted or identified.
     #   @return [String]
     #
     # @!attribute [rw] language_model_name
@@ -1660,10 +1691,9 @@ module Aws::TranscribeStreamingService
     # @!attribute [rw] identify_language
     #   Enables automatic language identification for your transcription.
     #
-    #   If you include `IdentifyLanguage`, you can optionally include a list
-    #   of language codes, using `LanguageOptions`, that you think may be
-    #   present in your audio stream. Including language options can improve
-    #   transcription accuracy.
+    #   If you include `IdentifyLanguage`, you must include a list of
+    #   language codes, using `LanguageOptions`, that you think may be
+    #   present in your audio stream.
     #
     #   You can also include a preferred language using `PreferredLanguage`.
     #   Adding a preferred language can help Amazon Transcribe identify the
@@ -1686,14 +1716,13 @@ module Aws::TranscribeStreamingService
     # @!attribute [rw] language_options
     #   Specify two or more language codes that represent the languages you
     #   think may be present in your media; including more than five is not
-    #   recommended. If you're unsure what languages are present, do not
-    #   include this parameter.
+    #   recommended.
     #
     #   Including language options can improve the accuracy of language
     #   identification.
     #
     #   If you include `LanguageOptions` in your request, you must also
-    #   include `IdentifyLanguage`.
+    #   include `IdentifyLanguage` or `IdentifyMultipleLanguages`.
     #
     #   For a list of languages supported with Amazon Transcribe streaming,
     #   refer to the [Supported languages][1] table.
@@ -1721,11 +1750,9 @@ module Aws::TranscribeStreamingService
     #   contains more than one language. If your stream contains only one
     #   language, use IdentifyLanguage instead.
     #
-    #   If you include `IdentifyMultipleLanguages`, you can optionally
-    #   include a list of language codes, using `LanguageOptions`, that you
-    #   think may be present in your stream. Including `LanguageOptions`
-    #   restricts `IdentifyMultipleLanguages` to only the language options
-    #   that you specify, which can improve transcription accuracy.
+    #   If you include `IdentifyMultipleLanguages`, you must include a list
+    #   of language codes, using `LanguageOptions`, that you think may be
+    #   present in your stream.
     #
     #   If you want to apply a custom vocabulary or a custom vocabulary
     #   filter to your automatic multiple language identification request,
@@ -2112,7 +2139,7 @@ module Aws::TranscribeStreamingService
 
     end
 
-    # Contains detailed information about your Call Analytics streaming
+    # Contains detailed information about your real-time Call Analytics
     # session. These details are provided in the `UtteranceEvent` and
     # `CategoryEvent` objects.
     #

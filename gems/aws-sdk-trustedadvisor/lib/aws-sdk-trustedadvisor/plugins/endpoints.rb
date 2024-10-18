@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::TrustedAdvisor::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,33 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :batch_update_recommendation_resource_exclusion
-            Aws::TrustedAdvisor::Endpoints::BatchUpdateRecommendationResourceExclusion.build(context)
-          when :get_organization_recommendation
-            Aws::TrustedAdvisor::Endpoints::GetOrganizationRecommendation.build(context)
-          when :get_recommendation
-            Aws::TrustedAdvisor::Endpoints::GetRecommendation.build(context)
-          when :list_checks
-            Aws::TrustedAdvisor::Endpoints::ListChecks.build(context)
-          when :list_organization_recommendation_accounts
-            Aws::TrustedAdvisor::Endpoints::ListOrganizationRecommendationAccounts.build(context)
-          when :list_organization_recommendation_resources
-            Aws::TrustedAdvisor::Endpoints::ListOrganizationRecommendationResources.build(context)
-          when :list_organization_recommendations
-            Aws::TrustedAdvisor::Endpoints::ListOrganizationRecommendations.build(context)
-          when :list_recommendation_resources
-            Aws::TrustedAdvisor::Endpoints::ListRecommendationResources.build(context)
-          when :list_recommendations
-            Aws::TrustedAdvisor::Endpoints::ListRecommendations.build(context)
-          when :update_organization_recommendation_lifecycle
-            Aws::TrustedAdvisor::Endpoints::UpdateOrganizationRecommendationLifecycle.build(context)
-          when :update_recommendation_lifecycle
-            Aws::TrustedAdvisor::Endpoints::UpdateRecommendationLifecycle.build(context)
           end
         end
       end

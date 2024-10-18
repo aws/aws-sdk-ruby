@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.482.0 (2024-10-18)
+------------------
+
+* Feature - RequestSpotInstances and RequestSpotFleet feature release.
+
 1.481.0 (2024-10-10)
 ------------------
 

@@ -1737,6 +1737,10 @@ module Aws::Bedrock
     #   The imported model is encrypted at rest using this key.
     #   @return [String]
     #
+    # @!attribute [rw] instruct_supported
+    #   Specifies if the imported model supports fine tuning.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModelResponse AWS API Documentation
     #
     class GetImportedModelResponse < Struct.new(
@@ -1747,7 +1751,8 @@ module Aws::Bedrock
       :model_data_source,
       :creation_time,
       :model_architecture,
-      :model_kms_key_arn)
+      :model_kms_key_arn,
+      :instruct_supported)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3325,7 +3330,7 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # Information about tne imported model.
+    # Information about the imported model.
     #
     # @!attribute [rw] model_arn
     #   The Amazon Resource Name (ARN) of the imported model.
@@ -3339,12 +3344,22 @@ module Aws::Bedrock
     #   Creation time of the imported model.
     #   @return [Time]
     #
+    # @!attribute [rw] instruct_supported
+    #   Specifies if the imported model supports fine tuning.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] model_architecture
+    #   The architecture of the imported model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ImportedModelSummary AWS API Documentation
     #
     class ImportedModelSummary < Struct.new(
       :model_arn,
       :model_name,
-      :creation_time)
+      :creation_time,
+      :instruct_supported,
+      :model_architecture)
       SENSITIVE = []
       include Aws::Structure
     end

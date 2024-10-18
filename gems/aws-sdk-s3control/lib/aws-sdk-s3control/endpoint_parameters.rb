@@ -94,14 +94,8 @@ module Aws::S3Control
       self[:region] = options[:region]
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
-      if self[:use_fips].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_fips"
-      end
       self[:use_dual_stack] = options[:use_dual_stack]
       self[:use_dual_stack] = false if self[:use_dual_stack].nil?
-      if self[:use_dual_stack].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_dual_stack"
-      end
       self[:endpoint] = options[:endpoint]
       self[:account_id] = options[:account_id]
       self[:requires_account_id] = options[:requires_account_id]
@@ -109,6 +103,15 @@ module Aws::S3Control
       self[:bucket] = options[:bucket]
       self[:access_point_name] = options[:access_point_name]
       self[:use_arn_region] = options[:use_arn_region]
+    end
+
+    def self.create(config, options={})
+      new({
+        region: config.region,
+        use_fips: config.use_fips_endpoint,
+        endpoint: (config.endpoint.to_s unless config.regional_endpoint),
+        use_arn_region: config.s3_use_arn_region,
+      }.merge(options))
     end
   end
 end

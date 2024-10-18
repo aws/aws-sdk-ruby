@@ -459,6 +459,7 @@ module Aws::Bedrock
       attr_accessor creation_time: ::Time
       attr_accessor model_architecture: ::String
       attr_accessor model_kms_key_arn: ::String
+      attr_accessor instruct_supported: bool
       SENSITIVE: []
     end
 
@@ -786,6 +787,8 @@ module Aws::Bedrock
       attr_accessor model_arn: ::String
       attr_accessor model_name: ::String
       attr_accessor creation_time: ::Time
+      attr_accessor instruct_supported: bool
+      attr_accessor model_architecture: ::String
       SENSITIVE: []
     end
 

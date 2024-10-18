@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:dataexchange)
 # structure.
 #
 #     data_exchange = Aws::DataExchange::Client.new
-#     resp = data_exchange.cancel_job(params)
+#     resp = data_exchange.accept_data_grant(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::DataExchange
   autoload :EndpointProvider, 'aws-sdk-dataexchange/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dataexchange/endpoints'
 
-  GEM_VERSION = '1.58.0'
+  GEM_VERSION = '1.60.0'
 
 end
 

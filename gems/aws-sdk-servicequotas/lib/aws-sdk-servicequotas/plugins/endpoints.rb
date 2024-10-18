@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ServiceQuotas::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,49 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_service_quota_template
-            Aws::ServiceQuotas::Endpoints::AssociateServiceQuotaTemplate.build(context)
-          when :delete_service_quota_increase_request_from_template
-            Aws::ServiceQuotas::Endpoints::DeleteServiceQuotaIncreaseRequestFromTemplate.build(context)
-          when :disassociate_service_quota_template
-            Aws::ServiceQuotas::Endpoints::DisassociateServiceQuotaTemplate.build(context)
-          when :get_aws_default_service_quota
-            Aws::ServiceQuotas::Endpoints::GetAWSDefaultServiceQuota.build(context)
-          when :get_association_for_service_quota_template
-            Aws::ServiceQuotas::Endpoints::GetAssociationForServiceQuotaTemplate.build(context)
-          when :get_requested_service_quota_change
-            Aws::ServiceQuotas::Endpoints::GetRequestedServiceQuotaChange.build(context)
-          when :get_service_quota
-            Aws::ServiceQuotas::Endpoints::GetServiceQuota.build(context)
-          when :get_service_quota_increase_request_from_template
-            Aws::ServiceQuotas::Endpoints::GetServiceQuotaIncreaseRequestFromTemplate.build(context)
-          when :list_aws_default_service_quotas
-            Aws::ServiceQuotas::Endpoints::ListAWSDefaultServiceQuotas.build(context)
-          when :list_requested_service_quota_change_history
-            Aws::ServiceQuotas::Endpoints::ListRequestedServiceQuotaChangeHistory.build(context)
-          when :list_requested_service_quota_change_history_by_quota
-            Aws::ServiceQuotas::Endpoints::ListRequestedServiceQuotaChangeHistoryByQuota.build(context)
-          when :list_service_quota_increase_requests_in_template
-            Aws::ServiceQuotas::Endpoints::ListServiceQuotaIncreaseRequestsInTemplate.build(context)
-          when :list_service_quotas
-            Aws::ServiceQuotas::Endpoints::ListServiceQuotas.build(context)
-          when :list_services
-            Aws::ServiceQuotas::Endpoints::ListServices.build(context)
-          when :list_tags_for_resource
-            Aws::ServiceQuotas::Endpoints::ListTagsForResource.build(context)
-          when :put_service_quota_increase_request_into_template
-            Aws::ServiceQuotas::Endpoints::PutServiceQuotaIncreaseRequestIntoTemplate.build(context)
-          when :request_service_quota_increase
-            Aws::ServiceQuotas::Endpoints::RequestServiceQuotaIncrease.build(context)
-          when :tag_resource
-            Aws::ServiceQuotas::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::ServiceQuotas::Endpoints::UntagResource.build(context)
           end
         end
       end

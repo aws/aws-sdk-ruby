@@ -11161,18 +11161,28 @@ module Aws::QuickSight
     # @option params [required, String] :analysis_id
     #   The ID of the analysis that you're restoring.
     #
+    # @option params [Boolean] :restore_to_folders
+    #   A boolean value that determines if the analysis will be restored to
+    #   folders that it previously resided in. A `True` value restores
+    #   analysis back to all folders that it previously resided in. A `False`
+    #   value restores the analysis but does not restore the analysis back to
+    #   all previously resided folders. Restoring a restricted analysis
+    #   requires this parameter to be set to `True`.
+    #
     # @return [Types::RestoreAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreAnalysisResponse#status #status} => Integer
     #   * {Types::RestoreAnalysisResponse#arn #arn} => String
     #   * {Types::RestoreAnalysisResponse#analysis_id #analysis_id} => String
     #   * {Types::RestoreAnalysisResponse#request_id #request_id} => String
+    #   * {Types::RestoreAnalysisResponse#restoration_failed_folder_arns #restoration_failed_folder_arns} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_analysis({
     #     aws_account_id: "AwsAccountId", # required
     #     analysis_id: "ShortRestrictiveResourceId", # required
+    #     restore_to_folders: false,
     #   })
     #
     # @example Response structure
@@ -11181,6 +11191,8 @@ module Aws::QuickSight
     #   resp.arn #=> String
     #   resp.analysis_id #=> String
     #   resp.request_id #=> String
+    #   resp.restoration_failed_folder_arns #=> Array
+    #   resp.restoration_failed_folder_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RestoreAnalysis AWS API Documentation
     #
@@ -12411,6 +12423,62 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def start_dashboard_snapshot_job(params = {}, options = {})
       req = build_request(:start_dashboard_snapshot_job, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous job that runs an existing dashboard schedule
+    # and sends the dashboard snapshot through email.
+    #
+    # Only one job can run simultaneously in a given schedule. Repeated
+    # requests are skipped with a `202` HTTP status code.
+    #
+    # For more information, see [Scheduling and sending Amazon QuickSight
+    # reports by email][1] and [Configuring email report settings for a
+    # Amazon QuickSight dashboard][2] in the *Amazon QuickSight User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/sending-reports.html
+    # [2]: https://docs.aws.amazon.com/quicksight/latest/user/email-reports-from-dashboard.html
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard snapshot
+    #   job is executed in.
+    #
+    # @option params [required, String] :dashboard_id
+    #   The ID of the dashboard that you want to start a snapshot job schedule
+    #   for.
+    #
+    # @option params [required, String] :schedule_id
+    #   The ID of the schedule that you want to start a snapshot job schedule
+    #   for. The schedule ID can be found in the Amazon QuickSight console in
+    #   the **Schedules** pane of the dashboard that the schedule is
+    #   configured for.
+    #
+    # @return [Types::StartDashboardSnapshotJobScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDashboardSnapshotJobScheduleResponse#request_id #request_id} => String
+    #   * {Types::StartDashboardSnapshotJobScheduleResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_dashboard_snapshot_job_schedule({
+    #     aws_account_id: "AwsAccountId", # required
+    #     dashboard_id: "ShortRestrictiveResourceId", # required
+    #     schedule_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartDashboardSnapshotJobSchedule AWS API Documentation
+    #
+    # @overload start_dashboard_snapshot_job_schedule(params = {})
+    # @param [Hash] params ({})
+    def start_dashboard_snapshot_job_schedule(params = {}, options = {})
+      req = build_request(:start_dashboard_snapshot_job_schedule, params)
       req.send_request(options)
     end
 
@@ -15481,7 +15549,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

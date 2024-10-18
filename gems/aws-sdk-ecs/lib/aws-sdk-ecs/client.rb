@@ -7501,8 +7501,8 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
     #
     # @option params [String] :reference_id
-    #   The reference ID to use for the task. The reference ID can have a
-    #   maximum length of 1024 characters.
+    #   This parameter is only used by Amazon ECS. It is not intended for use
+    #   by customers.
     #
     # @option params [String] :started_by
     #   An optional tag specified when a task is started. For example, if you
@@ -7972,7 +7972,8 @@ module Aws::ECS
     #   propagated.
     #
     # @option params [String] :reference_id
-    #   The reference ID to use for the task.
+    #   This parameter is only used by Amazon ECS. It is not intended for use
+    #   by customers.
     #
     # @option params [String] :started_by
     #   An optional tag specified when a task is started. For example, if you
@@ -10431,7 +10432,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

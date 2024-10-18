@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::CodeGuruProfiler::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,57 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :add_notification_channels
-            Aws::CodeGuruProfiler::Endpoints::AddNotificationChannels.build(context)
-          when :batch_get_frame_metric_data
-            Aws::CodeGuruProfiler::Endpoints::BatchGetFrameMetricData.build(context)
-          when :configure_agent
-            Aws::CodeGuruProfiler::Endpoints::ConfigureAgent.build(context)
-          when :create_profiling_group
-            Aws::CodeGuruProfiler::Endpoints::CreateProfilingGroup.build(context)
-          when :delete_profiling_group
-            Aws::CodeGuruProfiler::Endpoints::DeleteProfilingGroup.build(context)
-          when :describe_profiling_group
-            Aws::CodeGuruProfiler::Endpoints::DescribeProfilingGroup.build(context)
-          when :get_findings_report_account_summary
-            Aws::CodeGuruProfiler::Endpoints::GetFindingsReportAccountSummary.build(context)
-          when :get_notification_configuration
-            Aws::CodeGuruProfiler::Endpoints::GetNotificationConfiguration.build(context)
-          when :get_policy
-            Aws::CodeGuruProfiler::Endpoints::GetPolicy.build(context)
-          when :get_profile
-            Aws::CodeGuruProfiler::Endpoints::GetProfile.build(context)
-          when :get_recommendations
-            Aws::CodeGuruProfiler::Endpoints::GetRecommendations.build(context)
-          when :list_findings_reports
-            Aws::CodeGuruProfiler::Endpoints::ListFindingsReports.build(context)
-          when :list_profile_times
-            Aws::CodeGuruProfiler::Endpoints::ListProfileTimes.build(context)
-          when :list_profiling_groups
-            Aws::CodeGuruProfiler::Endpoints::ListProfilingGroups.build(context)
-          when :list_tags_for_resource
-            Aws::CodeGuruProfiler::Endpoints::ListTagsForResource.build(context)
-          when :post_agent_profile
-            Aws::CodeGuruProfiler::Endpoints::PostAgentProfile.build(context)
-          when :put_permission
-            Aws::CodeGuruProfiler::Endpoints::PutPermission.build(context)
-          when :remove_notification_channel
-            Aws::CodeGuruProfiler::Endpoints::RemoveNotificationChannel.build(context)
-          when :remove_permission
-            Aws::CodeGuruProfiler::Endpoints::RemovePermission.build(context)
-          when :submit_feedback
-            Aws::CodeGuruProfiler::Endpoints::SubmitFeedback.build(context)
-          when :tag_resource
-            Aws::CodeGuruProfiler::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::CodeGuruProfiler::Endpoints::UntagResource.build(context)
-          when :update_profiling_group
-            Aws::CodeGuruProfiler::Endpoints::UpdateProfilingGroup.build(context)
           end
         end
       end

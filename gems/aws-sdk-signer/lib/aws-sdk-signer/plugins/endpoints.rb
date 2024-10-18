@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Signer::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,49 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :add_profile_permission
-            Aws::Signer::Endpoints::AddProfilePermission.build(context)
-          when :cancel_signing_profile
-            Aws::Signer::Endpoints::CancelSigningProfile.build(context)
-          when :describe_signing_job
-            Aws::Signer::Endpoints::DescribeSigningJob.build(context)
-          when :get_revocation_status
-            Aws::Signer::Endpoints::GetRevocationStatus.build(context)
-          when :get_signing_platform
-            Aws::Signer::Endpoints::GetSigningPlatform.build(context)
-          when :get_signing_profile
-            Aws::Signer::Endpoints::GetSigningProfile.build(context)
-          when :list_profile_permissions
-            Aws::Signer::Endpoints::ListProfilePermissions.build(context)
-          when :list_signing_jobs
-            Aws::Signer::Endpoints::ListSigningJobs.build(context)
-          when :list_signing_platforms
-            Aws::Signer::Endpoints::ListSigningPlatforms.build(context)
-          when :list_signing_profiles
-            Aws::Signer::Endpoints::ListSigningProfiles.build(context)
-          when :list_tags_for_resource
-            Aws::Signer::Endpoints::ListTagsForResource.build(context)
-          when :put_signing_profile
-            Aws::Signer::Endpoints::PutSigningProfile.build(context)
-          when :remove_profile_permission
-            Aws::Signer::Endpoints::RemoveProfilePermission.build(context)
-          when :revoke_signature
-            Aws::Signer::Endpoints::RevokeSignature.build(context)
-          when :revoke_signing_profile
-            Aws::Signer::Endpoints::RevokeSigningProfile.build(context)
-          when :sign_payload
-            Aws::Signer::Endpoints::SignPayload.build(context)
-          when :start_signing_job
-            Aws::Signer::Endpoints::StartSigningJob.build(context)
-          when :tag_resource
-            Aws::Signer::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Signer::Endpoints::UntagResource.build(context)
           end
         end
       end

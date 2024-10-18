@@ -144,30 +144,15 @@ module Aws::S3
       self[:region] = options[:region]
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
-      if self[:use_fips].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_fips"
-      end
       self[:use_dual_stack] = options[:use_dual_stack]
       self[:use_dual_stack] = false if self[:use_dual_stack].nil?
-      if self[:use_dual_stack].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_dual_stack"
-      end
       self[:endpoint] = options[:endpoint]
       self[:force_path_style] = options[:force_path_style]
       self[:force_path_style] = false if self[:force_path_style].nil?
-      if self[:force_path_style].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :force_path_style"
-      end
       self[:accelerate] = options[:accelerate]
       self[:accelerate] = false if self[:accelerate].nil?
-      if self[:accelerate].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :accelerate"
-      end
       self[:use_global_endpoint] = options[:use_global_endpoint]
       self[:use_global_endpoint] = false if self[:use_global_endpoint].nil?
-      if self[:use_global_endpoint].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_global_endpoint"
-      end
       self[:use_object_lambda_endpoint] = options[:use_object_lambda_endpoint]
       self[:key] = options[:key]
       self[:prefix] = options[:prefix]
@@ -175,12 +160,22 @@ module Aws::S3
       self[:disable_access_points] = options[:disable_access_points]
       self[:disable_multi_region_access_points] = options[:disable_multi_region_access_points]
       self[:disable_multi_region_access_points] = false if self[:disable_multi_region_access_points].nil?
-      if self[:disable_multi_region_access_points].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :disable_multi_region_access_points"
-      end
       self[:use_arn_region] = options[:use_arn_region]
       self[:use_s3_express_control_endpoint] = options[:use_s3_express_control_endpoint]
       self[:disable_s3_express_session_auth] = options[:disable_s3_express_session_auth]
+    end
+
+    def self.create(config, options={})
+      new({
+        region: config.region,
+        use_fips: config.use_fips_endpoint,
+        endpoint: (config.endpoint.to_s unless config.regional_endpoint),
+        force_path_style: config.force_path_style,
+        use_global_endpoint: config.s3_us_east_1_regional_endpoint == 'legacy',
+        disable_multi_region_access_points: config.s3_disable_multiregion_access_points,
+        use_arn_region: config.s3_use_arn_region,
+        disable_s3_express_session_auth: config.disable_s3_express_session_auth,
+      }.merge(options))
     end
   end
 end

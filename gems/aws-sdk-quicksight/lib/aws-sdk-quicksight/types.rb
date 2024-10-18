@@ -25487,11 +25487,21 @@ module Aws::QuickSight
     #   The ID of the analysis that you're restoring.
     #   @return [String]
     #
+    # @!attribute [rw] restore_to_folders
+    #   A boolean value that determines if the analysis will be restored to
+    #   folders that it previously resided in. A `True` value restores
+    #   analysis back to all folders that it previously resided in. A
+    #   `False` value restores the analysis but does not restore the
+    #   analysis back to all previously resided folders. Restoring a
+    #   restricted analysis requires this parameter to be set to `True`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RestoreAnalysisRequest AWS API Documentation
     #
     class RestoreAnalysisRequest < Struct.new(
       :aws_account_id,
-      :analysis_id)
+      :analysis_id,
+      :restore_to_folders)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25513,13 +25523,18 @@ module Aws::QuickSight
     #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
+    # @!attribute [rw] restoration_failed_folder_arns
+    #   A list of folder arns thatthe analysis failed to be restored to.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RestoreAnalysisResponse AWS API Documentation
     #
     class RestoreAnalysisResponse < Struct.new(
       :status,
       :arn,
       :analysis_id,
-      :request_id)
+      :request_id,
+      :restoration_failed_folder_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28195,6 +28210,50 @@ module Aws::QuickSight
     class StartDashboardSnapshotJobResponse < Struct.new(
       :arn,
       :snapshot_job_id,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard
+    #   snapshot job is executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID of the dashboard that you want to start a snapshot job
+    #   schedule for.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The ID of the schedule that you want to start a snapshot job
+    #   schedule for. The schedule ID can be found in the Amazon QuickSight
+    #   console in the **Schedules** pane of the dashboard that the schedule
+    #   is configured for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartDashboardSnapshotJobScheduleRequest AWS API Documentation
+    #
+    class StartDashboardSnapshotJobScheduleRequest < Struct.new(
+      :aws_account_id,
+      :dashboard_id,
+      :schedule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartDashboardSnapshotJobScheduleResponse AWS API Documentation
+    #
+    class StartDashboardSnapshotJobScheduleResponse < Struct.new(
       :request_id,
       :status)
       SENSITIVE = []

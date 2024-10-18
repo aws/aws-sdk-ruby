@@ -54,7 +54,7 @@ module Aws::ConnectParticipant
   autoload :EndpointProvider, 'aws-sdk-connectparticipant/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectparticipant/endpoints'
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end
 

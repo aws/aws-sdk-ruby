@@ -54,7 +54,7 @@ module Aws::ApiGatewayManagementApi
   autoload :EndpointProvider, 'aws-sdk-apigatewaymanagementapi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-apigatewaymanagementapi/endpoints'
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end
 

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SupplyChain::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,53 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_bill_of_materials_import_job
-            Aws::SupplyChain::Endpoints::CreateBillOfMaterialsImportJob.build(context)
-          when :create_data_integration_flow
-            Aws::SupplyChain::Endpoints::CreateDataIntegrationFlow.build(context)
-          when :create_data_lake_dataset
-            Aws::SupplyChain::Endpoints::CreateDataLakeDataset.build(context)
-          when :create_instance
-            Aws::SupplyChain::Endpoints::CreateInstance.build(context)
-          when :delete_data_integration_flow
-            Aws::SupplyChain::Endpoints::DeleteDataIntegrationFlow.build(context)
-          when :delete_data_lake_dataset
-            Aws::SupplyChain::Endpoints::DeleteDataLakeDataset.build(context)
-          when :delete_instance
-            Aws::SupplyChain::Endpoints::DeleteInstance.build(context)
-          when :get_bill_of_materials_import_job
-            Aws::SupplyChain::Endpoints::GetBillOfMaterialsImportJob.build(context)
-          when :get_data_integration_flow
-            Aws::SupplyChain::Endpoints::GetDataIntegrationFlow.build(context)
-          when :get_data_lake_dataset
-            Aws::SupplyChain::Endpoints::GetDataLakeDataset.build(context)
-          when :get_instance
-            Aws::SupplyChain::Endpoints::GetInstance.build(context)
-          when :list_data_integration_flows
-            Aws::SupplyChain::Endpoints::ListDataIntegrationFlows.build(context)
-          when :list_data_lake_datasets
-            Aws::SupplyChain::Endpoints::ListDataLakeDatasets.build(context)
-          when :list_instances
-            Aws::SupplyChain::Endpoints::ListInstances.build(context)
-          when :list_tags_for_resource
-            Aws::SupplyChain::Endpoints::ListTagsForResource.build(context)
-          when :send_data_integration_event
-            Aws::SupplyChain::Endpoints::SendDataIntegrationEvent.build(context)
-          when :tag_resource
-            Aws::SupplyChain::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::SupplyChain::Endpoints::UntagResource.build(context)
-          when :update_data_integration_flow
-            Aws::SupplyChain::Endpoints::UpdateDataIntegrationFlow.build(context)
-          when :update_data_lake_dataset
-            Aws::SupplyChain::Endpoints::UpdateDataLakeDataset.build(context)
-          when :update_instance
-            Aws::SupplyChain::Endpoints::UpdateInstance.build(context)
           end
         end
       end

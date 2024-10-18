@@ -1057,11 +1057,14 @@ module Aws
         def buckets: () -> ::Array[Types::Bucket]
         def owner: () -> Types::Owner
         def continuation_token: () -> ::String
+        def prefix: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#list_buckets-instance_method
       def list_buckets: (
                           ?max_buckets: ::Integer,
-                          ?continuation_token: ::String
+                          ?continuation_token: ::String,
+                          ?prefix: ::String,
+                          ?bucket_region: ::String
                         ) -> _ListBucketsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBucketsResponseSuccess
 

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SecretsManager::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,57 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :batch_get_secret_value
-            Aws::SecretsManager::Endpoints::BatchGetSecretValue.build(context)
-          when :cancel_rotate_secret
-            Aws::SecretsManager::Endpoints::CancelRotateSecret.build(context)
-          when :create_secret
-            Aws::SecretsManager::Endpoints::CreateSecret.build(context)
-          when :delete_resource_policy
-            Aws::SecretsManager::Endpoints::DeleteResourcePolicy.build(context)
-          when :delete_secret
-            Aws::SecretsManager::Endpoints::DeleteSecret.build(context)
-          when :describe_secret
-            Aws::SecretsManager::Endpoints::DescribeSecret.build(context)
-          when :get_random_password
-            Aws::SecretsManager::Endpoints::GetRandomPassword.build(context)
-          when :get_resource_policy
-            Aws::SecretsManager::Endpoints::GetResourcePolicy.build(context)
-          when :get_secret_value
-            Aws::SecretsManager::Endpoints::GetSecretValue.build(context)
-          when :list_secret_version_ids
-            Aws::SecretsManager::Endpoints::ListSecretVersionIds.build(context)
-          when :list_secrets
-            Aws::SecretsManager::Endpoints::ListSecrets.build(context)
-          when :put_resource_policy
-            Aws::SecretsManager::Endpoints::PutResourcePolicy.build(context)
-          when :put_secret_value
-            Aws::SecretsManager::Endpoints::PutSecretValue.build(context)
-          when :remove_regions_from_replication
-            Aws::SecretsManager::Endpoints::RemoveRegionsFromReplication.build(context)
-          when :replicate_secret_to_regions
-            Aws::SecretsManager::Endpoints::ReplicateSecretToRegions.build(context)
-          when :restore_secret
-            Aws::SecretsManager::Endpoints::RestoreSecret.build(context)
-          when :rotate_secret
-            Aws::SecretsManager::Endpoints::RotateSecret.build(context)
-          when :stop_replication_to_replica
-            Aws::SecretsManager::Endpoints::StopReplicationToReplica.build(context)
-          when :tag_resource
-            Aws::SecretsManager::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::SecretsManager::Endpoints::UntagResource.build(context)
-          when :update_secret
-            Aws::SecretsManager::Endpoints::UpdateSecret.build(context)
-          when :update_secret_version_stage
-            Aws::SecretsManager::Endpoints::UpdateSecretVersionStage.build(context)
-          when :validate_resource_policy
-            Aws::SecretsManager::Endpoints::ValidateResourcePolicy.build(context)
           end
         end
       end

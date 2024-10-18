@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Polly::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,29 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :delete_lexicon
-            Aws::Polly::Endpoints::DeleteLexicon.build(context)
-          when :describe_voices
-            Aws::Polly::Endpoints::DescribeVoices.build(context)
-          when :get_lexicon
-            Aws::Polly::Endpoints::GetLexicon.build(context)
-          when :get_speech_synthesis_task
-            Aws::Polly::Endpoints::GetSpeechSynthesisTask.build(context)
-          when :list_lexicons
-            Aws::Polly::Endpoints::ListLexicons.build(context)
-          when :list_speech_synthesis_tasks
-            Aws::Polly::Endpoints::ListSpeechSynthesisTasks.build(context)
-          when :put_lexicon
-            Aws::Polly::Endpoints::PutLexicon.build(context)
-          when :start_speech_synthesis_task
-            Aws::Polly::Endpoints::StartSpeechSynthesisTask.build(context)
-          when :synthesize_speech
-            Aws::Polly::Endpoints::SynthesizeSpeech.build(context)
           end
         end
       end

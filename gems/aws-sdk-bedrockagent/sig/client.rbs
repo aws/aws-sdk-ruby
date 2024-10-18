@@ -431,7 +431,6 @@ module Aws
                                            max_tokens: ::Integer?,
                                            stop_sequences: Array[::String]?,
                                            temperature: ::Float?,
-                                           top_k: ::Integer?,
                                            top_p: ::Float?
                                          }?
                                        }?,
@@ -649,7 +648,6 @@ module Aws
                                    max_tokens: ::Integer?,
                                    stop_sequences: Array[::String]?,
                                    temperature: ::Float?,
-                                   top_k: ::Integer?,
                                    top_p: ::Float?
                                  }?
                                }?,
@@ -670,7 +668,7 @@ module Aws
                                    ]?,
                                    text: ::String
                                  }?
-                               }?,
+                               },
                                template_type: ("TEXT")
                              },
                            ]
@@ -1600,7 +1598,6 @@ module Aws
                                            max_tokens: ::Integer?,
                                            stop_sequences: Array[::String]?,
                                            temperature: ::Float?,
-                                           top_k: ::Integer?,
                                            top_p: ::Float?
                                          }?
                                        }?,
@@ -1794,7 +1791,6 @@ module Aws
                                    max_tokens: ::Integer?,
                                    stop_sequences: Array[::String]?,
                                    temperature: ::Float?,
-                                   top_k: ::Integer?,
                                    top_p: ::Float?
                                  }?
                                }?,
@@ -1815,7 +1811,7 @@ module Aws
                                    ]?,
                                    text: ::String
                                  }?
-                               }?,
+                               },
                                template_type: ("TEXT")
                              },
                            ]

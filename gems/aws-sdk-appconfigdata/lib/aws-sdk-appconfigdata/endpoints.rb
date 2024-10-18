@@ -12,27 +12,9 @@ module Aws::AppConfigData
   # @api private
   module Endpoints
 
-    class GetLatestConfiguration
-      def self.build(context)
-        Aws::AppConfigData::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
-    class StartConfigurationSession
-      def self.build(context)
-        Aws::AppConfigData::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::AppConfigData::EndpointParameters.create(context.config)
     end
-
   end
 end

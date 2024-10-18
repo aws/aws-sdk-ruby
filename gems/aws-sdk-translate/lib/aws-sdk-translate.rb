@@ -54,7 +54,7 @@ module Aws::Translate
   autoload :EndpointProvider, 'aws-sdk-translate/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-translate/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2024-10-15)
+------------------
+
+* Feature - On a channel that you own, you can now replace an ongoing stream with a new stream by streaming up with the priority parameter appended to the stream key.
+
 1.61.0 (2024-09-24)
 ------------------
 

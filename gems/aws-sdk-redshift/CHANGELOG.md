@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.127.0 (2024-10-15)
+------------------
+
+* Feature - This release launches the CreateIntegration, DeleteIntegration, DescribeIntegrations and ModifyIntegration APIs to create and manage Amazon Redshift Zero-ETL Integrations.
+
 1.126.0 (2024-10-07)
 ------------------
 

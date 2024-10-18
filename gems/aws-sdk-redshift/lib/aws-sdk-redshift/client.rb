@@ -1307,8 +1307,8 @@ module Aws::Redshift
     #   node types, go to [ Working with Clusters][1] in the *Amazon Redshift
     #   Cluster Management Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
-    #   `ra3.4xlarge` \| `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.large` \|
+    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -2580,6 +2580,104 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Creates a zero-ETL integration with Amazon Redshift.
+    #
+    # @option params [required, String] :source_arn
+    #   The Amazon Resource Name (ARN) of the database to use as the source
+    #   for replication.
+    #
+    # @option params [required, String] :target_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse
+    #   to use as the target for replication.
+    #
+    # @option params [required, String] :integration_name
+    #   The name of the integration.
+    #
+    # @option params [String] :kms_key_id
+    #   An Key Management Service (KMS) key identifier for the key to use to
+    #   encrypt the integration. If you don't specify an encryption key, the
+    #   default Amazon Web Services owned key is used.
+    #
+    # @option params [Array<Types::Tag>] :tag_list
+    #   A list of tags.
+    #
+    # @option params [Hash<String,String>] :additional_encryption_context
+    #   An optional set of non-secret key–value pairs that contains additional
+    #   contextual information about the data. For more information, see
+    #   [Encryption context][1] in the *Amazon Web Services Key Management
+    #   Service Developer Guide*.
+    #
+    #   You can only include this parameter if you specify the `KMSKeyId`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #
+    # @option params [String] :description
+    #   A description of the integration.
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#description #description} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_integration({
+    #     source_arn: "String", # required
+    #     target_arn: "String", # required
+    #     integration_name: "IntegrationName", # required
+    #     kms_key_id: "String",
+    #     tag_list: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     additional_encryption_context: {
+    #       "String" => "String",
+    #     },
+    #     description: "IntegrationDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.create_time #=> Time
+    #   resp.description #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateIntegration AWS API Documentation
+    #
+    # @overload create_integration(params = {})
+    # @param [Hash] params ({})
+    def create_integration(params = {}, options = {})
+      req = build_request(:create_integration, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Redshift application for use with IAM Identity
     # Center.
     #
@@ -3686,6 +3784,59 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_hsm_configuration(params = {}, options = {})
       req = build_request(:delete_hsm_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes a zero-ETL integration with Amazon Redshift.
+    #
+    # @option params [required, String] :integration_arn
+    #   The unique identifier of the integration to delete.
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#description #description} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_integration({
+    #     integration_arn: "IntegrationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.create_time #=> Time
+    #   resp.description #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteIntegration AWS API Documentation
+    #
+    # @overload delete_integration(params = {})
+    # @param [Hash] params ({})
+    def delete_integration(params = {}, options = {})
+      req = build_request(:delete_integration, params)
       req.send_request(options)
     end
 
@@ -6041,6 +6192,82 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Describes one or more zero-ETL integrations with Amazon Redshift.
+    #
+    # @option params [String] :integration_arn
+    #   The unique identifier of the integration.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeIntegrations` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @option params [Array<Types::DescribeIntegrationsFilter>] :filters
+    #   A filter that specifies one or more resources to return.
+    #
+    # @return [Types::IntegrationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::IntegrationsMessage#marker #marker} => String
+    #   * {Types::IntegrationsMessage#integrations #integrations} => Array&lt;Types::Integration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_integrations({
+    #     integration_arn: "IntegrationArn",
+    #     max_records: 1,
+    #     marker: "String",
+    #     filters: [
+    #       {
+    #         name: "integration-arn", # required, accepts integration-arn, source-arn, source-types, status
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.integrations #=> Array
+    #   resp.integrations[0].integration_arn #=> String
+    #   resp.integrations[0].integration_name #=> String
+    #   resp.integrations[0].source_arn #=> String
+    #   resp.integrations[0].target_arn #=> String
+    #   resp.integrations[0].status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.integrations[0].errors #=> Array
+    #   resp.integrations[0].errors[0].error_code #=> String
+    #   resp.integrations[0].errors[0].error_message #=> String
+    #   resp.integrations[0].create_time #=> Time
+    #   resp.integrations[0].description #=> String
+    #   resp.integrations[0].kms_key_id #=> String
+    #   resp.integrations[0].additional_encryption_context #=> Hash
+    #   resp.integrations[0].additional_encryption_context["String"] #=> String
+    #   resp.integrations[0].tags #=> Array
+    #   resp.integrations[0].tags[0].key #=> String
+    #   resp.integrations[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeIntegrations AWS API Documentation
+    #
+    # @overload describe_integrations(params = {})
+    # @param [Hash] params ({})
+    def describe_integrations(params = {}, options = {})
+      req = build_request(:describe_integrations, params)
+      req.send_request(options)
+    end
+
     # Describes whether information, such as queries and connection
     # attempts, is being logged for the specified Amazon Redshift cluster.
     #
@@ -7080,6 +7307,14 @@ module Aws::Redshift
     #   * Parameter group
     #
     #   * Snapshot copy grant
+    #
+    #   * Integration (zero-ETL integration)
+    #
+    #     <note markdown="1"> To describe the tags associated with an `integration`, don't
+    #     specify `ResourceType`, instead specify the `ResourceName` of the
+    #     integration.
+    #
+    #      </note>
     #
     #   For more information about Amazon Redshift resource types and
     #   constructing ARNs, go to [Specifying Policy Elements: Actions,
@@ -8580,8 +8815,8 @@ module Aws::Redshift
     #   in Amazon Redshift][1] in the *Amazon Redshift Cluster Management
     #   Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
-    #   `ra3.4xlarge` \| `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.large` \|
+    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -9996,6 +10231,67 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Modifies a zero-ETL integration with Amazon Redshift.
+    #
+    # @option params [required, String] :integration_arn
+    #   The unique identifier of the integration to modify.
+    #
+    # @option params [String] :description
+    #   A new description for the integration.
+    #
+    # @option params [String] :integration_name
+    #   A new name for the integration.
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#description #description} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_integration({
+    #     integration_arn: "IntegrationArn", # required
+    #     description: "IntegrationDescription",
+    #     integration_name: "IntegrationName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.create_time #=> Time
+    #   resp.description #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyIntegration AWS API Documentation
+    #
+    # @overload modify_integration(params = {})
+    # @param [Hash] params ({})
+    def modify_integration(params = {}, options = {})
+      req = build_request(:modify_integration, params)
+      req.send_request(options)
+    end
+
     # Changes an existing Amazon Redshift IAM Identity Center application.
     #
     # @option params [required, String] :redshift_idc_application_arn
@@ -11032,6 +11328,8 @@ module Aws::Redshift
     #   * dc2.large
     #
     #   * dc2.8xlarge
+    #
+    #   * ra3.large
     #
     #   * ra3.xlplus
     #
@@ -12433,7 +12731,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

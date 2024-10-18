@@ -54,7 +54,7 @@ module Aws::ChimeSDKMeetings
   autoload :EndpointProvider, 'aws-sdk-chimesdkmeetings/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkmeetings/endpoints'
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end
 

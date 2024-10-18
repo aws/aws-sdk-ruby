@@ -833,13 +833,13 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @!attribute [rw] attachment_body
-    #   The registration file to upload. The maximum file size is 1MiB and
+    #   The registration file to upload. The maximum file size is 500KB and
     #   valid file extensions are PDF, JPEG and PNG.
     #   @return [String]
     #
     # @!attribute [rw] attachment_url
-    #   A URL to the required registration file. For example, you can
-    #   provide the S3 object URL.
+    #   Registration files have to be stored in an Amazon S3 bucket. The URI
+    #   to use when sending is in the format `s3://BucketName/FileName`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2275,6 +2275,9 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] opted_out_numbers
     #   An array of phone numbers to search for in the OptOutList.
+    #
+    #   If you specify an opted out number that isn't valid, an exception
+    #   is returned.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
