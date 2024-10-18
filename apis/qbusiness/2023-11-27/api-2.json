@@ -1951,6 +1951,7 @@
         "subtitle":{"shape":"WebExperienceSubtitle"},
         "welcomeMessage":{"shape":"WebExperienceWelcomeMessage"},
         "samplePromptsControlMode":{"shape":"WebExperienceSamplePromptsControlMode"},
+        "origins":{"shape":"WebExperienceOrigins"},
         "roleArn":{"shape":"RoleArn"},
         "tags":{"shape":"Tags"},
         "clientToken":{
@@ -2973,6 +2974,7 @@
         "subtitle":{"shape":"WebExperienceSubtitle"},
         "welcomeMessage":{"shape":"WebExperienceWelcomeMessage"},
         "samplePromptsControlMode":{"shape":"WebExperienceSamplePromptsControlMode"},
+        "origins":{"shape":"WebExperienceOrigins"},
         "roleArn":{"shape":"RoleArn"},
         "identityProviderConfiguration":{"shape":"IdentityProviderConfiguration"},
         "authenticationConfiguration":{
@@ -3884,6 +3886,12 @@
         "secretsArn":{"shape":"SecretArn"},
         "secretsRole":{"shape":"RoleArn"}
       }
+    },
+    "Origin":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"(http://|https://)[a-zA-Z0-9-_.]+(?::[0-9]{1,5})?"
     },
     "Payload":{
       "type":"string",
@@ -4865,7 +4873,8 @@
         "subtitle":{"shape":"WebExperienceSubtitle"},
         "welcomeMessage":{"shape":"WebExperienceWelcomeMessage"},
         "samplePromptsControlMode":{"shape":"WebExperienceSamplePromptsControlMode"},
-        "identityProviderConfiguration":{"shape":"IdentityProviderConfiguration"}
+        "identityProviderConfiguration":{"shape":"IdentityProviderConfiguration"},
+        "origins":{"shape":"WebExperienceOrigins"}
       }
     },
     "UpdateWebExperienceResponse":{
@@ -4986,6 +4995,12 @@
       "max":36,
       "min":36,
       "pattern":"[a-zA-Z0-9][a-zA-Z0-9-]*"
+    },
+    "WebExperienceOrigins":{
+      "type":"list",
+      "member":{"shape":"Origin"},
+      "max":10,
+      "min":0
     },
     "WebExperienceSamplePromptsControlMode":{
       "type":"string",

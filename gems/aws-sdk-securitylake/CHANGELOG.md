@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2024-10-14)
+------------------
+
+* Feature - This release updates request validation regex for resource ARNs.
+
 1.30.0 (2024-09-24)
 ------------------
 

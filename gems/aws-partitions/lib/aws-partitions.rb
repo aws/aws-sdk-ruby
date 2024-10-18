@@ -5,6 +5,7 @@ require_relative 'aws-partitions/partition'
 require_relative 'aws-partitions/partition_list'
 require_relative 'aws-partitions/region'
 require_relative 'aws-partitions/service'
+require_relative 'aws-partitions/metadata'
 
 require 'json'
 
@@ -501,7 +502,6 @@ module Aws
             'NetworkFirewall' => 'network-firewall',
             'NetworkManager' => 'networkmanager',
             'NetworkMonitor' => 'networkmonitor',
-            'NimbleStudio' => 'nimble',
             'OAM' => 'oam',
             'OSIS' => 'osis',
             'Omics' => 'omics',
@@ -598,6 +598,7 @@ module Aws
             'SimpleDB' => 'sdb',
             'SnowDeviceManagement' => 'snow-device-management',
             'Snowball' => 'snowball',
+            'SocialMessaging' => 'social-messaging',
             'SsmSap' => 'ssm-sap',
             'States' => 'states',
             'StorageGateway' => 'storagegateway',

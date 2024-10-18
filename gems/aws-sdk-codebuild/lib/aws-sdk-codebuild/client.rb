@@ -847,6 +847,12 @@ module Aws::CodeBuild
     #   resp.fleets[0].vpc_config.subnets[0] #=> String
     #   resp.fleets[0].vpc_config.security_group_ids #=> Array
     #   resp.fleets[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.fleets[0].proxy_configuration.default_behavior #=> String, one of "ALLOW_ALL", "DENY_ALL"
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules #=> Array
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules[0].type #=> String, one of "DOMAIN", "IP"
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules[0].entities #=> Array
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules[0].entities[0] #=> String
     #   resp.fleets[0].image_id #=> String
     #   resp.fleets[0].fleet_service_role #=> String
     #   resp.fleets[0].tags #=> Array
@@ -970,7 +976,7 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.branch_filter #=> String
     #   resp.projects[0].webhook.filter_groups #=> Array
     #   resp.projects[0].webhook.filter_groups[0] #=> Array
-    #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.projects[0].webhook.filter_groups[0][0].pattern #=> String
     #   resp.projects[0].webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.projects[0].webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -1259,6 +1265,9 @@ module Aws::CodeBuild
     # @option params [Types::VpcConfig] :vpc_config
     #   Information about the VPC configuration that CodeBuild accesses.
     #
+    # @option params [Types::ProxyConfiguration] :proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #
     # @option params [String] :image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #
@@ -1304,6 +1313,16 @@ module Aws::CodeBuild
     #       subnets: ["NonEmptyString"],
     #       security_group_ids: ["NonEmptyString"],
     #     },
+    #     proxy_configuration: {
+    #       default_behavior: "ALLOW_ALL", # accepts ALLOW_ALL, DENY_ALL
+    #       ordered_proxy_rules: [
+    #         {
+    #           type: "DOMAIN", # required, accepts DOMAIN, IP
+    #           effect: "ALLOW", # required, accepts ALLOW, DENY
+    #           entities: ["String"], # required
+    #         },
+    #       ],
+    #     },
     #     image_id: "NonEmptyString",
     #     fleet_service_role: "NonEmptyString",
     #     tags: [
@@ -1339,6 +1358,12 @@ module Aws::CodeBuild
     #   resp.fleet.vpc_config.subnets[0] #=> String
     #   resp.fleet.vpc_config.security_group_ids #=> Array
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
+    #   resp.fleet.proxy_configuration.default_behavior #=> String, one of "ALLOW_ALL", "DENY_ALL"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules #=> Array
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].type #=> String, one of "DOMAIN", "IP"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].entities #=> Array
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].entities[0] #=> String
     #   resp.fleet.image_id #=> String
     #   resp.fleet.fleet_service_role #=> String
     #   resp.fleet.tags #=> Array
@@ -1737,7 +1762,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.branch_filter #=> String
     #   resp.project.webhook.filter_groups #=> Array
     #   resp.project.webhook.filter_groups[0] #=> Array
-    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -1936,7 +1961,7 @@ module Aws::CodeBuild
     #     filter_groups: [
     #       [
     #         {
-    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE, WORKFLOW_NAME, TAG_NAME, RELEASE_NAME
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE, WORKFLOW_NAME, TAG_NAME, RELEASE_NAME, REPOSITORY_NAME
     #           pattern: "String", # required
     #           exclude_matched_pattern: false,
     #         },
@@ -1959,7 +1984,7 @@ module Aws::CodeBuild
     #   resp.webhook.branch_filter #=> String
     #   resp.webhook.filter_groups #=> Array
     #   resp.webhook.filter_groups[0] #=> Array
-    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -5080,6 +5105,9 @@ module Aws::CodeBuild
     # @option params [Types::VpcConfig] :vpc_config
     #   Information about the VPC configuration that CodeBuild accesses.
     #
+    # @option params [Types::ProxyConfiguration] :proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #
     # @option params [String] :image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #
@@ -5125,6 +5153,16 @@ module Aws::CodeBuild
     #       subnets: ["NonEmptyString"],
     #       security_group_ids: ["NonEmptyString"],
     #     },
+    #     proxy_configuration: {
+    #       default_behavior: "ALLOW_ALL", # accepts ALLOW_ALL, DENY_ALL
+    #       ordered_proxy_rules: [
+    #         {
+    #           type: "DOMAIN", # required, accepts DOMAIN, IP
+    #           effect: "ALLOW", # required, accepts ALLOW, DENY
+    #           entities: ["String"], # required
+    #         },
+    #       ],
+    #     },
     #     image_id: "NonEmptyString",
     #     fleet_service_role: "NonEmptyString",
     #     tags: [
@@ -5160,6 +5198,12 @@ module Aws::CodeBuild
     #   resp.fleet.vpc_config.subnets[0] #=> String
     #   resp.fleet.vpc_config.security_group_ids #=> Array
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
+    #   resp.fleet.proxy_configuration.default_behavior #=> String, one of "ALLOW_ALL", "DENY_ALL"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules #=> Array
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].type #=> String, one of "DOMAIN", "IP"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].entities #=> Array
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].entities[0] #=> String
     #   resp.fleet.image_id #=> String
     #   resp.fleet.fleet_service_role #=> String
     #   resp.fleet.tags #=> Array
@@ -5561,7 +5605,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.branch_filter #=> String
     #   resp.project.webhook.filter_groups #=> Array
     #   resp.project.webhook.filter_groups[0] #=> Array
-    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -5816,7 +5860,7 @@ module Aws::CodeBuild
     #     filter_groups: [
     #       [
     #         {
-    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE, WORKFLOW_NAME, TAG_NAME, RELEASE_NAME
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE, WORKFLOW_NAME, TAG_NAME, RELEASE_NAME, REPOSITORY_NAME
     #           pattern: "String", # required
     #           exclude_matched_pattern: false,
     #         },
@@ -5833,7 +5877,7 @@ module Aws::CodeBuild
     #   resp.webhook.branch_filter #=> String
     #   resp.webhook.filter_groups #=> Array
     #   resp.webhook.filter_groups[0] #=> Array
-    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -5870,7 +5914,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

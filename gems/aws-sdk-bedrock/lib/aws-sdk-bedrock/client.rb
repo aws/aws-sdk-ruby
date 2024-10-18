@@ -1838,6 +1838,7 @@ module Aws::Bedrock
     #   * {Types::GetImportedModelResponse#creation_time #creation_time} => Time
     #   * {Types::GetImportedModelResponse#model_architecture #model_architecture} => String
     #   * {Types::GetImportedModelResponse#model_kms_key_arn #model_kms_key_arn} => String
+    #   * {Types::GetImportedModelResponse#instruct_supported #instruct_supported} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1855,6 +1856,7 @@ module Aws::Bedrock
     #   resp.creation_time #=> Time
     #   resp.model_architecture #=> String
     #   resp.model_kms_key_arn #=> String
+    #   resp.instruct_supported #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModel AWS API Documentation
     #
@@ -2626,6 +2628,8 @@ module Aws::Bedrock
     #   resp.model_summaries[0].model_arn #=> String
     #   resp.model_summaries[0].model_name #=> String
     #   resp.model_summaries[0].creation_time #=> Time
+    #   resp.model_summaries[0].instruct_supported #=> Boolean
+    #   resp.model_summaries[0].model_architecture #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListImportedModels AWS API Documentation
     #
@@ -3603,7 +3607,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

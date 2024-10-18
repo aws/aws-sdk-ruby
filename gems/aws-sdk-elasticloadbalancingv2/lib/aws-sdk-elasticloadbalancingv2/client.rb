@@ -3214,6 +3214,9 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target_health.description #=> String
     #   resp.target_health_descriptions[0].anomaly_detection.result #=> String, one of "anomalous", "normal"
     #   resp.target_health_descriptions[0].anomaly_detection.mitigation_in_effect #=> String, one of "yes", "no"
+    #   resp.target_health_descriptions[0].administrative_override.state #=> String, one of "unknown", "no_override", "zonal_shift_active", "zonal_shift_delegated_to_dns"
+    #   resp.target_health_descriptions[0].administrative_override.reason #=> String, one of "AdministrativeOverride.Unknown", "AdministrativeOverride.NoOverride", "AdministrativeOverride.ZonalShiftActive", "AdministrativeOverride.ZonalShiftDelegatedToDns"
+    #   resp.target_health_descriptions[0].administrative_override.description #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5092,7 +5095,7 @@ module Aws::ElasticLoadBalancingV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

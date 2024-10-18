@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::STS::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,27 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :assume_role
-            Aws::STS::Endpoints::AssumeRole.build(context)
-          when :assume_role_with_saml
-            Aws::STS::Endpoints::AssumeRoleWithSAML.build(context)
-          when :assume_role_with_web_identity
-            Aws::STS::Endpoints::AssumeRoleWithWebIdentity.build(context)
-          when :decode_authorization_message
-            Aws::STS::Endpoints::DecodeAuthorizationMessage.build(context)
-          when :get_access_key_info
-            Aws::STS::Endpoints::GetAccessKeyInfo.build(context)
-          when :get_caller_identity
-            Aws::STS::Endpoints::GetCallerIdentity.build(context)
-          when :get_federation_token
-            Aws::STS::Endpoints::GetFederationToken.build(context)
-          when :get_session_token
-            Aws::STS::Endpoints::GetSessionToken.build(context)
           end
         end
       end

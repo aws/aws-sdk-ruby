@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SSMQuickSetup::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,35 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_configuration_manager
-            Aws::SSMQuickSetup::Endpoints::CreateConfigurationManager.build(context)
-          when :delete_configuration_manager
-            Aws::SSMQuickSetup::Endpoints::DeleteConfigurationManager.build(context)
-          when :get_configuration_manager
-            Aws::SSMQuickSetup::Endpoints::GetConfigurationManager.build(context)
-          when :get_service_settings
-            Aws::SSMQuickSetup::Endpoints::GetServiceSettings.build(context)
-          when :list_configuration_managers
-            Aws::SSMQuickSetup::Endpoints::ListConfigurationManagers.build(context)
-          when :list_quick_setup_types
-            Aws::SSMQuickSetup::Endpoints::ListQuickSetupTypes.build(context)
-          when :list_tags_for_resource
-            Aws::SSMQuickSetup::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::SSMQuickSetup::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::SSMQuickSetup::Endpoints::UntagResource.build(context)
-          when :update_configuration_definition
-            Aws::SSMQuickSetup::Endpoints::UpdateConfigurationDefinition.build(context)
-          when :update_configuration_manager
-            Aws::SSMQuickSetup::Endpoints::UpdateConfigurationManager.build(context)
-          when :update_service_settings
-            Aws::SSMQuickSetup::Endpoints::UpdateServiceSettings.build(context)
           end
         end
       end

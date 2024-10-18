@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::MigrationHub::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,45 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_created_artifact
-            Aws::MigrationHub::Endpoints::AssociateCreatedArtifact.build(context)
-          when :associate_discovered_resource
-            Aws::MigrationHub::Endpoints::AssociateDiscoveredResource.build(context)
-          when :create_progress_update_stream
-            Aws::MigrationHub::Endpoints::CreateProgressUpdateStream.build(context)
-          when :delete_progress_update_stream
-            Aws::MigrationHub::Endpoints::DeleteProgressUpdateStream.build(context)
-          when :describe_application_state
-            Aws::MigrationHub::Endpoints::DescribeApplicationState.build(context)
-          when :describe_migration_task
-            Aws::MigrationHub::Endpoints::DescribeMigrationTask.build(context)
-          when :disassociate_created_artifact
-            Aws::MigrationHub::Endpoints::DisassociateCreatedArtifact.build(context)
-          when :disassociate_discovered_resource
-            Aws::MigrationHub::Endpoints::DisassociateDiscoveredResource.build(context)
-          when :import_migration_task
-            Aws::MigrationHub::Endpoints::ImportMigrationTask.build(context)
-          when :list_application_states
-            Aws::MigrationHub::Endpoints::ListApplicationStates.build(context)
-          when :list_created_artifacts
-            Aws::MigrationHub::Endpoints::ListCreatedArtifacts.build(context)
-          when :list_discovered_resources
-            Aws::MigrationHub::Endpoints::ListDiscoveredResources.build(context)
-          when :list_migration_tasks
-            Aws::MigrationHub::Endpoints::ListMigrationTasks.build(context)
-          when :list_progress_update_streams
-            Aws::MigrationHub::Endpoints::ListProgressUpdateStreams.build(context)
-          when :notify_application_state
-            Aws::MigrationHub::Endpoints::NotifyApplicationState.build(context)
-          when :notify_migration_task_state
-            Aws::MigrationHub::Endpoints::NotifyMigrationTaskState.build(context)
-          when :put_resource_attributes
-            Aws::MigrationHub::Endpoints::PutResourceAttributes.build(context)
           end
         end
       end

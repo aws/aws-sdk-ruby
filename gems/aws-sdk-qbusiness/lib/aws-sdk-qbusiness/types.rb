@@ -874,7 +874,8 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] user_groups
-    #   The groups that a user associated with the chat input belongs to.
+    #   The group names that a user associated with the chat input belongs
+    #   to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] conversation_id
@@ -962,7 +963,8 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] user_groups
-    #   The groups that a user associated with the chat input belongs to.
+    #   The group names that a user associated with the chat input belongs
+    #   to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_message
@@ -1251,7 +1253,13 @@ module Aws::QBusiness
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permissions to
-    #   access your Amazon CloudWatch logs and metrics.
+    #   access your Amazon CloudWatch logs and metrics. If this property is
+    #   not specified, Amazon Q Business will create a [service linked role
+    #   (SLR)][1] and use it as the application's role.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles.html#slr-permissions
     #   @return [String]
     #
     # @!attribute [rw] identity_type
@@ -1771,6 +1779,16 @@ module Aws::QBusiness
     #   for an end user.
     #   @return [String]
     #
+    # @!attribute [rw] origins
+    #   Sets the website domain origins that are allowed to embed the Amazon
+    #   Q Business web experience.      The <i>domain origin</i> refers to
+    #   the base URL for accessing a website including the protocol
+    #   (<code>http/https</code>), the domain name, and the port number (if
+    #   specified). </p> <note> <p>You must only submit a <i>base URL</i>
+    #   and not a full path. For example,
+    #   <code>https://docs.aws.amazon.com</code>.</p> </note>
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the service role attached to your
     #   web experience.
@@ -1812,6 +1830,7 @@ module Aws::QBusiness
       :subtitle,
       :welcome_message,
       :sample_prompts_control_mode,
+      :origins,
       :role_arn,
       :tags,
       :client_token,
@@ -3643,6 +3662,14 @@ module Aws::QBusiness
     #   for an end user.
     #   @return [String]
     #
+    # @!attribute [rw] origins
+    #   Gets the website domain origins that are allowed to embed the Amazon
+    #   Q Business web experience.      The <i>domain origin</i> refers to
+    #   the base URL for accessing a website including the protocol
+    #   (<code>http/https</code>), the domain name, and the port number (if
+    #   specified). </p>
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the service role attached to your
     #   web experience.
@@ -3678,6 +3705,7 @@ module Aws::QBusiness
       :subtitle,
       :welcome_message,
       :sample_prompts_control_mode,
+      :origins,
       :role_arn,
       :identity_provider_configuration,
       :authentication_configuration,
@@ -5198,7 +5226,7 @@ module Aws::QBusiness
     #
     class PutGroupResponse < Aws::EmptyStructure; end
 
-    # Configuration information about Amazon Q Apps. (preview feature)
+    # Configuration information about Amazon Q Apps.
     #
     # @!attribute [rw] q_apps_control_mode
     #   Status information about whether end users can create and use Amazon
@@ -6294,6 +6322,18 @@ module Aws::QBusiness
     #   end users of an Amazon Q Business web experience.
     #   @return [Types::IdentityProviderConfiguration]
     #
+    # @!attribute [rw] origins
+    #   Updates the website domain origins that are allowed to embed the
+    #   Amazon Q Business web experience.      The <i>domain origin</i>
+    #   refers to the <i>base URL</i> for accessing a website including the
+    #   protocol (<code>http/https</code>), the domain name, and the port
+    #   number (if specified).</p> <note> <ul> <li> <p>Any values except
+    #   <code>null</code> submitted as part of this update will replace all
+    #   previous values.</p> </li> <li> <p>You must only submit a <i>base
+    #   URL</i> and not a full path. For example,
+    #   <code>https://docs.aws.amazon.com</code>.</p> </li> </ul> </note>
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateWebExperienceRequest AWS API Documentation
     #
     class UpdateWebExperienceRequest < Struct.new(
@@ -6305,7 +6345,8 @@ module Aws::QBusiness
       :subtitle,
       :welcome_message,
       :sample_prompts_control_mode,
-      :identity_provider_configuration)
+      :identity_provider_configuration,
+      :origins)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6340,15 +6381,15 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Provides information about users and groups associated with a topic
-    # control rule.
+    # Provides information about users and group names associated with a
+    # topic control rule.
     #
     # @!attribute [rw] user_ids
     #   The user ids associated with a topic control rule.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
-    #   The user groups associated with a topic control rule.
+    #   The user group names associated with a topic control rule.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UsersAndGroups AWS API Documentation

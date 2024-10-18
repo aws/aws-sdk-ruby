@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Keyspaces::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,39 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_keyspace
-            Aws::Keyspaces::Endpoints::CreateKeyspace.build(context)
-          when :create_table
-            Aws::Keyspaces::Endpoints::CreateTable.build(context)
-          when :delete_keyspace
-            Aws::Keyspaces::Endpoints::DeleteKeyspace.build(context)
-          when :delete_table
-            Aws::Keyspaces::Endpoints::DeleteTable.build(context)
-          when :get_keyspace
-            Aws::Keyspaces::Endpoints::GetKeyspace.build(context)
-          when :get_table
-            Aws::Keyspaces::Endpoints::GetTable.build(context)
-          when :get_table_auto_scaling_settings
-            Aws::Keyspaces::Endpoints::GetTableAutoScalingSettings.build(context)
-          when :list_keyspaces
-            Aws::Keyspaces::Endpoints::ListKeyspaces.build(context)
-          when :list_tables
-            Aws::Keyspaces::Endpoints::ListTables.build(context)
-          when :list_tags_for_resource
-            Aws::Keyspaces::Endpoints::ListTagsForResource.build(context)
-          when :restore_table
-            Aws::Keyspaces::Endpoints::RestoreTable.build(context)
-          when :tag_resource
-            Aws::Keyspaces::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Keyspaces::Endpoints::UntagResource.build(context)
-          when :update_table
-            Aws::Keyspaces::Endpoints::UpdateTable.build(context)
           end
         end
       end

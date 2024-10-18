@@ -54,7 +54,7 @@ module Aws::TimestreamWrite
   autoload :EndpointProvider, 'aws-sdk-timestreamwrite/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-timestreamwrite/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

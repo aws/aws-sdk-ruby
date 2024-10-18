@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::MarketplaceAgreement::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,17 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :describe_agreement
-            Aws::MarketplaceAgreement::Endpoints::DescribeAgreement.build(context)
-          when :get_agreement_terms
-            Aws::MarketplaceAgreement::Endpoints::GetAgreementTerms.build(context)
-          when :search_agreements
-            Aws::MarketplaceAgreement::Endpoints::SearchAgreements.build(context)
           end
         end
       end

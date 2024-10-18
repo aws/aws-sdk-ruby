@@ -675,6 +675,120 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Creates a data migration using the provided settings.
+    #
+    # @option params [String] :data_migration_name
+    #   A user-friendly name for the data migration. Data migration names have
+    #   the following constraints:
+    #
+    #   * Must begin with a letter, and can only contain ASCII letters,
+    #     digits, and hyphens.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    #   * Length must be from 1 to 255 characters.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   An identifier for the migration project.
+    #
+    # @option params [required, String] :data_migration_type
+    #   Specifies if the data migration is full-load only, change data capture
+    #   (CDC) only, or full-load and CDC.
+    #
+    # @option params [required, String] :service_access_role_arn
+    #   The Amazon Resource Name (ARN) for the service access role that you
+    #   want to use to create the data migration.
+    #
+    # @option params [Boolean] :enable_cloudwatch_logs
+    #   Specifies whether to enable CloudWatch logs for the data migration.
+    #
+    # @option params [Array<Types::SourceDataSetting>] :source_data_settings
+    #   Specifies information about the source data provider.
+    #
+    # @option params [Integer] :number_of_jobs
+    #   The number of parallel jobs that trigger parallel threads to unload
+    #   the tables from the source, and then load them to the target.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags to be assigned to the data migration.
+    #
+    # @option params [String] :selection_rules
+    #   An optional JSON string specifying what tables, views, and schemas to
+    #   include or exclude from the migration.
+    #
+    # @return [Types::CreateDataMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataMigrationResponse#data_migration #data_migration} => Types::DataMigration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_migration({
+    #     data_migration_name: "String",
+    #     migration_project_identifier: "String", # required
+    #     data_migration_type: "full-load", # required, accepts full-load, cdc, full-load-and-cdc
+    #     service_access_role_arn: "String", # required
+    #     enable_cloudwatch_logs: false,
+    #     source_data_settings: [
+    #       {
+    #         cdc_start_position: "String",
+    #         cdc_start_time: Time.now,
+    #         cdc_stop_time: Time.now,
+    #         slot_name: "String",
+    #       },
+    #     ],
+    #     number_of_jobs: 1,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #         resource_arn: "String",
+    #       },
+    #     ],
+    #     selection_rules: "SecretString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_migration.data_migration_name #=> String
+    #   resp.data_migration.data_migration_arn #=> String
+    #   resp.data_migration.data_migration_create_time #=> Time
+    #   resp.data_migration.data_migration_start_time #=> Time
+    #   resp.data_migration.data_migration_end_time #=> Time
+    #   resp.data_migration.service_access_role_arn #=> String
+    #   resp.data_migration.migration_project_arn #=> String
+    #   resp.data_migration.data_migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.data_migration.data_migration_settings.number_of_jobs #=> Integer
+    #   resp.data_migration.data_migration_settings.cloudwatch_logs_enabled #=> Boolean
+    #   resp.data_migration.data_migration_settings.selection_rules #=> String
+    #   resp.data_migration.source_data_settings #=> Array
+    #   resp.data_migration.source_data_settings[0].cdc_start_position #=> String
+    #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
+    #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
+    #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
+    #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
+    #   resp.data_migration.data_migration_statistics.full_load_percentage #=> Integer
+    #   resp.data_migration.data_migration_statistics.cdc_latency #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_queued #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_errored #=> Integer
+    #   resp.data_migration.data_migration_statistics.start_time #=> Time
+    #   resp.data_migration.data_migration_statistics.stop_time #=> Time
+    #   resp.data_migration.data_migration_status #=> String
+    #   resp.data_migration.public_ip_addresses #=> Array
+    #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.last_failure_message #=> String
+    #   resp.data_migration.stop_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateDataMigration AWS API Documentation
+    #
+    # @overload create_data_migration(params = {})
+    # @param [Hash] params ({})
+    def create_data_migration(params = {}, options = {})
+      req = build_request(:create_data_migration, params)
+      req.send_request(options)
+    end
+
     # Creates a data provider using the provided settings. A data provider
     # stores a data store type and location information about your database.
     #
@@ -907,7 +1021,10 @@ module Aws::DatabaseMigrationService
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
     #   `"redshift"`, `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`, `"sybase"`,
     #   `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
-    #   `"docdb"`, `"sqlserver"`, `"neptune"`, and `"babelfish"`.
+    #   `"docdb"`, `"sqlserver"`, `"neptune"`, `"babelfish"`,
+    #   `redshift-serverless`, `aurora-serverless`,
+    #   `aurora-postgresql-serverless`, `gcp-mysql`,
+    #   `azure-sql-managed-instance`, `redis`, `dms-transfer`.
     #
     # @option params [String] :username
     #   The user name to be used to log in to the endpoint database.
@@ -2803,7 +2920,7 @@ module Aws::DatabaseMigrationService
     #   lowercase string.
     #
     #   Constraints: Must contain no more than 255 alphanumeric characters,
-    #   periods, spaces, underscores, or hyphens. Must not be "default".
+    #   periods, underscores, or hyphens. Must not be "default".
     #
     #   Example: `mySubnetgroup`
     #
@@ -3209,6 +3326,63 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def delete_connection(params = {}, options = {})
       req = build_request(:delete_connection, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified data migration.
+    #
+    # @option params [required, String] :data_migration_identifier
+    #   The identifier (name or ARN) of the data migration to delete.
+    #
+    # @return [Types::DeleteDataMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataMigrationResponse#data_migration #data_migration} => Types::DataMigration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_migration({
+    #     data_migration_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_migration.data_migration_name #=> String
+    #   resp.data_migration.data_migration_arn #=> String
+    #   resp.data_migration.data_migration_create_time #=> Time
+    #   resp.data_migration.data_migration_start_time #=> Time
+    #   resp.data_migration.data_migration_end_time #=> Time
+    #   resp.data_migration.service_access_role_arn #=> String
+    #   resp.data_migration.migration_project_arn #=> String
+    #   resp.data_migration.data_migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.data_migration.data_migration_settings.number_of_jobs #=> Integer
+    #   resp.data_migration.data_migration_settings.cloudwatch_logs_enabled #=> Boolean
+    #   resp.data_migration.data_migration_settings.selection_rules #=> String
+    #   resp.data_migration.source_data_settings #=> Array
+    #   resp.data_migration.source_data_settings[0].cdc_start_position #=> String
+    #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
+    #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
+    #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
+    #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
+    #   resp.data_migration.data_migration_statistics.full_load_percentage #=> Integer
+    #   resp.data_migration.data_migration_statistics.cdc_latency #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_queued #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_errored #=> Integer
+    #   resp.data_migration.data_migration_statistics.start_time #=> Time
+    #   resp.data_migration.data_migration_statistics.stop_time #=> Time
+    #   resp.data_migration.data_migration_status #=> String
+    #   resp.data_migration.public_ip_addresses #=> Array
+    #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.last_failure_message #=> String
+    #   resp.data_migration.stop_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteDataMigration AWS API Documentation
+    #
+    # @overload delete_data_migration(params = {})
+    # @param [Hash] params ({})
+    def delete_data_migration(params = {}, options = {})
+      req = build_request(:delete_data_migration, params)
       req.send_request(options)
     end
 
@@ -4651,6 +4825,99 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_conversion_configuration(params = {}, options = {})
       req = build_request(:describe_conversion_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns information about data migrations.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the data migrations.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Boolean] :without_settings
+    #   An option to set to avoid returning information about settings. Use
+    #   this to reduce overhead when setting information is too large. To use
+    #   this option, choose `true`; otherwise, choose `false` (the default).
+    #
+    # @option params [Boolean] :without_statistics
+    #   An option to set to avoid returning information about statistics. Use
+    #   this to reduce overhead when statistics information is too large. To
+    #   use this option, choose `true`; otherwise, choose `false` (the
+    #   default).
+    #
+    # @return [Types::DescribeDataMigrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataMigrationsResponse#data_migrations #data_migrations} => Array&lt;Types::DataMigration&gt;
+    #   * {Types::DescribeDataMigrationsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_migrations({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "Marker",
+    #     without_settings: false,
+    #     without_statistics: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_migrations #=> Array
+    #   resp.data_migrations[0].data_migration_name #=> String
+    #   resp.data_migrations[0].data_migration_arn #=> String
+    #   resp.data_migrations[0].data_migration_create_time #=> Time
+    #   resp.data_migrations[0].data_migration_start_time #=> Time
+    #   resp.data_migrations[0].data_migration_end_time #=> Time
+    #   resp.data_migrations[0].service_access_role_arn #=> String
+    #   resp.data_migrations[0].migration_project_arn #=> String
+    #   resp.data_migrations[0].data_migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.data_migrations[0].data_migration_settings.number_of_jobs #=> Integer
+    #   resp.data_migrations[0].data_migration_settings.cloudwatch_logs_enabled #=> Boolean
+    #   resp.data_migrations[0].data_migration_settings.selection_rules #=> String
+    #   resp.data_migrations[0].source_data_settings #=> Array
+    #   resp.data_migrations[0].source_data_settings[0].cdc_start_position #=> String
+    #   resp.data_migrations[0].source_data_settings[0].cdc_start_time #=> Time
+    #   resp.data_migrations[0].source_data_settings[0].cdc_stop_time #=> Time
+    #   resp.data_migrations[0].source_data_settings[0].slot_name #=> String
+    #   resp.data_migrations[0].data_migration_statistics.tables_loaded #=> Integer
+    #   resp.data_migrations[0].data_migration_statistics.elapsed_time_millis #=> Integer
+    #   resp.data_migrations[0].data_migration_statistics.tables_loading #=> Integer
+    #   resp.data_migrations[0].data_migration_statistics.full_load_percentage #=> Integer
+    #   resp.data_migrations[0].data_migration_statistics.cdc_latency #=> Integer
+    #   resp.data_migrations[0].data_migration_statistics.tables_queued #=> Integer
+    #   resp.data_migrations[0].data_migration_statistics.tables_errored #=> Integer
+    #   resp.data_migrations[0].data_migration_statistics.start_time #=> Time
+    #   resp.data_migrations[0].data_migration_statistics.stop_time #=> Time
+    #   resp.data_migrations[0].data_migration_status #=> String
+    #   resp.data_migrations[0].public_ip_addresses #=> Array
+    #   resp.data_migrations[0].public_ip_addresses[0] #=> String
+    #   resp.data_migrations[0].last_failure_message #=> String
+    #   resp.data_migrations[0].stop_reason #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeDataMigrations AWS API Documentation
+    #
+    # @overload describe_data_migrations(params = {})
+    # @param [Hash] params ({})
+    def describe_data_migrations(params = {}, options = {})
+      req = build_request(:describe_data_migrations, params)
       req.send_request(options)
     end
 
@@ -8384,6 +8651,101 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Modifies an existing DMS data migration.
+    #
+    # @option params [required, String] :data_migration_identifier
+    #   The identifier (name or ARN) of the data migration to modify.
+    #
+    # @option params [String] :data_migration_name
+    #   The new name for the data migration.
+    #
+    # @option params [Boolean] :enable_cloudwatch_logs
+    #   Whether to enable Cloudwatch logs for the data migration.
+    #
+    # @option params [String] :service_access_role_arn
+    #   The new service access role ARN for the data migration.
+    #
+    # @option params [String] :data_migration_type
+    #   The new migration type for the data migration.
+    #
+    # @option params [Array<Types::SourceDataSetting>] :source_data_settings
+    #   The new information about the source data provider for the data
+    #   migration.
+    #
+    # @option params [Integer] :number_of_jobs
+    #   The number of parallel jobs that trigger parallel threads to unload
+    #   the tables from the source, and then load them to the target.
+    #
+    # @option params [String] :selection_rules
+    #   A JSON-formatted string that defines what objects to include and
+    #   exclude from the migration.
+    #
+    # @return [Types::ModifyDataMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDataMigrationResponse#data_migration #data_migration} => Types::DataMigration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_data_migration({
+    #     data_migration_identifier: "String", # required
+    #     data_migration_name: "String",
+    #     enable_cloudwatch_logs: false,
+    #     service_access_role_arn: "String",
+    #     data_migration_type: "full-load", # accepts full-load, cdc, full-load-and-cdc
+    #     source_data_settings: [
+    #       {
+    #         cdc_start_position: "String",
+    #         cdc_start_time: Time.now,
+    #         cdc_stop_time: Time.now,
+    #         slot_name: "String",
+    #       },
+    #     ],
+    #     number_of_jobs: 1,
+    #     selection_rules: "SecretString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_migration.data_migration_name #=> String
+    #   resp.data_migration.data_migration_arn #=> String
+    #   resp.data_migration.data_migration_create_time #=> Time
+    #   resp.data_migration.data_migration_start_time #=> Time
+    #   resp.data_migration.data_migration_end_time #=> Time
+    #   resp.data_migration.service_access_role_arn #=> String
+    #   resp.data_migration.migration_project_arn #=> String
+    #   resp.data_migration.data_migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.data_migration.data_migration_settings.number_of_jobs #=> Integer
+    #   resp.data_migration.data_migration_settings.cloudwatch_logs_enabled #=> Boolean
+    #   resp.data_migration.data_migration_settings.selection_rules #=> String
+    #   resp.data_migration.source_data_settings #=> Array
+    #   resp.data_migration.source_data_settings[0].cdc_start_position #=> String
+    #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
+    #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
+    #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
+    #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
+    #   resp.data_migration.data_migration_statistics.full_load_percentage #=> Integer
+    #   resp.data_migration.data_migration_statistics.cdc_latency #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_queued #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_errored #=> Integer
+    #   resp.data_migration.data_migration_statistics.start_time #=> Time
+    #   resp.data_migration.data_migration_statistics.stop_time #=> Time
+    #   resp.data_migration.data_migration_status #=> String
+    #   resp.data_migration.public_ip_addresses #=> Array
+    #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.last_failure_message #=> String
+    #   resp.data_migration.stop_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyDataMigration AWS API Documentation
+    #
+    # @overload modify_data_migration(params = {})
+    # @param [Hash] params ({})
+    def modify_data_migration(params = {}, options = {})
+      req = build_request(:modify_data_migration, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified data provider using the provided settings.
     #
     # <note markdown="1"> You must remove the data provider from all migration projects before
@@ -10838,6 +11200,68 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Starts the specified data migration.
+    #
+    # @option params [required, String] :data_migration_identifier
+    #   The identifier (name or ARN) of the data migration to start.
+    #
+    # @option params [required, String] :start_type
+    #   Specifies the start type for the data migration. Valid values include
+    #   `start-replication`, `reload-target`, and `resume-processing`.
+    #
+    # @return [Types::StartDataMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDataMigrationResponse#data_migration #data_migration} => Types::DataMigration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_data_migration({
+    #     data_migration_identifier: "String", # required
+    #     start_type: "reload-target", # required, accepts reload-target, resume-processing, start-replication
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_migration.data_migration_name #=> String
+    #   resp.data_migration.data_migration_arn #=> String
+    #   resp.data_migration.data_migration_create_time #=> Time
+    #   resp.data_migration.data_migration_start_time #=> Time
+    #   resp.data_migration.data_migration_end_time #=> Time
+    #   resp.data_migration.service_access_role_arn #=> String
+    #   resp.data_migration.migration_project_arn #=> String
+    #   resp.data_migration.data_migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.data_migration.data_migration_settings.number_of_jobs #=> Integer
+    #   resp.data_migration.data_migration_settings.cloudwatch_logs_enabled #=> Boolean
+    #   resp.data_migration.data_migration_settings.selection_rules #=> String
+    #   resp.data_migration.source_data_settings #=> Array
+    #   resp.data_migration.source_data_settings[0].cdc_start_position #=> String
+    #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
+    #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
+    #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
+    #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
+    #   resp.data_migration.data_migration_statistics.full_load_percentage #=> Integer
+    #   resp.data_migration.data_migration_statistics.cdc_latency #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_queued #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_errored #=> Integer
+    #   resp.data_migration.data_migration_statistics.start_time #=> Time
+    #   resp.data_migration.data_migration_statistics.stop_time #=> Time
+    #   resp.data_migration.data_migration_status #=> String
+    #   resp.data_migration.public_ip_addresses #=> Array
+    #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.last_failure_message #=> String
+    #   resp.data_migration.stop_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartDataMigration AWS API Documentation
+    #
+    # @overload start_data_migration(params = {})
+    # @param [Hash] params ({})
+    def start_data_migration(params = {}, options = {})
+      req = build_request(:start_data_migration, params)
+      req.send_request(options)
+    end
+
     # Applies the extension pack to your target database. An extension pack
     # is an add-on module that emulates functions present in a source
     # database that are required when converting objects to the target
@@ -11650,6 +12074,63 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Stops the specified data migration.
+    #
+    # @option params [required, String] :data_migration_identifier
+    #   The identifier (name or ARN) of the data migration to stop.
+    #
+    # @return [Types::StopDataMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopDataMigrationResponse#data_migration #data_migration} => Types::DataMigration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_data_migration({
+    #     data_migration_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_migration.data_migration_name #=> String
+    #   resp.data_migration.data_migration_arn #=> String
+    #   resp.data_migration.data_migration_create_time #=> Time
+    #   resp.data_migration.data_migration_start_time #=> Time
+    #   resp.data_migration.data_migration_end_time #=> Time
+    #   resp.data_migration.service_access_role_arn #=> String
+    #   resp.data_migration.migration_project_arn #=> String
+    #   resp.data_migration.data_migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.data_migration.data_migration_settings.number_of_jobs #=> Integer
+    #   resp.data_migration.data_migration_settings.cloudwatch_logs_enabled #=> Boolean
+    #   resp.data_migration.data_migration_settings.selection_rules #=> String
+    #   resp.data_migration.source_data_settings #=> Array
+    #   resp.data_migration.source_data_settings[0].cdc_start_position #=> String
+    #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
+    #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
+    #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
+    #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
+    #   resp.data_migration.data_migration_statistics.full_load_percentage #=> Integer
+    #   resp.data_migration.data_migration_statistics.cdc_latency #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_queued #=> Integer
+    #   resp.data_migration.data_migration_statistics.tables_errored #=> Integer
+    #   resp.data_migration.data_migration_statistics.start_time #=> Time
+    #   resp.data_migration.data_migration_statistics.stop_time #=> Time
+    #   resp.data_migration.data_migration_status #=> String
+    #   resp.data_migration.public_ip_addresses #=> Array
+    #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.last_failure_message #=> String
+    #   resp.data_migration.stop_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopDataMigration AWS API Documentation
+    #
+    # @overload stop_data_migration(params = {})
+    # @param [Hash] params ({})
+    def stop_data_migration(params = {}, options = {})
+      req = build_request(:stop_data_migration, params)
+      req.send_request(options)
+    end
+
     # For a given DMS Serverless replication configuration, DMS stops any
     # and all ongoing DMS Serverless replications. This command doesn't
     # deprovision the stopped replications.
@@ -11917,7 +12398,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

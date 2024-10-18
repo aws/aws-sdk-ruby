@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Artifact::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,23 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :get_account_settings
-            Aws::Artifact::Endpoints::GetAccountSettings.build(context)
-          when :get_report
-            Aws::Artifact::Endpoints::GetReport.build(context)
-          when :get_report_metadata
-            Aws::Artifact::Endpoints::GetReportMetadata.build(context)
-          when :get_term_for_report
-            Aws::Artifact::Endpoints::GetTermForReport.build(context)
-          when :list_reports
-            Aws::Artifact::Endpoints::ListReports.build(context)
-          when :put_account_settings
-            Aws::Artifact::Endpoints::PutAccountSettings.build(context)
           end
         end
       end

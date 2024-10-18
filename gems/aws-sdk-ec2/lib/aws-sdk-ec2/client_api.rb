@@ -26,6 +26,8 @@ module Aws::EC2
     AcceleratorTypeSet = Shapes::ListShape.new(name: 'AcceleratorTypeSet')
     AcceptAddressTransferRequest = Shapes::StructureShape.new(name: 'AcceptAddressTransferRequest')
     AcceptAddressTransferResult = Shapes::StructureShape.new(name: 'AcceptAddressTransferResult')
+    AcceptCapacityReservationBillingOwnershipRequest = Shapes::StructureShape.new(name: 'AcceptCapacityReservationBillingOwnershipRequest')
+    AcceptCapacityReservationBillingOwnershipResult = Shapes::StructureShape.new(name: 'AcceptCapacityReservationBillingOwnershipResult')
     AcceptReservedInstancesExchangeQuoteRequest = Shapes::StructureShape.new(name: 'AcceptReservedInstancesExchangeQuoteRequest')
     AcceptReservedInstancesExchangeQuoteResult = Shapes::StructureShape.new(name: 'AcceptReservedInstancesExchangeQuoteResult')
     AcceptTransitGatewayMulticastDomainAssociationsRequest = Shapes::StructureShape.new(name: 'AcceptTransitGatewayMulticastDomainAssociationsRequest')
@@ -50,6 +52,7 @@ module Aws::EC2
     AccountAttributeNameStringList = Shapes::ListShape.new(name: 'AccountAttributeNameStringList')
     AccountAttributeValue = Shapes::StructureShape.new(name: 'AccountAttributeValue')
     AccountAttributeValueList = Shapes::ListShape.new(name: 'AccountAttributeValueList')
+    AccountID = Shapes::StringShape.new(name: 'AccountID')
     ActiveInstance = Shapes::StructureShape.new(name: 'ActiveInstance')
     ActiveInstanceSet = Shapes::ListShape.new(name: 'ActiveInstanceSet')
     ActivityStatus = Shapes::StringShape.new(name: 'ActivityStatus')
@@ -128,6 +131,8 @@ module Aws::EC2
     AssignedPrivateIpAddressList = Shapes::ListShape.new(name: 'AssignedPrivateIpAddressList')
     AssociateAddressRequest = Shapes::StructureShape.new(name: 'AssociateAddressRequest')
     AssociateAddressResult = Shapes::StructureShape.new(name: 'AssociateAddressResult')
+    AssociateCapacityReservationBillingOwnerRequest = Shapes::StructureShape.new(name: 'AssociateCapacityReservationBillingOwnerRequest')
+    AssociateCapacityReservationBillingOwnerResult = Shapes::StructureShape.new(name: 'AssociateCapacityReservationBillingOwnerResult')
     AssociateClientVpnTargetNetworkRequest = Shapes::StructureShape.new(name: 'AssociateClientVpnTargetNetworkRequest')
     AssociateClientVpnTargetNetworkResult = Shapes::StructureShape.new(name: 'AssociateClientVpnTargetNetworkResult')
     AssociateDhcpOptionsRequest = Shapes::StructureShape.new(name: 'AssociateDhcpOptionsRequest')
@@ -242,6 +247,7 @@ module Aws::EC2
     ByoipCidr = Shapes::StructureShape.new(name: 'ByoipCidr')
     ByoipCidrSet = Shapes::ListShape.new(name: 'ByoipCidrSet')
     ByoipCidrState = Shapes::StringShape.new(name: 'ByoipCidrState')
+    CallerRole = Shapes::StringShape.new(name: 'CallerRole')
     CancelBatchErrorCode = Shapes::StringShape.new(name: 'CancelBatchErrorCode')
     CancelBundleTaskRequest = Shapes::StructureShape.new(name: 'CancelBundleTaskRequest')
     CancelBundleTaskResult = Shapes::StructureShape.new(name: 'CancelBundleTaskResult')
@@ -277,6 +283,9 @@ module Aws::EC2
     CapacityBlockOffering = Shapes::StructureShape.new(name: 'CapacityBlockOffering')
     CapacityBlockOfferingSet = Shapes::ListShape.new(name: 'CapacityBlockOfferingSet')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
+    CapacityReservationBillingRequest = Shapes::StructureShape.new(name: 'CapacityReservationBillingRequest')
+    CapacityReservationBillingRequestSet = Shapes::ListShape.new(name: 'CapacityReservationBillingRequestSet')
+    CapacityReservationBillingRequestStatus = Shapes::StringShape.new(name: 'CapacityReservationBillingRequestStatus')
     CapacityReservationFleet = Shapes::StructureShape.new(name: 'CapacityReservationFleet')
     CapacityReservationFleetCancellationState = Shapes::StructureShape.new(name: 'CapacityReservationFleetCancellationState')
     CapacityReservationFleetCancellationStateSet = Shapes::ListShape.new(name: 'CapacityReservationFleetCancellationStateSet')
@@ -288,6 +297,7 @@ module Aws::EC2
     CapacityReservationGroupSet = Shapes::ListShape.new(name: 'CapacityReservationGroupSet')
     CapacityReservationId = Shapes::StringShape.new(name: 'CapacityReservationId')
     CapacityReservationIdSet = Shapes::ListShape.new(name: 'CapacityReservationIdSet')
+    CapacityReservationInfo = Shapes::StructureShape.new(name: 'CapacityReservationInfo')
     CapacityReservationInstancePlatform = Shapes::StringShape.new(name: 'CapacityReservationInstancePlatform')
     CapacityReservationOptions = Shapes::StructureShape.new(name: 'CapacityReservationOptions')
     CapacityReservationOptionsRequest = Shapes::StructureShape.new(name: 'CapacityReservationOptionsRequest')
@@ -790,6 +800,9 @@ module Aws::EC2
     DescribeCapacityBlockOfferingsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityBlockOfferingsMaxResults')
     DescribeCapacityBlockOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityBlockOfferingsRequest')
     DescribeCapacityBlockOfferingsResult = Shapes::StructureShape.new(name: 'DescribeCapacityBlockOfferingsResult')
+    DescribeCapacityReservationBillingRequestsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationBillingRequestsRequest')
+    DescribeCapacityReservationBillingRequestsRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationBillingRequestsRequestMaxResults')
+    DescribeCapacityReservationBillingRequestsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationBillingRequestsResult')
     DescribeCapacityReservationFleetsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationFleetsMaxResults')
     DescribeCapacityReservationFleetsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationFleetsRequest')
     DescribeCapacityReservationFleetsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationFleetsResult')
@@ -1197,6 +1210,8 @@ module Aws::EC2
     DisableVpcClassicLinkRequest = Shapes::StructureShape.new(name: 'DisableVpcClassicLinkRequest')
     DisableVpcClassicLinkResult = Shapes::StructureShape.new(name: 'DisableVpcClassicLinkResult')
     DisassociateAddressRequest = Shapes::StructureShape.new(name: 'DisassociateAddressRequest')
+    DisassociateCapacityReservationBillingOwnerRequest = Shapes::StructureShape.new(name: 'DisassociateCapacityReservationBillingOwnerRequest')
+    DisassociateCapacityReservationBillingOwnerResult = Shapes::StructureShape.new(name: 'DisassociateCapacityReservationBillingOwnerResult')
     DisassociateClientVpnTargetNetworkRequest = Shapes::StructureShape.new(name: 'DisassociateClientVpnTargetNetworkRequest')
     DisassociateClientVpnTargetNetworkResult = Shapes::StructureShape.new(name: 'DisassociateClientVpnTargetNetworkResult')
     DisassociateEnclaveCertificateIamRoleRequest = Shapes::StructureShape.new(name: 'DisassociateEnclaveCertificateIamRoleRequest')
@@ -2517,6 +2532,8 @@ module Aws::EC2
     RegisterTransitGatewayMulticastGroupMembersResult = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupMembersResult')
     RegisterTransitGatewayMulticastGroupSourcesRequest = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupSourcesRequest')
     RegisterTransitGatewayMulticastGroupSourcesResult = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupSourcesResult')
+    RejectCapacityReservationBillingOwnershipRequest = Shapes::StructureShape.new(name: 'RejectCapacityReservationBillingOwnershipRequest')
+    RejectCapacityReservationBillingOwnershipResult = Shapes::StructureShape.new(name: 'RejectCapacityReservationBillingOwnershipResult')
     RejectTransitGatewayMulticastDomainAssociationsRequest = Shapes::StructureShape.new(name: 'RejectTransitGatewayMulticastDomainAssociationsRequest')
     RejectTransitGatewayMulticastDomainAssociationsResult = Shapes::StructureShape.new(name: 'RejectTransitGatewayMulticastDomainAssociationsResult')
     RejectTransitGatewayPeeringAttachmentRequest = Shapes::StructureShape.new(name: 'RejectTransitGatewayPeeringAttachmentRequest')
@@ -3257,6 +3274,13 @@ module Aws::EC2
     AcceptAddressTransferResult.add_member(:address_transfer, Shapes::ShapeRef.new(shape: AddressTransfer, location_name: "addressTransfer"))
     AcceptAddressTransferResult.struct_class = Types::AcceptAddressTransferResult
 
+    AcceptCapacityReservationBillingOwnershipRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AcceptCapacityReservationBillingOwnershipRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
+    AcceptCapacityReservationBillingOwnershipRequest.struct_class = Types::AcceptCapacityReservationBillingOwnershipRequest
+
+    AcceptCapacityReservationBillingOwnershipResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    AcceptCapacityReservationBillingOwnershipResult.struct_class = Types::AcceptCapacityReservationBillingOwnershipResult
+
     AcceptReservedInstancesExchangeQuoteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     AcceptReservedInstancesExchangeQuoteRequest.add_member(:reserved_instance_ids, Shapes::ShapeRef.new(shape: ReservedInstanceIdSet, required: true, location_name: "ReservedInstanceId"))
     AcceptReservedInstancesExchangeQuoteRequest.add_member(:target_configurations, Shapes::ShapeRef.new(shape: TargetConfigurationRequestSet, location_name: "TargetConfiguration"))
@@ -3629,6 +3653,14 @@ module Aws::EC2
 
     AssociateAddressResult.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
     AssociateAddressResult.struct_class = Types::AssociateAddressResult
+
+    AssociateCapacityReservationBillingOwnerRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateCapacityReservationBillingOwnerRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
+    AssociateCapacityReservationBillingOwnerRequest.add_member(:unused_reservation_billing_owner_id, Shapes::ShapeRef.new(shape: AccountID, required: true, location_name: "UnusedReservationBillingOwnerId"))
+    AssociateCapacityReservationBillingOwnerRequest.struct_class = Types::AssociateCapacityReservationBillingOwnerRequest
+
+    AssociateCapacityReservationBillingOwnerResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    AssociateCapacityReservationBillingOwnerResult.struct_class = Types::AssociateCapacityReservationBillingOwnerResult
 
     AssociateClientVpnTargetNetworkRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: ClientVpnEndpointId, required: true, location_name: "ClientVpnEndpointId"))
     AssociateClientVpnTargetNetworkRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
@@ -4155,7 +4187,19 @@ module Aws::EC2
     CapacityReservation.add_member(:placement_group_arn, Shapes::ShapeRef.new(shape: PlacementGroupArn, location_name: "placementGroupArn"))
     CapacityReservation.add_member(:capacity_allocations, Shapes::ShapeRef.new(shape: CapacityAllocations, location_name: "capacityAllocationSet"))
     CapacityReservation.add_member(:reservation_type, Shapes::ShapeRef.new(shape: CapacityReservationType, location_name: "reservationType"))
+    CapacityReservation.add_member(:unused_reservation_billing_owner_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "unusedReservationBillingOwnerId"))
     CapacityReservation.struct_class = Types::CapacityReservation
+
+    CapacityReservationBillingRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
+    CapacityReservationBillingRequest.add_member(:requested_by, Shapes::ShapeRef.new(shape: String, location_name: "requestedBy"))
+    CapacityReservationBillingRequest.add_member(:unused_reservation_billing_owner_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "unusedReservationBillingOwnerId"))
+    CapacityReservationBillingRequest.add_member(:last_update_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastUpdateTime"))
+    CapacityReservationBillingRequest.add_member(:status, Shapes::ShapeRef.new(shape: CapacityReservationBillingRequestStatus, location_name: "status"))
+    CapacityReservationBillingRequest.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    CapacityReservationBillingRequest.add_member(:capacity_reservation_info, Shapes::ShapeRef.new(shape: CapacityReservationInfo, location_name: "capacityReservationInfo"))
+    CapacityReservationBillingRequest.struct_class = Types::CapacityReservationBillingRequest
+
+    CapacityReservationBillingRequestSet.member = Shapes::ShapeRef.new(shape: CapacityReservationBillingRequest, location_name: "item")
 
     CapacityReservationFleet.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))
     CapacityReservationFleet.add_member(:capacity_reservation_fleet_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationFleetArn"))
@@ -4189,6 +4233,11 @@ module Aws::EC2
     CapacityReservationGroupSet.member = Shapes::ShapeRef.new(shape: CapacityReservationGroup, location_name: "item")
 
     CapacityReservationIdSet.member = Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "item")
+
+    CapacityReservationInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    CapacityReservationInfo.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "availabilityZone"))
+    CapacityReservationInfo.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityReservationTenancy, location_name: "tenancy"))
+    CapacityReservationInfo.struct_class = Types::CapacityReservationInfo
 
     CapacityReservationOptions.add_member(:usage_strategy, Shapes::ShapeRef.new(shape: FleetCapacityReservationUsageStrategy, location_name: "usageStrategy"))
     CapacityReservationOptions.struct_class = Types::CapacityReservationOptions
@@ -6364,6 +6413,18 @@ module Aws::EC2
     DescribeCapacityBlockOfferingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeCapacityBlockOfferingsResult.struct_class = Types::DescribeCapacityBlockOfferingsResult
 
+    DescribeCapacityReservationBillingRequestsRequest.add_member(:capacity_reservation_ids, Shapes::ShapeRef.new(shape: CapacityReservationIdSet, location_name: "CapacityReservationId"))
+    DescribeCapacityReservationBillingRequestsRequest.add_member(:role, Shapes::ShapeRef.new(shape: CallerRole, required: true, location_name: "Role"))
+    DescribeCapacityReservationBillingRequestsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeCapacityReservationBillingRequestsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityReservationBillingRequestsRequestMaxResults, location_name: "MaxResults"))
+    DescribeCapacityReservationBillingRequestsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeCapacityReservationBillingRequestsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeCapacityReservationBillingRequestsRequest.struct_class = Types::DescribeCapacityReservationBillingRequestsRequest
+
+    DescribeCapacityReservationBillingRequestsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeCapacityReservationBillingRequestsResult.add_member(:capacity_reservation_billing_requests, Shapes::ShapeRef.new(shape: CapacityReservationBillingRequestSet, location_name: "capacityReservationBillingRequestSet"))
+    DescribeCapacityReservationBillingRequestsResult.struct_class = Types::DescribeCapacityReservationBillingRequestsResult
+
     DescribeCapacityReservationFleetsRequest.add_member(:capacity_reservation_fleet_ids, Shapes::ShapeRef.new(shape: CapacityReservationFleetIdSet, location_name: "CapacityReservationFleetId"))
     DescribeCapacityReservationFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeCapacityReservationFleetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityReservationFleetsMaxResults, location_name: "MaxResults"))
@@ -8182,6 +8243,14 @@ module Aws::EC2
     DisassociateAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: EipAllocationPublicIp, location_name: "PublicIp"))
     DisassociateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateAddressRequest.struct_class = Types::DisassociateAddressRequest
+
+    DisassociateCapacityReservationBillingOwnerRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateCapacityReservationBillingOwnerRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
+    DisassociateCapacityReservationBillingOwnerRequest.add_member(:unused_reservation_billing_owner_id, Shapes::ShapeRef.new(shape: AccountID, required: true, location_name: "UnusedReservationBillingOwnerId"))
+    DisassociateCapacityReservationBillingOwnerRequest.struct_class = Types::DisassociateCapacityReservationBillingOwnerRequest
+
+    DisassociateCapacityReservationBillingOwnerResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DisassociateCapacityReservationBillingOwnerResult.struct_class = Types::DisassociateCapacityReservationBillingOwnerResult
 
     DisassociateClientVpnTargetNetworkRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: ClientVpnEndpointId, required: true, location_name: "ClientVpnEndpointId"))
     DisassociateClientVpnTargetNetworkRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AssociationId"))
@@ -13157,6 +13226,13 @@ module Aws::EC2
     RegisterTransitGatewayMulticastGroupSourcesResult.add_member(:registered_multicast_group_sources, Shapes::ShapeRef.new(shape: TransitGatewayMulticastRegisteredGroupSources, location_name: "registeredMulticastGroupSources"))
     RegisterTransitGatewayMulticastGroupSourcesResult.struct_class = Types::RegisterTransitGatewayMulticastGroupSourcesResult
 
+    RejectCapacityReservationBillingOwnershipRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    RejectCapacityReservationBillingOwnershipRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
+    RejectCapacityReservationBillingOwnershipRequest.struct_class = Types::RejectCapacityReservationBillingOwnershipRequest
+
+    RejectCapacityReservationBillingOwnershipResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    RejectCapacityReservationBillingOwnershipResult.struct_class = Types::RejectCapacityReservationBillingOwnershipResult
+
     RejectTransitGatewayMulticastDomainAssociationsRequest.add_member(:transit_gateway_multicast_domain_id, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainId, location_name: "TransitGatewayMulticastDomainId"))
     RejectTransitGatewayMulticastDomainAssociationsRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
     RejectTransitGatewayMulticastDomainAssociationsRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "SubnetIds"))
@@ -13408,7 +13484,7 @@ module Aws::EC2
     RequestSpotLaunchSpecification.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
     RequestSpotLaunchSpecification.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     RequestSpotLaunchSpecification.add_member(:kernel_id, Shapes::ShapeRef.new(shape: KernelId, location_name: "kernelId"))
-    RequestSpotLaunchSpecification.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairName, location_name: "keyName"))
+    RequestSpotLaunchSpecification.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairNameWithResolver, location_name: "keyName"))
     RequestSpotLaunchSpecification.add_member(:monitoring, Shapes::ShapeRef.new(shape: RunInstancesMonitoringEnabled, location_name: "monitoring"))
     RequestSpotLaunchSpecification.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecificationList, location_name: "NetworkInterface"))
     RequestSpotLaunchSpecification.add_member(:placement, Shapes::ShapeRef.new(shape: SpotPlacement, location_name: "placement"))
@@ -15892,6 +15968,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: AcceptAddressTransferResult)
       end)
 
+      api.add_operation(:accept_capacity_reservation_billing_ownership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptCapacityReservationBillingOwnership"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcceptCapacityReservationBillingOwnershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptCapacityReservationBillingOwnershipResult)
+      end)
+
       api.add_operation(:accept_reserved_instances_exchange_quote, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AcceptReservedInstancesExchangeQuote"
         o.http_method = "POST"
@@ -16010,6 +16094,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateAddressRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateAddressResult)
+      end)
+
+      api.add_operation(:associate_capacity_reservation_billing_owner, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateCapacityReservationBillingOwner"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateCapacityReservationBillingOwnerRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateCapacityReservationBillingOwnerResult)
       end)
 
       api.add_operation(:associate_client_vpn_target_network, Seahorse::Model::Operation.new.tap do |o|
@@ -17762,6 +17854,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeCapacityBlockOfferingsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCapacityBlockOfferingsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_capacity_reservation_billing_requests, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCapacityReservationBillingRequests"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCapacityReservationBillingRequestsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCapacityReservationBillingRequestsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -19743,6 +19849,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:disassociate_capacity_reservation_billing_owner, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateCapacityReservationBillingOwner"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateCapacityReservationBillingOwnerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateCapacityReservationBillingOwnerResult)
+      end)
+
       api.add_operation(:disassociate_client_vpn_target_network, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateClientVpnTargetNetwork"
         o.http_method = "POST"
@@ -21301,6 +21415,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RegisterTransitGatewayMulticastGroupSourcesRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterTransitGatewayMulticastGroupSourcesResult)
+      end)
+
+      api.add_operation(:reject_capacity_reservation_billing_ownership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectCapacityReservationBillingOwnership"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RejectCapacityReservationBillingOwnershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectCapacityReservationBillingOwnershipResult)
       end)
 
       api.add_operation(:reject_transit_gateway_multicast_domain_associations, Seahorse::Model::Operation.new.tap do |o|

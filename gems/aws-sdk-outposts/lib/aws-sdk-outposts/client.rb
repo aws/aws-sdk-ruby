@@ -532,7 +532,7 @@ module Aws::Outposts
     #
     #   resp.order.outpost_id #=> String
     #   resp.order.order_id #=> String
-    #   resp.order.status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.order.status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "DELIVERED", "COMPLETED", "ERROR"
     #   resp.order.line_items #=> Array
     #   resp.order.line_items[0].catalog_item_id #=> String
     #   resp.order.line_items[0].line_item_id #=> String
@@ -955,7 +955,7 @@ module Aws::Outposts
     #
     #   resp.order.outpost_id #=> String
     #   resp.order.order_id #=> String
-    #   resp.order.status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.order.status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "DELIVERED", "COMPLETED", "ERROR"
     #   resp.order.line_items #=> Array
     #   resp.order.line_items[0].catalog_item_id #=> String
     #   resp.order.line_items[0].line_item_id #=> String
@@ -1430,7 +1430,7 @@ module Aws::Outposts
     #   resp.orders[0].outpost_id #=> String
     #   resp.orders[0].order_id #=> String
     #   resp.orders[0].order_type #=> String, one of "OUTPOST", "REPLACEMENT"
-    #   resp.orders[0].status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.orders[0].status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "DELIVERED", "COMPLETED", "ERROR"
     #   resp.orders[0].line_item_counts_by_status #=> Hash
     #   resp.orders[0].line_item_counts_by_status["LineItemStatus"] #=> Integer
     #   resp.orders[0].order_submission_date #=> Time
@@ -2156,7 +2156,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

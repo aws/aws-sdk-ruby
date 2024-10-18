@@ -1036,6 +1036,118 @@ module Aws::SupplyChain
       req.send_request(options)
     end
 
+    # Create a new instance for AWS Supply Chain. This is an asynchronous
+    # operation. Upon receiving a CreateInstance request, AWS Supply Chain
+    # immediately returns the instance resource, with instance ID, and the
+    # initializing state while simultaneously creating all required Amazon
+    # Web Services resources for an instance creation. You can use
+    # GetInstance to check the status of the instance.
+    #
+    # @option params [String] :instance_name
+    #   The AWS Supply Chain instance name.
+    #
+    # @option params [String] :instance_description
+    #   The AWS Supply Chain instance description.
+    #
+    # @option params [String] :kms_key_arn
+    #   The ARN (Amazon Resource Name) of the Key Management Service (KMS) key
+    #   you provide for encryption. This is required if you do not want to use
+    #   the Amazon Web Services owned KMS key. If you don't provide anything
+    #   here, AWS Supply Chain uses the Amazon Web Services owned KMS key.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The Amazon Web Services tags of an instance to be created.
+    #
+    # @option params [String] :client_token
+    #   The client token for idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInstanceResponse#instance #instance} => Types::Instance
+    #
+    #
+    # @example Example: Successful CreateInstance request with all input data
+    #
+    #   resp = client.create_instance({
+    #     instance_description: "example instance description", 
+    #     instance_name: "example instance name", 
+    #     kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #     tags: {
+    #       "tagKey1" => "tagValue1", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance: {
+    #       aws_account_id: "123456789012", 
+    #       created_time: Time.parse(172615383136), 
+    #       instance_description: "example instance description", 
+    #       instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #       instance_name: "example instance name", 
+    #       kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #       last_modified_time: Time.parse(172615383136), 
+    #       state: "Initializing", 
+    #       version_number: 2.0, 
+    #     }, 
+    #   }
+    #
+    # @example Example: Successful CreateInstance request with no input data
+    #
+    #   resp = client.create_instance({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance: {
+    #       aws_account_id: "123456789012", 
+    #       created_time: Time.parse(172615383136), 
+    #       instance_description: "", 
+    #       instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #       kms_key_arn: "arn:aws:kms:us-west-2:456789012345:key/7372eb6d-874c-4212-8d49-7804282d33a8", 
+    #       last_modified_time: Time.parse(172615383136), 
+    #       state: "Initializing", 
+    #       version_number: 2.0, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_instance({
+    #     instance_name: "InstanceName",
+    #     instance_description: "InstanceDescription",
+    #     kms_key_arn: "KmsKeyArn",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance.instance_id #=> String
+    #   resp.instance.aws_account_id #=> String
+    #   resp.instance.state #=> String, one of "Initializing", "Active", "CreateFailed", "DeleteFailed", "Deleting", "Deleted"
+    #   resp.instance.web_app_dns_domain #=> String
+    #   resp.instance.created_time #=> Time
+    #   resp.instance.last_modified_time #=> Time
+    #   resp.instance.instance_name #=> String
+    #   resp.instance.instance_description #=> String
+    #   resp.instance.kms_key_arn #=> String
+    #   resp.instance.version_number #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/CreateInstance AWS API Documentation
+    #
+    # @overload create_instance(params = {})
+    # @param [Hash] params ({})
+    def create_instance(params = {}, options = {})
+      req = build_request(:create_instance, params)
+      req.send_request(options)
+    end
+
     # Delete the DataIntegrationFlow.
     #
     # @option params [required, String] :instance_id
@@ -1165,6 +1277,70 @@ module Aws::SupplyChain
     # @param [Hash] params ({})
     def delete_data_lake_dataset(params = {}, options = {})
       req = build_request(:delete_data_lake_dataset, params)
+      req.send_request(options)
+    end
+
+    # Delete the instance. This is an asynchronous operation. Upon receiving
+    # a DeleteInstance request, AWS Supply Chain immediately returns a
+    # response with the instance resource, delete state while cleaning up
+    # all Amazon Web Services resources created during the instance creation
+    # process. You can use the GetInstance action to check the instance
+    # status.
+    #
+    # @option params [required, String] :instance_id
+    #   The AWS Supply Chain instance identifier.
+    #
+    # @return [Types::DeleteInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInstanceResponse#instance #instance} => Types::Instance
+    #
+    #
+    # @example Example: Successful DeleteInstance request
+    #
+    #   resp = client.delete_instance({
+    #     instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance: {
+    #       aws_account_id: "123456789012", 
+    #       created_time: Time.parse(172615383136), 
+    #       instance_description: "updated example instance description", 
+    #       instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #       instance_name: "updated example instance name", 
+    #       kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #       last_modified_time: Time.parse(172615383136), 
+    #       state: "Deleting", 
+    #       version_number: 2.0, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_instance({
+    #     instance_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance.instance_id #=> String
+    #   resp.instance.aws_account_id #=> String
+    #   resp.instance.state #=> String, one of "Initializing", "Active", "CreateFailed", "DeleteFailed", "Deleting", "Deleted"
+    #   resp.instance.web_app_dns_domain #=> String
+    #   resp.instance.created_time #=> Time
+    #   resp.instance.last_modified_time #=> Time
+    #   resp.instance.instance_name #=> String
+    #   resp.instance.instance_description #=> String
+    #   resp.instance.kms_key_arn #=> String
+    #   resp.instance.version_number #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DeleteInstance AWS API Documentation
+    #
+    # @overload delete_instance(params = {})
+    # @param [Hash] params ({})
+    def delete_instance(params = {}, options = {})
+      req = build_request(:delete_instance, params)
       req.send_request(options)
     end
 
@@ -1616,6 +1792,65 @@ module Aws::SupplyChain
     # @param [Hash] params ({})
     def get_data_lake_dataset(params = {}, options = {})
       req = build_request(:get_data_lake_dataset, params)
+      req.send_request(options)
+    end
+
+    # Get the AWS Supply Chain instance details.
+    #
+    # @option params [required, String] :instance_id
+    #   The AWS Supply Chain instance identifier
+    #
+    # @return [Types::GetInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceResponse#instance #instance} => Types::Instance
+    #
+    #
+    # @example Example: Successful GetInstance request
+    #
+    #   resp = client.get_instance({
+    #     instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance: {
+    #       aws_account_id: "123456789012", 
+    #       created_time: Time.parse(172615383136), 
+    #       instance_description: "example instance description", 
+    #       instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #       instance_name: "example instance name", 
+    #       kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #       last_modified_time: Time.parse(172615383136), 
+    #       state: "Active", 
+    #       version_number: 2.0, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance({
+    #     instance_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance.instance_id #=> String
+    #   resp.instance.aws_account_id #=> String
+    #   resp.instance.state #=> String, one of "Initializing", "Active", "CreateFailed", "DeleteFailed", "Deleting", "Deleted"
+    #   resp.instance.web_app_dns_domain #=> String
+    #   resp.instance.created_time #=> Time
+    #   resp.instance.last_modified_time #=> Time
+    #   resp.instance.instance_name #=> String
+    #   resp.instance.instance_description #=> String
+    #   resp.instance.kms_key_arn #=> String
+    #   resp.instance.version_number #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetInstance AWS API Documentation
+    #
+    # @overload get_instance(params = {})
+    # @param [Hash] params ({})
+    def get_instance(params = {}, options = {})
+      req = build_request(:get_instance, params)
       req.send_request(options)
     end
 
@@ -2071,6 +2306,169 @@ module Aws::SupplyChain
     # @param [Hash] params ({})
     def list_data_lake_datasets(params = {}, options = {})
       req = build_request(:list_data_lake_datasets, params)
+      req.send_request(options)
+    end
+
+    # List all the AWS Supply Chain instances in a paginated way.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to fetch the next page of instances.
+    #
+    # @option params [Integer] :max_results
+    #   Specify the maximum number of instances to fetch in this paginated
+    #   request.
+    #
+    # @option params [Array<String>] :instance_name_filter
+    #   The filter to ListInstances based on their names.
+    #
+    # @option params [Array<String>] :instance_state_filter
+    #   The filter to ListInstances based on their state.
+    #
+    # @return [Types::ListInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInstancesResponse#instances #instances} => Array&lt;Types::Instance&gt;
+    #   * {Types::ListInstancesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Successful ListInstance request with no input data
+    #
+    #   resp = client.list_instances({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances: [
+    #       {
+    #         aws_account_id: "123456789012", 
+    #         created_time: Time.parse(172615383136), 
+    #         instance_description: "example instance description", 
+    #         instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #         instance_name: "example instance name", 
+    #         kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #         last_modified_time: Time.parse(172615383136), 
+    #         state: "Active", 
+    #         version_number: 2.0, 
+    #       }, 
+    #       {
+    #         aws_account_id: "123456789012", 
+    #         created_time: Time.parse(17261674383136), 
+    #         instance_description: "example instance description", 
+    #         instance_id: "3ad8116a-644d-4172-8dcb-20e51d314c14", 
+    #         kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #         last_modified_time: Time.parse(17261674383136), 
+    #         state: "Initializing", 
+    #         version_number: 2.0, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Successful ListInstance request with filters
+    #
+    #   resp = client.list_instances({
+    #     instance_name_filter: [
+    #       "example instance name", 
+    #     ], 
+    #     instance_state_filter: [
+    #       "Active", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances: [
+    #       {
+    #         aws_account_id: "123456789012", 
+    #         created_time: Time.parse(172615383136), 
+    #         instance_description: "example instance description", 
+    #         instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #         instance_name: "example instance name", 
+    #         kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #         last_modified_time: Time.parse(172615383136), 
+    #         state: "Active", 
+    #         version_number: 2.0, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Successful ListInstance request with maxResult override
+    #
+    #   resp = client.list_instances({
+    #     max_results: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances: [
+    #       {
+    #         aws_account_id: "123456789012", 
+    #         created_time: Time.parse(172615383136), 
+    #         instance_description: "example instance description", 
+    #         instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #         instance_name: "example instance name", 
+    #         kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #         last_modified_time: Time.parse(172615383136), 
+    #         state: "Active", 
+    #         version_number: 2.0, 
+    #       }, 
+    #     ], 
+    #     next_token: "AAQA-EFRSURBSGhtcng0c0dxbENwUHdnckVIbkFYNU1QVjRTZWN2ak5iMFVicC8zemlHOVF3SEpjSC9WTWJVVXBMV2Z1N3ZvZlQ0WEFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTTJibW9LemgrSWZTY0RaZEdBZ0VRZ0R2dDhsQnVGbGJ0dnFTZityWmNSWEVPbG93emJoSjhxOGNMbGQ1UGMvY0VRbWlTR3pQUFd4N2RraXY5Y0ovcS9vSmFYZVBGdWVHaU0zWmd0dz09n-rC1ejA5--7ltJxpDT2xP_i8xGqDPMOZfjpp8q6l5NuP9_bnBURvwwYhdqDriMK5_f96LuPEnPbuML-ItfgEiCcUy0p2tApvpZkZqOG5fbqP-4C5aDYPTffHLyq-MMqvfrGVJzL1nvkpZcnTkVR9VJsu5b8I0qqDW0H8EMKGgTo78U9lr4sj3Usi9VMwZxgKCBmr03HhFLYXOW--XMbIx0CTZF0fYIcRxmA_sVS6J7gpaB9yMcnzs5VUKokoA5JTcAPY5d1Y1VyE8KKxv51cfPgXw8OYCDbFQncw8mZPmE-VqxjFbksmk_FmghpPn9j2Ppoe-zr0LQ%3D", 
+    #   }
+    #
+    # @example Example: Successful ListInstance request with nextToken
+    #
+    #   resp = client.list_instances({
+    #     max_results: 1, 
+    #     next_token: "AAQA-EFRSURBSGhtcng0c0dxbENwUHdnckVIbkFYNU1QVjRTZWN2ak5iMFVicC8zemlHOVF3SEpjSC9WTWJVVXBMV2Z1N3ZvZlQ0WEFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTTJibW9LemgrSWZTY0RaZEdBZ0VRZ0R2dDhsQnVGbGJ0dnFTZityWmNSWEVPbG93emJoSjhxOGNMbGQ1UGMvY0VRbWlTR3pQUFd4N2RraXY5Y0ovcS9vSmFYZVBGdWVHaU0zWmd0dz09n-rC1ejA5--7ltJxpDT2xP_i8xGqDPMOZfjpp8q6l5NuP9_bnBURvwwYhdqDriMK5_f96LuPEnPbuML-ItfgEiCcUy0p2tApvpZkZqOG5fbqP-4C5aDYPTffHLyq-MMqvfrGVJzL1nvkpZcnTkVR9VJsu5b8I0qqDW0H8EMKGgTo78U9lr4sj3Usi9VMwZxgKCBmr03HhFLYXOW--XMbIx0CTZF0fYIcRxmA_sVS6J7gpaB9yMcnzs5VUKokoA5JTcAPY5d1Y1VyE8KKxv51cfPgXw8OYCDbFQncw8mZPmE-VqxjFbksmk_FmghpPn9j2Ppoe-zr0LQ%3D", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instances: [
+    #       {
+    #         aws_account_id: "123456789012", 
+    #         created_time: Time.parse(17261674383136), 
+    #         instance_description: "example instance description", 
+    #         instance_id: "3ad8116a-644d-4172-8dcb-20e51d314c14", 
+    #         kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #         last_modified_time: Time.parse(17261674383136), 
+    #         state: "Initializing", 
+    #         version_number: 2.0, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_instances({
+    #     next_token: "InstanceNextToken",
+    #     max_results: 1,
+    #     instance_name_filter: ["InstanceName"],
+    #     instance_state_filter: ["Initializing"], # accepts Initializing, Active, CreateFailed, DeleteFailed, Deleting, Deleted
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instances #=> Array
+    #   resp.instances[0].instance_id #=> String
+    #   resp.instances[0].aws_account_id #=> String
+    #   resp.instances[0].state #=> String, one of "Initializing", "Active", "CreateFailed", "DeleteFailed", "Deleting", "Deleted"
+    #   resp.instances[0].web_app_dns_domain #=> String
+    #   resp.instances[0].created_time #=> Time
+    #   resp.instances[0].last_modified_time #=> Time
+    #   resp.instances[0].instance_name #=> String
+    #   resp.instances[0].instance_description #=> String
+    #   resp.instances[0].kms_key_arn #=> String
+    #   resp.instances[0].version_number #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListInstances AWS API Documentation
+    #
+    # @overload list_instances(params = {})
+    # @param [Hash] params ({})
+    def list_instances(params = {}, options = {})
+      req = build_request(:list_instances, params)
       req.send_request(options)
     end
 
@@ -3024,6 +3422,75 @@ module Aws::SupplyChain
       req.send_request(options)
     end
 
+    # Update the instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The AWS Supply Chain instance identifier.
+    #
+    # @option params [String] :instance_name
+    #   The AWS Supply Chain instance name.
+    #
+    # @option params [String] :instance_description
+    #   The AWS Supply Chain instance description.
+    #
+    # @return [Types::UpdateInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInstanceResponse#instance #instance} => Types::Instance
+    #
+    #
+    # @example Example: Successful UpdateInstance request
+    #
+    #   resp = client.update_instance({
+    #     instance_description: "updated example instance description", 
+    #     instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #     instance_name: "updated example instance name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     instance: {
+    #       aws_account_id: "123456789012", 
+    #       created_time: Time.parse(172615383136), 
+    #       instance_description: "updated example instance description", 
+    #       instance_id: "9e193580-7cc5-45f7-9609-c43ba0ada793", 
+    #       instance_name: "updated example instance name", 
+    #       kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d", 
+    #       last_modified_time: Time.parse(172615383136), 
+    #       state: "Active", 
+    #       version_number: 2.0, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_instance({
+    #     instance_id: "UUID", # required
+    #     instance_name: "InstanceName",
+    #     instance_description: "InstanceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance.instance_id #=> String
+    #   resp.instance.aws_account_id #=> String
+    #   resp.instance.state #=> String, one of "Initializing", "Active", "CreateFailed", "DeleteFailed", "Deleting", "Deleted"
+    #   resp.instance.web_app_dns_domain #=> String
+    #   resp.instance.created_time #=> Time
+    #   resp.instance.last_modified_time #=> Time
+    #   resp.instance.instance_name #=> String
+    #   resp.instance.instance_description #=> String
+    #   resp.instance.kms_key_arn #=> String
+    #   resp.instance.version_number #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/UpdateInstance AWS API Documentation
+    #
+    # @overload update_instance(params = {})
+    # @param [Hash] params ({})
+    def update_instance(params = {}, options = {})
+      req = build_request(:update_instance, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3042,7 +3509,7 @@ module Aws::SupplyChain
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-supplychain'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

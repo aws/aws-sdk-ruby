@@ -515,6 +515,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Accepts a request to assign billing of the available capacity of a
+    # shared Capacity Reservation to your account. For more information, see
+    # [ Billing assignment for shared Amazon EC2 Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation for which to accept the request.
+    #
+    # @return [Types::AcceptCapacityReservationBillingOwnershipResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptCapacityReservationBillingOwnershipResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_capacity_reservation_billing_ownership({
+    #     dry_run: false,
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptCapacityReservationBillingOwnership AWS API Documentation
+    #
+    # @overload accept_capacity_reservation_billing_ownership(params = {})
+    # @param [Hash] params ({})
+    def accept_capacity_reservation_billing_ownership(params = {}, options = {})
+      req = build_request(:accept_capacity_reservation_billing_ownership, params)
+      req.send_request(options)
+    end
+
     # Accepts the Convertible Reserved Instance exchange quote described in
     # the GetReservedInstancesExchangeQuote call.
     #
@@ -1586,7 +1627,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -1759,6 +1800,53 @@ module Aws::EC2
     # @param [Hash] params ({})
     def associate_address(params = {}, options = {})
       req = build_request(:associate_address, params)
+      req.send_request(options)
+    end
+
+    # Initiates a request to assign billing of the unused capacity of a
+    # shared Capacity Reservation to a consumer account that is consolidated
+    # under the same Amazon Web Services organizations payer account. For
+    # more information, see [Billing assignment for shared Amazon EC2
+    # Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [required, String] :unused_reservation_billing_owner_id
+    #   The ID of the consumer account to which assign billing.
+    #
+    # @return [Types::AssociateCapacityReservationBillingOwnerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateCapacityReservationBillingOwnerResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_capacity_reservation_billing_owner({
+    #     dry_run: false,
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #     unused_reservation_billing_owner_id: "AccountID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateCapacityReservationBillingOwner AWS API Documentation
+    #
+    # @overload associate_capacity_reservation_billing_owner(params = {})
+    # @param [Hash] params ({})
+    def associate_capacity_reservation_billing_owner(params = {}, options = {})
+      req = build_request(:associate_capacity_reservation_billing_owner, params)
       req.send_request(options)
     end
 
@@ -2255,9 +2343,9 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips
-    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -5140,6 +5228,7 @@ module Aws::EC2
     #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.capacity_reservation.unused_reservation_billing_owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation AWS API Documentation
     #
@@ -5240,6 +5329,7 @@ module Aws::EC2
     #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.source_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.source_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.source_capacity_reservation.unused_reservation_billing_owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_id #=> String
     #   resp.destination_capacity_reservation.owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_arn #=> String
@@ -5268,6 +5358,7 @@ module Aws::EC2
     #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.destination_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.destination_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.destination_capacity_reservation.unused_reservation_billing_owner_id #=> String
     #   resp.instance_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationBySplitting AWS API Documentation
@@ -6066,7 +6157,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/work-with-default-vpc.html#create-default-subnet
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-subnet
     #
     # @option params [required, String] :availability_zone
     #   The Availability Zone in which to create the default subnet.
@@ -6833,7 +6924,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html
     #
     # @option params [Boolean] :dry_run
@@ -6929,7 +7020,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
@@ -9710,7 +9801,7 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
     #
     # @option params [String] :allocation_id
     #   \[Public NAT gateways only\] The allocation ID of an Elastic IP
@@ -9760,7 +9851,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #
     # @option params [Array<String>] :secondary_private_ip_addresses
     #   Secondary private IPv4 addresses. For more information about secondary
@@ -9769,7 +9860,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #
     # @option params [Integer] :secondary_private_ip_address_count
     #   \[Private NAT gateway only\] The number of secondary private IPv4
@@ -9779,7 +9870,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     #
     # @return [Types::CreateNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12410,14 +12501,13 @@ module Aws::EC2
     end
 
     # Creates a subnet CIDR reservation. For more information, see [Subnet
-    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Manage
-    # prefixes for your network interfaces][2] in the *Amazon EC2 User
-    # Guide*.
+    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Assign
+    # prefixes to network interfaces][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-prefixes.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
@@ -19061,10 +19151,7 @@ module Aws::EC2
     # delete all security groups associated with the VPC (except the default
     # one), delete all route tables associated with the VPC (except the
     # default one), and so on. When you delete the VPC, it deletes the
-    # default security group, network ACL, and route table for the VPC.
-    #
-    # If you created a flow log for the VPC that you are deleting, note that
-    # flow logs for deleted VPCs are eventually automatically removed.
+    # VPC's default security group, network ACL, and route table.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -20702,6 +20789,107 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes a request to assign the billing of the unused capacity of a
+    # Capacity Reservation. For more information, see [ Billing assignment
+    # for shared Amazon EC2 Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/transfer-billing.html
+    #
+    # @option params [Array<String>] :capacity_reservation_ids
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [required, String] :role
+    #   Specify one of the following:
+    #
+    #   * `odcr-owner` - If you are the Capacity Reservation owner, specify
+    #     this value to view requests that you have initiated. Not supported
+    #     with the `requested-by` filter.
+    #
+    #   * `unused-reservation-billing-owner` - If you are the consumer
+    #     account, specify this value to view requests that have been sent to
+    #     you. Not supported with the `unused-reservation-billing-owner`
+    #     filter.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `status` - The state of the request (`pending` \| `accepted` \|
+    #     `rejected` \| `cancelled` \| `revoked` \| `expired`).
+    #
+    #   * `requested-by` - The account ID of the Capacity Reservation owner
+    #     that initiated the request. Not supported if you specify
+    #     `requested-by` for **Role**.
+    #
+    #   * `unused-reservation-billing-owner` - The ID of the consumer account
+    #     to which the request was sent. Not supported if you specify
+    #     `unused-reservation-billing-owner` for **Role**.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeCapacityReservationBillingRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapacityReservationBillingRequestsResult#next_token #next_token} => String
+    #   * {Types::DescribeCapacityReservationBillingRequestsResult#capacity_reservation_billing_requests #capacity_reservation_billing_requests} => Array&lt;Types::CapacityReservationBillingRequest&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capacity_reservation_billing_requests({
+    #     capacity_reservation_ids: ["CapacityReservationId"],
+    #     role: "odcr-owner", # required, accepts odcr-owner, unused-reservation-billing-owner
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.capacity_reservation_billing_requests #=> Array
+    #   resp.capacity_reservation_billing_requests[0].capacity_reservation_id #=> String
+    #   resp.capacity_reservation_billing_requests[0].requested_by #=> String
+    #   resp.capacity_reservation_billing_requests[0].unused_reservation_billing_owner_id #=> String
+    #   resp.capacity_reservation_billing_requests[0].last_update_time #=> Time
+    #   resp.capacity_reservation_billing_requests[0].status #=> String, one of "pending", "accepted", "rejected", "cancelled", "revoked", "expired"
+    #   resp.capacity_reservation_billing_requests[0].status_message #=> String
+    #   resp.capacity_reservation_billing_requests[0].capacity_reservation_info.instance_type #=> String
+    #   resp.capacity_reservation_billing_requests[0].capacity_reservation_info.availability_zone #=> String
+    #   resp.capacity_reservation_billing_requests[0].capacity_reservation_info.tenancy #=> String, one of "default", "dedicated"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservationBillingRequests AWS API Documentation
+    #
+    # @overload describe_capacity_reservation_billing_requests(params = {})
+    # @param [Hash] params ({})
+    def describe_capacity_reservation_billing_requests(params = {}, options = {})
+      req = build_request(:describe_capacity_reservation_billing_requests, params)
+      req.send_request(options)
+    end
+
     # Describes one or more Capacity Reservation Fleets.
     #
     # @option params [Array<String>] :capacity_reservation_fleet_ids
@@ -20966,6 +21154,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.capacity_reservations[0].capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservations[0].reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.capacity_reservations[0].unused_reservation_billing_owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations AWS API Documentation
     #
@@ -22058,9 +22247,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4, G5, or G6 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     #
@@ -24003,11 +24190,11 @@ module Aws::EC2
     #   * `sriov-net-support` - A value of `simple` indicates that enhanced
     #     networking with the Intel 82599 VF interface is enabled.
     #
-    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
-    #     the resource. Use the tag key in the filter name and the tag value
-    #     as the filter value. For example, to find all resources that have a
-    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
-    #     for the filter name and `TeamA` for the filter value.
+    #   * `tag:<key>` - The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a tag
+    #     with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+    #     the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -25760,9 +25947,6 @@ module Aws::EC2
     #
     #   * `iam-instance-profile.id` - The instance profile associated with the
     #     instance. Specified as an ID.
-    #
-    #   * `iam-instance-profile.name` - The instance profile associated with
-    #     the instance. Specified as an name.
     #
     #   * `image-id` - The ID of the image used to launch the instance.
     #
@@ -39602,6 +39786,52 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Cancels a pending request to assign billing of the unused capacity of
+    # a Capacity Reservation to a consumer account, or revokes a request
+    # that has already been accepted. For more information, see [Billing
+    # assignment for shared Amazon EC2 Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #
+    # @option params [required, String] :unused_reservation_billing_owner_id
+    #   The ID of the consumer account to which the request was sent.
+    #
+    # @return [Types::DisassociateCapacityReservationBillingOwnerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateCapacityReservationBillingOwnerResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_capacity_reservation_billing_owner({
+    #     dry_run: false,
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #     unused_reservation_billing_owner_id: "AccountID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateCapacityReservationBillingOwner AWS API Documentation
+    #
+    # @overload disassociate_capacity_reservation_billing_owner(params = {})
+    # @param [Hash] params ({})
+    def disassociate_capacity_reservation_billing_owner(params = {}, options = {})
+      req = build_request(:disassociate_capacity_reservation_billing_owner, params)
+      req.send_request(options)
+    end
+
     # Disassociates a target network from the specified Client VPN endpoint.
     # When you disassociate the last target network from a Client VPN, the
     # following happens:
@@ -39948,7 +40178,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -47911,7 +48141,8 @@ module Aws::EC2
     # performance. The base cost of the instance remains unchanged.
     #
     # The number of active vCPUs equals the number of threads per CPU core
-    # multiplied by the number of cores.
+    # multiplied by the number of cores. The instance must be in a `Stopped`
+    # state before you make changes.
     #
     # <note markdown="1"> Some instance type options do not support this capability. For more
     # information, see [Supported CPU options][1] in the *Amazon EC2 User
@@ -49985,11 +50216,13 @@ module Aws::EC2
     #   in this subnet should return synthetic IPv6 addresses for IPv4-only
     #   destinations.
     #
-    #   You must first configure a NAT gateway in a public subnet (separate
+    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
     #   from the subnet containing the IPv6-only workloads). For example, the
     #   subnet containing the NAT gateway should have a `0.0.0.0/0` route
     #   pointing to the internet gateway. For more information, see [Configure
     #   DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
+    #
+    #    </note>
     #
     #
     #
@@ -52727,6 +52960,7 @@ module Aws::EC2
     #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.source_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.source_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.source_capacity_reservation.unused_reservation_billing_owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_id #=> String
     #   resp.destination_capacity_reservation.owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_arn #=> String
@@ -52755,6 +52989,7 @@ module Aws::EC2
     #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.destination_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.destination_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.destination_capacity_reservation.unused_reservation_billing_owner_id #=> String
     #   resp.instance_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveCapacityReservationInstances AWS API Documentation
@@ -53196,6 +53431,7 @@ module Aws::EC2
     #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
     #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.capacity_reservation.unused_reservation_billing_owner_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlock AWS API Documentation
     #
@@ -53975,6 +54211,47 @@ module Aws::EC2
     # @param [Hash] params ({})
     def register_transit_gateway_multicast_group_sources(params = {}, options = {})
       req = build_request(:register_transit_gateway_multicast_group_sources, params)
+      req.send_request(options)
+    end
+
+    # Rejects a request to assign billing of the available capacity of a
+    # shared Capacity Reservation to your account. For more information, see
+    # [ Billing assignment for shared Amazon EC2 Capacity Reservations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :capacity_reservation_id
+    #   The ID of the Capacity Reservation for which to reject the request.
+    #
+    # @return [Types::RejectCapacityReservationBillingOwnershipResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectCapacityReservationBillingOwnershipResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_capacity_reservation_billing_ownership({
+    #     dry_run: false,
+    #     capacity_reservation_id: "CapacityReservationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectCapacityReservationBillingOwnership AWS API Documentation
+    #
+    # @overload reject_capacity_reservation_billing_ownership(params = {})
+    # @param [Hash] params ({})
+    def reject_capacity_reservation_billing_ownership(params = {}, options = {})
+      req = build_request(:reject_capacity_reservation_billing_ownership, params)
       req.send_request(options)
     end
 
@@ -55704,7 +55981,7 @@ module Aws::EC2
     #       image_id: "ImageId",
     #       instance_type: "a1.medium", # accepts a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5a.large, c5a.xlarge, c5a.2xlarge, c5a.4xlarge, c5a.8xlarge, c5a.12xlarge, c5a.16xlarge, c5a.24xlarge, c5ad.large, c5ad.xlarge, c5ad.2xlarge, c5ad.4xlarge, c5ad.8xlarge, c5ad.12xlarge, c5ad.16xlarge, c5ad.24xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, c5n.metal, c6g.medium, c6g.large, c6g.xlarge, c6g.2xlarge, c6g.4xlarge, c6g.8xlarge, c6g.12xlarge, c6g.16xlarge, c6g.metal, c6gd.medium, c6gd.large, c6gd.xlarge, c6gd.2xlarge, c6gd.4xlarge, c6gd.8xlarge, c6gd.12xlarge, c6gd.16xlarge, c6gd.metal, c6gn.medium, c6gn.large, c6gn.xlarge, c6gn.2xlarge, c6gn.4xlarge, c6gn.8xlarge, c6gn.12xlarge, c6gn.16xlarge, c6i.large, c6i.xlarge, c6i.2xlarge, c6i.4xlarge, c6i.8xlarge, c6i.12xlarge, c6i.16xlarge, c6i.24xlarge, c6i.32xlarge, c6i.metal, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge, cr1.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, d3.xlarge, d3.2xlarge, d3.4xlarge, d3.8xlarge, d3en.xlarge, d3en.2xlarge, d3en.4xlarge, d3en.6xlarge, d3en.8xlarge, d3en.12xlarge, dl1.24xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4ad.xlarge, g4ad.2xlarge, g4ad.4xlarge, g4ad.8xlarge, g4ad.16xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, g4dn.metal, g5.xlarge, g5.2xlarge, g5.4xlarge, g5.8xlarge, g5.12xlarge, g5.16xlarge, g5.24xlarge, g5.48xlarge, g5g.xlarge, g5g.2xlarge, g5g.4xlarge, g5g.8xlarge, g5g.16xlarge, g5g.metal, hi1.4xlarge, hpc6a.48xlarge, hs1.8xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, im4gn.large, im4gn.xlarge, im4gn.2xlarge, im4gn.4xlarge, im4gn.8xlarge, im4gn.16xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge, is4gen.medium, is4gen.large, is4gen.xlarge, is4gen.2xlarge, is4gen.4xlarge, is4gen.8xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5dn.metal, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, m5n.metal, m5zn.large, m5zn.xlarge, m5zn.2xlarge, m5zn.3xlarge, m5zn.6xlarge, m5zn.12xlarge, m5zn.metal, m6a.large, m6a.xlarge, m6a.2xlarge, m6a.4xlarge, m6a.8xlarge, m6a.12xlarge, m6a.16xlarge, m6a.24xlarge, m6a.32xlarge, m6a.48xlarge, m6g.metal, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge, m6gd.metal, m6gd.medium, m6gd.large, m6gd.xlarge, m6gd.2xlarge, m6gd.4xlarge, m6gd.8xlarge, m6gd.12xlarge, m6gd.16xlarge, m6i.large, m6i.xlarge, m6i.2xlarge, m6i.4xlarge, m6i.8xlarge, m6i.12xlarge, m6i.16xlarge, m6i.24xlarge, m6i.32xlarge, m6i.metal, mac1.metal, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, p4d.24xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, r5b.large, r5b.xlarge, r5b.2xlarge, r5b.4xlarge, r5b.8xlarge, r5b.12xlarge, r5b.16xlarge, r5b.24xlarge, r5b.metal, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5dn.metal, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, r5n.metal, r6g.medium, r6g.large, r6g.xlarge, r6g.2xlarge, r6g.4xlarge, r6g.8xlarge, r6g.12xlarge, r6g.16xlarge, r6g.metal, r6gd.medium, r6gd.large, r6gd.xlarge, r6gd.2xlarge, r6gd.4xlarge, r6gd.8xlarge, r6gd.12xlarge, r6gd.16xlarge, r6gd.metal, r6i.large, r6i.xlarge, r6i.2xlarge, r6i.4xlarge, r6i.8xlarge, r6i.12xlarge, r6i.16xlarge, r6i.24xlarge, r6i.32xlarge, r6i.metal, t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, t4g.nano, t4g.micro, t4g.small, t4g.medium, t4g.large, t4g.xlarge, t4g.2xlarge, u-6tb1.56xlarge, u-6tb1.112xlarge, u-9tb1.112xlarge, u-12tb1.112xlarge, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, vt1.3xlarge, vt1.6xlarge, vt1.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, x2iezn.2xlarge, x2iezn.4xlarge, x2iezn.6xlarge, x2iezn.8xlarge, x2iezn.12xlarge, x2iezn.metal, x2gd.medium, x2gd.large, x2gd.xlarge, x2gd.2xlarge, x2gd.4xlarge, x2gd.8xlarge, x2gd.12xlarge, x2gd.16xlarge, x2gd.metal, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, x2idn.16xlarge, x2idn.24xlarge, x2idn.32xlarge, x2iedn.xlarge, x2iedn.2xlarge, x2iedn.4xlarge, x2iedn.8xlarge, x2iedn.16xlarge, x2iedn.24xlarge, x2iedn.32xlarge, c6a.large, c6a.xlarge, c6a.2xlarge, c6a.4xlarge, c6a.8xlarge, c6a.12xlarge, c6a.16xlarge, c6a.24xlarge, c6a.32xlarge, c6a.48xlarge, c6a.metal, m6a.metal, i4i.large, i4i.xlarge, i4i.2xlarge, i4i.4xlarge, i4i.8xlarge, i4i.16xlarge, i4i.32xlarge, i4i.metal, x2idn.metal, x2iedn.metal, c7g.medium, c7g.large, c7g.xlarge, c7g.2xlarge, c7g.4xlarge, c7g.8xlarge, c7g.12xlarge, c7g.16xlarge, mac2.metal, c6id.large, c6id.xlarge, c6id.2xlarge, c6id.4xlarge, c6id.8xlarge, c6id.12xlarge, c6id.16xlarge, c6id.24xlarge, c6id.32xlarge, c6id.metal, m6id.large, m6id.xlarge, m6id.2xlarge, m6id.4xlarge, m6id.8xlarge, m6id.12xlarge, m6id.16xlarge, m6id.24xlarge, m6id.32xlarge, m6id.metal, r6id.large, r6id.xlarge, r6id.2xlarge, r6id.4xlarge, r6id.8xlarge, r6id.12xlarge, r6id.16xlarge, r6id.24xlarge, r6id.32xlarge, r6id.metal, r6a.large, r6a.xlarge, r6a.2xlarge, r6a.4xlarge, r6a.8xlarge, r6a.12xlarge, r6a.16xlarge, r6a.24xlarge, r6a.32xlarge, r6a.48xlarge, r6a.metal, p4de.24xlarge, u-3tb1.56xlarge, u-18tb1.112xlarge, u-24tb1.112xlarge, trn1.2xlarge, trn1.32xlarge, hpc6id.32xlarge, c6in.large, c6in.xlarge, c6in.2xlarge, c6in.4xlarge, c6in.8xlarge, c6in.12xlarge, c6in.16xlarge, c6in.24xlarge, c6in.32xlarge, m6in.large, m6in.xlarge, m6in.2xlarge, m6in.4xlarge, m6in.8xlarge, m6in.12xlarge, m6in.16xlarge, m6in.24xlarge, m6in.32xlarge, m6idn.large, m6idn.xlarge, m6idn.2xlarge, m6idn.4xlarge, m6idn.8xlarge, m6idn.12xlarge, m6idn.16xlarge, m6idn.24xlarge, m6idn.32xlarge, r6in.large, r6in.xlarge, r6in.2xlarge, r6in.4xlarge, r6in.8xlarge, r6in.12xlarge, r6in.16xlarge, r6in.24xlarge, r6in.32xlarge, r6idn.large, r6idn.xlarge, r6idn.2xlarge, r6idn.4xlarge, r6idn.8xlarge, r6idn.12xlarge, r6idn.16xlarge, r6idn.24xlarge, r6idn.32xlarge, c7g.metal, m7g.medium, m7g.large, m7g.xlarge, m7g.2xlarge, m7g.4xlarge, m7g.8xlarge, m7g.12xlarge, m7g.16xlarge, m7g.metal, r7g.medium, r7g.large, r7g.xlarge, r7g.2xlarge, r7g.4xlarge, r7g.8xlarge, r7g.12xlarge, r7g.16xlarge, r7g.metal, c6in.metal, m6in.metal, m6idn.metal, r6in.metal, r6idn.metal, inf2.xlarge, inf2.8xlarge, inf2.24xlarge, inf2.48xlarge, trn1n.32xlarge, i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge, i4g.16xlarge, hpc7g.4xlarge, hpc7g.8xlarge, hpc7g.16xlarge, c7gn.medium, c7gn.large, c7gn.xlarge, c7gn.2xlarge, c7gn.4xlarge, c7gn.8xlarge, c7gn.12xlarge, c7gn.16xlarge, p5.48xlarge, m7i.large, m7i.xlarge, m7i.2xlarge, m7i.4xlarge, m7i.8xlarge, m7i.12xlarge, m7i.16xlarge, m7i.24xlarge, m7i.48xlarge, m7i-flex.large, m7i-flex.xlarge, m7i-flex.2xlarge, m7i-flex.4xlarge, m7i-flex.8xlarge, m7a.medium, m7a.large, m7a.xlarge, m7a.2xlarge, m7a.4xlarge, m7a.8xlarge, m7a.12xlarge, m7a.16xlarge, m7a.24xlarge, m7a.32xlarge, m7a.48xlarge, m7a.metal-48xl, hpc7a.12xlarge, hpc7a.24xlarge, hpc7a.48xlarge, hpc7a.96xlarge, c7gd.medium, c7gd.large, c7gd.xlarge, c7gd.2xlarge, c7gd.4xlarge, c7gd.8xlarge, c7gd.12xlarge, c7gd.16xlarge, m7gd.medium, m7gd.large, m7gd.xlarge, m7gd.2xlarge, m7gd.4xlarge, m7gd.8xlarge, m7gd.12xlarge, m7gd.16xlarge, r7gd.medium, r7gd.large, r7gd.xlarge, r7gd.2xlarge, r7gd.4xlarge, r7gd.8xlarge, r7gd.12xlarge, r7gd.16xlarge, r7a.medium, r7a.large, r7a.xlarge, r7a.2xlarge, r7a.4xlarge, r7a.8xlarge, r7a.12xlarge, r7a.16xlarge, r7a.24xlarge, r7a.32xlarge, r7a.48xlarge, c7i.large, c7i.xlarge, c7i.2xlarge, c7i.4xlarge, c7i.8xlarge, c7i.12xlarge, c7i.16xlarge, c7i.24xlarge, c7i.48xlarge, mac2-m2pro.metal, r7iz.large, r7iz.xlarge, r7iz.2xlarge, r7iz.4xlarge, r7iz.8xlarge, r7iz.12xlarge, r7iz.16xlarge, r7iz.32xlarge, c7a.medium, c7a.large, c7a.xlarge, c7a.2xlarge, c7a.4xlarge, c7a.8xlarge, c7a.12xlarge, c7a.16xlarge, c7a.24xlarge, c7a.32xlarge, c7a.48xlarge, c7a.metal-48xl, r7a.metal-48xl, r7i.large, r7i.xlarge, r7i.2xlarge, r7i.4xlarge, r7i.8xlarge, r7i.12xlarge, r7i.16xlarge, r7i.24xlarge, r7i.48xlarge, dl2q.24xlarge, mac2-m2.metal, i4i.12xlarge, i4i.24xlarge, c7i.metal-24xl, c7i.metal-48xl, m7i.metal-24xl, m7i.metal-48xl, r7i.metal-24xl, r7i.metal-48xl, r7iz.metal-16xl, r7iz.metal-32xl, c7gd.metal, m7gd.metal, r7gd.metal, g6.xlarge, g6.2xlarge, g6.4xlarge, g6.8xlarge, g6.12xlarge, g6.16xlarge, g6.24xlarge, g6.48xlarge, gr6.4xlarge, gr6.8xlarge, c7i-flex.large, c7i-flex.xlarge, c7i-flex.2xlarge, c7i-flex.4xlarge, c7i-flex.8xlarge, u7i-12tb.224xlarge, u7in-16tb.224xlarge, u7in-24tb.224xlarge, u7in-32tb.224xlarge, u7ib-12tb.224xlarge, c7gn.metal, r8g.medium, r8g.large, r8g.xlarge, r8g.2xlarge, r8g.4xlarge, r8g.8xlarge, r8g.12xlarge, r8g.16xlarge, r8g.24xlarge, r8g.48xlarge, r8g.metal-24xl, r8g.metal-48xl, mac2-m1ultra.metal, g6e.xlarge, g6e.2xlarge, g6e.4xlarge, g6e.8xlarge, g6e.12xlarge, g6e.16xlarge, g6e.24xlarge, g6e.48xlarge
     #       kernel_id: "KernelId",
-    #       key_name: "KeyPairName",
+    #       key_name: "KeyPairNameWithResolver",
     #       monitoring: {
     #         enabled: false, # required
     #       },
@@ -57082,14 +57359,9 @@ module Aws::EC2
     # @option params [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
     #
-    #   <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to new customers.
-    #   For more information, see [Amazon Elastic Inference FAQs][1].
+    #   <note markdown="1"> Amazon Elastic Inference is no longer available.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/machine-learning/elastic-inference/faqs/
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources that are created during instance
@@ -59745,7 +60017,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -60196,7 +60468,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.480.0'
+      context[:gem_version] = '1.482.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

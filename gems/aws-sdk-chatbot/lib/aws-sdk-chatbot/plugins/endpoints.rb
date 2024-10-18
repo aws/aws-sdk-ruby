@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Chatbot::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,63 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_chime_webhook_configuration
-            Aws::Chatbot::Endpoints::CreateChimeWebhookConfiguration.build(context)
-          when :create_microsoft_teams_channel_configuration
-            Aws::Chatbot::Endpoints::CreateMicrosoftTeamsChannelConfiguration.build(context)
-          when :create_slack_channel_configuration
-            Aws::Chatbot::Endpoints::CreateSlackChannelConfiguration.build(context)
-          when :delete_chime_webhook_configuration
-            Aws::Chatbot::Endpoints::DeleteChimeWebhookConfiguration.build(context)
-          when :delete_microsoft_teams_channel_configuration
-            Aws::Chatbot::Endpoints::DeleteMicrosoftTeamsChannelConfiguration.build(context)
-          when :delete_microsoft_teams_configured_team
-            Aws::Chatbot::Endpoints::DeleteMicrosoftTeamsConfiguredTeam.build(context)
-          when :delete_microsoft_teams_user_identity
-            Aws::Chatbot::Endpoints::DeleteMicrosoftTeamsUserIdentity.build(context)
-          when :delete_slack_channel_configuration
-            Aws::Chatbot::Endpoints::DeleteSlackChannelConfiguration.build(context)
-          when :delete_slack_user_identity
-            Aws::Chatbot::Endpoints::DeleteSlackUserIdentity.build(context)
-          when :delete_slack_workspace_authorization
-            Aws::Chatbot::Endpoints::DeleteSlackWorkspaceAuthorization.build(context)
-          when :describe_chime_webhook_configurations
-            Aws::Chatbot::Endpoints::DescribeChimeWebhookConfigurations.build(context)
-          when :describe_slack_channel_configurations
-            Aws::Chatbot::Endpoints::DescribeSlackChannelConfigurations.build(context)
-          when :describe_slack_user_identities
-            Aws::Chatbot::Endpoints::DescribeSlackUserIdentities.build(context)
-          when :describe_slack_workspaces
-            Aws::Chatbot::Endpoints::DescribeSlackWorkspaces.build(context)
-          when :get_account_preferences
-            Aws::Chatbot::Endpoints::GetAccountPreferences.build(context)
-          when :get_microsoft_teams_channel_configuration
-            Aws::Chatbot::Endpoints::GetMicrosoftTeamsChannelConfiguration.build(context)
-          when :list_microsoft_teams_channel_configurations
-            Aws::Chatbot::Endpoints::ListMicrosoftTeamsChannelConfigurations.build(context)
-          when :list_microsoft_teams_configured_teams
-            Aws::Chatbot::Endpoints::ListMicrosoftTeamsConfiguredTeams.build(context)
-          when :list_microsoft_teams_user_identities
-            Aws::Chatbot::Endpoints::ListMicrosoftTeamsUserIdentities.build(context)
-          when :list_tags_for_resource
-            Aws::Chatbot::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::Chatbot::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Chatbot::Endpoints::UntagResource.build(context)
-          when :update_account_preferences
-            Aws::Chatbot::Endpoints::UpdateAccountPreferences.build(context)
-          when :update_chime_webhook_configuration
-            Aws::Chatbot::Endpoints::UpdateChimeWebhookConfiguration.build(context)
-          when :update_microsoft_teams_channel_configuration
-            Aws::Chatbot::Endpoints::UpdateMicrosoftTeamsChannelConfiguration.build(context)
-          when :update_slack_channel_configuration
-            Aws::Chatbot::Endpoints::UpdateSlackChannelConfiguration.build(context)
           end
         end
       end

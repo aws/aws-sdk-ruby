@@ -1542,6 +1542,7 @@ module Aws::GuardDuty
       attr_accessor local_port_details: Types::LocalPortDetails
       attr_accessor protocol: ::String
       attr_accessor local_ip_details: Types::LocalIpDetails
+      attr_accessor local_network_interface: ::String
       attr_accessor remote_ip_details: Types::RemoteIpDetails
       attr_accessor remote_port_details: Types::RemotePortDetails
       SENSITIVE: []

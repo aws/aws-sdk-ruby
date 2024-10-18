@@ -54,7 +54,7 @@ module Aws::ApplicationDiscoveryService
   autoload :EndpointProvider, 'aws-sdk-applicationdiscoveryservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationdiscoveryservice/endpoints'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end
 

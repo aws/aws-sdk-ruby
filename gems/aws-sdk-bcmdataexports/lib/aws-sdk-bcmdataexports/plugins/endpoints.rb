@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::BCMDataExports::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,35 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_export
-            Aws::BCMDataExports::Endpoints::CreateExport.build(context)
-          when :delete_export
-            Aws::BCMDataExports::Endpoints::DeleteExport.build(context)
-          when :get_execution
-            Aws::BCMDataExports::Endpoints::GetExecution.build(context)
-          when :get_export
-            Aws::BCMDataExports::Endpoints::GetExport.build(context)
-          when :get_table
-            Aws::BCMDataExports::Endpoints::GetTable.build(context)
-          when :list_executions
-            Aws::BCMDataExports::Endpoints::ListExecutions.build(context)
-          when :list_exports
-            Aws::BCMDataExports::Endpoints::ListExports.build(context)
-          when :list_tables
-            Aws::BCMDataExports::Endpoints::ListTables.build(context)
-          when :list_tags_for_resource
-            Aws::BCMDataExports::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::BCMDataExports::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::BCMDataExports::Endpoints::UntagResource.build(context)
-          when :update_export
-            Aws::BCMDataExports::Endpoints::UpdateExport.build(context)
           end
         end
       end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2024-10-14)
+------------------
+
+* Feature - Mail Manager support for viewing and exporting metadata of archived messages.
+
 1.12.0 (2024-09-24)
 ------------------
 

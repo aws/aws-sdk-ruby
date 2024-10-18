@@ -232,7 +232,7 @@ module Aws
         def registration_arn: () -> ::String
         def registration_id: () -> ::String
         def registration_type: () -> ::String
-        def registration_status: () -> ("CREATED" | "SUBMITTED" | "REVIEWING" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+        def registration_status: () -> ("CREATED" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
         def current_version_number: () -> ::Integer
         def additional_attributes: () -> ::Hash[::String, ::String]
         def tags: () -> ::Array[Types::Tag]
@@ -296,7 +296,7 @@ module Aws
         def registration_arn: () -> ::String
         def registration_id: () -> ::String
         def version_number: () -> ::Integer
-        def registration_version_status: () -> ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+        def registration_version_status: () -> ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
         def registration_version_status_history: () -> Types::RegistrationVersionStatusHistory
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#create_registration_version-instance_method
@@ -479,7 +479,7 @@ module Aws
         def registration_arn: () -> ::String
         def registration_id: () -> ::String
         def registration_type: () -> ::String
-        def registration_status: () -> ("CREATED" | "SUBMITTED" | "REVIEWING" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+        def registration_status: () -> ("CREATED" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
         def current_version_number: () -> ::Integer
         def approved_version_number: () -> ::Integer
         def latest_denied_version_number: () -> ::Integer
@@ -948,7 +948,7 @@ module Aws
         def registration_arn: () -> ::String
         def registration_id: () -> ::String
         def version_number: () -> ::Integer
-        def registration_version_status: () -> ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+        def registration_version_status: () -> ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
         def registration_version_status_history: () -> Types::RegistrationVersionStatusHistory
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#discard_registration_version-instance_method
@@ -1361,7 +1361,7 @@ module Aws
         def registration_arn: () -> ::String
         def registration_id: () -> ::String
         def version_number: () -> ::Integer
-        def registration_version_status: () -> ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+        def registration_version_status: () -> ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
         def registration_version_status_history: () -> Types::RegistrationVersionStatusHistory
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#submit_registration_version-instance_method

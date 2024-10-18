@@ -54,7 +54,7 @@ module Aws::KafkaConnect
   autoload :EndpointProvider, 'aws-sdk-kafkaconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kafkaconnect/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end
 

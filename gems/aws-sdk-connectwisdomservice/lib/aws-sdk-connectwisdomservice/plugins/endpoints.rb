@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ConnectWisdomService::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,93 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_assistant
-            Aws::ConnectWisdomService::Endpoints::CreateAssistant.build(context)
-          when :create_assistant_association
-            Aws::ConnectWisdomService::Endpoints::CreateAssistantAssociation.build(context)
-          when :create_content
-            Aws::ConnectWisdomService::Endpoints::CreateContent.build(context)
-          when :create_knowledge_base
-            Aws::ConnectWisdomService::Endpoints::CreateKnowledgeBase.build(context)
-          when :create_quick_response
-            Aws::ConnectWisdomService::Endpoints::CreateQuickResponse.build(context)
-          when :create_session
-            Aws::ConnectWisdomService::Endpoints::CreateSession.build(context)
-          when :delete_assistant
-            Aws::ConnectWisdomService::Endpoints::DeleteAssistant.build(context)
-          when :delete_assistant_association
-            Aws::ConnectWisdomService::Endpoints::DeleteAssistantAssociation.build(context)
-          when :delete_content
-            Aws::ConnectWisdomService::Endpoints::DeleteContent.build(context)
-          when :delete_import_job
-            Aws::ConnectWisdomService::Endpoints::DeleteImportJob.build(context)
-          when :delete_knowledge_base
-            Aws::ConnectWisdomService::Endpoints::DeleteKnowledgeBase.build(context)
-          when :delete_quick_response
-            Aws::ConnectWisdomService::Endpoints::DeleteQuickResponse.build(context)
-          when :get_assistant
-            Aws::ConnectWisdomService::Endpoints::GetAssistant.build(context)
-          when :get_assistant_association
-            Aws::ConnectWisdomService::Endpoints::GetAssistantAssociation.build(context)
-          when :get_content
-            Aws::ConnectWisdomService::Endpoints::GetContent.build(context)
-          when :get_content_summary
-            Aws::ConnectWisdomService::Endpoints::GetContentSummary.build(context)
-          when :get_import_job
-            Aws::ConnectWisdomService::Endpoints::GetImportJob.build(context)
-          when :get_knowledge_base
-            Aws::ConnectWisdomService::Endpoints::GetKnowledgeBase.build(context)
-          when :get_quick_response
-            Aws::ConnectWisdomService::Endpoints::GetQuickResponse.build(context)
-          when :get_recommendations
-            Aws::ConnectWisdomService::Endpoints::GetRecommendations.build(context)
-          when :get_session
-            Aws::ConnectWisdomService::Endpoints::GetSession.build(context)
-          when :list_assistant_associations
-            Aws::ConnectWisdomService::Endpoints::ListAssistantAssociations.build(context)
-          when :list_assistants
-            Aws::ConnectWisdomService::Endpoints::ListAssistants.build(context)
-          when :list_contents
-            Aws::ConnectWisdomService::Endpoints::ListContents.build(context)
-          when :list_import_jobs
-            Aws::ConnectWisdomService::Endpoints::ListImportJobs.build(context)
-          when :list_knowledge_bases
-            Aws::ConnectWisdomService::Endpoints::ListKnowledgeBases.build(context)
-          when :list_quick_responses
-            Aws::ConnectWisdomService::Endpoints::ListQuickResponses.build(context)
-          when :list_tags_for_resource
-            Aws::ConnectWisdomService::Endpoints::ListTagsForResource.build(context)
-          when :notify_recommendations_received
-            Aws::ConnectWisdomService::Endpoints::NotifyRecommendationsReceived.build(context)
-          when :query_assistant
-            Aws::ConnectWisdomService::Endpoints::QueryAssistant.build(context)
-          when :remove_knowledge_base_template_uri
-            Aws::ConnectWisdomService::Endpoints::RemoveKnowledgeBaseTemplateUri.build(context)
-          when :search_content
-            Aws::ConnectWisdomService::Endpoints::SearchContent.build(context)
-          when :search_quick_responses
-            Aws::ConnectWisdomService::Endpoints::SearchQuickResponses.build(context)
-          when :search_sessions
-            Aws::ConnectWisdomService::Endpoints::SearchSessions.build(context)
-          when :start_content_upload
-            Aws::ConnectWisdomService::Endpoints::StartContentUpload.build(context)
-          when :start_import_job
-            Aws::ConnectWisdomService::Endpoints::StartImportJob.build(context)
-          when :tag_resource
-            Aws::ConnectWisdomService::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::ConnectWisdomService::Endpoints::UntagResource.build(context)
-          when :update_content
-            Aws::ConnectWisdomService::Endpoints::UpdateContent.build(context)
-          when :update_knowledge_base_template_uri
-            Aws::ConnectWisdomService::Endpoints::UpdateKnowledgeBaseTemplateUri.build(context)
-          when :update_quick_response
-            Aws::ConnectWisdomService::Endpoints::UpdateQuickResponse.build(context)
           end
         end
       end

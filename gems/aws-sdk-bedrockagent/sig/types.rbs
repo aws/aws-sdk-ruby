@@ -1485,7 +1485,6 @@ module Aws::BedrockAgent
       attr_accessor max_tokens: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
       attr_accessor temperature: ::Float
-      attr_accessor top_k: ::Integer
       attr_accessor top_p: ::Float
       SENSITIVE: []
     end

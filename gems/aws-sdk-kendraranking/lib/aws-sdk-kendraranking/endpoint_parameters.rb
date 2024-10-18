@@ -45,10 +45,15 @@ module Aws::KendraRanking
       self[:region] = options[:region]
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
-      if self[:use_fips].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_fips"
-      end
       self[:endpoint] = options[:endpoint]
+    end
+
+    def self.create(config, options={})
+      new({
+        region: config.region,
+        use_fips: config.use_fips_endpoint,
+        endpoint: (config.endpoint.to_s unless config.regional_endpoint),
+      }.merge(options))
     end
   end
 end

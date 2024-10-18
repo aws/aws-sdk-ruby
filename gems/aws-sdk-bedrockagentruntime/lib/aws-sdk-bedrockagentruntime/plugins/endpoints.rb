@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::BedrockAgentRuntime::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,23 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :delete_agent_memory
-            Aws::BedrockAgentRuntime::Endpoints::DeleteAgentMemory.build(context)
-          when :get_agent_memory
-            Aws::BedrockAgentRuntime::Endpoints::GetAgentMemory.build(context)
-          when :invoke_agent
-            Aws::BedrockAgentRuntime::Endpoints::InvokeAgent.build(context)
-          when :invoke_flow
-            Aws::BedrockAgentRuntime::Endpoints::InvokeFlow.build(context)
-          when :retrieve
-            Aws::BedrockAgentRuntime::Endpoints::Retrieve.build(context)
-          when :retrieve_and_generate
-            Aws::BedrockAgentRuntime::Endpoints::RetrieveAndGenerate.build(context)
           end
         end
       end

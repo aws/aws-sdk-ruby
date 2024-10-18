@@ -54,7 +54,7 @@ module Aws::CodeGuruSecurity
   autoload :EndpointProvider, 'aws-sdk-codegurusecurity/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codegurusecurity/endpoints'
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end
 

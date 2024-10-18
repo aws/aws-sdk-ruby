@@ -1565,6 +1565,8 @@ module Aws::QuickSight
     StartAssetBundleImportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobResponse')
     StartDashboardSnapshotJobRequest = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobRequest')
     StartDashboardSnapshotJobResponse = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobResponse')
+    StartDashboardSnapshotJobScheduleRequest = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobScheduleRequest')
+    StartDashboardSnapshotJobScheduleResponse = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobScheduleResponse')
     StatePersistenceConfigurations = Shapes::StructureShape.new(name: 'StatePersistenceConfigurations')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
@@ -4315,7 +4317,7 @@ module Aws::QuickSight
 
     DescribeAnalysisPermissionsResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AnalysisId"))
     DescribeAnalysisPermissionsResponse.add_member(:analysis_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnalysisArn"))
-    DescribeAnalysisPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeAnalysisPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "Permissions"))
     DescribeAnalysisPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeAnalysisPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeAnalysisPermissionsResponse.struct_class = Types::DescribeAnalysisPermissionsResponse
@@ -4399,7 +4401,7 @@ module Aws::QuickSight
 
     DescribeDashboardPermissionsResponse.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "DashboardId"))
     DescribeDashboardPermissionsResponse.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DashboardArn"))
-    DescribeDashboardPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeDashboardPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "Permissions"))
     DescribeDashboardPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeDashboardPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeDashboardPermissionsResponse.add_member(:link_sharing_configuration, Shapes::ShapeRef.new(shape: LinkSharingConfiguration, location_name: "LinkSharingConfiguration"))
@@ -4670,7 +4672,7 @@ module Aws::QuickSight
 
     DescribeTemplatePermissionsResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "TemplateId"))
     DescribeTemplatePermissionsResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "TemplateArn"))
-    DescribeTemplatePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeTemplatePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "Permissions"))
     DescribeTemplatePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeTemplatePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeTemplatePermissionsResponse.struct_class = Types::DescribeTemplatePermissionsResponse
@@ -4702,7 +4704,7 @@ module Aws::QuickSight
 
     DescribeThemePermissionsResponse.add_member(:theme_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "ThemeId"))
     DescribeThemePermissionsResponse.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
-    DescribeThemePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeThemePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "Permissions"))
     DescribeThemePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeThemePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeThemePermissionsResponse.struct_class = Types::DescribeThemePermissionsResponse
@@ -7120,12 +7122,14 @@ module Aws::QuickSight
 
     RestoreAnalysisRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     RestoreAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
+    RestoreAnalysisRequest.add_member(:restore_to_folders, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "restore-to-folders"))
     RestoreAnalysisRequest.struct_class = Types::RestoreAnalysisRequest
 
     RestoreAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     RestoreAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     RestoreAnalysisResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AnalysisId"))
     RestoreAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    RestoreAnalysisResponse.add_member(:restoration_failed_folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "RestorationFailedFolderArns"))
     RestoreAnalysisResponse.struct_class = Types::RestoreAnalysisResponse
 
     RollingDateConfiguration.add_member(:data_set_identifier, Shapes::ShapeRef.new(shape: DataSetIdentifier, location_name: "DataSetIdentifier"))
@@ -7684,6 +7688,15 @@ module Aws::QuickSight
     StartDashboardSnapshotJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
     StartDashboardSnapshotJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     StartDashboardSnapshotJobResponse.struct_class = Types::StartDashboardSnapshotJobResponse
+
+    StartDashboardSnapshotJobScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    StartDashboardSnapshotJobScheduleRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
+    StartDashboardSnapshotJobScheduleRequest.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ScheduleId"))
+    StartDashboardSnapshotJobScheduleRequest.struct_class = Types::StartDashboardSnapshotJobScheduleRequest
+
+    StartDashboardSnapshotJobScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    StartDashboardSnapshotJobScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    StartDashboardSnapshotJobScheduleResponse.struct_class = Types::StartDashboardSnapshotJobScheduleResponse
 
     StatePersistenceConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     StatePersistenceConfigurations.struct_class = Types::StatePersistenceConfigurations
@@ -8570,7 +8583,7 @@ module Aws::QuickSight
 
     UpdateAnalysisPermissionsResponse.add_member(:analysis_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnalysisArn"))
     UpdateAnalysisPermissionsResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AnalysisId"))
-    UpdateAnalysisPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    UpdateAnalysisPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "Permissions"))
     UpdateAnalysisPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateAnalysisPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateAnalysisPermissionsResponse.struct_class = Types::UpdateAnalysisPermissionsResponse
@@ -8613,7 +8626,7 @@ module Aws::QuickSight
 
     UpdateDashboardPermissionsResponse.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DashboardArn"))
     UpdateDashboardPermissionsResponse.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "DashboardId"))
-    UpdateDashboardPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    UpdateDashboardPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "Permissions"))
     UpdateDashboardPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateDashboardPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateDashboardPermissionsResponse.add_member(:link_sharing_configuration, Shapes::ShapeRef.new(shape: LinkSharingConfiguration, location_name: "LinkSharingConfiguration"))
@@ -8864,7 +8877,7 @@ module Aws::QuickSight
 
     UpdateTemplatePermissionsResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "TemplateId"))
     UpdateTemplatePermissionsResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "TemplateArn"))
-    UpdateTemplatePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    UpdateTemplatePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "Permissions"))
     UpdateTemplatePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateTemplatePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateTemplatePermissionsResponse.struct_class = Types::UpdateTemplatePermissionsResponse
@@ -8905,7 +8918,7 @@ module Aws::QuickSight
 
     UpdateThemePermissionsResponse.add_member(:theme_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "ThemeId"))
     UpdateThemePermissionsResponse.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
-    UpdateThemePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    UpdateThemePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "Permissions"))
     UpdateThemePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateThemePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateThemePermissionsResponse.struct_class = Types::UpdateThemePermissionsResponse
@@ -11378,6 +11391,8 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -11549,6 +11564,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:start_dashboard_snapshot_job_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDashboardSnapshotJobSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/dashboards/{DashboardId}/schedules/{ScheduleId}"
+        o.input = Shapes::ShapeRef.new(shape: StartDashboardSnapshotJobScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDashboardSnapshotJobScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

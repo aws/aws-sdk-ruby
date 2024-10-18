@@ -12,27 +12,9 @@ module Aws::EC2InstanceConnect
   # @api private
   module Endpoints
 
-    class SendSSHPublicKey
-      def self.build(context)
-        Aws::EC2InstanceConnect::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
-    class SendSerialConsoleSSHPublicKey
-      def self.build(context)
-        Aws::EC2InstanceConnect::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::EC2InstanceConnect::EndpointParameters.create(context.config)
     end
-
   end
 end

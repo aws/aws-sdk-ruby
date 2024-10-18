@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::MarketplaceCatalog::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,37 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :batch_describe_entities
-            Aws::MarketplaceCatalog::Endpoints::BatchDescribeEntities.build(context)
-          when :cancel_change_set
-            Aws::MarketplaceCatalog::Endpoints::CancelChangeSet.build(context)
-          when :delete_resource_policy
-            Aws::MarketplaceCatalog::Endpoints::DeleteResourcePolicy.build(context)
-          when :describe_change_set
-            Aws::MarketplaceCatalog::Endpoints::DescribeChangeSet.build(context)
-          when :describe_entity
-            Aws::MarketplaceCatalog::Endpoints::DescribeEntity.build(context)
-          when :get_resource_policy
-            Aws::MarketplaceCatalog::Endpoints::GetResourcePolicy.build(context)
-          when :list_change_sets
-            Aws::MarketplaceCatalog::Endpoints::ListChangeSets.build(context)
-          when :list_entities
-            Aws::MarketplaceCatalog::Endpoints::ListEntities.build(context)
-          when :list_tags_for_resource
-            Aws::MarketplaceCatalog::Endpoints::ListTagsForResource.build(context)
-          when :put_resource_policy
-            Aws::MarketplaceCatalog::Endpoints::PutResourcePolicy.build(context)
-          when :start_change_set
-            Aws::MarketplaceCatalog::Endpoints::StartChangeSet.build(context)
-          when :tag_resource
-            Aws::MarketplaceCatalog::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::MarketplaceCatalog::Endpoints::UntagResource.build(context)
           end
         end
       end

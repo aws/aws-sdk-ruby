@@ -312,8 +312,12 @@ module Aws::CodePipeline
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Result = Shapes::StringShape.new(name: 'Result')
+    RetryAttempt = Shapes::IntegerShape.new(name: 'RetryAttempt')
+    RetryConfiguration = Shapes::StructureShape.new(name: 'RetryConfiguration')
     RetryStageExecutionInput = Shapes::StructureShape.new(name: 'RetryStageExecutionInput')
     RetryStageExecutionOutput = Shapes::StructureShape.new(name: 'RetryStageExecutionOutput')
+    RetryStageMetadata = Shapes::StructureShape.new(name: 'RetryStageMetadata')
+    RetryTrigger = Shapes::StringShape.new(name: 'RetryTrigger')
     Revision = Shapes::StringShape.new(name: 'Revision')
     RevisionChangeIdentifier = Shapes::StringShape.new(name: 'RevisionChangeIdentifier')
     RevisionSummary = Shapes::StringShape.new(name: 'RevisionSummary')
@@ -793,6 +797,7 @@ module Aws::CodePipeline
     ExecutorConfiguration.struct_class = Types::ExecutorConfiguration
 
     FailureConditions.add_member(:result, Shapes::ShapeRef.new(shape: Result, location_name: "result"))
+    FailureConditions.add_member(:retry_configuration, Shapes::ShapeRef.new(shape: RetryConfiguration, location_name: "retryConfiguration"))
     FailureConditions.add_member(:conditions, Shapes::ShapeRef.new(shape: ConditionList, location_name: "conditions"))
     FailureConditions.struct_class = Types::FailureConditions
 
@@ -1262,6 +1267,9 @@ module Aws::CodePipeline
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RetryConfiguration.add_member(:retry_mode, Shapes::ShapeRef.new(shape: StageRetryMode, location_name: "retryMode"))
+    RetryConfiguration.struct_class = Types::RetryConfiguration
+
     RetryStageExecutionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     RetryStageExecutionInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
     RetryStageExecutionInput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, required: true, location_name: "pipelineExecutionId"))
@@ -1270,6 +1278,11 @@ module Aws::CodePipeline
 
     RetryStageExecutionOutput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
     RetryStageExecutionOutput.struct_class = Types::RetryStageExecutionOutput
+
+    RetryStageMetadata.add_member(:auto_stage_retry_attempt, Shapes::ShapeRef.new(shape: RetryAttempt, location_name: "autoStageRetryAttempt"))
+    RetryStageMetadata.add_member(:manual_stage_retry_attempt, Shapes::ShapeRef.new(shape: RetryAttempt, location_name: "manualStageRetryAttempt"))
+    RetryStageMetadata.add_member(:latest_retry_trigger, Shapes::ShapeRef.new(shape: RetryTrigger, location_name: "latestRetryTrigger"))
+    RetryStageMetadata.struct_class = Types::RetryStageMetadata
 
     RollbackStageInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     RollbackStageInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
@@ -1451,6 +1464,7 @@ module Aws::CodePipeline
     StageState.add_member(:before_entry_condition_state, Shapes::ShapeRef.new(shape: StageConditionState, location_name: "beforeEntryConditionState"))
     StageState.add_member(:on_success_condition_state, Shapes::ShapeRef.new(shape: StageConditionState, location_name: "onSuccessConditionState"))
     StageState.add_member(:on_failure_condition_state, Shapes::ShapeRef.new(shape: StageConditionState, location_name: "onFailureConditionState"))
+    StageState.add_member(:retry_stage_metadata, Shapes::ShapeRef.new(shape: RetryStageMetadata, location_name: "retryStageMetadata"))
     StageState.struct_class = Types::StageState
 
     StageStateList.member = Shapes::ShapeRef.new(shape: StageState)

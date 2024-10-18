@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-10-11)
+------------------
+
+* Feature - This release provides new parameter "Context" in instance fleet clusters.
+
 1.99.0 (2024-09-24)
 ------------------
 

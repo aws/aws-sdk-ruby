@@ -688,7 +688,7 @@ module Aws::QBusiness
     #   The identifier of the user attached to the chat input.
     #
     # @option params [Array<String>] :user_groups
-    #   The groups that a user associated with the chat input belongs to.
+    #   The group names that a user associated with the chat input belongs to.
     #
     # @option params [String] :user_message
     #   A end user message in a conversation.
@@ -939,7 +939,13 @@ module Aws::QBusiness
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permissions to
-    #   access your Amazon CloudWatch logs and metrics.
+    #   access your Amazon CloudWatch logs and metrics. If this property is
+    #   not specified, Amazon Q Business will create a [service linked role
+    #   (SLR)][1] and use it as the application's role.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles.html#slr-permissions
     #
     # @option params [String] :identity_type
     #   The authentication type being used by a Amazon Q Business application.
@@ -1588,6 +1594,15 @@ module Aws::QBusiness
     #   Determines whether sample prompts are enabled in the web experience
     #   for an end user.
     #
+    # @option params [Array<String>] :origins
+    #   Sets the website domain origins that are allowed to embed the Amazon Q
+    #   Business web experience.      The <i>domain origin</i> refers to the
+    #   base URL for accessing a website including the protocol
+    #   (<code>http/https</code>), the domain name, and the port number (if
+    #   specified). </p> <note> <p>You must only submit a <i>base URL</i> and
+    #   not a full path. For example,
+    #   <code>https://docs.aws.amazon.com</code>.</p> </note>
+    #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the service role attached to your
     #   web experience.
@@ -1630,6 +1645,7 @@ module Aws::QBusiness
     #     subtitle: "WebExperienceSubtitle",
     #     welcome_message: "WebExperienceWelcomeMessage",
     #     sample_prompts_control_mode: "ENABLED", # accepts ENABLED, DISABLED
+    #     origins: ["Origin"],
     #     role_arn: "RoleArn",
     #     tags: [
     #       {
@@ -2496,6 +2512,7 @@ module Aws::QBusiness
     #   * {Types::GetWebExperienceResponse#subtitle #subtitle} => String
     #   * {Types::GetWebExperienceResponse#welcome_message #welcome_message} => String
     #   * {Types::GetWebExperienceResponse#sample_prompts_control_mode #sample_prompts_control_mode} => String
+    #   * {Types::GetWebExperienceResponse#origins #origins} => Array&lt;String&gt;
     #   * {Types::GetWebExperienceResponse#role_arn #role_arn} => String
     #   * {Types::GetWebExperienceResponse#identity_provider_configuration #identity_provider_configuration} => Types::IdentityProviderConfiguration
     #   * {Types::GetWebExperienceResponse#authentication_configuration #authentication_configuration} => Types::WebExperienceAuthConfiguration
@@ -2521,6 +2538,8 @@ module Aws::QBusiness
     #   resp.subtitle #=> String
     #   resp.welcome_message #=> String
     #   resp.sample_prompts_control_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.origins #=> Array
+    #   resp.origins[0] #=> String
     #   resp.role_arn #=> String
     #   resp.identity_provider_configuration.saml_configuration.authentication_url #=> String
     #   resp.identity_provider_configuration.open_id_connect_configuration.secrets_arn #=> String
@@ -4097,6 +4116,17 @@ module Aws::QBusiness
     #   Information about the identity provider (IdP) used to authenticate end
     #   users of an Amazon Q Business web experience.
     #
+    # @option params [Array<String>] :origins
+    #   Updates the website domain origins that are allowed to embed the
+    #   Amazon Q Business web experience.      The <i>domain origin</i> refers
+    #   to the <i>base URL</i> for accessing a website including the protocol
+    #   (<code>http/https</code>), the domain name, and the port number (if
+    #   specified).</p> <note> <ul> <li> <p>Any values except
+    #   <code>null</code> submitted as part of this update will replace all
+    #   previous values.</p> </li> <li> <p>You must only submit a <i>base
+    #   URL</i> and not a full path. For example,
+    #   <code>https://docs.aws.amazon.com</code>.</p> </li> </ul> </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4126,6 +4156,7 @@ module Aws::QBusiness
     #         secrets_role: "RoleArn", # required
     #       },
     #     },
+    #     origins: ["Origin"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateWebExperience AWS API Documentation
@@ -4155,7 +4186,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

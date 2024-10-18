@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ManagedBlockchainQuery::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,29 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :batch_get_token_balance
-            Aws::ManagedBlockchainQuery::Endpoints::BatchGetTokenBalance.build(context)
-          when :get_asset_contract
-            Aws::ManagedBlockchainQuery::Endpoints::GetAssetContract.build(context)
-          when :get_token_balance
-            Aws::ManagedBlockchainQuery::Endpoints::GetTokenBalance.build(context)
-          when :get_transaction
-            Aws::ManagedBlockchainQuery::Endpoints::GetTransaction.build(context)
-          when :list_asset_contracts
-            Aws::ManagedBlockchainQuery::Endpoints::ListAssetContracts.build(context)
-          when :list_filtered_transaction_events
-            Aws::ManagedBlockchainQuery::Endpoints::ListFilteredTransactionEvents.build(context)
-          when :list_token_balances
-            Aws::ManagedBlockchainQuery::Endpoints::ListTokenBalances.build(context)
-          when :list_transaction_events
-            Aws::ManagedBlockchainQuery::Endpoints::ListTransactionEvents.build(context)
-          when :list_transactions
-            Aws::ManagedBlockchainQuery::Endpoints::ListTransactions.build(context)
           end
         end
       end

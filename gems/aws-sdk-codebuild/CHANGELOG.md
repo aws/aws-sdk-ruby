@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.133.0 (2024-10-15)
+------------------
+
+* Feature - Enable proxy for reserved capacity fleet.
+
 1.132.0 (2024-09-24)
 ------------------
 

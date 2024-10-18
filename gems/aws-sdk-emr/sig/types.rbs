@@ -560,6 +560,7 @@ module Aws::EMR
       attr_accessor instance_type_specifications: ::Array[Types::InstanceTypeSpecification]
       attr_accessor launch_specifications: Types::InstanceFleetProvisioningSpecifications
       attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications
+      attr_accessor context: ::String
       SENSITIVE: []
     end
 
@@ -571,6 +572,7 @@ module Aws::EMR
       attr_accessor instance_type_configs: ::Array[Types::InstanceTypeConfig]
       attr_accessor launch_specifications: Types::InstanceFleetProvisioningSpecifications
       attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications
+      attr_accessor context: ::String
       SENSITIVE: []
     end
 
@@ -580,6 +582,7 @@ module Aws::EMR
       attr_accessor target_spot_capacity: ::Integer
       attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications
       attr_accessor instance_type_configs: ::Array[Types::InstanceTypeConfig]
+      attr_accessor context: ::String
       SENSITIVE: []
     end
 

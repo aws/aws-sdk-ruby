@@ -447,17 +447,17 @@ module Aws::SecurityLake
 
     # @!group API Operations
 
-    # Adds a natively supported Amazon Web Service as an Amazon Security
-    # Lake source. Enables source types for member accounts in required
-    # Amazon Web Services Regions, based on the parameters you specify. You
-    # can choose any source type in any Region for either accounts that are
-    # part of a trusted organization or standalone accounts. Once you add an
-    # Amazon Web Service as a source, Security Lake starts collecting logs
-    # and events from it.
+    # Adds a natively supported Amazon Web Services service as an Amazon
+    # Security Lake source. Enables source types for member accounts in
+    # required Amazon Web Services Regions, based on the parameters you
+    # specify. You can choose any source type in any Region for either
+    # accounts that are part of a trusted organization or standalone
+    # accounts. Once you add an Amazon Web Services service as a source,
+    # Security Lake starts collecting logs and events from it.
     #
     # You can use this API only to enable natively supported Amazon Web
-    # Services as a source. Use `CreateCustomLogSource` to enable data
-    # collection from a custom source.
+    # Services services as a source. Use `CreateCustomLogSource` to enable
+    # data collection from a custom source.
     #
     # @option params [required, Array<Types::AwsLogSourceConfiguration>] :sources
     #   Specify the natively-supported Amazon Web Services service to add as a
@@ -505,7 +505,7 @@ module Aws::SecurityLake
     # table and an Glue crawler.
     #
     # @option params [required, Types::CustomLogSourceConfiguration] :configuration
-    #   The configuration for the third-party custom source.
+    #   The configuration used for the third-party custom source.
     #
     # @option params [Array<String>] :event_classes
     #   The Open Cybersecurity Schema Framework (OCSF) event classes which
@@ -572,7 +572,12 @@ module Aws::SecurityLake
     #
     # @option params [required, String] :source_name
     #   Specify the name for a third-party custom source. This must be a
-    #   Regionally unique value.
+    #   Regionally unique value. The `sourceName` you enter here, is used in
+    #   the `LogProviderRole` name which follows the convention
+    #   `AmazonSecurityLake-Provider-\{name of the custom
+    #   source\}-\{region\}`. You must use a `CustomLogSource` name that is
+    #   shorter than or equal to 20 characters. This ensures that the
+    #   `LogProviderRole` name is below the 64 character limit.
     #
     # @option params [String] :source_version
     #   Specify the source version for the third-party custom source, to limit
@@ -630,8 +635,9 @@ module Aws::SecurityLake
     # Region with the specified configurations.
     #
     # When you enable Security Lake, it starts ingesting security data after
-    # the `CreateAwsLogSource` call. This includes ingesting security data
-    # from sources, storing data, and making data accessible to subscribers.
+    # the `CreateAwsLogSource` call and after you create subscribers using
+    # the `CreateSubscriber` API. This includes ingesting security data from
+    # sources, storing data, and making data accessible to subscribers.
     # Security Lake also enables all the existing settings and resources
     # that it stores or maintains for your Amazon Web Services account in
     # the current Region, including security log and event data. For more
@@ -724,10 +730,13 @@ module Aws::SecurityLake
     end
 
     # Creates the specified notification subscription in Amazon Security
-    # Lake for the organization you specify.
+    # Lake for the organization you specify. The notification subscription
+    # is created for exceptions that cannot be resolved by Security Lake
+    # automatically.
     #
     # @option params [Integer] :exception_time_to_live
-    #   The expiration period and time-to-live (TTL).
+    #   The expiration period and time-to-live (TTL). It is the duration of
+    #   time until which the exception message remains.
     #
     # @option params [required, String] :notification_endpoint
     #   The Amazon Web Services account where you want to receive exception
@@ -790,17 +799,17 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Creates a subscription permission for accounts that are already
-    # enabled in Amazon Security Lake. You can create a subscriber with
-    # access to data in the current Amazon Web Services Region.
+    # Creates a subscriber for accounts that are already enabled in Amazon
+    # Security Lake. You can create a subscriber with access to data in the
+    # current Amazon Web Services Region.
     #
     # @option params [Array<String>] :access_types
     #   The Amazon S3 or Lake Formation access type.
     #
     # @option params [required, Array<Types::LogSourceResource>] :sources
-    #   The supported Amazon Web Services from which logs and events are
-    #   collected. Security Lake supports log and event collection for
-    #   natively supported Amazon Web Services.
+    #   The supported Amazon Web Services services from which logs and events
+    #   are collected. Security Lake supports log and event collection for
+    #   natively supported Amazon Web Services services.
     #
     # @option params [String] :subscriber_description
     #   The description for your subscriber account in Security Lake.
@@ -942,11 +951,11 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Removes a natively supported Amazon Web Service as an Amazon Security
-    # Lake source. You can remove a source for one or more Regions. When you
-    # remove the source, Security Lake stops collecting data from that
-    # source in the specified Regions and accounts, and subscribers can no
-    # longer consume new data from the source. However, subscribers can
+    # Removes a natively supported Amazon Web Services service as an Amazon
+    # Security Lake source. You can remove a source for one or more Regions.
+    # When you remove the source, Security Lake stops collecting data from
+    # that source in the specified Regions and accounts, and subscribers can
+    # no longer consume new data from the source. However, subscribers can
     # still consume data that Security Lake collected from the source before
     # removal.
     #
@@ -1134,7 +1143,7 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Deletes the specified notification subscription in Amazon Security
+    # Deletes the specified subscription notification in Amazon Security
     # Lake for the organization you specify.
     #
     # @option params [required, String] :subscriber_id
@@ -1173,8 +1182,8 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Retrieves the details of exception notifications for the account in
-    # Amazon Security Lake.
+    # Retrieves the protocol and endpoint that were provided when
+    # subscribing to Amazon SNS topics for exception notifications.
     #
     # @return [Types::GetDataLakeExceptionSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1343,10 +1352,10 @@ module Aws::SecurityLake
     # source of problems and fix them.
     #
     # @option params [Integer] :max_results
-    #   List the maximum number of failures in Security Lake.
+    #   Lists the maximum number of failures in Security Lake.
     #
     # @option params [String] :next_token
-    #   List if there are more results available. The value of nextToken is a
+    #   Lists if there are more results available. The value of nextToken is a
     #   unique pagination token for each page. Repeat the call using the
     #   returned token to retrieve the next page. Keep all other arguments
     #   unchanged.
@@ -1436,7 +1445,7 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Retrieves the log sources in the current Amazon Web Services Region.
+    # Retrieves the log sources.
     #
     # @option params [Array<String>] :accounts
     #   The list of Amazon Web Services accounts for which log sources are
@@ -1519,9 +1528,9 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # List all subscribers for the specific Amazon Security Lake account ID.
-    # You can retrieve a list of subscriptions associated with a specific
-    # organization or Amazon Web Services account.
+    # Lists all subscribers for the specific Amazon Security Lake account
+    # ID. You can retrieve a list of subscriptions associated with a
+    # specific organization or Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of accounts for which the configuration is
@@ -1727,13 +1736,38 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Specifies where to store your security data and for how long. You can
-    # add a rollup Region to consolidate data from multiple Amazon Web
-    # Services Regions.
+    # You can use `UpdateDataLake` to specify where to store your security
+    # data, how it should be encrypted at rest and for how long. You can add
+    # a [Rollup Region][1] to consolidate data from multiple Amazon Web
+    # Services Regions, replace default encryption (SSE-S3) with [Customer
+    # Manged Key][2], or specify transition and expiration actions through
+    # storage [Lifecycle management][3]. The `UpdateDataLake` API works as
+    # an "upsert" operation that performs an insert if the specified item
+    # or record does not exist, or an update if it already exists. Security
+    # Lake securely stores your data at rest using Amazon Web Services
+    # encryption solutions. For more details, see [Data protection in Amazon
+    # Security Lake][4].
+    #
+    # For example, omitting the key `encryptionConfiguration` from a Region
+    # that is included in an update call that currently uses KMS will leave
+    # that Region's KMS key in place, but specifying
+    # `encryptionConfiguration: \{kmsKeyId: 'S3_MANAGED_KEY'\}` for that
+    # same Region will reset the key to `S3-managed`.
+    #
+    # For more details about lifecycle management and how to update
+    # retention settings for one or more Regions after enabling Security
+    # Lake, see the [Amazon Security Lake User Guide][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/manage-regions.html#add-rollup-region
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+    # [3]: https://docs.aws.amazon.com/security-lake/latest/userguide/lifecycle-management.html
+    # [4]: https://docs.aws.amazon.com/security-lake/latest/userguide/data-protection.html
     #
     # @option params [required, Array<Types::DataLakeConfiguration>] :configurations
-    #   Specify the Region or Regions that will contribute data to the rollup
-    #   region.
+    #   Specifies the Region or Regions that will contribute data to the
+    #   rollup region.
     #
     # @option params [String] :meta_store_manager_role_arn
     #   The Amazon Resource Name (ARN) used to create and update the Glue
@@ -1806,7 +1840,8 @@ module Aws::SecurityLake
     # Lake for the organization you specify.
     #
     # @option params [Integer] :exception_time_to_live
-    #   The time-to-live (TTL) for the exception message to remain.
+    #   The time-to-live (TTL) for the exception message to remain. It is the
+    #   duration of time until which the exception message remains.
     #
     # @option params [required, String] :notification_endpoint
     #   The account that is subscribed to receive exception notifications.
@@ -1838,9 +1873,9 @@ module Aws::SecurityLake
     # the subscriber consumes data from.
     #
     # @option params [Array<Types::LogSourceResource>] :sources
-    #   The supported Amazon Web Services from which logs and events are
-    #   collected. For the list of supported Amazon Web Services, see the
-    #   [Amazon Security Lake User Guide][1].
+    #   The supported Amazon Web Services services from which logs and events
+    #   are collected. For the list of supported Amazon Web Services services,
+    #   see the [Amazon Security Lake User Guide][1].
     #
     #
     #
@@ -1854,7 +1889,7 @@ module Aws::SecurityLake
     #   subscription.
     #
     # @option params [Types::AwsIdentity] :subscriber_identity
-    #   The AWS identity used to access your data.
+    #   The Amazon Web Services identity used to access your data.
     #
     # @option params [String] :subscriber_name
     #   The name of the Security Lake account subscriber.
@@ -1997,7 +2032,7 @@ module Aws::SecurityLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

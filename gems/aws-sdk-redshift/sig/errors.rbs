@@ -117,7 +117,19 @@ module Aws
       end
       class InsufficientS3BucketPolicyFault < ::Aws::Errors::ServiceError
       end
+      class IntegrationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class IntegrationConflictOperationFault < ::Aws::Errors::ServiceError
+      end
+      class IntegrationConflictStateFault < ::Aws::Errors::ServiceError
+      end
       class IntegrationNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class IntegrationQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class IntegrationSourceNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class IntegrationTargetNotFoundFault < ::Aws::Errors::ServiceError
       end
       class InvalidAuthenticationProfileRequestFault < ::Aws::Errors::ServiceError
       end

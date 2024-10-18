@@ -249,6 +249,61 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The request parameters for CreateInstance.
+    #
+    # @!attribute [rw] instance_name
+    #   The AWS Supply Chain instance name.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_description
+    #   The AWS Supply Chain instance description.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN (Amazon Resource Name) of the Key Management Service (KMS)
+    #   key you provide for encryption. This is required if you do not want
+    #   to use the Amazon Web Services owned KMS key. If you don't provide
+    #   anything here, AWS Supply Chain uses the Amazon Web Services owned
+    #   KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services tags of an instance to be created.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   The client token for idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/CreateInstanceRequest AWS API Documentation
+    #
+    class CreateInstanceRequest < Struct.new(
+      :instance_name,
+      :instance_description,
+      :kms_key_arn,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters for CreateInstance.
+    #
+    # @!attribute [rw] instance
+    #   The AWS Supply Chain instance resource data details.
+    #   @return [Types::Instance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/CreateInstanceResponse AWS API Documentation
+    #
+    class CreateInstanceResponse < Struct.new(
+      :instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The DataIntegrationFlow details.
     #
     # @!attribute [rw] instance_id
@@ -706,6 +761,34 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The request parameters for DeleteInstance.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DeleteInstanceRequest AWS API Documentation
+    #
+    class DeleteInstanceRequest < Struct.new(
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters for DeleteInstance.
+    #
+    # @!attribute [rw] instance
+    #   The AWS Supply Chain instance resource data details.
+    #   @return [Types::Instance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/DeleteInstanceResponse AWS API Documentation
+    #
+    class DeleteInstanceResponse < Struct.new(
+      :instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request parameters for GetBillOfMaterialsImportJob.
     #
     # @!attribute [rw] instance_id
@@ -826,6 +909,96 @@ module Aws::SupplyChain
       include Aws::Structure
     end
 
+    # The request parameters for GetInstance.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetInstanceRequest AWS API Documentation
+    #
+    class GetInstanceRequest < Struct.new(
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters for GetInstance.
+    #
+    # @!attribute [rw] instance
+    #   The instance resource data details.
+    #   @return [Types::Instance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/GetInstanceResponse AWS API Documentation
+    #
+    class GetInstanceResponse < Struct.new(
+      :instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the instance.
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon Web Services Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID that owns the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_app_dns_domain
+    #   The WebApp DNS domain name of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The instance creation timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The instance last modified timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] instance_name
+    #   The Amazon Web Services Supply Chain instance name.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_description
+    #   The Amazon Web Services Supply Chain instance description.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN (Amazon Resource Name) of the Key Management Service (KMS)
+    #   key you optionally provided for encryption. If you did not provide
+    #   anything here, AWS Supply Chain uses the Amazon Web Services owned
+    #   KMS key and nothing is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the instance.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/Instance AWS API Documentation
+    #
+    class Instance < Struct.new(
+      :instance_id,
+      :aws_account_id,
+      :state,
+      :web_app_dns_domain,
+      :created_time,
+      :last_modified_time,
+      :instance_name,
+      :instance_description,
+      :kms_key_arn,
+      :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Unexpected error during processing of request.
     #
     # @!attribute [rw] message
@@ -936,6 +1109,55 @@ module Aws::SupplyChain
     #
     class ListDataLakeDatasetsResponse < Struct.new(
       :datasets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for ListInstances.
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to fetch the next page of instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specify the maximum number of instances to fetch in this paginated
+    #   request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_name_filter
+    #   The filter to ListInstances based on their names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_state_filter
+    #   The filter to ListInstances based on their state.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListInstancesRequest AWS API Documentation
+    #
+    class ListInstancesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :instance_name_filter,
+      :instance_state_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters for ListInstances.
+    #
+    # @!attribute [rw] instances
+    #   The list of instances resource data details.
+    #   @return [Array<Types::Instance>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to fetch the next page of instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/ListInstancesResponse AWS API Documentation
+    #
+    class ListInstancesResponse < Struct.new(
+      :instances,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1229,6 +1451,44 @@ module Aws::SupplyChain
     #
     class UpdateDataLakeDatasetResponse < Struct.new(
       :dataset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request parameters for UpdateInstance.
+    #
+    # @!attribute [rw] instance_id
+    #   The AWS Supply Chain instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_name
+    #   The AWS Supply Chain instance name.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_description
+    #   The AWS Supply Chain instance description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/UpdateInstanceRequest AWS API Documentation
+    #
+    class UpdateInstanceRequest < Struct.new(
+      :instance_id,
+      :instance_name,
+      :instance_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response parameters for UpdateInstance.
+    #
+    # @!attribute [rw] instance
+    #   The instance resource data details.
+    #   @return [Types::Instance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/supplychain-2024-01-01/UpdateInstanceResponse AWS API Documentation
+    #
+    class UpdateInstanceResponse < Struct.new(
+      :instance)
       SENSITIVE = []
       include Aws::Structure
     end

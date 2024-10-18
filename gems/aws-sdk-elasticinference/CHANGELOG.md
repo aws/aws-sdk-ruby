@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2024-10-10)
+------------------
+
+* Feature - Elastic Inference - Documentation update to add service shutdown notice.
+
 1.47.0 (2024-09-24)
 ------------------
 

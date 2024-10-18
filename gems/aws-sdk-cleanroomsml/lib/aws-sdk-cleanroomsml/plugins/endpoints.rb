@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::CleanRoomsML::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,61 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_audience_model
-            Aws::CleanRoomsML::Endpoints::CreateAudienceModel.build(context)
-          when :create_configured_audience_model
-            Aws::CleanRoomsML::Endpoints::CreateConfiguredAudienceModel.build(context)
-          when :create_training_dataset
-            Aws::CleanRoomsML::Endpoints::CreateTrainingDataset.build(context)
-          when :delete_audience_generation_job
-            Aws::CleanRoomsML::Endpoints::DeleteAudienceGenerationJob.build(context)
-          when :delete_audience_model
-            Aws::CleanRoomsML::Endpoints::DeleteAudienceModel.build(context)
-          when :delete_configured_audience_model
-            Aws::CleanRoomsML::Endpoints::DeleteConfiguredAudienceModel.build(context)
-          when :delete_configured_audience_model_policy
-            Aws::CleanRoomsML::Endpoints::DeleteConfiguredAudienceModelPolicy.build(context)
-          when :delete_training_dataset
-            Aws::CleanRoomsML::Endpoints::DeleteTrainingDataset.build(context)
-          when :get_audience_generation_job
-            Aws::CleanRoomsML::Endpoints::GetAudienceGenerationJob.build(context)
-          when :get_audience_model
-            Aws::CleanRoomsML::Endpoints::GetAudienceModel.build(context)
-          when :get_configured_audience_model
-            Aws::CleanRoomsML::Endpoints::GetConfiguredAudienceModel.build(context)
-          when :get_configured_audience_model_policy
-            Aws::CleanRoomsML::Endpoints::GetConfiguredAudienceModelPolicy.build(context)
-          when :get_training_dataset
-            Aws::CleanRoomsML::Endpoints::GetTrainingDataset.build(context)
-          when :list_audience_export_jobs
-            Aws::CleanRoomsML::Endpoints::ListAudienceExportJobs.build(context)
-          when :list_audience_generation_jobs
-            Aws::CleanRoomsML::Endpoints::ListAudienceGenerationJobs.build(context)
-          when :list_audience_models
-            Aws::CleanRoomsML::Endpoints::ListAudienceModels.build(context)
-          when :list_configured_audience_models
-            Aws::CleanRoomsML::Endpoints::ListConfiguredAudienceModels.build(context)
-          when :list_tags_for_resource
-            Aws::CleanRoomsML::Endpoints::ListTagsForResource.build(context)
-          when :list_training_datasets
-            Aws::CleanRoomsML::Endpoints::ListTrainingDatasets.build(context)
-          when :put_configured_audience_model_policy
-            Aws::CleanRoomsML::Endpoints::PutConfiguredAudienceModelPolicy.build(context)
-          when :start_audience_export_job
-            Aws::CleanRoomsML::Endpoints::StartAudienceExportJob.build(context)
-          when :start_audience_generation_job
-            Aws::CleanRoomsML::Endpoints::StartAudienceGenerationJob.build(context)
-          when :tag_resource
-            Aws::CleanRoomsML::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::CleanRoomsML::Endpoints::UntagResource.build(context)
-          when :update_configured_audience_model
-            Aws::CleanRoomsML::Endpoints::UpdateConfiguredAudienceModel.build(context)
           end
         end
       end

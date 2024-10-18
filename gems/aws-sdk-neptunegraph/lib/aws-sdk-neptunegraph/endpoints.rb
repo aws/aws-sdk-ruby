@@ -14,11 +14,8 @@ module Aws::NeptuneGraph
 
     class CancelImportTask
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -26,11 +23,8 @@ module Aws::NeptuneGraph
 
     class CancelQuery
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "DataPlane",
         )
       end
@@ -38,11 +32,8 @@ module Aws::NeptuneGraph
 
     class CreateGraph
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -50,11 +41,8 @@ module Aws::NeptuneGraph
 
     class CreateGraphSnapshot
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -62,11 +50,8 @@ module Aws::NeptuneGraph
 
     class CreateGraphUsingImportTask
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -74,11 +59,8 @@ module Aws::NeptuneGraph
 
     class CreatePrivateGraphEndpoint
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -86,11 +68,8 @@ module Aws::NeptuneGraph
 
     class DeleteGraph
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -98,11 +77,8 @@ module Aws::NeptuneGraph
 
     class DeleteGraphSnapshot
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -110,11 +86,8 @@ module Aws::NeptuneGraph
 
     class DeletePrivateGraphEndpoint
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -122,11 +95,8 @@ module Aws::NeptuneGraph
 
     class ExecuteQuery
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "DataPlane",
         )
       end
@@ -134,11 +104,8 @@ module Aws::NeptuneGraph
 
     class GetGraph
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -146,11 +113,8 @@ module Aws::NeptuneGraph
 
     class GetGraphSnapshot
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -158,11 +122,8 @@ module Aws::NeptuneGraph
 
     class GetGraphSummary
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "DataPlane",
         )
       end
@@ -170,11 +131,8 @@ module Aws::NeptuneGraph
 
     class GetImportTask
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -182,11 +140,8 @@ module Aws::NeptuneGraph
 
     class GetPrivateGraphEndpoint
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -194,11 +149,8 @@ module Aws::NeptuneGraph
 
     class GetQuery
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "DataPlane",
         )
       end
@@ -206,11 +158,8 @@ module Aws::NeptuneGraph
 
     class ListGraphSnapshots
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -218,11 +167,8 @@ module Aws::NeptuneGraph
 
     class ListGraphs
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -230,11 +176,8 @@ module Aws::NeptuneGraph
 
     class ListImportTasks
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -242,11 +185,8 @@ module Aws::NeptuneGraph
 
     class ListPrivateGraphEndpoints
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -254,11 +194,8 @@ module Aws::NeptuneGraph
 
     class ListQueries
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "DataPlane",
         )
       end
@@ -266,11 +203,8 @@ module Aws::NeptuneGraph
 
     class ListTagsForResource
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -278,11 +212,8 @@ module Aws::NeptuneGraph
 
     class ResetGraph
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -290,11 +221,8 @@ module Aws::NeptuneGraph
 
     class RestoreGraphFromSnapshot
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -302,11 +230,8 @@ module Aws::NeptuneGraph
 
     class StartImportTask
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -314,11 +239,8 @@ module Aws::NeptuneGraph
 
     class TagResource
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -326,11 +248,8 @@ module Aws::NeptuneGraph
 
     class UntagResource
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
@@ -338,15 +257,75 @@ module Aws::NeptuneGraph
 
     class UpdateGraph
       def self.build(context)
-        Aws::NeptuneGraph::EndpointParameters.new(
-          region: context.config.region,
-          use_fips: context.config.use_fips_endpoint,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
           api_type: "ControlPlane",
         )
       end
     end
 
+
+    def self.parameters_for_operation(context)
+      case context.operation_name
+      when :cancel_import_task
+        CancelImportTask.build(context)
+      when :cancel_query
+        CancelQuery.build(context)
+      when :create_graph
+        CreateGraph.build(context)
+      when :create_graph_snapshot
+        CreateGraphSnapshot.build(context)
+      when :create_graph_using_import_task
+        CreateGraphUsingImportTask.build(context)
+      when :create_private_graph_endpoint
+        CreatePrivateGraphEndpoint.build(context)
+      when :delete_graph
+        DeleteGraph.build(context)
+      when :delete_graph_snapshot
+        DeleteGraphSnapshot.build(context)
+      when :delete_private_graph_endpoint
+        DeletePrivateGraphEndpoint.build(context)
+      when :execute_query
+        ExecuteQuery.build(context)
+      when :get_graph
+        GetGraph.build(context)
+      when :get_graph_snapshot
+        GetGraphSnapshot.build(context)
+      when :get_graph_summary
+        GetGraphSummary.build(context)
+      when :get_import_task
+        GetImportTask.build(context)
+      when :get_private_graph_endpoint
+        GetPrivateGraphEndpoint.build(context)
+      when :get_query
+        GetQuery.build(context)
+      when :list_graph_snapshots
+        ListGraphSnapshots.build(context)
+      when :list_graphs
+        ListGraphs.build(context)
+      when :list_import_tasks
+        ListImportTasks.build(context)
+      when :list_private_graph_endpoints
+        ListPrivateGraphEndpoints.build(context)
+      when :list_queries
+        ListQueries.build(context)
+      when :list_tags_for_resource
+        ListTagsForResource.build(context)
+      when :reset_graph
+        ResetGraph.build(context)
+      when :restore_graph_from_snapshot
+        RestoreGraphFromSnapshot.build(context)
+      when :start_import_task
+        StartImportTask.build(context)
+      when :tag_resource
+        TagResource.build(context)
+      when :untag_resource
+        UntagResource.build(context)
+      when :update_graph
+        UpdateGraph.build(context)
+      else
+        Aws::NeptuneGraph::EndpointParameters.create(context.config)
+      end
+    end
   end
 end

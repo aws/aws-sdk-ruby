@@ -59,19 +59,22 @@ module Aws::NeptuneGraph
       self[:region] = options[:region]
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
-      if self[:use_fips].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_fips"
-      end
       self[:use_dual_stack] = options[:use_dual_stack]
       self[:use_dual_stack] = false if self[:use_dual_stack].nil?
-      if self[:use_dual_stack].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_dual_stack"
-      end
       self[:endpoint] = options[:endpoint]
       self[:api_type] = options[:api_type]
       if self[:api_type].nil?
         raise ArgumentError, "Missing required EndpointParameter: :api_type"
       end
+    end
+
+    def self.create(config, options={})
+      new({
+        region: config.region,
+        use_fips: config.use_fips_endpoint,
+        use_dual_stack: config.use_dualstack_endpoint,
+        endpoint: (config.endpoint.to_s unless config.regional_endpoint),
+      }.merge(options))
     end
   end
 end

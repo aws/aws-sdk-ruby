@@ -54,7 +54,7 @@ module Aws::MarketplaceCommerceAnalytics
   autoload :EndpointProvider, 'aws-sdk-marketplacecommerceanalytics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacecommerceanalytics/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

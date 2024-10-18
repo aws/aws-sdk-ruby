@@ -44,11 +44,16 @@ module Aws::ApplicationSignals
     def initialize(options = {})
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
-      if self[:use_fips].nil?
-        raise ArgumentError, "Missing required EndpointParameter: :use_fips"
-      end
       self[:endpoint] = options[:endpoint]
       self[:region] = options[:region]
+    end
+
+    def self.create(config, options={})
+      new({
+        use_fips: config.use_fips_endpoint,
+        endpoint: (config.endpoint.to_s unless config.regional_endpoint),
+        region: config.region,
+      }.merge(options))
     end
   end
 end

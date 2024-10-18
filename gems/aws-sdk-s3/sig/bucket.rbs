@@ -20,6 +20,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Bucket.html#creation_date-instance_method
       def creation_date: () -> ::Time
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Bucket.html#bucket_region-instance_method
+      def bucket_region: () -> ::String
+
       def client: () -> Client
 
 

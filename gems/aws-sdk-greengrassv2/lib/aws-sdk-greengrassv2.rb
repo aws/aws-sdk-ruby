@@ -54,7 +54,7 @@ module Aws::GreengrassV2
   autoload :EndpointProvider, 'aws-sdk-greengrassv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-greengrassv2/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.50.0'
 
 end
 

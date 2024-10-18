@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2024-10-15)
+------------------
+
+* Feature - Amazon Q Business now supports embedding the Amazon Q Business web experience on third-party websites.
+
 1.18.0 (2024-09-24)
 ------------------
 
