@@ -38,6 +38,7 @@ describe 'Plugins Interface:' do
       it 'uses endpoint provider with params to resolve endpoint' do
         expect_any_instance_of(EndpointsPlugin::EndpointProvider)
           .to receive(:resolve_endpoint)
+          .at_least(:once)
           .with(an_instance_of(EndpointsPlugin::EndpointParameters))
           .and_call_original
         client.operation
@@ -71,13 +72,13 @@ describe 'Plugins Interface:' do
 
       it 'maps built ins' do
         expect(EndpointsBuiltIns::EndpointParameters).to receive(:new)
-          .with(
+          .with({
             region: region,
             endpoint: endpoint,
             use_fips: true,
             use_dual_stack: true,
             account_id_endpoint_mode: 'preferred'
-          ).and_call_original
+          }).and_call_original
 
         client.operation
       end
@@ -124,6 +125,10 @@ describe 'Plugins Interface:' do
         EndpointsPrecedence::Client.new(stub_responses: true, region: 'config')
       end
 
+      before(:each) do
+        client # force client initialization before testing resolution to account for config.endpoint
+      end
+
       # Most to least
       # staticContextParams
       # contextParam
@@ -166,7 +171,7 @@ describe 'Plugins Interface:' do
       it 'defaults to nil' do
         client = EndpointsPrecedence::Client.new(stub_responses: true)
         expect(EndpointsPrecedence::EndpointParameters).to receive(:new)
-           .with(hash_including(nothing: nil)).and_call_original
+           .with(hash_including(client_context_param: nil)).and_call_original
         client.operation
       end
     end
