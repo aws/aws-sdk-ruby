@@ -41,7 +41,7 @@
       "input": { "shape": "ListOfObjectsOperationRequest" },
       "operationContextParams": {
         "stringArrayParam": {
-          "path": "nested.listOfObjects[*].key"
+          "value": "nested.listOfObjects[*].key"
         }
       },
       "http": {
@@ -53,7 +53,7 @@
       "input": { "shape": "MapOperationRequest" },
       "operationContextParams": {
         "stringArrayParam": {
-          "path": "keys(map)"
+          "value": "keys(map)"
         }
       },
       "http": {
