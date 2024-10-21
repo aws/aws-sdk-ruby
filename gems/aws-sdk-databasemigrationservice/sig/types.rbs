@@ -383,6 +383,7 @@ module Aws::DatabaseMigrationService
       attr_accessor data_migration_statistics: Types::DataMigrationStatistics
       attr_accessor data_migration_status: ::String
       attr_accessor public_ip_addresses: ::Array[::String]
+      attr_accessor data_migration_cidr_blocks: ::Array[::String]
       attr_accessor last_failure_message: ::String
       attr_accessor stop_reason: ::String
       SENSITIVE: [:public_ip_addresses]
@@ -2417,12 +2418,23 @@ module Aws::DatabaseMigrationService
       attr_accessor result_encryption_mode: ::String
       attr_accessor result_kms_key_arn: ::String
       attr_accessor assessment_run_name: ::String
+      attr_accessor is_latest_task_assessment_run: bool
+      attr_accessor result_statistic: Types::ReplicationTaskAssessmentRunResultStatistic
       SENSITIVE: []
     end
 
     class ReplicationTaskAssessmentRunProgress
       attr_accessor individual_assessment_count: ::Integer
       attr_accessor individual_assessment_completed_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReplicationTaskAssessmentRunResultStatistic
+      attr_accessor passed: ::Integer
+      attr_accessor failed: ::Integer
+      attr_accessor error: ::Integer
+      attr_accessor warning: ::Integer
+      attr_accessor cancelled: ::Integer
       SENSITIVE: []
     end
 
@@ -2722,6 +2734,7 @@ module Aws::DatabaseMigrationService
       attr_accessor assessment_run_name: ::String
       attr_accessor include_only: ::Array[::String]
       attr_accessor exclude: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

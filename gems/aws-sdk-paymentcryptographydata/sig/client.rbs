@@ -252,6 +252,74 @@ module Aws
                         ) -> _GenerateMacResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateMacResponseSuccess
 
+      interface _GenerateMacEmvPinChangeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateMacEmvPinChangeOutput]
+        def new_pin_pek_arn: () -> ::String
+        def secure_messaging_integrity_key_arn: () -> ::String
+        def secure_messaging_confidentiality_key_arn: () -> ::String
+        def mac: () -> ::String
+        def encrypted_pin_block: () -> ::String
+        def new_pin_pek_key_check_value: () -> ::String
+        def secure_messaging_integrity_key_check_value: () -> ::String
+        def secure_messaging_confidentiality_key_check_value: () -> ::String
+        def visa_amex_derivation_outputs: () -> Types::VisaAmexDerivationOutputs
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#generate_mac_emv_pin_change-instance_method
+      def generate_mac_emv_pin_change: (
+                                         new_pin_pek_identifier: ::String,
+                                         new_encrypted_pin_block: ::String,
+                                         pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_1" | "ISO_FORMAT_3"),
+                                         secure_messaging_integrity_key_identifier: ::String,
+                                         secure_messaging_confidentiality_key_identifier: ::String,
+                                         message_data: ::String,
+                                         derivation_method_attributes: {
+                                           emv_common: {
+                                             major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                                             primary_account_number: ::String,
+                                             pan_sequence_number: ::String,
+                                             application_cryptogram: ::String,
+                                             mode: ("ECB" | "CBC"),
+                                             pin_block_padding_type: ("NO_PADDING" | "ISO_IEC_7816_4"),
+                                             pin_block_length_position: ("NONE" | "FRONT_OF_PIN_BLOCK")
+                                           }?,
+                                           amex: {
+                                             major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                                             primary_account_number: ::String,
+                                             pan_sequence_number: ::String,
+                                             application_transaction_counter: ::String,
+                                             authorization_request_key_identifier: ::String,
+                                             current_pin_attributes: {
+                                               current_pin_pek_identifier: ::String,
+                                               current_encrypted_pin_block: ::String
+                                             }?
+                                           }?,
+                                           visa: {
+                                             major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                                             primary_account_number: ::String,
+                                             pan_sequence_number: ::String,
+                                             application_transaction_counter: ::String,
+                                             authorization_request_key_identifier: ::String,
+                                             current_pin_attributes: {
+                                               current_pin_pek_identifier: ::String,
+                                               current_encrypted_pin_block: ::String
+                                             }?
+                                           }?,
+                                           emv_2000: {
+                                             major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                                             primary_account_number: ::String,
+                                             pan_sequence_number: ::String,
+                                             application_transaction_counter: ::String
+                                           }?,
+                                           mastercard: {
+                                             major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                                             primary_account_number: ::String,
+                                             pan_sequence_number: ::String,
+                                             application_cryptogram: ::String
+                                           }?
+                                         }
+                                       ) -> _GenerateMacEmvPinChangeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateMacEmvPinChangeResponseSuccess
+
       interface _GeneratePinDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GeneratePinDataOutput]
         def generation_key_arn: () -> ::String

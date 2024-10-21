@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2024-10-21)
+------------------
+
+* Feature - Add a property to WebACL to indicate whether it's been retrofitted by Firewall Manager.
+
 1.96.0 (2024-10-18)
 ------------------
 

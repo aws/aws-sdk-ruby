@@ -665,6 +665,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task_assessment_run.result_encryption_mode #=> String
     #   resp.replication_task_assessment_run.result_kms_key_arn #=> String
     #   resp.replication_task_assessment_run.assessment_run_name #=> String
+    #   resp.replication_task_assessment_run.is_latest_task_assessment_run #=> Boolean
+    #   resp.replication_task_assessment_run.result_statistic.passed #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.failed #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.error #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.warning #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.cancelled #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelReplicationTaskAssessmentRun AWS API Documentation
     #
@@ -777,6 +783,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.data_migration_status #=> String
     #   resp.data_migration.public_ip_addresses #=> Array
     #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.data_migration_cidr_blocks #=> Array
+    #   resp.data_migration.data_migration_cidr_blocks[0] #=> String
     #   resp.data_migration.last_failure_message #=> String
     #   resp.data_migration.stop_reason #=> String
     #
@@ -3374,6 +3382,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.data_migration_status #=> String
     #   resp.data_migration.public_ip_addresses #=> Array
     #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.data_migration_cidr_blocks #=> Array
+    #   resp.data_migration.data_migration_cidr_blocks[0] #=> String
     #   resp.data_migration.last_failure_message #=> String
     #   resp.data_migration.stop_reason #=> String
     #
@@ -4428,6 +4438,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task_assessment_run.result_encryption_mode #=> String
     #   resp.replication_task_assessment_run.result_kms_key_arn #=> String
     #   resp.replication_task_assessment_run.assessment_run_name #=> String
+    #   resp.replication_task_assessment_run.is_latest_task_assessment_run #=> Boolean
+    #   resp.replication_task_assessment_run.result_statistic.passed #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.failed #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.error #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.warning #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.cancelled #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskAssessmentRun AWS API Documentation
     #
@@ -4908,6 +4924,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migrations[0].data_migration_status #=> String
     #   resp.data_migrations[0].public_ip_addresses #=> Array
     #   resp.data_migrations[0].public_ip_addresses[0] #=> String
+    #   resp.data_migrations[0].data_migration_cidr_blocks #=> Array
+    #   resp.data_migrations[0].data_migration_cidr_blocks[0] #=> String
     #   resp.data_migrations[0].last_failure_message #=> String
     #   resp.data_migrations[0].stop_reason #=> String
     #   resp.marker #=> String
@@ -7922,6 +7940,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task_assessment_runs[0].result_encryption_mode #=> String
     #   resp.replication_task_assessment_runs[0].result_kms_key_arn #=> String
     #   resp.replication_task_assessment_runs[0].assessment_run_name #=> String
+    #   resp.replication_task_assessment_runs[0].is_latest_task_assessment_run #=> Boolean
+    #   resp.replication_task_assessment_runs[0].result_statistic.passed #=> Integer
+    #   resp.replication_task_assessment_runs[0].result_statistic.failed #=> Integer
+    #   resp.replication_task_assessment_runs[0].result_statistic.error #=> Integer
+    #   resp.replication_task_assessment_runs[0].result_statistic.warning #=> Integer
+    #   resp.replication_task_assessment_runs[0].result_statistic.cancelled #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentRuns AWS API Documentation
     #
@@ -8734,6 +8758,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.data_migration_status #=> String
     #   resp.data_migration.public_ip_addresses #=> Array
     #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.data_migration_cidr_blocks #=> Array
+    #   resp.data_migration.data_migration_cidr_blocks[0] #=> String
     #   resp.data_migration.last_failure_message #=> String
     #   resp.data_migration.stop_reason #=> String
     #
@@ -11250,6 +11276,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.data_migration_status #=> String
     #   resp.data_migration.public_ip_addresses #=> Array
     #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.data_migration_cidr_blocks #=> Array
+    #   resp.data_migration.data_migration_cidr_blocks[0] #=> String
     #   resp.data_migration.last_failure_message #=> String
     #   resp.data_migration.stop_reason #=> String
     #
@@ -12031,6 +12059,10 @@ module Aws::DatabaseMigrationService
     #
     #    </note>
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags to be assigned to the premigration assessment run
+    #   that you want to start.
+    #
     # @return [Types::StartReplicationTaskAssessmentRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartReplicationTaskAssessmentRunResponse#replication_task_assessment_run #replication_task_assessment_run} => Types::ReplicationTaskAssessmentRun
@@ -12047,6 +12079,13 @@ module Aws::DatabaseMigrationService
     #     assessment_run_name: "String", # required
     #     include_only: ["String"],
     #     exclude: ["String"],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #         resource_arn: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -12064,6 +12103,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task_assessment_run.result_encryption_mode #=> String
     #   resp.replication_task_assessment_run.result_kms_key_arn #=> String
     #   resp.replication_task_assessment_run.assessment_run_name #=> String
+    #   resp.replication_task_assessment_run.is_latest_task_assessment_run #=> Boolean
+    #   resp.replication_task_assessment_run.result_statistic.passed #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.failed #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.error #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.warning #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.cancelled #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentRun AWS API Documentation
     #
@@ -12119,6 +12164,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.data_migration_status #=> String
     #   resp.data_migration.public_ip_addresses #=> Array
     #   resp.data_migration.public_ip_addresses[0] #=> String
+    #   resp.data_migration.data_migration_cidr_blocks #=> Array
+    #   resp.data_migration.data_migration_cidr_blocks[0] #=> String
     #   resp.data_migration.last_failure_message #=> String
     #   resp.data_migration.stop_reason #=> String
     #
@@ -12398,7 +12445,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1928,6 +1928,10 @@ module Aws::DatabaseMigrationService
     #   The IP addresses of the endpoints for the data migration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] data_migration_cidr_blocks
+    #   The CIDR blocks of the endpoints for the data migration.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] last_failure_message
     #   Information about the data migration's most recent error or
     #   failure.
@@ -1953,6 +1957,7 @@ module Aws::DatabaseMigrationService
       :data_migration_statistics,
       :data_migration_status,
       :public_ip_addresses,
+      :data_migration_cidr_blocks,
       :last_failure_message,
       :stop_reason)
       SENSITIVE = [:public_ip_addresses]
@@ -11658,6 +11663,17 @@ module Aws::DatabaseMigrationService
     #   Unique name of the assessment run.
     #   @return [String]
     #
+    # @!attribute [rw] is_latest_task_assessment_run
+    #   Indicates that the following PreflightAssessmentRun is the latest
+    #   for the ReplicationTask. The status is either true or false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] result_statistic
+    #   Result statistics for a completed assessment run, showing aggregated
+    #   statistics of IndividualAssessments for how many assessments were
+    #   passed, failed, or encountered issues such as errors or warnings.
+    #   @return [Types::ReplicationTaskAssessmentRunResultStatistic]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskAssessmentRun AWS API Documentation
     #
     class ReplicationTaskAssessmentRun < Struct.new(
@@ -11672,7 +11688,9 @@ module Aws::DatabaseMigrationService
       :result_location_folder,
       :result_encryption_mode,
       :result_kms_key_arn,
-      :assessment_run_name)
+      :assessment_run_name,
+      :is_latest_task_assessment_run,
+      :result_statistic)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11694,6 +11712,46 @@ module Aws::DatabaseMigrationService
     class ReplicationTaskAssessmentRunProgress < Struct.new(
       :individual_assessment_count,
       :individual_assessment_completed_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object containing the result statistics for a completed assessment
+    # run.
+    #
+    # @!attribute [rw] passed
+    #   The number of individual assessments that successfully passed all
+    #   checks in the assessment run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed
+    #   The number of individual assessments that failed to meet the
+    #   criteria defined in the assessment run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error
+    #   The number of individual assessments that encountered a critical
+    #   error and could not complete properly.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] warning
+    #   Indicates that the recent completed AssessmentRun triggered a
+    #   warning.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cancelled
+    #   The number of individual assessments that were cancelled during the
+    #   assessment run.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskAssessmentRunResultStatistic AWS API Documentation
+    #
+    class ReplicationTaskAssessmentRunResultStatistic < Struct.new(
+      :passed,
+      :failed,
+      :error,
+      :warning,
+      :cancelled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13226,6 +13284,11 @@ module Aws::DatabaseMigrationService
     #    </note>
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   One or more tags to be assigned to the premigration assessment run
+    #   that you want to start.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentRunMessage AWS API Documentation
     #
     class StartReplicationTaskAssessmentRunMessage < Struct.new(
@@ -13237,7 +13300,8 @@ module Aws::DatabaseMigrationService
       :result_kms_key_arn,
       :assessment_run_name,
       :include_only,
-      :exclude)
+      :exclude,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

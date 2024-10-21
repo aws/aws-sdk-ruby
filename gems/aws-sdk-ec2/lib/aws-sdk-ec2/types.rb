@@ -1971,7 +1971,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] unused_reservation_billing_owner_id
-    #   The ID of the consumer account to which assign billing.
+    #   The ID of the consumer account to which to assign billing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateCapacityReservationBillingOwnerRequest AWS API Documentation
@@ -8280,7 +8280,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
     #   @return [String]
     #
@@ -9722,7 +9722,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] secondary_private_ip_addresses
@@ -9732,7 +9732,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] secondary_private_ip_address_count
@@ -9743,7 +9743,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayRequest AWS API Documentation
@@ -30767,8 +30767,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer
-    #   managed CMK under which the EBS volume is encrypted.
+    #   Identifier (key ID, key alias, key ARN, or alias ARN) of the
+    #   customer managed KMS key to use for EBS encryption.
     #
     #   This parameter is only supported on `BlockDeviceMapping` objects
     #   called by [RunInstances][1], [RequestSpotFleet][2], and
@@ -41239,12 +41239,11 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information, see [Create a mixed instances group using
+    # For more information, see [Create mixed instances group using
     # attribute-based instance type selection][3] in the *Amazon EC2 Auto
-    # Scaling User Guide*, and also [Attribute-based instance type selection
-    # for EC2 Fleet][4], [Attribute-based instance type selection for Spot
-    # Fleet][5], and [Spot placement score][6] in the *Amazon EC2 User
-    # Guide*.
+    # Scaling User Guide*, and also [Specify attributes for instance type
+    # selection for EC2 Fleet or Spot Fleet][4] and [Spot placement
+    # score][5] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -41252,8 +41251,7 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
-    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
-    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
     #
     # @!attribute [rw] v_cpu_count
     #   The minimum and maximum number of vCPUs.
@@ -41708,10 +41706,9 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information, see [Attribute-based instance type selection for
-    # EC2 Fleet][4], [Attribute-based instance type selection for Spot
-    # Fleet][5], and [Spot placement score][6] in the *Amazon EC2 User
-    # Guide*.
+    # For more information, see [Specify attributes for instance type
+    # selection for EC2 Fleet or Spot Fleet][4] and [Spot placement
+    # score][5] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -41719,8 +41716,7 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
-    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
-    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
     #
     # @!attribute [rw] v_cpu_count
     #   The minimum and maximum number of vCPUs.
@@ -50268,13 +50264,11 @@ module Aws::EC2
     #   Resolver in this subnet should return synthetic IPv6 addresses for
     #   IPv4-only destinations.
     #
-    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
+    #   You must first configure a NAT gateway in a public subnet (separate
     #   from the subnet containing the IPv6-only workloads). For example,
     #   the subnet containing the NAT gateway should have a `0.0.0.0/0`
     #   route pointing to the internet gateway. For more information, see
     #   [Configure DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
-    #
-    #    </note>
     #
     #
     #
@@ -57786,10 +57780,9 @@ module Aws::EC2
     #
     #    </note>
     #
-    #   For more information, see [Attribute-based instance type selection
-    #   for EC2 Fleet][4], [Attribute-based instance type selection for Spot
-    #   Fleet][5], and [Spot placement score][6] in the *Amazon EC2 User
-    #   Guide*.
+    #   For more information, see [Specify attributes for instance type
+    #   selection for EC2 Fleet or Spot Fleet][4] and [Spot placement
+    #   score][5] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -57797,8 +57790,7 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
     #   [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
-    #   [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
-    #   [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    #   [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
     #   @return [Types::InstanceRequirementsRequest]
     #
     # @!attribute [rw] private_dns_name_options

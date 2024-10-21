@@ -133,6 +133,7 @@ module Aws::ApplicationInsights
     MetaDataValue = Shapes::StringShape.new(name: 'MetaDataValue')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricNamespace = Shapes::StringShape.new(name: 'MetricNamespace')
+    MissingWorkloadConfig = Shapes::BooleanShape.new(name: 'MissingWorkloadConfig')
     Monitor = Shapes::BooleanShape.new(name: 'Monitor')
     Observation = Shapes::StructureShape.new(name: 'Observation')
     ObservationId = Shapes::StringShape.new(name: 'ObservationId')
@@ -161,7 +162,9 @@ module Aws::ApplicationInsights
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     S3EventName = Shapes::StringShape.new(name: 'S3EventName')
+    SNSNotificationArn = Shapes::StringShape.new(name: 'SNSNotificationArn')
     SeverityLevel = Shapes::StringShape.new(name: 'SeverityLevel')
+    ShortName = Shapes::StringShape.new(name: 'ShortName')
     SourceARN = Shapes::StringShape.new(name: 'SourceARN')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
@@ -241,6 +244,7 @@ module Aws::ApplicationInsights
     ApplicationInfo.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
     ApplicationInfo.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "LifeCycle"))
     ApplicationInfo.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
+    ApplicationInfo.add_member(:sns_notification_arn, Shapes::ShapeRef.new(shape: SNSNotificationArn, location_name: "SNSNotificationArn"))
     ApplicationInfo.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
     ApplicationInfo.add_member(:cwe_monitor_enabled, Shapes::ShapeRef.new(shape: CWEMonitorEnabled, location_name: "CWEMonitorEnabled"))
     ApplicationInfo.add_member(:remarks, Shapes::ShapeRef.new(shape: Remarks, location_name: "Remarks"))
@@ -270,6 +274,7 @@ module Aws::ApplicationInsights
     CreateApplicationRequest.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
     CreateApplicationRequest.add_member(:cwe_monitor_enabled, Shapes::ShapeRef.new(shape: CWEMonitorEnabled, location_name: "CWEMonitorEnabled"))
     CreateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
+    CreateApplicationRequest.add_member(:sns_notification_arn, Shapes::ShapeRef.new(shape: SNSNotificationArn, location_name: "SNSNotificationArn"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateApplicationRequest.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
     CreateApplicationRequest.add_member(:auto_create, Shapes::ShapeRef.new(shape: AutoCreate, location_name: "AutoCreate"))
@@ -382,6 +387,7 @@ module Aws::ApplicationInsights
     DescribeProblemRequest.struct_class = Types::DescribeProblemRequest
 
     DescribeProblemResponse.add_member(:problem, Shapes::ShapeRef.new(shape: Problem, location_name: "Problem"))
+    DescribeProblemResponse.add_member(:sns_notification_arn, Shapes::ShapeRef.new(shape: SNSNotificationArn, location_name: "SNSNotificationArn"))
     DescribeProblemResponse.struct_class = Types::DescribeProblemResponse
 
     DescribeWorkloadRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
@@ -555,6 +561,7 @@ module Aws::ApplicationInsights
 
     Problem.add_member(:id, Shapes::ShapeRef.new(shape: ProblemId, location_name: "Id"))
     Problem.add_member(:title, Shapes::ShapeRef.new(shape: Title, location_name: "Title"))
+    Problem.add_member(:short_name, Shapes::ShapeRef.new(shape: ShortName, location_name: "ShortName"))
     Problem.add_member(:insights, Shapes::ShapeRef.new(shape: Insights, location_name: "Insights"))
     Problem.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     Problem.add_member(:affected_resource, Shapes::ShapeRef.new(shape: AffectedResource, location_name: "AffectedResource"))
@@ -621,6 +628,7 @@ module Aws::ApplicationInsights
     UpdateApplicationRequest.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
     UpdateApplicationRequest.add_member(:cwe_monitor_enabled, Shapes::ShapeRef.new(shape: CWEMonitorEnabled, location_name: "CWEMonitorEnabled"))
     UpdateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
+    UpdateApplicationRequest.add_member(:sns_notification_arn, Shapes::ShapeRef.new(shape: SNSNotificationArn, location_name: "SNSNotificationArn"))
     UpdateApplicationRequest.add_member(:remove_sns_topic, Shapes::ShapeRef.new(shape: RemoveSNSTopic, location_name: "RemoveSNSTopic"))
     UpdateApplicationRequest.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
     UpdateApplicationRequest.add_member(:attach_missing_permission, Shapes::ShapeRef.new(shape: AttachMissingPermission, location_name: "AttachMissingPermission"))
@@ -683,6 +691,7 @@ module Aws::ApplicationInsights
     Workload.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "WorkloadName"))
     Workload.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, location_name: "Tier"))
     Workload.add_member(:workload_remarks, Shapes::ShapeRef.new(shape: Remarks, location_name: "WorkloadRemarks"))
+    Workload.add_member(:missing_workload_config, Shapes::ShapeRef.new(shape: MissingWorkloadConfig, location_name: "MissingWorkloadConfig"))
     Workload.struct_class = Types::Workload
 
     WorkloadConfiguration.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "WorkloadName"))

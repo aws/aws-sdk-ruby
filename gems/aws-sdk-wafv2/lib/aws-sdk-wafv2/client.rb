@@ -3706,11 +3706,11 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Deletes all rule groups that are managed by Firewall Manager for the
-    # specified web ACL.
-    #
-    # You can only use this if `ManagedByFirewallManager` is false in the
+    # Deletes all rule groups that are managed by Firewall Manager from the
     # specified WebACL.
+    #
+    # You can only use this if `ManagedByFirewallManager` and
+    # `RetrofittedByFirewallManager` are both false in the web ACL.
     #
     # @option params [required, String] :web_acl_arn
     #   The Amazon Resource Name (ARN) of the web ACL.
@@ -3995,7 +3995,7 @@ module Aws::WAFV2
     # Deletes the specified WebACL.
     #
     # You can only use this if `ManagedByFirewallManager` is false in the
-    # specified WebACL.
+    # web ACL.
     #
     # <note markdown="1"> Before deleting any web ACL, first disassociate it from all resources.
     #
@@ -9225,7 +9225,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

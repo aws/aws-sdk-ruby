@@ -5163,6 +5163,16 @@ module Aws::WAFV2
     #   Indicates whether the logging configuration was created by Firewall
     #   Manager, as part of an WAF policy configuration. If true, only
     #   Firewall Manager can modify or delete the configuration.
+    #
+    #   The logging configuration can be created by Firewall Manager for use
+    #   with any web ACL that Firewall Manager is using for an WAF policy.
+    #   Web ACLs that Firewall Manager creates and uses have their
+    #   `ManagedByFirewallManager` property set to true. Web ACLs that were
+    #   created by a customer account and then retrofitted by Firewall
+    #   Manager for use by a policy have their
+    #   `RetrofittedByFirewallManager` property set to true. For either
+    #   case, any corresponding logging configuration will indicate
+    #   `ManagedByFirewallManager`.
     #   @return [Boolean]
     #
     # @!attribute [rw] logging_filter
@@ -9854,9 +9864,13 @@ module Aws::WAFV2
     #   @return [Array<Types::FirewallManagerRuleGroup>]
     #
     # @!attribute [rw] managed_by_firewall_manager
-    #   Indicates whether this web ACL is managed by Firewall Manager. If
-    #   true, then only Firewall Manager can delete the web ACL or any
-    #   Firewall Manager rule groups in the web ACL.
+    #   Indicates whether this web ACL was created by Firewall Manager and
+    #   is being managed by Firewall Manager. If true, then only Firewall
+    #   Manager can delete the web ACL or any Firewall Manager rule groups
+    #   in the web ACL. See also the properties
+    #   `RetrofittedByFirewallManager`,
+    #   `PreProcessFirewallManagerRuleGroups`, and
+    #   `PostProcessFirewallManagerRuleGroups`.
     #   @return [Boolean]
     #
     # @!attribute [rw] label_namespace
@@ -9943,6 +9957,16 @@ module Aws::WAFV2
     #   [1]: http://aws.amazon.com/waf/pricing/
     #   @return [Types::AssociationConfig]
     #
+    # @!attribute [rw] retrofitted_by_firewall_manager
+    #   Indicates whether this web ACL was created by a customer account and
+    #   then retrofitted by Firewall Manager. If true, then the web ACL is
+    #   currently being managed by a Firewall Manager WAF policy, and only
+    #   Firewall Manager can manage any Firewall Manager rule groups in the
+    #   web ACL. See also the properties `ManagedByFirewallManager`,
+    #   `PreProcessFirewallManagerRuleGroups`, and
+    #   `PostProcessFirewallManagerRuleGroups`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -9962,7 +9986,8 @@ module Aws::WAFV2
       :captcha_config,
       :challenge_config,
       :token_domains,
-      :association_config)
+      :association_config,
+      :retrofitted_by_firewall_manager)
       SENSITIVE = []
       include Aws::Structure
     end

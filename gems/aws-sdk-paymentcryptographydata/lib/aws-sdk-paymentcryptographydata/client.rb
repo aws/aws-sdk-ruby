@@ -452,8 +452,8 @@ module Aws::PaymentCryptographyData
     # more information, see [Decrypt data][1] in the *Amazon Web Services
     # Payment Cryptography User Guide*.
     #
-    # You can use an encryption key generated within Amazon Web Services
-    # Payment Cryptography, or you can import your own encryption key by
+    # You can use an decryption key generated within Amazon Web Services
+    # Payment Cryptography, or you can import your own decryption key by
     # calling [ImportKey][2]. For this operation, the key must have
     # `KeyModesOfUse` set to `Decrypt`. In asymmetric decryption, Amazon Web
     # Services Payment Cryptography decrypts the ciphertext using the
@@ -461,6 +461,17 @@ module Aws::PaymentCryptographyData
     # encryption outside of Amazon Web Services Payment Cryptography, you
     # can export the public component of the asymmetric key pair by calling
     # [GetPublicCertificate][3].
+    #
+    # This operation also supports dynamic keys, allowing you to pass a
+    # dynamic decryption key as a TR-31 WrappedKeyBlock. This can be used
+    # when key material is frequently rotated, such as during every card
+    # transaction, and there is need to avoid importing short-lived keys
+    # into Amazon Web Services Payment Cryptography. To decrypt using
+    # dynamic keys, the `keyARN` is the Key Encryption Key (KEK) of the
+    # TR-31 wrapped decryption key material. The incoming wrapped key shall
+    # have a key purpose of D0 with a mode of use of B or D. For more
+    # information, see [Using Dynamic Keys][4] in the *Amazon Web Services
+    # Payment Cryptography User Guide*.
     #
     # For symmetric and DUKPT decryption, Amazon Web Services Payment
     # Cryptography supports `TDES` and `AES` algorithms. For EMV decryption,
@@ -474,8 +485,8 @@ module Aws::PaymentCryptographyData
     # size unless padding is enabled.
     #
     # For information about valid keys for this operation, see
-    # [Understanding key attributes][4] and [Key types for specific data
-    # operations][5] in the *Amazon Web Services Payment Cryptography User
+    # [Understanding key attributes][5] and [Key types for specific data
+    # operations][6] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
     # **Cross-account use**: This operation can't be used across different
@@ -494,8 +505,9 @@ module Aws::PaymentCryptographyData
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/decrypt-data.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
-    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the encryption key that Amazon Web Services Payment
@@ -581,11 +593,24 @@ module Aws::PaymentCryptographyData
     #
     # You can generate an encryption key within Amazon Web Services Payment
     # Cryptography by calling [CreateKey][2]. You can import your own
-    # encryption key by calling [ImportKey][3]. For this operation, the key
-    # must have `KeyModesOfUse` set to `Encrypt`. In asymmetric encryption,
-    # plaintext is encrypted using public component. You can import the
-    # public component of an asymmetric key pair created outside Amazon Web
-    # Services Payment Cryptography by calling [ImportKey][3].
+    # encryption key by calling [ImportKey][3].
+    #
+    # For this operation, the key must have `KeyModesOfUse` set to
+    # `Encrypt`. In asymmetric encryption, plaintext is encrypted using
+    # public component. You can import the public component of an asymmetric
+    # key pair created outside Amazon Web Services Payment Cryptography by
+    # calling [ImportKey][3].
+    #
+    # This operation also supports dynamic keys, allowing you to pass a
+    # dynamic encryption key as a TR-31 WrappedKeyBlock. This can be used
+    # when key material is frequently rotated, such as during every card
+    # transaction, and there is need to avoid importing short-lived keys
+    # into Amazon Web Services Payment Cryptography. To encrypt using
+    # dynamic keys, the `keyARN` is the Key Encryption Key (KEK) of the
+    # TR-31 wrapped encryption key material. The incoming wrapped key shall
+    # have a key purpose of D0 with a mode of use of B or D. For more
+    # information, see [Using Dynamic Keys][4] in the *Amazon Web Services
+    # Payment Cryptography User Guide*.
     #
     # For symmetric and DUKPT encryption, Amazon Web Services Payment
     # Cryptography supports `TDES` and `AES` algorithms. For EMV encryption,
@@ -605,8 +630,8 @@ module Aws::PaymentCryptographyData
     # your account with `KeyModesOfUse` set to `DeriveKey`.
     #
     # For information about valid keys for this operation, see
-    # [Understanding key attributes][4] and [Key types for specific data
-    # operations][5] in the *Amazon Web Services Payment Cryptography User
+    # [Understanding key attributes][5] and [Key types for specific data
+    # operations][6] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
     # **Cross-account use**: This operation can't be used across different
@@ -616,7 +641,7 @@ module Aws::PaymentCryptographyData
     #
     # * DecryptData
     #
-    # * [GetPublicCertificate][6]
+    # * [GetPublicCertificate][7]
     #
     # * [ImportKey][3]
     #
@@ -627,9 +652,10 @@ module Aws::PaymentCryptographyData
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
-    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
-    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the encryption key that Amazon Web Services Payment
@@ -906,7 +932,7 @@ module Aws::PaymentCryptographyData
     #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA
     #         session_key_derivation_value: { # required
     #           application_cryptogram: "ApplicationCryptogramType",
-    #           application_transaction_counter: "HexLengthBetween2And4",
+    #           application_transaction_counter: "HexLengthEquals4",
     #         },
     #       },
     #       dukpt_iso_9797_algorithm_1: {
@@ -940,6 +966,173 @@ module Aws::PaymentCryptographyData
     # @param [Hash] params ({})
     def generate_mac(params = {}, options = {})
       req = build_request(:generate_mac, params)
+      req.send_request(options)
+    end
+
+    # Generates an issuer script mac for EMV payment cards that use offline
+    # PINs as the cardholder verification method (CVM).
+    #
+    # This operation generates an authenticated issuer script response by
+    # appending the incoming message data (APDU command) with the target
+    # encrypted PIN block in ISO2 format. The command structure and method
+    # to send the issuer script update to the card is not defined by this
+    # operation and is typically determined by the applicable payment card
+    # scheme.
+    #
+    # The primary inputs to this operation include the incoming new
+    # encrypted pinblock, PIN encryption key (PEK), issuer master key (IMK),
+    # primary account number (PAN), and the payment card derivation method.
+    #
+    # The operation uses two issuer master keys - secure messaging for
+    # confidentiality (IMK-SMC) and secure messaging for integrity
+    # (IMK-SMI). The SMC key is used to internally derive a key to secure
+    # the pin, while SMI key is used to internally derive a key to
+    # authenticate the script reponse as per the [EMV 4.4 - Book 2 -
+    # Security and Key Management][1] specification.
+    #
+    # This operation supports Amex, EMV2000, EMVCommon, Mastercard and Visa
+    # derivation methods, each requiring specific input parameters. Users
+    # must follow the specific derivation method and input parameters
+    # defined by the respective payment card scheme.
+    #
+    # <note markdown="1"> Use GenerateMac operation when sending a script update to an EMV card
+    # that does not involve PIN change. When assigning IAM permissions, it
+    # is important to understand that EncryptData using EMV keys and
+    # GenerateMac perform similar functions to this command.
+    #
+    #  </note>
+    #
+    # **Cross-account use**: This operation can't be used across different
+    # Amazon Web Services accounts.
+    #
+    # **Related operations:**
+    #
+    # * EncryptData
+    #
+    # * GenerateMac
+    #
+    #
+    #
+    # [1]: https://www.emvco.com/specifications/
+    #
+    # @option params [required, String] :new_pin_pek_identifier
+    #   The `keyARN` of the PEK protecting the incoming new encrypted PIN
+    #   block.
+    #
+    # @option params [required, String] :new_encrypted_pin_block
+    #   The incoming new encrypted PIN block data for offline pin change on an
+    #   EMV card.
+    #
+    # @option params [required, String] :pin_block_format
+    #   The PIN encoding format of the incoming new encrypted PIN block as
+    #   specified in ISO 9564.
+    #
+    # @option params [required, String] :secure_messaging_integrity_key_identifier
+    #   The `keyARN` of the issuer master key (IMK-SMI) used to authenticate
+    #   the issuer script response.
+    #
+    # @option params [required, String] :secure_messaging_confidentiality_key_identifier
+    #   The `keyARN` of the issuer master key (IMK-SMC) used to protect the
+    #   PIN block data in the issuer script response.
+    #
+    # @option params [required, String] :message_data
+    #   The message data is the APDU command from the card reader or terminal.
+    #   The target encrypted PIN block, after translation to ISO2 format, is
+    #   appended to this message data to generate an issuer script response.
+    #
+    # @option params [required, Types::DerivationMethodAttributes] :derivation_method_attributes
+    #   The attributes and data values to derive payment card specific
+    #   confidentiality and integrity keys.
+    #
+    # @return [Types::GenerateMacEmvPinChangeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateMacEmvPinChangeOutput#new_pin_pek_arn #new_pin_pek_arn} => String
+    #   * {Types::GenerateMacEmvPinChangeOutput#secure_messaging_integrity_key_arn #secure_messaging_integrity_key_arn} => String
+    #   * {Types::GenerateMacEmvPinChangeOutput#secure_messaging_confidentiality_key_arn #secure_messaging_confidentiality_key_arn} => String
+    #   * {Types::GenerateMacEmvPinChangeOutput#mac #mac} => String
+    #   * {Types::GenerateMacEmvPinChangeOutput#encrypted_pin_block #encrypted_pin_block} => String
+    #   * {Types::GenerateMacEmvPinChangeOutput#new_pin_pek_key_check_value #new_pin_pek_key_check_value} => String
+    #   * {Types::GenerateMacEmvPinChangeOutput#secure_messaging_integrity_key_check_value #secure_messaging_integrity_key_check_value} => String
+    #   * {Types::GenerateMacEmvPinChangeOutput#secure_messaging_confidentiality_key_check_value #secure_messaging_confidentiality_key_check_value} => String
+    #   * {Types::GenerateMacEmvPinChangeOutput#visa_amex_derivation_outputs #visa_amex_derivation_outputs} => Types::VisaAmexDerivationOutputs
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_mac_emv_pin_change({
+    #     new_pin_pek_identifier: "KeyArnOrKeyAliasType", # required
+    #     new_encrypted_pin_block: "PinBlockLengthEquals16", # required
+    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_1, ISO_FORMAT_3
+    #     secure_messaging_integrity_key_identifier: "KeyArnOrKeyAliasType", # required
+    #     secure_messaging_confidentiality_key_identifier: "KeyArnOrKeyAliasType", # required
+    #     message_data: "CommandMessageDataType", # required
+    #     derivation_method_attributes: { # required
+    #       emv_common: {
+    #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_cryptogram: "ApplicationCryptogramType", # required
+    #         mode: "ECB", # required, accepts ECB, CBC
+    #         pin_block_padding_type: "NO_PADDING", # required, accepts NO_PADDING, ISO_IEC_7816_4
+    #         pin_block_length_position: "NONE", # required, accepts NONE, FRONT_OF_PIN_BLOCK
+    #       },
+    #       amex: {
+    #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
+    #         authorization_request_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         current_pin_attributes: {
+    #           current_pin_pek_identifier: "KeyArnOrKeyAliasType", # required
+    #           current_encrypted_pin_block: "PinBlockLengthEquals16", # required
+    #         },
+    #       },
+    #       visa: {
+    #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
+    #         authorization_request_key_identifier: "KeyArnOrKeyAliasType", # required
+    #         current_pin_attributes: {
+    #           current_pin_pek_identifier: "KeyArnOrKeyAliasType", # required
+    #           current_encrypted_pin_block: "PinBlockLengthEquals16", # required
+    #         },
+    #       },
+    #       emv_2000: {
+    #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
+    #       },
+    #       mastercard: {
+    #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_cryptogram: "ApplicationCryptogramType", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.new_pin_pek_arn #=> String
+    #   resp.secure_messaging_integrity_key_arn #=> String
+    #   resp.secure_messaging_confidentiality_key_arn #=> String
+    #   resp.mac #=> String
+    #   resp.encrypted_pin_block #=> String
+    #   resp.new_pin_pek_key_check_value #=> String
+    #   resp.secure_messaging_integrity_key_check_value #=> String
+    #   resp.secure_messaging_confidentiality_key_check_value #=> String
+    #   resp.visa_amex_derivation_outputs.authorization_request_key_arn #=> String
+    #   resp.visa_amex_derivation_outputs.authorization_request_key_check_value #=> String
+    #   resp.visa_amex_derivation_outputs.current_pin_pek_arn #=> String
+    #   resp.visa_amex_derivation_outputs.current_pin_pek_key_check_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GenerateMacEmvPinChange AWS API Documentation
+    #
+    # @overload generate_mac_emv_pin_change(params = {})
+    # @param [Hash] params ({})
+    def generate_mac_emv_pin_change(params = {}, options = {})
+      req = build_request(:generate_mac_emv_pin_change, params)
       req.send_request(options)
     end
 
@@ -1086,6 +1279,17 @@ module Aws::PaymentCryptographyData
     # this operation must be in a compatible key state with `KeyModesOfUse`
     # set to `Encrypt`.
     #
+    # This operation also supports dynamic keys, allowing you to pass a
+    # dynamic encryption key as a TR-31 WrappedKeyBlock. This can be used
+    # when key material is frequently rotated, such as during every card
+    # transaction, and there is need to avoid importing short-lived keys
+    # into Amazon Web Services Payment Cryptography. To re-encrypt using
+    # dynamic keys, the `keyARN` is the Key Encryption Key (KEK) of the
+    # TR-31 wrapped encryption key material. The incoming wrapped key shall
+    # have a key purpose of D0 with a mode of use of B or D. For more
+    # information, see [Using Dynamic Keys][3] in the *Amazon Web Services
+    # Payment Cryptography User Guide*.
+    #
     # For symmetric and DUKPT encryption, Amazon Web Services Payment
     # Cryptography supports `TDES` and `AES` algorithms. To encrypt using
     # DUKPT, a DUKPT key must already exist within your account with
@@ -1093,8 +1297,8 @@ module Aws::PaymentCryptographyData
     # calling [CreateKey][1].
     #
     # For information about valid keys for this operation, see
-    # [Understanding key attributes][3] and [Key types for specific data
-    # operations][4] in the *Amazon Web Services Payment Cryptography User
+    # [Understanding key attributes][4] and [Key types for specific data
+    # operations][5] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
     # **Cross-account use**: This operation can't be used across different
@@ -1106,7 +1310,7 @@ module Aws::PaymentCryptographyData
     #
     # * EncryptData
     #
-    # * [GetPublicCertificate][5]
+    # * [GetPublicCertificate][6]
     #
     # * [ImportKey][2]
     #
@@ -1114,9 +1318,10 @@ module Aws::PaymentCryptographyData
     #
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
-    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
-    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
     #
     # @option params [required, String] :incoming_key_identifier
     #   The `keyARN` of the encryption key of incoming ciphertext data.
@@ -1231,6 +1436,16 @@ module Aws::PaymentCryptographyData
     # Cryptography supports `TDES` and `AES` key derivation type for DUKPT
     # translations.
     #
+    # This operation also supports dynamic keys, allowing you to pass a
+    # dynamic PEK as a TR-31 WrappedKeyBlock. This can be used when key
+    # material is frequently rotated, such as during every card transaction,
+    # and there is need to avoid importing short-lived keys into Amazon Web
+    # Services Payment Cryptography. To translate PIN block using dynamic
+    # keys, the `keyARN` is the Key Encryption Key (KEK) of the TR-31
+    # wrapped PEK. The incoming wrapped key shall have a key purpose of P0
+    # with a mode of use of B or D. For more information, see [Using Dynamic
+    # Keys][2] in the *Amazon Web Services Payment Cryptography User Guide*.
+    #
     # The allowed combinations of PIN block format translations are guided
     # by PCI. It is important to note that not all encrypted PIN block
     # formats (example, format 1) require PAN (Primary Account Number) as
@@ -1239,8 +1454,8 @@ module Aws::PaymentCryptographyData
     # not require a PAN for generation.
     #
     # For information about valid keys for this operation, see
-    # [Understanding key attributes][2] and [Key types for specific data
-    # operations][3] in the *Amazon Web Services Payment Cryptography User
+    # [Understanding key attributes][3] and [Key types for specific data
+    # operations][4] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
     # <note markdown="1"> Amazon Web Services Payment Cryptography currently supports ISO PIN
@@ -1261,8 +1476,9 @@ module Aws::PaymentCryptographyData
     #
     #
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html
-    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
     # @option params [required, String] :incoming_key_identifier
     #   The `keyARN` of the encryption key under which incoming PIN block data
@@ -1468,18 +1684,18 @@ module Aws::PaymentCryptographyData
     #       emv_common: {
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
     #       },
     #       mastercard: {
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
     #         unpredictable_number: "HexLengthBetween2And8", # required
     #       },
     #       emv_2000: {
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
     #       },
     #       amex: {
     #         primary_account_number: "PrimaryAccountNumberType", # required
@@ -1702,7 +1918,7 @@ module Aws::PaymentCryptographyData
     #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA
     #         session_key_derivation_value: { # required
     #           application_cryptogram: "ApplicationCryptogramType",
-    #           application_transaction_counter: "HexLengthBetween2And4",
+    #           application_transaction_counter: "HexLengthEquals4",
     #         },
     #       },
     #       dukpt_iso_9797_algorithm_1: {
@@ -1874,7 +2090,7 @@ module Aws::PaymentCryptographyData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

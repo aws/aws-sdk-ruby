@@ -13,6 +13,16 @@ module Aws::PaymentCryptographyData
       SENSITIVE: []
     end
 
+    class AmexAttributes
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor primary_account_number: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor authorization_request_key_identifier: ::String
+      attr_accessor current_pin_attributes: Types::CurrentPinAttributes
+      SENSITIVE: [:primary_account_number]
+    end
+
     class AmexCardSecurityCodeVersion1
       attr_accessor card_expiry_date: ::String
       SENSITIVE: [:card_expiry_date]
@@ -133,6 +143,12 @@ module Aws::PaymentCryptographyData
       SENSITIVE: [:proprietary_authentication_data]
     end
 
+    class CurrentPinAttributes
+      attr_accessor current_pin_pek_identifier: ::String
+      attr_accessor current_encrypted_pin_block: ::String
+      SENSITIVE: [:current_encrypted_pin_block]
+    end
+
     class DecryptDataInput
       attr_accessor key_identifier: ::String
       attr_accessor cipher_text: ::String
@@ -146,6 +162,29 @@ module Aws::PaymentCryptographyData
       attr_accessor key_check_value: ::String
       attr_accessor plain_text: ::String
       SENSITIVE: [:plain_text]
+    end
+
+    class DerivationMethodAttributes
+      attr_accessor emv_common: Types::EmvCommonAttributes
+      attr_accessor amex: Types::AmexAttributes
+      attr_accessor visa: Types::VisaAttributes
+      attr_accessor emv_2000: Types::Emv2000Attributes
+      attr_accessor mastercard: Types::MasterCardAttributes
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EmvCommon < DerivationMethodAttributes
+      end
+      class Amex < DerivationMethodAttributes
+      end
+      class Visa < DerivationMethodAttributes
+      end
+      class Emv2000 < DerivationMethodAttributes
+      end
+      class Mastercard < DerivationMethodAttributes
+      end
+      class Unknown < DerivationMethodAttributes
+      end
     end
 
     class DiscoverDynamicCardVerificationCode
@@ -191,6 +230,25 @@ module Aws::PaymentCryptographyData
       attr_accessor service_code: ::String
       attr_accessor application_transaction_counter: ::String
       SENSITIVE: [:card_expiry_date, :service_code]
+    end
+
+    class Emv2000Attributes
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor primary_account_number: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor application_transaction_counter: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class EmvCommonAttributes
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor primary_account_number: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor application_cryptogram: ::String
+      attr_accessor mode: ("ECB" | "CBC")
+      attr_accessor pin_block_padding_type: ("NO_PADDING" | "ISO_IEC_7816_4")
+      attr_accessor pin_block_length_position: ("NONE" | "FRONT_OF_PIN_BLOCK")
+      SENSITIVE: [:primary_account_number, :application_cryptogram]
     end
 
     class EmvEncryptionAttributes
@@ -251,6 +309,30 @@ module Aws::PaymentCryptographyData
       attr_accessor key_check_value: ::String
       attr_accessor validation_data: ::String
       SENSITIVE: [:validation_data]
+    end
+
+    class GenerateMacEmvPinChangeInput
+      attr_accessor new_pin_pek_identifier: ::String
+      attr_accessor new_encrypted_pin_block: ::String
+      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_1" | "ISO_FORMAT_3")
+      attr_accessor secure_messaging_integrity_key_identifier: ::String
+      attr_accessor secure_messaging_confidentiality_key_identifier: ::String
+      attr_accessor message_data: ::String
+      attr_accessor derivation_method_attributes: Types::DerivationMethodAttributes
+      SENSITIVE: [:new_encrypted_pin_block, :message_data]
+    end
+
+    class GenerateMacEmvPinChangeOutput
+      attr_accessor new_pin_pek_arn: ::String
+      attr_accessor secure_messaging_integrity_key_arn: ::String
+      attr_accessor secure_messaging_confidentiality_key_arn: ::String
+      attr_accessor mac: ::String
+      attr_accessor encrypted_pin_block: ::String
+      attr_accessor new_pin_pek_key_check_value: ::String
+      attr_accessor secure_messaging_integrity_key_check_value: ::String
+      attr_accessor secure_messaging_confidentiality_key_check_value: ::String
+      attr_accessor visa_amex_derivation_outputs: Types::VisaAmexDerivationOutputs
+      SENSITIVE: [:mac, :encrypted_pin_block]
     end
 
     class GenerateMacInput
@@ -368,6 +450,14 @@ module Aws::PaymentCryptographyData
       end
       class Unknown < MacAttributes
       end
+    end
+
+    class MasterCardAttributes
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor primary_account_number: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor application_cryptogram: ::String
+      SENSITIVE: [:primary_account_number, :application_cryptogram]
     end
 
     class PinData
@@ -674,6 +764,24 @@ module Aws::PaymentCryptographyData
       attr_accessor encryption_key_arn: ::String
       attr_accessor encryption_key_check_value: ::String
       SENSITIVE: []
+    end
+
+    class VisaAmexDerivationOutputs
+      attr_accessor authorization_request_key_arn: ::String
+      attr_accessor authorization_request_key_check_value: ::String
+      attr_accessor current_pin_pek_arn: ::String
+      attr_accessor current_pin_pek_key_check_value: ::String
+      SENSITIVE: []
+    end
+
+    class VisaAttributes
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor primary_account_number: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor authorization_request_key_identifier: ::String
+      attr_accessor current_pin_attributes: Types::CurrentPinAttributes
+      SENSITIVE: [:primary_account_number]
     end
 
     class VisaPin

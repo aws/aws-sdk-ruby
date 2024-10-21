@@ -2598,7 +2598,14 @@ module Aws
                                                    ?result_kms_key_arn: ::String,
                                                    assessment_run_name: ::String,
                                                    ?include_only: Array[::String],
-                                                   ?exclude: Array[::String]
+                                                   ?exclude: Array[::String],
+                                                   ?tags: Array[
+                                                     {
+                                                       key: ::String?,
+                                                       value: ::String?,
+                                                       resource_arn: ::String?
+                                                     },
+                                                   ]
                                                  ) -> _StartReplicationTaskAssessmentRunResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReplicationTaskAssessmentRunResponseSuccess
 

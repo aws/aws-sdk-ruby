@@ -566,6 +566,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class OrchestrationConfiguration
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      attr_accessor inference_config: Types::InferenceConfig
+      attr_accessor prompt_template: Types::PromptTemplate
       attr_accessor query_transformation_configuration: Types::QueryTransformationConfiguration
       SENSITIVE: []
     end

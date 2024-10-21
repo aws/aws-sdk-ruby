@@ -419,9 +419,22 @@ module Aws
                                        knowledge_base_id: ::String,
                                        model_arn: ::String,
                                        orchestration_configuration: {
+                                         additional_model_request_fields: Hash[::String, {
+                                           }]?,
+                                         inference_config: {
+                                           text_inference_config: {
+                                             max_tokens: ::Integer?,
+                                             stop_sequences: Array[::String]?,
+                                             temperature: ::Float?,
+                                             top_p: ::Float?
+                                           }?
+                                         }?,
+                                         prompt_template: {
+                                           text_prompt_template: ::String?
+                                         }?,
                                          query_transformation_configuration: {
                                            type: ("QUERY_DECOMPOSITION")
-                                         }
+                                         }?
                                        }?,
                                        retrieval_configuration: {
                                          vector_search_configuration: {

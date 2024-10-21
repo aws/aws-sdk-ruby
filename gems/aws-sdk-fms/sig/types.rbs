@@ -123,7 +123,7 @@ module Aws::FMS
 
     class ComplianceViolator
       attr_accessor resource_id: ::String
-      attr_accessor violation_reason: ("WEB_ACL_MISSING_RULE_GROUP" | "RESOURCE_MISSING_WEB_ACL" | "RESOURCE_INCORRECT_WEB_ACL" | "RESOURCE_MISSING_SHIELD_PROTECTION" | "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION" | "RESOURCE_MISSING_SECURITY_GROUP" | "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP" | "SECURITY_GROUP_UNUSED" | "SECURITY_GROUP_REDUNDANT" | "FMS_CREATED_SECURITY_GROUP_EDITED" | "MISSING_FIREWALL" | "MISSING_FIREWALL_SUBNET_IN_AZ" | "MISSING_EXPECTED_ROUTE_TABLE" | "NETWORK_FIREWALL_POLICY_MODIFIED" | "FIREWALL_SUBNET_IS_OUT_OF_SCOPE" | "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE" | "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE" | "UNEXPECTED_FIREWALL_ROUTES" | "UNEXPECTED_TARGET_GATEWAY_ROUTES" | "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY" | "INVALID_ROUTE_CONFIGURATION" | "MISSING_TARGET_GATEWAY" | "INTERNET_TRAFFIC_NOT_INSPECTED" | "BLACK_HOLE_ROUTE_DETECTED" | "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET" | "RESOURCE_MISSING_DNS_FIREWALL" | "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT" | "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT" | "INVALID_NETWORK_ACL_ENTRY")
+      attr_accessor violation_reason: ("WEB_ACL_MISSING_RULE_GROUP" | "RESOURCE_MISSING_WEB_ACL" | "RESOURCE_INCORRECT_WEB_ACL" | "RESOURCE_MISSING_SHIELD_PROTECTION" | "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION" | "RESOURCE_MISSING_SECURITY_GROUP" | "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP" | "SECURITY_GROUP_UNUSED" | "SECURITY_GROUP_REDUNDANT" | "FMS_CREATED_SECURITY_GROUP_EDITED" | "MISSING_FIREWALL" | "MISSING_FIREWALL_SUBNET_IN_AZ" | "MISSING_EXPECTED_ROUTE_TABLE" | "NETWORK_FIREWALL_POLICY_MODIFIED" | "FIREWALL_SUBNET_IS_OUT_OF_SCOPE" | "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE" | "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE" | "UNEXPECTED_FIREWALL_ROUTES" | "UNEXPECTED_TARGET_GATEWAY_ROUTES" | "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY" | "INVALID_ROUTE_CONFIGURATION" | "MISSING_TARGET_GATEWAY" | "INTERNET_TRAFFIC_NOT_INSPECTED" | "BLACK_HOLE_ROUTE_DETECTED" | "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET" | "RESOURCE_MISSING_DNS_FIREWALL" | "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT" | "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT" | "INVALID_NETWORK_ACL_ENTRY" | "WEB_ACL_CONFIGURATION_OR_SCOPE_OF_USE")
       attr_accessor resource_type: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -1081,6 +1081,8 @@ module Aws::FMS
       attr_accessor firewall_subnet_missing_vpc_endpoint_violation: Types::FirewallSubnetMissingVPCEndpointViolation
       attr_accessor invalid_network_acl_entries_violation: Types::InvalidNetworkAclEntriesViolation
       attr_accessor possible_remediation_actions: Types::PossibleRemediationActions
+      attr_accessor web_acl_has_incompatible_configuration_violation: Types::WebACLHasIncompatibleConfigurationViolation
+      attr_accessor web_acl_has_out_of_scope_resources_violation: Types::WebACLHasOutOfScopeResourcesViolation
       SENSITIVE: []
     end
 
@@ -1222,6 +1224,18 @@ module Aws::FMS
       attr_accessor resource_violations: ::Array[Types::ResourceViolation]
       attr_accessor resource_tags: ::Array[Types::Tag]
       attr_accessor resource_description: ::String
+      SENSITIVE: []
+    end
+
+    class WebACLHasIncompatibleConfigurationViolation
+      attr_accessor web_acl_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class WebACLHasOutOfScopeResourcesViolation
+      attr_accessor web_acl_arn: ::String
+      attr_accessor out_of_scope_resource_list: ::Array[::String]
       SENSITIVE: []
     end
   end

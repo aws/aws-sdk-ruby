@@ -479,7 +479,7 @@ module Aws::ApplicationInsights
     #     component_name: "ComponentName", # required
     #     workload_configuration: { # required
     #       workload_name: "WorkloadName",
-    #       tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #       tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SAP_ASE_SINGLE_NODE, SAP_ASE_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
     #       configuration: "ComponentConfiguration",
     #     },
     #   })
@@ -488,7 +488,7 @@ module Aws::ApplicationInsights
     #
     #   resp.workload_id #=> String
     #   resp.workload_configuration.workload_name #=> String
-    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SAP_ASE_SINGLE_NODE", "SAP_ASE_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.workload_configuration.configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/AddWorkload AWS API Documentation
@@ -518,6 +518,9 @@ module Aws::ApplicationInsights
     #   The SNS topic provided to Application Insights that is associated to
     #   the created opsItem. Allows you to receive notifications for updates
     #   to the opsItem.
+    #
+    # @option params [String] :sns_notification_arn
+    #   The SNS notification topic ARN.
     #
     # @option params [Array<Types::Tag>] :tags
     #   List of tags to add to the application. tag key (`Key`) and an
@@ -552,6 +555,7 @@ module Aws::ApplicationInsights
     #     ops_center_enabled: false,
     #     cwe_monitor_enabled: false,
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
+    #     sns_notification_arn: "SNSNotificationArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -570,6 +574,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.resource_group_name #=> String
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
+    #   resp.application_info.sns_notification_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
     #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
@@ -643,7 +648,7 @@ module Aws::ApplicationInsights
     #   `750,000` rank. A `Medium` severity pattern translates to a `500,000`
     #   rank. And a `High` severity pattern translates to a `250,000` rank.
     #   Rank values less than `1` or greater than `1,000,000` are reserved for
-    #   AWS-provided patterns.
+    #   Amazon Web Services provided patterns.
     #
     # @return [Types::CreateLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -764,7 +769,7 @@ module Aws::ApplicationInsights
     #   The name of the resource group.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::DescribeApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -783,6 +788,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.resource_group_name #=> String
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
+    #   resp.application_info.sns_notification_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
     #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
@@ -809,7 +815,7 @@ module Aws::ApplicationInsights
     #   The name of the component.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::DescribeComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -830,7 +836,7 @@ module Aws::ApplicationInsights
     #   resp.application_component.component_remarks #=> String
     #   resp.application_component.resource_type #=> String
     #   resp.application_component.os_type #=> String, one of "WINDOWS", "LINUX"
-    #   resp.application_component.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.application_component.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SAP_ASE_SINGLE_NODE", "SAP_ASE_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.application_component.monitor #=> Boolean
     #   resp.application_component.detected_workload #=> Hash
     #   resp.application_component.detected_workload["Tier"] #=> Hash
@@ -856,7 +862,7 @@ module Aws::ApplicationInsights
     #   The name of the component.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::DescribeComponentConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -875,7 +881,7 @@ module Aws::ApplicationInsights
     # @example Response structure
     #
     #   resp.monitor #=> Boolean
-    #   resp.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SAP_ASE_SINGLE_NODE", "SAP_ASE_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.component_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfiguration AWS API Documentation
@@ -899,7 +905,9 @@ module Aws::ApplicationInsights
     #   The tier of the application component.
     #
     # @option params [String] :workload_name
-    #   The name of the workload.
+    #   The name of the workload. The name of the workload is required when
+    #   the tier of the application component is `SAP_ASE_SINGLE_NODE` or
+    #   `SAP_ASE_HIGH_AVAILABILITY`.
     #
     # @option params [String] :recommendation_type
     #   The recommended configuration type.
@@ -913,7 +921,7 @@ module Aws::ApplicationInsights
     #   resp = client.describe_component_configuration_recommendation({
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
-    #     tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #     tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SAP_ASE_SINGLE_NODE, SAP_ASE_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
     #     workload_name: "WorkloadName",
     #     recommendation_type: "INFRA_ONLY", # accepts INFRA_ONLY, WORKLOAD_ONLY, ALL
     #   })
@@ -943,7 +951,7 @@ module Aws::ApplicationInsights
     #   The name of the log pattern.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::DescribeLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -984,7 +992,7 @@ module Aws::ApplicationInsights
     #   The ID of the observation.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::DescribeObservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1060,12 +1068,13 @@ module Aws::ApplicationInsights
     #   The ID of the problem.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the owner of the resource group affected by the
-    #   problem.
+    #   The Amazon Web Services account ID for the owner of the resource group
+    #   affected by the problem.
     #
     # @return [Types::DescribeProblemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProblemResponse#problem #problem} => Types::Problem
+    #   * {Types::DescribeProblemResponse#sns_notification_arn #sns_notification_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1078,6 +1087,7 @@ module Aws::ApplicationInsights
     #
     #   resp.problem.id #=> String
     #   resp.problem.title #=> String
+    #   resp.problem.short_name #=> String
     #   resp.problem.insights #=> String
     #   resp.problem.status #=> String, one of "IGNORE", "RESOLVED", "PENDING", "RECURRING", "RECOVERING"
     #   resp.problem.affected_resource #=> String
@@ -1092,6 +1102,7 @@ module Aws::ApplicationInsights
     #   resp.problem.last_recurrence_time #=> Time
     #   resp.problem.visibility #=> String, one of "IGNORED", "VISIBLE"
     #   resp.problem.resolution_method #=> String, one of "MANUAL", "AUTOMATIC", "UNRESOLVED"
+    #   resp.sns_notification_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeProblem AWS API Documentation
     #
@@ -1108,7 +1119,7 @@ module Aws::ApplicationInsights
     #   The ID of the problem.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::DescribeProblemObservationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1191,7 +1202,7 @@ module Aws::ApplicationInsights
     #   The ID of the workload.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the workload owner.
+    #   The Amazon Web Services account ID for the workload owner.
     #
     # @return [Types::DescribeWorkloadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1213,7 +1224,7 @@ module Aws::ApplicationInsights
     #   resp.workload_id #=> String
     #   resp.workload_remarks #=> String
     #   resp.workload_configuration.workload_name #=> String
-    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SAP_ASE_SINGLE_NODE", "SAP_ASE_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.workload_configuration.configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeWorkload AWS API Documentation
@@ -1236,7 +1247,7 @@ module Aws::ApplicationInsights
     #   The token to request the next page of results.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1260,6 +1271,7 @@ module Aws::ApplicationInsights
     #   resp.application_info_list[0].resource_group_name #=> String
     #   resp.application_info_list[0].life_cycle #=> String
     #   resp.application_info_list[0].ops_item_sns_topic_arn #=> String
+    #   resp.application_info_list[0].sns_notification_arn #=> String
     #   resp.application_info_list[0].ops_center_enabled #=> Boolean
     #   resp.application_info_list[0].cwe_monitor_enabled #=> Boolean
     #   resp.application_info_list[0].remarks #=> String
@@ -1292,7 +1304,7 @@ module Aws::ApplicationInsights
     #   The token to request the next page of results.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::ListComponentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1317,7 +1329,7 @@ module Aws::ApplicationInsights
     #   resp.application_component_list[0].component_remarks #=> String
     #   resp.application_component_list[0].resource_type #=> String
     #   resp.application_component_list[0].os_type #=> String, one of "WINDOWS", "LINUX"
-    #   resp.application_component_list[0].tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.application_component_list[0].tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SAP_ASE_SINGLE_NODE", "SAP_ASE_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.application_component_list[0].monitor #=> Boolean
     #   resp.application_component_list[0].detected_workload #=> Hash
     #   resp.application_component_list[0].detected_workload["Tier"] #=> Hash
@@ -1376,7 +1388,7 @@ module Aws::ApplicationInsights
     #   value. This value is `null` when there are no more results to return.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::ListConfigurationHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1433,7 +1445,7 @@ module Aws::ApplicationInsights
     #   The token to request the next page of results.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::ListLogPatternSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1487,7 +1499,7 @@ module Aws::ApplicationInsights
     #   The token to request the next page of results.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @return [Types::ListLogPatternsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1531,7 +1543,7 @@ module Aws::ApplicationInsights
     # Lists the problems with your application.
     #
     # @option params [String] :account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #
     # @option params [String] :resource_group_name
     #   The name of the resource group.
@@ -1587,6 +1599,7 @@ module Aws::ApplicationInsights
     #   resp.problem_list #=> Array
     #   resp.problem_list[0].id #=> String
     #   resp.problem_list[0].title #=> String
+    #   resp.problem_list[0].short_name #=> String
     #   resp.problem_list[0].insights #=> String
     #   resp.problem_list[0].status #=> String, one of "IGNORE", "RESOLVED", "PENDING", "RECURRING", "RECOVERING"
     #   resp.problem_list[0].affected_resource #=> String
@@ -1667,7 +1680,7 @@ module Aws::ApplicationInsights
     #   The token to request the next page of results.
     #
     # @option params [String] :account_id
-    #   The AWS account ID of the owner of the workload.
+    #   The Amazon Web Services account ID of the owner of the workload.
     #
     # @return [Types::ListWorkloadsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1692,8 +1705,9 @@ module Aws::ApplicationInsights
     #   resp.workload_list[0].workload_id #=> String
     #   resp.workload_list[0].component_name #=> String
     #   resp.workload_list[0].workload_name #=> String
-    #   resp.workload_list[0].tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.workload_list[0].tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SAP_ASE_SINGLE_NODE", "SAP_ASE_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.workload_list[0].workload_remarks #=> String
+    #   resp.workload_list[0].missing_workload_config #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListWorkloads AWS API Documentation
@@ -1832,6 +1846,10 @@ module Aws::ApplicationInsights
     #   the created opsItem. Allows you to receive notifications for updates
     #   to the opsItem.
     #
+    # @option params [String] :sns_notification_arn
+    #   The SNS topic ARN. Allows you to receive SNS notifications for updates
+    #   and issues with an application.
+    #
     # @option params [Boolean] :remove_sns_topic
     #   Disassociates the SNS topic from the opsItem created for detected
     #   problems.
@@ -1854,6 +1872,7 @@ module Aws::ApplicationInsights
     #     ops_center_enabled: false,
     #     cwe_monitor_enabled: false,
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
+    #     sns_notification_arn: "SNSNotificationArn",
     #     remove_sns_topic: false,
     #     auto_config_enabled: false,
     #     attach_missing_permission: false,
@@ -1865,6 +1884,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.resource_group_name #=> String
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
+    #   resp.application_info.sns_notification_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
     #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
@@ -1958,7 +1978,7 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
     #     monitor: false,
-    #     tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #     tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SAP_ASE_SINGLE_NODE, SAP_ASE_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
     #     component_configuration: "ComponentConfiguration",
     #     auto_config_enabled: false,
     #   })
@@ -1998,7 +2018,7 @@ module Aws::ApplicationInsights
     #   `750,000` rank. A `Medium` severity pattern translates to a `500,000`
     #   rank. And a `High` severity pattern translates to a `250,000` rank.
     #   Rank values less than `1` or greater than `1,000,000` are reserved for
-    #   AWS-provided patterns.
+    #   Amazon Web Services provided patterns.
     #
     # @return [Types::UpdateLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2096,7 +2116,7 @@ module Aws::ApplicationInsights
     #     workload_id: "WorkloadId",
     #     workload_configuration: { # required
     #       workload_name: "WorkloadName",
-    #       tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #       tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SAP_ASE_SINGLE_NODE, SAP_ASE_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
     #       configuration: "ComponentConfiguration",
     #     },
     #   })
@@ -2105,7 +2125,7 @@ module Aws::ApplicationInsights
     #
     #   resp.workload_id #=> String
     #   resp.workload_configuration.workload_name #=> String
-    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SAP_ASE_SINGLE_NODE", "SAP_ASE_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.workload_configuration.configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateWorkload AWS API Documentation
@@ -2135,7 +2155,7 @@ module Aws::ApplicationInsights
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

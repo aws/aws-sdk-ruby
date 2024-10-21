@@ -954,7 +954,7 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "FIREWALL_SUBNET_IS_OUT_OF_SCOPE", "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE", "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE", "UNEXPECTED_FIREWALL_ROUTES", "UNEXPECTED_TARGET_GATEWAY_ROUTES", "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY", "INVALID_ROUTE_CONFIGURATION", "MISSING_TARGET_GATEWAY", "INTERNET_TRAFFIC_NOT_INSPECTED", "BLACK_HOLE_ROUTE_DETECTED", "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET", "RESOURCE_MISSING_DNS_FIREWALL", "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT", "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT", "INVALID_NETWORK_ACL_ENTRY"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "FIREWALL_SUBNET_IS_OUT_OF_SCOPE", "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE", "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE", "UNEXPECTED_FIREWALL_ROUTES", "UNEXPECTED_TARGET_GATEWAY_ROUTES", "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY", "INVALID_ROUTE_CONFIGURATION", "MISSING_TARGET_GATEWAY", "INTERNET_TRAFFIC_NOT_INSPECTED", "BLACK_HOLE_ROUTE_DETECTED", "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET", "RESOURCE_MISSING_DNS_FIREWALL", "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT", "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT", "INVALID_NETWORK_ACL_ENTRY", "WEB_ACL_CONFIGURATION_OR_SCOPE_OF_USE"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
     #   resp.policy_compliance_detail.violators[0].metadata #=> Hash
     #   resp.policy_compliance_detail.violators[0].metadata["LengthBoundedString"] #=> String
@@ -1265,6 +1265,8 @@ module Aws::FMS
     #   The ID of the Firewall Manager policy that you want the details for.
     #   You can get violation details for the following policy types:
     #
+    #   * WAF
+    #
     #   * DNS Firewall
     #
     #   * Imported Network Firewall
@@ -1286,9 +1288,9 @@ module Aws::FMS
     # @option params [required, String] :resource_type
     #   The resource type. This is in the format shown in the [Amazon Web
     #   Services Resource Types Reference][1]. Supported resource types are:
-    #   `AWS::EC2::Instance`, `AWS::EC2::NetworkInterface`,
-    #   `AWS::EC2::SecurityGroup`, `AWS::NetworkFirewall::FirewallPolicy`, and
-    #   `AWS::EC2::Subnet`.
+    #   `AWS::WAFv2::WebACL`, `AWS::EC2::Instance`,
+    #   `AWS::EC2::NetworkInterface`, `AWS::EC2::SecurityGroup`,
+    #   `AWS::NetworkFirewall::FirewallPolicy`, and `AWS::EC2::Subnet`.
     #
     #
     #
@@ -1708,6 +1710,11 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.delete_network_acl_entries_action.fms_can_remediate #=> Boolean
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].order #=> Integer
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].is_default_action #=> Boolean
+    #   resp.violation_detail.resource_violations[0].web_acl_has_incompatible_configuration_violation.web_acl_arn #=> String
+    #   resp.violation_detail.resource_violations[0].web_acl_has_incompatible_configuration_violation.description #=> String
+    #   resp.violation_detail.resource_violations[0].web_acl_has_out_of_scope_resources_violation.web_acl_arn #=> String
+    #   resp.violation_detail.resource_violations[0].web_acl_has_out_of_scope_resources_violation.out_of_scope_resource_list #=> Array
+    #   resp.violation_detail.resource_violations[0].web_acl_has_out_of_scope_resources_violation.out_of_scope_resource_list[0] #=> String
     #   resp.violation_detail.resource_tags #=> Array
     #   resp.violation_detail.resource_tags[0].key #=> String
     #   resp.violation_detail.resource_tags[0].value #=> String
@@ -2947,7 +2954,7 @@ module Aws::FMS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

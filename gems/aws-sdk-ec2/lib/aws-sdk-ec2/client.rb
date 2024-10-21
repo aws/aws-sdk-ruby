@@ -1627,7 +1627,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -1823,7 +1823,7 @@ module Aws::EC2
     #   The ID of the Capacity Reservation.
     #
     # @option params [required, String] :unused_reservation_billing_owner_id
-    #   The ID of the consumer account to which assign billing.
+    #   The ID of the consumer account to which to assign billing.
     #
     # @return [Types::AssociateCapacityReservationBillingOwnerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2343,9 +2343,9 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips
-    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -6157,7 +6157,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-subnet
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/work-with-default-vpc.html#create-default-subnet
     #
     # @option params [required, String] :availability_zone
     #   The Availability Zone in which to create the default subnet.
@@ -6924,7 +6924,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html
     #
     # @option params [Boolean] :dry_run
@@ -7020,7 +7020,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
@@ -9801,7 +9801,7 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html
     #
     # @option params [String] :allocation_id
     #   \[Public NAT gateways only\] The allocation ID of an Elastic IP
@@ -9851,7 +9851,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #
     # @option params [Array<String>] :secondary_private_ip_addresses
     #   Secondary private IPv4 addresses. For more information about secondary
@@ -9860,7 +9860,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #
     # @option params [Integer] :secondary_private_ip_address_count
     #   \[Private NAT gateway only\] The number of secondary private IPv4
@@ -9870,7 +9870,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html
     #
     # @return [Types::CreateNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10833,7 +10833,7 @@ module Aws::EC2
     #       },
     #     ],
     #     ipv_6_prefix_count: 1,
-    #     interface_type: "efa", # accepts efa, branch, trunk
+    #     interface_type: "efa", # accepts efa, efa-only, branch, trunk
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
@@ -10900,7 +10900,7 @@ module Aws::EC2
     #   resp.network_interface.groups #=> Array
     #   resp.network_interface.groups[0].group_id #=> String
     #   resp.network_interface.groups[0].group_name #=> String
-    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa", "trunk", "load_balancer", "network_load_balancer", "vpc_endpoint", "branch", "transit_gateway", "lambda", "quicksight", "global_accelerator_managed", "api_gateway_managed", "gateway_load_balancer", "gateway_load_balancer_endpoint", "iot_rules_managed", "aws_codestar_connections_managed"
+    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa", "efa-only", "trunk", "load_balancer", "network_load_balancer", "vpc_endpoint", "branch", "transit_gateway", "lambda", "quicksight", "global_accelerator_managed", "api_gateway_managed", "gateway_load_balancer", "gateway_load_balancer_endpoint", "iot_rules_managed", "aws_codestar_connections_managed"
     #   resp.network_interface.ipv_6_addresses #=> Array
     #   resp.network_interface.ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interface.ipv_6_addresses[0].is_primary_ipv_6 #=> Boolean
@@ -12501,13 +12501,14 @@ module Aws::EC2
     end
 
     # Creates a subnet CIDR reservation. For more information, see [Subnet
-    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Assign
-    # prefixes to network interfaces][2] in the *Amazon EC2 User Guide*.
+    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Manage
+    # prefixes for your network interfaces][2] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-prefixes.html
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
@@ -19151,7 +19152,10 @@ module Aws::EC2
     # delete all security groups associated with the VPC (except the default
     # one), delete all route tables associated with the VPC (except the
     # default one), and so on. When you delete the VPC, it deletes the
-    # VPC's default security group, network ACL, and route table.
+    # default security group, network ACL, and route table for the VPC.
+    #
+    # If you created a flow log for the VPC that you are deleting, note that
+    # flow logs for deleted VPCs are eventually automatically removed.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -30765,7 +30769,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].groups #=> Array
     #   resp.network_interfaces[0].groups[0].group_id #=> String
     #   resp.network_interfaces[0].groups[0].group_name #=> String
-    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa", "trunk", "load_balancer", "network_load_balancer", "vpc_endpoint", "branch", "transit_gateway", "lambda", "quicksight", "global_accelerator_managed", "api_gateway_managed", "gateway_load_balancer", "gateway_load_balancer_endpoint", "iot_rules_managed", "aws_codestar_connections_managed"
+    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa", "efa-only", "trunk", "load_balancer", "network_load_balancer", "vpc_endpoint", "branch", "transit_gateway", "lambda", "quicksight", "global_accelerator_managed", "api_gateway_managed", "gateway_load_balancer", "gateway_load_balancer_endpoint", "iot_rules_managed", "aws_codestar_connections_managed"
     #   resp.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interfaces[0].ipv_6_addresses[0].is_primary_ipv_6 #=> Boolean
@@ -39264,7 +39268,7 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
-    # [2]: http://amazonaws.com/AWSEC2/latest/APIReference/API_EnableImage.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableImage.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html
     #
     # @option params [required, String] :image_id
@@ -40178,7 +40182,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -42662,20 +42666,18 @@ module Aws::EC2
     # specified values.
     #
     # For more information, see [Preview instance types with specified
-    # attributes][1], [Attribute-based instance type selection for EC2
-    # Fleet][2], [Attribute-based instance type selection for Spot
-    # Fleet][3], and [Spot placement score][4] in the *Amazon EC2 User
-    # Guide*, and [Creating an Auto Scaling group using attribute-based
-    # instance type selection][5] in the *Amazon EC2 Auto Scaling User
-    # Guide*.
+    # attributes][1], [Specify attributes for instance type selection for
+    # EC2 Fleet or Spot Fleet][2], and [Spot placement score][3] in the
+    # *Amazon EC2 User Guide*, and [Creating mixed instance groups using
+    # attribute-based instance type selection][4] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html#spotfleet-get-instance-types-from-instance-requirements
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-get-instance-types-from-instance-requirements
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
-    # [5]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    # [4]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -50216,13 +50218,11 @@ module Aws::EC2
     #   in this subnet should return synthetic IPv6 addresses for IPv4-only
     #   destinations.
     #
-    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
+    #   You must first configure a NAT gateway in a public subnet (separate
     #   from the subnet containing the IPv6-only workloads). For example, the
     #   subnet containing the NAT gateway should have a `0.0.0.0/0` route
     #   pointing to the internet gateway. For more information, see [Configure
     #   DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
-    #
-    #    </note>
     #
     #
     #
@@ -60017,7 +60017,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
     #   The ID of the NAT gateway.
@@ -60468,7 +60468,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.482.0'
+      context[:gem_version] = '1.483.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

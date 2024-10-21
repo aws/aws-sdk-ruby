@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2024-10-21)
+------------------
+
+* Feature - Update AWS WAF policy - add the option to retrofit existing web ACLs instead of creating all new web ACLs.
+
 1.83.0 (2024-10-18)
 ------------------
 

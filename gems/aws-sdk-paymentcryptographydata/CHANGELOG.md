@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-10-21)
+------------------
+
+* Feature - Adding new API to generate authenticated scripts for EMV pin change use cases.
+
 1.25.0 (2024-10-18)
 ------------------
 

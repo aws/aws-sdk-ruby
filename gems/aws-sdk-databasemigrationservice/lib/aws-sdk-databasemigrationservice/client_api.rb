@@ -77,6 +77,7 @@ module Aws::DatabaseMigrationService
     CreateReplicationTaskResponse = Shapes::StructureShape.new(name: 'CreateReplicationTaskResponse')
     DataFormatValue = Shapes::StringShape.new(name: 'DataFormatValue')
     DataMigration = Shapes::StructureShape.new(name: 'DataMigration')
+    DataMigrationCidrBlock = Shapes::ListShape.new(name: 'DataMigrationCidrBlock')
     DataMigrationSettings = Shapes::StructureShape.new(name: 'DataMigrationSettings')
     DataMigrationStatistics = Shapes::StructureShape.new(name: 'DataMigrationStatistics')
     DataMigrations = Shapes::ListShape.new(name: 'DataMigrations')
@@ -391,6 +392,7 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentRun = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentRun')
     ReplicationTaskAssessmentRunList = Shapes::ListShape.new(name: 'ReplicationTaskAssessmentRunList')
     ReplicationTaskAssessmentRunProgress = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentRunProgress')
+    ReplicationTaskAssessmentRunResultStatistic = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentRunResultStatistic')
     ReplicationTaskIndividualAssessment = Shapes::StructureShape.new(name: 'ReplicationTaskIndividualAssessment')
     ReplicationTaskIndividualAssessmentList = Shapes::ListShape.new(name: 'ReplicationTaskIndividualAssessmentList')
     ReplicationTaskList = Shapes::ListShape.new(name: 'ReplicationTaskList')
@@ -796,9 +798,12 @@ module Aws::DatabaseMigrationService
     DataMigration.add_member(:data_migration_statistics, Shapes::ShapeRef.new(shape: DataMigrationStatistics, location_name: "DataMigrationStatistics"))
     DataMigration.add_member(:data_migration_status, Shapes::ShapeRef.new(shape: String, location_name: "DataMigrationStatus"))
     DataMigration.add_member(:public_ip_addresses, Shapes::ShapeRef.new(shape: PublicIpAddressList, location_name: "PublicIpAddresses"))
+    DataMigration.add_member(:data_migration_cidr_blocks, Shapes::ShapeRef.new(shape: DataMigrationCidrBlock, location_name: "DataMigrationCidrBlocks"))
     DataMigration.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: String, location_name: "LastFailureMessage"))
     DataMigration.add_member(:stop_reason, Shapes::ShapeRef.new(shape: String, location_name: "StopReason"))
     DataMigration.struct_class = Types::DataMigration
+
+    DataMigrationCidrBlock.member = Shapes::ShapeRef.new(shape: String)
 
     DataMigrationSettings.add_member(:number_of_jobs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfJobs"))
     DataMigrationSettings.add_member(:cloudwatch_logs_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CloudwatchLogsEnabled"))
@@ -2420,6 +2425,8 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentRun.add_member(:result_encryption_mode, Shapes::ShapeRef.new(shape: String, location_name: "ResultEncryptionMode"))
     ReplicationTaskAssessmentRun.add_member(:result_kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResultKmsKeyArn"))
     ReplicationTaskAssessmentRun.add_member(:assessment_run_name, Shapes::ShapeRef.new(shape: String, location_name: "AssessmentRunName"))
+    ReplicationTaskAssessmentRun.add_member(:is_latest_task_assessment_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsLatestTaskAssessmentRun"))
+    ReplicationTaskAssessmentRun.add_member(:result_statistic, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRunResultStatistic, location_name: "ResultStatistic"))
     ReplicationTaskAssessmentRun.struct_class = Types::ReplicationTaskAssessmentRun
 
     ReplicationTaskAssessmentRunList.member = Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRun)
@@ -2427,6 +2434,13 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentRunProgress.add_member(:individual_assessment_count, Shapes::ShapeRef.new(shape: Integer, location_name: "IndividualAssessmentCount"))
     ReplicationTaskAssessmentRunProgress.add_member(:individual_assessment_completed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "IndividualAssessmentCompletedCount"))
     ReplicationTaskAssessmentRunProgress.struct_class = Types::ReplicationTaskAssessmentRunProgress
+
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:passed, Shapes::ShapeRef.new(shape: Integer, location_name: "Passed"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:failed, Shapes::ShapeRef.new(shape: Integer, location_name: "Failed"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:error, Shapes::ShapeRef.new(shape: Integer, location_name: "Error"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:warning, Shapes::ShapeRef.new(shape: Integer, location_name: "Warning"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:cancelled, Shapes::ShapeRef.new(shape: Integer, location_name: "Cancelled"))
+    ReplicationTaskAssessmentRunResultStatistic.struct_class = Types::ReplicationTaskAssessmentRunResultStatistic
 
     ReplicationTaskIndividualAssessment.add_member(:replication_task_individual_assessment_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIndividualAssessmentArn"))
     ReplicationTaskIndividualAssessment.add_member(:replication_task_assessment_run_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskAssessmentRunArn"))
@@ -2661,6 +2675,7 @@ module Aws::DatabaseMigrationService
     StartReplicationTaskAssessmentRunMessage.add_member(:assessment_run_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AssessmentRunName"))
     StartReplicationTaskAssessmentRunMessage.add_member(:include_only, Shapes::ShapeRef.new(shape: IncludeTestList, location_name: "IncludeOnly"))
     StartReplicationTaskAssessmentRunMessage.add_member(:exclude, Shapes::ShapeRef.new(shape: ExcludeTestList, location_name: "Exclude"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartReplicationTaskAssessmentRunMessage.struct_class = Types::StartReplicationTaskAssessmentRunMessage
 
     StartReplicationTaskAssessmentRunResponse.add_member(:replication_task_assessment_run, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRun, location_name: "ReplicationTaskAssessmentRun"))

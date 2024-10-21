@@ -23,6 +23,51 @@ module Aws::PaymentCryptographyData
       include Aws::Structure
     end
 
+    # Parameters to derive the confidentiality and integrity keys for a
+    # payment card using Amex derivation method.
+    #
+    # @!attribute [rw] major_key_derivation_mode
+    #   The method to use when deriving the master key for a payment card
+    #   using Amex derivation.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_account_number
+    #   The Primary Account Number (PAN) of the cardholder.
+    #   @return [String]
+    #
+    # @!attribute [rw] pan_sequence_number
+    #   A number that identifies and differentiates payment cards with the
+    #   same Primary Account Number (PAN). Typically 00 is used, if no value
+    #   is provided by the terminal.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_transaction_counter
+    #   The transaction counter of the current transaction that is provided
+    #   by the terminal during transaction processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_request_key_identifier
+    #   The `keyArn` of the issuer master key for cryptogram (IMK-AC) for
+    #   the payment card.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_pin_attributes
+    #   The encrypted pinblock of the old pin stored on the chip card.
+    #   @return [Types::CurrentPinAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/AmexAttributes AWS API Documentation
+    #
+    class AmexAttributes < Struct.new(
+      :major_key_derivation_mode,
+      :primary_account_number,
+      :pan_sequence_number,
+      :application_transaction_counter,
+      :authorization_request_key_identifier,
+      :current_pin_attributes)
+      SENSITIVE = [:primary_account_number]
+      include Aws::Structure
+    end
+
     # Card data parameters that are required to generate a Card Security
     # Code (CSC2) for an AMEX payment card.
     #
@@ -345,6 +390,26 @@ module Aws::PaymentCryptographyData
       include Aws::Structure
     end
 
+    # The parameter values of the current PIN to be changed on the EMV chip
+    # card.
+    #
+    # @!attribute [rw] current_pin_pek_identifier
+    #   The `keyArn` of the current PIN PEK.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_encrypted_pin_block
+    #   The encrypted pinblock of the current pin stored on the chip card.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/CurrentPinAttributes AWS API Documentation
+    #
+    class CurrentPinAttributes < Struct.new(
+      :current_pin_pek_identifier,
+      :current_encrypted_pin_block)
+      SENSITIVE = [:current_encrypted_pin_block]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] key_identifier
     #   The `keyARN` of the encryption key that Amazon Web Services Payment
     #   Cryptography uses for ciphertext decryption.
@@ -404,6 +469,57 @@ module Aws::PaymentCryptographyData
       :plain_text)
       SENSITIVE = [:plain_text]
       include Aws::Structure
+    end
+
+    # Parameters to derive the payment card specific confidentiality and
+    # integrity keys.
+    #
+    # @note DerivationMethodAttributes is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] emv_common
+    #   Parameters to derive the confidentiality and integrity keys for a
+    #   payment card using Emv common derivation method.
+    #   @return [Types::EmvCommonAttributes]
+    #
+    # @!attribute [rw] amex
+    #   Parameters to derive the confidentiality and integrity keys for a
+    #   payment card using Amex derivation method.
+    #   @return [Types::AmexAttributes]
+    #
+    # @!attribute [rw] visa
+    #   Parameters to derive the confidentiality and integrity keys for a a
+    #   payment card using Visa derivation method.
+    #   @return [Types::VisaAttributes]
+    #
+    # @!attribute [rw] emv_2000
+    #   Parameters to derive the confidentiality and integrity keys for a
+    #   payment card using Emv2000 derivation method.
+    #   @return [Types::Emv2000Attributes]
+    #
+    # @!attribute [rw] mastercard
+    #   Parameters to derive the confidentiality and integrity keys for a
+    #   payment card using Mastercard derivation method.
+    #   @return [Types::MasterCardAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/DerivationMethodAttributes AWS API Documentation
+    #
+    class DerivationMethodAttributes < Struct.new(
+      :emv_common,
+      :amex,
+      :visa,
+      :emv_2000,
+      :mastercard,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EmvCommon < DerivationMethodAttributes; end
+      class Amex < DerivationMethodAttributes; end
+      class Visa < DerivationMethodAttributes; end
+      class Emv2000 < DerivationMethodAttributes; end
+      class Mastercard < DerivationMethodAttributes; end
+      class Unknown < DerivationMethodAttributes; end
     end
 
     # Parameters that are required to generate or verify dCVC (Dynamic Card
@@ -598,6 +714,95 @@ module Aws::PaymentCryptographyData
       include Aws::Structure
     end
 
+    # Parameters to derive the confidentiality and integrity keys for a
+    # payment card using EMV2000 deruv.
+    #
+    # @!attribute [rw] major_key_derivation_mode
+    #   The method to use when deriving the master key for the payment card.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_account_number
+    #   The Primary Account Number (PAN) of the cardholder.
+    #   @return [String]
+    #
+    # @!attribute [rw] pan_sequence_number
+    #   A number that identifies and differentiates payment cards with the
+    #   same Primary Account Number (PAN). Typically 00 is used, if no value
+    #   is provided by the terminal.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_transaction_counter
+    #   The transaction counter of the current transaction that is provided
+    #   by the terminal during transaction processing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/Emv2000Attributes AWS API Documentation
+    #
+    class Emv2000Attributes < Struct.new(
+      :major_key_derivation_mode,
+      :primary_account_number,
+      :pan_sequence_number,
+      :application_transaction_counter)
+      SENSITIVE = [:primary_account_number]
+      include Aws::Structure
+    end
+
+    # Parameters to derive the confidentiality and integrity keys for an Emv
+    # common payment card.
+    #
+    # @!attribute [rw] major_key_derivation_mode
+    #   The method to use when deriving the master key for the payment card.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_account_number
+    #   The Primary Account Number (PAN) of the cardholder.
+    #   @return [String]
+    #
+    # @!attribute [rw] pan_sequence_number
+    #   A number that identifies and differentiates payment cards with the
+    #   same Primary Account Number (PAN). Typically 00 is used, if no value
+    #   is provided by the terminal.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_cryptogram
+    #   The application cryptogram for the current transaction that is
+    #   provided by the terminal during transaction processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The block cipher method to use for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] pin_block_padding_type
+    #   The padding to be added to the PIN block prior to encryption.
+    #
+    #   Padding type should be `ISO_IEC_7816_4`, if `PinBlockLengthPosition`
+    #   is set to `FRONT_OF_PIN_BLOCK`. No padding is required, if
+    #   `PinBlockLengthPosition` is set to `NONE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pin_block_length_position
+    #   Specifies if PIN block length should be added to front of the pin
+    #   block.
+    #
+    #   If value is set to `FRONT_OF_PIN_BLOCK`, then PIN block padding type
+    #   should be `ISO_IEC_7816_4`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/EmvCommonAttributes AWS API Documentation
+    #
+    class EmvCommonAttributes < Struct.new(
+      :major_key_derivation_mode,
+      :primary_account_number,
+      :pan_sequence_number,
+      :application_cryptogram,
+      :mode,
+      :pin_block_padding_type,
+      :pin_block_length_position)
+      SENSITIVE = [:primary_account_number, :application_cryptogram]
+      include Aws::Structure
+    end
+
     # Parameters for plaintext encryption using EMV keys.
     #
     # @!attribute [rw] major_key_derivation_mode
@@ -613,7 +818,8 @@ module Aws::PaymentCryptographyData
     #
     # @!attribute [rw] pan_sequence_number
     #   A number that identifies and differentiates payment cards with the
-    #   same Primary Account Number (PAN).
+    #   same Primary Account Number (PAN). Typically 00 is used, if no value
+    #   is provided by the terminal.
     #   @return [String]
     #
     # @!attribute [rw] session_derivation_data
@@ -818,6 +1024,114 @@ module Aws::PaymentCryptographyData
       :key_check_value,
       :validation_data)
       SENSITIVE = [:validation_data]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] new_pin_pek_identifier
+    #   The `keyARN` of the PEK protecting the incoming new encrypted PIN
+    #   block.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_encrypted_pin_block
+    #   The incoming new encrypted PIN block data for offline pin change on
+    #   an EMV card.
+    #   @return [String]
+    #
+    # @!attribute [rw] pin_block_format
+    #   The PIN encoding format of the incoming new encrypted PIN block as
+    #   specified in ISO 9564.
+    #   @return [String]
+    #
+    # @!attribute [rw] secure_messaging_integrity_key_identifier
+    #   The `keyARN` of the issuer master key (IMK-SMI) used to authenticate
+    #   the issuer script response.
+    #   @return [String]
+    #
+    # @!attribute [rw] secure_messaging_confidentiality_key_identifier
+    #   The `keyARN` of the issuer master key (IMK-SMC) used to protect the
+    #   PIN block data in the issuer script response.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_data
+    #   The message data is the APDU command from the card reader or
+    #   terminal. The target encrypted PIN block, after translation to ISO2
+    #   format, is appended to this message data to generate an issuer
+    #   script response.
+    #   @return [String]
+    #
+    # @!attribute [rw] derivation_method_attributes
+    #   The attributes and data values to derive payment card specific
+    #   confidentiality and integrity keys.
+    #   @return [Types::DerivationMethodAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GenerateMacEmvPinChangeInput AWS API Documentation
+    #
+    class GenerateMacEmvPinChangeInput < Struct.new(
+      :new_pin_pek_identifier,
+      :new_encrypted_pin_block,
+      :pin_block_format,
+      :secure_messaging_integrity_key_identifier,
+      :secure_messaging_confidentiality_key_identifier,
+      :message_data,
+      :derivation_method_attributes)
+      SENSITIVE = [:new_encrypted_pin_block, :message_data]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] new_pin_pek_arn
+    #   Returns the `keyArn` of the PEK protecting the incoming new
+    #   encrypted PIN block.
+    #   @return [String]
+    #
+    # @!attribute [rw] secure_messaging_integrity_key_arn
+    #   Returns the `keyArn` of the IMK-SMI used by the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] secure_messaging_confidentiality_key_arn
+    #   Returns the `keyArn` of the IMK-SMC used by the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac
+    #   Returns the mac of the issuer script containing message data and
+    #   appended target encrypted pin block in ISO2 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted_pin_block
+    #   Returns the incoming new encrpted PIN block.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_pin_pek_key_check_value
+    #   The key check value (KCV) of the PEK uprotecting the incoming new
+    #   encrypted PIN block.
+    #   @return [String]
+    #
+    # @!attribute [rw] secure_messaging_integrity_key_check_value
+    #   The key check value (KCV) of the SMI issuer master key used by the
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] secure_messaging_confidentiality_key_check_value
+    #   The key check value (KCV) of the SMC issuer master key used by the
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] visa_amex_derivation_outputs
+    #   The attribute values used for Amex and Visa derivation methods.
+    #   @return [Types::VisaAmexDerivationOutputs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GenerateMacEmvPinChangeOutput AWS API Documentation
+    #
+    class GenerateMacEmvPinChangeOutput < Struct.new(
+      :new_pin_pek_arn,
+      :secure_messaging_integrity_key_arn,
+      :secure_messaging_confidentiality_key_arn,
+      :mac,
+      :encrypted_pin_block,
+      :new_pin_pek_key_check_value,
+      :secure_messaging_integrity_key_check_value,
+      :secure_messaging_confidentiality_key_check_value,
+      :visa_amex_derivation_outputs)
+      SENSITIVE = [:mac, :encrypted_pin_block]
       include Aws::Structure
     end
 
@@ -1268,6 +1582,39 @@ module Aws::PaymentCryptographyData
       class DukptIso9797Algorithm3 < MacAttributes; end
       class DukptCmac < MacAttributes; end
       class Unknown < MacAttributes; end
+    end
+
+    # Parameters to derive the confidentiality and integrity keys for a
+    # Mastercard payment card.
+    #
+    # @!attribute [rw] major_key_derivation_mode
+    #   The method to use when deriving the master key for the payment card.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_account_number
+    #   The Primary Account Number (PAN) of the cardholder.
+    #   @return [String]
+    #
+    # @!attribute [rw] pan_sequence_number
+    #   A number that identifies and differentiates payment cards with the
+    #   same Primary Account Number (PAN). Typically 00 is used, if no value
+    #   is provided by the terminal.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_cryptogram
+    #   The application cryptogram for the current transaction that is
+    #   provided by the terminal during transaction processing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/MasterCardAttributes AWS API Documentation
+    #
+    class MasterCardAttributes < Struct.new(
+      :major_key_derivation_mode,
+      :primary_account_number,
+      :pan_sequence_number,
+      :application_cryptogram)
+      SENSITIVE = [:primary_account_number, :application_cryptogram]
+      include Aws::Structure
     end
 
     # Parameters that are required to generate, translate, or verify PIN
@@ -2261,6 +2608,81 @@ module Aws::PaymentCryptographyData
       :encryption_key_arn,
       :encryption_key_check_value)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The attributes values used for Amex and Visa derivation methods.
+    #
+    # @!attribute [rw] authorization_request_key_arn
+    #   The `keyArn` of the issuer master key for cryptogram (IMK-AC) used
+    #   by the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_request_key_check_value
+    #   The key check value (KCV) of the issuer master key for cryptogram
+    #   (IMK-AC) used by the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_pin_pek_arn
+    #   The `keyArn` of the current PIN PEK.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_pin_pek_key_check_value
+    #   The key check value (KCV) of the current PIN PEK.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VisaAmexDerivationOutputs AWS API Documentation
+    #
+    class VisaAmexDerivationOutputs < Struct.new(
+      :authorization_request_key_arn,
+      :authorization_request_key_check_value,
+      :current_pin_pek_arn,
+      :current_pin_pek_key_check_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameters to derive the confidentiality and integrity keys for a Visa
+    # payment card.
+    #
+    # @!attribute [rw] major_key_derivation_mode
+    #   The method to use when deriving the master key for the payment card.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_account_number
+    #   The Primary Account Number (PAN) of the cardholder.
+    #   @return [String]
+    #
+    # @!attribute [rw] pan_sequence_number
+    #   A number that identifies and differentiates payment cards with the
+    #   same Primary Account Number (PAN). Typically 00 is used, if no value
+    #   is provided by the terminal.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_transaction_counter
+    #   The transaction counter of the current transaction that is provided
+    #   by the terminal during transaction processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_request_key_identifier
+    #   The `keyArn` of the issuer master key for cryptogram (IMK-AC) for
+    #   the payment card.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_pin_attributes
+    #   The encrypted pinblock of the old pin stored on the chip card.
+    #   @return [Types::CurrentPinAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VisaAttributes AWS API Documentation
+    #
+    class VisaAttributes < Struct.new(
+      :major_key_derivation_mode,
+      :primary_account_number,
+      :pan_sequence_number,
+      :application_transaction_counter,
+      :authorization_request_key_identifier,
+      :current_pin_attributes)
+      SENSITIVE = [:primary_account_number]
       include Aws::Structure
     end
 

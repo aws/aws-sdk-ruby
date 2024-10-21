@@ -31,9 +31,9 @@ module Aws::ApplicationInsights
       attr_accessor component_remarks: ::String
       attr_accessor resource_type: ::String
       attr_accessor os_type: ("WINDOWS" | "LINUX")
-      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SAP_ASE_SINGLE_NODE" | "SAP_ASE_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
       attr_accessor monitor: bool
-      attr_accessor detected_workload: ::Hash[("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY"), ::Hash[::String, ::String]]
+      attr_accessor detected_workload: ::Hash[("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SAP_ASE_SINGLE_NODE" | "SAP_ASE_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY"), ::Hash[::String, ::String]]
       SENSITIVE: []
     end
 
@@ -42,6 +42,7 @@ module Aws::ApplicationInsights
       attr_accessor resource_group_name: ::String
       attr_accessor life_cycle: ::String
       attr_accessor ops_item_sns_topic_arn: ::String
+      attr_accessor sns_notification_arn: ::String
       attr_accessor ops_center_enabled: bool
       attr_accessor cwe_monitor_enabled: bool
       attr_accessor remarks: ::String
@@ -73,6 +74,7 @@ module Aws::ApplicationInsights
       attr_accessor ops_center_enabled: bool
       attr_accessor cwe_monitor_enabled: bool
       attr_accessor ops_item_sns_topic_arn: ::String
+      attr_accessor sns_notification_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor auto_config_enabled: bool
       attr_accessor auto_create: bool
@@ -152,7 +154,7 @@ module Aws::ApplicationInsights
     class DescribeComponentConfigurationRecommendationRequest
       attr_accessor resource_group_name: ::String
       attr_accessor component_name: ::String
-      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SAP_ASE_SINGLE_NODE" | "SAP_ASE_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
       attr_accessor workload_name: ::String
       attr_accessor recommendation_type: ("INFRA_ONLY" | "WORKLOAD_ONLY" | "ALL")
       SENSITIVE: []
@@ -172,7 +174,7 @@ module Aws::ApplicationInsights
 
     class DescribeComponentConfigurationResponse
       attr_accessor monitor: bool
-      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SAP_ASE_SINGLE_NODE" | "SAP_ASE_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
       attr_accessor component_configuration: ::String
       SENSITIVE: []
     end
@@ -235,6 +237,7 @@ module Aws::ApplicationInsights
 
     class DescribeProblemResponse
       attr_accessor problem: Types::Problem
+      attr_accessor sns_notification_arn: ::String
       SENSITIVE: []
     end
 
@@ -440,6 +443,7 @@ module Aws::ApplicationInsights
     class Problem
       attr_accessor id: ::String
       attr_accessor title: ::String
+      attr_accessor short_name: ::String
       attr_accessor insights: ::String
       attr_accessor status: ("IGNORE" | "RESOLVED" | "PENDING" | "RECURRING" | "RECOVERING")
       attr_accessor affected_resource: ::String
@@ -521,6 +525,7 @@ module Aws::ApplicationInsights
       attr_accessor ops_center_enabled: bool
       attr_accessor cwe_monitor_enabled: bool
       attr_accessor ops_item_sns_topic_arn: ::String
+      attr_accessor sns_notification_arn: ::String
       attr_accessor remove_sns_topic: bool
       attr_accessor auto_config_enabled: bool
       attr_accessor attach_missing_permission: bool
@@ -536,7 +541,7 @@ module Aws::ApplicationInsights
       attr_accessor resource_group_name: ::String
       attr_accessor component_name: ::String
       attr_accessor monitor: bool
-      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SAP_ASE_SINGLE_NODE" | "SAP_ASE_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
       attr_accessor component_configuration: ::String
       attr_accessor auto_config_enabled: bool
       SENSITIVE: []
@@ -604,14 +609,15 @@ module Aws::ApplicationInsights
       attr_accessor workload_id: ::String
       attr_accessor component_name: ::String
       attr_accessor workload_name: ::String
-      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SAP_ASE_SINGLE_NODE" | "SAP_ASE_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
       attr_accessor workload_remarks: ::String
+      attr_accessor missing_workload_config: bool
       SENSITIVE: []
     end
 
     class WorkloadConfiguration
       attr_accessor workload_name: ::String
-      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+      attr_accessor tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SAP_ASE_SINGLE_NODE" | "SAP_ASE_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
       attr_accessor configuration: ::String
       SENSITIVE: []
     end

@@ -1634,6 +1634,7 @@ module Aws::WAFV2
       attr_accessor challenge_config: Types::ChallengeConfig
       attr_accessor token_domains: ::Array[::String]
       attr_accessor association_config: Types::AssociationConfig
+      attr_accessor retrofitted_by_firewall_manager: bool
       SENSITIVE: []
     end
 

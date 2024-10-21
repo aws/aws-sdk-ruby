@@ -1813,6 +1813,8 @@ module Aws::FMS
     #   The ID of the Firewall Manager policy that you want the details for.
     #   You can get violation details for the following policy types:
     #
+    #   * WAF
+    #
     #   * DNS Firewall
     #
     #   * Imported Network Firewall
@@ -1837,9 +1839,9 @@ module Aws::FMS
     # @!attribute [rw] resource_type
     #   The resource type. This is in the format shown in the [Amazon Web
     #   Services Resource Types Reference][1]. Supported resource types are:
-    #   `AWS::EC2::Instance`, `AWS::EC2::NetworkInterface`,
-    #   `AWS::EC2::SecurityGroup`, `AWS::NetworkFirewall::FirewallPolicy`,
-    #   and `AWS::EC2::Subnet`.
+    #   `AWS::WAFv2::WebACL`, `AWS::EC2::Instance`,
+    #   `AWS::EC2::NetworkInterface`, `AWS::EC2::SecurityGroup`,
+    #   `AWS::NetworkFirewall::FirewallPolicy`, and `AWS::EC2::Subnet`.
     #
     #
     #
@@ -4588,6 +4590,16 @@ module Aws::FMS
     #   actions.
     #   @return [Types::PossibleRemediationActions]
     #
+    # @!attribute [rw] web_acl_has_incompatible_configuration_violation
+    #   The violation details for a web ACL whose configuration is
+    #   incompatible with the Firewall Manager policy.
+    #   @return [Types::WebACLHasIncompatibleConfigurationViolation]
+    #
+    # @!attribute [rw] web_acl_has_out_of_scope_resources_violation
+    #   The violation details for a web ACL that's associated with at least
+    #   one resource that's out of scope of the Firewall Manager policy.
+    #   @return [Types::WebACLHasOutOfScopeResourcesViolation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceViolation AWS API Documentation
     #
     class ResourceViolation < Struct.new(
@@ -4614,7 +4626,9 @@ module Aws::FMS
       :third_party_firewall_missing_expected_route_table_violation,
       :firewall_subnet_missing_vpc_endpoint_violation,
       :invalid_network_acl_entries_violation,
-      :possible_remediation_actions)
+      :possible_remediation_actions,
+      :web_acl_has_incompatible_configuration_violation,
+      :web_acl_has_out_of_scope_resources_violation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4891,9 +4905,7 @@ module Aws::FMS
     #
     #   * Example: `SECURITY_GROUPS_COMMON`
     #
-    #     `"\{"type":"SECURITY_GROUPS_COMMON","revertManualSecurityGroupChanges":false,"exclusiveResourceSecurityGroupManagement":false,
-    #     "applyToAllEC2InstanceENIs":false,"securityGroups":[\{"id":"
-    #     sg-000e55995d61a06bd"\}]\}"`
+    #     `"\{"type":"SECURITY_GROUPS_COMMON","securityGroups":[\{"id":"sg-03b1f67d69ed00197"\}],"revertManualSecurityGroupChanges":true,"exclusiveResourceSecurityGroupManagement":true,"applyToAllEC2InstanceENIs":false,"includeSharedVPC":true,"enableSecurityGroupReferencesDistribution":true\}"`
     #
     #   * Example: `SECURITY_GROUPS_COMMON` - Security group tag
     #     distribution
@@ -4922,7 +4934,7 @@ module Aws::FMS
     #
     #   * Example: `SECURITY_GROUPS_CONTENT_AUDIT`
     #
-    #     `"\{"type":"SECURITY_GROUPS_CONTENT_AUDIT","securityGroups":[\{"id":"sg-000e55995d61a06bd"\}],"securityGroupAction":\{"type":"ALLOW"\}\}"`
+    #     `"\{"type":"SECURITY_GROUPS_CONTENT_AUDIT","preManagedOptions":[\{"denyProtocolAllValue":true\},\{"auditSgDirection":\{"type":"ALL"\}\}],"securityGroups":[\{"id":"sg-049b2393a25468971"\}],"securityGroupAction":\{"type":"ALLOW"\}\}"`
     #
     #     The security group action for content audit can be `ALLOW` or
     #     `DENY`. For `ALLOW`, all in-scope security group rules must be
@@ -4933,7 +4945,7 @@ module Aws::FMS
     #
     #   * Example: `SECURITY_GROUPS_USAGE_AUDIT`
     #
-    #     `"\{"type":"SECURITY_GROUPS_USAGE_AUDIT","deleteUnusedSecurityGroups":true,"coalesceRedundantSecurityGroups":true\}"`
+    #     `"\{"type":"SECURITY_GROUPS_USAGE_AUDIT","deleteUnusedSecurityGroups":true,"coalesceRedundantSecurityGroups":true,"optionalDelayForUnusedInMinutes":60\}"`
     #
     #   * Example: `SHIELD_ADVANCED` with web ACL management
     #
@@ -5072,7 +5084,7 @@ module Aws::FMS
     #   * Example: `WAFV2` - Firewall Manager support for WAF managed rule
     #     group versioning
     #
-    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"versionEnabled":true,"version":"Version_2.0","vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesCommonRuleSet"\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[\{"name":"NoUserAgent_HEADER"\}]\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"overrideCustomerWebACLAssociation":false,"loggingConfiguration":\{"logDestinationConfigs":["arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination"],"redactedFields":[\{"redactedFieldType":"SingleHeader","redactedFieldValue":"Cookies"\},\{"redactedFieldType":"Method"\}]\}\}"`
+    #     `"\{"preProcessRuleGroups":[\{"ruleGroupType":"ManagedRuleGroup","overrideAction":\{"type":"NONE"\},"sampledRequestsEnabled":true,"managedRuleGroupIdentifier":\{"managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet","vendorName":"AWS","managedRuleGroupConfigs":null\}\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"customRequestHandling":null,"tokenDomains":null,"customResponse":null,"type":"WAFV2","overrideCustomerWebACLAssociation":false,"sampledRequestsEnabledForDefaultActions":true,"optimizeUnassociatedWebACL":true,"webACLSource":"RETROFIT_EXISTING"\}"`
     #
     #     To use a specific version of a WAF managed rule group in your
     #     Firewall Manager policy, you must set `versionEnabled` to `true`,
@@ -5111,10 +5123,7 @@ module Aws::FMS
     #
     #   * Example: `WAF Classic`
     #
-    #     `"\{"type": "WAF", "ruleGroups":
-    #     [\{"id":"12345678-1bcd-9012-efga-0987654321ab",
-    #     "overrideAction" : \{"type": "COUNT"\}\}],
-    #     "defaultAction": \{"type": "BLOCK"\}\}"`
+    #     `"\{"ruleGroups":[\{"id":"78cb36c0-1b5e-4d7d-82b2-cf48d3ad9659","overrideAction":\{"type":"NONE"\}\}],"overrideCustomerWebACLAssociation":true,"defaultAction":\{"type":"ALLOW"\},"type":"WAF"\}"`
     #
     #
     #
@@ -5538,6 +5547,48 @@ module Aws::FMS
       :resource_violations,
       :resource_tags,
       :resource_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The violation details for a web ACL whose configuration is
+    # incompatible with the Firewall Manager policy.
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Information about the problems that Firewall Manager encountered
+    #   with the web ACL configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/WebACLHasIncompatibleConfigurationViolation AWS API Documentation
+    #
+    class WebACLHasIncompatibleConfigurationViolation < Struct.new(
+      :web_acl_arn,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The violation details for a web ACL that's associated with at least
+    # one resource that's out of scope of the Firewall Manager policy.
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] out_of_scope_resource_list
+    #   An array of Amazon Resource Name (ARN) for the resources that are
+    #   out of scope of the policy and are associated with the web ACL.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/WebACLHasOutOfScopeResourcesViolation AWS API Documentation
+    #
+    class WebACLHasOutOfScopeResourcesViolation < Struct.new(
+      :web_acl_arn,
+      :out_of_scope_resource_list)
       SENSITIVE = []
       include Aws::Structure
     end

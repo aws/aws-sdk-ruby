@@ -872,6 +872,10 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
     #   @return [Types::UpgradePolicyResponse]
     #
+    # @!attribute [rw] zonal_shift_config
+    #   The configuration for zonal shift for the cluster.
+    #   @return [Types::ZonalShiftConfigResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -896,7 +900,8 @@ module Aws::EKS
       :health,
       :outpost_config,
       :access_config,
-      :upgrade_policy)
+      :upgrade_policy,
+      :zonal_shift_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1354,7 +1359,12 @@ module Aws::EKS
     end
 
     # @!attribute [rw] name
-    #   The unique name to give to your cluster.
+    #   The unique name to give to your cluster. The name can contain only
+    #   alphanumeric characters (case-sensitive), hyphens, and underscores.
+    #   It must start with an alphanumeric character and can't be longer
+    #   than 100 characters. The name must be unique within the Amazon Web
+    #   Services Region and Amazon Web Services account that you're
+    #   creating the cluster in.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1471,6 +1481,33 @@ module Aws::EKS
     #   value to `STANDARD`.
     #   @return [Types::UpgradePolicyRequest]
     #
+    # @!attribute [rw] zonal_shift_config
+    #   Enable or disable ARC zonal shift for the cluster. If zonal shift is
+    #   enabled, Amazon Web Services configures zonal autoshift for the
+    #   cluster.
+    #
+    #   Zonal shift is a feature of Amazon Application Recovery Controller
+    #   (ARC). ARC zonal shift is designed to be a temporary measure that
+    #   allows you to move traffic for a resource away from an impaired AZ
+    #   until the zonal shift expires or you cancel it. You can extend the
+    #   zonal shift if necessary.
+    #
+    #   You can start a zonal shift for an EKS cluster, or you can allow
+    #   Amazon Web Services to do it for you by enabling *zonal autoshift*.
+    #   This shift updates the flow of east-to-west network traffic in your
+    #   cluster to only consider network endpoints for Pods running on
+    #   worker nodes in healthy AZs. Additionally, any ALB or NLB handling
+    #   ingress traffic for applications in your EKS cluster will
+    #   automatically route traffic to targets in the healthy AZs. For more
+    #   information about zonal shift in EKS, see [Learn about Amazon
+    #   Application Recovery Controller (ARC) Zonal Shift in Amazon EKS][1]
+    #   in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/zone-shift.html
+    #   @return [Types::ZonalShiftConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -1486,7 +1523,8 @@ module Aws::EKS
       :outpost_config,
       :access_config,
       :bootstrap_self_managed_addons,
-      :upgrade_policy)
+      :upgrade_policy,
+      :zonal_shift_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5992,6 +6030,33 @@ module Aws::EKS
     #   standard support.
     #   @return [Types::UpgradePolicyRequest]
     #
+    # @!attribute [rw] zonal_shift_config
+    #   Enable or disable ARC zonal shift for the cluster. If zonal shift is
+    #   enabled, Amazon Web Services configures zonal autoshift for the
+    #   cluster.
+    #
+    #   Zonal shift is a feature of Amazon Application Recovery Controller
+    #   (ARC). ARC zonal shift is designed to be a temporary measure that
+    #   allows you to move traffic for a resource away from an impaired AZ
+    #   until the zonal shift expires or you cancel it. You can extend the
+    #   zonal shift if necessary.
+    #
+    #   You can start a zonal shift for an EKS cluster, or you can allow
+    #   Amazon Web Services to do it for you by enabling *zonal autoshift*.
+    #   This shift updates the flow of east-to-west network traffic in your
+    #   cluster to only consider network endpoints for Pods running on
+    #   worker nodes in healthy AZs. Additionally, any ALB or NLB handling
+    #   ingress traffic for applications in your EKS cluster will
+    #   automatically route traffic to targets in the healthy AZs. For more
+    #   information about zonal shift in EKS, see [Learn about Amazon
+    #   Application Recovery Controller (ARC) Zonal Shift in Amazon EKS][1]
+    #   in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/zone-shift.html
+    #   @return [Types::ZonalShiftConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest AWS API Documentation
     #
     class UpdateClusterConfigRequest < Struct.new(
@@ -6000,7 +6065,8 @@ module Aws::EKS
       :logging,
       :client_request_token,
       :access_config,
-      :upgrade_policy)
+      :upgrade_policy,
+      :zonal_shift_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6565,6 +6631,35 @@ module Aws::EKS
       :endpoint_public_access,
       :endpoint_private_access,
       :public_access_cidrs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for zonal shift for the cluster.
+    #
+    # @!attribute [rw] enabled
+    #   If zonal shift is enabled, Amazon Web Services configures zonal
+    #   autoshift for the cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ZonalShiftConfigRequest AWS API Documentation
+    #
+    class ZonalShiftConfigRequest < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of zonal shift configuration for the cluster
+    #
+    # @!attribute [rw] enabled
+    #   Whether the zonal shift is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ZonalShiftConfigResponse AWS API Documentation
+    #
+    class ZonalShiftConfigResponse < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end

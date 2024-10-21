@@ -1773,7 +1773,22 @@ module Aws::BedrockAgentRuntime
     #         knowledge_base_id: "KnowledgeBaseId", # required
     #         model_arn: "BedrockModelArn", # required
     #         orchestration_configuration: {
-    #           query_transformation_configuration: { # required
+    #           additional_model_request_fields: {
+    #             "AdditionalModelRequestFieldsKey" => {
+    #             },
+    #           },
+    #           inference_config: {
+    #             text_inference_config: {
+    #               max_tokens: 1,
+    #               stop_sequences: ["RAGStopSequencesMemberString"],
+    #               temperature: 1.0,
+    #               top_p: 1.0,
+    #             },
+    #           },
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #           query_transformation_configuration: {
     #             type: "QUERY_DECOMPOSITION", # required, accepts QUERY_DECOMPOSITION
     #           },
     #         },
@@ -1905,7 +1920,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

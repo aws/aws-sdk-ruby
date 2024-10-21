@@ -551,6 +551,7 @@
         "ResourceGroupName":{"shape":"ResourceGroupName"},
         "LifeCycle":{"shape":"LifeCycle"},
         "OpsItemSNSTopicArn":{"shape":"OpsItemSNSTopicArn"},
+        "SNSNotificationArn":{"shape":"SNSNotificationArn"},
         "OpsCenterEnabled":{"shape":"OpsCenterEnabled"},
         "CWEMonitorEnabled":{"shape":"CWEMonitorEnabled"},
         "Remarks":{"shape":"Remarks"},
@@ -647,6 +648,7 @@
         "OpsCenterEnabled":{"shape":"OpsCenterEnabled"},
         "CWEMonitorEnabled":{"shape":"CWEMonitorEnabled"},
         "OpsItemSNSTopicArn":{"shape":"OpsItemSNSTopicArn"},
+        "SNSNotificationArn":{"shape":"SNSNotificationArn"},
         "Tags":{"shape":"TagList"},
         "AutoConfigEnabled":{"shape":"AutoConfigEnabled"},
         "AutoCreate":{"shape":"AutoCreate"},
@@ -889,7 +891,8 @@
     "DescribeProblemResponse":{
       "type":"structure",
       "members":{
-        "Problem":{"shape":"Problem"}
+        "Problem":{"shape":"Problem"},
+        "SNSNotificationArn":{"shape":"SNSNotificationArn"}
       }
     },
     "DescribeWorkloadRequest":{
@@ -1173,6 +1176,7 @@
     "MetaDataValue":{"type":"string"},
     "MetricName":{"type":"string"},
     "MetricNamespace":{"type":"string"},
+    "MissingWorkloadConfig":{"type":"boolean"},
     "Monitor":{"type":"boolean"},
     "Observation":{
       "type":"structure",
@@ -1259,6 +1263,7 @@
       "members":{
         "Id":{"shape":"ProblemId"},
         "Title":{"shape":"Title"},
+        "ShortName":{"shape":"ShortName"},
         "Insights":{"shape":"Insights"},
         "Status":{"shape":"Status"},
         "AffectedResource":{"shape":"AffectedResource"},
@@ -1366,6 +1371,12 @@
       "pattern":"[0-9a-zA-Z:_]*"
     },
     "S3EventName":{"type":"string"},
+    "SNSNotificationArn":{
+      "type":"string",
+      "max":300,
+      "min":20,
+      "pattern":"^arn:aws(-\\w+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"
+    },
     "SeverityLevel":{
       "type":"string",
       "enum":[
@@ -1375,6 +1386,7 @@
         "High"
       ]
     },
+    "ShortName":{"type":"string"},
     "SourceARN":{"type":"string"},
     "SourceType":{"type":"string"},
     "StartTime":{"type":"timestamp"},
@@ -1468,6 +1480,8 @@
         "SAP_HANA_MULTI_NODE",
         "SAP_HANA_SINGLE_NODE",
         "SAP_HANA_HIGH_AVAILABILITY",
+        "SAP_ASE_SINGLE_NODE",
+        "SAP_ASE_HIGH_AVAILABILITY",
         "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE",
         "SHAREPOINT",
         "ACTIVE_DIRECTORY",
@@ -1512,6 +1526,7 @@
         "OpsCenterEnabled":{"shape":"OpsCenterEnabled"},
         "CWEMonitorEnabled":{"shape":"CWEMonitorEnabled"},
         "OpsItemSNSTopicArn":{"shape":"OpsItemSNSTopicArn"},
+        "SNSNotificationArn":{"shape":"SNSNotificationArn"},
         "RemoveSNSTopic":{"shape":"RemoveSNSTopic"},
         "AutoConfigEnabled":{"shape":"AutoConfigEnabled"},
         "AttachMissingPermission":{"shape":"AttachMissingPermission"}
@@ -1644,7 +1659,8 @@
         "ComponentName":{"shape":"ComponentName"},
         "WorkloadName":{"shape":"WorkloadName"},
         "Tier":{"shape":"Tier"},
-        "WorkloadRemarks":{"shape":"Remarks"}
+        "WorkloadRemarks":{"shape":"Remarks"},
+        "MissingWorkloadConfig":{"shape":"MissingWorkloadConfig"}
       }
     },
     "WorkloadConfiguration":{
@@ -1672,7 +1688,7 @@
     },
     "WorkloadName":{
       "type":"string",
-      "max":8,
+      "max":12,
       "min":1,
       "pattern":"[a-zA-Z0-9\\.\\-_]*"
     },

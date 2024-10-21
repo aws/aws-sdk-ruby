@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2024-10-21)
+------------------
+
+* Feature - Adds support for removing the PlacementGroup setting on an Auto Scaling Group through the UpdateAutoScalingGroup API.
+
 1.122.0 (2024-10-18)
 ------------------
 

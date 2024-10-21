@@ -2297,7 +2297,7 @@ module Aws::EC2
       attr_accessor ipv_4_prefix_count: ::Integer
       attr_accessor ipv_6_prefixes: ::Array[Types::Ipv6PrefixSpecificationRequest]
       attr_accessor ipv_6_prefix_count: ::Integer
-      attr_accessor interface_type: ("efa" | "branch" | "trunk")
+      attr_accessor interface_type: ("efa" | "efa-only" | "branch" | "trunk")
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor client_token: ::String
       attr_accessor enable_primary_ipv_6: bool
@@ -11703,7 +11703,7 @@ module Aws::EC2
       attr_accessor connection_tracking_configuration: Types::ConnectionTrackingConfiguration
       attr_accessor description: ::String
       attr_accessor groups: ::Array[Types::GroupIdentifier]
-      attr_accessor interface_type: ("interface" | "natGateway" | "efa" | "trunk" | "load_balancer" | "network_load_balancer" | "vpc_endpoint" | "branch" | "transit_gateway" | "lambda" | "quicksight" | "global_accelerator_managed" | "api_gateway_managed" | "gateway_load_balancer" | "gateway_load_balancer_endpoint" | "iot_rules_managed" | "aws_codestar_connections_managed")
+      attr_accessor interface_type: ("interface" | "natGateway" | "efa" | "efa-only" | "trunk" | "load_balancer" | "network_load_balancer" | "vpc_endpoint" | "branch" | "transit_gateway" | "lambda" | "quicksight" | "global_accelerator_managed" | "api_gateway_managed" | "gateway_load_balancer" | "gateway_load_balancer_endpoint" | "iot_rules_managed" | "aws_codestar_connections_managed")
       attr_accessor ipv_6_addresses: ::Array[Types::NetworkInterfaceIpv6Address]
       attr_accessor mac_address: ::String
       attr_accessor network_interface_id: ::String

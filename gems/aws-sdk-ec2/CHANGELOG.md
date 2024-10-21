@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.483.0 (2024-10-21)
+------------------
+
+* Feature - Amazon EC2 now allows you to create network interfaces with just the EFA driver and no ENA driver by specifying the network interface type as efa-only.
+
 1.482.0 (2024-10-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2024-10-21)
+------------------
+
+* Feature - This release adds support for Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift with EKS that enhances the resiliency of multi-AZ cluster environments
+
 1.119.0 (2024-10-18)
 ------------------
 

@@ -1686,6 +1686,7 @@ module Aws::WAFV2
     WebACL.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
     WebACL.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     WebACL.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
+    WebACL.add_member(:retrofitted_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "RetrofittedByFirewallManager"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)
