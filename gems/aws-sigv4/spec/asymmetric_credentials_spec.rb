@@ -42,8 +42,8 @@ module Aws
         # ensure that encoding of private keys with MSB set result in valid EC objects
         context 'private key with most significant bit set' do
 
-          let(:access_key_id) { 'ASIAZRFOHJT45NGNWXS3' }
-          let(:secret_access_key) { 'WOuDKprKr+rt3Dl7+RCiNpZGzi3Jw/DdVifyifuC' }
+          let(:access_key_id) { 'ASIAJOP4OINN7EXAMPLE' }
+          let(:secret_access_key) { 'bJalbXutNFeni/k7MDEnG/byxRfiCYEXAMPLEKEY' }
           let(:test_value) { 'test_value' }
 
           it 'derives a valid EC PKey' do
