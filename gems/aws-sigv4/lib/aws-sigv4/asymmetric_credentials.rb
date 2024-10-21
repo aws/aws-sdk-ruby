@@ -64,8 +64,8 @@ module Aws
       def self.bn_to_be_bytes(bn)
         bytes = []
         while bn > 0
-          bytes << bn % 256
-          bn /= 256
+          bytes << (bn & 0xff)
+          bn = bn >> 8
         end
         bytes.reverse
       end
