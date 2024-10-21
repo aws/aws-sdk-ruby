@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - fix sigv4a signing issue with derive_asymmetric_key for certain credentials.
+
 1.10.0 (2024-09-17)
 ------------------
 
