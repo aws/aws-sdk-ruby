@@ -174,7 +174,7 @@ module AwsSdkCodeGenerator
 
       return nil unless binding
 
-      "JMESPath.search(\"#{Underscore.underscore_jmespath(binding['value'])}\", context.params)"
+      "JMESPath.search(\"#{Underscore.underscore_jmespath(binding['path'])}\", context.params)"
     end
 
     def static_context_param(operation, param_name)
