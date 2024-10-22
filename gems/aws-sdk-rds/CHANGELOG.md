@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.255.0 (2024-10-22)
+------------------
+
+* Feature - Global clusters now expose the Endpoint attribute as one of its fields. It is a Read/Write endpoint for the global cluster which resolves to the Global Cluster writer instance.
+
 1.254.0 (2024-10-18)
 ------------------
 

@@ -447,6 +447,90 @@ module Aws::Repostspace
 
     # @!group API Operations
 
+    # Add role to multiple users or groups in a private re:Post.
+    #
+    # @option params [required, Array<String>] :accessor_ids
+    #   The user or group accessor identifiers to add the role to.
+    #
+    # @option params [required, String] :role
+    #   The role to add to the users or groups.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
+    #
+    # @return [Types::BatchAddRoleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAddRoleOutput#added_accessor_ids #added_accessor_ids} => Array&lt;String&gt;
+    #   * {Types::BatchAddRoleOutput#errors #errors} => Array&lt;Types::BatchError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_add_role({
+    #     accessor_ids: ["AccessorId"], # required
+    #     role: "EXPERT", # required, accepts EXPERT, MODERATOR, ADMINISTRATOR, SUPPORTREQUESTOR
+    #     space_id: "SpaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.added_accessor_ids #=> Array
+    #   resp.added_accessor_ids[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].accessor_id #=> String
+    #   resp.errors[0].error #=> Integer
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchAddRole AWS API Documentation
+    #
+    # @overload batch_add_role(params = {})
+    # @param [Hash] params ({})
+    def batch_add_role(params = {}, options = {})
+      req = build_request(:batch_add_role, params)
+      req.send_request(options)
+    end
+
+    # Remove role from multiple users or groups in a private re:Post.
+    #
+    # @option params [required, Array<String>] :accessor_ids
+    #   The user or group accessor identifiers to remove the role from.
+    #
+    # @option params [required, String] :role
+    #   The role to remove from the users or groups.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the private re:Post.
+    #
+    # @return [Types::BatchRemoveRoleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchRemoveRoleOutput#errors #errors} => Array&lt;Types::BatchError&gt;
+    #   * {Types::BatchRemoveRoleOutput#removed_accessor_ids #removed_accessor_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_remove_role({
+    #     accessor_ids: ["AccessorId"], # required
+    #     role: "EXPERT", # required, accepts EXPERT, MODERATOR, ADMINISTRATOR, SUPPORTREQUESTOR
+    #     space_id: "SpaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].accessor_id #=> String
+    #   resp.errors[0].error #=> Integer
+    #   resp.errors[0].message #=> String
+    #   resp.removed_accessor_ids #=> Array
+    #   resp.removed_accessor_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchRemoveRole AWS API Documentation
+    #
+    # @overload batch_remove_role(params = {})
+    # @param [Hash] params ({})
+    def batch_remove_role(params = {}, options = {})
+      req = build_request(:batch_remove_role, params)
+      req.send_request(options)
+    end
+
     # Creates an AWS re:Post Private private re:Post.
     #
     # @option params [String] :description
@@ -575,6 +659,7 @@ module Aws::Repostspace
     #   * {Types::GetSpaceOutput#group_admins #group_admins} => Array&lt;String&gt;
     #   * {Types::GetSpaceOutput#name #name} => String
     #   * {Types::GetSpaceOutput#random_domain #random_domain} => String
+    #   * {Types::GetSpaceOutput#roles #roles} => Hash&lt;String,Array&lt;String&gt;&gt;
     #   * {Types::GetSpaceOutput#space_id #space_id} => String
     #   * {Types::GetSpaceOutput#status #status} => String
     #   * {Types::GetSpaceOutput#storage_limit #storage_limit} => Integer
@@ -605,6 +690,9 @@ module Aws::Repostspace
     #   resp.group_admins[0] #=> String
     #   resp.name #=> String
     #   resp.random_domain #=> String
+    #   resp.roles #=> Hash
+    #   resp.roles["AccessorId"] #=> Array
+    #   resp.roles["AccessorId"][0] #=> String, one of "EXPERT", "MODERATOR", "ADMINISTRATOR", "SUPPORTREQUESTOR"
     #   resp.space_id #=> String
     #   resp.status #=> String
     #   resp.storage_limit #=> Integer
@@ -887,7 +975,7 @@ module Aws::Repostspace
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-repostspace'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

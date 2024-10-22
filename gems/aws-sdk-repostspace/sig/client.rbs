@@ -75,6 +75,32 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchAddRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAddRoleOutput]
+        def added_accessor_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::BatchError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#batch_add_role-instance_method
+      def batch_add_role: (
+                            accessor_ids: Array[::String],
+                            role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR"),
+                            space_id: ::String
+                          ) -> _BatchAddRoleResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAddRoleResponseSuccess
+
+      interface _BatchRemoveRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchRemoveRoleOutput]
+        def errors: () -> ::Array[Types::BatchError]
+        def removed_accessor_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Repostspace/Client.html#batch_remove_role-instance_method
+      def batch_remove_role: (
+                               accessor_ids: Array[::String],
+                               role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR"),
+                               space_id: ::String
+                             ) -> _BatchRemoveRoleResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchRemoveRoleResponseSuccess
+
       interface _CreateSpaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSpaceOutput]
         def space_id: () -> ::String
@@ -117,6 +143,7 @@ module Aws
         def group_admins: () -> ::Array[::String]
         def name: () -> ::String
         def random_domain: () -> ::String
+        def roles: () -> ::Hash[::String, ::Array[("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")]]
         def space_id: () -> ::String
         def status: () -> ::String
         def storage_limit: () -> ::Integer

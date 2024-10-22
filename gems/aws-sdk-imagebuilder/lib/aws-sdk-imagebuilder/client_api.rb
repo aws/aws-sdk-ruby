@@ -341,6 +341,7 @@ module Aws::Imagebuilder
     ParallelGroup = Shapes::StringShape.new(name: 'ParallelGroup')
     PipelineExecutionStartCondition = Shapes::StringShape.new(name: 'PipelineExecutionStartCondition')
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
+    Placement = Shapes::StructureShape.new(name: 'Placement')
     Platform = Shapes::StringShape.new(name: 'Platform')
     PutComponentPolicyRequest = Shapes::StructureShape.new(name: 'PutComponentPolicyRequest')
     PutComponentPolicyResponse = Shapes::StructureShape.new(name: 'PutComponentPolicyResponse')
@@ -393,6 +394,7 @@ module Aws::Imagebuilder
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetContainerRepository = Shapes::StructureShape.new(name: 'TargetContainerRepository')
     TargetResourceCount = Shapes::IntegerShape.new(name: 'TargetResourceCount')
+    TenancyType = Shapes::StringShape.new(name: 'TenancyType')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -751,6 +753,7 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     CreateInfrastructureConfigurationRequest.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     CreateInfrastructureConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateInfrastructureConfigurationRequest.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
     CreateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateInfrastructureConfigurationRequest.struct_class = Types::CreateInfrastructureConfigurationRequest
 
@@ -1312,6 +1315,7 @@ module Aws::Imagebuilder
     InfrastructureConfiguration.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     InfrastructureConfiguration.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     InfrastructureConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    InfrastructureConfiguration.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
     InfrastructureConfiguration.struct_class = Types::InfrastructureConfiguration
 
     InfrastructureConfigurationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -1323,6 +1327,7 @@ module Aws::Imagebuilder
     InfrastructureConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     InfrastructureConfigurationSummary.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeList, location_name: "instanceTypes"))
     InfrastructureConfigurationSummary.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: InstanceProfileNameType, location_name: "instanceProfileName"))
+    InfrastructureConfigurationSummary.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
     InfrastructureConfigurationSummary.struct_class = Types::InfrastructureConfigurationSummary
 
     InfrastructureConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: InfrastructureConfigurationSummary)
@@ -1756,6 +1761,12 @@ module Aws::Imagebuilder
     PackageVulnerabilityDetails.add_member(:reference_urls, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "referenceUrls"))
     PackageVulnerabilityDetails.struct_class = Types::PackageVulnerabilityDetails
 
+    Placement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "availabilityZone"))
+    Placement.add_member(:tenancy, Shapes::ShapeRef.new(shape: TenancyType, location_name: "tenancy"))
+    Placement.add_member(:host_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "hostId"))
+    Placement.add_member(:host_resource_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "hostResourceGroupArn"))
+    Placement.struct_class = Types::Placement
+
     PutComponentPolicyRequest.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, required: true, location_name: "componentArn"))
     PutComponentPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
     PutComponentPolicyRequest.struct_class = Types::PutComponentPolicyRequest
@@ -1957,9 +1968,10 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationRequest.add_member(:key_pair, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "keyPair"))
     UpdateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_failure, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnFailure"))
     UpdateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
-    UpdateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     UpdateInfrastructureConfigurationRequest.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
+    UpdateInfrastructureConfigurationRequest.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
+    UpdateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateInfrastructureConfigurationRequest.struct_class = Types::UpdateInfrastructureConfigurationRequest
 
     UpdateInfrastructureConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))

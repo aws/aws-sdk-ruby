@@ -69,15 +69,24 @@ module Aws::TimestreamQuery
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParameterMapping = Shapes::StructureShape.new(name: 'ParameterMapping')
     ParameterMappingList = Shapes::ListShape.new(name: 'ParameterMappingList')
+    PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
+    PartitionKeyList = Shapes::ListShape.new(name: 'PartitionKeyList')
     PrepareQueryRequest = Shapes::StructureShape.new(name: 'PrepareQueryRequest')
     PrepareQueryResponse = Shapes::StructureShape.new(name: 'PrepareQueryResponse')
     QueryExecutionException = Shapes::StructureShape.new(name: 'QueryExecutionException')
     QueryId = Shapes::StringShape.new(name: 'QueryId')
+    QueryInsights = Shapes::StructureShape.new(name: 'QueryInsights')
+    QueryInsightsMode = Shapes::StringShape.new(name: 'QueryInsightsMode')
+    QueryInsightsResponse = Shapes::StructureShape.new(name: 'QueryInsightsResponse')
     QueryPricingModel = Shapes::StringShape.new(name: 'QueryPricingModel')
     QueryRequest = Shapes::StructureShape.new(name: 'QueryRequest')
     QueryResponse = Shapes::StructureShape.new(name: 'QueryResponse')
+    QuerySpatialCoverage = Shapes::StructureShape.new(name: 'QuerySpatialCoverage')
+    QuerySpatialCoverageMax = Shapes::StructureShape.new(name: 'QuerySpatialCoverageMax')
     QueryStatus = Shapes::StructureShape.new(name: 'QueryStatus')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
+    QueryTemporalRange = Shapes::StructureShape.new(name: 'QueryTemporalRange')
+    QueryTemporalRangeMax = Shapes::StructureShape.new(name: 'QueryTemporalRangeMax')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Row = Shapes::StructureShape.new(name: 'Row')
@@ -95,6 +104,9 @@ module Aws::TimestreamQuery
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     ScheduledQuery = Shapes::StructureShape.new(name: 'ScheduledQuery')
     ScheduledQueryDescription = Shapes::StructureShape.new(name: 'ScheduledQueryDescription')
+    ScheduledQueryInsights = Shapes::StructureShape.new(name: 'ScheduledQueryInsights')
+    ScheduledQueryInsightsMode = Shapes::StringShape.new(name: 'ScheduledQueryInsightsMode')
+    ScheduledQueryInsightsResponse = Shapes::StructureShape.new(name: 'ScheduledQueryInsightsResponse')
     ScheduledQueryList = Shapes::ListShape.new(name: 'ScheduledQueryList')
     ScheduledQueryName = Shapes::StringShape.new(name: 'ScheduledQueryName')
     ScheduledQueryRunStatus = Shapes::StringShape.new(name: 'ScheduledQueryRunStatus')
@@ -216,6 +228,7 @@ module Aws::TimestreamQuery
     ExecuteScheduledQueryRequest.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ScheduledQueryArn"))
     ExecuteScheduledQueryRequest.add_member(:invocation_time, Shapes::ShapeRef.new(shape: Time, required: true, location_name: "InvocationTime"))
     ExecuteScheduledQueryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ExecuteScheduledQueryRequest.add_member(:query_insights, Shapes::ShapeRef.new(shape: ScheduledQueryInsights, location_name: "QueryInsights"))
     ExecuteScheduledQueryRequest.struct_class = Types::ExecuteScheduledQueryRequest
 
     ExecutionStats.add_member(:execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ExecutionTimeInMillis"))
@@ -278,6 +291,8 @@ module Aws::TimestreamQuery
 
     ParameterMappingList.member = Shapes::ShapeRef.new(shape: ParameterMapping)
 
+    PartitionKeyList.member = Shapes::ShapeRef.new(shape: PartitionKey)
+
     PrepareQueryRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryString"))
     PrepareQueryRequest.add_member(:validate_only, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ValidateOnly"))
     PrepareQueryRequest.struct_class = Types::PrepareQueryRequest
@@ -290,10 +305,24 @@ module Aws::TimestreamQuery
     QueryExecutionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     QueryExecutionException.struct_class = Types::QueryExecutionException
 
+    QueryInsights.add_member(:mode, Shapes::ShapeRef.new(shape: QueryInsightsMode, required: true, location_name: "Mode"))
+    QueryInsights.struct_class = Types::QueryInsights
+
+    QueryInsightsResponse.add_member(:query_spatial_coverage, Shapes::ShapeRef.new(shape: QuerySpatialCoverage, location_name: "QuerySpatialCoverage"))
+    QueryInsightsResponse.add_member(:query_temporal_range, Shapes::ShapeRef.new(shape: QueryTemporalRange, location_name: "QueryTemporalRange"))
+    QueryInsightsResponse.add_member(:query_table_count, Shapes::ShapeRef.new(shape: Long, location_name: "QueryTableCount", metadata: {"box"=>true}))
+    QueryInsightsResponse.add_member(:output_rows, Shapes::ShapeRef.new(shape: Long, location_name: "OutputRows", metadata: {"box"=>true}))
+    QueryInsightsResponse.add_member(:output_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "OutputBytes", metadata: {"box"=>true}))
+    QueryInsightsResponse.add_member(:unload_partition_count, Shapes::ShapeRef.new(shape: Long, location_name: "UnloadPartitionCount", metadata: {"box"=>true}))
+    QueryInsightsResponse.add_member(:unload_written_rows, Shapes::ShapeRef.new(shape: Long, location_name: "UnloadWrittenRows", metadata: {"box"=>true}))
+    QueryInsightsResponse.add_member(:unload_written_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "UnloadWrittenBytes", metadata: {"box"=>true}))
+    QueryInsightsResponse.struct_class = Types::QueryInsightsResponse
+
     QueryRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryString"))
     QueryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     QueryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     QueryRequest.add_member(:max_rows, Shapes::ShapeRef.new(shape: MaxQueryResults, location_name: "MaxRows"))
+    QueryRequest.add_member(:query_insights, Shapes::ShapeRef.new(shape: QueryInsights, location_name: "QueryInsights"))
     QueryRequest.struct_class = Types::QueryRequest
 
     QueryResponse.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, required: true, location_name: "QueryId"))
@@ -301,12 +330,28 @@ module Aws::TimestreamQuery
     QueryResponse.add_member(:rows, Shapes::ShapeRef.new(shape: RowList, required: true, location_name: "Rows"))
     QueryResponse.add_member(:column_info, Shapes::ShapeRef.new(shape: ColumnInfoList, required: true, location_name: "ColumnInfo"))
     QueryResponse.add_member(:query_status, Shapes::ShapeRef.new(shape: QueryStatus, location_name: "QueryStatus"))
+    QueryResponse.add_member(:query_insights_response, Shapes::ShapeRef.new(shape: QueryInsightsResponse, location_name: "QueryInsightsResponse"))
     QueryResponse.struct_class = Types::QueryResponse
+
+    QuerySpatialCoverage.add_member(:max, Shapes::ShapeRef.new(shape: QuerySpatialCoverageMax, location_name: "Max"))
+    QuerySpatialCoverage.struct_class = Types::QuerySpatialCoverage
+
+    QuerySpatialCoverageMax.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "Value"))
+    QuerySpatialCoverageMax.add_member(:table_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TableArn"))
+    QuerySpatialCoverageMax.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKeyList, location_name: "PartitionKey"))
+    QuerySpatialCoverageMax.struct_class = Types::QuerySpatialCoverageMax
 
     QueryStatus.add_member(:progress_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "ProgressPercentage"))
     QueryStatus.add_member(:cumulative_bytes_scanned, Shapes::ShapeRef.new(shape: Long, location_name: "CumulativeBytesScanned"))
     QueryStatus.add_member(:cumulative_bytes_metered, Shapes::ShapeRef.new(shape: Long, location_name: "CumulativeBytesMetered"))
     QueryStatus.struct_class = Types::QueryStatus
+
+    QueryTemporalRange.add_member(:max, Shapes::ShapeRef.new(shape: QueryTemporalRangeMax, location_name: "Max"))
+    QueryTemporalRange.struct_class = Types::QueryTemporalRange
+
+    QueryTemporalRangeMax.add_member(:value, Shapes::ShapeRef.new(shape: Long, location_name: "Value"))
+    QueryTemporalRangeMax.add_member(:table_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TableArn"))
+    QueryTemporalRangeMax.struct_class = Types::QueryTemporalRangeMax
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ScheduledQueryArn"))
@@ -357,12 +402,23 @@ module Aws::TimestreamQuery
     ScheduledQueryDescription.add_member(:recently_failed_runs, Shapes::ShapeRef.new(shape: ScheduledQueryRunSummaryList, location_name: "RecentlyFailedRuns"))
     ScheduledQueryDescription.struct_class = Types::ScheduledQueryDescription
 
+    ScheduledQueryInsights.add_member(:mode, Shapes::ShapeRef.new(shape: ScheduledQueryInsightsMode, required: true, location_name: "Mode"))
+    ScheduledQueryInsights.struct_class = Types::ScheduledQueryInsights
+
+    ScheduledQueryInsightsResponse.add_member(:query_spatial_coverage, Shapes::ShapeRef.new(shape: QuerySpatialCoverage, location_name: "QuerySpatialCoverage"))
+    ScheduledQueryInsightsResponse.add_member(:query_temporal_range, Shapes::ShapeRef.new(shape: QueryTemporalRange, location_name: "QueryTemporalRange"))
+    ScheduledQueryInsightsResponse.add_member(:query_table_count, Shapes::ShapeRef.new(shape: Long, location_name: "QueryTableCount", metadata: {"box"=>true}))
+    ScheduledQueryInsightsResponse.add_member(:output_rows, Shapes::ShapeRef.new(shape: Long, location_name: "OutputRows", metadata: {"box"=>true}))
+    ScheduledQueryInsightsResponse.add_member(:output_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "OutputBytes", metadata: {"box"=>true}))
+    ScheduledQueryInsightsResponse.struct_class = Types::ScheduledQueryInsightsResponse
+
     ScheduledQueryList.member = Shapes::ShapeRef.new(shape: ScheduledQuery)
 
     ScheduledQueryRunSummary.add_member(:invocation_time, Shapes::ShapeRef.new(shape: Time, location_name: "InvocationTime"))
     ScheduledQueryRunSummary.add_member(:trigger_time, Shapes::ShapeRef.new(shape: Time, location_name: "TriggerTime"))
     ScheduledQueryRunSummary.add_member(:run_status, Shapes::ShapeRef.new(shape: ScheduledQueryRunStatus, location_name: "RunStatus"))
     ScheduledQueryRunSummary.add_member(:execution_stats, Shapes::ShapeRef.new(shape: ExecutionStats, location_name: "ExecutionStats"))
+    ScheduledQueryRunSummary.add_member(:query_insights_response, Shapes::ShapeRef.new(shape: ScheduledQueryInsightsResponse, location_name: "QueryInsightsResponse"))
     ScheduledQueryRunSummary.add_member(:error_report_location, Shapes::ShapeRef.new(shape: ErrorReportLocation, location_name: "ErrorReportLocation"))
     ScheduledQueryRunSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "FailureReason"))
     ScheduledQueryRunSummary.struct_class = Types::ScheduledQueryRunSummary

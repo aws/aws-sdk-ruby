@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-10-22)
+------------------
+
+* Feature - Adds the BatchAddRole and BatchRemoveRole APIs.
+
 1.15.0 (2024-10-18)
 ------------------
 

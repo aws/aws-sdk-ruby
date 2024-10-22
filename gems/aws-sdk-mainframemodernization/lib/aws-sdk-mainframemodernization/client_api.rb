@@ -26,6 +26,7 @@ module Aws::MainframeModernization
     ApplicationVersionSummaryList = Shapes::ListShape.new(name: 'ApplicationVersionSummaryList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
+    AuthSecretsManagerArn = Shapes::StringShape.new(name: 'AuthSecretsManagerArn')
     BatchJobDefinition = Shapes::UnionShape.new(name: 'BatchJobDefinition')
     BatchJobDefinitions = Shapes::ListShape.new(name: 'BatchJobDefinitions')
     BatchJobExecutionStatus = Shapes::StringShape.new(name: 'BatchJobExecutionStatus')
@@ -41,6 +42,7 @@ module Aws::MainframeModernization
     CancelBatchJobExecutionRequest = Shapes::StructureShape.new(name: 'CancelBatchJobExecutionRequest')
     CancelBatchJobExecutionResponse = Shapes::StructureShape.new(name: 'CancelBatchJobExecutionResponse')
     CapacityValue = Shapes::IntegerShape.new(name: 'CapacityValue')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
@@ -277,6 +279,7 @@ module Aws::MainframeModernization
     BatchJobStepList.member = Shapes::ShapeRef.new(shape: JobStep)
 
     CancelBatchJobExecutionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
+    CancelBatchJobExecutionRequest.add_member(:auth_secrets_manager_arn, Shapes::ShapeRef.new(shape: AuthSecretsManagerArn, location_name: "authSecretsManagerArn"))
     CancelBatchJobExecutionRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "executionId"))
     CancelBatchJobExecutionRequest.struct_class = Types::CancelBatchJobExecutionRequest
 
@@ -287,7 +290,7 @@ module Aws::MainframeModernization
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateApplicationRequest.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     CreateApplicationRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
@@ -303,7 +306,7 @@ module Aws::MainframeModernization
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
     CreateDataSetImportTaskRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
-    CreateDataSetImportTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSetImportTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateDataSetImportTaskRequest.add_member(:import_config, Shapes::ShapeRef.new(shape: DataSetImportConfig, required: true, location_name: "importConfig"))
     CreateDataSetImportTaskRequest.struct_class = Types::CreateDataSetImportTaskRequest
 
@@ -312,14 +315,14 @@ module Aws::MainframeModernization
 
     CreateDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
     CreateDeploymentRequest.add_member(:application_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "applicationVersion"))
-    CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateDeploymentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "environmentId"))
     CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
 
     CreateDeploymentResponse.add_member(:deployment_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "deploymentId"))
     CreateDeploymentResponse.struct_class = Types::CreateDeploymentResponse
 
-    CreateEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateEnvironmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     CreateEnvironmentRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
     CreateEnvironmentRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "engineVersion"))
@@ -700,6 +703,7 @@ module Aws::MainframeModernization
     ListBatchJobExecutionsResponse.struct_class = Types::ListBatchJobExecutionsResponse
 
     ListBatchJobRestartPointsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
+    ListBatchJobRestartPointsRequest.add_member(:auth_secrets_manager_arn, Shapes::ShapeRef.new(shape: AuthSecretsManagerArn, location: "querystring", location_name: "authSecretsManagerArn"))
     ListBatchJobRestartPointsRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "executionId"))
     ListBatchJobRestartPointsRequest.struct_class = Types::ListBatchJobRestartPointsRequest
 
@@ -838,6 +842,7 @@ module Aws::MainframeModernization
     StartApplicationResponse.struct_class = Types::StartApplicationResponse
 
     StartBatchJobRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "applicationId"))
+    StartBatchJobRequest.add_member(:auth_secrets_manager_arn, Shapes::ShapeRef.new(shape: AuthSecretsManagerArn, location_name: "authSecretsManagerArn"))
     StartBatchJobRequest.add_member(:batch_job_identifier, Shapes::ShapeRef.new(shape: BatchJobIdentifier, required: true, location_name: "batchJobIdentifier"))
     StartBatchJobRequest.add_member(:job_params, Shapes::ShapeRef.new(shape: BatchJobParametersMap, location_name: "jobParams"))
     StartBatchJobRequest.struct_class = Types::StartBatchJobRequest
@@ -943,9 +948,11 @@ module Aws::MainframeModernization
 
       api.metadata = {
         "apiVersion" => "2021-04-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "m2",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWSMainframeModernization",
         "serviceId" => "m2",
         "signatureVersion" => "v4",

@@ -111,7 +111,7 @@ module Aws
                               semantic_version: ::String,
                               ?description: ::String,
                               ?change_description: ::String,
-                              platform: ("Windows" | "Linux"),
+                              platform: ("Windows" | "Linux" | "macOS"),
                               ?supported_os_versions: Array[::String],
                               ?data: ::String,
                               ?uri: ::String,
@@ -166,7 +166,7 @@ module Aws
                                      },
                                      ?dockerfile_template_data: ::String,
                                      ?dockerfile_template_uri: ::String,
-                                     ?platform_override: ("Windows" | "Linux"),
+                                     ?platform_override: ("Windows" | "Linux" | "macOS"),
                                      ?image_os_version_override: ::String,
                                      parent_image: ::String,
                                      ?tags: Hash[::String, ::String],
@@ -425,6 +425,12 @@ module Aws
                                                    http_put_response_hop_limit: ::Integer?
                                                  },
                                                  ?tags: Hash[::String, ::String],
+                                                 ?placement: {
+                                                   availability_zone: ::String?,
+                                                   tenancy: ("default" | "dedicated" | "host")?,
+                                                   host_id: ::String?,
+                                                   host_resource_group_arn: ::String?
+                                                 },
                                                  client_token: ::String
                                                ) -> _CreateInfrastructureConfigurationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInfrastructureConfigurationResponseSuccess
@@ -817,7 +823,7 @@ module Aws
                               ?change_description: ::String,
                               type: ("BUILD" | "TEST"),
                               format: ("SHELL"),
-                              platform: ("Windows" | "Linux"),
+                              platform: ("Windows" | "Linux" | "macOS"),
                               ?data: ::String,
                               ?uri: ::String,
                               ?kms_key_id: ::String,
@@ -837,7 +843,7 @@ module Aws
                              name: ::String,
                              semantic_version: ::String,
                              ?description: ::String,
-                             platform: ("Windows" | "Linux"),
+                             platform: ("Windows" | "Linux" | "macOS"),
                              ?os_version: ::String,
                              vm_import_task_id: ::String,
                              ?tags: Hash[::String, ::String],
@@ -1498,12 +1504,18 @@ module Aws
                                                  ?key_pair: ::String,
                                                  ?terminate_instance_on_failure: bool,
                                                  ?sns_topic_arn: ::String,
-                                                 client_token: ::String,
                                                  ?resource_tags: Hash[::String, ::String],
                                                  ?instance_metadata_options: {
                                                    http_tokens: ::String?,
                                                    http_put_response_hop_limit: ::Integer?
-                                                 }
+                                                 },
+                                                 ?placement: {
+                                                   availability_zone: ::String?,
+                                                   tenancy: ("default" | "dedicated" | "host")?,
+                                                   host_id: ::String?,
+                                                   host_resource_group_arn: ::String?
+                                                 },
+                                                 client_token: ::String
                                                ) -> _UpdateInfrastructureConfigurationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInfrastructureConfigurationResponseSuccess
 

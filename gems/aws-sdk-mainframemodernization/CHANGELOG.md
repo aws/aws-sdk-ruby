@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-10-22)
+------------------
+
+* Feature - Add AuthSecretsManagerArn optional parameter to batch job APIs, expand batch parameter limits, and introduce clientToken constraints.
+
 1.29.0 (2024-10-18)
 ------------------
 

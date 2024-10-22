@@ -629,7 +629,7 @@ module Aws::Imagebuilder
     #     semantic_version: "VersionNumber", # required
     #     description: "NonEmptyString",
     #     change_description: "NonEmptyString",
-    #     platform: "Windows", # required, accepts Windows, Linux
+    #     platform: "Windows", # required, accepts Windows, Linux, macOS
     #     supported_os_versions: ["OsVersion"],
     #     data: "InlineComponentData",
     #     uri: "Uri",
@@ -724,7 +724,7 @@ module Aws::Imagebuilder
     #   The destination repository for the container image.
     #
     # @option params [String] :kms_key_id
-    #   Identifies which KMS key is used to encrypt the container image.
+    #   Identifies which KMS key is used to encrypt the Dockerfile template.
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -784,7 +784,7 @@ module Aws::Imagebuilder
     #     },
     #     dockerfile_template_data: "InlineDockerFileTemplate",
     #     dockerfile_template_uri: "Uri",
-    #     platform_override: "Windows", # accepts Windows, Linux
+    #     platform_override: "Windows", # accepts Windows, Linux, macOS
     #     image_os_version_override: "NonEmptyString",
     #     parent_image: "NonEmptyString", # required
     #     tags: {
@@ -1368,14 +1368,22 @@ module Aws::Imagebuilder
     #    </note>
     #
     # @option params [Hash<String,String>] :resource_tags
-    #   The tags attached to the resource created by Image Builder.
+    #   The metadata tags to assign to the Amazon EC2 instance that Image
+    #   Builder launches during the build process. Tags are formatted as key
+    #   value pairs.
     #
     # @option params [Types::InstanceMetadataOptions] :instance_metadata_options
     #   The instance metadata options that you can set for the HTTP requests
     #   that pipeline builds use to launch EC2 build and test instances.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags of the infrastructure configuration.
+    #   The metadata tags to assign to the infrastructure configuration
+    #   resource that Image Builder creates as output. Tags are formatted as
+    #   key value pairs.
+    #
+    # @option params [Types::Placement] :placement
+    #   The instance placement settings that define where the instances that
+    #   are launched from your image will run.
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -1422,6 +1430,12 @@ module Aws::Imagebuilder
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     placement: {
+    #       availability_zone: "NonEmptyString",
+    #       tenancy: "default", # accepts default, dedicated, host
+    #       host_id: "NonEmptyString",
+    #       host_resource_group_arn: "NonEmptyString",
     #     },
     #     client_token: "ClientToken", # required
     #   })
@@ -1981,7 +1995,7 @@ module Aws::Imagebuilder
     #   resp.component.description #=> String
     #   resp.component.change_description #=> String
     #   resp.component.type #=> String, one of "BUILD", "TEST"
-    #   resp.component.platform #=> String, one of "Windows", "Linux"
+    #   resp.component.platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.component.supported_os_versions #=> Array
     #   resp.component.supported_os_versions[0] #=> String
     #   resp.component.state.status #=> String, one of "DEPRECATED"
@@ -2065,7 +2079,7 @@ module Aws::Imagebuilder
     #   resp.container_recipe.container_type #=> String, one of "DOCKER"
     #   resp.container_recipe.name #=> String
     #   resp.container_recipe.description #=> String
-    #   resp.container_recipe.platform #=> String, one of "Windows", "Linux"
+    #   resp.container_recipe.platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.container_recipe.owner #=> String
     #   resp.container_recipe.version #=> String
     #   resp.container_recipe.components #=> Array
@@ -2239,7 +2253,7 @@ module Aws::Imagebuilder
     #   resp.image.type #=> String, one of "AMI", "DOCKER"
     #   resp.image.name #=> String
     #   resp.image.version #=> String
-    #   resp.image.platform #=> String, one of "Windows", "Linux"
+    #   resp.image.platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image.enhanced_image_metadata_enabled #=> Boolean
     #   resp.image.os_version #=> String
     #   resp.image.state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
@@ -2248,7 +2262,7 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.type #=> String, one of "AMI", "DOCKER"
     #   resp.image.image_recipe.name #=> String
     #   resp.image.image_recipe.description #=> String
-    #   resp.image.image_recipe.platform #=> String, one of "Windows", "Linux"
+    #   resp.image.image_recipe.platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image.image_recipe.owner #=> String
     #   resp.image.image_recipe.version #=> String
     #   resp.image.image_recipe.components #=> Array
@@ -2280,7 +2294,7 @@ module Aws::Imagebuilder
     #   resp.image.container_recipe.container_type #=> String, one of "DOCKER"
     #   resp.image.container_recipe.name #=> String
     #   resp.image.container_recipe.description #=> String
-    #   resp.image.container_recipe.platform #=> String, one of "Windows", "Linux"
+    #   resp.image.container_recipe.platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image.container_recipe.owner #=> String
     #   resp.image.container_recipe.version #=> String
     #   resp.image.container_recipe.components #=> Array
@@ -2336,6 +2350,10 @@ module Aws::Imagebuilder
     #   resp.image.infrastructure_configuration.instance_metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.image.infrastructure_configuration.tags #=> Hash
     #   resp.image.infrastructure_configuration.tags["TagKey"] #=> String
+    #   resp.image.infrastructure_configuration.placement.availability_zone #=> String
+    #   resp.image.infrastructure_configuration.placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.image.infrastructure_configuration.placement.host_id #=> String
+    #   resp.image.infrastructure_configuration.placement.host_resource_group_arn #=> String
     #   resp.image.distribution_configuration.arn #=> String
     #   resp.image.distribution_configuration.name #=> String
     #   resp.image.distribution_configuration.description #=> String
@@ -2453,7 +2471,7 @@ module Aws::Imagebuilder
     #   resp.image_pipeline.arn #=> String
     #   resp.image_pipeline.name #=> String
     #   resp.image_pipeline.description #=> String
-    #   resp.image_pipeline.platform #=> String, one of "Windows", "Linux"
+    #   resp.image_pipeline.platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image_pipeline.enhanced_image_metadata_enabled #=> Boolean
     #   resp.image_pipeline.image_recipe_arn #=> String
     #   resp.image_pipeline.container_recipe_arn #=> String
@@ -2549,7 +2567,7 @@ module Aws::Imagebuilder
     #   resp.image_recipe.type #=> String, one of "AMI", "DOCKER"
     #   resp.image_recipe.name #=> String
     #   resp.image_recipe.description #=> String
-    #   resp.image_recipe.platform #=> String, one of "Windows", "Linux"
+    #   resp.image_recipe.platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image_recipe.owner #=> String
     #   resp.image_recipe.version #=> String
     #   resp.image_recipe.components #=> Array
@@ -2660,6 +2678,10 @@ module Aws::Imagebuilder
     #   resp.infrastructure_configuration.instance_metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.infrastructure_configuration.tags #=> Hash
     #   resp.infrastructure_configuration.tags["TagKey"] #=> String
+    #   resp.infrastructure_configuration.placement.availability_zone #=> String
+    #   resp.infrastructure_configuration.placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.infrastructure_configuration.placement.host_id #=> String
+    #   resp.infrastructure_configuration.placement.host_resource_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetInfrastructureConfiguration AWS API Documentation
     #
@@ -3019,7 +3041,7 @@ module Aws::Imagebuilder
     #     change_description: "NonEmptyString",
     #     type: "BUILD", # required, accepts BUILD, TEST
     #     format: "SHELL", # required, accepts SHELL
-    #     platform: "Windows", # required, accepts Windows, Linux
+    #     platform: "Windows", # required, accepts Windows, Linux, macOS
     #     data: "NonEmptyString",
     #     uri: "Uri",
     #     kms_key_id: "NonEmptyString",
@@ -3127,7 +3149,7 @@ module Aws::Imagebuilder
     #     name: "NonEmptyString", # required
     #     semantic_version: "VersionNumber", # required
     #     description: "NonEmptyString",
-    #     platform: "Windows", # required, accepts Windows, Linux
+    #     platform: "Windows", # required, accepts Windows, Linux, macOS
     #     os_version: "OsVersion",
     #     vm_import_task_id: "NonEmptyString", # required
     #     tags: {
@@ -3152,19 +3174,7 @@ module Aws::Imagebuilder
     end
 
     # Returns the list of component build versions for the specified
-    # semantic version.
-    #
-    # <note markdown="1"> The semantic version has four nodes:
-    # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
-    # assign values for the first three, and can filter on all of them.
-    #
-    #  **Filtering:** With semantic versioning, you have the flexibility to
-    # use wildcards (x) to specify the most recent versions or nodes when
-    # selecting the base image or components for your recipe. When you use a
-    # wildcard in any node, all nodes to the right of the first wildcard
-    # must also be wildcards.
-    #
-    #  </note>
+    # component version Amazon Resource Name (ARN).
     #
     # @option params [required, String] :component_version_arn
     #   The component version Amazon Resource Name (ARN) whose versions you
@@ -3200,7 +3210,7 @@ module Aws::Imagebuilder
     #   resp.component_summary_list[0].arn #=> String
     #   resp.component_summary_list[0].name #=> String
     #   resp.component_summary_list[0].version #=> String
-    #   resp.component_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.component_summary_list[0].platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.component_summary_list[0].supported_os_versions #=> Array
     #   resp.component_summary_list[0].supported_os_versions[0] #=> String
     #   resp.component_summary_list[0].state.status #=> String, one of "DEPRECATED"
@@ -3305,7 +3315,7 @@ module Aws::Imagebuilder
     #   resp.component_version_list[0].name #=> String
     #   resp.component_version_list[0].version #=> String
     #   resp.component_version_list[0].description #=> String
-    #   resp.component_version_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.component_version_list[0].platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.component_version_list[0].supported_os_versions #=> Array
     #   resp.component_version_list[0].supported_os_versions[0] #=> String
     #   resp.component_version_list[0].type #=> String, one of "BUILD", "TEST"
@@ -3376,7 +3386,7 @@ module Aws::Imagebuilder
     #   resp.container_recipe_summary_list[0].arn #=> String
     #   resp.container_recipe_summary_list[0].container_type #=> String, one of "DOCKER"
     #   resp.container_recipe_summary_list[0].name #=> String
-    #   resp.container_recipe_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.container_recipe_summary_list[0].platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.container_recipe_summary_list[0].owner #=> String
     #   resp.container_recipe_summary_list[0].parent_image #=> String
     #   resp.container_recipe_summary_list[0].date_created #=> String
@@ -3506,7 +3516,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].name #=> String
     #   resp.image_summary_list[0].type #=> String, one of "AMI", "DOCKER"
     #   resp.image_summary_list[0].version #=> String
-    #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image_summary_list[0].os_version #=> String
     #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].state.reason #=> String
@@ -3639,7 +3649,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].name #=> String
     #   resp.image_summary_list[0].type #=> String, one of "AMI", "DOCKER"
     #   resp.image_summary_list[0].version #=> String
-    #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image_summary_list[0].os_version #=> String
     #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].state.reason #=> String
@@ -3726,7 +3736,7 @@ module Aws::Imagebuilder
     #   resp.image_pipeline_list[0].arn #=> String
     #   resp.image_pipeline_list[0].name #=> String
     #   resp.image_pipeline_list[0].description #=> String
-    #   resp.image_pipeline_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_pipeline_list[0].platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image_pipeline_list[0].enhanced_image_metadata_enabled #=> Boolean
     #   resp.image_pipeline_list[0].image_recipe_arn #=> String
     #   resp.image_pipeline_list[0].container_recipe_arn #=> String
@@ -3821,7 +3831,7 @@ module Aws::Imagebuilder
     #   resp.image_recipe_summary_list #=> Array
     #   resp.image_recipe_summary_list[0].arn #=> String
     #   resp.image_recipe_summary_list[0].name #=> String
-    #   resp.image_recipe_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_recipe_summary_list[0].platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image_recipe_summary_list[0].owner #=> String
     #   resp.image_recipe_summary_list[0].parent_image #=> String
     #   resp.image_recipe_summary_list[0].date_created #=> String
@@ -4097,7 +4107,7 @@ module Aws::Imagebuilder
     #   resp.image_version_list[0].name #=> String
     #   resp.image_version_list[0].type #=> String, one of "AMI", "DOCKER"
     #   resp.image_version_list[0].version #=> String
-    #   resp.image_version_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_version_list[0].platform #=> String, one of "Windows", "Linux", "macOS"
     #   resp.image_version_list[0].os_version #=> String
     #   resp.image_version_list[0].owner #=> String
     #   resp.image_version_list[0].date_created #=> String
@@ -4163,6 +4173,10 @@ module Aws::Imagebuilder
     #   resp.infrastructure_configuration_summary_list[0].instance_types #=> Array
     #   resp.infrastructure_configuration_summary_list[0].instance_types[0] #=> String
     #   resp.infrastructure_configuration_summary_list[0].instance_profile_name #=> String
+    #   resp.infrastructure_configuration_summary_list[0].placement.availability_zone #=> String
+    #   resp.infrastructure_configuration_summary_list[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.infrastructure_configuration_summary_list[0].placement.host_id #=> String
+    #   resp.infrastructure_configuration_summary_list[0].placement.host_resource_group_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListInfrastructureConfigurations AWS API Documentation
@@ -5394,18 +5408,6 @@ module Aws::Imagebuilder
     #
     #    </note>
     #
-    # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-    #
     # @option params [Hash<String,String>] :resource_tags
     #   The tags attached to the resource created by Image Builder.
     #
@@ -5425,6 +5427,22 @@ module Aws::Imagebuilder
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
+    #
+    # @option params [Types::Placement] :placement
+    #   The instance placement settings that define where the instances that
+    #   are launched from your image will run.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::UpdateInfrastructureConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5450,7 +5468,6 @@ module Aws::Imagebuilder
     #     key_pair: "NonEmptyString",
     #     terminate_instance_on_failure: false,
     #     sns_topic_arn: "SnsTopicArn",
-    #     client_token: "ClientToken", # required
     #     resource_tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -5458,6 +5475,13 @@ module Aws::Imagebuilder
     #       http_tokens: "HttpTokens",
     #       http_put_response_hop_limit: 1,
     #     },
+    #     placement: {
+    #       availability_zone: "NonEmptyString",
+    #       tenancy: "default", # accepts default, dedicated, host
+    #       host_id: "NonEmptyString",
+    #       host_resource_group_arn: "NonEmptyString",
+    #     },
+    #     client_token: "ClientToken", # required
     #   })
     #
     # @example Response structure
@@ -5603,7 +5627,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

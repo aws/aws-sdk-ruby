@@ -1101,7 +1101,7 @@ module Aws::Imagebuilder
     #   @return [Types::TargetContainerRepository]
     #
     # @!attribute [rw] kms_key_id
-    #   Identifies which KMS key is used to encrypt the container image.
+    #   Identifies which KMS key is used to encrypt the Dockerfile template.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1625,7 +1625,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
-    #   The tags attached to the resource created by Image Builder.
+    #   The metadata tags to assign to the Amazon EC2 instance that Image
+    #   Builder launches during the build process. Tags are formatted as key
+    #   value pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] instance_metadata_options
@@ -1634,8 +1636,15 @@ module Aws::Imagebuilder
     #   @return [Types::InstanceMetadataOptions]
     #
     # @!attribute [rw] tags
-    #   The tags of the infrastructure configuration.
+    #   The metadata tags to assign to the infrastructure configuration
+    #   resource that Image Builder creates as output. Tags are formatted as
+    #   key value pairs.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] placement
+    #   The instance placement settings that define where the instances that
+    #   are launched from your image will run.
+    #   @return [Types::Placement]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency
@@ -1666,6 +1675,7 @@ module Aws::Imagebuilder
       :resource_tags,
       :instance_metadata_options,
       :tags,
+      :placement,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2460,8 +2470,8 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] container_tags
     #   Tags for Image Builder to apply to the output container image that
-    #   &amp;INS; scans. Tags can help you identify and manage your scanned
-    #   images.
+    #   Amazon Inspector scans. Tags can help you identify and manage your
+    #   scanned images.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/EcrConfiguration AWS API Documentation
@@ -4502,6 +4512,11 @@ module Aws::Imagebuilder
     #   The tags of the infrastructure configuration.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] placement
+    #   The instance placement settings that define where the instances that
+    #   are launched from your image will run.
+    #   @return [Types::Placement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InfrastructureConfiguration AWS API Documentation
     #
     class InfrastructureConfiguration < Struct.new(
@@ -4520,7 +4535,8 @@ module Aws::Imagebuilder
       :date_updated,
       :resource_tags,
       :instance_metadata_options,
-      :tags)
+      :tags,
+      :placement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4563,6 +4579,11 @@ module Aws::Imagebuilder
     #   The instance profile of the infrastructure configuration.
     #   @return [String]
     #
+    # @!attribute [rw] placement
+    #   The instance placement settings that define where the instances that
+    #   are launched from your image will run.
+    #   @return [Types::Placement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InfrastructureConfigurationSummary AWS API Documentation
     #
     class InfrastructureConfigurationSummary < Struct.new(
@@ -4574,7 +4595,8 @@ module Aws::Imagebuilder
       :resource_tags,
       :tags,
       :instance_types,
-      :instance_profile_name)
+      :instance_profile_name,
+      :placement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6790,6 +6812,57 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # By default, EC2 instances run on shared tenancy hardware. This means
+    # that multiple Amazon Web Services accounts might share the same
+    # physical hardware. When you use dedicated hardware, the physical
+    # server that hosts your instances is dedicated to your Amazon Web
+    # Services account. Instance placement settings contain the details for
+    # the physical hardware where instances that Image Builder launches
+    # during image creation will run.
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where your build and test instances will
+    #   launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the instance. An instance with a tenancy of
+    #   `dedicated` runs on single-tenant hardware. An instance with a
+    #   tenancy of `host` runs on a Dedicated Host.
+    #
+    #   If tenancy is set to `host`, then you can optionally specify one
+    #   target for placement – either host ID or host resource group ARN. If
+    #   automatic placement is enabled for your host, and you don't specify
+    #   any placement target, Amazon EC2 will try to find an available host
+    #   for your build and test instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_id
+    #   The ID of the Dedicated Host on which build and test instances run.
+    #   This only applies if `tenancy` is `host`. If you specify the host
+    #   ID, you must not specify the resource group ARN. If you specify
+    #   both, Image Builder returns an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_resource_group_arn
+    #   The Amazon Resource Name (ARN) of the host resource group in which
+    #   to launch build and test instances. This only applies if `tenancy`
+    #   is `host`. If you specify the resource group ARN, you must not
+    #   specify the host ID. If you specify both, Image Builder returns an
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Placement AWS API Documentation
+    #
+    class Placement < Struct.new(
+      :availability_zone,
+      :tenancy,
+      :host_id,
+      :host_resource_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] component_arn
     #   The Amazon Resource Name (ARN) of the component that this policy
     #   should be applied to.
@@ -7783,19 +7856,6 @@ module Aws::Imagebuilder
     #    </note>
     #   @return [String]
     #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
-    #   in the *Amazon EC2 API Reference*.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
-    #   @return [String]
-    #
     # @!attribute [rw] resource_tags
     #   The tags attached to the resource created by Image Builder.
     #   @return [Hash<String,String>]
@@ -7818,6 +7878,24 @@ module Aws::Imagebuilder
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
     #   @return [Types::InstanceMetadataOptions]
     #
+    # @!attribute [rw] placement
+    #   The instance placement settings that define where the instances that
+    #   are launched from your image will run.
+    #   @return [Types::Placement]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency
+    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   in the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/UpdateInfrastructureConfigurationRequest AWS API Documentation
     #
     class UpdateInfrastructureConfigurationRequest < Struct.new(
@@ -7831,9 +7909,10 @@ module Aws::Imagebuilder
       :key_pair,
       :terminate_instance_on_failure,
       :sns_topic_arn,
-      :client_token,
       :resource_tags,
-      :instance_metadata_options)
+      :instance_metadata_options,
+      :placement,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end

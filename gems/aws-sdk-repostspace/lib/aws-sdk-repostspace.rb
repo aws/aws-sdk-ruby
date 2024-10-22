@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:repostspace)
 # structure.
 #
 #     repostspace = Aws::Repostspace::Client.new
-#     resp = repostspace.create_space(params)
+#     resp = repostspace.batch_add_role(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::Repostspace
   autoload :EndpointProvider, 'aws-sdk-repostspace/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-repostspace/endpoints'
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end
 

@@ -19,6 +19,12 @@ module Aws::Repostspace
     AccessorIdList = Shapes::ListShape.new(name: 'AccessorIdList')
     AdminId = Shapes::StringShape.new(name: 'AdminId')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BatchAddRoleInput = Shapes::StructureShape.new(name: 'BatchAddRoleInput')
+    BatchAddRoleOutput = Shapes::StructureShape.new(name: 'BatchAddRoleOutput')
+    BatchError = Shapes::StructureShape.new(name: 'BatchError')
+    BatchErrorList = Shapes::ListShape.new(name: 'BatchErrorList')
+    BatchRemoveRoleInput = Shapes::StructureShape.new(name: 'BatchRemoveRoleInput')
+    BatchRemoveRoleOutput = Shapes::StructureShape.new(name: 'BatchRemoveRoleOutput')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ConfigurationStatus = Shapes::StringShape.new(name: 'ConfigurationStatus')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -27,6 +33,8 @@ module Aws::Repostspace
     CreateSpaceOutput = Shapes::StructureShape.new(name: 'CreateSpaceOutput')
     DeleteSpaceInput = Shapes::StructureShape.new(name: 'DeleteSpaceInput')
     DeregisterAdminInput = Shapes::StructureShape.new(name: 'DeregisterAdminInput')
+    ErrorCode = Shapes::IntegerShape.new(name: 'ErrorCode')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GetSpaceInput = Shapes::StructureShape.new(name: 'GetSpaceInput')
     GetSpaceOutput = Shapes::StructureShape.new(name: 'GetSpaceOutput')
     GroupAdmins = Shapes::ListShape.new(name: 'GroupAdmins')
@@ -43,6 +51,9 @@ module Aws::Repostspace
     ProvisioningStatus = Shapes::StringShape.new(name: 'ProvisioningStatus')
     RegisterAdminInput = Shapes::StructureShape.new(name: 'RegisterAdminInput')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    Role = Shapes::StringShape.new(name: 'Role')
+    RoleList = Shapes::ListShape.new(name: 'RoleList')
+    Roles = Shapes::MapShape.new(name: 'Roles')
     SendInvitesInput = Shapes::StructureShape.new(name: 'SendInvitesInput')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SpaceData = Shapes::StructureShape.new(name: 'SpaceData')
@@ -79,6 +90,31 @@ module Aws::Repostspace
 
     AccessorIdList.member = Shapes::ShapeRef.new(shape: AccessorId)
 
+    BatchAddRoleInput.add_member(:accessor_ids, Shapes::ShapeRef.new(shape: AccessorIdList, required: true, location_name: "accessorIds"))
+    BatchAddRoleInput.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "role"))
+    BatchAddRoleInput.add_member(:space_id, Shapes::ShapeRef.new(shape: SpaceId, required: true, location: "uri", location_name: "spaceId"))
+    BatchAddRoleInput.struct_class = Types::BatchAddRoleInput
+
+    BatchAddRoleOutput.add_member(:added_accessor_ids, Shapes::ShapeRef.new(shape: AccessorIdList, required: true, location_name: "addedAccessorIds"))
+    BatchAddRoleOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchErrorList, required: true, location_name: "errors"))
+    BatchAddRoleOutput.struct_class = Types::BatchAddRoleOutput
+
+    BatchError.add_member(:accessor_id, Shapes::ShapeRef.new(shape: AccessorId, required: true, location_name: "accessorId"))
+    BatchError.add_member(:error, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "error"))
+    BatchError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    BatchError.struct_class = Types::BatchError
+
+    BatchErrorList.member = Shapes::ShapeRef.new(shape: BatchError)
+
+    BatchRemoveRoleInput.add_member(:accessor_ids, Shapes::ShapeRef.new(shape: AccessorIdList, required: true, location_name: "accessorIds"))
+    BatchRemoveRoleInput.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "role"))
+    BatchRemoveRoleInput.add_member(:space_id, Shapes::ShapeRef.new(shape: SpaceId, required: true, location: "uri", location_name: "spaceId"))
+    BatchRemoveRoleInput.struct_class = Types::BatchRemoveRoleInput
+
+    BatchRemoveRoleOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchErrorList, required: true, location_name: "errors"))
+    BatchRemoveRoleOutput.add_member(:removed_accessor_ids, Shapes::ShapeRef.new(shape: AccessorIdList, required: true, location_name: "removedAccessorIds"))
+    BatchRemoveRoleOutput.struct_class = Types::BatchRemoveRoleOutput
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
@@ -114,14 +150,15 @@ module Aws::Repostspace
     GetSpaceOutput.add_member(:customer_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "customerRoleArn"))
     GetSpaceOutput.add_member(:delete_date_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "deleteDateTime"))
     GetSpaceOutput.add_member(:description, Shapes::ShapeRef.new(shape: SpaceDescription, location_name: "description"))
-    GetSpaceOutput.add_member(:group_admins, Shapes::ShapeRef.new(shape: GroupAdmins, location_name: "groupAdmins"))
+    GetSpaceOutput.add_member(:group_admins, Shapes::ShapeRef.new(shape: GroupAdmins, deprecated: true, location_name: "groupAdmins", metadata: {"deprecatedMessage"=>"This property has been depracted and will be replaced by the roles property."}))
     GetSpaceOutput.add_member(:name, Shapes::ShapeRef.new(shape: SpaceName, required: true, location_name: "name"))
     GetSpaceOutput.add_member(:random_domain, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "randomDomain"))
+    GetSpaceOutput.add_member(:roles, Shapes::ShapeRef.new(shape: Roles, location_name: "roles"))
     GetSpaceOutput.add_member(:space_id, Shapes::ShapeRef.new(shape: SpaceId, required: true, location_name: "spaceId"))
     GetSpaceOutput.add_member(:status, Shapes::ShapeRef.new(shape: ProvisioningStatus, required: true, location_name: "status"))
     GetSpaceOutput.add_member(:storage_limit, Shapes::ShapeRef.new(shape: StorageLimit, required: true, location_name: "storageLimit"))
     GetSpaceOutput.add_member(:tier, Shapes::ShapeRef.new(shape: TierLevel, required: true, location_name: "tier"))
-    GetSpaceOutput.add_member(:user_admins, Shapes::ShapeRef.new(shape: UserAdmins, location_name: "userAdmins"))
+    GetSpaceOutput.add_member(:user_admins, Shapes::ShapeRef.new(shape: UserAdmins, deprecated: true, location_name: "userAdmins", metadata: {"deprecatedMessage"=>"This property has been depracted and will be replaced by the roles property."}))
     GetSpaceOutput.add_member(:user_count, Shapes::ShapeRef.new(shape: UserCount, location_name: "userCount"))
     GetSpaceOutput.add_member(:user_kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "userKMSKey"))
     GetSpaceOutput.add_member(:vanity_domain, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "vanityDomain"))
@@ -156,6 +193,11 @@ module Aws::Repostspace
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RoleList.member = Shapes::ShapeRef.new(shape: Role)
+
+    Roles.key = Shapes::ShapeRef.new(shape: AccessorId)
+    Roles.value = Shapes::ShapeRef.new(shape: RoleList)
 
     SendInvitesInput.add_member(:accessor_ids, Shapes::ShapeRef.new(shape: AccessorIdList, required: true, location_name: "accessorIds"))
     SendInvitesInput.add_member(:body, Shapes::ShapeRef.new(shape: InviteBody, required: true, location_name: "body"))
@@ -240,15 +282,43 @@ module Aws::Repostspace
 
       api.metadata = {
         "apiVersion" => "2022-05-13",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "repostspace",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS re:Post Private",
         "serviceId" => "repostspace",
         "signatureVersion" => "v4",
         "signingName" => "repostspace",
         "uid" => "repostspace-2022-05-13",
       }
+
+      api.add_operation(:batch_add_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchAddRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/spaces/{spaceId}/roles"
+        o.input = Shapes::ShapeRef.new(shape: BatchAddRoleInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchAddRoleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_remove_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchRemoveRole"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/spaces/{spaceId}/roles"
+        o.input = Shapes::ShapeRef.new(shape: BatchRemoveRoleInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchRemoveRoleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:create_space, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSpace"

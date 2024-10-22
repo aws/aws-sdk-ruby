@@ -8186,6 +8186,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
+    #   resp.global_cluster.endpoint #=> String
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
@@ -10483,6 +10484,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
+    #   resp.global_cluster.endpoint #=> String
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
@@ -16071,6 +16073,7 @@ module Aws::RDS
     #   resp.global_clusters[0].global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_clusters[0].global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.global_clusters[0].global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
+    #   resp.global_clusters[0].endpoint #=> String
     #   resp.global_clusters[0].failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_clusters[0].failover_state.from_db_cluster_arn #=> String
     #   resp.global_clusters[0].failover_state.to_db_cluster_arn #=> String
@@ -18117,6 +18120,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
+    #   resp.global_cluster.endpoint #=> String
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
@@ -22621,6 +22625,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
+    #   resp.global_cluster.endpoint #=> String
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
@@ -24150,6 +24155,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
+    #   resp.global_cluster.endpoint #=> String
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
@@ -31302,6 +31308,7 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
+    #   resp.global_cluster.endpoint #=> String
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
@@ -31535,7 +31542,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.254.0'
+      context[:gem_version] = '1.255.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

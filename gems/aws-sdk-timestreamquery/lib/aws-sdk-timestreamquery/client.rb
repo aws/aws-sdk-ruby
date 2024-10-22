@@ -801,6 +801,15 @@ module Aws::TimestreamQuery
     #   resp.scheduled_query.last_run_summary.execution_stats.cumulative_bytes_scanned #=> Integer
     #   resp.scheduled_query.last_run_summary.execution_stats.records_ingested #=> Integer
     #   resp.scheduled_query.last_run_summary.execution_stats.query_result_rows #=> Integer
+    #   resp.scheduled_query.last_run_summary.query_insights_response.query_spatial_coverage.max.value #=> Float
+    #   resp.scheduled_query.last_run_summary.query_insights_response.query_spatial_coverage.max.table_arn #=> String
+    #   resp.scheduled_query.last_run_summary.query_insights_response.query_spatial_coverage.max.partition_key #=> Array
+    #   resp.scheduled_query.last_run_summary.query_insights_response.query_spatial_coverage.max.partition_key[0] #=> String
+    #   resp.scheduled_query.last_run_summary.query_insights_response.query_temporal_range.max.value #=> Integer
+    #   resp.scheduled_query.last_run_summary.query_insights_response.query_temporal_range.max.table_arn #=> String
+    #   resp.scheduled_query.last_run_summary.query_insights_response.query_table_count #=> Integer
+    #   resp.scheduled_query.last_run_summary.query_insights_response.output_rows #=> Integer
+    #   resp.scheduled_query.last_run_summary.query_insights_response.output_bytes #=> Integer
     #   resp.scheduled_query.last_run_summary.error_report_location.s3_report_location.bucket_name #=> String
     #   resp.scheduled_query.last_run_summary.error_report_location.s3_report_location.object_key #=> String
     #   resp.scheduled_query.last_run_summary.failure_reason #=> String
@@ -814,6 +823,15 @@ module Aws::TimestreamQuery
     #   resp.scheduled_query.recently_failed_runs[0].execution_stats.cumulative_bytes_scanned #=> Integer
     #   resp.scheduled_query.recently_failed_runs[0].execution_stats.records_ingested #=> Integer
     #   resp.scheduled_query.recently_failed_runs[0].execution_stats.query_result_rows #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.query_spatial_coverage.max.value #=> Float
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.query_spatial_coverage.max.table_arn #=> String
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.query_spatial_coverage.max.partition_key #=> Array
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.query_spatial_coverage.max.partition_key[0] #=> String
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.query_temporal_range.max.value #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.query_temporal_range.max.table_arn #=> String
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.query_table_count #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.output_rows #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].query_insights_response.output_bytes #=> Integer
     #   resp.scheduled_query.recently_failed_runs[0].error_report_location.s3_report_location.bucket_name #=> String
     #   resp.scheduled_query.recently_failed_runs[0].error_report_location.s3_report_location.object_key #=> String
     #   resp.scheduled_query.recently_failed_runs[0].failure_reason #=> String
@@ -829,6 +847,11 @@ module Aws::TimestreamQuery
 
     # You can use this API to run a scheduled query manually.
     #
+    # If you enabled `QueryInsights`, this API also returns insights and
+    # metrics related to the query that you executed as part of an Amazon
+    # SNS notification. `QueryInsights` helps with performance tuning of
+    # your query.
+    #
     # @option params [required, String] :scheduled_query_arn
     #   ARN of the scheduled query.
     #
@@ -842,6 +865,13 @@ module Aws::TimestreamQuery
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ScheduledQueryInsights] :query_insights
+    #   Encapsulates settings for enabling `QueryInsights`.
+    #
+    #   Enabling `QueryInsights` returns insights and metrics as a part of the
+    #   Amazon SNS notification for the query that you executed. You can use
+    #   `QueryInsights` to tune your query performance and cost.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -850,6 +880,9 @@ module Aws::TimestreamQuery
     #     scheduled_query_arn: "AmazonResourceName", # required
     #     invocation_time: Time.now, # required
     #     client_token: "ClientToken",
+    #     query_insights: {
+    #       mode: "ENABLED_WITH_RATE_CONTROL", # required, accepts ENABLED_WITH_RATE_CONTROL, DISABLED
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/ExecuteScheduledQuery AWS API Documentation
@@ -1021,9 +1054,21 @@ module Aws::TimestreamQuery
     end
 
     # `Query` is a synchronous operation that enables you to run a query
-    # against your Amazon Timestream data. `Query` will time out after 60
-    # seconds. You must update the default timeout in the SDK to support a
-    # timeout of 60 seconds. See the [code sample][1] for details.
+    # against your Amazon Timestream data.
+    #
+    # If you enabled `QueryInsights`, this API also returns insights and
+    # metrics related to the query that you executed. `QueryInsights` helps
+    # with performance tuning of your query.
+    #
+    # <note markdown="1"> The maximum number of `Query` API requests you're allowed to make
+    # with `QueryInsights` enabled is 1 query per second (QPS). If you
+    # exceed this query rate, it might result in throttling.
+    #
+    #  </note>
+    #
+    # `Query` will time out after 60 seconds. You must update the default
+    # timeout in the SDK to support a timeout of 60 seconds. See the [code
+    # sample][1] for details.
     #
     # Your query request will fail in the following cases:
     #
@@ -1129,6 +1174,13 @@ module Aws::TimestreamQuery
     #   limit. If `MaxRows` is not provided, Timestream will send the
     #   necessary number of rows to meet the 1 MB limit.
     #
+    # @option params [Types::QueryInsights] :query_insights
+    #   Encapsulates settings for enabling `QueryInsights`.
+    #
+    #   Enabling `QueryInsights` returns insights and metrics in addition to
+    #   query results for the query that you executed. You can use
+    #   `QueryInsights` to tune your query performance.
+    #
     # @return [Types::QueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::QueryResponse#query_id #query_id} => String
@@ -1136,6 +1188,7 @@ module Aws::TimestreamQuery
     #   * {Types::QueryResponse#rows #rows} => Array&lt;Types::Row&gt;
     #   * {Types::QueryResponse#column_info #column_info} => Array&lt;Types::ColumnInfo&gt;
     #   * {Types::QueryResponse#query_status #query_status} => Types::QueryStatus
+    #   * {Types::QueryResponse#query_insights_response #query_insights_response} => Types::QueryInsightsResponse
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1146,6 +1199,9 @@ module Aws::TimestreamQuery
     #     client_token: "ClientRequestToken",
     #     next_token: "PaginationToken",
     #     max_rows: 1,
+    #     query_insights: {
+    #       mode: "ENABLED_WITH_RATE_CONTROL", # required, accepts ENABLED_WITH_RATE_CONTROL, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -1170,6 +1226,18 @@ module Aws::TimestreamQuery
     #   resp.query_status.progress_percentage #=> Float
     #   resp.query_status.cumulative_bytes_scanned #=> Integer
     #   resp.query_status.cumulative_bytes_metered #=> Integer
+    #   resp.query_insights_response.query_spatial_coverage.max.value #=> Float
+    #   resp.query_insights_response.query_spatial_coverage.max.table_arn #=> String
+    #   resp.query_insights_response.query_spatial_coverage.max.partition_key #=> Array
+    #   resp.query_insights_response.query_spatial_coverage.max.partition_key[0] #=> String
+    #   resp.query_insights_response.query_temporal_range.max.value #=> Integer
+    #   resp.query_insights_response.query_temporal_range.max.table_arn #=> String
+    #   resp.query_insights_response.query_table_count #=> Integer
+    #   resp.query_insights_response.output_rows #=> Integer
+    #   resp.query_insights_response.output_bytes #=> Integer
+    #   resp.query_insights_response.unload_partition_count #=> Integer
+    #   resp.query_insights_response.unload_written_rows #=> Integer
+    #   resp.query_insights_response.unload_written_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/Query AWS API Documentation
     #
@@ -1346,7 +1414,7 @@ module Aws::TimestreamQuery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

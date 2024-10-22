@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-10-22)
+------------------
+
+* Feature - This release adds support for Query Insights, a feature that provides details of query execution, enabling users to identify areas for improvement to optimize their queries, resulting in improved query performance and lower query costs.
+
 1.45.0 (2024-10-18)
 ------------------
 

@@ -13,6 +13,39 @@ module Aws::Repostspace
       SENSITIVE: []
     end
 
+    class BatchAddRoleInput
+      attr_accessor accessor_ids: ::Array[::String]
+      attr_accessor role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAddRoleOutput
+      attr_accessor added_accessor_ids: ::Array[::String]
+      attr_accessor errors: ::Array[Types::BatchError]
+      SENSITIVE: []
+    end
+
+    class BatchError
+      attr_accessor accessor_id: ::String
+      attr_accessor error: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRemoveRoleInput
+      attr_accessor accessor_ids: ::Array[::String]
+      attr_accessor role: ("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRemoveRoleOutput
+      attr_accessor errors: ::Array[Types::BatchError]
+      attr_accessor removed_accessor_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -64,6 +97,7 @@ module Aws::Repostspace
       attr_accessor group_admins: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor random_domain: ::String
+      attr_accessor roles: ::Hash[::String, ::Array[("EXPERT" | "MODERATOR" | "ADMINISTRATOR" | "SUPPORTREQUESTOR")]]
       attr_accessor space_id: ::String
       attr_accessor status: ::String
       attr_accessor storage_limit: ::Integer

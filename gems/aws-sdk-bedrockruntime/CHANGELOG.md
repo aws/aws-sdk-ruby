@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-10-22)
+------------------
+
+* Feature - Updating invoke regex to support imported models for converse API
+
 1.27.0 (2024-10-18)
 ------------------
 

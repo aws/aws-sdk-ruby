@@ -81,7 +81,7 @@ module Aws::Imagebuilder
       attr_accessor description: ::String
       attr_accessor change_description: ::String
       attr_accessor type: ("BUILD" | "TEST")
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor supported_os_versions: ::Array[::String]
       attr_accessor state: Types::ComponentState
       attr_accessor parameters: ::Array[Types::ComponentParameterDetail]
@@ -126,7 +126,7 @@ module Aws::Imagebuilder
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor version: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor supported_os_versions: ::Array[::String]
       attr_accessor state: Types::ComponentState
       attr_accessor type: ("BUILD" | "TEST")
@@ -145,7 +145,7 @@ module Aws::Imagebuilder
       attr_accessor name: ::String
       attr_accessor version: ::String
       attr_accessor description: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor supported_os_versions: ::Array[::String]
       attr_accessor type: ("BUILD" | "TEST")
       attr_accessor owner: ::String
@@ -171,7 +171,7 @@ module Aws::Imagebuilder
       attr_accessor container_type: ("DOCKER")
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor owner: ::String
       attr_accessor version: ::String
       attr_accessor components: ::Array[Types::ComponentConfiguration]
@@ -191,7 +191,7 @@ module Aws::Imagebuilder
       attr_accessor arn: ::String
       attr_accessor container_type: ("DOCKER")
       attr_accessor name: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor owner: ::String
       attr_accessor parent_image: ::String
       attr_accessor date_created: ::String
@@ -204,7 +204,7 @@ module Aws::Imagebuilder
       attr_accessor semantic_version: ::String
       attr_accessor description: ::String
       attr_accessor change_description: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor supported_os_versions: ::Array[::String]
       attr_accessor data: ::String
       attr_accessor uri: ::String
@@ -230,7 +230,7 @@ module Aws::Imagebuilder
       attr_accessor instance_configuration: Types::InstanceConfiguration
       attr_accessor dockerfile_template_data: ::String
       attr_accessor dockerfile_template_uri: ::String
-      attr_accessor platform_override: ("Windows" | "Linux")
+      attr_accessor platform_override: ("Windows" | "Linux" | "macOS")
       attr_accessor image_os_version_override: ::String
       attr_accessor parent_image: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -347,6 +347,7 @@ module Aws::Imagebuilder
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor placement: Types::Placement
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -812,7 +813,7 @@ module Aws::Imagebuilder
       attr_accessor type: ("AMI" | "DOCKER")
       attr_accessor name: ::String
       attr_accessor version: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor enhanced_image_metadata_enabled: bool
       attr_accessor os_version: ::String
       attr_accessor state: Types::ImageState
@@ -853,7 +854,7 @@ module Aws::Imagebuilder
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor enhanced_image_metadata_enabled: bool
       attr_accessor image_recipe_arn: ::String
       attr_accessor container_recipe_arn: ::String
@@ -884,7 +885,7 @@ module Aws::Imagebuilder
       attr_accessor type: ("AMI" | "DOCKER")
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor owner: ::String
       attr_accessor version: ::String
       attr_accessor components: ::Array[Types::ComponentConfiguration]
@@ -900,7 +901,7 @@ module Aws::Imagebuilder
     class ImageRecipeSummary
       attr_accessor arn: ::String
       attr_accessor name: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor owner: ::String
       attr_accessor parent_image: ::String
       attr_accessor date_created: ::String
@@ -963,7 +964,7 @@ module Aws::Imagebuilder
       attr_accessor name: ::String
       attr_accessor type: ("AMI" | "DOCKER")
       attr_accessor version: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor os_version: ::String
       attr_accessor state: Types::ImageState
       attr_accessor owner: ::String
@@ -988,7 +989,7 @@ module Aws::Imagebuilder
       attr_accessor name: ::String
       attr_accessor type: ("AMI" | "DOCKER")
       attr_accessor version: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor os_version: ::String
       attr_accessor owner: ::String
       attr_accessor date_created: ::String
@@ -1004,7 +1005,7 @@ module Aws::Imagebuilder
       attr_accessor change_description: ::String
       attr_accessor type: ("BUILD" | "TEST")
       attr_accessor format: ("SHELL")
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor data: ::String
       attr_accessor uri: ::String
       attr_accessor kms_key_id: ::String
@@ -1024,7 +1025,7 @@ module Aws::Imagebuilder
       attr_accessor name: ::String
       attr_accessor semantic_version: ::String
       attr_accessor description: ::String
-      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor platform: ("Windows" | "Linux" | "macOS")
       attr_accessor os_version: ::String
       attr_accessor vm_import_task_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1056,6 +1057,7 @@ module Aws::Imagebuilder
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor placement: Types::Placement
       SENSITIVE: []
     end
 
@@ -1069,6 +1071,7 @@ module Aws::Imagebuilder
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor instance_types: ::Array[::String]
       attr_accessor instance_profile_name: ::String
+      attr_accessor placement: Types::Placement
       SENSITIVE: []
     end
 
@@ -1627,6 +1630,14 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class Placement
+      attr_accessor availability_zone: ::String
+      attr_accessor tenancy: ("default" | "dedicated" | "host")
+      attr_accessor host_id: ::String
+      attr_accessor host_resource_group_arn: ::String
+      SENSITIVE: []
+    end
+
     class PutComponentPolicyRequest
       attr_accessor component_arn: ::String
       attr_accessor policy: ::String
@@ -1893,9 +1904,10 @@ module Aws::Imagebuilder
       attr_accessor key_pair: ::String
       attr_accessor terminate_instance_on_failure: bool
       attr_accessor sns_topic_arn: ::String
-      attr_accessor client_token: ::String
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
+      attr_accessor placement: Types::Placement
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 

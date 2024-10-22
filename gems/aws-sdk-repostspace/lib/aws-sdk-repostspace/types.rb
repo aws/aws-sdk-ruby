@@ -23,6 +23,108 @@ module Aws::Repostspace
       include Aws::Structure
     end
 
+    # @!attribute [rw] accessor_ids
+    #   The user or group accessor identifiers to add the role to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role
+    #   The role to add to the users or groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_id
+    #   The unique ID of the private re:Post.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchAddRoleInput AWS API Documentation
+    #
+    class BatchAddRoleInput < Struct.new(
+      :accessor_ids,
+      :role,
+      :space_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] added_accessor_ids
+    #   An array of successfully updated accessor identifiers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   An array of errors that occurred when roles were added.
+    #   @return [Array<Types::BatchError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchAddRoleOutput AWS API Documentation
+    #
+    class BatchAddRoleOutput < Struct.new(
+      :added_accessor_ids,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error that occurred during a batch operation.
+    #
+    # @!attribute [rw] accessor_id
+    #   The accessor identifier that's related to the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   Description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchError AWS API Documentation
+    #
+    class BatchError < Struct.new(
+      :accessor_id,
+      :error,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accessor_ids
+    #   The user or group accessor identifiers to remove the role from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role
+    #   The role to remove from the users or groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_id
+    #   The unique ID of the private re:Post.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchRemoveRoleInput AWS API Documentation
+    #
+    class BatchRemoveRoleInput < Struct.new(
+      :accessor_ids,
+      :role,
+      :space_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   An array of errors that occurred when roles were removed.
+    #   @return [Array<Types::BatchError>]
+    #
+    # @!attribute [rw] removed_accessor_ids
+    #   An array of successfully updated accessor identifiers.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/repostspace-2022-05-13/BatchRemoveRoleOutput AWS API Documentation
+    #
+    class BatchRemoveRoleOutput < Struct.new(
+      :errors,
+      :removed_accessor_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Updating or deleting a resource can cause an inconsistent state.
     #
     # @!attribute [rw] message
@@ -194,6 +296,10 @@ module Aws::Repostspace
     #   The AWS generated subdomain of the private re:Post
     #   @return [String]
     #
+    # @!attribute [rw] roles
+    #   A map of accessor identifiers and their roles.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @!attribute [rw] space_id
     #   The unique ID of the private re:Post.
     #   @return [String]
@@ -245,6 +351,7 @@ module Aws::Repostspace
       :group_admins,
       :name,
       :random_domain,
+      :roles,
       :space_id,
       :status,
       :storage_limit,

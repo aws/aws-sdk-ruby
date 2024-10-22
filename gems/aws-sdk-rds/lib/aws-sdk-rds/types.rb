@@ -16152,6 +16152,12 @@ module Aws::RDS
     #   database cluster.
     #   @return [Array<Types::GlobalClusterMember>]
     #
+    # @!attribute [rw] endpoint
+    #   The writer endpoint for the new global database cluster. This
+    #   endpoint always points to the writer DB instance in the current
+    #   primary cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] failover_state
     #   A data object containing all properties for the current state of an
     #   in-process or pending switchover or failover process for this global
@@ -16187,15 +16193,16 @@ module Aws::RDS
       :storage_encrypted,
       :deletion_protection,
       :global_cluster_members,
+      :endpoint,
       :failover_state,
       :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The `GlobalClusterIdentifier` already exists. Choose a new global
+    # The `GlobalClusterIdentifier` already exists. Specify a new global
     # database identifier (unique name) to create a new global database
-    # cluster.
+    # cluster or to rename an existing one.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterAlreadyExistsFault AWS API Documentation
     #
