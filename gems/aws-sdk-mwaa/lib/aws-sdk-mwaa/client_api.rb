@@ -33,6 +33,7 @@ module Aws::MWAA
     DeleteEnvironmentOutput = Shapes::StructureShape.new(name: 'DeleteEnvironmentOutput')
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     Dimensions = Shapes::ListShape.new(name: 'Dimensions')
+    Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     Double = Shapes::FloatShape.new(name: 'Double')
     EndpointManagement = Shapes::StringShape.new(name: 'EndpointManagement')
     Environment = Shapes::StructureShape.new(name: 'Environment')
@@ -50,6 +51,8 @@ module Aws::MWAA
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvokeRestApiRequest = Shapes::StructureShape.new(name: 'InvokeRestApiRequest')
+    InvokeRestApiResponse = Shapes::StructureShape.new(name: 'InvokeRestApiResponse')
     KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     LastUpdate = Shapes::StructureShape.new(name: 'LastUpdate')
     ListEnvironmentsInput = Shapes::StructureShape.new(name: 'ListEnvironmentsInput')
@@ -75,6 +78,12 @@ module Aws::MWAA
     PublishMetricsOutput = Shapes::StructureShape.new(name: 'PublishMetricsOutput')
     RelativePath = Shapes::StringShape.new(name: 'RelativePath')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RestApiClientException = Shapes::StructureShape.new(name: 'RestApiClientException')
+    RestApiMethod = Shapes::StringShape.new(name: 'RestApiMethod')
+    RestApiPath = Shapes::StringShape.new(name: 'RestApiPath')
+    RestApiRequestBody = Shapes::DocumentShape.new(name: 'RestApiRequestBody', document: true)
+    RestApiResponse = Shapes::DocumentShape.new(name: 'RestApiResponse', document: true)
+    RestApiServerException = Shapes::StructureShape.new(name: 'RestApiServerException')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
     Schedulers = Shapes::IntegerShape.new(name: 'Schedulers')
@@ -218,6 +227,17 @@ module Aws::MWAA
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    InvokeRestApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "Name"))
+    InvokeRestApiRequest.add_member(:path, Shapes::ShapeRef.new(shape: RestApiPath, required: true, location_name: "Path"))
+    InvokeRestApiRequest.add_member(:method, Shapes::ShapeRef.new(shape: RestApiMethod, required: true, location_name: "Method"))
+    InvokeRestApiRequest.add_member(:query_parameters, Shapes::ShapeRef.new(shape: Document, location_name: "QueryParameters"))
+    InvokeRestApiRequest.add_member(:body, Shapes::ShapeRef.new(shape: RestApiRequestBody, location_name: "Body"))
+    InvokeRestApiRequest.struct_class = Types::InvokeRestApiRequest
+
+    InvokeRestApiResponse.add_member(:rest_api_status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "RestApiStatusCode"))
+    InvokeRestApiResponse.add_member(:rest_api_response, Shapes::ShapeRef.new(shape: RestApiResponse, location_name: "RestApiResponse"))
+    InvokeRestApiResponse.struct_class = Types::InvokeRestApiResponse
+
     LastUpdate.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
     LastUpdate.add_member(:created_at, Shapes::ShapeRef.new(shape: UpdateCreatedAt, location_name: "CreatedAt"))
     LastUpdate.add_member(:error, Shapes::ShapeRef.new(shape: UpdateError, location_name: "Error"))
@@ -283,6 +303,14 @@ module Aws::MWAA
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RestApiClientException.add_member(:rest_api_status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "RestApiStatusCode"))
+    RestApiClientException.add_member(:rest_api_response, Shapes::ShapeRef.new(shape: RestApiResponse, location_name: "RestApiResponse"))
+    RestApiClientException.struct_class = Types::RestApiClientException
+
+    RestApiServerException.add_member(:rest_api_status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "RestApiStatusCode"))
+    RestApiServerException.add_member(:rest_api_response, Shapes::ShapeRef.new(shape: RestApiResponse, location_name: "RestApiResponse"))
+    RestApiServerException.struct_class = Types::RestApiServerException
 
     SecurityGroupList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -356,6 +384,7 @@ module Aws::MWAA
 
       api.metadata = {
         "apiVersion" => "2020-07-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "airflow",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
@@ -432,6 +461,23 @@ module Aws::MWAA
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:invoke_rest_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InvokeRestApi"
+        o.http_method = "POST"
+        o.http_request_uri = "/restapi/{Name}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "env.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: InvokeRestApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: InvokeRestApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: RestApiClientException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: RestApiServerException)
       end)
 
       api.add_operation(:list_environments, Seahorse::Model::Operation.new.tap do |o|

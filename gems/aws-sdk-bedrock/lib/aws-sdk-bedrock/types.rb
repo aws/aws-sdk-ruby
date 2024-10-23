@@ -1738,7 +1738,7 @@ module Aws::Bedrock
     #   @return [String]
     #
     # @!attribute [rw] instruct_supported
-    #   Specifies if the imported model supports fine tuning.
+    #   Specifies if the imported model supports converse.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModelResponse AWS API Documentation
@@ -3345,7 +3345,7 @@ module Aws::Bedrock
     #   @return [Time]
     #
     # @!attribute [rw] instruct_supported
-    #   Specifies if the imported model supports fine tuning.
+    #   Specifies if the imported model supports converse.
     #   @return [Boolean]
     #
     # @!attribute [rw] model_architecture

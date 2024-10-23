@@ -714,6 +714,53 @@ module Aws::PaymentCryptographyData
       include Aws::Structure
     end
 
+    # Parameters required to establish ECDH based key exchange.
+    #
+    # @!attribute [rw] certificate_authority_public_key_identifier
+    #   The `keyArn` of the certificate that signed the client's
+    #   `PublicKeyCertificate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key_certificate
+    #   The client's public key certificate in PEM format (base64 encoded)
+    #   to use for ECDH key derivation.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_algorithm
+    #   The key algorithm of the derived ECDH key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_derivation_function
+    #   The key derivation function to use for deriving a key using ECDH.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_derivation_hash_algorithm
+    #   The hash type to use for deriving a key using ECDH.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_information
+    #   A byte string containing information that binds the ECDH derived key
+    #   to the two parties involved or to the context of the key.
+    #
+    #   It may include details like identities of the two parties deriving
+    #   the key, context of the operation, session IDs, and optionally a
+    #   nonce. It must not contain zero bytes, and re-using shared
+    #   information for multiple ECDH key derivations is not recommended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/EcdhDerivationAttributes AWS API Documentation
+    #
+    class EcdhDerivationAttributes < Struct.new(
+      :certificate_authority_public_key_identifier,
+      :public_key_certificate,
+      :key_algorithm,
+      :key_derivation_function,
+      :key_derivation_hash_algorithm,
+      :shared_information)
+      SENSITIVE = [:public_key_certificate]
+      include Aws::Structure
+    end
+
     # Parameters to derive the confidentiality and integrity keys for a
     # payment card using EMV2000 deruv.
     #
@@ -1200,7 +1247,8 @@ module Aws::PaymentCryptographyData
     #
     # @!attribute [rw] encryption_key_identifier
     #   The `keyARN` of the PEK that Amazon Web Services Payment
-    #   Cryptography uses to encrypt the PIN Block.
+    #   Cryptography uses to encrypt the PIN Block. For ECDH, it is the
+    #   `keyARN` of the asymmetric ECC key.
     #   @return [String]
     #
     # @!attribute [rw] generation_attributes
@@ -1231,6 +1279,11 @@ module Aws::PaymentCryptographyData
     #   except that the fill digits are random values from 10 to 15.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_wrapped_key
+    #   Parameter information of a WrappedKeyBlock for encryption key
+    #   exchange.
+    #   @return [Types::WrappedKey]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GeneratePinDataInput AWS API Documentation
     #
     class GeneratePinDataInput < Struct.new(
@@ -1239,7 +1292,8 @@ module Aws::PaymentCryptographyData
       :generation_attributes,
       :pin_data_length,
       :primary_account_number,
-      :pin_block_format)
+      :pin_block_format,
+      :encryption_wrapped_key)
       SENSITIVE = [:primary_account_number]
       include Aws::Structure
     end
@@ -1260,7 +1314,8 @@ module Aws::PaymentCryptographyData
     #
     # @!attribute [rw] encryption_key_arn
     #   The `keyARN` of the PEK that Amazon Web Services Payment
-    #   Cryptography uses for encrypted pin block generation.
+    #   Cryptography uses for encrypted pin block generation. For ECDH, it
+    #   is the `keyARN` of the asymmetric ECC key.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key_check_value
@@ -2110,14 +2165,15 @@ module Aws::PaymentCryptographyData
     #   The `keyARN` of the encryption key under which incoming PIN block
     #   data is encrypted. This key type can be PEK or BDK.
     #
-    #   When a WrappedKeyBlock is provided, this value will be the
-    #   identifier to the key wrapping key for PIN block. Otherwise, it is
-    #   the key identifier used to perform the operation.
+    #   For dynamic keys, it is the `keyARN` of KEK of the TR-31 wrapped
+    #   PEK. For ECDH, it is the `keyARN` of the asymmetric ECC key.
     #   @return [String]
     #
     # @!attribute [rw] outgoing_key_identifier
     #   The `keyARN` of the encryption key for encrypting outgoing PIN block
     #   data. This key type can be PEK or BDK.
+    #
+    #   For ECDH, it is the `keyARN` of the asymmetric ECC key.
     #   @return [String]
     #
     # @!attribute [rw] incoming_translation_attributes
@@ -2557,6 +2613,11 @@ module Aws::PaymentCryptographyData
     #   The attributes and values for the DUKPT encrypted PIN block data.
     #   @return [Types::DukptAttributes]
     #
+    # @!attribute [rw] encryption_wrapped_key
+    #   Parameter information of a WrappedKeyBlock for encryption key
+    #   exchange.
+    #   @return [Types::WrappedKey]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VerifyPinDataInput AWS API Documentation
     #
     class VerifyPinDataInput < Struct.new(
@@ -2567,7 +2628,8 @@ module Aws::PaymentCryptographyData
       :primary_account_number,
       :pin_block_format,
       :pin_data_length,
-      :dukpt_attributes)
+      :dukpt_attributes,
+      :encryption_wrapped_key)
       SENSITIVE = [:encrypted_pin_block, :primary_account_number]
       include Aws::Structure
     end
@@ -2782,16 +2844,22 @@ module Aws::PaymentCryptographyData
     #   The TR-31 wrapped key block.
     #   @return [String]
     #
+    # @!attribute [rw] diffie_hellman_symmetric_key
+    #   The parameter information for deriving a ECDH shared key.
+    #   @return [Types::EcdhDerivationAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/WrappedKeyMaterial AWS API Documentation
     #
     class WrappedKeyMaterial < Struct.new(
       :tr_31_key_block,
+      :diffie_hellman_symmetric_key,
       :unknown)
       SENSITIVE = [:tr_31_key_block]
       include Aws::Structure
       include Aws::Structure::Union
 
       class Tr31KeyBlock < WrappedKeyMaterial; end
+      class DiffieHellmanSymmetricKey < WrappedKeyMaterial; end
       class Unknown < WrappedKeyMaterial; end
     end
 

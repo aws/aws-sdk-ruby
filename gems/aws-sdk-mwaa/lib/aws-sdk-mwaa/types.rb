@@ -60,9 +60,9 @@ module Aws::MWAA
     end
 
     # This section contains the Amazon Managed Workflows for Apache Airflow
-    # (MWAA) API reference documentation to create an environment. For more
-    # information, see [Get started with Amazon Managed Workflows for Apache
-    # Airflow][1].
+    # (Amazon MWAA) API reference documentation to create an environment.
+    # For more information, see [Get started with Amazon Managed Workflows
+    # for Apache Airflow][1].
     #
     #
     #
@@ -239,10 +239,10 @@ module Aws::MWAA
     #   The Apache Airflow version for your environment. If no value is
     #   specified, it defaults to the latest version. For more information,
     #   see [Apache Airflow versions on Amazon Managed Workflows for Apache
-    #   Airflow (MWAA)][1].
+    #   Airflow (Amazon MWAA)][1].
     #
     #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`,
-    #   `2.6.3`, `2.7.2` `2.8.1`
+    #   `2.6.3`, `2.7.2`, `2.8.1`, `2.9.2`, and `2.10.1`.
     #
     #
     #
@@ -590,7 +590,7 @@ module Aws::MWAA
     #   The Apache Airflow version on your environment.
     #
     #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`,
-    #   `2.6.3`, `2.7.2`, `2.8.1`.
+    #   `2.6.3`, `2.7.2`, `2.8.1`, `2.9.2`, and `2.10.1`.
     #   @return [String]
     #
     # @!attribute [rw] source_bucket_arn
@@ -913,6 +913,66 @@ module Aws::MWAA
     class InternalServerException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The Apache Airflow REST API endpoint path to be called. For example,
+    #   `/dags/123456/clearTaskInstances`. For more information, see [Apache
+    #   Airflow API][1]
+    #
+    #
+    #
+    #   [1]: https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html
+    #   @return [String]
+    #
+    # @!attribute [rw] method
+    #   The HTTP method used for making Airflow REST API calls. For example,
+    #   `POST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_parameters
+    #   Query parameters to be included in the Apache Airflow REST API call,
+    #   provided as a JSON object.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] body
+    #   The request body for the Apache Airflow REST API call, provided as a
+    #   JSON object.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/InvokeRestApiRequest AWS API Documentation
+    #
+    class InvokeRestApiRequest < Struct.new(
+      :name,
+      :path,
+      :method,
+      :query_parameters,
+      :body)
+      SENSITIVE = [:body]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rest_api_status_code
+    #   The HTTP status code returned by the Apache Airflow REST API call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rest_api_response
+    #   The response data from the Apache Airflow REST API call, provided as
+    #   a JSON object.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/InvokeRestApiResponse AWS API Documentation
+    #
+    class InvokeRestApiResponse < Struct.new(
+      :rest_api_status_code,
+      :rest_api_response)
+      SENSITIVE = [:rest_api_response]
       include Aws::Structure
     end
 
@@ -1261,6 +1321,48 @@ module Aws::MWAA
       include Aws::Structure
     end
 
+    # An exception indicating that a client-side error occurred during the
+    # Apache Airflow REST API call.
+    #
+    # @!attribute [rw] rest_api_status_code
+    #   The HTTP status code returned by the Apache Airflow REST API call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rest_api_response
+    #   The error response data from the Apache Airflow REST API call,
+    #   provided as a JSON object.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/RestApiClientException AWS API Documentation
+    #
+    class RestApiClientException < Struct.new(
+      :rest_api_status_code,
+      :rest_api_response)
+      SENSITIVE = [:rest_api_response]
+      include Aws::Structure
+    end
+
+    # An exception indicating that a server-side error occurred during the
+    # Apache Airflow REST API call.
+    #
+    # @!attribute [rw] rest_api_status_code
+    #   The HTTP status code returned by the Apache Airflow REST API call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rest_api_response
+    #   The error response data from the Apache Airflow REST API call,
+    #   provided as a JSON object.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/RestApiServerException AWS API Documentation
+    #
+    class RestApiServerException < Struct.new(
+      :rest_api_status_code,
+      :rest_api_response)
+      SENSITIVE = [:rest_api_response]
+      include Aws::Structure
+    end
+
     # **Internal only**. Represents a set of statistics that describe a
     # specific metric. To learn more about the metrics published to Amazon
     # CloudWatch, see [Amazon MWAA performance metrics in Amazon
@@ -1379,7 +1481,7 @@ module Aws::MWAA
     #   environment][1].
     #
     #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`,
-    #   `2.6.3`, `2.7.2`, `2.8.1`.
+    #   `2.6.3`, `2.7.2`, `2.8.1`, `2.9.2`, and `2.10.1`.
     #
     #
     #

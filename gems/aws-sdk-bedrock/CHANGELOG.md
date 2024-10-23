@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-10-23)
+------------------
+
+* Feature - Doc updates for supporting converse
+
 1.26.0 (2024-10-18)
 ------------------
 

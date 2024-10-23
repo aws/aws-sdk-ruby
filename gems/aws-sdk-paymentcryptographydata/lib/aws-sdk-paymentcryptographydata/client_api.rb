@@ -28,6 +28,7 @@ module Aws::PaymentCryptographyData
     CardVerificationAttributes = Shapes::UnionShape.new(name: 'CardVerificationAttributes')
     CardVerificationValue1 = Shapes::StructureShape.new(name: 'CardVerificationValue1')
     CardVerificationValue2 = Shapes::StructureShape.new(name: 'CardVerificationValue2')
+    CertificateType = Shapes::StringShape.new(name: 'CertificateType')
     CipherTextType = Shapes::StringShape.new(name: 'CipherTextType')
     CommandMessageDataType = Shapes::StringShape.new(name: 'CommandMessageDataType')
     CryptogramAuthResponse = Shapes::UnionShape.new(name: 'CryptogramAuthResponse')
@@ -47,6 +48,7 @@ module Aws::PaymentCryptographyData
     DukptKeyVariant = Shapes::StringShape.new(name: 'DukptKeyVariant')
     DynamicCardVerificationCode = Shapes::StructureShape.new(name: 'DynamicCardVerificationCode')
     DynamicCardVerificationValue = Shapes::StructureShape.new(name: 'DynamicCardVerificationValue')
+    EcdhDerivationAttributes = Shapes::StructureShape.new(name: 'EcdhDerivationAttributes')
     Emv2000Attributes = Shapes::StructureShape.new(name: 'Emv2000Attributes')
     EmvCommonAttributes = Shapes::StructureShape.new(name: 'EmvCommonAttributes')
     EmvEncryptionAttributes = Shapes::StructureShape.new(name: 'EmvEncryptionAttributes')
@@ -87,6 +89,8 @@ module Aws::PaymentCryptographyData
     KeyArnOrKeyAliasType = Shapes::StringShape.new(name: 'KeyArnOrKeyAliasType')
     KeyCheckValue = Shapes::StringShape.new(name: 'KeyCheckValue')
     KeyCheckValueAlgorithm = Shapes::StringShape.new(name: 'KeyCheckValueAlgorithm')
+    KeyDerivationFunction = Shapes::StringShape.new(name: 'KeyDerivationFunction')
+    KeyDerivationHashAlgorithm = Shapes::StringShape.new(name: 'KeyDerivationHashAlgorithm')
     MacAlgorithm = Shapes::StringShape.new(name: 'MacAlgorithm')
     MacAlgorithmDukpt = Shapes::StructureShape.new(name: 'MacAlgorithmDukpt')
     MacAlgorithmEmv = Shapes::StructureShape.new(name: 'MacAlgorithmEmv')
@@ -127,8 +131,10 @@ module Aws::PaymentCryptographyData
     SessionKeyEmvCommon = Shapes::StructureShape.new(name: 'SessionKeyEmvCommon')
     SessionKeyMastercard = Shapes::StructureShape.new(name: 'SessionKeyMastercard')
     SessionKeyVisa = Shapes::StructureShape.new(name: 'SessionKeyVisa')
+    SharedInformation = Shapes::StringShape.new(name: 'SharedInformation')
     String = Shapes::StringShape.new(name: 'String')
     SymmetricEncryptionAttributes = Shapes::StructureShape.new(name: 'SymmetricEncryptionAttributes')
+    SymmetricKeyAlgorithm = Shapes::StringShape.new(name: 'SymmetricKeyAlgorithm')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Tr31WrappedKeyBlock = Shapes::StringShape.new(name: 'Tr31WrappedKeyBlock')
     TrackDataType = Shapes::StringShape.new(name: 'TrackDataType')
@@ -309,6 +315,14 @@ module Aws::PaymentCryptographyData
     DynamicCardVerificationValue.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     DynamicCardVerificationValue.struct_class = Types::DynamicCardVerificationValue
 
+    EcdhDerivationAttributes.add_member(:certificate_authority_public_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "CertificateAuthorityPublicKeyIdentifier"))
+    EcdhDerivationAttributes.add_member(:public_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "PublicKeyCertificate"))
+    EcdhDerivationAttributes.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, required: true, location_name: "KeyAlgorithm"))
+    EcdhDerivationAttributes.add_member(:key_derivation_function, Shapes::ShapeRef.new(shape: KeyDerivationFunction, required: true, location_name: "KeyDerivationFunction"))
+    EcdhDerivationAttributes.add_member(:key_derivation_hash_algorithm, Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, required: true, location_name: "KeyDerivationHashAlgorithm"))
+    EcdhDerivationAttributes.add_member(:shared_information, Shapes::ShapeRef.new(shape: SharedInformation, required: true, location_name: "SharedInformation"))
+    EcdhDerivationAttributes.struct_class = Types::EcdhDerivationAttributes
+
     Emv2000Attributes.add_member(:major_key_derivation_mode, Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, required: true, location_name: "MajorKeyDerivationMode"))
     Emv2000Attributes.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
     Emv2000Attributes.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
@@ -403,6 +417,7 @@ module Aws::PaymentCryptographyData
     GeneratePinDataInput.add_member(:pin_data_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: "PinDataLength"))
     GeneratePinDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
     GeneratePinDataInput.add_member(:pin_block_format, Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, required: true, location_name: "PinBlockFormat"))
+    GeneratePinDataInput.add_member(:encryption_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "EncryptionWrappedKey"))
     GeneratePinDataInput.struct_class = Types::GeneratePinDataInput
 
     GeneratePinDataOutput.add_member(:generation_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "GenerationKeyArn"))
@@ -676,6 +691,7 @@ module Aws::PaymentCryptographyData
     VerifyPinDataInput.add_member(:pin_block_format, Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, required: true, location_name: "PinBlockFormat"))
     VerifyPinDataInput.add_member(:pin_data_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: "PinDataLength"))
     VerifyPinDataInput.add_member(:dukpt_attributes, Shapes::ShapeRef.new(shape: DukptAttributes, location_name: "DukptAttributes"))
+    VerifyPinDataInput.add_member(:encryption_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "EncryptionWrappedKey"))
     VerifyPinDataInput.struct_class = Types::VerifyPinDataInput
 
     VerifyPinDataOutput.add_member(:verification_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "VerificationKeyArn"))
@@ -714,8 +730,10 @@ module Aws::PaymentCryptographyData
     WrappedKey.struct_class = Types::WrappedKey
 
     WrappedKeyMaterial.add_member(:tr_31_key_block, Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, location_name: "Tr31KeyBlock"))
+    WrappedKeyMaterial.add_member(:diffie_hellman_symmetric_key, Shapes::ShapeRef.new(shape: EcdhDerivationAttributes, location_name: "DiffieHellmanSymmetricKey"))
     WrappedKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     WrappedKeyMaterial.add_member_subclass(:tr_31_key_block, Types::WrappedKeyMaterial::Tr31KeyBlock)
+    WrappedKeyMaterial.add_member_subclass(:diffie_hellman_symmetric_key, Types::WrappedKeyMaterial::DiffieHellmanSymmetricKey)
     WrappedKeyMaterial.add_member_subclass(:unknown, Types::WrappedKeyMaterial::Unknown)
     WrappedKeyMaterial.struct_class = Types::WrappedKeyMaterial
 

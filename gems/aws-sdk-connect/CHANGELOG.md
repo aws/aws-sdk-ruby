@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.182.0 (2024-10-23)
+------------------
+
+* Feature - Amazon Connect Service Feature: Add support to start screen sharing for a web calling contact.
+
 1.181.0 (2024-10-18)
 ------------------
 

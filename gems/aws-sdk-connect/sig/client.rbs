@@ -3519,6 +3519,17 @@ module Aws
                                         ) -> _StartOutboundVoiceContactResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOutboundVoiceContactResponseSuccess
 
+      interface _StartScreenSharingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartScreenSharingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_screen_sharing-instance_method
+      def start_screen_sharing: (
+                                  ?client_token: ::String,
+                                  instance_id: ::String,
+                                  contact_id: ::String
+                                ) -> _StartScreenSharingResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartScreenSharingResponseSuccess
+
       interface _StartTaskContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartTaskContactResponse]
         def contact_id: () -> ::String
@@ -3558,10 +3569,12 @@ module Aws
                                    instance_id: ::String,
                                    ?allowed_capabilities: {
                                      customer: {
-                                       video: ("SEND")?
+                                       video: ("SEND")?,
+                                       screen_share: ("SEND")?
                                      }?,
                                      agent: {
-                                       video: ("SEND")?
+                                       video: ("SEND")?,
+                                       screen_share: ("SEND")?
                                      }?
                                    },
                                    participant_details: {

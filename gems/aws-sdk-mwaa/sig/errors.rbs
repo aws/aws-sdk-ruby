@@ -20,6 +20,14 @@ module Aws
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class RestApiClientException < ::Aws::Errors::ServiceError
+        def rest_api_status_code: () -> ::String
+        def rest_api_response: () -> ::String
+      end
+      class RestApiServerException < ::Aws::Errors::ServiceError
+        def rest_api_status_code: () -> ::String
+        def rest_api_response: () -> ::String
+      end
       class ValidationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

@@ -232,6 +232,16 @@ module Aws::PaymentCryptographyData
       SENSITIVE: [:card_expiry_date, :service_code]
     end
 
+    class EcdhDerivationAttributes
+      attr_accessor certificate_authority_public_key_identifier: ::String
+      attr_accessor public_key_certificate: ::String
+      attr_accessor key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")
+      attr_accessor key_derivation_function: ("NIST_SP800" | "ANSI_X963")
+      attr_accessor key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512")
+      attr_accessor shared_information: ::String
+      SENSITIVE: [:public_key_certificate]
+    end
+
     class Emv2000Attributes
       attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
       attr_accessor primary_account_number: ::String
@@ -356,7 +366,8 @@ module Aws::PaymentCryptographyData
       attr_accessor generation_attributes: Types::PinGenerationAttributes
       attr_accessor pin_data_length: ::Integer
       attr_accessor primary_account_number: ::String
-      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3")
+      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3" | "ISO_FORMAT_4")
+      attr_accessor encryption_wrapped_key: Types::WrappedKey
       SENSITIVE: [:primary_account_number]
     end
 
@@ -752,9 +763,10 @@ module Aws::PaymentCryptographyData
       attr_accessor verification_attributes: Types::PinVerificationAttributes
       attr_accessor encrypted_pin_block: ::String
       attr_accessor primary_account_number: ::String
-      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3")
+      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3" | "ISO_FORMAT_4")
       attr_accessor pin_data_length: ::Integer
       attr_accessor dukpt_attributes: Types::DukptAttributes
+      attr_accessor encryption_wrapped_key: Types::WrappedKey
       SENSITIVE: [:encrypted_pin_block, :primary_account_number]
     end
 
@@ -809,10 +821,13 @@ module Aws::PaymentCryptographyData
 
     class WrappedKeyMaterial
       attr_accessor tr_31_key_block: ::String
+      attr_accessor diffie_hellman_symmetric_key: Types::EcdhDerivationAttributes
       attr_accessor unknown: untyped
       SENSITIVE: [:tr_31_key_block]
 
       class Tr31KeyBlock < WrappedKeyMaterial
+      end
+      class DiffieHellmanSymmetricKey < WrappedKeyMaterial
       end
       class Unknown < WrappedKeyMaterial
       end

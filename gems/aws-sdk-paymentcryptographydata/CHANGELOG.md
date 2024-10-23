@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-10-23)
+------------------
+
+* Feature - Add ECDH support on PIN operations.
+
 1.26.0 (2024-10-21)
 ------------------
 

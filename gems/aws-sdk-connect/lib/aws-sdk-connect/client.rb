@@ -1050,13 +1050,13 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Associates an agent with a traffic distribution group.
+    # Associates an agent with a traffic distribution group. This API can be
+    # called only in the Region where the traffic distribution group is
+    # created.
     #
     # @option params [required, String] :traffic_distribution_group_id
     #   The identifier of the traffic distribution group. This can be the ID
-    #   or the ARN if the API is being called in the Region where the traffic
-    #   distribution group was created. The ARN must be provided if the call
-    #   is from the replicated Region.
+    #   or the ARN of the traffic distribution group.
     #
     # @option params [required, String] :user_id
     #   The identifier of the user account. This can be the ID or the ARN of
@@ -4270,9 +4270,7 @@ module Aws::Connect
     #
     # @option params [required, String] :traffic_distribution_group_id
     #   The identifier of the traffic distribution group. This can be the ID
-    #   or the ARN if the API is being called in the Region where the traffic
-    #   distribution group was created. The ARN must be provided if the call
-    #   is from the replicated Region.
+    #   or the ARN of the traffic distribution group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4671,6 +4669,7 @@ module Aws::Connect
     #   resp.contact.agent_info.device_info.platform_version #=> String
     #   resp.contact.agent_info.device_info.operating_system #=> String
     #   resp.contact.agent_info.capabilities.video #=> String, one of "SEND"
+    #   resp.contact.agent_info.capabilities.screen_share #=> String, one of "SEND"
     #   resp.contact.initiation_timestamp #=> Time
     #   resp.contact.disconnect_timestamp #=> Time
     #   resp.contact.last_update_timestamp #=> Time
@@ -4706,6 +4705,7 @@ module Aws::Connect
     #   resp.contact.customer.device_info.platform_version #=> String
     #   resp.contact.customer.device_info.operating_system #=> String
     #   resp.contact.customer.capabilities.video #=> String, one of "SEND"
+    #   resp.contact.customer.capabilities.screen_share #=> String, one of "SEND"
     #   resp.contact.campaign.campaign_id #=> String
     #   resp.contact.answering_machine_detection_status #=> String, one of "ANSWERED", "UNDETECTED", "ERROR", "HUMAN_ANSWERED", "SIT_TONE_DETECTED", "SIT_TONE_BUSY", "SIT_TONE_INVALID_NUMBER", "FAX_MACHINE_DETECTED", "VOICEMAIL_BEEP", "VOICEMAIL_NO_BEEP", "AMD_UNRESOLVED", "AMD_UNANSWERED", "AMD_ERROR", "AMD_NOT_APPLICABLE"
     #   resp.contact.customer_voice_activity.greeting_start_timestamp #=> Time
@@ -6441,13 +6441,13 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Disassociates an agent from a traffic distribution group.
+    # Disassociates an agent from a traffic distribution group. This API can
+    # be called only in the Region where the traffic distribution group is
+    # created.
     #
     # @option params [required, String] :traffic_distribution_group_id
     #   The identifier of the traffic distribution group. This can be the ID
-    #   or the ARN if the API is being called in the Region where the traffic
-    #   distribution group was created. The ARN must be provided if the call
-    #   is from the replicated Region.
+    #   or the ARN of the traffic distribution group.
     #
     # @option params [required, String] :user_id
     #   The identifier for the user. This can be the ID or the ARN of the
@@ -7470,7 +7470,7 @@ module Aws::Connect
     # a metric level, and offers the ability to filter and group data by
     # channels, queues, routing profiles, agents, and agent hierarchy
     # levels. It can retrieve historical data for the last 3 months, at
-    # varying intervals.
+    # varying intervals. It does not support agent queues.
     #
     # For a description of the historical metrics that are supported by
     # `GetMetricDataV2` and `GetMetricData`, see [Historical metrics
@@ -7784,7 +7784,7 @@ module Aws::Connect
     #
     #     UI name: [Average agent API connecting time][15]
     #
-    #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for this
+    #     <note markdown="1"> The `Negate` key in metric-level filters is not applicable for this
     #     metric.
     #
     #      </note>
@@ -8242,7 +8242,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     Threshold: For `ThresholdValue` enter any whole number from 1 to
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
@@ -8561,7 +8561,7 @@ module Aws::Connect
     #
     #     UI name: [Agent API connecting time][74]
     #
-    #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for this
+    #     <note markdown="1"> The `Negate` key in metric-level filters is not applicable for this
     #     metric.
     #
     #      </note>
@@ -14951,6 +14951,57 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Starts screen sharing for a contact. For more information about screen
+    # sharing, see [Set up in-app, web, video calling, and screen sharing
+    # capabilities][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_screen_sharing({
+    #     client_token: "ClientToken",
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartScreenSharing AWS API Documentation
+    #
+    # @overload start_screen_sharing(params = {})
+    # @param [Hash] params ({})
+    def start_screen_sharing(params = {}, options = {})
+      req = build_request(:start_screen_sharing, params)
+      req.send_request(options)
+    end
+
     # Initiates a flow to start a new task contact. For more information
     # about task contacts, see [Concepts: Tasks in Amazon Connect][1] in the
     # *Amazon Connect Administrator Guide*.
@@ -15223,9 +15274,11 @@ module Aws::Connect
     #     allowed_capabilities: {
     #       customer: {
     #         video: "SEND", # accepts SEND
+    #         screen_share: "SEND", # accepts SEND
     #       },
     #       agent: {
     #         video: "SEND", # accepts SEND
+    #         screen_share: "SEND", # accepts SEND
     #       },
     #     },
     #     participant_details: { # required
@@ -18472,7 +18525,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.181.0'
+      context[:gem_version] = '1.182.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
