@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Tighten regex used to check for S3 200 errors.
+
 1.169.0 (2024-10-18)
 ------------------
 
