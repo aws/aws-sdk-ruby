@@ -1687,13 +1687,14 @@ module Aws::AppConfig
     #   saved for subsequent calls to GetConfiguration.
     #
     #   For more information about working with configurations, see
-    #   [Retrieving the Configuration][3] in the *AppConfig User Guide*.
+    #   [Retrieving feature flags and configuration data in AppConfig][3] in
+    #   the *AppConfig User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html
     #   [2]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html
-    #   [3]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
+    #   [3]: http://docs.aws.amazon.com/appconfig/latest/userguide/retrieving-feature-flags.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetConfigurationRequest AWS API Documentation
@@ -2448,12 +2449,19 @@ module Aws::AppConfig
     #   The sequence number of the deployment.
     #   @return [Integer]
     #
+    # @!attribute [rw] allow_revert
+    #   A Boolean that enables AppConfig to rollback a `COMPLETED`
+    #   deployment to the previous configuration version. This action moves
+    #   the deployment to a status of `REVERTED`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StopDeploymentRequest AWS API Documentation
     #
     class StopDeploymentRequest < Struct.new(
       :application_id,
       :environment_id,
-      :deployment_number)
+      :deployment_number,
+      :allow_revert)
       SENSITIVE = []
       include Aws::Structure
     end

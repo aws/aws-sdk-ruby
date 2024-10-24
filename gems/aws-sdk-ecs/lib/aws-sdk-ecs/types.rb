@@ -5222,7 +5222,7 @@ module Aws::ECS
     #
     #   An exit code of 0 indicates success, and non-zero exit code
     #   indicates failure. For more information, see `HealthCheck` in the
-    #   docker container create command
+    #   docker container create command.
     #   @return [Array<String>]
     #
     # @!attribute [rw] interval
@@ -9621,10 +9621,17 @@ module Aws::ECS
     # The configuration for the Amazon EBS volume that Amazon ECS creates
     # and manages on your behalf. These settings are used to create each
     # Amazon EBS volume, with one volume created for each task in the
-    # service.
+    # service. For information about the supported launch types and
+    # operating systems, see [Supported operating systems and launch
+    # types][1] in the<i> Amazon Elastic Container Service Developer
+    # Guide</i>.
     #
     # Many of these parameters map 1:1 with the Amazon EBS `CreateVolume`
     # API request parameters.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volumes-configuration
     #
     # @!attribute [rw] encrypted
     #   Indicates whether the volume should be encrypted. If no value is
@@ -9784,13 +9791,16 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] filesystem_type
-    #   The Linux filesystem type for the volume. For volumes created from a
+    #   The filesystem type for the volume. For volumes created from a
     #   snapshot, you must specify the same filesystem type that the volume
     #   was using when the snapshot was created. If there is a filesystem
     #   type mismatch, the task will fail to start.
     #
-    #   The available filesystem types are  `ext3`, `ext4`, and `xfs`. If no
-    #   value is specified, the `xfs` filesystem type is used by default.
+    #   The available Linux filesystem types are  `ext3`, `ext4`, and `xfs`.
+    #   If no value is specified, the `xfs` filesystem type is used by
+    #   default.
+    #
+    #   The available Windows filesystem types are `NTFS`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceManagedEBSVolumeConfiguration AWS API Documentation

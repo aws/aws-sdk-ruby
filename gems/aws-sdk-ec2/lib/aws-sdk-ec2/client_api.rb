@@ -908,6 +908,9 @@ module Aws::EC2
     DescribeInstanceEventNotificationAttributesResult = Shapes::StructureShape.new(name: 'DescribeInstanceEventNotificationAttributesResult')
     DescribeInstanceEventWindowsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceEventWindowsRequest')
     DescribeInstanceEventWindowsResult = Shapes::StructureShape.new(name: 'DescribeInstanceEventWindowsResult')
+    DescribeInstanceImageMetadataMaxResults = Shapes::IntegerShape.new(name: 'DescribeInstanceImageMetadataMaxResults')
+    DescribeInstanceImageMetadataRequest = Shapes::StructureShape.new(name: 'DescribeInstanceImageMetadataRequest')
+    DescribeInstanceImageMetadataResult = Shapes::StructureShape.new(name: 'DescribeInstanceImageMetadataResult')
     DescribeInstanceStatusRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStatusRequest')
     DescribeInstanceStatusResult = Shapes::StructureShape.new(name: 'DescribeInstanceStatusResult')
     DescribeInstanceTopologyGroupNameSet = Shapes::ListShape.new(name: 'DescribeInstanceTopologyGroupNameSet')
@@ -1639,6 +1642,7 @@ module Aws::EC2
     ImageIdList = Shapes::ListShape.new(name: 'ImageIdList')
     ImageIdStringList = Shapes::ListShape.new(name: 'ImageIdStringList')
     ImageList = Shapes::ListShape.new(name: 'ImageList')
+    ImageMetadata = Shapes::StructureShape.new(name: 'ImageMetadata')
     ImageRecycleBinInfo = Shapes::StructureShape.new(name: 'ImageRecycleBinInfo')
     ImageRecycleBinInfoList = Shapes::ListShape.new(name: 'ImageRecycleBinInfoList')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
@@ -1732,6 +1736,8 @@ module Aws::EC2
     InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
     InstanceIdWithVolumeResolver = Shapes::StringShape.new(name: 'InstanceIdWithVolumeResolver')
     InstanceIdsSet = Shapes::ListShape.new(name: 'InstanceIdsSet')
+    InstanceImageMetadata = Shapes::StructureShape.new(name: 'InstanceImageMetadata')
+    InstanceImageMetadataList = Shapes::ListShape.new(name: 'InstanceImageMetadataList')
     InstanceInterruptionBehavior = Shapes::StringShape.new(name: 'InstanceInterruptionBehavior')
     InstanceIpv4Prefix = Shapes::StructureShape.new(name: 'InstanceIpv4Prefix')
     InstanceIpv4PrefixList = Shapes::ListShape.new(name: 'InstanceIpv4PrefixList')
@@ -6881,6 +6887,17 @@ module Aws::EC2
     DescribeInstanceEventWindowsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeInstanceEventWindowsResult.struct_class = Types::DescribeInstanceEventWindowsResult
 
+    DescribeInstanceImageMetadataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeInstanceImageMetadataRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
+    DescribeInstanceImageMetadataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeInstanceImageMetadataMaxResults, location_name: "MaxResults"))
+    DescribeInstanceImageMetadataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeInstanceImageMetadataRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceImageMetadataRequest.struct_class = Types::DescribeInstanceImageMetadataRequest
+
+    DescribeInstanceImageMetadataResult.add_member(:instance_image_metadata, Shapes::ShapeRef.new(shape: InstanceImageMetadataList, location_name: "instanceImageMetadataSet"))
+    DescribeInstanceImageMetadataResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeInstanceImageMetadataResult.struct_class = Types::DescribeInstanceImageMetadataResult
+
     DescribeInstanceStatusRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
     DescribeInstanceStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeInstanceStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -9861,6 +9878,16 @@ module Aws::EC2
 
     ImageList.member = Shapes::ShapeRef.new(shape: Image, location_name: "item")
 
+    ImageMetadata.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
+    ImageMetadata.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ImageMetadata.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "imageOwnerId"))
+    ImageMetadata.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "imageState"))
+    ImageMetadata.add_member(:image_owner_alias, Shapes::ShapeRef.new(shape: String, location_name: "imageOwnerAlias"))
+    ImageMetadata.add_member(:creation_date, Shapes::ShapeRef.new(shape: String, location_name: "creationDate"))
+    ImageMetadata.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: String, location_name: "deprecationTime"))
+    ImageMetadata.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
+    ImageMetadata.struct_class = Types::ImageMetadata
+
     ImageRecycleBinInfo.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     ImageRecycleBinInfo.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ImageRecycleBinInfo.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -10249,6 +10276,19 @@ module Aws::EC2
     InstanceIdStringList.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId")
 
     InstanceIdsSet.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "item")
+
+    InstanceImageMetadata.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "instanceId"))
+    InstanceImageMetadata.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    InstanceImageMetadata.add_member(:launch_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "launchTime"))
+    InstanceImageMetadata.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    InstanceImageMetadata.add_member(:zone_id, Shapes::ShapeRef.new(shape: String, location_name: "zoneId"))
+    InstanceImageMetadata.add_member(:state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
+    InstanceImageMetadata.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceOwnerId"))
+    InstanceImageMetadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    InstanceImageMetadata.add_member(:image_metadata, Shapes::ShapeRef.new(shape: ImageMetadata, location_name: "imageMetadata"))
+    InstanceImageMetadata.struct_class = Types::InstanceImageMetadata
+
+    InstanceImageMetadataList.member = Shapes::ShapeRef.new(shape: InstanceImageMetadata, location_name: "item")
 
     InstanceIpv4Prefix.add_member(:ipv_4_prefix, Shapes::ShapeRef.new(shape: String, location_name: "ipv4Prefix"))
     InstanceIpv4Prefix.struct_class = Types::InstanceIpv4Prefix
@@ -18356,6 +18396,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeInstanceEventWindowsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceEventWindowsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_instance_image_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceImageMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceImageMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceImageMetadataResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

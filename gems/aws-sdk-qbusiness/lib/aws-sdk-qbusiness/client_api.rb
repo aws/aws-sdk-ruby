@@ -34,6 +34,7 @@ module Aws::QBusiness
     ActionReviewPayloadField = Shapes::StructureShape.new(name: 'ActionReviewPayloadField')
     ActionReviewPayloadFieldAllowedValue = Shapes::StructureShape.new(name: 'ActionReviewPayloadFieldAllowedValue')
     ActionReviewPayloadFieldAllowedValues = Shapes::ListShape.new(name: 'ActionReviewPayloadFieldAllowedValues')
+    ActionReviewPayloadFieldArrayItemJsonSchema = Shapes::DocumentShape.new(name: 'ActionReviewPayloadFieldArrayItemJsonSchema', document: true)
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
@@ -498,6 +499,7 @@ module Aws::QBusiness
     ActionReviewPayloadField.add_member(:value, Shapes::ShapeRef.new(shape: ActionPayloadFieldValue, location_name: "value"))
     ActionReviewPayloadField.add_member(:allowed_values, Shapes::ShapeRef.new(shape: ActionReviewPayloadFieldAllowedValues, location_name: "allowedValues"))
     ActionReviewPayloadField.add_member(:allowed_format, Shapes::ShapeRef.new(shape: String, location_name: "allowedFormat"))
+    ActionReviewPayloadField.add_member(:array_item_json_schema, Shapes::ShapeRef.new(shape: ActionReviewPayloadFieldArrayItemJsonSchema, location_name: "arrayItemJsonSchema"))
     ActionReviewPayloadField.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))
     ActionReviewPayloadField.struct_class = Types::ActionReviewPayloadField
 

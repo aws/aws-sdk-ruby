@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2024-10-24)
+------------------
+
+* Feature - This release adds support for EBS volumes attached to Amazon ECS Windows tasks running on EC2 instances.
+
 1.164.0 (2024-10-18)
 ------------------
 

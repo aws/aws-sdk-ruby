@@ -246,7 +246,7 @@ module Aws::AppConfig
       attr_accessor growth_type: ("LINEAR" | "EXPONENTIAL")
       attr_accessor growth_factor: ::Float
       attr_accessor final_bake_time_in_minutes: ::Integer
-      attr_accessor state: ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK")
+      attr_accessor state: ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
       attr_accessor event_log: ::Array[Types::DeploymentEvent]
       attr_accessor percentage_complete: ::Float
       attr_accessor started_at: ::Time
@@ -259,7 +259,7 @@ module Aws::AppConfig
     end
 
     class DeploymentEvent
-      attr_accessor event_type: ("PERCENTAGE_UPDATED" | "ROLLBACK_STARTED" | "ROLLBACK_COMPLETED" | "BAKE_TIME_STARTED" | "DEPLOYMENT_STARTED" | "DEPLOYMENT_COMPLETED")
+      attr_accessor event_type: ("PERCENTAGE_UPDATED" | "ROLLBACK_STARTED" | "ROLLBACK_COMPLETED" | "BAKE_TIME_STARTED" | "DEPLOYMENT_STARTED" | "DEPLOYMENT_COMPLETED" | "REVERT_COMPLETED")
       attr_accessor triggered_by: ("USER" | "APPCONFIG" | "CLOUDWATCH_ALARM" | "INTERNAL_ERROR")
       attr_accessor description: ::String
       attr_accessor action_invocations: ::Array[Types::ActionInvocation]
@@ -293,7 +293,7 @@ module Aws::AppConfig
       attr_accessor growth_type: ("LINEAR" | "EXPONENTIAL")
       attr_accessor growth_factor: ::Float
       attr_accessor final_bake_time_in_minutes: ::Integer
-      attr_accessor state: ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK")
+      attr_accessor state: ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
       attr_accessor percentage_complete: ::Float
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
@@ -312,7 +312,7 @@ module Aws::AppConfig
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor state: ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK")
+      attr_accessor state: ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
       attr_accessor monitors: ::Array[Types::Monitor]
       SENSITIVE: []
     end
@@ -590,6 +590,7 @@ module Aws::AppConfig
       attr_accessor application_id: ::String
       attr_accessor environment_id: ::String
       attr_accessor deployment_number: ::Integer
+      attr_accessor allow_revert: bool
       SENSITIVE: []
     end
 

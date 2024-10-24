@@ -1575,7 +1575,7 @@ module Aws::ECS
     #             },
     #           ],
     #           role_arn: "IAMRoleArn", # required
-    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs, ntfs
     #         },
     #       },
     #     ],
@@ -1723,7 +1723,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
-    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
@@ -2534,7 +2534,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
-    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
@@ -3891,7 +3891,7 @@ module Aws::ECS
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
-    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.services[0].deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
@@ -7760,7 +7760,7 @@ module Aws::ECS
     #           termination_policy: {
     #             delete_on_termination: false, # required
     #           },
-    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs, ntfs
     #         },
     #       },
     #     ],
@@ -8136,7 +8136,7 @@ module Aws::ECS
     #           termination_policy: {
     #             delete_on_termination: false, # required
     #           },
-    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs, ntfs
     #         },
     #       },
     #     ],
@@ -9869,7 +9869,7 @@ module Aws::ECS
     #             },
     #           ],
     #           role_arn: "IAMRoleArn", # required
-    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs, ntfs
     #         },
     #       },
     #     ],
@@ -10017,7 +10017,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
-    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
@@ -10432,7 +10432,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

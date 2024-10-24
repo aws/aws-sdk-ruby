@@ -87,6 +87,7 @@ module Aws::QBusiness
       attr_accessor value: untyped
       attr_accessor allowed_values: ::Array[Types::ActionReviewPayloadFieldAllowedValue]
       attr_accessor allowed_format: ::String
+      attr_accessor array_item_json_schema: untyped
       attr_accessor required: bool
       SENSITIVE: []
     end

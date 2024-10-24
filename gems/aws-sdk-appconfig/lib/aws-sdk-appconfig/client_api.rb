@@ -647,6 +647,7 @@ module Aws::AppConfig
     StopDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     StopDeploymentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "EnvironmentId"))
     StopDeploymentRequest.add_member(:deployment_number, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "DeploymentNumber", metadata: {"box"=>true}))
+    StopDeploymentRequest.add_member(:allow_revert, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "Allow-Revert", metadata: {"box"=>true}))
     StopDeploymentRequest.struct_class = Types::StopDeploymentRequest
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)

@@ -1187,6 +1187,7 @@
         "value":{"shape":"ActionPayloadFieldValue"},
         "allowedValues":{"shape":"ActionReviewPayloadFieldAllowedValues"},
         "allowedFormat":{"shape":"String"},
+        "arrayItemJsonSchema":{"shape":"ActionReviewPayloadFieldArrayItemJsonSchema"},
         "required":{"shape":"Boolean"}
       }
     },
@@ -1200,6 +1201,12 @@
     "ActionReviewPayloadFieldAllowedValues":{
       "type":"list",
       "member":{"shape":"ActionReviewPayloadFieldAllowedValue"}
+    },
+    "ActionReviewPayloadFieldArrayItemJsonSchema":{
+      "type":"structure",
+      "members":{
+      },
+      "document":true
     },
     "AmazonResourceName":{
       "type":"string",

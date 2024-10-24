@@ -5876,6 +5876,26 @@ module Aws
                                            ) -> _DescribeInstanceEventWindowsResponseSuccess
                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceEventWindowsResponseSuccess
 
+      interface _DescribeInstanceImageMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceImageMetadataResult]
+        def instance_image_metadata: () -> ::Array[Types::InstanceImageMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_instance_image_metadata-instance_method
+      def describe_instance_image_metadata: (
+                                              ?filters: Array[
+                                                {
+                                                  name: ::String?,
+                                                  values: Array[::String]?
+                                                },
+                                              ],
+                                              ?instance_ids: Array[::String],
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              ?dry_run: bool
+                                            ) -> _DescribeInstanceImageMetadataResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceImageMetadataResponseSuccess
+
       interface _DescribeInstanceStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceStatusResult]
         def instance_statuses: () -> ::Array[Types::InstanceStatus]

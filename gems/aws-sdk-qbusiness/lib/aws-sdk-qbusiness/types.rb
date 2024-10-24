@@ -304,6 +304,11 @@ module Aws::QBusiness
     #   allowed format.
     #   @return [String]
     #
+    # @!attribute [rw] array_item_json_schema
+    #   Use to create a custom form with array fields (fields with nested
+    #   objects inside an array).
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @!attribute [rw] required
     #   Information about whether the field is required.
     #   @return [Boolean]
@@ -318,6 +323,7 @@ module Aws::QBusiness
       :value,
       :allowed_values,
       :allowed_format,
+      :array_item_json_schema,
       :required)
       SENSITIVE = []
       include Aws::Structure

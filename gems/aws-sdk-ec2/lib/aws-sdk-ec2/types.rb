@@ -8828,9 +8828,6 @@ module Aws::EC2
     #     ([supported Local Zones][1]). This option is only available for
     #     IPAM IPv4 pools in the public scope.
     #
-    #   If you do not choose a locale, resources in Regions others than the
-    #   IPAM's home region cannot use CIDRs from this pool.
-    #
     #   Possible values: Any Amazon Web Services Region or supported Amazon
     #   Web Services Local Zone. Default is `none` and means any locale.
     #
@@ -8871,8 +8868,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] publicly_advertisable
-    #   Determines if the pool is publicly advertisable. This option is not
-    #   available for pools with AddressFamily set to `ipv4`.
+    #   Determines if the pool is publicly advertisable. The request can
+    #   only contain `PubliclyAdvertisable` if `AddressFamily` is `ipv6` and
+    #   `PublicIpSource` is `byoip`.
     #   @return [Boolean]
     #
     # @!attribute [rw] allocation_min_netmask_length
@@ -20317,6 +20315,104 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The name of the Availability Zone (for
+    #     example, `us-west-2a`) or Local Zone (for example,
+    #     `us-west-2-lax-1b`) of the instance.
+    #
+    #   * `instance-id` - The ID of the instance.
+    #
+    #   * `instance-state-name` - The state of the instance (`pending` \|
+    #     `running` \| `shutting-down` \| `terminated` \| `stopping` \|
+    #     `stopped`).
+    #
+    #   * `instance-type` - The type of instance (for example, `t3.micro`).
+    #
+    #   * `launch-time` - The time when the instance was launched, in the
+    #     ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ),
+    #     for example, `2023-09-29T11:04:43.305Z`. You can use a wildcard
+    #     (`*`), for example, `2023-09-29T*`, which matches an entire day.
+    #
+    #   * `tag:<key>` - The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `zone-id` - The ID of the Availability Zone (for example,
+    #     `usw2-az2`) or Local Zone (for example, `usw2-lax1-az1`) of the
+    #     instance.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] instance_ids
+    #   The instance IDs.
+    #
+    #   If you don't specify an instance ID or filters, the output includes
+    #   information for all instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   Default: 1000
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceImageMetadataRequest AWS API Documentation
+    #
+    class DescribeInstanceImageMetadataRequest < Struct.new(
+      :filters,
+      :instance_ids,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_image_metadata
+    #   Information about the instance and the AMI used to launch the
+    #   instance.
+    #   @return [Array<Types::InstanceImageMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceImageMetadataResult AWS API Documentation
+    #
+    class DescribeInstanceImageMetadataResult < Struct.new(
+      :instance_image_metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_ids
     #   The instance IDs.
     #
@@ -31262,14 +31358,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
+    # Deprecated.
+    #
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
     #  </note>
     #
-    # Describes an elastic GPU.
-    #
     # @!attribute [rw] type
-    #   The elastic GPU type.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse AWS API Documentation
@@ -38470,6 +38574,62 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about the AMI.
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the AMI. If the state is `available`, the AMI
+    #   is successfully registered and can be used to launch an instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_owner_alias
+    #   The alias of the AMI owner.
+    #
+    #   Valid values: `amazon` \| `aws-marketplace`
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time the AMI was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecation_time
+    #   The deprecation date and time of the AMI, in UTC, in the following
+    #   format: *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_public
+    #   Indicates whether the AMI has public launch permissions. A value of
+    #   `true` means this AMI has public launch permissions, while `false`
+    #   means it has only implicit (AMI owner) or explicit (shared with your
+    #   account) launch permissions.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageMetadata AWS API Documentation
+    #
+    class ImageMetadata < Struct.new(
+      :image_id,
+      :name,
+      :owner_id,
+      :state,
+      :image_owner_alias,
+      :creation_date,
+      :deprecation_time,
+      :is_public)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an AMI that is currently in the Recycle Bin.
     #
     # @!attribute [rw] image_id
@@ -40422,6 +40582,61 @@ module Aws::EC2
     class InstanceFamilyCreditSpecification < Struct.new(
       :instance_family,
       :cpu_credits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the instance and the AMI used to launch the
+    # instance.
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_time
+    #   The time the instance was launched.
+    #   @return [Time]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone or Local Zone of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_id
+    #   The ID of the Availability Zone or Local Zone of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the instance.
+    #   @return [Types::InstanceState]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the instance.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] image_metadata
+    #   Information about the AMI used to launch the instance.
+    #   @return [Types::ImageMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceImageMetadata AWS API Documentation
+    #
+    class InstanceImageMetadata < Struct.new(
+      :instance_id,
+      :instance_type,
+      :launch_time,
+      :availability_zone,
+      :zone_id,
+      :state,
+      :owner_id,
+      :tags,
+      :image_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45142,7 +45357,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN of the Key Management Service (KMS) CMK used for encryption.
+    #   Identifier (key ID, key alias, key ARN, or alias ARN) of the
+    #   customer managed KMS key to use for EBS encryption.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -45217,8 +45433,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN of the symmetric Key Management Service (KMS) CMK used for
-    #   encryption.
+    #   Identifier (key ID, key alias, key ARN, or alias ARN) of the
+    #   customer managed KMS key to use for EBS encryption.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -57648,15 +57864,35 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_specifications
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   Deprecated.
-    #
     #   <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #    </note>
+    #
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the
+    #   same request.
+    #
+    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    #   customers to Amazon Elastic Inference (EI), and will help current
+    #   customers migrate their workloads to options that offer better price
+    #   and performance. After April 15, 2023, new customers will not be
+    #   able to launch instances with Amazon EI accelerators in Amazon
+    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
+    #   used Amazon EI at least once during the past 30-day period are
+    #   considered current customers and will be able to continue using the
+    #   service.
     #
     #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAccelerator>]
@@ -59090,15 +59326,35 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_specifications
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   Deprecated.
-    #
     #   <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #    </note>
+    #
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the
+    #   same request.
+    #
+    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    #   customers to Amazon Elastic Inference (EI), and will help current
+    #   customers migrate their workloads to options that offer better price
+    #   and performance. After April 15, 2023, new customers will not be
+    #   able to launch instances with Amazon EI accelerators in Amazon
+    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
+    #   used Amazon EI at least once during the past 30-day period are
+    #   considered current customers and will be able to continue using the
+    #   service.
     #
     #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAcceleratorResponse>]

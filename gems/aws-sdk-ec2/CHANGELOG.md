@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.485.0 (2024-10-24)
+------------------
+
+* Feature - This release includes a new API to describe some details of the Amazon Machine Images (AMIs) that were used to launch EC2 instances, even if those AMIs are no longer available for use.
+
 1.484.0 (2024-10-23)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-10-24)
+------------------
+
+* Feature - Add a new field in chat response. This field can be used to support nested schemas in array fields
+
 1.20.0 (2024-10-18)
 ------------------
 

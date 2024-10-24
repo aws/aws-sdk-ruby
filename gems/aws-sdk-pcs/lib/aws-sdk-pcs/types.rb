@@ -118,7 +118,9 @@ module Aws::PCS
     # Additional options related to the Slurm scheduler.
     #
     # @!attribute [rw] scale_down_idle_time_in_seconds
-    #   The time before an idle node is scaled down.
+    #   The time (in seconds) before an idle node is scaled down.
+    #
+    #   Default: `600`
     #   @return [Integer]
     #
     # @!attribute [rw] slurm_custom_settings
@@ -144,7 +146,9 @@ module Aws::PCS
     # Additional options related to the Slurm scheduler.
     #
     # @!attribute [rw] scale_down_idle_time_in_seconds
-    #   The time before an idle node is scaled down.
+    #   The time (in seconds) before an idle node is scaled down.
+    #
+    #   Default: `600`
     #   @return [Integer]
     #
     # @!attribute [rw] slurm_custom_settings
