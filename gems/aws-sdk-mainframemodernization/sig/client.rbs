@@ -81,6 +81,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#cancel_batch_job_execution-instance_method
       def cancel_batch_job_execution: (
                                         application_id: ::String,
+                                        ?auth_secrets_manager_arn: ::String,
                                         execution_id: ::String
                                       ) -> _CancelBatchJobExecutionResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelBatchJobExecutionResponseSuccess
@@ -383,7 +384,7 @@ module Aws
         def preferred_maintenance_window: () -> ::String
         def publicly_accessible: () -> bool
         def security_group_ids: () -> ::Array[::String]
-        def status: () -> ("Creating" | "Available" | "Updating" | "Deleting" | "Failed")
+        def status: () -> ("Creating" | "Available" | "Updating" | "Deleting" | "Failed" | "UnHealthy")
         def status_reason: () -> ::String
         def storage_configurations: () -> ::Array[Types::StorageConfiguration]
         def subnet_ids: () -> ::Array[::String]
@@ -470,6 +471,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#list_batch_job_restart_points-instance_method
       def list_batch_job_restart_points: (
                                            application_id: ::String,
+                                           ?auth_secrets_manager_arn: ::String,
                                            execution_id: ::String
                                          ) -> _ListBatchJobRestartPointsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBatchJobRestartPointsResponseSuccess
@@ -568,6 +570,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MainframeModernization/Client.html#start_batch_job-instance_method
       def start_batch_job: (
                              application_id: ::String,
+                             ?auth_secrets_manager_arn: ::String,
                              batch_job_identifier: {
                                file_batch_job_identifier: {
                                  file_name: ::String,

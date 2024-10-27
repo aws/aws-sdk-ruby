@@ -697,11 +697,11 @@ module Aws::Route53Resolver
     #
     #   * **S3 bucket**:
     #
-    #     `arn:aws:s3:::examplebucket`
+    #     `arn:aws:s3:::amzn-s3-demo-bucket`
     #
     #     You can optionally append a file prefix to the end of the ARN.
     #
-    #     `arn:aws:s3:::examplebucket/development/`
+    #     `arn:aws:s3:::amzn-s3-demo-bucket/development/`
     #
     #   * **CloudWatch Logs log group**:
     #
@@ -4829,13 +4829,20 @@ module Aws::Route53Resolver
     #   * None, which is treated as Do53.
     #   @return [String]
     #
+    # @!attribute [rw] server_name_indication
+    #   The Server Name Indication of the DoH server that you want to
+    #   forward queries to. This is only used if the Protocol of the
+    #   `TargetAddress` is `DoH`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/TargetAddress AWS API Documentation
     #
     class TargetAddress < Struct.new(
       :ip,
       :port,
       :ipv_6,
-      :protocol)
+      :protocol,
+      :server_name_indication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5193,6 +5200,12 @@ module Aws::Route53Resolver
     #     for AAAA. The values must be defined as TYPENUMBER, where the
     #     NUMBER can be 1-65334, for example, TYPE28. For more information,
     #     see [List of DNS record types][1].
+    #
+    #     <note markdown="1"> If you set up a firewall BLOCK rule with action NXDOMAIN on query
+    #     type equals AAAA, this action will not be applied to synthetic
+    #     IPv6 addresses generated when DNS64 is enabled.
+    #
+    #      </note>
     #
     #
     #

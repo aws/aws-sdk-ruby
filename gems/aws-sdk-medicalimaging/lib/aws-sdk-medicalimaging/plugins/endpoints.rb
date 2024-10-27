@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::MedicalImaging::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,47 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :copy_image_set
-            Aws::MedicalImaging::Endpoints::CopyImageSet.build(context)
-          when :create_datastore
-            Aws::MedicalImaging::Endpoints::CreateDatastore.build(context)
-          when :delete_datastore
-            Aws::MedicalImaging::Endpoints::DeleteDatastore.build(context)
-          when :delete_image_set
-            Aws::MedicalImaging::Endpoints::DeleteImageSet.build(context)
-          when :get_dicom_import_job
-            Aws::MedicalImaging::Endpoints::GetDICOMImportJob.build(context)
-          when :get_datastore
-            Aws::MedicalImaging::Endpoints::GetDatastore.build(context)
-          when :get_image_frame
-            Aws::MedicalImaging::Endpoints::GetImageFrame.build(context)
-          when :get_image_set
-            Aws::MedicalImaging::Endpoints::GetImageSet.build(context)
-          when :get_image_set_metadata
-            Aws::MedicalImaging::Endpoints::GetImageSetMetadata.build(context)
-          when :list_dicom_import_jobs
-            Aws::MedicalImaging::Endpoints::ListDICOMImportJobs.build(context)
-          when :list_datastores
-            Aws::MedicalImaging::Endpoints::ListDatastores.build(context)
-          when :list_image_set_versions
-            Aws::MedicalImaging::Endpoints::ListImageSetVersions.build(context)
-          when :list_tags_for_resource
-            Aws::MedicalImaging::Endpoints::ListTagsForResource.build(context)
-          when :search_image_sets
-            Aws::MedicalImaging::Endpoints::SearchImageSets.build(context)
-          when :start_dicom_import_job
-            Aws::MedicalImaging::Endpoints::StartDICOMImportJob.build(context)
-          when :tag_resource
-            Aws::MedicalImaging::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::MedicalImaging::Endpoints::UntagResource.build(context)
-          when :update_image_set_metadata
-            Aws::MedicalImaging::Endpoints::UpdateImageSetMetadata.build(context)
           end
         end
       end

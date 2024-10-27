@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::FIS::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,63 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_experiment_template
-            Aws::FIS::Endpoints::CreateExperimentTemplate.build(context)
-          when :create_target_account_configuration
-            Aws::FIS::Endpoints::CreateTargetAccountConfiguration.build(context)
-          when :delete_experiment_template
-            Aws::FIS::Endpoints::DeleteExperimentTemplate.build(context)
-          when :delete_target_account_configuration
-            Aws::FIS::Endpoints::DeleteTargetAccountConfiguration.build(context)
-          when :get_action
-            Aws::FIS::Endpoints::GetAction.build(context)
-          when :get_experiment
-            Aws::FIS::Endpoints::GetExperiment.build(context)
-          when :get_experiment_target_account_configuration
-            Aws::FIS::Endpoints::GetExperimentTargetAccountConfiguration.build(context)
-          when :get_experiment_template
-            Aws::FIS::Endpoints::GetExperimentTemplate.build(context)
-          when :get_safety_lever
-            Aws::FIS::Endpoints::GetSafetyLever.build(context)
-          when :get_target_account_configuration
-            Aws::FIS::Endpoints::GetTargetAccountConfiguration.build(context)
-          when :get_target_resource_type
-            Aws::FIS::Endpoints::GetTargetResourceType.build(context)
-          when :list_actions
-            Aws::FIS::Endpoints::ListActions.build(context)
-          when :list_experiment_resolved_targets
-            Aws::FIS::Endpoints::ListExperimentResolvedTargets.build(context)
-          when :list_experiment_target_account_configurations
-            Aws::FIS::Endpoints::ListExperimentTargetAccountConfigurations.build(context)
-          when :list_experiment_templates
-            Aws::FIS::Endpoints::ListExperimentTemplates.build(context)
-          when :list_experiments
-            Aws::FIS::Endpoints::ListExperiments.build(context)
-          when :list_tags_for_resource
-            Aws::FIS::Endpoints::ListTagsForResource.build(context)
-          when :list_target_account_configurations
-            Aws::FIS::Endpoints::ListTargetAccountConfigurations.build(context)
-          when :list_target_resource_types
-            Aws::FIS::Endpoints::ListTargetResourceTypes.build(context)
-          when :start_experiment
-            Aws::FIS::Endpoints::StartExperiment.build(context)
-          when :stop_experiment
-            Aws::FIS::Endpoints::StopExperiment.build(context)
-          when :tag_resource
-            Aws::FIS::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::FIS::Endpoints::UntagResource.build(context)
-          when :update_experiment_template
-            Aws::FIS::Endpoints::UpdateExperimentTemplate.build(context)
-          when :update_safety_lever_state
-            Aws::FIS::Endpoints::UpdateSafetyLeverState.build(context)
-          when :update_target_account_configuration
-            Aws::FIS::Endpoints::UpdateTargetAccountConfiguration.build(context)
           end
         end
       end

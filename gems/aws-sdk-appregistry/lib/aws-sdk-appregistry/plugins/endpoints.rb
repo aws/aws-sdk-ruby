@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::AppRegistry::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,59 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_attribute_group
-            Aws::AppRegistry::Endpoints::AssociateAttributeGroup.build(context)
-          when :associate_resource
-            Aws::AppRegistry::Endpoints::AssociateResource.build(context)
-          when :create_application
-            Aws::AppRegistry::Endpoints::CreateApplication.build(context)
-          when :create_attribute_group
-            Aws::AppRegistry::Endpoints::CreateAttributeGroup.build(context)
-          when :delete_application
-            Aws::AppRegistry::Endpoints::DeleteApplication.build(context)
-          when :delete_attribute_group
-            Aws::AppRegistry::Endpoints::DeleteAttributeGroup.build(context)
-          when :disassociate_attribute_group
-            Aws::AppRegistry::Endpoints::DisassociateAttributeGroup.build(context)
-          when :disassociate_resource
-            Aws::AppRegistry::Endpoints::DisassociateResource.build(context)
-          when :get_application
-            Aws::AppRegistry::Endpoints::GetApplication.build(context)
-          when :get_associated_resource
-            Aws::AppRegistry::Endpoints::GetAssociatedResource.build(context)
-          when :get_attribute_group
-            Aws::AppRegistry::Endpoints::GetAttributeGroup.build(context)
-          when :get_configuration
-            Aws::AppRegistry::Endpoints::GetConfiguration.build(context)
-          when :list_applications
-            Aws::AppRegistry::Endpoints::ListApplications.build(context)
-          when :list_associated_attribute_groups
-            Aws::AppRegistry::Endpoints::ListAssociatedAttributeGroups.build(context)
-          when :list_associated_resources
-            Aws::AppRegistry::Endpoints::ListAssociatedResources.build(context)
-          when :list_attribute_groups
-            Aws::AppRegistry::Endpoints::ListAttributeGroups.build(context)
-          when :list_attribute_groups_for_application
-            Aws::AppRegistry::Endpoints::ListAttributeGroupsForApplication.build(context)
-          when :list_tags_for_resource
-            Aws::AppRegistry::Endpoints::ListTagsForResource.build(context)
-          when :put_configuration
-            Aws::AppRegistry::Endpoints::PutConfiguration.build(context)
-          when :sync_resource
-            Aws::AppRegistry::Endpoints::SyncResource.build(context)
-          when :tag_resource
-            Aws::AppRegistry::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::AppRegistry::Endpoints::UntagResource.build(context)
-          when :update_application
-            Aws::AppRegistry::Endpoints::UpdateApplication.build(context)
-          when :update_attribute_group
-            Aws::AppRegistry::Endpoints::UpdateAttributeGroup.build(context)
           end
         end
       end

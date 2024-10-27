@@ -54,7 +54,7 @@ module Aws::IoT1ClickDevicesService
   autoload :EndpointProvider, 'aws-sdk-iot1clickdevicesservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iot1clickdevicesservice/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

@@ -574,8 +574,43 @@ module Aws::BedrockAgent
     #   A description of the agent.
     #
     # @option params [String] :foundation_model
-    #   The Amazon Resource Name (ARN) of the foundation model to be used for
+    #   The identifier for the model that you want to be used for
     #   orchestration by the agent you create.
+    #
+    #   The `modelId` to provide depends on the type of model or throughput
+    #   that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a list
+    #     of model IDs for base models, see [Amazon Bedrock base model IDs
+    #     (on-demand throughput)][1] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use an inference profile, specify the inference profile ID or
+    #     its ARN. For a list of inference profile IDs, see [Supported Regions
+    #     and models for cross-region inference][2] in the Amazon Bedrock User
+    #     Guide.
+    #
+    #   * If you use a provisioned model, specify the ARN of the Provisioned
+    #     Throughput. For more information, see [Run inference using a
+    #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a custom model, first purchase Provisioned Throughput for
+    #     it. Then specify the ARN of the resulting provisioned model. For
+    #     more information, see [Use a custom model in Amazon Bedrock][4] in
+    #     the Amazon Bedrock User Guide.
+    #
+    #   * If you use an [imported model][5], specify the ARN of the imported
+    #     model. You can get the model ARN from a successful call to
+    #     [CreateModelImportJob][6] or from the Imported models page in the
+    #     Amazon Bedrock console.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #   [6]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
     #
     # @option params [Types::GuardrailConfiguration] :guardrail_configuration
     #   The unique Guardrail configuration assigned to the agent when it is
@@ -1388,12 +1423,13 @@ module Aws::BedrockAgent
     #             prompt: {
     #               source_configuration: { # required
     #                 inline: {
+    #                   additional_model_request_fields: {
+    #                   },
     #                   inference_configuration: {
     #                     text: {
     #                       max_tokens: 1,
     #                       stop_sequences: ["String"],
     #                       temperature: 1.0,
-    #                       top_k: 1,
     #                       top_p: 1.0,
     #                     },
     #                   },
@@ -1483,7 +1519,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -1684,7 +1719,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -2022,12 +2056,13 @@ module Aws::BedrockAgent
     #     },
     #     variants: [
     #       {
+    #         additional_model_request_fields: {
+    #         },
     #         inference_configuration: {
     #           text: {
     #             max_tokens: 1,
     #             stop_sequences: ["String"],
     #             temperature: 1.0,
-    #             top_k: 1,
     #             top_p: 1.0,
     #           },
     #         },
@@ -2039,7 +2074,7 @@ module Aws::BedrockAgent
     #         ],
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
-    #         template_configuration: {
+    #         template_configuration: { # required
     #           text: {
     #             input_variables: [
     #               {
@@ -2069,7 +2104,6 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
-    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
     #   resp.variants[0].metadata #=> Array
     #   resp.variants[0].metadata[0].key #=> String
@@ -2166,7 +2200,6 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
-    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
     #   resp.variants[0].metadata #=> Array
     #   resp.variants[0].metadata[0].key #=> String
@@ -3044,7 +3077,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -3196,7 +3228,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -3232,7 +3263,7 @@ module Aws::BedrockAgent
     end
 
     # Gets information about a data ingestion job. Data sources are ingested
-    # into your knowledge base so that Large Lanaguage Models (LLMs) can use
+    # into your knowledge base so that Large Language Models (LLMs) can use
     # your data.
     #
     # @option params [required, String] :data_source_id
@@ -3417,7 +3448,6 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
-    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
     #   resp.variants[0].metadata #=> Array
     #   resp.variants[0].metadata[0].key #=> String
@@ -4434,8 +4464,43 @@ module Aws::BedrockAgent
     #   Specifies a new description of the agent.
     #
     # @option params [required, String] :foundation_model
-    #   Specifies a new foundation model to be used for orchestration by the
-    #   agent.
+    #   The identifier for the model that you want to be used for
+    #   orchestration by the agent you create.
+    #
+    #   The `modelId` to provide depends on the type of model or throughput
+    #   that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a list
+    #     of model IDs for base models, see [Amazon Bedrock base model IDs
+    #     (on-demand throughput)][1] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use an inference profile, specify the inference profile ID or
+    #     its ARN. For a list of inference profile IDs, see [Supported Regions
+    #     and models for cross-region inference][2] in the Amazon Bedrock User
+    #     Guide.
+    #
+    #   * If you use a provisioned model, specify the ARN of the Provisioned
+    #     Throughput. For more information, see [Run inference using a
+    #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a custom model, first purchase Provisioned Throughput for
+    #     it. Then specify the ARN of the resulting provisioned model. For
+    #     more information, see [Use a custom model in Amazon Bedrock][4] in
+    #     the Amazon Bedrock User Guide.
+    #
+    #   * If you use an [imported model][5], specify the ARN of the imported
+    #     model. You can get the model ARN from a successful call to
+    #     [CreateModelImportJob][6] or from the Imported models page in the
+    #     Amazon Bedrock console.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #   [6]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
     #
     # @option params [Types::GuardrailConfiguration] :guardrail_configuration
     #   The unique Guardrail configuration assigned to the agent when it is
@@ -5206,12 +5271,13 @@ module Aws::BedrockAgent
     #             prompt: {
     #               source_configuration: { # required
     #                 inline: {
+    #                   additional_model_request_fields: {
+    #                   },
     #                   inference_configuration: {
     #                     text: {
     #                       max_tokens: 1,
     #                       stop_sequences: ["String"],
     #                       temperature: 1.0,
-    #                       top_k: 1,
     #                       top_p: 1.0,
     #                     },
     #                   },
@@ -5299,7 +5365,6 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
@@ -5644,12 +5709,13 @@ module Aws::BedrockAgent
     #     prompt_identifier: "PromptIdentifier", # required
     #     variants: [
     #       {
+    #         additional_model_request_fields: {
+    #         },
     #         inference_configuration: {
     #           text: {
     #             max_tokens: 1,
     #             stop_sequences: ["String"],
     #             temperature: 1.0,
-    #             top_k: 1,
     #             top_p: 1.0,
     #           },
     #         },
@@ -5661,7 +5727,7 @@ module Aws::BedrockAgent
     #         ],
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
-    #         template_configuration: {
+    #         template_configuration: { # required
     #           text: {
     #             input_variables: [
     #               {
@@ -5691,7 +5757,6 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
-    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
     #   resp.variants[0].metadata #=> Array
     #   resp.variants[0].metadata[0].key #=> String
@@ -5731,7 +5796,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -245,6 +245,7 @@ module Aws::Route53Resolver
     Rfc3339TimeString = Shapes::StringShape.new(name: 'Rfc3339TimeString')
     RuleTypeOption = Shapes::StringShape.new(name: 'RuleTypeOption')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    ServerNameIndication = Shapes::StringShape.new(name: 'ServerNameIndication')
     ServicePrinciple = Shapes::StringShape.new(name: 'ServicePrinciple')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
@@ -1055,6 +1056,7 @@ module Aws::Route53Resolver
     TargetAddress.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port", metadata: {"box"=>true}))
     TargetAddress.add_member(:ipv_6, Shapes::ShapeRef.new(shape: Ipv6, location_name: "Ipv6", metadata: {"box"=>true}))
     TargetAddress.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol", metadata: {"box"=>true}))
+    TargetAddress.add_member(:server_name_indication, Shapes::ShapeRef.new(shape: ServerNameIndication, location_name: "ServerNameIndication", metadata: {"box"=>true}))
     TargetAddress.struct_class = Types::TargetAddress
 
     TargetList.member = Shapes::ShapeRef.new(shape: TargetAddress)

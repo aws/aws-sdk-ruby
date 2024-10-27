@@ -11,7 +11,11 @@ module Aws::AutoScaling
   module Types
 
     # Specifies the minimum and maximum for the `AcceleratorCount` object
-    # when you specify InstanceRequirements for an Auto Scaling group.
+    # when you specify [InstanceRequirements][1] for an Auto Scaling group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #
     # @!attribute [rw] min
     #   The minimum value.
@@ -31,8 +35,12 @@ module Aws::AutoScaling
     end
 
     # Specifies the minimum and maximum for the `AcceleratorTotalMemoryMiB`
-    # object when you specify InstanceRequirements for an Auto Scaling
+    # object when you specify [InstanceRequirements][1] for an Auto Scaling
     # group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #
     # @!attribute [rw] min
     #   The memory minimum in MiB.
@@ -415,8 +423,12 @@ module Aws::AutoScaling
     #   @return [Array<Types::EnabledMetric>]
     #
     # @!attribute [rw] status
-    #   The current state of the group when the DeleteAutoScalingGroup
+    #   The current state of the group when the [DeleteAutoScalingGroup][1]
     #   operation is in progress.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteAutoScalingGroup.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -680,8 +692,12 @@ module Aws::AutoScaling
     end
 
     # Specifies the minimum and maximum for the `BaselineEbsBandwidthMbps`
-    # object when you specify InstanceRequirements for an Auto Scaling
+    # object when you specify [InstanceRequirements][1] for an Auto Scaling
     # group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #
     # @!attribute [rw] min
     #   The minimum value in Mbps.
@@ -3010,7 +3026,8 @@ module Aws::AutoScaling
     #   The name of the filter.
     #
     #   The valid values for `Name` depend on which API operation you're
-    #   using with the filter (DescribeAutoScalingGroups or DescribeTags).
+    #   using with the filter ([DescribeAutoScalingGroups][1] or
+    #   [DescribeTags][2]).
     #
     #   **DescribeAutoScalingGroups**
     #
@@ -3046,6 +3063,11 @@ module Aws::AutoScaling
     #     whether tags propagate to instances at launch. The results only
     #     include information about the tags associated with the specified
     #     Boolean value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTags.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -3948,7 +3970,7 @@ module Aws::AutoScaling
     #   : Uses price to determine which instance types are the highest
     #     priority, launching the lowest priced instance types within an
     #     Availability Zone first. This is the default value for Auto
-    #     Scaling groups that specify InstanceRequirements.
+    #     Scaling groups that specify [InstanceRequirements][1].
     #
     #   prioritized
     #
@@ -3959,8 +3981,12 @@ module Aws::AutoScaling
     #     fulfilled using your highest priority instance type, then Amazon
     #     EC2 Auto Scaling launches the remaining capacity using the second
     #     priority instance type, and so on. This is the default value for
-    #     Auto Scaling groups that don't specify InstanceRequirements and
-    #     cannot be used for groups that do.
+    #     Auto Scaling groups that don't specify [InstanceRequirements][1]
+    #     and cannot be used for groups that do.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #   @return [String]
     #
     # @!attribute [rw] on_demand_base_capacity
@@ -4011,7 +4037,7 @@ module Aws::AutoScaling
     #     first. Note that if the On-Demand allocation strategy is set to
     #     `prioritized`, the same priority is applied when fulfilling
     #     On-Demand capacity. This is not a valid value for Auto Scaling
-    #     groups that specify InstanceRequirements.
+    #     groups that specify [InstanceRequirements][1].
     #
     #   lowest-price
     #
@@ -4028,6 +4054,10 @@ module Aws::AutoScaling
     #   : The price and capacity optimized allocation strategy looks at both
     #     price and capacity to select the Spot Instance pools that are the
     #     least likely to be interrupted and have the lowest possible price.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_pools
@@ -4833,7 +4863,11 @@ module Aws::AutoScaling
     end
 
     # Specifies the minimum and maximum for the `MemoryGiBPerVCpu` object
-    # when you specify InstanceRequirements for an Auto Scaling group.
+    # when you specify [InstanceRequirements][1] for an Auto Scaling group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #
     # @!attribute [rw] min
     #   The memory minimum in GiB.
@@ -4853,7 +4887,11 @@ module Aws::AutoScaling
     end
 
     # Specifies the minimum and maximum for the `MemoryMiB` object when you
-    # specify InstanceRequirements for an Auto Scaling group.
+    # specify [InstanceRequirements][1] for an Auto Scaling group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #
     # @!attribute [rw] min
     #   The memory minimum in MiB.
@@ -5160,21 +5198,22 @@ module Aws::AutoScaling
     end
 
     # Specifies the minimum and maximum for the `NetworkBandwidthGbps`
-    # object when you specify InstanceRequirements for an Auto Scaling
+    # object when you specify [InstanceRequirements][1] for an Auto Scaling
     # group.
     #
     # <note markdown="1"> Setting the minimum bandwidth does not guarantee that your instance
     # will achieve the minimum bandwidth. Amazon EC2 will identify instance
     # types that support the specified minimum bandwidth, but the actual
     # bandwidth of your instance might go below the specified minimum at
-    # times. For more information, see [Available instance bandwidth][1] in
+    # times. For more information, see [Available instance bandwidth][2] in
     # the *Amazon EC2 User Guide for Linux Instances*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth
     #
     # @!attribute [rw] min
     #   The minimum amount of network bandwidth, in gigabits per second
@@ -5196,8 +5235,12 @@ module Aws::AutoScaling
     end
 
     # Specifies the minimum and maximum for the `NetworkInterfaceCount`
-    # object when you specify InstanceRequirements for an Auto Scaling
+    # object when you specify [InstanceRequirements][1] for an Auto Scaling
     # group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #
     # @!attribute [rw] min
     #   The minimum number of network interfaces.
@@ -5887,7 +5930,11 @@ module Aws::AutoScaling
     # @!attribute [rw] notification_types
     #   The type of event that causes the notification to be sent. To query
     #   the notification types supported by Amazon EC2 Auto Scaling, call
-    #   the DescribeAutoScalingNotificationTypes API.
+    #   the [DescribeAutoScalingNotificationTypes][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingNotificationTypes.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfigurationType AWS API Documentation
@@ -6826,7 +6873,11 @@ module Aws::AutoScaling
     end
 
     # Describes information used for one or more scheduled scaling action
-    # updates in a BatchPutScheduledUpdateGroupAction operation.
+    # updates in a [BatchPutScheduledUpdateGroupAction][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_BatchPutScheduledUpdateGroupAction.html
     #
     # @!attribute [rw] scheduled_action_name
     #   The name of the scaling action.
@@ -7450,7 +7501,11 @@ module Aws::AutoScaling
     end
 
     # Specifies the minimum and maximum for the `TotalLocalStorageGB` object
-    # when you specify InstanceRequirements for an Auto Scaling group.
+    # when you specify [InstanceRequirements][1] for an Auto Scaling group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #
     # @!attribute [rw] min
     #   The storage minimum in GB.
@@ -7696,8 +7751,10 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] placement_group
     #   The name of an existing placement group into which to launch your
-    #   instances. For more information, see [Placement groups][1] in the
-    #   *Amazon EC2 User Guide for Linux Instances*.
+    #   instances. To remove the placement group setting, pass an empty
+    #   string for `placement-group`. For more information about placement
+    #   groups, see [Placement groups][1] in the *Amazon EC2 User Guide for
+    #   Linux Instances*.
     #
     #   <note markdown="1"> A *cluster* placement group is a logical grouping of instances
     #   within a single Availability Zone. You cannot specify multiple
@@ -7867,7 +7924,11 @@ module Aws::AutoScaling
     end
 
     # Specifies the minimum and maximum for the `VCpuCount` object when you
-    # specify InstanceRequirements for an Auto Scaling group.
+    # specify [InstanceRequirements][1] for an Auto Scaling group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html
     #
     # @!attribute [rw] min
     #   The minimum number of vCPUs.

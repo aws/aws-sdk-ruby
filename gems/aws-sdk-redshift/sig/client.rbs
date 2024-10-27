@@ -480,6 +480,37 @@ module Aws
                                     ) -> _CreateHsmConfigurationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHsmConfigurationResponseSuccess
 
+      interface _CreateIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
+        def integration_arn: () -> ::String
+        def integration_name: () -> ::String
+        def source_arn: () -> ::String
+        def target_arn: () -> ::String
+        def status: () -> ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
+        def errors: () -> ::Array[Types::IntegrationError]
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def kms_key_id: () -> ::String
+        def additional_encryption_context: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_integration-instance_method
+      def create_integration: (
+                                source_arn: ::String,
+                                target_arn: ::String,
+                                integration_name: ::String,
+                                ?kms_key_id: ::String,
+                                ?tag_list: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?additional_encryption_context: Hash[::String, ::String],
+                                ?description: ::String
+                              ) -> _CreateIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
+
       interface _CreateRedshiftIdcApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRedshiftIdcApplicationResult]
         def redshift_idc_application: () -> Types::RedshiftIdcApplication
@@ -745,6 +776,26 @@ module Aws
                                       hsm_configuration_identifier: ::String
                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
+        def integration_arn: () -> ::String
+        def integration_name: () -> ::String
+        def source_arn: () -> ::String
+        def target_arn: () -> ::String
+        def status: () -> ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
+        def errors: () -> ::Array[Types::IntegrationError]
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def kms_key_id: () -> ::String
+        def additional_encryption_context: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#delete_integration-instance_method
+      def delete_integration: (
+                                integration_arn: ::String
+                              ) -> _DeleteIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntegrationResponseSuccess
 
       interface _DeletePartnerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PartnerIntegrationOutputMessage]
@@ -1148,6 +1199,25 @@ module Aws
                                            ?marker: ::String
                                          ) -> _DescribeInboundIntegrationsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInboundIntegrationsResponseSuccess
+
+      interface _DescribeIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IntegrationsMessage]
+        def marker: () -> ::String
+        def integrations: () -> ::Array[Types::Integration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#describe_integrations-instance_method
+      def describe_integrations: (
+                                   ?integration_arn: ::String,
+                                   ?max_records: ::Integer,
+                                   ?marker: ::String,
+                                   ?filters: Array[
+                                     {
+                                       name: ("integration-arn" | "source-arn" | "source-types" | "status"),
+                                       values: Array[::String]
+                                     },
+                                   ]
+                                 ) -> _DescribeIntegrationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIntegrationsResponseSuccess
 
       interface _DescribeLoggingStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::LoggingStatus]
@@ -1786,6 +1856,28 @@ module Aws
                                        ?enabled: bool
                                      ) -> _ModifyEventSubscriptionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyEventSubscriptionResponseSuccess
+
+      interface _ModifyIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
+        def integration_arn: () -> ::String
+        def integration_name: () -> ::String
+        def source_arn: () -> ::String
+        def target_arn: () -> ::String
+        def status: () -> ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
+        def errors: () -> ::Array[Types::IntegrationError]
+        def create_time: () -> ::Time
+        def description: () -> ::String
+        def kms_key_id: () -> ::String
+        def additional_encryption_context: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_integration-instance_method
+      def modify_integration: (
+                                integration_arn: ::String,
+                                ?description: ::String,
+                                ?integration_name: ::String
+                              ) -> _ModifyIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyIntegrationResponseSuccess
 
       interface _ModifyRedshiftIdcApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyRedshiftIdcApplicationResult]

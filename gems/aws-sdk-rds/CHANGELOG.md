@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.255.0 (2024-10-22)
+------------------
+
+* Feature - Global clusters now expose the Endpoint attribute as one of its fields. It is a Read/Write endpoint for the global cluster which resolves to the Global Cluster writer instance.
+
+1.254.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.253.0 (2024-10-17)
+------------------
+
+* Feature - Updates Amazon RDS documentation for TAZ IAM support
+
 1.252.0 (2024-10-01)
 ------------------
 

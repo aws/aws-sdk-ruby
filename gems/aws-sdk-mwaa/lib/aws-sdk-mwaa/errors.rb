@@ -30,6 +30,8 @@ module Aws::MWAA
   # * {AccessDeniedException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {RestApiClientException}
+  # * {RestApiServerException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -80,6 +82,46 @@ module Aws::MWAA
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class RestApiClientException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MWAA::Types::RestApiClientException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def rest_api_status_code
+        @data[:rest_api_status_code]
+      end
+
+      # @return [String]
+      def rest_api_response
+        @data[:rest_api_response]
+      end
+    end
+
+    class RestApiServerException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MWAA::Types::RestApiServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def rest_api_status_code
+        @data[:rest_api_status_code]
+      end
+
+      # @return [String]
+      def rest_api_response
+        @data[:rest_api_response]
       end
     end
 

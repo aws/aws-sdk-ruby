@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::DocDBElastic::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,43 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :copy_cluster_snapshot
-            Aws::DocDBElastic::Endpoints::CopyClusterSnapshot.build(context)
-          when :create_cluster
-            Aws::DocDBElastic::Endpoints::CreateCluster.build(context)
-          when :create_cluster_snapshot
-            Aws::DocDBElastic::Endpoints::CreateClusterSnapshot.build(context)
-          when :delete_cluster
-            Aws::DocDBElastic::Endpoints::DeleteCluster.build(context)
-          when :delete_cluster_snapshot
-            Aws::DocDBElastic::Endpoints::DeleteClusterSnapshot.build(context)
-          when :get_cluster
-            Aws::DocDBElastic::Endpoints::GetCluster.build(context)
-          when :get_cluster_snapshot
-            Aws::DocDBElastic::Endpoints::GetClusterSnapshot.build(context)
-          when :list_cluster_snapshots
-            Aws::DocDBElastic::Endpoints::ListClusterSnapshots.build(context)
-          when :list_clusters
-            Aws::DocDBElastic::Endpoints::ListClusters.build(context)
-          when :list_tags_for_resource
-            Aws::DocDBElastic::Endpoints::ListTagsForResource.build(context)
-          when :restore_cluster_from_snapshot
-            Aws::DocDBElastic::Endpoints::RestoreClusterFromSnapshot.build(context)
-          when :start_cluster
-            Aws::DocDBElastic::Endpoints::StartCluster.build(context)
-          when :stop_cluster
-            Aws::DocDBElastic::Endpoints::StopCluster.build(context)
-          when :tag_resource
-            Aws::DocDBElastic::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::DocDBElastic::Endpoints::UntagResource.build(context)
-          when :update_cluster
-            Aws::DocDBElastic::Endpoints::UpdateCluster.build(context)
           end
         end
       end

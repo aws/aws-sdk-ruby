@@ -29,6 +29,7 @@ module Aws::DatabaseMigrationService
   # ## Error Classes
   # * {AccessDeniedFault}
   # * {CollectorNotFoundFault}
+  # * {FailedDependencyFault}
   # * {InsufficientResourceCapacityFault}
   # * {InvalidCertificateFault}
   # * {InvalidOperationFault}
@@ -79,6 +80,21 @@ module Aws::DatabaseMigrationService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DatabaseMigrationService::Types::CollectorNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class FailedDependencyFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DatabaseMigrationService::Types::FailedDependencyFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

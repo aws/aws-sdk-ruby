@@ -227,7 +227,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor registration_type: ::String
-      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
       attr_accessor current_version_number: ::Integer
       attr_accessor additional_attributes: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
@@ -244,7 +244,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       SENSITIVE: []
     end
@@ -451,7 +451,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor registration_type: ::String
-      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
       attr_accessor current_version_number: ::Integer
       attr_accessor approved_version_number: ::Integer
       attr_accessor latest_denied_version_number: ::Integer
@@ -822,7 +822,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       SENSITIVE: []
     end
@@ -1183,7 +1183,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor registration_type: ::String
-      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
       attr_accessor current_version_number: ::Integer
       attr_accessor approved_version_number: ::Integer
       attr_accessor latest_denied_version_number: ::Integer
@@ -1237,7 +1237,7 @@ module Aws::PinpointSMSVoiceV2
 
     class RegistrationVersionInformation
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       attr_accessor denied_reasons: ::Array[Types::RegistrationDeniedReasonInformation]
       SENSITIVE: []
@@ -1572,7 +1572,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       SENSITIVE: []
     end
@@ -1750,7 +1750,7 @@ module Aws::PinpointSMSVoiceV2
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor reason: ("CANNOT_ADD_OPTED_OUT_NUMBER" | "CANNOT_PARSE" | "COUNTRY_CODE_MISMATCH" | "DESTINATION_COUNTRY_BLOCKED" | "FIELD_VALIDATION_FAILED" | "ATTACHMENT_TYPE_NOT_SUPPORTED" | "INVALID_ARN" | "INVALID_FILTER_VALUES" | "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY" | "INVALID_NEXT_TOKEN" | "INVALID_PARAMETER" | "INVALID_REQUEST" | "INVALID_REGISTRATION_ASSOCIATION" | "MAXIMUM_SIZE_EXCEEDED" | "MEDIA_TYPE_NOT_SUPPORTED" | "MISSING_PARAMETER" | "PARAMETERS_CANNOT_BE_USED_TOGETHER" | "PHONE_NUMBER_CANNOT_BE_OPTED_IN" | "PHONE_NUMBER_CANNOT_BE_RELEASED" | "PRICE_OVER_THRESHOLD" | "RESOURCE_NOT_ACCESSIBLE" | "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT" | "SENDER_ID_NOT_REGISTERED" | "SENDER_ID_NOT_SUPPORTED" | "SENDER_ID_REQUIRES_REGISTRATION" | "TWO_WAY_TOPIC_NOT_PRESENT" | "TWO_WAY_NOT_ENABLED" | "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY" | "TWO_WAY_NOT_SUPPORTED_IN_REGION" | "TWO_WAY_CHANNEL_NOT_PRESENT" | "UNKNOWN_REGISTRATION_FIELD" | "UNKNOWN_REGISTRATION_SECTION" | "UNKNOWN_REGISTRATION_TYPE" | "UNKNOWN_REGISTRATION_VERSION" | "UNKNOWN_OPERATION" | "REGISTRATION_FIELD_CANNOT_BE_DELETED" | "VERIFICATION_CODE_MISMATCH" | "VOICE_CAPABILITY_NOT_AVAILABLE" | "OTHER")
+      attr_accessor reason: ("CANNOT_ADD_OPTED_OUT_NUMBER" | "CANNOT_PARSE" | "COUNTRY_CODE_MISMATCH" | "DESTINATION_COUNTRY_BLOCKED" | "FIELD_VALIDATION_FAILED" | "ATTACHMENT_TYPE_NOT_SUPPORTED" | "INVALID_ARN" | "INVALID_FILTER_VALUES" | "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY" | "INVALID_NEXT_TOKEN" | "INVALID_PARAMETER" | "INVALID_REQUEST" | "INVALID_REGISTRATION_ASSOCIATION" | "MAXIMUM_SIZE_EXCEEDED" | "MEDIA_TYPE_NOT_SUPPORTED" | "MISSING_PARAMETER" | "PARAMETERS_CANNOT_BE_USED_TOGETHER" | "PHONE_NUMBER_CANNOT_BE_OPTED_IN" | "PHONE_NUMBER_CANNOT_BE_RELEASED" | "PRICE_OVER_THRESHOLD" | "RESOURCE_NOT_ACCESSIBLE" | "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT" | "SENDER_ID_NOT_REGISTERED" | "SENDER_ID_NOT_SUPPORTED" | "SENDER_ID_REQUIRES_REGISTRATION" | "TWO_WAY_TOPIC_NOT_PRESENT" | "TWO_WAY_NOT_ENABLED" | "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY" | "TWO_WAY_NOT_SUPPORTED_IN_REGION" | "TWO_WAY_CHANNEL_NOT_PRESENT" | "UNKNOWN_REGISTRATION_FIELD" | "UNKNOWN_REGISTRATION_SECTION" | "UNKNOWN_REGISTRATION_TYPE" | "UNKNOWN_REGISTRATION_VERSION" | "UNKNOWN_OPERATION" | "REGISTRATION_FIELD_CANNOT_BE_DELETED" | "VERIFICATION_CODE_MISMATCH" | "VOICE_CAPABILITY_NOT_AVAILABLE" | "UNSPECIFIED_PARAMETER_NOT_SUPPORTED" | "OTHER")
       attr_accessor fields: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end

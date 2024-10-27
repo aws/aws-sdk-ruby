@@ -1294,11 +1294,11 @@ module Aws::Route53Resolver
     #
     #   * **S3 bucket**:
     #
-    #     `arn:aws:s3:::examplebucket`
+    #     `arn:aws:s3:::amzn-s3-demo-bucket`
     #
     #     You can optionally append a file prefix to the end of the ARN.
     #
-    #     `arn:aws:s3:::examplebucket/development/`
+    #     `arn:aws:s3:::amzn-s3-demo-bucket/development/`
     #
     #   * **CloudWatch Logs log group**:
     #
@@ -1432,6 +1432,7 @@ module Aws::Route53Resolver
     #         port: 1,
     #         ipv_6: "Ipv6",
     #         protocol: "DoH", # accepts DoH, Do53, DoH-FIPS
+    #         server_name_indication: "ServerNameIndication",
     #       },
     #     ],
     #     resolver_endpoint_id: "ResourceId",
@@ -1458,6 +1459,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
     #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_rule.target_ips[0].server_name_indication #=> String
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -1823,6 +1825,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
     #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_rule.target_ips[0].server_name_indication #=> String
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -2514,6 +2517,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
     #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_rule.target_ips[0].server_name_indication #=> String
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -3810,6 +3814,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rules[0].target_ips[0].port #=> Integer
     #   resp.resolver_rules[0].target_ips[0].ipv_6 #=> String
     #   resp.resolver_rules[0].target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_rules[0].target_ips[0].server_name_indication #=> String
     #   resp.resolver_rules[0].resolver_endpoint_id #=> String
     #   resp.resolver_rules[0].owner_id #=> String
     #   resp.resolver_rules[0].share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -4342,6 +4347,12 @@ module Aws::Route53Resolver
     #     be 1-65334, for example, TYPE28. For more information, see [List of
     #     DNS record types][1].
     #
+    #     <note markdown="1"> If you set up a firewall BLOCK rule with action NXDOMAIN on query
+    #     type equals AAAA, this action will not be applied to synthetic IPv6
+    #     addresses generated when DNS64 is enabled.
+    #
+    #      </note>
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
@@ -4735,6 +4746,7 @@ module Aws::Route53Resolver
     #           port: 1,
     #           ipv_6: "Ipv6",
     #           protocol: "DoH", # accepts DoH, Do53, DoH-FIPS
+    #           server_name_indication: "ServerNameIndication",
     #         },
     #       ],
     #       resolver_endpoint_id: "ResourceId",
@@ -4756,6 +4768,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
     #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_rule.target_ips[0].server_name_indication #=> String
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -4789,7 +4802,7 @@ module Aws::Route53Resolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

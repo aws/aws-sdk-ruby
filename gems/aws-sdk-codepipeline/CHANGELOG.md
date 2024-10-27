@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2024-10-14)
+------------------
+
+* Feature - AWS CodePipeline V2 type pipelines now support automatically retrying failed stages and skipping stage for failed entry conditions.
+
+1.87.0 (2024-10-09)
+------------------
+
+* Feature - AWS CodePipeline introduces a Compute category
+
 1.86.0 (2024-10-03)
 ------------------
 

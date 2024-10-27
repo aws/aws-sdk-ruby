@@ -424,6 +424,7 @@ module Aws::SESV2
     class DeliveryOptions
       attr_accessor tls_policy: ("REQUIRE" | "OPTIONAL")
       attr_accessor sending_pool_name: ::String
+      attr_accessor max_delivery_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -1279,6 +1280,7 @@ module Aws::SESV2
       attr_accessor configuration_set_name: ::String
       attr_accessor tls_policy: ("REQUIRE" | "OPTIONAL")
       attr_accessor sending_pool_name: ::String
+      attr_accessor max_delivery_seconds: ::Integer
       SENSITIVE: []
     end
 

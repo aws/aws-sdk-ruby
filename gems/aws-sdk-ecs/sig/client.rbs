@@ -299,7 +299,7 @@ module Aws
                                     },
                                   ]?,
                                   role_arn: ::String,
-                                  filesystem_type: ("ext3" | "ext4" | "xfs")?
+                                  filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")?
                                 }?
                               },
                             ]
@@ -1218,7 +1218,7 @@ module Aws
                             termination_policy: {
                               delete_on_termination: bool
                             }?,
-                            filesystem_type: ("ext3" | "ext4" | "xfs")?
+                            filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")?
                           }?
                         },
                       ]
@@ -1323,7 +1323,7 @@ module Aws
                               termination_policy: {
                                 delete_on_termination: bool
                               }?,
-                              filesystem_type: ("ext3" | "ext4" | "xfs")?
+                              filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")?
                             }?
                           },
                         ]
@@ -1689,7 +1689,7 @@ module Aws
                                     },
                                   ]?,
                                   role_arn: ::String,
-                                  filesystem_type: ("ext3" | "ext4" | "xfs")?
+                                  filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")?
                                 }?
                               },
                             ]

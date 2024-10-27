@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2024-10-17)
+------------------
+
+* Feature - This release adds Data Grant support, through which customers can programmatically create data grants to share with other AWS accounts and accept data grants from other AWS accounts.
+
 1.58.0 (2024-09-24)
 ------------------
 

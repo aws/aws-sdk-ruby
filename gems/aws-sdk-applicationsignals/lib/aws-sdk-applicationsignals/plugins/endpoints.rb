@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ApplicationSignals::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,41 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :batch_get_service_level_objective_budget_report
-            Aws::ApplicationSignals::Endpoints::BatchGetServiceLevelObjectiveBudgetReport.build(context)
-          when :create_service_level_objective
-            Aws::ApplicationSignals::Endpoints::CreateServiceLevelObjective.build(context)
-          when :delete_service_level_objective
-            Aws::ApplicationSignals::Endpoints::DeleteServiceLevelObjective.build(context)
-          when :get_service
-            Aws::ApplicationSignals::Endpoints::GetService.build(context)
-          when :get_service_level_objective
-            Aws::ApplicationSignals::Endpoints::GetServiceLevelObjective.build(context)
-          when :list_service_dependencies
-            Aws::ApplicationSignals::Endpoints::ListServiceDependencies.build(context)
-          when :list_service_dependents
-            Aws::ApplicationSignals::Endpoints::ListServiceDependents.build(context)
-          when :list_service_level_objectives
-            Aws::ApplicationSignals::Endpoints::ListServiceLevelObjectives.build(context)
-          when :list_service_operations
-            Aws::ApplicationSignals::Endpoints::ListServiceOperations.build(context)
-          when :list_services
-            Aws::ApplicationSignals::Endpoints::ListServices.build(context)
-          when :list_tags_for_resource
-            Aws::ApplicationSignals::Endpoints::ListTagsForResource.build(context)
-          when :start_discovery
-            Aws::ApplicationSignals::Endpoints::StartDiscovery.build(context)
-          when :tag_resource
-            Aws::ApplicationSignals::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::ApplicationSignals::Endpoints::UntagResource.build(context)
-          when :update_service_level_objective
-            Aws::ApplicationSignals::Endpoints::UpdateServiceLevelObjective.build(context)
           end
         end
       end

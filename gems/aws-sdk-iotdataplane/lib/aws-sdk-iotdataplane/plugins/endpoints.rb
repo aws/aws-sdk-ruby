@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::IoTDataPlane::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,25 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :delete_thing_shadow
-            Aws::IoTDataPlane::Endpoints::DeleteThingShadow.build(context)
-          when :get_retained_message
-            Aws::IoTDataPlane::Endpoints::GetRetainedMessage.build(context)
-          when :get_thing_shadow
-            Aws::IoTDataPlane::Endpoints::GetThingShadow.build(context)
-          when :list_named_shadows_for_thing
-            Aws::IoTDataPlane::Endpoints::ListNamedShadowsForThing.build(context)
-          when :list_retained_messages
-            Aws::IoTDataPlane::Endpoints::ListRetainedMessages.build(context)
-          when :publish
-            Aws::IoTDataPlane::Endpoints::Publish.build(context)
-          when :update_thing_shadow
-            Aws::IoTDataPlane::Endpoints::UpdateThingShadow.build(context)
           end
         end
       end

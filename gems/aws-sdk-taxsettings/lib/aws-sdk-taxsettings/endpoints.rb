@@ -12,82 +12,9 @@ module Aws::TaxSettings
   # @api private
   module Endpoints
 
-    class BatchDeleteTaxRegistration
-      def self.build(context)
-        Aws::TaxSettings::EndpointParameters.new(
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-          region: context.config.region,
-        )
-      end
-    end
 
-    class BatchPutTaxRegistration
-      def self.build(context)
-        Aws::TaxSettings::EndpointParameters.new(
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-          region: context.config.region,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::TaxSettings::EndpointParameters.create(context.config)
     end
-
-    class DeleteTaxRegistration
-      def self.build(context)
-        Aws::TaxSettings::EndpointParameters.new(
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-          region: context.config.region,
-        )
-      end
-    end
-
-    class GetTaxRegistration
-      def self.build(context)
-        Aws::TaxSettings::EndpointParameters.new(
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-          region: context.config.region,
-        )
-      end
-    end
-
-    class GetTaxRegistrationDocument
-      def self.build(context)
-        Aws::TaxSettings::EndpointParameters.new(
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-          region: context.config.region,
-        )
-      end
-    end
-
-    class ListTaxRegistrations
-      def self.build(context)
-        Aws::TaxSettings::EndpointParameters.new(
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-          region: context.config.region,
-        )
-      end
-    end
-
-    class PutTaxRegistration
-      def self.build(context)
-        Aws::TaxSettings::EndpointParameters.new(
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-          region: context.config.region,
-        )
-      end
-    end
-
   end
 end

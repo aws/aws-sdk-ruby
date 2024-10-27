@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ApplicationAutoScaling::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,37 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :delete_scaling_policy
-            Aws::ApplicationAutoScaling::Endpoints::DeleteScalingPolicy.build(context)
-          when :delete_scheduled_action
-            Aws::ApplicationAutoScaling::Endpoints::DeleteScheduledAction.build(context)
-          when :deregister_scalable_target
-            Aws::ApplicationAutoScaling::Endpoints::DeregisterScalableTarget.build(context)
-          when :describe_scalable_targets
-            Aws::ApplicationAutoScaling::Endpoints::DescribeScalableTargets.build(context)
-          when :describe_scaling_activities
-            Aws::ApplicationAutoScaling::Endpoints::DescribeScalingActivities.build(context)
-          when :describe_scaling_policies
-            Aws::ApplicationAutoScaling::Endpoints::DescribeScalingPolicies.build(context)
-          when :describe_scheduled_actions
-            Aws::ApplicationAutoScaling::Endpoints::DescribeScheduledActions.build(context)
-          when :list_tags_for_resource
-            Aws::ApplicationAutoScaling::Endpoints::ListTagsForResource.build(context)
-          when :put_scaling_policy
-            Aws::ApplicationAutoScaling::Endpoints::PutScalingPolicy.build(context)
-          when :put_scheduled_action
-            Aws::ApplicationAutoScaling::Endpoints::PutScheduledAction.build(context)
-          when :register_scalable_target
-            Aws::ApplicationAutoScaling::Endpoints::RegisterScalableTarget.build(context)
-          when :tag_resource
-            Aws::ApplicationAutoScaling::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::ApplicationAutoScaling::Endpoints::UntagResource.build(context)
           end
         end
       end

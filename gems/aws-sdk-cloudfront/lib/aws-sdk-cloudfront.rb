@@ -55,7 +55,7 @@ module Aws::CloudFront
   autoload :EndpointProvider, 'aws-sdk-cloudfront/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudfront/endpoints'
 
-  GEM_VERSION = '1.102.0'
+  GEM_VERSION = '1.103.0'
 
 end
 

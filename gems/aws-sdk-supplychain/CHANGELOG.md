@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-10-25)
+------------------
+
+* Feature - API doc updates, and also support showing error message on a failed instance
+
+1.18.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2024-10-14)
+------------------
+
+* Feature - This release adds AWS Supply Chain instance management functionality. Specifically adding CreateInstance, DeleteInstance, GetInstance, ListInstances, and UpdateInstance APIs.
+
 1.16.0 (2024-09-30)
 ------------------
 

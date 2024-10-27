@@ -1085,7 +1085,7 @@ module Aws::BedrockAgent
     #
     class ConditionFlowNodeConfiguration < Struct.new(
       :conditions)
-      SENSITIVE = [:conditions]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1409,8 +1409,43 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] foundation_model
-    #   The Amazon Resource Name (ARN) of the foundation model to be used
-    #   for orchestration by the agent you create.
+    #   The identifier for the model that you want to be used for
+    #   orchestration by the agent you create.
+    #
+    #   The `modelId` to provide depends on the type of model or throughput
+    #   that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a
+    #     list of model IDs for base models, see [Amazon Bedrock base model
+    #     IDs (on-demand throughput)][1] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use an inference profile, specify the inference profile ID
+    #     or its ARN. For a list of inference profile IDs, see [Supported
+    #     Regions and models for cross-region inference][2] in the Amazon
+    #     Bedrock User Guide.
+    #
+    #   * If you use a provisioned model, specify the ARN of the Provisioned
+    #     Throughput. For more information, see [Run inference using a
+    #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a custom model, first purchase Provisioned Throughput
+    #     for it. Then specify the ARN of the resulting provisioned model.
+    #     For more information, see [Use a custom model in Amazon
+    #     Bedrock][4] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use an [imported model][5], specify the ARN of the imported
+    #     model. You can get the model ARN from a successful call to
+    #     [CreateModelImportJob][6] or from the Imported models page in the
+    #     Amazon Bedrock console.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #   [6]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
     #   @return [String]
     #
     # @!attribute [rw] guardrail_configuration
@@ -1724,7 +1759,7 @@ module Aws::BedrockAgent
       :execution_role_arn,
       :name,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -1796,7 +1831,7 @@ module Aws::BedrockAgent
       :status,
       :updated_at,
       :version)
-      SENSITIVE = []
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -1893,7 +1928,7 @@ module Aws::BedrockAgent
       :name,
       :status,
       :version)
-      SENSITIVE = []
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -3059,7 +3094,7 @@ module Aws::BedrockAgent
     class FlowDefinition < Struct.new(
       :connections,
       :nodes)
-      SENSITIVE = [:nodes]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3865,7 +3900,7 @@ module Aws::BedrockAgent
       :updated_at,
       :validations,
       :version)
-      SENSITIVE = []
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -3947,7 +3982,7 @@ module Aws::BedrockAgent
       :name,
       :status,
       :version)
-      SENSITIVE = []
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -5896,6 +5931,17 @@ module Aws::BedrockAgent
 
     # Contains configurations for a prompt defined inline in the node.
     #
+    # @!attribute [rw] additional_model_request_fields
+    #   Contains model-specific inference configurations that aren't in the
+    #   `inferenceConfiguration` field. To see model-specific inference
+    #   parameters, see [Inference request parameters and response fields
+    #   for foundation models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @!attribute [rw] inference_configuration
     #   Contains inference configurations for the prompt.
     #   @return [Types::PromptInferenceConfiguration]
@@ -5921,6 +5967,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptFlowNodeInlineConfiguration AWS API Documentation
     #
     class PromptFlowNodeInlineConfiguration < Struct.new(
+      :additional_model_request_fields,
       :inference_configuration,
       :model_id,
       :template_configuration,
@@ -6058,11 +6105,6 @@ module Aws::BedrockAgent
     #   outputs.
     #   @return [Float]
     #
-    # @!attribute [rw] top_k
-    #   The number of most-likely candidates that the model considers for
-    #   the next token during generation.
-    #   @return [Integer]
-    #
     # @!attribute [rw] top_p
     #   The percentage of most-likely candidates that the model considers
     #   for the next token.
@@ -6074,7 +6116,6 @@ module Aws::BedrockAgent
       :max_tokens,
       :stop_sequences,
       :temperature,
-      :top_k,
       :top_p)
       SENSITIVE = []
       include Aws::Structure
@@ -6203,6 +6244,17 @@ module Aws::BedrockAgent
 
     # Contains details about a variant of the prompt.
     #
+    # @!attribute [rw] additional_model_request_fields
+    #   Contains model-specific inference configurations that aren't in the
+    #   `inferenceConfiguration` field. To see model-specific inference
+    #   parameters, see [Inference request parameters and response fields
+    #   for foundation models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @!attribute [rw] inference_configuration
     #   Contains inference configurations for the prompt variant.
     #   @return [Types::PromptInferenceConfiguration]
@@ -6241,6 +6293,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptVariant AWS API Documentation
     #
     class PromptVariant < Struct.new(
+      :additional_model_request_fields,
       :inference_configuration,
       :metadata,
       :model_id,
@@ -7313,8 +7366,43 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] foundation_model
-    #   Specifies a new foundation model to be used for orchestration by the
-    #   agent.
+    #   The identifier for the model that you want to be used for
+    #   orchestration by the agent you create.
+    #
+    #   The `modelId` to provide depends on the type of model or throughput
+    #   that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a
+    #     list of model IDs for base models, see [Amazon Bedrock base model
+    #     IDs (on-demand throughput)][1] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use an inference profile, specify the inference profile ID
+    #     or its ARN. For a list of inference profile IDs, see [Supported
+    #     Regions and models for cross-region inference][2] in the Amazon
+    #     Bedrock User Guide.
+    #
+    #   * If you use a provisioned model, specify the ARN of the Provisioned
+    #     Throughput. For more information, see [Run inference using a
+    #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a custom model, first purchase Provisioned Throughput
+    #     for it. Then specify the ARN of the resulting provisioned model.
+    #     For more information, see [Use a custom model in Amazon
+    #     Bedrock][4] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use an [imported model][5], specify the ARN of the imported
+    #     model. You can get the model ARN from a successful call to
+    #     [CreateModelImportJob][6] or from the Imported models page in the
+    #     Amazon Bedrock console.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #   [6]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
     #   @return [String]
     #
     # @!attribute [rw] guardrail_configuration
@@ -7561,7 +7649,7 @@ module Aws::BedrockAgent
       :execution_role_arn,
       :flow_identifier,
       :name)
-      SENSITIVE = []
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 
@@ -7634,7 +7722,7 @@ module Aws::BedrockAgent
       :status,
       :updated_at,
       :version)
-      SENSITIVE = []
+      SENSITIVE = [:definition]
       include Aws::Structure
     end
 

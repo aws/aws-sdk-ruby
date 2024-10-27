@@ -199,7 +199,10 @@ module Aws
       def execute_scheduled_query: (
                                      scheduled_query_arn: ::String,
                                      invocation_time: ::Time,
-                                     ?client_token: ::String
+                                     ?client_token: ::String,
+                                     ?query_insights: {
+                                       mode: ("ENABLED_WITH_RATE_CONTROL" | "DISABLED")
+                                     }
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -248,13 +251,17 @@ module Aws
         def rows: () -> ::Array[Types::Row]
         def column_info: () -> ::Array[Types::ColumnInfo]
         def query_status: () -> Types::QueryStatus
+        def query_insights_response: () -> Types::QueryInsightsResponse
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamQuery/Client.html#query-instance_method
       def query: (
                    query_string: ::String,
                    ?client_token: ::String,
                    ?next_token: ::String,
-                   ?max_rows: ::Integer
+                   ?max_rows: ::Integer,
+                   ?query_insights: {
+                     mode: ("ENABLED_WITH_RATE_CONTROL" | "DISABLED")
+                   }
                  ) -> _QueryResponseSuccess
                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryResponseSuccess
 

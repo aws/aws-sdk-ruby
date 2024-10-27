@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-10-24)
+------------------
+
+* Feature - Add a new field in chat response. This field can be used to support nested schemas in array fields
+
+1.20.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2024-10-15)
+------------------
+
+* Feature - Amazon Q Business now supports embedding the Amazon Q Business web experience on third-party websites.
+
 1.18.0 (2024-09-24)
 ------------------
 

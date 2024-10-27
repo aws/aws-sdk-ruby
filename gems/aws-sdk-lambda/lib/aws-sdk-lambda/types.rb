@@ -2922,12 +2922,19 @@ module Aws::Lambda
     #   @return [Types::FunctionCodeLocation]
     #
     # @!attribute [rw] tags
-    #   The function's [tags][1].
+    #   The function's [tags][1]. Lambda returns tag data only if you have
+    #   explicit allow permissions for [lambda:ListTags][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
+    #   [2]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/lambda/latest/api/API_ListTags.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags_error
+    #   An object that contains details about an error related to retrieving
+    #   tags.
+    #   @return [Types::TagsError]
     #
     # @!attribute [rw] concurrency
     #   The function's [reserved concurrency][1].
@@ -2943,6 +2950,7 @@ module Aws::Lambda
       :configuration,
       :code,
       :tags,
+      :tags_error,
       :concurrency)
       SENSITIVE = []
       include Aws::Structure
@@ -6055,6 +6063,26 @@ module Aws::Lambda
     class TagResourceRequest < Struct.new(
       :resource,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about an error related to retrieving
+    # tags.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagsError AWS API Documentation
+    #
+    class TagsError < Struct.new(
+      :error_code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

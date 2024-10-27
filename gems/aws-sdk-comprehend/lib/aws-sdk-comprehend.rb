@@ -54,7 +54,7 @@ module Aws::Comprehend
   autoload :EndpointProvider, 'aws-sdk-comprehend/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-comprehend/endpoints'
 
-  GEM_VERSION = '1.93.0'
+  GEM_VERSION = '1.94.0'
 
 end
 

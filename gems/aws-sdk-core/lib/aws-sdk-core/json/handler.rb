@@ -21,6 +21,7 @@ module Aws
         context.http_request.http_method = 'POST'
         context.http_request.headers['Content-Type'] = content_type(context)
         context.http_request.headers['X-Amz-Target'] = target(context)
+        context.http_request.headers['X-Amzn-Query-Mode'] = 'true' if query_compatible?(context)
         context.http_request.body = build_body(context)
       end
 

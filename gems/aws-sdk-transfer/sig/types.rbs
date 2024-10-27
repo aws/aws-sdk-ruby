@@ -31,6 +31,14 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class ConnectorFileTransferResult
+      attr_accessor file_path: ::String
+      attr_accessor status_code: ("QUEUED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
     class CopyStepDetails
       attr_accessor name: ::String
       attr_accessor destination_file_location: Types::InputFileLocation
@@ -696,6 +704,20 @@ module Aws::Transfer
       attr_accessor next_token: ::String
       attr_accessor workflow_id: ::String
       attr_accessor executions: ::Array[Types::ListedExecution]
+      SENSITIVE: []
+    end
+
+    class ListFileTransferResultsRequest
+      attr_accessor connector_id: ::String
+      attr_accessor transfer_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFileTransferResultsResponse
+      attr_accessor file_transfer_results: ::Array[Types::ConnectorFileTransferResult]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Cloud9::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,37 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_environment_ec2
-            Aws::Cloud9::Endpoints::CreateEnvironmentEC2.build(context)
-          when :create_environment_membership
-            Aws::Cloud9::Endpoints::CreateEnvironmentMembership.build(context)
-          when :delete_environment
-            Aws::Cloud9::Endpoints::DeleteEnvironment.build(context)
-          when :delete_environment_membership
-            Aws::Cloud9::Endpoints::DeleteEnvironmentMembership.build(context)
-          when :describe_environment_memberships
-            Aws::Cloud9::Endpoints::DescribeEnvironmentMemberships.build(context)
-          when :describe_environment_status
-            Aws::Cloud9::Endpoints::DescribeEnvironmentStatus.build(context)
-          when :describe_environments
-            Aws::Cloud9::Endpoints::DescribeEnvironments.build(context)
-          when :list_environments
-            Aws::Cloud9::Endpoints::ListEnvironments.build(context)
-          when :list_tags_for_resource
-            Aws::Cloud9::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::Cloud9::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Cloud9::Endpoints::UntagResource.build(context)
-          when :update_environment
-            Aws::Cloud9::Endpoints::UpdateEnvironment.build(context)
-          when :update_environment_membership
-            Aws::Cloud9::Endpoints::UpdateEnvironmentMembership.build(context)
           end
         end
       end

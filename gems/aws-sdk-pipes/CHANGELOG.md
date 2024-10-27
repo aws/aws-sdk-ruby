@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2024-10-17)
+------------------
+
+* Feature - This release adds validation to require specifying a SecurityGroup and Subnets in the Vpc object under PipesSourceSelfManagedKafkaParameters. It also adds support for iso-e, iso-f, and other non-commercial partitions in ARN parameters.
+
 1.30.0 (2024-09-24)
 ------------------
 

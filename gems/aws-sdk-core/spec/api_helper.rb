@@ -45,6 +45,14 @@ module ApiHelper
       end
     end
 
+    def sample_rpcv2_cbor # cloudwatch logs changed to cbor
+      @sample_rpcv2_cbor ||= begin
+        api = File.expand_path('../fixtures/apis/logs.json', __FILE__)
+        api = JSON.load(File.read(api))
+        sample_service(api: api)
+      end
+    end
+
     def sample_shapes
       {
         'StructureShape' => {

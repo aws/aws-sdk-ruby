@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-10-21)
+------------------
+
+* Feature - Knowledge Bases for Amazon Bedrock now supports custom prompts and model parameters in the orchestrationConfiguration of the RetrieveAndGenerate API. The modelArn field accepts Custom Models and Imported Models ARNs.
+
+1.28.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.27.0 (2024-10-02)
 ------------------
 

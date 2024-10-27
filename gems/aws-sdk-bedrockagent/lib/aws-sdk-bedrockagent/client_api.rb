@@ -123,6 +123,7 @@ module Aws::BedrockAgent
     Dimensions = Shapes::IntegerShape.new(name: 'Dimensions')
     DisassociateAgentKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'DisassociateAgentKnowledgeBaseRequest')
     DisassociateAgentKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'DisassociateAgentKnowledgeBaseResponse')
+    Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DraftVersion = Shapes::StringShape.new(name: 'DraftVersion')
     EmbeddingModelConfiguration = Shapes::StructureShape.new(name: 'EmbeddingModelConfiguration')
     EnabledMemoryTypes = Shapes::ListShape.new(name: 'EnabledMemoryTypes')
@@ -1569,6 +1570,7 @@ module Aws::BedrockAgent
     PromptFlowNodeConfiguration.add_member(:source_configuration, Shapes::ShapeRef.new(shape: PromptFlowNodeSourceConfiguration, required: true, location_name: "sourceConfiguration"))
     PromptFlowNodeConfiguration.struct_class = Types::PromptFlowNodeConfiguration
 
+    PromptFlowNodeInlineConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
     PromptFlowNodeInlineConfiguration.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: PromptInferenceConfiguration, location_name: "inferenceConfiguration"))
     PromptFlowNodeInlineConfiguration.add_member(:model_id, Shapes::ShapeRef.new(shape: PromptModelIdentifier, required: true, location_name: "modelId"))
     PromptFlowNodeInlineConfiguration.add_member(:template_configuration, Shapes::ShapeRef.new(shape: PromptTemplateConfiguration, required: true, location_name: "templateConfiguration"))
@@ -1606,7 +1608,6 @@ module Aws::BedrockAgent
     PromptModelInferenceConfiguration.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaximumLength, location_name: "maxTokens"))
     PromptModelInferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: StopSequences, location_name: "stopSequences"))
     PromptModelInferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
-    PromptModelInferenceConfiguration.add_member(:top_k, Shapes::ShapeRef.new(shape: TopK, location_name: "topK"))
     PromptModelInferenceConfiguration.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
     PromptModelInferenceConfiguration.struct_class = Types::PromptModelInferenceConfiguration
 
@@ -1631,11 +1632,12 @@ module Aws::BedrockAgent
     PromptTemplateConfiguration.add_member_subclass(:unknown, Types::PromptTemplateConfiguration::Unknown)
     PromptTemplateConfiguration.struct_class = Types::PromptTemplateConfiguration
 
+    PromptVariant.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
     PromptVariant.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: PromptInferenceConfiguration, location_name: "inferenceConfiguration"))
     PromptVariant.add_member(:metadata, Shapes::ShapeRef.new(shape: PromptMetadataList, location_name: "metadata"))
     PromptVariant.add_member(:model_id, Shapes::ShapeRef.new(shape: PromptModelIdentifier, location_name: "modelId"))
     PromptVariant.add_member(:name, Shapes::ShapeRef.new(shape: PromptVariantName, required: true, location_name: "name"))
-    PromptVariant.add_member(:template_configuration, Shapes::ShapeRef.new(shape: PromptTemplateConfiguration, location_name: "templateConfiguration"))
+    PromptVariant.add_member(:template_configuration, Shapes::ShapeRef.new(shape: PromptTemplateConfiguration, required: true, location_name: "templateConfiguration"))
     PromptVariant.add_member(:template_type, Shapes::ShapeRef.new(shape: PromptTemplateType, required: true, location_name: "templateType"))
     PromptVariant.struct_class = Types::PromptVariant
 

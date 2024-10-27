@@ -556,6 +556,7 @@ module Aws
         def configuration: () -> Types::FunctionConfiguration
         def code: () -> Types::FunctionCodeLocation
         def tags: () -> ::Hash[::String, ::String]
+        def tags_error: () -> Types::TagsError
         def concurrency: () -> Types::Concurrency
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function-instance_method

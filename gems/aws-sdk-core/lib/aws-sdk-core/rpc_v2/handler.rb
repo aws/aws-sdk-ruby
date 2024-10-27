@@ -20,7 +20,8 @@ module Aws
       end
 
       def build_request(context)
-        context.http_request.headers['smithy-protocol'] = 'rpc-v2-cbor'
+        context.http_request.headers['Smithy-Protocol'] = 'rpc-v2-cbor'
+        context.http_request.headers['X-Amzn-Query-Mode'] = 'true' if query_compatible?(context)
         context.http_request.http_method = 'POST'
         context.http_request.body = build_body(context)
         build_url(context)

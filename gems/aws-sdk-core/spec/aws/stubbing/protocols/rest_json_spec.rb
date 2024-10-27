@@ -112,6 +112,17 @@ module Aws
             JSON
           end
 
+          it 'can stub errors' do
+            resp = RestJson.new.stub_error('error-code')
+            expect(resp.status_code).to eq(400)
+            expect(normalize(resp.body.string)).to eq(normalize(<<-JSON))
+              {
+                "code": "error-code",
+                "message": "stubbed-response-error-message"
+              }
+            JSON
+          end
+
         end
       end
     end

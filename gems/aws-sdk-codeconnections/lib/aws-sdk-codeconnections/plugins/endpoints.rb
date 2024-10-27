@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::CodeConnections::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,65 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_connection
-            Aws::CodeConnections::Endpoints::CreateConnection.build(context)
-          when :create_host
-            Aws::CodeConnections::Endpoints::CreateHost.build(context)
-          when :create_repository_link
-            Aws::CodeConnections::Endpoints::CreateRepositoryLink.build(context)
-          when :create_sync_configuration
-            Aws::CodeConnections::Endpoints::CreateSyncConfiguration.build(context)
-          when :delete_connection
-            Aws::CodeConnections::Endpoints::DeleteConnection.build(context)
-          when :delete_host
-            Aws::CodeConnections::Endpoints::DeleteHost.build(context)
-          when :delete_repository_link
-            Aws::CodeConnections::Endpoints::DeleteRepositoryLink.build(context)
-          when :delete_sync_configuration
-            Aws::CodeConnections::Endpoints::DeleteSyncConfiguration.build(context)
-          when :get_connection
-            Aws::CodeConnections::Endpoints::GetConnection.build(context)
-          when :get_host
-            Aws::CodeConnections::Endpoints::GetHost.build(context)
-          when :get_repository_link
-            Aws::CodeConnections::Endpoints::GetRepositoryLink.build(context)
-          when :get_repository_sync_status
-            Aws::CodeConnections::Endpoints::GetRepositorySyncStatus.build(context)
-          when :get_resource_sync_status
-            Aws::CodeConnections::Endpoints::GetResourceSyncStatus.build(context)
-          when :get_sync_blocker_summary
-            Aws::CodeConnections::Endpoints::GetSyncBlockerSummary.build(context)
-          when :get_sync_configuration
-            Aws::CodeConnections::Endpoints::GetSyncConfiguration.build(context)
-          when :list_connections
-            Aws::CodeConnections::Endpoints::ListConnections.build(context)
-          when :list_hosts
-            Aws::CodeConnections::Endpoints::ListHosts.build(context)
-          when :list_repository_links
-            Aws::CodeConnections::Endpoints::ListRepositoryLinks.build(context)
-          when :list_repository_sync_definitions
-            Aws::CodeConnections::Endpoints::ListRepositorySyncDefinitions.build(context)
-          when :list_sync_configurations
-            Aws::CodeConnections::Endpoints::ListSyncConfigurations.build(context)
-          when :list_tags_for_resource
-            Aws::CodeConnections::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::CodeConnections::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::CodeConnections::Endpoints::UntagResource.build(context)
-          when :update_host
-            Aws::CodeConnections::Endpoints::UpdateHost.build(context)
-          when :update_repository_link
-            Aws::CodeConnections::Endpoints::UpdateRepositoryLink.build(context)
-          when :update_sync_blocker
-            Aws::CodeConnections::Endpoints::UpdateSyncBlocker.build(context)
-          when :update_sync_configuration
-            Aws::CodeConnections::Endpoints::UpdateSyncConfiguration.build(context)
           end
         end
       end

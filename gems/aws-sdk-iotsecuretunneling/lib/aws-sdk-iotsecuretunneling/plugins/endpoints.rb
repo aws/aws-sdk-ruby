@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::IoTSecureTunneling::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,27 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :close_tunnel
-            Aws::IoTSecureTunneling::Endpoints::CloseTunnel.build(context)
-          when :describe_tunnel
-            Aws::IoTSecureTunneling::Endpoints::DescribeTunnel.build(context)
-          when :list_tags_for_resource
-            Aws::IoTSecureTunneling::Endpoints::ListTagsForResource.build(context)
-          when :list_tunnels
-            Aws::IoTSecureTunneling::Endpoints::ListTunnels.build(context)
-          when :open_tunnel
-            Aws::IoTSecureTunneling::Endpoints::OpenTunnel.build(context)
-          when :rotate_tunnel_access_token
-            Aws::IoTSecureTunneling::Endpoints::RotateTunnelAccessToken.build(context)
-          when :tag_resource
-            Aws::IoTSecureTunneling::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::IoTSecureTunneling::Endpoints::UntagResource.build(context)
           end
         end
       end

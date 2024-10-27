@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::NetworkMonitor::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,35 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_monitor
-            Aws::NetworkMonitor::Endpoints::CreateMonitor.build(context)
-          when :create_probe
-            Aws::NetworkMonitor::Endpoints::CreateProbe.build(context)
-          when :delete_monitor
-            Aws::NetworkMonitor::Endpoints::DeleteMonitor.build(context)
-          when :delete_probe
-            Aws::NetworkMonitor::Endpoints::DeleteProbe.build(context)
-          when :get_monitor
-            Aws::NetworkMonitor::Endpoints::GetMonitor.build(context)
-          when :get_probe
-            Aws::NetworkMonitor::Endpoints::GetProbe.build(context)
-          when :list_monitors
-            Aws::NetworkMonitor::Endpoints::ListMonitors.build(context)
-          when :list_tags_for_resource
-            Aws::NetworkMonitor::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::NetworkMonitor::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::NetworkMonitor::Endpoints::UntagResource.build(context)
-          when :update_monitor
-            Aws::NetworkMonitor::Endpoints::UpdateMonitor.build(context)
-          when :update_probe
-            Aws::NetworkMonitor::Endpoints::UpdateProbe.build(context)
           end
         end
       end

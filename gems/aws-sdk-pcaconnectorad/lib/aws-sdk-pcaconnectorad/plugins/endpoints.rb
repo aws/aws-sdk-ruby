@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::PcaConnectorAd::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,61 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_connector
-            Aws::PcaConnectorAd::Endpoints::CreateConnector.build(context)
-          when :create_directory_registration
-            Aws::PcaConnectorAd::Endpoints::CreateDirectoryRegistration.build(context)
-          when :create_service_principal_name
-            Aws::PcaConnectorAd::Endpoints::CreateServicePrincipalName.build(context)
-          when :create_template
-            Aws::PcaConnectorAd::Endpoints::CreateTemplate.build(context)
-          when :create_template_group_access_control_entry
-            Aws::PcaConnectorAd::Endpoints::CreateTemplateGroupAccessControlEntry.build(context)
-          when :delete_connector
-            Aws::PcaConnectorAd::Endpoints::DeleteConnector.build(context)
-          when :delete_directory_registration
-            Aws::PcaConnectorAd::Endpoints::DeleteDirectoryRegistration.build(context)
-          when :delete_service_principal_name
-            Aws::PcaConnectorAd::Endpoints::DeleteServicePrincipalName.build(context)
-          when :delete_template
-            Aws::PcaConnectorAd::Endpoints::DeleteTemplate.build(context)
-          when :delete_template_group_access_control_entry
-            Aws::PcaConnectorAd::Endpoints::DeleteTemplateGroupAccessControlEntry.build(context)
-          when :get_connector
-            Aws::PcaConnectorAd::Endpoints::GetConnector.build(context)
-          when :get_directory_registration
-            Aws::PcaConnectorAd::Endpoints::GetDirectoryRegistration.build(context)
-          when :get_service_principal_name
-            Aws::PcaConnectorAd::Endpoints::GetServicePrincipalName.build(context)
-          when :get_template
-            Aws::PcaConnectorAd::Endpoints::GetTemplate.build(context)
-          when :get_template_group_access_control_entry
-            Aws::PcaConnectorAd::Endpoints::GetTemplateGroupAccessControlEntry.build(context)
-          when :list_connectors
-            Aws::PcaConnectorAd::Endpoints::ListConnectors.build(context)
-          when :list_directory_registrations
-            Aws::PcaConnectorAd::Endpoints::ListDirectoryRegistrations.build(context)
-          when :list_service_principal_names
-            Aws::PcaConnectorAd::Endpoints::ListServicePrincipalNames.build(context)
-          when :list_tags_for_resource
-            Aws::PcaConnectorAd::Endpoints::ListTagsForResource.build(context)
-          when :list_template_group_access_control_entries
-            Aws::PcaConnectorAd::Endpoints::ListTemplateGroupAccessControlEntries.build(context)
-          when :list_templates
-            Aws::PcaConnectorAd::Endpoints::ListTemplates.build(context)
-          when :tag_resource
-            Aws::PcaConnectorAd::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::PcaConnectorAd::Endpoints::UntagResource.build(context)
-          when :update_template
-            Aws::PcaConnectorAd::Endpoints::UpdateTemplate.build(context)
-          when :update_template_group_access_control_entry
-            Aws::PcaConnectorAd::Endpoints::UpdateTemplateGroupAccessControlEntry.build(context)
           end
         end
       end

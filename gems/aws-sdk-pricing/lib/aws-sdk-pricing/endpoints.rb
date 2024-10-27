@@ -12,60 +12,9 @@ module Aws::Pricing
   # @api private
   module Endpoints
 
-    class DescribeServices
-      def self.build(context)
-        Aws::Pricing::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
-    class GetAttributeValues
-      def self.build(context)
-        Aws::Pricing::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::Pricing::EndpointParameters.create(context.config)
     end
-
-    class GetPriceListFileUrl
-      def self.build(context)
-        Aws::Pricing::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
-    class GetProducts
-      def self.build(context)
-        Aws::Pricing::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
-    class ListPriceLists
-      def self.build(context)
-        Aws::Pricing::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
   end
 end

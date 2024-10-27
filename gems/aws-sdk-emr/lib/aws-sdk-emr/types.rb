@@ -2373,6 +2373,10 @@ module Aws::EMR
     #   The resize specification for the instance fleet.
     #   @return [Types::InstanceFleetResizingSpecifications]
     #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleet AWS API Documentation
     #
     class InstanceFleet < Struct.new(
@@ -2386,7 +2390,8 @@ module Aws::EMR
       :provisioned_spot_capacity,
       :instance_type_specifications,
       :launch_specifications,
-      :resize_specifications)
+      :resize_specifications,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2468,6 +2473,10 @@ module Aws::EMR
     #   The resize specification for the instance fleet.
     #   @return [Types::InstanceFleetResizingSpecifications]
     #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetConfig AWS API Documentation
     #
     class InstanceFleetConfig < Struct.new(
@@ -2477,7 +2486,8 @@ module Aws::EMR
       :target_spot_capacity,
       :instance_type_configs,
       :launch_specifications,
-      :resize_specifications)
+      :resize_specifications,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2517,6 +2527,10 @@ module Aws::EMR
     #   [1]: https://docs.aws.amazon.com/emr/latest/APIReference/API_InstanceTypeConfig.html
     #   @return [Array<Types::InstanceTypeConfig>]
     #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetModifyConfig AWS API Documentation
     #
     class InstanceFleetModifyConfig < Struct.new(
@@ -2524,7 +2538,8 @@ module Aws::EMR
       :target_on_demand_capacity,
       :target_spot_capacity,
       :resize_specifications,
-      :instance_type_configs)
+      :instance_type_configs,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end

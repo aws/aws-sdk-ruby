@@ -447,6 +447,58 @@ module Aws::DataExchange
 
     # @!group API Operations
 
+    # This operation accepts a data grant.
+    #
+    # @option params [required, String] :data_grant_arn
+    #   The Amazon Resource Name (ARN) of the data grant to accept.
+    #
+    # @return [Types::AcceptDataGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptDataGrantResponse#name #name} => String
+    #   * {Types::AcceptDataGrantResponse#sender_principal #sender_principal} => String
+    #   * {Types::AcceptDataGrantResponse#receiver_principal #receiver_principal} => String
+    #   * {Types::AcceptDataGrantResponse#description #description} => String
+    #   * {Types::AcceptDataGrantResponse#acceptance_state #acceptance_state} => String
+    #   * {Types::AcceptDataGrantResponse#accepted_at #accepted_at} => Time
+    #   * {Types::AcceptDataGrantResponse#ends_at #ends_at} => Time
+    #   * {Types::AcceptDataGrantResponse#grant_distribution_scope #grant_distribution_scope} => String
+    #   * {Types::AcceptDataGrantResponse#data_set_id #data_set_id} => String
+    #   * {Types::AcceptDataGrantResponse#id #id} => String
+    #   * {Types::AcceptDataGrantResponse#arn #arn} => String
+    #   * {Types::AcceptDataGrantResponse#created_at #created_at} => Time
+    #   * {Types::AcceptDataGrantResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_data_grant({
+    #     data_grant_arn: "DataGrantArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.sender_principal #=> String
+    #   resp.receiver_principal #=> String
+    #   resp.description #=> String
+    #   resp.acceptance_state #=> String, one of "PENDING_RECEIVER_ACCEPTANCE", "ACCEPTED"
+    #   resp.accepted_at #=> Time
+    #   resp.ends_at #=> Time
+    #   resp.grant_distribution_scope #=> String, one of "AWS_ORGANIZATION", "NONE"
+    #   resp.data_set_id #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/AcceptDataGrant AWS API Documentation
+    #
+    # @overload accept_data_grant(params = {})
+    # @param [Hash] params ({})
+    def accept_data_grant(params = {}, options = {})
+      req = build_request(:accept_data_grant, params)
+      req.send_request(options)
+    end
+
     # This operation cancels a job. Jobs can be cancelled only when they are
     # in the WAITING state.
     #
@@ -467,6 +519,89 @@ module Aws::DataExchange
     # @param [Hash] params ({})
     def cancel_job(params = {}, options = {})
       req = build_request(:cancel_job, params)
+      req.send_request(options)
+    end
+
+    # This operation creates a data grant.
+    #
+    # @option params [required, String] :name
+    #   The name of the data grant.
+    #
+    # @option params [required, String] :grant_distribution_scope
+    #   The distribution scope of the data grant.
+    #
+    # @option params [required, String] :receiver_principal
+    #   The Amazon Web Services account ID of the data grant receiver.
+    #
+    # @option params [required, String] :source_data_set_id
+    #   The ID of the data set used to create the data grant.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :ends_at
+    #   The timestamp of when access to the associated data set ends.
+    #
+    # @option params [String] :description
+    #   The description of the data grant.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the data grant. A tag is a key-value pair.
+    #
+    # @return [Types::CreateDataGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataGrantResponse#name #name} => String
+    #   * {Types::CreateDataGrantResponse#sender_principal #sender_principal} => String
+    #   * {Types::CreateDataGrantResponse#receiver_principal #receiver_principal} => String
+    #   * {Types::CreateDataGrantResponse#description #description} => String
+    #   * {Types::CreateDataGrantResponse#acceptance_state #acceptance_state} => String
+    #   * {Types::CreateDataGrantResponse#accepted_at #accepted_at} => Time
+    #   * {Types::CreateDataGrantResponse#ends_at #ends_at} => Time
+    #   * {Types::CreateDataGrantResponse#grant_distribution_scope #grant_distribution_scope} => String
+    #   * {Types::CreateDataGrantResponse#data_set_id #data_set_id} => String
+    #   * {Types::CreateDataGrantResponse#source_data_set_id #source_data_set_id} => String
+    #   * {Types::CreateDataGrantResponse#id #id} => String
+    #   * {Types::CreateDataGrantResponse#arn #arn} => String
+    #   * {Types::CreateDataGrantResponse#created_at #created_at} => Time
+    #   * {Types::CreateDataGrantResponse#updated_at #updated_at} => Time
+    #   * {Types::CreateDataGrantResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_grant({
+    #     name: "DataGrantName", # required
+    #     grant_distribution_scope: "AWS_ORGANIZATION", # required, accepts AWS_ORGANIZATION, NONE
+    #     receiver_principal: "ReceiverPrincipal", # required
+    #     source_data_set_id: "Id", # required
+    #     ends_at: Time.now,
+    #     description: "Description",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.sender_principal #=> String
+    #   resp.receiver_principal #=> String
+    #   resp.description #=> String
+    #   resp.acceptance_state #=> String, one of "PENDING_RECEIVER_ACCEPTANCE", "ACCEPTED"
+    #   resp.accepted_at #=> Time
+    #   resp.ends_at #=> Time
+    #   resp.grant_distribution_scope #=> String, one of "AWS_ORGANIZATION", "NONE"
+    #   resp.data_set_id #=> String
+    #   resp.source_data_set_id #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateDataGrant AWS API Documentation
+    #
+    # @overload create_data_grant(params = {})
+    # @param [Hash] params ({})
+    def create_data_grant(params = {}, options = {})
+      req = build_request(:create_data_grant, params)
       req.send_request(options)
     end
 
@@ -524,6 +659,7 @@ module Aws::DataExchange
     #   resp.name #=> String
     #   resp.origin #=> String, one of "OWNED", "ENTITLED"
     #   resp.origin_details.product_id #=> String
+    #   resp.origin_details.data_grant_id #=> String
     #   resp.source_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -929,6 +1065,28 @@ module Aws::DataExchange
       req.send_request(options)
     end
 
+    # This operation deletes a data grant.
+    #
+    # @option params [required, String] :data_grant_id
+    #   The ID of the data grant to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_grant({
+    #     data_grant_id: "DataGrantId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteDataGrant AWS API Documentation
+    #
+    # @overload delete_data_grant(params = {})
+    # @param [Hash] params ({})
+    def delete_data_grant(params = {}, options = {})
+      req = build_request(:delete_data_grant, params)
+      req.send_request(options)
+    end
+
     # This operation deletes a data set.
     #
     # @option params [required, String] :data_set_id
@@ -1086,6 +1244,63 @@ module Aws::DataExchange
       req.send_request(options)
     end
 
+    # This operation returns information about a data grant.
+    #
+    # @option params [required, String] :data_grant_id
+    #   The ID of the data grant.
+    #
+    # @return [Types::GetDataGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataGrantResponse#name #name} => String
+    #   * {Types::GetDataGrantResponse#sender_principal #sender_principal} => String
+    #   * {Types::GetDataGrantResponse#receiver_principal #receiver_principal} => String
+    #   * {Types::GetDataGrantResponse#description #description} => String
+    #   * {Types::GetDataGrantResponse#acceptance_state #acceptance_state} => String
+    #   * {Types::GetDataGrantResponse#accepted_at #accepted_at} => Time
+    #   * {Types::GetDataGrantResponse#ends_at #ends_at} => Time
+    #   * {Types::GetDataGrantResponse#grant_distribution_scope #grant_distribution_scope} => String
+    #   * {Types::GetDataGrantResponse#data_set_id #data_set_id} => String
+    #   * {Types::GetDataGrantResponse#source_data_set_id #source_data_set_id} => String
+    #   * {Types::GetDataGrantResponse#id #id} => String
+    #   * {Types::GetDataGrantResponse#arn #arn} => String
+    #   * {Types::GetDataGrantResponse#created_at #created_at} => Time
+    #   * {Types::GetDataGrantResponse#updated_at #updated_at} => Time
+    #   * {Types::GetDataGrantResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_grant({
+    #     data_grant_id: "DataGrantId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.sender_principal #=> String
+    #   resp.receiver_principal #=> String
+    #   resp.description #=> String
+    #   resp.acceptance_state #=> String, one of "PENDING_RECEIVER_ACCEPTANCE", "ACCEPTED"
+    #   resp.accepted_at #=> Time
+    #   resp.ends_at #=> Time
+    #   resp.grant_distribution_scope #=> String, one of "AWS_ORGANIZATION", "NONE"
+    #   resp.data_set_id #=> String
+    #   resp.source_data_set_id #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetDataGrant AWS API Documentation
+    #
+    # @overload get_data_grant(params = {})
+    # @param [Hash] params ({})
+    def get_data_grant(params = {}, options = {})
+      req = build_request(:get_data_grant, params)
+      req.send_request(options)
+    end
+
     # This operation returns information about a data set.
     #
     # @option params [required, String] :data_set_id
@@ -1121,6 +1336,7 @@ module Aws::DataExchange
     #   resp.name #=> String
     #   resp.origin #=> String, one of "OWNED", "ENTITLED"
     #   resp.origin_details.product_id #=> String
+    #   resp.origin_details.data_grant_id #=> String
     #   resp.source_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -1299,6 +1515,58 @@ module Aws::DataExchange
       req.send_request(options)
     end
 
+    # This operation returns information about a received data grant.
+    #
+    # @option params [required, String] :data_grant_arn
+    #   The Amazon Resource Name (ARN) of the data grant.
+    #
+    # @return [Types::GetReceivedDataGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetReceivedDataGrantResponse#name #name} => String
+    #   * {Types::GetReceivedDataGrantResponse#sender_principal #sender_principal} => String
+    #   * {Types::GetReceivedDataGrantResponse#receiver_principal #receiver_principal} => String
+    #   * {Types::GetReceivedDataGrantResponse#description #description} => String
+    #   * {Types::GetReceivedDataGrantResponse#acceptance_state #acceptance_state} => String
+    #   * {Types::GetReceivedDataGrantResponse#accepted_at #accepted_at} => Time
+    #   * {Types::GetReceivedDataGrantResponse#ends_at #ends_at} => Time
+    #   * {Types::GetReceivedDataGrantResponse#grant_distribution_scope #grant_distribution_scope} => String
+    #   * {Types::GetReceivedDataGrantResponse#data_set_id #data_set_id} => String
+    #   * {Types::GetReceivedDataGrantResponse#id #id} => String
+    #   * {Types::GetReceivedDataGrantResponse#arn #arn} => String
+    #   * {Types::GetReceivedDataGrantResponse#created_at #created_at} => Time
+    #   * {Types::GetReceivedDataGrantResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_received_data_grant({
+    #     data_grant_arn: "DataGrantArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.sender_principal #=> String
+    #   resp.receiver_principal #=> String
+    #   resp.description #=> String
+    #   resp.acceptance_state #=> String, one of "PENDING_RECEIVER_ACCEPTANCE", "ACCEPTED"
+    #   resp.accepted_at #=> Time
+    #   resp.ends_at #=> Time
+    #   resp.grant_distribution_scope #=> String, one of "AWS_ORGANIZATION", "NONE"
+    #   resp.data_set_id #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetReceivedDataGrant AWS API Documentation
+    #
+    # @overload get_received_data_grant(params = {})
+    # @param [Hash] params ({})
+    def get_received_data_grant(params = {}, options = {})
+      req = build_request(:get_received_data_grant, params)
+      req.send_request(options)
+    end
+
     # This operation returns information about a revision.
     #
     # @option params [required, String] :data_set_id
@@ -1351,6 +1619,55 @@ module Aws::DataExchange
     # @param [Hash] params ({})
     def get_revision(params = {}, options = {})
       req = build_request(:get_revision, params)
+      req.send_request(options)
+    end
+
+    # This operation returns information about all data grants.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @return [Types::ListDataGrantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataGrantsResponse#data_grant_summaries #data_grant_summaries} => Array&lt;Types::DataGrantSummaryEntry&gt;
+    #   * {Types::ListDataGrantsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_grants({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_grant_summaries #=> Array
+    #   resp.data_grant_summaries[0].name #=> String
+    #   resp.data_grant_summaries[0].sender_principal #=> String
+    #   resp.data_grant_summaries[0].receiver_principal #=> String
+    #   resp.data_grant_summaries[0].acceptance_state #=> String, one of "PENDING_RECEIVER_ACCEPTANCE", "ACCEPTED"
+    #   resp.data_grant_summaries[0].accepted_at #=> Time
+    #   resp.data_grant_summaries[0].ends_at #=> Time
+    #   resp.data_grant_summaries[0].data_set_id #=> String
+    #   resp.data_grant_summaries[0].source_data_set_id #=> String
+    #   resp.data_grant_summaries[0].id #=> String
+    #   resp.data_grant_summaries[0].arn #=> String
+    #   resp.data_grant_summaries[0].created_at #=> Time
+    #   resp.data_grant_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListDataGrants AWS API Documentation
+    #
+    # @overload list_data_grants(params = {})
+    # @param [Hash] params ({})
+    def list_data_grants(params = {}, options = {})
+      req = build_request(:list_data_grants, params)
       req.send_request(options)
     end
 
@@ -1409,8 +1726,7 @@ module Aws::DataExchange
 
     # This operation lists your data sets. When listing by origin OWNED,
     # results are sorted by CreatedAt in descending order. When listing by
-    # origin ENTITLED, there is no order and the maxResults parameter is
-    # ignored.
+    # origin ENTITLED, there is no order.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by a single call.
@@ -1449,6 +1765,7 @@ module Aws::DataExchange
     #   resp.data_sets[0].name #=> String
     #   resp.data_sets[0].origin #=> String, one of "OWNED", "ENTITLED"
     #   resp.data_sets[0].origin_details.product_id #=> String
+    #   resp.data_sets[0].origin_details.data_grant_id #=> String
     #   resp.data_sets[0].source_id #=> String
     #   resp.data_sets[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -1644,6 +1961,58 @@ module Aws::DataExchange
     # @param [Hash] params ({})
     def list_jobs(params = {}, options = {})
       req = build_request(:list_jobs, params)
+      req.send_request(options)
+    end
+
+    # This operation returns information about all received data grants.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @option params [Array<String>] :acceptance_state
+    #   The acceptance state of the data grants to list.
+    #
+    # @return [Types::ListReceivedDataGrantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReceivedDataGrantsResponse#data_grant_summaries #data_grant_summaries} => Array&lt;Types::ReceivedDataGrantSummariesEntry&gt;
+    #   * {Types::ListReceivedDataGrantsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_received_data_grants({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     acceptance_state: ["PENDING_RECEIVER_ACCEPTANCE"], # accepts PENDING_RECEIVER_ACCEPTANCE, ACCEPTED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_grant_summaries #=> Array
+    #   resp.data_grant_summaries[0].name #=> String
+    #   resp.data_grant_summaries[0].sender_principal #=> String
+    #   resp.data_grant_summaries[0].receiver_principal #=> String
+    #   resp.data_grant_summaries[0].acceptance_state #=> String, one of "PENDING_RECEIVER_ACCEPTANCE", "ACCEPTED"
+    #   resp.data_grant_summaries[0].accepted_at #=> Time
+    #   resp.data_grant_summaries[0].ends_at #=> Time
+    #   resp.data_grant_summaries[0].data_set_id #=> String
+    #   resp.data_grant_summaries[0].id #=> String
+    #   resp.data_grant_summaries[0].arn #=> String
+    #   resp.data_grant_summaries[0].created_at #=> Time
+    #   resp.data_grant_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListReceivedDataGrants AWS API Documentation
+    #
+    # @overload list_received_data_grants(params = {})
+    # @param [Hash] params ({})
+    def list_received_data_grants(params = {}, options = {})
+      req = build_request(:list_received_data_grants, params)
       req.send_request(options)
     end
 
@@ -2201,6 +2570,7 @@ module Aws::DataExchange
     #   resp.name #=> String
     #   resp.origin #=> String, one of "OWNED", "ENTITLED"
     #   resp.origin_details.product_id #=> String
+    #   resp.origin_details.data_grant_id #=> String
     #   resp.source_id #=> String
     #   resp.updated_at #=> Time
     #
@@ -2349,7 +2719,7 @@ module Aws::DataExchange
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

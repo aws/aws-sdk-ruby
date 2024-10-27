@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-10-23)
+------------------
+
+* Feature - Add ECDH support on PIN operations.
+
+1.26.0 (2024-10-21)
+------------------
+
+* Feature - Adding new API to generate authenticated scripts for EMV pin change use cases.
+
+1.25.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2024-09-24)
 ------------------
 

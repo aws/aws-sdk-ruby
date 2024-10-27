@@ -1974,8 +1974,8 @@ module Aws::Redshift
     #   about node types, go to [ Working with Clusters][1] in the *Amazon
     #   Redshift Cluster Management Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
-    #   `ra3.4xlarge` \| `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.large` \|
+    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -2894,6 +2894,62 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the database to use as the source
+    #   for replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse
+    #   to use as the target for replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   The name of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   An Key Management Service (KMS) key identifier for the key to use to
+    #   encrypt the integration. If you don't specify an encryption key,
+    #   the default Amazon Web Services owned key is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_list
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] additional_encryption_context
+    #   An optional set of non-secret key–value pairs that contains
+    #   additional contextual information about the data. For more
+    #   information, see [Encryption context][1] in the *Amazon Web Services
+    #   Key Management Service Developer Guide*.
+    #
+    #   You can only include this parameter if you specify the `KMSKeyId`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] description
+    #   A description of the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateIntegrationMessage AWS API Documentation
+    #
+    class CreateIntegrationMessage < Struct.new(
+      :source_arn,
+      :target_arn,
+      :integration_name,
+      :kms_key_id,
+      :tag_list,
+      :additional_encryption_context,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] idc_instance_arn
     #   The Amazon resource name (ARN) of the IAM Identity Center instance
     #   where Amazon Redshift creates a new managed application.
@@ -3686,6 +3742,18 @@ module Aws::Redshift
     #
     class DeleteHsmConfigurationMessage < Struct.new(
       :hsm_configuration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_arn
+    #   The unique identifier of the integration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteIntegrationMessage AWS API Documentation
+    #
+    class DeleteIntegrationMessage < Struct.new(
+      :integration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5103,6 +5171,63 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # A set of elements to filter the returned integrations.
+    #
+    # @!attribute [rw] name
+    #   Specifies the type of integration filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Specifies the values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeIntegrationsFilter AWS API Documentation
+    #
+    class DescribeIntegrationsFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_arn
+    #   The unique identifier of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeIntegrations` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more resources to return.
+    #   @return [Array<Types::DescribeIntegrationsFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeIntegrationsMessage AWS API Documentation
+    #
+    class DescribeIntegrationsMessage < Struct.new(
+      :integration_arn,
+      :max_records,
+      :marker,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_identifier
     #   The identifier of the cluster from which to get the logging status.
     #
@@ -5740,6 +5865,14 @@ module Aws::Redshift
     #   * Parameter group
     #
     #   * Snapshot copy grant
+    #
+    #   * Integration (zero-ETL integration)
+    #
+    #     <note markdown="1"> To describe the tags associated with an `integration`, don't
+    #     specify `ResourceType`, instead specify the `ResourceName` of the
+    #     integration.
+    #
+    #      </note>
     #
     #   For more information about Amazon Redshift resource types and
     #   constructing ARNs, go to [Specifying Policy Elements: Actions,
@@ -7224,6 +7357,99 @@ module Aws::Redshift
     #
     class InsufficientS3BucketPolicyFault < Aws::EmptyStructure; end
 
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   The name of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the database used as the source
+    #   for replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse
+    #   to use as the target for replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   Any errors associated with the integration.
+    #   @return [Array<Types::IntegrationError>]
+    #
+    # @!attribute [rw] create_time
+    #   The time (UTC) when the integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Key Management Service (KMS) key identifier for the key used to
+    #   encrypt the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_encryption_context
+    #   The encryption context for the integration. For more information,
+    #   see [Encryption context][1] in the *Amazon Web Services Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags associated with the integration.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Integration AWS API Documentation
+    #
+    class Integration < Struct.new(
+      :integration_arn,
+      :integration_name,
+      :source_arn,
+      :target_arn,
+      :status,
+      :errors,
+      :create_time,
+      :description,
+      :kms_key_id,
+      :additional_encryption_context,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The integration you are trying to create already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationAlreadyExistsFault AWS API Documentation
+    #
+    class IntegrationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # A conflicting conditional operation is currently in progress against
+    # this resource. This typically occurs when there are multiple requests
+    # being made to the same resource at the same time, and these requests
+    # conflict with each other.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationConflictOperationFault AWS API Documentation
+    #
+    class IntegrationConflictOperationFault < Aws::EmptyStructure; end
+
+    # The integration is in an invalid state and can't perform the
+    # requested operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationConflictStateFault AWS API Documentation
+    #
+    class IntegrationConflictStateFault < Aws::EmptyStructure; end
+
     # The error of an inbound integration.
     #
     # @!attribute [rw] error_code
@@ -7248,6 +7474,47 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationNotFoundFault AWS API Documentation
     #
     class IntegrationNotFoundFault < Aws::EmptyStructure; end
+
+    # You can't create any more zero-ETL integrations because the quota has
+    # been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationQuotaExceededFault AWS API Documentation
+    #
+    class IntegrationQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The specified integration source can't be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationSourceNotFoundFault AWS API Documentation
+    #
+    class IntegrationSourceNotFoundFault < Aws::EmptyStructure; end
+
+    # The specified integration target can't be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationTargetNotFoundFault AWS API Documentation
+    #
+    class IntegrationTargetNotFoundFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the `Marker` parameter and retrying
+    #   the command. If the `Marker` field is empty, all response records
+    #   have been retrieved for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] integrations
+    #   List of integrations that are described.
+    #   @return [Array<Types::Integration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationsMessage AWS API Documentation
+    #
+    class IntegrationsMessage < Struct.new(
+      :marker,
+      :integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The authentication profile request is not valid. The profile name
     # can't be null or empty. The authentication profile API operation must
@@ -7884,8 +8151,8 @@ module Aws::Redshift
     #   Clusters in Amazon Redshift][1] in the *Amazon Redshift Cluster
     #   Management Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
-    #   `ra3.4xlarge` \| `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.large` \|
+    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -8510,6 +8777,28 @@ module Aws::Redshift
     #
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_arn
+    #   The unique identifier of the integration to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   A new name for the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyIntegrationMessage AWS API Documentation
+    #
+    class ModifyIntegrationMessage < Struct.new(
+      :integration_arn,
+      :description,
+      :integration_name)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -34,6 +34,7 @@ module Aws::QBusiness
     ActionReviewPayloadField = Shapes::StructureShape.new(name: 'ActionReviewPayloadField')
     ActionReviewPayloadFieldAllowedValue = Shapes::StructureShape.new(name: 'ActionReviewPayloadFieldAllowedValue')
     ActionReviewPayloadFieldAllowedValues = Shapes::ListShape.new(name: 'ActionReviewPayloadFieldAllowedValues')
+    ActionReviewPayloadFieldArrayItemJsonSchema = Shapes::DocumentShape.new(name: 'ActionReviewPayloadFieldArrayItemJsonSchema', document: true)
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
@@ -303,6 +304,7 @@ module Aws::QBusiness
     NumberAttributeBoostingType = Shapes::StringShape.new(name: 'NumberAttributeBoostingType')
     OAuth2ClientCredentialConfiguration = Shapes::StructureShape.new(name: 'OAuth2ClientCredentialConfiguration')
     OpenIDConnectProviderConfiguration = Shapes::StructureShape.new(name: 'OpenIDConnectProviderConfiguration')
+    Origin = Shapes::StringShape.new(name: 'Origin')
     Payload = Shapes::StringShape.new(name: 'Payload')
     PersonalizationConfiguration = Shapes::StructureShape.new(name: 'PersonalizationConfiguration')
     PersonalizationControlMode = Shapes::StringShape.new(name: 'PersonalizationControlMode')
@@ -427,6 +429,7 @@ module Aws::QBusiness
     WebExperienceArn = Shapes::StringShape.new(name: 'WebExperienceArn')
     WebExperienceAuthConfiguration = Shapes::UnionShape.new(name: 'WebExperienceAuthConfiguration')
     WebExperienceId = Shapes::StringShape.new(name: 'WebExperienceId')
+    WebExperienceOrigins = Shapes::ListShape.new(name: 'WebExperienceOrigins')
     WebExperienceSamplePromptsControlMode = Shapes::StringShape.new(name: 'WebExperienceSamplePromptsControlMode')
     WebExperienceStatus = Shapes::StringShape.new(name: 'WebExperienceStatus')
     WebExperienceSubtitle = Shapes::StringShape.new(name: 'WebExperienceSubtitle')
@@ -496,6 +499,7 @@ module Aws::QBusiness
     ActionReviewPayloadField.add_member(:value, Shapes::ShapeRef.new(shape: ActionPayloadFieldValue, location_name: "value"))
     ActionReviewPayloadField.add_member(:allowed_values, Shapes::ShapeRef.new(shape: ActionReviewPayloadFieldAllowedValues, location_name: "allowedValues"))
     ActionReviewPayloadField.add_member(:allowed_format, Shapes::ShapeRef.new(shape: String, location_name: "allowedFormat"))
+    ActionReviewPayloadField.add_member(:array_item_json_schema, Shapes::ShapeRef.new(shape: ActionReviewPayloadFieldArrayItemJsonSchema, location_name: "arrayItemJsonSchema"))
     ActionReviewPayloadField.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))
     ActionReviewPayloadField.struct_class = Types::ActionReviewPayloadField
 
@@ -786,6 +790,7 @@ module Aws::QBusiness
     CreateWebExperienceRequest.add_member(:subtitle, Shapes::ShapeRef.new(shape: WebExperienceSubtitle, location_name: "subtitle"))
     CreateWebExperienceRequest.add_member(:welcome_message, Shapes::ShapeRef.new(shape: WebExperienceWelcomeMessage, location_name: "welcomeMessage"))
     CreateWebExperienceRequest.add_member(:sample_prompts_control_mode, Shapes::ShapeRef.new(shape: WebExperienceSamplePromptsControlMode, location_name: "samplePromptsControlMode"))
+    CreateWebExperienceRequest.add_member(:origins, Shapes::ShapeRef.new(shape: WebExperienceOrigins, location_name: "origins"))
     CreateWebExperienceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateWebExperienceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateWebExperienceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
@@ -1167,6 +1172,7 @@ module Aws::QBusiness
     GetWebExperienceResponse.add_member(:subtitle, Shapes::ShapeRef.new(shape: WebExperienceSubtitle, location_name: "subtitle"))
     GetWebExperienceResponse.add_member(:welcome_message, Shapes::ShapeRef.new(shape: WebExperienceWelcomeMessage, location_name: "welcomeMessage"))
     GetWebExperienceResponse.add_member(:sample_prompts_control_mode, Shapes::ShapeRef.new(shape: WebExperienceSamplePromptsControlMode, location_name: "samplePromptsControlMode"))
+    GetWebExperienceResponse.add_member(:origins, Shapes::ShapeRef.new(shape: WebExperienceOrigins, location_name: "origins"))
     GetWebExperienceResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     GetWebExperienceResponse.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "identityProviderConfiguration"))
     GetWebExperienceResponse.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: WebExperienceAuthConfiguration, deprecated: true, location_name: "authenticationConfiguration", metadata: {"deprecatedMessage"=>"Property associated with legacy SAML IdP flow. Deprecated in favor of using AWS IAM Identity Center for user management."}))
@@ -1713,6 +1719,7 @@ module Aws::QBusiness
     UpdateWebExperienceRequest.add_member(:welcome_message, Shapes::ShapeRef.new(shape: WebExperienceWelcomeMessage, location_name: "welcomeMessage"))
     UpdateWebExperienceRequest.add_member(:sample_prompts_control_mode, Shapes::ShapeRef.new(shape: WebExperienceSamplePromptsControlMode, location_name: "samplePromptsControlMode"))
     UpdateWebExperienceRequest.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "identityProviderConfiguration"))
+    UpdateWebExperienceRequest.add_member(:origins, Shapes::ShapeRef.new(shape: WebExperienceOrigins, location_name: "origins"))
     UpdateWebExperienceRequest.struct_class = Types::UpdateWebExperienceRequest
 
     UpdateWebExperienceResponse.struct_class = Types::UpdateWebExperienceResponse
@@ -1755,6 +1762,8 @@ module Aws::QBusiness
     WebExperienceAuthConfiguration.add_member_subclass(:saml_configuration, Types::WebExperienceAuthConfiguration::SamlConfiguration)
     WebExperienceAuthConfiguration.add_member_subclass(:unknown, Types::WebExperienceAuthConfiguration::Unknown)
     WebExperienceAuthConfiguration.struct_class = Types::WebExperienceAuthConfiguration
+
+    WebExperienceOrigins.member = Shapes::ShapeRef.new(shape: Origin)
 
     WebExperiences.member = Shapes::ShapeRef.new(shape: WebExperience)
 

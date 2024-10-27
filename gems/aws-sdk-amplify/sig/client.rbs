@@ -484,7 +484,8 @@ module Aws
                               app_id: ::String,
                               branch_name: ::String,
                               ?job_id: ::String,
-                              ?source_url: ::String
+                              ?source_url: ::String,
+                              ?source_url_type: ("ZIP" | "BUCKET_PREFIX")
                             ) -> _StartDeploymentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeploymentResponseSuccess
 

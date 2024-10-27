@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::IoT1ClickDevicesService::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,37 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :claim_devices_by_claim_code
-            Aws::IoT1ClickDevicesService::Endpoints::ClaimDevicesByClaimCode.build(context)
-          when :describe_device
-            Aws::IoT1ClickDevicesService::Endpoints::DescribeDevice.build(context)
-          when :finalize_device_claim
-            Aws::IoT1ClickDevicesService::Endpoints::FinalizeDeviceClaim.build(context)
-          when :get_device_methods
-            Aws::IoT1ClickDevicesService::Endpoints::GetDeviceMethods.build(context)
-          when :initiate_device_claim
-            Aws::IoT1ClickDevicesService::Endpoints::InitiateDeviceClaim.build(context)
-          when :invoke_device_method
-            Aws::IoT1ClickDevicesService::Endpoints::InvokeDeviceMethod.build(context)
-          when :list_device_events
-            Aws::IoT1ClickDevicesService::Endpoints::ListDeviceEvents.build(context)
-          when :list_devices
-            Aws::IoT1ClickDevicesService::Endpoints::ListDevices.build(context)
-          when :list_tags_for_resource
-            Aws::IoT1ClickDevicesService::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::IoT1ClickDevicesService::Endpoints::TagResource.build(context)
-          when :unclaim_device
-            Aws::IoT1ClickDevicesService::Endpoints::UnclaimDevice.build(context)
-          when :untag_resource
-            Aws::IoT1ClickDevicesService::Endpoints::UntagResource.build(context)
-          when :update_device_state
-            Aws::IoT1ClickDevicesService::Endpoints::UpdateDeviceState.build(context)
           end
         end
       end

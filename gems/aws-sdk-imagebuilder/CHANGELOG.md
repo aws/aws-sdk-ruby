@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2024-10-22)
+------------------
+
+* Feature - Add macOS platform and instance placement options
+
+1.72.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.71.0 (2024-09-24)
 ------------------
 

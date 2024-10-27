@@ -5,6 +5,24 @@ Unreleased Changes
 
 * Feature - Always validate response checksums for operations that support or require it. Supported config options are `when_supported` and `when_required`. The default value is `when_supported`. This option is configured in code with `:response_checksum_validation`, in the shared config file as `response_checksum_validation`, and in the ENV as `ENV['AWS_response_checksum_validation']`.
 
+3.211.0 (2024-10-21)
+------------------
+
+* Feature - Support functionality for services that migrate from AWS Query to AWS JSON or CBOR.
+
+* Issue - Fix RPCv2 protocol to always send an Accept header for CBOR.
+
+3.210.0 (2024-10-18)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - reduce memory usage by not using legacy endpoint data unless required.
+
 3.209.1 (2024-09-25)
 ------------------
 

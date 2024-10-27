@@ -226,6 +226,9 @@ module Aws
                             ?bootstrap_self_managed_addons: bool,
                             ?upgrade_policy: {
                               support_type: ("STANDARD" | "EXTENDED")?
+                            },
+                            ?zonal_shift_config: {
+                              enabled: bool?
                             }
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
@@ -865,6 +868,9 @@ module Aws
                                    },
                                    ?upgrade_policy: {
                                      support_type: ("STANDARD" | "EXTENDED")?
+                                   },
+                                   ?zonal_shift_config: {
+                                     enabled: bool?
                                    }
                                  ) -> _UpdateClusterConfigResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterConfigResponseSuccess

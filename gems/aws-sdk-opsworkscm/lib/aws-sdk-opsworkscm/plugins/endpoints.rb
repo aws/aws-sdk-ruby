@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::OpsWorksCM::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,49 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_node
-            Aws::OpsWorksCM::Endpoints::AssociateNode.build(context)
-          when :create_backup
-            Aws::OpsWorksCM::Endpoints::CreateBackup.build(context)
-          when :create_server
-            Aws::OpsWorksCM::Endpoints::CreateServer.build(context)
-          when :delete_backup
-            Aws::OpsWorksCM::Endpoints::DeleteBackup.build(context)
-          when :delete_server
-            Aws::OpsWorksCM::Endpoints::DeleteServer.build(context)
-          when :describe_account_attributes
-            Aws::OpsWorksCM::Endpoints::DescribeAccountAttributes.build(context)
-          when :describe_backups
-            Aws::OpsWorksCM::Endpoints::DescribeBackups.build(context)
-          when :describe_events
-            Aws::OpsWorksCM::Endpoints::DescribeEvents.build(context)
-          when :describe_node_association_status
-            Aws::OpsWorksCM::Endpoints::DescribeNodeAssociationStatus.build(context)
-          when :describe_servers
-            Aws::OpsWorksCM::Endpoints::DescribeServers.build(context)
-          when :disassociate_node
-            Aws::OpsWorksCM::Endpoints::DisassociateNode.build(context)
-          when :export_server_engine_attribute
-            Aws::OpsWorksCM::Endpoints::ExportServerEngineAttribute.build(context)
-          when :list_tags_for_resource
-            Aws::OpsWorksCM::Endpoints::ListTagsForResource.build(context)
-          when :restore_server
-            Aws::OpsWorksCM::Endpoints::RestoreServer.build(context)
-          when :start_maintenance
-            Aws::OpsWorksCM::Endpoints::StartMaintenance.build(context)
-          when :tag_resource
-            Aws::OpsWorksCM::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::OpsWorksCM::Endpoints::UntagResource.build(context)
-          when :update_server
-            Aws::OpsWorksCM::Endpoints::UpdateServer.build(context)
-          when :update_server_engine_attributes
-            Aws::OpsWorksCM::Endpoints::UpdateServerEngineAttributes.build(context)
           end
         end
       end

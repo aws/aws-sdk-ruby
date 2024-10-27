@@ -2495,6 +2495,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.network_connection_action.protocol #=> String
     #   resp.findings[0].service.action.network_connection_action.local_ip_details.ip_address_v4 #=> String
     #   resp.findings[0].service.action.network_connection_action.local_ip_details.ip_address_v6 #=> String
+    #   resp.findings[0].service.action.network_connection_action.local_network_interface #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_name #=> String
@@ -5059,7 +5060,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

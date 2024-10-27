@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::LicenseManagerUserSubscriptions::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,33 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_user
-            Aws::LicenseManagerUserSubscriptions::Endpoints::AssociateUser.build(context)
-          when :deregister_identity_provider
-            Aws::LicenseManagerUserSubscriptions::Endpoints::DeregisterIdentityProvider.build(context)
-          when :disassociate_user
-            Aws::LicenseManagerUserSubscriptions::Endpoints::DisassociateUser.build(context)
-          when :list_identity_providers
-            Aws::LicenseManagerUserSubscriptions::Endpoints::ListIdentityProviders.build(context)
-          when :list_instances
-            Aws::LicenseManagerUserSubscriptions::Endpoints::ListInstances.build(context)
-          when :list_product_subscriptions
-            Aws::LicenseManagerUserSubscriptions::Endpoints::ListProductSubscriptions.build(context)
-          when :list_user_associations
-            Aws::LicenseManagerUserSubscriptions::Endpoints::ListUserAssociations.build(context)
-          when :register_identity_provider
-            Aws::LicenseManagerUserSubscriptions::Endpoints::RegisterIdentityProvider.build(context)
-          when :start_product_subscription
-            Aws::LicenseManagerUserSubscriptions::Endpoints::StartProductSubscription.build(context)
-          when :stop_product_subscription
-            Aws::LicenseManagerUserSubscriptions::Endpoints::StopProductSubscription.build(context)
-          when :update_identity_provider_settings
-            Aws::LicenseManagerUserSubscriptions::Endpoints::UpdateIdentityProviderSettings.build(context)
           end
         end
       end

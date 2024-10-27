@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::IVSRealTime::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,83 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_encoder_configuration
-            Aws::IVSRealTime::Endpoints::CreateEncoderConfiguration.build(context)
-          when :create_ingest_configuration
-            Aws::IVSRealTime::Endpoints::CreateIngestConfiguration.build(context)
-          when :create_participant_token
-            Aws::IVSRealTime::Endpoints::CreateParticipantToken.build(context)
-          when :create_stage
-            Aws::IVSRealTime::Endpoints::CreateStage.build(context)
-          when :create_storage_configuration
-            Aws::IVSRealTime::Endpoints::CreateStorageConfiguration.build(context)
-          when :delete_encoder_configuration
-            Aws::IVSRealTime::Endpoints::DeleteEncoderConfiguration.build(context)
-          when :delete_ingest_configuration
-            Aws::IVSRealTime::Endpoints::DeleteIngestConfiguration.build(context)
-          when :delete_public_key
-            Aws::IVSRealTime::Endpoints::DeletePublicKey.build(context)
-          when :delete_stage
-            Aws::IVSRealTime::Endpoints::DeleteStage.build(context)
-          when :delete_storage_configuration
-            Aws::IVSRealTime::Endpoints::DeleteStorageConfiguration.build(context)
-          when :disconnect_participant
-            Aws::IVSRealTime::Endpoints::DisconnectParticipant.build(context)
-          when :get_composition
-            Aws::IVSRealTime::Endpoints::GetComposition.build(context)
-          when :get_encoder_configuration
-            Aws::IVSRealTime::Endpoints::GetEncoderConfiguration.build(context)
-          when :get_ingest_configuration
-            Aws::IVSRealTime::Endpoints::GetIngestConfiguration.build(context)
-          when :get_participant
-            Aws::IVSRealTime::Endpoints::GetParticipant.build(context)
-          when :get_public_key
-            Aws::IVSRealTime::Endpoints::GetPublicKey.build(context)
-          when :get_stage
-            Aws::IVSRealTime::Endpoints::GetStage.build(context)
-          when :get_stage_session
-            Aws::IVSRealTime::Endpoints::GetStageSession.build(context)
-          when :get_storage_configuration
-            Aws::IVSRealTime::Endpoints::GetStorageConfiguration.build(context)
-          when :import_public_key
-            Aws::IVSRealTime::Endpoints::ImportPublicKey.build(context)
-          when :list_compositions
-            Aws::IVSRealTime::Endpoints::ListCompositions.build(context)
-          when :list_encoder_configurations
-            Aws::IVSRealTime::Endpoints::ListEncoderConfigurations.build(context)
-          when :list_ingest_configurations
-            Aws::IVSRealTime::Endpoints::ListIngestConfigurations.build(context)
-          when :list_participant_events
-            Aws::IVSRealTime::Endpoints::ListParticipantEvents.build(context)
-          when :list_participants
-            Aws::IVSRealTime::Endpoints::ListParticipants.build(context)
-          when :list_public_keys
-            Aws::IVSRealTime::Endpoints::ListPublicKeys.build(context)
-          when :list_stage_sessions
-            Aws::IVSRealTime::Endpoints::ListStageSessions.build(context)
-          when :list_stages
-            Aws::IVSRealTime::Endpoints::ListStages.build(context)
-          when :list_storage_configurations
-            Aws::IVSRealTime::Endpoints::ListStorageConfigurations.build(context)
-          when :list_tags_for_resource
-            Aws::IVSRealTime::Endpoints::ListTagsForResource.build(context)
-          when :start_composition
-            Aws::IVSRealTime::Endpoints::StartComposition.build(context)
-          when :stop_composition
-            Aws::IVSRealTime::Endpoints::StopComposition.build(context)
-          when :tag_resource
-            Aws::IVSRealTime::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::IVSRealTime::Endpoints::UntagResource.build(context)
-          when :update_ingest_configuration
-            Aws::IVSRealTime::Endpoints::UpdateIngestConfiguration.build(context)
-          when :update_stage
-            Aws::IVSRealTime::Endpoints::UpdateStage.build(context)
           end
         end
       end

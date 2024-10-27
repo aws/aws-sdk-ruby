@@ -105164,11 +105164,13 @@ module Aws
         def arn: () -> ::String
         def analysis_id: () -> ::String
         def request_id: () -> ::String
+        def restoration_failed_folder_arns: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#restore_analysis-instance_method
       def restore_analysis: (
                               aws_account_id: ::String,
-                              analysis_id: ::String
+                              analysis_id: ::String,
+                              ?restore_to_folders: bool
                             ) -> _RestoreAnalysisResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreAnalysisResponseSuccess
 
@@ -105827,6 +105829,19 @@ module Aws
                                           }
                                         ) -> _StartDashboardSnapshotJobResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDashboardSnapshotJobResponseSuccess
+
+      interface _StartDashboardSnapshotJobScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDashboardSnapshotJobScheduleResponse]
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#start_dashboard_snapshot_job_schedule-instance_method
+      def start_dashboard_snapshot_job_schedule: (
+                                                   aws_account_id: ::String,
+                                                   dashboard_id: ::String,
+                                                   schedule_id: ::String
+                                                 ) -> _StartDashboardSnapshotJobScheduleResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDashboardSnapshotJobScheduleResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

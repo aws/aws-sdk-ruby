@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ChimeSDKIdentity::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,71 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_app_instance
-            Aws::ChimeSDKIdentity::Endpoints::CreateAppInstance.build(context)
-          when :create_app_instance_admin
-            Aws::ChimeSDKIdentity::Endpoints::CreateAppInstanceAdmin.build(context)
-          when :create_app_instance_bot
-            Aws::ChimeSDKIdentity::Endpoints::CreateAppInstanceBot.build(context)
-          when :create_app_instance_user
-            Aws::ChimeSDKIdentity::Endpoints::CreateAppInstanceUser.build(context)
-          when :delete_app_instance
-            Aws::ChimeSDKIdentity::Endpoints::DeleteAppInstance.build(context)
-          when :delete_app_instance_admin
-            Aws::ChimeSDKIdentity::Endpoints::DeleteAppInstanceAdmin.build(context)
-          when :delete_app_instance_bot
-            Aws::ChimeSDKIdentity::Endpoints::DeleteAppInstanceBot.build(context)
-          when :delete_app_instance_user
-            Aws::ChimeSDKIdentity::Endpoints::DeleteAppInstanceUser.build(context)
-          when :deregister_app_instance_user_endpoint
-            Aws::ChimeSDKIdentity::Endpoints::DeregisterAppInstanceUserEndpoint.build(context)
-          when :describe_app_instance
-            Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstance.build(context)
-          when :describe_app_instance_admin
-            Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstanceAdmin.build(context)
-          when :describe_app_instance_bot
-            Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstanceBot.build(context)
-          when :describe_app_instance_user
-            Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstanceUser.build(context)
-          when :describe_app_instance_user_endpoint
-            Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstanceUserEndpoint.build(context)
-          when :get_app_instance_retention_settings
-            Aws::ChimeSDKIdentity::Endpoints::GetAppInstanceRetentionSettings.build(context)
-          when :list_app_instance_admins
-            Aws::ChimeSDKIdentity::Endpoints::ListAppInstanceAdmins.build(context)
-          when :list_app_instance_bots
-            Aws::ChimeSDKIdentity::Endpoints::ListAppInstanceBots.build(context)
-          when :list_app_instance_user_endpoints
-            Aws::ChimeSDKIdentity::Endpoints::ListAppInstanceUserEndpoints.build(context)
-          when :list_app_instance_users
-            Aws::ChimeSDKIdentity::Endpoints::ListAppInstanceUsers.build(context)
-          when :list_app_instances
-            Aws::ChimeSDKIdentity::Endpoints::ListAppInstances.build(context)
-          when :list_tags_for_resource
-            Aws::ChimeSDKIdentity::Endpoints::ListTagsForResource.build(context)
-          when :put_app_instance_retention_settings
-            Aws::ChimeSDKIdentity::Endpoints::PutAppInstanceRetentionSettings.build(context)
-          when :put_app_instance_user_expiration_settings
-            Aws::ChimeSDKIdentity::Endpoints::PutAppInstanceUserExpirationSettings.build(context)
-          when :register_app_instance_user_endpoint
-            Aws::ChimeSDKIdentity::Endpoints::RegisterAppInstanceUserEndpoint.build(context)
-          when :tag_resource
-            Aws::ChimeSDKIdentity::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::ChimeSDKIdentity::Endpoints::UntagResource.build(context)
-          when :update_app_instance
-            Aws::ChimeSDKIdentity::Endpoints::UpdateAppInstance.build(context)
-          when :update_app_instance_bot
-            Aws::ChimeSDKIdentity::Endpoints::UpdateAppInstanceBot.build(context)
-          when :update_app_instance_user
-            Aws::ChimeSDKIdentity::Endpoints::UpdateAppInstanceUser.build(context)
-          when :update_app_instance_user_endpoint
-            Aws::ChimeSDKIdentity::Endpoints::UpdateAppInstanceUserEndpoint.build(context)
           end
         end
       end

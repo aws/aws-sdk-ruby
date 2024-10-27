@@ -2000,6 +2000,87 @@
         ]
     },
     {
+        "description": "Test cases for NestedXmlMapWithXmlName operation",
+        "metadata": {
+            "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "NestedXmlMapWithXmlNameInputOutput": {
+                "type": "structure",
+                "members": {
+                    "nestedXmlMapWithXmlNameMap": {
+                        "shape": "NestedXmlMapWithXmlNameMap"
+                    }
+                }
+            },
+            "NestedXmlMapWithXmlNameMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String",
+                    "locationName": "OuterKey"
+                },
+                "value": {
+                    "shape": "NestedXmlMapWithXmlNameInnerMap"
+                }
+            },
+            "NestedXmlMapWithXmlNameInnerMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String",
+                    "locationName": "InnerKey"
+                },
+                "value": {
+                    "shape": "String",
+                    "locationName": "InnerValue"
+                }
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "NestedXmlMapWithXmlNameDeserializes",
+                "given": {
+                    "name": "NestedXmlMapWithXmlName",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/NestedXmlMapWithXmlName",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "NestedXmlMapWithXmlNameInputOutput"
+                    },
+                    "documentation": "<p>Nested Xml Maps with key/values with @xmlName</p>"
+                },
+                "description": "Serializes nested XML maps in responses that have xmlName on members",
+                "result": {
+                    "nestedXmlMapWithXmlNameMap": {
+                        "foo": {
+                            "bar": "Baz",
+                            "fizz": "Buzz"
+                        },
+                        "qux": {
+                            "foobar": "Bar",
+                            "fizzbuzz": "Buzz"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/xml"
+                    },
+                    "body": "    <NestedXmlMapWithXmlNameInputOutput>\n        <nestedXmlMapWithXmlNameMap>\n            <entry>\n                <OuterKey>foo</OuterKey>\n                <value>\n                    <entry>\n                        <InnerKey>bar</InnerKey>\n                        <InnerValue>Baz</InnerValue>\n                    </entry>\n                    <entry>\n                        <InnerKey>fizz</InnerKey>\n                        <InnerValue>Buzz</InnerValue>\n                    </entry>\n                </value>\n            </entry>\n            <entry>\n                <OuterKey>qux</OuterKey>\n                <value>\n                    <entry>\n                        <InnerKey>foobar</InnerKey>\n                        <InnerValue>Bar</InnerValue>\n                    </entry>\n                    <entry>\n                        <InnerKey>fizzbuzz</InnerKey>\n                        <InnerValue>Buzz</InnerValue>\n                    </entry>\n                </value>\n            </entry>\n        </nestedXmlMapWithXmlNameMap>\n    </NestedXmlMapWithXmlNameInputOutput>\n"
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
             "protocol": "rest-xml",

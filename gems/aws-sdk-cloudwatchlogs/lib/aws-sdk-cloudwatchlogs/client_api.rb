@@ -189,6 +189,7 @@ module Aws::CloudWatchLogs
     GetQueryResultsResponse = Shapes::StructureShape.new(name: 'GetQueryResultsResponse')
     Histogram = Shapes::MapShape.new(name: 'Histogram')
     IncludeLinkedAccounts = Shapes::BooleanShape.new(name: 'IncludeLinkedAccounts')
+    InferredTokenName = Shapes::StringShape.new(name: 'InferredTokenName')
     InheritedProperties = Shapes::ListShape.new(name: 'InheritedProperties')
     InheritedProperty = Shapes::StringShape.new(name: 'InheritedProperty')
     InputLogEvent = Shapes::StructureShape.new(name: 'InputLogEvent')
@@ -1082,6 +1083,7 @@ module Aws::CloudWatchLogs
     PatternToken.add_member(:is_dynamic, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDynamic"))
     PatternToken.add_member(:token_string, Shapes::ShapeRef.new(shape: TokenString, location_name: "tokenString"))
     PatternToken.add_member(:enumerations, Shapes::ShapeRef.new(shape: Enumerations, location_name: "enumerations"))
+    PatternToken.add_member(:inferred_token_name, Shapes::ShapeRef.new(shape: InferredTokenName, location_name: "inferredTokenName"))
     PatternToken.struct_class = Types::PatternToken
 
     PatternTokens.member = Shapes::ShapeRef.new(shape: PatternToken)

@@ -12,49 +12,9 @@ module Aws::IoTJobsDataPlane
   # @api private
   module Endpoints
 
-    class DescribeJobExecution
-      def self.build(context)
-        Aws::IoTJobsDataPlane::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
-    class GetPendingJobExecutions
-      def self.build(context)
-        Aws::IoTJobsDataPlane::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::IoTJobsDataPlane::EndpointParameters.create(context.config)
     end
-
-    class StartNextPendingJobExecution
-      def self.build(context)
-        Aws::IoTJobsDataPlane::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
-    class UpdateJobExecution
-      def self.build(context)
-        Aws::IoTJobsDataPlane::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
   end
 end

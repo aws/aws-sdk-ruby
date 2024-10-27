@@ -713,7 +713,10 @@ module Aws::BedrockAgentRuntime
     Observation.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
     Observation.struct_class = Types::Observation
 
-    OrchestrationConfiguration.add_member(:query_transformation_configuration, Shapes::ShapeRef.new(shape: QueryTransformationConfiguration, required: true, location_name: "queryTransformationConfiguration"))
+    OrchestrationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    OrchestrationConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "inferenceConfig"))
+    OrchestrationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
+    OrchestrationConfiguration.add_member(:query_transformation_configuration, Shapes::ShapeRef.new(shape: QueryTransformationConfiguration, location_name: "queryTransformationConfiguration"))
     OrchestrationConfiguration.struct_class = Types::OrchestrationConfiguration
 
     OrchestrationModelInvocationOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))

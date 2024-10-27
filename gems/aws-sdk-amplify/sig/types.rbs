@@ -442,6 +442,8 @@ module Aws::Amplify
       attr_accessor status: ("PENDING" | "PROVISIONING" | "RUNNING" | "FAILED" | "SUCCEED" | "CANCELLING" | "CANCELLED")
       attr_accessor end_time: ::Time
       attr_accessor job_type: ("RELEASE" | "RETRY" | "MANUAL" | "WEB_HOOK")
+      attr_accessor source_url: ::String
+      attr_accessor source_url_type: ("ZIP" | "BUCKET_PREFIX")
       SENSITIVE: []
     end
 
@@ -578,6 +580,7 @@ module Aws::Amplify
       attr_accessor branch_name: ::String
       attr_accessor job_id: ::String
       attr_accessor source_url: ::String
+      attr_accessor source_url_type: ("ZIP" | "BUCKET_PREFIX")
       SENSITIVE: []
     end
 

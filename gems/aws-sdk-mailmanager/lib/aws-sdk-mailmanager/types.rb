@@ -885,6 +885,31 @@ module Aws::MailManager
     #
     class DropAction < Aws::EmptyStructure; end
 
+    # The SMTP envelope information of the email.
+    #
+    # @!attribute [rw] from
+    #   The RCPT FROM given by the host from which the email was received.
+    #   @return [String]
+    #
+    # @!attribute [rw] helo
+    #   The HELO used by the host from which the email was received.
+    #   @return [String]
+    #
+    # @!attribute [rw] to
+    #   All SMTP TO entries given by the host from which the email was
+    #   received.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/Envelope AWS API Documentation
+    #
+    class Envelope < Struct.new(
+      :from,
+      :helo,
+      :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The destination configuration for delivering exported email data.
     #
     # @note ExportDestinationConfiguration is a union - when making an API calls you must set exactly one of the members.
@@ -1136,14 +1161,24 @@ module Aws::MailManager
     # The response containing details about the requested archived email
     # message.
     #
+    # @!attribute [rw] envelope
+    #   The SMTP envelope information of the email.
+    #   @return [Types::Envelope]
+    #
     # @!attribute [rw] message_download_link
     #   A pre-signed URL to temporarily download the full message content.
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   The metadata about the email.
+    #   @return [Types::Metadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetArchiveMessageResponse AWS API Documentation
     #
     class GetArchiveMessageResponse < Struct.new(
-      :message_download_link)
+      :envelope,
+      :message_download_link,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2290,6 +2325,58 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # The metadata about the email.
+    #
+    # @!attribute [rw] ingress_point_id
+    #   The ID of the ingress endpoint through which the email was received.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_set_id
+    #   The ID of the rule set that processed the email.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_hostname
+    #   The name of the host from which the email was received.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_ip_address
+    #   The IP address of the host from which the email was received.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of when the email was received.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tls_cipher_suite
+    #   The TLS cipher suite used to communicate with the host from which
+    #   the email was received.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_protocol
+    #   The TLS protocol used to communicate with the host from which the
+    #   email was received.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_policy_id
+    #   The ID of the traffic policy that was in effect when the email was
+    #   received.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/Metadata AWS API Documentation
+    #
+    class Metadata < Struct.new(
+      :ingress_point_id,
+      :rule_set_id,
+      :sender_hostname,
+      :sender_ip_address,
+      :timestamp,
+      :tls_cipher_suite,
+      :tls_protocol,
+      :traffic_policy_id)
+      SENSITIVE = [:sender_ip_address]
+      include Aws::Structure
+    end
+
     # Explicitly indicate that the relay destination server does not require
     # SMTP credential authentication.
     #
@@ -2504,6 +2591,10 @@ module Aws::MailManager
     #   The date the email was sent.
     #   @return [String]
     #
+    # @!attribute [rw] envelope
+    #   The SMTP envelope information of the email.
+    #   @return [Types::Envelope]
+    #
     # @!attribute [rw] from
     #   The email address of the sender.
     #   @return [String]
@@ -2514,6 +2605,10 @@ module Aws::MailManager
     #
     # @!attribute [rw] in_reply_to
     #   The email message ID this is a reply to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_point_id
+    #   The ID of the ingress endpoint through which the email was received.
     #   @return [String]
     #
     # @!attribute [rw] message_id
@@ -2527,6 +2622,14 @@ module Aws::MailManager
     # @!attribute [rw] received_timestamp
     #   The timestamp of when the email was received.
     #   @return [Time]
+    #
+    # @!attribute [rw] sender_hostname
+    #   The name of the host from which the email was received.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_ip_address
+    #   The IP address of the host from which the email was received.
+    #   @return [String]
     #
     # @!attribute [rw] subject
     #   The subject header value of the email.
@@ -2554,18 +2657,22 @@ module Aws::MailManager
       :archived_message_id,
       :cc,
       :date,
+      :envelope,
       :from,
       :has_attachments,
       :in_reply_to,
+      :ingress_point_id,
       :message_id,
       :received_headers,
       :received_timestamp,
+      :sender_hostname,
+      :sender_ip_address,
       :subject,
       :to,
       :x_mailer,
       :x_original_mailer,
       :x_priority)
-      SENSITIVE = []
+      SENSITIVE = [:sender_ip_address]
       include Aws::Structure
     end
 
@@ -3205,6 +3312,10 @@ module Aws::MailManager
     #   The start of the timestamp range to include emails from.
     #   @return [Time]
     #
+    # @!attribute [rw] include_metadata
+    #   Whether to include message metadata as JSON files in the export.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of email items to include in the export.
     #   @return [Integer]
@@ -3220,6 +3331,7 @@ module Aws::MailManager
       :export_destination_configuration,
       :filters,
       :from_timestamp,
+      :include_metadata,
       :max_results,
       :to_timestamp)
       SENSITIVE = []

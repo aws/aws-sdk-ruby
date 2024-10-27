@@ -688,6 +688,15 @@
         "SECRETS_MANAGER"
       ]
     },
+    "AutoRetryConfig":{
+      "type":"structure",
+      "members":{
+        "autoRetryLimit":{"shape":"WrapperInt"},
+        "autoRetryNumber":{"shape":"WrapperInt"},
+        "nextAutoRetry":{"shape":"String"},
+        "previousAutoRetry":{"shape":"String"}
+      }
+    },
     "BatchDeleteBuildsInput":{
       "type":"structure",
       "required":["ids"],
@@ -843,7 +852,8 @@
         "reportArns":{"shape":"BuildReportArns"},
         "fileSystemLocations":{"shape":"ProjectFileSystemLocations"},
         "debugSession":{"shape":"DebugSession"},
-        "buildBatchArn":{"shape":"String"}
+        "buildBatchArn":{"shape":"String"},
+        "autoRetryConfig":{"shape":"AutoRetryConfig"}
       }
     },
     "BuildArtifacts":{
@@ -1130,6 +1140,7 @@
         "scalingConfiguration":{"shape":"ScalingConfigurationInput"},
         "overflowBehavior":{"shape":"FleetOverflowBehavior"},
         "vpcConfig":{"shape":"VpcConfig"},
+        "proxyConfiguration":{"shape":"ProxyConfiguration"},
         "imageId":{"shape":"NonEmptyString"},
         "fleetServiceRole":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"}
@@ -1171,7 +1182,8 @@
         "logsConfig":{"shape":"LogsConfig"},
         "fileSystemLocations":{"shape":"ProjectFileSystemLocations"},
         "buildBatchConfig":{"shape":"ProjectBuildBatchConfig"},
-        "concurrentBuildLimit":{"shape":"WrapperInt"}
+        "concurrentBuildLimit":{"shape":"WrapperInt"},
+        "autoRetryLimit":{"shape":"WrapperInt"}
       }
     },
     "CreateProjectOutput":{
@@ -1476,6 +1488,7 @@
         "scalingConfiguration":{"shape":"ScalingConfigurationOutput"},
         "overflowBehavior":{"shape":"FleetOverflowBehavior"},
         "vpcConfig":{"shape":"VpcConfig"},
+        "proxyConfiguration":{"shape":"ProxyConfiguration"},
         "imageId":{"shape":"NonEmptyString"},
         "fleetServiceRole":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"}
@@ -1519,6 +1532,51 @@
         "QUEUE",
         "ON_DEMAND"
       ]
+    },
+    "FleetProxyRule":{
+      "type":"structure",
+      "required":[
+        "type",
+        "effect",
+        "entities"
+      ],
+      "members":{
+        "type":{"shape":"FleetProxyRuleType"},
+        "effect":{"shape":"FleetProxyRuleEffectType"},
+        "entities":{"shape":"FleetProxyRuleEntities"}
+      }
+    },
+    "FleetProxyRuleBehavior":{
+      "type":"string",
+      "enum":[
+        "ALLOW_ALL",
+        "DENY_ALL"
+      ]
+    },
+    "FleetProxyRuleEffectType":{
+      "type":"string",
+      "enum":[
+        "ALLOW",
+        "DENY"
+      ]
+    },
+    "FleetProxyRuleEntities":{
+      "type":"list",
+      "member":{"shape":"String"},
+      "max":100,
+      "min":1
+    },
+    "FleetProxyRuleType":{
+      "type":"string",
+      "enum":[
+        "DOMAIN",
+        "IP"
+      ]
+    },
+    "FleetProxyRules":{
+      "type":"list",
+      "member":{"shape":"FleetProxyRule"},
+      "max":100
     },
     "FleetScalingMetricType":{
       "type":"string",
@@ -1987,7 +2045,8 @@
         "concurrentBuildLimit":{"shape":"WrapperInt"},
         "projectVisibility":{"shape":"ProjectVisibilityType"},
         "publicProjectAlias":{"shape":"NonEmptyString"},
-        "resourceAccessRole":{"shape":"NonEmptyString"}
+        "resourceAccessRole":{"shape":"NonEmptyString"},
+        "autoRetryLimit":{"shape":"WrapperInt"}
       }
     },
     "ProjectArns":{
@@ -2161,6 +2220,13 @@
     "Projects":{
       "type":"list",
       "member":{"shape":"Project"}
+    },
+    "ProxyConfiguration":{
+      "type":"structure",
+      "members":{
+        "defaultBehavior":{"shape":"FleetProxyRuleBehavior"},
+        "orderedProxyRules":{"shape":"FleetProxyRules"}
+      }
     },
     "PutResourcePolicyInput":{
       "type":"structure",
@@ -2620,7 +2686,8 @@
         "registryCredentialOverride":{"shape":"RegistryCredential"},
         "imagePullCredentialsTypeOverride":{"shape":"ImagePullCredentialsType"},
         "debugSessionEnabled":{"shape":"WrapperBoolean"},
-        "fleetOverride":{"shape":"ProjectFleet"}
+        "fleetOverride":{"shape":"ProjectFleet"},
+        "autoRetryLimitOverride":{"shape":"WrapperInt"}
       }
     },
     "StartBuildOutput":{
@@ -2750,6 +2817,7 @@
         "scalingConfiguration":{"shape":"ScalingConfigurationInput"},
         "overflowBehavior":{"shape":"FleetOverflowBehavior"},
         "vpcConfig":{"shape":"VpcConfig"},
+        "proxyConfiguration":{"shape":"ProxyConfiguration"},
         "imageId":{"shape":"NonEmptyString"},
         "fleetServiceRole":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"}
@@ -2785,7 +2853,8 @@
         "logsConfig":{"shape":"LogsConfig"},
         "fileSystemLocations":{"shape":"ProjectFileSystemLocations"},
         "buildBatchConfig":{"shape":"ProjectBuildBatchConfig"},
-        "concurrentBuildLimit":{"shape":"WrapperInt"}
+        "concurrentBuildLimit":{"shape":"WrapperInt"},
+        "autoRetryLimit":{"shape":"WrapperInt"}
       }
     },
     "UpdateProjectOutput":{
@@ -2904,7 +2973,8 @@
         "COMMIT_MESSAGE",
         "WORKFLOW_NAME",
         "TAG_NAME",
-        "RELEASE_NAME"
+        "RELEASE_NAME",
+        "REPOSITORY_NAME"
       ]
     },
     "WebhookScopeType":{

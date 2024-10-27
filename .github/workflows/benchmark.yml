@@ -77,5 +77,5 @@ jobs:
         uses: thollander/actions-comment-pull-request@main
         with:
           message: ${{ steps.regressions.outputs.message }}
-          comment_tag: performance-regression
+          comment-tag: performance-regression
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

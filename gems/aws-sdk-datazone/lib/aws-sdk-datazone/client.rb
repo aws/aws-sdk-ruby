@@ -752,7 +752,7 @@ module Aws::DataZone
     #         group_identifier: "GroupIdentifier",
     #       },
     #       project: {
-    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR
+    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR, PROJECT_CATALOG_STEWARD
     #         project_grant_filter: {
     #           domain_unit_filter: {
     #             domain_unit: "DomainUnitId", # required
@@ -2705,7 +2705,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_project_membership({
-    #     designation: "PROJECT_OWNER", # required, accepts PROJECT_OWNER, PROJECT_CONTRIBUTOR
+    #     designation: "PROJECT_OWNER", # required, accepts PROJECT_OWNER, PROJECT_CONTRIBUTOR, PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER, PROJECT_CATALOG_STEWARD
     #     domain_identifier: "DomainId", # required
     #     member: { # required
     #       group_identifier: "String",
@@ -7004,7 +7004,7 @@ module Aws::DataZone
     #   resp.grant_list[0].principal.domain_unit.domain_unit_designation #=> String, one of "OWNER"
     #   resp.grant_list[0].principal.domain_unit.domain_unit_identifier #=> String
     #   resp.grant_list[0].principal.group.group_identifier #=> String
-    #   resp.grant_list[0].principal.project.project_designation #=> String, one of "OWNER", "CONTRIBUTOR"
+    #   resp.grant_list[0].principal.project.project_designation #=> String, one of "OWNER", "CONTRIBUTOR", "PROJECT_CATALOG_STEWARD"
     #   resp.grant_list[0].principal.project.project_grant_filter.domain_unit_filter.domain_unit #=> String
     #   resp.grant_list[0].principal.project.project_grant_filter.domain_unit_filter.include_child_domain_units #=> Boolean
     #   resp.grant_list[0].principal.project.project_identifier #=> String
@@ -7071,7 +7071,7 @@ module Aws::DataZone
     # @example Response structure
     #
     #   resp.members #=> Array
-    #   resp.members[0].designation #=> String, one of "PROJECT_OWNER", "PROJECT_CONTRIBUTOR"
+    #   resp.members[0].designation #=> String, one of "PROJECT_OWNER", "PROJECT_CONTRIBUTOR", "PROJECT_CATALOG_VIEWER", "PROJECT_CATALOG_CONSUMER", "PROJECT_CATALOG_STEWARD"
     #   resp.members[0].member_details.group.group_id #=> String
     #   resp.members[0].member_details.user.user_id #=> String
     #   resp.next_token #=> String
@@ -8143,7 +8143,7 @@ module Aws::DataZone
     #         group_identifier: "GroupIdentifier",
     #       },
     #       project: {
-    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR
+    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR, PROJECT_CATALOG_STEWARD
     #         project_grant_filter: {
     #           domain_unit_filter: {
     #             domain_unit: "DomainUnitId", # required
@@ -10395,7 +10395,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

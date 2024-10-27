@@ -832,6 +832,10 @@ module Aws::ECS
     #
     #  </note>
     #
+    # <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to customers.
+    #
+    #  </note>
+    #
     # In addition to maintaining the desired count of tasks in your service,
     # you can optionally run your service behind one or more load balancers.
     # The load balancers distribute traffic across the tasks that are
@@ -931,15 +935,6 @@ module Aws::ECS
     # placement. For information about task placement and task placement
     # strategies, see [Amazon ECS task placement][7] in the *Amazon Elastic
     # Container Service Developer Guide*
-    #
-    # Starting April 15, 2023, Amazon Web Services will not onboard new
-    # customers to Amazon Elastic Inference (EI), and will help current
-    # customers migrate their workloads to options that offer better price
-    # and performance. After April 15, 2023, new customers will not be able
-    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
-    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
-    # at least once during the past 30-day period are considered current
-    # customers and will be able to continue using the service.
     #
     #
     #
@@ -1580,7 +1575,7 @@ module Aws::ECS
     #             },
     #           ],
     #           role_arn: "IAMRoleArn", # required
-    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs, ntfs
     #         },
     #       },
     #     ],
@@ -1728,7 +1723,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
-    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
@@ -2539,7 +2534,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
-    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
@@ -3896,7 +3891,7 @@ module Aws::ECS
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
-    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.services[0].deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
@@ -7325,6 +7320,10 @@ module Aws::ECS
     #
     #  </note>
     #
+    # <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to customers.
+    #
+    #  </note>
+    #
     # You can allow Amazon ECS to place tasks for you, or you can customize
     # how Amazon ECS places tasks using placement constraints and placement
     # strategies. For more information, see [Scheduling Tasks][1] in the
@@ -7332,15 +7331,6 @@ module Aws::ECS
     #
     # Alternatively, you can use `StartTask` to use your own scheduler or
     # place tasks manually on specific container instances.
-    #
-    # Starting April 15, 2023, Amazon Web Services will not onboard new
-    # customers to Amazon Elastic Inference (EI), and will help current
-    # customers migrate their workloads to options that offer better price
-    # and performance. After April 15, 2023, new customers will not be able
-    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
-    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
-    # at least once during the past 30-day period are considered current
-    # customers and will be able to continue using the service.
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when creating or updating a service. For more infomation,
@@ -7511,8 +7501,8 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
     #
     # @option params [String] :reference_id
-    #   The reference ID to use for the task. The reference ID can have a
-    #   maximum length of 1024 characters.
+    #   This parameter is only used by Amazon ECS. It is not intended for use
+    #   by customers.
     #
     # @option params [String] :started_by
     #   An optional tag specified when a task is started. For example, if you
@@ -7770,7 +7760,7 @@ module Aws::ECS
     #           termination_policy: {
     #             delete_on_termination: false, # required
     #           },
-    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs, ntfs
     #         },
     #       },
     #     ],
@@ -7909,14 +7899,9 @@ module Aws::ECS
     #
     #  </note>
     #
-    # Starting April 15, 2023, Amazon Web Services will not onboard new
-    # customers to Amazon Elastic Inference (EI), and will help current
-    # customers migrate their workloads to options that offer better price
-    # and performance. After April 15, 2023, new customers will not be able
-    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
-    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
-    # at least once during the past 30-day period are considered current
-    # customers and will be able to continue using the service.
+    # <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to customers.
+    #
+    #  </note>
     #
     # Alternatively, you can use`RunTask` to place tasks for you. For more
     # information, see [Scheduling Tasks][1] in the *Amazon Elastic
@@ -7987,7 +7972,8 @@ module Aws::ECS
     #   propagated.
     #
     # @option params [String] :reference_id
-    #   The reference ID to use for the task.
+    #   This parameter is only used by Amazon ECS. It is not intended for use
+    #   by customers.
     #
     # @option params [String] :started_by
     #   An optional tag specified when a task is started. For example, if you
@@ -8150,7 +8136,7 @@ module Aws::ECS
     #           termination_policy: {
     #             delete_on_termination: false, # required
     #           },
-    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs, ntfs
     #         },
     #       },
     #     ],
@@ -9883,7 +9869,7 @@ module Aws::ECS
     #             },
     #           ],
     #           role_arn: "IAMRoleArn", # required
-    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs, ntfs
     #         },
     #       },
     #     ],
@@ -10031,7 +10017,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
-    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
@@ -10446,7 +10432,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

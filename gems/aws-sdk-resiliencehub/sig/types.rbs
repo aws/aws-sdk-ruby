@@ -60,6 +60,7 @@ module Aws::ResilienceHub
     class App
       attr_accessor app_arn: ::String
       attr_accessor assessment_schedule: ("Disabled" | "Daily")
+      attr_accessor aws_application_arn: ::String
       attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotAssessed" | "ChangesDetected" | "NotApplicable" | "MissingPolicy")
       attr_accessor creation_time: ::Time
       attr_accessor description: ::String
@@ -151,6 +152,7 @@ module Aws::ResilienceHub
     class AppSummary
       attr_accessor app_arn: ::String
       attr_accessor assessment_schedule: ("Disabled" | "Daily")
+      attr_accessor aws_application_arn: ::String
       attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotAssessed" | "ChangesDetected" | "NotApplicable" | "MissingPolicy")
       attr_accessor creation_time: ::Time
       attr_accessor description: ::String
@@ -264,6 +266,7 @@ module Aws::ResilienceHub
 
     class CreateAppRequest
       attr_accessor assessment_schedule: ("Disabled" | "Daily")
+      attr_accessor aws_application_arn: ::String
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor event_subscriptions: ::Array[Types::EventSubscription]
@@ -546,6 +549,7 @@ module Aws::ResilienceHub
     class DescribeDraftAppVersionResourcesImportStatusResponse
       attr_accessor app_arn: ::String
       attr_accessor app_version: ::String
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       attr_accessor error_message: ::String
       attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
       attr_accessor status_change_time: ::Time
@@ -598,6 +602,11 @@ module Aws::ResilienceHub
     class EksSourceClusterNamespace
       attr_accessor eks_cluster_arn: ::String
       attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetail
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
@@ -833,6 +842,7 @@ module Aws::ResilienceHub
 
     class ListAppsRequest
       attr_accessor app_arn: ::String
+      attr_accessor aws_application_arn: ::String
       attr_accessor from_last_assessment_time: ::Time
       attr_accessor max_results: ::Integer
       attr_accessor name: ::String

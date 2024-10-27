@@ -116,7 +116,8 @@ module Aws
                                       },
                                       ?delivery_options: {
                                         tls_policy: ("REQUIRE" | "OPTIONAL")?,
-                                        sending_pool_name: ::String?
+                                        sending_pool_name: ::String?,
+                                        max_delivery_seconds: ::Integer?
                                       },
                                       ?reputation_options: {
                                         reputation_metrics_enabled: bool?,
@@ -1054,7 +1055,8 @@ module Aws
       def put_configuration_set_delivery_options: (
                                                     configuration_set_name: ::String,
                                                     ?tls_policy: ("REQUIRE" | "OPTIONAL"),
-                                                    ?sending_pool_name: ::String
+                                                    ?sending_pool_name: ::String,
+                                                    ?max_delivery_seconds: ::Integer
                                                   ) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
 

@@ -167,6 +167,20 @@ module Aws
                                     ) -> _CreateDataLakeDatasetResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeDatasetResponseSuccess
 
+      interface _CreateInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInstanceResponse]
+        def instance: () -> Types::Instance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#create_instance-instance_method
+      def create_instance: (
+                             ?instance_name: ::String,
+                             ?instance_description: ::String,
+                             ?kms_key_arn: ::String,
+                             ?tags: Hash[::String, ::String],
+                             ?client_token: ::String
+                           ) -> _CreateInstanceResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceResponseSuccess
+
       interface _DeleteDataIntegrationFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataIntegrationFlowResponse]
         def instance_id: () -> ::String
@@ -192,6 +206,16 @@ module Aws
                                       name: ::String
                                     ) -> _DeleteDataLakeDatasetResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeDatasetResponseSuccess
+
+      interface _DeleteInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInstanceResponse]
+        def instance: () -> Types::Instance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#delete_instance-instance_method
+      def delete_instance: (
+                             instance_id: ::String
+                           ) -> _DeleteInstanceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInstanceResponseSuccess
 
       interface _GetBillOfMaterialsImportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBillOfMaterialsImportJobResponse]
@@ -227,6 +251,16 @@ module Aws
                                  ) -> _GetDataLakeDatasetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakeDatasetResponseSuccess
 
+      interface _GetInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceResponse]
+        def instance: () -> Types::Instance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#get_instance-instance_method
+      def get_instance: (
+                          instance_id: ::String
+                        ) -> _GetInstanceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceResponseSuccess
+
       interface _ListDataIntegrationFlowsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataIntegrationFlowsResponse]
         def flows: () -> ::Array[Types::DataIntegrationFlow]
@@ -253,6 +287,20 @@ module Aws
                                      ?max_results: ::Integer
                                    ) -> _ListDataLakeDatasetsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataLakeDatasetsResponseSuccess
+
+      interface _ListInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstancesResponse]
+        def instances: () -> ::Array[Types::Instance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#list_instances-instance_method
+      def list_instances: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?instance_name_filter: Array[::String],
+                            ?instance_state_filter: Array[("Initializing" | "Active" | "CreateFailed" | "DeleteFailed" | "Deleting" | "Deleted")]
+                          ) -> _ListInstancesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstancesResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -365,6 +413,18 @@ module Aws
                                       ?description: ::String
                                     ) -> _UpdateDataLakeDatasetResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataLakeDatasetResponseSuccess
+
+      interface _UpdateInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInstanceResponse]
+        def instance: () -> Types::Instance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#update_instance-instance_method
+      def update_instance: (
+                             instance_id: ::String,
+                             ?instance_name: ::String,
+                             ?instance_description: ::String
+                           ) -> _UpdateInstanceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInstanceResponseSuccess
     end
   end
 end

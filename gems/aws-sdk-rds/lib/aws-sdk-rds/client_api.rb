@@ -2831,6 +2831,7 @@ module Aws::RDS
     GlobalCluster.add_member(:storage_encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "StorageEncrypted"))
     GlobalCluster.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     GlobalCluster.add_member(:global_cluster_members, Shapes::ShapeRef.new(shape: GlobalClusterMemberList, location_name: "GlobalClusterMembers"))
+    GlobalCluster.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
     GlobalCluster.add_member(:failover_state, Shapes::ShapeRef.new(shape: FailoverState, location_name: "FailoverState"))
     GlobalCluster.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     GlobalCluster.struct_class = Types::GlobalCluster
@@ -5993,6 +5994,7 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: ModifyGlobalClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyGlobalClusterResult)
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)

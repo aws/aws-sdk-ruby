@@ -6492,6 +6492,7 @@ module Aws::QuickSight
     class RestoreAnalysisRequest
       attr_accessor aws_account_id: ::String
       attr_accessor analysis_id: ::String
+      attr_accessor restore_to_folders: bool
       SENSITIVE: []
     end
 
@@ -6500,6 +6501,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor analysis_id: ::String
       attr_accessor request_id: ::String
+      attr_accessor restoration_failed_folder_arns: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -7189,6 +7191,19 @@ module Aws::QuickSight
     class StartDashboardSnapshotJobResponse
       attr_accessor arn: ::String
       attr_accessor snapshot_job_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartDashboardSnapshotJobScheduleRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor dashboard_id: ::String
+      attr_accessor schedule_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartDashboardSnapshotJobScheduleResponse
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []

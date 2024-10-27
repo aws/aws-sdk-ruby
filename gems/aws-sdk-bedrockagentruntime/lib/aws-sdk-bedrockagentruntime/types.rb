@@ -2284,6 +2284,23 @@ module Aws::BedrockAgentRuntime
     # Settings for how the model processes the prompt prior to retrieval and
     # generation.
     #
+    # @!attribute [rw] additional_model_request_fields
+    #   Additional model parameters and corresponding values not included in
+    #   the textInferenceConfig structure for a knowledge base. This allows
+    #   users to provide custom model parameters specific to the language
+    #   model being used.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] inference_config
+    #   Configuration settings for inference when using RetrieveAndGenerate
+    #   to generate responses while using a knowledge base as a source.
+    #   @return [Types::InferenceConfig]
+    #
+    # @!attribute [rw] prompt_template
+    #   Contains the template for the prompt that's sent to the model for
+    #   response generation.
+    #   @return [Types::PromptTemplate]
+    #
     # @!attribute [rw] query_transformation_configuration
     #   To split up the prompt and retrieve multiple sources, set the
     #   transformation type to `QUERY_DECOMPOSITION`.
@@ -2292,6 +2309,9 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/OrchestrationConfiguration AWS API Documentation
     #
     class OrchestrationConfiguration < Struct.new(
+      :additional_model_request_fields,
+      :inference_config,
+      :prompt_template,
       :query_transformation_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -2300,7 +2320,8 @@ module Aws::BedrockAgentRuntime
     # The foundation model output from the orchestration step.
     #
     # @!attribute [rw] metadata
-    #   Contains information about the foundation model output.
+    #   Contains information about the foundation model output from the
+    #   orchestration step.
     #   @return [Types::Metadata]
     #
     # @!attribute [rw] raw_response
@@ -2458,7 +2479,8 @@ module Aws::BedrockAgentRuntime
     # The foundation model output from the post-processing step.
     #
     # @!attribute [rw] metadata
-    #   Provides details of the foundation model.
+    #   Contains information about the foundation model output from the
+    #   post-processing step.
     #   @return [Types::Metadata]
     #
     # @!attribute [rw] parsed_response
@@ -2467,7 +2489,7 @@ module Aws::BedrockAgentRuntime
     #   @return [Types::PostProcessingParsedResponse]
     #
     # @!attribute [rw] raw_response
-    #   Contains the raw output from the foundation model.
+    #   Details of the raw response from the foundation model output.
     #   @return [Types::RawResponse]
     #
     # @!attribute [rw] trace_id
@@ -2543,7 +2565,8 @@ module Aws::BedrockAgentRuntime
     # The foundation model output from the pre-processing step.
     #
     # @!attribute [rw] metadata
-    #   Provides details of the foundation model.
+    #   Contains information about the foundation model output from the
+    #   pre-processing step.
     #   @return [Types::Metadata]
     #
     # @!attribute [rw] parsed_response
@@ -2552,7 +2575,7 @@ module Aws::BedrockAgentRuntime
     #   @return [Types::PreProcessingParsedResponse]
     #
     # @!attribute [rw] raw_response
-    #   Contains the raw output from the foundation model.
+    #   Details of the raw response from the foundation model output.
     #   @return [Types::RawResponse]
     #
     # @!attribute [rw] trace_id

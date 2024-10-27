@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-10-22)
+------------------
+
+* Feature - Adds the BatchAddRole and BatchRemoveRole APIs.
+
+1.15.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2024-09-24)
 ------------------
 

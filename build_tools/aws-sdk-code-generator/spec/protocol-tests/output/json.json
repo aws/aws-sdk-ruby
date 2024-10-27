@@ -733,6 +733,114 @@
         ]
     },
     {
+        "description": "Test cases for JsonIntEnums operation",
+        "metadata": {
+            "protocol": "json",
+            "protocols": [
+                "json"
+            ],
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
+        },
+        "shapes": {
+            "JsonIntEnumsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "intEnum1": {
+                        "shape": "IntegerEnum"
+                    },
+                    "intEnum2": {
+                        "shape": "IntegerEnum"
+                    },
+                    "intEnum3": {
+                        "shape": "IntegerEnum"
+                    },
+                    "intEnumList": {
+                        "shape": "IntegerEnumList"
+                    },
+                    "intEnumSet": {
+                        "shape": "IntegerEnumSet"
+                    },
+                    "intEnumMap": {
+                        "shape": "IntegerEnumMap"
+                    }
+                }
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerEnumSet": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11IntEnums",
+                "given": {
+                    "name": "JsonIntEnums",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonIntEnumsInputOutput"
+                    },
+                    "documentation": "<p>This example serializes intEnums as top level properties, in lists, sets, and maps.</p>",
+                    "idempotent": true
+                },
+                "description": "Serializes simple scalar properties",
+                "result": {
+                    "intEnum1": 1,
+                    "intEnum2": 2,
+                    "intEnum3": 3,
+                    "intEnumList": [
+                        1,
+                        2
+                    ],
+                    "intEnumSet": [
+                        1,
+                        2
+                    ],
+                    "intEnumMap": {
+                        "a": 1,
+                        "b": 2
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1",
+                        "X-Amz-Target": "JsonProtocol.JsonIntEnums"
+                    },
+                    "body": "{\n    \"intEnum1\": 1,\n    \"intEnum2\": 2,\n    \"intEnum3\": 3,\n    \"intEnumList\": [\n        1,\n        2\n    ],\n    \"intEnumSet\": [\n        1,\n        2\n    ],\n    \"intEnumMap\": {\n        \"a\": 1,\n        \"b\": 2\n    }\n}"
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for JsonUnions operation",
         "metadata": {
             "protocol": "json",

@@ -60,8 +60,9 @@ module Aws::CloudFormation
       data[:physical_resource_id]
     end
 
-    # Type of resource. (For more information, go to [Amazon Web Services
-    # Resource Types Reference][1] in the *CloudFormation User Guide*.)
+    # Type of resource. For more information, see [Amazon Web Services
+    # resource and property types reference][1] in the *CloudFormation User
+    # Guide*.
     #
     #
     #
@@ -155,8 +156,9 @@ module Aws::CloudFormation
     # the stack event.
     #
     # * `CONFIGURATION_COMPLETE` - all of the resources in the stack have
-    #   reached that event. For more information, see [CloudFormation stack
-    #   deployment][1] in the *CloudFormation User Guide*.
+    #   reached that event. For more information, see [Understand
+    #   CloudFormation stack creation events][1] in the *CloudFormation User
+    #   Guide*.
     #
     # ^
     # ^

@@ -223,6 +223,7 @@ module Aws::Bedrock
     InferenceProfileType = Shapes::StringShape.new(name: 'InferenceProfileType')
     InferenceType = Shapes::StringShape.new(name: 'InferenceType')
     InferenceTypeList = Shapes::ListShape.new(name: 'InferenceTypeList')
+    InstructSupported = Shapes::BooleanShape.new(name: 'InstructSupported')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobName = Shapes::StringShape.new(name: 'JobName')
     KeyPrefix = Shapes::StringShape.new(name: 'KeyPrefix')
@@ -257,6 +258,7 @@ module Aws::Bedrock
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
     MetricFloat = Shapes::FloatShape.new(name: 'MetricFloat')
+    ModelArchitecture = Shapes::StringShape.new(name: 'ModelArchitecture')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
     ModelCopyJobArn = Shapes::StringShape.new(name: 'ModelCopyJobArn')
     ModelCopyJobStatus = Shapes::StringShape.new(name: 'ModelCopyJobStatus')
@@ -711,6 +713,7 @@ module Aws::Bedrock
     GetImportedModelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     GetImportedModelResponse.add_member(:model_architecture, Shapes::ShapeRef.new(shape: String, location_name: "modelArchitecture"))
     GetImportedModelResponse.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
+    GetImportedModelResponse.add_member(:instruct_supported, Shapes::ShapeRef.new(shape: InstructSupported, location_name: "instructSupported"))
     GetImportedModelResponse.struct_class = Types::GetImportedModelResponse
 
     GetInferenceProfileRequest.add_member(:inference_profile_identifier, Shapes::ShapeRef.new(shape: InferenceProfileIdentifier, required: true, location: "uri", location_name: "inferenceProfileIdentifier"))
@@ -991,6 +994,8 @@ module Aws::Bedrock
     ImportedModelSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: ImportedModelArn, required: true, location_name: "modelArn"))
     ImportedModelSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: ImportedModelName, required: true, location_name: "modelName"))
     ImportedModelSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
+    ImportedModelSummary.add_member(:instruct_supported, Shapes::ShapeRef.new(shape: InstructSupported, location_name: "instructSupported"))
+    ImportedModelSummary.add_member(:model_architecture, Shapes::ShapeRef.new(shape: ModelArchitecture, location_name: "modelArchitecture"))
     ImportedModelSummary.struct_class = Types::ImportedModelSummary
 
     ImportedModelSummaryList.member = Shapes::ShapeRef.new(shape: ImportedModelSummary)

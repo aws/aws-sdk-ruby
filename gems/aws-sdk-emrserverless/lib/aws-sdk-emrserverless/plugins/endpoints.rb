@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::EMRServerless::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,43 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :cancel_job_run
-            Aws::EMRServerless::Endpoints::CancelJobRun.build(context)
-          when :create_application
-            Aws::EMRServerless::Endpoints::CreateApplication.build(context)
-          when :delete_application
-            Aws::EMRServerless::Endpoints::DeleteApplication.build(context)
-          when :get_application
-            Aws::EMRServerless::Endpoints::GetApplication.build(context)
-          when :get_dashboard_for_job_run
-            Aws::EMRServerless::Endpoints::GetDashboardForJobRun.build(context)
-          when :get_job_run
-            Aws::EMRServerless::Endpoints::GetJobRun.build(context)
-          when :list_applications
-            Aws::EMRServerless::Endpoints::ListApplications.build(context)
-          when :list_job_run_attempts
-            Aws::EMRServerless::Endpoints::ListJobRunAttempts.build(context)
-          when :list_job_runs
-            Aws::EMRServerless::Endpoints::ListJobRuns.build(context)
-          when :list_tags_for_resource
-            Aws::EMRServerless::Endpoints::ListTagsForResource.build(context)
-          when :start_application
-            Aws::EMRServerless::Endpoints::StartApplication.build(context)
-          when :start_job_run
-            Aws::EMRServerless::Endpoints::StartJobRun.build(context)
-          when :stop_application
-            Aws::EMRServerless::Endpoints::StopApplication.build(context)
-          when :tag_resource
-            Aws::EMRServerless::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::EMRServerless::Endpoints::UntagResource.build(context)
-          when :update_application
-            Aws::EMRServerless::Endpoints::UpdateApplication.build(context)
           end
         end
       end

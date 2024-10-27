@@ -8,6 +8,28 @@
 module Aws::DataExchange
   module Types
 
+    class AcceptDataGrantRequest
+      attr_accessor data_grant_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptDataGrantResponse
+      attr_accessor name: ::String
+      attr_accessor sender_principal: ::String
+      attr_accessor receiver_principal: ::String
+      attr_accessor description: ::String
+      attr_accessor acceptance_state: ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+      attr_accessor accepted_at: ::Time
+      attr_accessor ends_at: ::Time
+      attr_accessor grant_distribution_scope: ("AWS_ORGANIZATION" | "NONE")
+      attr_accessor data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -87,7 +109,37 @@ module Aws::DataExchange
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("DATA_SET" | "REVISION" | "ASSET" | "JOB" | "EVENT_ACTION")
+      attr_accessor resource_type: ("DATA_SET" | "REVISION" | "ASSET" | "JOB" | "EVENT_ACTION" | "DATA_GRANT")
+      SENSITIVE: []
+    end
+
+    class CreateDataGrantRequest
+      attr_accessor name: ::String
+      attr_accessor grant_distribution_scope: ("AWS_ORGANIZATION" | "NONE")
+      attr_accessor receiver_principal: ::String
+      attr_accessor source_data_set_id: ::String
+      attr_accessor ends_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDataGrantResponse
+      attr_accessor name: ::String
+      attr_accessor sender_principal: ::String
+      attr_accessor receiver_principal: ::String
+      attr_accessor description: ::String
+      attr_accessor acceptance_state: ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+      attr_accessor accepted_at: ::Time
+      attr_accessor ends_at: ::Time
+      attr_accessor grant_distribution_scope: ("AWS_ORGANIZATION" | "NONE")
+      attr_accessor data_set_id: ::String
+      attr_accessor source_data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -185,6 +237,22 @@ module Aws::DataExchange
       SENSITIVE: []
     end
 
+    class DataGrantSummaryEntry
+      attr_accessor name: ::String
+      attr_accessor sender_principal: ::String
+      attr_accessor receiver_principal: ::String
+      attr_accessor acceptance_state: ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+      attr_accessor accepted_at: ::Time
+      attr_accessor ends_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor source_data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class DataSetEntry
       attr_accessor arn: ::String
       attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
@@ -219,6 +287,11 @@ module Aws::DataExchange
       attr_accessor asset_id: ::String
       attr_accessor data_set_id: ::String
       attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataGrantRequest
+      attr_accessor data_grant_id: ::String
       SENSITIVE: []
     end
 
@@ -338,6 +411,30 @@ module Aws::DataExchange
       SENSITIVE: []
     end
 
+    class GetDataGrantRequest
+      attr_accessor data_grant_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataGrantResponse
+      attr_accessor name: ::String
+      attr_accessor sender_principal: ::String
+      attr_accessor receiver_principal: ::String
+      attr_accessor description: ::String
+      attr_accessor acceptance_state: ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+      attr_accessor accepted_at: ::Time
+      attr_accessor ends_at: ::Time
+      attr_accessor grant_distribution_scope: ("AWS_ORGANIZATION" | "NONE")
+      attr_accessor data_set_id: ::String
+      attr_accessor source_data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetDataSetRequest
       attr_accessor data_set_id: ::String
       SENSITIVE: []
@@ -386,6 +483,28 @@ module Aws::DataExchange
       attr_accessor id: ::String
       attr_accessor state: ("WAITING" | "IN_PROGRESS" | "ERROR" | "COMPLETED" | "CANCELLED" | "TIMED_OUT")
       attr_accessor type: ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetReceivedDataGrantRequest
+      attr_accessor data_grant_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetReceivedDataGrantResponse
+      attr_accessor name: ::String
+      attr_accessor sender_principal: ::String
+      attr_accessor receiver_principal: ::String
+      attr_accessor description: ::String
+      attr_accessor acceptance_state: ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+      attr_accessor accepted_at: ::Time
+      attr_accessor ends_at: ::Time
+      attr_accessor grant_distribution_scope: ("AWS_ORGANIZATION" | "NONE")
+      attr_accessor data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -582,6 +701,18 @@ module Aws::DataExchange
       SENSITIVE: []
     end
 
+    class ListDataGrantsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataGrantsResponse
+      attr_accessor data_grant_summaries: ::Array[Types::DataGrantSummaryEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDataSetRevisionsRequest
       attr_accessor data_set_id: ::String
       attr_accessor max_results: ::Integer
@@ -635,6 +766,19 @@ module Aws::DataExchange
       SENSITIVE: []
     end
 
+    class ListReceivedDataGrantsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor acceptance_state: ::Array[("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")]
+      SENSITIVE: []
+    end
+
+    class ListReceivedDataGrantsResponse
+      attr_accessor data_grant_summaries: ::Array[Types::ReceivedDataGrantSummariesEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListRevisionAssetsRequest
       attr_accessor data_set_id: ::String
       attr_accessor max_results: ::Integer
@@ -668,6 +812,22 @@ module Aws::DataExchange
 
     class OriginDetails
       attr_accessor product_id: ::String
+      attr_accessor data_grant_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReceivedDataGrantSummariesEntry
+      attr_accessor name: ::String
+      attr_accessor sender_principal: ::String
+      attr_accessor receiver_principal: ::String
+      attr_accessor acceptance_state: ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+      attr_accessor accepted_at: ::Time
+      attr_accessor ends_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -707,7 +867,7 @@ module Aws::DataExchange
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("DATA_SET" | "REVISION" | "ASSET" | "JOB" | "EVENT_ACTION")
+      attr_accessor resource_type: ("DATA_SET" | "REVISION" | "ASSET" | "JOB" | "EVENT_ACTION" | "DATA_GRANT")
       SENSITIVE: []
     end
 
@@ -854,7 +1014,7 @@ module Aws::DataExchange
     end
 
     class ServiceLimitExceededException
-      attr_accessor limit_name: ("Products per account" | "Data sets per account" | "Data sets per product" | "Revisions per data set" | "Assets per revision" | "Assets per import job from Amazon S3" | "Asset per export job from Amazon S3" | "Asset size in GB" | "Concurrent in progress jobs to export assets to Amazon S3" | "Concurrent in progress jobs to export assets to a signed URL" | "Concurrent in progress jobs to import assets from Amazon S3" | "Concurrent in progress jobs to import assets from a signed URL" | "Concurrent in progress jobs to export revisions to Amazon S3" | "Event actions per account" | "Auto export event actions per data set" | "Amazon Redshift datashare assets per import job from Redshift" | "Concurrent in progress jobs to import assets from Amazon Redshift datashares" | "Revisions per Amazon Redshift datashare data set" | "Amazon Redshift datashare assets per revision" | "Concurrent in progress jobs to import assets from an API Gateway API" | "Amazon API Gateway API assets per revision" | "Revisions per Amazon API Gateway API data set" | "Concurrent in progress jobs to import assets from an AWS Lake Formation tag policy" | "AWS Lake Formation data permission assets per revision" | "Revisions per AWS Lake Formation data permission data set" | "Revisions per Amazon S3 data access data set" | "Amazon S3 data access assets per revision" | "Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets")
+      attr_accessor limit_name: ("Products per account" | "Data sets per account" | "Data sets per product" | "Revisions per data set" | "Assets per revision" | "Assets per import job from Amazon S3" | "Asset per export job from Amazon S3" | "Asset size in GB" | "Concurrent in progress jobs to export assets to Amazon S3" | "Concurrent in progress jobs to export assets to a signed URL" | "Concurrent in progress jobs to import assets from Amazon S3" | "Concurrent in progress jobs to import assets from a signed URL" | "Concurrent in progress jobs to export revisions to Amazon S3" | "Event actions per account" | "Auto export event actions per data set" | "Amazon Redshift datashare assets per import job from Redshift" | "Concurrent in progress jobs to import assets from Amazon Redshift datashares" | "Revisions per Amazon Redshift datashare data set" | "Amazon Redshift datashare assets per revision" | "Concurrent in progress jobs to import assets from an API Gateway API" | "Amazon API Gateway API assets per revision" | "Revisions per Amazon API Gateway API data set" | "Concurrent in progress jobs to import assets from an AWS Lake Formation tag policy" | "AWS Lake Formation data permission assets per revision" | "Revisions per AWS Lake Formation data permission data set" | "Revisions per Amazon S3 data access data set" | "Amazon S3 data access assets per revision" | "Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets" | "Active and pending data grants" | "Pending data grants per consumer")
       attr_accessor limit_value: ::Float
       attr_accessor message: ::String
       SENSITIVE: []

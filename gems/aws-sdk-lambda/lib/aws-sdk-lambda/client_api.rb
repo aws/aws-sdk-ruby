@@ -349,6 +349,9 @@ module Aws::Lambda
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaggableResource = Shapes::StringShape.new(name: 'TaggableResource')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TagsError = Shapes::StructureShape.new(name: 'TagsError')
+    TagsErrorCode = Shapes::StringShape.new(name: 'TagsErrorCode')
+    TagsErrorMessage = Shapes::StringShape.new(name: 'TagsErrorMessage')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -860,6 +863,7 @@ module Aws::Lambda
     GetFunctionResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "Configuration"))
     GetFunctionResponse.add_member(:code, Shapes::ShapeRef.new(shape: FunctionCodeLocation, location_name: "Code"))
     GetFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    GetFunctionResponse.add_member(:tags_error, Shapes::ShapeRef.new(shape: TagsError, location_name: "TagsError"))
     GetFunctionResponse.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, location_name: "Concurrency"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
@@ -1413,6 +1417,10 @@ module Aws::Lambda
 
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagsError.add_member(:error_code, Shapes::ShapeRef.new(shape: TagsErrorCode, required: true, location_name: "ErrorCode"))
+    TagsError.add_member(:message, Shapes::ShapeRef.new(shape: TagsErrorMessage, required: true, location_name: "Message"))
+    TagsError.struct_class = Types::TagsError
 
     TooManyRequestsException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
     TooManyRequestsException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))

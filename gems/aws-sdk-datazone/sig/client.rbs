@@ -206,7 +206,7 @@ module Aws
                                   group_identifier: ::String?
                                 }?,
                                 project: {
-                                  project_designation: ("OWNER" | "CONTRIBUTOR"),
+                                  project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD"),
                                   project_grant_filter: {
                                     domain_unit_filter: {
                                       domain_unit: ::String,
@@ -945,7 +945,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_project_membership-instance_method
       def create_project_membership: (
-                                       designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR"),
+                                       designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD"),
                                        domain_identifier: ::String,
                                        member: {
                                          group_identifier: ::String?,
@@ -2524,7 +2524,7 @@ module Aws
                                      group_identifier: ::String?
                                    }?,
                                    project: {
-                                     project_designation: ("OWNER" | "CONTRIBUTOR"),
+                                     project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD"),
                                      project_grant_filter: {
                                        domain_unit_filter: {
                                          domain_unit: ::String,

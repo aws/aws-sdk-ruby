@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::IdentityStore::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,49 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_group
-            Aws::IdentityStore::Endpoints::CreateGroup.build(context)
-          when :create_group_membership
-            Aws::IdentityStore::Endpoints::CreateGroupMembership.build(context)
-          when :create_user
-            Aws::IdentityStore::Endpoints::CreateUser.build(context)
-          when :delete_group
-            Aws::IdentityStore::Endpoints::DeleteGroup.build(context)
-          when :delete_group_membership
-            Aws::IdentityStore::Endpoints::DeleteGroupMembership.build(context)
-          when :delete_user
-            Aws::IdentityStore::Endpoints::DeleteUser.build(context)
-          when :describe_group
-            Aws::IdentityStore::Endpoints::DescribeGroup.build(context)
-          when :describe_group_membership
-            Aws::IdentityStore::Endpoints::DescribeGroupMembership.build(context)
-          when :describe_user
-            Aws::IdentityStore::Endpoints::DescribeUser.build(context)
-          when :get_group_id
-            Aws::IdentityStore::Endpoints::GetGroupId.build(context)
-          when :get_group_membership_id
-            Aws::IdentityStore::Endpoints::GetGroupMembershipId.build(context)
-          when :get_user_id
-            Aws::IdentityStore::Endpoints::GetUserId.build(context)
-          when :is_member_in_groups
-            Aws::IdentityStore::Endpoints::IsMemberInGroups.build(context)
-          when :list_group_memberships
-            Aws::IdentityStore::Endpoints::ListGroupMemberships.build(context)
-          when :list_group_memberships_for_member
-            Aws::IdentityStore::Endpoints::ListGroupMembershipsForMember.build(context)
-          when :list_groups
-            Aws::IdentityStore::Endpoints::ListGroups.build(context)
-          when :list_users
-            Aws::IdentityStore::Endpoints::ListUsers.build(context)
-          when :update_group
-            Aws::IdentityStore::Endpoints::UpdateGroup.build(context)
-          when :update_user
-            Aws::IdentityStore::Endpoints::UpdateUser.build(context)
           end
         end
       end

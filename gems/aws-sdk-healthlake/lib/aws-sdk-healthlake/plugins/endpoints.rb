@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::HealthLake::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,37 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_fhir_datastore
-            Aws::HealthLake::Endpoints::CreateFHIRDatastore.build(context)
-          when :delete_fhir_datastore
-            Aws::HealthLake::Endpoints::DeleteFHIRDatastore.build(context)
-          when :describe_fhir_datastore
-            Aws::HealthLake::Endpoints::DescribeFHIRDatastore.build(context)
-          when :describe_fhir_export_job
-            Aws::HealthLake::Endpoints::DescribeFHIRExportJob.build(context)
-          when :describe_fhir_import_job
-            Aws::HealthLake::Endpoints::DescribeFHIRImportJob.build(context)
-          when :list_fhir_datastores
-            Aws::HealthLake::Endpoints::ListFHIRDatastores.build(context)
-          when :list_fhir_export_jobs
-            Aws::HealthLake::Endpoints::ListFHIRExportJobs.build(context)
-          when :list_fhir_import_jobs
-            Aws::HealthLake::Endpoints::ListFHIRImportJobs.build(context)
-          when :list_tags_for_resource
-            Aws::HealthLake::Endpoints::ListTagsForResource.build(context)
-          when :start_fhir_export_job
-            Aws::HealthLake::Endpoints::StartFHIRExportJob.build(context)
-          when :start_fhir_import_job
-            Aws::HealthLake::Endpoints::StartFHIRImportJob.build(context)
-          when :tag_resource
-            Aws::HealthLake::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::HealthLake::Endpoints::UntagResource.build(context)
           end
         end
       end

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Support::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,43 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :add_attachments_to_set
-            Aws::Support::Endpoints::AddAttachmentsToSet.build(context)
-          when :add_communication_to_case
-            Aws::Support::Endpoints::AddCommunicationToCase.build(context)
-          when :create_case
-            Aws::Support::Endpoints::CreateCase.build(context)
-          when :describe_attachment
-            Aws::Support::Endpoints::DescribeAttachment.build(context)
-          when :describe_cases
-            Aws::Support::Endpoints::DescribeCases.build(context)
-          when :describe_communications
-            Aws::Support::Endpoints::DescribeCommunications.build(context)
-          when :describe_create_case_options
-            Aws::Support::Endpoints::DescribeCreateCaseOptions.build(context)
-          when :describe_services
-            Aws::Support::Endpoints::DescribeServices.build(context)
-          when :describe_severity_levels
-            Aws::Support::Endpoints::DescribeSeverityLevels.build(context)
-          when :describe_supported_languages
-            Aws::Support::Endpoints::DescribeSupportedLanguages.build(context)
-          when :describe_trusted_advisor_check_refresh_statuses
-            Aws::Support::Endpoints::DescribeTrustedAdvisorCheckRefreshStatuses.build(context)
-          when :describe_trusted_advisor_check_result
-            Aws::Support::Endpoints::DescribeTrustedAdvisorCheckResult.build(context)
-          when :describe_trusted_advisor_check_summaries
-            Aws::Support::Endpoints::DescribeTrustedAdvisorCheckSummaries.build(context)
-          when :describe_trusted_advisor_checks
-            Aws::Support::Endpoints::DescribeTrustedAdvisorChecks.build(context)
-          when :refresh_trusted_advisor_check
-            Aws::Support::Endpoints::RefreshTrustedAdvisorCheck.build(context)
-          when :resolve_case
-            Aws::Support::Endpoints::ResolveCase.build(context)
           end
         end
       end

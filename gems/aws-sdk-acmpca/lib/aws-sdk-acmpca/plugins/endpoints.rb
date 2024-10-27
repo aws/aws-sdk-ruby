@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ACMPCA::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,57 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_certificate_authority
-            Aws::ACMPCA::Endpoints::CreateCertificateAuthority.build(context)
-          when :create_certificate_authority_audit_report
-            Aws::ACMPCA::Endpoints::CreateCertificateAuthorityAuditReport.build(context)
-          when :create_permission
-            Aws::ACMPCA::Endpoints::CreatePermission.build(context)
-          when :delete_certificate_authority
-            Aws::ACMPCA::Endpoints::DeleteCertificateAuthority.build(context)
-          when :delete_permission
-            Aws::ACMPCA::Endpoints::DeletePermission.build(context)
-          when :delete_policy
-            Aws::ACMPCA::Endpoints::DeletePolicy.build(context)
-          when :describe_certificate_authority
-            Aws::ACMPCA::Endpoints::DescribeCertificateAuthority.build(context)
-          when :describe_certificate_authority_audit_report
-            Aws::ACMPCA::Endpoints::DescribeCertificateAuthorityAuditReport.build(context)
-          when :get_certificate
-            Aws::ACMPCA::Endpoints::GetCertificate.build(context)
-          when :get_certificate_authority_certificate
-            Aws::ACMPCA::Endpoints::GetCertificateAuthorityCertificate.build(context)
-          when :get_certificate_authority_csr
-            Aws::ACMPCA::Endpoints::GetCertificateAuthorityCsr.build(context)
-          when :get_policy
-            Aws::ACMPCA::Endpoints::GetPolicy.build(context)
-          when :import_certificate_authority_certificate
-            Aws::ACMPCA::Endpoints::ImportCertificateAuthorityCertificate.build(context)
-          when :issue_certificate
-            Aws::ACMPCA::Endpoints::IssueCertificate.build(context)
-          when :list_certificate_authorities
-            Aws::ACMPCA::Endpoints::ListCertificateAuthorities.build(context)
-          when :list_permissions
-            Aws::ACMPCA::Endpoints::ListPermissions.build(context)
-          when :list_tags
-            Aws::ACMPCA::Endpoints::ListTags.build(context)
-          when :put_policy
-            Aws::ACMPCA::Endpoints::PutPolicy.build(context)
-          when :restore_certificate_authority
-            Aws::ACMPCA::Endpoints::RestoreCertificateAuthority.build(context)
-          when :revoke_certificate
-            Aws::ACMPCA::Endpoints::RevokeCertificate.build(context)
-          when :tag_certificate_authority
-            Aws::ACMPCA::Endpoints::TagCertificateAuthority.build(context)
-          when :untag_certificate_authority
-            Aws::ACMPCA::Endpoints::UntagCertificateAuthority.build(context)
-          when :update_certificate_authority
-            Aws::ACMPCA::Endpoints::UpdateCertificateAuthority.build(context)
           end
         end
       end

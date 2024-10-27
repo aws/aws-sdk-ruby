@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ResourceGroups::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,57 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :cancel_tag_sync_task
-            Aws::ResourceGroups::Endpoints::CancelTagSyncTask.build(context)
-          when :create_group
-            Aws::ResourceGroups::Endpoints::CreateGroup.build(context)
-          when :delete_group
-            Aws::ResourceGroups::Endpoints::DeleteGroup.build(context)
-          when :get_account_settings
-            Aws::ResourceGroups::Endpoints::GetAccountSettings.build(context)
-          when :get_group
-            Aws::ResourceGroups::Endpoints::GetGroup.build(context)
-          when :get_group_configuration
-            Aws::ResourceGroups::Endpoints::GetGroupConfiguration.build(context)
-          when :get_group_query
-            Aws::ResourceGroups::Endpoints::GetGroupQuery.build(context)
-          when :get_tag_sync_task
-            Aws::ResourceGroups::Endpoints::GetTagSyncTask.build(context)
-          when :get_tags
-            Aws::ResourceGroups::Endpoints::GetTags.build(context)
-          when :group_resources
-            Aws::ResourceGroups::Endpoints::GroupResources.build(context)
-          when :list_group_resources
-            Aws::ResourceGroups::Endpoints::ListGroupResources.build(context)
-          when :list_grouping_statuses
-            Aws::ResourceGroups::Endpoints::ListGroupingStatuses.build(context)
-          when :list_groups
-            Aws::ResourceGroups::Endpoints::ListGroups.build(context)
-          when :list_tag_sync_tasks
-            Aws::ResourceGroups::Endpoints::ListTagSyncTasks.build(context)
-          when :put_group_configuration
-            Aws::ResourceGroups::Endpoints::PutGroupConfiguration.build(context)
-          when :search_resources
-            Aws::ResourceGroups::Endpoints::SearchResources.build(context)
-          when :start_tag_sync_task
-            Aws::ResourceGroups::Endpoints::StartTagSyncTask.build(context)
-          when :tag
-            Aws::ResourceGroups::Endpoints::Tag.build(context)
-          when :ungroup_resources
-            Aws::ResourceGroups::Endpoints::UngroupResources.build(context)
-          when :untag
-            Aws::ResourceGroups::Endpoints::Untag.build(context)
-          when :update_account_settings
-            Aws::ResourceGroups::Endpoints::UpdateAccountSettings.build(context)
-          when :update_group
-            Aws::ResourceGroups::Endpoints::UpdateGroup.build(context)
-          when :update_group_query
-            Aws::ResourceGroups::Endpoints::UpdateGroupQuery.build(context)
           end
         end
       end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-10-21)
+------------------
+
+* Feature - Added support for tagging in StartReplicationTaskAssessmentRun API and introduced IsLatestTaskAssessmentRun and ResultStatistic fields for enhanced tracking and assessment result statistics.
+
+1.108.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2024-10-10)
+------------------
+
+* Feature - Introduces DescribeDataMigrations, CreateDataMigration, ModifyDataMigration, DeleteDataMigration, StartDataMigration, StopDataMigration operations to SDK. Provides FailedDependencyFault error message.
+
 1.106.0 (2024-09-24)
 ------------------
 

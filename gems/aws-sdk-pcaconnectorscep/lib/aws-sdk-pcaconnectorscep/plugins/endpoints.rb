@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::PcaConnectorScep::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,35 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_challenge
-            Aws::PcaConnectorScep::Endpoints::CreateChallenge.build(context)
-          when :create_connector
-            Aws::PcaConnectorScep::Endpoints::CreateConnector.build(context)
-          when :delete_challenge
-            Aws::PcaConnectorScep::Endpoints::DeleteChallenge.build(context)
-          when :delete_connector
-            Aws::PcaConnectorScep::Endpoints::DeleteConnector.build(context)
-          when :get_challenge_metadata
-            Aws::PcaConnectorScep::Endpoints::GetChallengeMetadata.build(context)
-          when :get_challenge_password
-            Aws::PcaConnectorScep::Endpoints::GetChallengePassword.build(context)
-          when :get_connector
-            Aws::PcaConnectorScep::Endpoints::GetConnector.build(context)
-          when :list_challenge_metadata
-            Aws::PcaConnectorScep::Endpoints::ListChallengeMetadata.build(context)
-          when :list_connectors
-            Aws::PcaConnectorScep::Endpoints::ListConnectors.build(context)
-          when :list_tags_for_resource
-            Aws::PcaConnectorScep::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::PcaConnectorScep::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::PcaConnectorScep::Endpoints::UntagResource.build(context)
           end
         end
       end

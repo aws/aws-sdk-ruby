@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::AccessAnalyzer::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,81 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :apply_archive_rule
-            Aws::AccessAnalyzer::Endpoints::ApplyArchiveRule.build(context)
-          when :cancel_policy_generation
-            Aws::AccessAnalyzer::Endpoints::CancelPolicyGeneration.build(context)
-          when :check_access_not_granted
-            Aws::AccessAnalyzer::Endpoints::CheckAccessNotGranted.build(context)
-          when :check_no_new_access
-            Aws::AccessAnalyzer::Endpoints::CheckNoNewAccess.build(context)
-          when :check_no_public_access
-            Aws::AccessAnalyzer::Endpoints::CheckNoPublicAccess.build(context)
-          when :create_access_preview
-            Aws::AccessAnalyzer::Endpoints::CreateAccessPreview.build(context)
-          when :create_analyzer
-            Aws::AccessAnalyzer::Endpoints::CreateAnalyzer.build(context)
-          when :create_archive_rule
-            Aws::AccessAnalyzer::Endpoints::CreateArchiveRule.build(context)
-          when :delete_analyzer
-            Aws::AccessAnalyzer::Endpoints::DeleteAnalyzer.build(context)
-          when :delete_archive_rule
-            Aws::AccessAnalyzer::Endpoints::DeleteArchiveRule.build(context)
-          when :generate_finding_recommendation
-            Aws::AccessAnalyzer::Endpoints::GenerateFindingRecommendation.build(context)
-          when :get_access_preview
-            Aws::AccessAnalyzer::Endpoints::GetAccessPreview.build(context)
-          when :get_analyzed_resource
-            Aws::AccessAnalyzer::Endpoints::GetAnalyzedResource.build(context)
-          when :get_analyzer
-            Aws::AccessAnalyzer::Endpoints::GetAnalyzer.build(context)
-          when :get_archive_rule
-            Aws::AccessAnalyzer::Endpoints::GetArchiveRule.build(context)
-          when :get_finding
-            Aws::AccessAnalyzer::Endpoints::GetFinding.build(context)
-          when :get_finding_recommendation
-            Aws::AccessAnalyzer::Endpoints::GetFindingRecommendation.build(context)
-          when :get_finding_v2
-            Aws::AccessAnalyzer::Endpoints::GetFindingV2.build(context)
-          when :get_generated_policy
-            Aws::AccessAnalyzer::Endpoints::GetGeneratedPolicy.build(context)
-          when :list_access_preview_findings
-            Aws::AccessAnalyzer::Endpoints::ListAccessPreviewFindings.build(context)
-          when :list_access_previews
-            Aws::AccessAnalyzer::Endpoints::ListAccessPreviews.build(context)
-          when :list_analyzed_resources
-            Aws::AccessAnalyzer::Endpoints::ListAnalyzedResources.build(context)
-          when :list_analyzers
-            Aws::AccessAnalyzer::Endpoints::ListAnalyzers.build(context)
-          when :list_archive_rules
-            Aws::AccessAnalyzer::Endpoints::ListArchiveRules.build(context)
-          when :list_findings
-            Aws::AccessAnalyzer::Endpoints::ListFindings.build(context)
-          when :list_findings_v2
-            Aws::AccessAnalyzer::Endpoints::ListFindingsV2.build(context)
-          when :list_policy_generations
-            Aws::AccessAnalyzer::Endpoints::ListPolicyGenerations.build(context)
-          when :list_tags_for_resource
-            Aws::AccessAnalyzer::Endpoints::ListTagsForResource.build(context)
-          when :start_policy_generation
-            Aws::AccessAnalyzer::Endpoints::StartPolicyGeneration.build(context)
-          when :start_resource_scan
-            Aws::AccessAnalyzer::Endpoints::StartResourceScan.build(context)
-          when :tag_resource
-            Aws::AccessAnalyzer::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::AccessAnalyzer::Endpoints::UntagResource.build(context)
-          when :update_archive_rule
-            Aws::AccessAnalyzer::Endpoints::UpdateArchiveRule.build(context)
-          when :update_findings
-            Aws::AccessAnalyzer::Endpoints::UpdateFindings.build(context)
-          when :validate_policy
-            Aws::AccessAnalyzer::Endpoints::ValidatePolicy.build(context)
           end
         end
       end

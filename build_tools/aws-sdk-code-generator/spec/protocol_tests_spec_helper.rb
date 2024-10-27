@@ -114,7 +114,7 @@ module ProtocolTestsHelper
         when /xml/, /ec2/, /query/
           Aws::Xml::Parser
         when /smithy-rpc-v2-cbor/
-          Aws::Cbor
+          Aws::RpcV2
         else
           raise "unsupported protocol: #{protocol}"
         end
@@ -301,8 +301,8 @@ module ProtocolTestsHelper
               expected_body = Aws::Json.load(expected_body)
             end
           when 'smithy-rpc-v2-cbor'
-            request_body = Aws::Cbor.decode(request_body)
-            expected_body = Aws::Cbor.decode(Base64.decode64(expected_body))
+            request_body = Aws::RpcV2.decode(request_body)
+            expected_body = Aws::RpcV2.decode(Base64.decode64(expected_body))
           else raise "unsupported protocol: `#{protocol}`"
           end
           assert(it, request_body, expected_body)

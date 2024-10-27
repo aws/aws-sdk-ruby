@@ -1,6 +1,11 @@
 {
   "rest-xml" : {
-    "input" : {},
+    "input" : {
+      "NestedXmlMapWithXmlNameSerializes": {
+        "description": "Smithy 1.52.0 did not include a fix to this test.",
+        "engines": ["ox", "nokogiri", "rexml", "libxml", "oga"]
+      }
+    },
     "output" : {
       "SimpleScalarPropertiesComplexEscapes": {
         "description": "OxEngine does not handle all escape cases but other engines supports it",

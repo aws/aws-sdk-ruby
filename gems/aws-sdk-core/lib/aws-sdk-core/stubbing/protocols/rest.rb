@@ -5,6 +5,7 @@ require 'aws-eventstream'
 module Aws
   module Stubbing
     module Protocols
+      # @api private
       class Rest
 
         include Seahorse::Model::Shapes
@@ -22,7 +23,7 @@ module Aws
         def new_http_response
           resp = Seahorse::Client::Http::Response.new
           resp.status_code = 200
-          resp.headers["x-amzn-RequestId"] = "stubbed-request-id"
+          resp.headers['x-amzn-RequestId'] = 'stubbed-request-id'
           resp
         end
 

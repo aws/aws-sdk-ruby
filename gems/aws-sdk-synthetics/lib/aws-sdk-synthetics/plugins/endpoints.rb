@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Synthetics::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,53 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_resource
-            Aws::Synthetics::Endpoints::AssociateResource.build(context)
-          when :create_canary
-            Aws::Synthetics::Endpoints::CreateCanary.build(context)
-          when :create_group
-            Aws::Synthetics::Endpoints::CreateGroup.build(context)
-          when :delete_canary
-            Aws::Synthetics::Endpoints::DeleteCanary.build(context)
-          when :delete_group
-            Aws::Synthetics::Endpoints::DeleteGroup.build(context)
-          when :describe_canaries
-            Aws::Synthetics::Endpoints::DescribeCanaries.build(context)
-          when :describe_canaries_last_run
-            Aws::Synthetics::Endpoints::DescribeCanariesLastRun.build(context)
-          when :describe_runtime_versions
-            Aws::Synthetics::Endpoints::DescribeRuntimeVersions.build(context)
-          when :disassociate_resource
-            Aws::Synthetics::Endpoints::DisassociateResource.build(context)
-          when :get_canary
-            Aws::Synthetics::Endpoints::GetCanary.build(context)
-          when :get_canary_runs
-            Aws::Synthetics::Endpoints::GetCanaryRuns.build(context)
-          when :get_group
-            Aws::Synthetics::Endpoints::GetGroup.build(context)
-          when :list_associated_groups
-            Aws::Synthetics::Endpoints::ListAssociatedGroups.build(context)
-          when :list_group_resources
-            Aws::Synthetics::Endpoints::ListGroupResources.build(context)
-          when :list_groups
-            Aws::Synthetics::Endpoints::ListGroups.build(context)
-          when :list_tags_for_resource
-            Aws::Synthetics::Endpoints::ListTagsForResource.build(context)
-          when :start_canary
-            Aws::Synthetics::Endpoints::StartCanary.build(context)
-          when :stop_canary
-            Aws::Synthetics::Endpoints::StopCanary.build(context)
-          when :tag_resource
-            Aws::Synthetics::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Synthetics::Endpoints::UntagResource.build(context)
-          when :update_canary
-            Aws::Synthetics::Endpoints::UpdateCanary.build(context)
           end
         end
       end

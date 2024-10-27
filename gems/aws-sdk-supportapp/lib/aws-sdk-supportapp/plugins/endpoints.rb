@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SupportApp::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,31 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_slack_channel_configuration
-            Aws::SupportApp::Endpoints::CreateSlackChannelConfiguration.build(context)
-          when :delete_account_alias
-            Aws::SupportApp::Endpoints::DeleteAccountAlias.build(context)
-          when :delete_slack_channel_configuration
-            Aws::SupportApp::Endpoints::DeleteSlackChannelConfiguration.build(context)
-          when :delete_slack_workspace_configuration
-            Aws::SupportApp::Endpoints::DeleteSlackWorkspaceConfiguration.build(context)
-          when :get_account_alias
-            Aws::SupportApp::Endpoints::GetAccountAlias.build(context)
-          when :list_slack_channel_configurations
-            Aws::SupportApp::Endpoints::ListSlackChannelConfigurations.build(context)
-          when :list_slack_workspace_configurations
-            Aws::SupportApp::Endpoints::ListSlackWorkspaceConfigurations.build(context)
-          when :put_account_alias
-            Aws::SupportApp::Endpoints::PutAccountAlias.build(context)
-          when :register_slack_workspace_for_organization
-            Aws::SupportApp::Endpoints::RegisterSlackWorkspaceForOrganization.build(context)
-          when :update_slack_channel_configuration
-            Aws::SupportApp::Endpoints::UpdateSlackChannelConfiguration.build(context)
           end
         end
       end

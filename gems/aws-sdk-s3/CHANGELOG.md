@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - Default to using `CRC32` checksum validation for S3 uploads and downloads.
 
+1.169.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.168.0 (2024-10-16)
+------------------
+
+* Feature - Add support for the new optional bucket-region and prefix query parameters in the ListBuckets API. For ListBuckets requests that express pagination, Amazon S3 will now return both the bucket names and associated AWS regions in the response.
+
 1.167.0 (2024-10-02)
 ------------------
 

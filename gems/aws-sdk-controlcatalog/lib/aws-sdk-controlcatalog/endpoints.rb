@@ -12,60 +12,9 @@ module Aws::ControlCatalog
   # @api private
   module Endpoints
 
-    class GetControl
-      def self.build(context)
-        Aws::ControlCatalog::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
-    class ListCommonControls
-      def self.build(context)
-        Aws::ControlCatalog::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::ControlCatalog::EndpointParameters.create(context.config)
     end
-
-    class ListControls
-      def self.build(context)
-        Aws::ControlCatalog::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
-    class ListDomains
-      def self.build(context)
-        Aws::ControlCatalog::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
-    class ListObjectives
-      def self.build(context)
-        Aws::ControlCatalog::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
   end
 end

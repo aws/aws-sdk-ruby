@@ -91,9 +91,7 @@ module Aws::EC2
 
     # Deprecated.
     #
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     # @return [Array<Types::ElasticGpuAssociation>]
@@ -101,7 +99,11 @@ module Aws::EC2
       data[:elastic_gpu_associations]
     end
 
-    # The elastic inference accelerator associated with the instance.
+    # Deprecated
+    #
+    # <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #  </note>
     # @return [Array<Types::ElasticInferenceAcceleratorAssociation>]
     def elastic_inference_accelerator_associations
       data[:elastic_inference_accelerator_associations]

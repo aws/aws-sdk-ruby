@@ -138,6 +138,21 @@ module Aws::MWAA
       SENSITIVE: []
     end
 
+    class InvokeRestApiRequest
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      attr_accessor method: ("GET" | "PUT" | "POST" | "PATCH" | "DELETE")
+      attr_accessor query_parameters: untyped
+      attr_accessor body: untyped
+      SENSITIVE: [:body]
+    end
+
+    class InvokeRestApiResponse
+      attr_accessor rest_api_status_code: ::Integer
+      attr_accessor rest_api_response: untyped
+      SENSITIVE: [:rest_api_response]
+    end
+
     class LastUpdate
       attr_accessor status: ("SUCCESS" | "PENDING" | "FAILED")
       attr_accessor created_at: ::Time
@@ -227,6 +242,18 @@ module Aws::MWAA
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class RestApiClientException
+      attr_accessor rest_api_status_code: ::Integer
+      attr_accessor rest_api_response: untyped
+      SENSITIVE: [:rest_api_response]
+    end
+
+    class RestApiServerException
+      attr_accessor rest_api_status_code: ::Integer
+      attr_accessor rest_api_response: untyped
+      SENSITIVE: [:rest_api_response]
     end
 
     class StatisticSet

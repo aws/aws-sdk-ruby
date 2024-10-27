@@ -301,6 +301,8 @@ module Aws::EKS
     VpcConfigRequest = Shapes::StructureShape.new(name: 'VpcConfigRequest')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
     ZeroCapacity = Shapes::IntegerShape.new(name: 'ZeroCapacity')
+    ZonalShiftConfigRequest = Shapes::StructureShape.new(name: 'ZonalShiftConfigRequest')
+    ZonalShiftConfigResponse = Shapes::StructureShape.new(name: 'ZonalShiftConfigResponse')
     configStatus = Shapes::StringShape.new(name: 'configStatus')
     labelKey = Shapes::StringShape.new(name: 'labelKey')
     labelValue = Shapes::StringShape.new(name: 'labelValue')
@@ -488,6 +490,7 @@ module Aws::EKS
     Cluster.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigResponse, location_name: "outpostConfig"))
     Cluster.add_member(:access_config, Shapes::ShapeRef.new(shape: AccessConfigResponse, location_name: "accessConfig"))
     Cluster.add_member(:upgrade_policy, Shapes::ShapeRef.new(shape: UpgradePolicyResponse, location_name: "upgradePolicy"))
+    Cluster.add_member(:zonal_shift_config, Shapes::ShapeRef.new(shape: ZonalShiftConfigResponse, location_name: "zonalShiftConfig"))
     Cluster.struct_class = Types::Cluster
 
     ClusterHealth.add_member(:issues, Shapes::ShapeRef.new(shape: ClusterIssueList, location_name: "issues"))
@@ -567,6 +570,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:access_config, Shapes::ShapeRef.new(shape: CreateAccessConfigRequest, location_name: "accessConfig"))
     CreateClusterRequest.add_member(:bootstrap_self_managed_addons, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bootstrapSelfManagedAddons"))
     CreateClusterRequest.add_member(:upgrade_policy, Shapes::ShapeRef.new(shape: UpgradePolicyRequest, location_name: "upgradePolicy"))
+    CreateClusterRequest.add_member(:zonal_shift_config, Shapes::ShapeRef.new(shape: ZonalShiftConfigRequest, location_name: "zonalShiftConfig"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -1322,6 +1326,7 @@ module Aws::EKS
     UpdateClusterConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateClusterConfigRequest.add_member(:access_config, Shapes::ShapeRef.new(shape: UpdateAccessConfigRequest, location_name: "accessConfig"))
     UpdateClusterConfigRequest.add_member(:upgrade_policy, Shapes::ShapeRef.new(shape: UpgradePolicyRequest, location_name: "upgradePolicy"))
+    UpdateClusterConfigRequest.add_member(:zonal_shift_config, Shapes::ShapeRef.new(shape: ZonalShiftConfigRequest, location_name: "zonalShiftConfig"))
     UpdateClusterConfigRequest.struct_class = Types::UpdateClusterConfigRequest
 
     UpdateClusterConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1411,6 +1416,12 @@ module Aws::EKS
     VpcConfigResponse.add_member(:endpoint_private_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "endpointPrivateAccess"))
     VpcConfigResponse.add_member(:public_access_cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "publicAccessCidrs"))
     VpcConfigResponse.struct_class = Types::VpcConfigResponse
+
+    ZonalShiftConfigRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
+    ZonalShiftConfigRequest.struct_class = Types::ZonalShiftConfigRequest
+
+    ZonalShiftConfigResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
+    ZonalShiftConfigResponse.struct_class = Types::ZonalShiftConfigResponse
 
     labelsKeyList.member = Shapes::ShapeRef.new(shape: String)
 

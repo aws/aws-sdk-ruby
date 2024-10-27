@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2024-10-10)
+------------------
+
+* Feature - Adding new "DELIVERED" enum value for Outposts Order status
+
 1.69.0 (2024-09-24)
 ------------------
 

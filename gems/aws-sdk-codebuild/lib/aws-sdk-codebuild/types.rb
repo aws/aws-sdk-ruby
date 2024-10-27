@@ -17,6 +17,42 @@ module Aws::CodeBuild
     #
     class AccountLimitExceededException < Aws::EmptyStructure; end
 
+    # Information about the auto-retry configuration for the build.
+    #
+    # @!attribute [rw] auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_retry_number
+    #   The number of times that the build has been retried. The initial
+    #   build will have an auto-retry number of 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_auto_retry
+    #   The build ARN of the auto-retried build triggered by the current
+    #   build. The next auto-retry will be `null` for builds that don't
+    #   trigger an auto-retry.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_auto_retry
+    #   The build ARN of the build that triggered the current auto-retry
+    #   build. The previous auto-retry will be `null` for the initial build.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/AutoRetryConfig AWS API Documentation
+    #
+    class AutoRetryConfig < Struct.new(
+      :auto_retry_limit,
+      :auto_retry_number,
+      :next_auto_retry,
+      :previous_auto_retry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ids
     #   The IDs of the builds to delete.
     #   @return [Array<String>]
@@ -474,6 +510,10 @@ module Aws::CodeBuild
     #   applicable.
     #   @return [String]
     #
+    # @!attribute [rw] auto_retry_config
+    #   Information about the auto-retry configuration for the build.
+    #   @return [Types::AutoRetryConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -508,7 +548,8 @@ module Aws::CodeBuild
       :report_arns,
       :file_system_locations,
       :debug_session,
-      :build_batch_arn)
+      :build_batch_arn,
+      :auto_retry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1534,6 +1575,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @!attribute [rw] image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #   @return [String]
@@ -1566,6 +1611,7 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :proxy_configuration,
       :image_id,
       :fleet_service_role,
       :tags)
@@ -1741,6 +1787,13 @@ module Aws::CodeBuild
     #   limit, new builds are throttled and are not run.
     #   @return [Integer]
     #
+    # @!attribute [rw] auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
@@ -1764,7 +1817,8 @@ module Aws::CodeBuild
       :logs_config,
       :file_system_locations,
       :build_batch_config,
-      :concurrent_build_limit)
+      :concurrent_build_limit,
+      :auto_retry_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2546,6 +2600,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @!attribute [rw] image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #   @return [String]
@@ -2583,9 +2641,34 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :proxy_configuration,
       :image_id,
       :fleet_service_role,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the proxy rule for your reserved capacity instances.
+    #
+    # @!attribute [rw] type
+    #   The type of proxy rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The behavior of the proxy rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   The destination of the proxy rule.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/FleetProxyRule AWS API Documentation
+    #
+    class FleetProxyRule < Struct.new(
+      :type,
+      :effect,
+      :entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3913,6 +3996,13 @@ module Aws::CodeBuild
     #   CloudWatch Logs and Amazon S3 artifacts for the project's builds.
     #   @return [String]
     #
+    # @!attribute [rw] auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -3943,7 +4033,8 @@ module Aws::CodeBuild
       :concurrent_build_limit,
       :project_visibility,
       :public_project_alias,
-      :resource_access_role)
+      :resource_access_role,
+      :auto_retry_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4860,6 +4951,28 @@ module Aws::CodeBuild
     class ProjectSourceVersion < Struct.new(
       :source_identifier,
       :source_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the proxy configurations that apply network access
+    # control to your reserved capacity instances.
+    #
+    # @!attribute [rw] default_behavior
+    #   The default behavior of outgoing traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordered_proxy_rules
+    #   An array of `FleetProxyRule` objects that represent the specified
+    #   destination domains or IPs to allow or deny network access control
+    #   to.
+    #   @return [Array<Types::FleetProxyRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProxyConfiguration AWS API Documentation
+    #
+    class ProxyConfiguration < Struct.new(
+      :default_behavior,
+      :ordered_proxy_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6143,6 +6256,13 @@ module Aws::CodeBuild
     #   one defined in the build project.
     #   @return [Types::ProjectFleet]
     #
+    # @!attribute [rw] auto_retry_limit_override
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -6177,7 +6297,8 @@ module Aws::CodeBuild
       :registry_credential_override,
       :image_pull_credentials_type_override,
       :debug_session_enabled,
-      :fleet_override)
+      :fleet_override,
+      :auto_retry_limit_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6537,6 +6658,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #   @return [Types::ProxyConfiguration]
+    #
     # @!attribute [rw] image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #   @return [String]
@@ -6569,6 +6694,7 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :proxy_configuration,
       :image_id,
       :fleet_service_role,
       :tags)
@@ -6746,6 +6872,13 @@ module Aws::CodeBuild
     #   To remove this limit, set this value to -1.
     #   @return [Integer]
     #
+    # @!attribute [rw] auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -6769,7 +6902,8 @@ module Aws::CodeBuild
       :logs_config,
       :file_system_locations,
       :build_batch_config,
-      :concurrent_build_limit)
+      :concurrent_build_limit,
+      :auto_retry_limit)
       SENSITIVE = []
       include Aws::Structure
     end

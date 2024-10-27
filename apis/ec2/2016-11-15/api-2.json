@@ -23,6 +23,15 @@
       "input":{"shape":"AcceptAddressTransferRequest"},
       "output":{"shape":"AcceptAddressTransferResult"}
     },
+    "AcceptCapacityReservationBillingOwnership":{
+      "name":"AcceptCapacityReservationBillingOwnership",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AcceptCapacityReservationBillingOwnershipRequest"},
+      "output":{"shape":"AcceptCapacityReservationBillingOwnershipResult"}
+    },
     "AcceptReservedInstancesExchangeQuote":{
       "name":"AcceptReservedInstancesExchangeQuote",
       "http":{
@@ -157,6 +166,15 @@
       },
       "input":{"shape":"AssociateAddressRequest"},
       "output":{"shape":"AssociateAddressResult"}
+    },
+    "AssociateCapacityReservationBillingOwner":{
+      "name":"AssociateCapacityReservationBillingOwner",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateCapacityReservationBillingOwnerRequest"},
+      "output":{"shape":"AssociateCapacityReservationBillingOwnerResult"}
     },
     "AssociateClientVpnTargetNetwork":{
       "name":"AssociateClientVpnTargetNetwork",
@@ -2075,6 +2093,15 @@
       "input":{"shape":"DescribeCapacityBlockOfferingsRequest"},
       "output":{"shape":"DescribeCapacityBlockOfferingsResult"}
     },
+    "DescribeCapacityReservationBillingRequests":{
+      "name":"DescribeCapacityReservationBillingRequests",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeCapacityReservationBillingRequestsRequest"},
+      "output":{"shape":"DescribeCapacityReservationBillingRequestsResult"}
+    },
     "DescribeCapacityReservationFleets":{
       "name":"DescribeCapacityReservationFleets",
       "http":{
@@ -2434,6 +2461,15 @@
       },
       "input":{"shape":"DescribeInstanceEventWindowsRequest"},
       "output":{"shape":"DescribeInstanceEventWindowsResult"}
+    },
+    "DescribeInstanceImageMetadata":{
+      "name":"DescribeInstanceImageMetadata",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeInstanceImageMetadataRequest"},
+      "output":{"shape":"DescribeInstanceImageMetadataResult"}
     },
     "DescribeInstanceStatus":{
       "name":"DescribeInstanceStatus",
@@ -3554,6 +3590,15 @@
         "requestUri":"/"
       },
       "input":{"shape":"DisassociateAddressRequest"}
+    },
+    "DisassociateCapacityReservationBillingOwner":{
+      "name":"DisassociateCapacityReservationBillingOwner",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateCapacityReservationBillingOwnerRequest"},
+      "output":{"shape":"DisassociateCapacityReservationBillingOwnerResult"}
     },
     "DisassociateClientVpnTargetNetwork":{
       "name":"DisassociateClientVpnTargetNetwork",
@@ -5135,6 +5180,15 @@
       "input":{"shape":"RegisterTransitGatewayMulticastGroupSourcesRequest"},
       "output":{"shape":"RegisterTransitGatewayMulticastGroupSourcesResult"}
     },
+    "RejectCapacityReservationBillingOwnership":{
+      "name":"RejectCapacityReservationBillingOwnership",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RejectCapacityReservationBillingOwnershipRequest"},
+      "output":{"shape":"RejectCapacityReservationBillingOwnershipResult"}
+    },
     "RejectTransitGatewayMulticastDomainAssociations":{
       "name":"RejectTransitGatewayMulticastDomainAssociations",
       "http":{
@@ -5730,6 +5784,23 @@
         }
       }
     },
+    "AcceptCapacityReservationBillingOwnershipRequest":{
+      "type":"structure",
+      "required":["CapacityReservationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "CapacityReservationId":{"shape":"CapacityReservationId"}
+      }
+    },
+    "AcceptCapacityReservationBillingOwnershipResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
     "AcceptReservedInstancesExchangeQuoteRequest":{
       "type":"structure",
       "required":["ReservedInstanceIds"],
@@ -5972,6 +6043,12 @@
         "shape":"AccountAttributeValue",
         "locationName":"item"
       }
+    },
+    "AccountID":{
+      "type":"string",
+      "max":12,
+      "min":12,
+      "pattern":"[0-9]{12}"
     },
     "ActiveInstance":{
       "type":"structure",
@@ -7055,6 +7132,27 @@
         "AssociationId":{
           "shape":"String",
           "locationName":"associationId"
+        }
+      }
+    },
+    "AssociateCapacityReservationBillingOwnerRequest":{
+      "type":"structure",
+      "required":[
+        "CapacityReservationId",
+        "UnusedReservationBillingOwnerId"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "CapacityReservationId":{"shape":"CapacityReservationId"},
+        "UnusedReservationBillingOwnerId":{"shape":"AccountID"}
+      }
+    },
+    "AssociateCapacityReservationBillingOwnerResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
         }
       }
     },
@@ -8385,6 +8483,13 @@
         "provisioned-not-publicly-advertisable"
       ]
     },
+    "CallerRole":{
+      "type":"string",
+      "enum":[
+        "odcr-owner",
+        "unused-reservation-billing-owner"
+      ]
+    },
     "CancelBatchErrorCode":{
       "type":"string",
       "enum":[
@@ -8873,8 +8978,63 @@
         "ReservationType":{
           "shape":"CapacityReservationType",
           "locationName":"reservationType"
+        },
+        "UnusedReservationBillingOwnerId":{
+          "shape":"AccountID",
+          "locationName":"unusedReservationBillingOwnerId"
         }
       }
+    },
+    "CapacityReservationBillingRequest":{
+      "type":"structure",
+      "members":{
+        "CapacityReservationId":{
+          "shape":"String",
+          "locationName":"capacityReservationId"
+        },
+        "RequestedBy":{
+          "shape":"String",
+          "locationName":"requestedBy"
+        },
+        "UnusedReservationBillingOwnerId":{
+          "shape":"AccountID",
+          "locationName":"unusedReservationBillingOwnerId"
+        },
+        "LastUpdateTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"lastUpdateTime"
+        },
+        "Status":{
+          "shape":"CapacityReservationBillingRequestStatus",
+          "locationName":"status"
+        },
+        "StatusMessage":{
+          "shape":"String",
+          "locationName":"statusMessage"
+        },
+        "CapacityReservationInfo":{
+          "shape":"CapacityReservationInfo",
+          "locationName":"capacityReservationInfo"
+        }
+      }
+    },
+    "CapacityReservationBillingRequestSet":{
+      "type":"list",
+      "member":{
+        "shape":"CapacityReservationBillingRequest",
+        "locationName":"item"
+      }
+    },
+    "CapacityReservationBillingRequestStatus":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "accepted",
+        "rejected",
+        "cancelled",
+        "revoked",
+        "expired"
+      ]
     },
     "CapacityReservationFleet":{
       "type":"structure",
@@ -9008,6 +9168,23 @@
       "member":{
         "shape":"CapacityReservationId",
         "locationName":"item"
+      }
+    },
+    "CapacityReservationInfo":{
+      "type":"structure",
+      "members":{
+        "InstanceType":{
+          "shape":"String",
+          "locationName":"instanceType"
+        },
+        "AvailabilityZone":{
+          "shape":"AvailabilityZoneName",
+          "locationName":"availabilityZone"
+        },
+        "Tenancy":{
+          "shape":"CapacityReservationTenancy",
+          "locationName":"tenancy"
+        }
       }
     },
     "CapacityReservationInstancePlatform":{
@@ -15158,6 +15335,42 @@
         }
       }
     },
+    "DescribeCapacityReservationBillingRequestsRequest":{
+      "type":"structure",
+      "required":["Role"],
+      "members":{
+        "CapacityReservationIds":{
+          "shape":"CapacityReservationIdSet",
+          "locationName":"CapacityReservationId"
+        },
+        "Role":{"shape":"CallerRole"},
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"DescribeCapacityReservationBillingRequestsRequestMaxResults"},
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeCapacityReservationBillingRequestsRequestMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
+    "DescribeCapacityReservationBillingRequestsResult":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        },
+        "CapacityReservationBillingRequests":{
+          "shape":"CapacityReservationBillingRequestSet",
+          "locationName":"capacityReservationBillingRequestSet"
+        }
+      }
+    },
     "DescribeCapacityReservationFleetsMaxResults":{
       "type":"integer",
       "max":100,
@@ -16509,6 +16722,40 @@
         "InstanceEventWindows":{
           "shape":"InstanceEventWindowSet",
           "locationName":"instanceEventWindowSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeInstanceImageMetadataMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
+    "DescribeInstanceImageMetadataRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "InstanceIds":{
+          "shape":"InstanceIdStringList",
+          "locationName":"InstanceId"
+        },
+        "MaxResults":{"shape":"DescribeInstanceImageMetadataMaxResults"},
+        "NextToken":{"shape":"String"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeInstanceImageMetadataResult":{
+      "type":"structure",
+      "members":{
+        "InstanceImageMetadata":{
+          "shape":"InstanceImageMetadataList",
+          "locationName":"instanceImageMetadataSet"
         },
         "NextToken":{
           "shape":"String",
@@ -20482,6 +20729,27 @@
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
+        }
+      }
+    },
+    "DisassociateCapacityReservationBillingOwnerRequest":{
+      "type":"structure",
+      "required":[
+        "CapacityReservationId",
+        "UnusedReservationBillingOwnerId"
+      ],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "CapacityReservationId":{"shape":"CapacityReservationId"},
+        "UnusedReservationBillingOwnerId":{"shape":"AccountID"}
+      }
+    },
+    "DisassociateCapacityReservationBillingOwnerResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
         }
       }
     },
@@ -25821,6 +26089,43 @@
         "locationName":"item"
       }
     },
+    "ImageMetadata":{
+      "type":"structure",
+      "members":{
+        "ImageId":{
+          "shape":"ImageId",
+          "locationName":"imageId"
+        },
+        "Name":{
+          "shape":"String",
+          "locationName":"name"
+        },
+        "OwnerId":{
+          "shape":"String",
+          "locationName":"imageOwnerId"
+        },
+        "State":{
+          "shape":"ImageState",
+          "locationName":"imageState"
+        },
+        "ImageOwnerAlias":{
+          "shape":"String",
+          "locationName":"imageOwnerAlias"
+        },
+        "CreationDate":{
+          "shape":"String",
+          "locationName":"creationDate"
+        },
+        "DeprecationTime":{
+          "shape":"String",
+          "locationName":"deprecationTime"
+        },
+        "IsPublic":{
+          "shape":"Boolean",
+          "locationName":"isPublic"
+        }
+      }
+    },
     "ImageRecycleBinInfo":{
       "type":"structure",
       "members":{
@@ -27240,6 +27545,54 @@
       "type":"list",
       "member":{
         "shape":"InstanceId",
+        "locationName":"item"
+      }
+    },
+    "InstanceImageMetadata":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "locationName":"instanceId"
+        },
+        "InstanceType":{
+          "shape":"InstanceType",
+          "locationName":"instanceType"
+        },
+        "LaunchTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"launchTime"
+        },
+        "AvailabilityZone":{
+          "shape":"String",
+          "locationName":"availabilityZone"
+        },
+        "ZoneId":{
+          "shape":"String",
+          "locationName":"zoneId"
+        },
+        "State":{
+          "shape":"InstanceState",
+          "locationName":"instanceState"
+        },
+        "OwnerId":{
+          "shape":"String",
+          "locationName":"instanceOwnerId"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        },
+        "ImageMetadata":{
+          "shape":"ImageMetadata",
+          "locationName":"imageMetadata"
+        }
+      }
+    },
+    "InstanceImageMetadataList":{
+      "type":"list",
+      "member":{
+        "shape":"InstanceImageMetadata",
         "locationName":"item"
       }
     },
@@ -28991,7 +29344,43 @@
         "g6e.12xlarge",
         "g6e.16xlarge",
         "g6e.24xlarge",
-        "g6e.48xlarge"
+        "g6e.48xlarge",
+        "c8g.medium",
+        "c8g.large",
+        "c8g.xlarge",
+        "c8g.2xlarge",
+        "c8g.4xlarge",
+        "c8g.8xlarge",
+        "c8g.12xlarge",
+        "c8g.16xlarge",
+        "c8g.24xlarge",
+        "c8g.48xlarge",
+        "c8g.metal-24xl",
+        "c8g.metal-48xl",
+        "m8g.medium",
+        "m8g.large",
+        "m8g.xlarge",
+        "m8g.2xlarge",
+        "m8g.4xlarge",
+        "m8g.8xlarge",
+        "m8g.12xlarge",
+        "m8g.16xlarge",
+        "m8g.24xlarge",
+        "m8g.48xlarge",
+        "m8g.metal-24xl",
+        "m8g.metal-48xl",
+        "x8g.medium",
+        "x8g.large",
+        "x8g.xlarge",
+        "x8g.2xlarge",
+        "x8g.4xlarge",
+        "x8g.8xlarge",
+        "x8g.12xlarge",
+        "x8g.16xlarge",
+        "x8g.24xlarge",
+        "x8g.48xlarge",
+        "x8g.metal-24xl",
+        "x8g.metal-48xl"
       ]
     },
     "InstanceTypeHypervisor":{
@@ -35787,6 +36176,7 @@
       "type":"string",
       "enum":[
         "efa",
+        "efa-only",
         "branch",
         "trunk"
       ]
@@ -35940,6 +36330,7 @@
         "interface",
         "natGateway",
         "efa",
+        "efa-only",
         "trunk",
         "load_balancer",
         "network_load_balancer",
@@ -38058,6 +38449,23 @@
         }
       }
     },
+    "RejectCapacityReservationBillingOwnershipRequest":{
+      "type":"structure",
+      "required":["CapacityReservationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "CapacityReservationId":{"shape":"CapacityReservationId"}
+      }
+    },
+    "RejectCapacityReservationBillingOwnershipResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
     "RejectTransitGatewayMulticastDomainAssociationsRequest":{
       "type":"structure",
       "members":{
@@ -38838,7 +39246,7 @@
           "locationName":"kernelId"
         },
         "KeyName":{
-          "shape":"KeyPairName",
+          "shape":"KeyPairNameWithResolver",
           "locationName":"keyName"
         },
         "Monitoring":{

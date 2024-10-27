@@ -595,6 +595,7 @@ module Aws::Lambda
       attr_accessor configuration: Types::FunctionConfiguration
       attr_accessor code: Types::FunctionCodeLocation
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tags_error: Types::TagsError
       attr_accessor concurrency: Types::Concurrency
       SENSITIVE: []
     end
@@ -1318,6 +1319,12 @@ module Aws::Lambda
     class TagResourceRequest
       attr_accessor resource: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagsError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

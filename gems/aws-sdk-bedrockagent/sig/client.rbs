@@ -426,12 +426,13 @@ module Aws
                                  prompt: {
                                    source_configuration: {
                                      inline: {
+                                       additional_model_request_fields: {
+                                       }?,
                                        inference_configuration: {
                                          text: {
                                            max_tokens: ::Integer?,
                                            stop_sequences: Array[::String]?,
                                            temperature: ::Float?,
-                                           top_k: ::Integer?,
                                            top_p: ::Float?
                                          }?
                                        }?,
@@ -644,12 +645,13 @@ module Aws
                            ?tags: Hash[::String, ::String],
                            ?variants: Array[
                              {
+                               additional_model_request_fields: {
+                               }?,
                                inference_configuration: {
                                  text: {
                                    max_tokens: ::Integer?,
                                    stop_sequences: Array[::String]?,
                                    temperature: ::Float?,
-                                   top_k: ::Integer?,
                                    top_p: ::Float?
                                  }?
                                }?,
@@ -670,7 +672,7 @@ module Aws
                                    ]?,
                                    text: ::String
                                  }?
-                               }?,
+                               },
                                template_type: ("TEXT")
                              },
                            ]
@@ -1595,12 +1597,13 @@ module Aws
                                  prompt: {
                                    source_configuration: {
                                      inline: {
+                                       additional_model_request_fields: {
+                                       }?,
                                        inference_configuration: {
                                          text: {
                                            max_tokens: ::Integer?,
                                            stop_sequences: Array[::String]?,
                                            temperature: ::Float?,
-                                           top_k: ::Integer?,
                                            top_p: ::Float?
                                          }?
                                        }?,
@@ -1789,12 +1792,13 @@ module Aws
                            prompt_identifier: ::String,
                            ?variants: Array[
                              {
+                               additional_model_request_fields: {
+                               }?,
                                inference_configuration: {
                                  text: {
                                    max_tokens: ::Integer?,
                                    stop_sequences: Array[::String]?,
                                    temperature: ::Float?,
-                                   top_k: ::Integer?,
                                    top_p: ::Float?
                                  }?
                                }?,
@@ -1815,7 +1819,7 @@ module Aws
                                    ]?,
                                    text: ::String
                                  }?
-                               }?,
+                               },
                                template_type: ("TEXT")
                              },
                            ]

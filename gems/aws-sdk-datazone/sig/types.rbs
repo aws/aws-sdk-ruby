@@ -830,7 +830,7 @@ module Aws::DataZone
     end
 
     class CreateProjectMembershipInput
-      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR")
+      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
       attr_accessor domain_identifier: ::String
       attr_accessor member: Types::Member
       attr_accessor project_identifier: ::String
@@ -3147,13 +3147,13 @@ module Aws::DataZone
     end
 
     class ProjectMember
-      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR")
+      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
       attr_accessor member_details: Types::MemberDetails
       SENSITIVE: []
     end
 
     class ProjectPolicyGrantPrincipal
-      attr_accessor project_designation: ("OWNER" | "CONTRIBUTOR")
+      attr_accessor project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD")
       attr_accessor project_grant_filter: Types::ProjectGrantFilter
       attr_accessor project_identifier: ::String
       SENSITIVE: []

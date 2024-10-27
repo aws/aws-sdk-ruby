@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Route53Profiles::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,43 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_profile
-            Aws::Route53Profiles::Endpoints::AssociateProfile.build(context)
-          when :associate_resource_to_profile
-            Aws::Route53Profiles::Endpoints::AssociateResourceToProfile.build(context)
-          when :create_profile
-            Aws::Route53Profiles::Endpoints::CreateProfile.build(context)
-          when :delete_profile
-            Aws::Route53Profiles::Endpoints::DeleteProfile.build(context)
-          when :disassociate_profile
-            Aws::Route53Profiles::Endpoints::DisassociateProfile.build(context)
-          when :disassociate_resource_from_profile
-            Aws::Route53Profiles::Endpoints::DisassociateResourceFromProfile.build(context)
-          when :get_profile
-            Aws::Route53Profiles::Endpoints::GetProfile.build(context)
-          when :get_profile_association
-            Aws::Route53Profiles::Endpoints::GetProfileAssociation.build(context)
-          when :get_profile_resource_association
-            Aws::Route53Profiles::Endpoints::GetProfileResourceAssociation.build(context)
-          when :list_profile_associations
-            Aws::Route53Profiles::Endpoints::ListProfileAssociations.build(context)
-          when :list_profile_resource_associations
-            Aws::Route53Profiles::Endpoints::ListProfileResourceAssociations.build(context)
-          when :list_profiles
-            Aws::Route53Profiles::Endpoints::ListProfiles.build(context)
-          when :list_tags_for_resource
-            Aws::Route53Profiles::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::Route53Profiles::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Route53Profiles::Endpoints::UntagResource.build(context)
-          when :update_profile_resource_association
-            Aws::Route53Profiles::Endpoints::UpdateProfileResourceAssociation.build(context)
           end
         end
       end

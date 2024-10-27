@@ -38,6 +38,19 @@ module Aws
           expect(extra[:pk_y]).to be_a(Integer)
           expect(extra[:pk_y]).to eq 60777455846638291266199385583357715250110920888403467466325436560561456866584
         end
+
+        # ensure that encoding of private keys with MSB set result in valid EC objects
+        context 'private key with most significant bit set' do
+
+          let(:access_key_id) { 'ASIAJOP4OINN7EXAMPLE' }
+          let(:secret_access_key) { 'bJalbXutNFeni/k7MDEnG/byxRfiCYEXAMPLEKEY' }
+          let(:test_value) { 'test_value' }
+
+          it 'derives a valid EC PKey' do
+            signature = ec.dsa_sign_asn1(test_value)
+            expect(ec.dsa_verify_asn1(test_value, signature)).to be_truthy
+          end
+        end
       end
     end
   end

@@ -248,6 +248,7 @@ module Aws::FMS
     ReplaceNetworkAclAssociationAction = Shapes::StructureShape.new(name: 'ReplaceNetworkAclAssociationAction')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -310,6 +311,8 @@ module Aws::FMS
     ViolationDetail = Shapes::StructureShape.new(name: 'ViolationDetail')
     ViolationReason = Shapes::StringShape.new(name: 'ViolationReason')
     ViolationTarget = Shapes::StringShape.new(name: 'ViolationTarget')
+    WebACLHasIncompatibleConfigurationViolation = Shapes::StructureShape.new(name: 'WebACLHasIncompatibleConfigurationViolation')
+    WebACLHasOutOfScopeResourcesViolation = Shapes::StructureShape.new(name: 'WebACLHasOutOfScopeResourcesViolation')
 
     AWSAccountIdList.member = Shapes::ShapeRef.new(shape: AWSAccountId)
 
@@ -1119,6 +1122,8 @@ module Aws::FMS
     Resource.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "AccountId"))
     Resource.struct_class = Types::Resource
 
+    ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
+
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
@@ -1178,6 +1183,8 @@ module Aws::FMS
     ResourceViolation.add_member(:firewall_subnet_missing_vpc_endpoint_violation, Shapes::ShapeRef.new(shape: FirewallSubnetMissingVPCEndpointViolation, location_name: "FirewallSubnetMissingVPCEndpointViolation"))
     ResourceViolation.add_member(:invalid_network_acl_entries_violation, Shapes::ShapeRef.new(shape: InvalidNetworkAclEntriesViolation, location_name: "InvalidNetworkAclEntriesViolation"))
     ResourceViolation.add_member(:possible_remediation_actions, Shapes::ShapeRef.new(shape: PossibleRemediationActions, location_name: "PossibleRemediationActions"))
+    ResourceViolation.add_member(:web_acl_has_incompatible_configuration_violation, Shapes::ShapeRef.new(shape: WebACLHasIncompatibleConfigurationViolation, location_name: "WebACLHasIncompatibleConfigurationViolation"))
+    ResourceViolation.add_member(:web_acl_has_out_of_scope_resources_violation, Shapes::ShapeRef.new(shape: WebACLHasOutOfScopeResourcesViolation, location_name: "WebACLHasOutOfScopeResourcesViolation"))
     ResourceViolation.struct_class = Types::ResourceViolation
 
     ResourceViolations.member = Shapes::ShapeRef.new(shape: ResourceViolation)
@@ -1304,6 +1311,14 @@ module Aws::FMS
     ViolationDetail.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ResourceTags"))
     ViolationDetail.add_member(:resource_description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "ResourceDescription"))
     ViolationDetail.struct_class = Types::ViolationDetail
+
+    WebACLHasIncompatibleConfigurationViolation.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "WebACLArn"))
+    WebACLHasIncompatibleConfigurationViolation.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
+    WebACLHasIncompatibleConfigurationViolation.struct_class = Types::WebACLHasIncompatibleConfigurationViolation
+
+    WebACLHasOutOfScopeResourcesViolation.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "WebACLArn"))
+    WebACLHasOutOfScopeResourcesViolation.add_member(:out_of_scope_resource_list, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "OutOfScopeResourceList"))
+    WebACLHasOutOfScopeResourcesViolation.struct_class = Types::WebACLHasOutOfScopeResourcesViolation
 
 
     # @api private

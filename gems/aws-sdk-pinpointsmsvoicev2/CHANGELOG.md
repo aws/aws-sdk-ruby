@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2024-10-17)
+------------------
+
+* Feature - Added the registrations status of REQUIRES_AUTHENTICATION
+
 1.27.0 (2024-09-24)
 ------------------
 

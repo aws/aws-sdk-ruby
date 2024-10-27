@@ -55,7 +55,7 @@ module Aws::DocDB
   autoload :EndpointProvider, 'aws-sdk-docdb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-docdb/endpoints'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end
 

@@ -176,6 +176,23 @@ module Aws
                            ) -> _GetEnvironmentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
 
+      interface _InvokeRestApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeRestApiResponse]
+        def rest_api_status_code: () -> ::Integer
+        def rest_api_response: () -> untyped
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#invoke_rest_api-instance_method
+      def invoke_rest_api: (
+                             name: ::String,
+                             path: ::String,
+                             method: ("GET" | "PUT" | "POST" | "PATCH" | "DELETE"),
+                             ?query_parameters: {
+                             },
+                             ?body: {
+                             }
+                           ) -> _InvokeRestApiResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeRestApiResponseSuccess
+
       interface _ListEnvironmentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsOutput]
         def environments: () -> ::Array[::String]

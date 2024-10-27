@@ -53,6 +53,8 @@ module Aws::DatabaseMigrationService
     ComputeConfig = Shapes::StructureShape.new(name: 'ComputeConfig')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
+    CreateDataMigrationMessage = Shapes::StructureShape.new(name: 'CreateDataMigrationMessage')
+    CreateDataMigrationResponse = Shapes::StructureShape.new(name: 'CreateDataMigrationResponse')
     CreateDataProviderMessage = Shapes::StructureShape.new(name: 'CreateDataProviderMessage')
     CreateDataProviderResponse = Shapes::StructureShape.new(name: 'CreateDataProviderResponse')
     CreateEndpointMessage = Shapes::StructureShape.new(name: 'CreateEndpointMessage')
@@ -74,6 +76,11 @@ module Aws::DatabaseMigrationService
     CreateReplicationTaskMessage = Shapes::StructureShape.new(name: 'CreateReplicationTaskMessage')
     CreateReplicationTaskResponse = Shapes::StructureShape.new(name: 'CreateReplicationTaskResponse')
     DataFormatValue = Shapes::StringShape.new(name: 'DataFormatValue')
+    DataMigration = Shapes::StructureShape.new(name: 'DataMigration')
+    DataMigrationCidrBlock = Shapes::ListShape.new(name: 'DataMigrationCidrBlock')
+    DataMigrationSettings = Shapes::StructureShape.new(name: 'DataMigrationSettings')
+    DataMigrationStatistics = Shapes::StructureShape.new(name: 'DataMigrationStatistics')
+    DataMigrations = Shapes::ListShape.new(name: 'DataMigrations')
     DataProvider = Shapes::StructureShape.new(name: 'DataProvider')
     DataProviderDescriptor = Shapes::StructureShape.new(name: 'DataProviderDescriptor')
     DataProviderDescriptorDefinition = Shapes::StructureShape.new(name: 'DataProviderDescriptorDefinition')
@@ -94,6 +101,8 @@ module Aws::DatabaseMigrationService
     DeleteCollectorRequest = Shapes::StructureShape.new(name: 'DeleteCollectorRequest')
     DeleteConnectionMessage = Shapes::StructureShape.new(name: 'DeleteConnectionMessage')
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
+    DeleteDataMigrationMessage = Shapes::StructureShape.new(name: 'DeleteDataMigrationMessage')
+    DeleteDataMigrationResponse = Shapes::StructureShape.new(name: 'DeleteDataMigrationResponse')
     DeleteDataProviderMessage = Shapes::StructureShape.new(name: 'DeleteDataProviderMessage')
     DeleteDataProviderResponse = Shapes::StructureShape.new(name: 'DeleteDataProviderResponse')
     DeleteEndpointMessage = Shapes::StructureShape.new(name: 'DeleteEndpointMessage')
@@ -126,6 +135,8 @@ module Aws::DatabaseMigrationService
     DescribeConnectionsResponse = Shapes::StructureShape.new(name: 'DescribeConnectionsResponse')
     DescribeConversionConfigurationMessage = Shapes::StructureShape.new(name: 'DescribeConversionConfigurationMessage')
     DescribeConversionConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeConversionConfigurationResponse')
+    DescribeDataMigrationsMessage = Shapes::StructureShape.new(name: 'DescribeDataMigrationsMessage')
+    DescribeDataMigrationsResponse = Shapes::StructureShape.new(name: 'DescribeDataMigrationsResponse')
     DescribeDataProvidersMessage = Shapes::StructureShape.new(name: 'DescribeDataProvidersMessage')
     DescribeDataProvidersResponse = Shapes::StructureShape.new(name: 'DescribeDataProvidersResponse')
     DescribeEndpointSettingsMessage = Shapes::StructureShape.new(name: 'DescribeEndpointSettingsMessage')
@@ -233,6 +244,7 @@ module Aws::DatabaseMigrationService
     ExportMetadataModelAssessmentResponse = Shapes::StructureShape.new(name: 'ExportMetadataModelAssessmentResponse')
     ExportMetadataModelAssessmentResultEntry = Shapes::StructureShape.new(name: 'ExportMetadataModelAssessmentResultEntry')
     ExportSqlDetails = Shapes::StructureShape.new(name: 'ExportSqlDetails')
+    FailedDependencyFault = Shapes::StructureShape.new(name: 'FailedDependencyFault')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
@@ -280,6 +292,7 @@ module Aws::DatabaseMigrationService
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
     LongVarcharMappingType = Shapes::StringShape.new(name: 'LongVarcharMappingType')
     MariaDbDataProviderSettings = Shapes::StructureShape.new(name: 'MariaDbDataProviderSettings')
+    Marker = Shapes::StringShape.new(name: 'Marker')
     MessageFormatValue = Shapes::StringShape.new(name: 'MessageFormatValue')
     MicrosoftSQLServerSettings = Shapes::StructureShape.new(name: 'MicrosoftSQLServerSettings')
     MicrosoftSqlServerDataProviderSettings = Shapes::StructureShape.new(name: 'MicrosoftSqlServerDataProviderSettings')
@@ -288,6 +301,8 @@ module Aws::DatabaseMigrationService
     MigrationTypeValue = Shapes::StringShape.new(name: 'MigrationTypeValue')
     ModifyConversionConfigurationMessage = Shapes::StructureShape.new(name: 'ModifyConversionConfigurationMessage')
     ModifyConversionConfigurationResponse = Shapes::StructureShape.new(name: 'ModifyConversionConfigurationResponse')
+    ModifyDataMigrationMessage = Shapes::StructureShape.new(name: 'ModifyDataMigrationMessage')
+    ModifyDataMigrationResponse = Shapes::StructureShape.new(name: 'ModifyDataMigrationResponse')
     ModifyDataProviderMessage = Shapes::StructureShape.new(name: 'ModifyDataProviderMessage')
     ModifyDataProviderResponse = Shapes::StructureShape.new(name: 'ModifyDataProviderResponse')
     ModifyEndpointMessage = Shapes::StructureShape.new(name: 'ModifyEndpointMessage')
@@ -327,6 +342,7 @@ module Aws::DatabaseMigrationService
     PostgreSQLSettings = Shapes::StructureShape.new(name: 'PostgreSQLSettings')
     PostgreSqlDataProviderSettings = Shapes::StructureShape.new(name: 'PostgreSqlDataProviderSettings')
     ProvisionData = Shapes::StructureShape.new(name: 'ProvisionData')
+    PublicIpAddressList = Shapes::ListShape.new(name: 'PublicIpAddressList')
     RdsConfiguration = Shapes::StructureShape.new(name: 'RdsConfiguration')
     RdsRecommendation = Shapes::StructureShape.new(name: 'RdsRecommendation')
     RdsRequirements = Shapes::StructureShape.new(name: 'RdsRequirements')
@@ -376,6 +392,7 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentRun = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentRun')
     ReplicationTaskAssessmentRunList = Shapes::ListShape.new(name: 'ReplicationTaskAssessmentRunList')
     ReplicationTaskAssessmentRunProgress = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentRunProgress')
+    ReplicationTaskAssessmentRunResultStatistic = Shapes::StructureShape.new(name: 'ReplicationTaskAssessmentRunResultStatistic')
     ReplicationTaskIndividualAssessment = Shapes::StructureShape.new(name: 'ReplicationTaskIndividualAssessment')
     ReplicationTaskIndividualAssessmentList = Shapes::ListShape.new(name: 'ReplicationTaskIndividualAssessmentList')
     ReplicationTaskList = Shapes::ListShape.new(name: 'ReplicationTaskList')
@@ -400,9 +417,13 @@ module Aws::DatabaseMigrationService
     SchemaShortInfoResponse = Shapes::StructureShape.new(name: 'SchemaShortInfoResponse')
     SecretString = Shapes::StringShape.new(name: 'SecretString')
     ServerShortInfoResponse = Shapes::StructureShape.new(name: 'ServerShortInfoResponse')
+    SourceDataSetting = Shapes::StructureShape.new(name: 'SourceDataSetting')
+    SourceDataSettings = Shapes::ListShape.new(name: 'SourceDataSettings')
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     SslSecurityProtocolValue = Shapes::StringShape.new(name: 'SslSecurityProtocolValue')
+    StartDataMigrationMessage = Shapes::StructureShape.new(name: 'StartDataMigrationMessage')
+    StartDataMigrationResponse = Shapes::StructureShape.new(name: 'StartDataMigrationResponse')
     StartExtensionPackAssociationMessage = Shapes::StructureShape.new(name: 'StartExtensionPackAssociationMessage')
     StartExtensionPackAssociationResponse = Shapes::StructureShape.new(name: 'StartExtensionPackAssociationResponse')
     StartMetadataModelAssessmentMessage = Shapes::StructureShape.new(name: 'StartMetadataModelAssessmentMessage')
@@ -419,6 +440,7 @@ module Aws::DatabaseMigrationService
     StartRecommendationsRequestEntry = Shapes::StructureShape.new(name: 'StartRecommendationsRequestEntry')
     StartRecommendationsRequestEntryList = Shapes::ListShape.new(name: 'StartRecommendationsRequestEntryList')
     StartReplicationMessage = Shapes::StructureShape.new(name: 'StartReplicationMessage')
+    StartReplicationMigrationTypeValue = Shapes::StringShape.new(name: 'StartReplicationMigrationTypeValue')
     StartReplicationResponse = Shapes::StructureShape.new(name: 'StartReplicationResponse')
     StartReplicationTaskAssessmentMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentMessage')
     StartReplicationTaskAssessmentResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentResponse')
@@ -427,6 +449,8 @@ module Aws::DatabaseMigrationService
     StartReplicationTaskMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskMessage')
     StartReplicationTaskResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskResponse')
     StartReplicationTaskTypeValue = Shapes::StringShape.new(name: 'StartReplicationTaskTypeValue')
+    StopDataMigrationMessage = Shapes::StructureShape.new(name: 'StopDataMigrationMessage')
+    StopDataMigrationResponse = Shapes::StructureShape.new(name: 'StopDataMigrationResponse')
     StopReplicationMessage = Shapes::StructureShape.new(name: 'StopReplicationMessage')
     StopReplicationResponse = Shapes::StructureShape.new(name: 'StopReplicationResponse')
     StopReplicationTaskMessage = Shapes::StructureShape.new(name: 'StopReplicationTaskMessage')
@@ -581,6 +605,20 @@ module Aws::DatabaseMigrationService
     Connection.struct_class = Types::Connection
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
+
+    CreateDataMigrationMessage.add_member(:data_migration_name, Shapes::ShapeRef.new(shape: String, location_name: "DataMigrationName"))
+    CreateDataMigrationMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    CreateDataMigrationMessage.add_member(:data_migration_type, Shapes::ShapeRef.new(shape: MigrationTypeValue, required: true, location_name: "DataMigrationType"))
+    CreateDataMigrationMessage.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
+    CreateDataMigrationMessage.add_member(:enable_cloudwatch_logs, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCloudwatchLogs"))
+    CreateDataMigrationMessage.add_member(:source_data_settings, Shapes::ShapeRef.new(shape: SourceDataSettings, location_name: "SourceDataSettings"))
+    CreateDataMigrationMessage.add_member(:number_of_jobs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfJobs"))
+    CreateDataMigrationMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDataMigrationMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: SecretString, location_name: "SelectionRules"))
+    CreateDataMigrationMessage.struct_class = Types::CreateDataMigrationMessage
+
+    CreateDataMigrationResponse.add_member(:data_migration, Shapes::ShapeRef.new(shape: DataMigration, location_name: "DataMigration"))
+    CreateDataMigrationResponse.struct_class = Types::CreateDataMigrationResponse
 
     CreateDataProviderMessage.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
     CreateDataProviderMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -747,6 +785,44 @@ module Aws::DatabaseMigrationService
     CreateReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
     CreateReplicationTaskResponse.struct_class = Types::CreateReplicationTaskResponse
 
+    DataMigration.add_member(:data_migration_name, Shapes::ShapeRef.new(shape: String, location_name: "DataMigrationName"))
+    DataMigration.add_member(:data_migration_arn, Shapes::ShapeRef.new(shape: String, location_name: "DataMigrationArn"))
+    DataMigration.add_member(:data_migration_create_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "DataMigrationCreateTime"))
+    DataMigration.add_member(:data_migration_start_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "DataMigrationStartTime"))
+    DataMigration.add_member(:data_migration_end_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "DataMigrationEndTime"))
+    DataMigration.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
+    DataMigration.add_member(:migration_project_arn, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectArn"))
+    DataMigration.add_member(:data_migration_type, Shapes::ShapeRef.new(shape: MigrationTypeValue, location_name: "DataMigrationType"))
+    DataMigration.add_member(:data_migration_settings, Shapes::ShapeRef.new(shape: DataMigrationSettings, location_name: "DataMigrationSettings"))
+    DataMigration.add_member(:source_data_settings, Shapes::ShapeRef.new(shape: SourceDataSettings, location_name: "SourceDataSettings"))
+    DataMigration.add_member(:data_migration_statistics, Shapes::ShapeRef.new(shape: DataMigrationStatistics, location_name: "DataMigrationStatistics"))
+    DataMigration.add_member(:data_migration_status, Shapes::ShapeRef.new(shape: String, location_name: "DataMigrationStatus"))
+    DataMigration.add_member(:public_ip_addresses, Shapes::ShapeRef.new(shape: PublicIpAddressList, location_name: "PublicIpAddresses"))
+    DataMigration.add_member(:data_migration_cidr_blocks, Shapes::ShapeRef.new(shape: DataMigrationCidrBlock, location_name: "DataMigrationCidrBlocks"))
+    DataMigration.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: String, location_name: "LastFailureMessage"))
+    DataMigration.add_member(:stop_reason, Shapes::ShapeRef.new(shape: String, location_name: "StopReason"))
+    DataMigration.struct_class = Types::DataMigration
+
+    DataMigrationCidrBlock.member = Shapes::ShapeRef.new(shape: String)
+
+    DataMigrationSettings.add_member(:number_of_jobs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfJobs"))
+    DataMigrationSettings.add_member(:cloudwatch_logs_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CloudwatchLogsEnabled"))
+    DataMigrationSettings.add_member(:selection_rules, Shapes::ShapeRef.new(shape: SecretString, location_name: "SelectionRules"))
+    DataMigrationSettings.struct_class = Types::DataMigrationSettings
+
+    DataMigrationStatistics.add_member(:tables_loaded, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesLoaded"))
+    DataMigrationStatistics.add_member(:elapsed_time_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ElapsedTimeMillis"))
+    DataMigrationStatistics.add_member(:tables_loading, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesLoading"))
+    DataMigrationStatistics.add_member(:full_load_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "FullLoadPercentage"))
+    DataMigrationStatistics.add_member(:cdc_latency, Shapes::ShapeRef.new(shape: Integer, location_name: "CDCLatency"))
+    DataMigrationStatistics.add_member(:tables_queued, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesQueued"))
+    DataMigrationStatistics.add_member(:tables_errored, Shapes::ShapeRef.new(shape: Integer, location_name: "TablesErrored"))
+    DataMigrationStatistics.add_member(:start_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartTime"))
+    DataMigrationStatistics.add_member(:stop_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StopTime"))
+    DataMigrationStatistics.struct_class = Types::DataMigrationStatistics
+
+    DataMigrations.member = Shapes::ShapeRef.new(shape: DataMigration)
+
     DataProvider.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
     DataProvider.add_member(:data_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderArn"))
     DataProvider.add_member(:data_provider_creation_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "DataProviderCreationTime"))
@@ -836,6 +912,12 @@ module Aws::DatabaseMigrationService
 
     DeleteConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     DeleteConnectionResponse.struct_class = Types::DeleteConnectionResponse
+
+    DeleteDataMigrationMessage.add_member(:data_migration_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataMigrationIdentifier"))
+    DeleteDataMigrationMessage.struct_class = Types::DeleteDataMigrationMessage
+
+    DeleteDataMigrationResponse.add_member(:data_migration, Shapes::ShapeRef.new(shape: DataMigration, location_name: "DataMigration"))
+    DeleteDataMigrationResponse.struct_class = Types::DeleteDataMigrationResponse
 
     DeleteDataProviderMessage.add_member(:data_provider_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataProviderIdentifier"))
     DeleteDataProviderMessage.struct_class = Types::DeleteDataProviderMessage
@@ -945,6 +1027,17 @@ module Aws::DatabaseMigrationService
     DescribeConversionConfigurationResponse.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectIdentifier"))
     DescribeConversionConfigurationResponse.add_member(:conversion_configuration, Shapes::ShapeRef.new(shape: String, location_name: "ConversionConfiguration"))
     DescribeConversionConfigurationResponse.struct_class = Types::DescribeConversionConfigurationResponse
+
+    DescribeDataMigrationsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeDataMigrationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeDataMigrationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeDataMigrationsMessage.add_member(:without_settings, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "WithoutSettings"))
+    DescribeDataMigrationsMessage.add_member(:without_statistics, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "WithoutStatistics"))
+    DescribeDataMigrationsMessage.struct_class = Types::DescribeDataMigrationsMessage
+
+    DescribeDataMigrationsResponse.add_member(:data_migrations, Shapes::ShapeRef.new(shape: DataMigrations, location_name: "DataMigrations"))
+    DescribeDataMigrationsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeDataMigrationsResponse.struct_class = Types::DescribeDataMigrationsResponse
 
     DescribeDataProvidersMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeDataProvidersMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1460,6 +1553,9 @@ module Aws::DatabaseMigrationService
     ExportSqlDetails.add_member(:object_url, Shapes::ShapeRef.new(shape: String, location_name: "ObjectURL"))
     ExportSqlDetails.struct_class = Types::ExportSqlDetails
 
+    FailedDependencyFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    FailedDependencyFault.struct_class = Types::FailedDependencyFault
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
     Filter.struct_class = Types::Filter
@@ -1691,6 +1787,19 @@ module Aws::DatabaseMigrationService
 
     ModifyConversionConfigurationResponse.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectIdentifier"))
     ModifyConversionConfigurationResponse.struct_class = Types::ModifyConversionConfigurationResponse
+
+    ModifyDataMigrationMessage.add_member(:data_migration_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataMigrationIdentifier"))
+    ModifyDataMigrationMessage.add_member(:data_migration_name, Shapes::ShapeRef.new(shape: String, location_name: "DataMigrationName"))
+    ModifyDataMigrationMessage.add_member(:enable_cloudwatch_logs, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCloudwatchLogs"))
+    ModifyDataMigrationMessage.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
+    ModifyDataMigrationMessage.add_member(:data_migration_type, Shapes::ShapeRef.new(shape: MigrationTypeValue, location_name: "DataMigrationType"))
+    ModifyDataMigrationMessage.add_member(:source_data_settings, Shapes::ShapeRef.new(shape: SourceDataSettings, location_name: "SourceDataSettings"))
+    ModifyDataMigrationMessage.add_member(:number_of_jobs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfJobs"))
+    ModifyDataMigrationMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: SecretString, location_name: "SelectionRules"))
+    ModifyDataMigrationMessage.struct_class = Types::ModifyDataMigrationMessage
+
+    ModifyDataMigrationResponse.add_member(:data_migration, Shapes::ShapeRef.new(shape: DataMigration, location_name: "DataMigration"))
+    ModifyDataMigrationResponse.struct_class = Types::ModifyDataMigrationResponse
 
     ModifyDataProviderMessage.add_member(:data_provider_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataProviderIdentifier"))
     ModifyDataProviderMessage.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
@@ -2022,6 +2131,8 @@ module Aws::DatabaseMigrationService
     ProvisionData.add_member(:reason_for_new_provisioning_data, Shapes::ShapeRef.new(shape: String, location_name: "ReasonForNewProvisioningData"))
     ProvisionData.struct_class = Types::ProvisionData
 
+    PublicIpAddressList.member = Shapes::ShapeRef.new(shape: String)
+
     RdsConfiguration.add_member(:engine_edition, Shapes::ShapeRef.new(shape: String, location_name: "EngineEdition"))
     RdsConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
     RdsConfiguration.add_member(:instance_vcpu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "InstanceVcpu"))
@@ -2314,6 +2425,8 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentRun.add_member(:result_encryption_mode, Shapes::ShapeRef.new(shape: String, location_name: "ResultEncryptionMode"))
     ReplicationTaskAssessmentRun.add_member(:result_kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResultKmsKeyArn"))
     ReplicationTaskAssessmentRun.add_member(:assessment_run_name, Shapes::ShapeRef.new(shape: String, location_name: "AssessmentRunName"))
+    ReplicationTaskAssessmentRun.add_member(:is_latest_task_assessment_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsLatestTaskAssessmentRun"))
+    ReplicationTaskAssessmentRun.add_member(:result_statistic, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRunResultStatistic, location_name: "ResultStatistic"))
     ReplicationTaskAssessmentRun.struct_class = Types::ReplicationTaskAssessmentRun
 
     ReplicationTaskAssessmentRunList.member = Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRun)
@@ -2321,6 +2434,13 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentRunProgress.add_member(:individual_assessment_count, Shapes::ShapeRef.new(shape: Integer, location_name: "IndividualAssessmentCount"))
     ReplicationTaskAssessmentRunProgress.add_member(:individual_assessment_completed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "IndividualAssessmentCompletedCount"))
     ReplicationTaskAssessmentRunProgress.struct_class = Types::ReplicationTaskAssessmentRunProgress
+
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:passed, Shapes::ShapeRef.new(shape: Integer, location_name: "Passed"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:failed, Shapes::ShapeRef.new(shape: Integer, location_name: "Failed"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:error, Shapes::ShapeRef.new(shape: Integer, location_name: "Error"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:warning, Shapes::ShapeRef.new(shape: Integer, location_name: "Warning"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:cancelled, Shapes::ShapeRef.new(shape: Integer, location_name: "Cancelled"))
+    ReplicationTaskAssessmentRunResultStatistic.struct_class = Types::ReplicationTaskAssessmentRunResultStatistic
 
     ReplicationTaskIndividualAssessment.add_member(:replication_task_individual_assessment_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIndividualAssessmentArn"))
     ReplicationTaskIndividualAssessment.add_member(:replication_task_assessment_run_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskAssessmentRunArn"))
@@ -2457,7 +2577,22 @@ module Aws::DatabaseMigrationService
     ServerShortInfoResponse.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     ServerShortInfoResponse.struct_class = Types::ServerShortInfoResponse
 
+    SourceDataSetting.add_member(:cdc_start_position, Shapes::ShapeRef.new(shape: String, location_name: "CDCStartPosition"))
+    SourceDataSetting.add_member(:cdc_start_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "CDCStartTime"))
+    SourceDataSetting.add_member(:cdc_stop_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "CDCStopTime"))
+    SourceDataSetting.add_member(:slot_name, Shapes::ShapeRef.new(shape: String, location_name: "SlotName"))
+    SourceDataSetting.struct_class = Types::SourceDataSetting
+
+    SourceDataSettings.member = Shapes::ShapeRef.new(shape: SourceDataSetting)
+
     SourceIdsList.member = Shapes::ShapeRef.new(shape: String)
+
+    StartDataMigrationMessage.add_member(:data_migration_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataMigrationIdentifier"))
+    StartDataMigrationMessage.add_member(:start_type, Shapes::ShapeRef.new(shape: StartReplicationMigrationTypeValue, required: true, location_name: "StartType"))
+    StartDataMigrationMessage.struct_class = Types::StartDataMigrationMessage
+
+    StartDataMigrationResponse.add_member(:data_migration, Shapes::ShapeRef.new(shape: DataMigration, location_name: "DataMigration"))
+    StartDataMigrationResponse.struct_class = Types::StartDataMigrationResponse
 
     StartExtensionPackAssociationMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
     StartExtensionPackAssociationMessage.struct_class = Types::StartExtensionPackAssociationMessage
@@ -2540,6 +2675,7 @@ module Aws::DatabaseMigrationService
     StartReplicationTaskAssessmentRunMessage.add_member(:assessment_run_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AssessmentRunName"))
     StartReplicationTaskAssessmentRunMessage.add_member(:include_only, Shapes::ShapeRef.new(shape: IncludeTestList, location_name: "IncludeOnly"))
     StartReplicationTaskAssessmentRunMessage.add_member(:exclude, Shapes::ShapeRef.new(shape: ExcludeTestList, location_name: "Exclude"))
+    StartReplicationTaskAssessmentRunMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartReplicationTaskAssessmentRunMessage.struct_class = Types::StartReplicationTaskAssessmentRunMessage
 
     StartReplicationTaskAssessmentRunResponse.add_member(:replication_task_assessment_run, Shapes::ShapeRef.new(shape: ReplicationTaskAssessmentRun, location_name: "ReplicationTaskAssessmentRun"))
@@ -2554,6 +2690,12 @@ module Aws::DatabaseMigrationService
 
     StartReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
     StartReplicationTaskResponse.struct_class = Types::StartReplicationTaskResponse
+
+    StopDataMigrationMessage.add_member(:data_migration_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataMigrationIdentifier"))
+    StopDataMigrationMessage.struct_class = Types::StopDataMigrationMessage
+
+    StopDataMigrationResponse.add_member(:data_migration, Shapes::ShapeRef.new(shape: DataMigration, location_name: "DataMigration"))
+    StopDataMigrationResponse.struct_class = Types::StopDataMigrationResponse
 
     StopReplicationMessage.add_member(:replication_config_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationConfigArn"))
     StopReplicationMessage.struct_class = Types::StopReplicationMessage
@@ -2700,6 +2842,7 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: AddTagsToResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: AddTagsToResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:apply_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
@@ -2733,6 +2876,19 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
+      api.add_operation(:create_data_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataMigrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
+      end)
+
       api.add_operation(:create_data_provider, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDataProvider"
         o.http_method = "POST"
@@ -2742,6 +2898,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:create_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -2804,6 +2961,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:create_migration_project, Seahorse::Model::Operation.new.tap do |o|
@@ -2818,6 +2976,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:create_replication_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2903,6 +3062,17 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
+      api.add_operation(:delete_data_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataMigrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
+      end)
+
       api.add_operation(:delete_data_provider, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataProvider"
         o.http_method = "POST"
@@ -2912,6 +3082,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -2942,6 +3113,7 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: CollectorNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
       end)
 
       api.add_operation(:delete_fleet_advisor_databases, Seahorse::Model::Operation.new.tap do |o|
@@ -2952,6 +3124,7 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: DeleteFleetAdvisorDatabasesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
       end)
 
       api.add_operation(:delete_instance_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -2963,6 +3136,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:delete_migration_project, Seahorse::Model::Operation.new.tap do |o|
@@ -2973,7 +3147,9 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: DeleteMigrationProjectResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:delete_replication_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3092,6 +3268,23 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
       end)
 
+      api.add_operation(:describe_data_migrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataMigrations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataMigrationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataMigrationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_data_providers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDataProviders"
         o.http_method = "POST"
@@ -3100,6 +3293,7 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: DescribeDataProvidersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -3299,6 +3493,7 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceProfilesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -3390,6 +3585,7 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: DescribeMigrationProjectsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -3680,6 +3876,7 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:modify_conversion_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -3692,6 +3889,17 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
+      api.add_operation(:modify_data_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyDataMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyDataMigrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyDataMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
+      end)
+
       api.add_operation(:modify_data_provider, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyDataProvider"
         o.http_method = "POST"
@@ -3701,6 +3909,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:modify_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -3745,6 +3954,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:modify_migration_project, Seahorse::Model::Operation.new.tap do |o|
@@ -3758,6 +3968,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:modify_replication_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3877,6 +4088,7 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:run_fleet_advisor_lsa_analysis, Seahorse::Model::Operation.new.tap do |o|
@@ -3887,6 +4099,19 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: RunFleetAdvisorLsaAnalysisResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:start_data_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDataMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDataMigrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartDataMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:start_extension_pack_association, Seahorse::Model::Operation.new.tap do |o|
@@ -4046,6 +4271,17 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+      end)
+
+      api.add_operation(:stop_data_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopDataMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopDataMigrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: StopDataMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyFault)
       end)
 
       api.add_operation(:stop_replication, Seahorse::Model::Operation.new.tap do |o|

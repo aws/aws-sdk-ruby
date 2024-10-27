@@ -11,10 +11,12 @@ module Aws::Athena
   module Types
 
     # Indicates that an Amazon S3 canned ACL should be set to control
-    # ownership of stored query results. When Athena stores query results in
-    # Amazon S3, the canned ACL is set with the `x-amz-acl` request header.
-    # For more information about S3 Object Ownership, see [Object Ownership
-    # settings][1] in the *Amazon S3 User Guide*.
+    # ownership of stored query results, including data files inserted by
+    # Athena as the result of statements like CTAS or INSERT INTO. When
+    # Athena stores query results in Amazon S3, the canned ACL is set with
+    # the `x-amz-acl` request header. For more information about S3 Object
+    # Ownership, see [Object Ownership settings][1] in the *Amazon S3 User
+    # Guide*.
     #
     #
     #
@@ -22,12 +24,14 @@ module Aws::Athena
     #
     # @!attribute [rw] s3_acl_option
     #   The Amazon S3 canned ACL that Athena should specify when storing
-    #   query results. Currently the only supported canned ACL is
-    #   `BUCKET_OWNER_FULL_CONTROL`. If a query runs in a workgroup and the
-    #   workgroup overrides client-side settings, then the Amazon S3 canned
-    #   ACL specified in the workgroup's settings is used for all queries
-    #   that run in the workgroup. For more information about Amazon S3
-    #   canned ACLs, see [Canned ACL][1] in the *Amazon S3 User Guide*.
+    #   query results, including data files inserted by Athena as the result
+    #   of statements like CTAS or INSERT INTO. Currently the only supported
+    #   canned ACL is `BUCKET_OWNER_FULL_CONTROL`. If a query runs in a
+    #   workgroup and the workgroup overrides client-side settings, then the
+    #   Amazon S3 canned ACL specified in the workgroup's settings is used
+    #   for all queries that run in the workgroup. For more information
+    #   about Amazon S3 canned ACLs, see [Canned ACL][1] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
@@ -601,10 +605,8 @@ module Aws::Athena
     #
     # @!attribute [rw] type
     #   The type of data catalog to create: `LAMBDA` for a federated
-    #   catalog, `GLUE` for an Glue Data Catalog, and `HIVE` for an external
-    #   Apache Hive metastore. `FEDERATED` is a federated catalog for which
-    #   Athena creates the connection and the Lambda function for you based
-    #   on the parameters that you pass.
+    #   catalog, `HIVE` for an external hive metastore, or `GLUE` for an
+    #   Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -649,24 +651,6 @@ module Aws::Athena
     #       you can have only one and cannot modify.
     #
     #     ^
-    #
-    #   * The `FEDERATED` data catalog type uses one of the following
-    #     parameters, but not both. Use `connection-arn` for an existing
-    #     Glue connection. Use `connection-type` and `connection-properties`
-    #     to specify the configuration setting for a new connection.
-    #
-    #     * `connection-arn:<glue_connection_arn_to_reuse> `
-    #
-    #     * `lambda-role-arn` (optional): The execution role to use for the
-    #       Lambda function. If not provided, one is created.
-    #
-    #     * `connection-type:MYSQL|REDSHIFT|....,
-    #       connection-properties:"<json_string>"`
-    #
-    #       For <i> <code>&lt;json_string&gt;</code> </i>, use escaped JSON
-    #       text, as in the following example.
-    #
-    #       `"\{"spill_bucket":"my_spill","spill_prefix":"athena-spill","host":"abc12345.snowflakecomputing.com","port":"1234","warehouse":"DEV_WH","database":"TEST","schema":"PUBLIC","SecretArn":"arn:aws:secretsmanager:ap-south-1:111122223333:secret:snowflake-XHb67j"\}"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -686,23 +670,9 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @!attribute [rw] data_catalog
-    #   Contains information about a data catalog in an Amazon Web Services
-    #   account.
-    #
-    #   <note markdown="1"> In the Athena console, data catalogs are listed as "data sources"
-    #   on the **Data sources** page under the **Data source name** column.
-    #
-    #    </note>
-    #   @return [Types::DataCatalog]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateDataCatalogOutput AWS API Documentation
     #
-    class CreateDataCatalogOutput < Struct.new(
-      :data_catalog)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class CreateDataCatalogOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   The query name.
@@ -957,10 +927,8 @@ module Aws::Athena
     #
     # @!attribute [rw] type
     #   The type of data catalog to create: `LAMBDA` for a federated
-    #   catalog, `GLUE` for an Glue Data Catalog, and `HIVE` for an external
-    #   Apache Hive metastore. `FEDERATED` is a federated catalog for which
-    #   Athena creates the connection and the Lambda function for you based
-    #   on the parameters that you pass.
+    #   catalog, `HIVE` for an external hive metastore, or `GLUE` for an
+    #   Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -1000,72 +968,7 @@ module Aws::Athena
     #       you can have only one and cannot modify.
     #
     #     ^
-    #
-    #   * The `FEDERATED` data catalog type uses one of the following
-    #     parameters, but not both. Use `connection-arn` for an existing
-    #     Glue connection. Use `connection-type` and `connection-properties`
-    #     to specify the configuration setting for a new connection.
-    #
-    #     * `connection-arn:<glue_connection_arn_to_reuse> `
-    #
-    #     * `connection-type:MYSQL|REDSHIFT|....,
-    #       connection-properties:"<json_string>"`
-    #
-    #       For <i> <code>&lt;json_string&gt;</code> </i>, use escaped JSON
-    #       text, as in the following example.
-    #
-    #       `"\{"spill_bucket":"my_spill","spill_prefix":"athena-spill","host":"abc12345.snowflakecomputing.com","port":"1234","warehouse":"DEV_WH","database":"TEST","schema":"PUBLIC","SecretArn":"arn:aws:secretsmanager:ap-south-1:111122223333:secret:snowflake-XHb67j"\}"`
     #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] status
-    #   The status of the creation or deletion of the data catalog.
-    #
-    #   * The `LAMBDA`, `GLUE`, and `HIVE` data catalog types are created
-    #     synchronously. Their status is either `CREATE_COMPLETE` or
-    #     `CREATE_FAILED`.
-    #
-    #   * The `FEDERATED` data catalog type is created asynchronously.
-    #
-    #   Data catalog creation status:
-    #
-    #   * `CREATE_IN_PROGRESS`: Federated data catalog creation in progress.
-    #
-    #   * `CREATE_COMPLETE`: Data catalog creation complete.
-    #
-    #   * `CREATE_FAILED`: Data catalog could not be created.
-    #
-    #   * `CREATE_FAILED_CLEANUP_IN_PROGRESS`: Federated data catalog
-    #     creation failed and is being removed.
-    #
-    #   * `CREATE_FAILED_CLEANUP_COMPLETE`: Federated data catalog creation
-    #     failed and was removed.
-    #
-    #   * `CREATE_FAILED_CLEANUP_FAILED`: Federated data catalog creation
-    #     failed but could not be removed.
-    #
-    #   Data catalog deletion status:
-    #
-    #   * `DELETE_IN_PROGRESS`: Federated data catalog deletion in progress.
-    #
-    #   * `DELETE_COMPLETE`: Federated data catalog deleted.
-    #
-    #   * `DELETE_FAILED`: Federated data catalog could not be deleted.
-    #   @return [String]
-    #
-    # @!attribute [rw] connection_type
-    #   The type of connection for a `FEDERATED` data catalog (for example,
-    #   `REDSHIFT`, `MYSQL`, or `SQLSERVER`). For information about
-    #   individual connectors, see [Available data source connectors][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/connectors-available.html
-    #   @return [String]
-    #
-    # @!attribute [rw] error
-    #   Text of the error that occurred during data catalog creation or
-    #   deletion.
-    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DataCatalog AWS API Documentation
     #
@@ -1073,10 +976,7 @@ module Aws::Athena
       :name,
       :description,
       :type,
-      :parameters,
-      :status,
-      :connection_type,
-      :error)
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1096,64 +996,11 @@ module Aws::Athena
     #   The data catalog type.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The status of the creation or deletion of the data catalog.
-    #
-    #   * The `LAMBDA`, `GLUE`, and `HIVE` data catalog types are created
-    #     synchronously. Their status is either `CREATE_COMPLETE` or
-    #     `CREATE_FAILED`.
-    #
-    #   * The `FEDERATED` data catalog type is created asynchronously.
-    #
-    #   Data catalog creation status:
-    #
-    #   * `CREATE_IN_PROGRESS`: Federated data catalog creation in progress.
-    #
-    #   * `CREATE_COMPLETE`: Data catalog creation complete.
-    #
-    #   * `CREATE_FAILED`: Data catalog could not be created.
-    #
-    #   * `CREATE_FAILED_CLEANUP_IN_PROGRESS`: Federated data catalog
-    #     creation failed and is being removed.
-    #
-    #   * `CREATE_FAILED_CLEANUP_COMPLETE`: Federated data catalog creation
-    #     failed and was removed.
-    #
-    #   * `CREATE_FAILED_CLEANUP_FAILED`: Federated data catalog creation
-    #     failed but could not be removed.
-    #
-    #   Data catalog deletion status:
-    #
-    #   * `DELETE_IN_PROGRESS`: Federated data catalog deletion in progress.
-    #
-    #   * `DELETE_COMPLETE`: Federated data catalog deleted.
-    #
-    #   * `DELETE_FAILED`: Federated data catalog could not be deleted.
-    #   @return [String]
-    #
-    # @!attribute [rw] connection_type
-    #   The type of connection for a `FEDERATED` data catalog (for example,
-    #   `REDSHIFT`, `MYSQL`, or `SQLSERVER`). For information about
-    #   individual connectors, see [Available data source connectors][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/connectors-available.html
-    #   @return [String]
-    #
-    # @!attribute [rw] error
-    #   Text of the error that occurred during data catalog creation or
-    #   deletion.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DataCatalogSummary AWS API Documentation
     #
     class DataCatalogSummary < Struct.new(
       :catalog_name,
-      :type,
-      :status,
-      :connection_type,
-      :error)
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1224,23 +1071,9 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # @!attribute [rw] data_catalog
-    #   Contains information about a data catalog in an Amazon Web Services
-    #   account.
-    #
-    #   <note markdown="1"> In the Athena console, data catalogs are listed as "data sources"
-    #   on the **Data sources** page under the **Data source name** column.
-    #
-    #    </note>
-    #   @return [Types::DataCatalog]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteDataCatalogOutput AWS API Documentation
     #
-    class DeleteDataCatalogOutput < Struct.new(
-      :data_catalog)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class DeleteDataCatalogOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] named_query_id
     #   The unique ID of the query to delete.
@@ -1876,8 +1709,8 @@ module Aws::Athena
     end
 
     # @!attribute [rw] update_count
-    #   The number of rows inserted with a `CREATE TABLE AS SELECT`
-    #   statement.
+    #   The number of rows inserted with a `CREATE TABLE AS SELECT`, `INSERT
+    #   INTO`, or `UPDATE` statement.
     #   @return [Integer]
     #
     # @!attribute [rw] result_set

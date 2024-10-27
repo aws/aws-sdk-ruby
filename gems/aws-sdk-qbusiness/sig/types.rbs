@@ -87,6 +87,7 @@ module Aws::QBusiness
       attr_accessor value: untyped
       attr_accessor allowed_values: ::Array[Types::ActionReviewPayloadFieldAllowedValue]
       attr_accessor allowed_format: ::String
+      attr_accessor array_item_json_schema: untyped
       attr_accessor required: bool
       SENSITIVE: []
     end
@@ -431,6 +432,7 @@ module Aws::QBusiness
       attr_accessor subtitle: ::String
       attr_accessor welcome_message: ::String
       attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
+      attr_accessor origins: ::Array[::String]
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
@@ -919,6 +921,7 @@ module Aws::QBusiness
       attr_accessor subtitle: ::String
       attr_accessor welcome_message: ::String
       attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
+      attr_accessor origins: ::Array[::String]
       attr_accessor role_arn: ::String
       attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
       attr_accessor authentication_configuration: Types::WebExperienceAuthConfiguration
@@ -1639,6 +1642,7 @@ module Aws::QBusiness
       attr_accessor welcome_message: ::String
       attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
       attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      attr_accessor origins: ::Array[::String]
       SENSITIVE: []
     end
 

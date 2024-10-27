@@ -820,7 +820,7 @@ module Aws::CostandUsageReportService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costandusagereportservice'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

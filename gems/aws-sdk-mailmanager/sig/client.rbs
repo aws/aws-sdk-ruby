@@ -514,7 +514,9 @@ module Aws
 
       interface _GetArchiveMessageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveMessageResponse]
+        def envelope: () -> Types::Envelope
         def message_download_link: () -> ::String
+        def metadata: () -> Types::Metadata
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_archive_message-instance_method
       def get_archive_message: (
@@ -769,7 +771,7 @@ module Aws
                                         }?,
                                         string_expression: {
                                           evaluate: {
-                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT")?
+                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
                                           },
                                           operator: ("CONTAINS"),
                                           values: Array[::String]
@@ -786,7 +788,7 @@ module Aws
                                         }?,
                                         string_expression: {
                                           evaluate: {
-                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT")?
+                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
                                           },
                                           operator: ("CONTAINS"),
                                           values: Array[::String]
@@ -795,6 +797,7 @@ module Aws
                                     ]?
                                   },
                                   from_timestamp: ::Time,
+                                  ?include_metadata: bool,
                                   ?max_results: ::Integer,
                                   to_timestamp: ::Time
                                 ) -> _StartArchiveExportResponseSuccess
@@ -818,7 +821,7 @@ module Aws
                                         }?,
                                         string_expression: {
                                           evaluate: {
-                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT")?
+                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
                                           },
                                           operator: ("CONTAINS"),
                                           values: Array[::String]
@@ -835,7 +838,7 @@ module Aws
                                         }?,
                                         string_expression: {
                                           evaluate: {
-                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT")?
+                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
                                           },
                                           operator: ("CONTAINS"),
                                           values: Array[::String]

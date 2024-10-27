@@ -57,6 +57,7 @@ module Aws::S3
     BucketLoggingStatus = Shapes::StructureShape.new(name: 'BucketLoggingStatus')
     BucketLogsPermission = Shapes::StringShape.new(name: 'BucketLogsPermission')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
+    BucketRegion = Shapes::StringShape.new(name: 'BucketRegion')
     BucketType = Shapes::StringShape.new(name: 'BucketType')
     BucketVersioningStatus = Shapes::StringShape.new(name: 'BucketVersioningStatus')
     Buckets = Shapes::ListShape.new(name: 'Buckets')
@@ -680,6 +681,7 @@ module Aws::S3
 
     Bucket.add_member(:name, Shapes::ShapeRef.new(shape: BucketName, location_name: "Name"))
     Bucket.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    Bucket.add_member(:bucket_region, Shapes::ShapeRef.new(shape: BucketRegion, location_name: "BucketRegion"))
     Bucket.struct_class = Types::Bucket
 
     BucketAlreadyExists.struct_class = Types::BucketAlreadyExists
@@ -1723,10 +1725,13 @@ module Aws::S3
     ListBucketsOutput.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
     ListBucketsOutput.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     ListBucketsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "ContinuationToken"))
+    ListBucketsOutput.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     ListBucketsOutput.struct_class = Types::ListBucketsOutput
 
     ListBucketsRequest.add_member(:max_buckets, Shapes::ShapeRef.new(shape: MaxBuckets, location: "querystring", location_name: "max-buckets"))
     ListBucketsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
+    ListBucketsRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location: "querystring", location_name: "prefix"))
+    ListBucketsRequest.add_member(:bucket_region, Shapes::ShapeRef.new(shape: BucketRegion, location: "querystring", location_name: "bucket-region"))
     ListBucketsRequest.struct_class = Types::ListBucketsRequest
 
     ListDirectoryBucketsOutput.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))

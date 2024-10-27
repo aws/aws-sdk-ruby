@@ -75,11 +75,63 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AcceptDataGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptDataGrantResponse]
+        def name: () -> ::String
+        def sender_principal: () -> ::String
+        def receiver_principal: () -> ::String
+        def description: () -> ::String
+        def acceptance_state: () -> ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+        def accepted_at: () -> ::Time
+        def ends_at: () -> ::Time
+        def grant_distribution_scope: () -> ("AWS_ORGANIZATION" | "NONE")
+        def data_set_id: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#accept_data_grant-instance_method
+      def accept_data_grant: (
+                               data_grant_arn: ::String
+                             ) -> _AcceptDataGrantResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptDataGrantResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#cancel_job-instance_method
       def cancel_job: (
                         job_id: ::String
                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateDataGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataGrantResponse]
+        def name: () -> ::String
+        def sender_principal: () -> ::String
+        def receiver_principal: () -> ::String
+        def description: () -> ::String
+        def acceptance_state: () -> ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+        def accepted_at: () -> ::Time
+        def ends_at: () -> ::Time
+        def grant_distribution_scope: () -> ("AWS_ORGANIZATION" | "NONE")
+        def data_set_id: () -> ::String
+        def source_data_set_id: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#create_data_grant-instance_method
+      def create_data_grant: (
+                               name: ::String,
+                               grant_distribution_scope: ("AWS_ORGANIZATION" | "NONE"),
+                               receiver_principal: ::String,
+                               source_data_set_id: ::String,
+                               ?ends_at: ::Time,
+                               ?description: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateDataGrantResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataGrantResponseSuccess
 
       interface _CreateDataSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSetResponse]
@@ -293,6 +345,12 @@ module Aws
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#delete_data_grant-instance_method
+      def delete_data_grant: (
+                               data_grant_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#delete_data_set-instance_method
       def delete_data_set: (
                              data_set_id: ::String
@@ -332,6 +390,30 @@ module Aws
                        revision_id: ::String
                      ) -> _GetAssetResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetResponseSuccess
+
+      interface _GetDataGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataGrantResponse]
+        def name: () -> ::String
+        def sender_principal: () -> ::String
+        def receiver_principal: () -> ::String
+        def description: () -> ::String
+        def acceptance_state: () -> ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+        def accepted_at: () -> ::Time
+        def ends_at: () -> ::Time
+        def grant_distribution_scope: () -> ("AWS_ORGANIZATION" | "NONE")
+        def data_set_id: () -> ::String
+        def source_data_set_id: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_data_grant-instance_method
+      def get_data_grant: (
+                            data_grant_id: ::String
+                          ) -> _GetDataGrantResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataGrantResponseSuccess
 
       interface _GetDataSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSetResponse]
@@ -385,6 +467,28 @@ module Aws
                    ) -> _GetJobResponseSuccess
                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobResponseSuccess
 
+      interface _GetReceivedDataGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReceivedDataGrantResponse]
+        def name: () -> ::String
+        def sender_principal: () -> ::String
+        def receiver_principal: () -> ::String
+        def description: () -> ::String
+        def acceptance_state: () -> ("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")
+        def accepted_at: () -> ::Time
+        def ends_at: () -> ::Time
+        def grant_distribution_scope: () -> ("AWS_ORGANIZATION" | "NONE")
+        def data_set_id: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_received_data_grant-instance_method
+      def get_received_data_grant: (
+                                     data_grant_arn: ::String
+                                   ) -> _GetReceivedDataGrantResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReceivedDataGrantResponseSuccess
+
       interface _GetRevisionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRevisionResponse]
         def arn: () -> ::String
@@ -406,6 +510,18 @@ module Aws
                           revision_id: ::String
                         ) -> _GetRevisionResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRevisionResponseSuccess
+
+      interface _ListDataGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataGrantsResponse]
+        def data_grant_summaries: () -> ::Array[Types::DataGrantSummaryEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#list_data_grants-instance_method
+      def list_data_grants: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListDataGrantsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataGrantsResponseSuccess
 
       interface _ListDataSetRevisionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSetRevisionsResponse]
@@ -459,6 +575,19 @@ module Aws
                        ?revision_id: ::String
                      ) -> _ListJobsResponseSuccess
                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListReceivedDataGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReceivedDataGrantsResponse]
+        def data_grant_summaries: () -> ::Array[Types::ReceivedDataGrantSummariesEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#list_received_data_grants-instance_method
+      def list_received_data_grants: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?acceptance_state: Array[("PENDING_RECEIVER_ACCEPTANCE" | "ACCEPTED")]
+                                     ) -> _ListReceivedDataGrantsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReceivedDataGrantsResponseSuccess
 
       interface _ListRevisionAssetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRevisionAssetsResponse]

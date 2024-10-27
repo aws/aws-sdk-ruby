@@ -1018,6 +1018,7 @@ module Aws::Connect
     RuleTriggerEventSource = Shapes::StructureShape.new(name: 'RuleTriggerEventSource')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    ScreenShareCapability = Shapes::StringShape.new(name: 'ScreenShareCapability')
     SearchAgentStatusesRequest = Shapes::StructureShape.new(name: 'SearchAgentStatusesRequest')
     SearchAgentStatusesResponse = Shapes::StructureShape.new(name: 'SearchAgentStatusesResponse')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
@@ -1117,6 +1118,8 @@ module Aws::Connect
     StartOutboundChatContactResponse = Shapes::StructureShape.new(name: 'StartOutboundChatContactResponse')
     StartOutboundVoiceContactRequest = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactRequest')
     StartOutboundVoiceContactResponse = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactResponse')
+    StartScreenSharingRequest = Shapes::StructureShape.new(name: 'StartScreenSharingRequest')
+    StartScreenSharingResponse = Shapes::StructureShape.new(name: 'StartScreenSharingResponse')
     StartTaskContactRequest = Shapes::StructureShape.new(name: 'StartTaskContactRequest')
     StartTaskContactResponse = Shapes::StructureShape.new(name: 'StartTaskContactResponse')
     StartWebRTCContactRequest = Shapes::StructureShape.new(name: 'StartWebRTCContactRequest')
@@ -4011,6 +4014,7 @@ module Aws::Connect
     OutputTypeNotFoundException.struct_class = Types::OutputTypeNotFoundException
 
     ParticipantCapabilities.add_member(:video, Shapes::ShapeRef.new(shape: VideoCapability, location_name: "Video"))
+    ParticipantCapabilities.add_member(:screen_share, Shapes::ShapeRef.new(shape: ScreenShareCapability, location_name: "ScreenShare"))
     ParticipantCapabilities.struct_class = Types::ParticipantCapabilities
 
     ParticipantDetails.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "DisplayName"))
@@ -5012,6 +5016,13 @@ module Aws::Connect
 
     StartOutboundVoiceContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     StartOutboundVoiceContactResponse.struct_class = Types::StartOutboundVoiceContactResponse
+
+    StartScreenSharingRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartScreenSharingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StartScreenSharingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    StartScreenSharingRequest.struct_class = Types::StartScreenSharingRequest
+
+    StartScreenSharingResponse.struct_class = Types::StartScreenSharingResponse
 
     StartTaskContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     StartTaskContactRequest.add_member(:previous_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "PreviousContactId"))
@@ -8886,6 +8897,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DestinationNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: OutboundContactNotPermittedException)
+      end)
+
+      api.add_operation(:start_screen_sharing, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartScreenSharing"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact/screen-sharing"
+        o.input = Shapes::ShapeRef.new(shape: StartScreenSharingRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartScreenSharingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:start_task_contact, Seahorse::Model::Operation.new.tap do |o|

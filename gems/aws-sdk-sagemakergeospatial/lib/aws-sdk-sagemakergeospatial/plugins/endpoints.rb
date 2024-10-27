@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SageMakerGeospatial::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,49 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :delete_earth_observation_job
-            Aws::SageMakerGeospatial::Endpoints::DeleteEarthObservationJob.build(context)
-          when :delete_vector_enrichment_job
-            Aws::SageMakerGeospatial::Endpoints::DeleteVectorEnrichmentJob.build(context)
-          when :export_earth_observation_job
-            Aws::SageMakerGeospatial::Endpoints::ExportEarthObservationJob.build(context)
-          when :export_vector_enrichment_job
-            Aws::SageMakerGeospatial::Endpoints::ExportVectorEnrichmentJob.build(context)
-          when :get_earth_observation_job
-            Aws::SageMakerGeospatial::Endpoints::GetEarthObservationJob.build(context)
-          when :get_raster_data_collection
-            Aws::SageMakerGeospatial::Endpoints::GetRasterDataCollection.build(context)
-          when :get_tile
-            Aws::SageMakerGeospatial::Endpoints::GetTile.build(context)
-          when :get_vector_enrichment_job
-            Aws::SageMakerGeospatial::Endpoints::GetVectorEnrichmentJob.build(context)
-          when :list_earth_observation_jobs
-            Aws::SageMakerGeospatial::Endpoints::ListEarthObservationJobs.build(context)
-          when :list_raster_data_collections
-            Aws::SageMakerGeospatial::Endpoints::ListRasterDataCollections.build(context)
-          when :list_tags_for_resource
-            Aws::SageMakerGeospatial::Endpoints::ListTagsForResource.build(context)
-          when :list_vector_enrichment_jobs
-            Aws::SageMakerGeospatial::Endpoints::ListVectorEnrichmentJobs.build(context)
-          when :search_raster_data_collection
-            Aws::SageMakerGeospatial::Endpoints::SearchRasterDataCollection.build(context)
-          when :start_earth_observation_job
-            Aws::SageMakerGeospatial::Endpoints::StartEarthObservationJob.build(context)
-          when :start_vector_enrichment_job
-            Aws::SageMakerGeospatial::Endpoints::StartVectorEnrichmentJob.build(context)
-          when :stop_earth_observation_job
-            Aws::SageMakerGeospatial::Endpoints::StopEarthObservationJob.build(context)
-          when :stop_vector_enrichment_job
-            Aws::SageMakerGeospatial::Endpoints::StopVectorEnrichmentJob.build(context)
-          when :tag_resource
-            Aws::SageMakerGeospatial::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::SageMakerGeospatial::Endpoints::UntagResource.build(context)
           end
         end
       end

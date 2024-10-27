@@ -12,49 +12,9 @@ module Aws::MarketplaceMetering
   # @api private
   module Endpoints
 
-    class BatchMeterUsage
-      def self.build(context)
-        Aws::MarketplaceMetering::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
-    class MeterUsage
-      def self.build(context)
-        Aws::MarketplaceMetering::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::MarketplaceMetering::EndpointParameters.create(context.config)
     end
-
-    class RegisterUsage
-      def self.build(context)
-        Aws::MarketplaceMetering::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
-    class ResolveCustomer
-      def self.build(context)
-        Aws::MarketplaceMetering::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
   end
 end

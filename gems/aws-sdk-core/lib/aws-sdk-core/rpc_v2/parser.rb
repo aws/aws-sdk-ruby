@@ -16,7 +16,7 @@ module Aws
       def parse(cbor, target = nil)
         return {} if cbor.empty?
 
-        parse_ref(@rules, Cbor.decode(cbor), target)
+        parse_ref(@rules, RpcV2.decode(cbor), target)
       end
 
       private

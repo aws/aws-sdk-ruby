@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::ResourceExplorer2::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,55 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :associate_default_view
-            Aws::ResourceExplorer2::Endpoints::AssociateDefaultView.build(context)
-          when :batch_get_view
-            Aws::ResourceExplorer2::Endpoints::BatchGetView.build(context)
-          when :create_index
-            Aws::ResourceExplorer2::Endpoints::CreateIndex.build(context)
-          when :create_view
-            Aws::ResourceExplorer2::Endpoints::CreateView.build(context)
-          when :delete_index
-            Aws::ResourceExplorer2::Endpoints::DeleteIndex.build(context)
-          when :delete_view
-            Aws::ResourceExplorer2::Endpoints::DeleteView.build(context)
-          when :disassociate_default_view
-            Aws::ResourceExplorer2::Endpoints::DisassociateDefaultView.build(context)
-          when :get_account_level_service_configuration
-            Aws::ResourceExplorer2::Endpoints::GetAccountLevelServiceConfiguration.build(context)
-          when :get_default_view
-            Aws::ResourceExplorer2::Endpoints::GetDefaultView.build(context)
-          when :get_index
-            Aws::ResourceExplorer2::Endpoints::GetIndex.build(context)
-          when :get_view
-            Aws::ResourceExplorer2::Endpoints::GetView.build(context)
-          when :list_indexes
-            Aws::ResourceExplorer2::Endpoints::ListIndexes.build(context)
-          when :list_indexes_for_members
-            Aws::ResourceExplorer2::Endpoints::ListIndexesForMembers.build(context)
-          when :list_resources
-            Aws::ResourceExplorer2::Endpoints::ListResources.build(context)
-          when :list_supported_resource_types
-            Aws::ResourceExplorer2::Endpoints::ListSupportedResourceTypes.build(context)
-          when :list_tags_for_resource
-            Aws::ResourceExplorer2::Endpoints::ListTagsForResource.build(context)
-          when :list_views
-            Aws::ResourceExplorer2::Endpoints::ListViews.build(context)
-          when :search
-            Aws::ResourceExplorer2::Endpoints::Search.build(context)
-          when :tag_resource
-            Aws::ResourceExplorer2::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::ResourceExplorer2::Endpoints::UntagResource.build(context)
-          when :update_index_type
-            Aws::ResourceExplorer2::Endpoints::UpdateIndexType.build(context)
-          when :update_view
-            Aws::ResourceExplorer2::Endpoints::UpdateView.build(context)
           end
         end
       end

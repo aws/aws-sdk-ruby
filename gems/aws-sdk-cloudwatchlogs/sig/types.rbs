@@ -865,6 +865,7 @@ module Aws::CloudWatchLogs
       attr_accessor is_dynamic: bool
       attr_accessor token_string: ::String
       attr_accessor enumerations: ::Hash[::String, ::Integer]
+      attr_accessor inferred_token_name: ::String
       SENSITIVE: []
     end
 

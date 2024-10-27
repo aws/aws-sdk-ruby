@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::CloudWatchRUM::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,45 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :batch_create_rum_metric_definitions
-            Aws::CloudWatchRUM::Endpoints::BatchCreateRumMetricDefinitions.build(context)
-          when :batch_delete_rum_metric_definitions
-            Aws::CloudWatchRUM::Endpoints::BatchDeleteRumMetricDefinitions.build(context)
-          when :batch_get_rum_metric_definitions
-            Aws::CloudWatchRUM::Endpoints::BatchGetRumMetricDefinitions.build(context)
-          when :create_app_monitor
-            Aws::CloudWatchRUM::Endpoints::CreateAppMonitor.build(context)
-          when :delete_app_monitor
-            Aws::CloudWatchRUM::Endpoints::DeleteAppMonitor.build(context)
-          when :delete_rum_metrics_destination
-            Aws::CloudWatchRUM::Endpoints::DeleteRumMetricsDestination.build(context)
-          when :get_app_monitor
-            Aws::CloudWatchRUM::Endpoints::GetAppMonitor.build(context)
-          when :get_app_monitor_data
-            Aws::CloudWatchRUM::Endpoints::GetAppMonitorData.build(context)
-          when :list_app_monitors
-            Aws::CloudWatchRUM::Endpoints::ListAppMonitors.build(context)
-          when :list_rum_metrics_destinations
-            Aws::CloudWatchRUM::Endpoints::ListRumMetricsDestinations.build(context)
-          when :list_tags_for_resource
-            Aws::CloudWatchRUM::Endpoints::ListTagsForResource.build(context)
-          when :put_rum_events
-            Aws::CloudWatchRUM::Endpoints::PutRumEvents.build(context)
-          when :put_rum_metrics_destination
-            Aws::CloudWatchRUM::Endpoints::PutRumMetricsDestination.build(context)
-          when :tag_resource
-            Aws::CloudWatchRUM::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::CloudWatchRUM::Endpoints::UntagResource.build(context)
-          when :update_app_monitor
-            Aws::CloudWatchRUM::Endpoints::UpdateAppMonitor.build(context)
-          when :update_rum_metric_definition
-            Aws::CloudWatchRUM::Endpoints::UpdateRumMetricDefinition.build(context)
           end
         end
       end

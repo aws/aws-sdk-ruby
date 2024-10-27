@@ -12,38 +12,9 @@ module Aws::PersonalizeRuntime
   # @api private
   module Endpoints
 
-    class GetActionRecommendations
-      def self.build(context)
-        Aws::PersonalizeRuntime::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
-    class GetPersonalizedRanking
-      def self.build(context)
-        Aws::PersonalizeRuntime::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
+    def self.parameters_for_operation(context)
+      Aws::PersonalizeRuntime::EndpointParameters.create(context.config)
     end
-
-    class GetRecommendations
-      def self.build(context)
-        Aws::PersonalizeRuntime::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
-
   end
 end

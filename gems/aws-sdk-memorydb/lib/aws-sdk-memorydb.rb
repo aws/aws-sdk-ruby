@@ -54,7 +54,7 @@ module Aws::MemoryDB
   autoload :EndpointProvider, 'aws-sdk-memorydb/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-memorydb/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
 

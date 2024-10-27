@@ -54,7 +54,7 @@ module Aws::Chatbot
   autoload :EndpointProvider, 'aws-sdk-chatbot/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chatbot/endpoints'
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end
 

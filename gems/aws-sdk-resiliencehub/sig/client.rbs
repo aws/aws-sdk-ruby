@@ -138,7 +138,7 @@ module Aws
                                                       resource_id: ::String?,
                                                       target_account_id: ::String?,
                                                       target_region: ::String?
-                                                    },
+                                                    }?,
                                                     reference_id: ::String
                                                   },
                                                 ]
@@ -152,6 +152,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#create_app-instance_method
       def create_app: (
                         ?assessment_schedule: ("Disabled" | "Daily"),
+                        ?aws_application_arn: ::String,
                         ?client_token: ::String,
                         ?description: ::String,
                         ?event_subscriptions: Array[
@@ -461,6 +462,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDraftAppVersionResourcesImportStatusResponse]
         def app_arn: () -> ::String
         def app_version: () -> ::String
+        def error_details: () -> ::Array[Types::ErrorDetail]
         def error_message: () -> ::String
         def status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
         def status_change_time: () -> ::Time
@@ -688,6 +690,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_apps-instance_method
       def list_apps: (
                        ?app_arn: ::String,
+                       ?aws_application_arn: ::String,
                        ?from_last_assessment_time: ::Time,
                        ?max_results: ::Integer,
                        ?name: ::String,

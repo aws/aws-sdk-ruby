@@ -515,7 +515,7 @@ module Aws::IoTFleetWise
       :minimum_trigger_interval_ms,
       :trigger_mode,
       :condition_language_version)
-      SENSITIVE = []
+      SENSITIVE = [:expression]
       include Aws::Structure
     end
 
@@ -679,7 +679,7 @@ module Aws::IoTFleetWise
       :data_extra_dimensions,
       :tags,
       :data_destination_configs)
-      SENSITIVE = []
+      SENSITIVE = [:signals_to_collect, :data_extra_dimensions]
       include Aws::Structure
     end
 
@@ -1579,7 +1579,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       :data_destination_configs)
-      SENSITIVE = []
+      SENSITIVE = [:signals_to_collect, :data_extra_dimensions]
       include Aws::Structure
     end
 
@@ -3854,7 +3854,7 @@ module Aws::IoTFleetWise
       :description,
       :data_extra_dimensions,
       :action)
-      SENSITIVE = []
+      SENSITIVE = [:data_extra_dimensions]
       include Aws::Structure
     end
 

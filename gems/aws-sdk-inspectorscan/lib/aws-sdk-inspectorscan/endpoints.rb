@@ -12,16 +12,9 @@ module Aws::InspectorScan
   # @api private
   module Endpoints
 
-    class ScanSbom
-      def self.build(context)
-        Aws::InspectorScan::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
-        )
-      end
-    end
 
+    def self.parameters_for_operation(context)
+      Aws::InspectorScan::EndpointParameters.create(context.config)
+    end
   end
 end

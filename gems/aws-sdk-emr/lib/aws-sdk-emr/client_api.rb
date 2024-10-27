@@ -780,6 +780,7 @@ module Aws::EMR
     InstanceFleet.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: InstanceTypeSpecificationList, location_name: "InstanceTypeSpecifications"))
     InstanceFleet.add_member(:launch_specifications, Shapes::ShapeRef.new(shape: InstanceFleetProvisioningSpecifications, location_name: "LaunchSpecifications"))
     InstanceFleet.add_member(:resize_specifications, Shapes::ShapeRef.new(shape: InstanceFleetResizingSpecifications, location_name: "ResizeSpecifications"))
+    InstanceFleet.add_member(:context, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Context"))
     InstanceFleet.struct_class = Types::InstanceFleet
 
     InstanceFleetConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Name"))
@@ -789,6 +790,7 @@ module Aws::EMR
     InstanceFleetConfig.add_member(:instance_type_configs, Shapes::ShapeRef.new(shape: InstanceTypeConfigList, location_name: "InstanceTypeConfigs"))
     InstanceFleetConfig.add_member(:launch_specifications, Shapes::ShapeRef.new(shape: InstanceFleetProvisioningSpecifications, location_name: "LaunchSpecifications"))
     InstanceFleetConfig.add_member(:resize_specifications, Shapes::ShapeRef.new(shape: InstanceFleetResizingSpecifications, location_name: "ResizeSpecifications"))
+    InstanceFleetConfig.add_member(:context, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Context"))
     InstanceFleetConfig.struct_class = Types::InstanceFleetConfig
 
     InstanceFleetConfigList.member = Shapes::ShapeRef.new(shape: InstanceFleetConfig)
@@ -800,6 +802,7 @@ module Aws::EMR
     InstanceFleetModifyConfig.add_member(:target_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetSpotCapacity"))
     InstanceFleetModifyConfig.add_member(:resize_specifications, Shapes::ShapeRef.new(shape: InstanceFleetResizingSpecifications, location_name: "ResizeSpecifications"))
     InstanceFleetModifyConfig.add_member(:instance_type_configs, Shapes::ShapeRef.new(shape: InstanceTypeConfigList, location_name: "InstanceTypeConfigs"))
+    InstanceFleetModifyConfig.add_member(:context, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Context"))
     InstanceFleetModifyConfig.struct_class = Types::InstanceFleetModifyConfig
 
     InstanceFleetProvisioningSpecifications.add_member(:spot_specification, Shapes::ShapeRef.new(shape: SpotProvisioningSpecification, location_name: "SpotSpecification"))

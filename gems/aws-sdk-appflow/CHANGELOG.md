@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2024-10-11)
+------------------
+
+* Feature - Doc only updates for clarification around OAuth2GrantType for Salesforce.
+
 1.68.0 (2024-09-24)
 ------------------
 

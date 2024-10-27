@@ -1758,7 +1758,7 @@ module Aws::ResourceExplorer2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

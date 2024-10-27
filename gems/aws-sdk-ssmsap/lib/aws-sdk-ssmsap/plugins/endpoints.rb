@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SsmSap::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,53 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :delete_resource_permission
-            Aws::SsmSap::Endpoints::DeleteResourcePermission.build(context)
-          when :deregister_application
-            Aws::SsmSap::Endpoints::DeregisterApplication.build(context)
-          when :get_application
-            Aws::SsmSap::Endpoints::GetApplication.build(context)
-          when :get_component
-            Aws::SsmSap::Endpoints::GetComponent.build(context)
-          when :get_database
-            Aws::SsmSap::Endpoints::GetDatabase.build(context)
-          when :get_operation
-            Aws::SsmSap::Endpoints::GetOperation.build(context)
-          when :get_resource_permission
-            Aws::SsmSap::Endpoints::GetResourcePermission.build(context)
-          when :list_applications
-            Aws::SsmSap::Endpoints::ListApplications.build(context)
-          when :list_components
-            Aws::SsmSap::Endpoints::ListComponents.build(context)
-          when :list_databases
-            Aws::SsmSap::Endpoints::ListDatabases.build(context)
-          when :list_operation_events
-            Aws::SsmSap::Endpoints::ListOperationEvents.build(context)
-          when :list_operations
-            Aws::SsmSap::Endpoints::ListOperations.build(context)
-          when :list_tags_for_resource
-            Aws::SsmSap::Endpoints::ListTagsForResource.build(context)
-          when :put_resource_permission
-            Aws::SsmSap::Endpoints::PutResourcePermission.build(context)
-          when :register_application
-            Aws::SsmSap::Endpoints::RegisterApplication.build(context)
-          when :start_application
-            Aws::SsmSap::Endpoints::StartApplication.build(context)
-          when :start_application_refresh
-            Aws::SsmSap::Endpoints::StartApplicationRefresh.build(context)
-          when :stop_application
-            Aws::SsmSap::Endpoints::StopApplication.build(context)
-          when :tag_resource
-            Aws::SsmSap::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::SsmSap::Endpoints::UntagResource.build(context)
-          when :update_application_settings
-            Aws::SsmSap::Endpoints::UpdateApplicationSettings.build(context)
           end
         end
       end

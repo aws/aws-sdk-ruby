@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-10-23)
+------------------
+
+* Feature - Doc updates for supporting converse
+
+1.26.0 (2024-10-18)
+------------------
+
+* Feature - Adding converse support to CMI API's
+
 1.25.0 (2024-09-30)
 ------------------
 

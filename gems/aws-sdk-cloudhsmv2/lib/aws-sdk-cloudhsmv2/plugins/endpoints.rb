@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::CloudHSMV2::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,47 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :copy_backup_to_region
-            Aws::CloudHSMV2::Endpoints::CopyBackupToRegion.build(context)
-          when :create_cluster
-            Aws::CloudHSMV2::Endpoints::CreateCluster.build(context)
-          when :create_hsm
-            Aws::CloudHSMV2::Endpoints::CreateHsm.build(context)
-          when :delete_backup
-            Aws::CloudHSMV2::Endpoints::DeleteBackup.build(context)
-          when :delete_cluster
-            Aws::CloudHSMV2::Endpoints::DeleteCluster.build(context)
-          when :delete_hsm
-            Aws::CloudHSMV2::Endpoints::DeleteHsm.build(context)
-          when :delete_resource_policy
-            Aws::CloudHSMV2::Endpoints::DeleteResourcePolicy.build(context)
-          when :describe_backups
-            Aws::CloudHSMV2::Endpoints::DescribeBackups.build(context)
-          when :describe_clusters
-            Aws::CloudHSMV2::Endpoints::DescribeClusters.build(context)
-          when :get_resource_policy
-            Aws::CloudHSMV2::Endpoints::GetResourcePolicy.build(context)
-          when :initialize_cluster
-            Aws::CloudHSMV2::Endpoints::InitializeCluster.build(context)
-          when :list_tags
-            Aws::CloudHSMV2::Endpoints::ListTags.build(context)
-          when :modify_backup_attributes
-            Aws::CloudHSMV2::Endpoints::ModifyBackupAttributes.build(context)
-          when :modify_cluster
-            Aws::CloudHSMV2::Endpoints::ModifyCluster.build(context)
-          when :put_resource_policy
-            Aws::CloudHSMV2::Endpoints::PutResourcePolicy.build(context)
-          when :restore_backup
-            Aws::CloudHSMV2::Endpoints::RestoreBackup.build(context)
-          when :tag_resource
-            Aws::CloudHSMV2::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::CloudHSMV2::Endpoints::UntagResource.build(context)
           end
         end
       end

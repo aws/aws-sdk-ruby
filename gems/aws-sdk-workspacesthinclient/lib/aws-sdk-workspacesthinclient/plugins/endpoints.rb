@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::WorkSpacesThinClient::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,43 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_environment
-            Aws::WorkSpacesThinClient::Endpoints::CreateEnvironment.build(context)
-          when :delete_device
-            Aws::WorkSpacesThinClient::Endpoints::DeleteDevice.build(context)
-          when :delete_environment
-            Aws::WorkSpacesThinClient::Endpoints::DeleteEnvironment.build(context)
-          when :deregister_device
-            Aws::WorkSpacesThinClient::Endpoints::DeregisterDevice.build(context)
-          when :get_device
-            Aws::WorkSpacesThinClient::Endpoints::GetDevice.build(context)
-          when :get_environment
-            Aws::WorkSpacesThinClient::Endpoints::GetEnvironment.build(context)
-          when :get_software_set
-            Aws::WorkSpacesThinClient::Endpoints::GetSoftwareSet.build(context)
-          when :list_devices
-            Aws::WorkSpacesThinClient::Endpoints::ListDevices.build(context)
-          when :list_environments
-            Aws::WorkSpacesThinClient::Endpoints::ListEnvironments.build(context)
-          when :list_software_sets
-            Aws::WorkSpacesThinClient::Endpoints::ListSoftwareSets.build(context)
-          when :list_tags_for_resource
-            Aws::WorkSpacesThinClient::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::WorkSpacesThinClient::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::WorkSpacesThinClient::Endpoints::UntagResource.build(context)
-          when :update_device
-            Aws::WorkSpacesThinClient::Endpoints::UpdateDevice.build(context)
-          when :update_environment
-            Aws::WorkSpacesThinClient::Endpoints::UpdateEnvironment.build(context)
-          when :update_software_set
-            Aws::WorkSpacesThinClient::Endpoints::UpdateSoftwareSet.build(context)
           end
         end
       end

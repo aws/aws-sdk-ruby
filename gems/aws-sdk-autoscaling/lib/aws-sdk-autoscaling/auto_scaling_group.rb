@@ -152,8 +152,12 @@ module Aws::AutoScaling
       data[:enabled_metrics]
     end
 
-    # The current state of the group when the DeleteAutoScalingGroup
+    # The current state of the group when the [DeleteAutoScalingGroup][1]
     # operation is in progress.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteAutoScalingGroup.html
     # @return [String]
     def status
       data[:status]
@@ -1255,7 +1259,7 @@ module Aws::AutoScaling
     #     availability_zones: ["XmlStringMaxLen255"],
     #     health_check_type: "XmlStringMaxLen32",
     #     health_check_grace_period: 1,
-    #     placement_group: "XmlStringMaxLen255",
+    #     placement_group: "UpdatePlacementGroupParam",
     #     vpc_zone_identifier: "XmlStringMaxLen5000",
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
@@ -1346,8 +1350,10 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html
     # @option options [String] :placement_group
     #   The name of an existing placement group into which to launch your
-    #   instances. For more information, see [Placement groups][1] in the
-    #   *Amazon EC2 User Guide for Linux Instances*.
+    #   instances. To remove the placement group setting, pass an empty string
+    #   for `placement-group`. For more information about placement groups,
+    #   see [Placement groups][1] in the *Amazon EC2 User Guide for Linux
+    #   Instances*.
     #
     #   <note markdown="1"> A *cluster* placement group is a logical grouping of instances within
     #   a single Availability Zone. You cannot specify multiple Availability

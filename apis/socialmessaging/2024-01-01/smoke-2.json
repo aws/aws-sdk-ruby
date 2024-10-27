@@ -1,0 +1,19 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListTagsFailure",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "resourceArn" : "arn:aws:social-messaging:us-east-1:9923825:phone-number-id/45c1973a7577"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

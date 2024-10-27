@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::SavingsPlans::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,31 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_savings_plan
-            Aws::SavingsPlans::Endpoints::CreateSavingsPlan.build(context)
-          when :delete_queued_savings_plan
-            Aws::SavingsPlans::Endpoints::DeleteQueuedSavingsPlan.build(context)
-          when :describe_savings_plan_rates
-            Aws::SavingsPlans::Endpoints::DescribeSavingsPlanRates.build(context)
-          when :describe_savings_plans
-            Aws::SavingsPlans::Endpoints::DescribeSavingsPlans.build(context)
-          when :describe_savings_plans_offering_rates
-            Aws::SavingsPlans::Endpoints::DescribeSavingsPlansOfferingRates.build(context)
-          when :describe_savings_plans_offerings
-            Aws::SavingsPlans::Endpoints::DescribeSavingsPlansOfferings.build(context)
-          when :list_tags_for_resource
-            Aws::SavingsPlans::Endpoints::ListTagsForResource.build(context)
-          when :return_savings_plan
-            Aws::SavingsPlans::Endpoints::ReturnSavingsPlan.build(context)
-          when :tag_resource
-            Aws::SavingsPlans::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::SavingsPlans::Endpoints::UntagResource.build(context)
           end
         end
       end

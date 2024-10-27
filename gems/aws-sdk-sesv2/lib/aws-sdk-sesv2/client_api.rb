@@ -317,6 +317,7 @@ module Aws::SESV2
     MailFromDomainStatus = Shapes::StringShape.new(name: 'MailFromDomainStatus')
     MailType = Shapes::StringShape.new(name: 'MailType')
     Max24HourSend = Shapes::FloatShape.new(name: 'Max24HourSend')
+    MaxDeliverySeconds = Shapes::IntegerShape.new(name: 'MaxDeliverySeconds')
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     MaxSendRate = Shapes::FloatShape.new(name: 'MaxSendRate')
     Message = Shapes::StructureShape.new(name: 'Message')
@@ -817,6 +818,7 @@ module Aws::SESV2
 
     DeliveryOptions.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     DeliveryOptions.add_member(:sending_pool_name, Shapes::ShapeRef.new(shape: PoolName, location_name: "SendingPoolName"))
+    DeliveryOptions.add_member(:max_delivery_seconds, Shapes::ShapeRef.new(shape: MaxDeliverySeconds, location_name: "MaxDeliverySeconds"))
     DeliveryOptions.struct_class = Types::DeliveryOptions
 
     Destination.add_member(:to_addresses, Shapes::ShapeRef.new(shape: EmailAddressList, location_name: "ToAddresses"))
@@ -1499,6 +1501,7 @@ module Aws::SESV2
     PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
     PutConfigurationSetDeliveryOptionsRequest.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     PutConfigurationSetDeliveryOptionsRequest.add_member(:sending_pool_name, Shapes::ShapeRef.new(shape: SendingPoolName, location_name: "SendingPoolName"))
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:max_delivery_seconds, Shapes::ShapeRef.new(shape: MaxDeliverySeconds, location_name: "MaxDeliverySeconds"))
     PutConfigurationSetDeliveryOptionsRequest.struct_class = Types::PutConfigurationSetDeliveryOptionsRequest
 
     PutConfigurationSetDeliveryOptionsResponse.struct_class = Types::PutConfigurationSetDeliveryOptionsResponse

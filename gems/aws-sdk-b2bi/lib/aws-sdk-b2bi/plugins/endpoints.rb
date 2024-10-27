@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::B2bi::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,69 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_capability
-            Aws::B2bi::Endpoints::CreateCapability.build(context)
-          when :create_partnership
-            Aws::B2bi::Endpoints::CreatePartnership.build(context)
-          when :create_profile
-            Aws::B2bi::Endpoints::CreateProfile.build(context)
-          when :create_starter_mapping_template
-            Aws::B2bi::Endpoints::CreateStarterMappingTemplate.build(context)
-          when :create_transformer
-            Aws::B2bi::Endpoints::CreateTransformer.build(context)
-          when :delete_capability
-            Aws::B2bi::Endpoints::DeleteCapability.build(context)
-          when :delete_partnership
-            Aws::B2bi::Endpoints::DeletePartnership.build(context)
-          when :delete_profile
-            Aws::B2bi::Endpoints::DeleteProfile.build(context)
-          when :delete_transformer
-            Aws::B2bi::Endpoints::DeleteTransformer.build(context)
-          when :get_capability
-            Aws::B2bi::Endpoints::GetCapability.build(context)
-          when :get_partnership
-            Aws::B2bi::Endpoints::GetPartnership.build(context)
-          when :get_profile
-            Aws::B2bi::Endpoints::GetProfile.build(context)
-          when :get_transformer
-            Aws::B2bi::Endpoints::GetTransformer.build(context)
-          when :get_transformer_job
-            Aws::B2bi::Endpoints::GetTransformerJob.build(context)
-          when :list_capabilities
-            Aws::B2bi::Endpoints::ListCapabilities.build(context)
-          when :list_partnerships
-            Aws::B2bi::Endpoints::ListPartnerships.build(context)
-          when :list_profiles
-            Aws::B2bi::Endpoints::ListProfiles.build(context)
-          when :list_tags_for_resource
-            Aws::B2bi::Endpoints::ListTagsForResource.build(context)
-          when :list_transformers
-            Aws::B2bi::Endpoints::ListTransformers.build(context)
-          when :start_transformer_job
-            Aws::B2bi::Endpoints::StartTransformerJob.build(context)
-          when :tag_resource
-            Aws::B2bi::Endpoints::TagResource.build(context)
-          when :test_conversion
-            Aws::B2bi::Endpoints::TestConversion.build(context)
-          when :test_mapping
-            Aws::B2bi::Endpoints::TestMapping.build(context)
-          when :test_parsing
-            Aws::B2bi::Endpoints::TestParsing.build(context)
-          when :untag_resource
-            Aws::B2bi::Endpoints::UntagResource.build(context)
-          when :update_capability
-            Aws::B2bi::Endpoints::UpdateCapability.build(context)
-          when :update_partnership
-            Aws::B2bi::Endpoints::UpdatePartnership.build(context)
-          when :update_profile
-            Aws::B2bi::Endpoints::UpdateProfile.build(context)
-          when :update_transformer
-            Aws::B2bi::Endpoints::UpdateTransformer.build(context)
           end
         end
       end

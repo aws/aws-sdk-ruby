@@ -1779,17 +1779,17 @@ module Aws::S3
     #   * To encrypt new object copies to a directory bucket with SSE-KMS, we
     #     recommend you specify SSE-KMS as the directory bucket's default
     #     encryption configuration with a KMS key (specifically, a [customer
-    #     managed key][4]). [Amazon Web Services managed key][5] (`aws/s3`)
-    #     isn't supported. Your SSE-KMS configuration can only support 1
-    #     [customer managed key][4] per directory bucket for the lifetime of
-    #     the bucket. After you specify a customer managed key for SSE-KMS,
-    #     you can't override the customer managed key for the bucket's
-    #     SSE-KMS configuration. Then, when you perform a `CopyObject`
-    #     operation and want to specify server-side encryption settings for
-    #     new object copies with SSE-KMS in the encryption-related request
-    #     headers, you must ensure the encryption key is the same customer
-    #     managed key that you specified for the directory bucket's default
-    #     encryption configuration.
+    #     managed key][4]). The [Amazon Web Services managed key][5]
+    #     (`aws/s3`) isn't supported. Your SSE-KMS configuration can only
+    #     support 1 [customer managed key][4] per directory bucket for the
+    #     lifetime of the bucket. After you specify a customer managed key for
+    #     SSE-KMS, you can't override the customer managed key for the
+    #     bucket's SSE-KMS configuration. Then, when you perform a
+    #     `CopyObject` operation and want to specify server-side encryption
+    #     settings for new object copies with SSE-KMS in the
+    #     encryption-related request headers, you must ensure the encryption
+    #     key is the same customer managed key that you specified for the
+    #     directory bucket's default encryption configuration.
     #
     #
     #
@@ -1903,14 +1903,19 @@ module Aws::S3
     #   Guide*.
     #
     #   **Directory buckets** - If you specify `x-amz-server-side-encryption`
-    #   with `aws:kms`, you must specify the `
-    #   x-amz-server-side-encryption-aws-kms-key-id` header with the ID (Key
-    #   ID or Key ARN) of the KMS symmetric encryption customer managed key to
-    #   use. Otherwise, you get an HTTP `400 Bad Request` error. Only use the
-    #   key ID or key ARN. The key alias format of the KMS key isn't
-    #   supported. Your SSE-KMS configuration can only support 1 [customer
-    #   managed key][2] per directory bucket for the lifetime of the bucket.
-    #   [Amazon Web Services managed key][3] (`aws/s3`) isn't supported.
+    #   with `aws:kms`, the ` x-amz-server-side-encryption-aws-kms-key-id`
+    #   header is implicitly assigned the ID of the KMS symmetric encryption
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. If you want to specify the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
+    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
+    #   Request` error. Only use the key ID or key ARN. The key alias format
+    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
+    #   support 1 [customer managed key][2] per directory bucket for the
+    #   lifetime of the bucket. The [Amazon Web Services managed key][3]
+    #   (`aws/s3`) isn't supported.
     #
     #
     #
@@ -3272,14 +3277,19 @@ module Aws::S3
     #   Amazon Web Services managed key (`aws/s3`) to protect the data.
     #
     #   **Directory buckets** - If you specify `x-amz-server-side-encryption`
-    #   with `aws:kms`, you must specify the `
-    #   x-amz-server-side-encryption-aws-kms-key-id` header with the ID (Key
-    #   ID or Key ARN) of the KMS symmetric encryption customer managed key to
-    #   use. Otherwise, you get an HTTP `400 Bad Request` error. Only use the
-    #   key ID or key ARN. The key alias format of the KMS key isn't
-    #   supported. Your SSE-KMS configuration can only support 1 [customer
-    #   managed key][1] per directory bucket for the lifetime of the bucket.
-    #   [Amazon Web Services managed key][2] (`aws/s3`) isn't supported.
+    #   with `aws:kms`, the ` x-amz-server-side-encryption-aws-kms-key-id`
+    #   header is implicitly assigned the ID of the KMS symmetric encryption
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. If you want to specify the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
+    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
+    #   Request` error. Only use the key ID or key ARN. The key alias format
+    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
+    #   support 1 [customer managed key][1] per directory bucket for the
+    #   lifetime of the bucket. The [Amazon Web Services managed key][2]
+    #   (`aws/s3`) isn't supported.
     #
     #
     #
@@ -3587,7 +3597,7 @@ module Aws::S3
     #   with SSE-KMS and S3 Bucket Keys during the session.
     #
     #   <note markdown="1"> Only 1 [customer managed key][14] is supported per directory bucket
-    #   for the lifetime of the bucket. [Amazon Web Services managed
+    #   for the lifetime of the bucket. The [Amazon Web Services managed
     #   key][15] (`aws/s3`) isn't supported. After you specify SSE-KMS as
     #   your bucket's default encryption configuration with a customer
     #   managed key, you can't change the customer managed key for the
@@ -3679,8 +3689,8 @@ module Aws::S3
     #   the Key ID.
     #
     #   Your SSE-KMS configuration can only support 1 [customer managed
-    #   key][1] per directory bucket for the lifetime of the bucket. [Amazon
-    #   Web Services managed key][2] (`aws/s3`) isn't supported.
+    #   key][1] per directory bucket for the lifetime of the bucket. The
+    #   [Amazon Web Services managed key][2] (`aws/s3`) isn't supported.
     #
     #
     #
@@ -4744,67 +4754,33 @@ module Aws::S3
     end
 
     # Removes an object from a bucket. The behavior depends on the bucket's
-    # versioning state:
-    #
-    # * If bucket versioning is not enabled, the operation permanently
-    #   deletes the object.
-    #
-    # * If bucket versioning is enabled, the operation inserts a delete
-    #   marker, which becomes the current version of the object. To
-    #   permanently delete an object in a versioned bucket, you must include
-    #   the object’s `versionId` in the request. For more information about
-    #   versioning-enabled buckets, see [Deleting object versions from a
-    #   versioning-enabled bucket][1].
-    #
-    # * If bucket versioning is suspended, the operation removes the object
-    #   that has a null `versionId`, if there is one, and inserts a delete
-    #   marker that becomes the current version of the object. If there
-    #   isn't an object with a null `versionId`, and all versions of the
-    #   object have a `versionId`, Amazon S3 does not remove the object and
-    #   only inserts a delete marker. To permanently delete an object that
-    #   has a `versionId`, you must include the object’s `versionId` in the
-    #   request. For more information about versioning-suspended buckets,
-    #   see [Deleting objects from versioning-suspended buckets][2].
-    #
-    # <note markdown="1"> * **Directory buckets** - S3 Versioning isn't enabled and supported
-    #   for directory buckets. For this API operation, only the `null` value
-    #   of the version ID is supported by directory buckets. You can only
-    #   specify `null` to the `versionId` query parameter in the request.
-    #
-    # * **Directory buckets** - For directory buckets, you must make
-    #   requests for this API operation to the Zonal endpoint. These
-    #   endpoints support virtual-hosted-style requests in the format
-    #   `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name
-    #   `. Path-style requests are not supported. For more information, see
-    #   [Regional and Zonal endpoints][3] in the *Amazon S3 User Guide*.
-    #
-    #  </note>
+    # versioning state. For more information, see [Best practices to
+    # consider before deleting an object][1].
     #
     # To remove a specific version, you must use the `versionId` query
     # parameter. Using this query parameter permanently deletes the version.
     # If the object deleted is a delete marker, Amazon S3 sets the response
-    # header `x-amz-delete-marker` to true.
+    # header `x-amz-delete-marker` to true. If the object you want to delete
+    # is in a bucket where the bucket versioning configuration is MFA delete
+    # enabled, you must include the `x-amz-mfa` request header in the DELETE
+    # `versionId` request. Requests that include `x-amz-mfa` must use HTTPS.
+    # For more information about MFA delete and to see example requests, see
+    # [Using MFA delete][2] and [Sample request][3] in the *Amazon S3 User
+    # Guide*.
     #
-    # If the object you want to delete is in a bucket where the bucket
-    # versioning configuration is MFA Delete enabled, you must include the
-    # `x-amz-mfa` request header in the DELETE `versionId` request. Requests
-    # that include `x-amz-mfa` must use HTTPS. For more information about
-    # MFA Delete, see [Using MFA Delete][4] in the *Amazon S3 User Guide*.
-    # To see sample requests that use versioning, see [Sample Request][5].
+    # <note markdown="1"> * S3 Versioning isn't enabled and supported for directory buckets.
+    #   For this API operation, only the `null` value of the version ID is
+    #   supported by directory buckets. You can only specify `null` to the
+    #   `versionId` query parameter in the request.
     #
-    # <note markdown="1"> **Directory buckets** - MFA delete is not supported by directory
-    # buckets.
+    # * For directory buckets, you must make requests for this API operation
+    #   to the Zonal endpoint. These endpoints support virtual-hosted-style
+    #   requests in the format
+    #   `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name
+    #   `. Path-style requests are not supported. For more information, see
+    #   [Regional and Zonal endpoints][4] in the *Amazon S3 User Guide*.
     #
-    #  </note>
-    #
-    # You can delete objects by explicitly calling DELETE Object or calling
-    # ([PutBucketLifecycle][6]) to enable Amazon S3 to remove them for you.
-    # If you want to block users or accounts from removing or deleting
-    # objects from your bucket, you must deny them the `s3:DeleteObject`,
-    # `s3:DeleteObjectVersion`, and `s3:PutLifeCycleConfiguration` actions.
-    #
-    # <note markdown="1"> **Directory buckets** - S3 Lifecycle is not supported by directory
-    # buckets.
+    # * MFA delete is not supported by directory buckets.
     #
     #  </note>
     #
@@ -4816,24 +4792,23 @@ module Aws::S3
     #     * <b> <code>s3:DeleteObject</code> </b> - To delete an object from
     #       a bucket, you must always have the `s3:DeleteObject` permission.
     #
+    #       <note markdown="1"> You can also use PutBucketLifecycle to delete objects in Amazon
+    #       S3.
+    #
+    #        </note>
+    #
     #     * <b> <code>s3:DeleteObjectVersion</code> </b> - To delete a
     #       specific version of an object from a versioning-enabled bucket,
     #       you must have the `s3:DeleteObjectVersion` permission.
     #
-    #   * **Directory bucket permissions** - To grant access to this API
-    #     operation on a directory bucket, we recommend that you use the [
-    #     `CreateSession` ][7] API operation for session-based
-    #     authorization. Specifically, you grant the
-    #     `s3express:CreateSession` permission to the directory bucket in a
-    #     bucket policy or an IAM identity-based policy. Then, you make the
-    #     `CreateSession` API call on the bucket to obtain a session token.
-    #     With the session token in your request header, you can make API
-    #     requests to this operation. After the session token expires, you
-    #     make another `CreateSession` API call to generate a new session
-    #     token for use. Amazon Web Services CLI or SDKs create session and
-    #     refresh the session token automatically to avoid service
-    #     interruptions when a session expires. For more information about
-    #     authorization, see [ `CreateSession` ][7].
+    #     * If you want to block users or accounts from removing or deleting
+    #       objects from your bucket, you must deny them the
+    #       `s3:DeleteObject`, `s3:DeleteObjectVersion`, and
+    #       `s3:PutLifeCycleConfiguration` permissions.
+    #
+    #   * **Directory buckets permissions** - To grant access to this API
+    #     operation on a directory bucket, we recommend that you use the
+    #     CreateSession API operation for session-based authorization.
     #
     # HTTP Host header syntax
     #
@@ -4842,20 +4817,17 @@ module Aws::S3
     #
     # The following action is related to `DeleteObject`:
     #
-    # * [PutObject][8]
+    # * [PutObject][5]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectVersions.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectsfromVersioningSuspendedBuckets.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjects.html#DeletingObjects-best-practices
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
     #
     # @option params [required, String] :bucket
     #   The bucket name of the bucket containing the object.
@@ -4960,6 +4932,15 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -4972,15 +4953,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
-    #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -9291,6 +9263,27 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
+    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -9313,27 +9306,6 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -10664,11 +10636,35 @@ module Aws::S3
     #
     #   Required: No.
     #
+    # @option params [String] :prefix
+    #   Limits the response to bucket names that begin with the specified
+    #   bucket name prefix.
+    #
+    # @option params [String] :bucket_region
+    #   Limits the response to buckets that are located in the specified
+    #   Amazon Web Services Region. The Amazon Web Services Region must be
+    #   expressed according to the Amazon Web Services Region code, such as
+    #   `us-west-2` for the US West (Oregon) Region. For a list of the valid
+    #   values for all of the Amazon Web Services Regions, see [Regions and
+    #   Endpoints][1].
+    #
+    #   <note markdown="1"> Requests made to a Regional endpoint that is different from the
+    #   `bucket-region` parameter are not supported. For example, if you want
+    #   to limit the response to your buckets in Region `us-west-2`, the
+    #   request must be made to an endpoint in Region `us-west-2`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #
     # @return [Types::ListBucketsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBucketsOutput#buckets #buckets} => Array&lt;Types::Bucket&gt;
     #   * {Types::ListBucketsOutput#owner #owner} => Types::Owner
     #   * {Types::ListBucketsOutput#continuation_token #continuation_token} => String
+    #   * {Types::ListBucketsOutput#prefix #prefix} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -10707,6 +10703,8 @@ module Aws::S3
     #   resp = client.list_buckets({
     #     max_buckets: 1,
     #     continuation_token: "Token",
+    #     prefix: "Prefix",
+    #     bucket_region: "BucketRegion",
     #   })
     #
     # @example Response structure
@@ -10714,9 +10712,11 @@ module Aws::S3
     #   resp.buckets #=> Array
     #   resp.buckets[0].name #=> String
     #   resp.buckets[0].creation_date #=> Time
+    #   resp.buckets[0].bucket_region #=> String
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
     #   resp.continuation_token #=> String
+    #   resp.prefix #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBuckets AWS API Documentation
     #
@@ -10793,6 +10793,7 @@ module Aws::S3
     #   resp.buckets #=> Array
     #   resp.buckets[0].name #=> String
     #   resp.buckets[0].creation_date #=> Time
+    #   resp.buckets[0].bucket_region #=> String
     #   resp.continuation_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListDirectoryBuckets AWS API Documentation
@@ -13132,7 +13133,7 @@ module Aws::S3
     #     object uploads][4].
     #
     #   * Your SSE-KMS configuration can only support 1 [customer managed
-    #     key][5] per directory bucket for the lifetime of the bucket.
+    #     key][5] per directory bucket for the lifetime of the bucket. The
     #     [Amazon Web Services managed key][6] (`aws/s3`) isn't supported.
     #
     #   * S3 Bucket Keys are always enabled for `GET` and `PUT` operations
@@ -15876,10 +15877,11 @@ module Aws::S3
     #   information about REST request authentication, see [REST
     #   Authentication][1].
     #
-    #   <note markdown="1"> The `Content-MD5` header is required for any request to upload an
-    #   object with a retention period configured using Amazon S3 Object Lock.
-    #   For more information about Amazon S3 Object Lock, see [Amazon S3
-    #   Object Lock Overview][2] in the *Amazon S3 User Guide*.
+    #   <note markdown="1"> The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is required
+    #   for any request to upload an object with a retention period configured
+    #   using Amazon S3 Object Lock. For more information, see [Uploading
+    #   objects to an Object Lock enabled bucket ][2] in the *Amazon S3 User
+    #   Guide*.
     #
     #    </note>
     #
@@ -15890,7 +15892,7 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object
     #
     # @option params [String] :content_type
     #   A standard MIME type describing the format of the contents. For more
@@ -15929,14 +15931,21 @@ module Aws::S3
     #   provided `ChecksumAlgorithm` parameter and uses the checksum algorithm
     #   that matches the provided value in `x-amz-checksum-algorithm `.
     #
-    #   <note markdown="1"> For directory buckets, when you use Amazon Web Services SDKs, `CRC32`
-    #   is the default checksum algorithm that's used for performance.
+    #   <note markdown="1"> The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is required
+    #   for any request to upload an object with a retention period configured
+    #   using Amazon S3 Object Lock. For more information, see [Uploading
+    #   objects to an Object Lock enabled bucket ][2] in the *Amazon S3 User
+    #   Guide*.
     #
     #    </note>
+    #
+    #   For directory buckets, when you use Amazon Web Services SDKs, `CRC32`
+    #   is the default checksum algorithm that's used for performance.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html#object-lock-put-object
     #
     # @option params [String] :checksum_crc32
     #   This header can be used as a data integrity check to verify that the
@@ -16210,14 +16219,19 @@ module Aws::S3
     #   Amazon Web Services managed key (`aws/s3`) to protect the data.
     #
     #   **Directory buckets** - If you specify `x-amz-server-side-encryption`
-    #   with `aws:kms`, you must specify the `
-    #   x-amz-server-side-encryption-aws-kms-key-id` header with the ID (Key
-    #   ID or Key ARN) of the KMS symmetric encryption customer managed key to
-    #   use. Otherwise, you get an HTTP `400 Bad Request` error. Only use the
-    #   key ID or key ARN. The key alias format of the KMS key isn't
-    #   supported. Your SSE-KMS configuration can only support 1 [customer
-    #   managed key][1] per directory bucket for the lifetime of the bucket.
-    #   [Amazon Web Services managed key][2] (`aws/s3`) isn't supported.
+    #   with `aws:kms`, the ` x-amz-server-side-encryption-aws-kms-key-id`
+    #   header is implicitly assigned the ID of the KMS symmetric encryption
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. If you want to specify the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
+    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
+    #   customer managed key that's configured for your directory bucket's
+    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
+    #   Request` error. Only use the key ID or key ARN. The key alias format
+    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
+    #   support 1 [customer managed key][1] per directory bucket for the
+    #   lifetime of the bucket. The [Amazon Web Services managed key][2]
+    #   (`aws/s3`) isn't supported.
     #
     #
     #
@@ -16350,6 +16364,60 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To create an object.
+    #
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
     # @example Example: To upload an object and specify canned ACL.
     #
     #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
@@ -16368,37 +16436,24 @@ module Aws::S3
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
-    # @example Example: To create an object.
+    # @example Example: To upload an object (specify optional headers)
     #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
     #
     #   resp = client.put_object({
     #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
     # @example Example: To upload an object and specify optional tags
@@ -16437,47 +16492,6 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload object and specify user-defined metadata
-    #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
     # @example Streaming a file from disk
@@ -17605,10 +17619,6 @@ module Aws::S3
     #
     #  </note>
     #
-    # The `SELECT` job type for the RestoreObject operation is no longer
-    # available to new customers. Existing customers of Amazon S3 Select can
-    # continue to use the feature as usual. [Learn more][1]
-    #
     # Restores an archived copy of an object back into Amazon S3
     #
     # This functionality is not supported for Amazon S3 on Outposts.
@@ -17622,11 +17632,11 @@ module Aws::S3
     # For more information about the `S3` structure in the request body, see
     # the following:
     #
-    # * [PutObject][2]
+    # * [PutObject][1]
     #
-    # * [Managing Access with ACLs][3] in the *Amazon S3 User Guide*
+    # * [Managing Access with ACLs][2] in the *Amazon S3 User Guide*
     #
-    # * [Protecting Data Using Server-Side Encryption][4] in the *Amazon S3
+    # * [Protecting Data Using Server-Side Encryption][3] in the *Amazon S3
     #   User Guide*
     #
     # Permissions
@@ -17635,8 +17645,8 @@ module Aws::S3
     #   `s3:RestoreObject` action. The bucket owner has this permission by
     #   default and can grant this permission to others. For more
     #   information about permissions, see [Permissions Related to Bucket
-    #   Subresource Operations][5] and [Managing Access Permissions to Your
-    #   Amazon S3 Resources][6] in the *Amazon S3 User Guide*.
+    #   Subresource Operations][4] and [Managing Access Permissions to Your
+    #   Amazon S3 Resources][5] in the *Amazon S3 User Guide*.
     #
     # Restoring objects
     #
@@ -17699,11 +17709,11 @@ module Aws::S3
     #
     #   For more information about archive retrieval options and provisioned
     #   capacity for `Expedited` data access, see [Restoring Archived
-    #   Objects][7] in the *Amazon S3 User Guide*.
+    #   Objects][6] in the *Amazon S3 User Guide*.
     #
     #   You can use Amazon S3 restore speed upgrade to change the restore
     #   speed to a faster speed while it is in progress. For more
-    #   information, see [ Upgrading the speed of an in-progress restore][8]
+    #   information, see [ Upgrading the speed of an in-progress restore][7]
     #   in the *Amazon S3 User Guide*.
     #
     #   To get the status of object restoration, you can send a `HEAD`
@@ -17711,7 +17721,7 @@ module Aws::S3
     #   provides information about the restoration status, in the response.
     #   You can use Amazon S3 event notifications to notify you when a
     #   restore is initiated or completed. For more information, see
-    #   [Configuring Amazon S3 Event Notifications][9] in the *Amazon S3
+    #   [Configuring Amazon S3 Event Notifications][8] in the *Amazon S3
     #   User Guide*.
     #
     #   After restoring an archived object, you can update the restoration
@@ -17727,8 +17737,8 @@ module Aws::S3
     #   restore an object copy for 10 days, but the object is scheduled to
     #   expire in 3 days, Amazon S3 deletes the object in 3 days. For more
     #   information about lifecycle configuration, see
-    #   [PutBucketLifecycleConfiguration][10] and [Object Lifecycle
-    #   Management][11] in *Amazon S3 User Guide*.
+    #   [PutBucketLifecycleConfiguration][9] and [Object Lifecycle
+    #   Management][10] in *Amazon S3 User Guide*.
     #
     # Responses
     #
@@ -17766,24 +17776,23 @@ module Aws::S3
     #
     # The following operations are related to `RestoreObject`:
     #
-    # * [PutBucketLifecycleConfiguration][10]
+    # * [PutBucketLifecycleConfiguration][9]
     #
-    # * [GetBucketNotificationConfiguration][12]
+    # * [GetBucketNotificationConfiguration][11]
     #
     #
     #
-    # [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
-    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the object to restore.
@@ -17995,10 +18004,6 @@ module Aws::S3
     #
     #  </note>
     #
-    # The SelectObjectContent operation is no longer available to new
-    # customers. Existing customers of Amazon S3 Select can continue to use
-    # the operation as usual. [Learn more][1]
-    #
     # This action filters the contents of an Amazon S3 object based on a
     # simple structured query language (SQL) statement. In the request,
     # along with the SQL expression, you must also specify a data
@@ -18010,7 +18015,7 @@ module Aws::S3
     # This functionality is not supported for Amazon S3 on Outposts.
     #
     # For more information about Amazon S3 Select, see [Selecting Content
-    # from Objects][2] and [SELECT Command][3] in the *Amazon S3 User
+    # from Objects][1] and [SELECT Command][2] in the *Amazon S3 User
     # Guide*.
     #
     #
@@ -18020,7 +18025,7 @@ module Aws::S3
     # : You must have the `s3:GetObject` permission for this
     #   operation. Amazon S3 Select does not support anonymous access. For
     #   more information about permissions, see [Specifying Permissions in a
-    #   Policy][4] in the *Amazon S3 User Guide*.
+    #   Policy][3] in the *Amazon S3 User Guide*.
     #
     # Object Data Formats
     #
@@ -18045,31 +18050,31 @@ module Aws::S3
     #
     #     For objects that are encrypted with customer-provided encryption
     #     keys (SSE-C), you must use HTTPS, and you must use the headers
-    #     that are documented in the [GetObject][5]. For more information
+    #     that are documented in the [GetObject][4]. For more information
     #     about SSE-C, see [Server-Side Encryption (Using Customer-Provided
-    #     Encryption Keys)][6] in the *Amazon S3 User Guide*.
+    #     Encryption Keys)][5] in the *Amazon S3 User Guide*.
     #
     #     For objects that are encrypted with Amazon S3 managed keys
     #     (SSE-S3) and Amazon Web Services KMS keys (SSE-KMS), server-side
     #     encryption is handled transparently, so you don't need to specify
     #     anything. For more information about server-side encryption,
     #     including SSE-S3 and SSE-KMS, see [Protecting Data Using
-    #     Server-Side Encryption][7] in the *Amazon S3 User Guide*.
+    #     Server-Side Encryption][6] in the *Amazon S3 User Guide*.
     #
     # Working with the Response Body
     #
     # : Given the response size is unknown, Amazon S3 Select streams the
     #   response as a series of messages and includes a `Transfer-Encoding`
     #   header with `chunked` as its value in the response. For more
-    #   information, see [Appendix: SelectObjectContent Response][8].
+    #   information, see [Appendix: SelectObjectContent Response][7].
     #
     # GetObject Support
     #
     # : The `SelectObjectContent` action does not support the following
-    #   `GetObject` functionality. For more information, see [GetObject][5].
+    #   `GetObject` functionality. For more information, see [GetObject][4].
     #
     #   * `Range`: Although you can specify a scan range for an Amazon S3
-    #     Select request (see [SelectObjectContentRequest - ScanRange][9] in
+    #     Select request (see [SelectObjectContentRequest - ScanRange][8] in
     #     the request parameters), you cannot specify the range of bytes of
     #     an object to return.
     #
@@ -18080,37 +18085,36 @@ module Aws::S3
     #     storage classes, nor objects in the `ARCHIVE_ACCESS` or
     #     `DEEP_ARCHIVE_ACCESS` access tiers of the `INTELLIGENT_TIERING`
     #     storage class. For more information about storage classes, see
-    #     [Using Amazon S3 storage classes][10] in the *Amazon S3 User
+    #     [Using Amazon S3 storage classes][9] in the *Amazon S3 User
     #     Guide*.
     #
     # Special Errors
     #
     # : For a list of special errors for this operation, see [List of SELECT
-    #   Object Content Error Codes][11]
+    #   Object Content Error Codes][10]
     #
     # The following operations are related to `SelectObjectContent`:
     #
-    # * [GetObject][5]
+    # * [GetObject][4]
     #
-    # * [GetBucketLifecycleConfiguration][12]
+    # * [GetBucketLifecycleConfiguration][11]
     #
-    # * [PutBucketLifecycleConfiguration][13]
+    # * [PutBucketLifecycleConfiguration][12]
     #
     #
     #
-    # [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-glacier-select-sql-reference-select.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTSelectObjectAppendix.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html#AmazonS3-SelectObjectContent-request-ScanRange
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
-    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
-    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-glacier-select-sql-reference-select.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTSelectObjectAppendix.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html#AmazonS3-SelectObjectContent-request-ScanRange
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
     #
     # @option params [required, String] :bucket
     #   The S3 bucket.
@@ -19341,26 +19345,6 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
-    #     }, 
-    #   }
-    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -19380,6 +19364,26 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -19841,7 +19845,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.169.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

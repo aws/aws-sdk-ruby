@@ -167,6 +167,31 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about the override status applied to a target.
+    #
+    # @!attribute [rw] state
+    #   The state of the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason code for the state.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the override state that provides additional
+    #   details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AdministrativeOverride AWS API Documentation
+    #
+    class AdministrativeOverride < Struct.new(
+      :state,
+      :reason,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified allocation ID does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AllocationIdNotFoundException AWS API Documentation
@@ -2429,7 +2454,9 @@ module Aws::ElasticLoadBalancingV2
     #     percent zonal affinity, and `any_availability_zone` with 0 percent
     #     zonal affinity.
     #
-    #   ^
+    #   * `zonal_shift.config.enabled` - Indicates whether zonal shift is
+    #     enabled. The possible values are `true` and `false`. The default
+    #     is `false`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -4230,13 +4257,18 @@ module Aws::ElasticLoadBalancingV2
     #   If anomalies were detected, the result is `anomalous`.
     #   @return [Types::AnomalyDetection]
     #
+    # @!attribute [rw] administrative_override
+    #   The administrative override information for the target.
+    #   @return [Types::AdministrativeOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetHealthDescription AWS API Documentation
     #
     class TargetHealthDescription < Struct.new(
       :target,
       :health_check_port,
       :target_health,
-      :anomaly_detection)
+      :anomaly_detection,
+      :administrative_override)
       SENSITIVE = []
       include Aws::Structure
     end

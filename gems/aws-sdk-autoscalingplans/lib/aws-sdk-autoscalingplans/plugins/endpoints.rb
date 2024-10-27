@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::AutoScalingPlans::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,23 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_scaling_plan
-            Aws::AutoScalingPlans::Endpoints::CreateScalingPlan.build(context)
-          when :delete_scaling_plan
-            Aws::AutoScalingPlans::Endpoints::DeleteScalingPlan.build(context)
-          when :describe_scaling_plan_resources
-            Aws::AutoScalingPlans::Endpoints::DescribeScalingPlanResources.build(context)
-          when :describe_scaling_plans
-            Aws::AutoScalingPlans::Endpoints::DescribeScalingPlans.build(context)
-          when :get_scaling_plan_resource_forecast_data
-            Aws::AutoScalingPlans::Endpoints::GetScalingPlanResourceForecastData.build(context)
-          when :update_scaling_plan
-            Aws::AutoScalingPlans::Endpoints::UpdateScalingPlan.build(context)
           end
         end
       end

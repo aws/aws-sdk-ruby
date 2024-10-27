@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2024-10-17)
+------------------
+
+* Feature - Updated the DomainName pattern for Active Directory
+
 1.121.0 (2024-10-02)
 ------------------
 

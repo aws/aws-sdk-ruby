@@ -56,7 +56,7 @@ module Aws::LexRuntimeV2
   autoload :AsyncClient, 'aws-sdk-lexruntimev2/async_client'
   autoload :EventStreams, 'aws-sdk-lexruntimev2/event_streams'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
 

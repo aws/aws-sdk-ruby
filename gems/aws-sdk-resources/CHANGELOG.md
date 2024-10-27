@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.210.0 (2024-10-16)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-nimblestudio` gem.
+
+3.209.0 (2024-10-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-socialmessaging` gem.
+
 3.208.0 (2024-10-03)
 ------------------
 

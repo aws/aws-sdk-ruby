@@ -1348,7 +1348,7 @@ module Aws::ECS
       attr_accessor throughput: ::Integer
       attr_accessor tag_specifications: ::Array[Types::EBSTagSpecification]
       attr_accessor role_arn: ::String
-      attr_accessor filesystem_type: ("ext3" | "ext4" | "xfs")
+      attr_accessor filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")
       SENSITIVE: []
     end
 
@@ -1588,7 +1588,7 @@ module Aws::ECS
       attr_accessor tag_specifications: ::Array[Types::EBSTagSpecification]
       attr_accessor role_arn: ::String
       attr_accessor termination_policy: Types::TaskManagedEBSVolumeTerminationPolicy
-      attr_accessor filesystem_type: ("ext3" | "ext4" | "xfs")
+      attr_accessor filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")
       SENSITIVE: []
     end
 

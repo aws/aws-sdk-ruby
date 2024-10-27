@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::InternetMonitor::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,43 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_monitor
-            Aws::InternetMonitor::Endpoints::CreateMonitor.build(context)
-          when :delete_monitor
-            Aws::InternetMonitor::Endpoints::DeleteMonitor.build(context)
-          when :get_health_event
-            Aws::InternetMonitor::Endpoints::GetHealthEvent.build(context)
-          when :get_internet_event
-            Aws::InternetMonitor::Endpoints::GetInternetEvent.build(context)
-          when :get_monitor
-            Aws::InternetMonitor::Endpoints::GetMonitor.build(context)
-          when :get_query_results
-            Aws::InternetMonitor::Endpoints::GetQueryResults.build(context)
-          when :get_query_status
-            Aws::InternetMonitor::Endpoints::GetQueryStatus.build(context)
-          when :list_health_events
-            Aws::InternetMonitor::Endpoints::ListHealthEvents.build(context)
-          when :list_internet_events
-            Aws::InternetMonitor::Endpoints::ListInternetEvents.build(context)
-          when :list_monitors
-            Aws::InternetMonitor::Endpoints::ListMonitors.build(context)
-          when :list_tags_for_resource
-            Aws::InternetMonitor::Endpoints::ListTagsForResource.build(context)
-          when :start_query
-            Aws::InternetMonitor::Endpoints::StartQuery.build(context)
-          when :stop_query
-            Aws::InternetMonitor::Endpoints::StopQuery.build(context)
-          when :tag_resource
-            Aws::InternetMonitor::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::InternetMonitor::Endpoints::UntagResource.build(context)
-          when :update_monitor
-            Aws::InternetMonitor::Endpoints::UpdateMonitor.build(context)
           end
         end
       end

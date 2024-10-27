@@ -54,7 +54,7 @@ module Aws::DirectoryService
   autoload :EndpointProvider, 'aws-sdk-directoryservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-directoryservice/endpoints'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end
 

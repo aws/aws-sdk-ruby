@@ -265,6 +265,7 @@ module Aws::IoTFleetWise
     attributeValue = Shapes::StringShape.new(name: 'attributeValue')
     attributeValuesList = Shapes::ListShape.new(name: 'attributeValuesList')
     attributesMap = Shapes::MapShape.new(name: 'attributesMap')
+    campaignArn = Shapes::StringShape.new(name: 'campaignArn')
     campaignName = Shapes::StringShape.new(name: 'campaignName')
     campaignSummaries = Shapes::ListShape.new(name: 'campaignSummaries')
     collectionPeriodMs = Shapes::IntegerShape.new(name: 'collectionPeriodMs')
@@ -294,7 +295,7 @@ module Aws::IoTFleetWise
     priority = Shapes::IntegerShape.new(name: 'priority')
     resourceName = Shapes::StringShape.new(name: 'resourceName')
     signalCatalogSummaries = Shapes::ListShape.new(name: 'signalCatalogSummaries')
-    status = Shapes::StringShape.new(name: 'status')
+    statusStr = Shapes::StringShape.new(name: 'statusStr')
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
     uint32 = Shapes::IntegerShape.new(name: 'uint32')
@@ -361,7 +362,7 @@ module Aws::IoTFleetWise
     Branch.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
     Branch.struct_class = Types::Branch
 
-    CampaignSummary.add_member(:arn, Shapes::ShapeRef.new(shape: arn, location_name: "arn"))
+    CampaignSummary.add_member(:arn, Shapes::ShapeRef.new(shape: campaignArn, location_name: "arn"))
     CampaignSummary.add_member(:name, Shapes::ShapeRef.new(shape: campaignName, location_name: "name"))
     CampaignSummary.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     CampaignSummary.add_member(:signal_catalog_arn, Shapes::ShapeRef.new(shape: arn, location_name: "signalCatalogArn"))
@@ -424,7 +425,7 @@ module Aws::IoTFleetWise
     CreateCampaignRequest.add_member(:diagnostics_mode, Shapes::ShapeRef.new(shape: DiagnosticsMode, location_name: "diagnosticsMode"))
     CreateCampaignRequest.add_member(:spooling_mode, Shapes::ShapeRef.new(shape: SpoolingMode, location_name: "spoolingMode"))
     CreateCampaignRequest.add_member(:compression, Shapes::ShapeRef.new(shape: Compression, location_name: "compression"))
-    CreateCampaignRequest.add_member(:priority, Shapes::ShapeRef.new(shape: priority, location_name: "priority"))
+    CreateCampaignRequest.add_member(:priority, Shapes::ShapeRef.new(shape: priority, deprecated: true, location_name: "priority", metadata: {"deprecatedMessage"=>"priority is no longer used or needed as input"}))
     CreateCampaignRequest.add_member(:signals_to_collect, Shapes::ShapeRef.new(shape: SignalInformationList, location_name: "signalsToCollect"))
     CreateCampaignRequest.add_member(:collection_scheme, Shapes::ShapeRef.new(shape: CollectionScheme, required: true, location_name: "collectionScheme"))
     CreateCampaignRequest.add_member(:data_extra_dimensions, Shapes::ShapeRef.new(shape: DataExtraDimensionNodePathList, location_name: "dataExtraDimensions"))
@@ -433,7 +434,7 @@ module Aws::IoTFleetWise
     CreateCampaignRequest.struct_class = Types::CreateCampaignRequest
 
     CreateCampaignResponse.add_member(:name, Shapes::ShapeRef.new(shape: campaignName, location_name: "name"))
-    CreateCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: arn, location_name: "arn"))
+    CreateCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: campaignArn, location_name: "arn"))
     CreateCampaignResponse.struct_class = Types::CreateCampaignResponse
 
     CreateDecoderManifestRequest.add_member(:name, Shapes::ShapeRef.new(shape: resourceName, required: true, location_name: "name"))
@@ -556,7 +557,7 @@ module Aws::IoTFleetWise
     DeleteCampaignRequest.struct_class = Types::DeleteCampaignRequest
 
     DeleteCampaignResponse.add_member(:name, Shapes::ShapeRef.new(shape: campaignName, location_name: "name"))
-    DeleteCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: arn, location_name: "arn"))
+    DeleteCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: campaignArn, location_name: "arn"))
     DeleteCampaignResponse.struct_class = Types::DeleteCampaignResponse
 
     DeleteDecoderManifestRequest.add_member(:name, Shapes::ShapeRef.new(shape: resourceName, required: true, location_name: "name"))
@@ -620,7 +621,7 @@ module Aws::IoTFleetWise
     GetCampaignRequest.struct_class = Types::GetCampaignRequest
 
     GetCampaignResponse.add_member(:name, Shapes::ShapeRef.new(shape: campaignName, location_name: "name"))
-    GetCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: arn, location_name: "arn"))
+    GetCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: campaignArn, location_name: "arn"))
     GetCampaignResponse.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     GetCampaignResponse.add_member(:signal_catalog_arn, Shapes::ShapeRef.new(shape: arn, location_name: "signalCatalogArn"))
     GetCampaignResponse.add_member(:target_arn, Shapes::ShapeRef.new(shape: arn, location_name: "targetArn"))
@@ -800,7 +801,7 @@ module Aws::IoTFleetWise
 
     ListCampaignsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     ListCampaignsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResults, location_name: "maxResults"))
-    ListCampaignsRequest.add_member(:status, Shapes::ShapeRef.new(shape: status, location_name: "status"))
+    ListCampaignsRequest.add_member(:status, Shapes::ShapeRef.new(shape: statusStr, location_name: "status"))
     ListCampaignsRequest.struct_class = Types::ListCampaignsRequest
 
     ListCampaignsResponse.add_member(:campaign_summaries, Shapes::ShapeRef.new(shape: campaignSummaries, location_name: "campaignSummaries"))
@@ -1153,7 +1154,7 @@ module Aws::IoTFleetWise
     UpdateCampaignRequest.add_member(:action, Shapes::ShapeRef.new(shape: UpdateCampaignAction, required: true, location_name: "action"))
     UpdateCampaignRequest.struct_class = Types::UpdateCampaignRequest
 
-    UpdateCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: arn, location_name: "arn"))
+    UpdateCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: campaignArn, location_name: "arn"))
     UpdateCampaignResponse.add_member(:name, Shapes::ShapeRef.new(shape: campaignName, location_name: "name"))
     UpdateCampaignResponse.add_member(:status, Shapes::ShapeRef.new(shape: CampaignStatus, location_name: "status"))
     UpdateCampaignResponse.struct_class = Types::UpdateCampaignResponse
@@ -1245,7 +1246,7 @@ module Aws::IoTFleetWise
     VehicleMiddleware.add_member(:protocol_name, Shapes::ShapeRef.new(shape: VehicleMiddlewareProtocol, required: true, location_name: "protocolName"))
     VehicleMiddleware.struct_class = Types::VehicleMiddleware
 
-    VehicleStatus.add_member(:campaign_name, Shapes::ShapeRef.new(shape: string, location_name: "campaignName"))
+    VehicleStatus.add_member(:campaign_name, Shapes::ShapeRef.new(shape: campaignName, location_name: "campaignName"))
     VehicleStatus.add_member(:vehicle_name, Shapes::ShapeRef.new(shape: vehicleName, location_name: "vehicleName"))
     VehicleStatus.add_member(:status, Shapes::ShapeRef.new(shape: VehicleState, location_name: "status"))
     VehicleStatus.struct_class = Types::VehicleStatus

@@ -237,7 +237,7 @@ module Aws::BedrockAgent
 
     class ConditionFlowNodeConfiguration
       attr_accessor conditions: ::Array[Types::FlowCondition]
-      SENSITIVE: [:conditions]
+      SENSITIVE: []
     end
 
     class ConflictException
@@ -372,7 +372,7 @@ module Aws::BedrockAgent
       attr_accessor execution_role_arn: ::String
       attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:definition]
     end
 
     class CreateFlowResponse
@@ -387,7 +387,7 @@ module Aws::BedrockAgent
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
       attr_accessor updated_at: ::Time
       attr_accessor version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:definition]
     end
 
     class CreateFlowVersionRequest
@@ -408,7 +408,7 @@ module Aws::BedrockAgent
       attr_accessor name: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
       attr_accessor version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:definition]
     end
 
     class CreateKnowledgeBaseRequest
@@ -719,7 +719,7 @@ module Aws::BedrockAgent
     class FlowDefinition
       attr_accessor connections: ::Array[Types::FlowConnection]
       attr_accessor nodes: ::Array[Types::FlowNode]
-      SENSITIVE: [:nodes]
+      SENSITIVE: []
     end
 
     class FlowNode
@@ -937,7 +937,7 @@ module Aws::BedrockAgent
       attr_accessor updated_at: ::Time
       attr_accessor validations: ::Array[Types::FlowValidation]
       attr_accessor version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:definition]
     end
 
     class GetFlowVersionRequest
@@ -957,7 +957,7 @@ module Aws::BedrockAgent
       attr_accessor name: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
       attr_accessor version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:definition]
     end
 
     class GetIngestionJobRequest
@@ -1433,6 +1433,7 @@ module Aws::BedrockAgent
     end
 
     class PromptFlowNodeInlineConfiguration
+      attr_accessor additional_model_request_fields: untyped
       attr_accessor inference_configuration: Types::PromptInferenceConfiguration
       attr_accessor model_id: ::String
       attr_accessor template_configuration: Types::PromptTemplateConfiguration
@@ -1485,7 +1486,6 @@ module Aws::BedrockAgent
       attr_accessor max_tokens: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
       attr_accessor temperature: ::Float
-      attr_accessor top_k: ::Integer
       attr_accessor top_p: ::Float
       SENSITIVE: []
     end
@@ -1519,6 +1519,7 @@ module Aws::BedrockAgent
     end
 
     class PromptVariant
+      attr_accessor additional_model_request_fields: untyped
       attr_accessor inference_configuration: Types::PromptInferenceConfiguration
       attr_accessor metadata: ::Array[Types::PromptMetadataEntry]
       attr_accessor model_id: ::String
@@ -1878,7 +1879,7 @@ module Aws::BedrockAgent
       attr_accessor execution_role_arn: ::String
       attr_accessor flow_identifier: ::String
       attr_accessor name: ::String
-      SENSITIVE: []
+      SENSITIVE: [:definition]
     end
 
     class UpdateFlowResponse
@@ -1893,7 +1894,7 @@ module Aws::BedrockAgent
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
       attr_accessor updated_at: ::Time
       attr_accessor version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:definition]
     end
 
     class UpdateKnowledgeBaseRequest

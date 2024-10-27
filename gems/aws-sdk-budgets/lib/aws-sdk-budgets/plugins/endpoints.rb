@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::Budgets::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,63 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_budget
-            Aws::Budgets::Endpoints::CreateBudget.build(context)
-          when :create_budget_action
-            Aws::Budgets::Endpoints::CreateBudgetAction.build(context)
-          when :create_notification
-            Aws::Budgets::Endpoints::CreateNotification.build(context)
-          when :create_subscriber
-            Aws::Budgets::Endpoints::CreateSubscriber.build(context)
-          when :delete_budget
-            Aws::Budgets::Endpoints::DeleteBudget.build(context)
-          when :delete_budget_action
-            Aws::Budgets::Endpoints::DeleteBudgetAction.build(context)
-          when :delete_notification
-            Aws::Budgets::Endpoints::DeleteNotification.build(context)
-          when :delete_subscriber
-            Aws::Budgets::Endpoints::DeleteSubscriber.build(context)
-          when :describe_budget
-            Aws::Budgets::Endpoints::DescribeBudget.build(context)
-          when :describe_budget_action
-            Aws::Budgets::Endpoints::DescribeBudgetAction.build(context)
-          when :describe_budget_action_histories
-            Aws::Budgets::Endpoints::DescribeBudgetActionHistories.build(context)
-          when :describe_budget_actions_for_account
-            Aws::Budgets::Endpoints::DescribeBudgetActionsForAccount.build(context)
-          when :describe_budget_actions_for_budget
-            Aws::Budgets::Endpoints::DescribeBudgetActionsForBudget.build(context)
-          when :describe_budget_notifications_for_account
-            Aws::Budgets::Endpoints::DescribeBudgetNotificationsForAccount.build(context)
-          when :describe_budget_performance_history
-            Aws::Budgets::Endpoints::DescribeBudgetPerformanceHistory.build(context)
-          when :describe_budgets
-            Aws::Budgets::Endpoints::DescribeBudgets.build(context)
-          when :describe_notifications_for_budget
-            Aws::Budgets::Endpoints::DescribeNotificationsForBudget.build(context)
-          when :describe_subscribers_for_notification
-            Aws::Budgets::Endpoints::DescribeSubscribersForNotification.build(context)
-          when :execute_budget_action
-            Aws::Budgets::Endpoints::ExecuteBudgetAction.build(context)
-          when :list_tags_for_resource
-            Aws::Budgets::Endpoints::ListTagsForResource.build(context)
-          when :tag_resource
-            Aws::Budgets::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::Budgets::Endpoints::UntagResource.build(context)
-          when :update_budget
-            Aws::Budgets::Endpoints::UpdateBudget.build(context)
-          when :update_budget_action
-            Aws::Budgets::Endpoints::UpdateBudgetAction.build(context)
-          when :update_notification
-            Aws::Budgets::Endpoints::UpdateNotification.build(context)
-          when :update_subscriber
-            Aws::Budgets::Endpoints::UpdateSubscriber.build(context)
           end
         end
       end

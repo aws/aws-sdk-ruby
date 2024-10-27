@@ -392,12 +392,21 @@ module Aws::TimestreamQuery
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] query_insights
+    #   Encapsulates settings for enabling `QueryInsights`.
+    #
+    #   Enabling `QueryInsights` returns insights and metrics as a part of
+    #   the Amazon SNS notification for the query that you executed. You can
+    #   use `QueryInsights` to tune your query performance and cost.
+    #   @return [Types::ScheduledQueryInsights]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/ExecuteScheduledQueryRequest AWS API Documentation
     #
     class ExecuteScheduledQueryRequest < Struct.new(
       :scheduled_query_arn,
       :invocation_time,
-      :client_token)
+      :client_token,
+      :query_insights)
       SENSITIVE = [:client_token]
       include Aws::Structure
     end
@@ -737,6 +746,130 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
+    # `QueryInsights` is a performance tuning feature that helps you
+    # optimize your queries, reducing costs and improving performance. With
+    # `QueryInsights`, you can assess the pruning efficiency of your queries
+    # and identify areas for improvement to enhance query performance. With
+    # `QueryInsights`, you can also analyze the effectiveness of your
+    # queries in terms of temporal and spatial pruning, and identify
+    # opportunities to improve performance. Specifically, you can evaluate
+    # how well your queries use time-based and partition key-based indexing
+    # strategies to optimize data retrieval. To optimize query performance,
+    # it's essential that you fine-tune both the temporal and spatial
+    # parameters that govern query execution.
+    #
+    # The key metrics provided by `QueryInsights` are `QuerySpatialCoverage`
+    # and `QueryTemporalRange`. `QuerySpatialCoverage` indicates how much of
+    # the spatial axis the query scans, with lower values being more
+    # efficient. `QueryTemporalRange` shows the time range scanned, with
+    # narrower ranges being more performant.
+    #
+    # **Benefits of QueryInsights**
+    #
+    # The following are the key benefits of using `QueryInsights`:
+    #
+    # * **Identifying inefficient queries** – `QueryInsights` provides
+    #   information on the time-based and attribute-based pruning of the
+    #   tables accessed by the query. This information helps you identify
+    #   the tables that are sub-optimally accessed.
+    #
+    # * **Optimizing your data model and partitioning** – You can use the
+    #   `QueryInsights` information to access and fine-tune your data model
+    #   and partitioning strategy.
+    #
+    # * **Tuning queries** – `QueryInsights` highlights opportunities to use
+    #   indexes more effectively.
+    #
+    # <note markdown="1"> The maximum number of `Query` API requests you're allowed to make
+    # with `QueryInsights` enabled is 1 query per second (QPS). If you
+    # exceed this query rate, it might result in throttling.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] mode
+    #   Provides the following modes to enable `QueryInsights`:
+    #
+    #   * `ENABLED_WITH_RATE_CONTROL` – Enables `QueryInsights` for the
+    #     queries being processed. This mode also includes a rate control
+    #     mechanism, which limits the `QueryInsights` feature to 1 query per
+    #     second (QPS).
+    #
+    #   * `DISABLED` – Disables `QueryInsights`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QueryInsights AWS API Documentation
+    #
+    class QueryInsights < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides various insights and metrics related to the query that you
+    # executed.
+    #
+    # @!attribute [rw] query_spatial_coverage
+    #   Provides insights into the spatial coverage of the query, including
+    #   the table with sub-optimal (max) spatial pruning. This information
+    #   can help you identify areas for improvement in your partitioning
+    #   strategy to enhance spatial pruning.
+    #   @return [Types::QuerySpatialCoverage]
+    #
+    # @!attribute [rw] query_temporal_range
+    #   Provides insights into the temporal range of the query, including
+    #   the table with the largest (max) time range. Following are some of
+    #   the potential options for optimizing time-based pruning:
+    #
+    #   * Add missing time-predicates.
+    #
+    #   * Remove functions around the time predicates.
+    #
+    #   * Add time predicates to all the sub-queries.
+    #   @return [Types::QueryTemporalRange]
+    #
+    # @!attribute [rw] query_table_count
+    #   Indicates the number of tables in the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_rows
+    #   Indicates the total number of rows returned as part of the query
+    #   result set. You can use this data to validate if the number of rows
+    #   in the result set have changed as part of the query tuning exercise.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_bytes
+    #   Indicates the size of query result set in bytes. You can use this
+    #   data to validate if the result set has changed as part of the query
+    #   tuning exercise.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unload_partition_count
+    #   Indicates the partitions created by the `Unload` operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unload_written_rows
+    #   Indicates the rows written by the `Unload` query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unload_written_bytes
+    #   Indicates the size, in bytes, written by the `Unload` operation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QueryInsightsResponse AWS API Documentation
+    #
+    class QueryInsightsResponse < Struct.new(
+      :query_spatial_coverage,
+      :query_temporal_range,
+      :query_table_count,
+      :output_rows,
+      :output_bytes,
+      :unload_partition_count,
+      :unload_written_rows,
+      :unload_written_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] query_string
     #   The query to be run by Timestream.
     #   @return [String]
@@ -822,13 +955,22 @@ module Aws::TimestreamQuery
     #   necessary number of rows to meet the 1 MB limit.
     #   @return [Integer]
     #
+    # @!attribute [rw] query_insights
+    #   Encapsulates settings for enabling `QueryInsights`.
+    #
+    #   Enabling `QueryInsights` returns insights and metrics in addition to
+    #   query results for the query that you executed. You can use
+    #   `QueryInsights` to tune your query performance.
+    #   @return [Types::QueryInsights]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
       :query_string,
       :client_token,
       :next_token,
-      :max_rows)
+      :max_rows,
+      :query_insights)
       SENSITIVE = [:query_string, :client_token]
       include Aws::Structure
     end
@@ -855,6 +997,11 @@ module Aws::TimestreamQuery
     #   bytes scanned.
     #   @return [Types::QueryStatus]
     #
+    # @!attribute [rw] query_insights_response
+    #   Encapsulates `QueryInsights` containing insights and metrics related
+    #   to the query that you executed.
+    #   @return [Types::QueryInsightsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QueryResponse AWS API Documentation
     #
     class QueryResponse < Struct.new(
@@ -862,7 +1009,78 @@ module Aws::TimestreamQuery
       :next_token,
       :rows,
       :column_info,
-      :query_status)
+      :query_status,
+      :query_insights_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides insights into the spatial coverage of the query, including
+    # the table with sub-optimal (max) spatial pruning. This information can
+    # help you identify areas for improvement in your partitioning strategy
+    # to enhance spatial pruning
+    #
+    # For example, you can do the following with the `QuerySpatialCoverage`
+    # information:
+    #
+    # * Add measure\_name or use [customer-defined partition key][1] (CDPK)
+    #   predicates.
+    #
+    # * If you've already done the preceding action, remove functions
+    #   around them or clauses, such as `LIKE`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/customer-defined-partition-keys.html
+    #
+    # @!attribute [rw] max
+    #   Provides insights into the spatial coverage of the executed query
+    #   and the table with the most inefficient spatial pruning.
+    #
+    #   * `Value` – The maximum ratio of spatial coverage.
+    #
+    #   * `TableArn` – The Amazon Resource Name (ARN) of the table with
+    #     sub-optimal spatial pruning.
+    #
+    #   * `PartitionKey` – The partition key used for partitioning, which
+    #     can be a default `measure_name` or a CDPK.
+    #   @return [Types::QuerySpatialCoverageMax]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QuerySpatialCoverage AWS API Documentation
+    #
+    class QuerySpatialCoverage < Struct.new(
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides insights into the table with the most sub-optimal spatial
+    # range scanned by your query.
+    #
+    # @!attribute [rw] value
+    #   The maximum ratio of spatial coverage.
+    #   @return [Float]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the table with the most
+    #   sub-optimal spatial pruning.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_key
+    #   The partition key used for partitioning, which can be a default
+    #   `measure_name` or a [customer defined partition key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/customer-defined-partition-keys.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QuerySpatialCoverageMax AWS API Documentation
+    #
+    class QuerySpatialCoverageMax < Struct.new(
+      :value,
+      :table_arn,
+      :partition_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -894,6 +1112,50 @@ module Aws::TimestreamQuery
       :progress_percentage,
       :cumulative_bytes_scanned,
       :cumulative_bytes_metered)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides insights into the temporal range of the query, including the
+    # table with the largest (max) time range.
+    #
+    # @!attribute [rw] max
+    #   Encapsulates the following properties that provide insights into the
+    #   most sub-optimal performing table on the temporal axis:
+    #
+    #   * `Value` – The maximum duration in nanoseconds between the start
+    #     and end of the query.
+    #
+    #   * `TableArn` – The Amazon Resource Name (ARN) of the table which is
+    #     queried with the largest time range.
+    #   @return [Types::QueryTemporalRangeMax]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QueryTemporalRange AWS API Documentation
+    #
+    class QueryTemporalRange < Struct.new(
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides insights into the table with the most sub-optimal temporal
+    # pruning scanned by your query.
+    #
+    # @!attribute [rw] value
+    #   The maximum duration in nanoseconds between the start and end of the
+    #   query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the table which is queried with
+    #   the largest time range.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/QueryTemporalRangeMax AWS API Documentation
+    #
+    class QueryTemporalRangeMax < Struct.new(
+      :value,
+      :table_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1131,6 +1393,78 @@ module Aws::TimestreamQuery
       include Aws::Structure
     end
 
+    # Encapsulates settings for enabling `QueryInsights` on an
+    # `ExecuteScheduledQueryRequest`.
+    #
+    # @!attribute [rw] mode
+    #   Provides the following modes to enable `ScheduledQueryInsights`:
+    #
+    #   * `ENABLED_WITH_RATE_CONTROL` – Enables `ScheduledQueryInsights` for
+    #     the queries being processed. This mode also includes a rate
+    #     control mechanism, which limits the `QueryInsights` feature to 1
+    #     query per second (QPS).
+    #
+    #   * `DISABLED` – Disables `ScheduledQueryInsights`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/ScheduledQueryInsights AWS API Documentation
+    #
+    class ScheduledQueryInsights < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides various insights and metrics related to the
+    # `ExecuteScheduledQueryRequest` that was executed.
+    #
+    # @!attribute [rw] query_spatial_coverage
+    #   Provides insights into the spatial coverage of the query, including
+    #   the table with sub-optimal (max) spatial pruning. This information
+    #   can help you identify areas for improvement in your partitioning
+    #   strategy to enhance spatial pruning.
+    #   @return [Types::QuerySpatialCoverage]
+    #
+    # @!attribute [rw] query_temporal_range
+    #   Provides insights into the temporal range of the query, including
+    #   the table with the largest (max) time range. Following are some of
+    #   the potential options for optimizing time-based pruning:
+    #
+    #   * Add missing time-predicates.
+    #
+    #   * Remove functions around the time predicates.
+    #
+    #   * Add time predicates to all the sub-queries.
+    #   @return [Types::QueryTemporalRange]
+    #
+    # @!attribute [rw] query_table_count
+    #   Indicates the number of tables in the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_rows
+    #   Indicates the total number of rows returned as part of the query
+    #   result set. You can use this data to validate if the number of rows
+    #   in the result set have changed as part of the query tuning exercise.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_bytes
+    #   Indicates the size of query result set in bytes. You can use this
+    #   data to validate if the result set has changed as part of the query
+    #   tuning exercise.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/ScheduledQueryInsightsResponse AWS API Documentation
+    #
+    class ScheduledQueryInsightsResponse < Struct.new(
+      :query_spatial_coverage,
+      :query_temporal_range,
+      :query_table_count,
+      :output_rows,
+      :output_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Run summary for the scheduled query
     #
     # @!attribute [rw] invocation_time
@@ -1151,6 +1485,11 @@ module Aws::TimestreamQuery
     #   Runtime statistics for a scheduled run.
     #   @return [Types::ExecutionStats]
     #
+    # @!attribute [rw] query_insights_response
+    #   Provides various insights and metrics related to the run summary of
+    #   the scheduled query.
+    #   @return [Types::ScheduledQueryInsightsResponse]
+    #
     # @!attribute [rw] error_report_location
     #   S3 location for error report.
     #   @return [Types::ErrorReportLocation]
@@ -1167,6 +1506,7 @@ module Aws::TimestreamQuery
       :trigger_time,
       :run_status,
       :execution_stats,
+      :query_insights_response,
       :error_report_location,
       :failure_reason)
       SENSITIVE = []

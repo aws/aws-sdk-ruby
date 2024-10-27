@@ -655,6 +655,17 @@ module Aws::Redshift
       SENSITIVE: []
     end
 
+    class CreateIntegrationMessage
+      attr_accessor source_arn: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor integration_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
     class CreateRedshiftIdcApplicationMessage
       attr_accessor idc_instance_arn: ::String
       attr_accessor redshift_idc_application_name: ::String
@@ -862,6 +873,11 @@ module Aws::Redshift
 
     class DeleteHsmConfigurationMessage
       attr_accessor hsm_configuration_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationMessage
+      attr_accessor integration_arn: ::String
       SENSITIVE: []
     end
 
@@ -1136,6 +1152,20 @@ module Aws::Redshift
       attr_accessor target_arn: ::String
       attr_accessor max_records: ::Integer
       attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIntegrationsFilter
+      attr_accessor name: ("integration-arn" | "source-arn" | "source-types" | "status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeIntegrationsMessage
+      attr_accessor integration_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor filters: ::Array[Types::DescribeIntegrationsFilter]
       SENSITIVE: []
     end
 
@@ -1631,6 +1661,30 @@ module Aws::Redshift
     class InsufficientS3BucketPolicyFault < Aws::EmptyStructure
     end
 
+    class Integration
+      attr_accessor integration_arn: ::String
+      attr_accessor integration_name: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor status: ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
+      attr_accessor errors: ::Array[Types::IntegrationError]
+      attr_accessor create_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class IntegrationAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class IntegrationConflictOperationFault < Aws::EmptyStructure
+    end
+
+    class IntegrationConflictStateFault < Aws::EmptyStructure
+    end
+
     class IntegrationError
       attr_accessor error_code: ::String
       attr_accessor error_message: ::String
@@ -1638,6 +1692,21 @@ module Aws::Redshift
     end
 
     class IntegrationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class IntegrationQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class IntegrationSourceNotFoundFault < Aws::EmptyStructure
+    end
+
+    class IntegrationTargetNotFoundFault < Aws::EmptyStructure
+    end
+
+    class IntegrationsMessage
+      attr_accessor marker: ::String
+      attr_accessor integrations: ::Array[Types::Integration]
+      SENSITIVE: []
     end
 
     class InvalidAuthenticationProfileRequestFault < Aws::EmptyStructure
@@ -1959,6 +2028,13 @@ module Aws::Redshift
 
     class ModifyEventSubscriptionResult
       attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class ModifyIntegrationMessage
+      attr_accessor integration_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_name: ::String
       SENSITIVE: []
     end
 

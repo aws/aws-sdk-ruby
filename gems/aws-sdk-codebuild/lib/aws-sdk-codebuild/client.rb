@@ -793,6 +793,10 @@ module Aws::CodeBuild
     #   resp.builds[0].debug_session.session_enabled #=> Boolean
     #   resp.builds[0].debug_session.session_target #=> String
     #   resp.builds[0].build_batch_arn #=> String
+    #   resp.builds[0].auto_retry_config.auto_retry_limit #=> Integer
+    #   resp.builds[0].auto_retry_config.auto_retry_number #=> Integer
+    #   resp.builds[0].auto_retry_config.next_auto_retry #=> String
+    #   resp.builds[0].auto_retry_config.previous_auto_retry #=> String
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
@@ -847,6 +851,12 @@ module Aws::CodeBuild
     #   resp.fleets[0].vpc_config.subnets[0] #=> String
     #   resp.fleets[0].vpc_config.security_group_ids #=> Array
     #   resp.fleets[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.fleets[0].proxy_configuration.default_behavior #=> String, one of "ALLOW_ALL", "DENY_ALL"
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules #=> Array
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules[0].type #=> String, one of "DOMAIN", "IP"
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules[0].entities #=> Array
+    #   resp.fleets[0].proxy_configuration.ordered_proxy_rules[0].entities[0] #=> String
     #   resp.fleets[0].image_id #=> String
     #   resp.fleets[0].fleet_service_role #=> String
     #   resp.fleets[0].tags #=> Array
@@ -970,7 +980,7 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.branch_filter #=> String
     #   resp.projects[0].webhook.filter_groups #=> Array
     #   resp.projects[0].webhook.filter_groups[0] #=> Array
-    #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.projects[0].webhook.filter_groups[0][0].pattern #=> String
     #   resp.projects[0].webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.projects[0].webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -1010,6 +1020,7 @@ module Aws::CodeBuild
     #   resp.projects[0].project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
     #   resp.projects[0].public_project_alias #=> String
     #   resp.projects[0].resource_access_role #=> String
+    #   resp.projects[0].auto_retry_limit #=> Integer
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -1259,6 +1270,9 @@ module Aws::CodeBuild
     # @option params [Types::VpcConfig] :vpc_config
     #   Information about the VPC configuration that CodeBuild accesses.
     #
+    # @option params [Types::ProxyConfiguration] :proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #
     # @option params [String] :image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #
@@ -1304,6 +1318,16 @@ module Aws::CodeBuild
     #       subnets: ["NonEmptyString"],
     #       security_group_ids: ["NonEmptyString"],
     #     },
+    #     proxy_configuration: {
+    #       default_behavior: "ALLOW_ALL", # accepts ALLOW_ALL, DENY_ALL
+    #       ordered_proxy_rules: [
+    #         {
+    #           type: "DOMAIN", # required, accepts DOMAIN, IP
+    #           effect: "ALLOW", # required, accepts ALLOW, DENY
+    #           entities: ["String"], # required
+    #         },
+    #       ],
+    #     },
     #     image_id: "NonEmptyString",
     #     fleet_service_role: "NonEmptyString",
     #     tags: [
@@ -1339,6 +1363,12 @@ module Aws::CodeBuild
     #   resp.fleet.vpc_config.subnets[0] #=> String
     #   resp.fleet.vpc_config.security_group_ids #=> Array
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
+    #   resp.fleet.proxy_configuration.default_behavior #=> String, one of "ALLOW_ALL", "DENY_ALL"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules #=> Array
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].type #=> String, one of "DOMAIN", "IP"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].entities #=> Array
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].entities[0] #=> String
     #   resp.fleet.image_id #=> String
     #   resp.fleet.fleet_service_role #=> String
     #   resp.fleet.tags #=> Array
@@ -1487,6 +1517,12 @@ module Aws::CodeBuild
     #   New builds are only started if the current number of builds is less
     #   than or equal to this limit. If the current build count meets this
     #   limit, new builds are throttled and are not run.
+    #
+    # @option params [Integer] :auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
     #
     # @return [Types::CreateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1648,6 +1684,7 @@ module Aws::CodeBuild
     #       batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #     },
     #     concurrent_build_limit: 1,
+    #     auto_retry_limit: 1,
     #   })
     #
     # @example Response structure
@@ -1737,7 +1774,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.branch_filter #=> String
     #   resp.project.webhook.filter_groups #=> Array
     #   resp.project.webhook.filter_groups[0] #=> Array
-    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -1777,6 +1814,7 @@ module Aws::CodeBuild
     #   resp.project.project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
     #   resp.project.public_project_alias #=> String
     #   resp.project.resource_access_role #=> String
+    #   resp.project.auto_retry_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -1936,7 +1974,7 @@ module Aws::CodeBuild
     #     filter_groups: [
     #       [
     #         {
-    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE, WORKFLOW_NAME, TAG_NAME, RELEASE_NAME
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE, WORKFLOW_NAME, TAG_NAME, RELEASE_NAME, REPOSITORY_NAME
     #           pattern: "String", # required
     #           exclude_matched_pattern: false,
     #         },
@@ -1959,7 +1997,7 @@ module Aws::CodeBuild
     #   resp.webhook.branch_filter #=> String
     #   resp.webhook.filter_groups #=> Array
     #   resp.webhook.filter_groups[0] #=> Array
-    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -3447,6 +3485,10 @@ module Aws::CodeBuild
     #   resp.build.debug_session.session_enabled #=> Boolean
     #   resp.build.debug_session.session_target #=> String
     #   resp.build.build_batch_arn #=> String
+    #   resp.build.auto_retry_config.auto_retry_limit #=> Integer
+    #   resp.build.auto_retry_config.auto_retry_number #=> Integer
+    #   resp.build.auto_retry_config.next_auto_retry #=> String
+    #   resp.build.auto_retry_config.previous_auto_retry #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuild AWS API Documentation
     #
@@ -3886,6 +3928,12 @@ module Aws::CodeBuild
     #   A ProjectFleet object specified for this build that overrides the one
     #   defined in the build project.
     #
+    # @option params [Integer] :auto_retry_limit_override
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBuildOutput#build #build} => Types::Build
@@ -4010,6 +4058,7 @@ module Aws::CodeBuild
     #     fleet_override: {
     #       fleet_arn: "String",
     #     },
+    #     auto_retry_limit_override: 1,
     #   })
     #
     # @example Response structure
@@ -4133,6 +4182,10 @@ module Aws::CodeBuild
     #   resp.build.debug_session.session_enabled #=> Boolean
     #   resp.build.debug_session.session_target #=> String
     #   resp.build.build_batch_arn #=> String
+    #   resp.build.auto_retry_config.auto_retry_limit #=> Integer
+    #   resp.build.auto_retry_config.auto_retry_number #=> Integer
+    #   resp.build.auto_retry_config.next_auto_retry #=> String
+    #   resp.build.auto_retry_config.previous_auto_retry #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
     #
@@ -4774,6 +4827,10 @@ module Aws::CodeBuild
     #   resp.build.debug_session.session_enabled #=> Boolean
     #   resp.build.debug_session.session_target #=> String
     #   resp.build.build_batch_arn #=> String
+    #   resp.build.auto_retry_config.auto_retry_limit #=> Integer
+    #   resp.build.auto_retry_config.auto_retry_number #=> Integer
+    #   resp.build.auto_retry_config.next_auto_retry #=> String
+    #   resp.build.auto_retry_config.previous_auto_retry #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
@@ -5080,6 +5137,9 @@ module Aws::CodeBuild
     # @option params [Types::VpcConfig] :vpc_config
     #   Information about the VPC configuration that CodeBuild accesses.
     #
+    # @option params [Types::ProxyConfiguration] :proxy_configuration
+    #   The proxy configuration of the compute fleet.
+    #
     # @option params [String] :image_id
     #   The Amazon Machine Image (AMI) of the compute fleet.
     #
@@ -5125,6 +5185,16 @@ module Aws::CodeBuild
     #       subnets: ["NonEmptyString"],
     #       security_group_ids: ["NonEmptyString"],
     #     },
+    #     proxy_configuration: {
+    #       default_behavior: "ALLOW_ALL", # accepts ALLOW_ALL, DENY_ALL
+    #       ordered_proxy_rules: [
+    #         {
+    #           type: "DOMAIN", # required, accepts DOMAIN, IP
+    #           effect: "ALLOW", # required, accepts ALLOW, DENY
+    #           entities: ["String"], # required
+    #         },
+    #       ],
+    #     },
     #     image_id: "NonEmptyString",
     #     fleet_service_role: "NonEmptyString",
     #     tags: [
@@ -5160,6 +5230,12 @@ module Aws::CodeBuild
     #   resp.fleet.vpc_config.subnets[0] #=> String
     #   resp.fleet.vpc_config.security_group_ids #=> Array
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
+    #   resp.fleet.proxy_configuration.default_behavior #=> String, one of "ALLOW_ALL", "DENY_ALL"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules #=> Array
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].type #=> String, one of "DOMAIN", "IP"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].entities #=> Array
+    #   resp.fleet.proxy_configuration.ordered_proxy_rules[0].entities[0] #=> String
     #   resp.fleet.image_id #=> String
     #   resp.fleet.fleet_service_role #=> String
     #   resp.fleet.tags #=> Array
@@ -5311,6 +5387,12 @@ module Aws::CodeBuild
     #   limit, new builds are throttled and are not run.
     #
     #   To remove this limit, set this value to -1.
+    #
+    # @option params [Integer] :auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
     #
     # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5472,6 +5554,7 @@ module Aws::CodeBuild
     #       batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #     },
     #     concurrent_build_limit: 1,
+    #     auto_retry_limit: 1,
     #   })
     #
     # @example Response structure
@@ -5561,7 +5644,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.branch_filter #=> String
     #   resp.project.webhook.filter_groups #=> Array
     #   resp.project.webhook.filter_groups[0] #=> Array
-    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -5601,6 +5684,7 @@ module Aws::CodeBuild
     #   resp.project.project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
     #   resp.project.public_project_alias #=> String
     #   resp.project.resource_access_role #=> String
+    #   resp.project.auto_retry_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -5816,7 +5900,7 @@ module Aws::CodeBuild
     #     filter_groups: [
     #       [
     #         {
-    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE, WORKFLOW_NAME, TAG_NAME, RELEASE_NAME
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE, WORKFLOW_NAME, TAG_NAME, RELEASE_NAME, REPOSITORY_NAME
     #           pattern: "String", # required
     #           exclude_matched_pattern: false,
     #         },
@@ -5833,7 +5917,7 @@ module Aws::CodeBuild
     #   resp.webhook.branch_filter #=> String
     #   resp.webhook.filter_groups #=> Array
     #   resp.webhook.filter_groups[0] #=> Array
-    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME"
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
@@ -5870,7 +5954,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

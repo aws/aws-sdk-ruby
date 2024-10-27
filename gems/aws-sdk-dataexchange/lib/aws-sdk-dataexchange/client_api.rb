@@ -14,6 +14,10 @@ module Aws::DataExchange
 
     include Seahorse::Model
 
+    AcceptDataGrantRequest = Shapes::StructureShape.new(name: 'AcceptDataGrantRequest')
+    AcceptDataGrantResponse = Shapes::StructureShape.new(name: 'AcceptDataGrantResponse')
+    AcceptanceStateFilterValue = Shapes::StringShape.new(name: 'AcceptanceStateFilterValue')
+    AcceptanceStateFilterValues = Shapes::ListShape.new(name: 'AcceptanceStateFilterValues')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Action = Shapes::StructureShape.new(name: 'Action')
     ApiDescription = Shapes::StringShape.new(name: 'ApiDescription')
@@ -32,6 +36,8 @@ module Aws::DataExchange
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Code = Shapes::StringShape.new(name: 'Code')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateDataGrantRequest = Shapes::StructureShape.new(name: 'CreateDataGrantRequest')
+    CreateDataGrantResponse = Shapes::StructureShape.new(name: 'CreateDataGrantResponse')
     CreateDataSetRequest = Shapes::StructureShape.new(name: 'CreateDataSetRequest')
     CreateDataSetResponse = Shapes::StructureShape.new(name: 'CreateDataSetResponse')
     CreateEventActionRequest = Shapes::StructureShape.new(name: 'CreateEventActionRequest')
@@ -42,12 +48,19 @@ module Aws::DataExchange
     CreateRevisionResponse = Shapes::StructureShape.new(name: 'CreateRevisionResponse')
     CreateS3DataAccessFromS3BucketRequestDetails = Shapes::StructureShape.new(name: 'CreateS3DataAccessFromS3BucketRequestDetails')
     CreateS3DataAccessFromS3BucketResponseDetails = Shapes::StructureShape.new(name: 'CreateS3DataAccessFromS3BucketResponseDetails')
+    DataGrantAcceptanceState = Shapes::StringShape.new(name: 'DataGrantAcceptanceState')
+    DataGrantArn = Shapes::StringShape.new(name: 'DataGrantArn')
+    DataGrantDescription = Shapes::StringShape.new(name: 'DataGrantDescription')
+    DataGrantId = Shapes::StringShape.new(name: 'DataGrantId')
+    DataGrantName = Shapes::StringShape.new(name: 'DataGrantName')
+    DataGrantSummaryEntry = Shapes::StructureShape.new(name: 'DataGrantSummaryEntry')
     DataSetEntry = Shapes::StructureShape.new(name: 'DataSetEntry')
     DataUpdateRequestDetails = Shapes::StructureShape.new(name: 'DataUpdateRequestDetails')
     DatabaseLFTagPolicy = Shapes::StructureShape.new(name: 'DatabaseLFTagPolicy')
     DatabaseLFTagPolicyAndPermissions = Shapes::StructureShape.new(name: 'DatabaseLFTagPolicyAndPermissions')
     DatabaseLFTagPolicyPermission = Shapes::StringShape.new(name: 'DatabaseLFTagPolicyPermission')
     DeleteAssetRequest = Shapes::StructureShape.new(name: 'DeleteAssetRequest')
+    DeleteDataGrantRequest = Shapes::StructureShape.new(name: 'DeleteDataGrantRequest')
     DeleteDataSetRequest = Shapes::StructureShape.new(name: 'DeleteDataSetRequest')
     DeleteEventActionRequest = Shapes::StructureShape.new(name: 'DeleteEventActionRequest')
     DeleteRevisionRequest = Shapes::StructureShape.new(name: 'DeleteRevisionRequest')
@@ -66,14 +79,19 @@ module Aws::DataExchange
     ExportServerSideEncryption = Shapes::StructureShape.new(name: 'ExportServerSideEncryption')
     GetAssetRequest = Shapes::StructureShape.new(name: 'GetAssetRequest')
     GetAssetResponse = Shapes::StructureShape.new(name: 'GetAssetResponse')
+    GetDataGrantRequest = Shapes::StructureShape.new(name: 'GetDataGrantRequest')
+    GetDataGrantResponse = Shapes::StructureShape.new(name: 'GetDataGrantResponse')
     GetDataSetRequest = Shapes::StructureShape.new(name: 'GetDataSetRequest')
     GetDataSetResponse = Shapes::StructureShape.new(name: 'GetDataSetResponse')
     GetEventActionRequest = Shapes::StructureShape.new(name: 'GetEventActionRequest')
     GetEventActionResponse = Shapes::StructureShape.new(name: 'GetEventActionResponse')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
+    GetReceivedDataGrantRequest = Shapes::StructureShape.new(name: 'GetReceivedDataGrantRequest')
+    GetReceivedDataGrantResponse = Shapes::StructureShape.new(name: 'GetReceivedDataGrantResponse')
     GetRevisionRequest = Shapes::StructureShape.new(name: 'GetRevisionRequest')
     GetRevisionResponse = Shapes::StructureShape.new(name: 'GetRevisionResponse')
+    GrantDistributionScope = Shapes::StringShape.new(name: 'GrantDistributionScope')
     Id = Shapes::StringShape.new(name: 'Id')
     ImportAssetFromApiGatewayApiRequestDetails = Shapes::StructureShape.new(name: 'ImportAssetFromApiGatewayApiRequestDetails')
     ImportAssetFromApiGatewayApiResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetFromApiGatewayApiResponseDetails')
@@ -103,6 +121,8 @@ module Aws::DataExchange
     LakeFormationDataPermissionType = Shapes::StringShape.new(name: 'LakeFormationDataPermissionType')
     LakeFormationTagPolicyDetails = Shapes::StructureShape.new(name: 'LakeFormationTagPolicyDetails')
     LimitName = Shapes::StringShape.new(name: 'LimitName')
+    ListDataGrantsRequest = Shapes::StructureShape.new(name: 'ListDataGrantsRequest')
+    ListDataGrantsResponse = Shapes::StructureShape.new(name: 'ListDataGrantsResponse')
     ListDataSetRevisionsRequest = Shapes::StructureShape.new(name: 'ListDataSetRevisionsRequest')
     ListDataSetRevisionsResponse = Shapes::StructureShape.new(name: 'ListDataSetRevisionsResponse')
     ListDataSetsRequest = Shapes::StructureShape.new(name: 'ListDataSetsRequest')
@@ -114,6 +134,7 @@ module Aws::DataExchange
     ListOfAssetDestinationEntry = Shapes::ListShape.new(name: 'ListOfAssetDestinationEntry')
     ListOfAssetEntry = Shapes::ListShape.new(name: 'ListOfAssetEntry')
     ListOfAssetSourceEntry = Shapes::ListShape.new(name: 'ListOfAssetSourceEntry')
+    ListOfDataGrantSummaryEntry = Shapes::ListShape.new(name: 'ListOfDataGrantSummaryEntry')
     ListOfDataSetEntry = Shapes::ListShape.new(name: 'ListOfDataSetEntry')
     ListOfDatabaseLFTagPolicyPermissions = Shapes::ListShape.new(name: 'ListOfDatabaseLFTagPolicyPermissions')
     ListOfEventActionEntry = Shapes::ListShape.new(name: 'ListOfEventActionEntry')
@@ -124,6 +145,7 @@ module Aws::DataExchange
     ListOfLFTagValues = Shapes::ListShape.new(name: 'ListOfLFTagValues')
     ListOfLFTags = Shapes::ListShape.new(name: 'ListOfLFTags')
     ListOfLakeFormationTagPolicies = Shapes::ListShape.new(name: 'ListOfLakeFormationTagPolicies')
+    ListOfReceivedDataGrantSummariesEntry = Shapes::ListShape.new(name: 'ListOfReceivedDataGrantSummariesEntry')
     ListOfRedshiftDataShareAssetSourceEntry = Shapes::ListShape.new(name: 'ListOfRedshiftDataShareAssetSourceEntry')
     ListOfRedshiftDataShares = Shapes::ListShape.new(name: 'ListOfRedshiftDataShares')
     ListOfRevisionDestinationEntry = Shapes::ListShape.new(name: 'ListOfRevisionDestinationEntry')
@@ -132,6 +154,8 @@ module Aws::DataExchange
     ListOfSchemaChangeDetails = Shapes::ListShape.new(name: 'ListOfSchemaChangeDetails')
     ListOfTableTagPolicyLFPermissions = Shapes::ListShape.new(name: 'ListOfTableTagPolicyLFPermissions')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
+    ListReceivedDataGrantsRequest = Shapes::StructureShape.new(name: 'ListReceivedDataGrantsRequest')
+    ListReceivedDataGrantsResponse = Shapes::StructureShape.new(name: 'ListReceivedDataGrantsResponse')
     ListRevisionAssetsRequest = Shapes::StructureShape.new(name: 'ListRevisionAssetsRequest')
     ListRevisionAssetsResponse = Shapes::StructureShape.new(name: 'ListRevisionAssetsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -145,6 +169,8 @@ module Aws::DataExchange
     Origin = Shapes::StringShape.new(name: 'Origin')
     OriginDetails = Shapes::StructureShape.new(name: 'OriginDetails')
     ProtocolType = Shapes::StringShape.new(name: 'ProtocolType')
+    ReceivedDataGrantSummariesEntry = Shapes::StructureShape.new(name: 'ReceivedDataGrantSummariesEntry')
+    ReceiverPrincipal = Shapes::StringShape.new(name: 'ReceiverPrincipal')
     RedshiftDataShareAsset = Shapes::StructureShape.new(name: 'RedshiftDataShareAsset')
     RedshiftDataShareAssetSourceEntry = Shapes::StructureShape.new(name: 'RedshiftDataShareAssetSourceEntry')
     RedshiftDataShareDetails = Shapes::StructureShape.new(name: 'RedshiftDataShareDetails')
@@ -170,6 +196,7 @@ module Aws::DataExchange
     SendApiAssetResponse = Shapes::StructureShape.new(name: 'SendApiAssetResponse')
     SendDataSetNotificationRequest = Shapes::StructureShape.new(name: 'SendDataSetNotificationRequest')
     SendDataSetNotificationResponse = Shapes::StructureShape.new(name: 'SendDataSetNotificationResponse')
+    SenderPrincipal = Shapes::StringShape.new(name: 'SenderPrincipal')
     ServerSideEncryptionTypes = Shapes::StringShape.new(name: 'ServerSideEncryptionTypes')
     ServiceLimitExceededException = Shapes::StructureShape.new(name: 'ServiceLimitExceededException')
     StartJobRequest = Shapes::StructureShape.new(name: 'StartJobRequest')
@@ -201,6 +228,26 @@ module Aws::DataExchange
     __stringMin0Max4096 = Shapes::StringShape.new(name: '__stringMin0Max4096')
     __stringMin10Max512 = Shapes::StringShape.new(name: '__stringMin10Max512')
     __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 = Shapes::StringShape.new(name: '__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093')
+
+    AcceptDataGrantRequest.add_member(:data_grant_arn, Shapes::ShapeRef.new(shape: DataGrantArn, required: true, location: "uri", location_name: "DataGrantArn"))
+    AcceptDataGrantRequest.struct_class = Types::AcceptDataGrantRequest
+
+    AcceptDataGrantResponse.add_member(:name, Shapes::ShapeRef.new(shape: DataGrantName, required: true, location_name: "Name"))
+    AcceptDataGrantResponse.add_member(:sender_principal, Shapes::ShapeRef.new(shape: SenderPrincipal, location_name: "SenderPrincipal"))
+    AcceptDataGrantResponse.add_member(:receiver_principal, Shapes::ShapeRef.new(shape: ReceiverPrincipal, required: true, location_name: "ReceiverPrincipal"))
+    AcceptDataGrantResponse.add_member(:description, Shapes::ShapeRef.new(shape: DataGrantDescription, location_name: "Description"))
+    AcceptDataGrantResponse.add_member(:acceptance_state, Shapes::ShapeRef.new(shape: DataGrantAcceptanceState, required: true, location_name: "AcceptanceState"))
+    AcceptDataGrantResponse.add_member(:accepted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AcceptedAt"))
+    AcceptDataGrantResponse.add_member(:ends_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndsAt"))
+    AcceptDataGrantResponse.add_member(:grant_distribution_scope, Shapes::ShapeRef.new(shape: GrantDistributionScope, required: true, location_name: "GrantDistributionScope"))
+    AcceptDataGrantResponse.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    AcceptDataGrantResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    AcceptDataGrantResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    AcceptDataGrantResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    AcceptDataGrantResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    AcceptDataGrantResponse.struct_class = Types::AcceptDataGrantResponse
+
+    AcceptanceStateFilterValues.member = Shapes::ShapeRef.new(shape: AcceptanceStateFilterValue)
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -262,6 +309,32 @@ module Aws::DataExchange
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateDataGrantRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataGrantName, required: true, location_name: "Name"))
+    CreateDataGrantRequest.add_member(:grant_distribution_scope, Shapes::ShapeRef.new(shape: GrantDistributionScope, required: true, location_name: "GrantDistributionScope"))
+    CreateDataGrantRequest.add_member(:receiver_principal, Shapes::ShapeRef.new(shape: ReceiverPrincipal, required: true, location_name: "ReceiverPrincipal"))
+    CreateDataGrantRequest.add_member(:source_data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "SourceDataSetId"))
+    CreateDataGrantRequest.add_member(:ends_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndsAt"))
+    CreateDataGrantRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateDataGrantRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
+    CreateDataGrantRequest.struct_class = Types::CreateDataGrantRequest
+
+    CreateDataGrantResponse.add_member(:name, Shapes::ShapeRef.new(shape: DataGrantName, required: true, location_name: "Name"))
+    CreateDataGrantResponse.add_member(:sender_principal, Shapes::ShapeRef.new(shape: SenderPrincipal, required: true, location_name: "SenderPrincipal"))
+    CreateDataGrantResponse.add_member(:receiver_principal, Shapes::ShapeRef.new(shape: ReceiverPrincipal, required: true, location_name: "ReceiverPrincipal"))
+    CreateDataGrantResponse.add_member(:description, Shapes::ShapeRef.new(shape: DataGrantDescription, location_name: "Description"))
+    CreateDataGrantResponse.add_member(:acceptance_state, Shapes::ShapeRef.new(shape: DataGrantAcceptanceState, required: true, location_name: "AcceptanceState"))
+    CreateDataGrantResponse.add_member(:accepted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AcceptedAt"))
+    CreateDataGrantResponse.add_member(:ends_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndsAt"))
+    CreateDataGrantResponse.add_member(:grant_distribution_scope, Shapes::ShapeRef.new(shape: GrantDistributionScope, required: true, location_name: "GrantDistributionScope"))
+    CreateDataGrantResponse.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    CreateDataGrantResponse.add_member(:source_data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "SourceDataSetId"))
+    CreateDataGrantResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    CreateDataGrantResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    CreateDataGrantResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    CreateDataGrantResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    CreateDataGrantResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
+    CreateDataGrantResponse.struct_class = Types::CreateDataGrantResponse
 
     CreateDataSetRequest.add_member(:asset_type, Shapes::ShapeRef.new(shape: AssetType, required: true, location_name: "AssetType"))
     CreateDataSetRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "Description"))
@@ -337,6 +410,20 @@ module Aws::DataExchange
     CreateS3DataAccessFromS3BucketResponseDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
     CreateS3DataAccessFromS3BucketResponseDetails.struct_class = Types::CreateS3DataAccessFromS3BucketResponseDetails
 
+    DataGrantSummaryEntry.add_member(:name, Shapes::ShapeRef.new(shape: DataGrantName, required: true, location_name: "Name"))
+    DataGrantSummaryEntry.add_member(:sender_principal, Shapes::ShapeRef.new(shape: SenderPrincipal, required: true, location_name: "SenderPrincipal"))
+    DataGrantSummaryEntry.add_member(:receiver_principal, Shapes::ShapeRef.new(shape: ReceiverPrincipal, required: true, location_name: "ReceiverPrincipal"))
+    DataGrantSummaryEntry.add_member(:acceptance_state, Shapes::ShapeRef.new(shape: DataGrantAcceptanceState, required: true, location_name: "AcceptanceState"))
+    DataGrantSummaryEntry.add_member(:accepted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AcceptedAt"))
+    DataGrantSummaryEntry.add_member(:ends_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndsAt"))
+    DataGrantSummaryEntry.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    DataGrantSummaryEntry.add_member(:source_data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "SourceDataSetId"))
+    DataGrantSummaryEntry.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    DataGrantSummaryEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    DataGrantSummaryEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    DataGrantSummaryEntry.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    DataGrantSummaryEntry.struct_class = Types::DataGrantSummaryEntry
+
     DataSetEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     DataSetEntry.add_member(:asset_type, Shapes::ShapeRef.new(shape: AssetType, required: true, location_name: "AssetType"))
     DataSetEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
@@ -363,6 +450,9 @@ module Aws::DataExchange
     DeleteAssetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     DeleteAssetRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "RevisionId"))
     DeleteAssetRequest.struct_class = Types::DeleteAssetRequest
+
+    DeleteDataGrantRequest.add_member(:data_grant_id, Shapes::ShapeRef.new(shape: DataGrantId, required: true, location: "uri", location_name: "DataGrantId"))
+    DeleteDataGrantRequest.struct_class = Types::DeleteDataGrantRequest
 
     DeleteDataSetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     DeleteDataSetRequest.struct_class = Types::DeleteDataSetRequest
@@ -448,6 +538,26 @@ module Aws::DataExchange
     GetAssetResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     GetAssetResponse.struct_class = Types::GetAssetResponse
 
+    GetDataGrantRequest.add_member(:data_grant_id, Shapes::ShapeRef.new(shape: DataGrantId, required: true, location: "uri", location_name: "DataGrantId"))
+    GetDataGrantRequest.struct_class = Types::GetDataGrantRequest
+
+    GetDataGrantResponse.add_member(:name, Shapes::ShapeRef.new(shape: DataGrantName, required: true, location_name: "Name"))
+    GetDataGrantResponse.add_member(:sender_principal, Shapes::ShapeRef.new(shape: SenderPrincipal, required: true, location_name: "SenderPrincipal"))
+    GetDataGrantResponse.add_member(:receiver_principal, Shapes::ShapeRef.new(shape: ReceiverPrincipal, required: true, location_name: "ReceiverPrincipal"))
+    GetDataGrantResponse.add_member(:description, Shapes::ShapeRef.new(shape: DataGrantDescription, location_name: "Description"))
+    GetDataGrantResponse.add_member(:acceptance_state, Shapes::ShapeRef.new(shape: DataGrantAcceptanceState, required: true, location_name: "AcceptanceState"))
+    GetDataGrantResponse.add_member(:accepted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AcceptedAt"))
+    GetDataGrantResponse.add_member(:ends_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndsAt"))
+    GetDataGrantResponse.add_member(:grant_distribution_scope, Shapes::ShapeRef.new(shape: GrantDistributionScope, required: true, location_name: "GrantDistributionScope"))
+    GetDataGrantResponse.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    GetDataGrantResponse.add_member(:source_data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "SourceDataSetId"))
+    GetDataGrantResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    GetDataGrantResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    GetDataGrantResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    GetDataGrantResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    GetDataGrantResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
+    GetDataGrantResponse.struct_class = Types::GetDataGrantResponse
+
     GetDataSetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     GetDataSetRequest.struct_class = Types::GetDataSetRequest
 
@@ -487,6 +597,24 @@ module Aws::DataExchange
     GetJobResponse.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
     GetJobResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     GetJobResponse.struct_class = Types::GetJobResponse
+
+    GetReceivedDataGrantRequest.add_member(:data_grant_arn, Shapes::ShapeRef.new(shape: DataGrantArn, required: true, location: "uri", location_name: "DataGrantArn"))
+    GetReceivedDataGrantRequest.struct_class = Types::GetReceivedDataGrantRequest
+
+    GetReceivedDataGrantResponse.add_member(:name, Shapes::ShapeRef.new(shape: DataGrantName, required: true, location_name: "Name"))
+    GetReceivedDataGrantResponse.add_member(:sender_principal, Shapes::ShapeRef.new(shape: SenderPrincipal, location_name: "SenderPrincipal"))
+    GetReceivedDataGrantResponse.add_member(:receiver_principal, Shapes::ShapeRef.new(shape: ReceiverPrincipal, required: true, location_name: "ReceiverPrincipal"))
+    GetReceivedDataGrantResponse.add_member(:description, Shapes::ShapeRef.new(shape: DataGrantDescription, location_name: "Description"))
+    GetReceivedDataGrantResponse.add_member(:acceptance_state, Shapes::ShapeRef.new(shape: DataGrantAcceptanceState, required: true, location_name: "AcceptanceState"))
+    GetReceivedDataGrantResponse.add_member(:accepted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AcceptedAt"))
+    GetReceivedDataGrantResponse.add_member(:ends_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndsAt"))
+    GetReceivedDataGrantResponse.add_member(:grant_distribution_scope, Shapes::ShapeRef.new(shape: GrantDistributionScope, required: true, location_name: "GrantDistributionScope"))
+    GetReceivedDataGrantResponse.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    GetReceivedDataGrantResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    GetReceivedDataGrantResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    GetReceivedDataGrantResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    GetReceivedDataGrantResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    GetReceivedDataGrantResponse.struct_class = Types::GetReceivedDataGrantResponse
 
     GetRevisionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     GetRevisionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "RevisionId"))
@@ -634,6 +762,14 @@ module Aws::DataExchange
     LakeFormationTagPolicyDetails.add_member(:table, Shapes::ShapeRef.new(shape: __string, location_name: "Table"))
     LakeFormationTagPolicyDetails.struct_class = Types::LakeFormationTagPolicyDetails
 
+    ListDataGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListDataGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListDataGrantsRequest.struct_class = Types::ListDataGrantsRequest
+
+    ListDataGrantsResponse.add_member(:data_grant_summaries, Shapes::ShapeRef.new(shape: ListOfDataGrantSummaryEntry, location_name: "DataGrantSummaries"))
+    ListDataGrantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDataGrantsResponse.struct_class = Types::ListDataGrantsResponse
+
     ListDataSetRevisionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     ListDataSetRevisionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListDataSetRevisionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -677,6 +813,8 @@ module Aws::DataExchange
 
     ListOfAssetSourceEntry.member = Shapes::ShapeRef.new(shape: AssetSourceEntry)
 
+    ListOfDataGrantSummaryEntry.member = Shapes::ShapeRef.new(shape: DataGrantSummaryEntry)
+
     ListOfDataSetEntry.member = Shapes::ShapeRef.new(shape: DataSetEntry)
 
     ListOfDatabaseLFTagPolicyPermissions.member = Shapes::ShapeRef.new(shape: DatabaseLFTagPolicyPermission)
@@ -697,6 +835,8 @@ module Aws::DataExchange
 
     ListOfLakeFormationTagPolicies.member = Shapes::ShapeRef.new(shape: LakeFormationTagPolicyDetails)
 
+    ListOfReceivedDataGrantSummariesEntry.member = Shapes::ShapeRef.new(shape: ReceivedDataGrantSummariesEntry)
+
     ListOfRedshiftDataShareAssetSourceEntry.member = Shapes::ShapeRef.new(shape: RedshiftDataShareAssetSourceEntry)
 
     ListOfRedshiftDataShares.member = Shapes::ShapeRef.new(shape: RedshiftDataShareDetails)
@@ -712,6 +852,15 @@ module Aws::DataExchange
     ListOfTableTagPolicyLFPermissions.member = Shapes::ShapeRef.new(shape: TableTagPolicyLFPermission)
 
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    ListReceivedDataGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListReceivedDataGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListReceivedDataGrantsRequest.add_member(:acceptance_state, Shapes::ShapeRef.new(shape: AcceptanceStateFilterValues, location: "querystring", location_name: "acceptanceState"))
+    ListReceivedDataGrantsRequest.struct_class = Types::ListReceivedDataGrantsRequest
+
+    ListReceivedDataGrantsResponse.add_member(:data_grant_summaries, Shapes::ShapeRef.new(shape: ListOfReceivedDataGrantSummariesEntry, location_name: "DataGrantSummaries"))
+    ListReceivedDataGrantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListReceivedDataGrantsResponse.struct_class = Types::ListReceivedDataGrantsResponse
 
     ListRevisionAssetsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     ListRevisionAssetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -738,7 +887,21 @@ module Aws::DataExchange
     NotificationDetails.struct_class = Types::NotificationDetails
 
     OriginDetails.add_member(:product_id, Shapes::ShapeRef.new(shape: __string, location_name: "ProductId"))
+    OriginDetails.add_member(:data_grant_id, Shapes::ShapeRef.new(shape: __string, location_name: "DataGrantId"))
     OriginDetails.struct_class = Types::OriginDetails
+
+    ReceivedDataGrantSummariesEntry.add_member(:name, Shapes::ShapeRef.new(shape: DataGrantName, required: true, location_name: "Name"))
+    ReceivedDataGrantSummariesEntry.add_member(:sender_principal, Shapes::ShapeRef.new(shape: SenderPrincipal, required: true, location_name: "SenderPrincipal"))
+    ReceivedDataGrantSummariesEntry.add_member(:receiver_principal, Shapes::ShapeRef.new(shape: ReceiverPrincipal, required: true, location_name: "ReceiverPrincipal"))
+    ReceivedDataGrantSummariesEntry.add_member(:acceptance_state, Shapes::ShapeRef.new(shape: DataGrantAcceptanceState, required: true, location_name: "AcceptanceState"))
+    ReceivedDataGrantSummariesEntry.add_member(:accepted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AcceptedAt"))
+    ReceivedDataGrantSummariesEntry.add_member(:ends_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndsAt"))
+    ReceivedDataGrantSummariesEntry.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ReceivedDataGrantSummariesEntry.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    ReceivedDataGrantSummariesEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    ReceivedDataGrantSummariesEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    ReceivedDataGrantSummariesEntry.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    ReceivedDataGrantSummariesEntry.struct_class = Types::ReceivedDataGrantSummariesEntry
 
     RedshiftDataShareAsset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
     RedshiftDataShareAsset.struct_class = Types::RedshiftDataShareAsset
@@ -989,15 +1152,30 @@ module Aws::DataExchange
 
       api.metadata = {
         "apiVersion" => "2017-07-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "dataexchange",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Data Exchange",
         "serviceId" => "DataExchange",
         "signatureVersion" => "v4",
         "signingName" => "dataexchange",
         "uid" => "dataexchange-2017-07-25",
       }
+
+      api.add_operation(:accept_data_grant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptDataGrant"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/data-grants/{DataGrantArn}/accept"
+        o.input = Shapes::ShapeRef.new(shape: AcceptDataGrantRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptDataGrantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:cancel_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelJob"
@@ -1008,6 +1186,20 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_data_grant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataGrant"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/data-grants"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataGrantRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataGrantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -1079,6 +1271,19 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_data_grant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataGrant"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/data-grants/{DataGrantId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataGrantRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_data_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataSet"
         o.http_method = "DELETE"
@@ -1131,6 +1336,19 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_data_grant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataGrant"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/data-grants/{DataGrantId}"
+        o.input = Shapes::ShapeRef.new(shape: GetDataGrantRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataGrantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_data_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDataSet"
         o.http_method = "GET"
@@ -1167,6 +1385,19 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_received_data_grant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReceivedDataGrant"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/received-data-grants/{DataGrantArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetReceivedDataGrantRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetReceivedDataGrantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_revision, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRevision"
         o.http_method = "GET"
@@ -1177,6 +1408,25 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_data_grants, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataGrants"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/data-grants"
+        o.input = Shapes::ShapeRef.new(shape: ListDataGrantsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataGrantsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_data_set_revisions, Seahorse::Model::Operation.new.tap do |o|
@@ -1241,6 +1491,25 @@ module Aws::DataExchange
         o.output = Shapes::ShapeRef.new(shape: ListJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_received_data_grants, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReceivedDataGrants"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/received-data-grants"
+        o.input = Shapes::ShapeRef.new(shape: ListReceivedDataGrantsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReceivedDataGrantsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(

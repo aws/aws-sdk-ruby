@@ -114,7 +114,7 @@ module Aws::ApplicationInsights
     # Describes the status of the application.
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the owner of the application.
+    #   The Amazon Web Services account ID for the owner of the application.
     #   @return [String]
     #
     # @!attribute [rw] resource_group_name
@@ -129,6 +129,11 @@ module Aws::ApplicationInsights
     #   The SNS topic provided to Application Insights that is associated to
     #   the created opsItems to receive SNS notifications for opsItem
     #   updates.
+    #   @return [String]
+    #
+    # @!attribute [rw] sns_notification_arn
+    #   The SNS topic ARN that is associated with SNS notifications for
+    #   updates or issues.
     #   @return [String]
     #
     # @!attribute [rw] ops_center_enabled
@@ -172,6 +177,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :life_cycle,
       :ops_item_sns_topic_arn,
+      :sns_notification_arn,
       :ops_center_enabled,
       :cwe_monitor_enabled,
       :remarks,
@@ -203,8 +209,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the owner of the application to which the
-    #   configuration event belongs.
+    #   The Amazon Web Services account ID for the owner of the application
+    #   to which the configuration event belongs.
     #   @return [String]
     #
     # @!attribute [rw] monitored_resource_arn
@@ -270,6 +276,10 @@ module Aws::ApplicationInsights
     #   to the opsItem.
     #   @return [String]
     #
+    # @!attribute [rw] sns_notification_arn
+    #   The SNS notification topic ARN.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   List of tags to add to the application. tag key (`Key`) and an
     #   associated tag value (`Value`). The maximum length of a tag key is
@@ -305,6 +315,7 @@ module Aws::ApplicationInsights
       :ops_center_enabled,
       :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
+      :sns_notification_arn,
       :tags,
       :auto_config_enabled,
       :auto_create,
@@ -380,7 +391,8 @@ module Aws::ApplicationInsights
     #   pattern translates to a `750,000` rank. A `Medium` severity pattern
     #   translates to a `500,000` rank. And a `High` severity pattern
     #   translates to a `250,000` rank. Rank values less than `1` or greater
-    #   than `1,000,000` are reserved for AWS-provided patterns.
+    #   than `1,000,000` are reserved for Amazon Web Services provided
+    #   patterns.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateLogPatternRequest AWS API Documentation
@@ -480,7 +492,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeApplicationRequest AWS API Documentation
@@ -517,7 +529,9 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] workload_name
-    #   The name of the workload.
+    #   The name of the workload. The name of the workload is required when
+    #   the tier of the application component is `SAP_ASE_SINGLE_NODE` or
+    #   `SAP_ASE_HIGH_AVAILABILITY`.
     #   @return [String]
     #
     # @!attribute [rw] recommendation_type
@@ -558,7 +572,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfigurationRequest AWS API Documentation
@@ -605,7 +619,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentRequest AWS API Documentation
@@ -649,7 +663,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeLogPatternRequest AWS API Documentation
@@ -668,7 +682,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @!attribute [rw] log_pattern
@@ -690,7 +704,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeObservationRequest AWS API Documentation
@@ -719,7 +733,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeProblemObservationsRequest AWS API Documentation
@@ -748,8 +762,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the owner of the resource group affected by
-    #   the problem.
+    #   The Amazon Web Services account ID for the owner of the resource
+    #   group affected by the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeProblemRequest AWS API Documentation
@@ -765,10 +779,15 @@ module Aws::ApplicationInsights
     #   Information about the problem.
     #   @return [Types::Problem]
     #
+    # @!attribute [rw] sns_notification_arn
+    #   The SNS notification topic ARN of the problem.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeProblemResponse AWS API Documentation
     #
     class DescribeProblemResponse < Struct.new(
-      :problem)
+      :problem,
+      :sns_notification_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -786,7 +805,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the workload owner.
+    #   The Amazon Web Services account ID for the workload owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeWorkloadRequest AWS API Documentation
@@ -849,7 +868,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListApplicationsRequest AWS API Documentation
@@ -895,7 +914,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListComponentsRequest AWS API Documentation
@@ -964,7 +983,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListConfigurationHistoryRequest AWS API Documentation
@@ -1017,7 +1036,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListLogPatternSetsRequest AWS API Documentation
@@ -1036,7 +1055,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @!attribute [rw] log_pattern_sets
@@ -1078,7 +1097,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListLogPatternsRequest AWS API Documentation
@@ -1098,7 +1117,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @!attribute [rw] log_patterns
@@ -1122,7 +1141,7 @@ module Aws::ApplicationInsights
     end
 
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @!attribute [rw] resource_group_name
@@ -1188,7 +1207,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the resource group owner.
+    #   The Amazon Web Services account ID for the resource group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListProblemsResponse AWS API Documentation
@@ -1248,7 +1267,7 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the owner of the workload.
+    #   The Amazon Web Services account ID of the owner of the workload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListWorkloadsRequest AWS API Documentation
@@ -1314,7 +1333,8 @@ module Aws::ApplicationInsights
     #   pattern translates to a `750,000` rank. A `Medium` severity pattern
     #   translates to a `500,000` rank. And a `High` severity pattern
     #   translates to a `250,000` rank. Rank values less than `1` or greater
-    #   than `1,000,000` are reserved for AWS-provided patterns.
+    #   than `1,000,000` are reserved for Amazon Web Services provided
+    #   patterns.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/LogPattern AWS API Documentation
@@ -1398,26 +1418,26 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] health_event_arn
-    #   The Amazon Resource Name (ARN) of the AWS Health Event-based
+    #   The Amazon Resource Name (ARN) of the Health Event-based
     #   observation.
     #   @return [String]
     #
     # @!attribute [rw] health_service
-    #   The service to which the AWS Health Event belongs, such as EC2.
+    #   The service to which the Health Event belongs, such as EC2.
     #   @return [String]
     #
     # @!attribute [rw] health_event_type_code
-    #   The type of the AWS Health event, for example,
+    #   The type of the Health event, for example,
     #   `AWS_EC2_POWER_CONNECTIVITY_ISSUE`.
     #   @return [String]
     #
     # @!attribute [rw] health_event_type_category
-    #   The category of the AWS Health event, such as `issue`.
+    #   The category of the Health event, such as `issue`.
     #   @return [String]
     #
     # @!attribute [rw] health_event_description
-    #   The description of the AWS Health event provided by the service,
-    #   such as Amazon EC2.
+    #   The description of the Health event provided by the service, such as
+    #   Amazon EC2.
     #   @return [String]
     #
     # @!attribute [rw] code_deploy_deployment_id
@@ -1584,6 +1604,10 @@ module Aws::ApplicationInsights
     #   The name of the problem.
     #   @return [String]
     #
+    # @!attribute [rw] short_name
+    #   The short name of the problem associated with the SNS notification.
+    #   @return [String]
+    #
     # @!attribute [rw] insights
     #   A detailed analysis of the problem using machine learning.
     #   @return [String]
@@ -1609,8 +1633,8 @@ module Aws::ApplicationInsights
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID for the owner of the resource group affected by
-    #   the problem.
+    #   The Amazon Web Services account ID for the owner of the resource
+    #   group affected by the problem.
     #   @return [String]
     #
     # @!attribute [rw] resource_group_name
@@ -1647,6 +1671,7 @@ module Aws::ApplicationInsights
     class Problem < Struct.new(
       :id,
       :title,
+      :short_name,
       :insights,
       :status,
       :affected_resource,
@@ -1750,9 +1775,9 @@ module Aws::ApplicationInsights
     # * For each associated resource, each tag key must be unique and it can
     #   have only one value.
     #
-    # * The `aws:` prefix is reserved for use by AWS; you can’t use it in
-    #   any tag keys or values that you define. In addition, you can't edit
-    #   or remove tag keys or values that use this prefix.
+    # * The `aws:` prefix is reserved for use by Amazon Web Services; you
+    #   can’t use it in any tag keys or values that you define. In addition,
+    #   you can't edit or remove tag keys or values that use this prefix.
     #
     # @!attribute [rw] key
     #   One part of a key-value pair that defines a tag. The maximum length
@@ -1882,6 +1907,11 @@ module Aws::ApplicationInsights
     #   to the opsItem.
     #   @return [String]
     #
+    # @!attribute [rw] sns_notification_arn
+    #   The SNS topic ARN. Allows you to receive SNS notifications for
+    #   updates and issues with an application.
+    #   @return [String]
+    #
     # @!attribute [rw] remove_sns_topic
     #   Disassociates the SNS topic from the opsItem created for detected
     #   problems.
@@ -1903,6 +1933,7 @@ module Aws::ApplicationInsights
       :ops_center_enabled,
       :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
+      :sns_notification_arn,
       :remove_sns_topic,
       :auto_config_enabled,
       :attach_missing_permission)
@@ -2034,7 +2065,8 @@ module Aws::ApplicationInsights
     #   pattern translates to a `750,000` rank. A `Medium` severity pattern
     #   translates to a `500,000` rank. And a `High` severity pattern
     #   translates to a `250,000` rank. Rank values less than `1` or greater
-    #   than `1,000,000` are reserved for AWS-provided patterns.
+    #   than `1,000,000` are reserved for Amazon Web Services provided
+    #   patterns.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateLogPatternRequest AWS API Documentation
@@ -2178,6 +2210,11 @@ module Aws::ApplicationInsights
     #   component has configured logs to be monitored.
     #   @return [String]
     #
+    # @!attribute [rw] missing_workload_config
+    #   Indicates whether all of the component configurations required to
+    #   monitor a workload were provided.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/Workload AWS API Documentation
     #
     class Workload < Struct.new(
@@ -2185,7 +2222,8 @@ module Aws::ApplicationInsights
       :component_name,
       :workload_name,
       :tier,
-      :workload_remarks)
+      :workload_remarks,
+      :missing_workload_config)
       SENSITIVE = []
       include Aws::Structure
     end

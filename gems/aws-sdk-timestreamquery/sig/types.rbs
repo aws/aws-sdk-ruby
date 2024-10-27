@@ -120,6 +120,7 @@ module Aws::TimestreamQuery
       attr_accessor scheduled_query_arn: ::String
       attr_accessor invocation_time: ::Time
       attr_accessor client_token: ::String
+      attr_accessor query_insights: Types::ScheduledQueryInsights
       SENSITIVE: [:client_token]
     end
 
@@ -219,11 +220,29 @@ module Aws::TimestreamQuery
       SENSITIVE: []
     end
 
+    class QueryInsights
+      attr_accessor mode: ("ENABLED_WITH_RATE_CONTROL" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class QueryInsightsResponse
+      attr_accessor query_spatial_coverage: Types::QuerySpatialCoverage
+      attr_accessor query_temporal_range: Types::QueryTemporalRange
+      attr_accessor query_table_count: ::Integer
+      attr_accessor output_rows: ::Integer
+      attr_accessor output_bytes: ::Integer
+      attr_accessor unload_partition_count: ::Integer
+      attr_accessor unload_written_rows: ::Integer
+      attr_accessor unload_written_bytes: ::Integer
+      SENSITIVE: []
+    end
+
     class QueryRequest
       attr_accessor query_string: ::String
       attr_accessor client_token: ::String
       attr_accessor next_token: ::String
       attr_accessor max_rows: ::Integer
+      attr_accessor query_insights: Types::QueryInsights
       SENSITIVE: [:query_string, :client_token]
     end
 
@@ -233,6 +252,19 @@ module Aws::TimestreamQuery
       attr_accessor rows: ::Array[Types::Row]
       attr_accessor column_info: ::Array[Types::ColumnInfo]
       attr_accessor query_status: Types::QueryStatus
+      attr_accessor query_insights_response: Types::QueryInsightsResponse
+      SENSITIVE: []
+    end
+
+    class QuerySpatialCoverage
+      attr_accessor max: Types::QuerySpatialCoverageMax
+      SENSITIVE: []
+    end
+
+    class QuerySpatialCoverageMax
+      attr_accessor value: ::Float
+      attr_accessor table_arn: ::String
+      attr_accessor partition_key: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -240,6 +272,17 @@ module Aws::TimestreamQuery
       attr_accessor progress_percentage: ::Float
       attr_accessor cumulative_bytes_scanned: ::Integer
       attr_accessor cumulative_bytes_metered: ::Integer
+      SENSITIVE: []
+    end
+
+    class QueryTemporalRange
+      attr_accessor max: Types::QueryTemporalRangeMax
+      SENSITIVE: []
+    end
+
+    class QueryTemporalRangeMax
+      attr_accessor value: ::Integer
+      attr_accessor table_arn: ::String
       SENSITIVE: []
     end
 
@@ -304,11 +347,26 @@ module Aws::TimestreamQuery
       SENSITIVE: [:query_string]
     end
 
+    class ScheduledQueryInsights
+      attr_accessor mode: ("ENABLED_WITH_RATE_CONTROL" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ScheduledQueryInsightsResponse
+      attr_accessor query_spatial_coverage: Types::QuerySpatialCoverage
+      attr_accessor query_temporal_range: Types::QueryTemporalRange
+      attr_accessor query_table_count: ::Integer
+      attr_accessor output_rows: ::Integer
+      attr_accessor output_bytes: ::Integer
+      SENSITIVE: []
+    end
+
     class ScheduledQueryRunSummary
       attr_accessor invocation_time: ::Time
       attr_accessor trigger_time: ::Time
       attr_accessor run_status: ("AUTO_TRIGGER_SUCCESS" | "AUTO_TRIGGER_FAILURE" | "MANUAL_TRIGGER_SUCCESS" | "MANUAL_TRIGGER_FAILURE")
       attr_accessor execution_stats: Types::ExecutionStats
+      attr_accessor query_insights_response: Types::ScheduledQueryInsightsResponse
       attr_accessor error_report_location: Types::ErrorReportLocation
       attr_accessor failure_reason: ::String
       SENSITIVE: []

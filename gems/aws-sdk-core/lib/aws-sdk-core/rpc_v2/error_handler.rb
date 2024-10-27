@@ -27,7 +27,7 @@ module Aws
       end
 
       def extract_error(body, context)
-        data = Cbor.decode(body)
+        data = RpcV2.decode(body)
         code = error_code(data, context)
         message = data['message']
         data = parse_error_data(context, body, code)
@@ -39,7 +39,8 @@ module Aws
       def error_code(data, context)
         code =
           if aws_query_error?(context)
-            error = context.http_response.headers['x-amzn-query-error'].split(';')[0]
+            query_header = context.http_response.headers['x-amzn-query-error']
+            error, _type = query_header.split(';') # type not supported
             remove_prefix(error, context)
           else
             data['__type']

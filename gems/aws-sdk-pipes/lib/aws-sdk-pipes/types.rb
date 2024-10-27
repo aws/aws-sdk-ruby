@@ -1738,10 +1738,9 @@ module Aws::Pipes
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] on_partial_batch_item_failure
-    #   (Streams only) Define how to handle item process failures.
-    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
-    #   the records are processed or there is one failed message left in the
-    #   batch.
+    #   Define how to handle item process failures. `AUTOMATIC_BISECT`
+    #   halves each batch and retry each half until all the records are
+    #   processed or there is one failed message left in the batch.
     #   @return [String]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -1749,27 +1748,25 @@ module Aws::Pipes
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams only) Discard records older than the specified age. The
-    #   default value is -1, which sets the maximum age to infinite. When
-    #   the value is set to infinite, EventBridge never discards old
-    #   records.
+    #   Discard records older than the specified age. The default value is
+    #   -1, which sets the maximum age to infinite. When the value is set to
+    #   infinite, EventBridge never discards old records.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams only) Discard records after the specified number of
-    #   retries. The default value is -1, which sets the maximum number of
-    #   retries to infinite. When MaximumRetryAttempts is infinite,
-    #   EventBridge retries failed records until the record expires in the
-    #   event source.
+    #   Discard records after the specified number of retries. The default
+    #   value is -1, which sets the maximum number of retries to infinite.
+    #   When MaximumRetryAttempts is infinite, EventBridge retries failed
+    #   records until the record expires in the event source.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
-    #   (Streams only) The number of batches to process concurrently from
-    #   each shard. The default value is 1.
+    #   The number of batches to process concurrently from each shard. The
+    #   default value is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] starting_position
-    #   (Streams only) The position in a stream from which to start reading.
+    #   The position in a stream from which to start reading.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeSourceDynamoDBStreamParameters AWS API Documentation
@@ -1798,10 +1795,9 @@ module Aws::Pipes
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] on_partial_batch_item_failure
-    #   (Streams only) Define how to handle item process failures.
-    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
-    #   the records are processed or there is one failed message left in the
-    #   batch.
+    #   Define how to handle item process failures. `AUTOMATIC_BISECT`
+    #   halves each batch and retry each half until all the records are
+    #   processed or there is one failed message left in the batch.
     #   @return [String]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -1809,27 +1805,25 @@ module Aws::Pipes
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams only) Discard records older than the specified age. The
-    #   default value is -1, which sets the maximum age to infinite. When
-    #   the value is set to infinite, EventBridge never discards old
-    #   records.
+    #   Discard records older than the specified age. The default value is
+    #   -1, which sets the maximum age to infinite. When the value is set to
+    #   infinite, EventBridge never discards old records.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams only) Discard records after the specified number of
-    #   retries. The default value is -1, which sets the maximum number of
-    #   retries to infinite. When MaximumRetryAttempts is infinite,
-    #   EventBridge retries failed records until the record expires in the
-    #   event source.
+    #   Discard records after the specified number of retries. The default
+    #   value is -1, which sets the maximum number of retries to infinite.
+    #   When MaximumRetryAttempts is infinite, EventBridge retries failed
+    #   records until the record expires in the event source.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
-    #   (Streams only) The number of batches to process concurrently from
-    #   each shard. The default value is 1.
+    #   The number of batches to process concurrently from each shard. The
+    #   default value is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] starting_position
-    #   (Streams only) The position in a stream from which to start reading.
+    #   The position in a stream from which to start reading.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
@@ -1860,7 +1854,7 @@ module Aws::Pipes
     #   @return [String]
     #
     # @!attribute [rw] starting_position
-    #   (Streams only) The position in a stream from which to start reading.
+    #   The position in a stream from which to start reading.
     #   @return [String]
     #
     # @!attribute [rw] batch_size
@@ -2022,7 +2016,7 @@ module Aws::Pipes
     #   @return [String]
     #
     # @!attribute [rw] starting_position
-    #   (Streams only) The position in a stream from which to start reading.
+    #   The position in a stream from which to start reading.
     #   @return [String]
     #
     # @!attribute [rw] additional_bootstrap_servers
@@ -2673,7 +2667,7 @@ module Aws::Pipes
     #
     # @!attribute [rw] timestamp_format
     #   How to format the timestamps. For example,
-    #   `YYYY-MM-DDThh:mm:ss.sssTZD`.
+    #   `yyyy-MM-dd'T'HH:mm:ss'Z'`.
     #
     #   Required if `TimeFieldType` is specified as `TIMESTAMP_FORMAT`.
     #   @return [String]
@@ -3415,10 +3409,9 @@ module Aws::Pipes
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] on_partial_batch_item_failure
-    #   (Streams only) Define how to handle item process failures.
-    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
-    #   the records are processed or there is one failed message left in the
-    #   batch.
+    #   Define how to handle item process failures. `AUTOMATIC_BISECT`
+    #   halves each batch and retry each half until all the records are
+    #   processed or there is one failed message left in the batch.
     #   @return [String]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -3426,23 +3419,21 @@ module Aws::Pipes
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams only) Discard records older than the specified age. The
-    #   default value is -1, which sets the maximum age to infinite. When
-    #   the value is set to infinite, EventBridge never discards old
-    #   records.
+    #   Discard records older than the specified age. The default value is
+    #   -1, which sets the maximum age to infinite. When the value is set to
+    #   infinite, EventBridge never discards old records.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams only) Discard records after the specified number of
-    #   retries. The default value is -1, which sets the maximum number of
-    #   retries to infinite. When MaximumRetryAttempts is infinite,
-    #   EventBridge retries failed records until the record expires in the
-    #   event source.
+    #   Discard records after the specified number of retries. The default
+    #   value is -1, which sets the maximum number of retries to infinite.
+    #   When MaximumRetryAttempts is infinite, EventBridge retries failed
+    #   records until the record expires in the event source.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
-    #   (Streams only) The number of batches to process concurrently from
-    #   each shard. The default value is 1.
+    #   The number of batches to process concurrently from each shard. The
+    #   default value is 1.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeSourceDynamoDBStreamParameters AWS API Documentation
@@ -3470,10 +3461,9 @@ module Aws::Pipes
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] on_partial_batch_item_failure
-    #   (Streams only) Define how to handle item process failures.
-    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
-    #   the records are processed or there is one failed message left in the
-    #   batch.
+    #   Define how to handle item process failures. `AUTOMATIC_BISECT`
+    #   halves each batch and retry each half until all the records are
+    #   processed or there is one failed message left in the batch.
     #   @return [String]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -3481,23 +3471,21 @@ module Aws::Pipes
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams only) Discard records older than the specified age. The
-    #   default value is -1, which sets the maximum age to infinite. When
-    #   the value is set to infinite, EventBridge never discards old
-    #   records.
+    #   Discard records older than the specified age. The default value is
+    #   -1, which sets the maximum age to infinite. When the value is set to
+    #   infinite, EventBridge never discards old records.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams only) Discard records after the specified number of
-    #   retries. The default value is -1, which sets the maximum number of
-    #   retries to infinite. When MaximumRetryAttempts is infinite,
-    #   EventBridge retries failed records until the record expires in the
-    #   event source.
+    #   Discard records after the specified number of retries. The default
+    #   value is -1, which sets the maximum number of retries to infinite.
+    #   When MaximumRetryAttempts is infinite, EventBridge retries failed
+    #   records until the record expires in the event source.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
-    #   (Streams only) The number of batches to process concurrently from
-    #   each shard. The default value is 1.
+    #   The number of batches to process concurrently from each shard. The
+    #   default value is 1.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeSourceKinesisStreamParameters AWS API Documentation

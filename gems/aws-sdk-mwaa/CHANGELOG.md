@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2024-10-23)
+------------------
+
+* Feature - Introducing InvokeRestApi which allows users to invoke the Apache Airflow REST API on the webserver with the specified inputs.
+
+1.49.0 (2024-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.48.0 (2024-09-24)
 ------------------
 

@@ -27,7 +27,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
       class Handler < Seahorse::Client::Handler
         def call(context)
           unless context[:discovered_endpoint]
-            params = parameters_for_operation(context)
+            params = Aws::PrometheusService::Endpoints.parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
@@ -65,63 +65,6 @@ The endpoint provider used to resolve endpoints. Any object that responds to
               .join(',')
 
             context.http_request.headers[key] = value
-          end
-        end
-
-        def parameters_for_operation(context)
-          case context.operation_name
-          when :create_alert_manager_definition
-            Aws::PrometheusService::Endpoints::CreateAlertManagerDefinition.build(context)
-          when :create_logging_configuration
-            Aws::PrometheusService::Endpoints::CreateLoggingConfiguration.build(context)
-          when :create_rule_groups_namespace
-            Aws::PrometheusService::Endpoints::CreateRuleGroupsNamespace.build(context)
-          when :create_scraper
-            Aws::PrometheusService::Endpoints::CreateScraper.build(context)
-          when :create_workspace
-            Aws::PrometheusService::Endpoints::CreateWorkspace.build(context)
-          when :delete_alert_manager_definition
-            Aws::PrometheusService::Endpoints::DeleteAlertManagerDefinition.build(context)
-          when :delete_logging_configuration
-            Aws::PrometheusService::Endpoints::DeleteLoggingConfiguration.build(context)
-          when :delete_rule_groups_namespace
-            Aws::PrometheusService::Endpoints::DeleteRuleGroupsNamespace.build(context)
-          when :delete_scraper
-            Aws::PrometheusService::Endpoints::DeleteScraper.build(context)
-          when :delete_workspace
-            Aws::PrometheusService::Endpoints::DeleteWorkspace.build(context)
-          when :describe_alert_manager_definition
-            Aws::PrometheusService::Endpoints::DescribeAlertManagerDefinition.build(context)
-          when :describe_logging_configuration
-            Aws::PrometheusService::Endpoints::DescribeLoggingConfiguration.build(context)
-          when :describe_rule_groups_namespace
-            Aws::PrometheusService::Endpoints::DescribeRuleGroupsNamespace.build(context)
-          when :describe_scraper
-            Aws::PrometheusService::Endpoints::DescribeScraper.build(context)
-          when :describe_workspace
-            Aws::PrometheusService::Endpoints::DescribeWorkspace.build(context)
-          when :get_default_scraper_configuration
-            Aws::PrometheusService::Endpoints::GetDefaultScraperConfiguration.build(context)
-          when :list_rule_groups_namespaces
-            Aws::PrometheusService::Endpoints::ListRuleGroupsNamespaces.build(context)
-          when :list_scrapers
-            Aws::PrometheusService::Endpoints::ListScrapers.build(context)
-          when :list_tags_for_resource
-            Aws::PrometheusService::Endpoints::ListTagsForResource.build(context)
-          when :list_workspaces
-            Aws::PrometheusService::Endpoints::ListWorkspaces.build(context)
-          when :put_alert_manager_definition
-            Aws::PrometheusService::Endpoints::PutAlertManagerDefinition.build(context)
-          when :put_rule_groups_namespace
-            Aws::PrometheusService::Endpoints::PutRuleGroupsNamespace.build(context)
-          when :tag_resource
-            Aws::PrometheusService::Endpoints::TagResource.build(context)
-          when :untag_resource
-            Aws::PrometheusService::Endpoints::UntagResource.build(context)
-          when :update_logging_configuration
-            Aws::PrometheusService::Endpoints::UpdateLoggingConfiguration.build(context)
-          when :update_workspace_alias
-            Aws::PrometheusService::Endpoints::UpdateWorkspaceAlias.build(context)
           end
         end
       end

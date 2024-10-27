@@ -96,6 +96,7 @@ module Aws::MainframeModernization
 
     class CancelBatchJobExecutionRequest
       attr_accessor application_id: ::String
+      attr_accessor auth_secrets_manager_arn: ::String
       attr_accessor execution_id: ::String
       SENSITIVE: []
     end
@@ -350,7 +351,7 @@ module Aws::MainframeModernization
       attr_accessor environment_id: ::String
       attr_accessor instance_type: ::String
       attr_accessor name: ::String
-      attr_accessor status: ("Creating" | "Available" | "Updating" | "Deleting" | "Failed")
+      attr_accessor status: ("Creating" | "Available" | "Updating" | "Deleting" | "Failed" | "UnHealthy")
       SENSITIVE: []
     end
 
@@ -540,7 +541,7 @@ module Aws::MainframeModernization
       attr_accessor preferred_maintenance_window: ::String
       attr_accessor publicly_accessible: bool
       attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor status: ("Creating" | "Available" | "Updating" | "Deleting" | "Failed")
+      attr_accessor status: ("Creating" | "Available" | "Updating" | "Deleting" | "Failed" | "UnHealthy")
       attr_accessor status_reason: ::String
       attr_accessor storage_configurations: ::Array[Types::StorageConfiguration]
       attr_accessor subnet_ids: ::Array[::String]
@@ -658,6 +659,7 @@ module Aws::MainframeModernization
 
     class ListBatchJobRestartPointsRequest
       attr_accessor application_id: ::String
+      attr_accessor auth_secrets_manager_arn: ::String
       attr_accessor execution_id: ::String
       SENSITIVE: []
     end
@@ -855,6 +857,7 @@ module Aws::MainframeModernization
 
     class StartBatchJobRequest
       attr_accessor application_id: ::String
+      attr_accessor auth_secrets_manager_arn: ::String
       attr_accessor batch_job_identifier: Types::BatchJobIdentifier
       attr_accessor job_params: ::Hash[::String, ::String]
       SENSITIVE: []

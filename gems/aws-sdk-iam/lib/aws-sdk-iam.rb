@@ -76,7 +76,7 @@ module Aws::IAM
   autoload :UserPolicy, 'aws-sdk-iam/user_policy'
   autoload :VirtualMfaDevice, 'aws-sdk-iam/virtual_mfa_device'
 
-  GEM_VERSION = '1.111.0'
+  GEM_VERSION = '1.112.0'
 
 end
 
