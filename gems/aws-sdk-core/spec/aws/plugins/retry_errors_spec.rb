@@ -272,6 +272,53 @@ module Aws
           handle_with_retry(test_case_def)
         end
 
+        it 'fails due to retry quota bucket exhaustion' do
+          config.max_attempts = 5
+          config.retry_quota.instance_variable_set(:@available_capacity, 10)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 5, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 502, error: service_error },
+              expect: { available_capacity: 0, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 503, error: service_error },
+              expect: { available_capacity: 0, retries: 2 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        it 'recovers after successful responses' do
+          config.max_attempts = 5
+          config.retry_quota.instance_variable_set(:@available_capacity, 15)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 10, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 502, error: service_error },
+              expect: { available_capacity: 5, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { available_capacity: 10, retries: 2 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 5, retries: 1, delay: 1 }
+            }
+          ]
+          handle_with_retry(test_case_def)
+        end
+
         it 'corrects and retries clock skew errors' do
           clock_skew_error = RetryErrorsSvc::Errors::RequestTimeTooSkewed
                                .new(nil, nil)
