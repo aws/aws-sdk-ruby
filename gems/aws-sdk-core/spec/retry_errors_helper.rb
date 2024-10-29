@@ -40,7 +40,11 @@ def handle_with_retry(test_cases)
   apply_expectations(test_cases[i - 1])
 end
 
-
+# Reset the request context for a subsequent call
+def reset_request
+  resp.context.retries = 0
+  resp.context.metadata[:retries] = {}
+end
 
 # apply a delay to the current test case
 # See handle_with_retry for test case definition

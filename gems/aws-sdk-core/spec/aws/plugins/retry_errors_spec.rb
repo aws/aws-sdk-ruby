@@ -312,11 +312,8 @@ module Aws
               expect: { available_capacity: 10, retries: 2 }
             }
           ]
-
-          # failure cases ending in success
           handle_with_retry(test_case_def)
 
-          # after success, new request
           test_case_post_success = [
             {
               response: { status_code: 500, error: service_error },
@@ -327,10 +324,7 @@ module Aws
               expect: { available_capacity: 10, retries: 1 }
             }
           ]
-          # reset request
-          config.max_attempts = 2
-          resp.context.retries = 0
-          resp.context.metadata[:retries] = {}
+          reset_request
           handle_with_retry(test_case_post_success)
         end
 
