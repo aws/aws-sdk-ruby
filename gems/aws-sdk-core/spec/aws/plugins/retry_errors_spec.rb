@@ -310,13 +310,28 @@ module Aws
             {
               response: { status_code: 200, error: nil },
               expect: { available_capacity: 10, retries: 2 }
-            },
+            }
+          ]
+
+          # failure cases ending in success
+          handle_with_retry(test_case_def)
+
+          # after success, new request
+          test_case_post_success = [
             {
               response: { status_code: 500, error: service_error },
               expect: { available_capacity: 5, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { available_capacity: 10, retries: 1 }
             }
           ]
-          handle_with_retry(test_case_def)
+          # reset request
+          config.max_attempts = 2
+          resp.context.retries = 0
+          resp.context.metadata[:retries] = {}
+          handle_with_retry(test_case_post_success)
         end
 
         it 'corrects and retries clock skew errors' do
