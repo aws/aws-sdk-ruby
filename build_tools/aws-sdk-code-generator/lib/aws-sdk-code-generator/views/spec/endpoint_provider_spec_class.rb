@@ -128,6 +128,10 @@ module AwsSdkCodeGenerator
                !options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
               @client_params << built_in_to_param('AWS::S3::UseGlobalEndpoint', false)
             end
+
+            if @service.identifier == 'dynamodb'
+              @client_params << Param.new(:simple_attributes, false, true)
+            end
           end
 
           # @return String
