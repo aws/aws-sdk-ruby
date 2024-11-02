@@ -1396,11 +1396,11 @@ module Aws::QuickSight
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme: `"AccountCustomization":
-    #   { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }`. Or, you
-    #   can add a custom theme by specifying `"AccountCustomization": {
+    #   \{ "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" \}`. Or,
+    #   you can add a custom theme by specifying `"AccountCustomization": \{
     #   "DefaultTheme":
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
-    #   }`.
+    #   \}`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of the tags that you want to attach to this resource.
@@ -11283,9 +11283,9 @@ module Aws::QuickSight
     #
     # @option params [required, Array<Types::DashboardSearchFilter>] :filters
     #   The filters to apply to the search. Currently, you can search only by
-    #   user name, for example, `"Filters": [ { "Name": "QUICKSIGHT_USER",
+    #   user name, for example, `"Filters": [ \{ "Name": "QUICKSIGHT_USER",
     #   "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]`
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" \} ]`
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -11477,9 +11477,9 @@ module Aws::QuickSight
     #
     # @option params [required, Array<Types::FolderSearchFilter>] :filters
     #   The filters to apply to the search. Currently, you can search only by
-    #   the parent folder ARN. For example, `"Filters": [ { "Name":
+    #   the parent folder ARN. For example, `"Filters": [ \{ "Name":
     #   "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" } ]`.
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" \} ]`.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more

@@ -867,7 +867,7 @@ module Aws::Polly
     #
     # @option params [required, String] :name
     #   Name of the lexicon. The name must follow the regular express format
-    #   \[0-9A-Za-z\]\{1,20}. That is, the name is a case-sensitive
+    #   \[0-9A-Za-z\]\\\{1,20\\}. That is, the name is a case-sensitive
     #   alphanumeric string up to 20 characters long.
     #
     # @option params [required, String] :content

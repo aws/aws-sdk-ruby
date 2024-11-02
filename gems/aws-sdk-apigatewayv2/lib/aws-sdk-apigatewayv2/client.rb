@@ -918,9 +918,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
-    #   querystring, path, or header; and *\{name}* must be a valid and unique
-    #   method request parameter name.
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype, request
     #   parameters are a key-value map specifying parameters that are passed
@@ -1087,9 +1087,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
-    #   querystring, path, or header; and *\{name}* must be a valid and unique
-    #   method request parameter name.
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype, request
     #   parameters are a key-value map specifying parameters that are passed
@@ -3886,9 +3886,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
-    #   querystring, path, or header; and *\{name}* must be a valid and unique
-    #   method request parameter name.
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype, request
     #   parameters are a key-value map specifying parameters that are passed
@@ -4058,9 +4058,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
-    #   querystring, path, or header; and *\{name}* must be a valid and unique
-    #   method request parameter name.
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype, request
     #   parameters are a key-value map specifying parameters that are passed

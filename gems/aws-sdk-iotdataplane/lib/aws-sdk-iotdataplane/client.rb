@@ -732,7 +732,7 @@ module Aws::IoTDataPlane
     #   which represents two User Properties. Note that it needs to be
     #   base64-encoded:
     #
-    #   `[{"deviceName": "alpha"}, {"deviceCnt": "45"}]`
+    #   `[\{"deviceName": "alpha"\}, \{"deviceCnt": "45"\}]`
     #
     #   **SDK automatically handles json encoding and base64 encoding for you
     #   when the required value (Hash, Array, etc.) is provided according to

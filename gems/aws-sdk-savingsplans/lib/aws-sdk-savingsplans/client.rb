@@ -927,8 +927,8 @@ module Aws::SavingsPlans
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   One or more tags. For example, \{ "tags": \{"key1":"value1",
-    #   "key2":"value2"} }.
+    #   One or more tags. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #

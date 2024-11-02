@@ -2927,7 +2927,7 @@ module Aws::FraudDetector
     # returned.
     #
     # For example, the following filter lists all past predictions for `xyz`
-    # event type - `{ "eventType":{ "value": "xyz" }” } `
+    # event type - `\{ "eventType":\{ "value": "xyz" \}” \} `
     #
     # This is a paginated API. If you provide a null `maxResults`, this
     # action will retrieve a maximum of 10 records per page. If you provide

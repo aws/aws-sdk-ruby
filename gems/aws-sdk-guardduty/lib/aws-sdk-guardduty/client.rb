@@ -685,7 +685,7 @@ module Aws::GuardDuty
     # @option params [String] :description
     #   The description of the filter. Valid characters include alphanumeric
     #   characters, and special characters such as hyphen, period, colon,
-    #   underscore, parentheses (`{ }`, `[ ]`, and `( )`), forward slash,
+    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
     #   horizontal tab, vertical tab, newline, form feed, return, and
     #   whitespace.
     #
@@ -4519,7 +4519,7 @@ module Aws::GuardDuty
     # @option params [String] :description
     #   The description of the filter. Valid characters include alphanumeric
     #   characters, and special characters such as hyphen, period, colon,
-    #   underscore, parentheses (`{ }`, `[ ]`, and `( )`), forward slash,
+    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
     #   horizontal tab, vertical tab, newline, form feed, return, and
     #   whitespace.
     #

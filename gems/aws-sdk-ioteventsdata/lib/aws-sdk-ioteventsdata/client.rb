@@ -612,8 +612,8 @@ module Aws::IoTEventsData
     #
     # @option params [required, Array<Types::Message>] :messages
     #   The list of messages to send. Each message has the following format:
-    #   `'{ "messageId": "string", "inputName": "string", "payload":
-    #   "string"}'`
+    #   `'\{ "messageId": "string", "inputName": "string", "payload":
+    #   "string"\}'`
     #
     # @return [Types::BatchPutMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #

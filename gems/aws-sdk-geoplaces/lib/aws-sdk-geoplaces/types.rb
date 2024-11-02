@@ -410,7 +410,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] circle
@@ -1077,7 +1078,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] categories
@@ -1225,7 +1227,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set of four coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] categories
@@ -1733,7 +1736,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] categories
@@ -1789,7 +1793,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] include_countries
@@ -1977,7 +1982,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] categories
@@ -2060,7 +2066,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] circle
@@ -2235,7 +2242,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] categories
@@ -2445,7 +2453,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] circle
@@ -2516,7 +2525,8 @@ module Aws::GeoPlaces
     #   an individual result covers.
     #
     #   The bounding box formed is defined as a set 4 coordinates:
-    #   `[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]`
+    #   `[\{westward lng\}, \{southern lat\}, \{eastward lng\}, \{northern
+    #   lat\}]`
     #   @return [Array<Float>]
     #
     # @!attribute [rw] categories

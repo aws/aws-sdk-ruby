@@ -1495,8 +1495,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1505,7 +1505,7 @@ module Aws::Connect
     #   [Making retries safe with idempotent APIs][1].
     #
     #   Pattern:
-    #   `^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$`
+    #   `^[a-f0-9]\{8\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{12\}$`
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1613,8 +1613,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1692,8 +1692,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateContactFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1754,8 +1754,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1965,8 +1965,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateHoursOfOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2054,7 +2054,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, `{ "tags": {"key1":"value1", "key2":"value2"} }`.
+    #   For example, `\{ "tags": \{"key1":"value1", "key2":"value2"\} \}`.
     #
     # @return [Types::CreateInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2125,8 +2125,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2432,8 +2432,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2527,8 +2527,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2589,8 +2589,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2676,8 +2676,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :agent_availability_timer
     #   Whether agents with this routing profile will have their routing order
@@ -2915,8 +2915,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @option params [Hash<String,String>] :allowed_access_control_tags
     #   The list of tags that a security profile uses to restrict access to
@@ -3151,8 +3151,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateTrafficDistributionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3204,8 +3204,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUseCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3310,8 +3310,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3380,8 +3380,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3451,8 +3451,8 @@ module Aws::Connect
     # @option params [Hash<String,String>] :tags
     #   The tags associated with the view resource (not specific to view
     #   version).These tags can be used to organize, track, or control access
-    #   for this resource. For example, \{ "tags": \{"key1":"value1",
-    #   "key2":"value2"} }.
+    #   for this resource. For example, \\\{ "tags":
+    #   \\\{"key1":"value1", "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3622,8 +3622,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4837,9 +4837,9 @@ module Aws::Connect
     # language][1].
     #
     # Use the `$SAVED` alias in the request to describe the `SAVED` content
-    # of a Flow. For example, `arn:aws:.../contact-flow/{id}:$SAVED`. Once a
-    # contact flow is published, `$SAVED` needs to be supplied to view saved
-    # content that has not been published.
+    # of a Flow. For example, `arn:aws:.../contact-flow/\{id\}:$SAVED`. Once
+    # a contact flow is published, `$SAVED` needs to be supplied to view
+    # saved content that has not been published.
     #
     # In the response, **Status** indicates the flow status as either
     # `SAVED` or `PUBLISHED`. The `PUBLISHED` status will initiate
@@ -4892,9 +4892,9 @@ module Aws::Connect
     # Describes the specified flow module.
     #
     # Use the `$SAVED` alias in the request to describe the `SAVED` content
-    # of a Flow. For example, `arn:aws:.../contact-flow/{id}:$SAVED`. Once a
-    # contact flow is published, `$SAVED` needs to be supplied to view saved
-    # content that has not been published.
+    # of a Flow. For example, `arn:aws:.../contact-flow/\{id\}:$SAVED`. Once
+    # a contact flow is published, `$SAVED` needs to be supplied to view
+    # saved content that has not been published.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -6801,8 +6801,8 @@ module Aws::Connect
     #     returned in MILLISECONDS. For example, if you get a response like
     #     this:
     #
-    #     `{ "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" },
-    #     "Value": 24113.0 `}
+    #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" \},
+    #     "Value": 24113.0 `\\}
     #
     #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
     #
@@ -9107,8 +9107,8 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -14153,7 +14153,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, `{ "Tags": {"key1":"value1", "key2":"value2"} }`.
+    #   For example, `\{ "Tags": \{"key1":"value1", "key2":"value2"\} \}`.
     #
     # @return [Types::StartAttachedFileUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14350,8 +14350,8 @@ module Aws::Connect
     #   <note markdown="1"> The types `application/vnd.amazonaws.connect.message.interactive` and
     #   `application/vnd.amazonaws.connect.message.interactive.response` must
     #   be present in the SupportedMessagingContentTypes field of this API in
-    #   order to set `SegmentAttributes` as \{` "connect:Subtype":
-    #   {"valueString" : "connect:Guide" }}`.
+    #   order to set `SegmentAttributes` as \\\{` "connect:Subtype":
+    #   \{"valueString" : "connect:Guide" \}\}`.
     #
     #    </note>
     #
@@ -15461,7 +15461,7 @@ module Aws::Connect
     # Answers included in the request are merged with existing answers for
     # the given evaluation. If no answers or notes are passed, the
     # evaluation is submitted with the existing answers and notes. You can
-    # delete an answer or note by passing an empty object (`{}`) to the
+    # delete an answer or note by passing an empty object (`\{\}`) to the
     # question identifier.
     #
     # If a contact evaluation is already in submitted state, this operation
@@ -15590,8 +15590,8 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to be assigned to the contact resource. For example, \{
-    #   "Tags": \{"key1":"value1", "key2":"value2"} }.
+    #   The tags to be assigned to the contact resource. For example, \\\{
+    #   "Tags": \\\{"key1":"value1", "key2":"value2"\\} \\}.
     #
     #   <note markdown="1"> Authorization is not supported by this tag.
     #
@@ -15638,8 +15638,8 @@ module Aws::Connect
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
-    #   }.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -16088,7 +16088,7 @@ module Aws::Connect
     # Connect instance. A contact evaluation must be in draft state. Answers
     # included in the request are merged with existing answers for the given
     # evaluation. An answer or note can be deleted by passing an empty
-    # object (`{}`) to the question identifier.
+    # object (`\{\}`) to the question identifier.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -16153,9 +16153,9 @@ module Aws::Connect
     # language][1].
     #
     # Use the `$SAVED` alias in the request to describe the `SAVED` content
-    # of a Flow. For example, `arn:aws:.../contact-flow/{id}:$SAVED`. Once a
-    # contact flow is published, `$SAVED` needs to be supplied to view saved
-    # content that has not been published.
+    # of a Flow. For example, `arn:aws:.../contact-flow/\{id\}:$SAVED`. Once
+    # a contact flow is published, `$SAVED` needs to be supplied to view
+    # saved content that has not been published.
     #
     #
     #
@@ -16243,9 +16243,9 @@ module Aws::Connect
     # instance.
     #
     # Use the `$SAVED` alias in the request to describe the `SAVED` content
-    # of a Flow. For example, `arn:aws:.../contact-flow/{id}:$SAVED`. Once a
-    # contact flow is published, `$SAVED` needs to be supplied to view saved
-    # content that has not been published.
+    # of a Flow. For example, `arn:aws:.../contact-flow/\{id\}:$SAVED`. Once
+    # a contact flow is published, `$SAVED` needs to be supplied to view
+    # saved content that has not been published.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the

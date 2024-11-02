@@ -7072,7 +7072,7 @@ module Aws::EC2
     #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
     #   *Amazon Web Services Transit Gateway Guide*.
     #
-    #   Specify the fields using the `${field-id}` format, separated by
+    #   Specify the fields using the `$\{field-id\}` format, separated by
     #   spaces.
     #
     #
@@ -11849,7 +11849,7 @@ module Aws::EC2
     #   Constraints: Up to 255 characters in length
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     #
     # @option params [required, String] :group_name
     #   The name of the security group.
@@ -11857,7 +11857,7 @@ module Aws::EC2
     #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     #
     # @option params [String] :vpc_id
     #   The ID of the VPC. Required for a nondefault VPC.

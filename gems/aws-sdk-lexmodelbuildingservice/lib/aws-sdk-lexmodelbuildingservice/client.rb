@@ -3428,8 +3428,8 @@ module Aws::LexModelBuildingService
     #
     # @option params [Array<String>] :sample_utterances
     #   An array of utterances (strings) that a user might say to signal the
-    #   intent. For example, "I want \{PizzaSize} pizza", "Order
-    #   \{Quantity} \{PizzaSize} pizzas".
+    #   intent. For example, "I want \\\{PizzaSize\\} pizza", "Order
+    #   \\\{Quantity\\} \\\{PizzaSize\\} pizzas".
     #
     #   In each utterance, a slot name is enclosed in curly braces.
     #

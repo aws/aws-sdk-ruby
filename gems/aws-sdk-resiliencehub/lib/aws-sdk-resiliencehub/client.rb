@@ -3917,8 +3917,8 @@ module Aws::ResilienceHub
     #
     #        Key: `"failover-regions"`
     #
-    #        Value: `"[{"region":"<REGION>",
-    #       "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
+    #        Value: `"[\{"region":"<REGION>",
+    #       "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
     #
     #        </note>
     #
@@ -3965,8 +3965,8 @@ module Aws::ResilienceHub
     #
     #        Key: `"failover-regions"`
     #
-    #        Value: `"[{"region":"<REGION>",
-    #       "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
+    #        Value: `"[\{"region":"<REGION>",
+    #       "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
     #
     #        </note>
     #
@@ -4056,8 +4056,8 @@ module Aws::ResilienceHub
     #
     #      Key: `"failover-regions"`
     #
-    #      Value: `"[{"region":"<REGION>",
-    #     "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
+    #      Value: `"[\{"region":"<REGION>",
+    #     "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
     #
     #      </note>
     #
@@ -4601,7 +4601,8 @@ module Aws::ResilienceHub
     #
     #    Key: `"failover-regions"`
     #
-    #    Value: `"[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
+    #    Value: `"[\{"region":"<REGION>",
+    #   "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
     #
     #    </note>
     #
