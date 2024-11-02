@@ -242,7 +242,7 @@ module Aws::ECS
 
     # An object representing the networking details for a task or service.
     # For example
-    # `awsVpcConfiguration=\{subnets=["subnet-12344321"],securityGroups=["sg-12344321"]\}`.
+    # `awsVpcConfiguration={subnets=["subnet-12344321"],securityGroups=["sg-12344321"]}`.
     #
     # @!attribute [rw] subnets
     #   The IDs of the subnets associated with the task or service. There's
@@ -1667,7 +1667,7 @@ module Aws::ECS
     #   of the Docker Remote API or greater on your container instance. To
     #   check the Docker Remote API version on your container instance, log
     #   in to your container instance and run the following command: `sudo
-    #   docker version --format '\{\{.Server.APIVersion\}\}'`
+    #   docker version --format '{{.Server.APIVersion}}'`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] ulimits
@@ -1688,7 +1688,7 @@ module Aws::ECS
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: `sudo docker version
-    #   --format '\{\{.Server.APIVersion\}\}'`
+    #   --format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -1723,7 +1723,7 @@ module Aws::ECS
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: `sudo docker version
-    #   --format '\{\{.Server.APIVersion\}\}'`
+    #   --format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
     #   register the logging drivers available on that instance with the
@@ -2200,7 +2200,7 @@ module Aws::ECS
 
     # The overrides that are sent to a container. An empty container
     # override can be passed in. An example of an empty container override
-    # is `\{"containerOverrides": [ ] \}`. If a non-empty container override
+    # is `{"containerOverrides": [ ] }`. If a non-empty container override
     # is specified, the `name` parameter must be included.
     #
     # You can use Secrets Manager or Amazon Web Services Systems Manager
@@ -5152,7 +5152,7 @@ module Aws::ECS
     #   to add additional metadata, such as the task, task definition,
     #   cluster, and container instance details to the log event. If
     #   specified, the syntax to use is
-    #   `"options":\{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"\}`.
+    #   `"options":{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"}`.
     #   For more information, see [Creating a task definition that uses a
     #   FireLens configuration][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
@@ -5671,7 +5671,7 @@ module Aws::ECS
     #   Remote API or greater on your container instance. To check the
     #   Docker Remote API version on your container instance, log in to your
     #   container instance and run the following command: `sudo docker
-    #   version --format '\{\{.Server.APIVersion\}\}'`
+    #   version --format '{{.Server.APIVersion}}'`
     #   @return [Boolean]
     #
     # @!attribute [rw] shared_memory_size
@@ -6947,7 +6947,7 @@ module Aws::ECS
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: `sudo docker version
-    #   --format '\{\{.Server.APIVersion\}\}'`
+    #   --format '{{.Server.APIVersion}}'`
     #
     #
     #

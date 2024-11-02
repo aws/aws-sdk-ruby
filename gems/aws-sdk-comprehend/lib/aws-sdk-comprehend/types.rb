@@ -1106,12 +1106,12 @@ module Aws::Comprehend
     #   also enclosed in double quotes, then you must escape the double
     #   quotes that are inside the policy:
     #
-    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #   `"{"attribute": "value", "attribute": ["value"]}"`
     #
     #   To avoid escaping quotes, you can use single quotes to enclose the
     #   policy and double quotes to enclose the JSON names and values:
     #
-    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   `'{"attribute": "value", "attribute": ["value"]}'`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
@@ -1316,12 +1316,12 @@ module Aws::Comprehend
     #   quotes, then you must escape the double quotes that are inside the
     #   policy:
     #
-    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #   `"{"attribute": "value", "attribute": ["value"]}"`
     #
     #   To avoid escaping quotes, you can use single quotes to enclose the
     #   policy and double quotes to enclose the JSON names and values:
     #
-    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   `'{"attribute": "value", "attribute": ["value"]}'`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest AWS API Documentation
@@ -6424,12 +6424,12 @@ module Aws::Comprehend
     #   quotes, then you must escape the double quotes that are inside the
     #   policy:
     #
-    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #   `"{"attribute": "value", "attribute": ["value"]}"`
     #
     #   To avoid escaping quotes, you can use single quotes to enclose the
     #   policy and double quotes to enclose the JSON names and values:
     #
-    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   `'{"attribute": "value", "attribute": ["value"]}'`
     #   @return [String]
     #
     # @!attribute [rw] policy_revision_id

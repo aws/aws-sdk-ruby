@@ -4485,8 +4485,8 @@ module Aws::EMR
     # A CloudWatch dimension, which is specified using a `Key` (known as a
     # `Name` in CloudWatch), `Value` pair. By default, Amazon EMR uses one
     # dimension whose `Key` is `JobFlowID` and `Value` is a variable
-    # representing the cluster ID, which is `$\{emr.clusterId\}`. This
-    # enables the rule to bootstrap when the cluster ID becomes available.
+    # representing the cluster ID, which is `${emr.clusterId}`. This enables
+    # the rule to bootstrap when the cluster ID becomes available.
     #
     # @!attribute [rw] key
     #   The dimension name.

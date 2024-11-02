@@ -3622,8 +3622,8 @@ module Aws::Lambda
     # @!attribute [rw] payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
-    #   You can enter the JSON directly. For example, `--payload '\{ "key":
-    #   "value" \}'`. You can also specify a file path. For example,
+    #   You can enter the JSON directly. For example, `--payload '{ "key":
+    #   "value" }'`. You can also specify a file path. For example,
     #   `--payload file://payload.json`.
     #   @return [String]
     #
@@ -3813,8 +3813,8 @@ module Aws::Lambda
     # @!attribute [rw] payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
-    #   You can enter the JSON directly. For example, `--payload '\{ "key":
-    #   "value" \}'`. You can also specify a file path. For example,
+    #   You can enter the JSON directly. For example, `--payload '{ "key":
+    #   "value" }'`. You can also specify a file path. For example,
     #   `--payload file://payload.json`.
     #   @return [String]
     #

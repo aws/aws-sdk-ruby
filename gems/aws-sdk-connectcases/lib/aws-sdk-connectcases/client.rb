@@ -990,8 +990,7 @@ module Aws::ConnectCases
     # * Calling `UpdateCase` with a deleted field ID throws a
     #   `ValidationException` if the case does not already contain a value
     #   for the deleted field. Otherwise it succeeds, allowing you to update
-    #   or remove (using `emptyValue: \{\}`) the field's value from the
-    #   case.
+    #   or remove (using `emptyValue: {}`) the field's value from the case.
     #
     # * `GetTemplate` does not return field IDs for deleted fields.
     #

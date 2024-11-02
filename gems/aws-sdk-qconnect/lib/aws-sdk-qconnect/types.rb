@@ -5396,7 +5396,7 @@ module Aws::QConnect
     # Information about how to render the content.
     #
     # @!attribute [rw] template_uri
-    #   A URI template containing exactly one variable in `$\{variableName\}
+    #   A URI template containing exactly one variable in `${variableName}
     #   `format. This can only be set for `EXTERNAL` knowledge bases. For
     #   Salesforce, ServiceNow, and Zendesk, the variable must be one of the
     #   following:

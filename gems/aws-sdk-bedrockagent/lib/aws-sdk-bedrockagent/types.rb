@@ -7043,8 +7043,7 @@ module Aws::BedrockAgent
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # Contains configurations for a text prompt template. To include a
-    # variable, enclose a word in double curly braces as in
-    # `\{\{variable\}\}`.
+    # variable, enclose a word in double curly braces as in `{{variable}}`.
     #
     # @!attribute [rw] input_variables
     #   An array of the variables in the prompt template.

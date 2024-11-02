@@ -64,8 +64,8 @@ module Aws::CloudSearch
     #
     # @!attribute [rw] stemming_dictionary
     #   A JSON object that contains a collection of string:value pairs that
-    #   each map a term to its stem. For example, `\{"term1": "stem1",
-    #   "term2": "stem2", "term3": "stem3"\}`. The stemming dictionary is
+    #   each map a term to its stem. For example, `{"term1": "stem1",
+    #   "term2": "stem2", "term3": "stem3"}`. The stemming dictionary is
     #   applied in addition to any algorithmic stemming. This enables you to
     #   override the results of the algorithmic stemming to correct specific
     #   cases of overstemming or understemming. The maximum size of a

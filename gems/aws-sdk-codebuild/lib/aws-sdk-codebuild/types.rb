@@ -3715,7 +3715,7 @@ module Aws::CodeBuild
     # @!attribute [rw] cloud_watch_logs_arn
     #   The ARN of the CloudWatch Logs stream for a build execution. Its
     #   format is
-    #   `arn:$\{Partition\}:logs:$\{Region\}:$\{Account\}:log-group:$\{LogGroupName\}:log-stream:$\{LogStreamName\}`.
+    #   `arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}`.
     #   The CloudWatch Logs stream is created during the PROVISIONING phase
     #   of a build and the ARN will not be valid until it is created. For
     #   more information, see [Resources Defined by CloudWatch Logs][1].
@@ -3727,7 +3727,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] s3_logs_arn
     #   The ARN of S3 logs for a build project. Its format is
-    #   `arn:$\{Partition\}:s3:::$\{BucketName\}/$\{ObjectName\}`. For more
+    #   `arn:${Partition}:s3:::${BucketName}/${ObjectName}`. For more
     #   information, see [Resources Defined by Amazon S3][1].
     #
     #

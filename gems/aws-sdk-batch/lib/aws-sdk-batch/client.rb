@@ -1442,10 +1442,9 @@ module Aws::Batch
     # @option params [Array<String>] :job_definitions
     #   A list of up to 100 job definitions. Each entry in the list can either
     #   be an ARN in the format
-    #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
-    #   or a short version using the form
-    #   `$\{JobDefinitionName\}:$\{Revision\}`. This parameter can't be used
-    #   with other parameters.
+    #   `arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`
+    #   or a short version using the form `${JobDefinitionName}:${Revision}`.
+    #   This parameter can't be used with other parameters.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `DescribeJobDefinitions` in
@@ -2827,7 +2826,7 @@ module Aws::Batch
     #     the job definition that's used doesn't affect the sort order. When
     #     the `JOB_DEFINITION` filter is used and the ARN is used (which is in
     #     the form
-    #     `arn:$\{Partition\}:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`),
+    #     `arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`),
     #     the results include jobs that used the specified revision of the job
     #     definition. Asterisk (*) isn't supported when the ARN is used.
     #

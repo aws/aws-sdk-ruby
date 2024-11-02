@@ -1089,7 +1089,7 @@ module Aws::HealthLake
     end
 
     # A tag is a label consisting of a user-defined key and value. The form
-    # for tags is \\\{"Key", "Value"\\}
+    # for tags is \{"Key", "Value"}
     #
     # @!attribute [rw] key
     #   The key portion of a tag. Tag keys are case sensitive.

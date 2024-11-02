@@ -11619,7 +11619,7 @@ module Aws::Glue
     #     example, to set `inferSchema` to true, pass the following key
     #     value pair:
     #
-    #     `--additional-plan-options-map '\{"inferSchema":"true"\}'`
+    #     `--additional-plan-options-map '{"inferSchema":"true"}'`
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlanRequest AWS API Documentation
@@ -13937,8 +13937,8 @@ module Aws::Glue
     # @!attribute [rw] data_type_mapping
     #   Custom data type mapping that builds a mapping from a JDBC data type
     #   to an Glue data type. For example, the option
-    #   `"dataTypeMapping":\{"FLOAT":"STRING"\}` maps data fields of JDBC
-    #   type `FLOAT` into the Java `String` type by calling the
+    #   `"dataTypeMapping":{"FLOAT":"STRING"}` maps data fields of JDBC type
+    #   `FLOAT` into the Java `String` type by calling the
     #   `ResultSet.getString()` method of the driver, and uses it to build
     #   the Glue record. The `ResultSet` object is implemented by each
     #   driver, so the behavior is specific to the driver you use. Refer to
@@ -17085,17 +17085,17 @@ module Aws::Glue
     #
     #   For the children part, suppose you have the structure:
     #
-    #   `\{ "FromPath": "OuterStructure", "ToKey": "OuterStructure",
-    #   "ToType": "Struct", "Dropped": false, "Chidlren": [\{ "FromPath":
-    #   "inner", "ToKey": "inner", "ToType": "Double", "Dropped": false, \}]
-    #   \}`
+    #   `{ "FromPath": "OuterStructure", "ToKey": "OuterStructure",
+    #   "ToType": "Struct", "Dropped": false, "Chidlren": [{ "FromPath":
+    #   "inner", "ToKey": "inner", "ToType": "Double", "Dropped": false, }]
+    #   }`
     #
     #   You can specify a `Mapping` that looks like:
     #
-    #   `\{ "FromPath": "OuterStructure", "ToKey": "OuterStructure",
-    #   "ToType": "Struct", "Dropped": false, "Chidlren": [\{ "FromPath":
-    #   "inner", "ToKey": "inner", "ToType": "Double", "Dropped": false, \}]
-    #   \}`
+    #   `{ "FromPath": "OuterStructure", "ToKey": "OuterStructure",
+    #   "ToType": "Struct", "Dropped": false, "Chidlren": [{ "FromPath":
+    #   "inner", "ToKey": "inner", "ToType": "Double", "Dropped": false, }]
+    #   }`
     #   @return [Array<Types::Mapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Mapping AWS API Documentation

@@ -27661,7 +27661,7 @@ module Aws::RDS
     #   `aws:` or `rds:`. The string can only contain only the set of
     #   Unicode letters, digits, white-space, '\_', '.', ':', '/',
     #   '=', '+', '-', '@' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-@\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-@\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -27670,7 +27670,7 @@ module Aws::RDS
     #   with `aws:` or `rds:`. The string can only contain only the set of
     #   Unicode letters, digits, white-space, '\_', '.', ':', '/',
     #   '=', '+', '-', '@' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-@\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-@\]*)$").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag AWS API Documentation

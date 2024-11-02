@@ -24,7 +24,7 @@ module Aws::BedrockRuntime
     end
 
     # The model must request at least one tool (no text is generated). For
-    # example, `\{"any" : \{\}\}`.
+    # example, `{"any" : {}}`.
     #
     # @api private
     #
@@ -92,7 +92,7 @@ module Aws::BedrockRuntime
     end
 
     # The Model automatically decides if a tool should be called or whether
-    # to generate text instead. For example, `\{"auto" : \{\}\}`.
+    # to generate text instead. For example, `{"auto" : {}}`.
     #
     # @api private
     #
@@ -1901,8 +1901,8 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # The model must request a specific tool. For example, `\{"tool" :
-    # \{"name" : "Your tool name"\}\}`.
+    # The model must request a specific tool. For example, `{"tool" :
+    # {"name" : "Your tool name"}}`.
     #
     # <note markdown="1"> This field is only supported by Anthropic Claude 3 models.
     #

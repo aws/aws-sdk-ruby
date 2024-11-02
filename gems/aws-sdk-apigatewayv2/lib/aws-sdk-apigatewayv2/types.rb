@@ -42,9 +42,9 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] api_endpoint
     #   The URI of the API, of the form
-    #   \\\{api-id\\}.execute-api.\\\{region\\}.amazonaws.com. The stage
-    #   name is typically appended to this URI to form a complete path to a
-    #   deployed API stage.
+    #   \{api-id}.execute-api.\{region}.amazonaws.com. The stage name is
+    #   typically appended to this URI to form a complete path to a deployed
+    #   API stage.
     #   @return [String]
     #
     # @!attribute [rw] api_gateway_managed
@@ -86,8 +86,7 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_execute_api_endpoint
     #   Specifies whether clients can invoke your API by using the default
     #   execute-api endpoint. By default, clients can invoke your API with
-    #   the default
-    #   https://\\\{api\_id\\}.execute-api.\\\{region\\}.amazonaws.com
+    #   the default https://\{api\_id}.execute-api.\{region}.amazonaws.com
     #   endpoint. To require that clients use a custom domain name to invoke
     #   your API, disable the default endpoint.
     #   @return [Boolean]
@@ -108,9 +107,9 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] route_selection_expression
     #   The route selection expression for the API. For HTTP APIs, the
-    #   routeSelectionExpression must be $\\\{request.method\\}
-    #   $\\\{request.path\\}. If not provided, this will be the default for
-    #   HTTP APIs. This property is required for WebSocket APIs.
+    #   routeSelectionExpression must be $\{request.method}
+    #   $\{request.path}. If not provided, this will be the default for HTTP
+    #   APIs. This property is required for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -241,12 +240,12 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\{account\_id}*:function:*\{lambda\_function\_name}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\\\{region\\}*:lambda:path/*\\\{service\_api\\}*
-    #   , where <replaceable />
+    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}* , where
+    #   <replaceable />
     #
-    #   \\\{region\\} is the same as the region hosting the Lambda function,
+    #   \{region} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial /. For
     #   Lambda functions, this is usually of the form
@@ -492,9 +491,9 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] route_selection_expression
     #   The route selection expression for the API. For HTTP APIs, the
-    #   routeSelectionExpression must be $\\\{request.method\\}
-    #   $\\\{request.path\\}. If not provided, this will be the default for
-    #   HTTP APIs. This property is required for WebSocket APIs.
+    #   routeSelectionExpression must be $\{request.method}
+    #   $\{request.path}. If not provided, this will be the default for HTTP
+    #   APIs. This property is required for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -829,12 +828,12 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\{account\_id}*:function:*\{lambda\_function\_name}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\\\{region\\}*:lambda:path/*\\\{service\_api\\}*
-    #   , where <replaceable />
+    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}* , where
+    #   <replaceable />
     #
-    #   \\\{region\\} is the same as the region hosting the Lambda function,
+    #   \{region} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial /. For
     #   Lambda functions, this is usually of the form
@@ -1372,9 +1371,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -1520,9 +1519,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -1670,9 +1669,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -1783,13 +1782,12 @@ module Aws::ApiGatewayV2
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   method.response.header.\\\{name\\}, where \\\{name\\} is a valid and
-    #   unique header name. The mapped non-static value must match the
-    #   pattern of integration.response.header.\\\{name\\} or
-    #   integration.response.body.\\\{JSON-expression\\}, where \\\{name\\}
-    #   is a valid and unique response header name and
-    #   \\\{JSON-expression\\} is a valid JSON expression without the $
-    #   prefix.
+    #   method.response.header.\{name}, where \{name} is a valid and unique
+    #   header name. The mapped non-static value must match the pattern of
+    #   integration.response.header.\{name} or
+    #   integration.response.body.\{JSON-expression}, where \{name} is a
+    #   valid and unique response header name and \{JSON-expression} is a
+    #   valid JSON expression without the $ prefix.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_templates
@@ -1843,9 +1841,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -1924,9 +1922,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -3739,9 +3737,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -3866,9 +3864,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -4817,9 +4815,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -4947,12 +4945,12 @@ module Aws::ApiGatewayV2
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   method.response.header.\\\{name\\}, where name is a valid and unique
+    #   method.response.header.\{name}, where name is a valid and unique
     #   header name. The mapped non-static value must match the pattern of
-    #   integration.response.header.\\\{name\\} or
-    #   integration.response.body.\\\{JSON-expression\\}, where name is a
-    #   valid and unique response header name and JSON-expression is a valid
-    #   JSON expression without the $ prefix.
+    #   integration.response.header.\{name} or
+    #   integration.response.body.\{JSON-expression}, where name is a valid
+    #   and unique response header name and JSON-expression is a valid JSON
+    #   expression without the $ prefix.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_templates
@@ -5030,9 +5028,8 @@ module Aws::ApiGatewayV2
     #   The base domain of the identity provider that issues JSON Web
     #   Tokens. For example, an Amazon Cognito user pool has the following
     #   format:
-    #   https://cognito-idp.*\\\{region\\}*.amazonaws.com/*\\\{userPoolId\\}*
-    #   . Required for the JWT authorizer type. Supported only for HTTP
-    #   APIs.
+    #   https://cognito-idp.*\{region}*.amazonaws.com/*\{userPoolId}* .
+    #   Required for the JWT authorizer type. Supported only for HTTP APIs.
     #   @return [String]
     #
     class JWTConfiguration < Struct.new(
@@ -5803,9 +5800,9 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] route_selection_expression
     #   The route selection expression for the API. For HTTP APIs, the
-    #   routeSelectionExpression must be $\\\{request.method\\}
-    #   $\\\{request.path\\}. If not provided, this will be the default for
-    #   HTTP APIs. This property is required for WebSocket APIs.
+    #   routeSelectionExpression must be $\{request.method}
+    #   $\{request.path}. If not provided, this will be the default for HTTP
+    #   APIs. This property is required for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -6129,12 +6126,12 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\{account\_id}*:function:*\{lambda\_function\_name}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\\\{region\\}*:lambda:path/*\\\{service\_api\\}*
-    #   , where <replaceable />
+    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}* , where
+    #   <replaceable />
     #
-    #   \\\{region\\} is the same as the region hosting the Lambda function,
+    #   \{region} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial /. For
     #   Lambda functions, this is usually of the form
@@ -6653,9 +6650,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -6804,9 +6801,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -6955,9 +6952,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -7069,13 +7066,12 @@ module Aws::ApiGatewayV2
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   method.response.header.*\\\{name\\}* , where name is a valid and
-    #   unique header name. The mapped non-static value must match the
-    #   pattern of integration.response.header.*\\\{name\\}* or
-    #   integration.response.body.*\\\{JSON-expression\\}* , where
-    #   *\\\{name\\}* is a valid and unique response header name and
-    #   *\\\{JSON-expression\\}* is a valid JSON expression without the $
-    #   prefix.
+    #   method.response.header.*\{name}* , where name is a valid and unique
+    #   header name. The mapped non-static value must match the pattern of
+    #   integration.response.header.*\{name}* or
+    #   integration.response.body.*\{JSON-expression}* , where *\{name}* is
+    #   a valid and unique response header name and *\{JSON-expression}* is
+    #   a valid JSON expression without the $ prefix.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_templates
@@ -7132,9 +7128,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that
@@ -7214,9 +7210,9 @@ module Aws::ApiGatewayV2
     #   method request parameter value or static value that must be enclosed
     #   within single quotes and pre-encoded as required by the backend. The
     #   method request parameter value must match the pattern of
-    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
-    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
-    #   must be a valid and unique method request parameter name.
+    #   method.request.*\{location}*.*\{name}* , where *\{location}* is
+    #   querystring, path, or header; and *\{name}* must be a valid and
+    #   unique method request parameter name.
     #
     #   For HTTP API integrations with a specified integrationSubtype,
     #   request parameters are a key-value map specifying parameters that

@@ -914,11 +914,11 @@ module Aws::MigrationHub
     #
     # MAC\_ADDRESS
     #
-    # : `^([0-9A-Fa-f]\{2\}[:-])\{5\}([0-9A-Fa-f]\{2\})$`
+    # : `^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$`
     #
     # FQDN
     #
-    # : `^[^<>\{\}\\\\/?,=\\p\{Cntrl\}]\{1,256\}$`
+    # : `^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$`
     #
     # @!attribute [rw] type
     #   Type of resource.

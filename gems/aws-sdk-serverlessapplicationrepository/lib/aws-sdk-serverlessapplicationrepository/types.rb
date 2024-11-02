@@ -888,7 +888,7 @@ module Aws::ServerlessApplicationRepository
     #   The UUID returned by CreateCloudFormationTemplate.
     #
     #   Pattern:
-    #   \[0-9a-fA-F\]\\\{8\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{12\\}
+    #   \[0-9a-fA-F\]\{8}\\-\[0-9a-fA-F\]\{4}\\-\[0-9a-fA-F\]\{4}\\-\[0-9a-fA-F\]\{4}\\-\[0-9a-fA-F\]\{12}
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationChangeSetInput AWS API Documentation
@@ -1656,7 +1656,7 @@ module Aws::ServerlessApplicationRepository
     #   The UUID returned by CreateCloudFormationTemplate.
     #
     #   Pattern:
-    #   \[0-9a-fA-F\]\\\{8\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{12\\}
+    #   \[0-9a-fA-F\]\{8}\\-\[0-9a-fA-F\]\{4}\\-\[0-9a-fA-F\]\{4}\\-\[0-9a-fA-F\]\{4}\\-\[0-9a-fA-F\]\{12}
     #   @return [String]
     #
     # @!attribute [rw] template_url

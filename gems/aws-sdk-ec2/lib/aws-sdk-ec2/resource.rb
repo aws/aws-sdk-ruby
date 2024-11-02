@@ -1162,14 +1162,14 @@ module Aws::EC2
     #   Constraints: Up to 255 characters in length
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     # @option options [required, String] :group_name
     #   The name of the security group.
     #
     #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     # @option options [String] :vpc_id
     #   The ID of the VPC. Required for a nondefault VPC.
     # @option options [Array<Types::TagSpecification>] :tag_specifications

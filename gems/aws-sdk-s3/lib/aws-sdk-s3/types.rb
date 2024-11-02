@@ -16828,7 +16828,7 @@ module Aws::S3
     #
     # @!attribute [rw] simple_prefix
     #   To use the simple format for S3 keys for log objects. To specify
-    #   SimplePrefix format, set SimplePrefix to \\\{\\}.
+    #   SimplePrefix format, set SimplePrefix to \{}.
     #   @return [Types::SimplePrefix]
     #
     # @!attribute [rw] partitioned_prefix

@@ -1123,7 +1123,7 @@ module Aws::ServiceDiscovery
     #
     # @option params [Hash<String,String>] :query_parameters
     #   Filters to scope the results based on custom attributes for the
-    #   instance (for example, `\{version=v1, az=1a\}`). Only instances that
+    #   instance (for example, `{version=v1, az=1a}`). Only instances that
     #   match all the specified key-value pairs are returned.
     #
     # @option params [Hash<String,String>] :optional_parameters

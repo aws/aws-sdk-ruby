@@ -405,9 +405,9 @@ module Aws::RedshiftServerless
     #   with input parameters. The following is an example of a target
     #   action.
     #
-    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   `"{"CreateSnapshot": {"NamespaceName":
     #   "sampleNamespace","SnapshotName": "sampleSnapshot",
-    #   "retentionPeriod": "1"\}\}"`
+    #   "retentionPeriod": "1"}}"`
     #   @return [Types::TargetAction]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/CreateScheduledActionRequest AWS API Documentation
@@ -2139,11 +2139,11 @@ module Aws::RedshiftServerless
     #   The policy to create or update. For example, the following policy
     #   grants a user authorization to restore a snapshot.
     #
-    #   `"\{"Version": "2012-10-17", "Statement" : [\{ "Sid":
-    #   "AllowUserRestoreFromSnapshot", "Principal":\{"AWS":
-    #   ["739247239426"]\}, "Action":
+    #   `"{"Version": "2012-10-17", "Statement" : [{ "Sid":
+    #   "AllowUserRestoreFromSnapshot", "Principal":{"AWS":
+    #   ["739247239426"]}, "Action":
     #   ["redshift-serverless:RestoreFromSnapshot"] , "Effect":
-    #   "Allow" \}]\}"`
+    #   "Allow" }]}"`
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -2650,9 +2650,9 @@ module Aws::RedshiftServerless
     #   with input parameters. The following is an example of a target
     #   action.
     #
-    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   `"{"CreateSnapshot": {"NamespaceName":
     #   "sampleNamespace","SnapshotName": "sampleSnapshot",
-    #   "retentionPeriod": "1"\}\}"`
+    #   "retentionPeriod": "1"}}"`
     #   @return [Types::TargetAction]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ScheduledActionResponse AWS API Documentation
@@ -2995,9 +2995,9 @@ module Aws::RedshiftServerless
     # A JSON format string of the Amazon Redshift Serverless API operation
     # with input parameters. The following is an example of a target action.
     #
-    # `"\{"CreateSnapshot": \{"NamespaceName":
+    # `"{"CreateSnapshot": {"NamespaceName":
     # "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod":
-    # "1"\}\}"`
+    # "1"}}"`
     #
     # @note TargetAction is a union - when making an API calls you must set exactly one of the members.
     #
@@ -3303,9 +3303,9 @@ module Aws::RedshiftServerless
     #   with input parameters. The following is an example of a target
     #   action.
     #
-    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   `"{"CreateSnapshot": {"NamespaceName":
     #   "sampleNamespace","SnapshotName": "sampleSnapshot",
-    #   "retentionPeriod": "1"\}\}"`
+    #   "retentionPeriod": "1"}}"`
     #   @return [Types::TargetAction]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateScheduledActionRequest AWS API Documentation

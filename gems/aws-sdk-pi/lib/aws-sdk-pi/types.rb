@@ -323,7 +323,7 @@ module Aws::PI
     #   dimension group in the `GroupBy` parameter is `db.sql_tokenized`,
     #   you can specify per-SQL metrics to get the values for the top `N`
     #   SQL digests. The response syntax is as follows: `"AdditionalMetrics"
-    #   \: \{ "string" : "string" \}`.
+    #   \: { "string" : "string" }`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] partition_by
@@ -1717,7 +1717,7 @@ module Aws::PI
     #   `aws:` or `rds:`. The string can only contain only the set of
     #   Unicode letters, digits, white-space, '\_', '.', ':', '/',
     #   '=', '+', '-', '@' (Java regex:
-    #   `"^([\\p\{L\}\\p\{Z\}\\p\{N\}_.:/=+\\-@]*)$"`).
+    #   `"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"`).
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1726,7 +1726,7 @@ module Aws::PI
     #   with `aws:` or `rds:`. The string can only contain only the set of
     #   Unicode letters, digits, white-space, '\_', '.', ':', '/',
     #   '=', '+', '-', '@' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-@\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-@\]*)$").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/Tag AWS API Documentation

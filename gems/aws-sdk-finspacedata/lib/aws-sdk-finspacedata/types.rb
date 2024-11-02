@@ -332,9 +332,9 @@ module Aws::FinSpaceData
     #
     #   Here is an example of how you could specify the `sourceParams`:
     #
-    #   ` "sourceParams": \{ "s3SourcePath":
+    #   ` "sourceParams": { "s3SourcePath":
     #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
-    #   "sourceType": "S3" \} `
+    #   "sourceType": "S3" } `
     #
     #   The S3 path that you specify must allow the FinSpace role access. To
     #   do that, you first need to configure the IAM policy on S3 bucket.
@@ -365,13 +365,13 @@ module Aws::FinSpaceData
     #
     #   Here is an example of how you could specify the `formatParams`:
     #
-    #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
-    #   "separator": ",", "compression":"None" \} `
+    #   ` "formatParams": { "formatType": "CSV", "withHeader": "true",
+    #   "separator": ",", "compression":"None" } `
     #
     #   Note that if you only provide `formatType` as `CSV`, the rest of the
     #   attributes will automatically default to CSV values as following:
     #
-    #   ` \{ "withHeader": "true", "separator": "," \} `
+    #   ` { "withHeader": "true", "separator": "," } `
     #
     #   For more information about supported file formats, see [Supported
     #   Data Types and File Formats][1] in the FinSpace User Guide.
@@ -743,7 +743,7 @@ module Aws::FinSpaceData
     #   Here is an example of how you could specify the
     #   `s3DestinationExportFileFormatOptions`
     #
-    #   ` \{ "header": "true", "delimiter": ",", "compression": "gzip" \}`
+    #   ` { "header": "true", "delimiter": ",", "compression": "gzip" }`
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DataViewDestinationTypeParams AWS API Documentation
@@ -2139,10 +2139,10 @@ module Aws::FinSpaceData
     # Here is an example of how you could specify the
     # `PermissionGroupParams`:
     #
-    # ` \{ "permissionGroupId": "0r6fCRtSTUk4XPfXQe3M0g",
-    # "datasetPermissions": [ \{"permission": "ViewDatasetDetails"\},
-    # \{"permission": "AddDatasetData"\}, \{"permission":
-    # "EditDatasetMetadata"\}, \{"permission": "DeleteDataset"\} ] \} `
+    # ` { "permissionGroupId": "0r6fCRtSTUk4XPfXQe3M0g",
+    # "datasetPermissions": [ {"permission": "ViewDatasetDetails"},
+    # {"permission": "AddDatasetData"}, {"permission":
+    # "EditDatasetMetadata"}, {"permission": "DeleteDataset"} ] } `
     #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the `PermissionGroup`.
@@ -2342,9 +2342,9 @@ module Aws::FinSpaceData
     #
     #   Here is an example of how you could specify the `sourceParams`:
     #
-    #   ` "sourceParams": \{ "s3SourcePath":
+    #   ` "sourceParams": { "s3SourcePath":
     #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
-    #   "sourceType": "S3" \} `
+    #   "sourceType": "S3" } `
     #
     #   The S3 path that you specify must allow the FinSpace role access. To
     #   do that, you first need to configure the IAM policy on S3 bucket.
@@ -2375,13 +2375,13 @@ module Aws::FinSpaceData
     #
     #   Here is an example of how you could specify the `formatParams`:
     #
-    #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
-    #   "separator": ",", "compression":"None" \} `
+    #   ` "formatParams": { "formatType": "CSV", "withHeader": "true",
+    #   "separator": ",", "compression":"None" } `
     #
     #   Note that if you only provide `formatType` as `CSV`, the rest of the
     #   attributes will automatically default to CSV values as following:
     #
-    #   ` \{ "withHeader": "true", "separator": "," \} `
+    #   ` { "withHeader": "true", "separator": "," } `
     #
     #   For more information about supported file formats, see [Supported
     #   Data Types and File Formats][1] in the FinSpace User Guide.

@@ -1710,9 +1710,9 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] schema
-    #   For rules that you create, this is always `\{"Name":
-    #   "CloudWatchLogRule", "Version": 1\}`. For managed rules, this is
-    #   `\{"Name": "ServiceLogRule", "Version": 1\}`
+    #   For rules that you create, this is always `{"Name":
+    #   "CloudWatchLogRule", "Version": 1}`. For managed rules, this is
+    #   `{"Name": "ServiceLogRule", "Version": 1}`
     #   @return [String]
     #
     # @!attribute [rw] definition

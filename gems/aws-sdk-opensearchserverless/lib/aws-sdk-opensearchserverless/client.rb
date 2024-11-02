@@ -1565,8 +1565,8 @@ module Aws::OpenSearchServerless
     # Lists all OpenSearch Serverless collections. For more information, see
     # [Creating and managing Amazon OpenSearch Serverless collections][1].
     #
-    # <note markdown="1"> Make sure to include an empty request body \\\{\\} if you don't
-    # include any collection filters in the request.
+    # <note markdown="1"> Make sure to include an empty request body \{} if you don't include
+    # any collection filters in the request.
     #
     #  </note>
     #

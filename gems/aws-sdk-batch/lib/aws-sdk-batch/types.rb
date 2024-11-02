@@ -704,9 +704,9 @@ module Aws::Batch
     #   Key-value pair tags to be applied to Amazon EC2 resources that are
     #   launched in the compute environment. For Batch, these take the form
     #   of `"String1": "String2"`, where `String1` is the tag key and
-    #   `String2` is the tag value-for example, `\{ "Name": "Batch Instance
-    #   - C4OnDemand" \}`. This is helpful for recognizing your Batch
-    #   instances in the Amazon EC2 console. Updating these tags requires an
+    #   `String2` is the tag value-for example, `{ "Name": "Batch Instance -
+    #   C4OnDemand" }`. This is helpful for recognizing your Batch instances
+    #   in the Amazon EC2 console. Updating these tags requires an
     #   infrastructure update to the compute environment. For more
     #   information, see [Updating compute environments][1] in the *Batch
     #   User Guide*. These tags aren't seen when using the Batch
@@ -1100,10 +1100,10 @@ module Aws::Batch
     #   Key-value pair tags to be applied to Amazon EC2 resources that are
     #   launched in the compute environment. For Batch, these take the form
     #   of `"String1": "String2"`, where `String1` is the tag key and
-    #   `String2` is the tag value-for example, `\{ "Name": "Batch Instance
-    #   - C4OnDemand" \}`. This is helpful for recognizing your Batch
-    #   instances in the Amazon EC2 console. These tags aren't seen when
-    #   using the Batch `ListTagsForResource` API operation.
+    #   `String2` is the tag value-for example, `{ "Name": "Batch Instance -
+    #   C4OnDemand" }`. This is helpful for recognizing your Batch instances
+    #   in the Amazon EC2 console. These tags aren't seen when using the
+    #   Batch `ListTagsForResource` API operation.
     #
     #   When updating a compute environment, changing this setting requires
     #   an infrastructure update of the compute environment. For more
@@ -2574,10 +2574,10 @@ module Aws::Batch
     # @!attribute [rw] job_definitions
     #   A list of up to 100 job definitions. Each entry in the list can
     #   either be an ARN in the format
-    #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
+    #   `arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`
     #   or a short version using the form
-    #   `$\{JobDefinitionName\}:$\{Revision\}`. This parameter can't be
-    #   used with other parameters.
+    #   `${JobDefinitionName}:${Revision}`. This parameter can't be used
+    #   with other parameters.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -5716,7 +5716,7 @@ module Aws::Batch
     #     version of the job definition that's used doesn't affect the
     #     sort order. When the `JOB_DEFINITION` filter is used and the ARN
     #     is used (which is in the form
-    #     `arn:$\{Partition\}:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`),
+    #     `arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`),
     #     the results include jobs that used the specified revision of the
     #     job definition. Asterisk (*) isn't supported when the ARN is
     #     used.
@@ -7290,7 +7290,7 @@ module Aws::Batch
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: sudo docker version
-    #   `--format '\{\{.Server.APIVersion\}\}'`
+    #   `--format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
     #   register the logging drivers available on that instance with the
@@ -7406,7 +7406,7 @@ module Aws::Batch
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: sudo docker version
-    #   `--format '\{\{.Server.APIVersion\}\}'`
+    #   `--format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -7670,7 +7670,7 @@ module Aws::Batch
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: sudo docker version
-    #   `--format '\{\{.Server.APIVersion\}\}'`
+    #   `--format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
     #   register the logging drivers available on that instance with the
@@ -7787,7 +7787,7 @@ module Aws::Batch
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: sudo docker version
-    #   `--format '\{\{.Server.APIVersion\}\}'`
+    #   `--format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #

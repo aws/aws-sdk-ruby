@@ -11138,7 +11138,7 @@ module Aws::Redshift
     #   A JSON format string of the Amazon Redshift API operation with input
     #   parameters.
     #
-    #   "`\{"ResizeCluster":\{"NodeType":"ra3.4xlarge","ClusterIdentifier":"my-test-cluster","NumberOfNodes":3\}\}`".
+    #   "`{"ResizeCluster":{"NodeType":"ra3.4xlarge","ClusterIdentifier":"my-test-cluster","NumberOfNodes":3}}`".
     #   @return [Types::ScheduledActionType]
     #
     # @!attribute [rw] schedule

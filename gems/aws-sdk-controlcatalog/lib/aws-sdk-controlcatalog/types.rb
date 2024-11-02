@@ -203,11 +203,11 @@ module Aws::ControlCatalog
     #
     #   *Global format*
     #
-    #   `arn:\{PARTITION\}:controlcatalog:::control/\{CONTROL_CATALOG_OPAQUE_ID\}`
+    #   `arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}`
     #
     #   *Or Regional format*
     #
-    #   `arn:\{PARTITION\}:controltower:\{REGION\}::control/\{CONTROL_TOWER_OPAQUE_ID\}`
+    #   `arn:{PARTITION}:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}`
     #
     #   Here is a more general pattern that covers Amazon Web Services
     #   Control Tower and Control Catalog ARNs:

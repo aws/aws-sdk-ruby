@@ -101,9 +101,9 @@ module Aws::CleanRoomsML
     #   generating audience is stored. A valid data source is a JSON line
     #   file in the following format:
     #
-    #   `\{"user_id": "111111"\}`
+    #   `{"user_id": "111111"}`
     #
-    #   `\{"user_id": "222222"\}`
+    #   `{"user_id": "222222"}`
     #
     #   `...`
     #   @return [Types::S3ConfigMap]

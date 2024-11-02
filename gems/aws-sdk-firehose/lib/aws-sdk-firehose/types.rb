@@ -3196,8 +3196,8 @@ module Aws::Firehose
     #   Maps column names to JSON keys that aren't identical to the column
     #   names. This is useful when the JSON contains keys that are Hive
     #   keywords. For example, `timestamp` is a Hive keyword. If you have a
-    #   JSON key named `timestamp`, set this parameter to `\{"ts":
-    #   "timestamp"\}` to map this key to a column named `ts`.
+    #   JSON key named `timestamp`, set this parameter to `{"ts":
+    #   "timestamp"}` to map this key to a column named `ts`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/OpenXJsonSerDe AWS API Documentation

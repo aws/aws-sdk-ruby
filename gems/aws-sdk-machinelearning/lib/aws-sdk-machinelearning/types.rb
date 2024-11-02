@@ -284,7 +284,7 @@ module Aws::MachineLearning
     #     and rearrangement requirements for the `Datasource`.
     #
     #     Sample - `
-    #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
+    #     "{"splitting":{"percentBegin":10,"percentEnd":60}}"`
     #
     #
     #
@@ -377,7 +377,7 @@ module Aws::MachineLearning
     #     and rearrangement requirements for the `DataSource`.
     #
     #     Sample - `
-    #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
+    #     "{"splitting":{"percentBegin":10,"percentEnd":60}}"`
     #   @return [Types::RedshiftDataSpec]
     #
     # @!attribute [rw] role_arn
@@ -451,7 +451,7 @@ module Aws::MachineLearning
     #     and rearrangement requirements for the `Datasource`.
     #
     #     Sample - `
-    #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
+    #     "{"splitting":{"percentBegin":10,"percentEnd":60}}"`
     #   @return [Types::S3DataSpec]
     #
     # @!attribute [rw] compute_statistics
@@ -2802,11 +2802,11 @@ module Aws::MachineLearning
     #     datasource has 25 percent of the data, and the second one has 75
     #     percent of the data.
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":0,
-    #     "percentEnd":25\}\}`
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":0,
+    #     "percentEnd":25}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":0,
-    #     "percentEnd":25, "complement":"true"\}\}`
+    #     Datasource for training: `{"splitting":{"percentBegin":0,
+    #     "percentEnd":25, "complement":"true"}}`
     #
     #   * <b> <code>strategy</code> </b>
     #
@@ -2821,12 +2821,11 @@ module Aws::MachineLearning
     #     The following two `DataRearrangement` lines are examples of
     #     sequentially ordered training and evaluation datasources:
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":70,
-    #     "percentEnd":100, "strategy":"sequential"\}\}`
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":70,
+    #     "percentEnd":100, "strategy":"sequential"}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":70,
-    #     "percentEnd":100, "strategy":"sequential",
-    #     "complement":"true"\}\}`
+    #     Datasource for training: `{"splitting":{"percentBegin":70,
+    #     "percentEnd":100, "strategy":"sequential", "complement":"true"}}`
     #
     #     To randomly split the input data into the proportions indicated by
     #     the percentBegin and percentEnd parameters, set the `strategy`
@@ -2848,14 +2847,14 @@ module Aws::MachineLearning
     #     The following two `DataRearrangement` lines are examples of
     #     non-sequentially ordered training and evaluation datasources:
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":70,
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":70,
     #     "percentEnd":100, "strategy":"random",
-    #     "randomSeed"="s3://my_s3_path/bucket/file.csv"\}\}`
+    #     "randomSeed"="s3://my_s3_path/bucket/file.csv"}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":70,
+    #     Datasource for training: `{"splitting":{"percentBegin":70,
     #     "percentEnd":100, "strategy":"random",
     #     "randomSeed"="s3://my_s3_path/bucket/file.csv",
-    #     "complement":"true"\}\}`
+    #     "complement":"true"}}`
     #   @return [String]
     #
     # @!attribute [rw] data_schema
@@ -2870,7 +2869,7 @@ module Aws::MachineLearning
     #   pairs for their value. Use the following format to define your
     #   `DataSchema`.
     #
-    #   \\\{ "version": "1.0",
+    #   \{ "version": "1.0",
     #
     #   "recordAnnotationFieldName": "F1",
     #
@@ -2884,17 +2883,17 @@ module Aws::MachineLearning
     #
     #   "attributes": \[
     #
-    #   \\\{ "fieldName": "F1", "fieldType": "TEXT" \\}, \\\{
-    #   "fieldName": "F2", "fieldType": "NUMERIC" \\}, \\\{
-    #   "fieldName": "F3", "fieldType": "CATEGORICAL" \\}, \\\{
-    #   "fieldName": "F4", "fieldType": "NUMERIC" \\}, \\\{
-    #   "fieldName": "F5", "fieldType": "CATEGORICAL" \\}, \\\{
-    #   "fieldName": "F6", "fieldType": "TEXT" \\}, \\\{
-    #   "fieldName": "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE"
-    #   \\}, \\\{ "fieldName": "F8", "fieldType":
-    #   "WEIGHTED\_STRING\_SEQUENCE" \\} \],
+    #   \{ "fieldName": "F1", "fieldType": "TEXT" }, \{
+    #   "fieldName": "F2", "fieldType": "NUMERIC" }, \{
+    #   "fieldName": "F3", "fieldType": "CATEGORICAL" }, \{
+    #   "fieldName": "F4", "fieldType": "NUMERIC" }, \{
+    #   "fieldName": "F5", "fieldType": "CATEGORICAL" }, \{
+    #   "fieldName": "F6", "fieldType": "TEXT" }, \{ "fieldName":
+    #   "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE" }, \{
+    #   "fieldName": "F8", "fieldType": "WEIGHTED\_STRING\_SEQUENCE"
+    #   } \],
     #
-    #   "excludedVariableNames": \[ "F6" \] \\}
+    #   "excludedVariableNames": \[ "F6" \] }
     #   @return [String]
     #
     # @!attribute [rw] data_schema_uri
@@ -3147,11 +3146,11 @@ module Aws::MachineLearning
     #     datasource has 25 percent of the data, and the second one has 75
     #     percent of the data.
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":0,
-    #     "percentEnd":25\}\}`
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":0,
+    #     "percentEnd":25}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":0,
-    #     "percentEnd":25, "complement":"true"\}\}`
+    #     Datasource for training: `{"splitting":{"percentBegin":0,
+    #     "percentEnd":25, "complement":"true"}}`
     #
     #   * <b> <code>strategy</code> </b>
     #
@@ -3166,12 +3165,11 @@ module Aws::MachineLearning
     #     The following two `DataRearrangement` lines are examples of
     #     sequentially ordered training and evaluation datasources:
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":70,
-    #     "percentEnd":100, "strategy":"sequential"\}\}`
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":70,
+    #     "percentEnd":100, "strategy":"sequential"}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":70,
-    #     "percentEnd":100, "strategy":"sequential",
-    #     "complement":"true"\}\}`
+    #     Datasource for training: `{"splitting":{"percentBegin":70,
+    #     "percentEnd":100, "strategy":"sequential", "complement":"true"}}`
     #
     #     To randomly split the input data into the proportions indicated by
     #     the percentBegin and percentEnd parameters, set the `strategy`
@@ -3193,14 +3191,14 @@ module Aws::MachineLearning
     #     The following two `DataRearrangement` lines are examples of
     #     non-sequentially ordered training and evaluation datasources:
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":70,
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":70,
     #     "percentEnd":100, "strategy":"random",
-    #     "randomSeed"="s3://my_s3_path/bucket/file.csv"\}\}`
+    #     "randomSeed"="s3://my_s3_path/bucket/file.csv"}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":70,
+    #     Datasource for training: `{"splitting":{"percentBegin":70,
     #     "percentEnd":100, "strategy":"random",
     #     "randomSeed"="s3://my_s3_path/bucket/file.csv",
-    #     "complement":"true"\}\}`
+    #     "complement":"true"}}`
     #   @return [String]
     #
     # @!attribute [rw] data_schema
@@ -3215,7 +3213,7 @@ module Aws::MachineLearning
     #   pairs for their value. Use the following format to define your
     #   `DataSchema`.
     #
-    #   \\\{ "version": "1.0",
+    #   \{ "version": "1.0",
     #
     #   "recordAnnotationFieldName": "F1",
     #
@@ -3229,17 +3227,17 @@ module Aws::MachineLearning
     #
     #   "attributes": \[
     #
-    #   \\\{ "fieldName": "F1", "fieldType": "TEXT" \\}, \\\{
-    #   "fieldName": "F2", "fieldType": "NUMERIC" \\}, \\\{
-    #   "fieldName": "F3", "fieldType": "CATEGORICAL" \\}, \\\{
-    #   "fieldName": "F4", "fieldType": "NUMERIC" \\}, \\\{
-    #   "fieldName": "F5", "fieldType": "CATEGORICAL" \\}, \\\{
-    #   "fieldName": "F6", "fieldType": "TEXT" \\}, \\\{
-    #   "fieldName": "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE"
-    #   \\}, \\\{ "fieldName": "F8", "fieldType":
-    #   "WEIGHTED\_STRING\_SEQUENCE" \\} \],
+    #   \{ "fieldName": "F1", "fieldType": "TEXT" }, \{
+    #   "fieldName": "F2", "fieldType": "NUMERIC" }, \{
+    #   "fieldName": "F3", "fieldType": "CATEGORICAL" }, \{
+    #   "fieldName": "F4", "fieldType": "NUMERIC" }, \{
+    #   "fieldName": "F5", "fieldType": "CATEGORICAL" }, \{
+    #   "fieldName": "F6", "fieldType": "TEXT" }, \{ "fieldName":
+    #   "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE" }, \{
+    #   "fieldName": "F8", "fieldType": "WEIGHTED\_STRING\_SEQUENCE"
+    #   } \],
     #
-    #   "excludedVariableNames": \[ "F6" \] \\}
+    #   "excludedVariableNames": \[ "F6" \] }
     #   @return [String]
     #
     # @!attribute [rw] data_schema_uri
@@ -3402,11 +3400,11 @@ module Aws::MachineLearning
     #     datasource has 25 percent of the data, and the second one has 75
     #     percent of the data.
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":0,
-    #     "percentEnd":25\}\}`
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":0,
+    #     "percentEnd":25}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":0,
-    #     "percentEnd":25, "complement":"true"\}\}`
+    #     Datasource for training: `{"splitting":{"percentBegin":0,
+    #     "percentEnd":25, "complement":"true"}}`
     #
     #   * <b> <code>strategy</code> </b>
     #
@@ -3421,12 +3419,11 @@ module Aws::MachineLearning
     #     The following two `DataRearrangement` lines are examples of
     #     sequentially ordered training and evaluation datasources:
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":70,
-    #     "percentEnd":100, "strategy":"sequential"\}\}`
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":70,
+    #     "percentEnd":100, "strategy":"sequential"}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":70,
-    #     "percentEnd":100, "strategy":"sequential",
-    #     "complement":"true"\}\}`
+    #     Datasource for training: `{"splitting":{"percentBegin":70,
+    #     "percentEnd":100, "strategy":"sequential", "complement":"true"}}`
     #
     #     To randomly split the input data into the proportions indicated by
     #     the percentBegin and percentEnd parameters, set the `strategy`
@@ -3448,14 +3445,14 @@ module Aws::MachineLearning
     #     The following two `DataRearrangement` lines are examples of
     #     non-sequentially ordered training and evaluation datasources:
     #
-    #     Datasource for evaluation: `\{"splitting":\{"percentBegin":70,
+    #     Datasource for evaluation: `{"splitting":{"percentBegin":70,
     #     "percentEnd":100, "strategy":"random",
-    #     "randomSeed"="s3://my_s3_path/bucket/file.csv"\}\}`
+    #     "randomSeed"="s3://my_s3_path/bucket/file.csv"}}`
     #
-    #     Datasource for training: `\{"splitting":\{"percentBegin":70,
+    #     Datasource for training: `{"splitting":{"percentBegin":70,
     #     "percentEnd":100, "strategy":"random",
     #     "randomSeed"="s3://my_s3_path/bucket/file.csv",
-    #     "complement":"true"\}\}`
+    #     "complement":"true"}}`
     #   @return [String]
     #
     # @!attribute [rw] data_schema
@@ -3471,7 +3468,7 @@ module Aws::MachineLearning
     #   pairs for their value. Use the following format to define your
     #   `DataSchema`.
     #
-    #   \\\{ "version": "1.0",
+    #   \{ "version": "1.0",
     #
     #   "recordAnnotationFieldName": "F1",
     #
@@ -3485,17 +3482,17 @@ module Aws::MachineLearning
     #
     #   "attributes": \[
     #
-    #   \\\{ "fieldName": "F1", "fieldType": "TEXT" \\}, \\\{
-    #   "fieldName": "F2", "fieldType": "NUMERIC" \\}, \\\{
-    #   "fieldName": "F3", "fieldType": "CATEGORICAL" \\}, \\\{
-    #   "fieldName": "F4", "fieldType": "NUMERIC" \\}, \\\{
-    #   "fieldName": "F5", "fieldType": "CATEGORICAL" \\}, \\\{
-    #   "fieldName": "F6", "fieldType": "TEXT" \\}, \\\{
-    #   "fieldName": "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE"
-    #   \\}, \\\{ "fieldName": "F8", "fieldType":
-    #   "WEIGHTED\_STRING\_SEQUENCE" \\} \],
+    #   \{ "fieldName": "F1", "fieldType": "TEXT" }, \{
+    #   "fieldName": "F2", "fieldType": "NUMERIC" }, \{
+    #   "fieldName": "F3", "fieldType": "CATEGORICAL" }, \{
+    #   "fieldName": "F4", "fieldType": "NUMERIC" }, \{
+    #   "fieldName": "F5", "fieldType": "CATEGORICAL" }, \{
+    #   "fieldName": "F6", "fieldType": "TEXT" }, \{ "fieldName":
+    #   "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE" }, \{
+    #   "fieldName": "F8", "fieldType": "WEIGHTED\_STRING\_SEQUENCE"
+    #   } \],
     #
-    #   "excludedVariableNames": \[ "F6" \] \\}
+    #   "excludedVariableNames": \[ "F6" \] }
     #   @return [String]
     #
     # @!attribute [rw] data_schema_location_s3

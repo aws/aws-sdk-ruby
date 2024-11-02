@@ -3286,7 +3286,7 @@ module Aws::ElasticsearchService
     #   * **PLAIN\_TEXT**: Contain direct values such as "1", "True", or
     #     "c5.large.search".
     #   * **STRINGIFIED\_JSON**: Contain content in JSON format, such as
-    #     \\\{"Enabled":"True"\\}".
+    #     \{"Enabled":"True"}".
     #   @return [String]
     #
     class ModifyingProperties < Struct.new(

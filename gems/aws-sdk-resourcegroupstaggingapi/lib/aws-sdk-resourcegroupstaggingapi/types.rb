@@ -322,19 +322,19 @@ module Aws::ResourceGroupsTaggingAPI
     #     resources that are tagged with that key, with any or no value.
     #
     #     For example, for the following filters: `filter1=
-    #     \{keyA,\{value1\}\}`, `filter2=\{keyB,\{value2,value3,value4\}\}`,
-    #     `filter3= \{keyC\}`:
+    #     {keyA,{value1}}`, `filter2={keyB,{value2,value3,value4}}`,
+    #     `filter3= {keyC}`:
     #
-    #     * `GetResources(\{filter1\})` returns resources tagged with
+    #     * `GetResources({filter1})` returns resources tagged with
     #       `key1=value1`
     #
-    #     * `GetResources(\{filter2\})` returns resources tagged with
+    #     * `GetResources({filter2})` returns resources tagged with
     #       `key2=value2` or `key2=value3` or `key2=value4`
     #
-    #     * `GetResources(\{filter3\})` returns resources tagged with any
-    #       tag with the key `key3`, and with any or no value
+    #     * `GetResources({filter3})` returns resources tagged with any tag
+    #       with the key `key3`, and with any or no value
     #
-    #     * `GetResources(\{filter1,filter2,filter3\})` returns resources
+    #     * `GetResources({filter1,filter2,filter3})` returns resources
     #       tagged with `(key1=value1) and (key2=value2 or key2=value3 or
     #       key2=value4) and (key3, any or no value)`
     #   @return [Array<Types::TagFilter>]

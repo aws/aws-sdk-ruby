@@ -669,7 +669,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -704,8 +704,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -826,7 +826,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -1019,7 +1019,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -1054,8 +1054,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -1416,7 +1416,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -1451,8 +1451,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -1716,7 +1716,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -1751,8 +1751,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -2248,7 +2248,7 @@ module Aws::DynamoDB
     #   Developer Guide*.) To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -2283,8 +2283,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #

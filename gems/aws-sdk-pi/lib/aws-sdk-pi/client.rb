@@ -640,8 +640,8 @@ module Aws::PI
     #   Additional metrics for the top `N` dimension keys. If the specified
     #   dimension group in the `GroupBy` parameter is `db.sql_tokenized`, you
     #   can specify per-SQL metrics to get the values for the top `N` SQL
-    #   digests. The response syntax is as follows: `"AdditionalMetrics" : \{
-    #   "string" : "string" \}`.
+    #   digests. The response syntax is as follows: `"AdditionalMetrics" : {
+    #   "string" : "string" }`.
     #
     # @option params [Types::DimensionGroup] :partition_by
     #   For each dimension specified in `GroupBy`, specify a secondary

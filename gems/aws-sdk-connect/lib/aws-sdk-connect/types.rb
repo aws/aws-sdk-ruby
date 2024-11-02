@@ -309,8 +309,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_modified_time
@@ -1098,8 +1098,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, `\{ "Tags": \{"key1":"value1",
-    #   "key2":"value2"\} \}`.
+    #   resource. For example, `{ "Tags": {"key1":"value1", "key2":"value2"}
+    #   }`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AttachedFile AWS API Documentation
@@ -1893,8 +1893,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -1904,7 +1904,7 @@ module Aws::Connect
     #   see [Making retries safe with idempotent APIs][1].
     #
     #   Pattern:
-    #   `^[a-f0-9]\{8\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{12\}$`
+    #   `^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$`
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1990,8 +1990,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] phone_number_status
@@ -2500,8 +2500,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlow AWS API Documentation
@@ -2557,8 +2557,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowModule AWS API Documentation
@@ -3050,8 +3050,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAgentStatusRequest AWS API Documentation
@@ -3131,8 +3131,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -3220,8 +3220,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowRequest AWS API Documentation
@@ -3354,8 +3354,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationRequest AWS API Documentation
@@ -3414,8 +3414,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, `\{ "tags": \{"key1":"value1",
-    #   "key2":"value2"\} \}`.
+    #   resource. For example, `{ "tags": {"key1":"value1", "key2":"value2"}
+    #   }`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateInstanceRequest AWS API Documentation
@@ -3488,8 +3488,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationRequest AWS API Documentation
@@ -3765,8 +3765,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePromptRequest AWS API Documentation
@@ -3834,8 +3834,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQueueRequest AWS API Documentation
@@ -3893,8 +3893,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnectRequest AWS API Documentation
@@ -3971,8 +3971,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] agent_availability_timer
@@ -4115,8 +4115,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] allowed_access_control_tags
@@ -4300,8 +4300,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTrafficDistributionGroupRequest AWS API Documentation
@@ -4355,8 +4355,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseRequest AWS API Documentation
@@ -4408,8 +4408,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroupRequest AWS API Documentation
@@ -4507,8 +4507,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserRequest AWS API Documentation
@@ -4579,8 +4579,8 @@ module Aws::Connect
     # @!attribute [rw] tags
     #   The tags associated with the view resource (not specific to view
     #   version).These tags can be used to organize, track, or control
-    #   access for this resource. For example, \\\{ "tags":
-    #   \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #   access for this resource. For example, \{ "tags":
+    #   \{"key1":"value1", "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateViewRequest AWS API Documentation
@@ -4705,8 +4705,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateVocabularyRequest AWS API Documentation
@@ -7159,8 +7159,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Evaluation AWS API Documentation
@@ -7310,8 +7310,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationForm AWS API Documentation
@@ -8295,8 +8295,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, `\{ "Tags": \{"key1":"value1",
-    #   "key2":"value2"\} \}`.
+    #   resource. For example, `{ "Tags": {"key1":"value1", "key2":"value2"}
+    #   }`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetAttachedFileResponse AWS API Documentation
@@ -8478,8 +8478,8 @@ module Aws::Connect
     #     returned in MILLISECONDS. For example, if you get a response like
     #     this:
     #
-    #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS"
-    #     \}, "Value": 24113.0 `\\}
+    #     `{ "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" },
+    #     "Value": 24113.0 `}
     #
     #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
     #
@@ -10564,8 +10564,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTaskTemplateResponse AWS API Documentation
@@ -10664,8 +10664,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_modified_time
@@ -11088,8 +11088,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_modified_time
@@ -11285,8 +11285,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -14753,9 +14753,9 @@ module Aws::Connect
     #
     # @!attribute [rw] user_tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}. Amazon Connect users with the specified
-    #   tags will be notified.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }. Amazon Connect users with the specified tags
+    #   will be notified.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_ids
@@ -15366,8 +15366,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_modified_time
@@ -15610,8 +15610,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_modified_time
@@ -15830,8 +15830,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_modified_time
@@ -17005,8 +17005,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] number_of_associated_queues
@@ -17329,8 +17329,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Rule AWS API Documentation
@@ -18759,8 +18759,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] allowed_access_control_tags
@@ -18869,8 +18869,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchSummary AWS API Documentation
@@ -19217,8 +19217,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, `\{ "Tags": \{"key1":"value1",
-    #   "key2":"value2"\} \}`.
+    #   resource. For example, `{ "Tags": {"key1":"value1", "key2":"value2"}
+    #   }`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartAttachedFileUploadRequest AWS API Documentation
@@ -19395,8 +19395,8 @@ module Aws::Connect
     #   <note markdown="1"> The types `application/vnd.amazonaws.connect.message.interactive`
     #   and `application/vnd.amazonaws.connect.message.interactive.response`
     #   must be present in the SupportedMessagingContentTypes field of this
-    #   API in order to set `SegmentAttributes` as \\\{` "connect:Subtype":
-    #   \{"valueString" : "connect:Guide" \}\}`.
+    #   API in order to set `SegmentAttributes` as \{` "connect:Subtype":
+    #   {"valueString" : "connect:Guide" }}`.
     #
     #    </note>
     #   @return [Hash<String,Types::SegmentAttributeValue>]
@@ -20500,8 +20500,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the contact resource. For example, \\\{
-    #   "Tags": \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #   The tags to be assigned to the contact resource. For example, \{
+    #   "Tags": \{"key1":"value1", "key2":"value2"} }.
     #
     #   <note markdown="1"> Authorization is not supported by this tag.
     #
@@ -20528,8 +20528,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagResourceRequest AWS API Documentation
@@ -20918,8 +20918,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] is_default
@@ -23442,7 +23442,7 @@ module Aws::Connect
     #   primary email address.
     #
     #   Pattern:
-    #   `(?=^.\{0,265\}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]\{2,63\}`
+    #   `(?=^.{0,265}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}`
     #   @return [String]
     #
     # @!attribute [rw] mobile
@@ -23750,8 +23750,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] username
@@ -24070,8 +24070,8 @@ module Aws::Connect
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "Tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Vocabulary AWS API Documentation

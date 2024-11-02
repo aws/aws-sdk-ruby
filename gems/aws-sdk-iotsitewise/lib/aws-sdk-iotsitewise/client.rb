@@ -907,7 +907,7 @@ module Aws::IoTSiteWise
     #
     #  For each asset property, IoT SiteWise overwrites TQVs with duplicate
     # timestamps unless the newer TQV has a different quality. For example,
-    # if you store a TQV `\{T1, GOOD, V1\}`, then storing `\{T1, GOOD, V2\}`
+    # if you store a TQV `{T1, GOOD, V1}`, then storing `{T1, GOOD, V2}`
     # replaces the existing TQV.
     #
     # IoT SiteWise authorizes access to each `BatchPutAssetPropertyValue`

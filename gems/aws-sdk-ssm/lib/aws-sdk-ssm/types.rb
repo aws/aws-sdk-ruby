@@ -6025,7 +6025,7 @@ module Aws::SSM
     #
     #   **If you filter the response by using the OperationalData
     #   operator, specify a key-value pair by using the following JSON
-    #   format: \\\{"key":"key\_name","value":"a\_value"\\}
+    #   format: \{"key":"key\_name","value":"a\_value"}
     #   @return [Array<Types::OpsItemFilter>]
     #
     # @!attribute [rw] max_results
@@ -6339,7 +6339,7 @@ module Aws::SSM
     #   Each entry in the array contains:
     #
     #   * `PatchGroup`: string (between 1 and 256 characters. Regex:
-    #     `^([\p\{L\}\p\{Z\}\p\{N\}_.:/=+\-@]*)$)`
+    #     `^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)`
     #
     #   * `PatchBaselineIdentity`: A `PatchBaselineIdentity` element.
     #   @return [Array<Types::PatchGroupPatchBaselineMapping>]
@@ -9632,7 +9632,7 @@ module Aws::SSM
     #   Valid filter key values: ActivationIds \| AgentVersion \|
     #   AssociationStatus \| IamRole \| InstanceIds \| PingStatus \|
     #   PlatformTypes \| ResourceType \| SourceIds \| SourceTypes \|
-    #   "tag-key" \| "tag:`\{keyname\}`
+    #   "tag-key" \| "tag:`{keyname}`
     #
     #   * Valid values for the `AssociationStatus` filter key: Success \|
     #     Pending \| Failed
@@ -15278,8 +15278,8 @@ module Aws::SSM
     #   value limit of 8 KB.
     #
     #   <note markdown="1"> Parameters can't be referenced or nested in the values of other
-    #   parameters. You can't include `\{\{\}\}` or
-    #   `\{\{ssm:parameter-name\}\}` in a parameter value.
+    #   parameters. You can't include `{{}}` or `{{ssm:parameter-name}}` in
+    #   a parameter value.
     #
     #    </note>
     #   @return [String]
@@ -18476,7 +18476,7 @@ module Aws::SSM
     #   The parameters you want to update for the association. If you create
     #   a parameter using Parameter Store, a capability of Amazon Web
     #   Services Systems Manager, you can reference the parameter using
-    #   `\{\{ssm:parameter-name\}\}`.
+    #   `{{ssm:parameter-name}}`.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] document_version

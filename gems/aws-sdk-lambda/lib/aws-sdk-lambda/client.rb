@@ -3931,9 +3931,9 @@ module Aws::Lambda
     # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
-    #   You can enter the JSON directly. For example, `--payload '\{ "key":
-    #   "value" \}'`. You can also specify a file path. For example,
-    #   `--payload file://payload.json`.
+    #   You can enter the JSON directly. For example, `--payload '{ "key":
+    #   "value" }'`. You can also specify a file path. For example, `--payload
+    #   file://payload.json`.
     #
     # @option params [String] :qualifier
     #   Specify a version or alias to invoke a published version of the
@@ -4130,9 +4130,9 @@ module Aws::Lambda
     # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
-    #   You can enter the JSON directly. For example, `--payload '\{ "key":
-    #   "value" \}'`. You can also specify a file path. For example,
-    #   `--payload file://payload.json`.
+    #   You can enter the JSON directly. For example, `--payload '{ "key":
+    #   "value" }'`. You can also specify a file path. For example, `--payload
+    #   file://payload.json`.
     #
     # @return [Types::InvokeWithResponseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #

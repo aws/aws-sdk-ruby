@@ -2842,7 +2842,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `animal`
     #   attribute whose value is `cat`:
     #
-    #   `"equals": \{ "key": "animal", "value": "cat" \}`
+    #   `"equals": { "key": "animal", "value": "cat" }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] greater_than
@@ -2853,7 +2853,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `year`
     #   attribute whose value is greater than `1989`:
     #
-    #   `"greaterThan": \{ "key": "year", "value": 1989 \}`
+    #   `"greaterThan": { "key": "year", "value": 1989 }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] greater_than_or_equals
@@ -2864,7 +2864,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `year`
     #   attribute whose value is greater than or equal to `1989`:
     #
-    #   `"greaterThanOrEquals": \{ "key": "year", "value": 1989 \}`
+    #   `"greaterThanOrEquals": { "key": "year", "value": 1989 }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] in
@@ -2875,7 +2875,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `animal`
     #   attribute that is either `cat` or `dog`:
     #
-    #   `"in": \{ "key": "animal", "value": ["cat", "dog"] \}`
+    #   `"in": { "key": "animal", "value": ["cat", "dog"] }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] less_than
@@ -2886,7 +2886,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `year`
     #   attribute whose value is less than to `1989`.
     #
-    #   `"lessThan": \{ "key": "year", "value": 1989 \}`
+    #   `"lessThan": { "key": "year", "value": 1989 }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] less_than_or_equals
@@ -2897,7 +2897,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `year`
     #   attribute whose value is less than or equal to `1989`.
     #
-    #   `"lessThanOrEquals": \{ "key": "year", "value": 1989 \}`
+    #   `"lessThanOrEquals": { "key": "year", "value": 1989 }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] list_contains
@@ -2909,7 +2909,7 @@ module Aws::BedrockAgentRuntime
     #   attribute that is a list containing a `cat` member (for example
     #   `["dog", "cat"]`).
     #
-    #   `"listContains": \{ "key": "animals", "value": "cat" \}`
+    #   `"listContains": { "key": "animals", "value": "cat" }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] not_equals
@@ -2920,7 +2920,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources that don't contain
     #   an `animal` attribute whose value is `cat`.
     #
-    #   `"notEquals": \{ "key": "animal", "value": "cat" \}`
+    #   `"notEquals": { "key": "animal", "value": "cat" }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] not_in
@@ -2931,7 +2931,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources whose `animal`
     #   attribute is neither `cat` nor `dog`.
     #
-    #   `"notIn": \{ "key": "animal", "value": ["cat", "dog"] \}`
+    #   `"notIn": { "key": "animal", "value": ["cat", "dog"] }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] or_all
@@ -2949,7 +2949,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `animal`
     #   attribute starts with `ca` (for example, `cat` or `camel`).
     #
-    #   `"startsWith": \{ "key": "animal", "value": "ca" \}`
+    #   `"startsWith": { "key": "animal", "value": "ca" }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] string_contains
@@ -2961,14 +2961,14 @@ module Aws::BedrockAgentRuntime
     #     example would return data sources with an `animal` attribute that
     #     contains the substring `at` (for example `cat`).
     #
-    #     `"stringContains": \{ "key": "animal", "value": "at" \}`
+    #     `"stringContains": { "key": "animal", "value": "at" }`
     #
     #   * A list with a member that contains the `value` as a substring. The
     #     following example would return data sources with an `animals`
     #     attribute that is a list containing a member that contains the
     #     substring `at` (for example `["dog", "cat"]`).
     #
-    #     `"stringContains": \{ "key": "animals", "value": "at" \}`
+    #     `"stringContains": { "key": "animals", "value": "at" }`
     #   @return [Types::FilterAttribute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrievalFilter AWS API Documentation

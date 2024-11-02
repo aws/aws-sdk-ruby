@@ -302,7 +302,7 @@ module Aws::CustomerProfiles
     #   Mathematical expression that is performed on attribute items
     #   provided in the attribute list. Each element in the expression
     #   should follow the structure of
-    #   \\"\\\{ObjectTypeName.AttributeName\\}\\".
+    #   \\"\{ObjectTypeName.AttributeName}\\".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AttributeDetails AWS API Documentation

@@ -464,7 +464,7 @@ module Aws::QLDB
     #   Amazon Ion structure that has two fields: `strandId` and
     #   `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`.
+    #   For example: `{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}`.
     #   @return [Types::ValueHolder]
     #
     # @!attribute [rw] digest_tip_address
@@ -472,7 +472,7 @@ module Aws::QLDB
     #   a proof. An address is an Amazon Ion structure that has two fields:
     #   `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`.
+    #   For example: `{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}`.
     #   @return [Types::ValueHolder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/GetBlockRequest AWS API Documentation
@@ -546,7 +546,7 @@ module Aws::QLDB
     #   address is an Amazon Ion structure that has two fields: `strandId`
     #   and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`.
+    #   For example: `{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}`.
     #   @return [Types::ValueHolder]
     #
     # @!attribute [rw] document_id
@@ -559,7 +559,7 @@ module Aws::QLDB
     #   a proof. An address is an Amazon Ion structure that has two fields:
     #   `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`.
+    #   For example: `{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}`.
     #   @return [Types::ValueHolder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/GetRevisionRequest AWS API Documentation

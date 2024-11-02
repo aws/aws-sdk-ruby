@@ -2220,7 +2220,7 @@ module Aws::DataExchange
     #
     # @option params [String] :path
     #   URI path value for the API request. Alternatively, you can set the URI
-    #   path directly by invoking /v1/\\\{pathValue\\}.
+    #   path directly by invoking /v1/\{pathValue}.
     #
     # @option params [required, String] :revision_id
     #   Revision ID value for the API request.

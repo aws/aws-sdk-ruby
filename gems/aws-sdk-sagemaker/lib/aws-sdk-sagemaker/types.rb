@@ -1916,13 +1916,13 @@ module Aws::SageMaker
     #   the input data source to run an Autopilot job. You can input
     #   `FeatureAttributeNames` (optional) in JSON format as shown below:
     #
-    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #   `{ "FeatureAttributeNames":["col1", "col2", ...] }`.
     #
     #   You can also specify the data type of the feature (optional) in the
     #   format shown below:
     #
-    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
-    #   \} \}`
+    #   `{ "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... }
+    #   }`
     #
     #   <note markdown="1"> These column keys may not include the target column.
     #
@@ -2740,8 +2740,8 @@ module Aws::SageMaker
     #
     #     A `ManifestFile` should have the format shown below:
     #
-    #     `[ \{"prefix":
-    #     "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"\},
+    #     `[ {"prefix":
+    #     "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},
     #     `
     #
     #     `"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",`
@@ -2759,10 +2759,10 @@ module Aws::SageMaker
     #     Here is a minimal, single-record example of an
     #     `AugmentedManifestFile`:
     #
-    #     `\{"source-ref":
+    #     `{"source-ref":
     #     "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg",`
     #
-    #     `"label-metadata": \{"class-name": "cat"` \\}
+    #     `"label-metadata": {"class-name": "cat"` }
     #
     #     For more information on `AugmentedManifestFile`, see [Provide
     #     Dataset Metadata to Training Jobs with an Augmented Manifest
@@ -3862,14 +3862,14 @@ module Aws::SageMaker
     #   model container input in JSON Lines format. For example, if
     #   `FeaturesAttribute` is the JMESPath expression `'myfeatures'`, it
     #   extracts a list of features `[1,2,3]` from request data
-    #   `'\{"myfeatures":[1,2,3]\}'`.
+    #   `'{"myfeatures":[1,2,3]}'`.
     #   @return [String]
     #
     # @!attribute [rw] content_template
     #   A template string used to format a JSON record into an acceptable
     #   model container input. For example, a `ContentTemplate` string
-    #   `'\{"myfeatures":$features\}'` will format a list of features
-    #   `[1,2,3]` into the record string `'\{"myfeatures":[1,2,3]\}'`.
+    #   `'{"myfeatures":$features}'` will format a list of features
+    #   `[1,2,3]` into the record string `'{"myfeatures":[1,2,3]}'`.
     #   Required only when the model container input is in JSON Lines
     #   format.
     #   @return [String]
@@ -3930,7 +3930,7 @@ module Aws::SageMaker
     #   Lines format.
     #
     #   **Example**: If the model container output of a single request is
-    #   `'\{"predicted_label":1,"probability":0.6\}'`, then set
+    #   `'{"predicted_label":1,"probability":0.6}'`, then set
     #   `ProbabilityAttribute` to `'probability'`.
     #   @return [String]
     #
@@ -3939,7 +3939,7 @@ module Aws::SageMaker
     #   the model container output.
     #
     #   **Example**: If the model container output of a batch request is
-    #   `'\{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]\}'`,
+    #   `'{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]}'`,
     #   then set `LabelAttribute` to `'labels'` to extract the list of label
     #   headers `["cat","dog","fish"]`
     #   @return [String]
@@ -6208,7 +6208,7 @@ module Aws::SageMaker
     # @!attribute [rw] enable_iot_role_alias
     #   Whether to create an Amazon Web Services IoT Role Alias during
     #   device fleet creation. The name of the role alias generated will
-    #   match this pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #   match this pattern: "SageMakerEdge-\{DeviceFleetName}".
     #
     #   For example, if your device fleet is called "demo-fleet", the name
     #   of the role alias will be "SageMakerEdge-demo-fleet".
@@ -7793,8 +7793,8 @@ module Aws::SageMaker
     #   For named entity recognition jobs, in addition to `"labels"`, you
     #   must provide worker instructions in the label category configuration
     #   file using the `"instructions"` parameter: `"instructions":
-    #   \{"shortInstruction":"<h1>Add header</h1><p>Add Instructions</p>",
-    #   "fullInstruction":"<p>Add additional instructions.</p>"\}`. For
+    #   {"shortInstruction":"<h1>Add header</h1><p>Add Instructions</p>",
+    #   "fullInstruction":"<p>Add additional instructions.</p>"}`. For
     #   details and an example, see [Create a Named Entity Recognition
     #   Labeling Job (API) ][2].
     #
@@ -7803,14 +7803,14 @@ module Aws::SageMaker
     #   following format. Identify the labels you want to use by replacing
     #   `label_1`, `label_2`,`...`,`label_n` with your label categories.
     #
-    #   `\{ `
+    #   `{ `
     #
     #   `"document-version": "2018-11-28",`
     #
-    #   `"labels": [\{"label": "label_1"\},\{"label":
-    #   "label_2"\},...\{"label": "label_n"\}]`
+    #   `"labels": [{"label": "label_1"},{"label": "label_2"},...{"label":
+    #   "label_n"}]`
     #
-    #   `\}`
+    #   `}`
     #
     #   Note the following about the label category configuration file:
     #
@@ -15463,35 +15463,35 @@ module Aws::SageMaker
     #
     #   The file is a JSON structure in the following format:
     #
-    #   `\{`
+    #   `{`
     #
     #   ` "document-version": "2018-11-28"`
     #
     #   ` "labels": [`
     #
-    #   ` \{`
+    #   ` {`
     #
     #   ` "label": "label 1"`
     #
-    #   ` \},`
+    #   ` },`
     #
-    #   ` \{`
+    #   ` {`
     #
     #   ` "label": "label 2"`
     #
-    #   ` \},`
+    #   ` },`
     #
     #   ` ...`
     #
-    #   ` \{`
+    #   ` {`
     #
     #   ` "label": "label n"`
     #
-    #   ` \}`
+    #   ` }`
     #
     #   ` ]`
     #
-    #   `\}`
+    #   `}`
     #   @return [String]
     #
     # @!attribute [rw] stopping_conditions
@@ -20755,7 +20755,7 @@ module Aws::SageMaker
     #   the following filter searches for training jobs with an `"accuracy"`
     #   metric greater than `"0.9"`:
     #
-    #   `\{`
+    #   `{`
     #
     #   `"Name": "Metrics.accuracy",`
     #
@@ -20763,7 +20763,7 @@ module Aws::SageMaker
     #
     #   `"Value": "0.9"`
     #
-    #   `\}`
+    #   `}`
     #
     # HyperParameters
     #
@@ -20775,7 +20775,7 @@ module Aws::SageMaker
     #   the following filter is satisfied by training jobs with a
     #   `"learning_rate"` hyperparameter that is less than `"0.5"`:
     #
-    #   ` \{`
+    #   ` {`
     #
     #   ` "Name": "HyperParameters.learning_rate",`
     #
@@ -20783,7 +20783,7 @@ module Aws::SageMaker
     #
     #   ` "Value": "0.5"`
     #
-    #   ` \}`
+    #   ` }`
     #
     # Tags
     #
@@ -21345,7 +21345,7 @@ module Aws::SageMaker
     #   repository. The secret must have a staging label of `AWSCURRENT` and
     #   must be in the following format:
     #
-    #   `\{"username": UserName, "password": Password\}`
+    #   `{"username": UserName, "password": Password}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfig AWS API Documentation
@@ -21367,7 +21367,7 @@ module Aws::SageMaker
     #   repository. The secret must have a staging label of `AWSCURRENT` and
     #   must be in the following format:
     #
-    #   `\{"username": UserName, "password": Password\}`
+    #   `{"username": UserName, "password": Password}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfigForUpdate AWS API Documentation
@@ -24899,17 +24899,17 @@ module Aws::SageMaker
     #
     #     * Examples for one input:
     #
-    #       * If using the console, `\{"input":[1,1024,1024,3]\}`
+    #       * If using the console, `{"input":[1,1024,1024,3]}`
     #
-    #       * If using the CLI, `\{"input":[1,1024,1024,3]\}`
+    #       * If using the CLI, `{"input":[1,1024,1024,3]}`
     #
     #     * Examples for two inputs:
     #
-    #       * If using the console, `\{"data1": [1,28,28,1],
-    #         "data2":[1,28,28,1]\}`
+    #       * If using the console, `{"data1": [1,28,28,1],
+    #         "data2":[1,28,28,1]}`
     #
-    #       * If using the CLI, `\{"data1": [1,28,28,1],
-    #         "data2":[1,28,28,1]\}`
+    #       * If using the CLI, `{"data1": [1,28,28,1],
+    #         "data2":[1,28,28,1]}`
     #
     #   * `KERAS`: You must specify the name and shape (NCHW format) of
     #     expected data inputs using a dictionary format for your trained
@@ -24920,17 +24920,17 @@ module Aws::SageMaker
     #
     #     * Examples for one input:
     #
-    #       * If using the console, `\{"input_1":[1,3,224,224]\}`
+    #       * If using the console, `{"input_1":[1,3,224,224]}`
     #
-    #       * If using the CLI, `\{"input_1":[1,3,224,224]\}`
+    #       * If using the CLI, `{"input_1":[1,3,224,224]}`
     #
     #     * Examples for two inputs:
     #
-    #       * If using the console, `\{"input_1": [1,3,224,224],
-    #         "input_2":[1,3,224,224]\} `
+    #       * If using the console, `{"input_1": [1,3,224,224],
+    #         "input_2":[1,3,224,224]} `
     #
-    #       * If using the CLI, `\{"input_1": [1,3,224,224],
-    #         "input_2":[1,3,224,224]\}`
+    #       * If using the CLI, `{"input_1": [1,3,224,224],
+    #         "input_2":[1,3,224,224]}`
     #
     #   * `MXNET/ONNX/DARKNET`: You must specify the name and shape (NCHW
     #     format) of the expected data inputs in order using a dictionary
@@ -24939,17 +24939,17 @@ module Aws::SageMaker
     #
     #     * Examples for one input:
     #
-    #       * If using the console, `\{"data":[1,3,1024,1024]\}`
+    #       * If using the console, `{"data":[1,3,1024,1024]}`
     #
-    #       * If using the CLI, `\{"data":[1,3,1024,1024]\}`
+    #       * If using the CLI, `{"data":[1,3,1024,1024]}`
     #
     #     * Examples for two inputs:
     #
-    #       * If using the console, `\{"var1": [1,1,28,28],
-    #         "var2":[1,1,28,28]\} `
+    #       * If using the console, `{"var1": [1,1,28,28],
+    #         "var2":[1,1,28,28]} `
     #
-    #       * If using the CLI, `\{"var1": [1,1,28,28],
-    #         "var2":[1,1,28,28]\}`
+    #       * If using the CLI, `{"var1": [1,1,28,28],
+    #         "var2":[1,1,28,28]}`
     #
     #   * `PyTorch`: You can either specify the name and shape (NCHW format)
     #     of expected data inputs in order using a dictionary format for
@@ -24960,19 +24960,19 @@ module Aws::SageMaker
     #
     #     * Examples for one input in dictionary format:
     #
-    #       * If using the console, `\{"input0":[1,3,224,224]\}`
+    #       * If using the console, `{"input0":[1,3,224,224]}`
     #
-    #       * If using the CLI, `\{"input0":[1,3,224,224]\}`
+    #       * If using the CLI, `{"input0":[1,3,224,224]}`
     #
     #     * Example for one input in list format: `[[1,3,224,224]]`
     #
     #     * Examples for two inputs in dictionary format:
     #
-    #       * If using the console, `\{"input0":[1,3,224,224],
-    #         "input1":[1,3,224,224]\}`
+    #       * If using the console, `{"input0":[1,3,224,224],
+    #         "input1":[1,3,224,224]}`
     #
-    #       * If using the CLI, `\{"input0":[1,3,224,224],
-    #         "input1":[1,3,224,224]\} `
+    #       * If using the CLI, `{"input0":[1,3,224,224],
+    #         "input1":[1,3,224,224]} `
     #
     #     * Example for two inputs in list format: `[[1,3,224,224],
     #       [1,3,224,224]]`
@@ -24982,24 +24982,24 @@ module Aws::SageMaker
     #   `DataInputConfig` supports the following parameters for `CoreML`
     #   `TargetDevice` (ML Model format):
     #
-    #   * `shape`: Input shape, for example `\{"input_1": \{"shape":
-    #     [1,224,224,3]\}\}`. In addition to static input shapes, CoreML
+    #   * `shape`: Input shape, for example `{"input_1": {"shape":
+    #     [1,224,224,3]}}`. In addition to static input shapes, CoreML
     #     converter supports Flexible input shapes:
     #
     #     * Range Dimension. You can use the Range Dimension feature if you
     #       know the input shape will be within some specific interval in
-    #       that dimension, for example: `\{"input_1": \{"shape": ["1..10",
-    #       224, 224, 3]\}\}`
+    #       that dimension, for example: `{"input_1": {"shape": ["1..10",
+    #       224, 224, 3]}}`
     #
     #     * Enumerated shapes. Sometimes, the models are trained to work
     #       only on a select set of inputs. You can enumerate all supported
-    #       input shapes, for example: `\{"input_1": \{"shape": [[1, 224,
-    #       224, 3], [1, 160, 160, 3]]\}\}`
+    #       input shapes, for example: `{"input_1": {"shape": [[1, 224, 224,
+    #       3], [1, 160, 160, 3]]}}`
     #
     #   * `default_shape`: Default input shape. You can set a default shape
     #     during conversion for both Range Dimension and Enumerated Shapes.
-    #     For example `\{"input_1": \{"shape": ["1..10", 224, 224, 3],
-    #     "default_shape": [1, 224, 224, 3]\}\}`
+    #     For example `{"input_1": {"shape": ["1..10", 224, 224, 3],
+    #     "default_shape": [1, 224, 224, 3]}}`
     #
     #   * `type`: Input type. Allowed values: `Image` and `Tensor`. By
     #     default, the converter generates an ML Model with inputs of type
@@ -25019,35 +25019,35 @@ module Aws::SageMaker
     #
     #   * Tensor type input:
     #
-    #     * `"DataInputConfig": \{"input_1": \{"shape": [[1,224,224,3],
-    #       [1,160,160,3]], "default_shape": [1,224,224,3]\}\}`
+    #     * `"DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
+    #       [1,160,160,3]], "default_shape": [1,224,224,3]}}`
     #
     #     ^
     #
     #   * Tensor type input without input name (PyTorch):
     #
-    #     * `"DataInputConfig": [\{"shape": [[1,3,224,224], [1,3,160,160]],
-    #       "default_shape": [1,3,224,224]\}]`
+    #     * `"DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]],
+    #       "default_shape": [1,3,224,224]}]`
     #
     #     ^
     #
     #   * Image type input:
     #
-    #     * `"DataInputConfig": \{"input_1": \{"shape": [[1,224,224,3],
+    #     * `"DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
     #       [1,160,160,3]], "default_shape": [1,224,224,3], "type": "Image",
-    #       "bias": [-1,-1,-1], "scale": 0.007843137255\}\}`
+    #       "bias": [-1,-1,-1], "scale": 0.007843137255}}`
     #
-    #     * `"CompilerOptions": \{"class_labels":
-    #       "imagenet_labels_1000.txt"\}`
+    #     * `"CompilerOptions": {"class_labels":
+    #       "imagenet_labels_1000.txt"}`
     #
     #   * Image type input without input name (PyTorch):
     #
-    #     * `"DataInputConfig": [\{"shape": [[1,3,224,224], [1,3,160,160]],
+    #     * `"DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]],
     #       "default_shape": [1,3,224,224], "type": "Image", "bias":
-    #       [-1,-1,-1], "scale": 0.007843137255\}]`
+    #       [-1,-1,-1], "scale": 0.007843137255}]`
     #
-    #     * `"CompilerOptions": \{"class_labels":
-    #       "imagenet_labels_1000.txt"\}`
+    #     * `"CompilerOptions": {"class_labels":
+    #       "imagenet_labels_1000.txt"}`
     #
     #   Depending on the model format, `DataInputConfig` requires the
     #   following parameters for `ml_eia2` [OutputConfig:TargetDevice][2].
@@ -25058,18 +25058,18 @@ module Aws::SageMaker
     #     `OutputConfig:CompilerOptions` ][3] if the model does not use
     #     TensorFlow's default signature def key. For example:
     #
-    #     * `"DataInputConfig": \{"inputs": [1, 224, 224, 3]\}`
+    #     * `"DataInputConfig": {"inputs": [1, 224, 224, 3]}`
     #
-    #     * `"CompilerOptions": \{"signature_def_key": "serving_custom"\}`
+    #     * `"CompilerOptions": {"signature_def_key": "serving_custom"}`
     #
     #   * For TensorFlow models saved as a frozen graph, specify the input
     #     tensor names and shapes in `DataInputConfig` and the output tensor
     #     names for `output_names` in [ `OutputConfig:CompilerOptions` ][3].
     #     For example:
     #
-    #     * `"DataInputConfig": \{"input_tensor:0": [1, 224, 224, 3]\}`
+    #     * `"DataInputConfig": {"input_tensor:0": [1, 224, 224, 3]}`
     #
-    #     * `"CompilerOptions": \{"output_names": ["output_tensor:0"]\}`
+    #     * `"CompilerOptions": {"output_names": ["output_tensor:0"]}`
     #
     #
     #
@@ -34800,11 +34800,11 @@ module Aws::SageMaker
     # with a specific channel name and `S3Uri` prefix, define the following
     # filters:
     #
-    # * `'\{Name:"InputDataConfig.ChannelName", "Operator":"Equals",
-    #   "Value":"train"\}',`
+    # * `'{Name:"InputDataConfig.ChannelName", "Operator":"Equals",
+    #   "Value":"train"}',`
     #
-    # * `'\{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
-    #   "Operator":"Contains", "Value":"mybucket/catdata"\}'`
+    # * `'{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
+    #   "Operator":"Contains", "Value":"mybucket/catdata"}'`
     #
     #
     #
@@ -35677,42 +35677,41 @@ module Aws::SageMaker
     #
     #   * Raspberry Pi 3 Model B+
     #
-    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM_EABIHF"\},`
+    #     `"TargetPlatform": {"Os": "LINUX", "Arch": "ARM_EABIHF"},`
     #
-    #     ` "CompilerOptions": \{'mattr': ['+neon']\}`
+    #     ` "CompilerOptions": {'mattr': ['+neon']}`
     #
     #   * Jetson TX2
     #
-    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM64",
-    #     "Accelerator": "NVIDIA"\},`
+    #     `"TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator":
+    #     "NVIDIA"},`
     #
-    #     ` "CompilerOptions": \{'gpu-code': 'sm_62', 'trt-ver': '6.0.1',
-    #     'cuda-ver': '10.0'\}`
+    #     ` "CompilerOptions": {'gpu-code': 'sm_62', 'trt-ver': '6.0.1',
+    #     'cuda-ver': '10.0'}`
     #
     #   * EC2 m5.2xlarge instance OS
     #
-    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "X86_64",
-    #     "Accelerator": "NVIDIA"\},`
+    #     `"TargetPlatform": {"Os": "LINUX", "Arch": "X86_64",
+    #     "Accelerator": "NVIDIA"},`
     #
-    #     ` "CompilerOptions": \{'mcpu': 'skylake-avx512'\}`
+    #     ` "CompilerOptions": {'mcpu': 'skylake-avx512'}`
     #
     #   * RK3399
     #
-    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM64",
-    #     "Accelerator": "MALI"\}`
+    #     `"TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator":
+    #     "MALI"}`
     #
     #   * ARMv7 phone (CPU)
     #
-    #     `"TargetPlatform": \{"Os": "ANDROID", "Arch": "ARM_EABI"\},`
+    #     `"TargetPlatform": {"Os": "ANDROID", "Arch": "ARM_EABI"},`
     #
-    #     ` "CompilerOptions": \{'ANDROID_PLATFORM': 25, 'mattr':
-    #     ['+neon']\}`
+    #     ` "CompilerOptions": {'ANDROID_PLATFORM': 25, 'mattr': ['+neon']}`
     #
     #   * ARMv8 phone (CPU)
     #
-    #     `"TargetPlatform": \{"Os": "ANDROID", "Arch": "ARM64"\},`
+    #     `"TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"},`
     #
-    #     ` "CompilerOptions": \{'ANDROID_PLATFORM': 29\}`
+    #     ` "CompilerOptions": {'ANDROID_PLATFORM': 29}`
     #   @return [Types::TargetPlatform]
     #
     # @!attribute [rw] compiler_options
@@ -35730,25 +35729,24 @@ module Aws::SageMaker
     #
     #     * int64: Use either `"int64"` or `"long"`.
     #
-    #     For example, `\{"dtype" : "float32"\}`.
+    #     For example, `{"dtype" : "float32"}`.
     #
     #   * `CPU`: Compilation for CPU supports the following compiler
     #     options.
     #
-    #     * `mcpu`: CPU micro-architecture. For example, `\{'mcpu':
-    #       'skylake-avx512'\}`
+    #     * `mcpu`: CPU micro-architecture. For example, `{'mcpu':
+    #       'skylake-avx512'}`
     #
-    #     * `mattr`: CPU flags. For example, `\{'mattr': ['+neon',
-    #       '+vfpv4']\}`
+    #     * `mattr`: CPU flags. For example, `{'mattr': ['+neon',
+    #       '+vfpv4']}`
     #
     #   * `ARM`: Details of ARM CPU compilations.
     #
     #     * `NEON`: NEON is an implementation of the Advanced SIMD extension
     #       used in ARMv7 processors.
     #
-    #       For example, add `\{'mattr': ['+neon']\}` to the compiler
-    #       options if compiling for ARM 32-bit platform with the NEON
-    #       support.
+    #       For example, add `{'mattr': ['+neon']}` to the compiler options
+    #       if compiling for ARM 32-bit platform with the NEON support.
     #
     #   * `NVIDIA`: Compilation for NVIDIA GPU supports the following
     #     compiler options.
@@ -35759,17 +35757,17 @@ module Aws::SageMaker
     #
     #     * `cuda-ver`: Specifies the CUDA version in x.y format.
     #
-    #     For example, `\{'gpu-code': 'sm_72', 'trt-ver': '6.0.1',
-    #     'cuda-ver': '10.1'\}`
+    #     For example, `{'gpu-code': 'sm_72', 'trt-ver': '6.0.1',
+    #     'cuda-ver': '10.1'}`
     #
     #   * `ANDROID`: Compilation for the Android OS supports the following
     #     compiler options:
     #
     #     * `ANDROID_PLATFORM`: Specifies the Android API levels. Available
-    #       levels range from 21 to 29. For example, `\{'ANDROID_PLATFORM':
-    #       28\}`.
+    #       levels range from 21 to 29. For example, `{'ANDROID_PLATFORM':
+    #       28}`.
     #
-    #     * `mattr`: Add `\{'mattr': ['+neon']\}` to compiler options if
+    #     * `mattr`: Add `{'mattr': ['+neon']}` to compiler options if
     #       compiling for ARM 32-bit platform with NEON support.
     #
     #   * `INFERENTIA`: Compilation for target ml\_inf1 uses compiler
@@ -35783,8 +35781,8 @@ module Aws::SageMaker
     #     `TargetDevice` supports the following compiler options:
     #
     #     * `class_labels`: Specifies the classification labels file name
-    #       inside input tar.gz file. For example, `\{"class_labels":
-    #       "imagenet_labels_1000.txt"\}`. Labels inside the txt file should
+    #       inside input tar.gz file. For example, `{"class_labels":
+    #       "imagenet_labels_1000.txt"}`. Labels inside the txt file should
     #       be separated by newlines.
     #
     #     ^
@@ -39950,7 +39948,7 @@ module Aws::SageMaker
     #
     #     The following code example shows a valid manifest format:
     #
-    #     `[ \{"prefix": "s3://customer_bucket/some/prefix/"\},`
+    #     `[ {"prefix": "s3://customer_bucket/some/prefix/"},`
     #
     #     ` "relative/path/to/custdata-1",`
     #
@@ -42102,13 +42100,13 @@ module Aws::SageMaker
     #   the input data source to run an Autopilot job V2. You can input
     #   `FeatureAttributeNames` (optional) in JSON format as shown below:
     #
-    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #   `{ "FeatureAttributeNames":["col1", "col2", ...] }`.
     #
     #   You can also specify the data type of the feature (optional) in the
     #   format shown below:
     #
-    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
-    #   \} \}`
+    #   `{ "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... }
+    #   }`
     #
     #   <note markdown="1"> These column keys may not include the target column.
     #
@@ -42296,7 +42294,7 @@ module Aws::SageMaker
     #
     #   * `ANDROID`: Android operating systems. Android API level can be
     #     specified using the `ANDROID_PLATFORM` compiler option. For
-    #     example, `"CompilerOptions": \{'ANDROID_PLATFORM': 28\}`
+    #     example, `"CompilerOptions": {'ANDROID_PLATFORM': 28}`
     #   @return [String]
     #
     # @!attribute [rw] arch
@@ -42487,8 +42485,8 @@ module Aws::SageMaker
     #
     #   Here is an example where all four hyperparameters are configured.
     #
-    #   `\{ "epochCount":"5", "learningRate":"0.5", "batchSize": "32",
-    #   "learningRateWarmupSteps": "10" \}`
+    #   `{ "epochCount":"5", "learningRate":"0.5", "batchSize": "32",
+    #   "learningRateWarmupSteps": "10" }`
     #
     #
     #
@@ -42723,13 +42721,13 @@ module Aws::SageMaker
     #   You can input `FeatureAttributeNames` (optional) in JSON format as
     #   shown below:
     #
-    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #   `{ "FeatureAttributeNames":["col1", "col2", ...] }`.
     #
     #   You can also specify the data type of the feature (optional) in the
     #   format shown below:
     #
-    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
-    #   \} \}`
+    #   `{ "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... }
+    #   }`
     #
     #   Autopilot supports the following data types: `numeric`,
     #   `categorical`, `text`, and `datetime`.
@@ -44252,7 +44250,7 @@ module Aws::SageMaker
     #     The manifest is an S3 object which is a JSON file with the
     #     following format:
     #
-    #     `[ \{"prefix": "s3://customer_bucket/some/prefix/"\},`
+    #     `[ {"prefix": "s3://customer_bucket/some/prefix/"},`
     #
     #     `"relative/path/to/custdata-1",`
     #
@@ -45281,7 +45279,7 @@ module Aws::SageMaker
     #   repository. The secret must have a staging label of `AWSCURRENT` and
     #   must be in the following format:
     #
-    #   `\{"username": UserName, "password": Password\}`
+    #   `{"username": UserName, "password": Password}`
     #   @return [Types::GitConfigForUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepositoryInput AWS API Documentation
@@ -45363,7 +45361,7 @@ module Aws::SageMaker
     # @!attribute [rw] enable_iot_role_alias
     #   Whether to create an Amazon Web Services IoT Role Alias during
     #   device fleet creation. The name of the role alias generated will
-    #   match this pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #   match this pattern: "SageMakerEdge-\{DeviceFleetName}".
     #
     #   For example, if your device fleet is called "demo-fleet", the name
     #   of the role alias will be "SageMakerEdge-demo-fleet".

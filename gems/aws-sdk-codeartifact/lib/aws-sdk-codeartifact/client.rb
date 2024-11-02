@@ -3325,7 +3325,7 @@ module Aws::CodeArtifact
     # @option params [required, String] :asset_name
     #   The name of the asset to publish. Asset names can include Unicode
     #   letters and numbers, and the following special characters: `` ~ ! @ ^
-    #   & ( ) - ` _ + [ ] \{ \} ; , . ` ``
+    #   & ( ) - ` _ + [ ] { } ; , . ` ``
     #
     # @option params [required, String] :asset_sha256
     #   The SHA256 hash of the `assetContent` to publish. This value must be

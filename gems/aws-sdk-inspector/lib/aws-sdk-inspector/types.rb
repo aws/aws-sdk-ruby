@@ -824,10 +824,10 @@ module Aws::Inspector
 
     # @!attribute [rw] resource_group_tags
     #   A collection of keys and an array of possible values,
-    #   '\[\\\{"key":"key1","values":\["Value1","Value2"\]\\},\\\{"key":"Key2","values":\["Value3"\]\\}\]'.
+    #   '\[\{"key":"key1","values":\["Value1","Value2"\]},\{"key":"Key2","values":\["Value3"\]}\]'.
     #
     #   For
-    #   example,'\[\\\{"key":"Name","values":\["TestEC2Instance"\]\\}\]'.
+    #   example,'\[\{"key":"Name","values":\["TestEC2Instance"\]}\]'.
     #   @return [Array<Types::ResourceGroupTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroupRequest AWS API Documentation

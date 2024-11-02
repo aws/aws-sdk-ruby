@@ -81,8 +81,8 @@ module Aws::IoT1ClickProjects
     #
     # @!attribute [rw] tags
     #   Optional tags (metadata key/value pairs) to be associated with the
-    #   project. For example, `\{ \{"key1": "value1", "key2": "value2"\}
-    #   \}`. For more information, see [AWS Tagging Strategies][1].
+    #   project. For example, `{ {"key1": "value1", "key2": "value2"} }`.
+    #   For more information, see [AWS Tagging Strategies][1].
     #
     #
     #

@@ -2504,7 +2504,7 @@ module Aws::SageMaker
     # @option params [Boolean] :enable_iot_role_alias
     #   Whether to create an Amazon Web Services IoT Role Alias during device
     #   fleet creation. The name of the role alias generated will match this
-    #   pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #   pattern: "SageMakerEdge-\{DeviceFleetName}".
     #
     #   For example, if your device fleet is called "demo-fleet", the name
     #   of the role alias will be "SageMakerEdge-demo-fleet".
@@ -5533,24 +5533,24 @@ module Aws::SageMaker
     #   For named entity recognition jobs, in addition to `"labels"`, you must
     #   provide worker instructions in the label category configuration file
     #   using the `"instructions"` parameter: `"instructions":
-    #   \{"shortInstruction":"<h1>Add header</h1><p>Add Instructions</p>",
-    #   "fullInstruction":"<p>Add additional instructions.</p>"\}`. For
-    #   details and an example, see [Create a Named Entity Recognition
-    #   Labeling Job (API) ][2].
+    #   {"shortInstruction":"<h1>Add header</h1><p>Add Instructions</p>",
+    #   "fullInstruction":"<p>Add additional instructions.</p>"}`. For details
+    #   and an example, see [Create a Named Entity Recognition Labeling Job
+    #   (API) ][2].
     #
     #   For all other [built-in task types][3] and [custom tasks][4], your
     #   label category configuration file must be a JSON file in the following
     #   format. Identify the labels you want to use by replacing `label_1`,
     #   `label_2`,`...`,`label_n` with your label categories.
     #
-    #   `\{ `
+    #   `{ `
     #
     #   `"document-version": "2018-11-28",`
     #
-    #   `"labels": [\{"label": "label_1"\},\{"label":
-    #   "label_2"\},...\{"label": "label_n"\}]`
+    #   `"labels": [{"label": "label_1"},{"label": "label_2"},...{"label":
+    #   "label_n"}]`
     #
-    #   `\}`
+    #   `}`
     #
     #   Note the following about the label category configuration file:
     #
@@ -22848,7 +22848,7 @@ module Aws::SageMaker
     #  For example, if `ListTrainingJobs` is invoked with the following
     # parameters:
     #
-    #  `\{ ... MaxResults: 100, StatusEquals: InProgress ... \}`
+    #  `{ ... MaxResults: 100, StatusEquals: InProgress ... }`
     #
     #  First, 100 trainings jobs with any status, including those other than
     # `InProgress`, are selected (sorted according to the creation time,
@@ -24994,7 +24994,7 @@ module Aws::SageMaker
     #   The secret must have a staging label of `AWSCURRENT` and must be in
     #   the following format:
     #
-    #   `\{"username": UserName, "password": Password\}`
+    #   `{"username": UserName, "password": Password}`
     #
     # @return [Types::UpdateCodeRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -25081,7 +25081,7 @@ module Aws::SageMaker
     # @option params [Boolean] :enable_iot_role_alias
     #   Whether to create an Amazon Web Services IoT Role Alias during device
     #   fleet creation. The name of the role alias generated will match this
-    #   pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #   pattern: "SageMakerEdge-\{DeviceFleetName}".
     #
     #   For example, if your device fleet is called "demo-fleet", the name
     #   of the role alias will be "SageMakerEdge-demo-fleet".

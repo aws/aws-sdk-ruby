@@ -542,7 +542,7 @@ module Aws::ConnectParticipant
     #   of a JSON string.
     #
     #   Sample Content:
-    #   "\\\{\\"messageId\\":\\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\\"\\}"
+    #   "\{\\"messageId\\":\\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\\"}"
     #   @return [String]
     #
     # @!attribute [rw] client_token

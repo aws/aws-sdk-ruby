@@ -3025,8 +3025,8 @@ module Aws::MediaPackageV2
     #   sufficient permissions policy to allow access to the specific key
     #   retrieval URL. Get this from your DRM solution provider.
     #
-    #   Valid format: `arn:aws:iam::\{accountID\}:role/\{name\}`. The
-    #   following example shows a role ARN:
+    #   Valid format: `arn:aws:iam::{accountID}:role/{name}`. The following
+    #   example shows a role ARN:
     #   `arn:aws:iam::444455556666:role/SpekeAccess`
     #   @return [String]
     #

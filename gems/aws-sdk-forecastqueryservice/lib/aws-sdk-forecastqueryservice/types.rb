@@ -122,7 +122,7 @@ module Aws::ForecastQueryService
     #   example, to get the forecast for `client_21` in the electricity
     #   usage dataset, specify the following:
     #
-    #   `\{"item_id" : "client_21"\}`
+    #   `{"item_id" : "client_21"}`
     #
     #   To get the full forecast, use the [CreateForecastExportJob][1]
     #   operation.
@@ -183,7 +183,7 @@ module Aws::ForecastQueryService
     #   example, to get the forecast for `client_21` in the electricity
     #   usage dataset, specify the following:
     #
-    #   `\{"item_id" : "client_21"\}`
+    #   `{"item_id" : "client_21"}`
     #
     #   To get the full what-if forecast, use the
     #   [CreateForecastExportJob][1] operation.

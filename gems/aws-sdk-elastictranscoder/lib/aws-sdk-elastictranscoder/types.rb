@@ -432,22 +432,21 @@ module Aws::ElasticTranscoder
     #
     # @!attribute [rw] pattern
     #   The prefix for caption filenames, in the form
-    #   *description*-`\{language\}`, where:
+    #   *description*-`{language}`, where:
     #
     #   * *description* is a description of the video.
     #
-    #   * `\{language\}` is a literal value that Elastic Transcoder replaces
+    #   * `{language}` is a literal value that Elastic Transcoder replaces
     #     with the two- or three-letter code for the language of the caption
     #     in the output file names.
     #
-    #   If you don't include `\{language\}` in the file name pattern,
-    #   Elastic Transcoder automatically appends "`\{language\}`" to the
-    #   value that you specify for the description. In addition, Elastic
-    #   Transcoder automatically appends the count to the end of the segment
-    #   files.
+    #   If you don't include `{language}` in the file name pattern, Elastic
+    #   Transcoder automatically appends "`{language}`" to the value that
+    #   you specify for the description. In addition, Elastic Transcoder
+    #   automatically appends the count to the end of the segment files.
     #
     #   For example, suppose you're transcoding into srt format. When you
-    #   enter "Sydney-\\\{language\\}-sunrise", and the language of the
+    #   enter "Sydney-\{language}-sunrise", and the language of the
     #   captions is English (en), the name of the first caption file is be
     #   Sydney-en-sunrise00000.srt.
     #   @return [String]
@@ -598,25 +597,25 @@ module Aws::ElasticTranscoder
     #   information that you want to include in the file name for each
     #   thumbnail. You can specify the following values in any sequence:
     #
-    #   * <b> <code>\{count\}</code> (Required)</b>: If you want to create
-    #     thumbnails, you must include `\{count\}` in the `ThumbnailPattern`
-    #     object. Wherever you specify `\{count\}`, Elastic Transcoder adds
-    #     a five-digit sequence number (beginning with **00001**) to
-    #     thumbnail file names. The number indicates where a given thumbnail
-    #     appears in the sequence of thumbnails for a transcoded file.
+    #   * <b> <code>{count}</code> (Required)</b>: If you want to create
+    #     thumbnails, you must include `{count}` in the `ThumbnailPattern`
+    #     object. Wherever you specify `{count}`, Elastic Transcoder adds a
+    #     five-digit sequence number (beginning with **00001**) to thumbnail
+    #     file names. The number indicates where a given thumbnail appears
+    #     in the sequence of thumbnails for a transcoded file.
     #
-    #     If you specify a literal value and/or `\{resolution\}` but you
-    #     omit `\{count\}`, Elastic Transcoder returns a validation error
-    #     and does not create the job.
+    #     If you specify a literal value and/or `{resolution}` but you omit
+    #     `{count}`, Elastic Transcoder returns a validation error and does
+    #     not create the job.
     #
     #   * **Literal values (Optional)**: You can specify literal values
     #     anywhere in the `ThumbnailPattern` object. For example, you can
     #     include them as a file name prefix or as a delimiter between
-    #     `\{resolution\}` and `\{count\}`.
+    #     `{resolution}` and `{count}`.
     #
-    #   * <b> <code>\{resolution\}</code> (Optional)</b>: If you want
-    #     Elastic Transcoder to include the resolution in the file name,
-    #     include `\{resolution\}` in the `ThumbnailPattern` object.
+    #   * <b> <code>{resolution}</code> (Optional)</b>: If you want Elastic
+    #     Transcoder to include the resolution in the file name, include
+    #     `{resolution}` in the `ThumbnailPattern` object.
     #
     #   When creating thumbnails, Elastic Transcoder automatically saves the
     #   files in the format (.jpg or .png) that appears in the preset that
@@ -1863,25 +1862,25 @@ module Aws::ElasticTranscoder
     #   information that you want to include in the file name for each
     #   thumbnail. You can specify the following values in any sequence:
     #
-    #   * <b> <code>\{count\}</code> (Required)</b>: If you want to create
-    #     thumbnails, you must include `\{count\}` in the `ThumbnailPattern`
-    #     object. Wherever you specify `\{count\}`, Elastic Transcoder adds
-    #     a five-digit sequence number (beginning with **00001**) to
-    #     thumbnail file names. The number indicates where a given thumbnail
-    #     appears in the sequence of thumbnails for a transcoded file.
+    #   * <b> <code>{count}</code> (Required)</b>: If you want to create
+    #     thumbnails, you must include `{count}` in the `ThumbnailPattern`
+    #     object. Wherever you specify `{count}`, Elastic Transcoder adds a
+    #     five-digit sequence number (beginning with **00001**) to thumbnail
+    #     file names. The number indicates where a given thumbnail appears
+    #     in the sequence of thumbnails for a transcoded file.
     #
-    #     If you specify a literal value and/or `\{resolution\}` but you
-    #     omit `\{count\}`, Elastic Transcoder returns a validation error
-    #     and does not create the job.
+    #     If you specify a literal value and/or `{resolution}` but you omit
+    #     `{count}`, Elastic Transcoder returns a validation error and does
+    #     not create the job.
     #
     #   * **Literal values (Optional)**: You can specify literal values
     #     anywhere in the `ThumbnailPattern` object. For example, you can
     #     include them as a file name prefix or as a delimiter between
-    #     `\{resolution\}` and `\{count\}`.
+    #     `{resolution}` and `{count}`.
     #
-    #   * <b> <code>\{resolution\}</code> (Optional)</b>: If you want
-    #     Elastic Transcoder to include the resolution in the file name,
-    #     include `\{resolution\}` in the `ThumbnailPattern` object.
+    #   * <b> <code>{resolution}</code> (Optional)</b>: If you want Elastic
+    #     Transcoder to include the resolution in the file name, include
+    #     `{resolution}` in the `ThumbnailPattern` object.
     #
     #   When creating thumbnails, Elastic Transcoder automatically saves the
     #   files in the format (.jpg or .png) that appears in the preset that

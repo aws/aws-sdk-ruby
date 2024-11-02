@@ -2210,7 +2210,7 @@ module Aws::AccessAnalyzer
     #   actions that support resource level granularity in policies.
     #
     #   For example, in the resource section of a policy, you can receive a
-    #   placeholder such as `"Resource":"arn:aws:s3:::$\{BucketName\}"`
+    #   placeholder such as `"Resource":"arn:aws:s3:::${BucketName}"`
     #   instead of `"*"`.
     #   @return [Boolean]
     #

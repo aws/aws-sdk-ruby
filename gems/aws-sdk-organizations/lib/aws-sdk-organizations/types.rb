@@ -2521,7 +2521,7 @@ module Aws::Organizations
     #   to invite to join your organization. This is a JSON object that
     #   contains the following elements:
     #
-    #   `\{ "Type": "ACCOUNT", "Id": "< account id number >" \}`
+    #   `{ "Type": "ACCOUNT", "Id": "< account id number >" }`
     #
     #   If you use the CLI, you can submit this as a single string, similar
     #   to the following example:

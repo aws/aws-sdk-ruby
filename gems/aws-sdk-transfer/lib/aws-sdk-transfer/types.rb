@@ -94,7 +94,7 @@ module Aws::Transfer
     #   If the connector should use Basic authentication, the secret needs
     #   to be in the following format:
     #
-    #   `\{ "Username": "user-name", "Password": "user-password" \}`
+    #   `{ "Username": "user-name", "Password": "user-password" }`
     #
     #   Replace `user-name` and `user-password` with the credentials for the
     #   actual user that is being authenticated.
@@ -191,16 +191,16 @@ module Aws::Transfer
     #
     # @!attribute [rw] destination_file_location
     #   Specifies the location for the file being copied. Use
-    #   `$\{Transfer:UserName\}` or `$\{Transfer:UploadDate\}` in this field
-    #   to parametrize the destination prefix by username or uploaded date.
+    #   `${Transfer:UserName}` or `${Transfer:UploadDate}` in this field to
+    #   parametrize the destination prefix by username or uploaded date.
     #
     #   * Set the value of `DestinationFileLocation` to
-    #     `$\{Transfer:UserName\}` to copy uploaded files to an Amazon S3
+    #     `${Transfer:UserName}` to copy uploaded files to an Amazon S3
     #     bucket that is prefixed with the name of the Transfer Family user
     #     that uploaded the file.
     #
     #   * Set the value of `DestinationFileLocation` to
-    #     `$\{Transfer:UploadDate\}` to copy uploaded files to an Amazon S3
+    #     `${Transfer:UploadDate}` to copy uploaded files to an Amazon S3
     #     bucket that is prefixed with the date of the upload.
     #
     #     <note markdown="1"> The system resolves `UploadDate` to a date format of *YYYY-MM-DD*,
@@ -228,12 +228,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * To use the previous file as the input, enter `$\{previous.file\}`.
+    #   * To use the previous file as the input, enter `${previous.file}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
     #   * To use the originally uploaded file location as input for this
-    #     step, enter `$\{original.file\}`.
+    #     step, enter `${original.file}`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CopyStepDetails AWS API Documentation
@@ -290,8 +290,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "/directory1", "Target":
-    #   "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" } ]`
     #
     #   In most cases, you can use this value instead of the session policy
     #   to lock down your user to the designated home directory
@@ -300,7 +300,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -308,8 +308,8 @@ module Aws::Transfer
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #
     #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
     #   Amazon EFS does not use session policies.
@@ -364,7 +364,7 @@ module Aws::Transfer
     #   you can view the SID values by running the following command using
     #   Windows PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
@@ -1039,8 +1039,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "/directory1", "Target":
-    #   "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" } ]`
     #
     #   In most cases, you can use this value instead of the session policy
     #   to lock your user down to the designated home directory
@@ -1050,7 +1050,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -1058,8 +1058,8 @@ module Aws::Transfer
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #
     #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
     #   Amazon EFS does not use session policies.
@@ -1262,12 +1262,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * To use the previous file as the input, enter `$\{previous.file\}`.
+    #   * To use the previous file as the input, enter `${previous.file}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
     #   * To use the originally uploaded file location as input for this
-    #     step, enter `$\{original.file\}`.
+    #     step, enter `${original.file}`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CustomStepDetails AWS API Documentation
@@ -1296,12 +1296,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * To use the previous file as the input, enter `$\{previous.file\}`.
+    #   * To use the previous file as the input, enter `${previous.file}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
     #   * To use the originally uploaded file location as input for this
-    #     step, enter `$\{original.file\}`.
+    #     step, enter `${original.file}`.
     #   @return [String]
     #
     # @!attribute [rw] overwrite_existing
@@ -1320,17 +1320,17 @@ module Aws::Transfer
     #
     # @!attribute [rw] destination_file_location
     #   Specifies the location for the file being decrypted. Use
-    #   `$\{Transfer:UserName\}` or `$\{Transfer:UploadDate\}` in this field
-    #   to parametrize the destination prefix by username or uploaded date.
+    #   `${Transfer:UserName}` or `${Transfer:UploadDate}` in this field to
+    #   parametrize the destination prefix by username or uploaded date.
     #
     #   * Set the value of `DestinationFileLocation` to
-    #     `$\{Transfer:UserName\}` to decrypt uploaded files to an Amazon S3
+    #     `${Transfer:UserName}` to decrypt uploaded files to an Amazon S3
     #     bucket that is prefixed with the name of the Transfer Family user
     #     that uploaded the file.
     #
     #   * Set the value of `DestinationFileLocation` to
-    #     `$\{Transfer:UploadDate\}` to decrypt uploaded files to an Amazon
-    #     S3 bucket that is prefixed with the date of the upload.
+    #     `${Transfer:UploadDate}` to decrypt uploaded files to an Amazon S3
+    #     bucket that is prefixed with the date of the upload.
     #
     #     <note markdown="1"> The system resolves `UploadDate` to a date format of *YYYY-MM-DD*,
     #     based on the date the file is uploaded in UTC.
@@ -1363,7 +1363,7 @@ module Aws::Transfer
     #   you can view the SID values by running the following command using
     #   Windows PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
@@ -1504,12 +1504,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * To use the previous file as the input, enter `$\{previous.file\}`.
+    #   * To use the previous file as the input, enter `${previous.file}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
     #   * To use the originally uploaded file location as input for this
-    #     step, enter `$\{original.file\}`.
+    #     step, enter `${original.file}`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteStepDetails AWS API Documentation
@@ -1565,7 +1565,7 @@ module Aws::Transfer
     #   you can view the SID values by running the following command using
     #   Windows PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
@@ -1940,8 +1940,8 @@ module Aws::Transfer
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #   @return [String]
     #
     # @!attribute [rw] posix_profile
@@ -1972,7 +1972,7 @@ module Aws::Transfer
     #   you can view the SID values by running the following command using
     #   Windows PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
@@ -2866,8 +2866,8 @@ module Aws::Transfer
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #   @return [String]
     #
     # @!attribute [rw] posix_profile
@@ -3254,7 +3254,7 @@ module Aws::Transfer
     #
     # The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    # `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    # `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #
     # @!attribute [rw] entry
     #   Represents an entry for `HomeDirectoryMappings`.
@@ -4269,7 +4269,7 @@ module Aws::Transfer
     #   you can view the SID values by running the following command using
     #   Windows PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
@@ -5424,12 +5424,12 @@ module Aws::Transfer
     #   the output from the previous step, or the originally uploaded file
     #   for the workflow.
     #
-    #   * To use the previous file as the input, enter `$\{previous.file\}`.
+    #   * To use the previous file as the input, enter `${previous.file}`.
     #     In this case, this workflow step uses the output file from the
     #     previous workflow step as input. This is the default value.
     #
     #   * To use the originally uploaded file location as input for this
-    #     step, enter `$\{original.file\}`.
+    #     step, enter `${original.file}`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TagStepDetails AWS API Documentation
@@ -5645,8 +5645,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "/directory1", "Target":
-    #   "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" } ]`
     #
     #   In most cases, you can use this value instead of the session policy
     #   to lock down your user to the designated home directory
@@ -5655,7 +5655,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -5663,8 +5663,8 @@ module Aws::Transfer
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #
     #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
     #   Amazon EFS does not use session policies.
@@ -5719,7 +5719,7 @@ module Aws::Transfer
     #   you can view the SID values by running the following command using
     #   Windows PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
@@ -6309,7 +6309,7 @@ module Aws::Transfer
     #   empty `OnUpload` object, as in the following example.
     #
     #   `aws transfer update-server --server-id s-01234567890abcdef
-    #   --workflow-details '\{"OnUpload":[]\}'`
+    #   --workflow-details '{"OnUpload":[]}'`
     #   @return [Types::WorkflowDetails]
     #
     # @!attribute [rw] structured_log_destinations
@@ -6420,8 +6420,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "/directory1", "Target":
-    #   "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" } ]`
     #
     #   In most cases, you can use this value instead of the session policy
     #   to lock down your user to the designated home directory
@@ -6430,7 +6430,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -6438,8 +6438,8 @@ module Aws::Transfer
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #
     #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
     #   Amazon EFS does not use session policies.
@@ -6600,7 +6600,7 @@ module Aws::Transfer
     #   empty `OnUpload` object, as in the following example.
     #
     #   `aws transfer update-server --server-id s-01234567890abcdef
-    #   --workflow-details '\{"OnUpload":[]\}'`
+    #   --workflow-details '{"OnUpload":[]}'`
     #
     #   <note markdown="1"> `OnUpload` can contain a maximum of one `WorkflowDetail` object.
     #

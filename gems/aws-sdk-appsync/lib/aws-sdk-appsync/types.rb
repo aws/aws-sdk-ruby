@@ -4270,7 +4270,7 @@ module Aws::AppSync
     #
     #   You can create a list of environmental variables by adding it to the
     #   `environmentVariables` payload as a list in the format
-    #   `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    #   `{"key1":"value1","key2":"value2", …}`. Note that each call of the
     #   `PutGraphqlApiEnvironmentVariables` action will result in the
     #   overwriting of the existing environmental variable list of that API.
     #   This means the existing environmental variables will be lost. To

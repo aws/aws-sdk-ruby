@@ -430,7 +430,7 @@ module Aws::Synthetics
     #   Specifies the keys and values to use for any environment variables
     #   used in the canary script. Use the following format:
     #
-    #   \\\{ "key1" : "value1", "key2" : "value2", ...\\}
+    #   \{ "key1" : "value1", "key2" : "value2", ...}
     #
     #   Keys must start with a letter and be at least two characters. The
     #   total size of your environment variables cannot exceed 4 KB. You

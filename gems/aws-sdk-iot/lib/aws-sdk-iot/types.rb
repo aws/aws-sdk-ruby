@@ -692,7 +692,7 @@ module Aws::IoT
     #   A JSON string containing up to three key-value pair in JSON format.
     #   For example:
     #
-    #   `\{"attributes":\{"string1":"string2"\}\}`
+    #   `{"attributes":{"string1":"string2"}}`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] merge
@@ -4196,7 +4196,7 @@ module Aws::IoT
     #   The attribute payload, which consists of up to three name/value
     #   pairs in a JSON document. For example:
     #
-    #   `\{"attributes":\{"string1":"string2"\}\}`
+    #   `{"attributes":{"string1":"string2"}}`
     #   @return [Types::AttributePayload]
     #
     # @!attribute [rw] billing_group_name
@@ -7121,17 +7121,17 @@ module Aws::IoT
     #
     # The `hashKeyValue` and `rangeKeyvalue` fields use a substitution
     # template syntax. These templates provide data at runtime. The syntax
-    # is as follows: $\\\{*sql-expression*\\}.
+    # is as follows: $\{*sql-expression*}.
     #
     # You can specify any valid expression in a WHERE or SELECT clause,
     # including JSON properties, comparisons, calculations, and functions.
     # For example, the following field uses the third level of the topic:
     #
-    # `"hashKeyValue": "$\{topic(3)\}"`
+    # `"hashKeyValue": "${topic(3)}"`
     #
     # The following field uses the timestamp:
     #
-    # `"rangeKeyValue": "$\{timestamp()\}"`
+    # `"rangeKeyValue": "${timestamp()}"`
     #
     # @!attribute [rw] table_name
     #   The name of the DynamoDB table.
@@ -7143,7 +7143,7 @@ module Aws::IoT
     #
     # @!attribute [rw] operation
     #   The type of operation to be performed. This follows the substitution
-    #   template, so it can be `$\{operation\}`, but the substitution must
+    #   template, so it can be `${operation}`, but the substitution must
     #   result in one of the following: `INSERT`, `UPDATE`, or `DELETE`.
     #   @return [String]
     #
@@ -7203,8 +7203,8 @@ module Aws::IoT
     #   Specifies the DynamoDB table to which the message data will be
     #   written. For example:
     #
-    #   `\{ "dynamoDBv2": \{ "roleArn": "aws:iam:12341251:my-role"
-    #   "putItem": \{ "tableName": "my-table" \} \} \}`
+    #   `{ "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem":
+    #   { "tableName": "my-table" } } }`
     #
     #   Each attribute in the message payload will be written to a separate
     #   column in the DynamoDB database.
@@ -17351,7 +17351,7 @@ module Aws::IoT
     #   A list of thing attributes, a JSON string containing name-value
     #   pairs. For example:
     #
-    #   `\{"attributes":\{"name1":"value2"\}\}`
+    #   `{"attributes":{"name1":"value2"}}`
     #
     #   This data is used to add new attributes or update existing
     #   attributes.

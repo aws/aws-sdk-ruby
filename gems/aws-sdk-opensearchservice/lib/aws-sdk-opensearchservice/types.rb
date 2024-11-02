@@ -644,7 +644,7 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] duration
     #   The duration of the maintenance schedule. For example, `"Duration":
-    #   \{"Value": 2, "Unit": "HOURS"\}`.
+    #   {"Value": 2, "Unit": "HOURS"}`.
     #   @return [Types::Duration]
     #
     # @!attribute [rw] cron_expression_for_recurrence
@@ -5283,7 +5283,7 @@ module Aws::OpenSearchService
     #     "c5.large.search".
     #
     #   * `STRINGIFIED_JSON`: Contain content in JSON format, such as
-    #     \\\{"Enabled":"True"\\}".
+    #     \{"Enabled":"True"}".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ModifyingProperties AWS API Documentation

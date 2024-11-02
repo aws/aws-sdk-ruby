@@ -382,7 +382,7 @@ module Aws::ManagedGrafana
     #   A description for the workspace. This is used only to help you
     #   identify this workspace.
     #
-    #   Pattern: `^[\\p\{L\}\\p\{Z\}\\p\{N\}\\p\{P\}]\{0,2048\}$`
+    #   Pattern: `^[\\p{L}\\p{Z}\\p{N}\\p{P}]{0,2048}$`
     #   @return [String]
     #
     # @!attribute [rw] workspace_name
@@ -1891,7 +1891,7 @@ module Aws::ManagedGrafana
     #   The ID of the user or group.
     #
     #   Pattern:
-    #   `^([0-9a-fA-F]\{10\}-|)[A-Fa-f0-9]\{8\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{12\}$`
+    #   `^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$`
     #   @return [String]
     #
     # @!attribute [rw] type

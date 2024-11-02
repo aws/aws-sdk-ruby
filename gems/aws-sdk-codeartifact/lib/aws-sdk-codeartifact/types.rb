@@ -3520,7 +3520,7 @@ module Aws::CodeArtifact
     # @!attribute [rw] asset_name
     #   The name of the asset to publish. Asset names can include Unicode
     #   letters and numbers, and the following special characters: `` ~ ! @
-    #   ^ & ( ) - ` _ + [ ] \{ \} ; , . ` ``
+    #   ^ & ( ) - ` _ + [ ] { } ; , . ` ``
     #   @return [String]
     #
     # @!attribute [rw] asset_sha256

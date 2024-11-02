@@ -4951,12 +4951,12 @@ module Aws::QuickSight
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme:
-    #   `"AccountCustomization": \{ "DefaultTheme":
-    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" \}`. Or, you can add a
-    #   custom theme by specifying `"AccountCustomization": \{
+    #   `"AccountCustomization": { "DefaultTheme":
+    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" }`. Or, you can add a
+    #   custom theme by specifying `"AccountCustomization": {
     #   "DefaultTheme":
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
-    #   \}`.
+    #   }`.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] tags
@@ -11664,7 +11664,7 @@ module Aws::QuickSight
     #   `DescribeAssetBundleExportJob` again for a fresh URL if needed.
     #
     #   The downloaded asset bundle is a zip file named
-    #   `assetbundle-\{jobId\}.qs`. The file has a `.qs` extension.
+    #   `assetbundle-{jobId}.qs`. The file has a `.qs` extension.
     #
     #   This URL can't be used in a `StartAssetBundleImportJob` API call
     #   and should only be used for download purposes.
@@ -26311,9 +26311,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] filters
     #   The filters to apply to the search. Currently, you can search only
-    #   by user name, for example, `"Filters": [ \{ "Name":
+    #   by user name, for example, `"Filters": [ { "Name":
     #   "QUICKSIGHT_USER", "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" \} ]`
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]`
     #   @return [Array<Types::DashboardSearchFilter>]
     #
     # @!attribute [rw] next_token
@@ -26480,9 +26480,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] filters
     #   The filters to apply to the search. Currently, you can search only
-    #   by the parent folder ARN. For example, `"Filters": [ \{ "Name":
+    #   by the parent folder ARN. For example, `"Filters": [ { "Name":
     #   "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" \} ]`.
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" } ]`.
     #   @return [Array<Types::FolderSearchFilter>]
     #
     # @!attribute [rw] next_token

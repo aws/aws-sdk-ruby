@@ -373,10 +373,9 @@ module Aws::CloudFormation
     #   limit resource-level permissions and avoid returning a response when
     #   no parameter is sent in the request:
     #
-    #    \\\{ "Version": "2012-10-17", "Statement": \[\\\{ "Effect":
+    #    \{ "Version": "2012-10-17", "Statement": \[\{ "Effect":
     #   "Deny", "Action": "cloudformation:DescribeStacks",
-    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" \\}\]
-    #   \\}
+    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }\] }
     #
     #    </note>
     #

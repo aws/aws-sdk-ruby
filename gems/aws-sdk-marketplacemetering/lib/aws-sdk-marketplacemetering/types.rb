@@ -87,8 +87,8 @@ module Aws::MarketplaceMetering
     end
 
     # A metering record has already been emitted by the same EC2 instance,
-    # ECS task, or EKS pod for the given \\\{`usageDimension`,
-    # `timestamp`\\} with a different `usageQuantity`.
+    # ECS task, or EKS pod for the given \{`usageDimension`, `timestamp`}
+    # with a different `usageQuantity`.
     #
     # @!attribute [rw] message
     #   @return [String]

@@ -3956,8 +3956,8 @@ module Aws::Proton
     # @!attribute [rw] value
     #   A value to filter by.
     #
-    #   With the date/time keys (`*At\{Before,After\}`), the value is a
-    #   valid [RFC 3339][1] string with no UTC offset and with an optional
+    #   With the date/time keys (`*At{Before,After}`), the value is a valid
+    #   [RFC 3339][1] string with no UTC offset and with an optional
     #   fractional precision (for example, `1985-04-12T23:20:50.52Z`).
     #
     #

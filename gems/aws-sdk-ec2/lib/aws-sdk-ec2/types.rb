@@ -8312,7 +8312,7 @@ module Aws::EC2
     #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
     #   *Amazon Web Services Transit Gateway Guide*.
     #
-    #   Specify the fields using the `$\{field-id\}` format, separated by
+    #   Specify the fields using the `${field-id}` format, separated by
     #   spaces.
     #
     #
@@ -10835,7 +10835,7 @@ module Aws::EC2
     #   Constraints: Up to 255 characters in length
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -10845,7 +10845,7 @@ module Aws::EC2
     #   `sg-`.
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -43262,7 +43262,7 @@ module Aws::EC2
     #   address range.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] cidr_ip
@@ -44928,7 +44928,7 @@ module Aws::EC2
     #   address range.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] cidr_ipv_6
@@ -55387,7 +55387,7 @@ module Aws::EC2
     #   prefix list ID.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] prefix_list_id
@@ -68245,7 +68245,7 @@ module Aws::EC2
     #   ID group pair.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] user_id
