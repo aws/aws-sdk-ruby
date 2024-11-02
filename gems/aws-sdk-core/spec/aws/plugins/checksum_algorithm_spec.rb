@@ -44,10 +44,10 @@ module Aws
           },
           shapes: {
             'Body' => { 'type' => 'blob' },
+            'String' => { 'type' => 'string' },
             'ChecksumAlgorithm' => {
               'type' => 'string',
-               # SHA256 intentionally unmodeled for forwards compatibility test
-              'enum' => ['CRC32', 'CRC32C', 'CRC64NVME', 'SHA1']
+              'enum' => ['CRC32', 'CRC32C', 'CRC64NVME', 'SHA1', 'SHA256']
             },
             'SomeInput' => {
               'type' => 'structure',
@@ -58,6 +58,36 @@ module Aws
                   'locationName' => 'x-amz-request-algorithm'
                 },
                 'ValidationMode' => { 'shape' => 'ValidationMode' },
+                'ChecksumCRC32' => {
+                  'shape' => 'String',
+                  'location' => 'header',
+                  'locationName' => 'x-amz-checksum-crc32'
+                },
+                'ChecksumCRC32C' => {
+                  'shape' => 'String',
+                  'location' => 'header',
+                  'locationName' => 'x-amz-checksum-crc32c'
+                },
+                'ChecksumCRC64NVME' => {
+                  'shape' => 'String',
+                  'location' => 'header',
+                  'locationName' => 'x-amz-checksum-crc64nvme'
+                },
+                'ChecksumSHA1' => {
+                  'shape' => 'String',
+                  'location' => 'header',
+                  'locationName' => 'x-amz-checksum-sha1'
+                },
+                'ChecksumSHA256' => {
+                  'shape' => 'String',
+                  'location' => 'header',
+                  'locationName' => 'x-amz-checksum-sha256'
+                },
+                'ChecksumFoo' => {
+                  'shape' => 'String',
+                  'location' => 'header',
+                  'locationName' => 'x-amz-checksum-foo'
+                },
                 'Body' => { 'shape' => 'Body' }
               },
               'payload' => 'Body'
@@ -303,6 +333,39 @@ module Aws
               end.to raise_error(Aws::Errors::ChecksumError, include(expect['calculatedChecksum']))
             else
               raise 'Unsupported test kind'
+            end
+          end
+        end
+      end
+
+      context 'checksums are provided' do
+        file = File.expand_path('checksum_provided.json', __dir__)
+        test_cases = JSON.load_file(file)
+
+        before do
+          algorithms = Aws::Plugins::ChecksumAlgorithm::CLIENT_ALGORITHMS.dup
+          algorithms << 'FOO'
+          algorithms.freeze
+          stub_const('Aws::Plugins::ChecksumAlgorithm::CLIENT_ALGORITHMS', algorithms)
+        end
+
+        test_cases.each do |test_case|
+          it "passes test: #{test_case['documentation']}" do
+            algorithm = test_case['checksumAlgorithm'].upcase
+            unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
+              skip "Algorithm #{algorithm} not supported"
+            end
+
+            resp = client.http_checksum_operation(
+              "checksum_#{algorithm.downcase}".to_sym => test_case['checksumValue'],
+              body: test_case['requestPayload']
+            )
+            headers = resp.context.http_request.headers
+            test_case['expectHeaders'].each do |key, value|
+              expect(headers[key]).to eq(value)
+            end
+            test_case['expectNotPresentHeaders'].each do |key|
+              expect(headers[key]).to be_nil
             end
           end
         end

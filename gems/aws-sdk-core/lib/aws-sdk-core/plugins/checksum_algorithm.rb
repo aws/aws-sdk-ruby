@@ -164,9 +164,6 @@ module Aws
             enable_request_validation_mode(context)
           end
 
-          # Default checksum member to CRC32 if not set
-          default_request_algorithm_member(context)
-
           @handler.call(context)
         end
 
@@ -177,13 +174,6 @@ module Aws
 
           input_member = context.operation.http_checksum['requestValidationModeMember']
           context.params[input_member.to_sym] ||= 'ENABLED' if input_member
-        end
-
-        def default_request_algorithm_member(context)
-          return unless context.operation.http_checksum
-
-          input_member = context.operation.http_checksum['requestAlgorithmMember']
-          context.params[input_member.to_sym] ||= DEFAULT_CHECKSUM if input_member
         end
       end
 
@@ -256,7 +246,7 @@ module Aws
           return unless context.operation.http_checksum
 
           input_member = context.operation.http_checksum['requestAlgorithmMember']
-          context.params[input_member.to_sym]&.upcase if input_member
+          context.params[input_member.to_sym] ||= DEFAULT_CHECKSUM if input_member
         end
 
         def request_validation_mode(context)
@@ -288,15 +278,13 @@ module Aws
         end
 
         def should_calculate_request_checksum?(context)
-          # requestAlgorithmMember must be present on the model - guaranteed
-          # a default from OptionHandler
-          request_algorithm_selection(context) &&
-            !checksum_provided_as_header?(context.http_request.headers) &&
+          !checksum_provided_as_header?(context.http_request.headers) &&
+            request_algorithm_selection(context) &&
             (checksum_required?(context) || checksum_optional?(context))
         end
 
         def choose_request_algorithm!(context)
-          algorithm = request_algorithm_selection(context)
+          algorithm = request_algorithm_selection(context).upcase
           return algorithm if CLIENT_ALGORITHMS.include?(algorithm)
 
           if %w[CRC32C CRC64NVME].include?(algorithm)
