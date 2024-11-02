@@ -25,6 +25,7 @@ module Aws::WorkMail
     ActionsList = Shapes::ListShape.new(name: 'ActionsList')
     Aliases = Shapes::ListShape.new(name: 'Aliases')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     AssociateDelegateToResourceRequest = Shapes::StructureShape.new(name: 'AssociateDelegateToResourceRequest')
     AssociateDelegateToResourceResponse = Shapes::StructureShape.new(name: 'AssociateDelegateToResourceResponse')
     AssociateMemberToGroupRequest = Shapes::StructureShape.new(name: 'AssociateMemberToGroupRequest')
@@ -45,6 +46,8 @@ module Aws::WorkMail
     CreateAvailabilityConfigurationResponse = Shapes::StructureShape.new(name: 'CreateAvailabilityConfigurationResponse')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
+    CreateIdentityCenterApplicationRequest = Shapes::StructureShape.new(name: 'CreateIdentityCenterApplicationRequest')
+    CreateIdentityCenterApplicationResponse = Shapes::StructureShape.new(name: 'CreateIdentityCenterApplicationResponse')
     CreateImpersonationRoleRequest = Shapes::StructureShape.new(name: 'CreateImpersonationRoleRequest')
     CreateImpersonationRoleResponse = Shapes::StructureShape.new(name: 'CreateImpersonationRoleResponse')
     CreateMobileDeviceAccessRuleRequest = Shapes::StructureShape.new(name: 'CreateMobileDeviceAccessRuleRequest')
@@ -66,6 +69,10 @@ module Aws::WorkMail
     DeleteEmailMonitoringConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteEmailMonitoringConfigurationResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
+    DeleteIdentityCenterApplicationRequest = Shapes::StructureShape.new(name: 'DeleteIdentityCenterApplicationRequest')
+    DeleteIdentityCenterApplicationResponse = Shapes::StructureShape.new(name: 'DeleteIdentityCenterApplicationResponse')
+    DeleteIdentityProviderConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteIdentityProviderConfigurationRequest')
+    DeleteIdentityProviderConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteIdentityProviderConfigurationResponse')
     DeleteImpersonationRoleRequest = Shapes::StructureShape.new(name: 'DeleteImpersonationRoleRequest')
     DeleteImpersonationRoleResponse = Shapes::StructureShape.new(name: 'DeleteImpersonationRoleResponse')
     DeleteMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsRequest')
@@ -76,6 +83,8 @@ module Aws::WorkMail
     DeleteMobileDeviceAccessRuleResponse = Shapes::StructureShape.new(name: 'DeleteMobileDeviceAccessRuleResponse')
     DeleteOrganizationRequest = Shapes::StructureShape.new(name: 'DeleteOrganizationRequest')
     DeleteOrganizationResponse = Shapes::StructureShape.new(name: 'DeleteOrganizationResponse')
+    DeletePersonalAccessTokenRequest = Shapes::StructureShape.new(name: 'DeletePersonalAccessTokenRequest')
+    DeletePersonalAccessTokenResponse = Shapes::StructureShape.new(name: 'DeletePersonalAccessTokenResponse')
     DeleteResourceRequest = Shapes::StructureShape.new(name: 'DeleteResourceRequest')
     DeleteResourceResponse = Shapes::StructureShape.new(name: 'DeleteResourceResponse')
     DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
@@ -92,6 +101,8 @@ module Aws::WorkMail
     DescribeEntityResponse = Shapes::StructureShape.new(name: 'DescribeEntityResponse')
     DescribeGroupRequest = Shapes::StructureShape.new(name: 'DescribeGroupRequest')
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
+    DescribeIdentityProviderConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeIdentityProviderConfigurationRequest')
+    DescribeIdentityProviderConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeIdentityProviderConfigurationResponse')
     DescribeInboundDmarcSettingsRequest = Shapes::StructureShape.new(name: 'DescribeInboundDmarcSettingsRequest')
     DescribeInboundDmarcSettingsResponse = Shapes::StructureShape.new(name: 'DescribeInboundDmarcSettingsResponse')
     DescribeMailboxExportJobRequest = Shapes::StructureShape.new(name: 'DescribeMailboxExportJobRequest')
@@ -156,6 +167,8 @@ module Aws::WorkMail
     GetMobileDeviceAccessEffectResponse = Shapes::StructureShape.new(name: 'GetMobileDeviceAccessEffectResponse')
     GetMobileDeviceAccessOverrideRequest = Shapes::StructureShape.new(name: 'GetMobileDeviceAccessOverrideRequest')
     GetMobileDeviceAccessOverrideResponse = Shapes::StructureShape.new(name: 'GetMobileDeviceAccessOverrideResponse')
+    GetPersonalAccessTokenMetadataRequest = Shapes::StructureShape.new(name: 'GetPersonalAccessTokenMetadataRequest')
+    GetPersonalAccessTokenMetadataResponse = Shapes::StructureShape.new(name: 'GetPersonalAccessTokenMetadataResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupIdentifier = Shapes::StructureShape.new(name: 'GroupIdentifier')
     GroupIdentifiers = Shapes::ListShape.new(name: 'GroupIdentifiers')
@@ -163,6 +176,13 @@ module Aws::WorkMail
     Groups = Shapes::ListShape.new(name: 'Groups')
     HostedZoneId = Shapes::StringShape.new(name: 'HostedZoneId')
     IdempotencyClientToken = Shapes::StringShape.new(name: 'IdempotencyClientToken')
+    IdentityCenterApplicationName = Shapes::StringShape.new(name: 'IdentityCenterApplicationName')
+    IdentityCenterConfiguration = Shapes::StructureShape.new(name: 'IdentityCenterConfiguration')
+    IdentityProviderAuthenticationMode = Shapes::StringShape.new(name: 'IdentityProviderAuthenticationMode')
+    IdentityProviderIdentityStoreId = Shapes::StringShape.new(name: 'IdentityProviderIdentityStoreId')
+    IdentityProviderUserId = Shapes::StringShape.new(name: 'IdentityProviderUserId')
+    IdentityProviderUserIdForUpdate = Shapes::StringShape.new(name: 'IdentityProviderUserIdForUpdate')
+    IdentityProviderUserIdPrefix = Shapes::StringShape.new(name: 'IdentityProviderUserIdPrefix')
     ImpersonationMatchedRule = Shapes::StructureShape.new(name: 'ImpersonationMatchedRule')
     ImpersonationMatchedRuleList = Shapes::ListShape.new(name: 'ImpersonationMatchedRuleList')
     ImpersonationRole = Shapes::StructureShape.new(name: 'ImpersonationRole')
@@ -178,6 +198,7 @@ module Aws::WorkMail
     ImpersonationRuleList = Shapes::ListShape.new(name: 'ImpersonationRuleList')
     ImpersonationRuleName = Shapes::StringShape.new(name: 'ImpersonationRuleName')
     ImpersonationToken = Shapes::StringShape.new(name: 'ImpersonationToken')
+    InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InvalidConfigurationException = Shapes::StructureShape.new(name: 'InvalidConfigurationException')
     InvalidCustomSesConfigurationException = Shapes::StructureShape.new(name: 'InvalidCustomSesConfigurationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -218,6 +239,8 @@ module Aws::WorkMail
     ListMobileDeviceAccessRulesResponse = Shapes::StructureShape.new(name: 'ListMobileDeviceAccessRulesResponse')
     ListOrganizationsRequest = Shapes::StructureShape.new(name: 'ListOrganizationsRequest')
     ListOrganizationsResponse = Shapes::StructureShape.new(name: 'ListOrganizationsResponse')
+    ListPersonalAccessTokensRequest = Shapes::StructureShape.new(name: 'ListPersonalAccessTokensRequest')
+    ListPersonalAccessTokensResponse = Shapes::StructureShape.new(name: 'ListPersonalAccessTokensResponse')
     ListResourceDelegatesRequest = Shapes::StructureShape.new(name: 'ListResourceDelegatesRequest')
     ListResourceDelegatesResponse = Shapes::StructureShape.new(name: 'ListResourceDelegatesResponse')
     ListResourcesFilters = Shapes::StructureShape.new(name: 'ListResourcesFilters')
@@ -269,11 +292,22 @@ module Aws::WorkMail
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
     PermissionValues = Shapes::ListShape.new(name: 'PermissionValues')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
+    PersonalAccessTokenConfiguration = Shapes::StructureShape.new(name: 'PersonalAccessTokenConfiguration')
+    PersonalAccessTokenConfigurationStatus = Shapes::StringShape.new(name: 'PersonalAccessTokenConfigurationStatus')
+    PersonalAccessTokenId = Shapes::StringShape.new(name: 'PersonalAccessTokenId')
+    PersonalAccessTokenLifetimeInDays = Shapes::IntegerShape.new(name: 'PersonalAccessTokenLifetimeInDays')
+    PersonalAccessTokenName = Shapes::StringShape.new(name: 'PersonalAccessTokenName')
+    PersonalAccessTokenScope = Shapes::StringShape.new(name: 'PersonalAccessTokenScope')
+    PersonalAccessTokenScopeList = Shapes::ListShape.new(name: 'PersonalAccessTokenScopeList')
+    PersonalAccessTokenSummary = Shapes::StructureShape.new(name: 'PersonalAccessTokenSummary')
+    PersonalAccessTokenSummaryList = Shapes::ListShape.new(name: 'PersonalAccessTokenSummaryList')
     PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PutAccessControlRuleRequest = Shapes::StructureShape.new(name: 'PutAccessControlRuleRequest')
     PutAccessControlRuleResponse = Shapes::StructureShape.new(name: 'PutAccessControlRuleResponse')
     PutEmailMonitoringConfigurationRequest = Shapes::StructureShape.new(name: 'PutEmailMonitoringConfigurationRequest')
     PutEmailMonitoringConfigurationResponse = Shapes::StructureShape.new(name: 'PutEmailMonitoringConfigurationResponse')
+    PutIdentityProviderConfigurationRequest = Shapes::StructureShape.new(name: 'PutIdentityProviderConfigurationRequest')
+    PutIdentityProviderConfigurationResponse = Shapes::StructureShape.new(name: 'PutIdentityProviderConfigurationResponse')
     PutInboundDmarcSettingsRequest = Shapes::StructureShape.new(name: 'PutInboundDmarcSettingsRequest')
     PutInboundDmarcSettingsResponse = Shapes::StructureShape.new(name: 'PutInboundDmarcSettingsResponse')
     PutMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'PutMailboxPermissionsRequest')
@@ -441,6 +475,14 @@ module Aws::WorkMail
     CreateGroupResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "GroupId"))
     CreateGroupResponse.struct_class = Types::CreateGroupResponse
 
+    CreateIdentityCenterApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: IdentityCenterApplicationName, required: true, location_name: "Name"))
+    CreateIdentityCenterApplicationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    CreateIdentityCenterApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIdentityCenterApplicationRequest.struct_class = Types::CreateIdentityCenterApplicationRequest
+
+    CreateIdentityCenterApplicationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
+    CreateIdentityCenterApplicationResponse.struct_class = Types::CreateIdentityCenterApplicationResponse
+
     CreateImpersonationRoleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateImpersonationRoleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     CreateImpersonationRoleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImpersonationRoleName, required: true, location_name: "Name"))
@@ -499,6 +541,7 @@ module Aws::WorkMail
     CreateUserRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "FirstName"))
     CreateUserRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "LastName"))
     CreateUserRequest.add_member(:hidden_from_global_address_list, Shapes::ShapeRef.new(shape: Boolean, location_name: "HiddenFromGlobalAddressList"))
+    CreateUserRequest.add_member(:identity_provider_user_id, Shapes::ShapeRef.new(shape: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
     CreateUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
@@ -538,6 +581,16 @@ module Aws::WorkMail
 
     DeleteGroupResponse.struct_class = Types::DeleteGroupResponse
 
+    DeleteIdentityCenterApplicationRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, required: true, location_name: "ApplicationArn"))
+    DeleteIdentityCenterApplicationRequest.struct_class = Types::DeleteIdentityCenterApplicationRequest
+
+    DeleteIdentityCenterApplicationResponse.struct_class = Types::DeleteIdentityCenterApplicationResponse
+
+    DeleteIdentityProviderConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeleteIdentityProviderConfigurationRequest.struct_class = Types::DeleteIdentityProviderConfigurationRequest
+
+    DeleteIdentityProviderConfigurationResponse.struct_class = Types::DeleteIdentityProviderConfigurationResponse
+
     DeleteImpersonationRoleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteImpersonationRoleRequest.add_member(:impersonation_role_id, Shapes::ShapeRef.new(shape: ImpersonationRoleId, required: true, location_name: "ImpersonationRoleId"))
     DeleteImpersonationRoleRequest.struct_class = Types::DeleteImpersonationRoleRequest
@@ -568,11 +621,18 @@ module Aws::WorkMail
     DeleteOrganizationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteOrganizationRequest.add_member(:delete_directory, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "DeleteDirectory"))
     DeleteOrganizationRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceDelete"))
+    DeleteOrganizationRequest.add_member(:delete_identity_center_application, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteIdentityCenterApplication"))
     DeleteOrganizationRequest.struct_class = Types::DeleteOrganizationRequest
 
     DeleteOrganizationResponse.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
     DeleteOrganizationResponse.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
     DeleteOrganizationResponse.struct_class = Types::DeleteOrganizationResponse
+
+    DeletePersonalAccessTokenRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeletePersonalAccessTokenRequest.add_member(:personal_access_token_id, Shapes::ShapeRef.new(shape: PersonalAccessTokenId, required: true, location_name: "PersonalAccessTokenId"))
+    DeletePersonalAccessTokenRequest.struct_class = Types::DeletePersonalAccessTokenRequest
+
+    DeletePersonalAccessTokenResponse.struct_class = Types::DeletePersonalAccessTokenResponse
 
     DeleteResourceRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location_name: "ResourceId"))
@@ -632,6 +692,14 @@ module Aws::WorkMail
     DescribeGroupResponse.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
     DescribeGroupResponse.add_member(:hidden_from_global_address_list, Shapes::ShapeRef.new(shape: Boolean, location_name: "HiddenFromGlobalAddressList"))
     DescribeGroupResponse.struct_class = Types::DescribeGroupResponse
+
+    DescribeIdentityProviderConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DescribeIdentityProviderConfigurationRequest.struct_class = Types::DescribeIdentityProviderConfigurationRequest
+
+    DescribeIdentityProviderConfigurationResponse.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: IdentityProviderAuthenticationMode, location_name: "AuthenticationMode"))
+    DescribeIdentityProviderConfigurationResponse.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
+    DescribeIdentityProviderConfigurationResponse.add_member(:personal_access_token_configuration, Shapes::ShapeRef.new(shape: PersonalAccessTokenConfiguration, location_name: "PersonalAccessTokenConfiguration"))
+    DescribeIdentityProviderConfigurationResponse.struct_class = Types::DescribeIdentityProviderConfigurationResponse
 
     DescribeInboundDmarcSettingsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DescribeInboundDmarcSettingsRequest.struct_class = Types::DescribeInboundDmarcSettingsRequest
@@ -716,6 +784,8 @@ module Aws::WorkMail
     DescribeUserResponse.add_member(:department, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Department"))
     DescribeUserResponse.add_member(:country, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Country"))
     DescribeUserResponse.add_member(:office, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Office"))
+    DescribeUserResponse.add_member(:identity_provider_user_id, Shapes::ShapeRef.new(shape: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
+    DescribeUserResponse.add_member(:identity_provider_identity_store_id, Shapes::ShapeRef.new(shape: IdentityProviderIdentityStoreId, location_name: "IdentityProviderIdentityStoreId"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
     DeviceModelList.member = Shapes::ShapeRef.new(shape: DeviceModel)
@@ -872,6 +942,19 @@ module Aws::WorkMail
     GetMobileDeviceAccessOverrideResponse.add_member(:date_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
     GetMobileDeviceAccessOverrideResponse.struct_class = Types::GetMobileDeviceAccessOverrideResponse
 
+    GetPersonalAccessTokenMetadataRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    GetPersonalAccessTokenMetadataRequest.add_member(:personal_access_token_id, Shapes::ShapeRef.new(shape: PersonalAccessTokenId, required: true, location_name: "PersonalAccessTokenId"))
+    GetPersonalAccessTokenMetadataRequest.struct_class = Types::GetPersonalAccessTokenMetadataRequest
+
+    GetPersonalAccessTokenMetadataResponse.add_member(:personal_access_token_id, Shapes::ShapeRef.new(shape: PersonalAccessTokenId, location_name: "PersonalAccessTokenId"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:name, Shapes::ShapeRef.new(shape: PersonalAccessTokenName, location_name: "Name"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:date_created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:date_last_used, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateLastUsed"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:expires_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresTime"))
+    GetPersonalAccessTokenMetadataResponse.add_member(:scopes, Shapes::ShapeRef.new(shape: PersonalAccessTokenScopeList, location_name: "Scopes"))
+    GetPersonalAccessTokenMetadataResponse.struct_class = Types::GetPersonalAccessTokenMetadataResponse
+
     Group.add_member(:id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "Id"))
     Group.add_member(:email, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
     Group.add_member(:name, Shapes::ShapeRef.new(shape: GroupName, location_name: "Name"))
@@ -887,6 +970,10 @@ module Aws::WorkMail
     GroupIdentifiers.member = Shapes::ShapeRef.new(shape: GroupIdentifier)
 
     Groups.member = Shapes::ShapeRef.new(shape: Group)
+
+    IdentityCenterConfiguration.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    IdentityCenterConfiguration.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, required: true, location_name: "ApplicationArn"))
+    IdentityCenterConfiguration.struct_class = Types::IdentityCenterConfiguration
 
     ImpersonationMatchedRule.add_member(:impersonation_rule_id, Shapes::ShapeRef.new(shape: ImpersonationRuleId, location_name: "ImpersonationRuleId"))
     ImpersonationMatchedRule.add_member(:name, Shapes::ShapeRef.new(shape: ImpersonationRuleName, location_name: "Name"))
@@ -1063,6 +1150,16 @@ module Aws::WorkMail
     ListOrganizationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOrganizationsResponse.struct_class = Types::ListOrganizationsResponse
 
+    ListPersonalAccessTokensRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    ListPersonalAccessTokensRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "UserId"))
+    ListPersonalAccessTokensRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPersonalAccessTokensRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPersonalAccessTokensRequest.struct_class = Types::ListPersonalAccessTokensRequest
+
+    ListPersonalAccessTokensResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPersonalAccessTokensResponse.add_member(:personal_access_token_summaries, Shapes::ShapeRef.new(shape: PersonalAccessTokenSummaryList, location_name: "PersonalAccessTokenSummaries"))
+    ListPersonalAccessTokensResponse.struct_class = Types::ListPersonalAccessTokensResponse
+
     ListResourceDelegatesRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     ListResourceDelegatesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location_name: "ResourceId"))
     ListResourceDelegatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1098,6 +1195,7 @@ module Aws::WorkMail
     ListUsersFilters.add_member(:display_name_prefix, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "DisplayNamePrefix"))
     ListUsersFilters.add_member(:primary_email_prefix, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryEmailPrefix"))
     ListUsersFilters.add_member(:state, Shapes::ShapeRef.new(shape: EntityState, location_name: "State"))
+    ListUsersFilters.add_member(:identity_provider_user_id_prefix, Shapes::ShapeRef.new(shape: IdentityProviderUserIdPrefix, location_name: "IdentityProviderUserIdPrefix"))
     ListUsersFilters.struct_class = Types::ListUsersFilters
 
     ListUsersRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
@@ -1207,6 +1305,23 @@ module Aws::WorkMail
 
     Permissions.member = Shapes::ShapeRef.new(shape: Permission)
 
+    PersonalAccessTokenConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: PersonalAccessTokenConfigurationStatus, required: true, location_name: "Status"))
+    PersonalAccessTokenConfiguration.add_member(:lifetime_in_days, Shapes::ShapeRef.new(shape: PersonalAccessTokenLifetimeInDays, location_name: "LifetimeInDays"))
+    PersonalAccessTokenConfiguration.struct_class = Types::PersonalAccessTokenConfiguration
+
+    PersonalAccessTokenScopeList.member = Shapes::ShapeRef.new(shape: PersonalAccessTokenScope)
+
+    PersonalAccessTokenSummary.add_member(:personal_access_token_id, Shapes::ShapeRef.new(shape: PersonalAccessTokenId, location_name: "PersonalAccessTokenId"))
+    PersonalAccessTokenSummary.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "UserId"))
+    PersonalAccessTokenSummary.add_member(:name, Shapes::ShapeRef.new(shape: PersonalAccessTokenName, location_name: "Name"))
+    PersonalAccessTokenSummary.add_member(:date_created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
+    PersonalAccessTokenSummary.add_member(:date_last_used, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateLastUsed"))
+    PersonalAccessTokenSummary.add_member(:expires_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresTime"))
+    PersonalAccessTokenSummary.add_member(:scopes, Shapes::ShapeRef.new(shape: PersonalAccessTokenScopeList, location_name: "Scopes"))
+    PersonalAccessTokenSummary.struct_class = Types::PersonalAccessTokenSummary
+
+    PersonalAccessTokenSummaryList.member = Shapes::ShapeRef.new(shape: PersonalAccessTokenSummary)
+
     PutAccessControlRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlRuleName, required: true, location_name: "Name"))
     PutAccessControlRuleRequest.add_member(:effect, Shapes::ShapeRef.new(shape: AccessControlRuleEffect, required: true, location_name: "Effect"))
     PutAccessControlRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlRuleDescription, required: true, location_name: "Description"))
@@ -1229,6 +1344,14 @@ module Aws::WorkMail
     PutEmailMonitoringConfigurationRequest.struct_class = Types::PutEmailMonitoringConfigurationRequest
 
     PutEmailMonitoringConfigurationResponse.struct_class = Types::PutEmailMonitoringConfigurationResponse
+
+    PutIdentityProviderConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    PutIdentityProviderConfigurationRequest.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: IdentityProviderAuthenticationMode, required: true, location_name: "AuthenticationMode"))
+    PutIdentityProviderConfigurationRequest.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, required: true, location_name: "IdentityCenterConfiguration"))
+    PutIdentityProviderConfigurationRequest.add_member(:personal_access_token_configuration, Shapes::ShapeRef.new(shape: PersonalAccessTokenConfiguration, required: true, location_name: "PersonalAccessTokenConfiguration"))
+    PutIdentityProviderConfigurationRequest.struct_class = Types::PutIdentityProviderConfigurationRequest
+
+    PutIdentityProviderConfigurationResponse.struct_class = Types::PutIdentityProviderConfigurationResponse
 
     PutInboundDmarcSettingsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     PutInboundDmarcSettingsRequest.add_member(:enforced, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enforced"))
@@ -1448,6 +1571,7 @@ module Aws::WorkMail
     UpdateUserRequest.add_member(:department, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Department"))
     UpdateUserRequest.add_member(:country, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Country"))
     UpdateUserRequest.add_member(:office, Shapes::ShapeRef.new(shape: UserAttribute, location_name: "Office"))
+    UpdateUserRequest.add_member(:identity_provider_user_id, Shapes::ShapeRef.new(shape: IdentityProviderUserIdForUpdate, location_name: "IdentityProviderUserId"))
     UpdateUserRequest.struct_class = Types::UpdateUserRequest
 
     UpdateUserResponse.struct_class = Types::UpdateUserResponse
@@ -1460,6 +1584,8 @@ module Aws::WorkMail
     User.add_member(:user_role, Shapes::ShapeRef.new(shape: UserRole, location_name: "UserRole"))
     User.add_member(:enabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
     User.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
+    User.add_member(:identity_provider_user_id, Shapes::ShapeRef.new(shape: IdentityProviderUserId, location_name: "IdentityProviderUserId"))
+    User.add_member(:identity_provider_identity_store_id, Shapes::ShapeRef.new(shape: IdentityProviderIdentityStoreId, location_name: "IdentityProviderIdentityStoreId"))
     User.struct_class = Types::User
 
     UserIdList.member = Shapes::ShapeRef.new(shape: WorkMailIdentifier)
@@ -1584,6 +1710,15 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNameException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:create_identity_center_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIdentityCenterApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateIdentityCenterApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIdentityCenterApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:create_impersonation_role, Seahorse::Model::Operation.new.tap do |o|
@@ -1717,6 +1852,27 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:delete_identity_center_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIdentityCenterApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIdentityCenterApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIdentityCenterApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:delete_identity_provider_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIdentityProviderConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIdentityProviderConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIdentityProviderConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:delete_impersonation_role, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteImpersonationRole"
         o.http_method = "POST"
@@ -1770,6 +1926,17 @@ module Aws::WorkMail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteOrganizationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteOrganizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:delete_personal_access_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePersonalAccessToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePersonalAccessTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePersonalAccessTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
@@ -1876,6 +2043,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
+      api.add_operation(:describe_identity_provider_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIdentityProviderConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIdentityProviderConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIdentityProviderConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_inbound_dmarc_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeInboundDmarcSettings"
         o.http_method = "POST"
@@ -1927,6 +2106,8 @@ module Aws::WorkMail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeUserRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
@@ -2062,6 +2243,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_personal_access_token_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPersonalAccessTokenMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPersonalAccessTokenMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPersonalAccessTokenMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:list_access_control_rules, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAccessControlRules"
         o.http_method = "POST"
@@ -2099,6 +2292,7 @@ module Aws::WorkMail
         o.output = Shapes::ShapeRef.new(shape: ListAvailabilityConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2276,6 +2470,25 @@ module Aws::WorkMail
         )
       end)
 
+      api.add_operation(:list_personal_access_tokens, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPersonalAccessTokens"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPersonalAccessTokensRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPersonalAccessTokensResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_resource_delegates, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListResourceDelegates"
         o.http_method = "POST"
@@ -2364,6 +2577,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:put_identity_provider_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutIdentityProviderConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutIdentityProviderConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutIdentityProviderConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:put_inbound_dmarc_settings, Seahorse::Model::Operation.new.tap do |o|

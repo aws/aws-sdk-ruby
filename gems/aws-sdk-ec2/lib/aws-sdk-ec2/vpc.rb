@@ -1732,12 +1732,12 @@ module Aws::EC2
     #
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
-    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efs` \|
-    #     `gateway_load_balancer` \| `gateway_load_balancer_endpoint` \|
-    #     `global_accelerator_managed` \| `interface` \| `iot_rules_managed`
-    #     \| `lambda` \| `load_balancer` \| `nat_gateway` \|
-    #     `network_load_balancer` \| `quicksight` \| `transit_gateway` \|
-    #     `trunk` \| `vpc_endpoint`).
+    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
+    #     \| `efs` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
+    #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
+    #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|
+    #     `transit_gateway` \| `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #

@@ -399,13 +399,21 @@ module Aws::ElasticLoadBalancingV2
     #   from the IPv4 range of the subnet.
     #   @return [Array<Types::LoadBalancerAddress>]
     #
+    # @!attribute [rw] source_nat_ipv_6_prefixes
+    #   \[Network Load Balancers with UDP listeners\] The IPv6 prefixes to
+    #   use for source NAT. For each subnet, specify an IPv6 prefix (/80
+    #   netmask) from the subnet CIDR block or `auto_assigned` to use an
+    #   IPv6 prefix selected at random from the subnet CIDR block.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id,
       :outpost_id,
-      :load_balancer_addresses)
+      :load_balancer_addresses,
+      :source_nat_ipv_6_prefixes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -478,12 +486,12 @@ module Aws::ElasticLoadBalancingV2
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
     #   TLS, UDP, and TCP\_UDP. You can’t specify the UDP or TCP\_UDP
-    #   protocol if dual-stack mode is enabled. You cannot specify a
+    #   protocol if dual-stack mode is enabled. You can't specify a
     #   protocol for a Gateway Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port on which the load balancer is listening. You cannot specify
+    #   The port on which the load balancer is listening. You can't specify
     #   a port for a Gateway Load Balancer.
     #   @return [Integer]
     #
@@ -594,11 +602,8 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers on Local Zones\] You can specify
     #   subnets from one or more Local Zones.
     #
-    #   \[Network Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones.
-    #
-    #   \[Gateway Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones.
+    #   \[Network Load Balancers and Gateway Load Balancers\] You can
+    #   specify subnets from one or more Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
@@ -607,7 +612,7 @@ module Aws::ElasticLoadBalancingV2
     #   mappings, but not both.
     #
     #   \[Application Load Balancers\] You must specify subnets from at
-    #   least two Availability Zones. You cannot specify Elastic IP
+    #   least two Availability Zones. You can't specify Elastic IP
     #   addresses for your subnets.
     #
     #   \[Application Load Balancers on Outposts\] You must specify one
@@ -625,7 +630,7 @@ module Aws::ElasticLoadBalancingV2
     #   subnet.
     #
     #   \[Gateway Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones. You cannot specify Elastic IP addresses for your
+    #   Availability Zones. You can't specify Elastic IP addresses for your
     #   subnets.
     #   @return [Array<Types::SubnetMapping>]
     #
@@ -649,7 +654,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   The default is an Internet-facing load balancer.
     #
-    #   You cannot specify a scheme for a Gateway Load Balancer.
+    #   You can't specify a scheme for a Gateway Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -661,26 +666,27 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   Note: Internal load balancers must use the `ipv4` IP address type.
+    #   The IP address type. Internal load balancers must use `ipv4`.
     #
-    #   \[Application Load Balancers\] The IP address type. The possible
-    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4
-    #   and IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6
-    #   only public addresses, with private IPv4 and IPv6 addresses).
+    #   \[Application Load Balancers\] The possible values are `ipv4` (IPv4
+    #   addresses), `dualstack` (IPv4 and IPv6 addresses), and
+    #   `dualstack-without-public-ipv4` (public IPv6 addresses and private
+    #   IPv4 and IPv6 addresses).
     #
-    #   \[Network Load Balancers\] The IP address type. The possible values
-    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
-    #   IPv6 addresses). You can’t specify `dualstack` for a load balancer
-    #   with a UDP or TCP\_UDP listener.
-    #
-    #   \[Gateway Load Balancers\] The IP address type. The possible values
-    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
-    #   IPv6 addresses).
+    #   \[Network Load Balancers and Gateway Load Balancers\] The possible
+    #   values are `ipv4` (IPv4 addresses) and `dualstack` (IPv4 and IPv6
+    #   addresses).
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
     #   \[Application Load Balancers on Outposts\] The ID of the
     #   customer-owned address pool (CoIP pool).
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_prefix_for_ipv_6_source_nat
+    #   \[Network Load Balancers with UDP listeners\] Indicates whether to
+    #   use an IPv6 prefix from each subnet for source NAT. The IP address
+    #   type must be `dualstack`. The default value is `off`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancerInput AWS API Documentation
@@ -694,7 +700,8 @@ module Aws::ElasticLoadBalancingV2
       :tags,
       :type,
       :ip_address_type,
-      :customer_owned_ipv_4_pool)
+      :customer_owned_ipv_4_pool,
+      :enable_prefix_for_ipv_6_source_nat)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -815,7 +822,7 @@ module Aws::ElasticLoadBalancingV2
     #   Indicates whether health checks are enabled. If the target type is
     #   `lambda`, health checks are disabled by default but can be enabled.
     #   If the target type is `instance`, `ip`, or `alb`, health checks are
-    #   always enabled and cannot be disabled.
+    #   always enabled and can't be disabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] health_check_path
@@ -897,9 +904,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP address used for this target group. The possible
-    #   values are `ipv4` and `ipv6`. This is an optional parameter. If not
-    #   specified, the IP address type defaults to `ipv4`.
+    #   The IP address type. The default value is `ipv4`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput AWS API Documentation
@@ -941,7 +946,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] name
     #   The name of the trust store.
     #
-    #   This name must be unique per region and cannot be changed after
+    #   This name must be unique per region and can't be changed after
     #   creation.
     #   @return [String]
     #
@@ -986,7 +991,7 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # The specified association cannot be within the same account.
+    # The specified association can't be within the same account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteAssociationSameAccountException AWS API Documentation
     #
@@ -2247,17 +2252,17 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] ip_address_type
-    #   \[Application Load Balancers\] The type of IP addresses used for
-    #   public or private connections by the subnets attached to your load
-    #   balancer. The possible values are `ipv4` (for only IPv4 addresses),
-    #   `dualstack` (for IPv4 and IPv6 addresses), and
-    #   `dualstack-without-public-ipv4` (for IPv6 only public addresses,
-    #   with private IPv4 and IPv6 addresses).
+    #   The type of IP addresses used for public or private connections by
+    #   the subnets attached to your load balancer.
     #
-    #   \[Network Load Balancers and Gateway Load Balancers\] The type of IP
-    #   addresses used for public or private connections by the subnets
-    #   attached to your load balancer. The possible values are `ipv4` (for
-    #   only IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
+    #   \[Application Load Balancers\] The possible values are `ipv4` (IPv4
+    #   addresses), `dualstack` (IPv4 and IPv6 addresses), and
+    #   `dualstack-without-public-ipv4` (public IPv6 addresses and private
+    #   IPv4 and IPv6 addresses).
+    #
+    #   \[Network Load Balancers and Gateway Load Balancers\] The possible
+    #   values are `ipv4` (IPv4 addresses) and `dualstack` (IPv4 and IPv6
+    #   addresses).
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
@@ -2269,6 +2274,12 @@ module Aws::ElasticLoadBalancingV2
     #   Indicates whether to evaluate inbound security group rules for
     #   traffic sent to a Network Load Balancer through Amazon Web Services
     #   PrivateLink.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_prefix_for_ipv_6_source_nat
+    #   \[Network Load Balancers with UDP listeners\] Indicates whether to
+    #   use an IPv6 prefix from each subnet for source NAT. The IP address
+    #   type must be `dualstack`. The default value is `off`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancer AWS API Documentation
@@ -2287,7 +2298,8 @@ module Aws::ElasticLoadBalancingV2
       :security_groups,
       :ip_address_type,
       :customer_owned_ipv_4_pool,
-      :enforce_security_group_inbound_rules_on_private_link_traffic)
+      :enforce_security_group_inbound_rules_on_private_link_traffic,
+      :enable_prefix_for_ipv_6_source_nat)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2338,7 +2350,7 @@ module Aws::ElasticLoadBalancingV2
     #     load balancing is enabled. The possible values are `true` and
     #     `false`. The default for Network Load Balancers and Gateway Load
     #     Balancers is `false`. The default for Application Load Balancers
-    #     is `true`, and cannot be changed.
+    #     is `true`, and can't be changed.
     #
     #   The following attributes are supported by both Application Load
     #   Balancers and Network Load Balancers:
@@ -2573,7 +2585,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] port
     #   The port for connections from clients to the load balancer. You
-    #   cannot specify a port for a Gateway Load Balancer.
+    #   can't specify a port for a Gateway Load Balancer.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -2581,7 +2593,7 @@ module Aws::ElasticLoadBalancingV2
     #   Application Load Balancers support the HTTP and HTTPS protocols.
     #   Network Load Balancers support the TCP, TLS, UDP, and TCP\_UDP
     #   protocols. You can’t change the protocol to UDP or TCP\_UDP if
-    #   dual-stack mode is enabled. You cannot specify a protocol for a
+    #   dual-stack mode is enabled. You can't specify a protocol for a
     #   Gateway Load Balancer.
     #   @return [String]
     #
@@ -3027,7 +3039,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] protocol
     #   The protocol. You can specify HTTP, HTTPS, or #\\\{protocol\\}. You
     #   can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You
-    #   cannot redirect HTTPS to HTTP.
+    #   can't redirect HTTPS to HTTP.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -3253,7 +3265,7 @@ module Aws::ElasticLoadBalancingV2
     # conditions: `http-request-method`, `host-header`, `path-pattern`, and
     # `source-ip`. Each rule can also optionally include one or more of each
     # of the following conditions: `http-header` and `query-string`. Note
-    # that the value for a condition cannot be empty.
+    # that the value for a condition can't be empty.
     #
     # For more information, see [Quotas for your Application Load
     # Balancers][1].
@@ -3397,27 +3409,21 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   Note: Internal load balancers must use the `ipv4` IP address type.
+    #   The IP address type. Internal load balancers must use `ipv4`.
     #
-    #   \[Application Load Balancers\] The IP address type. The possible
-    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4
-    #   and IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6
-    #   only public addresses, with private IPv4 and IPv6 addresses).
+    #   \[Application Load Balancers\] The possible values are `ipv4` (IPv4
+    #   addresses), `dualstack` (IPv4 and IPv6 addresses), and
+    #   `dualstack-without-public-ipv4` (public IPv6 addresses and private
+    #   IPv4 and IPv6 addresses).
     #
-    #   Note: Application Load Balancer authentication only supports IPv4
-    #   addresses when connecting to an Identity Provider (IdP) or Amazon
-    #   Cognito endpoint. Without a public IPv4 address the load balancer
-    #   cannot complete the authentication process, resulting in HTTP 500
-    #   errors.
+    #   Application Load Balancer authentication supports IPv4 addresses
+    #   only when connecting to an Identity Provider (IdP) or Amazon Cognito
+    #   endpoint. Without a public IPv4 address the load balancer can't
+    #   complete the authentication process, resulting in HTTP 500 errors.
     #
-    #   \[Network Load Balancers\] The IP address type. The possible values
-    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
-    #   IPv6 addresses). You can’t specify `dualstack` for a load balancer
-    #   with a UDP or TCP\_UDP listener.
-    #
-    #   \[Gateway Load Balancers\] The IP address type. The possible values
-    #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
-    #   IPv6 addresses).
+    #   \[Network Load Balancers and Gateway Load Balancers\] The possible
+    #   values are `ipv4` (IPv4 addresses) and `dualstack` (IPv4 and IPv6
+    #   addresses).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressTypeInput AWS API Documentation
@@ -3526,11 +3532,8 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers on Local Zones\] You can specify
     #   subnets from one or more Local Zones.
     #
-    #   \[Network Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones.
-    #
-    #   \[Gateway Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones.
+    #   \[Network Load Balancers and Gateway Load Balancers\] You can
+    #   specify subnets from one or more Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
@@ -3539,7 +3542,7 @@ module Aws::ElasticLoadBalancingV2
     #   mappings.
     #
     #   \[Application Load Balancers\] You must specify subnets from at
-    #   least two Availability Zones. You cannot specify Elastic IP
+    #   least two Availability Zones. You can't specify Elastic IP
     #   addresses for your subnets.
     #
     #   \[Application Load Balancers on Outposts\] You must specify one
@@ -3561,20 +3564,22 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] ip_address_type
-    #   \[Application Load Balancers\] The IP address type. The possible
-    #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4
-    #   and IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6
-    #   only public addresses, with private IPv4 and IPv6 addresses).
+    #   The IP address type.
     #
-    #   \[Network Load Balancers\] The type of IP addresses used by the
-    #   subnets for your load balancer. The possible values are `ipv4` (for
-    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
-    #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
-    #   listener.
+    #   \[Application Load Balancers\] The possible values are `ipv4` (IPv4
+    #   addresses), `dualstack` (IPv4 and IPv6 addresses), and
+    #   `dualstack-without-public-ipv4` (public IPv6 addresses and private
+    #   IPv4 and IPv6 addresses).
     #
-    #   \[Gateway Load Balancers\] The type of IP addresses used by the
-    #   subnets for your load balancer. The possible values are `ipv4` (for
-    #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses).
+    #   \[Network Load Balancers and Gateway Load Balancers\] The possible
+    #   values are `ipv4` (IPv4 addresses) and `dualstack` (IPv4 and IPv6
+    #   addresses).
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_prefix_for_ipv_6_source_nat
+    #   \[Network Load Balancers with UDP listeners\] Indicates whether to
+    #   use an IPv6 prefix from each subnet for source NAT. The IP address
+    #   type must be `dualstack`. The default value is `off`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
@@ -3583,7 +3588,8 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arn,
       :subnets,
       :subnet_mappings,
-      :ip_address_type)
+      :ip_address_type,
+      :enable_prefix_for_ipv_6_source_nat)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3593,18 +3599,20 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @!attribute [rw] ip_address_type
-    #   \[Application Load Balancers\] The IP address type.
+    #   The IP address type.
+    #   @return [String]
     #
-    #   \[Network Load Balancers\] The IP address type.
-    #
-    #   \[Gateway Load Balancers\] The IP address type.
+    # @!attribute [rw] enable_prefix_for_ipv_6_source_nat
+    #   \[Network Load Balancers\] Indicates whether to use an IPv6 prefix
+    #   from each subnet for source NAT.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsOutput AWS API Documentation
     #
     class SetSubnetsOutput < Struct.new(
       :availability_zones,
-      :ip_address_type)
+      :ip_address_type,
+      :enable_prefix_for_ipv_6_source_nat)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3686,13 +3694,21 @@ module Aws::ElasticLoadBalancingV2
     #   \[Network Load Balancers\] The IPv6 address.
     #   @return [String]
     #
+    # @!attribute [rw] source_nat_ipv_6_prefix
+    #   \[Network Load Balancers with UDP listeners\] The IPv6 prefix to use
+    #   for source NAT. Specify an IPv6 prefix (/80 netmask) from the subnet
+    #   CIDR block or `auto_assigned` to use an IPv6 prefix selected at
+    #   random from the subnet CIDR block.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetMapping AWS API Documentation
     #
     class SubnetMapping < Struct.new(
       :subnet_id,
       :allocation_id,
       :private_i_pv_4_address,
-      :i_pv_6_address)
+      :i_pv_6_address,
+      :source_nat_ipv_6_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3882,9 +3898,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The type of IP address used for this target group. The possible
-    #   values are `ipv4` and `ipv6`. This is an optional parameter. If not
-    #   specified, the IP address type defaults to `ipv4`.
+    #   The IP address type. The default value is `ipv4`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroup AWS API Documentation
@@ -4045,7 +4059,7 @@ module Aws::ElasticLoadBalancingV2
     #     preservation is enabled. The value is `true` or `false`. The
     #     default is disabled if the target group type is IP address and the
     #     target group protocol is TCP or TLS. Otherwise, the default is
-    #     enabled. Client IP preservation cannot be disabled for UDP and
+    #     enabled. Client IP preservation can't be disabled for UDP and
     #     TCP\_UDP target groups.
     #
     #   * `proxy_protocol_v2.enabled` - Indicates whether Proxy Protocol
@@ -4083,7 +4097,7 @@ module Aws::ElasticLoadBalancingV2
     #     possible values are `rebalance` and `no_rebalance`. The default is
     #     `no_rebalance`. The two attributes
     #     (`target_failover.on_deregistration` and
-    #     `target_failover.on_unhealthy`) cannot be set independently. The
+    #     `target_failover.on_unhealthy`) can't be set independently. The
     #     value you set for both attributes must be the same.
     #   @return [String]
     #

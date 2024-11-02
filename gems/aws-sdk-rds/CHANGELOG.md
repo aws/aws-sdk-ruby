@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.256.0 (2024-10-28)
+------------------
+
+* Feature - This release adds support for Enhanced Monitoring and Performance Insights when restoring Aurora Limitless Database DB clusters. It also adds support for the os-upgrade pending maintenance action.
+
 1.255.0 (2024-10-22)
 ------------------
 

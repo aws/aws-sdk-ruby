@@ -3320,7 +3320,7 @@ module Aws::Route53
     #     HTTP status code of 200 or greater and less than 400.
     #
     #     If you specify `HTTPS` for the value of `Type`, the endpoint must
-    #     support TLS v1.0 or later.
+    #     support TLS v1.0, v1.1, or v1.2.
     #
     #   * **HTTP\_STR\_MATCH**: Route 53 tries to establish a TCP
     #     connection. If successful, Route 53 submits an HTTP request and
@@ -6362,16 +6362,18 @@ module Aws::Route53
     #
     #   Valid values for basic resource record sets: `A` \| `AAAA` \| `CAA`
     #   \| `CNAME` \| `DS` \|`MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \|
-    #   `SPF` \| `SRV` \| `TXT`
+    #   `SPF` \| `SRV` \| `TXT`\| `TLSA`\| `SSHFP`\| `SVCB`\| `HTTPS`
     #
     #   Values for weighted, latency, geolocation, and failover resource
     #   record sets: `A` \| `AAAA` \| `CAA` \| `CNAME` \| `MX` \| `NAPTR` \|
-    #   `PTR` \| `SPF` \| `SRV` \| `TXT`. When creating a group of weighted,
-    #   latency, geolocation, or failover resource record sets, specify the
-    #   same value for all of the resource record sets in the group.
+    #   `PTR` \| `SPF` \| `SRV` \| `TXT`\| `TLSA`\| `SSHFP`\| `SVCB`\|
+    #   `HTTPS`. When creating a group of weighted, latency, geolocation, or
+    #   failover resource record sets, specify the same value for all of the
+    #   resource record sets in the group.
     #
     #   Valid values for multivalue answer resource record sets: `A` \|
-    #   `AAAA` \| `MX` \| `NAPTR` \| `PTR` \| `SPF` \| `SRV` \| `TXT`
+    #   `AAAA` \| `MX` \| `NAPTR` \| `PTR` \| `SPF` \| `SRV` \| `TXT`\|
+    #   `CAA`\| `TLSA`\| `SSHFP`\| `SVCB`\| `HTTPS`
     #
     #   <note markdown="1"> SPF records were formerly used to verify the identity of the sender
     #   of email messages. However, we no longer recommend that you create

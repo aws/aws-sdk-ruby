@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-11-01)
+------------------
+
+* Feature - Amazon Bedrock Knowledge Bases now supports using application inference profiles to increase throughput and improve resilience.
+
 1.31.0 (2024-10-25)
 ------------------
 

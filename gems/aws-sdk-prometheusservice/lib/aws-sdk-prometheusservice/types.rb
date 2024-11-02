@@ -24,7 +24,9 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # The details of an alert manager definition.
+    # The details of an alert manager definition. It is the configuration
+    # for the alert manager, including information about receivers for
+    # routing alerts.
     #
     # @!attribute [rw] created_at
     #   The date and time that the alert manager definition was created.
@@ -184,7 +186,7 @@ module Aws::PrometheusService
     # @!attribute [rw] log_group_arn
     #   The ARN of the CloudWatch log group to which the vended log data
     #   will be published. This log group must exist prior to calling this
-    #   API.
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -298,7 +300,7 @@ module Aws::PrometheusService
     # Represents the input of a `CreateScraper` operation.
     #
     # @!attribute [rw] alias
-    #   (optional) a name to associate with the scraper. This is for your
+    #   (optional) An alias to associate with the scraper. This is for your
     #   use, and does not need to be unique.
     #   @return [String]
     #
@@ -317,9 +319,12 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] scrape_configuration
     #   The configuration file to use in the new scraper. For more
-    #   information, see [Scraper
-    #   configuration](prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration)
-    #   in the *Amazon Managed Service for Prometheus User Guide*.
+    #   information, see [Scraper configuration][1] in the *Amazon Managed
+    #   Service for Prometheus User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration
     #   @return [Types::ScrapeConfiguration]
     #
     # @!attribute [rw] source
@@ -750,7 +755,7 @@ module Aws::PrometheusService
     # @note Destination is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Destination corresponding to the set member.
     #
     # @!attribute [rw] amp_configuration
-    #   The Amazon Managed Service for Prometheusworkspace to send metrics
+    #   The Amazon Managed Service for Prometheus workspace to send metrics
     #   to.
     #   @return [Types::AmpConfiguration]
     #
@@ -967,8 +972,8 @@ module Aws::PrometheusService
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource to list tages for. Must be a workspace or
-    #   rule groups namespace resource.
+    #   The ARN of the resource to list tages for. Must be a workspace,
+    #   scraper, or rule groups namespace resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListTagsForResourceRequest AWS API Documentation
@@ -1050,7 +1055,8 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
-    # Contains information about the logging configuration.
+    # Contains information about the logging configuration for the
+    # workspace.
     #
     # @!attribute [rw] created_at
     #   The date and time that the logging configuration was created.
@@ -1256,7 +1262,8 @@ module Aws::PrometheusService
     # The details about one rule groups namespace.
     #
     # @!attribute [rw] arn
-    #   The ARN of the rule groups namespace.
+    #   The ARN of the rule groups namespace. For example,
+    #   `arn:aws:aps:<region>:123456789012:rulegroupsnamespace/ws-example1-1234-abcd-5678-ef90abcd1234/rulesfile1`.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1369,9 +1376,12 @@ module Aws::PrometheusService
     end
 
     # A scrape configuration for a scraper, base 64 encoded. For more
-    # information, see [Scraper
-    # configuration](prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration)
-    # in the *Amazon Managed Service for Prometheus User Guide*.
+    # information, see [Scraper configuration][1] in the *Amazon Managed
+    # Service for Prometheus User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration
     #
     # @note ScrapeConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -1402,7 +1412,8 @@ module Aws::PrometheusService
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the scraper.
+    #   The Amazon Resource Name (ARN) of the scraper. For example,
+    #   `arn:aws:aps:<region>:123456798012:scraper/s-example1-1234-abcd-5678-ef9012abcd34`.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1422,14 +1433,18 @@ module Aws::PrometheusService
     #   The Amazon Resource Name (ARN) of the IAM role that provides
     #   permissions for the scraper to discover and collect metrics on your
     #   behalf.
+    #
+    #   For example,
+    #   `arn:aws:iam::123456789012:role/service-role/AmazonGrafanaServiceRole-12example`.
     #   @return [String]
     #
     # @!attribute [rw] scrape_configuration
-    #   The configuration file in use by the scraper.
+    #   The configuration in use by the scraper.
     #   @return [Types::ScrapeConfiguration]
     #
     # @!attribute [rw] scraper_id
-    #   The ID of the scraper.
+    #   The ID of the scraper. For example,
+    #   `s-example1-1234-abcd-5678-ef9012abcd34`.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -1610,13 +1625,13 @@ module Aws::PrometheusService
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the workspace or rule groups namespace to apply tags to.
+    #   The ARN of the resource to apply tags to.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The list of tag keys and values to associate with the resource.
     #
-    #   Keys may not begin with `aws:`.
+    #   Keys must not begin with `aws:`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/TagResourceRequest AWS API Documentation
@@ -1662,7 +1677,7 @@ module Aws::PrometheusService
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the workspace or rule groups namespace.
+    #   The ARN of the resource from which to remove a tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -1722,6 +1737,81 @@ module Aws::PrometheusService
     #
     class UpdateLoggingConfigurationResponse < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias
+    #   The new alias of the scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier that you can provide to ensure the idempotency
+    #   of the request. Case-sensitive.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The new Amazon Managed Service for Prometheus workspace to send
+    #   metrics to.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] scrape_configuration
+    #   Contains the base-64 encoded YAML configuration for the scraper.
+    #
+    #   <note markdown="1"> For more information about configuring a scraper, see [Using an
+    #   Amazon Web Services managed collector][1] in the *Amazon Managed
+    #   Service for Prometheus User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html
+    #   @return [Types::ScrapeConfiguration]
+    #
+    # @!attribute [rw] scraper_id
+    #   The ID of the scraper to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperRequest AWS API Documentation
+    #
+    class UpdateScraperRequest < Struct.new(
+      :alias,
+      :client_token,
+      :destination,
+      :scrape_configuration,
+      :scraper_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the updated scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] scraper_id
+    #   The ID of the updated scraper.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A structure that displays the current status of the scraper.
+    #   @return [Types::ScraperStatus]
+    #
+    # @!attribute [rw] tags
+    #   The list of tag keys and values that are associated with the
+    #   scraper.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperResponse AWS API Documentation
+    #
+    class UpdateScraperResponse < Struct.new(
+      :arn,
+      :scraper_id,
+      :status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1808,11 +1898,12 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] alias
     #   The alias that is assigned to this workspace to help identify it. It
-    #   may not be unique.
+    #   does not need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of the workspace.
+    #   The ARN of the workspace. For example,
+    #   `arn:aws:aps:<region>:123456789012:workspace/ws-example1-1234-abcd-5678-ef90abcd1234`.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1825,7 +1916,8 @@ module Aws::PrometheusService
     #   @return [String]
     #
     # @!attribute [rw] prometheus_endpoint
-    #   The Prometheus endpoint available for this workspace.
+    #   The Prometheus endpoint available for this workspace. For example,
+    #   `https://aps-workspaces.<region>.amazonaws.com/workspaces/ws-example1-1234-abcd-5678-ef90abcd1234/api/v1/`.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1838,7 +1930,8 @@ module Aws::PrometheusService
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] workspace_id
-    #   The unique ID for the workspace.
+    #   The unique ID for the workspace. For example,
+    #   `ws-example1-1234-abcd-5678-ef90abcd1234`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/WorkspaceDescription AWS API Documentation
@@ -1875,7 +1968,7 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] alias
     #   The alias that is assigned to this workspace to help identify it. It
-    #   may not be unique.
+    #   does not need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] arn

@@ -2580,7 +2580,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Creates a zero-ETL integration with Amazon Redshift.
+    # Creates a zero-ETL integration or S3 event integration with Amazon
+    # Redshift.
     #
     # @option params [required, String] :source_arn
     #   The Amazon Resource Name (ARN) of the database to use as the source
@@ -2634,8 +2635,8 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration({
-    #     source_arn: "String", # required
-    #     target_arn: "String", # required
+    #     source_arn: "SourceArn", # required
+    #     target_arn: "TargetArn", # required
     #     integration_name: "IntegrationName", # required
     #     kms_key_id: "String",
     #     tag_list: [
@@ -3787,7 +3788,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Deletes a zero-ETL integration with Amazon Redshift.
+    # Deletes a zero-ETL integration or S3 event integration with Amazon
+    # Redshift.
     #
     # @option params [required, String] :integration_arn
     #   The unique identifier of the integration to delete.
@@ -6164,8 +6166,8 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_inbound_integrations({
-    #     integration_arn: "String",
-    #     target_arn: "String",
+    #     integration_arn: "InboundIntegrationArn",
+    #     target_arn: "TargetArn",
     #     max_records: 1,
     #     marker: "String",
     #   })
@@ -6192,7 +6194,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Describes one or more zero-ETL integrations with Amazon Redshift.
+    # Describes one or more zero-ETL or S3 event integrations with Amazon
+    # Redshift.
     #
     # @option params [String] :integration_arn
     #   The unique identifier of the integration.
@@ -7308,7 +7311,7 @@ module Aws::Redshift
     #
     #   * Snapshot copy grant
     #
-    #   * Integration (zero-ETL integration)
+    #   * Integration (zero-ETL integration or S3 event integration)
     #
     #     <note markdown="1"> To describe the tags associated with an `integration`, don't
     #     specify `ResourceType`, instead specify the `ResourceName` of the
@@ -10231,7 +10234,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies a zero-ETL integration with Amazon Redshift.
+    # Modifies a zero-ETL integration or S3 event integration with Amazon
+    # Redshift.
     #
     # @option params [required, String] :integration_arn
     #   The unique identifier of the integration to modify.
@@ -12731,7 +12735,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

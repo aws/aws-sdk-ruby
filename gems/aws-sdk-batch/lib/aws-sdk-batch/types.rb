@@ -234,8 +234,10 @@ module Aws::Batch
     # @!attribute [rw] reason
     #   A message to attach to the job that explains the reason for
     #   canceling it. This message is returned by future DescribeJobs
-    #   operations on the job. This message is also recorded in the Batch
-    #   activity logs.
+    #   operations on the job. It is also recorded in the Batch activity
+    #   logs.
+    #
+    #   This parameter has as limit of 1024 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobRequest AWS API Documentation
@@ -2273,14 +2275,21 @@ module Aws::Batch
     #
     # @!attribute [rw] scheduling_policy_arn
     #   The Amazon Resource Name (ARN) of the fair share scheduling policy.
-    #   If this parameter is specified, the job queue uses a fair share
-    #   scheduling policy. If this parameter isn't specified, the job queue
-    #   uses a first in, first out (FIFO) scheduling policy. After a job
-    #   queue is created, you can replace but can't remove the fair share
-    #   scheduling policy. The format is
-    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. An
-    #   example is
+    #   Job queues that don't have a scheduling policy are scheduled in a
+    #   first-in, first-out (FIFO) model. After a job queue has a scheduling
+    #   policy, it can be replaced but can't be removed.
+    #
+    #   The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `.
+    #
+    #   An example is
     #   `aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy`.
+    #
+    #   A job queue without a scheduling policy is scheduled as a FIFO job
+    #   queue and can't have a scheduling policy added. Jobs queues with a
+    #   scheduling policy can have a maximum of 500 active fair share
+    #   identifiers. When the limit has been reached, submissions of any
+    #   jobs that add a new fair share identifier fail.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -2328,7 +2337,8 @@ module Aws::Batch
     #   The set of actions that Batch performs on jobs that remain at the
     #   head of the job queue in the specified state longer than specified
     #   times. Batch will perform each action after `maxTimeSeconds` has
-    #   passed.
+    #   passed. (**Note**: The minimum value for maxTimeSeconds is 600 (10
+    #   minutes) and its maximum value is 86,400 (24 hours).)
     #   @return [Array<Types::JobStateTimeLimitAction>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueRequest AWS API Documentation
@@ -3018,7 +3028,8 @@ module Aws::Batch
     #   An object that contains the properties for the Amazon ECS task
     #   definition of a job.
     #
-    #   <note markdown="1"> This object is currently limited to one element.
+    #   <note markdown="1"> This object is currently limited to one task element. However, the
+    #   task element can run up to 10 containers.
     #
     #    </note>
     #   @return [Array<Types::EcsTaskProperties>]
@@ -3296,6 +3307,10 @@ module Aws::Batch
     #   The name of a container.
     #   @return [String]
     #
+    # @!attribute [rw] container_id
+    #   The ID for the container.
+    #   @return [String]
+    #
     # @!attribute [rw] exit_code
     #   The exit code returned for the job attempt. A non-zero exit code is
     #   considered failed.
@@ -3310,6 +3325,7 @@ module Aws::Batch
     #
     class EksAttemptContainerDetail < Struct.new(
       :name,
+      :container_id,
       :exit_code,
       :reason)
       SENSITIVE = []
@@ -3334,6 +3350,10 @@ module Aws::Batch
     #
     # @!attribute [rw] pod_name
     #   The name of the pod for this job attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] pod_namespace
+    #   The namespace of the Amazon EKS cluster that the pod exists in.
     #   @return [String]
     #
     # @!attribute [rw] node_name
@@ -3365,6 +3385,7 @@ module Aws::Batch
       :init_containers,
       :eks_cluster_arn,
       :pod_name,
+      :pod_namespace,
       :node_name,
       :started_at,
       :stopped_at,
@@ -4133,6 +4154,10 @@ module Aws::Batch
     #
     # @!attribute [rw] containers
     #   The properties of the container that's used on the Amazon EKS pod.
+    #
+    #   <note markdown="1"> This object is limited to 10 elements.
+    #
+    #    </note>
     #   @return [Array<Types::EksContainer>]
     #
     # @!attribute [rw] init_containers
@@ -4143,7 +4168,7 @@ module Aws::Batch
     #   Kubernetes backend data store. For more information, see [Init
     #   Containers][1] in the *Kubernetes documentation*.
     #
-    #   <note markdown="1"> This object is limited to 10 elements
+    #   <note markdown="1"> This object is limited to 10 elements.
     #
     #    </note>
     #
@@ -4325,17 +4350,13 @@ module Aws::Batch
     #   @return [Array<Types::EksContainerOverride>]
     #
     # @!attribute [rw] init_containers
-    #   The overrides for the conatainers defined in the Amazon EKS pod.
-    #   These containers run before application containers, always runs to
-    #   completion, and must complete successfully before the next container
-    #   starts. These containers are registered with the Amazon EKS
-    #   Connector agent and persists the registration information in the
+    #   The overrides for the `initContainers` defined in the Amazon EKS
+    #   pod. These containers run before application containers, always runs
+    #   to completion, and must complete successfully before the next
+    #   container starts. These containers are registered with the Amazon
+    #   EKS Connector agent and persists the registration information in the
     #   Kubernetes backend data store. For more information, see [Init
     #   Containers][1] in the *Kubernetes documentation*.
-    #
-    #   <note markdown="1"> This object is limited to 10 elements
-    #
-    #    </note>
     #
     #
     #
@@ -7856,8 +7877,10 @@ module Aws::Batch
     # @!attribute [rw] reason
     #   A message to attach to the job that explains the reason for
     #   canceling it. This message is returned by future DescribeJobs
-    #   operations on the job. This message is also recorded in the Batch
-    #   activity logs.
+    #   operations on the job. It is also recorded in the Batch activity
+    #   logs.
+    #
+    #   This parameter has as limit of 1024 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobRequest AWS API Documentation
@@ -8174,7 +8197,8 @@ module Aws::Batch
     #   The set of actions that Batch perform on jobs that remain at the
     #   head of the job queue in the specified state longer than specified
     #   times. Batch will perform each action after `maxTimeSeconds` has
-    #   passed.
+    #   passed. (**Note**: The minimum value for maxTimeSeconds is 600 (10
+    #   minutes) and its maximum value is 86,400 (24 hours).)
     #   @return [Array<Types::JobStateTimeLimitAction>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueueRequest AWS API Documentation

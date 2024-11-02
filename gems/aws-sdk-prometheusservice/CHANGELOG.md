@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2024-10-31)
+------------------
+
+* Feature - Added support for UpdateScraper API, to enable updating collector configuration in-place
+
 1.43.0 (2024-10-18)
 ------------------
 

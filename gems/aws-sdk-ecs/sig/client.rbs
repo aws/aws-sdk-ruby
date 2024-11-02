@@ -200,8 +200,8 @@ module Aws
                               minimum_healthy_percent: ::Integer?,
                               alarms: {
                                 alarm_names: Array[::String],
-                                enable: bool,
-                                rollback: bool
+                                rollback: bool,
+                                enable: bool
                               }?
                             },
                             ?placement_constraints: Array[
@@ -509,6 +509,28 @@ module Aws
                                         ) -> _DescribeContainerInstancesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContainerInstancesResponseSuccess
 
+      interface _DescribeServiceDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceDeploymentsResponse]
+        def service_deployments: () -> ::Array[Types::ServiceDeployment]
+        def failures: () -> ::Array[Types::Failure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#describe_service_deployments-instance_method
+      def describe_service_deployments: (
+                                          service_deployment_arns: Array[::String]
+                                        ) -> _DescribeServiceDeploymentsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceDeploymentsResponseSuccess
+
+      interface _DescribeServiceRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceRevisionsResponse]
+        def service_revisions: () -> ::Array[Types::ServiceRevision]
+        def failures: () -> ::Array[Types::Failure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#describe_service_revisions-instance_method
+      def describe_service_revisions: (
+                                        service_revision_arns: Array[::String]
+                                      ) -> _DescribeServiceRevisionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceRevisionsResponseSuccess
+
       interface _DescribeServicesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServicesResponse]
         def services: () -> ::Array[Types::Service]
@@ -663,6 +685,25 @@ module Aws
                                       ?status: ("ACTIVE" | "DRAINING" | "REGISTERING" | "DEREGISTERING" | "REGISTRATION_FAILED")
                                     ) -> _ListContainerInstancesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContainerInstancesResponseSuccess
+
+      interface _ListServiceDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceDeploymentsResponse]
+        def service_deployments: () -> ::Array[Types::ServiceDeploymentBrief]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#list_service_deployments-instance_method
+      def list_service_deployments: (
+                                      service: ::String,
+                                      ?cluster: ::String,
+                                      ?status: Array[("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")],
+                                      ?created_at: {
+                                        before: ::Time?,
+                                        after: ::Time?
+                                      },
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListServiceDeploymentsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceDeploymentsResponseSuccess
 
       interface _ListServicesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesResponse]
@@ -1582,8 +1623,8 @@ module Aws
                               minimum_healthy_percent: ::Integer?,
                               alarms: {
                                 alarm_names: Array[::String],
-                                enable: bool,
-                                rollback: bool
+                                rollback: bool,
+                                enable: bool
                               }?
                             },
                             ?network_configuration: {

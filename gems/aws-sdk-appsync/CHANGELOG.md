@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2024-10-30)
+------------------
+
+* Feature - This release adds support for AppSync Event APIs.
+
 1.90.0 (2024-10-18)
 ------------------
 

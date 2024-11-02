@@ -2382,6 +2382,43 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_id
+    #   A security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   A VPC ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSecurityGroupVpcRequest AWS API Documentation
+    #
+    class AssociateSecurityGroupVpcRequest < Struct.new(
+      :group_id,
+      :vpc_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The state of the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSecurityGroupVpcResult AWS API Documentation
+    #
+    class AssociateSecurityGroupVpcResult < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ipv_6_ipam_pool_id
     #   An IPv6 IPAM pool ID.
     #   @return [String]
@@ -10159,7 +10196,12 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface. The default is `interface`.
     #
-    #   The only supported values are `interface`, `efa`, and `trunk`.
+    #   If you specify `efa-only`, do not assign any IP addresses to the
+    #   network interface. EFA-only network interfaces do not support IP
+    #   addresses.
+    #
+    #   The only supported values are `interface`, `efa`, `efa-only`, and
+    #   `trunk`.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -10841,11 +10883,16 @@ module Aws::EC2
     #   The tags assigned to the security group.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] security_group_arn
+    #   The security group ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroupResult AWS API Documentation
     #
     class CreateSecurityGroupResult < Struct.new(
       :group_id,
-      :tags)
+      :tags,
+      :security_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20867,7 +20914,8 @@ module Aws::EC2
     #   * `supported-root-device-type` - The root device type (`ebs` \|
     #     `instance-store`).
     #
-    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`).
+    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`
+    #     \| `capacity-block`).
     #
     #   * `supported-virtualization-type` - The virtualization type (`hvm`
     #     \| `paravirtual`).
@@ -23677,12 +23725,12 @@ module Aws::EC2
     #
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
-    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efs` \|
-    #     `gateway_load_balancer` \| `gateway_load_balancer_endpoint` \|
-    #     `global_accelerator_managed` \| `interface` \| `iot_rules_managed`
-    #     \| `lambda` \| `load_balancer` \| `nat_gateway` \|
-    #     `network_load_balancer` \| `quicksight` \| `transit_gateway` \|
-    #     `trunk` \| `vpc_endpoint`).
+    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
+    #     \| `efs` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed`
+    #     \| `interface` \| `iot_rules_managed` \| `lambda` \|
+    #     `load_balancer` \| `nat_gateway` \| `network_load_balancer` \|
+    #     `quicksight` \| `transit_gateway` \| `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #
@@ -24930,6 +24978,80 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   Security group VPC association filters.
+    #
+    #   * `group-id`: The security group ID.
+    #
+    #   * `vpc-id`: The ID of the associated VPC.
+    #
+    #   * `vpc-owner-id`: The account ID of the VPC owner.
+    #
+    #   * `state`: The state of the association.
+    #
+    #   * `tag:<key>`: The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key`: The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupVpcAssociationsRequest AWS API Documentation
+    #
+    class DescribeSecurityGroupVpcAssociationsRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_group_vpc_associations
+    #   The security group VPC associations.
+    #   @return [Array<Types::SecurityGroupVpcAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupVpcAssociationsResult AWS API Documentation
+    #
+    class DescribeSecurityGroupVpcAssociationsResult < Struct.new(
+      :security_group_vpc_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group_ids
     #   The IDs of the security groups. Required for security groups in a
     #   nondefault VPC.
@@ -25901,8 +26023,7 @@ module Aws::EC2
 
     # @!attribute [rw] next_token
     #   The token to include in another request to get the next page of
-    #   items. If there are no additional items to return, the string is
-    #   empty.
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] stale_security_group_set
@@ -30319,6 +30440,43 @@ module Aws::EC2
     class DisassociateRouteTableRequest < Struct.new(
       :dry_run,
       :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_id
+    #   A security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   A VPC ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSecurityGroupVpcRequest AWS API Documentation
+    #
+    class DisassociateSecurityGroupVpcRequest < Struct.new(
+      :group_id,
+      :vpc_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The state of the disassociation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSecurityGroupVpcResult AWS API Documentation
+    #
+    class DisassociateSecurityGroupVpcResult < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41037,7 +41195,7 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface.
     #
-    #   Valid values: `interface` \| `efa` \| `trunk`
+    #   Valid values: `interface` \| `efa` \| `efa-only` \| `trunk`
     #   @return [String]
     #
     # @!attribute [rw] ipv_4_prefixes
@@ -41291,7 +41449,11 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface.
     #
-    #   Valid values: `interface` \| `efa`
+    #   If you specify `efa-only`, do not assign any IP addresses to the
+    #   network interface. EFA-only network interfaces do not support IP
+    #   addresses.
+    #
+    #   Valid values: `interface` \| `efa` \| `efa-only`
     #   @return [String]
     #
     # @!attribute [rw] network_card_index
@@ -42741,8 +42903,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] supported_usage_classes
-    #   Indicates whether the instance type is offered for spot or
-    #   On-Demand.
+    #   Indicates whether the instance type is offered for spot, On-Demand,
+    #   or Capacity Blocks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_root_device_types
@@ -46158,13 +46320,17 @@ module Aws::EC2
     #
     # @!attribute [rw] interface_type
     #   The type of network interface. To create an Elastic Fabric Adapter
-    #   (EFA), specify `efa`. For more information, see [Elastic Fabric
-    #   Adapter][1] in the *Amazon EC2 User Guide*.
+    #   (EFA), specify `efa` or `efa`. For more information, see [Elastic
+    #   Fabric Adapter][1] in the *Amazon EC2 User Guide*.
     #
     #   If you are not creating an EFA, specify `interface` or omit this
     #   parameter.
     #
-    #   Valid values: `interface` \| `efa`
+    #   If you specify `efa-only`, do not assign any IP addresses to the
+    #   network interface. EFA-only network interfaces do not support IP
+    #   addresses.
+    #
+    #   Valid values: `interface` \| `efa` \| `efa-only`
     #
     #
     #
@@ -59874,11 +60040,16 @@ module Aws::EC2
     #   request parameter.
     #   @return [Array<Types::IpPermission>]
     #
+    # @!attribute [rw] revoked_security_group_rules
+    #   Details about the revoked security group rules.
+    #   @return [Array<Types::RevokedSecurityGroupRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgressResult AWS API Documentation
     #
     class RevokeSecurityGroupEgressResult < Struct.new(
       :return,
-      :unknown_ip_permissions)
+      :unknown_ip_permissions,
+      :revoked_security_group_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -59976,11 +60147,86 @@ module Aws::EC2
     #   request parameter.
     #   @return [Array<Types::IpPermission>]
     #
+    # @!attribute [rw] revoked_security_group_rules
+    #   Details about the revoked security group rules.
+    #   @return [Array<Types::RevokedSecurityGroupRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressResult AWS API Documentation
     #
     class RevokeSecurityGroupIngressResult < Struct.new(
       :return,
-      :unknown_ip_permissions)
+      :unknown_ip_permissions,
+      :revoked_security_group_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group rule removed with [RevokeSecurityGroupEgress][1] or
+    # [RevokeSecurityGroupIngress][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupEgress.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupIngress.html
+    #
+    # @!attribute [rw] security_group_rule_id
+    #   A security group rule ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   A security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_egress
+    #   Defines if a security group rule is an outbound rule.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ip_protocol
+    #   The security group rule's protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_port
+    #   The 'from' port number of the security group rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The 'to' port number of the security group rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cidr_ipv_4
+    #   The IPv4 CIDR of the traffic source.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_ipv_6
+    #   The IPv6 CIDR of the traffic source.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of a prefix list that's the traffic source.
+    #   @return [String]
+    #
+    # @!attribute [rw] referenced_group_id
+    #   The ID of a referenced security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the revoked security group rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokedSecurityGroupRule AWS API Documentation
+    #
+    class RevokedSecurityGroupRule < Struct.new(
+      :security_group_rule_id,
+      :group_id,
+      :is_egress,
+      :ip_protocol,
+      :from_port,
+      :to_port,
+      :cidr_ipv_4,
+      :cidr_ipv_6,
+      :prefix_list_id,
+      :referenced_group_id,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61712,6 +61958,10 @@ module Aws::EC2
     #   The ID of the VPC for the security group.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_arn
+    #   The ARN of the security group.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_id
     #   The Amazon Web Services account ID of the owner of the security
     #   group.
@@ -61736,6 +61986,7 @@ module Aws::EC2
       :ip_permissions_egress,
       :tags,
       :vpc_id,
+      :security_group_arn,
       :owner_id,
       :group_name,
       :description,
@@ -61911,6 +62162,10 @@ module Aws::EC2
     #   The tags applied to the security group rule.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] security_group_rule_arn
+    #   The ARN of the security group rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupRule AWS API Documentation
     #
     class SecurityGroupRule < Struct.new(
@@ -61926,7 +62181,8 @@ module Aws::EC2
       :prefix_list_id,
       :referenced_group_info,
       :description,
-      :tags)
+      :tags,
+      :security_group_rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -62047,6 +62303,45 @@ module Aws::EC2
     class SecurityGroupRuleUpdate < Struct.new(
       :security_group_rule_id,
       :security_group_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group association with a VPC that you made with
+    # [AssociateSecurityGroupVpc][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html
+    #
+    # @!attribute [rw] group_id
+    #   The association's security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The association's VPC ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_owner_id
+    #   The Amazon Web Services account ID of the owner of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The association's state.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The association's state reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupVpcAssociation AWS API Documentation
+    #
+    class SecurityGroupVpcAssociation < Struct.new(
+      :group_id,
+      :vpc_id,
+      :vpc_owner_id,
+      :state,
+      :state_reason)
       SENSITIVE = []
       include Aws::Structure
     end

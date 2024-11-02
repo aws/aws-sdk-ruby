@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2024-10-30)
+------------------
+
+* Feature - This release supports service deployments and service revisions which provide a comprehensive view of your Amazon ECS service history.
+
 1.165.0 (2024-10-24)
 ------------------
 

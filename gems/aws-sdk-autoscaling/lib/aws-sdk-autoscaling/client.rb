@@ -2941,7 +2941,7 @@ module Aws::AutoScaling
     #   resp.instance_refreshes #=> Array
     #   resp.instance_refreshes[0].instance_refresh_id #=> String
     #   resp.instance_refreshes[0].auto_scaling_group_name #=> String
-    #   resp.instance_refreshes[0].status #=> String, one of "Pending", "InProgress", "Successful", "Failed", "Cancelling", "Cancelled", "RollbackInProgress", "RollbackFailed", "RollbackSuccessful"
+    #   resp.instance_refreshes[0].status #=> String, one of "Pending", "InProgress", "Successful", "Failed", "Cancelling", "Cancelled", "RollbackInProgress", "RollbackFailed", "RollbackSuccessful", "Baking"
     #   resp.instance_refreshes[0].status_reason #=> String
     #   resp.instance_refreshes[0].start_time #=> Time
     #   resp.instance_refreshes[0].end_time #=> Time
@@ -2963,6 +2963,7 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].preferences.alarm_specification.alarms #=> Array
     #   resp.instance_refreshes[0].preferences.alarm_specification.alarms[0] #=> String
     #   resp.instance_refreshes[0].preferences.max_healthy_percentage #=> Integer
+    #   resp.instance_refreshes[0].preferences.bake_time #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_id #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_name #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.version #=> String
@@ -6572,6 +6573,8 @@ module Aws::AutoScaling
     #
     #   * Skip matching
     #
+    #   * Bake time
+    #
     # @return [Types::StartInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartInstanceRefreshAnswer#instance_refresh_id #instance_refresh_id} => String
@@ -6713,6 +6716,7 @@ module Aws::AutoScaling
     #         alarms: ["XmlStringMaxLen255"],
     #       },
     #       max_healthy_percentage: 1,
+    #       bake_time: 1,
     #     },
     #   })
     #
@@ -7311,7 +7315,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -886,6 +886,11 @@ module Aws::OpenSearchServerless
     # @option params [String] :description
     #   A description of the security configuration.
     #
+    # @option params [Types::CreateIamIdentityCenterConfigOptions] :iam_identity_center_options
+    #   Describes IAM Identity Center options in the form of a key-value map.
+    #   This field is required if you specify iamidentitycenter for the type
+    #   parameter.
+    #
     # @option params [required, String] :name
     #   The name of the security configuration.
     #
@@ -905,6 +910,11 @@ module Aws::OpenSearchServerless
     #   resp = client.create_security_config({
     #     client_token: "ClientToken",
     #     description: "ConfigDescription",
+    #     iam_identity_center_options: {
+    #       group_attribute: "GroupId", # accepts GroupId, GroupName
+    #       instance_arn: "IamIdentityCenterInstanceArn", # required
+    #       user_attribute: "UserId", # accepts UserId, UserName, Email
+    #     },
     #     name: "ConfigName", # required
     #     saml_options: {
     #       group_attribute: "samlGroupAttribute",
@@ -912,7 +922,7 @@ module Aws::OpenSearchServerless
     #       session_timeout: 1,
     #       user_attribute: "samlUserAttribute",
     #     },
-    #     type: "saml", # required, accepts saml
+    #     type: "saml", # required, accepts saml, iamidentitycenter
     #   })
     #
     # @example Response structure
@@ -920,13 +930,19 @@ module Aws::OpenSearchServerless
     #   resp.security_config_detail.config_version #=> String
     #   resp.security_config_detail.created_date #=> Integer
     #   resp.security_config_detail.description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
+    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.id #=> String
     #   resp.security_config_detail.last_modified_date #=> Integer
     #   resp.security_config_detail.saml_options.group_attribute #=> String
     #   resp.security_config_detail.saml_options.metadata #=> String
     #   resp.security_config_detail.saml_options.session_timeout #=> Integer
     #   resp.security_config_detail.saml_options.user_attribute #=> String
-    #   resp.security_config_detail.type #=> String, one of "saml"
+    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateSecurityConfig AWS API Documentation
     #
@@ -1421,13 +1437,19 @@ module Aws::OpenSearchServerless
     #   resp.security_config_detail.config_version #=> String
     #   resp.security_config_detail.created_date #=> Integer
     #   resp.security_config_detail.description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
+    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.id #=> String
     #   resp.security_config_detail.last_modified_date #=> Integer
     #   resp.security_config_detail.saml_options.group_attribute #=> String
     #   resp.security_config_detail.saml_options.metadata #=> String
     #   resp.security_config_detail.saml_options.session_timeout #=> Integer
     #   resp.security_config_detail.saml_options.user_attribute #=> String
-    #   resp.security_config_detail.type #=> String, one of "saml"
+    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetSecurityConfig AWS API Documentation
     #
@@ -1695,7 +1717,7 @@ module Aws::OpenSearchServerless
     #   resp = client.list_security_configs({
     #     max_results: 1,
     #     next_token: "String",
-    #     type: "saml", # required, accepts saml
+    #     type: "saml", # required, accepts saml, iamidentitycenter
     #   })
     #
     # @example Response structure
@@ -1707,7 +1729,7 @@ module Aws::OpenSearchServerless
     #   resp.security_config_summaries[0].description #=> String
     #   resp.security_config_summaries[0].id #=> String
     #   resp.security_config_summaries[0].last_modified_date #=> Integer
-    #   resp.security_config_summaries[0].type #=> String, one of "saml"
+    #   resp.security_config_summaries[0].type #=> String, one of "saml", "iamidentitycenter"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListSecurityConfigs AWS API Documentation
     #
@@ -2186,6 +2208,9 @@ module Aws::OpenSearchServerless
     # @option params [String] :description
     #   A description of the security configuration.
     #
+    # @option params [Types::UpdateIamIdentityCenterConfigOptions] :iam_identity_center_options_updates
+    #   Describes IAM Identity Center options in the form of a key-value map.
+    #
     # @option params [required, String] :id
     #   The security configuration identifier. For SAML the ID will be
     #   `saml/<accountId>/<idpProviderName>`. For example,
@@ -2204,6 +2229,10 @@ module Aws::OpenSearchServerless
     #     client_token: "ClientToken",
     #     config_version: "PolicyVersion", # required
     #     description: "ConfigDescription",
+    #     iam_identity_center_options_updates: {
+    #       group_attribute: "GroupId", # accepts GroupId, GroupName
+    #       user_attribute: "UserId", # accepts UserId, UserName, Email
+    #     },
     #     id: "SecurityConfigId", # required
     #     saml_options: {
     #       group_attribute: "samlGroupAttribute",
@@ -2218,13 +2247,19 @@ module Aws::OpenSearchServerless
     #   resp.security_config_detail.config_version #=> String
     #   resp.security_config_detail.created_date #=> Integer
     #   resp.security_config_detail.description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
+    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.id #=> String
     #   resp.security_config_detail.last_modified_date #=> Integer
     #   resp.security_config_detail.saml_options.group_attribute #=> String
     #   resp.security_config_detail.saml_options.metadata #=> String
     #   resp.security_config_detail.saml_options.session_timeout #=> Integer
     #   resp.security_config_detail.saml_options.user_attribute #=> String
-    #   resp.security_config_detail.type #=> String, one of "saml"
+    #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateSecurityConfig AWS API Documentation
     #
@@ -2386,7 +2421,7 @@ module Aws::OpenSearchServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

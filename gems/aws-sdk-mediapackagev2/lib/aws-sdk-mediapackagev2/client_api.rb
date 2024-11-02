@@ -18,6 +18,8 @@ module Aws::MediaPackageV2
     AdMarkerDash = Shapes::StringShape.new(name: 'AdMarkerDash')
     AdMarkerHls = Shapes::StringShape.new(name: 'AdMarkerHls')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelHarvestJobRequest = Shapes::StructureShape.new(name: 'CancelHarvestJobRequest')
+    CancelHarvestJobResponse = Shapes::StructureShape.new(name: 'CancelHarvestJobResponse')
     ChannelGroupListConfiguration = Shapes::StructureShape.new(name: 'ChannelGroupListConfiguration')
     ChannelGroupsList = Shapes::ListShape.new(name: 'ChannelGroupsList')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
@@ -36,6 +38,8 @@ module Aws::MediaPackageV2
     CreateDashManifestConfigurationMinUpdatePeriodSecondsInteger = Shapes::IntegerShape.new(name: 'CreateDashManifestConfigurationMinUpdatePeriodSecondsInteger')
     CreateDashManifestConfigurationSuggestedPresentationDelaySecondsInteger = Shapes::IntegerShape.new(name: 'CreateDashManifestConfigurationSuggestedPresentationDelaySecondsInteger')
     CreateDashManifests = Shapes::ListShape.new(name: 'CreateDashManifests')
+    CreateHarvestJobRequest = Shapes::StructureShape.new(name: 'CreateHarvestJobRequest')
+    CreateHarvestJobResponse = Shapes::StructureShape.new(name: 'CreateHarvestJobResponse')
     CreateHlsManifestConfiguration = Shapes::StructureShape.new(name: 'CreateHlsManifestConfiguration')
     CreateHlsManifestConfigurationManifestWindowSecondsInteger = Shapes::IntegerShape.new(name: 'CreateHlsManifestConfigurationManifestWindowSecondsInteger')
     CreateHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger = Shapes::IntegerShape.new(name: 'CreateHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger')
@@ -64,6 +68,7 @@ module Aws::MediaPackageV2
     DeleteOriginEndpointPolicyResponse = Shapes::StructureShape.new(name: 'DeleteOriginEndpointPolicyResponse')
     DeleteOriginEndpointRequest = Shapes::StructureShape.new(name: 'DeleteOriginEndpointRequest')
     DeleteOriginEndpointResponse = Shapes::StructureShape.new(name: 'DeleteOriginEndpointResponse')
+    Destination = Shapes::StructureShape.new(name: 'Destination')
     DrmSystem = Shapes::StringShape.new(name: 'DrmSystem')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     EncryptionConstantInitializationVectorString = Shapes::StringShape.new(name: 'EncryptionConstantInitializationVectorString')
@@ -86,6 +91,8 @@ module Aws::MediaPackageV2
     GetChannelResponse = Shapes::StructureShape.new(name: 'GetChannelResponse')
     GetDashManifestConfiguration = Shapes::StructureShape.new(name: 'GetDashManifestConfiguration')
     GetDashManifests = Shapes::ListShape.new(name: 'GetDashManifests')
+    GetHarvestJobRequest = Shapes::StructureShape.new(name: 'GetHarvestJobRequest')
+    GetHarvestJobResponse = Shapes::StructureShape.new(name: 'GetHarvestJobResponse')
     GetHlsManifestConfiguration = Shapes::StructureShape.new(name: 'GetHlsManifestConfiguration')
     GetHlsManifests = Shapes::ListShape.new(name: 'GetHlsManifests')
     GetLowLatencyHlsManifestConfiguration = Shapes::StructureShape.new(name: 'GetLowLatencyHlsManifestConfiguration')
@@ -94,6 +101,17 @@ module Aws::MediaPackageV2
     GetOriginEndpointPolicyResponse = Shapes::StructureShape.new(name: 'GetOriginEndpointPolicyResponse')
     GetOriginEndpointRequest = Shapes::StructureShape.new(name: 'GetOriginEndpointRequest')
     GetOriginEndpointResponse = Shapes::StructureShape.new(name: 'GetOriginEndpointResponse')
+    HarvestJob = Shapes::StructureShape.new(name: 'HarvestJob')
+    HarvestJobStatus = Shapes::StringShape.new(name: 'HarvestJobStatus')
+    HarvestJobsList = Shapes::ListShape.new(name: 'HarvestJobsList')
+    HarvestedDashManifest = Shapes::StructureShape.new(name: 'HarvestedDashManifest')
+    HarvestedDashManifestsList = Shapes::ListShape.new(name: 'HarvestedDashManifestsList')
+    HarvestedHlsManifest = Shapes::StructureShape.new(name: 'HarvestedHlsManifest')
+    HarvestedHlsManifestsList = Shapes::ListShape.new(name: 'HarvestedHlsManifestsList')
+    HarvestedLowLatencyHlsManifest = Shapes::StructureShape.new(name: 'HarvestedLowLatencyHlsManifest')
+    HarvestedLowLatencyHlsManifestsList = Shapes::ListShape.new(name: 'HarvestedLowLatencyHlsManifestsList')
+    HarvestedManifests = Shapes::StructureShape.new(name: 'HarvestedManifests')
+    HarvesterScheduleConfiguration = Shapes::StructureShape.new(name: 'HarvesterScheduleConfiguration')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IngestEndpoint = Shapes::StructureShape.new(name: 'IngestEndpoint')
     IngestEndpointList = Shapes::ListShape.new(name: 'IngestEndpointList')
@@ -106,6 +124,11 @@ module Aws::MediaPackageV2
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListDashManifestConfiguration = Shapes::StructureShape.new(name: 'ListDashManifestConfiguration')
     ListDashManifests = Shapes::ListShape.new(name: 'ListDashManifests')
+    ListHarvestJobsRequest = Shapes::StructureShape.new(name: 'ListHarvestJobsRequest')
+    ListHarvestJobsRequestChannelNameString = Shapes::StringShape.new(name: 'ListHarvestJobsRequestChannelNameString')
+    ListHarvestJobsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListHarvestJobsRequestMaxResultsInteger')
+    ListHarvestJobsRequestOriginEndpointNameString = Shapes::StringShape.new(name: 'ListHarvestJobsRequestOriginEndpointNameString')
+    ListHarvestJobsResponse = Shapes::StructureShape.new(name: 'ListHarvestJobsResponse')
     ListHlsManifestConfiguration = Shapes::StructureShape.new(name: 'ListHlsManifestConfiguration')
     ListHlsManifests = Shapes::ListShape.new(name: 'ListHlsManifests')
     ListLowLatencyHlsManifestConfiguration = Shapes::StructureShape.new(name: 'ListLowLatencyHlsManifestConfiguration')
@@ -129,6 +152,9 @@ module Aws::MediaPackageV2
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTypeNotFound = Shapes::StringShape.new(name: 'ResourceTypeNotFound')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3DestinationConfig = Shapes::StructureShape.new(name: 'S3DestinationConfig')
+    S3DestinationPath = Shapes::StringShape.new(name: 'S3DestinationPath')
     Scte = Shapes::StructureShape.new(name: 'Scte')
     ScteDash = Shapes::StructureShape.new(name: 'ScteDash')
     ScteFilter = Shapes::StringShape.new(name: 'ScteFilter')
@@ -167,6 +193,15 @@ module Aws::MediaPackageV2
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    CancelHarvestJobRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
+    CancelHarvestJobRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
+    CancelHarvestJobRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "OriginEndpointName"))
+    CancelHarvestJobRequest.add_member(:harvest_job_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "HarvestJobName"))
+    CancelHarvestJobRequest.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location: "header", location_name: "x-amzn-update-if-match"))
+    CancelHarvestJobRequest.struct_class = Types::CancelHarvestJobRequest
+
+    CancelHarvestJobResponse.struct_class = Types::CancelHarvestJobResponse
 
     ChannelGroupListConfiguration.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
     ChannelGroupListConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
@@ -242,6 +277,35 @@ module Aws::MediaPackageV2
     CreateDashManifestConfiguration.struct_class = Types::CreateDashManifestConfiguration
 
     CreateDashManifests.member = Shapes::ShapeRef.new(shape: CreateDashManifestConfiguration)
+
+    CreateHarvestJobRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
+    CreateHarvestJobRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
+    CreateHarvestJobRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "OriginEndpointName"))
+    CreateHarvestJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    CreateHarvestJobRequest.add_member(:harvested_manifests, Shapes::ShapeRef.new(shape: HarvestedManifests, required: true, location_name: "HarvestedManifests"))
+    CreateHarvestJobRequest.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: HarvesterScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
+    CreateHarvestJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    CreateHarvestJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateHarvestJobRequest.add_member(:harvest_job_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "HarvestJobName"))
+    CreateHarvestJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateHarvestJobRequest.struct_class = Types::CreateHarvestJobRequest
+
+    CreateHarvestJobResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
+    CreateHarvestJobResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
+    CreateHarvestJobResponse.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
+    CreateHarvestJobResponse.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    CreateHarvestJobResponse.add_member(:harvest_job_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "HarvestJobName"))
+    CreateHarvestJobResponse.add_member(:harvested_manifests, Shapes::ShapeRef.new(shape: HarvestedManifests, required: true, location_name: "HarvestedManifests"))
+    CreateHarvestJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    CreateHarvestJobResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: HarvesterScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
+    CreateHarvestJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    CreateHarvestJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    CreateHarvestJobResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
+    CreateHarvestJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: HarvestJobStatus, required: true, location_name: "Status"))
+    CreateHarvestJobResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    CreateHarvestJobResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
+    CreateHarvestJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateHarvestJobResponse.struct_class = Types::CreateHarvestJobResponse
 
     CreateHlsManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ManifestName, required: true, location_name: "ManifestName"))
     CreateHlsManifestConfiguration.add_member(:child_manifest_name, Shapes::ShapeRef.new(shape: ManifestName, location_name: "ChildManifestName"))
@@ -335,6 +399,9 @@ module Aws::MediaPackageV2
 
     DeleteOriginEndpointResponse.struct_class = Types::DeleteOriginEndpointResponse
 
+    Destination.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "S3Destination"))
+    Destination.struct_class = Types::Destination
+
     Encryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: EncryptionConstantInitializationVectorString, location_name: "ConstantInitializationVector"))
     Encryption.add_member(:encryption_method, Shapes::ShapeRef.new(shape: EncryptionMethod, required: true, location_name: "EncryptionMethod"))
     Encryption.add_member(:key_rotation_interval_seconds, Shapes::ShapeRef.new(shape: EncryptionKeyRotationIntervalSecondsInteger, location_name: "KeyRotationIntervalSeconds"))
@@ -415,6 +482,29 @@ module Aws::MediaPackageV2
 
     GetDashManifests.member = Shapes::ShapeRef.new(shape: GetDashManifestConfiguration)
 
+    GetHarvestJobRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
+    GetHarvestJobRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
+    GetHarvestJobRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "OriginEndpointName"))
+    GetHarvestJobRequest.add_member(:harvest_job_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "HarvestJobName"))
+    GetHarvestJobRequest.struct_class = Types::GetHarvestJobRequest
+
+    GetHarvestJobResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
+    GetHarvestJobResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
+    GetHarvestJobResponse.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
+    GetHarvestJobResponse.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    GetHarvestJobResponse.add_member(:harvest_job_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "HarvestJobName"))
+    GetHarvestJobResponse.add_member(:harvested_manifests, Shapes::ShapeRef.new(shape: HarvestedManifests, required: true, location_name: "HarvestedManifests"))
+    GetHarvestJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    GetHarvestJobResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: HarvesterScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
+    GetHarvestJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    GetHarvestJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    GetHarvestJobResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
+    GetHarvestJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: HarvestJobStatus, required: true, location_name: "Status"))
+    GetHarvestJobResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    GetHarvestJobResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
+    GetHarvestJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetHarvestJobResponse.struct_class = Types::GetHarvestJobResponse
+
     GetHlsManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ManifestName"))
     GetHlsManifestConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Url"))
     GetHlsManifestConfiguration.add_member(:child_manifest_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ChildManifestName"))
@@ -473,6 +563,48 @@ module Aws::MediaPackageV2
     GetOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetOriginEndpointResponse.struct_class = Types::GetOriginEndpointResponse
 
+    HarvestJob.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
+    HarvestJob.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
+    HarvestJob.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
+    HarvestJob.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
+    HarvestJob.add_member(:harvest_job_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "HarvestJobName"))
+    HarvestJob.add_member(:harvested_manifests, Shapes::ShapeRef.new(shape: HarvestedManifests, required: true, location_name: "HarvestedManifests"))
+    HarvestJob.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    HarvestJob.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: HarvesterScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
+    HarvestJob.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    HarvestJob.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    HarvestJob.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
+    HarvestJob.add_member(:status, Shapes::ShapeRef.new(shape: HarvestJobStatus, required: true, location_name: "Status"))
+    HarvestJob.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    HarvestJob.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
+    HarvestJob.struct_class = Types::HarvestJob
+
+    HarvestJobsList.member = Shapes::ShapeRef.new(shape: HarvestJob)
+
+    HarvestedDashManifest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ManifestName"))
+    HarvestedDashManifest.struct_class = Types::HarvestedDashManifest
+
+    HarvestedDashManifestsList.member = Shapes::ShapeRef.new(shape: HarvestedDashManifest)
+
+    HarvestedHlsManifest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ManifestName"))
+    HarvestedHlsManifest.struct_class = Types::HarvestedHlsManifest
+
+    HarvestedHlsManifestsList.member = Shapes::ShapeRef.new(shape: HarvestedHlsManifest)
+
+    HarvestedLowLatencyHlsManifest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ManifestName"))
+    HarvestedLowLatencyHlsManifest.struct_class = Types::HarvestedLowLatencyHlsManifest
+
+    HarvestedLowLatencyHlsManifestsList.member = Shapes::ShapeRef.new(shape: HarvestedLowLatencyHlsManifest)
+
+    HarvestedManifests.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: HarvestedHlsManifestsList, location_name: "HlsManifests"))
+    HarvestedManifests.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: HarvestedDashManifestsList, location_name: "DashManifests"))
+    HarvestedManifests.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: HarvestedLowLatencyHlsManifestsList, location_name: "LowLatencyHlsManifests"))
+    HarvestedManifests.struct_class = Types::HarvestedManifests
+
+    HarvesterScheduleConfiguration.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    HarvesterScheduleConfiguration.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    HarvesterScheduleConfiguration.struct_class = Types::HarvesterScheduleConfiguration
+
     IngestEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     IngestEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "Url"))
     IngestEndpoint.struct_class = Types::IngestEndpoint
@@ -504,6 +636,18 @@ module Aws::MediaPackageV2
     ListDashManifestConfiguration.struct_class = Types::ListDashManifestConfiguration
 
     ListDashManifests.member = Shapes::ShapeRef.new(shape: ListDashManifestConfiguration)
+
+    ListHarvestJobsRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
+    ListHarvestJobsRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ListHarvestJobsRequestChannelNameString, location: "querystring", location_name: "channelName"))
+    ListHarvestJobsRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ListHarvestJobsRequestOriginEndpointNameString, location: "querystring", location_name: "originEndpointName"))
+    ListHarvestJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: HarvestJobStatus, location: "querystring", location_name: "includeStatus"))
+    ListHarvestJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListHarvestJobsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListHarvestJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListHarvestJobsRequest.struct_class = Types::ListHarvestJobsRequest
+
+    ListHarvestJobsResponse.add_member(:items, Shapes::ShapeRef.new(shape: HarvestJobsList, location_name: "Items"))
+    ListHarvestJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListHarvestJobsResponse.struct_class = Types::ListHarvestJobsResponse
 
     ListHlsManifestConfiguration.add_member(:manifest_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ManifestName"))
     ListHlsManifestConfiguration.add_member(:child_manifest_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ChildManifestName"))
@@ -569,6 +713,10 @@ module Aws::MediaPackageV2
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_type_not_found, Shapes::ShapeRef.new(shape: ResourceTypeNotFound, location_name: "ResourceTypeNotFound"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3DestinationConfig.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "BucketName"))
+    S3DestinationConfig.add_member(:destination_path, Shapes::ShapeRef.new(shape: S3DestinationPath, required: true, location_name: "DestinationPath"))
+    S3DestinationConfig.struct_class = Types::S3DestinationConfig
 
     Scte.add_member(:scte_filter, Shapes::ShapeRef.new(shape: ScteFilterList, location_name: "ScteFilter"))
     Scte.struct_class = Types::Scte
@@ -699,6 +847,7 @@ module Aws::MediaPackageV2
 
       api.metadata = {
         "apiVersion" => "2022-12-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mediapackagev2",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
@@ -709,6 +858,20 @@ module Aws::MediaPackageV2
         "signingName" => "mediapackagev2",
         "uid" => "mediapackagev2-2022-12-25",
       }
+
+      api.add_operation(:cancel_harvest_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelHarvestJob"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}"
+        o.input = Shapes::ShapeRef.new(shape: CancelHarvestJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelHarvestJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateChannel"
@@ -731,6 +894,21 @@ module Aws::MediaPackageV2
         o.http_request_uri = "/channelGroup"
         o.input = Shapes::ShapeRef.new(shape: CreateChannelGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateChannelGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_harvest_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateHarvestJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob"
+        o.input = Shapes::ShapeRef.new(shape: CreateHarvestJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateHarvestJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -858,6 +1036,19 @@ module Aws::MediaPackageV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_harvest_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetHarvestJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}"
+        o.input = Shapes::ShapeRef.new(shape: GetHarvestJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetHarvestJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_origin_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetOriginEndpoint"
         o.http_method = "GET"
@@ -908,6 +1099,25 @@ module Aws::MediaPackageV2
         o.http_request_uri = "/channelGroup/{ChannelGroupName}/channel"
         o.input = Shapes::ShapeRef.new(shape: ListChannelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_harvest_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHarvestJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/channelGroup/{ChannelGroupName}/harvestJob"
+        o.input = Shapes::ShapeRef.new(shape: ListHarvestJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHarvestJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

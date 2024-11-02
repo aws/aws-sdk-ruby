@@ -23415,6 +23415,11 @@ module Aws::Connect
     #
     #  </note>
     #
+    # The `FirstName` and `LastName` length constraints below apply only to
+    # instances using SAML for identity management. If you are using Amazon
+    # Connect for identity management, the length constraints are 1-255 for
+    # `FirstName`, and 1-256 for `LastName`.
+    #
     # @!attribute [rw] first_name
     #   The first name. This is required if you are using Amazon Connect or
     #   SAML for identity management.

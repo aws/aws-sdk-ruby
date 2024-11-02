@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2024-10-31)
+------------------
+
+* Feature - This release enables customers to provide the email template content in the SESv2 SendEmail and SendBulkEmail APIs instead of the name or the ARN of a stored email template.
+
 1.65.0 (2024-10-18)
 ------------------
 

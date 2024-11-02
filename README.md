@@ -578,6 +578,9 @@ RubyGems.org page under "LINKS" section.
 | Amazon Lex Runtime V2                                 | Aws::LexRuntimeV2                        | aws-sdk-lexruntimev2                        | 2020-08-07  |
 | Amazon Lightsail                                      | Aws::Lightsail                           | aws-sdk-lightsail                           | 2016-11-28  |
 | Amazon Location Service                               | Aws::LocationService                     | aws-sdk-locationservice                     | 2020-11-19  |
+| Amazon Location Service Maps V2                       | Aws::GeoMaps                             | aws-sdk-geomaps                             | 2020-11-19  |
+| Amazon Location Service Places V2                     | Aws::GeoPlaces                           | aws-sdk-geoplaces                           | 2020-11-19  |
+| Amazon Location Service Routes V2                     | Aws::GeoRoutes                           | aws-sdk-georoutes                           | 2020-11-19  |
 | Amazon Lookout for Equipment                          | Aws::LookoutEquipment                    | aws-sdk-lookoutequipment                    | 2020-12-15  |
 | Amazon Lookout for Metrics                            | Aws::LookoutMetrics                      | aws-sdk-lookoutmetrics                      | 2017-07-25  |
 | Amazon Lookout for Vision                             | Aws::LookoutforVision                    | aws-sdk-lookoutforvision                    | 2020-11-20  |

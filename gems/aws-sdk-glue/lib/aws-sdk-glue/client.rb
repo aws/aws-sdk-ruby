@@ -2921,6 +2921,64 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates settings for a column statistics task.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table for which to generate column statistics.
+    #
+    # @option params [required, String] :role
+    #   The role used for running the column statistics.
+    #
+    # @option params [String] :schedule
+    #   A schedule for running the column statistics, specified in CRON
+    #   syntax.
+    #
+    # @option params [Array<String>] :column_name_list
+    #   A list of column names for which to run statistics.
+    #
+    # @option params [Float] :sample_size
+    #   The percentage of data to sample.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog in which the database resides.
+    #
+    # @option params [String] :security_configuration
+    #   Name of the security configuration that is used to encrypt CloudWatch
+    #   logs.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tags.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_column_statistics_task_settings({
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     role: "NameString", # required
+    #     schedule: "CronExpression",
+    #     column_name_list: ["NameString"],
+    #     sample_size: 1.0,
+    #     catalog_id: "NameString",
+    #     security_configuration: "NameString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateColumnStatisticsTaskSettings AWS API Documentation
+    #
+    # @overload create_column_statistics_task_settings(params = {})
+    # @param [Hash] params ({})
+    def create_column_statistics_task_settings(params = {}, options = {})
+      req = build_request(:create_column_statistics_task_settings, params)
+      req.send_request(options)
+    end
+
     # Creates a connection definition in the Data Catalog.
     #
     # Connections used for creating federated resources require the IAM
@@ -5265,6 +5323,32 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes settings for a column statistics task.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table for which to delete column statistics.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_column_statistics_task_settings({
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsTaskSettings AWS API Documentation
+    #
+    # @overload delete_column_statistics_task_settings(params = {})
+    # @param [Hash] params ({})
+    def delete_column_statistics_task_settings(params = {}, options = {})
+      req = build_request(:delete_column_statistics_task_settings, params)
+      req.send_request(options)
+    end
+
     # Deletes a connection from the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -6522,6 +6606,7 @@ module Aws::Glue
     #   resp.column_statistics_task_run.security_configuration #=> String
     #   resp.column_statistics_task_run.number_of_workers #=> Integer
     #   resp.column_statistics_task_run.worker_type #=> String
+    #   resp.column_statistics_task_run.computation_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.column_statistics_task_run.status #=> String, one of "STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"
     #   resp.column_statistics_task_run.creation_time #=> Time
     #   resp.column_statistics_task_run.last_updated #=> Time
@@ -6585,6 +6670,7 @@ module Aws::Glue
     #   resp.column_statistics_task_runs[0].security_configuration #=> String
     #   resp.column_statistics_task_runs[0].number_of_workers #=> Integer
     #   resp.column_statistics_task_runs[0].worker_type #=> String
+    #   resp.column_statistics_task_runs[0].computation_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.column_statistics_task_runs[0].status #=> String, one of "STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"
     #   resp.column_statistics_task_runs[0].creation_time #=> Time
     #   resp.column_statistics_task_runs[0].last_updated #=> Time
@@ -6600,6 +6686,47 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_column_statistics_task_runs(params = {}, options = {})
       req = build_request(:get_column_statistics_task_runs, params)
+      req.send_request(options)
+    end
+
+    # Gets settings for a column statistics task.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table for which to retrieve column statistics.
+    #
+    # @return [Types::GetColumnStatisticsTaskSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetColumnStatisticsTaskSettingsResponse#column_statistics_task_settings #column_statistics_task_settings} => Types::ColumnStatisticsTaskSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_column_statistics_task_settings({
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_settings.database_name #=> String
+    #   resp.column_statistics_task_settings.table_name #=> String
+    #   resp.column_statistics_task_settings.schedule.schedule_expression #=> String
+    #   resp.column_statistics_task_settings.schedule.state #=> String, one of "SCHEDULED", "NOT_SCHEDULED", "TRANSITIONING"
+    #   resp.column_statistics_task_settings.column_name_list #=> Array
+    #   resp.column_statistics_task_settings.column_name_list[0] #=> String
+    #   resp.column_statistics_task_settings.catalog_id #=> String
+    #   resp.column_statistics_task_settings.role #=> String
+    #   resp.column_statistics_task_settings.sample_size #=> Float
+    #   resp.column_statistics_task_settings.security_configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskSettings AWS API Documentation
+    #
+    # @overload get_column_statistics_task_settings(params = {})
+    # @param [Hash] params ({})
+    def get_column_statistics_task_settings(params = {}, options = {})
+      req = build_request(:get_column_statistics_task_settings, params)
       req.send_request(options)
     end
 
@@ -15485,6 +15612,33 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Starts a column statistics task run schedule.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table for which to start a column statistic task run
+    #   schedule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_column_statistics_task_run_schedule({
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunSchedule AWS API Documentation
+    #
+    # @overload start_column_statistics_task_run_schedule(params = {})
+    # @param [Hash] params ({})
+    def start_column_statistics_task_run_schedule(params = {}, options = {})
+      req = build_request(:start_column_statistics_task_run_schedule, params)
+      req.send_request(options)
+    end
+
     # Starts a crawl using the specified crawler, regardless of what is
     # scheduled. If the crawler is already running, returns a
     # [CrawlerRunningException][1].
@@ -16191,6 +16345,33 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Stops a column statistics task run schedule.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table for which to stop a column statistic task run
+    #   schedule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_column_statistics_task_run_schedule({
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunSchedule AWS API Documentation
+    #
+    # @overload stop_column_statistics_task_run_schedule(params = {})
+    # @param [Hash] params ({})
+    def stop_column_statistics_task_run_schedule(params = {}, options = {})
+      req = build_request(:stop_column_statistics_task_run_schedule, params)
+      req.send_request(options)
+    end
+
     # If the specified crawler is running, stops the crawl.
     #
     # @option params [required, String] :name
@@ -16814,6 +16995,58 @@ module Aws::Glue
     # @param [Hash] params ({})
     def update_column_statistics_for_table(params = {}, options = {})
       req = build_request(:update_column_statistics_for_table, params)
+      req.send_request(options)
+    end
+
+    # Updates settings for a column statistics task.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table for which to generate column statistics.
+    #
+    # @option params [String] :role
+    #   The role used for running the column statistics.
+    #
+    # @option params [String] :schedule
+    #   A schedule for running the column statistics, specified in CRON
+    #   syntax.
+    #
+    # @option params [Array<String>] :column_name_list
+    #   A list of column names for which to run statistics.
+    #
+    # @option params [Float] :sample_size
+    #   The percentage of data to sample.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog in which the database resides.
+    #
+    # @option params [String] :security_configuration
+    #   Name of the security configuration that is used to encrypt CloudWatch
+    #   logs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_column_statistics_task_settings({
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     role: "NameString",
+    #     schedule: "CronExpression",
+    #     column_name_list: ["NameString"],
+    #     sample_size: 1.0,
+    #     catalog_id: "NameString",
+    #     security_configuration: "NameString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsTaskSettings AWS API Documentation
+    #
+    # @overload update_column_statistics_task_settings(params = {})
+    # @param [Hash] params ({})
+    def update_column_statistics_task_settings(params = {}, options = {})
+      req = build_request(:update_column_statistics_task_settings, params)
       req.send_request(options)
     end
 
@@ -18223,7 +18456,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.199.0'
+      context[:gem_version] = '1.200.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

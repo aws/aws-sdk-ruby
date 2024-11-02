@@ -35,6 +35,7 @@ module Aws::CloudWatchLogs
     AnomalyVisibilityTime = Shapes::IntegerShape.new(name: 'AnomalyVisibilityTime')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateKmsKeyRequest = Shapes::StructureShape.new(name: 'AssociateKmsKeyRequest')
+    Baseline = Shapes::BooleanShape.new(name: 'Baseline')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelExportTaskRequest = Shapes::StructureShape.new(name: 'CancelExportTaskRequest')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -1379,6 +1380,7 @@ module Aws::CloudWatchLogs
     UpdateAnomalyRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: AnomalyDetectorArn, required: true, location_name: "anomalyDetectorArn"))
     UpdateAnomalyRequest.add_member(:suppression_type, Shapes::ShapeRef.new(shape: SuppressionType, location_name: "suppressionType"))
     UpdateAnomalyRequest.add_member(:suppression_period, Shapes::ShapeRef.new(shape: SuppressionPeriod, location_name: "suppressionPeriod"))
+    UpdateAnomalyRequest.add_member(:baseline, Shapes::ShapeRef.new(shape: Baseline, location_name: "baseline"))
     UpdateAnomalyRequest.struct_class = Types::UpdateAnomalyRequest
 
     UpdateDeliveryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: DeliveryId, required: true, location_name: "id"))

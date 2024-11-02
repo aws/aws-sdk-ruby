@@ -804,6 +804,22 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Information related to the utilization of resources that have been
+    # billed or charged for in a given context, such as a protected query.
+    #
+    # @!attribute [rw] units
+    #   The number of Clean Rooms Processing Unit (CRPU) hours that have
+    #   been billed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BilledResourceUtilization AWS API Documentation
+    #
+    class BilledResourceUtilization < Struct.new(
+      :units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The multi-party data share environment. The collaboration contains
     # metadata about its purpose and participants.
     #
@@ -863,6 +879,10 @@ module Aws::CleanRooms
     #   disabled for the collaboration.
     #   @return [String]
     #
+    # @!attribute [rw] analytics_engine
+    #   The analytics engine for the collaboration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Collaboration AWS API Documentation
     #
     class Collaboration < Struct.new(
@@ -878,7 +898,8 @@ module Aws::CleanRooms
       :membership_id,
       :membership_arn,
       :data_encryption_metadata,
-      :query_log_status)
+      :query_log_status,
+      :analytics_engine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1060,7 +1081,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_account_id
     #   The identifier used to reference members of the collaboration. Only
-    #   supports AWS account ID.
+    #   supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -1128,7 +1149,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_account_id
     #   The identifier used to reference members of the collaboration. Only
-    #   supports AWS account ID.
+    #   supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1538,6 +1559,10 @@ module Aws::CleanRooms
     #   The ARN of a member in a collaboration.
     #   @return [String]
     #
+    # @!attribute [rw] analytics_engine
+    #   The analytics engine.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationSummary AWS API Documentation
     #
     class CollaborationSummary < Struct.new(
@@ -1550,7 +1575,8 @@ module Aws::CleanRooms
       :update_time,
       :member_status,
       :membership_id,
-      :membership_arn)
+      :membership_arn,
+      :analytics_engine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1573,6 +1599,30 @@ module Aws::CleanRooms
       :type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration of the compute resources for an analysis with the
+    # Spark analytics engine.
+    #
+    # @note ComputeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ComputeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ComputeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] worker
+    #   The worker configuration for the compute environment.
+    #   @return [Types::WorkerComputeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ComputeConfiguration AWS API Documentation
+    #
+    class ComputeConfiguration < Struct.new(
+      :worker,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Worker < ComputeConfiguration; end
+      class Unknown < ComputeConfiguration; end
     end
 
     # The configuration details.
@@ -2411,6 +2461,10 @@ module Aws::CleanRooms
     #   default payer.
     #   @return [Types::PaymentConfiguration]
     #
+    # @!attribute [rw] analytics_engine
+    #   The analytics engine.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationInput AWS API Documentation
     #
     class CreateCollaborationInput < Struct.new(
@@ -2422,7 +2476,8 @@ module Aws::CleanRooms
       :data_encryption_metadata,
       :query_log_status,
       :tags,
-      :creator_payment_configuration)
+      :creator_payment_configuration,
+      :analytics_engine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4523,12 +4578,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListAnalysisTemplatesInput AWS API Documentation
@@ -4542,8 +4599,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] analysis_template_summaries
@@ -4565,12 +4621,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationAnalysisTemplatesInput AWS API Documentation
@@ -4584,8 +4642,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_analysis_template_summaries
@@ -4607,12 +4664,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociationsInput AWS API Documentation
@@ -4631,8 +4690,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::CollaborationConfiguredAudienceModelAssociationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociationsOutput AWS API Documentation
@@ -4692,14 +4750,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetTemplatesInput AWS API Documentation
@@ -4713,8 +4771,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_privacy_budget_template_summaries
@@ -4741,14 +4798,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsInput AWS API Documentation
@@ -4767,8 +4824,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::CollaborationPrivacyBudgetSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsOutput AWS API Documentation
@@ -4781,14 +4837,14 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @!attribute [rw] member_status
@@ -4806,8 +4862,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_list
@@ -4829,14 +4884,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredAudienceModelAssociationsInput AWS API Documentation
@@ -4873,12 +4928,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTableAssociationsInput AWS API Documentation
@@ -4896,8 +4953,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::ConfiguredTableAssociationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTableAssociationsOutput AWS API Documentation
@@ -4910,12 +4966,14 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTablesInput AWS API Documentation
@@ -4932,8 +4990,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::ConfiguredTableSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTablesOutput AWS API Documentation
@@ -5035,12 +5092,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMembersInput AWS API Documentation
@@ -5054,8 +5113,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] member_summaries
@@ -5072,12 +5130,14 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -5095,8 +5155,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] membership_summaries
@@ -5119,14 +5178,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetTemplatesInput AWS API Documentation
@@ -5140,8 +5199,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] privacy_budget_template_summaries
@@ -5170,14 +5228,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsInput AWS API Documentation
@@ -5198,8 +5256,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::PrivacyBudgetSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsOutput AWS API Documentation
@@ -5220,14 +5277,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service can return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListProtectedQueriesInput AWS API Documentation
@@ -5242,8 +5299,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] protected_queries
@@ -5265,17 +5321,18 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] schema_type
-    #   If present, filter schemas by schema type. The only valid schema
-    #   type is currently `TABLE`.
+    #   If present, filter schemas by schema type.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListSchemasInput AWS API Documentation
@@ -5294,8 +5351,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::SchemaSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListSchemasOutput AWS API Documentation
@@ -6134,6 +6190,10 @@ module Aws::CleanRooms
     #   the protected query.
     #   @return [Types::DifferentialPrivacyParameters]
     #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the protected query.
+    #   @return [Types::ComputeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQuery AWS API Documentation
     #
     class ProtectedQuery < Struct.new(
@@ -6147,7 +6207,8 @@ module Aws::CleanRooms
       :statistics,
       :result,
       :error,
-      :differential_privacy)
+      :differential_privacy,
+      :compute_configuration)
       SENSITIVE = [:sql_parameters]
       include Aws::Structure
     end
@@ -6302,12 +6363,19 @@ module Aws::CleanRooms
     #   The S3 prefix to unload the protected query results.
     #   @return [String]
     #
+    # @!attribute [rw] single_file_output
+    #   Indicates whether files should be output as a single file (`TRUE`)
+    #   or output as multiple files (`FALSE`). This parameter is only
+    #   supported for analyses with the Spark analytics engine.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryS3OutputConfiguration AWS API Documentation
     #
     class ProtectedQueryS3OutputConfiguration < Struct.new(
       :result_format,
       :bucket,
-      :key_prefix)
+      :key_prefix,
+      :single_file_output)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6359,10 +6427,15 @@ module Aws::CleanRooms
     #   completion.
     #   @return [Integer]
     #
+    # @!attribute [rw] billed_resource_utilization
+    #   The billed resource utilization.
+    #   @return [Types::BilledResourceUtilization]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryStatistics AWS API Documentation
     #
     class ProtectedQueryStatistics < Struct.new(
-      :total_duration_in_millis)
+      :total_duration_in_millis,
+      :billed_resource_utilization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6387,9 +6460,7 @@ module Aws::CleanRooms
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the protected query. Value values are `SUBMITTED`,
-    #   `STARTED`, `CANCELLED`, `CANCELLING`, `FAILED`, `SUCCESS`,
-    #   `TIMED\_OUT`.
+    #   The status of the protected query.
     #   @return [String]
     #
     # @!attribute [rw] receiver_configurations
@@ -6521,7 +6592,7 @@ module Aws::CleanRooms
     # A schema is a relation within a collaboration.
     #
     # @!attribute [rw] columns
-    #   The columns for the relation this schema represents.
+    #   The columns for the relation that this schema represents.
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] partition_keys
@@ -6529,13 +6600,13 @@ module Aws::CleanRooms
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] analysis_rule_types
-    #   The analysis rule types associated with the schema. Currently, only
-    #   one entry is present.
+    #   The analysis rule types that are associated with the schema.
+    #   Currently, only one entry is present.
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
     #   The analysis method for the schema. The only valid value is
-    #   currently DIRECT\_QUERY.
+    #   currently `DIRECT_QUERY`.
     #   @return [String]
     #
     # @!attribute [rw] creator_account_id
@@ -6553,7 +6624,8 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] collaboration_arn
-    #   The unique ARN for the collaboration that the schema belongs to.
+    #   The unique Amazon Resource Name (ARN) for the collaboration that the
+    #   schema belongs to.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6561,15 +6633,15 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The time the schema was created.
+    #   The time at which the schema was created.
     #   @return [Time]
     #
     # @!attribute [rw] update_time
-    #   The time the schema was last updated.
+    #   The most recent time at which the schema was updated.
     #   @return [Time]
     #
     # @!attribute [rw] type
-    #   The type of schema. The only valid value is currently `TABLE`.
+    #   The type of schema.
     #   @return [String]
     #
     # @!attribute [rw] schema_status_details
@@ -6693,8 +6765,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of schema object. The only valid schema type is currently
-    #   `TABLE`.
+    #   The type of schema object.
     #   @return [String]
     #
     # @!attribute [rw] creator_account_id
@@ -6805,13 +6876,18 @@ module Aws::CleanRooms
     #   The details needed to write the query results.
     #   @return [Types::ProtectedQueryResultConfiguration]
     #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the protected query.
+    #   @return [Types::ComputeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedQueryInput AWS API Documentation
     #
     class StartProtectedQueryInput < Struct.new(
       :type,
       :membership_identifier,
       :sql_parameters,
-      :result_configuration)
+      :result_configuration,
+      :compute_configuration)
       SENSITIVE = [:sql_parameters]
       include Aws::Structure
     end
@@ -7417,6 +7493,26 @@ module Aws::CleanRooms
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the compute resources for workers running an
+    # analysis with the Clean Rooms SQL analytics engine.
+    #
+    # @!attribute [rw] type
+    #   The worker compute configuration type.
+    #   @return [String]
+    #
+    # @!attribute [rw] number
+    #   The number of workers.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/WorkerComputeConfiguration AWS API Documentation
+    #
+    class WorkerComputeConfiguration < Struct.new(
+      :type,
+      :number)
       SENSITIVE = []
       include Aws::Structure
     end

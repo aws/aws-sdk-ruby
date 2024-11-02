@@ -1940,6 +1940,45 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The details about the container image a service revision uses.
+    #
+    # To ensure that all tasks in a service use the same container image,
+    # Amazon ECS resolves container image names and any image tags specified
+    # in the task definition to container image digests.
+    #
+    # After the container image digest has been established, Amazon ECS uses
+    # the digest to start any other desired tasks, and for any future
+    # service and service revision updates. This leads to all tasks in a
+    # service always running identical container images, resulting in
+    # version consistency for your software. For more information, see
+    # [Container image resolution][1] in the Amazon ECS Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_digest
+    #   The container image digest.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   The container image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerImage AWS API Documentation
+    #
+    class ContainerImage < Struct.new(
+      :container_name,
+      :image_digest,
+      :image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An Amazon EC2 or External instance that's running the Amazon ECS
     # agent and has been registered with a cluster.
     #
@@ -2746,8 +2785,7 @@ module Aws::ECS
     #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
-    #   during the deployment and the ordering of stopping and starting
-    #   tasks.
+    #   during the deployment and the failure detection methods.
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] placement_constraints
@@ -3161,6 +3199,30 @@ module Aws::ECS
     #
     class CreateTaskSetResponse < Struct.new(
       :task_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The optional filter to narrow the `ListServiceDeployment` results.
+    #
+    # If you do not specify a value, service deployments that were created
+    # before the current time are included in the result.
+    #
+    # @!attribute [rw] before
+    #   Include service deployments in the result that were created before
+    #   this time. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] after
+    #   Include service deployments in the result that were created after
+    #   this time. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreatedAt AWS API Documentation
+    #
+    class CreatedAt < Struct.new(
+      :before,
+      :after)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3632,11 +3694,6 @@ module Aws::ECS
     #   alarms.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] enable
-    #   Determines whether to use the CloudWatch alarm option in the service
-    #   deployment process.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] rollback
     #   Determines whether to configure Amazon ECS to roll back the service
     #   if a service deployment fails. If rollback is used, when a service
@@ -3644,12 +3701,17 @@ module Aws::ECS
     #   that completed successfully.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable
+    #   Determines whether to use the CloudWatch alarm option in the service
+    #   deployment process.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentAlarms AWS API Documentation
     #
     class DeploymentAlarms < Struct.new(
       :alarm_names,
-      :enable,
-      :rollback)
+      :rollback,
+      :enable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3697,7 +3759,7 @@ module Aws::ECS
     end
 
     # Optional deployment parameters that control how many tasks run during
-    # a deployment and the ordering of stopping and starting tasks.
+    # the deployment and the failure detection methods.
     #
     # @!attribute [rw] deployment_circuit_breaker
     #   <note markdown="1"> The deployment circuit breaker can only be used for services using
@@ -3895,8 +3957,8 @@ module Aws::ECS
     # The amount of ephemeral storage to allocate for the deployment.
     #
     # @!attribute [rw] kms_key_id
-    #   Specify an Key Management Service key ID to encrypt the ephemeral
-    #   storage for deployment.
+    #   Specify an Amazon Web Services Key Management Service key ID to
+    #   encrypt the ephemeral storage for deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentEphemeralStorage AWS API Documentation
@@ -4162,6 +4224,78 @@ module Aws::ECS
     #
     class DescribeContainerInstancesResponse < Struct.new(
       :container_instances,
+      :failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_deployment_arns
+    #   The ARN of the service deployment.
+    #
+    #   You can specify a maximum of 20 ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServiceDeploymentsRequest AWS API Documentation
+    #
+    class DescribeServiceDeploymentsRequest < Struct.new(
+      :service_deployment_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_deployments
+    #   The list of service deployments described.
+    #   @return [Array<Types::ServiceDeployment>]
+    #
+    # @!attribute [rw] failures
+    #   Any failures associated with the call.
+    #
+    #   If you decsribe a deployment with a service revision created before
+    #   October 25, 2024, the call fails. The failure includes the service
+    #   revision ARN and the reason set to `MISSING`.
+    #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServiceDeploymentsResponse AWS API Documentation
+    #
+    class DescribeServiceDeploymentsResponse < Struct.new(
+      :service_deployments,
+      :failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_revision_arns
+    #   The ARN of the service revision.
+    #
+    #   You can specify a maximum of 20 ARNs.
+    #
+    #   You can call [ListServiceDeployments][1] to get the ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServiceDeployments.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServiceRevisionsRequest AWS API Documentation
+    #
+    class DescribeServiceRevisionsRequest < Struct.new(
+      :service_revision_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_revisions
+    #   The list of service revisions described.
+    #   @return [Array<Types::ServiceRevision>]
+    #
+    # @!attribute [rw] failures
+    #   Any failures associated with the call.
+    #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServiceRevisionsResponse AWS API Documentation
+    #
+    class DescribeServiceRevisionsResponse < Struct.new(
+      :service_revisions,
       :failures)
       SENSITIVE = []
       include Aws::Structure
@@ -5922,6 +6056,103 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @!attribute [rw] service
+    #   The ARN or name of the service
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster
+    #   The cluster that hosts the service. This can either be the cluster
+    #   name or ARN. Starting April 15, 2023, Amazon Web Services will not
+    #   onboard new customers to Amazon Elastic Inference (EI), and will
+    #   help current customers migrate their workloads to options that offer
+    #   better price and performanceIf you don't specify a cluster,
+    #   `deault` is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An optional filter you can use to narrow the results. If you do not
+    #   specify a status, then all status values are included in the result.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   An optional filter you can use to narrow the results by the service
+    #   creation date. If you do not specify a value, the result includes
+    #   all services created before the current time. The format is
+    #   yyyy-MM-dd HH:mm:ss.SSSSSS.
+    #   @return [Types::CreatedAt]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a `ListServiceDeployments`
+    #   request indicating that more results are available to fulfill the
+    #   request and further calls are needed. If you provided `maxResults`,
+    #   it's possible the number of results is fewer than `maxResults`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of service deployment results that
+    #   `ListServiceDeployments` returned in paginated output. When this
+    #   parameter is used, `ListServiceDeployments` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListServiceDeployments` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter isn't used, then `ListServiceDeployments` returns up
+    #   to 20 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServiceDeploymentsRequest AWS API Documentation
+    #
+    class ListServiceDeploymentsRequest < Struct.new(
+      :service,
+      :cluster,
+      :status,
+      :created_at,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_deployments
+    #   An overview of the service deployment, including the following
+    #   properties:
+    #
+    #   * The ARN of the service deployment.
+    #
+    #   * The ARN of the service being deployed.
+    #
+    #   * The ARN of the cluster that hosts the service in the service
+    #     deployment.
+    #
+    #   * The time that the service deployment started.
+    #
+    #   * The time that the service deployment completed.
+    #
+    #   * The service deployment status.
+    #
+    #   * Information about why the service deployment is in the current
+    #     state.
+    #
+    #   * The ARN of the service revision that is being deployed.
+    #   @return [Array<Types::ServiceDeploymentBrief>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `ListServiceDeployments` request. When the results of a
+    #   `ListServiceDeployments` request exceed `maxResults`, this value can
+    #   be used to retrieve the next page of results. This value is null
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServiceDeploymentsResponse AWS API Documentation
+    #
+    class ListServiceDeploymentsResponse < Struct.new(
+      :service_deployments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] namespace
     #   The namespace name or full Amazon Resource Name (ARN) of the Cloud
     #   Map namespace to list the services in.
@@ -6417,8 +6648,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
-    #   The name of the load balancer to associate with the Amazon ECS
-    #   service or task set.
+    #   The name of the load balancer to associate with the service or task
+    #   set.
     #
     #   If you are using an Application Load Balancer or a Network Load
     #   Balancer the load balancer name parameter should be omitted.
@@ -6838,9 +7069,8 @@ module Aws::ECS
     #
     # @!attribute [rw] minimum_scaling_step_size
     #   The minimum number of Amazon EC2 instances that Amazon ECS will
-    #   scale out at one time. The scale in process is not affected by this
-    #   parameter If this parameter is omitted, the default value of `1` is
-    #   used.
+    #   scale out at one time. If this parameter is omitted, the default
+    #   value of `1` is used.
     #
     #   When additional capacity is required, Amazon ECS will scale up the
     #   minimum scaling step size even if the actual demand is less than the
@@ -6881,8 +7111,8 @@ module Aws::ECS
     # The managed storage configuration for the cluster.
     #
     # @!attribute [rw] kms_key_id
-    #   Specify a Key Management Service key ID to encrypt the managed
-    #   storage.
+    #   Specify a Amazon Web Services Key Management Service key ID to
+    #   encrypt the managed storage.
     #   @return [String]
     #
     # @!attribute [rw] fargate_ephemeral_storage_kms_key_id
@@ -7219,13 +7449,14 @@ module Aws::ECS
     #
     class PlatformUnknownException < Aws::EmptyStructure; end
 
-    # Port mappings allow containers to access ports on the host container
-    # instance to send or receive traffic. Port mappings are specified as
-    # part of the container definition.
+    # Port mappings expose your container's network ports to the outside
+    # world. this allows clients to access your application. It's also used
+    # for inter-container communication within the same task.
     #
-    # If you use containers in a task with the `awsvpc` or `host` network
-    # mode, specify the exposed ports using `containerPort`. The `hostPort`
-    # can be left blank or it must be the same value as the `containerPort`.
+    # For task definitions (both the Fargate and EC2 launch type) that use
+    # the `awsvpc` network mode, only specify the `containerPort`. The
+    # `hostPort` is always ignored, and the container port is automatically
+    # mapped to a random high-numbered port on the host.
     #
     # Most fields of this parameter (`containerPort`, `hostPort`,
     # `protocol`) maps to `PortBindings` in the docker container create
@@ -7250,15 +7481,19 @@ module Aws::ECS
     #   The port number on the container that's bound to the user-specified
     #   or automatically assigned host port.
     #
-    #   If you use containers in a task with the `awsvpc` or `host` network
-    #   mode, specify the exposed ports using `containerPort`.
+    #   For tasks that use the Fargate launch type or EC2 tasks that use the
+    #   `awsvpc` network mode, you use `containerPort` to specify the
+    #   exposed ports.
     #
-    #   If you use containers in a task with the `bridge` network mode and
-    #   you specify a container port and not a host port, your container
-    #   automatically receives a host port in the ephemeral port range. For
-    #   more information, see `hostPort`. Port mappings that are
-    #   automatically assigned in this way do not count toward the 100
-    #   reserved ports limit of a container instance.
+    #   For Windows containers on Fargate, you can't use port 3150 for the
+    #   `containerPort`. This is because it's reserved.
+    #
+    #   Suppose that you're using containers in a task with the EC2 launch
+    #   type and you specify a container port and not a host port. Then,
+    #   your container automatically receives a host port in the ephemeral
+    #   port range. For more information, see `hostPort`. Port mappings that
+    #   are automatically assigned in this way don't count toward the 100
+    #   reserved ports quota of a container instance.
     #   @return [Integer]
     #
     # @!attribute [rw] host_port
@@ -8091,19 +8326,22 @@ module Aws::ECS
     #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
-    #   network interface, and you must specify a [NetworkConfiguration][1]
-    #   value when you create a service or run a task with the task
-    #   definition. For more information, see [Task Networking][2] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
+    #   network interface, and you must specify a NetworkConfiguration value
+    #   when you create a service or run a task with the task definition.
+    #   For more information, see [Task Networking][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
     #
     #   If the network mode is `host`, you cannot run multiple
     #   instantiations of the same task on a single container instance when
     #   port mappings are used.
     #
+    #   For more information, see [Network settings][2] in the *Docker run
+    #   reference*.
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #   @return [String]
     #
     # @!attribute [rw] container_definitions
@@ -8276,10 +8514,12 @@ module Aws::ECS
     #   share the same process namespace.
     #
     #   If no value is specified, the default is a private namespace for
-    #   each container.
+    #   each container. For more information, see [PID settings][1] in the
+    #   *Docker run reference*.
     #
     #   If the `host` PID mode is used, there's a heightened risk of
-    #   undesired process namespace exposure.
+    #   undesired process namespace exposure. For more information, see
+    #   [Docker security][2].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -8290,6 +8530,11 @@ module Aws::ECS
     #   (Linux). This isn't supported for Windows containers on Fargate.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
+    #   [2]: https://docs.docker.com/engine/security/security/
     #   @return [String]
     #
     # @!attribute [rw] ipc_mode
@@ -8303,15 +8548,17 @@ module Aws::ECS
     #   containers of a task are private and not shared with other
     #   containers in a task or on the container instance. If no value is
     #   specified, then the IPC resource namespace sharing depends on the
-    #   Docker daemon setting on the container instance.
+    #   Docker daemon setting on the container instance. For more
+    #   information, see [IPC settings][1] in the *Docker run reference*.
     #
     #   If the `host` IPC mode is used, be aware that there is a heightened
-    #   risk of undesired IPC namespace expose.
+    #   risk of undesired IPC namespace expose. For more information, see
+    #   [Docker security][2].
     #
     #   If you are setting namespaced kernel parameters using
     #   `systemControls` for the containers in the task, the following will
     #   apply to your IPC resource namespace. For more information, see
-    #   [System Controls][1] in the *Amazon Elastic Container Service
+    #   [System Controls][3] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
     #   * For tasks that use the `host` IPC mode, IPC namespace related
@@ -8327,7 +8574,9 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
+    #   [2]: https://docs.docker.com/engine/security/security/
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
     # @!attribute [rw] proxy_configuration
@@ -8537,6 +8786,46 @@ module Aws::ECS
     class ResourceRequirement < Struct.new(
       :value,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the service deployment rollback.
+    #
+    # @!attribute [rw] reason
+    #   The reason the rollback happened. For example, the circuit breaker
+    #   initiated the rollback operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   Time time that the rollback started. The format is yyyy-MM-dd
+    #   HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_revision_arn
+    #   The ARN of the service revision deployed as part of the rollback.
+    #
+    #   When the type is `GPU`, the value is the number of physical `GPUs`
+    #   the Amazon ECS container agent reserves for the container. The
+    #   number of GPUs that's reserved for all containers in a task can't
+    #   exceed the number of available GPUs on the container instance that
+    #   the task is launched on.
+    #
+    #   When the type is `InferenceAccelerator`, the `value` matches the
+    #   `deviceName` for an [InferenceAccelerator][1] specified in a task
+    #   definition.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Rollback AWS API Documentation
+    #
+    class Rollback < Struct.new(
+      :reason,
+      :started_at,
+      :service_revision_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8866,10 +9155,14 @@ module Aws::ECS
     #   You can run your Linux tasks on an ARM-based platform by setting the
     #   value to `ARM64`. This option is available for tasks that run on
     #   Linux Amazon EC2 instance or Linux containers on Fargate.
+    #
+    #   The default is `X86_64`.
     #   @return [String]
     #
     # @!attribute [rw] operating_system_family
     #   The operating system.
+    #
+    #   The default is `Linux`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RuntimePlatform AWS API Documentation
@@ -9043,9 +9336,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_strategy
-    #   The capacity provider strategy the service uses. When using the
-    #   DescribeServices API, this field is omitted if the service was
-    #   created using a launch type.
+    #   The capacity provider strategy the service uses. When using
+    #   `DescribeServices`, this field is omitted if the service was created
+    #   using a launch type.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] platform_version
@@ -9168,7 +9461,7 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the service to help you categorize
     #   and organize them. Each tag consists of a key and an optional value.
-    #   You define bot the key and value.
+    #   You define both the key and value.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -9594,6 +9887,268 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # Information about the service deployment.
+    #
+    # Service deployments provide a comprehensive view of your deployments.
+    # For information about service deployments, see [View service history
+    # using Amazon ECS service deployments][1] in the <i> <i>Amazon Elastic
+    # Container Service Developer Guide</i> </i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployment.html
+    #
+    # @!attribute [rw] service_deployment_arn
+    #   The ARN of the service deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service for this service deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The ARN of the cluster that hosts the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the service deployment was created. The format is
+    #   yyyy-MM-dd HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_at
+    #   The time the service deployment statred. The format is yyyy-MM-dd
+    #   HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finished_at
+    #   The time the service deployment finished. The format is yyyy-MM-dd
+    #   HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stopped_at
+    #   The time the service deployment stopped. The format is yyyy-MM-dd
+    #   HH:mm:ss.SSSSSS.
+    #
+    #   The service deployment stops when any of the following actions
+    #   happen:
+    #
+    #   * A user manually stops the deployment
+    #
+    #   * The rollback option is not in use for the failure detection
+    #     mechanism (the circuit breaker or alarm-based) and the service
+    #     fails.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time that the service deployment was last updated. The format is
+    #   yyyy-MM-dd HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_service_revisions
+    #   The currently deployed workload configuration.
+    #   @return [Array<Types::ServiceRevisionSummary>]
+    #
+    # @!attribute [rw] target_service_revision
+    #   The workload configuration being deployed.
+    #   @return [Types::ServiceRevisionSummary]
+    #
+    # @!attribute [rw] status
+    #   The service deployment state.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the service deployment is in the current
+    #   status. For example, the circuit breaker detected a failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   Optional deployment parameters that control how many tasks run
+    #   during the deployment and the failure detection methods.
+    #   @return [Types::DeploymentConfiguration]
+    #
+    # @!attribute [rw] rollback
+    #   The rollback options the service deployment uses when the deployment
+    #   fails.
+    #   @return [Types::Rollback]
+    #
+    # @!attribute [rw] deployment_circuit_breaker
+    #   The circuit breaker configuration that determines a service
+    #   deployment failed.
+    #   @return [Types::ServiceDeploymentCircuitBreaker]
+    #
+    # @!attribute [rw] alarms
+    #   The CloudWatch alarms that determine when a service deployment
+    #   fails.
+    #   @return [Types::ServiceDeploymentAlarms]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceDeployment AWS API Documentation
+    #
+    class ServiceDeployment < Struct.new(
+      :service_deployment_arn,
+      :service_arn,
+      :cluster_arn,
+      :created_at,
+      :started_at,
+      :finished_at,
+      :stopped_at,
+      :updated_at,
+      :source_service_revisions,
+      :target_service_revision,
+      :status,
+      :status_reason,
+      :deployment_configuration,
+      :rollback,
+      :deployment_circuit_breaker,
+      :alarms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CloudWatch alarms used to determine a service deployment failed.
+    #
+    # Amazon ECS considers the service deployment as failed when any of the
+    # alarms move to the `ALARM` state. For more information, see [How
+    # CloudWatch alarms detect Amazon ECS deployment failures][1] in the
+    # Amazon ECS Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-alarm-failure.html
+    #
+    # @!attribute [rw] status
+    #   The status of the alarms check. Amazon ECS is not using alarms for
+    #   service deployment failures when the status is `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarm_names
+    #   The name of the CloudWatch alarms that determine when a service
+    #   deployment failed. A "," separates the alarms.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] triggered_alarm_names
+    #   One or more CloudWatch alarm names that have been triggered during
+    #   the service deployment. A "," separates the alarm names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceDeploymentAlarms AWS API Documentation
+    #
+    class ServiceDeploymentAlarms < Struct.new(
+      :status,
+      :alarm_names,
+      :triggered_alarm_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The service deployment properties that are retured when you call
+    # `ListServiceDeployments`.
+    #
+    # This provides a high-level overview of the service deployment.
+    #
+    # @!attribute [rw] service_deployment_arn
+    #   The ARN of the service deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service for this service deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The ARN of the cluster that hosts the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The time that the service deployment statred. The format is
+    #   yyyy-MM-dd HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The time that the service deployment was created. The format is
+    #   yyyy-MM-dd HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finished_at
+    #   The time that the service deployment completed. The format is
+    #   yyyy-MM-dd HH:mm:ss.SSSSSS.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_service_revision_arn
+    #   The ARN of the service revision being deplyed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the service deployment
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Information about why the service deployment is in the current
+    #   status. For example, the circuit breaker detected a deployment
+    #   failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceDeploymentBrief AWS API Documentation
+    #
+    class ServiceDeploymentBrief < Struct.new(
+      :service_deployment_arn,
+      :service_arn,
+      :cluster_arn,
+      :started_at,
+      :created_at,
+      :finished_at,
+      :target_service_revision_arn,
+      :status,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the circuit breaker used to determine when a service
+    # deployment has failed.
+    #
+    # The deployment circuit breaker is the rolling update mechanism that
+    # determines if the tasks reach a steady state. The deployment circuit
+    # breaker has an option that will automatically roll back a failed
+    # deployment to the last cpompleted service revision. For more
+    # information, see [How the Amazon ECS deployment circuit breaker
+    # detects failures][1] in the<i> Amazon ECS Developer Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html
+    #
+    # @!attribute [rw] status
+    #   The circuit breaker status. Amazon ECS is not using the circuit
+    #   breaker for service deployment failures when the status is
+    #   `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_count
+    #   The number of times the circuit breaker detected a service
+    #   deploymeny failure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threshold
+    #   The threshhold which determines that the service deployment failed.
+    #
+    #   The deployment circuit breaker calculates the threshold value, and
+    #   then uses the value to determine when to move the deployment to a
+    #   FAILED state. The deployment circuit breaker has a minimum threshold
+    #   of 3 and a maximum threshold of 200. and uses the values in the
+    #   following formula to determine the deployment failure.
+    #
+    #   `0.5 * desired task count`
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceDeploymentCircuitBreaker AWS API Documentation
+    #
+    class ServiceDeploymentCircuitBreaker < Struct.new(
+      :status,
+      :failure_count,
+      :threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details for an event that's associated with a service.
     #
     # @!attribute [rw] id
@@ -9900,6 +10455,162 @@ module Aws::ECS
       :port,
       :container_name,
       :container_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the service revision.
+    #
+    # A service revision contains a record of the workload configuration
+    # Amazon ECS is attempting to deploy. Whenever you create or deploy a
+    # service, Amazon ECS automatically creates and captures the
+    # configuration that you're trying to deploy in the service revision.
+    # For information about service revisions, see [Amazon ECS service
+    # revisions][1] in the <i> <i>Amazon Elastic Container Service Developer
+    # Guide</i> </i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html
+    #
+    # @!attribute [rw] service_revision_arn
+    #   The ARN of the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service for the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The ARN of the cluster that hosts the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_definition
+    #   The task definition the service revision uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy the service revision uses.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
+    # @!attribute [rw] launch_type
+    #   The launch type the service revision uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_version
+    #   For the Fargate launch type, the platform version the service
+    #   revision uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_family
+    #   The platform family the service revision uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancers
+    #   The load balancers the service revision uses.
+    #   @return [Array<Types::LoadBalancer>]
+    #
+    # @!attribute [rw] service_registries
+    #   The service registries (for Service Discovery) the service revision
+    #   uses.
+    #   @return [Array<Types::ServiceRegistry>]
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for a task or service.
+    #   @return [Types::NetworkConfiguration]
+    #
+    # @!attribute [rw] container_images
+    #   The container images the service revision uses.
+    #   @return [Array<Types::ContainerImage>]
+    #
+    # @!attribute [rw] guard_duty_enabled
+    #   Indicates whether Runtime Monitoring is turned on.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_connect_configuration
+    #   The Service Connect configuration of your Amazon ECS service. The
+    #   configuration for this service to discover and connect to services,
+    #   and be discovered by, and connected from, other services within a
+    #   namespace.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [Types::ServiceConnectConfiguration]
+    #
+    # @!attribute [rw] volume_configurations
+    #   The volumes that are configured at deployment that the service
+    #   revision uses.
+    #   @return [Array<Types::ServiceVolumeConfiguration>]
+    #
+    # @!attribute [rw] fargate_ephemeral_storage
+    #   The amount of ephemeral storage to allocate for the deployment.
+    #   @return [Types::DeploymentEphemeralStorage]
+    #
+    # @!attribute [rw] created_at
+    #   The time that the service revision was created. The format is
+    #   yyyy-mm-dd HH:mm:ss.SSSSS.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevision AWS API Documentation
+    #
+    class ServiceRevision < Struct.new(
+      :service_revision_arn,
+      :service_arn,
+      :cluster_arn,
+      :task_definition,
+      :capacity_provider_strategy,
+      :launch_type,
+      :platform_version,
+      :platform_family,
+      :load_balancers,
+      :service_registries,
+      :network_configuration,
+      :container_images,
+      :guard_duty_enabled,
+      :service_connect_configuration,
+      :volume_configurations,
+      :fargate_ephemeral_storage,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about the number of requested, pending, and running
+    # tasks for a service revision.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_task_count
+    #   The number of requested tasks for the service revision.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] running_task_count
+    #   The number of running tasks for the service revision.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_task_count
+    #   The number of pending tasks for the service revision.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevisionSummary AWS API Documentation
+    #
+    class ServiceRevisionSummary < Struct.new(
+      :arn,
+      :requested_task_count,
+      :running_task_count,
+      :pending_task_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11029,19 +11740,22 @@ module Aws::ECS
     #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
-    #   network interface, and you must specify a [NetworkConfiguration][1]
-    #   value when you create a service or run a task with the task
-    #   definition. For more information, see [Task Networking][2] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
+    #   network interface, and you must specify a NetworkConfiguration value
+    #   when you create a service or run a task with the task definition.
+    #   For more information, see [Task Networking][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
     #
     #   If the network mode is `host`, you cannot run multiple
     #   instantiations of the same task on a single container instance when
     #   port mappings are used.
     #
+    #   For more information, see [Network settings][2] in the *Docker run
+    #   reference*.
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #   @return [String]
     #
     # @!attribute [rw] revision
@@ -11236,10 +11950,12 @@ module Aws::ECS
     #   share the same process namespace.
     #
     #   If no value is specified, the default is a private namespace for
-    #   each container.
+    #   each container. For more information, see [PID settings][1] in the
+    #   *Docker run reference*.
     #
     #   If the `host` PID mode is used, there's a heightened risk of
-    #   undesired process namespace exposure.
+    #   undesired process namespace exposure. For more information, see
+    #   [Docker security][2].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -11250,6 +11966,11 @@ module Aws::ECS
     #   (Linux). This isn't supported for Windows containers on Fargate.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
+    #   [2]: https://docs.docker.com/engine/security/security/
     #   @return [String]
     #
     # @!attribute [rw] ipc_mode
@@ -11263,15 +11984,17 @@ module Aws::ECS
     #   containers of a task are private and not shared with other
     #   containers in a task or on the container instance. If no value is
     #   specified, then the IPC resource namespace sharing depends on the
-    #   Docker daemon setting on the container instance.
+    #   Docker daemon setting on the container instance. For more
+    #   information, see [IPC settings][1] in the *Docker run reference*.
     #
     #   If the `host` IPC mode is used, be aware that there is a heightened
-    #   risk of undesired IPC namespace expose.
+    #   risk of undesired IPC namespace expose. For more information, see
+    #   [Docker security][2].
     #
     #   If you are setting namespaced kernel parameters using
     #   `systemControls` for the containers in the task, the following will
     #   apply to your IPC resource namespace. For more information, see
-    #   [System Controls][1] in the *Amazon Elastic Container Service
+    #   [System Controls][3] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
     #   * For tasks that use the `host` IPC mode, IPC namespace related
@@ -11287,7 +12010,9 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
+    #   [2]: https://docs.docker.com/engine/security/security/
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
     # @!attribute [rw] proxy_configuration
@@ -11402,8 +12127,8 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   Specify an Key Management Service key ID to encrypt the ephemeral
-    #   storage for the task.
+    #   Specify an Amazon Web Services Key Management Service key ID to
+    #   encrypt the ephemeral storage for the task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskEphemeralStorage AWS API Documentation
@@ -12442,8 +13167,7 @@ module Aws::ECS
     #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
-    #   during the deployment and the ordering of stopping and starting
-    #   tasks.
+    #   during the deployment and the failure detection methods.
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] network_configuration

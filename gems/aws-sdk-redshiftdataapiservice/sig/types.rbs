@@ -29,6 +29,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor cluster_identifier: ::String
       attr_accessor database: ::String
       attr_accessor db_user: ::String
+      attr_accessor result_format: ("JSON" | "CSV")
       attr_accessor secret_arn: ::String
       attr_accessor session_id: ::String
       attr_accessor session_keep_alive_seconds: ::Integer
@@ -102,6 +103,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor query_string: ::String
       attr_accessor redshift_pid: ::Integer
       attr_accessor redshift_query_id: ::Integer
+      attr_accessor result_format: ("JSON" | "CSV")
       attr_accessor result_rows: ::Integer
       attr_accessor result_size: ::Integer
       attr_accessor secret_arn: ::String
@@ -146,6 +148,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor database: ::String
       attr_accessor db_user: ::String
       attr_accessor parameters: ::Array[Types::SqlParameter]
+      attr_accessor result_format: ("JSON" | "CSV")
       attr_accessor secret_arn: ::String
       attr_accessor session_id: ::String
       attr_accessor session_keep_alive_seconds: ::Integer
@@ -205,6 +208,21 @@ module Aws::RedshiftDataAPIService
       attr_accessor column_metadata: ::Array[Types::ColumnMetadata]
       attr_accessor next_token: ::String
       attr_accessor records: ::Array[::Array[Types::Field]]
+      attr_accessor total_num_rows: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetStatementResultV2Request
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetStatementResultV2Response
+      attr_accessor column_metadata: ::Array[Types::ColumnMetadata]
+      attr_accessor next_token: ::String
+      attr_accessor records: ::Array[Types::QueryRecords]
+      attr_accessor result_format: ("JSON" | "CSV")
       attr_accessor total_num_rows: ::Integer
       SENSITIVE: []
     end
@@ -285,6 +303,17 @@ module Aws::RedshiftDataAPIService
       SENSITIVE: []
     end
 
+    class QueryRecords
+      attr_accessor csv_records: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CsvRecords < QueryRecords
+      end
+      class Unknown < QueryRecords
+      end
+    end
+
     class QueryTimeoutException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -309,6 +338,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor query_parameters: ::Array[Types::SqlParameter]
       attr_accessor query_string: ::String
       attr_accessor query_strings: ::Array[::String]
+      attr_accessor result_format: ("JSON" | "CSV")
       attr_accessor secret_arn: ::String
       attr_accessor session_id: ::String
       attr_accessor statement_name: ::String

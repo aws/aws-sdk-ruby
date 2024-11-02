@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-10-30)
+------------------
+
+* Feature - AWS Network Firewall now supports configuring TCP idle timeout
+
 1.55.0 (2024-10-18)
 ------------------
 

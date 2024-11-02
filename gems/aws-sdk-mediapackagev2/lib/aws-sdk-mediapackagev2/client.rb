@@ -447,6 +447,62 @@ module Aws::MediaPackageV2
 
     # @!group API Operations
 
+    # Cancels an in-progress harvest job.
+    #
+    # @option params [required, String] :channel_group_name
+    #   The name of the channel group containing the channel from which the
+    #   harvest job is running.
+    #
+    # @option params [required, String] :channel_name
+    #   The name of the channel from which the harvest job is running.
+    #
+    # @option params [required, String] :origin_endpoint_name
+    #   The name of the origin endpoint that the harvest job is harvesting
+    #   from. This cannot be changed after the harvest job is submitted.
+    #
+    # @option params [required, String] :harvest_job_name
+    #   The name of the harvest job to cancel. This name must be unique within
+    #   the channel and cannot be changed after the harvest job is submitted.
+    #
+    # @option params [String] :etag
+    #   The current Entity Tag (ETag) associated with the harvest job. Used
+    #   for concurrency control.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Cancel a Harvest Job
+    #
+    #   resp = client.cancel_harvest_job({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #     harvest_job_name: "HarvestJobName", 
+    #     origin_endpoint_name: "exampleOriginEndpointName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_harvest_job({
+    #     channel_group_name: "ResourceName", # required
+    #     channel_name: "ResourceName", # required
+    #     origin_endpoint_name: "ResourceName", # required
+    #     harvest_job_name: "ResourceName", # required
+    #     etag: "EntityTag",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CancelHarvestJob AWS API Documentation
+    #
+    # @overload cancel_harvest_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_harvest_job(params = {}, options = {})
+      req = build_request(:cancel_harvest_job, params)
+      req.send_request(options)
+    end
+
     # Create a channel to start receiving content streams. The channel
     # represents the input to MediaPackage for incoming live content from an
     # encoder such as AWS Elemental MediaLive. The channel receives content,
@@ -689,6 +745,222 @@ module Aws::MediaPackageV2
     # @param [Hash] params ({})
     def create_channel_group(params = {}, options = {})
       req = build_request(:create_channel_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a new harvest job to export content from a MediaPackage v2
+    # channel to an S3 bucket.
+    #
+    # @option params [required, String] :channel_group_name
+    #   The name of the channel group containing the channel from which to
+    #   harvest content.
+    #
+    # @option params [required, String] :channel_name
+    #   The name of the channel from which to harvest content.
+    #
+    # @option params [required, String] :origin_endpoint_name
+    #   The name of the origin endpoint from which to harvest content.
+    #
+    # @option params [String] :description
+    #   An optional description for the harvest job.
+    #
+    # @option params [required, Types::HarvestedManifests] :harvested_manifests
+    #   A list of manifests to be harvested.
+    #
+    # @option params [required, Types::HarvesterScheduleConfiguration] :schedule_configuration
+    #   The configuration for when the harvest job should run, including start
+    #   and end times.
+    #
+    # @option params [required, Types::Destination] :destination
+    #   The S3 destination where the harvested content will be placed.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :harvest_job_name
+    #   A name for the harvest job. This name must be unique within the
+    #   channel.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A collection of tags associated with the harvest job.
+    #
+    # @return [Types::CreateHarvestJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHarvestJobResponse#channel_group_name #channel_group_name} => String
+    #   * {Types::CreateHarvestJobResponse#channel_name #channel_name} => String
+    #   * {Types::CreateHarvestJobResponse#origin_endpoint_name #origin_endpoint_name} => String
+    #   * {Types::CreateHarvestJobResponse#destination #destination} => Types::Destination
+    #   * {Types::CreateHarvestJobResponse#harvest_job_name #harvest_job_name} => String
+    #   * {Types::CreateHarvestJobResponse#harvested_manifests #harvested_manifests} => Types::HarvestedManifests
+    #   * {Types::CreateHarvestJobResponse#description #description} => String
+    #   * {Types::CreateHarvestJobResponse#schedule_configuration #schedule_configuration} => Types::HarvesterScheduleConfiguration
+    #   * {Types::CreateHarvestJobResponse#arn #arn} => String
+    #   * {Types::CreateHarvestJobResponse#created_at #created_at} => Time
+    #   * {Types::CreateHarvestJobResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateHarvestJobResponse#status #status} => String
+    #   * {Types::CreateHarvestJobResponse#error_message #error_message} => String
+    #   * {Types::CreateHarvestJobResponse#etag #etag} => String
+    #   * {Types::CreateHarvestJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Creating a Harvest Job
+    #
+    #   resp = client.create_harvest_job({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #     description: "Example HarvestJob description", 
+    #     destination: {
+    #       s3_destination: {
+    #         bucket_name: "harvestJobS3DestinationBucket", 
+    #         destination_path: "manifests", 
+    #       }, 
+    #     }, 
+    #     harvested_manifests: {
+    #       dash_manifests: [
+    #         {
+    #           manifest_name: "DashManifest", 
+    #         }, 
+    #       ], 
+    #       hls_manifests: [
+    #         {
+    #           manifest_name: "HlsManifest", 
+    #         }, 
+    #       ], 
+    #       low_latency_hls_manifests: [
+    #         {
+    #           manifest_name: "LowLatencyHlsManifest", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     origin_endpoint_name: "exampleOriginEndpointName", 
+    #     schedule_configuration: {
+    #       end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #       start_time: Time.parse("2024-05-28T06:00:00.00Z"), 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #     created_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #     description: "Example HarvestJob description", 
+    #     destination: {
+    #       s3_destination: {
+    #         bucket_name: "harvestJobS3DestinationBucket", 
+    #         destination_path: "manifests", 
+    #       }, 
+    #     }, 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     harvest_job_name: "HarvestJobName", 
+    #     harvested_manifests: {
+    #       dash_manifests: [
+    #         {
+    #           manifest_name: "DashManifest", 
+    #         }, 
+    #       ], 
+    #       hls_manifests: [
+    #         {
+    #           manifest_name: "HlsManifest", 
+    #         }, 
+    #       ], 
+    #       low_latency_hls_manifests: [
+    #         {
+    #           manifest_name: "LowLatencyHlsManifest", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     modified_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #     origin_endpoint_name: "exampleOriginEndpointName", 
+    #     schedule_configuration: {
+    #       end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #       start_time: Time.parse("2024-05-28T06:00:00.00Z"), 
+    #     }, 
+    #     status: "QUEUED", 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_harvest_job({
+    #     channel_group_name: "ResourceName", # required
+    #     channel_name: "ResourceName", # required
+    #     origin_endpoint_name: "ResourceName", # required
+    #     description: "ResourceDescription",
+    #     harvested_manifests: { # required
+    #       hls_manifests: [
+    #         {
+    #           manifest_name: "ResourceName", # required
+    #         },
+    #       ],
+    #       dash_manifests: [
+    #         {
+    #           manifest_name: "ResourceName", # required
+    #         },
+    #       ],
+    #       low_latency_hls_manifests: [
+    #         {
+    #           manifest_name: "ResourceName", # required
+    #         },
+    #       ],
+    #     },
+    #     schedule_configuration: { # required
+    #       start_time: Time.now, # required
+    #       end_time: Time.now, # required
+    #     },
+    #     destination: { # required
+    #       s3_destination: { # required
+    #         bucket_name: "S3BucketName", # required
+    #         destination_path: "S3DestinationPath", # required
+    #       },
+    #     },
+    #     client_token: "IdempotencyToken",
+    #     harvest_job_name: "ResourceName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_group_name #=> String
+    #   resp.channel_name #=> String
+    #   resp.origin_endpoint_name #=> String
+    #   resp.destination.s3_destination.bucket_name #=> String
+    #   resp.destination.s3_destination.destination_path #=> String
+    #   resp.harvest_job_name #=> String
+    #   resp.harvested_manifests.hls_manifests #=> Array
+    #   resp.harvested_manifests.hls_manifests[0].manifest_name #=> String
+    #   resp.harvested_manifests.dash_manifests #=> Array
+    #   resp.harvested_manifests.dash_manifests[0].manifest_name #=> String
+    #   resp.harvested_manifests.low_latency_hls_manifests #=> Array
+    #   resp.harvested_manifests.low_latency_hls_manifests[0].manifest_name #=> String
+    #   resp.description #=> String
+    #   resp.schedule_configuration.start_time #=> Time
+    #   resp.schedule_configuration.end_time #=> Time
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.modified_at #=> Time
+    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.error_message #=> String
+    #   resp.etag #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateHarvestJob AWS API Documentation
+    #
+    # @overload create_harvest_job(params = {})
+    # @param [Hash] params ({})
+    def create_harvest_job(params = {}, options = {})
+      req = build_request(:create_harvest_job, params)
       req.send_request(options)
     end
 
@@ -1894,6 +2166,143 @@ module Aws::MediaPackageV2
       req.send_request(options)
     end
 
+    # Retrieves the details of a specific harvest job.
+    #
+    # @option params [required, String] :channel_group_name
+    #   The name of the channel group containing the channel associated with
+    #   the harvest job.
+    #
+    # @option params [required, String] :channel_name
+    #   The name of the channel associated with the harvest job.
+    #
+    # @option params [required, String] :origin_endpoint_name
+    #   The name of the origin endpoint associated with the harvest job.
+    #
+    # @option params [required, String] :harvest_job_name
+    #   The name of the harvest job to retrieve.
+    #
+    # @return [Types::GetHarvestJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHarvestJobResponse#channel_group_name #channel_group_name} => String
+    #   * {Types::GetHarvestJobResponse#channel_name #channel_name} => String
+    #   * {Types::GetHarvestJobResponse#origin_endpoint_name #origin_endpoint_name} => String
+    #   * {Types::GetHarvestJobResponse#destination #destination} => Types::Destination
+    #   * {Types::GetHarvestJobResponse#harvest_job_name #harvest_job_name} => String
+    #   * {Types::GetHarvestJobResponse#harvested_manifests #harvested_manifests} => Types::HarvestedManifests
+    #   * {Types::GetHarvestJobResponse#description #description} => String
+    #   * {Types::GetHarvestJobResponse#schedule_configuration #schedule_configuration} => Types::HarvesterScheduleConfiguration
+    #   * {Types::GetHarvestJobResponse#arn #arn} => String
+    #   * {Types::GetHarvestJobResponse#created_at #created_at} => Time
+    #   * {Types::GetHarvestJobResponse#modified_at #modified_at} => Time
+    #   * {Types::GetHarvestJobResponse#status #status} => String
+    #   * {Types::GetHarvestJobResponse#error_message #error_message} => String
+    #   * {Types::GetHarvestJobResponse#etag #etag} => String
+    #   * {Types::GetHarvestJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Getting a Harvest Job
+    #
+    #   resp = client.get_harvest_job({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #     harvest_job_name: "HarvestJobName", 
+    #     origin_endpoint_name: "exampleOriginEndpointName", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannelName", 
+    #     created_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #     description: "Example HarvestJob description", 
+    #     destination: {
+    #       s3_destination: {
+    #         bucket_name: "harvestJobS3DestinationBucket", 
+    #         destination_path: "manifests", 
+    #       }, 
+    #     }, 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     harvest_job_name: "HarvestJobName", 
+    #     harvested_manifests: {
+    #       dash_manifests: [
+    #         {
+    #           manifest_name: "DashManifest", 
+    #         }, 
+    #       ], 
+    #       hls_manifests: [
+    #         {
+    #           manifest_name: "HlsManifest", 
+    #         }, 
+    #       ], 
+    #       low_latency_hls_manifests: [
+    #         {
+    #           manifest_name: "LowLatencyHlsManifest", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     modified_at: Time.parse("2024-05-28T09:36:00.00Z"), 
+    #     origin_endpoint_name: "exampleOriginEndpointName", 
+    #     schedule_configuration: {
+    #       end_time: Time.parse("2024-05-28T12:00:00.00Z"), 
+    #       start_time: Time.parse("2024-05-28T06:00:00.00Z"), 
+    #     }, 
+    #     status: "QUEUED", 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_harvest_job({
+    #     channel_group_name: "ResourceName", # required
+    #     channel_name: "ResourceName", # required
+    #     origin_endpoint_name: "ResourceName", # required
+    #     harvest_job_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_group_name #=> String
+    #   resp.channel_name #=> String
+    #   resp.origin_endpoint_name #=> String
+    #   resp.destination.s3_destination.bucket_name #=> String
+    #   resp.destination.s3_destination.destination_path #=> String
+    #   resp.harvest_job_name #=> String
+    #   resp.harvested_manifests.hls_manifests #=> Array
+    #   resp.harvested_manifests.hls_manifests[0].manifest_name #=> String
+    #   resp.harvested_manifests.dash_manifests #=> Array
+    #   resp.harvested_manifests.dash_manifests[0].manifest_name #=> String
+    #   resp.harvested_manifests.low_latency_hls_manifests #=> Array
+    #   resp.harvested_manifests.low_latency_hls_manifests[0].manifest_name #=> String
+    #   resp.description #=> String
+    #   resp.schedule_configuration.start_time #=> Time
+    #   resp.schedule_configuration.end_time #=> Time
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.modified_at #=> Time
+    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.error_message #=> String
+    #   resp.etag #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * harvest_job_finished
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetHarvestJob AWS API Documentation
+    #
+    # @overload get_harvest_job(params = {})
+    # @param [Hash] params ({})
+    def get_harvest_job(params = {}, options = {})
+      req = build_request(:get_harvest_job, params)
+      req.send_request(options)
+    end
+
     # Retrieves the specified origin endpoint that's configured in AWS
     # Elemental MediaPackage to obtain its playback URL and to view the
     # packaging settings that it's currently using.
@@ -2354,6 +2763,87 @@ module Aws::MediaPackageV2
     # @param [Hash] params ({})
     def list_channels(params = {}, options = {})
       req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of harvest jobs that match the specified criteria.
+    #
+    # @option params [required, String] :channel_group_name
+    #   The name of the channel group to filter the harvest jobs by. If
+    #   specified, only harvest jobs associated with channels in this group
+    #   will be returned.
+    #
+    # @option params [String] :channel_name
+    #   The name of the channel to filter the harvest jobs by. If specified,
+    #   only harvest jobs associated with this channel will be returned.
+    #
+    # @option params [String] :origin_endpoint_name
+    #   The name of the origin endpoint to filter the harvest jobs by. If
+    #   specified, only harvest jobs associated with this origin endpoint will
+    #   be returned.
+    #
+    # @option params [String] :status
+    #   The status to filter the harvest jobs by. If specified, only harvest
+    #   jobs with this status will be returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of harvest jobs to return in a single request. If
+    #   not specified, a default value will be used.
+    #
+    # @option params [String] :next_token
+    #   A token used for pagination. Provide this value in subsequent requests
+    #   to retrieve the next set of results.
+    #
+    # @return [Types::ListHarvestJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHarvestJobsResponse#items #items} => Array&lt;Types::HarvestJob&gt;
+    #   * {Types::ListHarvestJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_harvest_jobs({
+    #     channel_group_name: "ResourceName", # required
+    #     channel_name: "ListHarvestJobsRequestChannelNameString",
+    #     origin_endpoint_name: "ListHarvestJobsRequestOriginEndpointNameString",
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].channel_group_name #=> String
+    #   resp.items[0].channel_name #=> String
+    #   resp.items[0].origin_endpoint_name #=> String
+    #   resp.items[0].destination.s3_destination.bucket_name #=> String
+    #   resp.items[0].destination.s3_destination.destination_path #=> String
+    #   resp.items[0].harvest_job_name #=> String
+    #   resp.items[0].harvested_manifests.hls_manifests #=> Array
+    #   resp.items[0].harvested_manifests.hls_manifests[0].manifest_name #=> String
+    #   resp.items[0].harvested_manifests.dash_manifests #=> Array
+    #   resp.items[0].harvested_manifests.dash_manifests[0].manifest_name #=> String
+    #   resp.items[0].harvested_manifests.low_latency_hls_manifests #=> Array
+    #   resp.items[0].harvested_manifests.low_latency_hls_manifests[0].manifest_name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].schedule_configuration.start_time #=> Time
+    #   resp.items[0].schedule_configuration.end_time #=> Time
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].modified_at #=> Time
+    #   resp.items[0].status #=> String, one of "QUEUED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.items[0].error_message #=> String
+    #   resp.items[0].etag #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListHarvestJobs AWS API Documentation
+    #
+    # @overload list_harvest_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_harvest_jobs(params = {}, options = {})
+      req = build_request(:list_harvest_jobs, params)
       req.send_request(options)
     end
 
@@ -3464,14 +3954,127 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name          | params                   | :delay   | :max_attempts |
+    # | -------------------- | ------------------------ | -------- | ------------- |
+    # | harvest_job_finished | {Client#get_harvest_job} | 2        | 60            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        harvest_job_finished: Waiters::HarvestJobFinished
+      }
     end
 
     class << self

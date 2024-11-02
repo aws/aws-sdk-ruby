@@ -447,6 +447,68 @@ module Aws::DocDBElastic
 
     # @!group API Operations
 
+    # The type of pending maintenance action to be applied to the resource.
+    #
+    # @option params [required, String] :apply_action
+    #   The pending maintenance action to apply to the resource.
+    #
+    #   Valid actions are:
+    #
+    #   * `ENGINE_UPDATE `
+    #
+    #   * `ENGINE_UPGRADE`
+    #
+    #   * `SECURITY_UPDATE`
+    #
+    #   * `OS_UPDATE`
+    #
+    #   * `MASTER_USER_PASSWORD_UPDATE`
+    #
+    # @option params [String] :apply_on
+    #   A specific date to apply the pending maintenance action. Required if
+    #   opt-in-type is `APPLY_ON`. Format: `yyyy/MM/dd HH:mm-yyyy/MM/dd HH:mm`
+    #
+    # @option params [required, String] :opt_in_type
+    #   A value that specifies the type of opt-in request, or undoes an opt-in
+    #   request. An opt-in request of type `IMMEDIATE` can't be undone.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon DocumentDB Amazon Resource Name (ARN) of the resource to
+    #   which the pending maintenance action applies.
+    #
+    # @return [Types::ApplyPendingMaintenanceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ApplyPendingMaintenanceActionOutput#resource_pending_maintenance_action #resource_pending_maintenance_action} => Types::ResourcePendingMaintenanceAction
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.apply_pending_maintenance_action({
+    #     apply_action: "InputString", # required
+    #     apply_on: "InputString",
+    #     opt_in_type: "IMMEDIATE", # required, accepts IMMEDIATE, NEXT_MAINTENANCE, APPLY_ON, UNDO_OPT_IN
+    #     resource_arn: "InputString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details #=> Array
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].action #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].auto_applied_after_date #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].current_apply_date #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].description #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].forced_apply_date #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].opt_in_status #=> String
+    #   resp.resource_pending_maintenance_action.resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ApplyPendingMaintenanceAction AWS API Documentation
+    #
+    # @overload apply_pending_maintenance_action(params = {})
+    # @param [Hash] params ({})
+    def apply_pending_maintenance_action(params = {}, options = {})
+      req = build_request(:apply_pending_maintenance_action, params)
+      req.send_request(options)
+    end
+
     # Copies a snapshot of an elastic cluster.
     #
     # @option params [Boolean] :copy_tags
@@ -524,7 +586,7 @@ module Aws::DocDBElastic
     #   resp.snapshot.snapshot_creation_time #=> String
     #   resp.snapshot.snapshot_name #=> String
     #   resp.snapshot.snapshot_type #=> String, one of "MANUAL", "AUTOMATED"
-    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.snapshot.subnet_ids #=> Array
     #   resp.snapshot.subnet_ids[0] #=> String
     #   resp.snapshot.vpc_security_group_ids #=> Array
@@ -690,8 +752,8 @@ module Aws::DocDBElastic
     #   resp.cluster.shards #=> Array
     #   resp.cluster.shards[0].create_time #=> String
     #   resp.cluster.shards[0].shard_id #=> String
-    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -742,7 +804,7 @@ module Aws::DocDBElastic
     #   resp.snapshot.snapshot_creation_time #=> String
     #   resp.snapshot.snapshot_name #=> String
     #   resp.snapshot.snapshot_type #=> String, one of "MANUAL", "AUTOMATED"
-    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.snapshot.subnet_ids #=> Array
     #   resp.snapshot.subnet_ids[0] #=> String
     #   resp.snapshot.vpc_security_group_ids #=> Array
@@ -790,8 +852,8 @@ module Aws::DocDBElastic
     #   resp.cluster.shards #=> Array
     #   resp.cluster.shards[0].create_time #=> String
     #   resp.cluster.shards[0].shard_id #=> String
-    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -832,7 +894,7 @@ module Aws::DocDBElastic
     #   resp.snapshot.snapshot_creation_time #=> String
     #   resp.snapshot.snapshot_name #=> String
     #   resp.snapshot.snapshot_type #=> String, one of "MANUAL", "AUTOMATED"
-    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.snapshot.subnet_ids #=> Array
     #   resp.snapshot.subnet_ids[0] #=> String
     #   resp.snapshot.vpc_security_group_ids #=> Array
@@ -880,8 +942,8 @@ module Aws::DocDBElastic
     #   resp.cluster.shards #=> Array
     #   resp.cluster.shards[0].create_time #=> String
     #   resp.cluster.shards[0].shard_id #=> String
-    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -921,7 +983,7 @@ module Aws::DocDBElastic
     #   resp.snapshot.snapshot_creation_time #=> String
     #   resp.snapshot.snapshot_name #=> String
     #   resp.snapshot.snapshot_type #=> String, one of "MANUAL", "AUTOMATED"
-    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.snapshot.subnet_ids #=> Array
     #   resp.snapshot.subnet_ids[0] #=> String
     #   resp.snapshot.vpc_security_group_ids #=> Array
@@ -933,6 +995,42 @@ module Aws::DocDBElastic
     # @param [Hash] params ({})
     def get_cluster_snapshot(params = {}, options = {})
       req = build_request(:get_cluster_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all maintenance actions that are pending.
+    #
+    # @option params [required, String] :resource_arn
+    #   Retrieves pending maintenance actions for a specific Amazon Resource
+    #   Name (ARN).
+    #
+    # @return [Types::GetPendingMaintenanceActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPendingMaintenanceActionOutput#resource_pending_maintenance_action #resource_pending_maintenance_action} => Types::ResourcePendingMaintenanceAction
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_pending_maintenance_action({
+    #     resource_arn: "InputString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details #=> Array
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].action #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].auto_applied_after_date #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].current_apply_date #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].description #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].forced_apply_date #=> String
+    #   resp.resource_pending_maintenance_action.pending_maintenance_action_details[0].opt_in_status #=> String
+    #   resp.resource_pending_maintenance_action.resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/GetPendingMaintenanceAction AWS API Documentation
+    #
+    # @overload get_pending_maintenance_action(params = {})
+    # @param [Hash] params ({})
+    def get_pending_maintenance_action(params = {}, options = {})
+      req = build_request(:get_pending_maintenance_action, params)
       req.send_request(options)
     end
 
@@ -987,7 +1085,7 @@ module Aws::DocDBElastic
     #   resp.snapshots[0].snapshot_arn #=> String
     #   resp.snapshots[0].snapshot_creation_time #=> String
     #   resp.snapshots[0].snapshot_name #=> String
-    #   resp.snapshots[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.snapshots[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ListClusterSnapshots AWS API Documentation
     #
@@ -1032,7 +1130,7 @@ module Aws::DocDBElastic
     #   resp.clusters #=> Array
     #   resp.clusters[0].cluster_arn #=> String
     #   resp.clusters[0].cluster_name #=> String
-    #   resp.clusters[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.clusters[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ListClusters AWS API Documentation
@@ -1041,6 +1139,55 @@ module Aws::DocDBElastic
     # @param [Hash] params ({})
     def list_clusters(params = {}, options = {})
       req = build_request(:list_clusters, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of all maintenance actions that are pending.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. If more
+    #   records exist than the specified `maxResults` value, a pagination
+    #   token (marker) is included in the response so that the remaining
+    #   results can be retrieved.
+    #
+    # @option params [String] :next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `maxResults`.
+    #
+    # @return [Types::ListPendingMaintenanceActionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPendingMaintenanceActionsOutput#next_token #next_token} => String
+    #   * {Types::ListPendingMaintenanceActionsOutput#resource_pending_maintenance_actions #resource_pending_maintenance_actions} => Array&lt;Types::ResourcePendingMaintenanceAction&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pending_maintenance_actions({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.resource_pending_maintenance_actions #=> Array
+    #   resp.resource_pending_maintenance_actions[0].pending_maintenance_action_details #=> Array
+    #   resp.resource_pending_maintenance_actions[0].pending_maintenance_action_details[0].action #=> String
+    #   resp.resource_pending_maintenance_actions[0].pending_maintenance_action_details[0].auto_applied_after_date #=> String
+    #   resp.resource_pending_maintenance_actions[0].pending_maintenance_action_details[0].current_apply_date #=> String
+    #   resp.resource_pending_maintenance_actions[0].pending_maintenance_action_details[0].description #=> String
+    #   resp.resource_pending_maintenance_actions[0].pending_maintenance_action_details[0].forced_apply_date #=> String
+    #   resp.resource_pending_maintenance_actions[0].pending_maintenance_action_details[0].opt_in_status #=> String
+    #   resp.resource_pending_maintenance_actions[0].resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ListPendingMaintenanceActions AWS API Documentation
+    #
+    # @overload list_pending_maintenance_actions(params = {})
+    # @param [Hash] params ({})
+    def list_pending_maintenance_actions(params = {}, options = {})
+      req = build_request(:list_pending_maintenance_actions, params)
       req.send_request(options)
     end
 
@@ -1152,8 +1299,8 @@ module Aws::DocDBElastic
     #   resp.cluster.shards #=> Array
     #   resp.cluster.shards[0].create_time #=> String
     #   resp.cluster.shards[0].shard_id #=> String
-    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -1202,8 +1349,8 @@ module Aws::DocDBElastic
     #   resp.cluster.shards #=> Array
     #   resp.cluster.shards[0].create_time #=> String
     #   resp.cluster.shards[0].shard_id #=> String
-    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -1252,8 +1399,8 @@ module Aws::DocDBElastic
     #   resp.cluster.shards #=> Array
     #   resp.cluster.shards[0].create_time #=> String
     #   resp.cluster.shards[0].shard_id #=> String
-    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -1428,8 +1575,8 @@ module Aws::DocDBElastic
     #   resp.cluster.shards #=> Array
     #   resp.cluster.shards[0].create_time #=> String
     #   resp.cluster.shards[0].shard_id #=> String
-    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED", "MAINTENANCE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -1462,7 +1609,7 @@ module Aws::DocDBElastic
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-docdbelastic'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

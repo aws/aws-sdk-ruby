@@ -7972,8 +7972,8 @@ module Aws::BedrockAgent
     # the knowledge base.
     #
     # @!attribute [rw] embedding_model_arn
-    #   The Amazon Resource Name (ARN) of the model used to create vector
-    #   embeddings for the knowledge base.
+    #   The Amazon Resource Name (ARN) of the model or inference profile
+    #   used to create vector embeddings for the knowledge base.
     #   @return [String]
     #
     # @!attribute [rw] embedding_model_configuration

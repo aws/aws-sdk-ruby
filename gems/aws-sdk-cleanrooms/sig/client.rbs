@@ -133,7 +133,7 @@ module Aws
                                       ?analysis_parameters: Array[
                                         {
                                           name: ::String,
-                                          type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE"),
+                                          type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE" | "BINARY" | "BYTE" | "CHARACTER" | "DOUBLE" | "FLOAT" | "INT" | "LONG" | "NUMERIC" | "SHORT" | "STRING" | "TIMESTAMP_LTZ" | "TIMESTAMP_NTZ" | "TINYINT"),
                                           default_value: ::String?
                                         },
                                       ]
@@ -174,7 +174,8 @@ module Aws
                                     query_compute: {
                                       is_responsible: bool
                                     }
-                                  }
+                                  },
+                                  ?analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
                                 ) -> _CreateCollaborationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollaborationResponseSuccess
 
@@ -363,7 +364,8 @@ module Aws
                                    s3: {
                                      result_format: ("CSV" | "PARQUET"),
                                      bucket: ::String,
-                                     key_prefix: ::String?
+                                     key_prefix: ::String?,
+                                     single_file_output: bool?
                                    }?
                                  },
                                  role_arn: ::String?
@@ -1002,12 +1004,19 @@ module Aws
                                        s3: {
                                          result_format: ("CSV" | "PARQUET"),
                                          bucket: ::String,
-                                         key_prefix: ::String?
+                                         key_prefix: ::String?,
+                                         single_file_output: bool?
                                        }?,
                                        member: {
                                          account_id: ::String
                                        }?
                                      }
+                                   },
+                                   ?compute_configuration: {
+                                     worker: {
+                                       type: ("CR.1X" | "CR.4X")?,
+                                       number: ::Integer?
+                                     }?
                                    }
                                  ) -> _StartProtectedQueryResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProtectedQueryResponseSuccess
@@ -1219,7 +1228,8 @@ module Aws
                                    s3: {
                                      result_format: ("CSV" | "PARQUET"),
                                      bucket: ::String,
-                                     key_prefix: ::String?
+                                     key_prefix: ::String?,
+                                     single_file_output: bool?
                                    }?
                                  },
                                  role_arn: ::String?

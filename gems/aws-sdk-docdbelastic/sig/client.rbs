@@ -75,6 +75,19 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _ApplyPendingMaintenanceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplyPendingMaintenanceActionOutput]
+        def resource_pending_maintenance_action: () -> Types::ResourcePendingMaintenanceAction
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#apply_pending_maintenance_action-instance_method
+      def apply_pending_maintenance_action: (
+                                              apply_action: ::String,
+                                              ?apply_on: ::String,
+                                              opt_in_type: ("IMMEDIATE" | "NEXT_MAINTENANCE" | "APPLY_ON" | "UNDO_OPT_IN"),
+                                              resource_arn: ::String
+                                            ) -> _ApplyPendingMaintenanceActionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApplyPendingMaintenanceActionResponseSuccess
+
       interface _CopyClusterSnapshotResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CopyClusterSnapshotOutput]
         def snapshot: () -> Types::ClusterSnapshot
@@ -165,6 +178,16 @@ module Aws
                                 ) -> _GetClusterSnapshotResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterSnapshotResponseSuccess
 
+      interface _GetPendingMaintenanceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPendingMaintenanceActionOutput]
+        def resource_pending_maintenance_action: () -> Types::ResourcePendingMaintenanceAction
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#get_pending_maintenance_action-instance_method
+      def get_pending_maintenance_action: (
+                                            resource_arn: ::String
+                                          ) -> _GetPendingMaintenanceActionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPendingMaintenanceActionResponseSuccess
+
       interface _ListClusterSnapshotsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterSnapshotsOutput]
         def next_token: () -> ::String
@@ -190,6 +213,18 @@ module Aws
                            ?next_token: ::String
                          ) -> _ListClustersResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListPendingMaintenanceActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPendingMaintenanceActionsOutput]
+        def next_token: () -> ::String
+        def resource_pending_maintenance_actions: () -> ::Array[Types::ResourcePendingMaintenanceAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#list_pending_maintenance_actions-instance_method
+      def list_pending_maintenance_actions: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListPendingMaintenanceActionsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPendingMaintenanceActionsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]

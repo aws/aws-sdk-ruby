@@ -107,6 +107,23 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class AppConfig
+      attr_accessor key: ("opensearchDashboards.dashboardAdmin.users" | "opensearchDashboards.dashboardAdmin.groups")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class AssociatePackageRequest
       attr_accessor package_id: ::String
       attr_accessor domain_name: ::String
@@ -121,6 +138,7 @@ module Aws::OpenSearchService
     class AuthorizeVpcEndpointAccessRequest
       attr_accessor domain_name: ::String
       attr_accessor account: ::String
+      attr_accessor service: ("application.opensearchservice.amazonaws.com")
       SENSITIVE: []
     end
 
@@ -281,6 +299,7 @@ module Aws::OpenSearchService
       attr_accessor warm_count: ::Integer
       attr_accessor cold_storage_options: Types::ColdStorageOptions
       attr_accessor multi_az_with_standby_enabled: bool
+      attr_accessor node_options: ::Array[Types::NodeOption]
       SENSITIVE: []
     end
 
@@ -324,6 +343,28 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class CreateApplicationRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptionsInput
+      attr_accessor app_configs: ::Array[Types::AppConfig]
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptions
+      attr_accessor app_configs: ::Array[Types::AppConfig]
+      attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class CreateDomainRequest
       attr_accessor domain_name: ::String
       attr_accessor engine_version: ::String
@@ -340,6 +381,7 @@ module Aws::OpenSearchService
       attr_accessor log_publishing_options: ::Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), Types::LogPublishingOption]
       attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput
+      attr_accessor identity_center_options: Types::IdentityCenterOptionsInput
       attr_accessor tag_list: ::Array[Types::Tag]
       attr_accessor auto_tune_options: Types::AutoTuneOptionsInput
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptions
@@ -403,6 +445,12 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class DataSource
+      attr_accessor data_source_arn: ::String
+      attr_accessor data_source_description: ::String
+      SENSITIVE: []
+    end
+
     class DataSourceDetails
       attr_accessor data_source_type: Types::DataSourceType
       attr_accessor name: ::String
@@ -420,6 +468,14 @@ module Aws::OpenSearchService
       end
       class Unknown < DataSourceType
       end
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse < Aws::EmptyStructure
     end
 
     class DeleteDataSourceRequest
@@ -709,6 +765,7 @@ module Aws::OpenSearchService
       attr_accessor log_publishing_options: Types::LogPublishingOptionsStatus
       attr_accessor domain_endpoint_options: Types::DomainEndpointOptionsStatus
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsStatus
+      attr_accessor identity_center_options: Types::IdentityCenterOptionsStatus
       attr_accessor auto_tune_options: Types::AutoTuneOptionsStatus
       attr_accessor change_progress_details: Types::ChangeProgressDetails
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptionsStatus
@@ -808,6 +865,7 @@ module Aws::OpenSearchService
       attr_accessor service_software_options: Types::ServiceSoftwareOptions
       attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptions
+      attr_accessor identity_center_options: Types::IdentityCenterOptions
       attr_accessor auto_tune_options: Types::AutoTuneOptionsOutput
       attr_accessor change_progress_details: Types::ChangeProgressDetails
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptions
@@ -880,6 +938,25 @@ module Aws::OpenSearchService
     class Filter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetApplicationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptions
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor app_configs: ::Array[Types::AppConfig]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -968,6 +1045,45 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class IamIdentityCenterOptions
+      attr_accessor enabled: bool
+      attr_accessor iam_identity_center_instance_arn: ::String
+      attr_accessor iam_role_for_identity_center_application_arn: ::String
+      attr_accessor iam_identity_center_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IamIdentityCenterOptionsInput
+      attr_accessor enabled: bool
+      attr_accessor iam_identity_center_instance_arn: ::String
+      attr_accessor iam_role_for_identity_center_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterOptions
+      attr_accessor enabled_api_access: bool
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor subject_key: ("UserName" | "UserId" | "Email")
+      attr_accessor roles_key: ("GroupName" | "GroupId")
+      attr_accessor identity_center_application_arn: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterOptionsInput
+      attr_accessor enabled_api_access: bool
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor subject_key: ("UserName" | "UserId" | "Email")
+      attr_accessor roles_key: ("GroupName" | "GroupId")
+      SENSITIVE: []
+    end
+
+    class IdentityCenterOptionsStatus
+      attr_accessor options: Types::IdentityCenterOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
     class InboundConnection
       attr_accessor local_domain_info: Types::DomainInformationContainer
       attr_accessor remote_domain_info: Types::DomainInformationContainer
@@ -1038,6 +1154,19 @@ module Aws::OpenSearchService
       attr_accessor storage_types: ::Array[Types::StorageType]
       attr_accessor instance_limits: Types::InstanceLimits
       attr_accessor additional_limits: ::Array[Types::AdditionalLimit]
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor statuses: ::Array[("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")]
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor application_summaries: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1226,6 +1355,19 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class NodeConfig
+      attr_accessor enabled: bool
+      attr_accessor type: ("m3.medium.search" | "m3.large.search" | "m3.xlarge.search" | "m3.2xlarge.search" | "m4.large.search" | "m4.xlarge.search" | "m4.2xlarge.search" | "m4.4xlarge.search" | "m4.10xlarge.search" | "m5.large.search" | "m5.xlarge.search" | "m5.2xlarge.search" | "m5.4xlarge.search" | "m5.12xlarge.search" | "m5.24xlarge.search" | "r5.large.search" | "r5.xlarge.search" | "r5.2xlarge.search" | "r5.4xlarge.search" | "r5.12xlarge.search" | "r5.24xlarge.search" | "c5.large.search" | "c5.xlarge.search" | "c5.2xlarge.search" | "c5.4xlarge.search" | "c5.9xlarge.search" | "c5.18xlarge.search" | "t3.nano.search" | "t3.micro.search" | "t3.small.search" | "t3.medium.search" | "t3.large.search" | "t3.xlarge.search" | "t3.2xlarge.search" | "or1.medium.search" | "or1.large.search" | "or1.xlarge.search" | "or1.2xlarge.search" | "or1.4xlarge.search" | "or1.8xlarge.search" | "or1.12xlarge.search" | "or1.16xlarge.search" | "ultrawarm1.medium.search" | "ultrawarm1.large.search" | "ultrawarm1.xlarge.search" | "t2.micro.search" | "t2.small.search" | "t2.medium.search" | "r3.large.search" | "r3.xlarge.search" | "r3.2xlarge.search" | "r3.4xlarge.search" | "r3.8xlarge.search" | "i2.xlarge.search" | "i2.2xlarge.search" | "d2.xlarge.search" | "d2.2xlarge.search" | "d2.4xlarge.search" | "d2.8xlarge.search" | "c4.large.search" | "c4.xlarge.search" | "c4.2xlarge.search" | "c4.4xlarge.search" | "c4.8xlarge.search" | "r4.large.search" | "r4.xlarge.search" | "r4.2xlarge.search" | "r4.4xlarge.search" | "r4.8xlarge.search" | "r4.16xlarge.search" | "i3.large.search" | "i3.xlarge.search" | "i3.2xlarge.search" | "i3.4xlarge.search" | "i3.8xlarge.search" | "i3.16xlarge.search" | "r6g.large.search" | "r6g.xlarge.search" | "r6g.2xlarge.search" | "r6g.4xlarge.search" | "r6g.8xlarge.search" | "r6g.12xlarge.search" | "m6g.large.search" | "m6g.xlarge.search" | "m6g.2xlarge.search" | "m6g.4xlarge.search" | "m6g.8xlarge.search" | "m6g.12xlarge.search" | "c6g.large.search" | "c6g.xlarge.search" | "c6g.2xlarge.search" | "c6g.4xlarge.search" | "c6g.8xlarge.search" | "c6g.12xlarge.search" | "r6gd.large.search" | "r6gd.xlarge.search" | "r6gd.2xlarge.search" | "r6gd.4xlarge.search" | "r6gd.8xlarge.search" | "r6gd.12xlarge.search" | "r6gd.16xlarge.search" | "t4g.small.search" | "t4g.medium.search")
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class NodeOption
+      attr_accessor node_type: ("coordinator")
+      attr_accessor node_config: Types::NodeConfig
+      SENSITIVE: []
+    end
+
     class NodeToNodeEncryptionOptions
       attr_accessor enabled: bool
       SENSITIVE: []
@@ -1392,6 +1534,7 @@ module Aws::OpenSearchService
     class RevokeVpcEndpointAccessRequest
       attr_accessor domain_name: ::String
       attr_accessor account: ::String
+      attr_accessor service: ("application.opensearchservice.amazonaws.com")
       SENSITIVE: []
     end
 
@@ -1532,6 +1675,25 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class UpdateApplicationRequest
+      attr_accessor id: ::String
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor app_configs: ::Array[Types::AppConfig]
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptions
+      attr_accessor app_configs: ::Array[Types::AppConfig]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class UpdateDataSourceRequest
       attr_accessor domain_name: ::String
       attr_accessor name: ::String
@@ -1561,6 +1723,7 @@ module Aws::OpenSearchService
       attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
       attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput
+      attr_accessor identity_center_options: Types::IdentityCenterOptionsInput
       attr_accessor auto_tune_options: Types::AutoTuneOptions
       attr_accessor dry_run: bool
       attr_accessor dry_run_mode: ("Basic" | "Verbose")

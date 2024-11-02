@@ -1,0 +1,130 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::GeoMaps
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetGlyphsRequest
+      attr_accessor font_stack: ::String
+      attr_accessor font_unicode_range: ::String
+      SENSITIVE: []
+    end
+
+    class GetGlyphsResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetSpritesRequest
+      attr_accessor file_name: ::String
+      attr_accessor style: ("Standard" | "Monochrome" | "Hybrid" | "Satellite")
+      attr_accessor color_scheme: ("Light" | "Dark")
+      attr_accessor variant: ("Default")
+      SENSITIVE: []
+    end
+
+    class GetSpritesResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetStaticMapRequest
+      attr_accessor bounding_box: ::String
+      attr_accessor bounded_positions: ::String
+      attr_accessor center: ::String
+      attr_accessor compact_overlay: ::String
+      attr_accessor geo_json_overlay: ::String
+      attr_accessor height: ::Integer
+      attr_accessor key: ::String
+      attr_accessor padding: ::Integer
+      attr_accessor radius: ::Integer
+      attr_accessor file_name: ::String
+      attr_accessor scale_bar_unit: ("Kilometers" | "KilometersMiles" | "Miles" | "MilesKilometers")
+      attr_accessor style: ("Satellite")
+      attr_accessor width: ::Integer
+      attr_accessor zoom: ::Float
+      SENSITIVE: [:key]
+    end
+
+    class GetStaticMapResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor etag: ::String
+      attr_accessor pricing_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class GetStyleDescriptorRequest
+      attr_accessor style: ("Standard" | "Monochrome" | "Hybrid" | "Satellite")
+      attr_accessor color_scheme: ("Light" | "Dark")
+      attr_accessor political_view: ::String
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class GetStyleDescriptorResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetTileRequest
+      attr_accessor tileset: ::String
+      attr_accessor z: ::String
+      attr_accessor x: ::String
+      attr_accessor y: ::String
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class GetTileResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor etag: ::String
+      attr_accessor pricing_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UnknownOperation" | "Missing" | "CannotParse" | "FieldValidationFailed" | "Other" | "UnknownField")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

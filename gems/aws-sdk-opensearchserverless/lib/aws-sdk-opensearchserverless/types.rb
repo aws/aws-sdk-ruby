@@ -628,6 +628,34 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # Describes IAM Identity Center options for creating an OpenSearch
+    # Serverless security configuration in the form of a key-value map.
+    #
+    # @!attribute [rw] group_attribute
+    #   The group attribute for this IAM Identity Center integration.
+    #   Defaults to `GroupId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the IAM Identity Center instance used to integrate with
+    #   OpenSearch Serverless.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_attribute
+    #   The user attribute for this IAM Identity Center integration.
+    #   Defaults to `UserId`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateIamIdentityCenterConfigOptions AWS API Documentation
+    #
+    class CreateIamIdentityCenterConfigOptions < Struct.new(
+      :group_attribute,
+      :instance_arn,
+      :user_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -689,6 +717,12 @@ module Aws::OpenSearchServerless
     #   A description of the security configuration.
     #   @return [String]
     #
+    # @!attribute [rw] iam_identity_center_options
+    #   Describes IAM Identity Center options in the form of a key-value
+    #   map. This field is required if you specify iamidentitycenter for the
+    #   type parameter.
+    #   @return [Types::CreateIamIdentityCenterConfigOptions]
+    #
     # @!attribute [rw] name
     #   The name of the security configuration.
     #   @return [String]
@@ -707,6 +741,7 @@ module Aws::OpenSearchServerless
     class CreateSecurityConfigRequest < Struct.new(
       :client_token,
       :description,
+      :iam_identity_center_options,
       :name,
       :saml_options,
       :type)
@@ -1306,6 +1341,52 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # Describes IAM Identity Center options for an OpenSearch Serverless
+    # security configuration in the form of a key-value map.
+    #
+    # @!attribute [rw] application_arn
+    #   The ARN of the IAM Identity Center application used to integrate
+    #   with OpenSearch Serverless.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_description
+    #   The description of the IAM Identity Center application used to
+    #   integrate with OpenSearch Serverless.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_name
+    #   The name of the IAM Identity Center application used to integrate
+    #   with OpenSearch Serverless.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_attribute
+    #   The group attribute for this IAM Identity Center integration.
+    #   Defaults to `GroupId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the IAM Identity Center instance used to integrate with
+    #   OpenSearch Serverless.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_attribute
+    #   The user attribute for this IAM Identity Center integration.
+    #   Defaults to `UserId`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IamIdentityCenterConfigOptions AWS API Documentation
+    #
+    class IamIdentityCenterConfigOptions < Struct.new(
+      :application_arn,
+      :application_description,
+      :application_name,
+      :group_attribute,
+      :instance_arn,
+      :user_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Thrown when an error internal to the service occurs while processing a
     # request.
     #
@@ -1885,6 +1966,11 @@ module Aws::OpenSearchServerless
     #   The description of the security configuration.
     #   @return [String]
     #
+    # @!attribute [rw] iam_identity_center_options
+    #   Describes IAM Identity Center options in the form of a key-value
+    #   map.
+    #   @return [Types::IamIdentityCenterConfigOptions]
+    #
     # @!attribute [rw] id
     #   The unique identifier of the security configuration.
     #   @return [String]
@@ -1908,6 +1994,7 @@ module Aws::OpenSearchServerless
       :config_version,
       :created_date,
       :description,
+      :iam_identity_center_options,
       :id,
       :last_modified_date,
       :saml_options,
@@ -2348,6 +2435,28 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # Describes IAM Identity Center options for updating an OpenSearch
+    # Serverless security configuration in the form of a key-value map.
+    #
+    # @!attribute [rw] group_attribute
+    #   The group attribute for this IAM Identity Center integration.
+    #   Defaults to `GroupId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_attribute
+    #   The user attribute for this IAM Identity Center integration.
+    #   Defaults to `UserId`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateIamIdentityCenterConfigOptions AWS API Documentation
+    #
+    class UpdateIamIdentityCenterConfigOptions < Struct.new(
+      :group_attribute,
+      :user_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -2420,6 +2529,11 @@ module Aws::OpenSearchServerless
     #   A description of the security configuration.
     #   @return [String]
     #
+    # @!attribute [rw] iam_identity_center_options_updates
+    #   Describes IAM Identity Center options in the form of a key-value
+    #   map.
+    #   @return [Types::UpdateIamIdentityCenterConfigOptions]
+    #
     # @!attribute [rw] id
     #   The security configuration identifier. For SAML the ID will be
     #   `saml/<accountId>/<idpProviderName>`. For example,
@@ -2436,6 +2550,7 @@ module Aws::OpenSearchServerless
       :client_token,
       :config_version,
       :description,
+      :iam_identity_center_options_updates,
       :id,
       :saml_options)
       SENSITIVE = []

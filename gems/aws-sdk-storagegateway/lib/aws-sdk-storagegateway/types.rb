@@ -80,8 +80,17 @@ module Aws::StorageGateway
     #   specified is critical to all later functions of the gateway and
     #   cannot be changed after activation. The default value is `CACHED`.
     #
+    #   Amazon FSx File Gateway is no longer available to new customers.
+    #   Existing customers of FSx File Gateway can continue to use the
+    #   service normally. For capabilities similar to FSx File Gateway,
+    #   visit [this blog post][1].
+    #
     #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3` \|
     #   `FILE_FSX_SMB`
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/blogs/storage/switch-your-file-share-access-from-amazon-fsx-file-gateway-to-amazon-fsx-for-windows-file-server/
     #   @return [String]
     #
     # @!attribute [rw] tape_drive_type
@@ -602,6 +611,10 @@ module Aws::StorageGateway
     # one or more days of the week, during which bandwidth rate limits are
     # specified for uploading, downloading, or both.
     #
+    # <note markdown="1"> FSx File Gateway does not support this feature.
+    #
+    #  </note>
+    #
     # @!attribute [rw] start_hour_of_day
     #   The hour of the day to start the bandwidth rate limit interval.
     #   @return [Integer]
@@ -636,7 +649,7 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> For Tape Gateway and Volume Gateway, the minimum value is `51200`.
     #
-    #    For S3 File Gateway and FSx File Gateway, the minimum value is
+    #    This field is required for S3 File Gateway, and the minimum value is
     #   `104857600`.
     #
     #    </note>
@@ -646,6 +659,10 @@ module Aws::StorageGateway
     #   The average download rate limit component of the bandwidth rate
     #   limit interval, in bits per second. This field does not appear in
     #   the response if the download rate limit is not set.
+    #
+    #   <note markdown="1"> S3 File Gateway does not support this feature.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/BandwidthRateLimitInterval AWS API Documentation
@@ -1106,7 +1123,7 @@ module Aws::StorageGateway
     #
     #    Bucket ARN:
     #
-    #    `arn:aws:s3:::my-bucket/prefix/`
+    #    `arn:aws:s3:::amzn-s3-demo-bucket/prefix/`
     #
     #    Access point ARN:
     #
@@ -1211,6 +1228,9 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
     #   `LocationARN`, or if an access point or access point alias is used.
+    #
+    #    A valid NFS file share name can only contain the following
+    #   characters: `a`-`z`, `A`-`Z`, `0`-`9`, `-`, `.`, and `_`.
     #
     #    </note>
     #   @return [String]
@@ -1390,7 +1410,7 @@ module Aws::StorageGateway
     #
     #    Bucket ARN:
     #
-    #    `arn:aws:s3:::my-bucket/prefix/`
+    #    `arn:aws:s3:::amzn-s3-demo-bucket/prefix/`
     #
     #    Access point ARN:
     #
@@ -1542,6 +1562,10 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
     #   `LocationARN`, or if an access point or access point alias is used.
+    #
+    #    A valid SMB file share name cannot contain the following characters:
+    #   `[`,`]`,`#`,`;`,`<`,`>`,`:`,`"`,``,`/`,`|`,`?`,`*`,`+`, or ASCII
+    #   control characters `1-31`.
     #
     #    </note>
     #   @return [String]
@@ -2884,6 +2908,15 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_type
     #   The type of the gateway.
+    #
+    #   Amazon FSx File Gateway is no longer available to new customers.
+    #   Existing customers of FSx File Gateway can continue to use the
+    #   service normally. For capabilities similar to FSx File Gateway,
+    #   visit [this blog post][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/blogs/storage/switch-your-file-share-access-from-amazon-fsx-file-gateway-to-amazon-fsx-for-windows-file-server/
     #   @return [String]
     #
     # @!attribute [rw] next_update_availability_date
@@ -4147,6 +4180,15 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_type
     #   The type of the gateway.
+    #
+    #   Amazon FSx File Gateway is no longer available to new customers.
+    #   Existing customers of FSx File Gateway can continue to use the
+    #   service normally. For capabilities similar to FSx File Gateway,
+    #   visit [this blog post][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/blogs/storage/switch-your-file-share-access-from-amazon-fsx-file-gateway-to-amazon-fsx-for-windows-file-server/
     #   @return [String]
     #
     # @!attribute [rw] gateway_operational_state
@@ -5005,7 +5047,7 @@ module Aws::StorageGateway
     #
     #    Bucket ARN:
     #
-    #    `arn:aws:s3:::my-bucket/prefix/`
+    #    `arn:aws:s3:::amzn-s3-demo-bucket/prefix/`
     #
     #    Access point ARN:
     #
@@ -5599,7 +5641,7 @@ module Aws::StorageGateway
     #
     #    Bucket ARN:
     #
-    #    `arn:aws:s3:::my-bucket/prefix/`
+    #    `arn:aws:s3:::amzn-s3-demo-bucket/prefix/`
     #
     #    Access point ARN:
     #
@@ -7089,6 +7131,9 @@ module Aws::StorageGateway
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
     #   `LocationARN`, or if an access point or access point alias is used.
     #
+    #    A valid NFS file share name can only contain the following
+    #   characters: `a`-`z`, `A`-`Z`, `0`-`9`, `-`, `.`, and `_`.
+    #
     #    </note>
     #   @return [String]
     #
@@ -7327,6 +7372,10 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
     #   `LocationARN`, or if an access point or access point alias is used.
+    #
+    #    A valid SMB file share name cannot contain the following characters:
+    #   `[`,`]`,`#`,`;`,`<`,`>`,`:`,`"`,``,`/`,`|`,`?`,`*`,`+`, or ASCII
+    #   control characters `1-31`.
     #
     #    </note>
     #   @return [String]

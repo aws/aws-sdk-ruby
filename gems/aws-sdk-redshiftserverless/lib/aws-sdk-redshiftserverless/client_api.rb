@@ -146,6 +146,9 @@ module Aws::RedshiftServerless
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
+    PerformanceTarget = Shapes::StructureShape.new(name: 'PerformanceTarget')
+    PerformanceTargetLevelInteger = Shapes::IntegerShape.new(name: 'PerformanceTargetLevelInteger')
+    PerformanceTargetStatus = Shapes::StringShape.new(name: 'PerformanceTargetStatus')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     RecoveryPoint = Shapes::StructureShape.new(name: 'RecoveryPoint')
@@ -354,6 +357,7 @@ module Aws::RedshiftServerless
     CreateWorkgroupRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     CreateWorkgroupRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     CreateWorkgroupRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
+    CreateWorkgroupRequest.add_member(:price_performance_target, Shapes::ShapeRef.new(shape: PerformanceTarget, location_name: "pricePerformanceTarget"))
     CreateWorkgroupRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     CreateWorkgroupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     CreateWorkgroupRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
@@ -667,6 +671,10 @@ module Aws::RedshiftServerless
 
     NextInvocationsList.member = Shapes::ShapeRef.new(shape: Timestamp)
 
+    PerformanceTarget.add_member(:level, Shapes::ShapeRef.new(shape: PerformanceTargetLevelInteger, location_name: "level"))
+    PerformanceTarget.add_member(:status, Shapes::ShapeRef.new(shape: PerformanceTargetStatus, location_name: "status"))
+    PerformanceTarget.struct_class = Types::PerformanceTarget
+
     PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policy"))
     PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceArn"))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
@@ -942,6 +950,7 @@ module Aws::RedshiftServerless
     UpdateWorkgroupRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     UpdateWorkgroupRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     UpdateWorkgroupRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
+    UpdateWorkgroupRequest.add_member(:price_performance_target, Shapes::ShapeRef.new(shape: PerformanceTarget, location_name: "pricePerformanceTarget"))
     UpdateWorkgroupRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     UpdateWorkgroupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     UpdateWorkgroupRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
@@ -996,6 +1005,7 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
     Workgroup.add_member(:patch_version, Shapes::ShapeRef.new(shape: String, location_name: "patchVersion"))
     Workgroup.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
+    Workgroup.add_member(:price_performance_target, Shapes::ShapeRef.new(shape: PerformanceTarget, location_name: "pricePerformanceTarget"))
     Workgroup.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     Workgroup.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     Workgroup.add_member(:status, Shapes::ShapeRef.new(shape: WorkgroupStatus, location_name: "status"))

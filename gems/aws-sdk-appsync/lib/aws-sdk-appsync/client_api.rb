@@ -17,6 +17,7 @@ module Aws::AppSync
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AdditionalAuthenticationProvider = Shapes::StructureShape.new(name: 'AdditionalAuthenticationProvider')
     AdditionalAuthenticationProviders = Shapes::ListShape.new(name: 'AdditionalAuthenticationProviders')
+    Api = Shapes::StructureShape.new(name: 'Api')
     ApiAssociation = Shapes::StructureShape.new(name: 'ApiAssociation')
     ApiCache = Shapes::StructureShape.new(name: 'ApiCache')
     ApiCacheStatus = Shapes::StringShape.new(name: 'ApiCacheStatus')
@@ -27,6 +28,8 @@ module Aws::AppSync
     ApiKeyValidityOutOfBoundsException = Shapes::StructureShape.new(name: 'ApiKeyValidityOutOfBoundsException')
     ApiKeys = Shapes::ListShape.new(name: 'ApiKeys')
     ApiLimitExceededException = Shapes::StructureShape.new(name: 'ApiLimitExceededException')
+    ApiName = Shapes::StringShape.new(name: 'ApiName')
+    Apis = Shapes::ListShape.new(name: 'Apis')
     AppSyncRuntime = Shapes::StructureShape.new(name: 'AppSyncRuntime')
     AssociateApiRequest = Shapes::StructureShape.new(name: 'AssociateApiRequest')
     AssociateApiResponse = Shapes::StructureShape.new(name: 'AssociateApiResponse')
@@ -35,6 +38,10 @@ module Aws::AppSync
     AssociateSourceGraphqlApiRequest = Shapes::StructureShape.new(name: 'AssociateSourceGraphqlApiRequest')
     AssociateSourceGraphqlApiResponse = Shapes::StructureShape.new(name: 'AssociateSourceGraphqlApiResponse')
     AssociationStatus = Shapes::StringShape.new(name: 'AssociationStatus')
+    AuthMode = Shapes::StructureShape.new(name: 'AuthMode')
+    AuthModes = Shapes::ListShape.new(name: 'AuthModes')
+    AuthProvider = Shapes::StructureShape.new(name: 'AuthProvider')
+    AuthProviders = Shapes::ListShape.new(name: 'AuthProviders')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AuthorizationConfig = Shapes::StructureShape.new(name: 'AuthorizationConfig')
     AuthorizationType = Shapes::StringShape.new(name: 'AuthorizationType')
@@ -49,6 +56,8 @@ module Aws::AppSync
     CachingConfig = Shapes::StructureShape.new(name: 'CachingConfig')
     CachingKeys = Shapes::ListShape.new(name: 'CachingKeys')
     CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
+    ChannelNamespace = Shapes::StructureShape.new(name: 'ChannelNamespace')
+    ChannelNamespaces = Shapes::ListShape.new(name: 'ChannelNamespaces')
     Code = Shapes::StringShape.new(name: 'Code')
     CodeError = Shapes::StructureShape.new(name: 'CodeError')
     CodeErrorColumn = Shapes::IntegerShape.new(name: 'CodeErrorColumn')
@@ -56,15 +65,21 @@ module Aws::AppSync
     CodeErrorLocation = Shapes::StructureShape.new(name: 'CodeErrorLocation')
     CodeErrorSpan = Shapes::IntegerShape.new(name: 'CodeErrorSpan')
     CodeErrors = Shapes::ListShape.new(name: 'CodeErrors')
+    CognitoConfig = Shapes::StructureShape.new(name: 'CognitoConfig')
     CognitoUserPoolConfig = Shapes::StructureShape.new(name: 'CognitoUserPoolConfig')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConflictDetectionType = Shapes::StringShape.new(name: 'ConflictDetectionType')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictHandlerType = Shapes::StringShape.new(name: 'ConflictHandlerType')
     Context = Shapes::StringShape.new(name: 'Context')
     CreateApiCacheRequest = Shapes::StructureShape.new(name: 'CreateApiCacheRequest')
     CreateApiCacheResponse = Shapes::StructureShape.new(name: 'CreateApiCacheResponse')
     CreateApiKeyRequest = Shapes::StructureShape.new(name: 'CreateApiKeyRequest')
     CreateApiKeyResponse = Shapes::StructureShape.new(name: 'CreateApiKeyResponse')
+    CreateApiRequest = Shapes::StructureShape.new(name: 'CreateApiRequest')
+    CreateApiResponse = Shapes::StructureShape.new(name: 'CreateApiResponse')
+    CreateChannelNamespaceRequest = Shapes::StructureShape.new(name: 'CreateChannelNamespaceRequest')
+    CreateChannelNamespaceResponse = Shapes::StructureShape.new(name: 'CreateChannelNamespaceResponse')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
     CreateDataSourceResponse = Shapes::StructureShape.new(name: 'CreateDataSourceResponse')
     CreateDomainNameRequest = Shapes::StructureShape.new(name: 'CreateDomainNameRequest')
@@ -99,6 +114,10 @@ module Aws::AppSync
     DeleteApiCacheResponse = Shapes::StructureShape.new(name: 'DeleteApiCacheResponse')
     DeleteApiKeyRequest = Shapes::StructureShape.new(name: 'DeleteApiKeyRequest')
     DeleteApiKeyResponse = Shapes::StructureShape.new(name: 'DeleteApiKeyResponse')
+    DeleteApiRequest = Shapes::StructureShape.new(name: 'DeleteApiRequest')
+    DeleteApiResponse = Shapes::StructureShape.new(name: 'DeleteApiResponse')
+    DeleteChannelNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteChannelNamespaceRequest')
+    DeleteChannelNamespaceResponse = Shapes::StructureShape.new(name: 'DeleteChannelNamespaceResponse')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteDataSourceResponse = Shapes::StructureShape.new(name: 'DeleteDataSourceResponse')
     DeleteDomainNameRequest = Shapes::StructureShape.new(name: 'DeleteDomainNameRequest')
@@ -137,6 +156,9 @@ module Aws::AppSync
     EvaluateMappingTemplateResponse = Shapes::StructureShape.new(name: 'EvaluateMappingTemplateResponse')
     EvaluationResult = Shapes::StringShape.new(name: 'EvaluationResult')
     EventBridgeDataSourceConfig = Shapes::StructureShape.new(name: 'EventBridgeDataSourceConfig')
+    EventConfig = Shapes::StructureShape.new(name: 'EventConfig')
+    EventLogConfig = Shapes::StructureShape.new(name: 'EventLogConfig')
+    EventLogLevel = Shapes::StringShape.new(name: 'EventLogLevel')
     FieldLogLevel = Shapes::StringShape.new(name: 'FieldLogLevel')
     FlushApiCacheRequest = Shapes::StructureShape.new(name: 'FlushApiCacheRequest')
     FlushApiCacheResponse = Shapes::StructureShape.new(name: 'FlushApiCacheResponse')
@@ -147,6 +169,10 @@ module Aws::AppSync
     GetApiAssociationResponse = Shapes::StructureShape.new(name: 'GetApiAssociationResponse')
     GetApiCacheRequest = Shapes::StructureShape.new(name: 'GetApiCacheRequest')
     GetApiCacheResponse = Shapes::StructureShape.new(name: 'GetApiCacheResponse')
+    GetApiRequest = Shapes::StructureShape.new(name: 'GetApiRequest')
+    GetApiResponse = Shapes::StructureShape.new(name: 'GetApiResponse')
+    GetChannelNamespaceRequest = Shapes::StructureShape.new(name: 'GetChannelNamespaceRequest')
+    GetChannelNamespaceResponse = Shapes::StructureShape.new(name: 'GetChannelNamespaceResponse')
     GetDataSourceIntrospectionRequest = Shapes::StructureShape.new(name: 'GetDataSourceIntrospectionRequest')
     GetDataSourceIntrospectionResponse = Shapes::StructureShape.new(name: 'GetDataSourceIntrospectionResponse')
     GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
@@ -183,6 +209,10 @@ module Aws::AppSync
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListApiKeysRequest = Shapes::StructureShape.new(name: 'ListApiKeysRequest')
     ListApiKeysResponse = Shapes::StructureShape.new(name: 'ListApiKeysResponse')
+    ListApisRequest = Shapes::StructureShape.new(name: 'ListApisRequest')
+    ListApisResponse = Shapes::StructureShape.new(name: 'ListApisResponse')
+    ListChannelNamespacesRequest = Shapes::StructureShape.new(name: 'ListChannelNamespacesRequest')
+    ListChannelNamespacesResponse = Shapes::StructureShape.new(name: 'ListChannelNamespacesResponse')
     ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
     ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
     ListDomainNamesRequest = Shapes::StructureShape.new(name: 'ListDomainNamesRequest')
@@ -211,11 +241,13 @@ module Aws::AppSync
     MaxBatchSize = Shapes::IntegerShape.new(name: 'MaxBatchSize')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MergeType = Shapes::StringShape.new(name: 'MergeType')
+    Namespace = Shapes::StringShape.new(name: 'Namespace')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OpenIDConnectConfig = Shapes::StructureShape.new(name: 'OpenIDConnectConfig')
     OpenSearchServiceDataSourceConfig = Shapes::StructureShape.new(name: 'OpenSearchServiceDataSourceConfig')
     OperationLevelMetricsConfig = Shapes::StringShape.new(name: 'OperationLevelMetricsConfig')
     OutputType = Shapes::StringShape.new(name: 'OutputType')
+    OwnerContact = Shapes::StringShape.new(name: 'OwnerContact')
     Ownership = Shapes::StringShape.new(name: 'Ownership')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PipelineConfig = Shapes::StructureShape.new(name: 'PipelineConfig')
@@ -239,6 +271,7 @@ module Aws::AppSync
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     RuntimeName = Shapes::StringShape.new(name: 'RuntimeName')
     SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SourceApiAssociation = Shapes::StructureShape.new(name: 'SourceApiAssociation')
     SourceApiAssociationConfig = Shapes::StructureShape.new(name: 'SourceApiAssociationConfig')
     SourceApiAssociationStatus = Shapes::StringShape.new(name: 'SourceApiAssociationStatus')
@@ -260,6 +293,7 @@ module Aws::AppSync
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Template = Shapes::StringShape.new(name: 'Template')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Type = Shapes::StructureShape.new(name: 'Type')
     TypeDefinitionFormat = Shapes::StringShape.new(name: 'TypeDefinitionFormat')
     TypeList = Shapes::ListShape.new(name: 'TypeList')
@@ -270,6 +304,10 @@ module Aws::AppSync
     UpdateApiCacheResponse = Shapes::StructureShape.new(name: 'UpdateApiCacheResponse')
     UpdateApiKeyRequest = Shapes::StructureShape.new(name: 'UpdateApiKeyRequest')
     UpdateApiKeyResponse = Shapes::StructureShape.new(name: 'UpdateApiKeyResponse')
+    UpdateApiRequest = Shapes::StructureShape.new(name: 'UpdateApiRequest')
+    UpdateApiResponse = Shapes::StructureShape.new(name: 'UpdateApiResponse')
+    UpdateChannelNamespaceRequest = Shapes::StructureShape.new(name: 'UpdateChannelNamespaceRequest')
+    UpdateChannelNamespaceResponse = Shapes::StructureShape.new(name: 'UpdateChannelNamespaceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDataSourceResponse')
     UpdateDomainNameRequest = Shapes::StructureShape.new(name: 'UpdateDomainNameRequest')
@@ -296,6 +334,18 @@ module Aws::AppSync
     AdditionalAuthenticationProvider.struct_class = Types::AdditionalAuthenticationProvider
 
     AdditionalAuthenticationProviders.member = Shapes::ShapeRef.new(shape: AdditionalAuthenticationProvider)
+
+    Api.add_member(:api_id, Shapes::ShapeRef.new(shape: String, location_name: "apiId"))
+    Api.add_member(:name, Shapes::ShapeRef.new(shape: ApiName, location_name: "name"))
+    Api.add_member(:owner_contact, Shapes::ShapeRef.new(shape: OwnerContact, location_name: "ownerContact"))
+    Api.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Api.add_member(:dns, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "dns"))
+    Api.add_member(:api_arn, Shapes::ShapeRef.new(shape: String, location_name: "apiArn"))
+    Api.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
+    Api.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
+    Api.add_member(:waf_web_acl_arn, Shapes::ShapeRef.new(shape: String, location_name: "wafWebAclArn"))
+    Api.add_member(:event_config, Shapes::ShapeRef.new(shape: EventConfig, location_name: "eventConfig"))
+    Api.struct_class = Types::Api
 
     ApiAssociation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     ApiAssociation.add_member(:api_id, Shapes::ShapeRef.new(shape: String, location_name: "apiId"))
@@ -329,6 +379,8 @@ module Aws::AppSync
     ApiLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ApiLimitExceededException.struct_class = Types::ApiLimitExceededException
 
+    Apis.member = Shapes::ShapeRef.new(shape: Api)
+
     AppSyncRuntime.add_member(:name, Shapes::ShapeRef.new(shape: RuntimeName, required: true, location_name: "name"))
     AppSyncRuntime.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "runtimeVersion"))
     AppSyncRuntime.struct_class = Types::AppSyncRuntime
@@ -358,6 +410,19 @@ module Aws::AppSync
     AssociateSourceGraphqlApiResponse.add_member(:source_api_association, Shapes::ShapeRef.new(shape: SourceApiAssociation, location_name: "sourceApiAssociation"))
     AssociateSourceGraphqlApiResponse.struct_class = Types::AssociateSourceGraphqlApiResponse
 
+    AuthMode.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "authType"))
+    AuthMode.struct_class = Types::AuthMode
+
+    AuthModes.member = Shapes::ShapeRef.new(shape: AuthMode)
+
+    AuthProvider.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "authType"))
+    AuthProvider.add_member(:cognito_config, Shapes::ShapeRef.new(shape: CognitoConfig, location_name: "cognitoConfig"))
+    AuthProvider.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
+    AuthProvider.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
+    AuthProvider.struct_class = Types::AuthProvider
+
+    AuthProviders.member = Shapes::ShapeRef.new(shape: AuthProvider)
+
     AuthorizationConfig.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "authorizationType"))
     AuthorizationConfig.add_member(:aws_iam_config, Shapes::ShapeRef.new(shape: AwsIamConfig, location_name: "awsIamConfig"))
     AuthorizationConfig.struct_class = Types::AuthorizationConfig
@@ -380,6 +445,19 @@ module Aws::AppSync
 
     CachingKeys.member = Shapes::ShapeRef.new(shape: String)
 
+    ChannelNamespace.add_member(:api_id, Shapes::ShapeRef.new(shape: String, location_name: "apiId"))
+    ChannelNamespace.add_member(:name, Shapes::ShapeRef.new(shape: Namespace, location_name: "name"))
+    ChannelNamespace.add_member(:subscribe_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, location_name: "subscribeAuthModes"))
+    ChannelNamespace.add_member(:publish_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, location_name: "publishAuthModes"))
+    ChannelNamespace.add_member(:code_handlers, Shapes::ShapeRef.new(shape: Code, location_name: "codeHandlers"))
+    ChannelNamespace.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ChannelNamespace.add_member(:channel_namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "channelNamespaceArn"))
+    ChannelNamespace.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
+    ChannelNamespace.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModified"))
+    ChannelNamespace.struct_class = Types::ChannelNamespace
+
+    ChannelNamespaces.member = Shapes::ShapeRef.new(shape: ChannelNamespace)
+
     CodeError.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location_name: "errorType"))
     CodeError.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     CodeError.add_member(:location, Shapes::ShapeRef.new(shape: CodeErrorLocation, location_name: "location"))
@@ -392,6 +470,11 @@ module Aws::AppSync
 
     CodeErrors.member = Shapes::ShapeRef.new(shape: CodeError)
 
+    CognitoConfig.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userPoolId"))
+    CognitoConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
+    CognitoConfig.add_member(:app_id_client_regex, Shapes::ShapeRef.new(shape: String, location_name: "appIdClientRegex"))
+    CognitoConfig.struct_class = Types::CognitoConfig
+
     CognitoUserPoolConfig.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userPoolId"))
     CognitoUserPoolConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
     CognitoUserPoolConfig.add_member(:app_id_client_regex, Shapes::ShapeRef.new(shape: String, location_name: "appIdClientRegex"))
@@ -399,6 +482,9 @@ module Aws::AppSync
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateApiCacheRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ttl"))
@@ -419,6 +505,26 @@ module Aws::AppSync
 
     CreateApiKeyResponse.add_member(:api_key, Shapes::ShapeRef.new(shape: ApiKey, location_name: "apiKey"))
     CreateApiKeyResponse.struct_class = Types::CreateApiKeyResponse
+
+    CreateApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApiName, required: true, location_name: "name"))
+    CreateApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
+    CreateApiRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateApiRequest.add_member(:event_config, Shapes::ShapeRef.new(shape: EventConfig, location_name: "eventConfig"))
+    CreateApiRequest.struct_class = Types::CreateApiRequest
+
+    CreateApiResponse.add_member(:api, Shapes::ShapeRef.new(shape: Api, location_name: "api"))
+    CreateApiResponse.struct_class = Types::CreateApiResponse
+
+    CreateChannelNamespaceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    CreateChannelNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "name"))
+    CreateChannelNamespaceRequest.add_member(:subscribe_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, location_name: "subscribeAuthModes"))
+    CreateChannelNamespaceRequest.add_member(:publish_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, location_name: "publishAuthModes"))
+    CreateChannelNamespaceRequest.add_member(:code_handlers, Shapes::ShapeRef.new(shape: Code, location_name: "codeHandlers"))
+    CreateChannelNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateChannelNamespaceRequest.struct_class = Types::CreateChannelNamespaceRequest
+
+    CreateChannelNamespaceResponse.add_member(:channel_namespace, Shapes::ShapeRef.new(shape: ChannelNamespace, location_name: "channelNamespace"))
+    CreateChannelNamespaceResponse.struct_class = Types::CreateChannelNamespaceResponse
 
     CreateDataSourceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -471,9 +577,9 @@ module Aws::AppSync
     CreateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
     CreateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     CreateGraphqlApiRequest.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
-    CreateGraphqlApiRequest.add_member(:visibility, Shapes::ShapeRef.new(shape: GraphQLApiVisibility, location_name: "visibility"))
     CreateGraphqlApiRequest.add_member(:api_type, Shapes::ShapeRef.new(shape: GraphQLApiType, location_name: "apiType"))
     CreateGraphqlApiRequest.add_member(:merged_api_execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiExecutionRoleArn"))
+    CreateGraphqlApiRequest.add_member(:visibility, Shapes::ShapeRef.new(shape: GraphQLApiVisibility, location_name: "visibility"))
     CreateGraphqlApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
     CreateGraphqlApiRequest.add_member(:introspection_config, Shapes::ShapeRef.new(shape: GraphQLApiIntrospectionConfig, location_name: "introspectionConfig"))
     CreateGraphqlApiRequest.add_member(:query_depth_limit, Shapes::ShapeRef.new(shape: QueryDepthLimit, location_name: "queryDepthLimit"))
@@ -574,6 +680,17 @@ module Aws::AppSync
     DeleteApiKeyRequest.struct_class = Types::DeleteApiKeyRequest
 
     DeleteApiKeyResponse.struct_class = Types::DeleteApiKeyResponse
+
+    DeleteApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    DeleteApiRequest.struct_class = Types::DeleteApiRequest
+
+    DeleteApiResponse.struct_class = Types::DeleteApiResponse
+
+    DeleteChannelNamespaceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    DeleteChannelNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "name"))
+    DeleteChannelNamespaceRequest.struct_class = Types::DeleteChannelNamespaceRequest
+
+    DeleteChannelNamespaceResponse.struct_class = Types::DeleteChannelNamespaceResponse
 
     DeleteDataSourceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     DeleteDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "name"))
@@ -692,6 +809,17 @@ module Aws::AppSync
     EventBridgeDataSourceConfig.add_member(:event_bus_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "eventBusArn"))
     EventBridgeDataSourceConfig.struct_class = Types::EventBridgeDataSourceConfig
 
+    EventConfig.add_member(:auth_providers, Shapes::ShapeRef.new(shape: AuthProviders, required: true, location_name: "authProviders"))
+    EventConfig.add_member(:connection_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, required: true, location_name: "connectionAuthModes"))
+    EventConfig.add_member(:default_publish_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, required: true, location_name: "defaultPublishAuthModes"))
+    EventConfig.add_member(:default_subscribe_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, required: true, location_name: "defaultSubscribeAuthModes"))
+    EventConfig.add_member(:log_config, Shapes::ShapeRef.new(shape: EventLogConfig, location_name: "logConfig"))
+    EventConfig.struct_class = Types::EventConfig
+
+    EventLogConfig.add_member(:log_level, Shapes::ShapeRef.new(shape: EventLogLevel, required: true, location_name: "logLevel"))
+    EventLogConfig.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudWatchLogsRoleArn"))
+    EventLogConfig.struct_class = Types::EventLogConfig
+
     FlushApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     FlushApiCacheRequest.struct_class = Types::FlushApiCacheRequest
 
@@ -726,6 +854,19 @@ module Aws::AppSync
 
     GetApiCacheResponse.add_member(:api_cache, Shapes::ShapeRef.new(shape: ApiCache, location_name: "apiCache"))
     GetApiCacheResponse.struct_class = Types::GetApiCacheResponse
+
+    GetApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    GetApiRequest.struct_class = Types::GetApiRequest
+
+    GetApiResponse.add_member(:api, Shapes::ShapeRef.new(shape: Api, location_name: "api"))
+    GetApiResponse.struct_class = Types::GetApiResponse
+
+    GetChannelNamespaceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    GetChannelNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "name"))
+    GetChannelNamespaceRequest.struct_class = Types::GetChannelNamespaceRequest
+
+    GetChannelNamespaceResponse.add_member(:channel_namespace, Shapes::ShapeRef.new(shape: ChannelNamespace, location_name: "channelNamespace"))
+    GetChannelNamespaceResponse.struct_class = Types::GetChannelNamespaceResponse
 
     GetDataSourceIntrospectionRequest.add_member(:introspection_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "introspectionId"))
     GetDataSourceIntrospectionRequest.add_member(:include_models_sdl, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeModelsSDL"))
@@ -870,6 +1011,23 @@ module Aws::AppSync
     ListApiKeysResponse.add_member(:api_keys, Shapes::ShapeRef.new(shape: ApiKeys, location_name: "apiKeys"))
     ListApiKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListApiKeysResponse.struct_class = Types::ListApiKeysResponse
+
+    ListApisRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListApisRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListApisRequest.struct_class = Types::ListApisRequest
+
+    ListApisResponse.add_member(:apis, Shapes::ShapeRef.new(shape: Apis, location_name: "apis"))
+    ListApisResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListApisResponse.struct_class = Types::ListApisResponse
+
+    ListChannelNamespacesRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    ListChannelNamespacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListChannelNamespacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListChannelNamespacesRequest.struct_class = Types::ListChannelNamespacesRequest
+
+    ListChannelNamespacesResponse.add_member(:channel_namespaces, Shapes::ShapeRef.new(shape: ChannelNamespaces, location_name: "channelNamespaces"))
+    ListChannelNamespacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListChannelNamespacesResponse.struct_class = Types::ListChannelNamespacesResponse
 
     ListDataSourcesRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     ListDataSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -1030,6 +1188,9 @@ module Aws::AppSync
 
     Resolvers.member = Shapes::ShapeRef.new(shape: Resolver)
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     SourceApiAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
     SourceApiAssociation.add_member(:association_arn, Shapes::ShapeRef.new(shape: String, location_name: "associationArn"))
     SourceApiAssociation.add_member(:source_api_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceApiId"))
@@ -1132,6 +1293,25 @@ module Aws::AppSync
     UpdateApiKeyResponse.add_member(:api_key, Shapes::ShapeRef.new(shape: ApiKey, location_name: "apiKey"))
     UpdateApiKeyResponse.struct_class = Types::UpdateApiKeyResponse
 
+    UpdateApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    UpdateApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApiName, required: true, location_name: "name"))
+    UpdateApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
+    UpdateApiRequest.add_member(:event_config, Shapes::ShapeRef.new(shape: EventConfig, location_name: "eventConfig"))
+    UpdateApiRequest.struct_class = Types::UpdateApiRequest
+
+    UpdateApiResponse.add_member(:api, Shapes::ShapeRef.new(shape: Api, location_name: "api"))
+    UpdateApiResponse.struct_class = Types::UpdateApiResponse
+
+    UpdateChannelNamespaceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    UpdateChannelNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "name"))
+    UpdateChannelNamespaceRequest.add_member(:subscribe_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, location_name: "subscribeAuthModes"))
+    UpdateChannelNamespaceRequest.add_member(:publish_auth_modes, Shapes::ShapeRef.new(shape: AuthModes, location_name: "publishAuthModes"))
+    UpdateChannelNamespaceRequest.add_member(:code_handlers, Shapes::ShapeRef.new(shape: Code, location_name: "codeHandlers"))
+    UpdateChannelNamespaceRequest.struct_class = Types::UpdateChannelNamespaceRequest
+
+    UpdateChannelNamespaceResponse.add_member(:channel_namespace, Shapes::ShapeRef.new(shape: ChannelNamespace, location_name: "channelNamespace"))
+    UpdateChannelNamespaceResponse.struct_class = Types::UpdateChannelNamespaceResponse
+
     UpdateDataSourceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "name"))
     UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -1177,7 +1357,7 @@ module Aws::AppSync
     UpdateGraphqlApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateGraphqlApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     UpdateGraphqlApiRequest.add_member(:log_config, Shapes::ShapeRef.new(shape: LogConfig, location_name: "logConfig"))
-    UpdateGraphqlApiRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "authenticationType"))
+    UpdateGraphqlApiRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     UpdateGraphqlApiRequest.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: UserPoolConfig, location_name: "userPoolConfig"))
     UpdateGraphqlApiRequest.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
     UpdateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
@@ -1298,6 +1478,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:create_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateApi"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/apis"
+        o.input = Shapes::ShapeRef.new(shape: CreateApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_api_cache, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateApiCache"
         o.http_method = "POST"
@@ -1325,6 +1518,21 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ApiKeyLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ApiKeyValidityOutOfBoundsException)
+      end)
+
+      api.add_operation(:create_channel_namespace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannelNamespace"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/apis/{apiId}/channelNamespaces"
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelNamespaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelNamespaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_data_source, Seahorse::Model::Operation.new.tap do |o|
@@ -1404,6 +1612,20 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApi"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/apis/{apiId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_api_cache, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApiCache"
         o.http_method = "DELETE"
@@ -1427,6 +1649,20 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_channel_namespace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannelNamespace"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/apis/{apiId}/channelNamespaces/{name}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelNamespaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteChannelNamespaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_data_source, Seahorse::Model::Operation.new.tap do |o|
@@ -1582,6 +1818,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:get_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApi"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/apis/{apiId}"
+        o.input = Shapes::ShapeRef.new(shape: GetApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_api_association, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetApiAssociation"
         o.http_method = "GET"
@@ -1605,6 +1854,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:get_channel_namespace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetChannelNamespace"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/apis/{apiId}/channelNamespaces/{name}"
+        o.input = Shapes::ShapeRef.new(shape: GetChannelNamespaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetChannelNamespaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_data_source, Seahorse::Model::Operation.new.tap do |o|
@@ -1746,6 +2008,41 @@ module Aws::AppSync
         o.http_request_uri = "/v1/apis/{apiId}/apikeys"
         o.input = Shapes::ShapeRef.new(shape: ListApiKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListApiKeysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_apis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApis"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/apis"
+        o.input = Shapes::ShapeRef.new(shape: ListApisRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListApisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_channel_namespaces, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelNamespaces"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/apis/{apiId}/channelNamespaces"
+        o.input = Shapes::ShapeRef.new(shape: ListChannelNamespacesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelNamespacesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -2014,6 +2311,20 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:update_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApi"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/apis/{apiId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:update_api_cache, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateApiCache"
         o.http_method = "POST"
@@ -2039,6 +2350,20 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ApiKeyValidityOutOfBoundsException)
+      end)
+
+      api.add_operation(:update_channel_namespace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannelNamespace"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/apis/{apiId}/channelNamespaces/{name}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelNamespaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelNamespaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_data_source, Seahorse::Model::Operation.new.tap do |o|

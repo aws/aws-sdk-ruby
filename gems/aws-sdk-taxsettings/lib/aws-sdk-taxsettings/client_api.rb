@@ -38,6 +38,7 @@ module Aws::TaxSettings
     BatchPutTaxRegistrationResponse = Shapes::StructureShape.new(name: 'BatchPutTaxRegistrationResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BrazilAdditionalInfo = Shapes::StructureShape.new(name: 'BrazilAdditionalInfo')
+    BusinessRegistrationNumber = Shapes::StringShape.new(name: 'BusinessRegistrationNumber')
     BusinessRepresentativeName = Shapes::StringShape.new(name: 'BusinessRepresentativeName')
     CanadaAdditionalInfo = Shapes::StructureShape.new(name: 'CanadaAdditionalInfo')
     CanadaProvincialSalesTaxIdString = Shapes::StringShape.new(name: 'CanadaProvincialSalesTaxIdString')
@@ -51,6 +52,8 @@ module Aws::TaxSettings
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CupNumber = Shapes::StringShape.new(name: 'CupNumber')
     DateOfBirth = Shapes::StringShape.new(name: 'DateOfBirth')
+    DeleteSupplementalTaxRegistrationRequest = Shapes::StructureShape.new(name: 'DeleteSupplementalTaxRegistrationRequest')
+    DeleteSupplementalTaxRegistrationResponse = Shapes::StructureShape.new(name: 'DeleteSupplementalTaxRegistrationResponse')
     DeleteTaxRegistrationRequest = Shapes::StructureShape.new(name: 'DeleteTaxRegistrationRequest')
     DeleteTaxRegistrationResponse = Shapes::StructureShape.new(name: 'DeleteTaxRegistrationResponse')
     DestinationFilePath = Shapes::StringShape.new(name: 'DestinationFilePath')
@@ -60,6 +63,7 @@ module Aws::TaxSettings
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EstoniaAdditionalInfo = Shapes::StructureShape.new(name: 'EstoniaAdditionalInfo')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
+    GenericString = Shapes::StringShape.new(name: 'GenericString')
     GeorgiaAdditionalInfo = Shapes::StructureShape.new(name: 'GeorgiaAdditionalInfo')
     GetTaxRegistrationDocumentRequest = Shapes::StructureShape.new(name: 'GetTaxRegistrationDocumentRequest')
     GetTaxRegistrationDocumentResponse = Shapes::StructureShape.new(name: 'GetTaxRegistrationDocumentResponse')
@@ -81,6 +85,8 @@ module Aws::TaxSettings
     LegalName = Shapes::StringShape.new(name: 'LegalName')
     LegalNatureCode = Shapes::StringShape.new(name: 'LegalNatureCode')
     LineOfBusiness = Shapes::StringShape.new(name: 'LineOfBusiness')
+    ListSupplementalTaxRegistrationsRequest = Shapes::StructureShape.new(name: 'ListSupplementalTaxRegistrationsRequest')
+    ListSupplementalTaxRegistrationsResponse = Shapes::StructureShape.new(name: 'ListSupplementalTaxRegistrationsResponse')
     ListTaxRegistrationsRequest = Shapes::StructureShape.new(name: 'ListTaxRegistrationsRequest')
     ListTaxRegistrationsResponse = Shapes::StructureShape.new(name: 'ListTaxRegistrationsResponse')
     MalaysiaAdditionalInfo = Shapes::StructureShape.new(name: 'MalaysiaAdditionalInfo')
@@ -92,6 +98,8 @@ module Aws::TaxSettings
     PersonType = Shapes::StringShape.new(name: 'PersonType')
     PolandAdditionalInfo = Shapes::StructureShape.new(name: 'PolandAdditionalInfo')
     PostalCode = Shapes::StringShape.new(name: 'PostalCode')
+    PutSupplementalTaxRegistrationRequest = Shapes::StructureShape.new(name: 'PutSupplementalTaxRegistrationRequest')
+    PutSupplementalTaxRegistrationResponse = Shapes::StructureShape.new(name: 'PutSupplementalTaxRegistrationResponse')
     PutTaxRegistrationRequest = Shapes::StructureShape.new(name: 'PutTaxRegistrationRequest')
     PutTaxRegistrationResponse = Shapes::StructureShape.new(name: 'PutTaxRegistrationResponse')
     RegistrationId = Shapes::StringShape.new(name: 'RegistrationId')
@@ -112,11 +120,16 @@ module Aws::TaxSettings
     SouthKoreaAdditionalInfo = Shapes::StructureShape.new(name: 'SouthKoreaAdditionalInfo')
     SpainAdditionalInfo = Shapes::StructureShape.new(name: 'SpainAdditionalInfo')
     State = Shapes::StringShape.new(name: 'State')
+    SupplementalTaxRegistration = Shapes::StructureShape.new(name: 'SupplementalTaxRegistration')
+    SupplementalTaxRegistrationEntry = Shapes::StructureShape.new(name: 'SupplementalTaxRegistrationEntry')
+    SupplementalTaxRegistrationList = Shapes::ListShape.new(name: 'SupplementalTaxRegistrationList')
+    SupplementalTaxRegistrationType = Shapes::StringShape.new(name: 'SupplementalTaxRegistrationType')
     TaxCode = Shapes::StringShape.new(name: 'TaxCode')
     TaxDocumentAccessToken = Shapes::StringShape.new(name: 'TaxDocumentAccessToken')
     TaxDocumentMetadata = Shapes::StructureShape.new(name: 'TaxDocumentMetadata')
     TaxDocumentMetadatas = Shapes::ListShape.new(name: 'TaxDocumentMetadatas')
     TaxDocumentName = Shapes::StringShape.new(name: 'TaxDocumentName')
+    TaxInformationNumber = Shapes::StringShape.new(name: 'TaxInformationNumber')
     TaxInheritanceDetails = Shapes::StructureShape.new(name: 'TaxInheritanceDetails')
     TaxOffice = Shapes::StringShape.new(name: 'TaxOffice')
     TaxRegistration = Shapes::StructureShape.new(name: 'TaxRegistration')
@@ -242,6 +255,11 @@ module Aws::TaxSettings
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    DeleteSupplementalTaxRegistrationRequest.add_member(:authority_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "authorityId"))
+    DeleteSupplementalTaxRegistrationRequest.struct_class = Types::DeleteSupplementalTaxRegistrationRequest
+
+    DeleteSupplementalTaxRegistrationResponse.struct_class = Types::DeleteSupplementalTaxRegistrationResponse
+
     DeleteTaxRegistrationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     DeleteTaxRegistrationRequest.struct_class = Types::DeleteTaxRegistrationRequest
 
@@ -294,6 +312,14 @@ module Aws::TaxSettings
     KenyaAdditionalInfo.add_member(:person_type, Shapes::ShapeRef.new(shape: PersonType, required: true, location_name: "personType"))
     KenyaAdditionalInfo.struct_class = Types::KenyaAdditionalInfo
 
+    ListSupplementalTaxRegistrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListSupplementalTaxRegistrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationTokenString, location_name: "nextToken"))
+    ListSupplementalTaxRegistrationsRequest.struct_class = Types::ListSupplementalTaxRegistrationsRequest
+
+    ListSupplementalTaxRegistrationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationTokenString, location_name: "nextToken"))
+    ListSupplementalTaxRegistrationsResponse.add_member(:tax_registrations, Shapes::ShapeRef.new(shape: SupplementalTaxRegistrationList, required: true, location_name: "taxRegistrations"))
+    ListSupplementalTaxRegistrationsResponse.struct_class = Types::ListSupplementalTaxRegistrationsResponse
+
     ListTaxRegistrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListTaxRegistrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationTokenString, location_name: "nextToken"))
     ListTaxRegistrationsRequest.struct_class = Types::ListTaxRegistrationsRequest
@@ -302,7 +328,9 @@ module Aws::TaxSettings
     ListTaxRegistrationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationTokenString, location_name: "nextToken"))
     ListTaxRegistrationsResponse.struct_class = Types::ListTaxRegistrationsResponse
 
-    MalaysiaAdditionalInfo.add_member(:service_tax_codes, Shapes::ShapeRef.new(shape: MalaysiaServiceTaxCodesList, required: true, location_name: "serviceTaxCodes"))
+    MalaysiaAdditionalInfo.add_member(:business_registration_number, Shapes::ShapeRef.new(shape: BusinessRegistrationNumber, location_name: "businessRegistrationNumber"))
+    MalaysiaAdditionalInfo.add_member(:service_tax_codes, Shapes::ShapeRef.new(shape: MalaysiaServiceTaxCodesList, location_name: "serviceTaxCodes"))
+    MalaysiaAdditionalInfo.add_member(:tax_information_number, Shapes::ShapeRef.new(shape: TaxInformationNumber, location_name: "taxInformationNumber"))
     MalaysiaAdditionalInfo.struct_class = Types::MalaysiaAdditionalInfo
 
     MalaysiaServiceTaxCodesList.member = Shapes::ShapeRef.new(shape: MalaysiaServiceTaxCode)
@@ -310,6 +338,13 @@ module Aws::TaxSettings
     PolandAdditionalInfo.add_member(:individual_registration_number, Shapes::ShapeRef.new(shape: IndividualRegistrationNumber, location_name: "individualRegistrationNumber"))
     PolandAdditionalInfo.add_member(:is_group_vat_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isGroupVatEnabled"))
     PolandAdditionalInfo.struct_class = Types::PolandAdditionalInfo
+
+    PutSupplementalTaxRegistrationRequest.add_member(:tax_registration_entry, Shapes::ShapeRef.new(shape: SupplementalTaxRegistrationEntry, required: true, location_name: "taxRegistrationEntry"))
+    PutSupplementalTaxRegistrationRequest.struct_class = Types::PutSupplementalTaxRegistrationRequest
+
+    PutSupplementalTaxRegistrationResponse.add_member(:authority_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "authorityId"))
+    PutSupplementalTaxRegistrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaxRegistrationStatus, required: true, location_name: "status"))
+    PutSupplementalTaxRegistrationResponse.struct_class = Types::PutSupplementalTaxRegistrationResponse
 
     PutTaxRegistrationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     PutTaxRegistrationRequest.add_member(:tax_registration_entry, Shapes::ShapeRef.new(shape: TaxRegistrationEntry, required: true, location_name: "taxRegistrationEntry"))
@@ -339,6 +374,22 @@ module Aws::TaxSettings
 
     SpainAdditionalInfo.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "registrationType"))
     SpainAdditionalInfo.struct_class = Types::SpainAdditionalInfo
+
+    SupplementalTaxRegistration.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "address"))
+    SupplementalTaxRegistration.add_member(:authority_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "authorityId"))
+    SupplementalTaxRegistration.add_member(:legal_name, Shapes::ShapeRef.new(shape: LegalName, required: true, location_name: "legalName"))
+    SupplementalTaxRegistration.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationId, required: true, location_name: "registrationId"))
+    SupplementalTaxRegistration.add_member(:registration_type, Shapes::ShapeRef.new(shape: SupplementalTaxRegistrationType, required: true, location_name: "registrationType"))
+    SupplementalTaxRegistration.add_member(:status, Shapes::ShapeRef.new(shape: TaxRegistrationStatus, required: true, location_name: "status"))
+    SupplementalTaxRegistration.struct_class = Types::SupplementalTaxRegistration
+
+    SupplementalTaxRegistrationEntry.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "address"))
+    SupplementalTaxRegistrationEntry.add_member(:legal_name, Shapes::ShapeRef.new(shape: LegalName, required: true, location_name: "legalName"))
+    SupplementalTaxRegistrationEntry.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationId, required: true, location_name: "registrationId"))
+    SupplementalTaxRegistrationEntry.add_member(:registration_type, Shapes::ShapeRef.new(shape: SupplementalTaxRegistrationType, required: true, location_name: "registrationType"))
+    SupplementalTaxRegistrationEntry.struct_class = Types::SupplementalTaxRegistrationEntry
+
+    SupplementalTaxRegistrationList.member = Shapes::ShapeRef.new(shape: SupplementalTaxRegistration)
 
     TaxDocumentMetadata.add_member(:tax_document_access_token, Shapes::ShapeRef.new(shape: TaxDocumentAccessToken, required: true, location_name: "taxDocumentAccessToken"))
     TaxDocumentMetadata.add_member(:tax_document_name, Shapes::ShapeRef.new(shape: TaxDocumentName, required: true, location_name: "taxDocumentName"))
@@ -452,6 +503,18 @@ module Aws::TaxSettings
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_supplemental_tax_registration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSupplementalTaxRegistration"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteSupplementalTaxRegistration"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSupplementalTaxRegistrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSupplementalTaxRegistrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_tax_registration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTaxRegistration"
         o.http_method = "POST"
@@ -485,6 +548,23 @@ module Aws::TaxSettings
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_supplemental_tax_registrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSupplementalTaxRegistrations"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListSupplementalTaxRegistrations"
+        o.input = Shapes::ShapeRef.new(shape: ListSupplementalTaxRegistrationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSupplementalTaxRegistrationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tax_registrations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTaxRegistrations"
         o.http_method = "POST"
@@ -500,6 +580,17 @@ module Aws::TaxSettings
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_supplemental_tax_registration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSupplementalTaxRegistration"
+        o.http_method = "POST"
+        o.http_request_uri = "/PutSupplementalTaxRegistration"
+        o.input = Shapes::ShapeRef.new(shape: PutSupplementalTaxRegistrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutSupplementalTaxRegistrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:put_tax_registration, Seahorse::Model::Operation.new.tap do |o|

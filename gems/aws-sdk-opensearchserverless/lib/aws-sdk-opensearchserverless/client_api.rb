@@ -54,6 +54,7 @@ module Aws::OpenSearchServerless
     CreateCollectionRequest = Shapes::StructureShape.new(name: 'CreateCollectionRequest')
     CreateCollectionRequestDescriptionString = Shapes::StringShape.new(name: 'CreateCollectionRequestDescriptionString')
     CreateCollectionResponse = Shapes::StructureShape.new(name: 'CreateCollectionResponse')
+    CreateIamIdentityCenterConfigOptions = Shapes::StructureShape.new(name: 'CreateIamIdentityCenterConfigOptions')
     CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
     CreateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyResponse')
     CreateSecurityConfigRequest = Shapes::StructureShape.new(name: 'CreateSecurityConfigRequest')
@@ -92,6 +93,11 @@ module Aws::OpenSearchServerless
     GetSecurityConfigResponse = Shapes::StructureShape.new(name: 'GetSecurityConfigResponse')
     GetSecurityPolicyRequest = Shapes::StructureShape.new(name: 'GetSecurityPolicyRequest')
     GetSecurityPolicyResponse = Shapes::StructureShape.new(name: 'GetSecurityPolicyResponse')
+    IamIdentityCenterApplicationArn = Shapes::StringShape.new(name: 'IamIdentityCenterApplicationArn')
+    IamIdentityCenterConfigOptions = Shapes::StructureShape.new(name: 'IamIdentityCenterConfigOptions')
+    IamIdentityCenterGroupAttribute = Shapes::StringShape.new(name: 'IamIdentityCenterGroupAttribute')
+    IamIdentityCenterInstanceArn = Shapes::StringShape.new(name: 'IamIdentityCenterInstanceArn')
+    IamIdentityCenterUserAttribute = Shapes::StringShape.new(name: 'IamIdentityCenterUserAttribute')
     IndexingCapacityValue = Shapes::IntegerShape.new(name: 'IndexingCapacityValue')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LifecyclePolicyDetail = Shapes::StructureShape.new(name: 'LifecyclePolicyDetail')
@@ -178,6 +184,7 @@ module Aws::OpenSearchServerless
     UpdateCollectionRequest = Shapes::StructureShape.new(name: 'UpdateCollectionRequest')
     UpdateCollectionRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateCollectionRequestDescriptionString')
     UpdateCollectionResponse = Shapes::StructureShape.new(name: 'UpdateCollectionResponse')
+    UpdateIamIdentityCenterConfigOptions = Shapes::StructureShape.new(name: 'UpdateIamIdentityCenterConfigOptions')
     UpdateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyRequest')
     UpdateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'UpdateLifecyclePolicyResponse')
     UpdateSecurityConfigRequest = Shapes::StructureShape.new(name: 'UpdateSecurityConfigRequest')
@@ -340,6 +347,11 @@ module Aws::OpenSearchServerless
     CreateCollectionResponse.add_member(:create_collection_detail, Shapes::ShapeRef.new(shape: CreateCollectionDetail, location_name: "createCollectionDetail"))
     CreateCollectionResponse.struct_class = Types::CreateCollectionResponse
 
+    CreateIamIdentityCenterConfigOptions.add_member(:group_attribute, Shapes::ShapeRef.new(shape: IamIdentityCenterGroupAttribute, location_name: "groupAttribute"))
+    CreateIamIdentityCenterConfigOptions.add_member(:instance_arn, Shapes::ShapeRef.new(shape: IamIdentityCenterInstanceArn, required: true, location_name: "instanceArn"))
+    CreateIamIdentityCenterConfigOptions.add_member(:user_attribute, Shapes::ShapeRef.new(shape: IamIdentityCenterUserAttribute, location_name: "userAttribute"))
+    CreateIamIdentityCenterConfigOptions.struct_class = Types::CreateIamIdentityCenterConfigOptions
+
     CreateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
     CreateLifecyclePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
@@ -352,6 +364,7 @@ module Aws::OpenSearchServerless
 
     CreateSecurityConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateSecurityConfigRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConfigDescription, location_name: "description"))
+    CreateSecurityConfigRequest.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: CreateIamIdentityCenterConfigOptions, location_name: "iamIdentityCenterOptions"))
     CreateSecurityConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: ConfigName, required: true, location_name: "name"))
     CreateSecurityConfigRequest.add_member(:saml_options, Shapes::ShapeRef.new(shape: SamlConfigOptions, location_name: "samlOptions"))
     CreateSecurityConfigRequest.add_member(:type, Shapes::ShapeRef.new(shape: SecurityConfigType, required: true, location_name: "type"))
@@ -488,6 +501,14 @@ module Aws::OpenSearchServerless
     GetSecurityPolicyResponse.add_member(:security_policy_detail, Shapes::ShapeRef.new(shape: SecurityPolicyDetail, location_name: "securityPolicyDetail"))
     GetSecurityPolicyResponse.struct_class = Types::GetSecurityPolicyResponse
 
+    IamIdentityCenterConfigOptions.add_member(:application_arn, Shapes::ShapeRef.new(shape: IamIdentityCenterApplicationArn, location_name: "applicationArn"))
+    IamIdentityCenterConfigOptions.add_member(:application_description, Shapes::ShapeRef.new(shape: String, location_name: "applicationDescription"))
+    IamIdentityCenterConfigOptions.add_member(:application_name, Shapes::ShapeRef.new(shape: String, location_name: "applicationName"))
+    IamIdentityCenterConfigOptions.add_member(:group_attribute, Shapes::ShapeRef.new(shape: IamIdentityCenterGroupAttribute, location_name: "groupAttribute"))
+    IamIdentityCenterConfigOptions.add_member(:instance_arn, Shapes::ShapeRef.new(shape: IamIdentityCenterInstanceArn, location_name: "instanceArn"))
+    IamIdentityCenterConfigOptions.add_member(:user_attribute, Shapes::ShapeRef.new(shape: IamIdentityCenterUserAttribute, location_name: "userAttribute"))
+    IamIdentityCenterConfigOptions.struct_class = Types::IamIdentityCenterConfigOptions
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -619,6 +640,7 @@ module Aws::OpenSearchServerless
     SecurityConfigDetail.add_member(:config_version, Shapes::ShapeRef.new(shape: PolicyVersion, location_name: "configVersion"))
     SecurityConfigDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
     SecurityConfigDetail.add_member(:description, Shapes::ShapeRef.new(shape: ConfigDescription, location_name: "description"))
+    SecurityConfigDetail.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: IamIdentityCenterConfigOptions, location_name: "iamIdentityCenterOptions"))
     SecurityConfigDetail.add_member(:id, Shapes::ShapeRef.new(shape: SecurityConfigId, location_name: "id"))
     SecurityConfigDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
     SecurityConfigDetail.add_member(:saml_options, Shapes::ShapeRef.new(shape: SamlConfigOptions, location_name: "samlOptions"))
@@ -727,6 +749,10 @@ module Aws::OpenSearchServerless
     UpdateCollectionResponse.add_member(:update_collection_detail, Shapes::ShapeRef.new(shape: UpdateCollectionDetail, location_name: "updateCollectionDetail"))
     UpdateCollectionResponse.struct_class = Types::UpdateCollectionResponse
 
+    UpdateIamIdentityCenterConfigOptions.add_member(:group_attribute, Shapes::ShapeRef.new(shape: IamIdentityCenterGroupAttribute, location_name: "groupAttribute"))
+    UpdateIamIdentityCenterConfigOptions.add_member(:user_attribute, Shapes::ShapeRef.new(shape: IamIdentityCenterUserAttribute, location_name: "userAttribute"))
+    UpdateIamIdentityCenterConfigOptions.struct_class = Types::UpdateIamIdentityCenterConfigOptions
+
     UpdateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
     UpdateLifecyclePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
@@ -741,6 +767,7 @@ module Aws::OpenSearchServerless
     UpdateSecurityConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateSecurityConfigRequest.add_member(:config_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "configVersion"))
     UpdateSecurityConfigRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConfigDescription, location_name: "description"))
+    UpdateSecurityConfigRequest.add_member(:iam_identity_center_options_updates, Shapes::ShapeRef.new(shape: UpdateIamIdentityCenterConfigOptions, location_name: "iamIdentityCenterOptionsUpdates"))
     UpdateSecurityConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: SecurityConfigId, required: true, location_name: "id"))
     UpdateSecurityConfigRequest.add_member(:saml_options, Shapes::ShapeRef.new(shape: SamlConfigOptions, location_name: "samlOptions"))
     UpdateSecurityConfigRequest.struct_class = Types::UpdateSecurityConfigRequest

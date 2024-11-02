@@ -400,6 +400,11 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class FlowTimeouts
+      attr_accessor tcp_idle_timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class Header
       attr_accessor protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP")
       attr_accessor source: ::String
@@ -700,6 +705,7 @@ module Aws::NetworkFirewall
     class StatefulEngineOptions
       attr_accessor rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")
       attr_accessor stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")
+      attr_accessor flow_timeouts: Types::FlowTimeouts
       SENSITIVE: []
     end
 

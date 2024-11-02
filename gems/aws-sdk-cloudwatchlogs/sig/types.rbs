@@ -1236,6 +1236,7 @@ module Aws::CloudWatchLogs
       attr_accessor anomaly_detector_arn: ::String
       attr_accessor suppression_type: ("LIMITED" | "INFINITE")
       attr_accessor suppression_period: Types::SuppressionPeriod
+      attr_accessor baseline: bool
       SENSITIVE: []
     end
 

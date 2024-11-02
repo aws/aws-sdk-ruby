@@ -252,6 +252,28 @@ module Aws
                                     ) -> _CreateGuardrailVersionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGuardrailVersionResponseSuccess
 
+      interface _CreateInferenceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInferenceProfileResponse]
+        def inference_profile_arn: () -> ::String
+        def status: () -> ("ACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_inference_profile-instance_method
+      def create_inference_profile: (
+                                      inference_profile_name: ::String,
+                                      ?description: ::String,
+                                      ?client_request_token: ::String,
+                                      model_source: {
+                                        copy_from: ::String?
+                                      },
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateInferenceProfileResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInferenceProfileResponseSuccess
+
       interface _CreateModelCopyJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelCopyJobResponse]
         def job_arn: () -> ::String
@@ -438,6 +460,15 @@ module Aws
                                  ) -> _DeleteImportedModelResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImportedModelResponseSuccess
 
+      interface _DeleteInferenceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInferenceProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_inference_profile-instance_method
+      def delete_inference_profile: (
+                                      inference_profile_identifier: ::String
+                                    ) -> _DeleteInferenceProfileResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInferenceProfileResponseSuccess
+
       interface _DeleteModelInvocationLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteModelInvocationLoggingConfigurationResponse]
       end
@@ -559,14 +590,14 @@ module Aws
       interface _GetInferenceProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInferenceProfileResponse]
         def inference_profile_name: () -> ::String
-        def models: () -> ::Array[Types::InferenceProfileModel]
         def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def inference_profile_arn: () -> ::String
+        def models: () -> ::Array[Types::InferenceProfileModel]
         def inference_profile_id: () -> ::String
         def status: () -> ("ACTIVE")
-        def type: () -> ("SYSTEM_DEFINED")
+        def type: () -> ("SYSTEM_DEFINED" | "APPLICATION")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_inference_profile-instance_method
       def get_inference_profile: (
@@ -790,7 +821,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_inference_profiles-instance_method
       def list_inference_profiles: (
                                      ?max_results: ::Integer,
-                                     ?next_token: ::String
+                                     ?next_token: ::String,
+                                     ?type_equals: ("SYSTEM_DEFINED" | "APPLICATION")
                                    ) -> _ListInferenceProfilesResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceProfilesResponseSuccess
 

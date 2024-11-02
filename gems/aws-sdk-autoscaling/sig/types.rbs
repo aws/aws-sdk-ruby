@@ -697,7 +697,7 @@ module Aws::AutoScaling
     class InstanceRefresh
       attr_accessor instance_refresh_id: ::String
       attr_accessor auto_scaling_group_name: ::String
-      attr_accessor status: ("Pending" | "InProgress" | "Successful" | "Failed" | "Cancelling" | "Cancelled" | "RollbackInProgress" | "RollbackFailed" | "RollbackSuccessful")
+      attr_accessor status: ("Pending" | "InProgress" | "Successful" | "Failed" | "Cancelling" | "Cancelled" | "RollbackInProgress" | "RollbackFailed" | "RollbackSuccessful" | "Baking")
       attr_accessor status_reason: ::String
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
@@ -1142,6 +1142,7 @@ module Aws::AutoScaling
       attr_accessor standby_instances: ("Terminate" | "Ignore" | "Wait")
       attr_accessor alarm_specification: Types::AlarmSpecification
       attr_accessor max_healthy_percentage: ::Integer
+      attr_accessor bake_time: ::Integer
       SENSITIVE: []
     end
 

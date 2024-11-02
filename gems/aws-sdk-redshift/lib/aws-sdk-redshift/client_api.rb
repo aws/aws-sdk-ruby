@@ -328,6 +328,7 @@ module Aws::Redshift
     ImportTablesNotStarted = Shapes::ListShape.new(name: 'ImportTablesNotStarted')
     InProgressTableRestoreQuotaExceededFault = Shapes::StructureShape.new(name: 'InProgressTableRestoreQuotaExceededFault', error: {"code"=>"InProgressTableRestoreQuotaExceededFault", "httpStatusCode"=>400, "senderFault"=>true})
     InboundIntegration = Shapes::StructureShape.new(name: 'InboundIntegration')
+    InboundIntegrationArn = Shapes::StringShape.new(name: 'InboundIntegrationArn')
     InboundIntegrationList = Shapes::ListShape.new(name: 'InboundIntegrationList')
     InboundIntegrationsMessage = Shapes::StructureShape.new(name: 'InboundIntegrationsMessage')
     IncompatibleOrderableOptions = Shapes::StructureShape.new(name: 'IncompatibleOrderableOptions', error: {"code"=>"IncompatibleOrderableOptions", "httpStatusCode"=>400, "senderFault"=>true})
@@ -576,6 +577,7 @@ module Aws::Redshift
     SnapshotSortingEntity = Shapes::StructureShape.new(name: 'SnapshotSortingEntity')
     SnapshotSortingEntityList = Shapes::ListShape.new(name: 'SnapshotSortingEntityList')
     SortByOrder = Shapes::StringShape.new(name: 'SortByOrder')
+    SourceArn = Shapes::StringShape.new(name: 'SourceArn')
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceNotFoundFault = Shapes::StructureShape.new(name: 'SourceNotFoundFault', error: {"code"=>"SourceNotFound", "httpStatusCode"=>404, "senderFault"=>true})
     SourceType = Shapes::StringShape.new(name: 'SourceType')
@@ -608,6 +610,7 @@ module Aws::Redshift
     TaggedResource = Shapes::StructureShape.new(name: 'TaggedResource')
     TaggedResourceList = Shapes::ListShape.new(name: 'TaggedResourceList')
     TaggedResourceListMessage = Shapes::StructureShape.new(name: 'TaggedResourceListMessage')
+    TargetArn = Shapes::StringShape.new(name: 'TargetArn')
     TrackList = Shapes::ListShape.new(name: 'TrackList')
     TrackListMessage = Shapes::StructureShape.new(name: 'TrackListMessage')
     UnauthorizedOperation = Shapes::StructureShape.new(name: 'UnauthorizedOperation', error: {"code"=>"UnauthorizedOperation", "httpStatusCode"=>400, "senderFault"=>true})
@@ -1160,8 +1163,8 @@ module Aws::Redshift
     CreateHsmConfigurationResult.add_member(:hsm_configuration, Shapes::ShapeRef.new(shape: HsmConfiguration, location_name: "HsmConfiguration"))
     CreateHsmConfigurationResult.struct_class = Types::CreateHsmConfigurationResult
 
-    CreateIntegrationMessage.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceArn"))
-    CreateIntegrationMessage.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetArn"))
+    CreateIntegrationMessage.add_member(:source_arn, Shapes::ShapeRef.new(shape: SourceArn, required: true, location_name: "SourceArn"))
+    CreateIntegrationMessage.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "TargetArn"))
     CreateIntegrationMessage.add_member(:integration_name, Shapes::ShapeRef.new(shape: IntegrationName, required: true, location_name: "IntegrationName"))
     CreateIntegrationMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KMSKeyId"))
     CreateIntegrationMessage.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
@@ -1523,8 +1526,8 @@ module Aws::Redshift
     DescribeHsmConfigurationsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
     DescribeHsmConfigurationsMessage.struct_class = Types::DescribeHsmConfigurationsMessage
 
-    DescribeInboundIntegrationsMessage.add_member(:integration_arn, Shapes::ShapeRef.new(shape: String, location_name: "IntegrationArn"))
-    DescribeInboundIntegrationsMessage.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
+    DescribeInboundIntegrationsMessage.add_member(:integration_arn, Shapes::ShapeRef.new(shape: InboundIntegrationArn, location_name: "IntegrationArn"))
+    DescribeInboundIntegrationsMessage.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, location_name: "TargetArn"))
     DescribeInboundIntegrationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeInboundIntegrationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeInboundIntegrationsMessage.struct_class = Types::DescribeInboundIntegrationsMessage
@@ -1918,9 +1921,9 @@ module Aws::Redshift
 
     InProgressTableRestoreQuotaExceededFault.struct_class = Types::InProgressTableRestoreQuotaExceededFault
 
-    InboundIntegration.add_member(:integration_arn, Shapes::ShapeRef.new(shape: String, location_name: "IntegrationArn"))
+    InboundIntegration.add_member(:integration_arn, Shapes::ShapeRef.new(shape: InboundIntegrationArn, location_name: "IntegrationArn"))
     InboundIntegration.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
-    InboundIntegration.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
+    InboundIntegration.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, location_name: "TargetArn"))
     InboundIntegration.add_member(:status, Shapes::ShapeRef.new(shape: ZeroETLIntegrationStatus, location_name: "Status"))
     InboundIntegration.add_member(:errors, Shapes::ShapeRef.new(shape: IntegrationErrorList, location_name: "Errors"))
     InboundIntegration.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
@@ -1938,10 +1941,10 @@ module Aws::Redshift
 
     InsufficientS3BucketPolicyFault.struct_class = Types::InsufficientS3BucketPolicyFault
 
-    Integration.add_member(:integration_arn, Shapes::ShapeRef.new(shape: String, location_name: "IntegrationArn"))
+    Integration.add_member(:integration_arn, Shapes::ShapeRef.new(shape: IntegrationArn, location_name: "IntegrationArn"))
     Integration.add_member(:integration_name, Shapes::ShapeRef.new(shape: IntegrationName, location_name: "IntegrationName"))
-    Integration.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
-    Integration.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
+    Integration.add_member(:source_arn, Shapes::ShapeRef.new(shape: SourceArn, location_name: "SourceArn"))
+    Integration.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, location_name: "TargetArn"))
     Integration.add_member(:status, Shapes::ShapeRef.new(shape: ZeroETLIntegrationStatus, location_name: "Status"))
     Integration.add_member(:errors, Shapes::ShapeRef.new(shape: IntegrationErrorList, location_name: "Errors"))
     Integration.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))

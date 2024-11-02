@@ -664,6 +664,11 @@ module Aws::RedshiftServerless
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
     #   @return [Integer]
     #
+    # @!attribute [rw] price_performance_target
+    #   An object that represents the price performance target settings for
+    #   the workgroup.
+    #   @return [Types::PerformanceTarget]
+    #
     # @!attribute [rw] publicly_accessible
     #   A value that specifies whether the workgroup can be accessed from a
     #   public network.
@@ -695,6 +700,7 @@ module Aws::RedshiftServerless
       :max_capacity,
       :namespace_name,
       :port,
+      :price_performance_target,
       :publicly_accessible,
       :security_group_ids,
       :subnet_ids,
@@ -2106,6 +2112,29 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # An object that represents the price performance target settings for
+    # the workgroup.
+    #
+    # @!attribute [rw] level
+    #   The target price performance level for the workgroup. Valid values
+    #   include 1, 25, 50, 75, and 100. These correspond to the price
+    #   performance levels LOW\_COST, ECONOMICAL, BALANCED, RESOURCEFUL, and
+    #   HIGH\_PERFORMANCE.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   Whether the price performance target is enabled for the workgroup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/PerformanceTarget AWS API Documentation
+    #
+    class PerformanceTarget < Struct.new(
+      :level,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] policy
     #   The policy to create or update. For example, the following policy
     #   grants a user authorization to restore a snapshot.
@@ -3444,6 +3473,11 @@ module Aws::RedshiftServerless
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
     #   @return [Integer]
     #
+    # @!attribute [rw] price_performance_target
+    #   An object that represents the price performance target settings for
+    #   the workgroup.
+    #   @return [Types::PerformanceTarget]
+    #
     # @!attribute [rw] publicly_accessible
     #   A value that specifies whether the workgroup can be accessible from
     #   a public network.
@@ -3471,6 +3505,7 @@ module Aws::RedshiftServerless
       :ip_address_type,
       :max_capacity,
       :port,
+      :price_performance_target,
       :publicly_accessible,
       :security_group_ids,
       :subnet_ids,
@@ -3685,6 +3720,11 @@ module Aws::RedshiftServerless
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
     #   @return [Integer]
     #
+    # @!attribute [rw] price_performance_target
+    #   An object that represents the price performance target settings for
+    #   the workgroup.
+    #   @return [Types::PerformanceTarget]
+    #
     # @!attribute [rw] publicly_accessible
     #   A value that specifies whether the workgroup can be accessible from
     #   a public network.
@@ -3741,6 +3781,7 @@ module Aws::RedshiftServerless
       :namespace_name,
       :patch_version,
       :port,
+      :price_performance_target,
       :publicly_accessible,
       :security_group_ids,
       :status,

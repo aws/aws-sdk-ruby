@@ -53,6 +53,12 @@ module Aws::EC2
       data[:vpc_id]
     end
 
+    # The ARN of the security group.
+    # @return [String]
+    def security_group_arn
+      data[:security_group_arn]
+    end
+
     # The Amazon Web Services account ID of the owner of the security group.
     # @return [String]
     def owner_id

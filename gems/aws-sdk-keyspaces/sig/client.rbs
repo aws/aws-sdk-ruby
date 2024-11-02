@@ -206,6 +206,24 @@ module Aws
                         ) -> _CreateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
 
+      interface _CreateTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTypeResponse]
+        def keyspace_arn: () -> ::String
+        def type_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#create_type-instance_method
+      def create_type: (
+                         keyspace_name: ::String,
+                         type_name: ::String,
+                         field_definitions: Array[
+                           {
+                             name: ::String,
+                             type: ::String
+                           },
+                         ]
+                       ) -> _CreateTypeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTypeResponseSuccess
+
       interface _DeleteKeyspaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKeyspaceResponse]
       end
@@ -224,6 +242,18 @@ module Aws
                           table_name: ::String
                         ) -> _DeleteTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTableResponseSuccess
+
+      interface _DeleteTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTypeResponse]
+        def keyspace_arn: () -> ::String
+        def type_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#delete_type-instance_method
+      def delete_type: (
+                         keyspace_name: ::String,
+                         type_name: ::String
+                       ) -> _DeleteTypeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTypeResponseSuccess
 
       interface _GetKeyspaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyspaceResponse]
@@ -277,6 +307,25 @@ module Aws
                                            ) -> _GetTableAutoScalingSettingsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableAutoScalingSettingsResponseSuccess
 
+      interface _GetTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTypeResponse]
+        def keyspace_name: () -> ::String
+        def type_name: () -> ::String
+        def field_definitions: () -> ::Array[Types::FieldDefinition]
+        def last_modified_timestamp: () -> ::Time
+        def status: () -> ("ACTIVE" | "CREATING" | "DELETING" | "RESTORING")
+        def direct_referring_tables: () -> ::Array[::String]
+        def direct_parent_types: () -> ::Array[::String]
+        def max_nesting_depth: () -> ::Integer
+        def keyspace_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#get_type-instance_method
+      def get_type: (
+                      keyspace_name: ::String,
+                      type_name: ::String
+                    ) -> _GetTypeResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTypeResponseSuccess
+
       interface _ListKeyspacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListKeyspacesResponse]
         def next_token: () -> ::String
@@ -314,6 +363,19 @@ module Aws
                                     ?max_results: ::Integer
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTypesResponse]
+        def next_token: () -> ::String
+        def types: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#list_types-instance_method
+      def list_types: (
+                        ?next_token: ::String,
+                        ?max_results: ::Integer,
+                        keyspace_name: ::String
+                      ) -> _ListTypesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTypesResponseSuccess
 
       interface _RestoreTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RestoreTableResponse]

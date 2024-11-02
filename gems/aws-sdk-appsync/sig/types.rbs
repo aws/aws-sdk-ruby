@@ -21,6 +21,20 @@ module Aws::AppSync
       SENSITIVE: []
     end
 
+    class Api
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner_contact: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor dns: ::Hash[::String, ::String]
+      attr_accessor api_arn: ::String
+      attr_accessor created: ::Time
+      attr_accessor xray_enabled: bool
+      attr_accessor waf_web_acl_arn: ::String
+      attr_accessor event_config: Types::EventConfig
+      SENSITIVE: []
+    end
+
     class ApiAssociation
       attr_accessor domain_name: ::String
       attr_accessor api_id: ::String
@@ -106,6 +120,19 @@ module Aws::AppSync
       SENSITIVE: []
     end
 
+    class AuthMode
+      attr_accessor auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+      SENSITIVE: []
+    end
+
+    class AuthProvider
+      attr_accessor auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+      attr_accessor cognito_config: Types::CognitoConfig
+      attr_accessor open_id_connect_config: Types::OpenIDConnectConfig
+      attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig
+      SENSITIVE: []
+    end
+
     class AuthorizationConfig
       attr_accessor authorization_type: ("AWS_IAM")
       attr_accessor aws_iam_config: Types::AwsIamConfig
@@ -136,6 +163,19 @@ module Aws::AppSync
       SENSITIVE: []
     end
 
+    class ChannelNamespace
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor subscribe_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor publish_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor code_handlers: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor channel_namespace_arn: ::String
+      attr_accessor created: ::Time
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
     class CodeError
       attr_accessor error_type: ::String
       attr_accessor value: ::String
@@ -150,6 +190,13 @@ module Aws::AppSync
       SENSITIVE: []
     end
 
+    class CognitoConfig
+      attr_accessor user_pool_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor app_id_client_regex: ::String
+      SENSITIVE: []
+    end
+
     class CognitoUserPoolConfig
       attr_accessor user_pool_id: ::String
       attr_accessor aws_region: ::String
@@ -158,6 +205,11 @@ module Aws::AppSync
     end
 
     class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -187,6 +239,34 @@ module Aws::AppSync
 
     class CreateApiKeyResponse
       attr_accessor api_key: Types::ApiKey
+      SENSITIVE: []
+    end
+
+    class CreateApiRequest
+      attr_accessor name: ::String
+      attr_accessor owner_contact: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor event_config: Types::EventConfig
+      SENSITIVE: []
+    end
+
+    class CreateApiResponse
+      attr_accessor api: Types::Api
+      SENSITIVE: []
+    end
+
+    class CreateChannelNamespaceRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor subscribe_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor publish_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor code_handlers: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateChannelNamespaceResponse
+      attr_accessor channel_namespace: Types::ChannelNamespace
       SENSITIVE: []
     end
 
@@ -254,9 +334,9 @@ module Aws::AppSync
       attr_accessor additional_authentication_providers: ::Array[Types::AdditionalAuthenticationProvider]
       attr_accessor xray_enabled: bool
       attr_accessor lambda_authorizer_config: Types::LambdaAuthorizerConfig
-      attr_accessor visibility: ("GLOBAL" | "PRIVATE")
       attr_accessor api_type: ("GRAPHQL" | "MERGED")
       attr_accessor merged_api_execution_role_arn: ::String
+      attr_accessor visibility: ("GLOBAL" | "PRIVATE")
       attr_accessor owner_contact: ::String
       attr_accessor introspection_config: ("ENABLED" | "DISABLED")
       attr_accessor query_depth_limit: ::Integer
@@ -373,6 +453,23 @@ module Aws::AppSync
     end
 
     class DeleteApiKeyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteApiRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApiResponse < Aws::EmptyStructure
+    end
+
+    class DeleteChannelNamespaceRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelNamespaceResponse < Aws::EmptyStructure
     end
 
     class DeleteDataSourceRequest
@@ -540,6 +637,21 @@ module Aws::AppSync
       SENSITIVE: []
     end
 
+    class EventConfig
+      attr_accessor auth_providers: ::Array[Types::AuthProvider]
+      attr_accessor connection_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor default_publish_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor default_subscribe_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor log_config: Types::EventLogConfig
+      SENSITIVE: []
+    end
+
+    class EventLogConfig
+      attr_accessor log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG")
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class FlushApiCacheRequest
       attr_accessor api_id: ::String
       SENSITIVE: []
@@ -581,6 +693,27 @@ module Aws::AppSync
 
     class GetApiCacheResponse
       attr_accessor api_cache: Types::ApiCache
+      SENSITIVE: []
+    end
+
+    class GetApiRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiResponse
+      attr_accessor api: Types::Api
+      SENSITIVE: []
+    end
+
+    class GetChannelNamespaceRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelNamespaceResponse
+      attr_accessor channel_namespace: Types::ChannelNamespace
       SENSITIVE: []
     end
 
@@ -784,6 +917,31 @@ module Aws::AppSync
 
     class ListApiKeysResponse
       attr_accessor api_keys: ::Array[Types::ApiKey]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApisRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApisResponse
+      attr_accessor apis: ::Array[Types::Api]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelNamespacesRequest
+      attr_accessor api_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListChannelNamespacesResponse
+      attr_accessor channel_namespaces: ::Array[Types::ChannelNamespace]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1002,6 +1160,11 @@ module Aws::AppSync
       SENSITIVE: []
     end
 
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class SourceApiAssociation
       attr_accessor association_id: ::String
       attr_accessor association_arn: ::String
@@ -1130,6 +1293,33 @@ module Aws::AppSync
 
     class UpdateApiKeyResponse
       attr_accessor api_key: Types::ApiKey
+      SENSITIVE: []
+    end
+
+    class UpdateApiRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner_contact: ::String
+      attr_accessor event_config: Types::EventConfig
+      SENSITIVE: []
+    end
+
+    class UpdateApiResponse
+      attr_accessor api: Types::Api
+      SENSITIVE: []
+    end
+
+    class UpdateChannelNamespaceRequest
+      attr_accessor api_id: ::String
+      attr_accessor name: ::String
+      attr_accessor subscribe_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor publish_auth_modes: ::Array[Types::AuthMode]
+      attr_accessor code_handlers: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelNamespaceResponse
+      attr_accessor channel_namespace: Types::ChannelNamespace
       SENSITIVE: []
     end
 

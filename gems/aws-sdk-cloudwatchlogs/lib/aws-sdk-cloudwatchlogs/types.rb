@@ -5379,6 +5379,16 @@ module Aws::CloudWatchLogs
     #   structure to specify how long the suppression is to last.
     #   @return [Types::SuppressionPeriod]
     #
+    # @!attribute [rw] baseline
+    #   Set this to `true` to prevent CloudWatch Logs from displaying this
+    #   behavior as an anomaly in the future. The behavior is then treated
+    #   as baseline behavior. However, if similar but more severe
+    #   occurrences of this behavior occur in the future, those will still
+    #   be reported as anomalies.
+    #
+    #   The default is `false`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateAnomalyRequest AWS API Documentation
     #
     class UpdateAnomalyRequest < Struct.new(
@@ -5386,7 +5396,8 @@ module Aws::CloudWatchLogs
       :pattern_id,
       :anomaly_detector_arn,
       :suppression_type,
-      :suppression_period)
+      :suppression_period,
+      :baseline)
       SENSITIVE = []
       include Aws::Structure
     end

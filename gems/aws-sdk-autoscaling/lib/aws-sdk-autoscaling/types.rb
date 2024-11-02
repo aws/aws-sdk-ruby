@@ -3362,6 +3362,9 @@ module Aws::AutoScaling
     #     troubleshoot using the status reason and the scaling activities.
     #
     #   * `RollbackSuccessful` - The rollback completed successfully.
+    #
+    #   * `Baking` - Waiting the specified bake time after an instance
+    #     refresh has finished updating instances.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -6503,6 +6506,11 @@ module Aws::AutoScaling
     #   Scaling group, if defined.
     #   @return [Integer]
     #
+    # @!attribute [rw] bake_time
+    #   The amount of time, in seconds, to wait at the end of an instance
+    #   refresh before the instance refresh is considered complete.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RefreshPreferences AWS API Documentation
     #
     class RefreshPreferences < Struct.new(
@@ -6515,7 +6523,8 @@ module Aws::AutoScaling
       :scale_in_protected_instances,
       :standby_instances,
       :alarm_specification,
-      :max_healthy_percentage)
+      :max_healthy_percentage,
+      :bake_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7121,6 +7130,8 @@ module Aws::AutoScaling
     #   * CloudWatch alarms
     #
     #   * Skip matching
+    #
+    #   * Bake time
     #   @return [Types::RefreshPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefreshType AWS API Documentation

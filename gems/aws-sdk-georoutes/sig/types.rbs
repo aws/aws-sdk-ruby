@@ -1,0 +1,1580 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::GeoRoutes
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CalculateIsolinesRequest
+      attr_accessor allow: Types::IsolineAllowOptions
+      attr_accessor arrival_time: ::String
+      attr_accessor avoid: Types::IsolineAvoidanceOptions
+      attr_accessor depart_now: bool
+      attr_accessor departure_time: ::String
+      attr_accessor destination: ::Array[::Float]
+      attr_accessor destination_options: Types::IsolineDestinationOptions
+      attr_accessor isoline_geometry_format: ("FlexiblePolyline" | "Simple")
+      attr_accessor isoline_granularity: Types::IsolineGranularityOptions
+      attr_accessor key: ::String
+      attr_accessor optimize_isoline_for: ("AccurateCalculation" | "BalancedCalculation" | "FastCalculation")
+      attr_accessor optimize_routing_for: ("FastestRoute" | "ShortestRoute")
+      attr_accessor origin: ::Array[::Float]
+      attr_accessor origin_options: Types::IsolineOriginOptions
+      attr_accessor thresholds: Types::IsolineThresholds
+      attr_accessor traffic: Types::IsolineTrafficOptions
+      attr_accessor travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck")
+      attr_accessor travel_mode_options: Types::IsolineTravelModeOptions
+      SENSITIVE: [:destination, :key, :origin]
+    end
+
+    class CalculateIsolinesResponse
+      attr_accessor arrival_time: ::String
+      attr_accessor departure_time: ::String
+      attr_accessor isoline_geometry_format: ("FlexiblePolyline" | "Simple")
+      attr_accessor isolines: ::Array[Types::Isoline]
+      attr_accessor pricing_bucket: ::String
+      attr_accessor snapped_destination: ::Array[::Float]
+      attr_accessor snapped_origin: ::Array[::Float]
+      SENSITIVE: [:snapped_destination, :snapped_origin]
+    end
+
+    class CalculateRouteMatrixRequest
+      attr_accessor allow: Types::RouteMatrixAllowOptions
+      attr_accessor avoid: Types::RouteMatrixAvoidanceOptions
+      attr_accessor depart_now: bool
+      attr_accessor departure_time: ::String
+      attr_accessor destinations: ::Array[Types::RouteMatrixDestination]
+      attr_accessor exclude: Types::RouteMatrixExclusionOptions
+      attr_accessor key: ::String
+      attr_accessor optimize_routing_for: ("FastestRoute" | "ShortestRoute")
+      attr_accessor origins: ::Array[Types::RouteMatrixOrigin]
+      attr_accessor routing_boundary: Types::RouteMatrixBoundary
+      attr_accessor traffic: Types::RouteMatrixTrafficOptions
+      attr_accessor travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck")
+      attr_accessor travel_mode_options: Types::RouteMatrixTravelModeOptions
+      SENSITIVE: [:key]
+    end
+
+    class CalculateRouteMatrixResponse
+      attr_accessor error_count: ::Integer
+      attr_accessor pricing_bucket: ::String
+      attr_accessor route_matrix: ::Array[::Array[Types::RouteMatrixEntry]]
+      attr_accessor routing_boundary: Types::RouteMatrixBoundary
+      SENSITIVE: []
+    end
+
+    class CalculateRoutesRequest
+      attr_accessor allow: Types::RouteAllowOptions
+      attr_accessor arrival_time: ::String
+      attr_accessor avoid: Types::RouteAvoidanceOptions
+      attr_accessor depart_now: bool
+      attr_accessor departure_time: ::String
+      attr_accessor destination: ::Array[::Float]
+      attr_accessor destination_options: Types::RouteDestinationOptions
+      attr_accessor driver: Types::RouteDriverOptions
+      attr_accessor exclude: Types::RouteExclusionOptions
+      attr_accessor instructions_measurement_system: ("Metric" | "Imperial")
+      attr_accessor key: ::String
+      attr_accessor languages: ::Array[::String]
+      attr_accessor leg_additional_features: ::Array[("Elevation" | "Incidents" | "PassThroughWaypoints" | "Summary" | "Tolls" | "TravelStepInstructions" | "TruckRoadTypes" | "TypicalDuration" | "Zones")]
+      attr_accessor leg_geometry_format: ("FlexiblePolyline" | "Simple")
+      attr_accessor max_alternatives: ::Integer
+      attr_accessor optimize_routing_for: ("FastestRoute" | "ShortestRoute")
+      attr_accessor origin: ::Array[::Float]
+      attr_accessor origin_options: Types::RouteOriginOptions
+      attr_accessor span_additional_features: ::Array[("BestCaseDuration" | "CarAccess" | "Country" | "Distance" | "Duration" | "DynamicSpeed" | "FunctionalClassification" | "Gates" | "Incidents" | "Names" | "Notices" | "PedestrianAccess" | "RailwayCrossings" | "Region" | "RoadAttributes" | "RouteNumbers" | "ScooterAccess" | "SpeedLimit" | "TollSystems" | "TruckAccess" | "TruckRoadTypes" | "TypicalDuration" | "Zones" | "Consumption")]
+      attr_accessor tolls: Types::RouteTollOptions
+      attr_accessor traffic: Types::RouteTrafficOptions
+      attr_accessor travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck")
+      attr_accessor travel_mode_options: Types::RouteTravelModeOptions
+      attr_accessor travel_step_type: ("Default" | "TurnByTurn")
+      attr_accessor waypoints: ::Array[Types::RouteWaypoint]
+      SENSITIVE: [:destination, :key, :origin]
+    end
+
+    class CalculateRoutesResponse
+      attr_accessor leg_geometry_format: ("FlexiblePolyline" | "Simple")
+      attr_accessor notices: ::Array[Types::RouteResponseNotice]
+      attr_accessor pricing_bucket: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      SENSITIVE: []
+    end
+
+    class Circle
+      attr_accessor center: ::Array[::Float]
+      attr_accessor radius: ::Float
+      SENSITIVE: [:center]
+    end
+
+    class Corridor
+      attr_accessor line_string: ::Array[::Array[::Float]]
+      attr_accessor radius: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Isoline
+      attr_accessor connections: ::Array[Types::IsolineConnection]
+      attr_accessor distance_threshold: ::Integer
+      attr_accessor geometries: ::Array[Types::IsolineShapeGeometry]
+      attr_accessor time_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class IsolineAllowOptions
+      attr_accessor hot: bool
+      attr_accessor hov: bool
+      SENSITIVE: []
+    end
+
+    class IsolineAvoidanceArea
+      attr_accessor except: ::Array[Types::IsolineAvoidanceAreaGeometry]
+      attr_accessor geometry: Types::IsolineAvoidanceAreaGeometry
+      SENSITIVE: []
+    end
+
+    class IsolineAvoidanceAreaGeometry
+      attr_accessor bounding_box: ::Array[::Float]
+      attr_accessor corridor: Types::Corridor
+      attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
+      attr_accessor polyline_corridor: Types::PolylineCorridor
+      attr_accessor polyline_polygon: ::Array[::String]
+      SENSITIVE: [:bounding_box, :corridor, :polyline_corridor]
+    end
+
+    class IsolineAvoidanceOptions
+      attr_accessor areas: ::Array[Types::IsolineAvoidanceArea]
+      attr_accessor car_shuttle_trains: bool
+      attr_accessor controlled_access_highways: bool
+      attr_accessor dirt_roads: bool
+      attr_accessor ferries: bool
+      attr_accessor seasonal_closure: bool
+      attr_accessor toll_roads: bool
+      attr_accessor toll_transponders: bool
+      attr_accessor truck_road_types: ::Array[::String]
+      attr_accessor tunnels: bool
+      attr_accessor u_turns: bool
+      attr_accessor zone_categories: ::Array[Types::IsolineAvoidanceZoneCategory]
+      SENSITIVE: []
+    end
+
+    class IsolineAvoidanceZoneCategory
+      attr_accessor category: ("CongestionPricing" | "Environmental" | "Vignette")
+      SENSITIVE: []
+    end
+
+    class IsolineCarOptions
+      attr_accessor engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")
+      attr_accessor license_plate: Types::IsolineVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      SENSITIVE: []
+    end
+
+    class IsolineConnection
+      attr_accessor from_polygon_index: ::Integer
+      attr_accessor geometry: Types::IsolineConnectionGeometry
+      attr_accessor to_polygon_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class IsolineConnectionGeometry
+      attr_accessor line_string: ::Array[::Array[::Float]]
+      attr_accessor polyline: ::String
+      SENSITIVE: [:polyline]
+    end
+
+    class IsolineDestinationOptions
+      attr_accessor avoid_actions_for_distance: ::Integer
+      attr_accessor heading: ::Float
+      attr_accessor matching: Types::IsolineMatchingOptions
+      attr_accessor side_of_street: Types::IsolineSideOfStreetOptions
+      SENSITIVE: []
+    end
+
+    class IsolineGranularityOptions
+      attr_accessor max_points: ::Integer
+      attr_accessor max_resolution: ::Integer
+      SENSITIVE: []
+    end
+
+    class IsolineMatchingOptions
+      attr_accessor name_hint: ::String
+      attr_accessor on_road_threshold: ::Integer
+      attr_accessor radius: ::Integer
+      attr_accessor strategy: ("MatchAny" | "MatchMostSignificantRoad")
+      SENSITIVE: [:name_hint]
+    end
+
+    class IsolineOriginOptions
+      attr_accessor avoid_actions_for_distance: ::Integer
+      attr_accessor heading: ::Float
+      attr_accessor matching: Types::IsolineMatchingOptions
+      attr_accessor side_of_street: Types::IsolineSideOfStreetOptions
+      SENSITIVE: []
+    end
+
+    class IsolineScooterOptions
+      attr_accessor engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")
+      attr_accessor license_plate: Types::IsolineVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      SENSITIVE: []
+    end
+
+    class IsolineShapeGeometry
+      attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
+      attr_accessor polyline_polygon: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IsolineSideOfStreetOptions
+      attr_accessor position: ::Array[::Float]
+      attr_accessor use_with: ("AnyStreet" | "DividedStreetOnly")
+      SENSITIVE: [:position]
+    end
+
+    class IsolineThresholds
+      attr_accessor distance: ::Array[::Integer]
+      attr_accessor time: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class IsolineTrafficOptions
+      attr_accessor flow_event_threshold_override: ::Integer
+      attr_accessor usage: ("IgnoreTrafficData" | "UseTrafficData")
+      SENSITIVE: []
+    end
+
+    class IsolineTrailerOptions
+      attr_accessor axle_count: ::Integer
+      attr_accessor trailer_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class IsolineTravelModeOptions
+      attr_accessor car: Types::IsolineCarOptions
+      attr_accessor scooter: Types::IsolineScooterOptions
+      attr_accessor truck: Types::IsolineTruckOptions
+      SENSITIVE: []
+    end
+
+    class IsolineTruckOptions
+      attr_accessor axle_count: ::Integer
+      attr_accessor engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")
+      attr_accessor gross_weight: ::Integer
+      attr_accessor hazardous_cargos: ::Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]
+      attr_accessor height: ::Integer
+      attr_accessor height_above_first_axle: ::Integer
+      attr_accessor kpra_length: ::Integer
+      attr_accessor length: ::Integer
+      attr_accessor license_plate: Types::IsolineVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      attr_accessor payload_capacity: ::Integer
+      attr_accessor tire_count: ::Integer
+      attr_accessor trailer: Types::IsolineTrailerOptions
+      attr_accessor truck_type: ("LightTruck" | "StraightTruck" | "Tractor")
+      attr_accessor tunnel_restriction_code: ::String
+      attr_accessor weight_per_axle: ::Integer
+      attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class IsolineVehicleLicensePlate
+      attr_accessor last_character: ::String
+      SENSITIVE: []
+    end
+
+    class LocalizedString
+      attr_accessor language: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class OptimizeWaypointsRequest
+      attr_accessor avoid: Types::WaypointOptimizationAvoidanceOptions
+      attr_accessor departure_time: ::String
+      attr_accessor destination: ::Array[::Float]
+      attr_accessor destination_options: Types::WaypointOptimizationDestinationOptions
+      attr_accessor driver: Types::WaypointOptimizationDriverOptions
+      attr_accessor exclude: Types::WaypointOptimizationExclusionOptions
+      attr_accessor key: ::String
+      attr_accessor optimize_sequencing_for: ("FastestRoute" | "ShortestRoute")
+      attr_accessor origin: ::Array[::Float]
+      attr_accessor origin_options: Types::WaypointOptimizationOriginOptions
+      attr_accessor traffic: Types::WaypointOptimizationTrafficOptions
+      attr_accessor travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck")
+      attr_accessor travel_mode_options: Types::WaypointOptimizationTravelModeOptions
+      attr_accessor waypoints: ::Array[Types::WaypointOptimizationWaypoint]
+      SENSITIVE: [:destination, :key, :origin]
+    end
+
+    class OptimizeWaypointsResponse
+      attr_accessor connections: ::Array[Types::WaypointOptimizationConnection]
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor impeding_waypoints: ::Array[Types::WaypointOptimizationImpedingWaypoint]
+      attr_accessor optimized_waypoints: ::Array[Types::WaypointOptimizationOptimizedWaypoint]
+      attr_accessor pricing_bucket: ::String
+      attr_accessor time_breakdown: Types::WaypointOptimizationTimeBreakdown
+      SENSITIVE: []
+    end
+
+    class PolylineCorridor
+      attr_accessor polyline: ::String
+      attr_accessor radius: ::Integer
+      SENSITIVE: [:polyline]
+    end
+
+    class RoadSnapNotice
+      attr_accessor code: ("TracePointsHeadingIgnored" | "TracePointsIgnored" | "TracePointsMovedByLargeDistance" | "TracePointsNotMatched" | "TracePointsOutOfSequence" | "TracePointsSpeedEstimated" | "TracePointsSpeedIgnored")
+      attr_accessor title: ::String
+      attr_accessor trace_point_indexes: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class RoadSnapSnappedGeometry
+      attr_accessor line_string: ::Array[::Array[::Float]]
+      attr_accessor polyline: ::String
+      SENSITIVE: [:polyline]
+    end
+
+    class RoadSnapSnappedTracePoint
+      attr_accessor confidence: ::Float
+      attr_accessor original_position: ::Array[::Float]
+      attr_accessor snapped_position: ::Array[::Float]
+      SENSITIVE: [:original_position, :snapped_position]
+    end
+
+    class RoadSnapTracePoint
+      attr_accessor heading: ::Float
+      attr_accessor position: ::Array[::Float]
+      attr_accessor speed: ::Float
+      attr_accessor timestamp: ::String
+      SENSITIVE: [:position]
+    end
+
+    class RoadSnapTrailerOptions
+      attr_accessor trailer_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class RoadSnapTravelModeOptions
+      attr_accessor truck: Types::RoadSnapTruckOptions
+      SENSITIVE: []
+    end
+
+    class RoadSnapTruckOptions
+      attr_accessor gross_weight: ::Integer
+      attr_accessor hazardous_cargos: ::Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]
+      attr_accessor height: ::Integer
+      attr_accessor length: ::Integer
+      attr_accessor trailer: Types::RoadSnapTrailerOptions
+      attr_accessor tunnel_restriction_code: ::String
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class Route
+      attr_accessor legs: ::Array[Types::RouteLeg]
+      attr_accessor major_road_labels: ::Array[Types::RouteMajorRoadLabel]
+      attr_accessor summary: Types::RouteSummary
+      SENSITIVE: []
+    end
+
+    class RouteAllowOptions
+      attr_accessor hot: bool
+      attr_accessor hov: bool
+      SENSITIVE: []
+    end
+
+    class RouteAvoidanceArea
+      attr_accessor except: ::Array[Types::RouteAvoidanceAreaGeometry]
+      attr_accessor geometry: Types::RouteAvoidanceAreaGeometry
+      SENSITIVE: []
+    end
+
+    class RouteAvoidanceAreaGeometry
+      attr_accessor corridor: Types::Corridor
+      attr_accessor bounding_box: ::Array[::Float]
+      attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
+      attr_accessor polyline_corridor: Types::PolylineCorridor
+      attr_accessor polyline_polygon: ::Array[::String]
+      SENSITIVE: [:corridor, :bounding_box, :polyline_corridor]
+    end
+
+    class RouteAvoidanceOptions
+      attr_accessor areas: ::Array[Types::RouteAvoidanceArea]
+      attr_accessor car_shuttle_trains: bool
+      attr_accessor controlled_access_highways: bool
+      attr_accessor dirt_roads: bool
+      attr_accessor ferries: bool
+      attr_accessor seasonal_closure: bool
+      attr_accessor toll_roads: bool
+      attr_accessor toll_transponders: bool
+      attr_accessor truck_road_types: ::Array[::String]
+      attr_accessor tunnels: bool
+      attr_accessor u_turns: bool
+      attr_accessor zone_categories: ::Array[Types::RouteAvoidanceZoneCategory]
+      SENSITIVE: []
+    end
+
+    class RouteAvoidanceZoneCategory
+      attr_accessor category: ("CongestionPricing" | "Environmental" | "Vignette")
+      SENSITIVE: []
+    end
+
+    class RouteCarOptions
+      attr_accessor engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")
+      attr_accessor license_plate: Types::RouteVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteContinueHighwayStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteContinueStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      SENSITIVE: []
+    end
+
+    class RouteDestinationOptions
+      attr_accessor avoid_actions_for_distance: ::Integer
+      attr_accessor avoid_u_turns: bool
+      attr_accessor heading: ::Float
+      attr_accessor matching: Types::RouteMatchingOptions
+      attr_accessor side_of_street: Types::RouteSideOfStreetOptions
+      attr_accessor stop_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteDriverOptions
+      attr_accessor schedule: ::Array[Types::RouteDriverScheduleInterval]
+      SENSITIVE: []
+    end
+
+    class RouteDriverScheduleInterval
+      attr_accessor drive_duration: ::Integer
+      attr_accessor rest_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteEmissionType
+      attr_accessor co_2_emission_class: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class RouteEnterHighwayStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteExclusionOptions
+      attr_accessor countries: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RouteExitStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor relative_exit: ::Integer
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteFerryAfterTravelStep
+      attr_accessor duration: ::Integer
+      attr_accessor instruction: ::String
+      attr_accessor type: ("Deboard")
+      SENSITIVE: []
+    end
+
+    class RouteFerryArrival
+      attr_accessor place: Types::RouteFerryPlace
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class RouteFerryBeforeTravelStep
+      attr_accessor duration: ::Integer
+      attr_accessor instruction: ::String
+      attr_accessor type: ("Board")
+      SENSITIVE: []
+    end
+
+    class RouteFerryDeparture
+      attr_accessor place: Types::RouteFerryPlace
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class RouteFerryLegDetails
+      attr_accessor after_travel_steps: ::Array[Types::RouteFerryAfterTravelStep]
+      attr_accessor arrival: Types::RouteFerryArrival
+      attr_accessor before_travel_steps: ::Array[Types::RouteFerryBeforeTravelStep]
+      attr_accessor departure: Types::RouteFerryDeparture
+      attr_accessor notices: ::Array[Types::RouteFerryNotice]
+      attr_accessor pass_through_waypoints: ::Array[Types::RoutePassThroughWaypoint]
+      attr_accessor route_name: ::String
+      attr_accessor spans: ::Array[Types::RouteFerrySpan]
+      attr_accessor summary: Types::RouteFerrySummary
+      attr_accessor travel_steps: ::Array[Types::RouteFerryTravelStep]
+      SENSITIVE: []
+    end
+
+    class RouteFerryNotice
+      attr_accessor code: ("AccuratePolylineUnavailable" | "NoSchedule" | "Other" | "ViolatedAvoidFerry" | "ViolatedAvoidRailFerry")
+      attr_accessor impact: ("High" | "Low")
+      SENSITIVE: []
+    end
+
+    class RouteFerryOverviewSummary
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteFerryPlace
+      attr_accessor name: ::String
+      attr_accessor original_position: ::Array[::Float]
+      attr_accessor position: ::Array[::Float]
+      attr_accessor waypoint_index: ::Integer
+      SENSITIVE: [:original_position, :position]
+    end
+
+    class RouteFerrySpan
+      attr_accessor country: ::String
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor geometry_offset: ::Integer
+      attr_accessor names: ::Array[Types::LocalizedString]
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class RouteFerrySummary
+      attr_accessor overview: Types::RouteFerryOverviewSummary
+      attr_accessor travel_only: Types::RouteFerryTravelOnlySummary
+      SENSITIVE: []
+    end
+
+    class RouteFerryTravelOnlySummary
+      attr_accessor duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteFerryTravelStep
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor geometry_offset: ::Integer
+      attr_accessor instruction: ::String
+      attr_accessor type: ("Depart" | "Continue" | "Arrive")
+      SENSITIVE: []
+    end
+
+    class RouteKeepStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteLeg
+      attr_accessor ferry_leg_details: Types::RouteFerryLegDetails
+      attr_accessor geometry: Types::RouteLegGeometry
+      attr_accessor language: ::String
+      attr_accessor pedestrian_leg_details: Types::RoutePedestrianLegDetails
+      attr_accessor travel_mode: ("Car" | "Ferry" | "Pedestrian" | "Scooter" | "Truck")
+      attr_accessor type: ("Ferry" | "Pedestrian" | "Vehicle")
+      attr_accessor vehicle_leg_details: Types::RouteVehicleLegDetails
+      SENSITIVE: []
+    end
+
+    class RouteLegGeometry
+      attr_accessor line_string: ::Array[::Array[::Float]]
+      attr_accessor polyline: ::String
+      SENSITIVE: [:polyline]
+    end
+
+    class RouteMajorRoadLabel
+      attr_accessor road_name: Types::LocalizedString
+      attr_accessor route_number: Types::RouteNumber
+      SENSITIVE: []
+    end
+
+    class RouteMatchingOptions
+      attr_accessor name_hint: ::String
+      attr_accessor on_road_threshold: ::Integer
+      attr_accessor radius: ::Integer
+      attr_accessor strategy: ("MatchAny" | "MatchMostSignificantRoad")
+      SENSITIVE: [:name_hint]
+    end
+
+    class RouteMatrixAllowOptions
+      attr_accessor hot: bool
+      attr_accessor hov: bool
+      SENSITIVE: []
+    end
+
+    class RouteMatrixAutoCircle
+      attr_accessor margin: ::Integer
+      attr_accessor max_radius: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteMatrixAvoidanceArea
+      attr_accessor geometry: Types::RouteMatrixAvoidanceAreaGeometry
+      SENSITIVE: []
+    end
+
+    class RouteMatrixAvoidanceAreaGeometry
+      attr_accessor bounding_box: ::Array[::Float]
+      attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
+      attr_accessor polyline_polygon: ::Array[::String]
+      SENSITIVE: [:bounding_box]
+    end
+
+    class RouteMatrixAvoidanceOptions
+      attr_accessor areas: ::Array[Types::RouteMatrixAvoidanceArea]
+      attr_accessor car_shuttle_trains: bool
+      attr_accessor controlled_access_highways: bool
+      attr_accessor dirt_roads: bool
+      attr_accessor ferries: bool
+      attr_accessor toll_roads: bool
+      attr_accessor toll_transponders: bool
+      attr_accessor truck_road_types: ::Array[::String]
+      attr_accessor tunnels: bool
+      attr_accessor u_turns: bool
+      attr_accessor zone_categories: ::Array[Types::RouteMatrixAvoidanceZoneCategory]
+      SENSITIVE: []
+    end
+
+    class RouteMatrixAvoidanceZoneCategory
+      attr_accessor category: ("CongestionPricing" | "Environmental" | "Vignette")
+      SENSITIVE: []
+    end
+
+    class RouteMatrixBoundary
+      attr_accessor geometry: Types::RouteMatrixBoundaryGeometry
+      attr_accessor unbounded: bool
+      SENSITIVE: []
+    end
+
+    class RouteMatrixBoundaryGeometry
+      attr_accessor auto_circle: Types::RouteMatrixAutoCircle
+      attr_accessor circle: Types::Circle
+      attr_accessor bounding_box: ::Array[::Float]
+      attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
+      SENSITIVE: [:circle, :bounding_box]
+    end
+
+    class RouteMatrixCarOptions
+      attr_accessor license_plate: Types::RouteMatrixVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteMatrixDestination
+      attr_accessor options: Types::RouteMatrixDestinationOptions
+      attr_accessor position: ::Array[::Float]
+      SENSITIVE: [:position]
+    end
+
+    class RouteMatrixDestinationOptions
+      attr_accessor avoid_actions_for_distance: ::Integer
+      attr_accessor heading: ::Float
+      attr_accessor matching: Types::RouteMatrixMatchingOptions
+      attr_accessor side_of_street: Types::RouteMatrixSideOfStreetOptions
+      SENSITIVE: []
+    end
+
+    class RouteMatrixEntry
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor error: ("NoMatch" | "NoMatchDestination" | "NoMatchOrigin" | "NoRoute" | "OutOfBounds" | "OutOfBoundsDestination" | "OutOfBoundsOrigin" | "Other" | "Violation")
+      SENSITIVE: []
+    end
+
+    class RouteMatrixExclusionOptions
+      attr_accessor countries: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RouteMatrixMatchingOptions
+      attr_accessor name_hint: ::String
+      attr_accessor on_road_threshold: ::Integer
+      attr_accessor radius: ::Integer
+      attr_accessor strategy: ("MatchAny" | "MatchMostSignificantRoad")
+      SENSITIVE: [:name_hint]
+    end
+
+    class RouteMatrixOrigin
+      attr_accessor options: Types::RouteMatrixOriginOptions
+      attr_accessor position: ::Array[::Float]
+      SENSITIVE: [:position]
+    end
+
+    class RouteMatrixOriginOptions
+      attr_accessor avoid_actions_for_distance: ::Integer
+      attr_accessor heading: ::Float
+      attr_accessor matching: Types::RouteMatrixMatchingOptions
+      attr_accessor side_of_street: Types::RouteMatrixSideOfStreetOptions
+      SENSITIVE: []
+    end
+
+    class RouteMatrixScooterOptions
+      attr_accessor license_plate: Types::RouteMatrixVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteMatrixSideOfStreetOptions
+      attr_accessor position: ::Array[::Float]
+      attr_accessor use_with: ("AnyStreet" | "DividedStreetOnly")
+      SENSITIVE: [:position]
+    end
+
+    class RouteMatrixTrafficOptions
+      attr_accessor flow_event_threshold_override: ::Integer
+      attr_accessor usage: ("IgnoreTrafficData" | "UseTrafficData")
+      SENSITIVE: []
+    end
+
+    class RouteMatrixTrailerOptions
+      attr_accessor trailer_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteMatrixTravelModeOptions
+      attr_accessor car: Types::RouteMatrixCarOptions
+      attr_accessor scooter: Types::RouteMatrixScooterOptions
+      attr_accessor truck: Types::RouteMatrixTruckOptions
+      SENSITIVE: []
+    end
+
+    class RouteMatrixTruckOptions
+      attr_accessor axle_count: ::Integer
+      attr_accessor gross_weight: ::Integer
+      attr_accessor hazardous_cargos: ::Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]
+      attr_accessor height: ::Integer
+      attr_accessor kpra_length: ::Integer
+      attr_accessor length: ::Integer
+      attr_accessor license_plate: Types::RouteMatrixVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      attr_accessor payload_capacity: ::Integer
+      attr_accessor trailer: Types::RouteMatrixTrailerOptions
+      attr_accessor truck_type: ("LightTruck" | "StraightTruck" | "Tractor")
+      attr_accessor tunnel_restriction_code: ::String
+      attr_accessor weight_per_axle: ::Integer
+      attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteMatrixVehicleLicensePlate
+      attr_accessor last_character: ::String
+      SENSITIVE: []
+    end
+
+    class RouteNoticeDetailRange
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteNumber
+      attr_accessor direction: ("East" | "North" | "South" | "West")
+      attr_accessor language: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RouteOriginOptions
+      attr_accessor avoid_actions_for_distance: ::Integer
+      attr_accessor avoid_u_turns: bool
+      attr_accessor heading: ::Float
+      attr_accessor matching: Types::RouteMatchingOptions
+      attr_accessor side_of_street: Types::RouteSideOfStreetOptions
+      SENSITIVE: []
+    end
+
+    class RoutePassThroughPlace
+      attr_accessor original_position: ::Array[::Float]
+      attr_accessor position: ::Array[::Float]
+      attr_accessor waypoint_index: ::Integer
+      SENSITIVE: [:original_position, :position]
+    end
+
+    class RoutePassThroughWaypoint
+      attr_accessor geometry_offset: ::Integer
+      attr_accessor place: Types::RoutePassThroughPlace
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianArrival
+      attr_accessor place: Types::RoutePedestrianPlace
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianDeparture
+      attr_accessor place: Types::RoutePedestrianPlace
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianLegDetails
+      attr_accessor arrival: Types::RoutePedestrianArrival
+      attr_accessor departure: Types::RoutePedestrianDeparture
+      attr_accessor notices: ::Array[Types::RoutePedestrianNotice]
+      attr_accessor pass_through_waypoints: ::Array[Types::RoutePassThroughWaypoint]
+      attr_accessor spans: ::Array[Types::RoutePedestrianSpan]
+      attr_accessor summary: Types::RoutePedestrianSummary
+      attr_accessor travel_steps: ::Array[Types::RoutePedestrianTravelStep]
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianNotice
+      attr_accessor code: ("AccuratePolylineUnavailable" | "Other" | "ViolatedAvoidDirtRoad" | "ViolatedAvoidTunnel" | "ViolatedPedestrianOption")
+      attr_accessor impact: ("High" | "Low")
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianOptions
+      attr_accessor speed: ::Float
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianOverviewSummary
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianPlace
+      attr_accessor name: ::String
+      attr_accessor original_position: ::Array[::Float]
+      attr_accessor position: ::Array[::Float]
+      attr_accessor side_of_street: ("Left" | "Right")
+      attr_accessor waypoint_index: ::Integer
+      SENSITIVE: [:original_position, :position]
+    end
+
+    class RoutePedestrianSpan
+      attr_accessor best_case_duration: ::Integer
+      attr_accessor country: ::String
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor dynamic_speed: Types::RouteSpanDynamicSpeedDetails
+      attr_accessor functional_classification: ::Integer
+      attr_accessor geometry_offset: ::Integer
+      attr_accessor incidents: ::Array[::Integer]
+      attr_accessor names: ::Array[Types::LocalizedString]
+      attr_accessor pedestrian_access: ::Array[("Allowed" | "Indoors" | "NoThroughTraffic" | "Park" | "Stairs" | "TollRoad")]
+      attr_accessor region: ::String
+      attr_accessor road_attributes: ::Array[("Bridge" | "BuiltUpArea" | "ControlledAccessHighway" | "DirtRoad" | "DividedRoad" | "Motorway" | "PrivateRoad" | "Ramp" | "RightHandTraffic" | "Roundabout" | "Tunnel" | "UnderConstruction")]
+      attr_accessor route_numbers: ::Array[Types::RouteNumber]
+      attr_accessor speed_limit: Types::RouteSpanSpeedLimitDetails
+      attr_accessor typical_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianSummary
+      attr_accessor overview: Types::RoutePedestrianOverviewSummary
+      attr_accessor travel_only: Types::RoutePedestrianTravelOnlySummary
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianTravelOnlySummary
+      attr_accessor duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RoutePedestrianTravelStep
+      attr_accessor continue_step_details: Types::RouteContinueStepDetails
+      attr_accessor current_road: Types::RouteRoad
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor exit_number: ::Array[Types::LocalizedString]
+      attr_accessor geometry_offset: ::Integer
+      attr_accessor instruction: ::String
+      attr_accessor keep_step_details: Types::RouteKeepStepDetails
+      attr_accessor next_road: Types::RouteRoad
+      attr_accessor roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails
+      attr_accessor roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails
+      attr_accessor roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails
+      attr_accessor signpost: Types::RouteSignpost
+      attr_accessor turn_step_details: Types::RouteTurnStepDetails
+      attr_accessor type: ("Arrive" | "Continue" | "Depart" | "Keep" | "RoundaboutEnter" | "RoundaboutExit" | "RoundaboutPass" | "Turn" | "Exit" | "Ramp" | "UTurn")
+      SENSITIVE: []
+    end
+
+    class RouteRampStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteResponseNotice
+      attr_accessor code: ("MainLanguageNotFound" | "Other" | "TravelTimeExceedsDriverWorkHours")
+      attr_accessor impact: ("High" | "Low")
+      SENSITIVE: []
+    end
+
+    class RouteRoad
+      attr_accessor road_name: ::Array[Types::LocalizedString]
+      attr_accessor route_number: ::Array[Types::RouteNumber]
+      attr_accessor towards: ::Array[Types::LocalizedString]
+      attr_accessor type: ("Highway" | "Rural" | "Urban")
+      SENSITIVE: []
+    end
+
+    class RouteRoundaboutEnterStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteRoundaboutExitStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor relative_exit: ::Integer
+      attr_accessor roundabout_angle: ::Float
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      SENSITIVE: []
+    end
+
+    class RouteRoundaboutPassStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteScooterOptions
+      attr_accessor engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")
+      attr_accessor license_plate: Types::RouteVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteSideOfStreetOptions
+      attr_accessor position: ::Array[::Float]
+      attr_accessor use_with: ("AnyStreet" | "DividedStreetOnly")
+      SENSITIVE: [:position]
+    end
+
+    class RouteSignpost
+      attr_accessor labels: ::Array[Types::RouteSignpostLabel]
+      SENSITIVE: []
+    end
+
+    class RouteSignpostLabel
+      attr_accessor route_number: Types::RouteNumber
+      attr_accessor text: Types::LocalizedString
+      SENSITIVE: []
+    end
+
+    class RouteSpanDynamicSpeedDetails
+      attr_accessor best_case_speed: ::Float
+      attr_accessor turn_duration: ::Integer
+      attr_accessor typical_speed: ::Float
+      SENSITIVE: []
+    end
+
+    class RouteSpanSpeedLimitDetails
+      attr_accessor max_speed: ::Float
+      attr_accessor unlimited: bool
+      SENSITIVE: []
+    end
+
+    class RouteSummary
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor tolls: Types::RouteTollSummary
+      SENSITIVE: []
+    end
+
+    class RouteToll
+      attr_accessor country: ::String
+      attr_accessor payment_sites: ::Array[Types::RouteTollPaymentSite]
+      attr_accessor rates: ::Array[Types::RouteTollRate]
+      attr_accessor systems: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class RouteTollOptions
+      attr_accessor all_transponders: bool
+      attr_accessor all_vignettes: bool
+      attr_accessor currency: ::String
+      attr_accessor emission_type: Types::RouteEmissionType
+      attr_accessor vehicle_category: ("Minibus")
+      SENSITIVE: []
+    end
+
+    class RouteTollPass
+      attr_accessor includes_return_trip: bool
+      attr_accessor senior_pass: bool
+      attr_accessor transfer_count: ::Integer
+      attr_accessor trip_count: ::Integer
+      attr_accessor validity_period: Types::RouteTollPassValidityPeriod
+      SENSITIVE: []
+    end
+
+    class RouteTollPassValidityPeriod
+      attr_accessor period: ("Annual" | "Days" | "ExtendedAnnual" | "Minutes" | "Months")
+      attr_accessor period_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteTollPaymentSite
+      attr_accessor name: ::String
+      attr_accessor position: ::Array[::Float]
+      SENSITIVE: [:position]
+    end
+
+    class RouteTollPrice
+      attr_accessor currency: ::String
+      attr_accessor estimate: bool
+      attr_accessor per_duration: ::Integer
+      attr_accessor range: bool
+      attr_accessor range_value: Types::RouteTollPriceValueRange
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class RouteTollPriceSummary
+      attr_accessor currency: ::String
+      attr_accessor estimate: bool
+      attr_accessor range: bool
+      attr_accessor range_value: Types::RouteTollPriceValueRange
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class RouteTollPriceValueRange
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      SENSITIVE: []
+    end
+
+    class RouteTollRate
+      attr_accessor applicable_times: ::String
+      attr_accessor converted_price: Types::RouteTollPrice
+      attr_accessor id: ::String
+      attr_accessor local_price: Types::RouteTollPrice
+      attr_accessor name: ::String
+      attr_accessor pass: Types::RouteTollPass
+      attr_accessor payment_methods: ::Array[("BankCard" | "Cash" | "CashExact" | "CreditCard" | "PassSubscription" | "TravelCard" | "Transponder" | "VideoToll")]
+      attr_accessor transponders: ::Array[Types::RouteTransponder]
+      SENSITIVE: []
+    end
+
+    class RouteTollSummary
+      attr_accessor total: Types::RouteTollPriceSummary
+      SENSITIVE: []
+    end
+
+    class RouteTollSystem
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class RouteTrafficOptions
+      attr_accessor flow_event_threshold_override: ::Integer
+      attr_accessor usage: ("IgnoreTrafficData" | "UseTrafficData")
+      SENSITIVE: []
+    end
+
+    class RouteTrailerOptions
+      attr_accessor axle_count: ::Integer
+      attr_accessor trailer_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteTransponder
+      attr_accessor system_name: ::String
+      SENSITIVE: []
+    end
+
+    class RouteTravelModeOptions
+      attr_accessor car: Types::RouteCarOptions
+      attr_accessor pedestrian: Types::RoutePedestrianOptions
+      attr_accessor scooter: Types::RouteScooterOptions
+      attr_accessor truck: Types::RouteTruckOptions
+      SENSITIVE: []
+    end
+
+    class RouteTruckOptions
+      attr_accessor axle_count: ::Integer
+      attr_accessor engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")
+      attr_accessor gross_weight: ::Integer
+      attr_accessor hazardous_cargos: ::Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]
+      attr_accessor height: ::Integer
+      attr_accessor height_above_first_axle: ::Integer
+      attr_accessor kpra_length: ::Integer
+      attr_accessor length: ::Integer
+      attr_accessor license_plate: Types::RouteVehicleLicensePlate
+      attr_accessor max_speed: ::Float
+      attr_accessor occupancy: ::Integer
+      attr_accessor payload_capacity: ::Integer
+      attr_accessor tire_count: ::Integer
+      attr_accessor trailer: Types::RouteTrailerOptions
+      attr_accessor truck_type: ("LightTruck" | "StraightTruck" | "Tractor")
+      attr_accessor tunnel_restriction_code: ::String
+      attr_accessor weight_per_axle: ::Integer
+      attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteTurnStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteUTurnStepDetails
+      attr_accessor intersection: ::Array[Types::LocalizedString]
+      attr_accessor steering_direction: ("Left" | "Right" | "Straight")
+      attr_accessor turn_angle: ::Float
+      attr_accessor turn_intensity: ("Sharp" | "Slight" | "Typical")
+      SENSITIVE: []
+    end
+
+    class RouteVehicleArrival
+      attr_accessor place: Types::RouteVehiclePlace
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class RouteVehicleDeparture
+      attr_accessor place: Types::RouteVehiclePlace
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class RouteVehicleIncident
+      attr_accessor description: ::String
+      attr_accessor end_time: ::String
+      attr_accessor severity: ("Critical" | "High" | "Medium" | "Low")
+      attr_accessor start_time: ::String
+      attr_accessor type: ("Accident" | "Congestion" | "Construction" | "DisabledVehicle" | "LaneRestriction" | "MassTransit" | "Other" | "PlannedEvent" | "RoadClosure" | "RoadHazard" | "Weather")
+      SENSITIVE: []
+    end
+
+    class RouteVehicleLegDetails
+      attr_accessor arrival: Types::RouteVehicleArrival
+      attr_accessor departure: Types::RouteVehicleDeparture
+      attr_accessor incidents: ::Array[Types::RouteVehicleIncident]
+      attr_accessor notices: ::Array[Types::RouteVehicleNotice]
+      attr_accessor pass_through_waypoints: ::Array[Types::RoutePassThroughWaypoint]
+      attr_accessor spans: ::Array[Types::RouteVehicleSpan]
+      attr_accessor summary: Types::RouteVehicleSummary
+      attr_accessor tolls: ::Array[Types::RouteToll]
+      attr_accessor toll_systems: ::Array[Types::RouteTollSystem]
+      attr_accessor travel_steps: ::Array[Types::RouteVehicleTravelStep]
+      attr_accessor truck_road_types: ::Array[::String]
+      attr_accessor zones: ::Array[Types::RouteZone]
+      SENSITIVE: []
+    end
+
+    class RouteVehicleLicensePlate
+      attr_accessor last_character: ::String
+      SENSITIVE: []
+    end
+
+    class RouteVehicleNotice
+      attr_accessor code: ("AccuratePolylineUnavailable" | "Other" | "PotentialViolatedAvoidTollRoadUsage" | "PotentialViolatedCarpoolUsage" | "PotentialViolatedTurnRestrictionUsage" | "PotentialViolatedVehicleRestrictionUsage" | "PotentialViolatedZoneRestrictionUsage" | "SeasonalClosure" | "TollsDataTemporarilyUnavailable" | "TollsDataUnavailable" | "TollTransponder" | "ViolatedAvoidControlledAccessHighway" | "ViolatedAvoidDifficultTurns" | "ViolatedAvoidDirtRoad" | "ViolatedAvoidSeasonalClosure" | "ViolatedAvoidTollRoad" | "ViolatedAvoidTollTransponder" | "ViolatedAvoidTruckRoadType" | "ViolatedAvoidTunnel" | "ViolatedAvoidUTurns" | "ViolatedBlockedRoad" | "ViolatedCarpool" | "ViolatedEmergencyGate" | "ViolatedStartDirection" | "ViolatedTurnRestriction" | "ViolatedVehicleRestriction" | "ViolatedZoneRestriction")
+      attr_accessor details: ::Array[Types::RouteVehicleNoticeDetail]
+      attr_accessor impact: ("High" | "Low")
+      SENSITIVE: []
+    end
+
+    class RouteVehicleNoticeDetail
+      attr_accessor title: ::String
+      attr_accessor violated_constraints: Types::RouteViolatedConstraints
+      SENSITIVE: []
+    end
+
+    class RouteVehicleOverviewSummary
+      attr_accessor best_case_duration: ::Integer
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor typical_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteVehiclePlace
+      attr_accessor name: ::String
+      attr_accessor original_position: ::Array[::Float]
+      attr_accessor position: ::Array[::Float]
+      attr_accessor side_of_street: ("Left" | "Right")
+      attr_accessor waypoint_index: ::Integer
+      SENSITIVE: [:original_position, :position]
+    end
+
+    class RouteVehicleSpan
+      attr_accessor best_case_duration: ::Integer
+      attr_accessor car_access: ::Array[("Allowed" | "NoThroughTraffic" | "TollRoad")]
+      attr_accessor country: ::String
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor dynamic_speed: Types::RouteSpanDynamicSpeedDetails
+      attr_accessor functional_classification: ::Integer
+      attr_accessor gate: ("Emergency" | "KeyAccess" | "PermissionRequired")
+      attr_accessor geometry_offset: ::Integer
+      attr_accessor incidents: ::Array[::Integer]
+      attr_accessor names: ::Array[Types::LocalizedString]
+      attr_accessor notices: ::Array[::Integer]
+      attr_accessor railway_crossing: ("Protected" | "Unprotected")
+      attr_accessor region: ::String
+      attr_accessor road_attributes: ::Array[("Bridge" | "BuiltUpArea" | "ControlledAccessHighway" | "DirtRoad" | "DividedRoad" | "Motorway" | "PrivateRoad" | "Ramp" | "RightHandTraffic" | "Roundabout" | "Tunnel" | "UnderConstruction")]
+      attr_accessor route_numbers: ::Array[Types::RouteNumber]
+      attr_accessor scooter_access: ::Array[("Allowed" | "NoThroughTraffic" | "TollRoad")]
+      attr_accessor speed_limit: Types::RouteSpanSpeedLimitDetails
+      attr_accessor toll_systems: ::Array[::Integer]
+      attr_accessor truck_access: ::Array[("Allowed" | "NoThroughTraffic" | "TollRoad")]
+      attr_accessor truck_road_types: ::Array[::Integer]
+      attr_accessor typical_duration: ::Integer
+      attr_accessor zones: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class RouteVehicleSummary
+      attr_accessor overview: Types::RouteVehicleOverviewSummary
+      attr_accessor travel_only: Types::RouteVehicleTravelOnlySummary
+      SENSITIVE: []
+    end
+
+    class RouteVehicleTravelOnlySummary
+      attr_accessor best_case_duration: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor typical_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteVehicleTravelStep
+      attr_accessor continue_highway_step_details: Types::RouteContinueHighwayStepDetails
+      attr_accessor continue_step_details: Types::RouteContinueStepDetails
+      attr_accessor current_road: Types::RouteRoad
+      attr_accessor distance: ::Integer
+      attr_accessor duration: ::Integer
+      attr_accessor enter_highway_step_details: Types::RouteEnterHighwayStepDetails
+      attr_accessor exit_number: ::Array[Types::LocalizedString]
+      attr_accessor exit_step_details: Types::RouteExitStepDetails
+      attr_accessor geometry_offset: ::Integer
+      attr_accessor instruction: ::String
+      attr_accessor keep_step_details: Types::RouteKeepStepDetails
+      attr_accessor next_road: Types::RouteRoad
+      attr_accessor ramp_step_details: Types::RouteRampStepDetails
+      attr_accessor roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails
+      attr_accessor roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails
+      attr_accessor roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails
+      attr_accessor signpost: Types::RouteSignpost
+      attr_accessor turn_step_details: Types::RouteTurnStepDetails
+      attr_accessor type: ("Arrive" | "Continue" | "ContinueHighway" | "Depart" | "EnterHighway" | "Exit" | "Keep" | "Ramp" | "RoundaboutEnter" | "RoundaboutExit" | "RoundaboutPass" | "Turn" | "UTurn")
+      attr_accessor u_turn_step_details: Types::RouteUTurnStepDetails
+      SENSITIVE: []
+    end
+
+    class RouteViolatedConstraints
+      attr_accessor all_hazards_restricted: bool
+      attr_accessor axle_count: Types::RouteNoticeDetailRange
+      attr_accessor hazardous_cargos: ::Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]
+      attr_accessor max_height: ::Integer
+      attr_accessor max_kpra_length: ::Integer
+      attr_accessor max_length: ::Integer
+      attr_accessor max_payload_capacity: ::Integer
+      attr_accessor max_weight: Types::RouteWeightConstraint
+      attr_accessor max_weight_per_axle: ::Integer
+      attr_accessor max_weight_per_axle_group: Types::WeightPerAxleGroup
+      attr_accessor max_width: ::Integer
+      attr_accessor occupancy: Types::RouteNoticeDetailRange
+      attr_accessor restricted_times: ::String
+      attr_accessor time_dependent: bool
+      attr_accessor trailer_count: Types::RouteNoticeDetailRange
+      attr_accessor travel_mode: bool
+      attr_accessor truck_road_type: ::String
+      attr_accessor truck_type: ("LightTruck" | "StraightTruck" | "Tractor")
+      attr_accessor tunnel_restriction_code: ::String
+      SENSITIVE: []
+    end
+
+    class RouteWaypoint
+      attr_accessor avoid_actions_for_distance: ::Integer
+      attr_accessor avoid_u_turns: bool
+      attr_accessor heading: ::Float
+      attr_accessor matching: Types::RouteMatchingOptions
+      attr_accessor pass_through: bool
+      attr_accessor position: ::Array[::Float]
+      attr_accessor side_of_street: Types::RouteSideOfStreetOptions
+      attr_accessor stop_duration: ::Integer
+      SENSITIVE: [:position]
+    end
+
+    class RouteWeightConstraint
+      attr_accessor type: ("Current" | "Gross" | "Unknown")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteZone
+      attr_accessor category: ("CongestionPricing" | "Environmental" | "Vignette")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SnapToRoadsRequest
+      attr_accessor key: ::String
+      attr_accessor snapped_geometry_format: ("FlexiblePolyline" | "Simple")
+      attr_accessor snap_radius: ::Integer
+      attr_accessor trace_points: ::Array[Types::RoadSnapTracePoint]
+      attr_accessor travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck")
+      attr_accessor travel_mode_options: Types::RoadSnapTravelModeOptions
+      SENSITIVE: [:key]
+    end
+
+    class SnapToRoadsResponse
+      attr_accessor notices: ::Array[Types::RoadSnapNotice]
+      attr_accessor pricing_bucket: ::String
+      attr_accessor snapped_geometry: Types::RoadSnapSnappedGeometry
+      attr_accessor snapped_geometry_format: ("FlexiblePolyline" | "Simple")
+      attr_accessor snapped_trace_points: ::Array[Types::RoadSnapSnappedTracePoint]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UnknownOperation" | "Missing" | "CannotParse" | "FieldValidationFailed" | "Other" | "UnknownField")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationAccessHours
+      attr_accessor from: Types::WaypointOptimizationAccessHoursEntry
+      attr_accessor to: Types::WaypointOptimizationAccessHoursEntry
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationAccessHoursEntry
+      attr_accessor day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday")
+      attr_accessor time_of_day: ::String
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationAvoidanceArea
+      attr_accessor geometry: Types::WaypointOptimizationAvoidanceAreaGeometry
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationAvoidanceAreaGeometry
+      attr_accessor bounding_box: ::Array[::Float]
+      SENSITIVE: [:bounding_box]
+    end
+
+    class WaypointOptimizationAvoidanceOptions
+      attr_accessor areas: ::Array[Types::WaypointOptimizationAvoidanceArea]
+      attr_accessor car_shuttle_trains: bool
+      attr_accessor controlled_access_highways: bool
+      attr_accessor dirt_roads: bool
+      attr_accessor ferries: bool
+      attr_accessor toll_roads: bool
+      attr_accessor tunnels: bool
+      attr_accessor u_turns: bool
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationConnection
+      attr_accessor distance: ::Integer
+      attr_accessor from: ::String
+      attr_accessor rest_duration: ::Integer
+      attr_accessor to: ::String
+      attr_accessor travel_duration: ::Integer
+      attr_accessor wait_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationDestinationOptions
+      attr_accessor access_hours: Types::WaypointOptimizationAccessHours
+      attr_accessor appointment_time: ::String
+      attr_accessor heading: ::Float
+      attr_accessor id: ::String
+      attr_accessor service_duration: ::Integer
+      attr_accessor side_of_street: Types::WaypointOptimizationSideOfStreetOptions
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationDriverOptions
+      attr_accessor rest_cycles: Types::WaypointOptimizationRestCycles
+      attr_accessor rest_profile: Types::WaypointOptimizationRestProfile
+      attr_accessor treat_service_time_as: ("Rest" | "Work")
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationExclusionOptions
+      attr_accessor countries: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationFailedConstraint
+      attr_accessor constraint: ("AccessHours" | "AppointmentTime" | "Before" | "Heading" | "ServiceDuration" | "SideOfStreet")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationImpedingWaypoint
+      attr_accessor failed_constraints: ::Array[Types::WaypointOptimizationFailedConstraint]
+      attr_accessor id: ::String
+      attr_accessor position: ::Array[::Float]
+      SENSITIVE: [:position]
+    end
+
+    class WaypointOptimizationOptimizedWaypoint
+      attr_accessor arrival_time: ::String
+      attr_accessor departure_time: ::String
+      attr_accessor id: ::String
+      attr_accessor position: ::Array[::Float]
+      SENSITIVE: [:position]
+    end
+
+    class WaypointOptimizationOriginOptions
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationPedestrianOptions
+      attr_accessor speed: ::Float
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationRestCycleDurations
+      attr_accessor rest_duration: ::Integer
+      attr_accessor work_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationRestCycles
+      attr_accessor long_cycle: Types::WaypointOptimizationRestCycleDurations
+      attr_accessor short_cycle: Types::WaypointOptimizationRestCycleDurations
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationRestProfile
+      attr_accessor profile: ::String
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationSideOfStreetOptions
+      attr_accessor position: ::Array[::Float]
+      attr_accessor use_with: ("AnyStreet" | "DividedStreetOnly")
+      SENSITIVE: [:position]
+    end
+
+    class WaypointOptimizationTimeBreakdown
+      attr_accessor rest_duration: ::Integer
+      attr_accessor service_duration: ::Integer
+      attr_accessor travel_duration: ::Integer
+      attr_accessor wait_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationTrafficOptions
+      attr_accessor usage: ("IgnoreTrafficData" | "UseTrafficData")
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationTrailerOptions
+      attr_accessor trailer_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationTravelModeOptions
+      attr_accessor pedestrian: Types::WaypointOptimizationPedestrianOptions
+      attr_accessor truck: Types::WaypointOptimizationTruckOptions
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationTruckOptions
+      attr_accessor gross_weight: ::Integer
+      attr_accessor hazardous_cargos: ::Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]
+      attr_accessor height: ::Integer
+      attr_accessor length: ::Integer
+      attr_accessor trailer: Types::WaypointOptimizationTrailerOptions
+      attr_accessor truck_type: ("StraightTruck" | "Tractor")
+      attr_accessor tunnel_restriction_code: ::String
+      attr_accessor weight_per_axle: ::Integer
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class WaypointOptimizationWaypoint
+      attr_accessor access_hours: Types::WaypointOptimizationAccessHours
+      attr_accessor appointment_time: ::String
+      attr_accessor before: ::Array[::Integer]
+      attr_accessor heading: ::Float
+      attr_accessor id: ::String
+      attr_accessor position: ::Array[::Float]
+      attr_accessor service_duration: ::Integer
+      attr_accessor side_of_street: Types::WaypointOptimizationSideOfStreetOptions
+      SENSITIVE: [:position]
+    end
+
+    class WeightPerAxleGroup
+      attr_accessor single: ::Integer
+      attr_accessor tandem: ::Integer
+      attr_accessor triple: ::Integer
+      attr_accessor quad: ::Integer
+      attr_accessor quint: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

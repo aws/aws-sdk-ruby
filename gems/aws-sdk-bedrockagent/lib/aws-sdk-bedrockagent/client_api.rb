@@ -1997,9 +1997,11 @@ module Aws::BedrockAgent
 
       api.metadata = {
         "apiVersion" => "2023-06-05",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "bedrock-agent",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Agents for Amazon Bedrock",
         "serviceId" => "Bedrock Agent",
         "signatureVersion" => "v4",

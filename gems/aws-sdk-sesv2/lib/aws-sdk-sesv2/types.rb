@@ -6892,8 +6892,10 @@ module Aws::SESV2
     # An object that defines the email template to use for an email message,
     # and the values to use for any message variables in that template. An
     # *email template* is a type of message template that contains content
-    # that you want to define, save, and reuse in email messages that you
-    # send.
+    # that you want to reuse in email messages that you send. You can
+    # specifiy the email template by providing the name or ARN of an *email
+    # template* previously saved in your Amazon SES account or by providing
+    # the full template content.
     #
     # @!attribute [rw] template_name
     #   The name of the template. You will refer to this name when you send
@@ -6904,6 +6906,16 @@ module Aws::SESV2
     # @!attribute [rw] template_arn
     #   The Amazon Resource Name (ARN) of the template.
     #   @return [String]
+    #
+    # @!attribute [rw] template_content
+    #   The content of the template.
+    #
+    #   <note markdown="1"> Amazon SES supports only simple substitions when you send email
+    #   using the `SendEmail` or `SendBulkEmail` operations and you provide
+    #   the full template content in the request.
+    #
+    #    </note>
+    #   @return [Types::EmailTemplateContent]
     #
     # @!attribute [rw] template_data
     #   An object that defines the values to use for message variables in
@@ -6921,6 +6933,7 @@ module Aws::SESV2
     class Template < Struct.new(
       :template_name,
       :template_arn,
+      :template_content,
       :template_data,
       :headers)
       SENSITIVE = []

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2024-10-30)
+------------------
+
+* Feature - Adds and updates API members for the Redshift Serverless AI-driven scaling and optimization feature using the price-performance target setting.
+
 1.40.0 (2024-10-18)
 ------------------
 

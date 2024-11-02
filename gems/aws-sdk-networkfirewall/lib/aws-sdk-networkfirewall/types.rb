@@ -2150,6 +2150,34 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Describes the amount of time that can pass without any traffic sent
+    # through the firewall before the firewall determines that the
+    # connection is idle and Network Firewall removes the flow entry from
+    # its flow table. Existing connections and flows are not impacted when
+    # you update this value. Only new connections after you update this
+    # value are impacted.
+    #
+    # @!attribute [rw] tcp_idle_timeout_seconds
+    #   The number of seconds that can pass without any TCP traffic sent
+    #   through the firewall before the firewall determines that the
+    #   connection is idle. After the idle timeout passes, data packets are
+    #   dropped, however, the next TCP SYN packet is considered a new flow
+    #   and is processed by the firewall. Clients or targets can use TCP
+    #   keepalive packets to reset the idle timeout.
+    #
+    #   You can define the `TcpIdleTimeoutSeconds` value to be between 60
+    #   and 6000 seconds. If no value is provided, it defaults to 350
+    #   seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FlowTimeouts AWS API Documentation
+    #
+    class FlowTimeouts < Struct.new(
+      :tcp_idle_timeout_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The basic rule criteria for Network Firewall to use to inspect packet
     # headers in stateful traffic flow inspection. Traffic flows that match
     # the criteria are a match for the corresponding StatefulRule.
@@ -3687,11 +3715,18 @@ module Aws::NetworkFirewall
     #     subsequent traffic.
     #   @return [String]
     #
+    # @!attribute [rw] flow_timeouts
+    #   Configures the amount of time that can pass without any traffic sent
+    #   through the firewall before the firewall determines that the
+    #   connection is idle.
+    #   @return [Types::FlowTimeouts]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulEngineOptions AWS API Documentation
     #
     class StatefulEngineOptions < Struct.new(
       :rule_order,
-      :stream_exception_policy)
+      :stream_exception_policy,
+      :flow_timeouts)
       SENSITIVE = []
       include Aws::Structure
     end

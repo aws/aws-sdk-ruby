@@ -641,10 +641,10 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of a Lambda function implements the
     #   logic for [annotation consolidation][1] and to process output data.
     #
-    #   This parameter is required for all labeling jobs. For [built-in task
-    #   types][2], use one of the following Amazon SageMaker Ground Truth
-    #   Lambda function ARNs for `AnnotationConsolidationLambdaArn`. For
-    #   custom labeling workflows, see [Post-annotation Lambda][3].
+    #   For [built-in task types][2], use one of the following Amazon
+    #   SageMaker Ground Truth Lambda function ARNs for
+    #   `AnnotationConsolidationLambdaArn`. For custom labeling workflows,
+    #   see [Post-annotation Lambda][3].
     #
     #   **Bounding box** - Finds the most similar boxes from different
     #   workers based on the Jaccard index of the boxes.
@@ -2931,6 +2931,79 @@ module Aws::SageMaker
       :destination_s3_uri,
       :kms_key_id,
       :generate_inference_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an error encountered when deleting a node from a SageMaker
+    # HyperPod cluster.
+    #
+    # @!attribute [rw] code
+    #   The error code associated with the error encountered when deleting a
+    #   node.
+    #
+    #   The code provides information about the specific issue encountered,
+    #   such as the node not being found, the node's status being invalid
+    #   for deletion, or the node ID being in use by another process.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the error encountered when deleting a node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The ID of the node that encountered an error during the deletion
+    #   process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDeleteClusterNodesError AWS API Documentation
+    #
+    class BatchDeleteClusterNodesError < Struct.new(
+      :code,
+      :message,
+      :node_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of the SageMaker HyperPod cluster from which to delete the
+    #   specified nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of node IDs to be deleted from the specified cluster.
+    #
+    #   <note markdown="1"> For SageMaker HyperPod clusters using the Slurm workload manager,
+    #   you cannot remove instances that are configured as Slurm controller
+    #   nodes.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDeleteClusterNodesRequest AWS API Documentation
+    #
+    class BatchDeleteClusterNodesRequest < Struct.new(
+      :cluster_name,
+      :node_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed
+    #   A list of errors encountered when deleting the specified nodes.
+    #   @return [Array<Types::BatchDeleteClusterNodesError>]
+    #
+    # @!attribute [rw] successful
+    #   A list of node IDs that were successfully deleted from the specified
+    #   cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDeleteClusterNodesResponse AWS API Documentation
+    #
+    class BatchDeleteClusterNodesResponse < Struct.new(
+      :failed,
+      :successful)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6230,7 +6303,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_space_settings
-    #   The default settings used to create a space.
+    #   The default settings for shared spaces that users create in the
+    #   domain.
     #   @return [Types::DefaultSpaceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
@@ -8483,6 +8557,11 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
+    # @!attribute [rw] model_life_cycle
+    #   A structure describing the current state of the model in its life
+    #   cycle.
+    #   @return [Types::ModelLifeCycle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -8507,7 +8586,8 @@ module Aws::SageMaker
       :skip_model_validation,
       :source_uri,
       :security_config,
-      :model_card)
+      :model_card,
+      :model_life_cycle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8733,14 +8813,11 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] accelerator_types
-    #   A list of Elastic Inference (EI) instance types to associate with
-    #   this notebook instance. Currently, only one instance type can be
-    #   associated with a notebook instance. For more information, see
-    #   [Using Elastic Inference in Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify a list of EI instance types to
+    #   associate with this notebook instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_code_repository
@@ -10932,7 +11009,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A collection of settings that apply to spaces created in the domain.
+    # The default settings for shared spaces that users create in the
+    # domain.
+    #
+    # SageMaker applies these settings only to shared spaces. It doesn't
+    # apply them to private spaces.
     #
     # @!attribute [rw] execution_role
     #   The ARN of the execution role for the space.
@@ -13519,7 +13600,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_space_settings
-    #   The default settings used to create a space.
+    #   The default settings for shared spaces that users create in the
+    #   domain.
     #   @return [Types::DefaultSpaceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomainResponse AWS API Documentation
@@ -16284,6 +16366,11 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
+    # @!attribute [rw] model_life_cycle
+    #   A structure describing the current state of the model in its life
+    #   cycle.
+    #   @return [Types::ModelLifeCycle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
     class DescribeModelPackageOutput < Struct.new(
@@ -16315,7 +16402,8 @@ module Aws::SageMaker
       :skip_model_validation,
       :source_uri,
       :security_config,
-      :model_card)
+      :model_card,
+      :model_life_cycle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16636,14 +16724,11 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] accelerator_types
-    #   A list of the Elastic Inference (EI) instance types associated with
-    #   this notebook instance. Currently only one EI instance type can be
-    #   associated with a notebook instance. For more information, see
-    #   [Using Elastic Inference in Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify a list of the EI instance types
+    #   associated with this notebook instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_code_repository
@@ -32845,6 +32930,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A structure describing the current state of the model in its life
+    # cycle.
+    #
+    # @!attribute [rw] stage
+    #   The current stage in the model life cycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_status
+    #   The current status of a stage in model life cycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_description
+    #   Describes the stage related details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelLifeCycle AWS API Documentation
+    #
+    class ModelLifeCycle < Struct.new(
+      :stage,
+      :stage_status,
+      :stage_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Part of the search expression. You can specify the name and value
     # (domain, task, framework, framework version, task, and model).
     #
@@ -33105,6 +33215,11 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
+    # @!attribute [rw] model_life_cycle
+    #   A structure describing the current state of the model in its life
+    #   cycle.
+    #   @return [Types::ModelLifeCycle]
+    #
     # @!attribute [rw] tags
     #   A list of the tags associated with the model package. For more
     #   information, see [Tagging Amazon Web Services resources][1] in the
@@ -33157,6 +33272,7 @@ module Aws::SageMaker
       :source_uri,
       :security_config,
       :model_card,
+      :model_life_cycle,
       :tags,
       :customer_metadata_properties,
       :drift_check_baselines,
@@ -35673,23 +35789,6 @@ module Aws::SageMaker
     #
     #     ^
     #
-    #   * `EIA`: Compilation for the Elastic Inference Accelerator supports
-    #     the following compiler options:
-    #
-    #     * `precision_mode`: Specifies the precision of compiled artifacts.
-    #       Supported values are `"FP16"` and `"FP32"`. Default is `"FP32"`.
-    #
-    #     * `signature_def_key`: Specifies the signature to use for models
-    #       in SavedModel format. Defaults is TensorFlow's default
-    #       signature def key.
-    #
-    #     * `output_names`: Specifies a list of output tensor names for
-    #       models in FrozenGraph format. Set at most one API field, either:
-    #       `signature_def_key` or `output_names`.
-    #
-    #     For example: `\{"precision_mode": "FP32", "output_names":
-    #     ["output:0"]\}`
-    #
     #
     #
     #   [1]: https://awsdocs-neuron.readthedocs-hosted.com/en/latest/compiler/neuronx-cc/api-reference-guide/neuron-compiler-cli-reference-guide.html
@@ -36108,14 +36207,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] accelerator_type
-    #   The size of the Elastic Inference (EI) instance to use for the
-    #   production variant. EI instances provide on-demand GPU computing for
-    #   inference. For more information, see [Using Elastic Inference in
-    #   Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify the size of the EI instance to
+    #   use for the production variant.
     #   @return [String]
     #
     # @!attribute [rw] variant_status
@@ -37275,14 +37371,11 @@ module Aws::SageMaker
     #   @return [Float]
     #
     # @!attribute [rw] accelerator_type
-    #   The size of the Elastic Inference (EI) instance to use for the
-    #   production variant. EI instances provide on-demand GPU computing for
-    #   inference. For more information, see [Using Elastic Inference in
-    #   Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify the size of the EI instance to
+    #   use for the production variant.
     #   @return [String]
     #
     # @!attribute [rw] core_dump_config
@@ -43478,6 +43571,10 @@ module Aws::SageMaker
     #   The status of the training job.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_status
+    #   The secondary status of the training job.
+    #   @return [String]
+    #
     # @!attribute [rw] warm_pool_status
     #   The status of the warm pool associated with the training job.
     #   @return [Types::WarmPoolStatus]
@@ -43491,6 +43588,7 @@ module Aws::SageMaker
       :training_end_time,
       :last_modified_time,
       :training_job_status,
+      :secondary_status,
       :warm_pool_status)
       SENSITIVE = []
       include Aws::Structure
@@ -45322,7 +45420,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_space_settings
-    #   The default settings used to create a space within the domain.
+    #   The default settings for shared spaces that users create in the
+    #   domain.
     #   @return [Types::DefaultSpaceSettings]
     #
     # @!attribute [rw] subnet_ids
@@ -46085,6 +46184,16 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
+    # @!attribute [rw] model_life_cycle
+    #   A structure describing the current state of the model in its life
+    #   cycle.
+    #   @return [Types::ModelLifeCycle]
+    #
+    # @!attribute [rw] client_token
+    #   A unique token that guarantees that the call to this API is
+    #   idempotent.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelPackageInput AWS API Documentation
     #
     class UpdateModelPackageInput < Struct.new(
@@ -46096,7 +46205,9 @@ module Aws::SageMaker
       :additional_inference_specifications_to_add,
       :inference_specification,
       :source_uri,
-      :model_card)
+      :model_card,
+      :model_life_cycle,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46274,21 +46385,19 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] accelerator_types
-    #   A list of the Elastic Inference (EI) instance types to associate
-    #   with this notebook instance. Currently only one EI instance type can
-    #   be associated with a notebook instance. For more information, see
-    #   [Using Elastic Inference in Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify a list of the EI instance types
+    #   to associate with this notebook instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] disassociate_accelerator_types
-    #   A list of the Elastic Inference (EI) instance types to remove from
-    #   this notebook instance. This operation is idempotent. If you specify
-    #   an accelerator type that is not associated with the notebook
-    #   instance when you call this method, it does not throw an error.
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
+    #
+    #   This parameter was used to specify a list of the EI instance types
+    #   to remove from this notebook instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] disassociate_default_code_repository
@@ -46988,6 +47097,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] execution_role
     #   The execution role for the user.
+    #
+    #   SageMaker applies this setting only to private spaces that the user
+    #   creates in the domain. SageMaker doesn't apply this setting to
+    #   shared spaces.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -47004,6 +47117,10 @@ module Aws::SageMaker
     #   Amazon SageMaker adds a security group to allow NFS traffic from
     #   Amazon SageMaker Studio. Therefore, the number of security groups
     #   that you can specify is one less than the maximum number shown.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sharing_settings
@@ -47033,18 +47150,33 @@ module Aws::SageMaker
     #
     # @!attribute [rw] canvas_app_settings
     #   The Canvas app settings.
+    #
+    #   SageMaker applies these settings only to private spaces that
+    #   SageMaker creates for the Canvas app.
     #   @return [Types::CanvasAppSettings]
     #
     # @!attribute [rw] code_editor_app_settings
     #   The Code Editor application settings.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Types::CodeEditorAppSettings]
     #
     # @!attribute [rw] jupyter_lab_app_settings
     #   The settings for the JupyterLab application.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Types::JupyterLabAppSettings]
     #
     # @!attribute [rw] space_storage_settings
     #   The storage settings for a space.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Types::DefaultSpaceStorageSettings]
     #
     # @!attribute [rw] default_landing_uri
@@ -47067,12 +47199,20 @@ module Aws::SageMaker
     # @!attribute [rw] custom_posix_user_config
     #   Details about the POSIX identity that is used for file system
     #   operations.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Types::CustomPosixUserConfig]
     #
     # @!attribute [rw] custom_file_system_configs
     #   The settings for assigning a custom file system to a user profile.
     #   Permitted users can access this file system in Amazon SageMaker
     #   Studio.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Array<Types::CustomFileSystemConfig>]
     #
     # @!attribute [rw] studio_web_portal_settings
@@ -47085,6 +47225,10 @@ module Aws::SageMaker
     #   the user profile. The `DefaultAsDomain` value is only supported for
     #   user profiles. Do not use the `DefaultAsDomain` value when setting
     #   this parameter for a domain.
+    #
+    #   SageMaker applies this setting only to private spaces that the user
+    #   creates in the domain. SageMaker doesn't apply this setting to
+    #   shared spaces.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserSettings AWS API Documentation

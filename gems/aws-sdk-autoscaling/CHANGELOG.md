@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2024-10-31)
+------------------
+
+* Feature - Adds bake time for Auto Scaling group Instance Refresh
+
 1.123.0 (2024-10-21)
 ------------------
 

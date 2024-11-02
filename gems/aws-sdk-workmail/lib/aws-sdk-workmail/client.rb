@@ -751,6 +751,48 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Creates the WorkMail application in IAM Identity Center that can be
+    # used later in the WorkMail - IdC integration. For more information,
+    # see PutIdentityProviderConfiguration. This action does not affect the
+    # authentication settings for any WorkMail organizations.
+    #
+    # @option params [required, String] :name
+    #   The name of the IAM Identity Center application.
+    #
+    # @option params [required, String] :instance_arn
+    #   The Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateIdentityCenterApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIdentityCenterApplicationResponse#application_arn #application_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_identity_center_application({
+    #     name: "IdentityCenterApplicationName", # required
+    #     instance_arn: "InstanceArn", # required
+    #     client_token: "IdempotencyClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateIdentityCenterApplication AWS API Documentation
+    #
+    # @overload create_identity_center_application(params = {})
+    # @param [Hash] params ({})
+    def create_identity_center_application(params = {}, options = {})
+      req = build_request(:create_identity_center_application, params)
+      req.send_request(options)
+    end
+
     # Creates an impersonation role for the given WorkMail organization.
     #
     # *Idempotency* ensures that an API request completes no more than one
@@ -1064,6 +1106,11 @@ module Aws::WorkMail
     #   If this parameter is enabled, the user will be hidden from the address
     #   book.
     #
+    # @option params [String] :identity_provider_user_id
+    #   User ID from the IAM Identity Center. If this parameter is empty it
+    #   will be updated automatically when the user logs in for the first time
+    #   to the mailbox associated with WorkMail.
+    #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserResponse#user_id #user_id} => String
@@ -1079,6 +1126,7 @@ module Aws::WorkMail
     #     first_name: "UserAttribute",
     #     last_name: "UserAttribute",
     #     hidden_from_global_address_list: false,
+    #     identity_provider_user_id: "IdentityProviderUserId",
     #   })
     #
     # @example Response structure
@@ -1244,6 +1292,55 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def delete_group(params = {}, options = {})
       req = build_request(:delete_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes the IAM Identity Center application from WorkMail. This action
+    # does not affect the authentication settings for any WorkMail
+    # organizations.
+    #
+    # @option params [required, String] :application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_identity_center_application({
+    #     application_arn: "ApplicationArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteIdentityCenterApplication AWS API Documentation
+    #
+    # @overload delete_identity_center_application(params = {})
+    # @param [Hash] params ({})
+    def delete_identity_center_application(params = {}, options = {})
+      req = build_request(:delete_identity_center_application, params)
+      req.send_request(options)
+    end
+
+    # Disables the integration between IdC and WorkMail. Authentication will
+    # continue with the directory as it was before the IdC integration. You
+    # might have to reset your directory passwords and reconfigure your
+    # desktop and mobile email clients.
+    #
+    # @option params [required, String] :organization_id
+    #   The Organization ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_identity_provider_configuration({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteIdentityProviderConfiguration AWS API Documentation
+    #
+    # @overload delete_identity_provider_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_identity_provider_configuration(params = {}, options = {})
+      req = build_request(:delete_identity_provider_configuration, params)
       req.send_request(options)
     end
 
@@ -1432,6 +1529,10 @@ module Aws::WorkMail
     #   Deletes a WorkMail organization even if the organization has enabled
     #   users.
     #
+    # @option params [Boolean] :delete_identity_center_application
+    #   Deletes IAM Identity Center application for WorkMail. This action does
+    #   not affect authentication settings for any organization.
+    #
     # @return [Types::DeleteOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteOrganizationResponse#organization_id #organization_id} => String
@@ -1444,6 +1545,7 @@ module Aws::WorkMail
     #     organization_id: "OrganizationId", # required
     #     delete_directory: false, # required
     #     force_delete: false,
+    #     delete_identity_center_application: false,
     #   })
     #
     # @example Response structure
@@ -1457,6 +1559,33 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def delete_organization(params = {}, options = {})
       req = build_request(:delete_organization, params)
+      req.send_request(options)
+    end
+
+    # Deletes the Personal Access Token from the provided WorkMail
+    # Organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Organization ID.
+    #
+    # @option params [required, String] :personal_access_token_id
+    #   The Personal Access Token ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_personal_access_token({
+    #     organization_id: "OrganizationId", # required
+    #     personal_access_token_id: "PersonalAccessTokenId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeletePersonalAccessToken AWS API Documentation
+    #
+    # @overload delete_personal_access_token(params = {})
+    # @param [Hash] params ({})
+    def delete_personal_access_token(params = {}, options = {})
+      req = build_request(:delete_personal_access_token, params)
       req.send_request(options)
     end
 
@@ -1752,6 +1881,41 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Returns detailed information on the current IdC setup for the WorkMail
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Organization ID.
+    #
+    # @return [Types::DescribeIdentityProviderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIdentityProviderConfigurationResponse#authentication_mode #authentication_mode} => String
+    #   * {Types::DescribeIdentityProviderConfigurationResponse#identity_center_configuration #identity_center_configuration} => Types::IdentityCenterConfiguration
+    #   * {Types::DescribeIdentityProviderConfigurationResponse#personal_access_token_configuration #personal_access_token_configuration} => Types::PersonalAccessTokenConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_identity_provider_configuration({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authentication_mode #=> String, one of "IDENTITY_PROVIDER_ONLY", "IDENTITY_PROVIDER_AND_DIRECTORY"
+    #   resp.identity_center_configuration.instance_arn #=> String
+    #   resp.identity_center_configuration.application_arn #=> String
+    #   resp.personal_access_token_configuration.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.personal_access_token_configuration.lifetime_in_days #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeIdentityProviderConfiguration AWS API Documentation
+    #
+    # @overload describe_identity_provider_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_identity_provider_configuration(params = {}, options = {})
+      req = build_request(:describe_identity_provider_configuration, params)
+      req.send_request(options)
+    end
+
     # Lists the settings in a DMARC policy for a specified organization.
     #
     # @option params [required, String] :organization_id
@@ -1988,6 +2152,8 @@ module Aws::WorkMail
     #   * {Types::DescribeUserResponse#department #department} => String
     #   * {Types::DescribeUserResponse#country #country} => String
     #   * {Types::DescribeUserResponse#office #office} => String
+    #   * {Types::DescribeUserResponse#identity_provider_user_id #identity_provider_user_id} => String
+    #   * {Types::DescribeUserResponse#identity_provider_identity_store_id #identity_provider_identity_store_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2021,6 +2187,8 @@ module Aws::WorkMail
     #   resp.department #=> String
     #   resp.country #=> String
     #   resp.office #=> String
+    #   resp.identity_provider_user_id #=> String
+    #   resp.identity_provider_identity_store_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeUser AWS API Documentation
     #
@@ -2522,6 +2690,52 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def get_mobile_device_access_override(params = {}, options = {})
       req = build_request(:get_mobile_device_access_override, params)
+      req.send_request(options)
+    end
+
+    # Requests details of a specific Personal Access Token within the
+    # WorkMail organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Organization ID.
+    #
+    # @option params [required, String] :personal_access_token_id
+    #   The Personal Access Token ID.
+    #
+    # @return [Types::GetPersonalAccessTokenMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPersonalAccessTokenMetadataResponse#personal_access_token_id #personal_access_token_id} => String
+    #   * {Types::GetPersonalAccessTokenMetadataResponse#user_id #user_id} => String
+    #   * {Types::GetPersonalAccessTokenMetadataResponse#name #name} => String
+    #   * {Types::GetPersonalAccessTokenMetadataResponse#date_created #date_created} => Time
+    #   * {Types::GetPersonalAccessTokenMetadataResponse#date_last_used #date_last_used} => Time
+    #   * {Types::GetPersonalAccessTokenMetadataResponse#expires_time #expires_time} => Time
+    #   * {Types::GetPersonalAccessTokenMetadataResponse#scopes #scopes} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_personal_access_token_metadata({
+    #     organization_id: "OrganizationId", # required
+    #     personal_access_token_id: "PersonalAccessTokenId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.personal_access_token_id #=> String
+    #   resp.user_id #=> String
+    #   resp.name #=> String
+    #   resp.date_created #=> Time
+    #   resp.date_last_used #=> Time
+    #   resp.expires_time #=> Time
+    #   resp.scopes #=> Array
+    #   resp.scopes[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetPersonalAccessTokenMetadata AWS API Documentation
+    #
+    # @overload get_personal_access_token_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_personal_access_token_metadata(params = {}, options = {})
+      req = build_request(:get_personal_access_token_metadata, params)
       req.send_request(options)
     end
 
@@ -3213,6 +3427,58 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Returns a summary of your Personal Access Tokens.
+    #
+    # @option params [required, String] :organization_id
+    #   The Organization ID.
+    #
+    # @option params [String] :user_id
+    #   The WorkMail User ID.
+    #
+    # @option params [String] :next_token
+    #   The token from the previous response to query the next page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum amount of items that should be returned in a response.
+    #
+    # @return [Types::ListPersonalAccessTokensResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPersonalAccessTokensResponse#next_token #next_token} => String
+    #   * {Types::ListPersonalAccessTokensResponse#personal_access_token_summaries #personal_access_token_summaries} => Array&lt;Types::PersonalAccessTokenSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_personal_access_tokens({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.personal_access_token_summaries #=> Array
+    #   resp.personal_access_token_summaries[0].personal_access_token_id #=> String
+    #   resp.personal_access_token_summaries[0].user_id #=> String
+    #   resp.personal_access_token_summaries[0].name #=> String
+    #   resp.personal_access_token_summaries[0].date_created #=> Time
+    #   resp.personal_access_token_summaries[0].date_last_used #=> Time
+    #   resp.personal_access_token_summaries[0].expires_time #=> Time
+    #   resp.personal_access_token_summaries[0].scopes #=> Array
+    #   resp.personal_access_token_summaries[0].scopes[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListPersonalAccessTokens AWS API Documentation
+    #
+    # @overload list_personal_access_tokens(params = {})
+    # @param [Hash] params ({})
+    def list_personal_access_tokens(params = {}, options = {})
+      req = build_request(:list_personal_access_tokens, params)
+      req.send_request(options)
+    end
+
     # Lists the delegates associated with a resource. Users and groups can
     # be resource delegates and answer requests on behalf of the resource.
     #
@@ -3393,6 +3659,7 @@ module Aws::WorkMail
     #       display_name_prefix: "UserAttribute",
     #       primary_email_prefix: "String",
     #       state: "ENABLED", # accepts ENABLED, DISABLED, DELETED
+    #       identity_provider_user_id_prefix: "IdentityProviderUserIdPrefix",
     #     },
     #   })
     #
@@ -3407,6 +3674,8 @@ module Aws::WorkMail
     #   resp.users[0].user_role #=> String, one of "USER", "RESOURCE", "SYSTEM_USER", "REMOTE_USER"
     #   resp.users[0].enabled_date #=> Time
     #   resp.users[0].disabled_date #=> Time
+    #   resp.users[0].identity_provider_user_id #=> String
+    #   resp.users[0].identity_provider_identity_store_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListUsers AWS API Documentation
@@ -3523,6 +3792,51 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def put_email_monitoring_configuration(params = {}, options = {})
       req = build_request(:put_email_monitoring_configuration, params)
+      req.send_request(options)
+    end
+
+    # Enables integration between IAM Identity Center (IdC) and WorkMail to
+    # proxy authentication requests for mailbox users. You can connect your
+    # IdC directory or your external directory to WorkMail through IdC and
+    # manage access to WorkMail mailboxes in a single place. For enhanced
+    # protection, you could enable Multifactor Authentication (MFA) and
+    # Personal Access Tokens.
+    #
+    # @option params [required, String] :organization_id
+    #   The ID of the WorkMail Organization.
+    #
+    # @option params [required, String] :authentication_mode
+    #   The authentication mode used in WorkMail.
+    #
+    # @option params [required, Types::IdentityCenterConfiguration] :identity_center_configuration
+    #   The details of the IAM Identity Center configuration.
+    #
+    # @option params [required, Types::PersonalAccessTokenConfiguration] :personal_access_token_configuration
+    #   The details of the Personal Access Token configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_identity_provider_configuration({
+    #     organization_id: "OrganizationId", # required
+    #     authentication_mode: "IDENTITY_PROVIDER_ONLY", # required, accepts IDENTITY_PROVIDER_ONLY, IDENTITY_PROVIDER_AND_DIRECTORY
+    #     identity_center_configuration: { # required
+    #       instance_arn: "InstanceArn", # required
+    #       application_arn: "ApplicationArn", # required
+    #     },
+    #     personal_access_token_configuration: { # required
+    #       status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #       lifetime_in_days: 1,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutIdentityProviderConfiguration AWS API Documentation
+    #
+    # @overload put_identity_provider_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_identity_provider_configuration(params = {}, options = {})
+      req = build_request(:put_identity_provider_configuration, params)
       req.send_request(options)
     end
 
@@ -4113,7 +4427,7 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Updates attibutes in a group.
+    # Updates attributes in a group.
     #
     # @option params [required, String] :organization_id
     #   The identifier for the organization under which the group exists.
@@ -4487,7 +4801,7 @@ module Aws::WorkMail
     #   Updates the user's company.
     #
     # @option params [String] :zip_code
-    #   Updates the user's zipcode.
+    #   Updates the user's zip code.
     #
     # @option params [String] :department
     #   Updates the user's department.
@@ -4497,6 +4811,11 @@ module Aws::WorkMail
     #
     # @option params [String] :office
     #   Updates the user's office.
+    #
+    # @option params [String] :identity_provider_user_id
+    #   User ID from the IAM Identity Center. If this parameter is empty it
+    #   will be updated automatically when the user logs in for the first time
+    #   to the mailbox associated with WorkMail.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4520,6 +4839,7 @@ module Aws::WorkMail
     #     department: "UserAttribute",
     #     country: "UserAttribute",
     #     office: "UserAttribute",
+    #     identity_provider_user_id: "IdentityProviderUserIdForUpdate",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateUser AWS API Documentation
@@ -4549,7 +4869,7 @@ module Aws::WorkMail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

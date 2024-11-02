@@ -94,6 +94,7 @@ module Aws
                                      ?cluster_identifier: ::String,
                                      ?database: ::String,
                                      ?db_user: ::String,
+                                     ?result_format: ("JSON" | "CSV"),
                                      ?secret_arn: ::String,
                                      ?session_id: ::String,
                                      ?session_keep_alive_seconds: ::Integer,
@@ -127,6 +128,7 @@ module Aws
         def query_string: () -> ::String
         def redshift_pid: () -> ::Integer
         def redshift_query_id: () -> ::Integer
+        def result_format: () -> ("JSON" | "CSV")
         def result_rows: () -> ::Integer
         def result_size: () -> ::Integer
         def secret_arn: () -> ::String
@@ -187,6 +189,7 @@ module Aws
                                    value: ::String
                                  },
                                ],
+                               ?result_format: ("JSON" | "CSV"),
                                ?secret_arn: ::String,
                                ?session_id: ::String,
                                ?session_keep_alive_seconds: ::Integer,
@@ -210,6 +213,21 @@ module Aws
                                   ?next_token: ::String
                                 ) -> _GetStatementResultResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStatementResultResponseSuccess
+
+      interface _GetStatementResultV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStatementResultV2Response]
+        def column_metadata: () -> ::Array[Types::ColumnMetadata]
+        def next_token: () -> ::String
+        def records: () -> ::Array[Types::QueryRecords]
+        def result_format: () -> ("JSON" | "CSV")
+        def total_num_rows: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#get_statement_result_v2-instance_method
+      def get_statement_result_v2: (
+                                     id: ::String,
+                                     ?next_token: ::String
+                                   ) -> _GetStatementResultV2ResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStatementResultV2ResponseSuccess
 
       interface _ListDatabasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDatabasesResponse]

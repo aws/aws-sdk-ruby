@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-10-29)
+------------------
+
+* Feature - Update Application Inference Profile
+
 1.27.0 (2024-10-23)
 ------------------
 

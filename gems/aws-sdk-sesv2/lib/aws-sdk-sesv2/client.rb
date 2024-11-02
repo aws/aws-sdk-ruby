@@ -943,6 +943,11 @@ module Aws::SESV2
     #       template: {
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
+    #         template_content: {
+    #           subject: "EmailTemplateSubject",
+    #           text: "EmailTemplateText",
+    #           html: "EmailTemplateHtml",
+    #         },
     #         template_data: "EmailTemplateData",
     #         headers: [
     #           {
@@ -4460,6 +4465,11 @@ module Aws::SESV2
     #       template: {
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
+    #         template_content: {
+    #           subject: "EmailTemplateSubject",
+    #           text: "EmailTemplateText",
+    #           html: "EmailTemplateHtml",
+    #         },
     #         template_data: "EmailTemplateData",
     #         headers: [
     #           {
@@ -4705,6 +4715,11 @@ module Aws::SESV2
     #       template: {
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
+    #         template_content: {
+    #           subject: "EmailTemplateSubject",
+    #           text: "EmailTemplateText",
+    #           html: "EmailTemplateHtml",
+    #         },
     #         template_data: "EmailTemplateData",
     #         headers: [
     #           {
@@ -5185,7 +5200,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

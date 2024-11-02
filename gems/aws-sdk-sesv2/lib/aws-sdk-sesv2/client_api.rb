@@ -1728,6 +1728,7 @@ module Aws::SESV2
 
     Template.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, location_name: "TemplateName"))
     Template.add_member(:template_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TemplateArn"))
+    Template.add_member(:template_content, Shapes::ShapeRef.new(shape: EmailTemplateContent, location_name: "TemplateContent"))
     Template.add_member(:template_data, Shapes::ShapeRef.new(shape: EmailTemplateData, location_name: "TemplateData"))
     Template.add_member(:headers, Shapes::ShapeRef.new(shape: MessageHeaderList, location_name: "Headers"))
     Template.struct_class = Types::Template

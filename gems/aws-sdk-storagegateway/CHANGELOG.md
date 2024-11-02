@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-10-28)
+------------------
+
+* Feature - Documentation update: Amazon FSx File Gateway will no longer be available to new customers.
+
 1.99.0 (2024-10-18)
 ------------------
 

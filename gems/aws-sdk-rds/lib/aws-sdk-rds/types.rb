@@ -285,8 +285,25 @@ module Aws::RDS
     # @!attribute [rw] apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid Values: `system-update`, `db-upgrade`, `hardware-maintenance`,
-    #   `ca-certificate-rotation`
+    #   Valid Values:
+    #
+    #   * `ca-certificate-rotation`
+    #
+    #   * `db-upgrade`
+    #
+    #   * `hardware-maintenance`
+    #
+    #   * `os-upgrade`
+    #
+    #   * `system-update`
+    #
+    #   For more information about these actions, see [Maintenance actions
+    #   for Amazon Aurora][1] or [Maintenance actions for Amazon RDS][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
     #   @return [String]
     #
     # @!attribute [rw] opt_in_type
@@ -2884,6 +2901,11 @@ module Aws::RDS
     #   enable Aurora Limitless Database to create a DB shard group.
     #
     #   Valid for: Aurora DB clusters only
+    #
+    #   <note markdown="1"> This setting is no longer used. Instead use the
+    #   `ClusterScalabilityType` setting.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] serverless_v2_scaling_configuration
@@ -17888,6 +17910,12 @@ module Aws::RDS
     #   enable Aurora Limitless Database to create a DB shard group.
     #
     #   Valid for: Aurora DB clusters only
+    #
+    #   <note markdown="1"> This setting is no longer used. Instead use the
+    #   `ClusterScalabilityType` setting when you create your Aurora
+    #   Limitless Database DB cluster.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] ca_certificate_identifier
@@ -21009,12 +21037,26 @@ module Aws::RDS
     #   For more information about maintenance actions, see [Maintaining a
     #   DB instance][1].
     #
-    #   Valid Values:` system-update | db-upgrade | hardware-maintenance |
-    #   ca-certificate-rotation`
+    #   Valid Values:
+    #
+    #   * `ca-certificate-rotation`
+    #
+    #   * `db-upgrade`
+    #
+    #   * `hardware-maintenance`
+    #
+    #   * `os-upgrade`
+    #
+    #   * `system-update`
+    #
+    #   For more information about these actions, see [Maintenance actions
+    #   for Amazon Aurora][2] or [Maintenance actions for Amazon RDS][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
     #   @return [String]
     #
     # @!attribute [rw] auto_applied_after_date
@@ -23475,6 +23517,66 @@ module Aws::RDS
     #   Reserved for future use.
     #   @return [Types::RdsCustomClusterConfiguration]
     #
+    # @!attribute [rw] monitoring_interval
+    #   The interval, in seconds, between points when Enhanced Monitoring
+    #   metrics are collected for the DB cluster. To turn off collecting
+    #   Enhanced Monitoring metrics, specify `0`.
+    #
+    #   If `MonitoringRoleArn` is specified, also set `MonitoringInterval`
+    #   to a value other than `0`.
+    #
+    #   Valid Values: `0 | 1 | 5 | 10 | 15 | 30 | 60`
+    #
+    #   Default: `0`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] monitoring_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that permits RDS to
+    #   send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An
+    #   example is `arn:aws:iam:123456789012:role/emaccess`.
+    #
+    #   If `MonitoringInterval` is set to a value other than `0`, supply a
+    #   `MonitoringRoleArn` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_performance_insights
+    #   Specifies whether to turn on Performance Insights for the DB
+    #   cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   The Amazon Web Services KMS key identifier for encryption of
+    #   Performance Insights data.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key.
+    #
+    #   If you don't specify a value for `PerformanceInsightsKMSKeyId`,
+    #   then Amazon RDS uses your default KMS key. There is a default KMS
+    #   key for your Amazon Web Services account. Your Amazon Web Services
+    #   account has a different default KMS key for each Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] performance_insights_retention_period
+    #   The number of days to retain Performance Insights data.
+    #
+    #   Valid Values:
+    #
+    #   * `7`
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23.
+    #     Examples: `93` (3 months * 31), `341` (11 months * 31), `589`
+    #     (19 months * 31)
+    #
+    #   * `731`
+    #
+    #   Default: `7` days
+    #
+    #   If you specify a retention period that isn't valid, such as `94`,
+    #   Amazon RDS issues an error.
+    #   @return [Integer]
+    #
     # @!attribute [rw] engine_lifecycle_support
     #   The life cycle type for this DB cluster.
     #
@@ -23546,6 +23648,11 @@ module Aws::RDS
       :serverless_v2_scaling_configuration,
       :network_type,
       :rds_custom_cluster_configuration,
+      :monitoring_interval,
+      :monitoring_role_arn,
+      :enable_performance_insights,
+      :performance_insights_kms_key_id,
+      :performance_insights_retention_period,
       :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
@@ -24022,6 +24129,66 @@ module Aws::RDS
     #   Reserved for future use.
     #   @return [Types::RdsCustomClusterConfiguration]
     #
+    # @!attribute [rw] monitoring_interval
+    #   The interval, in seconds, between points when Enhanced Monitoring
+    #   metrics are collected for the DB cluster. To turn off collecting
+    #   Enhanced Monitoring metrics, specify `0`.
+    #
+    #   If `MonitoringRoleArn` is specified, also set `MonitoringInterval`
+    #   to a value other than `0`.
+    #
+    #   Valid Values: `0 | 1 | 5 | 10 | 15 | 30 | 60`
+    #
+    #   Default: `0`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] monitoring_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that permits RDS to
+    #   send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An
+    #   example is `arn:aws:iam:123456789012:role/emaccess`.
+    #
+    #   If `MonitoringInterval` is set to a value other than `0`, supply a
+    #   `MonitoringRoleArn` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_performance_insights
+    #   Specifies whether to turn on Performance Insights for the DB
+    #   cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   The Amazon Web Services KMS key identifier for encryption of
+    #   Performance Insights data.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key.
+    #
+    #   If you don't specify a value for `PerformanceInsightsKMSKeyId`,
+    #   then Amazon RDS uses your default KMS key. There is a default KMS
+    #   key for your Amazon Web Services account. Your Amazon Web Services
+    #   account has a different default KMS key for each Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] performance_insights_retention_period
+    #   The number of days to retain Performance Insights data.
+    #
+    #   Valid Values:
+    #
+    #   * `7`
+    #
+    #   * *month* * 31, where *month* is a number of months from 1-23.
+    #     Examples: `93` (3 months * 31), `341` (11 months * 31), `589`
+    #     (19 months * 31)
+    #
+    #   * `731`
+    #
+    #   Default: `7` days
+    #
+    #   If you specify a retention period that isn't valid, such as `94`,
+    #   Amazon RDS issues an error.
+    #   @return [Integer]
+    #
     # @!attribute [rw] engine_lifecycle_support
     #   The life cycle type for this DB cluster.
     #
@@ -24093,6 +24260,11 @@ module Aws::RDS
       :network_type,
       :source_db_cluster_resource_id,
       :rds_custom_cluster_configuration,
+      :monitoring_interval,
+      :monitoring_role_arn,
+      :enable_performance_insights,
+      :performance_insights_kms_key_id,
+      :performance_insights_retention_period,
       :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure

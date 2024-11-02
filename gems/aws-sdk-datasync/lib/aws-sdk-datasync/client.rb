@@ -572,38 +572,28 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Activates an DataSync agent that you've deployed in your storage
+    # Activates an DataSync agent that you deploy in your storage
     # environment. The activation process associates the agent with your
     # Amazon Web Services account.
     #
-    # If you haven't deployed an agent yet, see the following topics to
-    # learn more:
-    #
-    # * [Agent requirements][1]
-    #
-    # * [Create an agent][2]
-    #
-    # <note markdown="1"> If you're transferring between Amazon Web Services storage services,
-    # you don't need a DataSync agent.
-    #
-    #  </note>
+    # If you haven't deployed an agent yet, see [Do I need a DataSync
+    # agent?][1]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/agent-requirements.html
-    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-agent.html
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html
     #
     # @option params [required, String] :activation_key
     #   Specifies your DataSync agent's activation key. If you don't have an
-    #   activation key, see [Activate your agent][1].
+    #   activation key, see [Activating your agent][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
     #
     # @option params [String] :agent_name
-    #   Specifies a name for your agent. You can see this name in the DataSync
-    #   console.
+    #   Specifies a name for your agent. We recommend specifying a name that
+    #   you can remember.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   Specifies labels that help you categorize, filter, and search for your
@@ -611,32 +601,24 @@ module Aws::DataSync
     #   for your agent.
     #
     # @option params [String] :vpc_endpoint_id
-    #   Specifies the ID of the VPC endpoint that you want your agent to
-    #   connect to. For example, a VPC endpoint ID looks like
-    #   `vpce-01234d5aff67890e1`.
+    #   Specifies the ID of the [VPC service endpoint][1] that you're using.
+    #   For example, a VPC endpoint ID looks like `vpce-01234d5aff67890e1`.
     #
-    #   The VPC endpoint you use must include the DataSync service name (for
-    #   example, `com.amazonaws.us-east-2.datasync`).
+    #   The VPC service endpoint you use must include the DataSync service
+    #   name (for example, `com.amazonaws.us-east-2.datasync`).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#datasync-in-vpc
     #
     # @option params [Array<String>] :subnet_arns
-    #   Specifies the ARN of the subnet where you want to run your DataSync
-    #   task when using a VPC endpoint. This is the subnet where DataSync
-    #   creates and manages the [network interfaces][1] for your transfer. You
-    #   can only specify one ARN.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
+    #   Specifies the ARN of the subnet where your VPC service endpoint is
+    #   located. You can only specify one ARN.
     #
     # @option params [Array<String>] :security_group_arns
     #   Specifies the Amazon Resource Name (ARN) of the security group that
-    #   protects your task's [network interfaces][1] when [using a virtual
-    #   private cloud (VPC) endpoint][2]. You can only specify one ARN.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
+    #   allows traffic between your agent and VPC service endpoint. You can
+    #   only specify one ARN.
     #
     # @return [Types::CreateAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -790,20 +772,26 @@ module Aws::DataSync
     # @option params [String] :subdirectory
     #   Specifies a mount path for your Amazon EFS file system. This is where
     #   DataSync reads or writes data (depending on if this is a source or
-    #   destination location). By default, DataSync uses the root directory,
-    #   but you can also include subdirectories.
+    #   destination location) on your file system.
     #
-    #   <note markdown="1"> You must specify a value with forward slashes (for example,
-    #   `/path/to/folder`).
+    #   By default, DataSync uses the root directory (or [access point][1] if
+    #   you provide one by using `AccessPointArn`). You can also include
+    #   subdirectories using forward slashes (for example, `/path/to/folder`).
     #
-    #    </note>
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html
     #
     # @option params [required, String] :efs_filesystem_arn
-    #   Specifies the ARN for the Amazon EFS file system.
+    #   Specifies the ARN for your Amazon EFS file system.
     #
     # @option params [required, Types::Ec2Config] :ec2_config
-    #   Specifies the subnet and security groups DataSync uses to access your
-    #   Amazon EFS file system.
+    #   Specifies the subnet and security groups DataSync uses to connect to
+    #   one of your Amazon EFS file system's [mount targets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   Specifies the key-value pair that represents a tag that you want to
@@ -813,15 +801,28 @@ module Aws::DataSync
     #
     # @option params [String] :access_point_arn
     #   Specifies the Amazon Resource Name (ARN) of the access point that
-    #   DataSync uses to access the Amazon EFS file system.
+    #   DataSync uses to mount your Amazon EFS file system.
+    #
+    #   For more information, see [Accessing restricted file systems][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam
     #
     # @option params [String] :file_system_access_role_arn
-    #   Specifies an Identity and Access Management (IAM) role that DataSync
-    #   assumes when mounting the Amazon EFS file system.
+    #   Specifies an Identity and Access Management (IAM) role that allows
+    #   DataSync to access your Amazon EFS file system.
+    #
+    #   For information on creating this role, see [Creating a DataSync IAM
+    #   role for file system access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam-role
     #
     # @option params [String] :in_transit_encryption
     #   Specifies whether you want DataSync to use Transport Layer Security
-    #   (TLS) 1.2 encryption when it copies data to or from the Amazon EFS
+    #   (TLS) 1.2 encryption when it transfers data to or from your Amazon EFS
     #   file system.
     #
     #   If you specify an access point using `AccessPointArn` or an IAM role
@@ -1132,8 +1133,13 @@ module Aws::DataSync
     #   Server file system.
     #
     # @option params [required, Array<String>] :security_group_arns
-    #   Specifies the ARNs of the security groups that provide access to your
-    #   file system's preferred subnet.
+    #   Specifies the ARNs of the Amazon EC2 security groups that provide
+    #   access to your file system's preferred subnet.
+    #
+    #   The security groups that you specify must be able to communicate with
+    #   your file system's security groups. For information about configuring
+    #   security groups for file system access, see the [ *Amazon FSx for
+    #   Windows File Server User Guide* ][1].
     #
     #   <note markdown="1"> If you choose a security group that doesn't allow connections from
     #   within itself, do one of the following:
@@ -1145,6 +1151,10 @@ module Aws::DataSync
     #     mount target's security group.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/limit-access-security-groups.html
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   Specifies labels that help you categorize, filter, and search for your
@@ -1299,8 +1309,8 @@ module Aws::DataSync
     #    </note>
     #
     # @option params [required, Array<String>] :agent_arns
-    #   The Amazon Resource Names (ARNs) of the agents that are used to
-    #   connect to the HDFS cluster.
+    #   The Amazon Resource Names (ARNs) of the DataSync agents that can
+    #   connect to your HDFS cluster.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -1391,14 +1401,14 @@ module Aws::DataSync
     #
     # @option params [required, Types::OnPremConfig] :on_prem_config
     #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
-    #   want to connect to your NFS file server.
+    #   can connect to your NFS file server.
     #
     #   You can specify more than one agent. For more information, see [Using
-    #   multiple agents for transfers][1].
+    #   multiple DataSync agents][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html#multiple-agents
     #
     # @option params [Types::NfsMountOptions] :mount_options
     #   Specifies the options that DataSync can use to mount your NFS file
@@ -1489,7 +1499,7 @@ module Aws::DataSync
     #
     # @option params [required, Array<String>] :agent_arns
     #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents that
-    #   can securely connect with your location.
+    #   can connect with your object storage system.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   Specifies the key-value pair that represents a tag that you want to
@@ -1745,9 +1755,9 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #
     # @option params [required, Array<String>] :agent_arns
-    #   Specifies the DataSync agent (or agents) which you want to connect to
-    #   your SMB file server. You specify an agent by using its Amazon
-    #   Resource Name (ARN).
+    #   Specifies the DataSync agent (or agents) that can connect to your SMB
+    #   file server. You specify an agent by using its Amazon Resource Name
+    #   (ARN).
     #
     # @option params [Types::SmbMountOptions] :mount_options
     #   Specifies the version of the SMB protocol that DataSync uses to access
@@ -1820,6 +1830,10 @@ module Aws::DataSync
     #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
     #   group for monitoring your task.
     #
+    #   For Enhanced mode tasks, you don't need to specify anything. DataSync
+    #   automatically sends logs to a CloudWatch log group named
+    #   `/aws/datasync`.
+    #
     # @option params [String] :name
     #   Specifies the name of your task.
     #
@@ -1852,8 +1866,8 @@ module Aws::DataSync
     #   for your DataSync resources.
     #
     # @option params [Array<Types::FilterRule>] :includes
-    #   Specifies include filters define the files, objects, and folders in
-    #   your source location that you want DataSync to transfer. For more
+    #   Specifies include filters that define the files, objects, and folders
+    #   in your source location that you want DataSync to transfer. For more
     #   information and examples, see [Specifying what DataSync transfers by
     #   using filters][1].
     #
@@ -1890,6 +1904,31 @@ module Aws::DataSync
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
+    #
+    # @option params [String] :task_mode
+    #   Specifies one of the following task modes for your data transfer:
+    #
+    #   * `ENHANCED` - Transfer virtually unlimited numbers of objects with
+    #     enhanced metrics, more detailed logs, and higher performance than
+    #     Basic mode. Currently available for transfers between Amazon S3
+    #     locations.
+    #
+    #     <note markdown="1"> To create an Enhanced mode task, the IAM role that you use to call
+    #     the `CreateTask` operation must have the
+    #     `iam:CreateServiceLinkedRole` permission.
+    #
+    #      </note>
+    #
+    #   * `BASIC` (default) - Transfer files or objects between Amazon Web
+    #     Services storage and on-premises, edge, or other cloud storage.
+    #     DataSync [quotas][1] apply.
+    #
+    #   For more information, see [Understanding task mode differences][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-limits.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences
     #
     # @return [Types::CreateTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1979,6 +2018,7 @@ module Aws::DataSync
     #         },
     #       },
     #     },
+    #     task_mode: "BASIC", # accepts BASIC, ENHANCED
     #   })
     #
     # @example Response structure
@@ -2960,6 +3000,7 @@ module Aws::DataSync
     #   * {Types::DescribeTaskResponse#manifest_config #manifest_config} => Types::ManifestConfig
     #   * {Types::DescribeTaskResponse#task_report_config #task_report_config} => Types::TaskReportConfig
     #   * {Types::DescribeTaskResponse#schedule_details #schedule_details} => Types::TaskScheduleDetails
+    #   * {Types::DescribeTaskResponse#task_mode #task_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3025,6 +3066,7 @@ module Aws::DataSync
     #   resp.schedule_details.status_update_time #=> Time
     #   resp.schedule_details.disabled_reason #=> String
     #   resp.schedule_details.disabled_by #=> String, one of "USER", "SERVICE"
+    #   resp.task_mode #=> String, one of "BASIC", "ENHANCED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTask AWS API Documentation
     #
@@ -3036,8 +3078,20 @@ module Aws::DataSync
     end
 
     # Provides information about an execution of your DataSync task. You can
-    # use this operation to help monitor the progress of an ongoing transfer
-    # or check the results of the transfer.
+    # use this operation to help monitor the progress of an ongoing data
+    # transfer or check the results of the transfer.
+    #
+    # <note markdown="1"> Some `DescribeTaskExecution` response elements are only relevant to a
+    # specific task mode. For information, see [Understanding task mode
+    # differences][1] and [Understanding data transfer performance
+    # metrics][2].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/transfer-performance-metrics.html
     #
     # @option params [required, String] :task_execution_arn
     #   Specifies the Amazon Resource Name (ARN) of the task execution that
@@ -3065,6 +3119,10 @@ module Aws::DataSync
     #   * {Types::DescribeTaskExecutionResponse#files_verified #files_verified} => Integer
     #   * {Types::DescribeTaskExecutionResponse#report_result #report_result} => Types::ReportResult
     #   * {Types::DescribeTaskExecutionResponse#estimated_files_to_delete #estimated_files_to_delete} => Integer
+    #   * {Types::DescribeTaskExecutionResponse#task_mode #task_mode} => String
+    #   * {Types::DescribeTaskExecutionResponse#files_prepared #files_prepared} => Integer
+    #   * {Types::DescribeTaskExecutionResponse#files_listed #files_listed} => Types::TaskExecutionFilesListedDetail
+    #   * {Types::DescribeTaskExecutionResponse#files_failed #files_failed} => Types::TaskExecutionFilesFailedDetail
     #
     # @example Request syntax with placeholder values
     #
@@ -3136,6 +3194,14 @@ module Aws::DataSync
     #   resp.report_result.error_code #=> String
     #   resp.report_result.error_detail #=> String
     #   resp.estimated_files_to_delete #=> Integer
+    #   resp.task_mode #=> String, one of "BASIC", "ENHANCED"
+    #   resp.files_prepared #=> Integer
+    #   resp.files_listed.at_source #=> Integer
+    #   resp.files_listed.at_destination_for_delete #=> Integer
+    #   resp.files_failed.prepare #=> Integer
+    #   resp.files_failed.transfer #=> Integer
+    #   resp.files_failed.verify #=> Integer
+    #   resp.files_failed.delete #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskExecution AWS API Documentation
     #
@@ -3474,6 +3540,7 @@ module Aws::DataSync
     #   resp.task_executions #=> Array
     #   resp.task_executions[0].task_execution_arn #=> String
     #   resp.task_executions[0].status #=> String, one of "QUEUED", "CANCELLING", "LAUNCHING", "PREPARING", "TRANSFERRING", "VERIFYING", "SUCCESS", "ERROR"
+    #   resp.task_executions[0].task_mode #=> String, one of "BASIC", "ENHANCED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTaskExecutions AWS API Documentation
@@ -3527,6 +3594,7 @@ module Aws::DataSync
     #   resp.tasks[0].task_arn #=> String
     #   resp.tasks[0].status #=> String, one of "AVAILABLE", "CREATING", "QUEUED", "RUNNING", "UNAVAILABLE"
     #   resp.tasks[0].name #=> String
+    #   resp.tasks[0].task_mode #=> String, one of "BASIC", "ENHANCED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTasks AWS API Documentation
@@ -3631,8 +3699,8 @@ module Aws::DataSync
     # Starts an DataSync transfer task. For each task, you can only run one
     # task execution at a time.
     #
-    # There are several phases to a task execution. For more information,
-    # see [Task execution statuses][1].
+    # There are several steps to a task execution. For more information, see
+    # [Task execution statuses][1].
     #
     # If you're planning to transfer data to or from an Amazon S3 location,
     # review [how DataSync can affect your S3 request charges][2] and the
@@ -4100,7 +4168,8 @@ module Aws::DataSync
     #   encoding for you. Otherwise, provide the base64-encoded text.
     #
     # @option params [Array<String>] :agent_arns
-    #   The ARNs of the agents that are used to connect to the HDFS cluster.
+    #   The Amazon Resource Names (ARNs) of the DataSync agents that can
+    #   connect to your HDFS cluster.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4166,8 +4235,8 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs
     #
     # @option params [Types::OnPremConfig] :on_prem_config
-    #   The DataSync agents that are connecting to a Network File System (NFS)
-    #   location.
+    #   The DataSync agents that can connect to your Network File System (NFS)
+    #   file server.
     #
     # @option params [Types::NfsMountOptions] :mount_options
     #   Specifies how DataSync can access a location using the NFS protocol.
@@ -4227,7 +4296,7 @@ module Aws::DataSync
     #
     # @option params [Array<String>] :agent_arns
     #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents that
-    #   can securely connect with your location.
+    #   can connect with your object storage system.
     #
     # @option params [String, StringIO, File] :server_certificate
     #   Specifies a certificate chain for DataSync to authenticate with your
@@ -4337,9 +4406,9 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #
     # @option params [Array<String>] :agent_arns
-    #   Specifies the DataSync agent (or agents) which you want to connect to
-    #   your SMB file server. You specify an agent by using its Amazon
-    #   Resource Name (ARN).
+    #   Specifies the DataSync agent (or agents) that can connect to your SMB
+    #   file server. You specify an agent by using its Amazon Resource Name
+    #   (ARN).
     #
     # @option params [Types::SmbMountOptions] :mount_options
     #   Specifies the version of the Server Message Block (SMB) protocol that
@@ -4472,6 +4541,18 @@ module Aws::DataSync
     # @option params [String] :cloud_watch_log_group_arn
     #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
     #   group for monitoring your task.
+    #
+    #   For Enhanced mode tasks, you must use `/aws/datasync` as your log
+    #   group name. For example:
+    #
+    #   `arn:aws:logs:us-east-1:111222333444:log-group:/aws/datasync:*`
+    #
+    #   For more information, see [Monitoring data transfers with CloudWatch
+    #   Logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-logging.html
     #
     # @option params [Array<Types::FilterRule>] :includes
     #   Specifies include filters define the files, objects, and folders in
@@ -4689,7 +4770,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

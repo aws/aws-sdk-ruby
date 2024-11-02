@@ -178,6 +178,13 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class CreateIamIdentityCenterConfigOptions
+      attr_accessor group_attribute: ("GroupId" | "GroupName")
+      attr_accessor instance_arn: ::String
+      attr_accessor user_attribute: ("UserId" | "UserName" | "Email")
+      SENSITIVE: []
+    end
+
     class CreateLifecyclePolicyRequest
       attr_accessor client_token: ::String
       attr_accessor description: ::String
@@ -195,9 +202,10 @@ module Aws::OpenSearchServerless
     class CreateSecurityConfigRequest
       attr_accessor client_token: ::String
       attr_accessor description: ::String
+      attr_accessor iam_identity_center_options: Types::CreateIamIdentityCenterConfigOptions
       attr_accessor name: ::String
       attr_accessor saml_options: Types::SamlConfigOptions
-      attr_accessor type: ("saml")
+      attr_accessor type: ("saml" | "iamidentitycenter")
       SENSITIVE: []
     end
 
@@ -386,6 +394,16 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class IamIdentityCenterConfigOptions
+      attr_accessor application_arn: ::String
+      attr_accessor application_description: ::String
+      attr_accessor application_name: ::String
+      attr_accessor group_attribute: ("GroupId" | "GroupName")
+      attr_accessor instance_arn: ::String
+      attr_accessor user_attribute: ("UserId" | "UserName" | "Email")
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -481,7 +499,7 @@ module Aws::OpenSearchServerless
     class ListSecurityConfigsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor type: ("saml")
+      attr_accessor type: ("saml" | "iamidentitycenter")
       SENSITIVE: []
     end
 
@@ -550,10 +568,11 @@ module Aws::OpenSearchServerless
       attr_accessor config_version: ::String
       attr_accessor created_date: ::Integer
       attr_accessor description: ::String
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterConfigOptions
       attr_accessor id: ::String
       attr_accessor last_modified_date: ::Integer
       attr_accessor saml_options: Types::SamlConfigOptions
-      attr_accessor type: ("saml")
+      attr_accessor type: ("saml" | "iamidentitycenter")
       SENSITIVE: []
     end
 
@@ -568,7 +587,7 @@ module Aws::OpenSearchServerless
       attr_accessor description: ::String
       attr_accessor id: ::String
       attr_accessor last_modified_date: ::Integer
-      attr_accessor type: ("saml")
+      attr_accessor type: ("saml" | "iamidentitycenter")
       SENSITIVE: []
     end
 
@@ -681,6 +700,12 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class UpdateIamIdentityCenterConfigOptions
+      attr_accessor group_attribute: ("GroupId" | "GroupName")
+      attr_accessor user_attribute: ("UserId" | "UserName" | "Email")
+      SENSITIVE: []
+    end
+
     class UpdateLifecyclePolicyRequest
       attr_accessor client_token: ::String
       attr_accessor description: ::String
@@ -700,6 +725,7 @@ module Aws::OpenSearchServerless
       attr_accessor client_token: ::String
       attr_accessor config_version: ::String
       attr_accessor description: ::String
+      attr_accessor iam_identity_center_options_updates: Types::UpdateIamIdentityCenterConfigOptions
       attr_accessor id: ::String
       attr_accessor saml_options: Types::SamlConfigOptions
       SENSITIVE: []

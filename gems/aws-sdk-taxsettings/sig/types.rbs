@@ -131,6 +131,14 @@ module Aws::TaxSettings
       SENSITIVE: [:message]
     end
 
+    class DeleteSupplementalTaxRegistrationRequest
+      attr_accessor authority_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSupplementalTaxRegistrationResponse < Aws::EmptyStructure
+    end
+
     class DeleteTaxRegistrationRequest
       attr_accessor account_id: ::String
       SENSITIVE: []
@@ -212,6 +220,18 @@ module Aws::TaxSettings
       SENSITIVE: []
     end
 
+    class ListSupplementalTaxRegistrationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupplementalTaxRegistrationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor tax_registrations: ::Array[Types::SupplementalTaxRegistration]
+      SENSITIVE: []
+    end
+
     class ListTaxRegistrationsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -225,13 +245,26 @@ module Aws::TaxSettings
     end
 
     class MalaysiaAdditionalInfo
+      attr_accessor business_registration_number: ::String
       attr_accessor service_tax_codes: ::Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]
+      attr_accessor tax_information_number: ::String
       SENSITIVE: []
     end
 
     class PolandAdditionalInfo
       attr_accessor individual_registration_number: ::String
       attr_accessor is_group_vat_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutSupplementalTaxRegistrationRequest
+      attr_accessor tax_registration_entry: Types::SupplementalTaxRegistrationEntry
+      SENSITIVE: [:tax_registration_entry]
+    end
+
+    class PutSupplementalTaxRegistrationResponse
+      attr_accessor authority_id: ::String
+      attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
       SENSITIVE: []
     end
 
@@ -280,6 +313,24 @@ module Aws::TaxSettings
       SENSITIVE: []
     end
 
+    class SupplementalTaxRegistration
+      attr_accessor address: Types::Address
+      attr_accessor authority_id: ::String
+      attr_accessor legal_name: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ("VAT")
+      attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
+      SENSITIVE: []
+    end
+
+    class SupplementalTaxRegistrationEntry
+      attr_accessor address: Types::Address
+      attr_accessor legal_name: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ("VAT")
+      SENSITIVE: []
+    end
+
     class TaxDocumentMetadata
       attr_accessor tax_document_access_token: ::String
       attr_accessor tax_document_name: ::String
@@ -298,7 +349,7 @@ module Aws::TaxSettings
       attr_accessor legal_address: Types::Address
       attr_accessor legal_name: ::String
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC")
       attr_accessor sector: ("Business" | "Individual" | "Government")
       attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
       attr_accessor tax_document_metadatas: ::Array[Types::TaxDocumentMetadata]
@@ -316,7 +367,7 @@ module Aws::TaxSettings
       attr_accessor legal_address: Types::Address
       attr_accessor legal_name: ::String
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC")
       attr_accessor sector: ("Business" | "Individual" | "Government")
       attr_accessor verification_details: Types::VerificationDetails
       SENSITIVE: []
@@ -328,7 +379,7 @@ module Aws::TaxSettings
       attr_accessor jurisdiction: Types::Jurisdiction
       attr_accessor legal_name: ::String
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC")
       attr_accessor sector: ("Business" | "Individual" | "Government")
       attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
       attr_accessor tax_document_metadatas: ::Array[Types::TaxDocumentMetadata]

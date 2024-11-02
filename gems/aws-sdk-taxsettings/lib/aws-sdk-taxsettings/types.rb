@@ -301,7 +301,9 @@ module Aws::TaxSettings
     #   @return [String]
     #
     # @!attribute [rw] state_or_region
-    #   The state, region, or province that the address is located.
+    #   The state, region, or province that the address is located. This
+    #   field is only required for Canada, India, United Arab Emirates,
+    #   Romania, and Brazil (CPF). It is optional for all other countries.
     #
     #   If this is required for tax settings, use the same name as shown on
     #   the **Tax Settings** page.
@@ -474,10 +476,10 @@ module Aws::TaxSettings
     #
     # @!attribute [rw] canada_retail_sales_tax_number
     #   Manitoba Retail Sales Tax ID number. Customers purchasing Amazon Web
-    #   Services for resale in Manitoba must provide a valid Retail Sales
-    #   Tax ID number for Manitoba. Leave this blank if you do not have a
-    #   Retail Sales Tax ID number in Manitoba or are not purchasing Amazon
-    #   Web Services for resale.
+    #   Services services for resale in Manitoba must provide a valid Retail
+    #   Sales Tax ID number for Manitoba. Leave this blank if you do not
+    #   have a Retail Sales Tax ID number in Manitoba or are not purchasing
+    #   Amazon Web Services services for resale.
     #   @return [String]
     #
     # @!attribute [rw] is_reseller_account
@@ -536,6 +538,23 @@ module Aws::TaxSettings
       SENSITIVE = [:message]
       include Aws::Structure
     end
+
+    # @!attribute [rw] authority_id
+    #   The unique authority Id for the supplemental TRN information that
+    #   needs to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/DeleteSupplementalTaxRegistrationRequest AWS API Documentation
+    #
+    class DeleteSupplementalTaxRegistrationRequest < Struct.new(
+      :authority_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/DeleteSupplementalTaxRegistrationResponse AWS API Documentation
+    #
+    class DeleteSupplementalTaxRegistrationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_id
     #   Unique account identifier for the TRN information that needs to be
@@ -790,6 +809,40 @@ module Aws::TaxSettings
     end
 
     # @!attribute [rw] max_results
+    #   The number of `taxRegistrations` results you want in one response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/ListSupplementalTaxRegistrationsRequest AWS API Documentation
+    #
+    class ListSupplementalTaxRegistrationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] tax_registrations
+    #   The list of supplemental tax registrations.
+    #   @return [Array<Types::SupplementalTaxRegistration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/ListSupplementalTaxRegistrationsResponse AWS API Documentation
+    #
+    class ListSupplementalTaxRegistrationsResponse < Struct.new(
+      :next_token,
+      :tax_registrations)
+      SENSITIVE = [:tax_registrations]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
     #   Number of `accountDetails` results you want in one response.
     #   @return [Integer]
     #
@@ -826,14 +879,56 @@ module Aws::TaxSettings
 
     # Additional tax information associated with your TRN in Malaysia.
     #
+    # @!attribute [rw] business_registration_number
+    #   The tax registration number (TRN) in Malaysia.
+    #
+    #   For individual, you can specify the `taxInformationNumber` in
+    #   `MalaysiaAdditionalInfo` with NRIC type, and a valid MyKad or NRIC
+    #   number. For business, you must specify a
+    #   `businessRegistrationNumber` in `MalaysiaAdditionalInfo` with a TIN
+    #   type and tax identification number. For business resellers, you must
+    #   specify a `businessRegistrationNumber` and `taxInformationNumber` in
+    #   `MalaysiaAdditionalInfo` with a sales and service tax (SST) type and
+    #   a valid SST number.
+    #
+    #   For business resellers with service codes, you must specify
+    #   `businessRegistrationNumber`, `taxInformationNumber`, and distinct
+    #   `serviceTaxCodes` in `MalaysiaAdditionalInfo` with a SST type and
+    #   valid sales and service tax (SST) number. By using this API
+    #   operation, Amazon Web Services registers your self-declaration that
+    #   you’re an authorized business reseller registered with the Royal
+    #   Malaysia Customs Department (RMCD), and have a valid SST number.
+    #   @return [String]
+    #
     # @!attribute [rw] service_tax_codes
     #   List of service tax codes for your TRN in Malaysia.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tax_information_number
+    #   The tax information number in Malaysia.
+    #
+    #   For individual, you can specify the `taxInformationNumber` in
+    #   `MalaysiaAdditionalInfo` with NRIC type, and a valid MyKad or NRIC
+    #   number. For business resellers, you must specify a
+    #   `businessRegistrationNumber` and `taxInformationNumber` in
+    #   `MalaysiaAdditionalInfo` with a sales and service tax (SST) type and
+    #   a valid SST number.
+    #
+    #   For business resellers with service codes, you must specify
+    #   `businessRegistrationNumber`, `taxInformationNumber`, and distinct
+    #   `serviceTaxCodes` in `MalaysiaAdditionalInfo` with a SST type and
+    #   valid sales and service tax (SST) number. By using this API
+    #   operation, Amazon Web Services registers your self-declaration that
+    #   you’re an authorized business reseller registered with the Royal
+    #   Malaysia Customs Department (RMCD), and have a valid SST number.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/MalaysiaAdditionalInfo AWS API Documentation
     #
     class MalaysiaAdditionalInfo < Struct.new(
-      :service_tax_codes)
+      :business_registration_number,
+      :service_tax_codes,
+      :tax_information_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -855,6 +950,39 @@ module Aws::TaxSettings
     class PolandAdditionalInfo < Struct.new(
       :individual_registration_number,
       :is_group_vat_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tax_registration_entry
+    #   The supplemental TRN information that will be stored for the caller
+    #   account ID.
+    #   @return [Types::SupplementalTaxRegistrationEntry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/PutSupplementalTaxRegistrationRequest AWS API Documentation
+    #
+    class PutSupplementalTaxRegistrationRequest < Struct.new(
+      :tax_registration_entry)
+      SENSITIVE = [:tax_registration_entry]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authority_id
+    #   Unique authority ID for the supplemental TRN information that was
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the supplemental TRN stored in the system after
+    #   processing. Based on the validation occurring on the TRN, the status
+    #   can be `Verified`, `Pending`, `Rejected`, or `Deleted`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/PutSupplementalTaxRegistrationResponse AWS API Documentation
+    #
+    class PutSupplementalTaxRegistrationResponse < Struct.new(
+      :authority_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -995,6 +1123,75 @@ module Aws::TaxSettings
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/SpainAdditionalInfo AWS API Documentation
     #
     class SpainAdditionalInfo < Struct.new(
+      :registration_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Supplemental TRN details.
+    #
+    # @!attribute [rw] address
+    #   The details of the address associated with the TRN information.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] authority_id
+    #   Unique authority ID for the supplemental TRN.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_name
+    #   The legal name associated with your TRN registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The supplemental TRN unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_type
+    #   Type of supplemental TRN. Currently, this can only be VAT.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of your TRN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/SupplementalTaxRegistration AWS API Documentation
+    #
+    class SupplementalTaxRegistration < Struct.new(
+      :address,
+      :authority_id,
+      :legal_name,
+      :registration_id,
+      :registration_type,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The supplemental TRN information to provide when adding or updating a
+    # supplemental TRN.
+    #
+    # @!attribute [rw] address
+    #   The details of the address associated with the TRN information.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] legal_name
+    #   The legal name associated with your TRN registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The supplemental TRN unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_type
+    #   Type of supplemental TRN. Currently, this can only be VAT.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/SupplementalTaxRegistrationEntry AWS API Documentation
+    #
+    class SupplementalTaxRegistrationEntry < Struct.new(
+      :address,
+      :legal_name,
+      :registration_id,
       :registration_type)
       SENSITIVE = []
       include Aws::Structure

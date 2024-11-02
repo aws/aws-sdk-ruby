@@ -2918,6 +2918,10 @@ module Aws::Glue
     #   `g.1x`.
     #   @return [String]
     #
+    # @!attribute [rw] computation_type
+    #   The type of column statistics computation.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the task run.
     #   @return [String]
@@ -2960,6 +2964,7 @@ module Aws::Glue
       :security_configuration,
       :number_of_workers,
       :worker_type,
+      :computation_type,
       :status,
       :creation_time,
       :last_updated,
@@ -2982,6 +2987,57 @@ module Aws::Glue
     #
     class ColumnStatisticsTaskRunningException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for a column statistics task.
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which to generate column statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   A schedule for running the column statistics, specified in CRON
+    #   syntax.
+    #   @return [Types::Schedule]
+    #
+    # @!attribute [rw] column_name_list
+    #   A list of column names for which to run statistics.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the database resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role used for running the column statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_size
+    #   The percentage of data to sample.
+    #   @return [Float]
+    #
+    # @!attribute [rw] security_configuration
+    #   Name of the security configuration that is used to encrypt
+    #   CloudWatch logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnStatisticsTaskSettings AWS API Documentation
+    #
+    class ColumnStatisticsTaskSettings < Struct.new(
+      :database_name,
+      :table_name,
+      :schedule,
+      :column_name_list,
+      :catalog_id,
+      :role,
+      :sample_size,
+      :security_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4287,6 +4343,64 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateClassifierResponse AWS API Documentation
     #
     class CreateClassifierResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which to generate column statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role used for running the column statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   A schedule for running the column statistics, specified in CRON
+    #   syntax.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_name_list
+    #   A list of column names for which to run statistics.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sample_size
+    #   The percentage of data to sample.
+    #   @return [Float]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the database resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_configuration
+    #   Name of the security configuration that is used to encrypt
+    #   CloudWatch logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateColumnStatisticsTaskSettingsRequest AWS API Documentation
+    #
+    class CreateColumnStatisticsTaskSettingsRequest < Struct.new(
+      :database_name,
+      :table_name,
+      :role,
+      :schedule,
+      :column_name_list,
+      :sample_size,
+      :catalog_id,
+      :security_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateColumnStatisticsTaskSettingsResponse AWS API Documentation
+    #
+    class CreateColumnStatisticsTaskSettingsResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which to create the connection. If
@@ -7462,6 +7576,27 @@ module Aws::Glue
     #
     class DeleteColumnStatisticsForTableResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which to delete column statistics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsTaskSettingsRequest AWS API Documentation
+    #
+    class DeleteColumnStatisticsTaskSettingsRequest < Struct.new(
+      :database_name,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsTaskSettingsResponse AWS API Documentation
+    #
+    class DeleteColumnStatisticsTaskSettingsResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
     #   is provided, the Amazon Web Services account ID is used by default.
@@ -9735,6 +9870,36 @@ module Aws::Glue
     class GetColumnStatisticsTaskRunsResponse < Struct.new(
       :column_statistics_task_runs,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which to retrieve column statistics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskSettingsRequest AWS API Documentation
+    #
+    class GetColumnStatisticsTaskSettingsRequest < Struct.new(
+      :database_name,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_statistics_task_settings
+    #   A `ColumnStatisticsTaskSettings` object representing the settings
+    #   for the column statistics task.
+    #   @return [Types::ColumnStatisticsTaskSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskSettingsResponse AWS API Documentation
+    #
+    class GetColumnStatisticsTaskSettingsResponse < Struct.new(
+      :column_statistics_task_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21208,6 +21373,28 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which to start a column statistic task run
+    #   schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunScheduleRequest AWS API Documentation
+    #
+    class StartColumnStatisticsTaskRunScheduleRequest < Struct.new(
+      :database_name,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunScheduleResponse AWS API Documentation
+    #
+    class StartColumnStatisticsTaskRunScheduleResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] name
     #   Name of the crawler to start.
     #   @return [String]
@@ -22045,6 +22232,28 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunResponse AWS API Documentation
     #
     class StopColumnStatisticsTaskRunResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which to stop a column statistic task run
+    #   schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunScheduleRequest AWS API Documentation
+    #
+    class StopColumnStatisticsTaskRunScheduleRequest < Struct.new(
+      :database_name,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunScheduleResponse AWS API Documentation
+    #
+    class StopColumnStatisticsTaskRunScheduleResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   Name of the crawler to stop.
@@ -23704,6 +23913,59 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which to generate column statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role used for running the column statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   A schedule for running the column statistics, specified in CRON
+    #   syntax.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_name_list
+    #   A list of column names for which to run statistics.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sample_size
+    #   The percentage of data to sample.
+    #   @return [Float]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the database resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_configuration
+    #   Name of the security configuration that is used to encrypt
+    #   CloudWatch logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsTaskSettingsRequest AWS API Documentation
+    #
+    class UpdateColumnStatisticsTaskSettingsRequest < Struct.new(
+      :database_name,
+      :table_name,
+      :role,
+      :schedule,
+      :column_name_list,
+      :sample_size,
+      :catalog_id,
+      :security_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateColumnStatisticsTaskSettingsResponse AWS API Documentation
+    #
+    class UpdateColumnStatisticsTaskSettingsResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none

@@ -462,12 +462,12 @@ module Aws::Keyspaces
     # creation status of the new keyspace by using the `GetKeyspace`
     # operation.
     #
-    # For more information, see [Creating keyspaces][1] in the *Amazon
+    # For more information, see [Create a keyspace][1] in the *Amazon
     # Keyspaces Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-keyspaces.html#keyspaces-create
+    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.keyspaces.html
     #
     # @option params [required, String] :keyspace_name
     #   The name of the keyspace to be created.
@@ -536,12 +536,12 @@ module Aws::Keyspaces
     # operation, which returns the current `status` of the table. You can
     # start using a table when the status is `ACTIVE`.
     #
-    # For more information, see [Creating tables][1] in the *Amazon
-    # Keyspaces Developer Guide*.
+    # For more information, see [Create a table][1] in the *Amazon Keyspaces
+    # Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-tables.html#tables-create
+    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.tables.html
     #
     # @option params [required, String] :keyspace_name
     #   The name of the keyspace that the table is going to be created in.
@@ -856,6 +856,71 @@ module Aws::Keyspaces
       req.send_request(options)
     end
 
+    # The `CreateType` operation creates a new user-defined type in the
+    # specified keyspace.
+    #
+    # For more information, see [User-defined types (UDTs)][1] in the
+    # *Amazon Keyspaces Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/udts.html
+    #
+    # @option params [required, String] :keyspace_name
+    #   The name of the keyspace.
+    #
+    # @option params [required, String] :type_name
+    #   The name of the user-defined type.
+    #
+    #   UDT names must contain 48 characters or less, must begin with an
+    #   alphabetic character, and can only contain alpha-numeric characters
+    #   and underscores. Amazon Keyspaces converts upper case characters
+    #   automatically into lower case characters.
+    #
+    #   Alternatively, you can declare a UDT name in double quotes. When
+    #   declaring a UDT name inside double quotes, Amazon Keyspaces preserves
+    #   upper casing and allows special characters.
+    #
+    #   You can also use double quotes as part of the name when you create the
+    #   UDT, but you must escape each double quote character with an
+    #   additional double quote character.
+    #
+    # @option params [required, Array<Types::FieldDefinition>] :field_definitions
+    #   The field definitions, consisting of names and types, that define this
+    #   type.
+    #
+    # @return [Types::CreateTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTypeResponse#keyspace_arn #keyspace_arn} => String
+    #   * {Types::CreateTypeResponse#type_name #type_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_type({
+    #     keyspace_name: "KeyspaceName", # required
+    #     type_name: "TypeName", # required
+    #     field_definitions: [ # required
+    #       {
+    #         name: "FieldDefinitionNameString", # required
+    #         type: "GenericString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.keyspace_arn #=> String
+    #   resp.type_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CreateType AWS API Documentation
+    #
+    # @overload create_type(params = {})
+    # @param [Hash] params ({})
+    def create_type(params = {}, options = {})
+      req = build_request(:create_type, params)
+      req.send_request(options)
+    end
+
     # The `DeleteKeyspace` operation deletes a keyspace and all of its
     # tables.
     #
@@ -912,6 +977,41 @@ module Aws::Keyspaces
       req.send_request(options)
     end
 
+    # The `DeleteType` operation deletes a user-defined type (UDT). You can
+    # only delete a type that is not used in a table or another UDT.
+    #
+    # @option params [required, String] :keyspace_name
+    #   The name of the keyspace of the to be deleted type.
+    #
+    # @option params [required, String] :type_name
+    #   The name of the type to be deleted.
+    #
+    # @return [Types::DeleteTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTypeResponse#keyspace_arn #keyspace_arn} => String
+    #   * {Types::DeleteTypeResponse#type_name #type_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_type({
+    #     keyspace_name: "KeyspaceName", # required
+    #     type_name: "TypeName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.keyspace_arn #=> String
+    #   resp.type_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/DeleteType AWS API Documentation
+    #
+    # @overload delete_type(params = {})
+    # @param [Hash] params ({})
+    def delete_type(params = {}, options = {})
+      req = build_request(:delete_type, params)
+      req.send_request(options)
+    end
+
     # Returns the name and the Amazon Resource Name (ARN) of the specified
     # table.
     #
@@ -952,9 +1052,8 @@ module Aws::Keyspaces
     # current status, the keyspace name, configuration settings, and
     # metadata.
     #
-    # To read table metadata using `GetTable`, `Select` action permissions
-    # for the table and system tables are required to complete the
-    # operation.
+    # To read table metadata using `GetTable`, the IAM principal needs
+    # `Select` action permissions for the table and the system keyspace.
     #
     # @option params [required, String] :keyspace_name
     #   The name of the keyspace that the table is stored in.
@@ -1124,7 +1223,68 @@ module Aws::Keyspaces
       req.send_request(options)
     end
 
-    # Returns a list of keyspaces.
+    # The `GetType` operation returns information about the type, for
+    # example the field definitions, the timestamp when the type was last
+    # modified, the level of nesting, the status, and details about if the
+    # type is used in other types and tables.
+    #
+    # To read keyspace metadata using `GetType`, the IAM principal needs
+    # `Select` action permissions for the system keyspace.
+    #
+    # @option params [required, String] :keyspace_name
+    #   The name of the keyspace that contains this type.
+    #
+    # @option params [required, String] :type_name
+    #   The formatted name of the type. For example, if the name of the type
+    #   was created without double quotes, Amazon Keyspaces saved the name in
+    #   lower-case characters. If the name was created in double quotes, you
+    #   must use double quotes to specify the type name.
+    #
+    # @return [Types::GetTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTypeResponse#keyspace_name #keyspace_name} => String
+    #   * {Types::GetTypeResponse#type_name #type_name} => String
+    #   * {Types::GetTypeResponse#field_definitions #field_definitions} => Array&lt;Types::FieldDefinition&gt;
+    #   * {Types::GetTypeResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::GetTypeResponse#status #status} => String
+    #   * {Types::GetTypeResponse#direct_referring_tables #direct_referring_tables} => Array&lt;String&gt;
+    #   * {Types::GetTypeResponse#direct_parent_types #direct_parent_types} => Array&lt;String&gt;
+    #   * {Types::GetTypeResponse#max_nesting_depth #max_nesting_depth} => Integer
+    #   * {Types::GetTypeResponse#keyspace_arn #keyspace_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_type({
+    #     keyspace_name: "KeyspaceName", # required
+    #     type_name: "TypeName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.keyspace_name #=> String
+    #   resp.type_name #=> String
+    #   resp.field_definitions #=> Array
+    #   resp.field_definitions[0].name #=> String
+    #   resp.field_definitions[0].type #=> String
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "RESTORING"
+    #   resp.direct_referring_tables #=> Array
+    #   resp.direct_referring_tables[0] #=> String
+    #   resp.direct_parent_types #=> Array
+    #   resp.direct_parent_types[0] #=> String
+    #   resp.max_nesting_depth #=> Integer
+    #   resp.keyspace_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetType AWS API Documentation
+    #
+    # @overload get_type(params = {})
+    # @param [Hash] params ({})
+    def get_type(params = {}, options = {})
+      req = build_request(:get_type, params)
+      req.send_request(options)
+    end
+
+    # The `ListKeyspaces` operation returns a list of keyspaces.
     #
     # @option params [String] :next_token
     #   The pagination token. To resume pagination, provide the `NextToken`
@@ -1169,7 +1329,11 @@ module Aws::Keyspaces
       req.send_request(options)
     end
 
-    # Returns a list of tables for a specified keyspace.
+    # The `ListTables` operation returns a list of tables for a specified
+    # keyspace.
+    #
+    # To read keyspace metadata using `ListTables`, the IAM principal needs
+    # `Select` action permissions for the system keyspace.
     #
     # @option params [String] :next_token
     #   The pagination token. To resume pagination, provide the `NextToken`
@@ -1219,6 +1383,10 @@ module Aws::Keyspaces
     # Returns a list of all tags associated with the specified Amazon
     # Keyspaces resource.
     #
+    # To read keyspace metadata using `ListTagsForResource`, the IAM
+    # principal needs `Select` action permissions for the specified resource
+    # and the system keyspace.
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Keyspaces resource.
     #
@@ -1260,6 +1428,55 @@ module Aws::Keyspaces
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # The `ListTypes` operation returns a list of types for a specified
+    # keyspace.
+    #
+    # To read keyspace metadata using `ListTypes`, the IAM principal needs
+    # `Select` action permissions for the system keyspace.
+    #
+    # @option params [String] :next_token
+    #   The pagination token. To resume pagination, provide the `NextToken`
+    #   value as an argument of a subsequent API invocation.
+    #
+    # @option params [Integer] :max_results
+    #   The total number of types to return in the output. If the total number
+    #   of types available is more than the value specified, a `NextToken` is
+    #   provided in the output. To resume pagination, provide the `NextToken`
+    #   value as an argument of a subsequent API invocation.
+    #
+    # @option params [required, String] :keyspace_name
+    #   The name of the keyspace that contains the listed types.
+    #
+    # @return [Types::ListTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTypesResponse#next_token #next_token} => String
+    #   * {Types::ListTypesResponse#types #types} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_types({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     keyspace_name: "KeyspaceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.types #=> Array
+    #   resp.types[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ListTypes AWS API Documentation
+    #
+    # @overload list_types(params = {})
+    # @param [Hash] params ({})
+    def list_types(params = {}, options = {})
+      req = build_request(:list_types, params)
       req.send_request(options)
     end
 
@@ -1837,7 +2054,7 @@ module Aws::Keyspaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-keyspaces'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

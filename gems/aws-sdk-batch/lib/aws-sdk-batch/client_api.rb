@@ -595,6 +595,7 @@ module Aws::Batch
     EcsTaskProperties.struct_class = Types::EcsTaskProperties
 
     EksAttemptContainerDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    EksAttemptContainerDetail.add_member(:container_id, Shapes::ShapeRef.new(shape: String, location_name: "containerID"))
     EksAttemptContainerDetail.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
     EksAttemptContainerDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     EksAttemptContainerDetail.struct_class = Types::EksAttemptContainerDetail
@@ -605,6 +606,7 @@ module Aws::Batch
     EksAttemptDetail.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksAttemptContainerDetails, location_name: "initContainers"))
     EksAttemptDetail.add_member(:eks_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "eksClusterArn"))
     EksAttemptDetail.add_member(:pod_name, Shapes::ShapeRef.new(shape: String, location_name: "podName"))
+    EksAttemptDetail.add_member(:pod_namespace, Shapes::ShapeRef.new(shape: String, location_name: "podNamespace"))
     EksAttemptDetail.add_member(:node_name, Shapes::ShapeRef.new(shape: String, location_name: "nodeName"))
     EksAttemptDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
     EksAttemptDetail.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))

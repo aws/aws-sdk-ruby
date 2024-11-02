@@ -937,7 +937,12 @@ module Aws::EC2
     # @option options [String] :interface_type
     #   The type of network interface. The default is `interface`.
     #
-    #   The only supported values are `interface`, `efa`, and `trunk`.
+    #   If you specify `efa-only`, do not assign any IP addresses to the
+    #   network interface. EFA-only network interfaces do not support IP
+    #   addresses.
+    #
+    #   The only supported values are `interface`, `efa`, `efa-only`, and
+    #   `trunk`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new network interface.
     # @option options [String] :client_token
@@ -3307,12 +3312,12 @@ module Aws::EC2
     #
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
-    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efs` \|
-    #     `gateway_load_balancer` \| `gateway_load_balancer_endpoint` \|
-    #     `global_accelerator_managed` \| `interface` \| `iot_rules_managed`
-    #     \| `lambda` \| `load_balancer` \| `nat_gateway` \|
-    #     `network_load_balancer` \| `quicksight` \| `transit_gateway` \|
-    #     `trunk` \| `vpc_endpoint`).
+    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
+    #     \| `efs` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
+    #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
+    #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|
+    #     `transit_gateway` \| `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #

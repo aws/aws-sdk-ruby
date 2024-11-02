@@ -1,6 +1,35 @@
 Unreleased Changes
 ------------------
 
+1.1001.0 (2024-11-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1000.0 (2024-10-31)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.999.0 (2024-10-30)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::GeoRoutes`.
+
+* Feature - Added support for enumerating regions for  `Aws::GeoPlaces`.
+
+* Feature - Added support for enumerating regions for  `Aws::GeoMaps`.
+
+1.998.0 (2024-10-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.997.0 (2024-10-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.996.0 (2024-10-25)
 ------------------
 

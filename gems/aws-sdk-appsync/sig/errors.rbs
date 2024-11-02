@@ -31,6 +31,9 @@ module Aws
       class ConcurrentModificationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class GraphQLSchemaException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -41,6 +44,9 @@ module Aws
         def message: () -> ::String
       end
       class NotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class UnauthorizedException < ::Aws::Errors::ServiceError

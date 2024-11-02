@@ -163,6 +163,18 @@ module Aws
                         ) -> _CreateGroupResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
 
+      interface _CreateIdentityCenterApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdentityCenterApplicationResponse]
+        def application_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#create_identity_center_application-instance_method
+      def create_identity_center_application: (
+                                                name: ::String,
+                                                instance_arn: ::String,
+                                                ?client_token: ::String
+                                              ) -> _CreateIdentityCenterApplicationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdentityCenterApplicationResponseSuccess
+
       interface _CreateImpersonationRoleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateImpersonationRoleResponse]
         def impersonation_role_id: () -> ::String
@@ -256,7 +268,8 @@ module Aws
                          ?role: ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER"),
                          ?first_name: ::String,
                          ?last_name: ::String,
-                         ?hidden_from_global_address_list: bool
+                         ?hidden_from_global_address_list: bool,
+                         ?identity_provider_user_id: ::String
                        ) -> _CreateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
 
@@ -310,6 +323,24 @@ module Aws
                         ) -> _DeleteGroupResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
 
+      interface _DeleteIdentityCenterApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdentityCenterApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_identity_center_application-instance_method
+      def delete_identity_center_application: (
+                                                application_arn: ::String
+                                              ) -> _DeleteIdentityCenterApplicationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentityCenterApplicationResponseSuccess
+
+      interface _DeleteIdentityProviderConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdentityProviderConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_identity_provider_configuration-instance_method
+      def delete_identity_provider_configuration: (
+                                                    organization_id: ::String
+                                                  ) -> _DeleteIdentityProviderConfigurationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentityProviderConfigurationResponseSuccess
+
       interface _DeleteImpersonationRoleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImpersonationRoleResponse]
       end
@@ -362,9 +393,20 @@ module Aws
                                  ?client_token: ::String,
                                  organization_id: ::String,
                                  delete_directory: bool,
-                                 ?force_delete: bool
+                                 ?force_delete: bool,
+                                 ?delete_identity_center_application: bool
                                ) -> _DeleteOrganizationResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOrganizationResponseSuccess
+
+      interface _DeletePersonalAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePersonalAccessTokenResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#delete_personal_access_token-instance_method
+      def delete_personal_access_token: (
+                                          organization_id: ::String,
+                                          personal_access_token_id: ::String
+                                        ) -> _DeletePersonalAccessTokenResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePersonalAccessTokenResponseSuccess
 
       interface _DeleteResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceResponse]
@@ -456,6 +498,18 @@ module Aws
                             group_id: ::String
                           ) -> _DescribeGroupResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGroupResponseSuccess
+
+      interface _DescribeIdentityProviderConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIdentityProviderConfigurationResponse]
+        def authentication_mode: () -> ("IDENTITY_PROVIDER_ONLY" | "IDENTITY_PROVIDER_AND_DIRECTORY")
+        def identity_center_configuration: () -> Types::IdentityCenterConfiguration
+        def personal_access_token_configuration: () -> Types::PersonalAccessTokenConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_identity_provider_configuration-instance_method
+      def describe_identity_provider_configuration: (
+                                                      organization_id: ::String
+                                                    ) -> _DescribeIdentityProviderConfigurationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIdentityProviderConfigurationResponseSuccess
 
       interface _DescribeInboundDmarcSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInboundDmarcSettingsResponse]
@@ -554,6 +608,8 @@ module Aws
         def department: () -> ::String
         def country: () -> ::String
         def office: () -> ::String
+        def identity_provider_user_id: () -> ::String
+        def identity_provider_identity_store_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#describe_user-instance_method
       def describe_user: (
@@ -701,6 +757,23 @@ module Aws
                                                device_id: ::String
                                              ) -> _GetMobileDeviceAccessOverrideResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMobileDeviceAccessOverrideResponseSuccess
+
+      interface _GetPersonalAccessTokenMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPersonalAccessTokenMetadataResponse]
+        def personal_access_token_id: () -> ::String
+        def user_id: () -> ::String
+        def name: () -> ::String
+        def date_created: () -> ::Time
+        def date_last_used: () -> ::Time
+        def expires_time: () -> ::Time
+        def scopes: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#get_personal_access_token_metadata-instance_method
+      def get_personal_access_token_metadata: (
+                                                organization_id: ::String,
+                                                personal_access_token_id: ::String
+                                              ) -> _GetPersonalAccessTokenMetadataResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPersonalAccessTokenMetadataResponseSuccess
 
       interface _ListAccessControlRulesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessControlRulesResponse]
@@ -878,6 +951,20 @@ module Aws
                               ) -> _ListOrganizationsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationsResponseSuccess
 
+      interface _ListPersonalAccessTokensResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPersonalAccessTokensResponse]
+        def next_token: () -> ::String
+        def personal_access_token_summaries: () -> ::Array[Types::PersonalAccessTokenSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#list_personal_access_tokens-instance_method
+      def list_personal_access_tokens: (
+                                         organization_id: ::String,
+                                         ?user_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListPersonalAccessTokensResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPersonalAccessTokensResponseSuccess
+
       interface _ListResourceDelegatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceDelegatesResponse]
         def delegates: () -> ::Array[Types::Delegate]
@@ -934,7 +1021,8 @@ module Aws
                           username_prefix: ::String?,
                           display_name_prefix: ::String?,
                           primary_email_prefix: ::String?,
-                          state: ("ENABLED" | "DISABLED" | "DELETED")?
+                          state: ("ENABLED" | "DISABLED" | "DELETED")?,
+                          identity_provider_user_id_prefix: ::String?
                         }
                       ) -> _ListUsersResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
@@ -969,6 +1057,24 @@ module Aws
                                                 log_group_arn: ::String
                                               ) -> _PutEmailMonitoringConfigurationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailMonitoringConfigurationResponseSuccess
+
+      interface _PutIdentityProviderConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutIdentityProviderConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkMail/Client.html#put_identity_provider_configuration-instance_method
+      def put_identity_provider_configuration: (
+                                                 organization_id: ::String,
+                                                 authentication_mode: ("IDENTITY_PROVIDER_ONLY" | "IDENTITY_PROVIDER_AND_DIRECTORY"),
+                                                 identity_center_configuration: {
+                                                   instance_arn: ::String,
+                                                   application_arn: ::String
+                                                 },
+                                                 personal_access_token_configuration: {
+                                                   status: ("ACTIVE" | "INACTIVE"),
+                                                   lifetime_in_days: ::Integer?
+                                                 }
+                                               ) -> _PutIdentityProviderConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIdentityProviderConfigurationResponseSuccess
 
       interface _PutInboundDmarcSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutInboundDmarcSettingsResponse]
@@ -1264,7 +1370,8 @@ module Aws
                          ?zip_code: ::String,
                          ?department: ::String,
                          ?country: ::String,
-                         ?office: ::String
+                         ?office: ::String,
+                         ?identity_provider_user_id: ::String
                        ) -> _UpdateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
     end

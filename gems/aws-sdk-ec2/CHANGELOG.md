@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.486.0 (2024-10-30)
+------------------
+
+* Feature - This release adds two new capabilities to VPC Security Groups: Security Group VPC Associations and Shared Security Groups.
+
 1.485.0 (2024-10-24)
 ------------------
 

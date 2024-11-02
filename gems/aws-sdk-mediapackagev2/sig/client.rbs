@@ -75,6 +75,19 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CancelHarvestJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelHarvestJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#cancel_harvest_job-instance_method
+      def cancel_harvest_job: (
+                                channel_group_name: ::String,
+                                channel_name: ::String,
+                                origin_endpoint_name: ::String,
+                                harvest_job_name: ::String,
+                                ?etag: ::String
+                              ) -> _CancelHarvestJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelHarvestJobResponseSuccess
+
       interface _CreateChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
         def arn: () -> ::String
@@ -118,6 +131,63 @@ module Aws
                                   ?tags: Hash[::String, ::String]
                                 ) -> _CreateChannelGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelGroupResponseSuccess
+
+      interface _CreateHarvestJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHarvestJobResponse]
+        def channel_group_name: () -> ::String
+        def channel_name: () -> ::String
+        def origin_endpoint_name: () -> ::String
+        def destination: () -> Types::Destination
+        def harvest_job_name: () -> ::String
+        def harvested_manifests: () -> Types::HarvestedManifests
+        def description: () -> ::String
+        def schedule_configuration: () -> Types::HarvesterScheduleConfiguration
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+        def status: () -> ("QUEUED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+        def error_message: () -> ::String
+        def etag: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#create_harvest_job-instance_method
+      def create_harvest_job: (
+                                channel_group_name: ::String,
+                                channel_name: ::String,
+                                origin_endpoint_name: ::String,
+                                ?description: ::String,
+                                harvested_manifests: {
+                                  hls_manifests: Array[
+                                    {
+                                      manifest_name: ::String
+                                    },
+                                  ]?,
+                                  dash_manifests: Array[
+                                    {
+                                      manifest_name: ::String
+                                    },
+                                  ]?,
+                                  low_latency_hls_manifests: Array[
+                                    {
+                                      manifest_name: ::String
+                                    },
+                                  ]?
+                                },
+                                schedule_configuration: {
+                                  start_time: ::Time,
+                                  end_time: ::Time
+                                },
+                                destination: {
+                                  s3_destination: {
+                                    bucket_name: ::String,
+                                    destination_path: ::String
+                                  }
+                                },
+                                ?client_token: ::String,
+                                ?harvest_job_name: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateHarvestJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHarvestJobResponseSuccess
 
       interface _CreateOriginEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateOriginEndpointResponse]
@@ -353,6 +423,33 @@ module Aws
                               ) -> _GetChannelPolicyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelPolicyResponseSuccess
 
+      interface _GetHarvestJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHarvestJobResponse]
+        def channel_group_name: () -> ::String
+        def channel_name: () -> ::String
+        def origin_endpoint_name: () -> ::String
+        def destination: () -> Types::Destination
+        def harvest_job_name: () -> ::String
+        def harvested_manifests: () -> Types::HarvestedManifests
+        def description: () -> ::String
+        def schedule_configuration: () -> Types::HarvesterScheduleConfiguration
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+        def status: () -> ("QUEUED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+        def error_message: () -> ::String
+        def etag: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_harvest_job-instance_method
+      def get_harvest_job: (
+                             channel_group_name: ::String,
+                             channel_name: ::String,
+                             origin_endpoint_name: ::String,
+                             harvest_job_name: ::String
+                           ) -> _GetHarvestJobResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHarvestJobResponseSuccess
+
       interface _GetOriginEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetOriginEndpointResponse]
         def arn: () -> ::String
@@ -419,6 +516,22 @@ module Aws
                            ?next_token: ::String
                          ) -> _ListChannelsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListHarvestJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHarvestJobsResponse]
+        def items: () -> ::Array[Types::HarvestJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#list_harvest_jobs-instance_method
+      def list_harvest_jobs: (
+                               channel_group_name: ::String,
+                               ?channel_name: ::String,
+                               ?origin_endpoint_name: ::String,
+                               ?status: ("QUEUED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED"),
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListHarvestJobsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHarvestJobsResponseSuccess
 
       interface _ListOriginEndpointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListOriginEndpointsResponse]
@@ -653,6 +766,15 @@ module Aws
                                     ?etag: ::String
                                   ) -> _UpdateOriginEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOriginEndpointResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#wait_until-instance_method
+      def wait_until: (:harvest_job_finished waiter_name, 
+                    channel_group_name: ::String,
+                    channel_name: ::String,
+                    origin_endpoint_name: ::String,
+                    harvest_job_name: ::String
+                  ) -> Client::_GetHarvestJobResponseSuccess
+                    | (:harvest_job_finished waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetHarvestJobResponseSuccess
     end
   end
 end

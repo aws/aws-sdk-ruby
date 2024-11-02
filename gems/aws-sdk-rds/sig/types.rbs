@@ -3709,6 +3709,11 @@ module Aws::RDS
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration
       attr_accessor network_type: ::String
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
+      attr_accessor monitoring_interval: ::Integer
+      attr_accessor monitoring_role_arn: ::String
+      attr_accessor enable_performance_insights: bool
+      attr_accessor performance_insights_kms_key_id: ::String
+      attr_accessor performance_insights_retention_period: ::Integer
       attr_accessor engine_lifecycle_support: ::String
       SENSITIVE: []
     end
@@ -3748,6 +3753,11 @@ module Aws::RDS
       attr_accessor network_type: ::String
       attr_accessor source_db_cluster_resource_id: ::String
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
+      attr_accessor monitoring_interval: ::Integer
+      attr_accessor monitoring_role_arn: ::String
+      attr_accessor enable_performance_insights: bool
+      attr_accessor performance_insights_kms_key_id: ::String
+      attr_accessor performance_insights_retention_period: ::Integer
       attr_accessor engine_lifecycle_support: ::String
       SENSITIVE: []
     end

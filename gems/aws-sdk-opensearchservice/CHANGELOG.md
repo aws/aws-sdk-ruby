@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2024-10-30)
+------------------
+
+* Feature - This release introduces the new OpenSearch user interface (Dashboards), a new web-based application that can be associated with multiple data sources across OpenSearch managed clusters, serverless collections, and Amazon S3, so that users can gain a comprehensive insights in an unified interface.
+
+1.58.0 (2024-10-28)
+------------------
+
+* Feature - Adds support for provisioning dedicated coordinator nodes. Coordinator nodes can be specified using the new NodeOptions parameter in ClusterConfig.
+
 1.57.0 (2024-10-18)
 ------------------
 

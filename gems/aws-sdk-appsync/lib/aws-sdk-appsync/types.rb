@@ -53,6 +53,73 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Describes an AppSync API. You can use `Api` for an AppSync API with
+    # your preferred configuration, such as an Event API that provides
+    # real-time message publishing and message subscriptions over
+    # WebSockets.
+    #
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `Api`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_contact
+    #   The owner contact information for the `Api`
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map with keys of `TagKey` objects and values of `TagValue`
+    #   objects.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] dns
+    #   The DNS records for the API. This will include an HTTP and a
+    #   real-time endpoint.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] api_arn
+    #   The Amazon Resource Name (ARN) for the `Api`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The date and time that the `Api` was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] xray_enabled
+    #   A flag indicating whether to use X-Ray tracing for this `Api`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] waf_web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web access control list
+    #   (web ACL) associated with this `Api`, if one exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_config
+    #   The Event API configuration. This includes the default authorization
+    #   configuration for connecting, publishing, and subscribing to an
+    #   Event API.
+    #   @return [Types::EventConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Api AWS API Documentation
+    #
+    class Api < Struct.new(
+      :api_id,
+      :name,
+      :owner_contact,
+      :tags,
+      :dns,
+      :api_arn,
+      :created,
+      :xray_enabled,
+      :waf_web_acl_arn,
+      :event_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an `ApiAssociation` object.
     #
     # @!attribute [rw] domain_name
@@ -468,6 +535,54 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Describes an authorization configuration. Use `AuthMode` to specify
+    # the publishing and subscription authorization configuration for an
+    # Event API.
+    #
+    # @!attribute [rw] auth_type
+    #   The authorization type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AuthMode AWS API Documentation
+    #
+    class AuthMode < Struct.new(
+      :auth_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an authorization provider.
+    #
+    # @!attribute [rw] auth_type
+    #   The authorization type.
+    #   @return [String]
+    #
+    # @!attribute [rw] cognito_config
+    #   Describes an Amazon Cognito user pool configuration.
+    #   @return [Types::CognitoConfig]
+    #
+    # @!attribute [rw] open_id_connect_config
+    #   Describes an OpenID Connect (OIDC) configuration.
+    #   @return [Types::OpenIDConnectConfig]
+    #
+    # @!attribute [rw] lambda_authorizer_config
+    #   A `LambdaAuthorizerConfig` specifies how to authorize AppSync API
+    #   access when using the `AWS_LAMBDA` authorizer mode. Be aware that an
+    #   AppSync API can have only one Lambda authorizer configured at a
+    #   time.
+    #   @return [Types::LambdaAuthorizerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AuthProvider AWS API Documentation
+    #
+    class AuthProvider < Struct.new(
+      :auth_type,
+      :cognito_config,
+      :open_id_connect_config,
+      :lambda_authorizer_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The authorization configuration in case the HTTP endpoint requires
     # authorization.
     #
@@ -579,6 +694,69 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Describes a channel namespace associated with an `Api`. The
+    # `ChannelNamespace` contains the definitions for code handlers for the
+    # `Api`.
+    #
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the channel namespace. This name must be unique within
+    #   the `Api`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscribe_auth_modes
+    #   The authorization mode to use for subscribing to messages on the
+    #   channel namespace. This configuration overrides the default
+    #   `Api`authorization configuration.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] publish_auth_modes
+    #   The authorization mode to use for publishing messages on the channel
+    #   namespace. This configuration overrides the default
+    #   `Api`authorization configuration.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] code_handlers
+    #   The event handler functions that run custom business logic to
+    #   process published events and subscribe requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map with keys of `TagKey` objects and values of `TagValue`
+    #   objects.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] channel_namespace_arn
+    #   The Amazon Resource Name (ARN) for the `ChannelNamespace`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The date and time that the `ChannelNamespace` was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time that the `ChannelNamespace` was last changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ChannelNamespace AWS API Documentation
+    #
+    class ChannelNamespace < Struct.new(
+      :api_id,
+      :name,
+      :subscribe_auth_modes,
+      :publish_auth_modes,
+      :code_handlers,
+      :tags,
+      :channel_namespace_arn,
+      :created,
+      :last_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an AppSync error.
     #
     # @!attribute [rw] error_type
@@ -633,6 +811,32 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Describes an Amazon Cognito configuration.
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region in which the user pool was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id_client_regex
+    #   A regular expression for validating the incoming Amazon Cognito user
+    #   pool app client ID. If this value isn't set, no filtering is
+    #   applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CognitoConfig AWS API Documentation
+    #
+    class CognitoConfig < Struct.new(
+      :user_pool_id,
+      :aws_region,
+      :app_id_client_regex)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Amazon Cognito user pool configuration.
     #
     # @!attribute [rw] user_pool_id
@@ -668,6 +872,22 @@ module Aws::AppSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ConcurrentModificationException AWS API Documentation
     #
     class ConcurrentModificationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A conflict with a previous successful update is detected. This
+    # typically occurs when the previous update did not have time to
+    # propagate before the next update was made. A retry (with appropriate
+    # backoff logic) is the recommended response to this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -823,6 +1043,104 @@ module Aws::AppSync
     #
     class CreateApiKeyResponse < Struct.new(
       :api_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name for the `Api`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_contact
+    #   The owner contact information for the `Api`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map with keys of `TagKey` objects and values of `TagValue`
+    #   objects.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] event_config
+    #   The Event API configuration. This includes the default authorization
+    #   configuration for connecting, publishing, and subscribing to an
+    #   Event API.
+    #   @return [Types::EventConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiRequest AWS API Documentation
+    #
+    class CreateApiRequest < Struct.new(
+      :name,
+      :owner_contact,
+      :tags,
+      :event_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api
+    #   The `Api` object.
+    #   @return [Types::Api]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiResponse AWS API Documentation
+    #
+    class CreateApiResponse < Struct.new(
+      :api)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `ChannelNamespace`. This name must be unique within
+    #   the `Api`
+    #   @return [String]
+    #
+    # @!attribute [rw] subscribe_auth_modes
+    #   The authorization mode to use for subscribing to messages on the
+    #   channel namespace. This configuration overrides the default `Api`
+    #   authorization configuration.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] publish_auth_modes
+    #   The authorization mode to use for publishing messages on the channel
+    #   namespace. This configuration overrides the default `Api`
+    #   authorization configuration.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] code_handlers
+    #   The event handler functions that run custom business logic to
+    #   process published events and subscribe requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map with keys of `TagKey` objects and values of `TagValue`
+    #   objects.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateChannelNamespaceRequest AWS API Documentation
+    #
+    class CreateChannelNamespaceRequest < Struct.new(
+      :api_id,
+      :name,
+      :subscribe_auth_modes,
+      :publish_auth_modes,
+      :code_handlers,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_namespace
+    #   The `ChannelNamespace` object.
+    #   @return [Types::ChannelNamespace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateChannelNamespaceResponse AWS API Documentation
+    #
+    class CreateChannelNamespaceResponse < Struct.new(
+      :channel_namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1085,13 +1403,6 @@ module Aws::AppSync
     #   Configuration for Lambda function authorization.
     #   @return [Types::LambdaAuthorizerConfig]
     #
-    # @!attribute [rw] visibility
-    #   Sets the value of the GraphQL API to public (`GLOBAL`) or private
-    #   (`PRIVATE`). If no value is provided, the visibility will be set to
-    #   `GLOBAL` by default. This value cannot be changed once the API has
-    #   been created.
-    #   @return [String]
-    #
     # @!attribute [rw] api_type
     #   The value that indicates whether the GraphQL API is a standard API
     #   (`GRAPHQL`) or merged API (`MERGED`).
@@ -1103,6 +1414,13 @@ module Aws::AppSync
     #   API to validate access to source APIs at runtime and to prompt the
     #   `AUTO_MERGE` to update the merged API endpoint with the source API
     #   changes automatically.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility
+    #   Sets the value of the GraphQL API to public (`GLOBAL`) or private
+    #   (`PRIVATE`). If no value is provided, the visibility will be set to
+    #   `GLOBAL` by default. This value cannot be changed once the API has
+    #   been created.
     #   @return [String]
     #
     # @!attribute [rw] owner_contact
@@ -1164,9 +1482,9 @@ module Aws::AppSync
       :additional_authentication_providers,
       :xray_enabled,
       :lambda_authorizer_config,
-      :visibility,
       :api_type,
       :merged_api_execution_role_arn,
+      :visibility,
       :owner_contact,
       :introspection_config,
       :query_depth_limit,
@@ -1648,6 +1966,43 @@ module Aws::AppSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiKeyResponse AWS API Documentation
     #
     class DeleteApiKeyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiRequest AWS API Documentation
+    #
+    class DeleteApiRequest < Struct.new(
+      :api_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiResponse AWS API Documentation
+    #
+    class DeleteApiResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] api_id
+    #   The ID of the `Api` associated with the `ChannelNamespace`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `ChannelNamespace`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteChannelNamespaceRequest AWS API Documentation
+    #
+    class DeleteChannelNamespaceRequest < Struct.new(
+      :api_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteChannelNamespaceResponse AWS API Documentation
+    #
+    class DeleteChannelNamespaceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] api_id
     #   The API ID.
@@ -2268,6 +2623,61 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Describes the authorization configuration for connections, message
+    # publishing, message subscriptions, and logging for an Event API.
+    #
+    # @!attribute [rw] auth_providers
+    #   A list of authorization providers.
+    #   @return [Array<Types::AuthProvider>]
+    #
+    # @!attribute [rw] connection_auth_modes
+    #   A list of valid authorization modes for the Event API connections.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] default_publish_auth_modes
+    #   A list of valid authorization modes for the Event API publishing.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] default_subscribe_auth_modes
+    #   A list of valid authorization modes for the Event API subscriptions.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] log_config
+    #   The CloudWatch Logs configuration for the Event API.
+    #   @return [Types::EventLogConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EventConfig AWS API Documentation
+    #
+    class EventConfig < Struct.new(
+      :auth_providers,
+      :connection_auth_modes,
+      :default_publish_auth_modes,
+      :default_subscribe_auth_modes,
+      :log_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the CloudWatch Logs configuration for the Event API.
+    #
+    # @!attribute [rw] log_level
+    #   The type of information to log for the Event API.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_logs_role_arn
+    #   The IAM service role that AppSync assumes to publish CloudWatch Logs
+    #   in your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EventLogConfig AWS API Documentation
+    #
+    class EventLogConfig < Struct.new(
+      :log_level,
+      :cloud_watch_logs_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `FlushApiCache` operation.
     #
     # @!attribute [rw] api_id
@@ -2420,6 +2830,59 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiRequest AWS API Documentation
+    #
+    class GetApiRequest < Struct.new(
+      :api_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api
+    #   The `Api` object.
+    #   @return [Types::Api]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiResponse AWS API Documentation
+    #
+    class GetApiResponse < Struct.new(
+      :api)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `ChannelNamespace`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetChannelNamespaceRequest AWS API Documentation
+    #
+    class GetChannelNamespaceRequest < Struct.new(
+      :api_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_namespace
+    #   The `ChannelNamespace` object.
+    #   @return [Types::ChannelNamespace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetChannelNamespaceResponse AWS API Documentation
+    #
+    class GetChannelNamespaceResponse < Struct.new(
+      :channel_namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] introspection_id
     #   The introspection ID. Each introspection contains a unique ID that
     #   can be used to reference the instrospection record.
@@ -2427,8 +2890,8 @@ module Aws::AppSync
     #
     # @!attribute [rw] include_models_sdl
     #   A boolean flag that determines whether SDL should be generated for
-    #   introspected types or not. If set to `true`, each model will contain
-    #   an `sdl` property that contains the SDL for that type. The SDL only
+    #   introspected types. If set to `true`, each model will contain an
+    #   `sdl` property that contains the SDL for that type. The SDL only
     #   contains the type data and no additional metadata or directives.
     #   @return [Boolean]
     #
@@ -3135,6 +3598,87 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which you can use to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that you want the request to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListApisRequest AWS API Documentation
+    #
+    class ListApisRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] apis
+    #   The `Api` objects.
+    #   @return [Array<Types::Api>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which you can use to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListApisResponse AWS API Documentation
+    #
+    class ListApisResponse < Struct.new(
+      :apis,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which you can use to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that you want the request to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListChannelNamespacesRequest AWS API Documentation
+    #
+    class ListChannelNamespacesRequest < Struct.new(
+      :api_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_namespaces
+    #   The `ChannelNamespace` objects.
+    #   @return [Array<Types::ChannelNamespace>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which you can use to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListChannelNamespacesResponse AWS API Documentation
+    #
+    class ListChannelNamespacesResponse < Struct.new(
+      :channel_namespaces,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -3575,13 +4119,12 @@ module Aws::AppSync
     # The Amazon CloudWatch Logs configuration.
     #
     # @!attribute [rw] field_log_level
-    #   The field logging level. Values can be NONE, ERROR, INFO, DEBUG, or
-    #   ALL.
+    #   The field logging level. Values can be NONE, ERROR, or ALL.
     #
     #   * **NONE**: No field-level logs are captured.
     #
-    #   * **ERROR**: Logs the following information **only** for the fields
-    #     that are in the error category:
+    #   * **ERROR**: Logs the following information only for the fields that
+    #     are in error:
     #
     #     * The error section in the server response.
     #
@@ -3590,32 +4133,12 @@ module Aws::AppSync
     #     * The generated request/response functions that got resolved for
     #       error fields.
     #
-    #   * **INFO**: Logs the following information **only** for the fields
-    #     that are in the info and error categories:
-    #
-    #     * Info-level messages.
-    #
-    #     * The user messages sent through `$util.log.info` and
-    #       `console.log`.
-    #
-    #     * Field-level tracing and mapping logs are not shown.
-    #
-    #   * **DEBUG**: Logs the following information **only** for the fields
-    #     that are in the debug, info, and error categories:
-    #
-    #     * Debug-level messages.
-    #
-    #     * The user messages sent through `$util.log.info`,
-    #       `$util.log.debug`, `console.log`, and `console.debug`.
-    #
-    #     * Field-level tracing and mapping logs are not shown.
-    #
     #   * **ALL**: The following information is logged for all fields in the
     #     query:
     #
     #     * Field-level tracing information.
     #
-    #     * The generated request/response functions that were resolved for
+    #     * The generated request/response functions that got resolved for
     #       each field.
     #   @return [String]
     #
@@ -3962,6 +4485,19 @@ module Aws::AppSync
       :runtime,
       :code,
       :metrics_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation exceeded the service quota for this resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4500,6 +5036,96 @@ module Aws::AppSync
     #
     class UpdateApiKeyResponse < Struct.new(
       :api_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Api.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_contact
+    #   The owner contact information for the `Api`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_config
+    #   The new event configuration. This includes the default authorization
+    #   configuration for connecting, publishing, and subscribing to an
+    #   Event API.
+    #   @return [Types::EventConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiRequest AWS API Documentation
+    #
+    class UpdateApiRequest < Struct.new(
+      :api_id,
+      :name,
+      :owner_contact,
+      :event_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api
+    #   The `Api` object.
+    #   @return [Types::Api]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiResponse AWS API Documentation
+    #
+    class UpdateApiResponse < Struct.new(
+      :api)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_id
+    #   The `Api` ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `ChannelNamespace`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscribe_auth_modes
+    #   The authorization mode to use for subscribing to messages on the
+    #   channel namespace. This configuration overrides the default `Api`
+    #   authorization configuration.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] publish_auth_modes
+    #   The authorization mode to use for publishing messages on the channel
+    #   namespace. This configuration overrides the default `Api`
+    #   authorization configuration.
+    #   @return [Array<Types::AuthMode>]
+    #
+    # @!attribute [rw] code_handlers
+    #   The event handler functions that run custom business logic to
+    #   process published events and subscribe requests.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateChannelNamespaceRequest AWS API Documentation
+    #
+    class UpdateChannelNamespaceRequest < Struct.new(
+      :api_id,
+      :name,
+      :subscribe_auth_modes,
+      :publish_auth_modes,
+      :code_handlers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_namespace
+    #   The `ChannelNamespace` object.
+    #   @return [Types::ChannelNamespace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateChannelNamespaceResponse AWS API Documentation
+    #
+    class UpdateChannelNamespaceResponse < Struct.new(
+      :channel_namespace)
       SENSITIVE = []
       include Aws::Structure
     end

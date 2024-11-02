@@ -15,6 +15,8 @@ module Aws::DocDBElastic
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    ApplyPendingMaintenanceActionInput = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionInput')
+    ApplyPendingMaintenanceActionOutput = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionOutput')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Auth = Shapes::StringShape.new(name: 'Auth')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -41,6 +43,9 @@ module Aws::DocDBElastic
     GetClusterOutput = Shapes::StructureShape.new(name: 'GetClusterOutput')
     GetClusterSnapshotInput = Shapes::StructureShape.new(name: 'GetClusterSnapshotInput')
     GetClusterSnapshotOutput = Shapes::StructureShape.new(name: 'GetClusterSnapshotOutput')
+    GetPendingMaintenanceActionInput = Shapes::StructureShape.new(name: 'GetPendingMaintenanceActionInput')
+    GetPendingMaintenanceActionOutput = Shapes::StructureShape.new(name: 'GetPendingMaintenanceActionOutput')
+    InputString = Shapes::StringShape.new(name: 'InputString')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListClusterSnapshotsInput = Shapes::StructureShape.new(name: 'ListClusterSnapshotsInput')
@@ -49,11 +54,19 @@ module Aws::DocDBElastic
     ListClustersInput = Shapes::StructureShape.new(name: 'ListClustersInput')
     ListClustersInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListClustersInputMaxResultsInteger')
     ListClustersOutput = Shapes::StructureShape.new(name: 'ListClustersOutput')
+    ListPendingMaintenanceActionsInput = Shapes::StructureShape.new(name: 'ListPendingMaintenanceActionsInput')
+    ListPendingMaintenanceActionsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListPendingMaintenanceActionsInputMaxResultsInteger')
+    ListPendingMaintenanceActionsOutput = Shapes::StructureShape.new(name: 'ListPendingMaintenanceActionsOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    OptInType = Shapes::StringShape.new(name: 'OptInType')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Password = Shapes::StringShape.new(name: 'Password')
+    PendingMaintenanceActionDetails = Shapes::StructureShape.new(name: 'PendingMaintenanceActionDetails')
+    PendingMaintenanceActionDetailsList = Shapes::ListShape.new(name: 'PendingMaintenanceActionDetailsList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePendingMaintenanceAction = Shapes::StructureShape.new(name: 'ResourcePendingMaintenanceAction')
+    ResourcePendingMaintenanceActionList = Shapes::ListShape.new(name: 'ResourcePendingMaintenanceActionList')
     RestoreClusterFromSnapshotInput = Shapes::StructureShape.new(name: 'RestoreClusterFromSnapshotInput')
     RestoreClusterFromSnapshotOutput = Shapes::StructureShape.new(name: 'RestoreClusterFromSnapshotOutput')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -85,6 +98,15 @@ module Aws::DocDBElastic
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ApplyPendingMaintenanceActionInput.add_member(:apply_action, Shapes::ShapeRef.new(shape: InputString, required: true, location_name: "applyAction"))
+    ApplyPendingMaintenanceActionInput.add_member(:apply_on, Shapes::ShapeRef.new(shape: InputString, location_name: "applyOn"))
+    ApplyPendingMaintenanceActionInput.add_member(:opt_in_type, Shapes::ShapeRef.new(shape: OptInType, required: true, location_name: "optInType"))
+    ApplyPendingMaintenanceActionInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: InputString, required: true, location_name: "resourceArn"))
+    ApplyPendingMaintenanceActionInput.struct_class = Types::ApplyPendingMaintenanceActionInput
+
+    ApplyPendingMaintenanceActionOutput.add_member(:resource_pending_maintenance_action, Shapes::ShapeRef.new(shape: ResourcePendingMaintenanceAction, required: true, location_name: "resourcePendingMaintenanceAction"))
+    ApplyPendingMaintenanceActionOutput.struct_class = Types::ApplyPendingMaintenanceActionOutput
 
     Cluster.add_member(:admin_user_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "adminUserName"))
     Cluster.add_member(:auth_type, Shapes::ShapeRef.new(shape: Auth, required: true, location_name: "authType"))
@@ -201,6 +223,12 @@ module Aws::DocDBElastic
     GetClusterSnapshotOutput.add_member(:snapshot, Shapes::ShapeRef.new(shape: ClusterSnapshot, required: true, location_name: "snapshot"))
     GetClusterSnapshotOutput.struct_class = Types::GetClusterSnapshotOutput
 
+    GetPendingMaintenanceActionInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: InputString, required: true, location: "uri", location_name: "resourceArn"))
+    GetPendingMaintenanceActionInput.struct_class = Types::GetPendingMaintenanceActionInput
+
+    GetPendingMaintenanceActionOutput.add_member(:resource_pending_maintenance_action, Shapes::ShapeRef.new(shape: ResourcePendingMaintenanceAction, required: true, location_name: "resourcePendingMaintenanceAction"))
+    GetPendingMaintenanceActionOutput.struct_class = Types::GetPendingMaintenanceActionOutput
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -222,16 +250,40 @@ module Aws::DocDBElastic
     ListClustersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListClustersOutput.struct_class = Types::ListClustersOutput
 
+    ListPendingMaintenanceActionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListPendingMaintenanceActionsInputMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListPendingMaintenanceActionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListPendingMaintenanceActionsInput.struct_class = Types::ListPendingMaintenanceActionsInput
+
+    ListPendingMaintenanceActionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPendingMaintenanceActionsOutput.add_member(:resource_pending_maintenance_actions, Shapes::ShapeRef.new(shape: ResourcePendingMaintenanceActionList, required: true, location_name: "resourcePendingMaintenanceActions"))
+    ListPendingMaintenanceActionsOutput.struct_class = Types::ListPendingMaintenanceActionsOutput
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    PendingMaintenanceActionDetails.add_member(:action, Shapes::ShapeRef.new(shape: String, required: true, location_name: "action"))
+    PendingMaintenanceActionDetails.add_member(:auto_applied_after_date, Shapes::ShapeRef.new(shape: String, location_name: "autoAppliedAfterDate"))
+    PendingMaintenanceActionDetails.add_member(:current_apply_date, Shapes::ShapeRef.new(shape: String, location_name: "currentApplyDate"))
+    PendingMaintenanceActionDetails.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    PendingMaintenanceActionDetails.add_member(:forced_apply_date, Shapes::ShapeRef.new(shape: String, location_name: "forcedApplyDate"))
+    PendingMaintenanceActionDetails.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: String, location_name: "optInStatus"))
+    PendingMaintenanceActionDetails.struct_class = Types::PendingMaintenanceActionDetails
+
+    PendingMaintenanceActionDetailsList.member = Shapes::ShapeRef.new(shape: PendingMaintenanceActionDetails)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourcePendingMaintenanceAction.add_member(:pending_maintenance_action_details, Shapes::ShapeRef.new(shape: PendingMaintenanceActionDetailsList, location_name: "pendingMaintenanceActionDetails"))
+    ResourcePendingMaintenanceAction.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
+    ResourcePendingMaintenanceAction.struct_class = Types::ResourcePendingMaintenanceAction
+
+    ResourcePendingMaintenanceActionList.member = Shapes::ShapeRef.new(shape: ResourcePendingMaintenanceAction)
 
     RestoreClusterFromSnapshotInput.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clusterName"))
     RestoreClusterFromSnapshotInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
@@ -327,9 +379,11 @@ module Aws::DocDBElastic
 
       api.metadata = {
         "apiVersion" => "2022-11-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "docdb-elastic",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "DocDB Elastic",
         "serviceFullName" => "Amazon DocumentDB Elastic Clusters",
         "serviceId" => "DocDB Elastic",
@@ -337,6 +391,20 @@ module Aws::DocDBElastic
         "signingName" => "docdb-elastic",
         "uid" => "docdb-elastic-2022-11-28",
       }
+
+      api.add_operation(:apply_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ApplyPendingMaintenanceAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/pending-action"
+        o.input = Shapes::ShapeRef.new(shape: ApplyPendingMaintenanceActionInput)
+        o.output = Shapes::ShapeRef.new(shape: ApplyPendingMaintenanceActionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
 
       api.add_operation(:copy_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CopyClusterSnapshot"
@@ -436,6 +504,20 @@ module Aws::DocDBElastic
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPendingMaintenanceAction"
+        o.http_method = "GET"
+        o.http_request_uri = "/pending-action/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetPendingMaintenanceActionInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPendingMaintenanceActionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:list_cluster_snapshots, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListClusterSnapshots"
         o.http_method = "GET"
@@ -460,6 +542,24 @@ module Aws::DocDBElastic
         o.http_request_uri = "/clusters"
         o.input = Shapes::ShapeRef.new(shape: ListClustersInput)
         o.output = Shapes::ShapeRef.new(shape: ListClustersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_pending_maintenance_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPendingMaintenanceActions"
+        o.http_method = "GET"
+        o.http_request_uri = "/pending-actions"
+        o.input = Shapes::ShapeRef.new(shape: ListPendingMaintenanceActionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListPendingMaintenanceActionsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

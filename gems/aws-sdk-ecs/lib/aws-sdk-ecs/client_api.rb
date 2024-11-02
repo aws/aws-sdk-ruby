@@ -69,6 +69,8 @@ module Aws::ECS
     ContainerDefinitions = Shapes::ListShape.new(name: 'ContainerDefinitions')
     ContainerDependencies = Shapes::ListShape.new(name: 'ContainerDependencies')
     ContainerDependency = Shapes::StructureShape.new(name: 'ContainerDependency')
+    ContainerImage = Shapes::StructureShape.new(name: 'ContainerImage')
+    ContainerImages = Shapes::ListShape.new(name: 'ContainerImages')
     ContainerInstance = Shapes::StructureShape.new(name: 'ContainerInstance')
     ContainerInstanceField = Shapes::StringShape.new(name: 'ContainerInstanceField')
     ContainerInstanceFieldList = Shapes::ListShape.new(name: 'ContainerInstanceFieldList')
@@ -89,6 +91,7 @@ module Aws::ECS
     CreateServiceResponse = Shapes::StructureShape.new(name: 'CreateServiceResponse')
     CreateTaskSetRequest = Shapes::StructureShape.new(name: 'CreateTaskSetRequest')
     CreateTaskSetResponse = Shapes::StructureShape.new(name: 'CreateTaskSetResponse')
+    CreatedAt = Shapes::StructureShape.new(name: 'CreatedAt')
     DeleteAccountSettingRequest = Shapes::StructureShape.new(name: 'DeleteAccountSettingRequest')
     DeleteAccountSettingResponse = Shapes::StructureShape.new(name: 'DeleteAccountSettingResponse')
     DeleteAttributesRequest = Shapes::StructureShape.new(name: 'DeleteAttributesRequest')
@@ -122,6 +125,10 @@ module Aws::ECS
     DescribeClustersResponse = Shapes::StructureShape.new(name: 'DescribeClustersResponse')
     DescribeContainerInstancesRequest = Shapes::StructureShape.new(name: 'DescribeContainerInstancesRequest')
     DescribeContainerInstancesResponse = Shapes::StructureShape.new(name: 'DescribeContainerInstancesResponse')
+    DescribeServiceDeploymentsRequest = Shapes::StructureShape.new(name: 'DescribeServiceDeploymentsRequest')
+    DescribeServiceDeploymentsResponse = Shapes::StructureShape.new(name: 'DescribeServiceDeploymentsResponse')
+    DescribeServiceRevisionsRequest = Shapes::StructureShape.new(name: 'DescribeServiceRevisionsRequest')
+    DescribeServiceRevisionsResponse = Shapes::StructureShape.new(name: 'DescribeServiceRevisionsResponse')
     DescribeServicesRequest = Shapes::StructureShape.new(name: 'DescribeServicesRequest')
     DescribeServicesResponse = Shapes::StructureShape.new(name: 'DescribeServicesResponse')
     DescribeTaskDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeTaskDefinitionRequest')
@@ -203,6 +210,8 @@ module Aws::ECS
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
     ListContainerInstancesRequest = Shapes::StructureShape.new(name: 'ListContainerInstancesRequest')
     ListContainerInstancesResponse = Shapes::StructureShape.new(name: 'ListContainerInstancesResponse')
+    ListServiceDeploymentsRequest = Shapes::StructureShape.new(name: 'ListServiceDeploymentsRequest')
+    ListServiceDeploymentsResponse = Shapes::StructureShape.new(name: 'ListServiceDeploymentsResponse')
     ListServicesByNamespaceRequest = Shapes::StructureShape.new(name: 'ListServicesByNamespaceRequest')
     ListServicesByNamespaceResponse = Shapes::StructureShape.new(name: 'ListServicesByNamespaceResponse')
     ListServicesRequest = Shapes::StructureShape.new(name: 'ListServicesRequest')
@@ -289,6 +298,7 @@ module Aws::ECS
     ResourceRequirements = Shapes::ListShape.new(name: 'ResourceRequirements')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     Resources = Shapes::ListShape.new(name: 'Resources')
+    Rollback = Shapes::StructureShape.new(name: 'Rollback')
     RunTaskRequest = Shapes::StructureShape.new(name: 'RunTaskRequest')
     RunTaskResponse = Shapes::StructureShape.new(name: 'RunTaskResponse')
     RuntimePlatform = Shapes::StructureShape.new(name: 'RuntimePlatform')
@@ -310,6 +320,15 @@ module Aws::ECS
     ServiceConnectServiceResourceList = Shapes::ListShape.new(name: 'ServiceConnectServiceResourceList')
     ServiceConnectTlsCertificateAuthority = Shapes::StructureShape.new(name: 'ServiceConnectTlsCertificateAuthority')
     ServiceConnectTlsConfiguration = Shapes::StructureShape.new(name: 'ServiceConnectTlsConfiguration')
+    ServiceDeployment = Shapes::StructureShape.new(name: 'ServiceDeployment')
+    ServiceDeploymentAlarms = Shapes::StructureShape.new(name: 'ServiceDeploymentAlarms')
+    ServiceDeploymentBrief = Shapes::StructureShape.new(name: 'ServiceDeploymentBrief')
+    ServiceDeploymentCircuitBreaker = Shapes::StructureShape.new(name: 'ServiceDeploymentCircuitBreaker')
+    ServiceDeploymentRollbackMonitorsStatus = Shapes::StringShape.new(name: 'ServiceDeploymentRollbackMonitorsStatus')
+    ServiceDeploymentStatus = Shapes::StringShape.new(name: 'ServiceDeploymentStatus')
+    ServiceDeploymentStatusList = Shapes::ListShape.new(name: 'ServiceDeploymentStatusList')
+    ServiceDeployments = Shapes::ListShape.new(name: 'ServiceDeployments')
+    ServiceDeploymentsBrief = Shapes::ListShape.new(name: 'ServiceDeploymentsBrief')
     ServiceEvent = Shapes::StructureShape.new(name: 'ServiceEvent')
     ServiceEvents = Shapes::ListShape.new(name: 'ServiceEvents')
     ServiceField = Shapes::StringShape.new(name: 'ServiceField')
@@ -319,6 +338,10 @@ module Aws::ECS
     ServiceNotFoundException = Shapes::StructureShape.new(name: 'ServiceNotFoundException')
     ServiceRegistries = Shapes::ListShape.new(name: 'ServiceRegistries')
     ServiceRegistry = Shapes::StructureShape.new(name: 'ServiceRegistry')
+    ServiceRevision = Shapes::StructureShape.new(name: 'ServiceRevision')
+    ServiceRevisionSummary = Shapes::StructureShape.new(name: 'ServiceRevisionSummary')
+    ServiceRevisions = Shapes::ListShape.new(name: 'ServiceRevisions')
+    ServiceRevisionsSummaryList = Shapes::ListShape.new(name: 'ServiceRevisionsSummaryList')
     ServiceVolumeConfiguration = Shapes::StructureShape.new(name: 'ServiceVolumeConfiguration')
     ServiceVolumeConfigurations = Shapes::ListShape.new(name: 'ServiceVolumeConfigurations')
     Services = Shapes::ListShape.new(name: 'Services')
@@ -607,6 +630,13 @@ module Aws::ECS
     ContainerDependency.add_member(:condition, Shapes::ShapeRef.new(shape: ContainerCondition, required: true, location_name: "condition"))
     ContainerDependency.struct_class = Types::ContainerDependency
 
+    ContainerImage.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
+    ContainerImage.add_member(:image_digest, Shapes::ShapeRef.new(shape: String, location_name: "imageDigest"))
+    ContainerImage.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
+    ContainerImage.struct_class = Types::ContainerImage
+
+    ContainerImages.member = Shapes::ShapeRef.new(shape: ContainerImage)
+
     ContainerInstance.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
     ContainerInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceId"))
     ContainerInstance.add_member(:capacity_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "capacityProviderName"))
@@ -732,6 +762,10 @@ module Aws::ECS
     CreateTaskSetResponse.add_member(:task_set, Shapes::ShapeRef.new(shape: TaskSet, location_name: "taskSet"))
     CreateTaskSetResponse.struct_class = Types::CreateTaskSetResponse
 
+    CreatedAt.add_member(:before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "before"))
+    CreatedAt.add_member(:after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "after"))
+    CreatedAt.struct_class = Types::CreatedAt
+
     DeleteAccountSettingRequest.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, required: true, location_name: "name"))
     DeleteAccountSettingRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, location_name: "principalArn"))
     DeleteAccountSettingRequest.struct_class = Types::DeleteAccountSettingRequest
@@ -805,8 +839,8 @@ module Aws::ECS
     Deployment.struct_class = Types::Deployment
 
     DeploymentAlarms.add_member(:alarm_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "alarmNames"))
-    DeploymentAlarms.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
     DeploymentAlarms.add_member(:rollback, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "rollback"))
+    DeploymentAlarms.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
     DeploymentAlarms.struct_class = Types::DeploymentAlarms
 
     DeploymentCircuitBreaker.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
@@ -868,6 +902,20 @@ module Aws::ECS
     DescribeContainerInstancesResponse.add_member(:container_instances, Shapes::ShapeRef.new(shape: ContainerInstances, location_name: "containerInstances"))
     DescribeContainerInstancesResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
     DescribeContainerInstancesResponse.struct_class = Types::DescribeContainerInstancesResponse
+
+    DescribeServiceDeploymentsRequest.add_member(:service_deployment_arns, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "serviceDeploymentArns"))
+    DescribeServiceDeploymentsRequest.struct_class = Types::DescribeServiceDeploymentsRequest
+
+    DescribeServiceDeploymentsResponse.add_member(:service_deployments, Shapes::ShapeRef.new(shape: ServiceDeployments, location_name: "serviceDeployments"))
+    DescribeServiceDeploymentsResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
+    DescribeServiceDeploymentsResponse.struct_class = Types::DescribeServiceDeploymentsResponse
+
+    DescribeServiceRevisionsRequest.add_member(:service_revision_arns, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "serviceRevisionArns"))
+    DescribeServiceRevisionsRequest.struct_class = Types::DescribeServiceRevisionsRequest
+
+    DescribeServiceRevisionsResponse.add_member(:service_revisions, Shapes::ShapeRef.new(shape: ServiceRevisions, location_name: "serviceRevisions"))
+    DescribeServiceRevisionsResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
+    DescribeServiceRevisionsResponse.struct_class = Types::DescribeServiceRevisionsResponse
 
     DescribeServicesRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     DescribeServicesRequest.add_member(:services, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "services"))
@@ -1123,6 +1171,18 @@ module Aws::ECS
     ListContainerInstancesResponse.add_member(:container_instance_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "containerInstanceArns"))
     ListContainerInstancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListContainerInstancesResponse.struct_class = Types::ListContainerInstancesResponse
+
+    ListServiceDeploymentsRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
+    ListServiceDeploymentsRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
+    ListServiceDeploymentsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ServiceDeploymentStatusList, location_name: "status"))
+    ListServiceDeploymentsRequest.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    ListServiceDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListServiceDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
+    ListServiceDeploymentsRequest.struct_class = Types::ListServiceDeploymentsRequest
+
+    ListServiceDeploymentsResponse.add_member(:service_deployments, Shapes::ShapeRef.new(shape: ServiceDeploymentsBrief, location_name: "serviceDeployments"))
+    ListServiceDeploymentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListServiceDeploymentsResponse.struct_class = Types::ListServiceDeploymentsResponse
 
     ListServicesByNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespace"))
     ListServicesByNamespaceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -1402,6 +1462,11 @@ module Aws::ECS
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
+    Rollback.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    Rollback.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    Rollback.add_member(:service_revision_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceRevisionArn"))
+    Rollback.struct_class = Types::Rollback
+
     RunTaskRequest.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     RunTaskRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     RunTaskRequest.add_member(:count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "count"))
@@ -1513,6 +1578,51 @@ module Aws::ECS
     ServiceConnectTlsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
     ServiceConnectTlsConfiguration.struct_class = Types::ServiceConnectTlsConfiguration
 
+    ServiceDeployment.add_member(:service_deployment_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceDeploymentArn"))
+    ServiceDeployment.add_member(:service_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceArn"))
+    ServiceDeployment.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
+    ServiceDeployment.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    ServiceDeployment.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    ServiceDeployment.add_member(:finished_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "finishedAt"))
+    ServiceDeployment.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stoppedAt"))
+    ServiceDeployment.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    ServiceDeployment.add_member(:source_service_revisions, Shapes::ShapeRef.new(shape: ServiceRevisionsSummaryList, location_name: "sourceServiceRevisions"))
+    ServiceDeployment.add_member(:target_service_revision, Shapes::ShapeRef.new(shape: ServiceRevisionSummary, location_name: "targetServiceRevision"))
+    ServiceDeployment.add_member(:status, Shapes::ShapeRef.new(shape: ServiceDeploymentStatus, location_name: "status"))
+    ServiceDeployment.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ServiceDeployment.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
+    ServiceDeployment.add_member(:rollback, Shapes::ShapeRef.new(shape: Rollback, location_name: "rollback"))
+    ServiceDeployment.add_member(:deployment_circuit_breaker, Shapes::ShapeRef.new(shape: ServiceDeploymentCircuitBreaker, location_name: "deploymentCircuitBreaker"))
+    ServiceDeployment.add_member(:alarms, Shapes::ShapeRef.new(shape: ServiceDeploymentAlarms, location_name: "alarms"))
+    ServiceDeployment.struct_class = Types::ServiceDeployment
+
+    ServiceDeploymentAlarms.add_member(:status, Shapes::ShapeRef.new(shape: ServiceDeploymentRollbackMonitorsStatus, location_name: "status"))
+    ServiceDeploymentAlarms.add_member(:alarm_names, Shapes::ShapeRef.new(shape: StringList, location_name: "alarmNames"))
+    ServiceDeploymentAlarms.add_member(:triggered_alarm_names, Shapes::ShapeRef.new(shape: StringList, location_name: "triggeredAlarmNames"))
+    ServiceDeploymentAlarms.struct_class = Types::ServiceDeploymentAlarms
+
+    ServiceDeploymentBrief.add_member(:service_deployment_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceDeploymentArn"))
+    ServiceDeploymentBrief.add_member(:service_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceArn"))
+    ServiceDeploymentBrief.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
+    ServiceDeploymentBrief.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    ServiceDeploymentBrief.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    ServiceDeploymentBrief.add_member(:finished_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "finishedAt"))
+    ServiceDeploymentBrief.add_member(:target_service_revision_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetServiceRevisionArn"))
+    ServiceDeploymentBrief.add_member(:status, Shapes::ShapeRef.new(shape: ServiceDeploymentStatus, location_name: "status"))
+    ServiceDeploymentBrief.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    ServiceDeploymentBrief.struct_class = Types::ServiceDeploymentBrief
+
+    ServiceDeploymentCircuitBreaker.add_member(:status, Shapes::ShapeRef.new(shape: ServiceDeploymentRollbackMonitorsStatus, location_name: "status"))
+    ServiceDeploymentCircuitBreaker.add_member(:failure_count, Shapes::ShapeRef.new(shape: Integer, location_name: "failureCount"))
+    ServiceDeploymentCircuitBreaker.add_member(:threshold, Shapes::ShapeRef.new(shape: Integer, location_name: "threshold"))
+    ServiceDeploymentCircuitBreaker.struct_class = Types::ServiceDeploymentCircuitBreaker
+
+    ServiceDeploymentStatusList.member = Shapes::ShapeRef.new(shape: ServiceDeploymentStatus)
+
+    ServiceDeployments.member = Shapes::ShapeRef.new(shape: ServiceDeployment)
+
+    ServiceDeploymentsBrief.member = Shapes::ShapeRef.new(shape: ServiceDeploymentBrief)
+
     ServiceEvent.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     ServiceEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     ServiceEvent.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -1545,6 +1655,35 @@ module Aws::ECS
     ServiceRegistry.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
     ServiceRegistry.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
     ServiceRegistry.struct_class = Types::ServiceRegistry
+
+    ServiceRevision.add_member(:service_revision_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceRevisionArn"))
+    ServiceRevision.add_member(:service_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceArn"))
+    ServiceRevision.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
+    ServiceRevision.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinition"))
+    ServiceRevision.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
+    ServiceRevision.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
+    ServiceRevision.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    ServiceRevision.add_member(:platform_family, Shapes::ShapeRef.new(shape: String, location_name: "platformFamily"))
+    ServiceRevision.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
+    ServiceRevision.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
+    ServiceRevision.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    ServiceRevision.add_member(:container_images, Shapes::ShapeRef.new(shape: ContainerImages, location_name: "containerImages"))
+    ServiceRevision.add_member(:guard_duty_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "guardDutyEnabled"))
+    ServiceRevision.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
+    ServiceRevision.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
+    ServiceRevision.add_member(:fargate_ephemeral_storage, Shapes::ShapeRef.new(shape: DeploymentEphemeralStorage, location_name: "fargateEphemeralStorage"))
+    ServiceRevision.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    ServiceRevision.struct_class = Types::ServiceRevision
+
+    ServiceRevisionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    ServiceRevisionSummary.add_member(:requested_task_count, Shapes::ShapeRef.new(shape: Integer, location_name: "requestedTaskCount"))
+    ServiceRevisionSummary.add_member(:running_task_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningTaskCount"))
+    ServiceRevisionSummary.add_member(:pending_task_count, Shapes::ShapeRef.new(shape: Integer, location_name: "pendingTaskCount"))
+    ServiceRevisionSummary.struct_class = Types::ServiceRevisionSummary
+
+    ServiceRevisions.member = Shapes::ShapeRef.new(shape: ServiceRevision)
+
+    ServiceRevisionsSummaryList.member = Shapes::ShapeRef.new(shape: ServiceRevisionSummary)
 
     ServiceVolumeConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: ECSVolumeName, required: true, location_name: "name"))
     ServiceVolumeConfiguration.add_member(:managed_ebs_volume, Shapes::ShapeRef.new(shape: ServiceManagedEBSVolumeConfiguration, location_name: "managedEBSVolume"))
@@ -2176,6 +2315,36 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
       end)
 
+      api.add_operation(:describe_service_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServiceDeployments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServiceDeploymentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServiceDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
+      api.add_operation(:describe_service_revisions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServiceRevisions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServiceRevisionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServiceRevisionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
+
       api.add_operation(:describe_services, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeServices"
         o.http_method = "POST"
@@ -2332,6 +2501,20 @@ module Aws::ECS
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_service_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceDeployments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceDeploymentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:list_services, Seahorse::Model::Operation.new.tap do |o|

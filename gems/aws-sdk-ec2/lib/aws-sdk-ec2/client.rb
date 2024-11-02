@@ -2472,6 +2472,61 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Associates a security group with another VPC in the same Region. This
+    # enables you to use the same security group with network interfaces and
+    # instances in the specified VPC.
+    #
+    # <note markdown="1"> * The VPC you want to associate the security group with must be in the
+    #   same Region.
+    #
+    # * You can associate the security group with another VPC if your
+    #   account owns the VPC or if the VPC was shared with you.
+    #
+    # * You must own the security group and the VPC that it was created in.
+    #
+    # * You cannot use this feature with default security groups.
+    #
+    # * You cannot use this feature with the default VPC.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :group_id
+    #   A security group ID.
+    #
+    # @option params [required, String] :vpc_id
+    #   A VPC ID.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssociateSecurityGroupVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateSecurityGroupVpcResult#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_security_group_vpc({
+    #     group_id: "SecurityGroupId", # required
+    #     vpc_id: "VpcId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated", "disassociation-failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSecurityGroupVpc AWS API Documentation
+    #
+    # @overload associate_security_group_vpc(params = {})
+    # @param [Hash] params ({})
+    def associate_security_group_vpc(params = {}, options = {})
+      req = build_request(:associate_security_group_vpc, params)
+      req.send_request(options)
+    end
+
     # Associates a CIDR block with your subnet. You can only associate a
     # single IPv6 CIDR block with your subnet.
     #
@@ -3590,6 +3645,7 @@ module Aws::EC2
     #   resp.security_group_rules[0].tags #=> Array
     #   resp.security_group_rules[0].tags[0].key #=> String
     #   resp.security_group_rules[0].tags[0].value #=> String
+    #   resp.security_group_rules[0].security_group_rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgress AWS API Documentation
     #
@@ -3875,6 +3931,7 @@ module Aws::EC2
     #   resp.security_group_rules[0].tags #=> Array
     #   resp.security_group_rules[0].tags[0].key #=> String
     #   resp.security_group_rules[0].tags[0].value #=> String
+    #   resp.security_group_rules[0].security_group_rule_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngress AWS API Documentation
     #
@@ -10670,7 +10727,12 @@ module Aws::EC2
     # @option params [String] :interface_type
     #   The type of network interface. The default is `interface`.
     #
-    #   The only supported values are `interface`, `efa`, and `trunk`.
+    #   If you specify `efa-only`, do not assign any IP addresses to the
+    #   network interface. EFA-only network interfaces do not support IP
+    #   addresses.
+    #
+    #   The only supported values are `interface`, `efa`, `efa-only`, and
+    #   `trunk`.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new network interface.
@@ -11813,6 +11875,7 @@ module Aws::EC2
     #
     #   * {Types::CreateSecurityGroupResult#group_id #group_id} => String
     #   * {Types::CreateSecurityGroupResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateSecurityGroupResult#security_group_arn #security_group_arn} => String
     #
     #
     # @example Example: To create a security group for a VPC
@@ -11856,6 +11919,7 @@ module Aws::EC2
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.security_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroup AWS API Documentation
     #
@@ -12928,7 +12992,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.htm
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.html
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the source network interface.
@@ -17846,8 +17910,9 @@ module Aws::EC2
     # Deletes a security group.
     #
     # If you attempt to delete a security group that is associated with an
-    # instance or network interface or is referenced by another security
-    # group in the same VPC, the operation fails with `DependencyViolation`.
+    # instance or network interface, is referenced by another security group
+    # in the same VPC, or has a VPC association, the operation fails with
+    # `DependencyViolation`.
     #
     # @option params [String] :group_id
     #   The ID of the security group.
@@ -25803,7 +25868,8 @@ module Aws::EC2
     #   * `supported-root-device-type` - The root device type (`ebs` \|
     #     `instance-store`).
     #
-    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`).
+    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot` \|
+    #     `capacity-block`).
     #
     #   * `supported-virtualization-type` - The virtualization type (`hvm` \|
     #     `paravirtual`).
@@ -30745,12 +30811,12 @@ module Aws::EC2
     #
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
-    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efs` \|
-    #     `gateway_load_balancer` \| `gateway_load_balancer_endpoint` \|
-    #     `global_accelerator_managed` \| `interface` \| `iot_rules_managed`
-    #     \| `lambda` \| `load_balancer` \| `nat_gateway` \|
-    #     `network_load_balancer` \| `quicksight` \| `transit_gateway` \|
-    #     `trunk` \| `vpc_endpoint`).
+    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
+    #     \| `efs` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
+    #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
+    #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|
+    #     `transit_gateway` \| `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #
@@ -32505,8 +32571,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the VPCs on the other side of a VPC peering connection that
-    # are referencing the security groups you've specified in this request.
+    # Describes the VPCs on the other side of a VPC peering or Transit
+    # Gateway connection that are referencing the security groups you've
+    # specified in this request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -32650,6 +32717,7 @@ module Aws::EC2
     #   resp.security_group_rules[0].tags #=> Array
     #   resp.security_group_rules[0].tags[0].key #=> String
     #   resp.security_group_rules[0].tags[0].value #=> String
+    #   resp.security_group_rules[0].security_group_rule_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupRules AWS API Documentation
@@ -32658,6 +32726,93 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_security_group_rules(params = {}, options = {})
       req = build_request(:describe_security_group_rules, params)
+      req.send_request(options)
+    end
+
+    # Describes security group VPC associations made with
+    # [AssociateSecurityGroupVpc][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Security group VPC association filters.
+    #
+    #   * `group-id`: The security group ID.
+    #
+    #   * `vpc-id`: The ID of the associated VPC.
+    #
+    #   * `vpc-owner-id`: The account ID of the VPC owner.
+    #
+    #   * `state`: The state of the association.
+    #
+    #   * `tag:<key>`: The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a tag
+    #     with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+    #     the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key`: The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeSecurityGroupVpcAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSecurityGroupVpcAssociationsResult#security_group_vpc_associations #security_group_vpc_associations} => Array&lt;Types::SecurityGroupVpcAssociation&gt;
+    #   * {Types::DescribeSecurityGroupVpcAssociationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_security_group_vpc_associations({
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_group_vpc_associations #=> Array
+    #   resp.security_group_vpc_associations[0].group_id #=> String
+    #   resp.security_group_vpc_associations[0].vpc_id #=> String
+    #   resp.security_group_vpc_associations[0].vpc_owner_id #=> String
+    #   resp.security_group_vpc_associations[0].state #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated", "disassociation-failed"
+    #   resp.security_group_vpc_associations[0].state_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupVpcAssociations AWS API Documentation
+    #
+    # @overload describe_security_group_vpc_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_security_group_vpc_associations(params = {}, options = {})
+      req = build_request(:describe_security_group_vpc_associations, params)
       req.send_request(options)
     end
 
@@ -32867,6 +33022,7 @@ module Aws::EC2
     #   resp.security_groups[0].tags[0].key #=> String
     #   resp.security_groups[0].tags[0].value #=> String
     #   resp.security_groups[0].vpc_id #=> String
+    #   resp.security_groups[0].security_group_arn #=> String
     #   resp.security_groups[0].owner_id #=> String
     #   resp.security_groups[0].group_name #=> String
     #   resp.security_groups[0].description #=> String
@@ -34420,11 +34576,19 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the stale security group rules for security groups in a
-    # specified VPC. Rules are stale when they reference a deleted security
-    # group in a peered VPC. Rules can also be stale if they reference a
-    # security group in a peer VPC for which the VPC peering connection has
-    # been deleted.
+    # Describes the stale security group rules for security groups
+    # referenced across a VPC peering connection, transit gateway
+    # connection, or with a security group VPC association. Rules are stale
+    # when they reference a deleted security group. Rules can also be stale
+    # if they reference a security group in a peer VPC for which the VPC
+    # peering connection has been deleted, across a transit gateway where
+    # the transit gateway has been deleted (or [the transit gateway security
+    # group referencing feature][1] has been disabled), or if a security
+    # group VPC association has been disassociated.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -40426,6 +40590,53 @@ module Aws::EC2
     # @param [Hash] params ({})
     def disassociate_route_table(params = {}, options = {})
       req = build_request(:disassociate_route_table, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a security group from a VPC. You cannot disassociate the
+    # security group if any Elastic network interfaces in the associated VPC
+    # are still associated with the security group. Note that the
+    # disassociation is asynchronous and you can check the status of the
+    # request with [DescribeSecurityGroupVpcAssociations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroupVpcAssociations.html
+    #
+    # @option params [required, String] :group_id
+    #   A security group ID.
+    #
+    # @option params [required, String] :vpc_id
+    #   A VPC ID.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisassociateSecurityGroupVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateSecurityGroupVpcResult#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_security_group_vpc({
+    #     group_id: "DisassociateSecurityGroupVpcSecurityGroupId", # required
+    #     vpc_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "associating", "associated", "association-failed", "disassociating", "disassociated", "disassociation-failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSecurityGroupVpc AWS API Documentation
+    #
+    # @overload disassociate_security_group_vpc(params = {})
+    # @param [Hash] params ({})
+    def disassociate_security_group_vpc(params = {}, options = {})
+      req = build_request(:disassociate_security_group_vpc, params)
       req.send_request(options)
     end
 
@@ -57028,6 +57239,7 @@ module Aws::EC2
     #
     #   * {Types::RevokeSecurityGroupEgressResult#return #return} => Boolean
     #   * {Types::RevokeSecurityGroupEgressResult#unknown_ip_permissions #unknown_ip_permissions} => Array&lt;Types::IpPermission&gt;
+    #   * {Types::RevokeSecurityGroupEgressResult#revoked_security_group_rules #revoked_security_group_rules} => Array&lt;Types::RevokedSecurityGroupRule&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -57103,6 +57315,18 @@ module Aws::EC2
     #   resp.unknown_ip_permissions[0].prefix_list_ids #=> Array
     #   resp.unknown_ip_permissions[0].prefix_list_ids[0].description #=> String
     #   resp.unknown_ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.revoked_security_group_rules #=> Array
+    #   resp.revoked_security_group_rules[0].security_group_rule_id #=> String
+    #   resp.revoked_security_group_rules[0].group_id #=> String
+    #   resp.revoked_security_group_rules[0].is_egress #=> Boolean
+    #   resp.revoked_security_group_rules[0].ip_protocol #=> String
+    #   resp.revoked_security_group_rules[0].from_port #=> Integer
+    #   resp.revoked_security_group_rules[0].to_port #=> Integer
+    #   resp.revoked_security_group_rules[0].cidr_ipv_4 #=> String
+    #   resp.revoked_security_group_rules[0].cidr_ipv_6 #=> String
+    #   resp.revoked_security_group_rules[0].prefix_list_id #=> String
+    #   resp.revoked_security_group_rules[0].referenced_group_id #=> String
+    #   resp.revoked_security_group_rules[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgress AWS API Documentation
     #
@@ -57196,6 +57420,7 @@ module Aws::EC2
     #
     #   * {Types::RevokeSecurityGroupIngressResult#return #return} => Boolean
     #   * {Types::RevokeSecurityGroupIngressResult#unknown_ip_permissions #unknown_ip_permissions} => Array&lt;Types::IpPermission&gt;
+    #   * {Types::RevokeSecurityGroupIngressResult#revoked_security_group_rules #revoked_security_group_rules} => Array&lt;Types::RevokedSecurityGroupRule&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -57272,6 +57497,18 @@ module Aws::EC2
     #   resp.unknown_ip_permissions[0].prefix_list_ids #=> Array
     #   resp.unknown_ip_permissions[0].prefix_list_ids[0].description #=> String
     #   resp.unknown_ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.revoked_security_group_rules #=> Array
+    #   resp.revoked_security_group_rules[0].security_group_rule_id #=> String
+    #   resp.revoked_security_group_rules[0].group_id #=> String
+    #   resp.revoked_security_group_rules[0].is_egress #=> Boolean
+    #   resp.revoked_security_group_rules[0].ip_protocol #=> String
+    #   resp.revoked_security_group_rules[0].from_port #=> Integer
+    #   resp.revoked_security_group_rules[0].to_port #=> Integer
+    #   resp.revoked_security_group_rules[0].cidr_ipv_4 #=> String
+    #   resp.revoked_security_group_rules[0].cidr_ipv_6 #=> String
+    #   resp.revoked_security_group_rules[0].prefix_list_id #=> String
+    #   resp.revoked_security_group_rules[0].referenced_group_id #=> String
+    #   resp.revoked_security_group_rules[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngress AWS API Documentation
     #
@@ -60611,7 +60848,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.485.0'
+      context[:gem_version] = '1.486.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

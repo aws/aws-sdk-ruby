@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.200.0 (2024-10-31)
+------------------
+
+* Feature - Add schedule support for AWS Glue column statistics
+
 1.199.0 (2024-10-18)
 ------------------
 

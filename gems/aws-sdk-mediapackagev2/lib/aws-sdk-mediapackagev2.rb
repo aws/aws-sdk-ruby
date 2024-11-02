@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:mediapackagev2)
 # structure.
 #
 #     media_package_v2 = Aws::MediaPackageV2::Client.new
-#     resp = media_package_v2.create_channel(params)
+#     resp = media_package_v2.cancel_harvest_job(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::MediaPackageV2
   autoload :EndpointProvider, 'aws-sdk-mediapackagev2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediapackagev2/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
 

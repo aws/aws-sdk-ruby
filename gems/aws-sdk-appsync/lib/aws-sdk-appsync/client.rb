@@ -604,6 +604,124 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Creates an `Api` object. Use this operation to create an AppSync API
+    # with your preferred configuration, such as an Event API that provides
+    # real-time message publishing and message subscriptions over
+    # WebSockets.
+    #
+    # @option params [required, String] :name
+    #   The name for the `Api`.
+    #
+    # @option params [String] :owner_contact
+    #   The owner contact information for the `Api`.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map with keys of `TagKey` objects and values of `TagValue` objects.
+    #
+    # @option params [Types::EventConfig] :event_config
+    #   The Event API configuration. This includes the default authorization
+    #   configuration for connecting, publishing, and subscribing to an Event
+    #   API.
+    #
+    # @return [Types::CreateApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApiResponse#api #api} => Types::Api
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_api({
+    #     name: "ApiName", # required
+    #     owner_contact: "String",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     event_config: {
+    #       auth_providers: [ # required
+    #         {
+    #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #           cognito_config: {
+    #             user_pool_id: "String", # required
+    #             aws_region: "String", # required
+    #             app_id_client_regex: "String",
+    #           },
+    #           open_id_connect_config: {
+    #             issuer: "String", # required
+    #             client_id: "String",
+    #             iat_ttl: 1,
+    #             auth_ttl: 1,
+    #           },
+    #           lambda_authorizer_config: {
+    #             authorizer_result_ttl_in_seconds: 1,
+    #             authorizer_uri: "String", # required
+    #             identity_validation_expression: "String",
+    #           },
+    #         },
+    #       ],
+    #       connection_auth_modes: [ # required
+    #         {
+    #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #         },
+    #       ],
+    #       default_publish_auth_modes: [ # required
+    #         {
+    #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #         },
+    #       ],
+    #       default_subscribe_auth_modes: [ # required
+    #         {
+    #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #         },
+    #       ],
+    #       log_config: {
+    #         log_level: "NONE", # required, accepts NONE, ERROR, ALL, INFO, DEBUG
+    #         cloud_watch_logs_role_arn: "String", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api.api_id #=> String
+    #   resp.api.name #=> String
+    #   resp.api.owner_contact #=> String
+    #   resp.api.tags #=> Hash
+    #   resp.api.tags["TagKey"] #=> String
+    #   resp.api.dns #=> Hash
+    #   resp.api.dns["String"] #=> String
+    #   resp.api.api_arn #=> String
+    #   resp.api.created #=> Time
+    #   resp.api.xray_enabled #=> Boolean
+    #   resp.api.waf_web_acl_arn #=> String
+    #   resp.api.event_config.auth_providers #=> Array
+    #   resp.api.event_config.auth_providers[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.auth_providers[0].cognito_config.user_pool_id #=> String
+    #   resp.api.event_config.auth_providers[0].cognito_config.aws_region #=> String
+    #   resp.api.event_config.auth_providers[0].cognito_config.app_id_client_regex #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.identity_validation_expression #=> String
+    #   resp.api.event_config.connection_auth_modes #=> Array
+    #   resp.api.event_config.connection_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.default_publish_auth_modes #=> Array
+    #   resp.api.event_config.default_publish_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.default_subscribe_auth_modes #=> Array
+    #   resp.api.event_config.default_subscribe_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.log_config.log_level #=> String, one of "NONE", "ERROR", "ALL", "INFO", "DEBUG"
+    #   resp.api.event_config.log_config.cloud_watch_logs_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApi AWS API Documentation
+    #
+    # @overload create_api(params = {})
+    # @param [Hash] params ({})
+    def create_api(params = {}, options = {})
+      req = build_request(:create_api, params)
+      req.send_request(options)
+    end
+
     # Creates a cache for the GraphQL API.
     #
     # @option params [required, String] :api_id
@@ -760,6 +878,81 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def create_api_key(params = {}, options = {})
       req = build_request(:create_api_key, params)
+      req.send_request(options)
+    end
+
+    # Creates a `ChannelNamespace` for an `Api`.
+    #
+    # @option params [required, String] :api_id
+    #   The `Api` ID.
+    #
+    # @option params [required, String] :name
+    #   The name of the `ChannelNamespace`. This name must be unique within
+    #   the `Api`
+    #
+    # @option params [Array<Types::AuthMode>] :subscribe_auth_modes
+    #   The authorization mode to use for subscribing to messages on the
+    #   channel namespace. This configuration overrides the default `Api`
+    #   authorization configuration.
+    #
+    # @option params [Array<Types::AuthMode>] :publish_auth_modes
+    #   The authorization mode to use for publishing messages on the channel
+    #   namespace. This configuration overrides the default `Api`
+    #   authorization configuration.
+    #
+    # @option params [String] :code_handlers
+    #   The event handler functions that run custom business logic to process
+    #   published events and subscribe requests.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map with keys of `TagKey` objects and values of `TagValue` objects.
+    #
+    # @return [Types::CreateChannelNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelNamespaceResponse#channel_namespace #channel_namespace} => Types::ChannelNamespace
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel_namespace({
+    #     api_id: "String", # required
+    #     name: "Namespace", # required
+    #     subscribe_auth_modes: [
+    #       {
+    #         auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #       },
+    #     ],
+    #     publish_auth_modes: [
+    #       {
+    #         auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #       },
+    #     ],
+    #     code_handlers: "Code",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_namespace.api_id #=> String
+    #   resp.channel_namespace.name #=> String
+    #   resp.channel_namespace.subscribe_auth_modes #=> Array
+    #   resp.channel_namespace.subscribe_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.channel_namespace.publish_auth_modes #=> Array
+    #   resp.channel_namespace.publish_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.channel_namespace.code_handlers #=> String
+    #   resp.channel_namespace.tags #=> Hash
+    #   resp.channel_namespace.tags["TagKey"] #=> String
+    #   resp.channel_namespace.channel_namespace_arn #=> String
+    #   resp.channel_namespace.created #=> Time
+    #   resp.channel_namespace.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateChannelNamespace AWS API Documentation
+    #
+    # @overload create_channel_namespace(params = {})
+    # @param [Hash] params ({})
+    def create_channel_namespace(params = {}, options = {})
+      req = build_request(:create_channel_namespace, params)
       req.send_request(options)
     end
 
@@ -1097,12 +1290,6 @@ module Aws::AppSync
     # @option params [Types::LambdaAuthorizerConfig] :lambda_authorizer_config
     #   Configuration for Lambda function authorization.
     #
-    # @option params [String] :visibility
-    #   Sets the value of the GraphQL API to public (`GLOBAL`) or private
-    #   (`PRIVATE`). If no value is provided, the visibility will be set to
-    #   `GLOBAL` by default. This value cannot be changed once the API has
-    #   been created.
-    #
     # @option params [String] :api_type
     #   The value that indicates whether the GraphQL API is a standard API
     #   (`GRAPHQL`) or merged API (`MERGED`).
@@ -1113,6 +1300,12 @@ module Aws::AppSync
     #   validate access to source APIs at runtime and to prompt the
     #   `AUTO_MERGE` to update the merged API endpoint with the source API
     #   changes automatically.
+    #
+    # @option params [String] :visibility
+    #   Sets the value of the GraphQL API to public (`GLOBAL`) or private
+    #   (`PRIVATE`). If no value is provided, the visibility will be set to
+    #   `GLOBAL` by default. This value cannot be changed once the API has
+    #   been created.
     #
     # @option params [String] :owner_contact
     #   The owner contact information for an API resource.
@@ -1212,9 +1405,9 @@ module Aws::AppSync
     #       authorizer_uri: "String", # required
     #       identity_validation_expression: "String",
     #     },
-    #     visibility: "GLOBAL", # accepts GLOBAL, PRIVATE
     #     api_type: "GRAPHQL", # accepts GRAPHQL, MERGED
     #     merged_api_execution_role_arn: "String",
+    #     visibility: "GLOBAL", # accepts GLOBAL, PRIVATE
     #     owner_contact: "String",
     #     introspection_config: "ENABLED", # accepts ENABLED, DISABLED
     #     query_depth_limit: 1,
@@ -1480,6 +1673,28 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Deletes an `Api` object
+    #
+    # @option params [required, String] :api_id
+    #   The `Api` ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_api({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApi AWS API Documentation
+    #
+    # @overload delete_api(params = {})
+    # @param [Hash] params ({})
+    def delete_api(params = {}, options = {})
+      req = build_request(:delete_api, params)
+      req.send_request(options)
+    end
+
     # Deletes an `ApiCache` object.
     #
     # @option params [required, String] :api_id
@@ -1525,6 +1740,32 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def delete_api_key(params = {}, options = {})
       req = build_request(:delete_api_key, params)
+      req.send_request(options)
+    end
+
+    # Deletes a `ChannelNamespace`.
+    #
+    # @option params [required, String] :api_id
+    #   The ID of the `Api` associated with the `ChannelNamespace`.
+    #
+    # @option params [required, String] :name
+    #   The name of the `ChannelNamespace`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel_namespace({
+    #     api_id: "String", # required
+    #     name: "Namespace", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteChannelNamespace AWS API Documentation
+    #
+    # @overload delete_channel_namespace(params = {})
+    # @param [Hash] params ({})
+    def delete_channel_namespace(params = {}, options = {})
+      req = build_request(:delete_channel_namespace, params)
       req.send_request(options)
     end
 
@@ -1914,6 +2155,64 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Retrieves an `Api` object.
+    #
+    # @option params [required, String] :api_id
+    #   The `Api` ID.
+    #
+    # @return [Types::GetApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApiResponse#api #api} => Types::Api
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_api({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api.api_id #=> String
+    #   resp.api.name #=> String
+    #   resp.api.owner_contact #=> String
+    #   resp.api.tags #=> Hash
+    #   resp.api.tags["TagKey"] #=> String
+    #   resp.api.dns #=> Hash
+    #   resp.api.dns["String"] #=> String
+    #   resp.api.api_arn #=> String
+    #   resp.api.created #=> Time
+    #   resp.api.xray_enabled #=> Boolean
+    #   resp.api.waf_web_acl_arn #=> String
+    #   resp.api.event_config.auth_providers #=> Array
+    #   resp.api.event_config.auth_providers[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.auth_providers[0].cognito_config.user_pool_id #=> String
+    #   resp.api.event_config.auth_providers[0].cognito_config.aws_region #=> String
+    #   resp.api.event_config.auth_providers[0].cognito_config.app_id_client_regex #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.identity_validation_expression #=> String
+    #   resp.api.event_config.connection_auth_modes #=> Array
+    #   resp.api.event_config.connection_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.default_publish_auth_modes #=> Array
+    #   resp.api.event_config.default_publish_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.default_subscribe_auth_modes #=> Array
+    #   resp.api.event_config.default_subscribe_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.log_config.log_level #=> String, one of "NONE", "ERROR", "ALL", "INFO", "DEBUG"
+    #   resp.api.event_config.log_config.cloud_watch_logs_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApi AWS API Documentation
+    #
+    # @overload get_api(params = {})
+    # @param [Hash] params ({})
+    def get_api(params = {}, options = {})
+      req = build_request(:get_api, params)
+      req.send_request(options)
+    end
+
     # Retrieves an `ApiAssociation` object.
     #
     # @option params [required, String] :domain_name
@@ -1976,6 +2275,49 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def get_api_cache(params = {}, options = {})
       req = build_request(:get_api_cache, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the channel namespace for a specified `Api`.
+    #
+    # @option params [required, String] :api_id
+    #   The `Api` ID.
+    #
+    # @option params [required, String] :name
+    #   The name of the `ChannelNamespace`.
+    #
+    # @return [Types::GetChannelNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelNamespaceResponse#channel_namespace #channel_namespace} => Types::ChannelNamespace
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel_namespace({
+    #     api_id: "String", # required
+    #     name: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_namespace.api_id #=> String
+    #   resp.channel_namespace.name #=> String
+    #   resp.channel_namespace.subscribe_auth_modes #=> Array
+    #   resp.channel_namespace.subscribe_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.channel_namespace.publish_auth_modes #=> Array
+    #   resp.channel_namespace.publish_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.channel_namespace.code_handlers #=> String
+    #   resp.channel_namespace.tags #=> Hash
+    #   resp.channel_namespace.tags["TagKey"] #=> String
+    #   resp.channel_namespace.channel_namespace_arn #=> String
+    #   resp.channel_namespace.created #=> Time
+    #   resp.channel_namespace.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetChannelNamespace AWS API Documentation
+    #
+    # @overload get_channel_namespace(params = {})
+    # @param [Hash] params ({})
+    def get_channel_namespace(params = {}, options = {})
+      req = build_request(:get_channel_namespace, params)
       req.send_request(options)
     end
 
@@ -2050,9 +2392,9 @@ module Aws::AppSync
     #
     # @option params [Boolean] :include_models_sdl
     #   A boolean flag that determines whether SDL should be generated for
-    #   introspected types or not. If set to `true`, each model will contain
-    #   an `sdl` property that contains the SDL for that type. The SDL only
-    #   contains the type data and no additional metadata or directives.
+    #   introspected types. If set to `true`, each model will contain an `sdl`
+    #   property that contains the SDL for that type. The SDL only contains
+    #   the type data and no additional metadata or directives.
     #
     # @option params [String] :next_token
     #   Determines the number of types to be returned in a single response
@@ -2557,6 +2899,136 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def list_api_keys(params = {}, options = {})
       req = build_request(:list_api_keys, params)
+      req.send_request(options)
+    end
+
+    # Lists the APIs in your AppSync account.
+    #
+    # `ListApis` returns only the high level API details. For more detailed
+    # information about an API, use `GetApi`.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which you can use to return the next set of items in the
+    #   list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want the request to return.
+    #
+    # @return [Types::ListApisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApisResponse#apis #apis} => Array&lt;Types::Api&gt;
+    #   * {Types::ListApisResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_apis({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.apis #=> Array
+    #   resp.apis[0].api_id #=> String
+    #   resp.apis[0].name #=> String
+    #   resp.apis[0].owner_contact #=> String
+    #   resp.apis[0].tags #=> Hash
+    #   resp.apis[0].tags["TagKey"] #=> String
+    #   resp.apis[0].dns #=> Hash
+    #   resp.apis[0].dns["String"] #=> String
+    #   resp.apis[0].api_arn #=> String
+    #   resp.apis[0].created #=> Time
+    #   resp.apis[0].xray_enabled #=> Boolean
+    #   resp.apis[0].waf_web_acl_arn #=> String
+    #   resp.apis[0].event_config.auth_providers #=> Array
+    #   resp.apis[0].event_config.auth_providers[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.apis[0].event_config.auth_providers[0].cognito_config.user_pool_id #=> String
+    #   resp.apis[0].event_config.auth_providers[0].cognito_config.aws_region #=> String
+    #   resp.apis[0].event_config.auth_providers[0].cognito_config.app_id_client_regex #=> String
+    #   resp.apis[0].event_config.auth_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.apis[0].event_config.auth_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.apis[0].event_config.auth_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.apis[0].event_config.auth_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.apis[0].event_config.auth_providers[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.apis[0].event_config.auth_providers[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.apis[0].event_config.auth_providers[0].lambda_authorizer_config.identity_validation_expression #=> String
+    #   resp.apis[0].event_config.connection_auth_modes #=> Array
+    #   resp.apis[0].event_config.connection_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.apis[0].event_config.default_publish_auth_modes #=> Array
+    #   resp.apis[0].event_config.default_publish_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.apis[0].event_config.default_subscribe_auth_modes #=> Array
+    #   resp.apis[0].event_config.default_subscribe_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.apis[0].event_config.log_config.log_level #=> String, one of "NONE", "ERROR", "ALL", "INFO", "DEBUG"
+    #   resp.apis[0].event_config.log_config.cloud_watch_logs_role_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListApis AWS API Documentation
+    #
+    # @overload list_apis(params = {})
+    # @param [Hash] params ({})
+    def list_apis(params = {}, options = {})
+      req = build_request(:list_apis, params)
+      req.send_request(options)
+    end
+
+    # Lists the channel namespaces for a specified `Api`.
+    #
+    # `ListChannelNamespaces` returns only high level details for the
+    # channel namespace. To retrieve code handlers, use
+    # `GetChannelNamespace`.
+    #
+    # @option params [required, String] :api_id
+    #   The `Api` ID.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which you can use to return the next set of items in the
+    #   list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want the request to return.
+    #
+    # @return [Types::ListChannelNamespacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelNamespacesResponse#channel_namespaces #channel_namespaces} => Array&lt;Types::ChannelNamespace&gt;
+    #   * {Types::ListChannelNamespacesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channel_namespaces({
+    #     api_id: "String", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_namespaces #=> Array
+    #   resp.channel_namespaces[0].api_id #=> String
+    #   resp.channel_namespaces[0].name #=> String
+    #   resp.channel_namespaces[0].subscribe_auth_modes #=> Array
+    #   resp.channel_namespaces[0].subscribe_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.channel_namespaces[0].publish_auth_modes #=> Array
+    #   resp.channel_namespaces[0].publish_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.channel_namespaces[0].code_handlers #=> String
+    #   resp.channel_namespaces[0].tags #=> Hash
+    #   resp.channel_namespaces[0].tags["TagKey"] #=> String
+    #   resp.channel_namespaces[0].channel_namespace_arn #=> String
+    #   resp.channel_namespaces[0].created #=> Time
+    #   resp.channel_namespaces[0].last_modified #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListChannelNamespaces AWS API Documentation
+    #
+    # @overload list_channel_namespaces(params = {})
+    # @param [Hash] params ({})
+    def list_channel_namespaces(params = {}, options = {})
+      req = build_request(:list_channel_namespaces, params)
       req.send_request(options)
     end
 
@@ -3410,6 +3882,119 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Updates an `Api`.
+    #
+    # @option params [required, String] :api_id
+    #   The `Api` ID.
+    #
+    # @option params [required, String] :name
+    #   The name of the Api.
+    #
+    # @option params [String] :owner_contact
+    #   The owner contact information for the `Api`.
+    #
+    # @option params [Types::EventConfig] :event_config
+    #   The new event configuration. This includes the default authorization
+    #   configuration for connecting, publishing, and subscribing to an Event
+    #   API.
+    #
+    # @return [Types::UpdateApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApiResponse#api #api} => Types::Api
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_api({
+    #     api_id: "String", # required
+    #     name: "ApiName", # required
+    #     owner_contact: "String",
+    #     event_config: {
+    #       auth_providers: [ # required
+    #         {
+    #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #           cognito_config: {
+    #             user_pool_id: "String", # required
+    #             aws_region: "String", # required
+    #             app_id_client_regex: "String",
+    #           },
+    #           open_id_connect_config: {
+    #             issuer: "String", # required
+    #             client_id: "String",
+    #             iat_ttl: 1,
+    #             auth_ttl: 1,
+    #           },
+    #           lambda_authorizer_config: {
+    #             authorizer_result_ttl_in_seconds: 1,
+    #             authorizer_uri: "String", # required
+    #             identity_validation_expression: "String",
+    #           },
+    #         },
+    #       ],
+    #       connection_auth_modes: [ # required
+    #         {
+    #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #         },
+    #       ],
+    #       default_publish_auth_modes: [ # required
+    #         {
+    #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #         },
+    #       ],
+    #       default_subscribe_auth_modes: [ # required
+    #         {
+    #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #         },
+    #       ],
+    #       log_config: {
+    #         log_level: "NONE", # required, accepts NONE, ERROR, ALL, INFO, DEBUG
+    #         cloud_watch_logs_role_arn: "String", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api.api_id #=> String
+    #   resp.api.name #=> String
+    #   resp.api.owner_contact #=> String
+    #   resp.api.tags #=> Hash
+    #   resp.api.tags["TagKey"] #=> String
+    #   resp.api.dns #=> Hash
+    #   resp.api.dns["String"] #=> String
+    #   resp.api.api_arn #=> String
+    #   resp.api.created #=> Time
+    #   resp.api.xray_enabled #=> Boolean
+    #   resp.api.waf_web_acl_arn #=> String
+    #   resp.api.event_config.auth_providers #=> Array
+    #   resp.api.event_config.auth_providers[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.auth_providers[0].cognito_config.user_pool_id #=> String
+    #   resp.api.event_config.auth_providers[0].cognito_config.aws_region #=> String
+    #   resp.api.event_config.auth_providers[0].cognito_config.app_id_client_regex #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.issuer #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.client_id #=> String
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.api.event_config.auth_providers[0].open_id_connect_config.auth_ttl #=> Integer
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.authorizer_uri #=> String
+    #   resp.api.event_config.auth_providers[0].lambda_authorizer_config.identity_validation_expression #=> String
+    #   resp.api.event_config.connection_auth_modes #=> Array
+    #   resp.api.event_config.connection_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.default_publish_auth_modes #=> Array
+    #   resp.api.event_config.default_publish_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.default_subscribe_auth_modes #=> Array
+    #   resp.api.event_config.default_subscribe_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.api.event_config.log_config.log_level #=> String, one of "NONE", "ERROR", "ALL", "INFO", "DEBUG"
+    #   resp.api.event_config.log_config.cloud_watch_logs_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApi AWS API Documentation
+    #
+    # @overload update_api(params = {})
+    # @param [Hash] params ({})
+    def update_api(params = {}, options = {})
+      req = build_request(:update_api, params)
+      req.send_request(options)
+    end
+
     # Updates the cache for the GraphQL API.
     #
     # @option params [required, String] :api_id
@@ -3559,6 +4144,74 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def update_api_key(params = {}, options = {})
       req = build_request(:update_api_key, params)
+      req.send_request(options)
+    end
+
+    # Updates a `ChannelNamespace` associated with an `Api`.
+    #
+    # @option params [required, String] :api_id
+    #   The `Api` ID.
+    #
+    # @option params [required, String] :name
+    #   The name of the `ChannelNamespace`.
+    #
+    # @option params [Array<Types::AuthMode>] :subscribe_auth_modes
+    #   The authorization mode to use for subscribing to messages on the
+    #   channel namespace. This configuration overrides the default `Api`
+    #   authorization configuration.
+    #
+    # @option params [Array<Types::AuthMode>] :publish_auth_modes
+    #   The authorization mode to use for publishing messages on the channel
+    #   namespace. This configuration overrides the default `Api`
+    #   authorization configuration.
+    #
+    # @option params [String] :code_handlers
+    #   The event handler functions that run custom business logic to process
+    #   published events and subscribe requests.
+    #
+    # @return [Types::UpdateChannelNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChannelNamespaceResponse#channel_namespace #channel_namespace} => Types::ChannelNamespace
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel_namespace({
+    #     api_id: "String", # required
+    #     name: "Namespace", # required
+    #     subscribe_auth_modes: [
+    #       {
+    #         auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #       },
+    #     ],
+    #     publish_auth_modes: [
+    #       {
+    #         auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #       },
+    #     ],
+    #     code_handlers: "Code",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_namespace.api_id #=> String
+    #   resp.channel_namespace.name #=> String
+    #   resp.channel_namespace.subscribe_auth_modes #=> Array
+    #   resp.channel_namespace.subscribe_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.channel_namespace.publish_auth_modes #=> Array
+    #   resp.channel_namespace.publish_auth_modes[0].auth_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
+    #   resp.channel_namespace.code_handlers #=> String
+    #   resp.channel_namespace.tags #=> Hash
+    #   resp.channel_namespace.tags["TagKey"] #=> String
+    #   resp.channel_namespace.channel_namespace_arn #=> String
+    #   resp.channel_namespace.created #=> Time
+    #   resp.channel_namespace.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateChannelNamespace AWS API Documentation
+    #
+    # @overload update_channel_namespace(params = {})
+    # @param [Hash] params ({})
+    def update_channel_namespace(params = {}, options = {})
+      req = build_request(:update_channel_namespace, params)
       req.send_request(options)
     end
 
@@ -3869,7 +4522,7 @@ module Aws::AppSync
     # @option params [Types::LogConfig] :log_config
     #   The Amazon CloudWatch Logs configuration for the `GraphqlApi` object.
     #
-    # @option params [required, String] :authentication_type
+    # @option params [String] :authentication_type
     #   The new authentication type for the `GraphqlApi` object.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
@@ -3952,7 +4605,7 @@ module Aws::AppSync
     #       cloud_watch_logs_role_arn: "String", # required
     #       exclude_verbose_content: false,
     #     },
-    #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #     user_pool_config: {
     #       user_pool_id: "String", # required
     #       aws_region: "String", # required
@@ -4327,7 +4980,7 @@ module Aws::AppSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

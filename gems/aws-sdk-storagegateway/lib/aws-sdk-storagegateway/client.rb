@@ -516,8 +516,17 @@ module Aws::StorageGateway
     #   specified is critical to all later functions of the gateway and cannot
     #   be changed after activation. The default value is `CACHED`.
     #
+    #   Amazon FSx File Gateway is no longer available to new customers.
+    #   Existing customers of FSx File Gateway can continue to use the service
+    #   normally. For capabilities similar to FSx File Gateway, visit [this
+    #   blog post][1].
+    #
     #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3` \|
     #   `FILE_FSX_SMB`
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/blogs/storage/switch-your-file-share-access-from-amazon-fsx-file-gateway-to-amazon-fsx-for-windows-file-server/
     #
     # @option params [String] :tape_drive_type
     #   The value that indicates the type of tape drive to use for tape
@@ -1428,7 +1437,7 @@ module Aws::StorageGateway
     #
     #    Bucket ARN:
     #
-    #    `arn:aws:s3:::my-bucket/prefix/`
+    #    `arn:aws:s3:::amzn-s3-demo-bucket/prefix/`
     #
     #    Access point ARN:
     #
@@ -1520,6 +1529,9 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
     #   `LocationARN`, or if an access point or access point alias is used.
+    #
+    #    A valid NFS file share name can only contain the following characters:
+    #   `a`-`z`, `A`-`Z`, `0`-`9`, `-`, `.`, and `_`.
     #
     #    </note>
     #
@@ -1721,7 +1733,7 @@ module Aws::StorageGateway
     #
     #    Bucket ARN:
     #
-    #    `arn:aws:s3:::my-bucket/prefix/`
+    #    `arn:aws:s3:::amzn-s3-demo-bucket/prefix/`
     #
     #    Access point ARN:
     #
@@ -1854,6 +1866,10 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
     #   `LocationARN`, or if an access point or access point alias is used.
+    #
+    #    A valid SMB file share name cannot contain the following characters:
+    #   `[`,`]`,`#`,`;`,`<`,`>`,`:`,`"`,``,`/`,`|`,`?`,`*`,`+`, or ASCII
+    #   control characters `1-31`.
     #
     #    </note>
     #
@@ -6916,6 +6932,9 @@ module Aws::StorageGateway
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
     #   `LocationARN`, or if an access point or access point alias is used.
     #
+    #    A valid NFS file share name can only contain the following characters:
+    #   `a`-`z`, `A`-`Z`, `0`-`9`, `-`, `.`, and `_`.
+    #
     #    </note>
     #
     # @option params [Types::CacheAttributes] :cache_attributes
@@ -7162,6 +7181,10 @@ module Aws::StorageGateway
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
     #   `LocationARN`, or if an access point or access point alias is used.
+    #
+    #    A valid SMB file share name cannot contain the following characters:
+    #   `[`,`]`,`#`,`;`,`<`,`>`,`:`,`"`,``,`/`,`|`,`?`,`*`,`+`, or ASCII
+    #   control characters `1-31`.
     #
     #    </note>
     #
@@ -7557,7 +7580,7 @@ module Aws::StorageGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

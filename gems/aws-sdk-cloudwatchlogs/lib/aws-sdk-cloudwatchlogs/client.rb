@@ -5477,6 +5477,15 @@ module Aws::CloudWatchLogs
     #   If you are temporarily suppressing an anomaly or pattern, use this
     #   structure to specify how long the suppression is to last.
     #
+    # @option params [Boolean] :baseline
+    #   Set this to `true` to prevent CloudWatch Logs from displaying this
+    #   behavior as an anomaly in the future. The behavior is then treated as
+    #   baseline behavior. However, if similar but more severe occurrences of
+    #   this behavior occur in the future, those will still be reported as
+    #   anomalies.
+    #
+    #   The default is `false`
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5490,6 +5499,7 @@ module Aws::CloudWatchLogs
     #       value: 1,
     #       suppression_unit: "SECONDS", # accepts SECONDS, MINUTES, HOURS
     #     },
+    #     baseline: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateAnomaly AWS API Documentation
@@ -5617,7 +5627,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -866,6 +866,88 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Creates an application inference profile to track metrics and costs
+    # when invoking a model. To create an application inference profile for
+    # a foundation model in one region, specify the ARN of the model in that
+    # region. To create an application inference profile for a foundation
+    # model across multiple regions, specify the ARN of the system-defined
+    # inference profile that contains the regions that you want to route
+    # requests to. For more information, see [Increase throughput and
+    # resilience with cross-region inference in Amazon Bedrock][1]. in the
+    # Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+    #
+    # @option params [required, String] :inference_profile_name
+    #   A name for the inference profile.
+    #
+    # @option params [String] :description
+    #   A description for the inference profile.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, Types::InferenceProfileModelSource] :model_source
+    #   The foundation model or system-defined inference profile that the
+    #   inference profile will track metrics and costs for.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of objects, each of which contains a tag and its value. For
+    #   more information, see [Tagging resources][1] in the [Amazon Bedrock
+    #   User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @return [Types::CreateInferenceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInferenceProfileResponse#inference_profile_arn #inference_profile_arn} => String
+    #   * {Types::CreateInferenceProfileResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_inference_profile({
+    #     inference_profile_name: "InferenceProfileName", # required
+    #     description: "InferenceProfileDescription",
+    #     client_request_token: "IdempotencyToken",
+    #     model_source: { # required
+    #       copy_from: "InferenceProfileModelSourceArn",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_profile_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateInferenceProfile AWS API Documentation
+    #
+    # @overload create_inference_profile(params = {})
+    # @param [Hash] params ({})
+    def create_inference_profile(params = {}, options = {})
+      req = build_request(:create_inference_profile, params)
+      req.send_request(options)
+    end
+
     # Copies a model to another region so that it can be used there. For
     # more information, see [Copy models to be used in other regions][1] in
     # the [Amazon Bedrock User Guide][2].
@@ -1506,6 +1588,35 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes an application inference profile. For more information, see
+    # [Increase throughput and resilience with cross-region inference in
+    # Amazon Bedrock][1]. in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+    #
+    # @option params [required, String] :inference_profile_identifier
+    #   The Amazon Resource Name (ARN) or ID of the application inference
+    #   profile to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inference_profile({
+    #     inference_profile_identifier: "InferenceProfileIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteInferenceProfile AWS API Documentation
+    #
+    # @overload delete_inference_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_inference_profile(params = {}, options = {})
+      req = build_request(:delete_inference_profile, params)
+      req.send_request(options)
+    end
+
     # Delete the invocation logging.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1868,19 +1979,24 @@ module Aws::Bedrock
     end
 
     # Gets information about an inference profile. For more information, see
-    # the Amazon Bedrock User Guide.
+    # [Increase throughput and resilience with cross-region inference in
+    # Amazon Bedrock][1]. in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #
     # @option params [required, String] :inference_profile_identifier
-    #   The unique identifier of the inference profile.
+    #   The ID or Amazon Resource Name (ARN) of the inference profile.
     #
     # @return [Types::GetInferenceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInferenceProfileResponse#inference_profile_name #inference_profile_name} => String
-    #   * {Types::GetInferenceProfileResponse#models #models} => Array&lt;Types::InferenceProfileModel&gt;
     #   * {Types::GetInferenceProfileResponse#description #description} => String
     #   * {Types::GetInferenceProfileResponse#created_at #created_at} => Time
     #   * {Types::GetInferenceProfileResponse#updated_at #updated_at} => Time
     #   * {Types::GetInferenceProfileResponse#inference_profile_arn #inference_profile_arn} => String
+    #   * {Types::GetInferenceProfileResponse#models #models} => Array&lt;Types::InferenceProfileModel&gt;
     #   * {Types::GetInferenceProfileResponse#inference_profile_id #inference_profile_id} => String
     #   * {Types::GetInferenceProfileResponse#status #status} => String
     #   * {Types::GetInferenceProfileResponse#type #type} => String
@@ -1894,15 +2010,15 @@ module Aws::Bedrock
     # @example Response structure
     #
     #   resp.inference_profile_name #=> String
-    #   resp.models #=> Array
-    #   resp.models[0].model_arn #=> String
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.inference_profile_arn #=> String
+    #   resp.models #=> Array
+    #   resp.models[0].model_arn #=> String
     #   resp.inference_profile_id #=> String
     #   resp.status #=> String, one of "ACTIVE"
-    #   resp.type #=> String, one of "SYSTEM_DEFINED"
+    #   resp.type #=> String, one of "SYSTEM_DEFINED", "APPLICATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfile AWS API Documentation
     #
@@ -2640,7 +2756,13 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Returns a list of inference profiles that you can use.
+    # Returns a list of inference profiles that you can use. For more
+    # information, see [Increase throughput and resilience with cross-region
+    # inference in Amazon Bedrock][1]. in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. If the total
@@ -2654,6 +2776,18 @@ module Aws::Bedrock
     #   field in the response in this field to return the next batch of
     #   results.
     #
+    # @option params [String] :type_equals
+    #   Filters for inference profiles that match the type you specify.
+    #
+    #   * `SYSTEM_DEFINED` – The inference profile is defined by Amazon
+    #     Bedrock. You can route inference requests across regions with these
+    #     inference profiles.
+    #
+    #   * `APPLICATION` – The inference profile was created by a user. This
+    #     type of inference profile can track metrics and costs when invoking
+    #     the model in it. The inference profile may route requests to one or
+    #     multiple regions.
+    #
     # @return [Types::ListInferenceProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListInferenceProfilesResponse#inference_profile_summaries #inference_profile_summaries} => Array&lt;Types::InferenceProfileSummary&gt;
@@ -2666,21 +2800,22 @@ module Aws::Bedrock
     #   resp = client.list_inference_profiles({
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     type_equals: "SYSTEM_DEFINED", # accepts SYSTEM_DEFINED, APPLICATION
     #   })
     #
     # @example Response structure
     #
     #   resp.inference_profile_summaries #=> Array
     #   resp.inference_profile_summaries[0].inference_profile_name #=> String
-    #   resp.inference_profile_summaries[0].models #=> Array
-    #   resp.inference_profile_summaries[0].models[0].model_arn #=> String
     #   resp.inference_profile_summaries[0].description #=> String
     #   resp.inference_profile_summaries[0].created_at #=> Time
     #   resp.inference_profile_summaries[0].updated_at #=> Time
     #   resp.inference_profile_summaries[0].inference_profile_arn #=> String
+    #   resp.inference_profile_summaries[0].models #=> Array
+    #   resp.inference_profile_summaries[0].models[0].model_arn #=> String
     #   resp.inference_profile_summaries[0].inference_profile_id #=> String
     #   resp.inference_profile_summaries[0].status #=> String, one of "ACTIVE"
-    #   resp.inference_profile_summaries[0].type #=> String, one of "SYSTEM_DEFINED"
+    #   resp.inference_profile_summaries[0].type #=> String, one of "SYSTEM_DEFINED", "APPLICATION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListInferenceProfiles AWS API Documentation
@@ -3156,12 +3291,11 @@ module Aws::Bedrock
     # List the tags associated with the specified resource.
     #
     # For more information, see [Tagging resources][1] in the [Amazon
-    # Bedrock User Guide][2].
+    # Bedrock User Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -3308,12 +3442,11 @@ module Aws::Bedrock
     end
 
     # Associate tags with a resource. For more information, see [Tagging
-    # resources][1] in the [Amazon Bedrock User Guide][2].
+    # resources][1] in the [Amazon Bedrock User Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to tag.
@@ -3345,12 +3478,11 @@ module Aws::Bedrock
     end
 
     # Remove one or more tags from a resource. For more information, see
-    # [Tagging resources][1] in the [Amazon Bedrock User Guide][2].
+    # [Tagging resources][1] in the [Amazon Bedrock User Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to untag.
@@ -3607,7 +3739,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

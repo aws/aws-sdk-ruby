@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.183.0 (2024-10-30)
+------------------
+
+* Feature - Updated the public documentation for the UserIdentityInfo object to accurately reflect the character limits for the FirstName and LastName fields, which were previously listed as 1-100 characters.
+
 1.182.0 (2024-10-23)
 ------------------
 

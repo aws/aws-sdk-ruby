@@ -494,6 +494,15 @@
   "GameLift": {
     "models": "gamelift/2015-10-01"
   },
+  "GeoMaps": {
+    "models": "geo-maps/2020-11-19"
+  },
+  "GeoPlaces": {
+    "models": "geo-places/2020-11-19"
+  },
+  "GeoRoutes": {
+    "models": "geo-routes/2020-11-19"
+  },
   "Glacier": {
     "models": "glacier/2012-06-01",
     "addPlugins": [

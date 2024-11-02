@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.272.0 (2024-10-31)
+------------------
+
+* Feature - SageMaker HyperPod adds scale-down at instance level via BatchDeleteClusterNodes API and group level via UpdateCluster API. SageMaker Training exposes secondary job status in TrainingJobSummary from ListTrainingJobs API. SageMaker now supports G6, G6e, P5e instances for HyperPod and Training.
+
+1.271.0 (2024-10-30)
+------------------
+
+* Feature - Added support for Model Registry Staging construct. Users can define series of stages that models can progress through for model workflows and lifecycle. This simplifies tracking and managing models as they transition through development, testing, and production stages.
+
+1.270.0 (2024-10-29)
+------------------
+
+* Feature - Adding `notebook-al2-v3` as allowed value to SageMaker NotebookInstance PlatformIdentifier attribute
+
 1.269.0 (2024-10-18)
 ------------------
 

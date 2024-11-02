@@ -562,21 +562,20 @@ module Aws::ECS
     # `default` cluster when you launch your first container instance.
     # However, you can create your own cluster with a unique name.
     #
-    # <note markdown="1"> When you call the [CreateCluster][1] API operation, Amazon ECS
-    # attempts to create the Amazon ECS service-linked role for your
-    # account. This is so that it can manage required resources in other
-    # Amazon Web Services services on your behalf. However, if the user that
-    # makes the call doesn't have permissions to create the service-linked
-    # role, it isn't created. For more information, see [Using
-    # service-linked roles for Amazon ECS][2] in the *Amazon Elastic
-    # Container Service Developer Guide*.
+    # <note markdown="1"> When you call the CreateCluster API operation, Amazon ECS attempts to
+    # create the Amazon ECS service-linked role for your account. This is so
+    # that it can manage required resources in other Amazon Web Services
+    # services on your behalf. However, if the user that makes the call
+    # doesn't have permissions to create the service-linked role, it isn't
+    # created. For more information, see [Using service-linked roles for
+    # Amazon ECS][1] in the *Amazon Elastic Container Service Developer
+    # Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [String] :cluster_name
     #   The name of your cluster. If you don't specify a name for your
@@ -822,8 +821,8 @@ module Aws::ECS
     # Runs and maintains your desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
     # the `desiredCount`, Amazon ECS runs another copy of the task in the
-    # specified cluster. To update an existing service, use
-    # [UpdateService][1].
+    # specified cluster. To update an existing service, see the
+    # UpdateService action.
     #
     # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
     # revision before authorization. When a task definition revision is not
@@ -840,13 +839,13 @@ module Aws::ECS
     # you can optionally run your service behind one or more load balancers.
     # The load balancers distribute traffic across the tasks that are
     # associated with the service. For more information, see [Service load
-    # balancing][2] in the *Amazon Elastic Container Service Developer
+    # balancing][1] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when creating or updating a service. `volumeConfigurations`
     # is only supported for REPLICA service and not DAEMON service. For more
-    # infomation, see [Amazon EBS volumes][3] in the *Amazon Elastic
+    # infomation, see [Amazon EBS volumes][2] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
     # Tasks for services that don't use a load balancer are considered
@@ -861,7 +860,7 @@ module Aws::ECS
     #   service scheduler spreads tasks across Availability Zones. You can
     #   use task placement strategies and constraints to customize task
     #   placement decisions. For more information, see [Service scheduler
-    #   concepts][4] in the *Amazon Elastic Container Service Developer
+    #   concepts][3] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
@@ -872,13 +871,13 @@ module Aws::ECS
     #   constraints. When using this strategy, you don't need to specify a
     #   desired number of tasks, a task placement strategy, or use Service
     #   Auto Scaling policies. For more information, see [Service scheduler
-    #   concepts][4] in the *Amazon Elastic Container Service Developer
+    #   concepts][3] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # You can optionally specify a deployment configuration for your
     # service. The deployment is initiated by changing properties. For
     # example, the deployment might be initiated by the task definition or
-    # by your desired count of a service. You can use [UpdateService][1].
+    # by your desired count of a service. You can use [UpdateService][4].
     # The default value for a replica service for `minimumHealthyPercent` is
     # 100%. The default value for a daemon service for
     # `minimumHealthyPercent` is 0%.
@@ -938,10 +937,10 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
-    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
     # [5]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
     # [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     # [7]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
@@ -1139,7 +1138,7 @@ module Aws::ECS
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
-    #   the deployment and the ordering of stopping and starting tasks.
+    #   the deployment and the failure detection methods.
     #
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   An array of placement constraint objects to use for tasks in your
@@ -1474,8 +1473,8 @@ module Aws::ECS
     #       minimum_healthy_percent: 1,
     #       alarms: {
     #         alarm_names: ["String"], # required
-    #         enable: false, # required
     #         rollback: false, # required
+    #         enable: false, # required
     #       },
     #     },
     #     placement_constraints: [
@@ -1614,8 +1613,8 @@ module Aws::ECS
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
-    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
+    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -2425,8 +2424,8 @@ module Aws::ECS
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
-    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
+    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -3662,6 +3661,211 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Describes one or more of your service deployments.
+    #
+    # A service deployment happens when you release a software update for
+    # the service. For more information, see [Amazon ECS service
+    # deployments][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployments.html
+    #
+    # @option params [required, Array<String>] :service_deployment_arns
+    #   The ARN of the service deployment.
+    #
+    #   You can specify a maximum of 20 ARNs.
+    #
+    # @return [Types::DescribeServiceDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServiceDeploymentsResponse#service_deployments #service_deployments} => Array&lt;Types::ServiceDeployment&gt;
+    #   * {Types::DescribeServiceDeploymentsResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_service_deployments({
+    #     service_deployment_arns: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_deployments #=> Array
+    #   resp.service_deployments[0].service_deployment_arn #=> String
+    #   resp.service_deployments[0].service_arn #=> String
+    #   resp.service_deployments[0].cluster_arn #=> String
+    #   resp.service_deployments[0].created_at #=> Time
+    #   resp.service_deployments[0].started_at #=> Time
+    #   resp.service_deployments[0].finished_at #=> Time
+    #   resp.service_deployments[0].stopped_at #=> Time
+    #   resp.service_deployments[0].updated_at #=> Time
+    #   resp.service_deployments[0].source_service_revisions #=> Array
+    #   resp.service_deployments[0].source_service_revisions[0].arn #=> String
+    #   resp.service_deployments[0].source_service_revisions[0].requested_task_count #=> Integer
+    #   resp.service_deployments[0].source_service_revisions[0].running_task_count #=> Integer
+    #   resp.service_deployments[0].source_service_revisions[0].pending_task_count #=> Integer
+    #   resp.service_deployments[0].target_service_revision.arn #=> String
+    #   resp.service_deployments[0].target_service_revision.requested_task_count #=> Integer
+    #   resp.service_deployments[0].target_service_revision.running_task_count #=> Integer
+    #   resp.service_deployments[0].target_service_revision.pending_task_count #=> Integer
+    #   resp.service_deployments[0].status #=> String, one of "PENDING", "SUCCESSFUL", "STOPPED", "STOP_REQUESTED", "IN_PROGRESS", "ROLLBACK_IN_PROGRESS", "ROLLBACK_SUCCESSFUL", "ROLLBACK_FAILED"
+    #   resp.service_deployments[0].status_reason #=> String
+    #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
+    #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
+    #   resp.service_deployments[0].deployment_configuration.maximum_percent #=> Integer
+    #   resp.service_deployments[0].deployment_configuration.minimum_healthy_percent #=> Integer
+    #   resp.service_deployments[0].deployment_configuration.alarms.alarm_names #=> Array
+    #   resp.service_deployments[0].deployment_configuration.alarms.alarm_names[0] #=> String
+    #   resp.service_deployments[0].deployment_configuration.alarms.rollback #=> Boolean
+    #   resp.service_deployments[0].deployment_configuration.alarms.enable #=> Boolean
+    #   resp.service_deployments[0].rollback.reason #=> String
+    #   resp.service_deployments[0].rollback.started_at #=> Time
+    #   resp.service_deployments[0].rollback.service_revision_arn #=> String
+    #   resp.service_deployments[0].deployment_circuit_breaker.status #=> String, one of "TRIGGERED", "MONITORING", "MONITORING_COMPLETE", "DISABLED"
+    #   resp.service_deployments[0].deployment_circuit_breaker.failure_count #=> Integer
+    #   resp.service_deployments[0].deployment_circuit_breaker.threshold #=> Integer
+    #   resp.service_deployments[0].alarms.status #=> String, one of "TRIGGERED", "MONITORING", "MONITORING_COMPLETE", "DISABLED"
+    #   resp.service_deployments[0].alarms.alarm_names #=> Array
+    #   resp.service_deployments[0].alarms.alarm_names[0] #=> String
+    #   resp.service_deployments[0].alarms.triggered_alarm_names #=> Array
+    #   resp.service_deployments[0].alarms.triggered_alarm_names[0] #=> String
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServiceDeployments AWS API Documentation
+    #
+    # @overload describe_service_deployments(params = {})
+    # @param [Hash] params ({})
+    def describe_service_deployments(params = {}, options = {})
+      req = build_request(:describe_service_deployments, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more service revisions.
+    #
+    # A service revision is a version of the service that includes the
+    # values for the Amazon ECS resources (for example, task definition) and
+    # the environment resources (for example, load balancers, subnets, and
+    # security groups). For more information, see [Amazon ECS service
+    # revisions][1].
+    #
+    # You can't describe a service revision that was created before October
+    # 25, 2024.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html
+    #
+    # @option params [required, Array<String>] :service_revision_arns
+    #   The ARN of the service revision.
+    #
+    #   You can specify a maximum of 20 ARNs.
+    #
+    #   You can call [ListServiceDeployments][1] to get the ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServiceDeployments.html
+    #
+    # @return [Types::DescribeServiceRevisionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServiceRevisionsResponse#service_revisions #service_revisions} => Array&lt;Types::ServiceRevision&gt;
+    #   * {Types::DescribeServiceRevisionsResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_service_revisions({
+    #     service_revision_arns: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_revisions #=> Array
+    #   resp.service_revisions[0].service_revision_arn #=> String
+    #   resp.service_revisions[0].service_arn #=> String
+    #   resp.service_revisions[0].cluster_arn #=> String
+    #   resp.service_revisions[0].task_definition #=> String
+    #   resp.service_revisions[0].capacity_provider_strategy #=> Array
+    #   resp.service_revisions[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service_revisions[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service_revisions[0].capacity_provider_strategy[0].base #=> Integer
+    #   resp.service_revisions[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.service_revisions[0].platform_version #=> String
+    #   resp.service_revisions[0].platform_family #=> String
+    #   resp.service_revisions[0].load_balancers #=> Array
+    #   resp.service_revisions[0].load_balancers[0].target_group_arn #=> String
+    #   resp.service_revisions[0].load_balancers[0].load_balancer_name #=> String
+    #   resp.service_revisions[0].load_balancers[0].container_name #=> String
+    #   resp.service_revisions[0].load_balancers[0].container_port #=> Integer
+    #   resp.service_revisions[0].service_registries #=> Array
+    #   resp.service_revisions[0].service_registries[0].registry_arn #=> String
+    #   resp.service_revisions[0].service_registries[0].port #=> Integer
+    #   resp.service_revisions[0].service_registries[0].container_name #=> String
+    #   resp.service_revisions[0].service_registries[0].container_port #=> Integer
+    #   resp.service_revisions[0].network_configuration.awsvpc_configuration.subnets #=> Array
+    #   resp.service_revisions[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.service_revisions[0].network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.service_revisions[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.service_revisions[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service_revisions[0].container_images #=> Array
+    #   resp.service_revisions[0].container_images[0].container_name #=> String
+    #   resp.service_revisions[0].container_images[0].image_digest #=> String
+    #   resp.service_revisions[0].container_images[0].image #=> String
+    #   resp.service_revisions[0].guard_duty_enabled #=> Boolean
+    #   resp.service_revisions[0].service_connect_configuration.enabled #=> Boolean
+    #   resp.service_revisions[0].service_connect_configuration.namespace #=> String
+    #   resp.service_revisions[0].service_connect_configuration.services #=> Array
+    #   resp.service_revisions[0].service_connect_configuration.services[0].port_name #=> String
+    #   resp.service_revisions[0].service_connect_configuration.services[0].discovery_name #=> String
+    #   resp.service_revisions[0].service_connect_configuration.services[0].client_aliases #=> Array
+    #   resp.service_revisions[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
+    #   resp.service_revisions[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.service_revisions[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service_revisions[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.service_revisions[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.service_revisions[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.service_revisions[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.service_revisions[0].service_connect_configuration.services[0].tls.role_arn #=> String
+    #   resp.service_revisions[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
+    #   resp.service_revisions[0].service_connect_configuration.log_configuration.options #=> Hash
+    #   resp.service_revisions[0].service_connect_configuration.log_configuration.options["String"] #=> String
+    #   resp.service_revisions[0].service_connect_configuration.log_configuration.secret_options #=> Array
+    #   resp.service_revisions[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
+    #   resp.service_revisions[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.service_revisions[0].volume_configurations #=> Array
+    #   resp.service_revisions[0].volume_configurations[0].name #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.encrypted #=> Boolean
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.kms_key_id #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].resource_type #=> String, one of "volume"
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags #=> Array
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].key #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
+    #   resp.service_revisions[0].fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.service_revisions[0].created_at #=> Time
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServiceRevisions AWS API Documentation
+    #
+    # @overload describe_service_revisions(params = {})
+    # @param [Hash] params ({})
+    def describe_service_revisions(params = {}, options = {})
+      req = build_request(:describe_service_revisions, params)
+      req.send_request(options)
+    end
+
     # Describes the specified services running in your cluster.
     #
     # @option params [String] :cluster
@@ -3782,8 +3986,8 @@ module Aws::ECS
     #   resp.services[0].deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.services[0].deployment_configuration.alarms.alarm_names #=> Array
     #   resp.services[0].deployment_configuration.alarms.alarm_names[0] #=> String
-    #   resp.services[0].deployment_configuration.alarms.enable #=> Boolean
     #   resp.services[0].deployment_configuration.alarms.rollback #=> Boolean
+    #   resp.services[0].deployment_configuration.alarms.enable #=> Boolean
     #   resp.services[0].task_sets #=> Array
     #   resp.services[0].task_sets[0].id #=> String
     #   resp.services[0].task_sets[0].task_set_arn #=> String
@@ -5124,6 +5328,100 @@ module Aws::ECS
     # @param [Hash] params ({})
     def list_container_instances(params = {}, options = {})
       req = build_request(:list_container_instances, params)
+      req.send_request(options)
+    end
+
+    # This operation lists all the service deployments that meet the
+    # specified filter criteria.
+    #
+    # A service deployment happens when you release a softwre update for the
+    # service. You route traffic from the running service revisions to the
+    # new service revison and control the number of running tasks.
+    #
+    # This API returns the values that you use for the request parameters in
+    # [DescribeServiceRevisions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceRevisions.html
+    #
+    # @option params [required, String] :service
+    #   The ARN or name of the service
+    #
+    # @option params [String] :cluster
+    #   The cluster that hosts the service. This can either be the cluster
+    #   name or ARN. Starting April 15, 2023, Amazon Web Services will not
+    #   onboard new customers to Amazon Elastic Inference (EI), and will help
+    #   current customers migrate their workloads to options that offer better
+    #   price and performanceIf you don't specify a cluster, `deault` is
+    #   used.
+    #
+    # @option params [Array<String>] :status
+    #   An optional filter you can use to narrow the results. If you do not
+    #   specify a status, then all status values are included in the result.
+    #
+    # @option params [Types::CreatedAt] :created_at
+    #   An optional filter you can use to narrow the results by the service
+    #   creation date. If you do not specify a value, the result includes all
+    #   services created before the current time. The format is yyyy-MM-dd
+    #   HH:mm:ss.SSSSSS.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a `ListServiceDeployments` request
+    #   indicating that more results are available to fulfill the request and
+    #   further calls are needed. If you provided `maxResults`, it's possible
+    #   the number of results is fewer than `maxResults`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of service deployment results that
+    #   `ListServiceDeployments` returned in paginated output. When this
+    #   parameter is used, `ListServiceDeployments` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListServiceDeployments` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If this parameter isn't
+    #   used, then `ListServiceDeployments` returns up to 20 results and a
+    #   `nextToken` value if applicable.
+    #
+    # @return [Types::ListServiceDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceDeploymentsResponse#service_deployments #service_deployments} => Array&lt;Types::ServiceDeploymentBrief&gt;
+    #   * {Types::ListServiceDeploymentsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_deployments({
+    #     service: "String", # required
+    #     cluster: "String",
+    #     status: ["PENDING"], # accepts PENDING, SUCCESSFUL, STOPPED, STOP_REQUESTED, IN_PROGRESS, ROLLBACK_IN_PROGRESS, ROLLBACK_SUCCESSFUL, ROLLBACK_FAILED
+    #     created_at: {
+    #       before: Time.now,
+    #       after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_deployments #=> Array
+    #   resp.service_deployments[0].service_deployment_arn #=> String
+    #   resp.service_deployments[0].service_arn #=> String
+    #   resp.service_deployments[0].cluster_arn #=> String
+    #   resp.service_deployments[0].started_at #=> Time
+    #   resp.service_deployments[0].created_at #=> Time
+    #   resp.service_deployments[0].finished_at #=> Time
+    #   resp.service_deployments[0].target_service_revision_arn #=> String
+    #   resp.service_deployments[0].status #=> String, one of "PENDING", "SUCCESSFUL", "STOPPED", "STOP_REQUESTED", "IN_PROGRESS", "ROLLBACK_IN_PROGRESS", "ROLLBACK_SUCCESSFUL", "ROLLBACK_FAILED"
+    #   resp.service_deployments[0].status_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServiceDeployments AWS API Documentation
+    #
+    # @overload list_service_deployments(params = {})
+    # @param [Hash] params ({})
+    def list_service_deployments(params = {}, options = {})
+      req = build_request(:list_service_deployments, params)
       req.send_request(options)
     end
 
@@ -6550,19 +6848,22 @@ module Aws::ECS
     #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
-    #   network interface, and you must specify a [NetworkConfiguration][1]
-    #   value when you create a service or run a task with the task
-    #   definition. For more information, see [Task Networking][2] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
+    #   network interface, and you must specify a NetworkConfiguration value
+    #   when you create a service or run a task with the task definition. For
+    #   more information, see [Task Networking][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   If the network mode is `host`, you cannot run multiple instantiations
     #   of the same task on a single container instance when port mappings are
     #   used.
     #
+    #   For more information, see [Network settings][2] in the *Docker run
+    #   reference*.
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #
     # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
     #   A list of container definitions in JSON format that describe the
@@ -6725,10 +7026,12 @@ module Aws::ECS
     #   the same process namespace.
     #
     #   If no value is specified, the default is a private namespace for each
-    #   container.
+    #   container. For more information, see [PID settings][1] in the *Docker
+    #   run reference*.
     #
     #   If the `host` PID mode is used, there's a heightened risk of
-    #   undesired process namespace exposure.
+    #   undesired process namespace exposure. For more information, see
+    #   [Docker security][2].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -6739,6 +7042,11 @@ module Aws::ECS
     #   isn't supported for Windows containers on Fargate.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
+    #   [2]: https://docs.docker.com/engine/security/security/
     #
     # @option params [String] :ipc_mode
     #   The IPC resource namespace to use for the containers in the task. The
@@ -6751,14 +7059,16 @@ module Aws::ECS
     #   private and not shared with other containers in a task or on the
     #   container instance. If no value is specified, then the IPC resource
     #   namespace sharing depends on the Docker daemon setting on the
-    #   container instance.
+    #   container instance. For more information, see [IPC settings][1] in the
+    #   *Docker run reference*.
     #
     #   If the `host` IPC mode is used, be aware that there is a heightened
-    #   risk of undesired IPC namespace expose.
+    #   risk of undesired IPC namespace expose. For more information, see
+    #   [Docker security][2].
     #
     #   If you are setting namespaced kernel parameters using `systemControls`
     #   for the containers in the task, the following will apply to your IPC
-    #   resource namespace. For more information, see [System Controls][1] in
+    #   resource namespace. For more information, see [System Controls][3] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #   * For tasks that use the `host` IPC mode, IPC namespace related
@@ -6774,7 +7084,9 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
+    #   [2]: https://docs.docker.com/engine/security/security/
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #
     # @option params [Types::ProxyConfiguration] :proxy_configuration
     #   The configuration details for the App Mesh proxy.
@@ -9539,7 +9851,7 @@ module Aws::ECS
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
-    #   the deployment and the ordering of stopping and starting tasks.
+    #   the deployment and the failure detection methods.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   An object representing the network configuration for the service.
@@ -9760,8 +10072,8 @@ module Aws::ECS
     #       minimum_healthy_percent: 1,
     #       alarms: {
     #         alarm_names: ["String"], # required
-    #         enable: false, # required
     #         rollback: false, # required
+    #         enable: false, # required
     #       },
     #     },
     #     network_configuration: {
@@ -9908,8 +10220,8 @@ module Aws::ECS
     #   resp.service.deployment_configuration.minimum_healthy_percent #=> Integer
     #   resp.service.deployment_configuration.alarms.alarm_names #=> Array
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
-    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
+    #   resp.service.deployment_configuration.alarms.enable #=> Boolean
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -10432,7 +10744,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

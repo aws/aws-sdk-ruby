@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2024-10-31)
+------------------
+
+* Feature - Add UDP support for AWS PrivateLink and dual-stack Network Load Balancers
+
 1.119.0 (2024-10-18)
 ------------------
 

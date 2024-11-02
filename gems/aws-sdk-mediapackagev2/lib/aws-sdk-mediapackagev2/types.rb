@@ -26,6 +26,47 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] channel_group_name
+    #   The name of the channel group containing the channel from which the
+    #   harvest job is running.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the channel from which the harvest job is running.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_name
+    #   The name of the origin endpoint that the harvest job is harvesting
+    #   from. This cannot be changed after the harvest job is submitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] harvest_job_name
+    #   The name of the harvest job to cancel. This name must be unique
+    #   within the channel and cannot be changed after the harvest job is
+    #   submitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with the harvest job. Used
+    #   for concurrency control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CancelHarvestJobRequest AWS API Documentation
+    #
+    class CancelHarvestJobRequest < Struct.new(
+      :channel_group_name,
+      :channel_name,
+      :origin_endpoint_name,
+      :harvest_job_name,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CancelHarvestJobResponse AWS API Documentation
+    #
+    class CancelHarvestJobResponse < Aws::EmptyStructure; end
+
     # The configuration of the channel group.
     #
     # @!attribute [rw] channel_group_name
@@ -459,6 +500,161 @@ module Aws::MediaPackageV2
       :scte_dash,
       :drm_signaling,
       :utc_timing)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request object for creating a new harvest job.
+    #
+    # @!attribute [rw] channel_group_name
+    #   The name of the channel group containing the channel from which to
+    #   harvest content.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the channel from which to harvest content.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_name
+    #   The name of the origin endpoint from which to harvest content.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] harvested_manifests
+    #   A list of manifests to be harvested.
+    #   @return [Types::HarvestedManifests]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The configuration for when the harvest job should run, including
+    #   start and end times.
+    #   @return [Types::HarvesterScheduleConfiguration]
+    #
+    # @!attribute [rw] destination
+    #   The S3 destination where the harvested content will be placed.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] harvest_job_name
+    #   A name for the harvest job. This name must be unique within the
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with the harvest job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateHarvestJobRequest AWS API Documentation
+    #
+    class CreateHarvestJobRequest < Struct.new(
+      :channel_group_name,
+      :channel_name,
+      :origin_endpoint_name,
+      :description,
+      :harvested_manifests,
+      :schedule_configuration,
+      :destination,
+      :client_token,
+      :harvest_job_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object returned after creating a harvest job.
+    #
+    # @!attribute [rw] channel_group_name
+    #   The name of the channel group containing the channel from which
+    #   content is being harvested.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the channel from which content is being harvested.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_name
+    #   The name of the origin endpoint from which content is being
+    #   harvested.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The S3 destination where the harvested content will be placed.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] harvest_job_name
+    #   The name of the created harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] harvested_manifests
+    #   A list of manifests that will be harvested.
+    #   @return [Types::HarvestedManifests]
+    #
+    # @!attribute [rw] description
+    #   The description of the harvest job, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The configuration for when the harvest job will run, including start
+    #   and end times.
+    #   @return [Types::HarvesterScheduleConfiguration]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the harvest job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time the harvest job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the harvest job (e.g., CREATED, IN\_PROGRESS,
+    #   ABORTED, COMPLETED, FAILED).
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message if the harvest job creation failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the harvest job. Used for concurrency
+    #   control.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with the harvest job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateHarvestJobResponse AWS API Documentation
+    #
+    class CreateHarvestJobResponse < Struct.new(
+      :channel_group_name,
+      :channel_name,
+      :origin_endpoint_name,
+      :destination,
+      :harvest_job_name,
+      :harvested_manifests,
+      :description,
+      :schedule_configuration,
+      :arn,
+      :created_at,
+      :modified_at,
+      :status,
+      :error_message,
+      :etag,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -950,6 +1146,23 @@ module Aws::MediaPackageV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DeleteOriginEndpointResponse AWS API Documentation
     #
     class DeleteOriginEndpointResponse < Aws::EmptyStructure; end
+
+    # The configuration for the destination where the harvested content will
+    # be exported.
+    #
+    # @!attribute [rw] s3_destination
+    #   The configuration for exporting harvested content to an S3 bucket.
+    #   This includes details such as the bucket name and destination path
+    #   within the bucket.
+    #   @return [Types::S3DestinationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :s3_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The parameters for encrypting content.
     #
@@ -1478,6 +1691,125 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # The request object for retrieving a specific harvest job.
+    #
+    # @!attribute [rw] channel_group_name
+    #   The name of the channel group containing the channel associated with
+    #   the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the channel associated with the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_name
+    #   The name of the origin endpoint associated with the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] harvest_job_name
+    #   The name of the harvest job to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetHarvestJobRequest AWS API Documentation
+    #
+    class GetHarvestJobRequest < Struct.new(
+      :channel_group_name,
+      :channel_name,
+      :origin_endpoint_name,
+      :harvest_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object containing the details of the requested harvest
+    # job.
+    #
+    # @!attribute [rw] channel_group_name
+    #   The name of the channel group containing the channel associated with
+    #   the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the channel associated with the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_name
+    #   The name of the origin endpoint associated with the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The S3 destination where the harvested content is being placed.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] harvest_job_name
+    #   The name of the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] harvested_manifests
+    #   A list of manifests that are being or have been harvested.
+    #   @return [Types::HarvestedManifests]
+    #
+    # @!attribute [rw] description
+    #   The description of the harvest job, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The configuration for when the harvest job is scheduled to run,
+    #   including start and end times.
+    #   @return [Types::HarvesterScheduleConfiguration]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the harvest job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time when the harvest job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the harvest job (e.g., QUEUED, IN\_PROGRESS,
+    #   CANCELLED, COMPLETED, FAILED).
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message if the harvest job encountered any issues.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the harvest job. Used for concurrency
+    #   control.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with the harvest job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetHarvestJobResponse AWS API Documentation
+    #
+    class GetHarvestJobResponse < Struct.new(
+      :channel_group_name,
+      :channel_name,
+      :origin_endpoint_name,
+      :destination,
+      :harvest_job_name,
+      :harvested_manifests,
+      :description,
+      :schedule_configuration,
+      :arn,
+      :created_at,
+      :modified_at,
+      :status,
+      :error_message,
+      :etag,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Retrieve the HTTP live streaming (HLS) manifest configuration.
     #
     # @!attribute [rw] manifest_name
@@ -1815,6 +2147,174 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # Represents a harvest job resource in MediaPackage v2, which is used to
+    # export content from an origin endpoint to an S3 bucket.
+    #
+    # @!attribute [rw] channel_group_name
+    #   The name of the channel group containing the channel associated with
+    #   this harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the channel associated with this harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_name
+    #   The name of the origin endpoint associated with this harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The S3 destination where the harvested content will be placed.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] harvest_job_name
+    #   The name of the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] harvested_manifests
+    #   A list of manifests that are being or have been harvested.
+    #   @return [Types::HarvestedManifests]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The configuration for when the harvest job is scheduled to run.
+    #   @return [Types::HarvesterScheduleConfiguration]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the harvest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the harvest job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time when the harvest job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the harvest job (e.g., QUEUED, IN\_PROGRESS,
+    #   CANCELLED, COMPLETED, FAILED).
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message if the harvest job encountered any issues.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the harvest job. Used for concurrency
+    #   control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/HarvestJob AWS API Documentation
+    #
+    class HarvestJob < Struct.new(
+      :channel_group_name,
+      :channel_name,
+      :origin_endpoint_name,
+      :destination,
+      :harvest_job_name,
+      :harvested_manifests,
+      :description,
+      :schedule_configuration,
+      :arn,
+      :created_at,
+      :modified_at,
+      :status,
+      :error_message,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a harvested DASH manifest.
+    #
+    # @!attribute [rw] manifest_name
+    #   The name of the harvested DASH manifest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/HarvestedDashManifest AWS API Documentation
+    #
+    class HarvestedDashManifest < Struct.new(
+      :manifest_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a harvested HLS manifest.
+    #
+    # @!attribute [rw] manifest_name
+    #   The name of the harvested HLS manifest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/HarvestedHlsManifest AWS API Documentation
+    #
+    class HarvestedHlsManifest < Struct.new(
+      :manifest_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a harvested Low-Latency HLS manifest.
+    #
+    # @!attribute [rw] manifest_name
+    #   The name of the harvested Low-Latency HLS manifest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/HarvestedLowLatencyHlsManifest AWS API Documentation
+    #
+    class HarvestedLowLatencyHlsManifest < Struct.new(
+      :manifest_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of harvested manifests of different types.
+    #
+    # @!attribute [rw] hls_manifests
+    #   A list of harvested HLS manifests.
+    #   @return [Array<Types::HarvestedHlsManifest>]
+    #
+    # @!attribute [rw] dash_manifests
+    #   A list of harvested DASH manifests.
+    #   @return [Array<Types::HarvestedDashManifest>]
+    #
+    # @!attribute [rw] low_latency_hls_manifests
+    #   A list of harvested Low-Latency HLS manifests.
+    #   @return [Array<Types::HarvestedLowLatencyHlsManifest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/HarvestedManifests AWS API Documentation
+    #
+    class HarvestedManifests < Struct.new(
+      :hls_manifests,
+      :dash_manifests,
+      :low_latency_hls_manifests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the schedule configuration for a harvest job.
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the harvest job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the harvest job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/HarvesterScheduleConfiguration AWS API Documentation
+    #
+    class HarvesterScheduleConfiguration < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The ingest domain URL where the source stream should be sent.
     #
     # @!attribute [rw] id
@@ -1943,6 +2443,75 @@ module Aws::MediaPackageV2
     class ListDashManifestConfiguration < Struct.new(
       :manifest_name,
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request object for listing harvest jobs.
+    #
+    # @!attribute [rw] channel_group_name
+    #   The name of the channel group to filter the harvest jobs by. If
+    #   specified, only harvest jobs associated with channels in this group
+    #   will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the channel to filter the harvest jobs by. If specified,
+    #   only harvest jobs associated with this channel will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_endpoint_name
+    #   The name of the origin endpoint to filter the harvest jobs by. If
+    #   specified, only harvest jobs associated with this origin endpoint
+    #   will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status to filter the harvest jobs by. If specified, only harvest
+    #   jobs with this status will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of harvest jobs to return in a single request. If
+    #   not specified, a default value will be used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination. Provide this value in subsequent
+    #   requests to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListHarvestJobsRequest AWS API Documentation
+    #
+    class ListHarvestJobsRequest < Struct.new(
+      :channel_group_name,
+      :channel_name,
+      :origin_endpoint_name,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object containing the list of harvest jobs that match the
+    # specified criteria.
+    #
+    # @!attribute [rw] items
+    #   An array of harvest job objects that match the specified criteria.
+    #   @return [Array<Types::HarvestJob>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination. Include this value in subsequent
+    #   requests to retrieve the next set of results. If null, there are no
+    #   more results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListHarvestJobsResponse AWS API Documentation
+    #
+    class ListHarvestJobsResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2251,6 +2820,28 @@ module Aws::MediaPackageV2
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_type_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration parameters for where in an S3 bucket to place the
+    # harvested content.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of an S3 bucket within which harvested content will be
+    #   exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_path
+    #   The path within the specified S3 bucket where the harvested content
+    #   will be placed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/S3DestinationConfig AWS API Documentation
+    #
+    class S3DestinationConfig < Struct.new(
+      :bucket_name,
+      :destination_path)
       SENSITIVE = []
       include Aws::Structure
     end

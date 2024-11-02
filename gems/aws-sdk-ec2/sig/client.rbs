@@ -501,6 +501,18 @@ module Aws
                                  ) -> _AssociateRouteTableResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateRouteTableResponseSuccess
 
+      interface _AssociateSecurityGroupVpcResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSecurityGroupVpcResult]
+        def state: () -> ("associating" | "associated" | "association-failed" | "disassociating" | "disassociated" | "disassociation-failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#associate_security_group_vpc-instance_method
+      def associate_security_group_vpc: (
+                                          group_id: ::String,
+                                          vpc_id: ::String,
+                                          ?dry_run: bool
+                                        ) -> _AssociateSecurityGroupVpcResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSecurityGroupVpcResponseSuccess
+
       interface _AssociateSubnetCidrBlockResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSubnetCidrBlockResult]
         def ipv_6_cidr_block_association: () -> Types::SubnetIpv6CidrBlockAssociation
@@ -3020,6 +3032,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSecurityGroupResult]
         def group_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
+        def security_group_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#create_security_group-instance_method
       def create_security_group: (
@@ -6917,6 +6930,25 @@ module Aws
                                          ) -> _DescribeSecurityGroupRulesResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSecurityGroupRulesResponseSuccess
 
+      interface _DescribeSecurityGroupVpcAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSecurityGroupVpcAssociationsResult]
+        def security_group_vpc_associations: () -> ::Array[Types::SecurityGroupVpcAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_security_group_vpc_associations-instance_method
+      def describe_security_group_vpc_associations: (
+                                                      ?filters: Array[
+                                                        {
+                                                          name: ::String?,
+                                                          values: Array[::String]?
+                                                        },
+                                                      ],
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer,
+                                                      ?dry_run: bool
+                                                    ) -> _DescribeSecurityGroupVpcAssociationsResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSecurityGroupVpcAssociationsResponseSuccess
+
       interface _DescribeSecurityGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSecurityGroupsResult]
         def next_token: () -> ::String
@@ -8259,6 +8291,18 @@ module Aws
                                       association_id: ::String
                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisassociateSecurityGroupVpcResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSecurityGroupVpcResult]
+        def state: () -> ("associating" | "associated" | "association-failed" | "disassociating" | "disassociated" | "disassociation-failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#disassociate_security_group_vpc-instance_method
+      def disassociate_security_group_vpc: (
+                                             group_id: ::String,
+                                             vpc_id: ::String,
+                                             ?dry_run: bool
+                                           ) -> _DisassociateSecurityGroupVpcResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSecurityGroupVpcResponseSuccess
 
       interface _DisassociateSubnetCidrBlockResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSubnetCidrBlockResult]
@@ -12395,6 +12439,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::RevokeSecurityGroupEgressResult]
         def return: () -> bool
         def unknown_ip_permissions: () -> ::Array[Types::IpPermission]
+        def revoked_security_group_rules: () -> ::Array[Types::RevokedSecurityGroupRule]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#revoke_security_group_egress-instance_method
       def revoke_security_group_egress: (
@@ -12450,6 +12495,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::RevokeSecurityGroupIngressResult]
         def return: () -> bool
         def unknown_ip_permissions: () -> ::Array[Types::IpPermission]
+        def revoked_security_group_rules: () -> ::Array[Types::RevokedSecurityGroupRule]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#revoke_security_group_ingress-instance_method
       def revoke_security_group_ingress: (

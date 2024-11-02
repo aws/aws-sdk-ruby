@@ -150,6 +150,8 @@ module Aws::EC2
     AssociateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'AssociateNatGatewayAddressResult')
     AssociateRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateRouteTableRequest')
     AssociateRouteTableResult = Shapes::StructureShape.new(name: 'AssociateRouteTableResult')
+    AssociateSecurityGroupVpcRequest = Shapes::StructureShape.new(name: 'AssociateSecurityGroupVpcRequest')
+    AssociateSecurityGroupVpcResult = Shapes::StructureShape.new(name: 'AssociateSecurityGroupVpcResult')
     AssociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockRequest')
     AssociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockResult')
     AssociateTransitGatewayMulticastDomainRequest = Shapes::StructureShape.new(name: 'AssociateTransitGatewayMulticastDomainRequest')
@@ -1031,6 +1033,9 @@ module Aws::EC2
     DescribeSecurityGroupRulesMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecurityGroupRulesMaxResults')
     DescribeSecurityGroupRulesRequest = Shapes::StructureShape.new(name: 'DescribeSecurityGroupRulesRequest')
     DescribeSecurityGroupRulesResult = Shapes::StructureShape.new(name: 'DescribeSecurityGroupRulesResult')
+    DescribeSecurityGroupVpcAssociationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecurityGroupVpcAssociationsMaxResults')
+    DescribeSecurityGroupVpcAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeSecurityGroupVpcAssociationsRequest')
+    DescribeSecurityGroupVpcAssociationsResult = Shapes::StructureShape.new(name: 'DescribeSecurityGroupVpcAssociationsResult')
     DescribeSecurityGroupsMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecurityGroupsMaxResults')
     DescribeSecurityGroupsRequest = Shapes::StructureShape.new(name: 'DescribeSecurityGroupsRequest')
     DescribeSecurityGroupsResult = Shapes::StructureShape.new(name: 'DescribeSecurityGroupsResult')
@@ -1230,6 +1235,9 @@ module Aws::EC2
     DisassociateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'DisassociateNatGatewayAddressRequest')
     DisassociateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'DisassociateNatGatewayAddressResult')
     DisassociateRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateRouteTableRequest')
+    DisassociateSecurityGroupVpcRequest = Shapes::StructureShape.new(name: 'DisassociateSecurityGroupVpcRequest')
+    DisassociateSecurityGroupVpcResult = Shapes::StructureShape.new(name: 'DisassociateSecurityGroupVpcResult')
+    DisassociateSecurityGroupVpcSecurityGroupId = Shapes::StringShape.new(name: 'DisassociateSecurityGroupVpcSecurityGroupId')
     DisassociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockRequest')
     DisassociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockResult')
     DisassociateTransitGatewayMulticastDomainRequest = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayMulticastDomainRequest')
@@ -2670,6 +2678,8 @@ module Aws::EC2
     RevokeSecurityGroupEgressResult = Shapes::StructureShape.new(name: 'RevokeSecurityGroupEgressResult')
     RevokeSecurityGroupIngressRequest = Shapes::StructureShape.new(name: 'RevokeSecurityGroupIngressRequest')
     RevokeSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'RevokeSecurityGroupIngressResult')
+    RevokedSecurityGroupRule = Shapes::StructureShape.new(name: 'RevokedSecurityGroupRule')
+    RevokedSecurityGroupRuleList = Shapes::ListShape.new(name: 'RevokedSecurityGroupRuleList')
     RoleId = Shapes::StringShape.new(name: 'RoleId')
     RootDeviceType = Shapes::StringShape.new(name: 'RootDeviceType')
     RootDeviceTypeList = Shapes::ListShape.new(name: 'RootDeviceTypeList')
@@ -2756,6 +2766,9 @@ module Aws::EC2
     SecurityGroupRuleUpdate = Shapes::StructureShape.new(name: 'SecurityGroupRuleUpdate')
     SecurityGroupRuleUpdateList = Shapes::ListShape.new(name: 'SecurityGroupRuleUpdateList')
     SecurityGroupStringList = Shapes::ListShape.new(name: 'SecurityGroupStringList')
+    SecurityGroupVpcAssociation = Shapes::StructureShape.new(name: 'SecurityGroupVpcAssociation')
+    SecurityGroupVpcAssociationList = Shapes::ListShape.new(name: 'SecurityGroupVpcAssociationList')
+    SecurityGroupVpcAssociationState = Shapes::StringShape.new(name: 'SecurityGroupVpcAssociationState')
     SelfServicePortal = Shapes::StringShape.new(name: 'SelfServicePortal')
     SendDiagnosticInterruptRequest = Shapes::StructureShape.new(name: 'SendDiagnosticInterruptRequest')
     SensitiveUrl = Shapes::StringShape.new(name: 'SensitiveUrl')
@@ -3745,6 +3758,14 @@ module Aws::EC2
     AssociateRouteTableResult.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
     AssociateRouteTableResult.add_member(:association_state, Shapes::ShapeRef.new(shape: RouteTableAssociationState, location_name: "associationState"))
     AssociateRouteTableResult.struct_class = Types::AssociateRouteTableResult
+
+    AssociateSecurityGroupVpcRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, required: true, location_name: "GroupId"))
+    AssociateSecurityGroupVpcRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    AssociateSecurityGroupVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateSecurityGroupVpcRequest.struct_class = Types::AssociateSecurityGroupVpcRequest
+
+    AssociateSecurityGroupVpcResult.add_member(:state, Shapes::ShapeRef.new(shape: SecurityGroupVpcAssociationState, location_name: "state"))
+    AssociateSecurityGroupVpcResult.struct_class = Types::AssociateSecurityGroupVpcResult
 
     AssociateSubnetCidrBlockRequest.add_member(:ipv_6_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "Ipv6IpamPoolId"))
     AssociateSubnetCidrBlockRequest.add_member(:ipv_6_netmask_length, Shapes::ShapeRef.new(shape: NetmaskLength, location_name: "Ipv6NetmaskLength"))
@@ -5214,6 +5235,7 @@ module Aws::EC2
 
     CreateSecurityGroupResult.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     CreateSecurityGroupResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    CreateSecurityGroupResult.add_member(:security_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "securityGroupArn"))
     CreateSecurityGroupResult.struct_class = Types::CreateSecurityGroupResult
 
     CreateSnapshotRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -7472,6 +7494,16 @@ module Aws::EC2
     DescribeSecurityGroupRulesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeSecurityGroupRulesResult.struct_class = Types::DescribeSecurityGroupRulesResult
 
+    DescribeSecurityGroupVpcAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeSecurityGroupVpcAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSecurityGroupVpcAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeSecurityGroupVpcAssociationsMaxResults, location_name: "MaxResults"))
+    DescribeSecurityGroupVpcAssociationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeSecurityGroupVpcAssociationsRequest.struct_class = Types::DescribeSecurityGroupVpcAssociationsRequest
+
+    DescribeSecurityGroupVpcAssociationsResult.add_member(:security_group_vpc_associations, Shapes::ShapeRef.new(shape: SecurityGroupVpcAssociationList, location_name: "securityGroupVpcAssociationSet"))
+    DescribeSecurityGroupVpcAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeSecurityGroupVpcAssociationsResult.struct_class = Types::DescribeSecurityGroupVpcAssociationsResult
+
     DescribeSecurityGroupsRequest.add_member(:group_ids, Shapes::ShapeRef.new(shape: GroupIdStringList, location_name: "GroupId"))
     DescribeSecurityGroupsRequest.add_member(:group_names, Shapes::ShapeRef.new(shape: GroupNameStringList, location_name: "GroupName"))
     DescribeSecurityGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -8328,6 +8360,14 @@ module Aws::EC2
     DisassociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateRouteTableRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: RouteTableAssociationId, required: true, location_name: "associationId"))
     DisassociateRouteTableRequest.struct_class = Types::DisassociateRouteTableRequest
+
+    DisassociateSecurityGroupVpcRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: DisassociateSecurityGroupVpcSecurityGroupId, required: true, location_name: "GroupId"))
+    DisassociateSecurityGroupVpcRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
+    DisassociateSecurityGroupVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateSecurityGroupVpcRequest.struct_class = Types::DisassociateSecurityGroupVpcRequest
+
+    DisassociateSecurityGroupVpcResult.add_member(:state, Shapes::ShapeRef.new(shape: SecurityGroupVpcAssociationState, location_name: "state"))
+    DisassociateSecurityGroupVpcResult.struct_class = Types::DisassociateSecurityGroupVpcResult
 
     DisassociateSubnetCidrBlockRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: SubnetCidrAssociationId, required: true, location_name: "associationId"))
     DisassociateSubnetCidrBlockRequest.struct_class = Types::DisassociateSubnetCidrBlockRequest
@@ -13842,6 +13882,7 @@ module Aws::EC2
 
     RevokeSecurityGroupEgressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     RevokeSecurityGroupEgressResult.add_member(:unknown_ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "unknownIpPermissionSet"))
+    RevokeSecurityGroupEgressResult.add_member(:revoked_security_group_rules, Shapes::ShapeRef.new(shape: RevokedSecurityGroupRuleList, location_name: "revokedSecurityGroupRuleSet"))
     RevokeSecurityGroupEgressResult.struct_class = Types::RevokeSecurityGroupEgressResult
 
     RevokeSecurityGroupIngressRequest.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: String, location_name: "CidrIp"))
@@ -13859,7 +13900,23 @@ module Aws::EC2
 
     RevokeSecurityGroupIngressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     RevokeSecurityGroupIngressResult.add_member(:unknown_ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "unknownIpPermissionSet"))
+    RevokeSecurityGroupIngressResult.add_member(:revoked_security_group_rules, Shapes::ShapeRef.new(shape: RevokedSecurityGroupRuleList, location_name: "revokedSecurityGroupRuleSet"))
     RevokeSecurityGroupIngressResult.struct_class = Types::RevokeSecurityGroupIngressResult
+
+    RevokedSecurityGroupRule.add_member(:security_group_rule_id, Shapes::ShapeRef.new(shape: SecurityGroupRuleId, location_name: "securityGroupRuleId"))
+    RevokedSecurityGroupRule.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "groupId"))
+    RevokedSecurityGroupRule.add_member(:is_egress, Shapes::ShapeRef.new(shape: Boolean, location_name: "isEgress"))
+    RevokedSecurityGroupRule.add_member(:ip_protocol, Shapes::ShapeRef.new(shape: String, location_name: "ipProtocol"))
+    RevokedSecurityGroupRule.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "fromPort"))
+    RevokedSecurityGroupRule.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "toPort"))
+    RevokedSecurityGroupRule.add_member(:cidr_ipv_4, Shapes::ShapeRef.new(shape: String, location_name: "cidrIpv4"))
+    RevokedSecurityGroupRule.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "cidrIpv6"))
+    RevokedSecurityGroupRule.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "prefixListId"))
+    RevokedSecurityGroupRule.add_member(:referenced_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "referencedGroupId"))
+    RevokedSecurityGroupRule.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    RevokedSecurityGroupRule.struct_class = Types::RevokedSecurityGroupRule
+
+    RevokedSecurityGroupRuleList.member = Shapes::ShapeRef.new(shape: RevokedSecurityGroupRule, location_name: "item")
 
     RootDeviceTypeList.member = Shapes::ShapeRef.new(shape: RootDeviceType, location_name: "item")
 
@@ -14155,6 +14212,7 @@ module Aws::EC2
     SecurityGroup.add_member(:ip_permissions_egress, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "ipPermissionsEgress"))
     SecurityGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     SecurityGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    SecurityGroup.add_member(:security_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "securityGroupArn"))
     SecurityGroup.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     SecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     SecurityGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "groupDescription"))
@@ -14206,6 +14264,7 @@ module Aws::EC2
     SecurityGroupRule.add_member(:referenced_group_info, Shapes::ShapeRef.new(shape: ReferencedSecurityGroup, location_name: "referencedGroupInfo"))
     SecurityGroupRule.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     SecurityGroupRule.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SecurityGroupRule.add_member(:security_group_rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "securityGroupRuleArn"))
     SecurityGroupRule.struct_class = Types::SecurityGroupRule
 
     SecurityGroupRuleDescription.add_member(:security_group_rule_id, Shapes::ShapeRef.new(shape: String, location_name: "SecurityGroupRuleId"))
@@ -14235,6 +14294,15 @@ module Aws::EC2
     SecurityGroupRuleUpdateList.member = Shapes::ShapeRef.new(shape: SecurityGroupRuleUpdate, location_name: "item")
 
     SecurityGroupStringList.member = Shapes::ShapeRef.new(shape: SecurityGroupName, location_name: "SecurityGroup")
+
+    SecurityGroupVpcAssociation.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "groupId"))
+    SecurityGroupVpcAssociation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    SecurityGroupVpcAssociation.add_member(:vpc_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcOwnerId"))
+    SecurityGroupVpcAssociation.add_member(:state, Shapes::ShapeRef.new(shape: SecurityGroupVpcAssociationState, location_name: "state"))
+    SecurityGroupVpcAssociation.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateReason"))
+    SecurityGroupVpcAssociation.struct_class = Types::SecurityGroupVpcAssociation
+
+    SecurityGroupVpcAssociationList.member = Shapes::ShapeRef.new(shape: SecurityGroupVpcAssociation, location_name: "item")
 
     SendDiagnosticInterruptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SendDiagnosticInterruptRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -16214,6 +16282,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateRouteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateRouteTableResult)
+      end)
+
+      api.add_operation(:associate_security_group_vpc, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSecurityGroupVpc"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSecurityGroupVpcRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSecurityGroupVpcResult)
       end)
 
       api.add_operation(:associate_subnet_cidr_block, Seahorse::Model::Operation.new.tap do |o|
@@ -19071,6 +19147,20 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_security_group_vpc_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSecurityGroupVpcAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSecurityGroupVpcAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSecurityGroupVpcAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_security_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSecurityGroups"
         o.http_method = "POST"
@@ -19973,6 +20063,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateRouteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:disassociate_security_group_vpc, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSecurityGroupVpc"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSecurityGroupVpcRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSecurityGroupVpcResult)
       end)
 
       api.add_operation(:disassociate_subnet_cidr_block, Seahorse::Model::Operation.new.tap do |o|

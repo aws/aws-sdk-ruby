@@ -1197,7 +1197,8 @@ module Aws
                                       alarm_specification: {
                                         alarms: Array[::String]?
                                       }?,
-                                      max_healthy_percentage: ::Integer?
+                                      max_healthy_percentage: ::Integer?,
+                                      bake_time: ::Integer?
                                     }
                                   ) -> _StartInstanceRefreshResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInstanceRefreshResponseSuccess

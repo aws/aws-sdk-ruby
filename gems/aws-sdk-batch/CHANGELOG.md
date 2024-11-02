@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2024-10-31)
+------------------
+
+* Feature - Add `podNamespace` to `EksAttemptDetail` and `containerID` to `EksAttemptContainerDetail`.
+
 1.102.0 (2024-10-18)
 ------------------
 

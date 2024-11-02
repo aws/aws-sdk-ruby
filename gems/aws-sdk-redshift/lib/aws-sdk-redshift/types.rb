@@ -5866,7 +5866,7 @@ module Aws::Redshift
     #
     #   * Snapshot copy grant
     #
-    #   * Integration (zero-ETL integration)
+    #   * Integration (zero-ETL integration or S3 event integration)
     #
     #     <note markdown="1"> To describe the tags associated with an `integration`, don't
     #     specify `ResourceType`, instead specify the `ResourceName` of the
@@ -7475,8 +7475,8 @@ module Aws::Redshift
     #
     class IntegrationNotFoundFault < Aws::EmptyStructure; end
 
-    # You can't create any more zero-ETL integrations because the quota has
-    # been reached.
+    # You can't create any more zero-ETL or S3 event integrations because
+    # the quota has been reached.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IntegrationQuotaExceededFault AWS API Documentation
     #

@@ -66,6 +66,7 @@ module Aws::CleanRooms
     AnalysisTemplateValidationStatusReasonList = Shapes::ListShape.new(name: 'AnalysisTemplateValidationStatusReasonList')
     AnalysisTemplateValidationType = Shapes::StringShape.new(name: 'AnalysisTemplateValidationType')
     AnalysisType = Shapes::StringShape.new(name: 'AnalysisType')
+    AnalyticsEngine = Shapes::StringShape.new(name: 'AnalyticsEngine')
     BatchGetCollaborationAnalysisTemplateError = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = Shapes::ListShape.new(name: 'BatchGetCollaborationAnalysisTemplateErrorList')
     BatchGetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateInput')
@@ -78,6 +79,7 @@ module Aws::CleanRooms
     BatchGetSchemaErrorList = Shapes::ListShape.new(name: 'BatchGetSchemaErrorList')
     BatchGetSchemaInput = Shapes::StructureShape.new(name: 'BatchGetSchemaInput')
     BatchGetSchemaOutput = Shapes::StructureShape.new(name: 'BatchGetSchemaOutput')
+    BilledResourceUtilization = Shapes::StructureShape.new(name: 'BilledResourceUtilization')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CleanroomsArn = Shapes::StringShape.new(name: 'CleanroomsArn')
     Collaboration = Shapes::StructureShape.new(name: 'Collaboration')
@@ -107,6 +109,7 @@ module Aws::CleanRooms
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
+    ComputeConfiguration = Shapes::UnionShape.new(name: 'ComputeConfiguration')
     ConfigurationDetails = Shapes::UnionShape.new(name: 'ConfigurationDetails')
     ConfiguredAudienceModelArn = Shapes::StringShape.new(name: 'ConfiguredAudienceModelArn')
     ConfiguredAudienceModelAssociation = Shapes::StructureShape.new(name: 'ConfiguredAudienceModelAssociation')
@@ -469,6 +472,9 @@ module Aws::CleanRooms
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    WorkerComputeConfiguration = Shapes::StructureShape.new(name: 'WorkerComputeConfiguration')
+    WorkerComputeConfigurationNumberInteger = Shapes::IntegerShape.new(name: 'WorkerComputeConfigurationNumberInteger')
+    WorkerComputeType = Shapes::StringShape.new(name: 'WorkerComputeType')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: "reason"))
@@ -668,6 +674,9 @@ module Aws::CleanRooms
     BatchGetSchemaOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetSchemaErrorList, required: true, location_name: "errors"))
     BatchGetSchemaOutput.struct_class = Types::BatchGetSchemaOutput
 
+    BilledResourceUtilization.add_member(:units, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "units"))
+    BilledResourceUtilization.struct_class = Types::BilledResourceUtilization
+
     Collaboration.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     Collaboration.add_member(:arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "arn"))
     Collaboration.add_member(:name, Shapes::ShapeRef.new(shape: CollaborationName, required: true, location_name: "name"))
@@ -681,6 +690,7 @@ module Aws::CleanRooms
     Collaboration.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, location_name: "membershipArn"))
     Collaboration.add_member(:data_encryption_metadata, Shapes::ShapeRef.new(shape: DataEncryptionMetadata, location_name: "dataEncryptionMetadata"))
     Collaboration.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
+    Collaboration.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
     Collaboration.struct_class = Types::Collaboration
 
     CollaborationAnalysisTemplate.add_member(:id, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location_name: "id"))
@@ -816,6 +826,7 @@ module Aws::CleanRooms
     CollaborationSummary.add_member(:member_status, Shapes::ShapeRef.new(shape: MemberStatus, required: true, location_name: "memberStatus"))
     CollaborationSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, location_name: "membershipId"))
     CollaborationSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, location_name: "membershipArn"))
+    CollaborationSummary.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
     CollaborationSummary.struct_class = Types::CollaborationSummary
 
     CollaborationSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationSummary)
@@ -825,6 +836,12 @@ module Aws::CleanRooms
     Column.struct_class = Types::Column
 
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
+
+    ComputeConfiguration.add_member(:worker, Shapes::ShapeRef.new(shape: WorkerComputeConfiguration, location_name: "worker"))
+    ComputeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ComputeConfiguration.add_member_subclass(:worker, Types::ComputeConfiguration::Worker)
+    ComputeConfiguration.add_member_subclass(:unknown, Types::ComputeConfiguration::Unknown)
+    ComputeConfiguration.struct_class = Types::ComputeConfiguration
 
     ConfigurationDetails.add_member(:direct_analysis_configuration_details, Shapes::ShapeRef.new(shape: DirectAnalysisConfigurationDetails, location_name: "directAnalysisConfigurationDetails"))
     ConfigurationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1002,6 +1019,7 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
     CreateCollaborationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateCollaborationInput.add_member(:creator_payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "creatorPaymentConfiguration"))
+    CreateCollaborationInput.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
     CreateCollaborationInput.struct_class = Types::CreateCollaborationInput
 
     CreateCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
@@ -1811,6 +1829,7 @@ module Aws::CleanRooms
     ProtectedQuery.add_member(:result, Shapes::ShapeRef.new(shape: ProtectedQueryResult, location_name: "result"))
     ProtectedQuery.add_member(:error, Shapes::ShapeRef.new(shape: ProtectedQueryError, location_name: "error"))
     ProtectedQuery.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyParameters, location_name: "differentialPrivacy"))
+    ProtectedQuery.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     ProtectedQuery.struct_class = Types::ProtectedQuery
 
     ProtectedQueryError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1850,6 +1869,7 @@ module Aws::CleanRooms
     ProtectedQueryS3OutputConfiguration.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormat, required: true, location_name: "resultFormat"))
     ProtectedQueryS3OutputConfiguration.add_member(:bucket, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfigurationBucketString, required: true, location_name: "bucket"))
     ProtectedQueryS3OutputConfiguration.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, location_name: "keyPrefix"))
+    ProtectedQueryS3OutputConfiguration.add_member(:single_file_output, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleFileOutput"))
     ProtectedQueryS3OutputConfiguration.struct_class = Types::ProtectedQueryS3OutputConfiguration
 
     ProtectedQuerySQLParameters.add_member(:query_string, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParametersQueryStringString, location_name: "queryString"))
@@ -1861,6 +1881,7 @@ module Aws::CleanRooms
     ProtectedQuerySingleMemberOutput.struct_class = Types::ProtectedQuerySingleMemberOutput
 
     ProtectedQueryStatistics.add_member(:total_duration_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "totalDurationInMillis"))
+    ProtectedQueryStatistics.add_member(:billed_resource_utilization, Shapes::ShapeRef.new(shape: BilledResourceUtilization, location_name: "billedResourceUtilization"))
     ProtectedQueryStatistics.struct_class = Types::ProtectedQueryStatistics
 
     ProtectedQuerySummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
@@ -1975,6 +1996,7 @@ module Aws::CleanRooms
     StartProtectedQueryInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     StartProtectedQueryInput.add_member(:sql_parameters, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParameters, required: true, location_name: "sqlParameters"))
     StartProtectedQueryInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ProtectedQueryResultConfiguration, location_name: "resultConfiguration"))
+    StartProtectedQueryInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     StartProtectedQueryInput.struct_class = Types::StartProtectedQueryInput
 
     StartProtectedQueryOutput.add_member(:protected_query, Shapes::ShapeRef.new(shape: ProtectedQuery, required: true, location_name: "protectedQuery"))
@@ -2121,6 +2143,10 @@ module Aws::CleanRooms
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    WorkerComputeConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: WorkerComputeType, location_name: "type"))
+    WorkerComputeConfiguration.add_member(:number, Shapes::ShapeRef.new(shape: WorkerComputeConfigurationNumberInteger, location_name: "number"))
+    WorkerComputeConfiguration.struct_class = Types::WorkerComputeConfiguration
 
 
     # @api private
@@ -3090,6 +3116,7 @@ module Aws::CleanRooms
         o.input = Shapes::ShapeRef.new(shape: PopulateIdMappingTableInput)
         o.output = Shapes::ShapeRef.new(shape: PopulateIdMappingTableOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

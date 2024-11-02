@@ -634,8 +634,11 @@ module Aws::OpenSearchService
     # @option params [required, String] :domain_name
     #   The name of the OpenSearch Service domain to provide access to.
     #
-    # @option params [required, String] :account
+    # @option params [String] :account
     #   The Amazon Web Services account ID to grant access to.
+    #
+    # @option params [String] :service
+    #   The Amazon Web Services service SP to grant access to.
     #
     # @return [Types::AuthorizeVpcEndpointAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -645,7 +648,8 @@ module Aws::OpenSearchService
     #
     #   resp = client.authorize_vpc_endpoint_access({
     #     domain_name: "DomainName", # required
-    #     account: "AWSAccount", # required
+    #     account: "AWSAccount",
+    #     service: "application.opensearchservice.amazonaws.com", # accepts application.opensearchservice.amazonaws.com
     #   })
     #
     # @example Response structure
@@ -747,6 +751,103 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def cancel_service_software_update(params = {}, options = {})
       req = build_request(:cancel_service_software_update, params)
+      req.send_request(options)
+    end
+
+    # Creates an OpenSearch Application.
+    #
+    # @option params [String] :client_token
+    #   A unique client idempotency token. It will be auto generated if not
+    #   provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   Name of the OpenSearch Appication to create. Application names are
+    #   unique across the applications owned by an account within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [Array<Types::DataSource>] :data_sources
+    #   Data sources to be associated with the OpenSearch Application.
+    #
+    # @option params [Types::IamIdentityCenterOptionsInput] :iam_identity_center_options
+    #   Settings of IAM Identity Center for the OpenSearch Application.
+    #
+    # @option params [Array<Types::AppConfig>] :app_configs
+    #   Configurations of the OpenSearch Application, inlcuding admin
+    #   configuration.
+    #
+    # @option params [Array<Types::Tag>] :tag_list
+    #   A list of tags attached to a domain.
+    #
+    # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApplicationResponse#id #id} => String
+    #   * {Types::CreateApplicationResponse#name #name} => String
+    #   * {Types::CreateApplicationResponse#arn #arn} => String
+    #   * {Types::CreateApplicationResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
+    #   * {Types::CreateApplicationResponse#iam_identity_center_options #iam_identity_center_options} => Types::IamIdentityCenterOptions
+    #   * {Types::CreateApplicationResponse#app_configs #app_configs} => Array&lt;Types::AppConfig&gt;
+    #   * {Types::CreateApplicationResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateApplicationResponse#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_application({
+    #     client_token: "ClientToken",
+    #     name: "ApplicationName", # required
+    #     data_sources: [
+    #       {
+    #         data_source_arn: "ARN",
+    #         data_source_description: "DataSourceDescription",
+    #       },
+    #     ],
+    #     iam_identity_center_options: {
+    #       enabled: false,
+    #       iam_identity_center_instance_arn: "ARN",
+    #       iam_role_for_identity_center_application_arn: "RoleArn",
+    #     },
+    #     app_configs: [
+    #       {
+    #         key: "opensearchDashboards.dashboardAdmin.users", # accepts opensearchDashboards.dashboardAdmin.users, opensearchDashboards.dashboardAdmin.groups
+    #         value: "AppConfigValue",
+    #       },
+    #     ],
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.data_sources #=> Array
+    #   resp.data_sources[0].data_source_arn #=> String
+    #   resp.data_sources[0].data_source_description #=> String
+    #   resp.iam_identity_center_options.enabled #=> Boolean
+    #   resp.iam_identity_center_options.iam_identity_center_instance_arn #=> String
+    #   resp.iam_identity_center_options.iam_role_for_identity_center_application_arn #=> String
+    #   resp.iam_identity_center_options.iam_identity_center_application_arn #=> String
+    #   resp.app_configs #=> Array
+    #   resp.app_configs[0].key #=> String, one of "opensearchDashboards.dashboardAdmin.users", "opensearchDashboards.dashboardAdmin.groups"
+    #   resp.app_configs[0].value #=> String
+    #   resp.tag_list #=> Array
+    #   resp.tag_list[0].key #=> String
+    #   resp.tag_list[0].value #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplication AWS API Documentation
+    #
+    # @overload create_application(params = {})
+    # @param [Hash] params ({})
+    def create_application(params = {}, options = {})
+      req = build_request(:create_application, params)
       req.send_request(options)
     end
 
@@ -861,6 +962,9 @@ module Aws::OpenSearchService
     # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
     #   Options for fine-grained access control.
     #
+    # @option params [Types::IdentityCenterOptionsInput] :identity_center_options
+    #   Options for IAM Identity Center Option control for the domain.
+    #
     # @option params [Array<Types::Tag>] :tag_list
     #   List of tags to add to the domain upon creation.
     #
@@ -907,6 +1011,16 @@ module Aws::OpenSearchService
     #         enabled: false, # required
     #       },
     #       multi_az_with_standby_enabled: false,
+    #       node_options: [
+    #         {
+    #           node_type: "coordinator", # accepts coordinator
+    #           node_config: {
+    #             enabled: false,
+    #             type: "m3.medium.search", # accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, or1.medium.search, or1.large.search, or1.xlarge.search, or1.2xlarge.search, or1.4xlarge.search, or1.8xlarge.search, or1.12xlarge.search, or1.16xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
+    #             count: 1,
+    #           },
+    #         },
+    #       ],
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
@@ -981,6 +1095,12 @@ module Aws::OpenSearchService
     #       },
     #       anonymous_auth_enabled: false,
     #     },
+    #     identity_center_options: {
+    #       enabled_api_access: false,
+    #       identity_center_instance_arn: "IdentityCenterInstanceARN",
+    #       subject_key: "UserName", # accepts UserName, UserId, Email
+    #       roles_key: "GroupName", # accepts GroupName, GroupId
+    #     },
     #     tag_list: [
     #       {
     #         key: "TagKey", # required
@@ -1047,6 +1167,11 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.cluster_config.multi_az_with_standby_enabled #=> Boolean
+    #   resp.domain_status.cluster_config.node_options #=> Array
+    #   resp.domain_status.cluster_config.node_options[0].node_type #=> String, one of "coordinator"
+    #   resp.domain_status.cluster_config.node_options[0].node_config.enabled #=> Boolean
+    #   resp.domain_status.cluster_config.node_options[0].node_config.type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "or1.medium.search", "or1.large.search", "or1.xlarge.search", "or1.2xlarge.search", "or1.4xlarge.search", "or1.8xlarge.search", "or1.12xlarge.search", "or1.16xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.domain_status.cluster_config.node_options[0].node_config.count #=> Integer
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -1101,6 +1226,12 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.jwt_options.public_key #=> String
     #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
+    #   resp.domain_status.identity_center_options.enabled_api_access #=> Boolean
+    #   resp.domain_status.identity_center_options.identity_center_instance_arn #=> String
+    #   resp.domain_status.identity_center_options.subject_key #=> String, one of "UserName", "UserId", "Email"
+    #   resp.domain_status.identity_center_options.roles_key #=> String, one of "GroupName", "GroupId"
+    #   resp.domain_status.identity_center_options.identity_center_application_arn #=> String
+    #   resp.domain_status.identity_center_options.identity_store_id #=> String
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.auto_tune_options.use_off_peak_window #=> Boolean
@@ -1334,6 +1465,29 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Deletes an existing OpenSearch Application.
+    #
+    # @option params [required, String] :id
+    #   Unique identifier for the OpenSearch Application that you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application({
+    #     id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteApplication AWS API Documentation
+    #
+    # @overload delete_application(params = {})
+    # @param [Hash] params ({})
+    def delete_application(params = {}, options = {})
+      req = build_request(:delete_application, params)
+      req.send_request(options)
+    end
+
     # Deletes a direct-query data source. For more information, see
     # [Deleting an Amazon OpenSearch Service data source with Amazon S3][1].
     #
@@ -1414,6 +1568,11 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.cluster_config.multi_az_with_standby_enabled #=> Boolean
+    #   resp.domain_status.cluster_config.node_options #=> Array
+    #   resp.domain_status.cluster_config.node_options[0].node_type #=> String, one of "coordinator"
+    #   resp.domain_status.cluster_config.node_options[0].node_config.enabled #=> Boolean
+    #   resp.domain_status.cluster_config.node_options[0].node_config.type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "or1.medium.search", "or1.large.search", "or1.xlarge.search", "or1.2xlarge.search", "or1.4xlarge.search", "or1.8xlarge.search", "or1.12xlarge.search", "or1.16xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.domain_status.cluster_config.node_options[0].node_config.count #=> Integer
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -1468,6 +1627,12 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.jwt_options.public_key #=> String
     #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
+    #   resp.domain_status.identity_center_options.enabled_api_access #=> Boolean
+    #   resp.domain_status.identity_center_options.identity_center_instance_arn #=> String
+    #   resp.domain_status.identity_center_options.subject_key #=> String, one of "UserName", "UserId", "Email"
+    #   resp.domain_status.identity_center_options.roles_key #=> String, one of "GroupName", "GroupId"
+    #   resp.domain_status.identity_center_options.identity_center_application_arn #=> String
+    #   resp.domain_status.identity_center_options.identity_store_id #=> String
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.auto_tune_options.use_off_peak_window #=> Boolean
@@ -1714,6 +1879,11 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.cluster_config.multi_az_with_standby_enabled #=> Boolean
+    #   resp.domain_status.cluster_config.node_options #=> Array
+    #   resp.domain_status.cluster_config.node_options[0].node_type #=> String, one of "coordinator"
+    #   resp.domain_status.cluster_config.node_options[0].node_config.enabled #=> Boolean
+    #   resp.domain_status.cluster_config.node_options[0].node_config.type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "or1.medium.search", "or1.large.search", "or1.xlarge.search", "or1.2xlarge.search", "or1.4xlarge.search", "or1.8xlarge.search", "or1.12xlarge.search", "or1.16xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.domain_status.cluster_config.node_options[0].node_config.count #=> Integer
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -1768,6 +1938,12 @@ module Aws::OpenSearchService
     #   resp.domain_status.advanced_security_options.jwt_options.public_key #=> String
     #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
+    #   resp.domain_status.identity_center_options.enabled_api_access #=> Boolean
+    #   resp.domain_status.identity_center_options.identity_center_instance_arn #=> String
+    #   resp.domain_status.identity_center_options.subject_key #=> String, one of "UserName", "UserId", "Email"
+    #   resp.domain_status.identity_center_options.roles_key #=> String, one of "GroupName", "GroupId"
+    #   resp.domain_status.identity_center_options.identity_center_application_arn #=> String
+    #   resp.domain_status.identity_center_options.identity_store_id #=> String
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.auto_tune_options.use_off_peak_window #=> Boolean
@@ -1945,6 +2121,11 @@ module Aws::OpenSearchService
     #   resp.domain_config.cluster_config.options.warm_count #=> Integer
     #   resp.domain_config.cluster_config.options.cold_storage_options.enabled #=> Boolean
     #   resp.domain_config.cluster_config.options.multi_az_with_standby_enabled #=> Boolean
+    #   resp.domain_config.cluster_config.options.node_options #=> Array
+    #   resp.domain_config.cluster_config.options.node_options[0].node_type #=> String, one of "coordinator"
+    #   resp.domain_config.cluster_config.options.node_options[0].node_config.enabled #=> Boolean
+    #   resp.domain_config.cluster_config.options.node_options[0].node_config.type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "or1.medium.search", "or1.large.search", "or1.xlarge.search", "or1.2xlarge.search", "or1.4xlarge.search", "or1.8xlarge.search", "or1.12xlarge.search", "or1.16xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.domain_config.cluster_config.options.node_options[0].node_config.count #=> Integer
     #   resp.domain_config.cluster_config.status.creation_date #=> Time
     #   resp.domain_config.cluster_config.status.update_date #=> Time
     #   resp.domain_config.cluster_config.status.update_version #=> Integer
@@ -2056,6 +2237,17 @@ module Aws::OpenSearchService
     #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
     #   resp.domain_config.advanced_security_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.advanced_security_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.identity_center_options.options.enabled_api_access #=> Boolean
+    #   resp.domain_config.identity_center_options.options.identity_center_instance_arn #=> String
+    #   resp.domain_config.identity_center_options.options.subject_key #=> String, one of "UserName", "UserId", "Email"
+    #   resp.domain_config.identity_center_options.options.roles_key #=> String, one of "GroupName", "GroupId"
+    #   resp.domain_config.identity_center_options.options.identity_center_application_arn #=> String
+    #   resp.domain_config.identity_center_options.options.identity_store_id #=> String
+    #   resp.domain_config.identity_center_options.status.creation_date #=> Time
+    #   resp.domain_config.identity_center_options.status.update_date #=> Time
+    #   resp.domain_config.identity_center_options.status.update_version #=> Integer
+    #   resp.domain_config.identity_center_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.identity_center_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.auto_tune_options.options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_config.auto_tune_options.options.rollback_on_disable #=> String, one of "NO_ROLLBACK", "DEFAULT_ROLLBACK"
     #   resp.domain_config.auto_tune_options.options.maintenance_schedules #=> Array
@@ -2256,6 +2448,11 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].cluster_config.warm_count #=> Integer
     #   resp.domain_status_list[0].cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status_list[0].cluster_config.multi_az_with_standby_enabled #=> Boolean
+    #   resp.domain_status_list[0].cluster_config.node_options #=> Array
+    #   resp.domain_status_list[0].cluster_config.node_options[0].node_type #=> String, one of "coordinator"
+    #   resp.domain_status_list[0].cluster_config.node_options[0].node_config.enabled #=> Boolean
+    #   resp.domain_status_list[0].cluster_config.node_options[0].node_config.type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "or1.medium.search", "or1.large.search", "or1.xlarge.search", "or1.2xlarge.search", "or1.4xlarge.search", "or1.8xlarge.search", "or1.12xlarge.search", "or1.16xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.domain_status_list[0].cluster_config.node_options[0].node_config.count #=> Integer
     #   resp.domain_status_list[0].ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status_list[0].ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status_list[0].ebs_options.volume_size #=> Integer
@@ -2310,6 +2507,12 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].advanced_security_options.jwt_options.public_key #=> String
     #   resp.domain_status_list[0].advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.domain_status_list[0].advanced_security_options.anonymous_auth_enabled #=> Boolean
+    #   resp.domain_status_list[0].identity_center_options.enabled_api_access #=> Boolean
+    #   resp.domain_status_list[0].identity_center_options.identity_center_instance_arn #=> String
+    #   resp.domain_status_list[0].identity_center_options.subject_key #=> String, one of "UserName", "UserId", "Email"
+    #   resp.domain_status_list[0].identity_center_options.roles_key #=> String, one of "GroupName", "GroupId"
+    #   resp.domain_status_list[0].identity_center_options.identity_center_application_arn #=> String
+    #   resp.domain_status_list[0].identity_center_options.identity_store_id #=> String
     #   resp.domain_status_list[0].auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status_list[0].auto_tune_options.error_message #=> String
     #   resp.domain_status_list[0].auto_tune_options.use_off_peak_window #=> Boolean
@@ -2408,6 +2611,11 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.cluster_config.warm_count #=> Integer
     #   resp.dry_run_config.cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.dry_run_config.cluster_config.multi_az_with_standby_enabled #=> Boolean
+    #   resp.dry_run_config.cluster_config.node_options #=> Array
+    #   resp.dry_run_config.cluster_config.node_options[0].node_type #=> String, one of "coordinator"
+    #   resp.dry_run_config.cluster_config.node_options[0].node_config.enabled #=> Boolean
+    #   resp.dry_run_config.cluster_config.node_options[0].node_config.type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "or1.medium.search", "or1.large.search", "or1.xlarge.search", "or1.2xlarge.search", "or1.4xlarge.search", "or1.8xlarge.search", "or1.12xlarge.search", "or1.16xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.dry_run_config.cluster_config.node_options[0].node_config.count #=> Integer
     #   resp.dry_run_config.ebs_options.ebs_enabled #=> Boolean
     #   resp.dry_run_config.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.dry_run_config.ebs_options.volume_size #=> Integer
@@ -2462,6 +2670,12 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.advanced_security_options.jwt_options.public_key #=> String
     #   resp.dry_run_config.advanced_security_options.anonymous_auth_disable_date #=> Time
     #   resp.dry_run_config.advanced_security_options.anonymous_auth_enabled #=> Boolean
+    #   resp.dry_run_config.identity_center_options.enabled_api_access #=> Boolean
+    #   resp.dry_run_config.identity_center_options.identity_center_instance_arn #=> String
+    #   resp.dry_run_config.identity_center_options.subject_key #=> String, one of "UserName", "UserId", "Email"
+    #   resp.dry_run_config.identity_center_options.roles_key #=> String, one of "GroupName", "GroupId"
+    #   resp.dry_run_config.identity_center_options.identity_center_application_arn #=> String
+    #   resp.dry_run_config.identity_center_options.identity_store_id #=> String
     #   resp.dry_run_config.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.dry_run_config.auto_tune_options.error_message #=> String
     #   resp.dry_run_config.auto_tune_options.use_off_peak_window #=> Boolean
@@ -2980,6 +3194,60 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Check the configuration and status of an existing OpenSearch
+    # Application.
+    #
+    # @option params [required, String] :id
+    #   Unique identifier of the checked OpenSearch Application.
+    #
+    # @return [Types::GetApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApplicationResponse#id #id} => String
+    #   * {Types::GetApplicationResponse#arn #arn} => String
+    #   * {Types::GetApplicationResponse#name #name} => String
+    #   * {Types::GetApplicationResponse#endpoint #endpoint} => String
+    #   * {Types::GetApplicationResponse#status #status} => String
+    #   * {Types::GetApplicationResponse#iam_identity_center_options #iam_identity_center_options} => Types::IamIdentityCenterOptions
+    #   * {Types::GetApplicationResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
+    #   * {Types::GetApplicationResponse#app_configs #app_configs} => Array&lt;Types::AppConfig&gt;
+    #   * {Types::GetApplicationResponse#created_at #created_at} => Time
+    #   * {Types::GetApplicationResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_application({
+    #     id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.endpoint #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.iam_identity_center_options.enabled #=> Boolean
+    #   resp.iam_identity_center_options.iam_identity_center_instance_arn #=> String
+    #   resp.iam_identity_center_options.iam_role_for_identity_center_application_arn #=> String
+    #   resp.iam_identity_center_options.iam_identity_center_application_arn #=> String
+    #   resp.data_sources #=> Array
+    #   resp.data_sources[0].data_source_arn #=> String
+    #   resp.data_sources[0].data_source_description #=> String
+    #   resp.app_configs #=> Array
+    #   resp.app_configs[0].key #=> String, one of "opensearchDashboards.dashboardAdmin.users", "opensearchDashboards.dashboardAdmin.groups"
+    #   resp.app_configs[0].value #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetApplication AWS API Documentation
+    #
+    # @overload get_application(params = {})
+    # @param [Hash] params ({})
+    def get_application(params = {}, options = {})
+      req = build_request(:get_application, params)
+      req.send_request(options)
+    end
+
     # Returns a map of OpenSearch or Elasticsearch versions and the versions
     # you can upgrade them to.
     #
@@ -3238,6 +3506,58 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def get_upgrade_status(params = {}, options = {})
       req = build_request(:get_upgrade_status, params)
+      req.send_request(options)
+    end
+
+    # List all OpenSearch Applications under your account.
+    #
+    # @option params [String] :next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Send
+    #   the request again using the returned token to retrieve the next page.
+    #
+    # @option params [Array<String>] :statuses
+    #   OpenSearch Application Status can be used as filters for the listing
+    #   request. Possible values are `CREATING`, `UPDATING`, `DELETING`,
+    #   `FAILED`, `ACTIVE`, and `DELETED`.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return for a given request.
+    #
+    # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationsResponse#application_summaries #application_summaries} => Array&lt;Types::ApplicationSummary&gt;
+    #   * {Types::ListApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_applications({
+    #     next_token: "NextToken",
+    #     statuses: ["CREATING"], # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_summaries #=> Array
+    #   resp.application_summaries[0].id #=> String
+    #   resp.application_summaries[0].arn #=> String
+    #   resp.application_summaries[0].name #=> String
+    #   resp.application_summaries[0].endpoint #=> String
+    #   resp.application_summaries[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.application_summaries[0].created_at #=> Time
+    #   resp.application_summaries[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListApplications AWS API Documentation
+    #
+    # @overload list_applications(params = {})
+    # @param [Hash] params ({})
+    def list_applications(params = {}, options = {})
+      req = build_request(:list_applications, params)
       req.send_request(options)
     end
 
@@ -3934,8 +4254,11 @@ module Aws::OpenSearchService
     # @option params [required, String] :domain_name
     #   The name of the OpenSearch Service domain.
     #
-    # @option params [required, String] :account
+    # @option params [String] :account
     #   The account ID to revoke access from.
+    #
+    # @option params [String] :service
+    #   The service SP to revoke access from.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3943,7 +4266,8 @@ module Aws::OpenSearchService
     #
     #   resp = client.revoke_vpc_endpoint_access({
     #     domain_name: "DomainName", # required
-    #     account: "AWSAccount", # required
+    #     account: "AWSAccount",
+    #     service: "application.opensearchservice.amazonaws.com", # accepts application.opensearchservice.amazonaws.com
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RevokeVpcEndpointAccess AWS API Documentation
@@ -4057,6 +4381,73 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def start_service_software_update(params = {}, options = {})
       req = build_request(:start_service_software_update, params)
+      req.send_request(options)
+    end
+
+    # Update the OpenSearch Application.
+    #
+    # @option params [required, String] :id
+    #   Unique identifier of the OpenSearch Application to be updated.
+    #
+    # @option params [Array<Types::DataSource>] :data_sources
+    #   Data sources to be associated with the OpenSearch Application.
+    #
+    # @option params [Array<Types::AppConfig>] :app_configs
+    #   Configurations to be changed for the OpenSearch Application.
+    #
+    # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApplicationResponse#id #id} => String
+    #   * {Types::UpdateApplicationResponse#name #name} => String
+    #   * {Types::UpdateApplicationResponse#arn #arn} => String
+    #   * {Types::UpdateApplicationResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
+    #   * {Types::UpdateApplicationResponse#iam_identity_center_options #iam_identity_center_options} => Types::IamIdentityCenterOptions
+    #   * {Types::UpdateApplicationResponse#app_configs #app_configs} => Array&lt;Types::AppConfig&gt;
+    #   * {Types::UpdateApplicationResponse#created_at #created_at} => Time
+    #   * {Types::UpdateApplicationResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application({
+    #     id: "Id", # required
+    #     data_sources: [
+    #       {
+    #         data_source_arn: "ARN",
+    #         data_source_description: "DataSourceDescription",
+    #       },
+    #     ],
+    #     app_configs: [
+    #       {
+    #         key: "opensearchDashboards.dashboardAdmin.users", # accepts opensearchDashboards.dashboardAdmin.users, opensearchDashboards.dashboardAdmin.groups
+    #         value: "AppConfigValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.data_sources #=> Array
+    #   resp.data_sources[0].data_source_arn #=> String
+    #   resp.data_sources[0].data_source_description #=> String
+    #   resp.iam_identity_center_options.enabled #=> Boolean
+    #   resp.iam_identity_center_options.iam_identity_center_instance_arn #=> String
+    #   resp.iam_identity_center_options.iam_role_for_identity_center_application_arn #=> String
+    #   resp.iam_identity_center_options.iam_identity_center_application_arn #=> String
+    #   resp.app_configs #=> Array
+    #   resp.app_configs[0].key #=> String, one of "opensearchDashboards.dashboardAdmin.users", "opensearchDashboards.dashboardAdmin.groups"
+    #   resp.app_configs[0].value #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateApplication AWS API Documentation
+    #
+    # @overload update_application(params = {})
+    # @param [Hash] params ({})
+    def update_application(params = {}, options = {})
+      req = build_request(:update_application, params)
       req.send_request(options)
     end
 
@@ -4198,6 +4589,9 @@ module Aws::OpenSearchService
     # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
     #   Options for fine-grained access control.
     #
+    # @option params [Types::IdentityCenterOptionsInput] :identity_center_options
+    #   Container for IAM Identity Center Options settings.
+    #
     # @option params [Types::AutoTuneOptions] :auto_tune_options
     #   Options for Auto-Tune.
     #
@@ -4256,6 +4650,16 @@ module Aws::OpenSearchService
     #         enabled: false, # required
     #       },
     #       multi_az_with_standby_enabled: false,
+    #       node_options: [
+    #         {
+    #           node_type: "coordinator", # accepts coordinator
+    #           node_config: {
+    #             enabled: false,
+    #             type: "m3.medium.search", # accepts m3.medium.search, m3.large.search, m3.xlarge.search, m3.2xlarge.search, m4.large.search, m4.xlarge.search, m4.2xlarge.search, m4.4xlarge.search, m4.10xlarge.search, m5.large.search, m5.xlarge.search, m5.2xlarge.search, m5.4xlarge.search, m5.12xlarge.search, m5.24xlarge.search, r5.large.search, r5.xlarge.search, r5.2xlarge.search, r5.4xlarge.search, r5.12xlarge.search, r5.24xlarge.search, c5.large.search, c5.xlarge.search, c5.2xlarge.search, c5.4xlarge.search, c5.9xlarge.search, c5.18xlarge.search, t3.nano.search, t3.micro.search, t3.small.search, t3.medium.search, t3.large.search, t3.xlarge.search, t3.2xlarge.search, or1.medium.search, or1.large.search, or1.xlarge.search, or1.2xlarge.search, or1.4xlarge.search, or1.8xlarge.search, or1.12xlarge.search, or1.16xlarge.search, ultrawarm1.medium.search, ultrawarm1.large.search, ultrawarm1.xlarge.search, t2.micro.search, t2.small.search, t2.medium.search, r3.large.search, r3.xlarge.search, r3.2xlarge.search, r3.4xlarge.search, r3.8xlarge.search, i2.xlarge.search, i2.2xlarge.search, d2.xlarge.search, d2.2xlarge.search, d2.4xlarge.search, d2.8xlarge.search, c4.large.search, c4.xlarge.search, c4.2xlarge.search, c4.4xlarge.search, c4.8xlarge.search, r4.large.search, r4.xlarge.search, r4.2xlarge.search, r4.4xlarge.search, r4.8xlarge.search, r4.16xlarge.search, i3.large.search, i3.xlarge.search, i3.2xlarge.search, i3.4xlarge.search, i3.8xlarge.search, i3.16xlarge.search, r6g.large.search, r6g.xlarge.search, r6g.2xlarge.search, r6g.4xlarge.search, r6g.8xlarge.search, r6g.12xlarge.search, m6g.large.search, m6g.xlarge.search, m6g.2xlarge.search, m6g.4xlarge.search, m6g.8xlarge.search, m6g.12xlarge.search, c6g.large.search, c6g.xlarge.search, c6g.2xlarge.search, c6g.4xlarge.search, c6g.8xlarge.search, c6g.12xlarge.search, r6gd.large.search, r6gd.xlarge.search, r6gd.2xlarge.search, r6gd.4xlarge.search, r6gd.8xlarge.search, r6gd.12xlarge.search, r6gd.16xlarge.search, t4g.small.search, t4g.medium.search
+    #             count: 1,
+    #           },
+    #         },
+    #       ],
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
@@ -4330,6 +4734,12 @@ module Aws::OpenSearchService
     #       },
     #       anonymous_auth_enabled: false,
     #     },
+    #     identity_center_options: {
+    #       enabled_api_access: false,
+    #       identity_center_instance_arn: "IdentityCenterInstanceARN",
+    #       subject_key: "UserName", # accepts UserName, UserId, Email
+    #       roles_key: "GroupName", # accepts GroupName, GroupId
+    #     },
     #     auto_tune_options: {
     #       desired_state: "ENABLED", # accepts ENABLED, DISABLED
     #       rollback_on_disable: "NO_ROLLBACK", # accepts NO_ROLLBACK, DEFAULT_ROLLBACK
@@ -4386,6 +4796,11 @@ module Aws::OpenSearchService
     #   resp.domain_config.cluster_config.options.warm_count #=> Integer
     #   resp.domain_config.cluster_config.options.cold_storage_options.enabled #=> Boolean
     #   resp.domain_config.cluster_config.options.multi_az_with_standby_enabled #=> Boolean
+    #   resp.domain_config.cluster_config.options.node_options #=> Array
+    #   resp.domain_config.cluster_config.options.node_options[0].node_type #=> String, one of "coordinator"
+    #   resp.domain_config.cluster_config.options.node_options[0].node_config.enabled #=> Boolean
+    #   resp.domain_config.cluster_config.options.node_options[0].node_config.type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "or1.medium.search", "or1.large.search", "or1.xlarge.search", "or1.2xlarge.search", "or1.4xlarge.search", "or1.8xlarge.search", "or1.12xlarge.search", "or1.16xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.domain_config.cluster_config.options.node_options[0].node_config.count #=> Integer
     #   resp.domain_config.cluster_config.status.creation_date #=> Time
     #   resp.domain_config.cluster_config.status.update_date #=> Time
     #   resp.domain_config.cluster_config.status.update_version #=> Integer
@@ -4497,6 +4912,17 @@ module Aws::OpenSearchService
     #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
     #   resp.domain_config.advanced_security_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.advanced_security_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.identity_center_options.options.enabled_api_access #=> Boolean
+    #   resp.domain_config.identity_center_options.options.identity_center_instance_arn #=> String
+    #   resp.domain_config.identity_center_options.options.subject_key #=> String, one of "UserName", "UserId", "Email"
+    #   resp.domain_config.identity_center_options.options.roles_key #=> String, one of "GroupName", "GroupId"
+    #   resp.domain_config.identity_center_options.options.identity_center_application_arn #=> String
+    #   resp.domain_config.identity_center_options.options.identity_store_id #=> String
+    #   resp.domain_config.identity_center_options.status.creation_date #=> Time
+    #   resp.domain_config.identity_center_options.status.update_date #=> Time
+    #   resp.domain_config.identity_center_options.status.update_version #=> Integer
+    #   resp.domain_config.identity_center_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.identity_center_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.auto_tune_options.options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_config.auto_tune_options.options.rollback_on_disable #=> String, one of "NO_ROLLBACK", "DEFAULT_ROLLBACK"
     #   resp.domain_config.auto_tune_options.options.maintenance_schedules #=> Array
@@ -4841,7 +5267,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -610,6 +610,18 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class AssociateSecurityGroupVpcRequest
+      attr_accessor group_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class AssociateSecurityGroupVpcResult
+      attr_accessor state: ("associating" | "associated" | "association-failed" | "disassociating" | "disassociated" | "disassociation-failed")
+      SENSITIVE: []
+    end
+
     class AssociateSubnetCidrBlockRequest
       attr_accessor ipv_6_ipam_pool_id: ::String
       attr_accessor ipv_6_netmask_length: ::Integer
@@ -2441,6 +2453,7 @@ module Aws::EC2
     class CreateSecurityGroupResult
       attr_accessor group_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor security_group_arn: ::String
       SENSITIVE: []
     end
 
@@ -5544,6 +5557,20 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DescribeSecurityGroupVpcAssociationsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DescribeSecurityGroupVpcAssociationsResult
+      attr_accessor security_group_vpc_associations: ::Array[Types::SecurityGroupVpcAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeSecurityGroupsRequest
       attr_accessor group_ids: ::Array[::String]
       attr_accessor group_names: ::Array[::String]
@@ -6724,6 +6751,18 @@ module Aws::EC2
     class DisassociateRouteTableRequest
       attr_accessor dry_run: bool
       attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSecurityGroupVpcRequest
+      attr_accessor group_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateSecurityGroupVpcResult
+      attr_accessor state: ("associating" | "associated" | "association-failed" | "disassociating" | "disassociated" | "disassociation-failed")
       SENSITIVE: []
     end
 
@@ -13183,6 +13222,7 @@ module Aws::EC2
     class RevokeSecurityGroupEgressResult
       attr_accessor return: bool
       attr_accessor unknown_ip_permissions: ::Array[Types::IpPermission]
+      attr_accessor revoked_security_group_rules: ::Array[Types::RevokedSecurityGroupRule]
       SENSITIVE: []
     end
 
@@ -13204,6 +13244,22 @@ module Aws::EC2
     class RevokeSecurityGroupIngressResult
       attr_accessor return: bool
       attr_accessor unknown_ip_permissions: ::Array[Types::IpPermission]
+      attr_accessor revoked_security_group_rules: ::Array[Types::RevokedSecurityGroupRule]
+      SENSITIVE: []
+    end
+
+    class RevokedSecurityGroupRule
+      attr_accessor security_group_rule_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor is_egress: bool
+      attr_accessor ip_protocol: ::String
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      attr_accessor cidr_ipv_4: ::String
+      attr_accessor cidr_ipv_6: ::String
+      attr_accessor prefix_list_id: ::String
+      attr_accessor referenced_group_id: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -13534,6 +13590,7 @@ module Aws::EC2
       attr_accessor ip_permissions_egress: ::Array[Types::IpPermission]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor vpc_id: ::String
+      attr_accessor security_group_arn: ::String
       attr_accessor owner_id: ::String
       attr_accessor group_name: ::String
       attr_accessor description: ::String
@@ -13579,6 +13636,7 @@ module Aws::EC2
       attr_accessor referenced_group_info: Types::ReferencedSecurityGroup
       attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor security_group_rule_arn: ::String
       SENSITIVE: []
     end
 
@@ -13603,6 +13661,15 @@ module Aws::EC2
     class SecurityGroupRuleUpdate
       attr_accessor security_group_rule_id: ::String
       attr_accessor security_group_rule: Types::SecurityGroupRuleRequest
+      SENSITIVE: []
+    end
+
+    class SecurityGroupVpcAssociation
+      attr_accessor group_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_owner_id: ::String
+      attr_accessor state: ("associating" | "associated" | "association-failed" | "disassociating" | "disassociated" | "disassociation-failed")
+      attr_accessor state_reason: ::String
       SENSITIVE: []
     end
 

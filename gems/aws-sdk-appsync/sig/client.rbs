@@ -116,6 +116,60 @@ module Aws
                                         ) -> _AssociateSourceGraphqlApiResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSourceGraphqlApiResponseSuccess
 
+      interface _CreateApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApiResponse]
+        def api: () -> Types::Api
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_api-instance_method
+      def create_api: (
+                        name: ::String,
+                        ?owner_contact: ::String,
+                        ?tags: Hash[::String, ::String],
+                        ?event_config: {
+                          auth_providers: Array[
+                            {
+                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
+                              cognito_config: {
+                                user_pool_id: ::String,
+                                aws_region: ::String,
+                                app_id_client_regex: ::String?
+                              }?,
+                              open_id_connect_config: {
+                                issuer: ::String,
+                                client_id: ::String?,
+                                iat_ttl: ::Integer?,
+                                auth_ttl: ::Integer?
+                              }?,
+                              lambda_authorizer_config: {
+                                authorizer_result_ttl_in_seconds: ::Integer?,
+                                authorizer_uri: ::String,
+                                identity_validation_expression: ::String?
+                              }?
+                            },
+                          ],
+                          connection_auth_modes: Array[
+                            {
+                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                            },
+                          ],
+                          default_publish_auth_modes: Array[
+                            {
+                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                            },
+                          ],
+                          default_subscribe_auth_modes: Array[
+                            {
+                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                            },
+                          ],
+                          log_config: {
+                            log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG"),
+                            cloud_watch_logs_role_arn: ::String
+                          }?
+                        }
+                      ) -> _CreateApiResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiResponseSuccess
+
       interface _CreateApiCacheResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateApiCacheResponse]
         def api_cache: () -> Types::ApiCache
@@ -143,6 +197,29 @@ module Aws
                             ?expires: ::Integer
                           ) -> _CreateApiKeyResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiKeyResponseSuccess
+
+      interface _CreateChannelNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelNamespaceResponse]
+        def channel_namespace: () -> Types::ChannelNamespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#create_channel_namespace-instance_method
+      def create_channel_namespace: (
+                                      api_id: ::String,
+                                      name: ::String,
+                                      ?subscribe_auth_modes: Array[
+                                        {
+                                          auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                                        },
+                                      ],
+                                      ?publish_auth_modes: Array[
+                                        {
+                                          auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                                        },
+                                      ],
+                                      ?code_handlers: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateChannelNamespaceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelNamespaceResponseSuccess
 
       interface _CreateDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceResponse]
@@ -298,9 +375,9 @@ module Aws
                                   authorizer_uri: ::String,
                                   identity_validation_expression: ::String?
                                 },
-                                ?visibility: ("GLOBAL" | "PRIVATE"),
                                 ?api_type: ("GRAPHQL" | "MERGED"),
                                 ?merged_api_execution_role_arn: ::String,
+                                ?visibility: ("GLOBAL" | "PRIVATE"),
                                 ?owner_contact: ::String,
                                 ?introspection_config: ("ENABLED" | "DISABLED"),
                                 ?query_depth_limit: ::Integer,
@@ -362,6 +439,15 @@ module Aws
                        ) -> _CreateTypeResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTypeResponseSuccess
 
+      interface _DeleteApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApiResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_api-instance_method
+      def delete_api: (
+                        api_id: ::String
+                      ) -> _DeleteApiResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApiResponseSuccess
+
       interface _DeleteApiCacheResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApiCacheResponse]
       end
@@ -380,6 +466,16 @@ module Aws
                             id: ::String
                           ) -> _DeleteApiKeyResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApiKeyResponseSuccess
+
+      interface _DeleteChannelNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChannelNamespaceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#delete_channel_namespace-instance_method
+      def delete_channel_namespace: (
+                                      api_id: ::String,
+                                      name: ::String
+                                    ) -> _DeleteChannelNamespaceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChannelNamespaceResponseSuccess
 
       interface _DeleteDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceResponse]
@@ -509,6 +605,16 @@ module Aws
                            ) -> _FlushApiCacheResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FlushApiCacheResponseSuccess
 
+      interface _GetApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApiResponse]
+        def api: () -> Types::Api
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_api-instance_method
+      def get_api: (
+                     api_id: ::String
+                   ) -> _GetApiResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApiResponseSuccess
+
       interface _GetApiAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetApiAssociationResponse]
         def api_association: () -> Types::ApiAssociation
@@ -528,6 +634,17 @@ module Aws
                            api_id: ::String
                          ) -> _GetApiCacheResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApiCacheResponseSuccess
+
+      interface _GetChannelNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelNamespaceResponse]
+        def channel_namespace: () -> Types::ChannelNamespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#get_channel_namespace-instance_method
+      def get_channel_namespace: (
+                                   api_id: ::String,
+                                   name: ::String
+                                 ) -> _GetChannelNamespaceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelNamespaceResponseSuccess
 
       interface _GetDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceResponse]
@@ -667,6 +784,31 @@ module Aws
                            ?max_results: ::Integer
                          ) -> _ListApiKeysResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApiKeysResponseSuccess
+
+      interface _ListApisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApisResponse]
+        def apis: () -> ::Array[Types::Api]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_apis-instance_method
+      def list_apis: (
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListApisResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApisResponseSuccess
+
+      interface _ListChannelNamespacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelNamespacesResponse]
+        def channel_namespaces: () -> ::Array[Types::ChannelNamespace]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#list_channel_namespaces-instance_method
+      def list_channel_namespaces: (
+                                     api_id: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListChannelNamespacesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelNamespacesResponseSuccess
 
       interface _ListDataSourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourcesResponse]
@@ -869,6 +1011,60 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApiResponse]
+        def api: () -> Types::Api
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_api-instance_method
+      def update_api: (
+                        api_id: ::String,
+                        name: ::String,
+                        ?owner_contact: ::String,
+                        ?event_config: {
+                          auth_providers: Array[
+                            {
+                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
+                              cognito_config: {
+                                user_pool_id: ::String,
+                                aws_region: ::String,
+                                app_id_client_regex: ::String?
+                              }?,
+                              open_id_connect_config: {
+                                issuer: ::String,
+                                client_id: ::String?,
+                                iat_ttl: ::Integer?,
+                                auth_ttl: ::Integer?
+                              }?,
+                              lambda_authorizer_config: {
+                                authorizer_result_ttl_in_seconds: ::Integer?,
+                                authorizer_uri: ::String,
+                                identity_validation_expression: ::String?
+                              }?
+                            },
+                          ],
+                          connection_auth_modes: Array[
+                            {
+                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                            },
+                          ],
+                          default_publish_auth_modes: Array[
+                            {
+                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                            },
+                          ],
+                          default_subscribe_auth_modes: Array[
+                            {
+                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                            },
+                          ],
+                          log_config: {
+                            log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG"),
+                            cloud_watch_logs_role_arn: ::String
+                          }?
+                        }
+                      ) -> _UpdateApiResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiResponseSuccess
+
       interface _UpdateApiCacheResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApiCacheResponse]
         def api_cache: () -> Types::ApiCache
@@ -895,6 +1091,28 @@ module Aws
                             ?expires: ::Integer
                           ) -> _UpdateApiKeyResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiKeyResponseSuccess
+
+      interface _UpdateChannelNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelNamespaceResponse]
+        def channel_namespace: () -> Types::ChannelNamespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#update_channel_namespace-instance_method
+      def update_channel_namespace: (
+                                      api_id: ::String,
+                                      name: ::String,
+                                      ?subscribe_auth_modes: Array[
+                                        {
+                                          auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                                        },
+                                      ],
+                                      ?publish_auth_modes: Array[
+                                        {
+                                          auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+                                        },
+                                      ],
+                                      ?code_handlers: ::String
+                                    ) -> _UpdateChannelNamespaceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelNamespaceResponseSuccess
 
       interface _UpdateDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceResponse]
@@ -1010,7 +1228,7 @@ module Aws
                                   cloud_watch_logs_role_arn: ::String,
                                   exclude_verbose_content: bool?
                                 },
-                                authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
+                                ?authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
                                 ?user_pool_config: {
                                   user_pool_id: ::String,
                                   aws_region: ::String,

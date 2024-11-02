@@ -405,6 +405,73 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] inference_profile_name
+    #   A name for the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] model_source
+    #   The foundation model or system-defined inference profile that the
+    #   inference profile will track metrics and costs for.
+    #   @return [Types::InferenceProfileModelSource]
+    #
+    # @!attribute [rw] tags
+    #   An array of objects, each of which contains a tag and its value. For
+    #   more information, see [Tagging resources][1] in the [Amazon Bedrock
+    #   User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateInferenceProfileRequest AWS API Documentation
+    #
+    class CreateInferenceProfileRequest < Struct.new(
+      :inference_profile_name,
+      :description,
+      :client_request_token,
+      :model_source,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_profile_arn
+    #   The ARN of the inference profile that you created.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the inference profile. `ACTIVE` means that the
+    #   inference profile is ready to be used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateInferenceProfileResponse AWS API Documentation
+    #
+    class CreateInferenceProfileResponse < Struct.new(
+      :inference_profile_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_model_arn
     #   The Amazon Resource Name (ARN) of the model to be copied.
     #   @return [String]
@@ -947,6 +1014,23 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteImportedModelResponse AWS API Documentation
     #
     class DeleteImportedModelResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] inference_profile_identifier
+    #   The Amazon Resource Name (ARN) or ID of the application inference
+    #   profile to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteInferenceProfileRequest AWS API Documentation
+    #
+    class DeleteInferenceProfileRequest < Struct.new(
+      :inference_profile_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteInferenceProfileResponse AWS API Documentation
+    #
+    class DeleteInferenceProfileResponse < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -1758,7 +1842,7 @@ module Aws::Bedrock
     end
 
     # @!attribute [rw] inference_profile_identifier
-    #   The unique identifier of the inference profile.
+    #   The ID or Amazon Resource Name (ARN) of the inference profile.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfileRequest AWS API Documentation
@@ -1772,10 +1856,6 @@ module Aws::Bedrock
     # @!attribute [rw] inference_profile_name
     #   The name of the inference profile.
     #   @return [String]
-    #
-    # @!attribute [rw] models
-    #   A list of information about each model in the inference profile.
-    #   @return [Array<Types::InferenceProfileModel>]
     #
     # @!attribute [rw] description
     #   The description of the inference profile.
@@ -1793,33 +1873,45 @@ module Aws::Bedrock
     #   The Amazon Resource Name (ARN) of the inference profile.
     #   @return [String]
     #
+    # @!attribute [rw] models
+    #   A list of information about each model in the inference profile.
+    #   @return [Array<Types::InferenceProfileModel>]
+    #
     # @!attribute [rw] inference_profile_id
     #   The unique identifier of the inference profile.
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The status of the inference profile. `ACTIVE` means that the
-    #   inference profile is available to use.
+    #   inference profile is ready to be used.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the inference profile. `SYSTEM_DEFINED` means that the
-    #   inference profile is defined by Amazon Bedrock.
+    #   The type of the inference profile. The following types are possible:
+    #
+    #   * `SYSTEM_DEFINED` – The inference profile is defined by Amazon
+    #     Bedrock. You can route inference requests across regions with
+    #     these inference profiles.
+    #
+    #   * `APPLICATION` – The inference profile was created by a user. This
+    #     type of inference profile can track metrics and costs when
+    #     invoking the model in it. The inference profile may route requests
+    #     to one or multiple regions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfileResponse AWS API Documentation
     #
     class GetInferenceProfileResponse < Struct.new(
       :inference_profile_name,
-      :models,
       :description,
       :created_at,
       :updated_at,
       :inference_profile_arn,
+      :models,
       :inference_profile_id,
       :status,
       :type)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -3378,15 +3470,34 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Contains information about the model or system-defined inference
+    # profile that is the source for an inference profile..
+    #
+    # @note InferenceProfileModelSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] copy_from
+    #   The ARN of the model or system-defined inference profile that is the
+    #   source for the inference profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/InferenceProfileModelSource AWS API Documentation
+    #
+    class InferenceProfileModelSource < Struct.new(
+      :copy_from,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CopyFrom < InferenceProfileModelSource; end
+      class Unknown < InferenceProfileModelSource; end
+    end
+
     # Contains information about an inference profile.
     #
     # @!attribute [rw] inference_profile_name
     #   The name of the inference profile.
     #   @return [String]
-    #
-    # @!attribute [rw] models
-    #   A list of information about each model in the inference profile.
-    #   @return [Array<Types::InferenceProfileModel>]
     #
     # @!attribute [rw] description
     #   The description of the inference profile.
@@ -3404,33 +3515,45 @@ module Aws::Bedrock
     #   The Amazon Resource Name (ARN) of the inference profile.
     #   @return [String]
     #
+    # @!attribute [rw] models
+    #   A list of information about each model in the inference profile.
+    #   @return [Array<Types::InferenceProfileModel>]
+    #
     # @!attribute [rw] inference_profile_id
     #   The unique identifier of the inference profile.
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The status of the inference profile. `ACTIVE` means that the
-    #   inference profile is available to use.
+    #   inference profile is ready to be used.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the inference profile. `SYSTEM_DEFINED` means that the
-    #   inference profile is defined by Amazon Bedrock.
+    #   The type of the inference profile. The following types are possible:
+    #
+    #   * `SYSTEM_DEFINED` – The inference profile is defined by Amazon
+    #     Bedrock. You can route inference requests across regions with
+    #     these inference profiles.
+    #
+    #   * `APPLICATION` – The inference profile was created by a user. This
+    #     type of inference profile can track metrics and costs when
+    #     invoking the model in it. The inference profile may route requests
+    #     to one or multiple regions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/InferenceProfileSummary AWS API Documentation
     #
     class InferenceProfileSummary < Struct.new(
       :inference_profile_name,
-      :models,
       :description,
       :created_at,
       :updated_at,
       :inference_profile_arn,
+      :models,
       :inference_profile_id,
       :status,
       :type)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -3782,11 +3905,25 @@ module Aws::Bedrock
     #   batch of results.
     #   @return [String]
     #
+    # @!attribute [rw] type_equals
+    #   Filters for inference profiles that match the type you specify.
+    #
+    #   * `SYSTEM_DEFINED` – The inference profile is defined by Amazon
+    #     Bedrock. You can route inference requests across regions with
+    #     these inference profiles.
+    #
+    #   * `APPLICATION` – The inference profile was created by a user. This
+    #     type of inference profile can track metrics and costs when
+    #     invoking the model in it. The inference profile may route requests
+    #     to one or multiple regions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListInferenceProfilesRequest AWS API Documentation
     #
     class ListInferenceProfilesRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :type_equals)
       SENSITIVE = []
       include Aws::Structure
     end

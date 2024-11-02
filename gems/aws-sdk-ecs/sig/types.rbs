@@ -215,6 +215,13 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class ContainerImage
+      attr_accessor container_name: ::String
+      attr_accessor image_digest: ::String
+      attr_accessor image: ::String
+      SENSITIVE: []
+    end
+
     class ContainerInstance
       attr_accessor container_instance_arn: ::String
       attr_accessor ec2_instance_id: ::String
@@ -356,6 +363,12 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class CreatedAt
+      attr_accessor before: ::Time
+      attr_accessor after: ::Time
+      SENSITIVE: []
+    end
+
     class DeleteAccountSettingRequest
       attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate")
       attr_accessor principal_arn: ::String
@@ -460,8 +473,8 @@ module Aws::ECS
 
     class DeploymentAlarms
       attr_accessor alarm_names: ::Array[::String]
-      attr_accessor enable: bool
       attr_accessor rollback: bool
+      attr_accessor enable: bool
       SENSITIVE: []
     end
 
@@ -547,6 +560,28 @@ module Aws::ECS
 
     class DescribeContainerInstancesResponse
       attr_accessor container_instances: ::Array[Types::ContainerInstance]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceDeploymentsRequest
+      attr_accessor service_deployment_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceDeploymentsResponse
+      attr_accessor service_deployments: ::Array[Types::ServiceDeployment]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceRevisionsRequest
+      attr_accessor service_revision_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceRevisionsResponse
+      attr_accessor service_revisions: ::Array[Types::ServiceRevision]
       attr_accessor failures: ::Array[Types::Failure]
       SENSITIVE: []
     end
@@ -862,6 +897,22 @@ module Aws::ECS
 
     class ListContainerInstancesResponse
       attr_accessor container_instance_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceDeploymentsRequest
+      attr_accessor service: ::String
+      attr_accessor cluster: ::String
+      attr_accessor status: ::Array[("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")]
+      attr_accessor created_at: Types::CreatedAt
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServiceDeploymentsResponse
+      attr_accessor service_deployments: ::Array[Types::ServiceDeploymentBrief]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1202,6 +1253,13 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class Rollback
+      attr_accessor reason: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor service_revision_arn: ::String
+      SENSITIVE: []
+    end
+
     class RunTaskRequest
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
       attr_accessor cluster: ::String
@@ -1331,6 +1389,53 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class ServiceDeployment
+      attr_accessor service_deployment_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor finished_at: ::Time
+      attr_accessor stopped_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor source_service_revisions: ::Array[Types::ServiceRevisionSummary]
+      attr_accessor target_service_revision: Types::ServiceRevisionSummary
+      attr_accessor status: ("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor rollback: Types::Rollback
+      attr_accessor deployment_circuit_breaker: Types::ServiceDeploymentCircuitBreaker
+      attr_accessor alarms: Types::ServiceDeploymentAlarms
+      SENSITIVE: []
+    end
+
+    class ServiceDeploymentAlarms
+      attr_accessor status: ("TRIGGERED" | "MONITORING" | "MONITORING_COMPLETE" | "DISABLED")
+      attr_accessor alarm_names: ::Array[::String]
+      attr_accessor triggered_alarm_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ServiceDeploymentBrief
+      attr_accessor service_deployment_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor finished_at: ::Time
+      attr_accessor target_service_revision_arn: ::String
+      attr_accessor status: ("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceDeploymentCircuitBreaker
+      attr_accessor status: ("TRIGGERED" | "MONITORING" | "MONITORING_COMPLETE" | "DISABLED")
+      attr_accessor failure_count: ::Integer
+      attr_accessor threshold: ::Integer
+      SENSITIVE: []
+    end
+
     class ServiceEvent
       attr_accessor id: ::String
       attr_accessor created_at: ::Time
@@ -1363,6 +1468,35 @@ module Aws::ECS
       attr_accessor port: ::Integer
       attr_accessor container_name: ::String
       attr_accessor container_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceRevision
+      attr_accessor service_revision_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor task_definition: ::String
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor platform_version: ::String
+      attr_accessor platform_family: ::String
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor service_registries: ::Array[Types::ServiceRegistry]
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor container_images: ::Array[Types::ContainerImage]
+      attr_accessor guard_duty_enabled: bool
+      attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
+      attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
+      attr_accessor fargate_ephemeral_storage: Types::DeploymentEphemeralStorage
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ServiceRevisionSummary
+      attr_accessor arn: ::String
+      attr_accessor requested_task_count: ::Integer
+      attr_accessor running_task_count: ::Integer
+      attr_accessor pending_task_count: ::Integer
       SENSITIVE: []
     end
 

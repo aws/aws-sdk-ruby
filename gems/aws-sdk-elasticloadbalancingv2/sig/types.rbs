@@ -103,6 +103,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor subnet_id: ::String
       attr_accessor outpost_id: ::String
       attr_accessor load_balancer_addresses: ::Array[Types::LoadBalancerAddress]
+      attr_accessor source_nat_ipv_6_prefixes: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -155,6 +156,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor type: ("application" | "network" | "gateway")
       attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       attr_accessor customer_owned_ipv_4_pool: ::String
+      attr_accessor enable_prefix_for_ipv_6_source_nat: ("on" | "off")
       SENSITIVE: []
     end
 
@@ -623,6 +625,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
       attr_accessor customer_owned_ipv_4_pool: ::String
       attr_accessor enforce_security_group_inbound_rules_on_private_link_traffic: ::String
+      attr_accessor enable_prefix_for_ipv_6_source_nat: ("on" | "off")
       SENSITIVE: []
     end
 
@@ -917,12 +920,14 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor subnets: ::Array[::String]
       attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
       attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
+      attr_accessor enable_prefix_for_ipv_6_source_nat: ("on" | "off")
       SENSITIVE: []
     end
 
     class SetSubnetsOutput
       attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
       attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
+      attr_accessor enable_prefix_for_ipv_6_source_nat: ("on" | "off")
       SENSITIVE: []
     end
 
@@ -944,6 +949,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor allocation_id: ::String
       attr_accessor private_i_pv_4_address: ::String
       attr_accessor i_pv_6_address: ::String
+      attr_accessor source_nat_ipv_6_prefix: ::String
       SENSITIVE: []
     end
 
