@@ -351,11 +351,7 @@ module Aws
 
         test_cases.each do |test_case|
           it "passes test: #{test_case['documentation']}" do
-            algorithm = test_case['checksumAlgorithm'].upcase
-            unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
-              skip "Algorithm #{algorithm} not supported"
-            end
-
+            algorithm = test_case['checksumAlgorithm']
             resp = client.http_checksum_operation(
               "checksum_#{algorithm.downcase}".to_sym => test_case['checksumValue'],
               body: test_case['requestPayload']
