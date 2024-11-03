@@ -360,7 +360,7 @@ module Aws
             test_case['expectHeaders'].each do |key, value|
               expect(headers[key]).to eq(value)
             end
-            test_case['expectNotPresentHeaders'].each do |key|
+            test_case['forbidHeaders'].each do |key|
               expect(headers[key]).to be_nil
             end
           end

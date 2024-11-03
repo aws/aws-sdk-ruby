@@ -7,19 +7,19 @@
     "expectHeaders": {
       "x-amz-checksum-crc32": "i9aeUg=="
     },
-    "expectNotPresentHeaders": [
+    "forbidHeaders": [
       "x-amz-request-algorithm"
     ]
   },
   {
     "documentation": "CRC32C checksum provided by user.",
     "requestPayload": "Hello world",
-    "checksumAlgorithm": "Crc32C",
+    "checksumAlgorithm": "Crc32c",
     "checksumValue": "crUfeA==",
     "expectHeaders": {
       "x-amz-checksum-crc32c": "crUfeA=="
     },
-    "expectNotPresentHeaders": [
+    "forbidHeaders": [
       "x-amz-request-algorithm"
     ]
   },
@@ -31,7 +31,7 @@
     "expectHeaders": {
       "x-amz-checksum-crc64nvme": "OOJZ0D8xKts="
     },
-    "expectNotPresentHeaders": [
+    "forbidHeaders": [
       "x-amz-request-algorithm"
     ]
   },
@@ -43,7 +43,7 @@
     "expectHeaders": {
       "x-amz-checksum-sha1": "e1AsOh9IyGCa4hLN+2Od7jlnP14="
     },
-    "expectNotPresentHeaders": [
+    "forbidHeaders": [
       "x-amz-request-algorithm"
     ]
   },
@@ -55,19 +55,19 @@
     "expectHeaders": {
       "x-amz-checksum-sha256": "ZOyIygCyaOW6GjVnihtTFtIS9PNmskdyMlNKiuyjfzw="
     },
-    "expectNotPresentHeaders": [
+    "forbidHeaders": [
       "x-amz-request-algorithm"
     ]
   },
   {
-    "documentation": "Unsupported checksum provided by user.",
+    "documentation": "Forwards compatibility, unmodeled checksum provided by user.",
     "requestPayload": "Hello world",
     "checksumAlgorithm": "Foo",
     "checksumValue": "This-is-not-a-real-checksum",
     "expectHeaders": {
       "x-amz-checksum-foo": "This-is-not-a-real-checksum"
     },
-    "expectNotPresentHeaders": [
+    "forbidHeaders": [
       "x-amz-request-algorithm"
     ]
   }
