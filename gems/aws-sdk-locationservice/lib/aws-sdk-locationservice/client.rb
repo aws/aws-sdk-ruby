@@ -783,8 +783,8 @@ module Aws::LocationService
     # if two consecutive updates from a device have a horizontal accuracy of
     # 5 m and 10 m, the second update is neither stored or evaluated if the
     # device has moved less than 15 m. If `PositionFiltering` is set to
-    # `AccuracyBased` filtering, Amazon Location uses the default value `\{
-    # "Horizontal": 0\}` when accuracy is not provided on a
+    # `AccuracyBased` filtering, Amazon Location uses the default value `{
+    # "Horizontal": 0}` when accuracy is not provided on a
     # `DevicePositionUpdate`.
     #
     #  </note>
@@ -1888,7 +1888,7 @@ module Aws::LocationService
     #   key-value pair helps manage, identify, search, and filter your
     #   resources by labelling them.
     #
-    #   * For example: \\\{ `"tag1" : "value1"`, `"tag2" : "value2"`\\}
+    #   * For example: \{ `"tag1" : "value1"`, `"tag2" : "value2"`}
     #
     #   ^
     #
@@ -4891,7 +4891,7 @@ module Aws::LocationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

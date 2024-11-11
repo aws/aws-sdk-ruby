@@ -376,12 +376,26 @@
         "PutNotificationConfigurationType$NotificationTypes": "<p>The type of event that causes the notification to be sent. To query the notification types supported by Amazon EC2 Auto Scaling, call the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingNotificationTypes.html\">DescribeAutoScalingNotificationTypes</a> API.</p>"
       }
     },
+    "AvailabilityZoneDistribution": {
+      "base": "<p> Describes an Availability Zone distribution. </p>",
+      "refs": {
+        "AutoScalingGroup$AvailabilityZoneDistribution": "<p> The instance capacity distribution across Availability Zones. </p>",
+        "CreateAutoScalingGroupType$AvailabilityZoneDistribution": "<p>The instance capacity distribution across Availability Zones.</p>",
+        "UpdateAutoScalingGroupType$AvailabilityZoneDistribution": "<p> The instance capacity distribution across Availability Zones. </p>"
+      }
+    },
     "AvailabilityZones": {
       "base": null,
       "refs": {
         "AutoScalingGroup$AvailabilityZones": "<p>One or more Availability Zones for the group.</p>",
         "CreateAutoScalingGroupType$AvailabilityZones": "<p>A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the <code>VPCZoneIdentifier</code> property, or for attaching a network interface when an existing network interface ID is specified in a launch template.</p>",
         "UpdateAutoScalingGroupType$AvailabilityZones": "<p>One or more Availability Zones for the group.</p>"
+      }
+    },
+    "BakeTime": {
+      "base": null,
+      "refs": {
+        "RefreshPreferences$BakeTime": "<p> The amount of time, in seconds, to wait at the end of an instance refresh before the instance refresh is considered complete. </p>"
       }
     },
     "BareMetal": {
@@ -479,6 +493,12 @@
     "CancelInstanceRefreshType": {
       "base": null,
       "refs": {
+      }
+    },
+    "CapacityDistributionStrategy": {
+      "base": null,
+      "refs": {
+        "AvailabilityZoneDistribution$CapacityDistributionStrategy": "<p> If launches fail in an Availability Zone, the following strategies are available. The default is <code>balanced-best-effort</code>. </p> <ul> <li> <p> <code>balanced-only</code> - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.</p> </li> <li> <p> <code>balanced-best-effort</code> - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.</p> </li> </ul>"
       }
     },
     "CapacityForecast": {
@@ -1075,7 +1095,7 @@
     "InstanceRefreshStatus": {
       "base": null,
       "refs": {
-        "InstanceRefresh$Status": "<p>The current status for the instance refresh operation:</p> <ul> <li> <p> <code>Pending</code> - The request was created, but the instance refresh has not started.</p> </li> <li> <p> <code>InProgress</code> - An instance refresh is in progress.</p> </li> <li> <p> <code>Successful</code> - An instance refresh completed successfully.</p> </li> <li> <p> <code>Failed</code> - An instance refresh failed to complete. You can troubleshoot using the status reason and the scaling activities. </p> </li> <li> <p> <code>Cancelling</code> - An ongoing instance refresh is being cancelled.</p> </li> <li> <p> <code>Cancelled</code> - The instance refresh is cancelled. </p> </li> <li> <p> <code>RollbackInProgress</code> - An instance refresh is being rolled back.</p> </li> <li> <p> <code>RollbackFailed</code> - The rollback failed to complete. You can troubleshoot using the status reason and the scaling activities.</p> </li> <li> <p> <code>RollbackSuccessful</code> - The rollback completed successfully.</p> </li> </ul>"
+        "InstanceRefresh$Status": "<p>The current status for the instance refresh operation:</p> <ul> <li> <p> <code>Pending</code> - The request was created, but the instance refresh has not started.</p> </li> <li> <p> <code>InProgress</code> - An instance refresh is in progress.</p> </li> <li> <p> <code>Successful</code> - An instance refresh completed successfully.</p> </li> <li> <p> <code>Failed</code> - An instance refresh failed to complete. You can troubleshoot using the status reason and the scaling activities. </p> </li> <li> <p> <code>Cancelling</code> - An ongoing instance refresh is being cancelled.</p> </li> <li> <p> <code>Cancelled</code> - The instance refresh is cancelled. </p> </li> <li> <p> <code>RollbackInProgress</code> - An instance refresh is being rolled back.</p> </li> <li> <p> <code>RollbackFailed</code> - The rollback failed to complete. You can troubleshoot using the status reason and the scaling activities.</p> </li> <li> <p> <code>RollbackSuccessful</code> - The rollback completed successfully.</p> </li> <li> <p> <code>Baking</code> - Waiting the specified bake time after an instance refresh has finished updating instances.</p> </li> </ul>"
       }
     },
     "InstanceRefreshWarmPoolProgress": {
@@ -1932,7 +1952,7 @@
       "base": "<p>Describes the preferences for an instance refresh.</p>",
       "refs": {
         "InstanceRefresh$Preferences": "<p>The preferences for an instance refresh.</p>",
-        "StartInstanceRefreshType$Preferences": "<p>Sets your preferences for the instance refresh so that it performs as expected when you start it. Includes the instance warmup time, the minimum and maximum healthy percentages, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in <code>Standby</code> state or protected from scale in are found. You can also choose to enable additional features, such as the following:</p> <ul> <li> <p>Auto rollback</p> </li> <li> <p>Checkpoints</p> </li> <li> <p>CloudWatch alarms</p> </li> <li> <p>Skip matching</p> </li> </ul>"
+        "StartInstanceRefreshType$Preferences": "<p>Sets your preferences for the instance refresh so that it performs as expected when you start it. Includes the instance warmup time, the minimum and maximum healthy percentages, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in <code>Standby</code> state or protected from scale in are found. You can also choose to enable additional features, such as the following:</p> <ul> <li> <p>Auto rollback</p> </li> <li> <p>Checkpoints</p> </li> <li> <p>CloudWatch alarms</p> </li> <li> <p>Skip matching</p> </li> <li> <p>Bake time</p> </li> </ul>"
       }
     },
     "RefreshStrategy": {

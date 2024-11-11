@@ -554,9 +554,9 @@ module Aws::CodePipeline
     #
     #   <note markdown="1"> You can refer to a name in the configuration properties of the custom
     #   action within the URL templates by following the format of
-    #   \\\{Config:name\\}, as long as the configuration property is both
-    #   required and not secret. For more information, see [Create a Custom
-    #   Action for a Pipeline][1].
+    #   \{Config:name}, as long as the configuration property is both required
+    #   and not secret. For more information, see [Create a Custom Action for
+    #   a Pipeline][1].
     #
     #    </note>
     #
@@ -3600,7 +3600,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

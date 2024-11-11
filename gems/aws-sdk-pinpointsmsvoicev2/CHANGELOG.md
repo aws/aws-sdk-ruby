@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-11-08)
+------------------
+
+* Feature - Added the RequiresAuthenticationTimestamp field to the RegistrationVersionStatusHistory data type.
+
 1.29.0 (2024-10-18)
 ------------------
 

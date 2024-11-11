@@ -1381,7 +1381,7 @@ module Aws::ResourceGroups
     # parameter must be formatted like the following CLI parameter example:
     #
     # `--resource-query
-    # '\{"Type":"TAG_FILTERS_1_0","Query":"\{"ResourceTypeFilters":["AWS::AllSupported"],"TagFilters":[\{"Key":"Stage","Values":["Test"]\}]\}"\}'`
+    # '{"Type":"TAG_FILTERS_1_0","Query":"{"ResourceTypeFilters":["AWS::AllSupported"],"TagFilters":[{"Key":"Stage","Values":["Test"]}]}"}'`
     #
     # In the preceding example, all of the double quote characters in the
     # value part of the `Query` element must be escaped because the value
@@ -1448,34 +1448,34 @@ module Aws::ResourceGroups
     #     For example, consider the following sample query for resources
     #     that have two tags, `Stage` and `Version`, with two values each:
     #
-    #     `[\{"Stage":["Test","Deploy"]\},\{"Version":["1","2"]\}]`
+    #     `[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]`
     #
     #     The results of this resource query could include the following.
     #
     #     * An Amazon EC2 instance that has the following two tags:
-    #       `\{"Stage":"Deploy"\}`, and `\{"Version":"2"\}`
+    #       `{"Stage":"Deploy"}`, and `{"Version":"2"}`
     #
     #     * An S3 bucket that has the following two tags:
-    #       `\{"Stage":"Test"\}`, and `\{"Version":"1"\}`
+    #       `{"Stage":"Test"}`, and `{"Version":"1"}`
     #
     #     The resource query results would *not* include the following items
     #     in the results, however.
     #
     #     * An Amazon EC2 instance that has only the following tag:
-    #       `\{"Stage":"Deploy"\}`.
+    #       `{"Stage":"Deploy"}`.
     #
     #       The instance does not have **all** of the tag keys specified in
     #       the filter, so it is excluded from the results.
     #
     #     * An RDS database that has the following two tags:
-    #       `\{"Stage":"Archived"\}` and `\{"Version":"4"\}`
+    #       `{"Stage":"Archived"}` and `{"Version":"4"}`
     #
     #       The database has all of the tag keys, but none of those keys has
     #       an associated value that matches at least one of the specified
     #       values in the filter.
     #
-    #     Example: `"TagFilters": [ \{ "Key": "Stage", "Values": [ "Gamma",
-    #     "Beta" ] \}`
+    #     Example: `"TagFilters": [ { "Key": "Stage", "Values": [ "Gamma",
+    #     "Beta" ] }`
     #
     #   * `StackIdentifier` – applicable only if `Type` =
     #     `CLOUDFORMATION_STACK_1_0`. The value of this parameter is the

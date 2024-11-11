@@ -778,6 +778,7 @@ module Aws::Glue
       attr_accessor security_configuration: ::String
       attr_accessor number_of_workers: ::Integer
       attr_accessor worker_type: ::String
+      attr_accessor computation_type: ("FULL" | "INCREMENTAL")
       attr_accessor status: ("STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED" | "STOPPED")
       attr_accessor creation_time: ::Time
       attr_accessor last_updated: ::Time
@@ -790,6 +791,18 @@ module Aws::Glue
 
     class ColumnStatisticsTaskRunningException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnStatisticsTaskSettings
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor column_name_list: ::Array[::String]
+      attr_accessor catalog_id: ::String
+      attr_accessor role: ::String
+      attr_accessor sample_size: ::Float
+      attr_accessor security_configuration: ::String
       SENSITIVE: []
     end
 
@@ -1034,6 +1047,22 @@ module Aws::Glue
     end
 
     class CreateClassifierResponse < Aws::EmptyStructure
+    end
+
+    class CreateColumnStatisticsTaskSettingsRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor role: ::String
+      attr_accessor schedule: ::String
+      attr_accessor column_name_list: ::Array[::String]
+      attr_accessor sample_size: ::Float
+      attr_accessor catalog_id: ::String
+      attr_accessor security_configuration: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateColumnStatisticsTaskSettingsResponse < Aws::EmptyStructure
     end
 
     class CreateConnectionRequest
@@ -1741,6 +1770,15 @@ module Aws::Glue
     class DeleteColumnStatisticsForTableResponse < Aws::EmptyStructure
     end
 
+    class DeleteColumnStatisticsTaskSettingsRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteColumnStatisticsTaskSettingsResponse < Aws::EmptyStructure
+    end
+
     class DeleteConnectionRequest
       attr_accessor catalog_id: ::String
       attr_accessor connection_name: ::String
@@ -2387,6 +2425,17 @@ module Aws::Glue
     class GetColumnStatisticsTaskRunsResponse
       attr_accessor column_statistics_task_runs: ::Array[Types::ColumnStatisticsTaskRun]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsTaskSettingsRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetColumnStatisticsTaskSettingsResponse
+      attr_accessor column_statistics_task_settings: Types::ColumnStatisticsTaskSettings
       SENSITIVE: []
     end
 
@@ -5203,6 +5252,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class StartColumnStatisticsTaskRunScheduleRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartColumnStatisticsTaskRunScheduleResponse < Aws::EmptyStructure
+    end
+
     class StartCrawlerRequest
       attr_accessor name: ::String
       SENSITIVE: []
@@ -5416,6 +5474,15 @@ module Aws::Glue
     end
 
     class StopColumnStatisticsTaskRunResponse < Aws::EmptyStructure
+    end
+
+    class StopColumnStatisticsTaskRunScheduleRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopColumnStatisticsTaskRunScheduleResponse < Aws::EmptyStructure
     end
 
     class StopCrawlerRequest
@@ -5835,6 +5902,21 @@ module Aws::Glue
     class UpdateColumnStatisticsForTableResponse
       attr_accessor errors: ::Array[Types::ColumnStatisticsError]
       SENSITIVE: []
+    end
+
+    class UpdateColumnStatisticsTaskSettingsRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor role: ::String
+      attr_accessor schedule: ::String
+      attr_accessor column_name_list: ::Array[::String]
+      attr_accessor sample_size: ::Float
+      attr_accessor catalog_id: ::String
+      attr_accessor security_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateColumnStatisticsTaskSettingsResponse < Aws::EmptyStructure
     end
 
     class UpdateConnectionRequest

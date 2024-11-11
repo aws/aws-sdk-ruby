@@ -128,7 +128,12 @@ module Aws
                                              tag_key: ::String,
                                              tag_values: Array[::String]
                                            },
-                                         ]
+                                         ]?,
+                                         expression_name: ::String?
+                                       }?,
+                                       lf_tag_expression: {
+                                         catalog_id: ::String?,
+                                         name: ::String
                                        }?
                                      },
                                      lf_tags: Array[
@@ -216,11 +221,16 @@ module Aws
                                                  tag_key: ::String,
                                                  tag_values: Array[::String]
                                                },
-                                             ]
+                                             ]?,
+                                             expression_name: ::String?
+                                           }?,
+                                           lf_tag_expression: {
+                                             catalog_id: ::String?,
+                                             name: ::String
                                            }?
                                          }?,
-                                         permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?,
-                                         permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?
+                                         permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]?,
+                                         permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]?
                                        },
                                      ]
                                    ) -> _BatchGrantPermissionsResponseSuccess
@@ -285,11 +295,16 @@ module Aws
                                                   tag_key: ::String,
                                                   tag_values: Array[::String]
                                                 },
-                                              ]
+                                              ]?,
+                                              expression_name: ::String?
+                                            }?,
+                                            lf_tag_expression: {
+                                              catalog_id: ::String?,
+                                              name: ::String
                                             }?
                                           }?,
-                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?,
-                                          permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?
+                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]?,
+                                          permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]?
                                         },
                                       ]
                                     ) -> _BatchRevokePermissionsResponseSuccess
@@ -348,6 +363,23 @@ module Aws
                            tag_values: Array[::String]
                          ) -> _CreateLFTagResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLFTagResponseSuccess
+
+      interface _CreateLFTagExpressionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLFTagExpressionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#create_lf_tag_expression-instance_method
+      def create_lf_tag_expression: (
+                                      name: ::String,
+                                      ?description: ::String,
+                                      ?catalog_id: ::String,
+                                      expression: Array[
+                                        {
+                                          tag_key: ::String,
+                                          tag_values: Array[::String]
+                                        },
+                                      ]
+                                    ) -> _CreateLFTagExpressionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLFTagExpressionResponseSuccess
 
       interface _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLakeFormationIdentityCenterConfigurationResponse]
@@ -423,7 +455,12 @@ module Aws
                                                   tag_key: ::String,
                                                   tag_values: Array[::String]
                                                 },
-                                              ]
+                                              ]?,
+                                              expression_name: ::String?
+                                            }?,
+                                            lf_tag_expression: {
+                                              catalog_id: ::String?,
+                                              name: ::String
                                             }?
                                           }
                                         ) -> _CreateLakeFormationOptInResponseSuccess
@@ -450,6 +487,16 @@ module Aws
                            tag_key: ::String
                          ) -> _DeleteLFTagResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLFTagResponseSuccess
+
+      interface _DeleteLFTagExpressionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLFTagExpressionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#delete_lf_tag_expression-instance_method
+      def delete_lf_tag_expression: (
+                                      name: ::String,
+                                      ?catalog_id: ::String
+                                    ) -> _DeleteLFTagExpressionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLFTagExpressionResponseSuccess
 
       interface _DeleteLakeFormationIdentityCenterConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLakeFormationIdentityCenterConfigurationResponse]
@@ -514,7 +561,12 @@ module Aws
                                                   tag_key: ::String,
                                                   tag_values: Array[::String]
                                                 },
-                                              ]
+                                              ]?,
+                                              expression_name: ::String?
+                                            }?,
+                                            lf_tag_expression: {
+                                              catalog_id: ::String?,
+                                              name: ::String
                                             }?
                                           }
                                         ) -> _DeleteLakeFormationOptInResponseSuccess
@@ -650,6 +702,20 @@ module Aws
                       ) -> _GetLFTagResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLFTagResponseSuccess
 
+      interface _GetLFTagExpressionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLFTagExpressionResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def catalog_id: () -> ::String
+        def expression: () -> ::Array[Types::LFTag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_lf_tag_expression-instance_method
+      def get_lf_tag_expression: (
+                                   name: ::String,
+                                   ?catalog_id: ::String
+                                 ) -> _GetLFTagExpressionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLFTagExpressionResponseSuccess
+
       interface _GetQueryStateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryStateResponse]
         def state: () -> ("PENDING" | "WORKUNITS_AVAILABLE" | "ERROR" | "FINISHED" | "EXPIRED")
@@ -727,7 +793,12 @@ module Aws
                                           tag_key: ::String,
                                           tag_values: Array[::String]
                                         },
-                                      ]
+                                      ]?,
+                                      expression_name: ::String?
+                                    }?,
+                                    lf_tag_expression: {
+                                      catalog_id: ::String?,
+                                      name: ::String
                                     }?
                                   },
                                   ?show_assigned_lf_tags: bool
@@ -765,7 +836,7 @@ module Aws
                                                       partition: {
                                                         values: Array[::String]
                                                       },
-                                                      ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")],
+                                                      ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")],
                                                       ?duration_seconds: ::Integer,
                                                       ?audit_context: {
                                                         additional_audit_context: ::String?
@@ -785,7 +856,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_temporary_glue_table_credentials-instance_method
       def get_temporary_glue_table_credentials: (
                                                   table_arn: ::String,
-                                                  ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")],
+                                                  ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")],
                                                   ?duration_seconds: ::Integer,
                                                   ?audit_context: {
                                                     additional_audit_context: ::String?
@@ -883,11 +954,16 @@ module Aws
                                        tag_key: ::String,
                                        tag_values: Array[::String]
                                      },
-                                   ]
+                                   ]?,
+                                   expression_name: ::String?
+                                 }?,
+                                 lf_tag_expression: {
+                                   catalog_id: ::String?,
+                                   name: ::String
                                  }?
                                },
-                               permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")],
-                               ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+                               permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")],
+                               ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
                              ) -> _GrantPermissionsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GrantPermissionsResponseSuccess
 
@@ -909,6 +985,19 @@ module Aws
                                     ?max_results: ::Integer
                                   ) -> _ListDataCellsFilterResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataCellsFilterResponseSuccess
+
+      interface _ListLFTagExpressionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLFTagExpressionsResponse]
+        def lf_tag_expressions: () -> ::Array[Types::LFTagExpression]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_lf_tag_expressions-instance_method
+      def list_lf_tag_expressions: (
+                                     ?catalog_id: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListLFTagExpressionsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLFTagExpressionsResponseSuccess
 
       interface _ListLFTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLFTagsResponse]
@@ -980,7 +1069,12 @@ module Aws
                                                  tag_key: ::String,
                                                  tag_values: Array[::String]
                                                },
-                                             ]
+                                             ]?,
+                                             expression_name: ::String?
+                                           }?,
+                                           lf_tag_expression: {
+                                             catalog_id: ::String?,
+                                             name: ::String
                                            }?
                                          },
                                          ?max_results: ::Integer,
@@ -999,7 +1093,7 @@ module Aws
                               ?principal: {
                                 data_lake_principal_identifier: ::String?
                               },
-                              ?resource_type: ("CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE"),
+                              ?resource_type: ("CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE" | "LF_NAMED_TAG_EXPRESSION"),
                               ?resource: {
                                 catalog: {
                                 }?,
@@ -1046,7 +1140,12 @@ module Aws
                                       tag_key: ::String,
                                       tag_values: Array[::String]
                                     },
-                                  ]
+                                  ]?,
+                                  expression_name: ::String?
+                                }?,
+                                lf_tag_expression: {
+                                  catalog_id: ::String?,
+                                  name: ::String
                                 }?
                               },
                               ?next_token: ::String,
@@ -1126,7 +1225,7 @@ module Aws
                                           principal: {
                                             data_lake_principal_identifier: ::String?
                                           }?,
-                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?
+                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]?
                                         },
                                       ]?,
                                       create_table_default_permissions: Array[
@@ -1134,7 +1233,7 @@ module Aws
                                           principal: {
                                             data_lake_principal_identifier: ::String?
                                           }?,
-                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?
+                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]?
                                         },
                                       ]?,
                                       parameters: Hash[::String, ::String]?,
@@ -1217,7 +1316,12 @@ module Aws
                                                   tag_key: ::String,
                                                   tag_values: Array[::String]
                                                 },
-                                              ]
+                                              ]?,
+                                              expression_name: ::String?
+                                            }?,
+                                            lf_tag_expression: {
+                                              catalog_id: ::String?,
+                                              name: ::String
                                             }?
                                           },
                                           lf_tags: Array[
@@ -1285,11 +1389,16 @@ module Aws
                                         tag_key: ::String,
                                         tag_values: Array[::String]
                                       },
-                                    ]
+                                    ]?,
+                                    expression_name: ::String?
+                                  }?,
+                                  lf_tag_expression: {
+                                    catalog_id: ::String?,
+                                    name: ::String
                                   }?
                                 },
-                                permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")],
-                                ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+                                permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")],
+                                ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
                               ) -> _RevokePermissionsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokePermissionsResponseSuccess
 
@@ -1393,6 +1502,23 @@ module Aws
                            ?tag_values_to_add: Array[::String]
                          ) -> _UpdateLFTagResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLFTagResponseSuccess
+
+      interface _UpdateLFTagExpressionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLFTagExpressionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_lf_tag_expression-instance_method
+      def update_lf_tag_expression: (
+                                      name: ::String,
+                                      ?description: ::String,
+                                      ?catalog_id: ::String,
+                                      expression: Array[
+                                        {
+                                          tag_key: ::String,
+                                          tag_values: Array[::String]
+                                        },
+                                      ]
+                                    ) -> _UpdateLFTagExpressionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLFTagExpressionResponseSuccess
 
       interface _UpdateLakeFormationIdentityCenterConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLakeFormationIdentityCenterConfigurationResponse]

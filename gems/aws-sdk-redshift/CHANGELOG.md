@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.129.0 (2024-10-30)
+------------------
+
+* Feature - This release launches S3 event integrations to create and manage integrations from an Amazon S3 source into an Amazon Redshift database.
+
 1.128.0 (2024-10-18)
 ------------------
 

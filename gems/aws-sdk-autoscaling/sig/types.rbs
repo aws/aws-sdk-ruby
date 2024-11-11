@@ -142,6 +142,7 @@ module Aws::AutoScaling
       attr_accessor default_instance_warmup: ::Integer
       attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
       attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution
       SENSITIVE: []
     end
 
@@ -176,6 +177,11 @@ module Aws::AutoScaling
     class AutoScalingInstancesType
       attr_accessor auto_scaling_instances: ::Array[Types::AutoScalingInstanceDetails]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class AvailabilityZoneDistribution
+      attr_accessor capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")
       SENSITIVE: []
     end
 
@@ -272,6 +278,7 @@ module Aws::AutoScaling
       attr_accessor default_instance_warmup: ::Integer
       attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
       attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution
       SENSITIVE: []
     end
 
@@ -697,7 +704,7 @@ module Aws::AutoScaling
     class InstanceRefresh
       attr_accessor instance_refresh_id: ::String
       attr_accessor auto_scaling_group_name: ::String
-      attr_accessor status: ("Pending" | "InProgress" | "Successful" | "Failed" | "Cancelling" | "Cancelled" | "RollbackInProgress" | "RollbackFailed" | "RollbackSuccessful")
+      attr_accessor status: ("Pending" | "InProgress" | "Successful" | "Failed" | "Cancelling" | "Cancelled" | "RollbackInProgress" | "RollbackFailed" | "RollbackSuccessful" | "Baking")
       attr_accessor status_reason: ::String
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
@@ -1142,6 +1149,7 @@ module Aws::AutoScaling
       attr_accessor standby_instances: ("Terminate" | "Ignore" | "Wait")
       attr_accessor alarm_specification: Types::AlarmSpecification
       attr_accessor max_healthy_percentage: ::Integer
+      attr_accessor bake_time: ::Integer
       SENSITIVE: []
     end
 
@@ -1390,6 +1398,7 @@ module Aws::AutoScaling
       attr_accessor desired_capacity_type: ::String
       attr_accessor default_instance_warmup: ::Integer
       attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution
       SENSITIVE: []
     end
 

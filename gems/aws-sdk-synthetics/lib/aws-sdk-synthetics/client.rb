@@ -596,6 +596,20 @@ module Aws::Synthetics
     #   If you specify this parameter and don't specify any tags in the
     #   `Tags` parameter, the canary creation fails.
     #
+    # @option params [String] :provisioned_resource_cleanup
+    #   Specifies whether to also delete the Lambda functions and layers used
+    #   by this canary when the canary is deleted. If you omit this parameter,
+    #   the default of `AUTOMATIC` is used, which means that the Lambda
+    #   functions and layers will be deleted when the canary is deleted.
+    #
+    #   If the value of this parameter is `OFF`, then the value of the
+    #   `DeleteLambda` parameter of the [DeleteCanary][1] operation determines
+    #   whether the Lambda functions and layers will be deleted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
+    #
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs to associate with the canary. You can
     #   associate as many as 50 tags with a canary.
@@ -650,6 +664,7 @@ module Aws::Synthetics
     #       security_group_ids: ["SecurityGroupId"],
     #     },
     #     resources_to_replicate_tags: ["lambda-function"], # accepts lambda-function
+    #     provisioned_resource_cleanup: "AUTOMATIC", # accepts AUTOMATIC, OFF
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -695,6 +710,7 @@ module Aws::Synthetics
     #   resp.canary.visual_reference.base_screenshots[0].ignore_coordinates #=> Array
     #   resp.canary.visual_reference.base_screenshots[0].ignore_coordinates[0] #=> String
     #   resp.canary.visual_reference.base_canary_run_id #=> String
+    #   resp.canary.provisioned_resource_cleanup #=> String, one of "AUTOMATIC", "OFF"
     #   resp.canary.tags #=> Hash
     #   resp.canary.tags["TagKey"] #=> String
     #   resp.canary.artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
@@ -782,12 +798,14 @@ module Aws::Synthetics
 
     # Permanently deletes the specified canary.
     #
-    # If you specify `DeleteLambda` to `true`, CloudWatch Synthetics also
-    # deletes the Lambda functions and layers that are used by the canary.
+    # If the canary's `ProvisionedResourceCleanup` field is set to
+    # `AUTOMATIC` or you specify `DeleteLambda` in this operation as `true`,
+    # CloudWatch Synthetics also deletes the Lambda functions and layers
+    # that are used by the canary.
     #
     # Other resources used and created by the canary are not automatically
-    # deleted. After you delete a canary that you do not intend to use
-    # again, you should also delete the following:
+    # deleted. After you delete a canary, you should also delete the
+    # following:
     #
     # * The CloudWatch alarms created for this canary. These alarms have a
     #   name of
@@ -820,7 +838,12 @@ module Aws::Synthetics
     #
     # @option params [Boolean] :delete_lambda
     #   Specifies whether to also delete the Lambda functions and layers used
-    #   by this canary. The default is false.
+    #   by this canary. The default is `false`.
+    #
+    #   Your setting for this parameter is used only if the canary doesn't
+    #   have `AUTOMATIC` for its `ProvisionedResourceCleanup` field. If that
+    #   field is set to `AUTOMATIC`, then the Lambda functions and layers will
+    #   be deleted when this canary is deleted.
     #
     #   Type: Boolean
     #
@@ -968,6 +991,7 @@ module Aws::Synthetics
     #   resp.canaries[0].visual_reference.base_screenshots[0].ignore_coordinates #=> Array
     #   resp.canaries[0].visual_reference.base_screenshots[0].ignore_coordinates[0] #=> String
     #   resp.canaries[0].visual_reference.base_canary_run_id #=> String
+    #   resp.canaries[0].provisioned_resource_cleanup #=> String, one of "AUTOMATIC", "OFF"
     #   resp.canaries[0].tags #=> Hash
     #   resp.canaries[0].tags["TagKey"] #=> String
     #   resp.canaries[0].artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
@@ -1201,6 +1225,7 @@ module Aws::Synthetics
     #   resp.canary.visual_reference.base_screenshots[0].ignore_coordinates #=> Array
     #   resp.canary.visual_reference.base_screenshots[0].ignore_coordinates[0] #=> String
     #   resp.canary.visual_reference.base_canary_run_id #=> String
+    #   resp.canary.provisioned_resource_cleanup #=> String, one of "AUTOMATIC", "OFF"
     #   resp.canary.tags #=> Hash
     #   resp.canary.tags["TagKey"] #=> String
     #   resp.canary.artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
@@ -1732,6 +1757,18 @@ module Aws::Synthetics
     #   including the encryption-at-rest settings for artifacts that the
     #   canary uploads to Amazon S3.
     #
+    # @option params [String] :provisioned_resource_cleanup
+    #   Specifies whether to also delete the Lambda functions and layers used
+    #   by this canary when the canary is deleted.
+    #
+    #   If the value of this parameter is `OFF`, then the value of the
+    #   `DeleteLambda` parameter of the [DeleteCanary][1] operation determines
+    #   whether the Lambda functions and layers will be deleted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1781,6 +1818,7 @@ module Aws::Synthetics
     #         kms_key_arn: "KmsKeyArn",
     #       },
     #     },
+    #     provisioned_resource_cleanup: "AUTOMATIC", # accepts AUTOMATIC, OFF
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanary AWS API Documentation
@@ -1810,7 +1848,7 @@ module Aws::Synthetics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

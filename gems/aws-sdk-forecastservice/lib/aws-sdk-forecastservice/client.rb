@@ -4091,8 +4091,8 @@ module Aws::ForecastService
     #   For example, to list all dataset import jobs whose status is ACTIVE,
     #   you specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
-    #   \} ]`
+    #   `"Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
+    #   } ]`
     #
     # @return [Types::ListDatasetImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4383,8 +4383,8 @@ module Aws::ForecastService
     #   For example, to list all jobs that export a forecast named
     #   *electricityforecast*, specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "ForecastArn", "Value":
-    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityforecast" \}
+    #   `"Filters": [ { "Condition": "IS", "Key": "ForecastArn", "Value":
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityforecast" }
     #   ]`
     #
     # @return [Types::ListForecastExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4466,8 +4466,8 @@ module Aws::ForecastService
     #   For example, to list all forecasts whose status is not ACTIVE, you
     #   would specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS_NOT", "Key": "Status", "Value":
-    #   "ACTIVE" \} ]`
+    #   `"Filters": [ { "Condition": "IS_NOT", "Key": "Status", "Value":
+    #   "ACTIVE" } ]`
     #
     # @return [Types::ListForecastsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4557,8 +4557,8 @@ module Aws::ForecastService
     #   For example, to list only successful monitor evaluations, you would
     #   specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "EvaluationState", "Value":
-    #   "SUCCESS" \} ]`
+    #   `"Filters": [ { "Condition": "IS", "Key": "EvaluationState", "Value":
+    #   "SUCCESS" } ]`
     #
     # @return [Types::ListMonitorEvaluationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4646,8 +4646,8 @@ module Aws::ForecastService
     #   For example, to list all monitors who's status is ACTIVE, you would
     #   specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
-    #   \} ]`
+    #   `"Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
+    #   } ]`
     #
     # @return [Types::ListMonitorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4807,8 +4807,8 @@ module Aws::ForecastService
     #   For example, to list all predictors whose status is ACTIVE, you would
     #   specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
-    #   \} ]`
+    #   `"Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
+    #   } ]`
     #
     # @return [Types::ListPredictorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4923,10 +4923,9 @@ module Aws::ForecastService
     #   For example, to list all jobs that export a forecast named
     #   *electricityWhatIf*, specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "WhatIfAnalysisArn",
+    #   `"Filters": [ { "Condition": "IS", "Key": "WhatIfAnalysisArn",
     #   "Value":
-    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIf" \}
-    #   ]`
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIf" } ]`
     #
     # @return [Types::ListWhatIfAnalysesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5007,10 +5006,10 @@ module Aws::ForecastService
     #   For example, to list all jobs that export a forecast named
     #   *electricityWIFExport*, specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "WhatIfForecastExportArn",
+    #   `"Filters": [ { "Condition": "IS", "Key": "WhatIfForecastExportArn",
     #   "Value":
-    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWIFExport"
-    #   \} ]`
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWIFExport" }
+    #   ]`
     #
     # @return [Types::ListWhatIfForecastExportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5095,10 +5094,10 @@ module Aws::ForecastService
     #   For example, to list all jobs that export a forecast named
     #   *electricityWhatIfForecast*, specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "WhatIfForecastArn",
+    #   `"Filters": [ { "Condition": "IS", "Key": "WhatIfForecastArn",
     #   "Value":
     #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIfForecast"
-    #   \} ]`
+    #   } ]`
     #
     # @return [Types::ListWhatIfForecastsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5355,7 +5354,7 @@ module Aws::ForecastService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

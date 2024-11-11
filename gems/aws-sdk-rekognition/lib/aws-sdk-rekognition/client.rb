@@ -3035,21 +3035,21 @@ module Aws::Rekognition
     # and a rock. The response includes all three labels, one for each
     # object, as well as the confidence in the label:
     #
-    # `\{Name: lighthouse, Confidence: 98.4629\}`
+    # `{Name: lighthouse, Confidence: 98.4629}`
     #
-    # `\{Name: rock,Confidence: 79.2097\}`
+    # `{Name: rock,Confidence: 79.2097}`
     #
-    # ` \{Name: sea,Confidence: 75.061\}`
+    # ` {Name: sea,Confidence: 75.061}`
     #
     # The list of labels can include multiple labels for the same object.
     # For example, if the input image shows a flower (for example, a tulip),
     # the operation might return the following three labels.
     #
-    # `\{Name: flower,Confidence: 99.0562\}`
+    # `{Name: flower,Confidence: 99.0562}`
     #
-    # `\{Name: plant,Confidence: 99.0562\}`
+    # `{Name: plant,Confidence: 99.0562}`
     #
-    # `\{Name: tulip,Confidence: 99.0562\}`
+    # `{Name: tulip,Confidence: 99.0562}`
     #
     # In this example, the detection algorithm more precisely identifies the
     # flower as a tulip.
@@ -8459,7 +8459,7 @@ module Aws::Rekognition
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

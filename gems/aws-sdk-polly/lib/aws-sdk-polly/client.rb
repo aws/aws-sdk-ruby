@@ -867,7 +867,7 @@ module Aws::Polly
     #
     # @option params [required, String] :name
     #   Name of the lexicon. The name must follow the regular express format
-    #   \[0-9A-Za-z\]\\\{1,20\\}. That is, the name is a case-sensitive
+    #   \[0-9A-Za-z\]\{1,20}. That is, the name is a case-sensitive
     #   alphanumeric string up to 20 characters long.
     #
     # @option params [required, String] :content
@@ -1209,7 +1209,7 @@ module Aws::Polly
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

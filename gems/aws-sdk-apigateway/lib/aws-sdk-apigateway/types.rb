@@ -209,7 +209,7 @@ module Aws::APIGateway
     # @!attribute [rw] provider_arns
     #   A list of the Amazon Cognito user pool ARNs for the
     #   `COGNITO_USER_POOLS` authorizer. Each element is of this format:
-    #   `arn:aws:cognito-idp:\{region\}:\{account_id\}:userpool/\{user_pool_id\}`.
+    #   `arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}`.
     #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
     #   @return [Array<String>]
     #
@@ -222,10 +222,10 @@ module Aws::APIGateway
     #   Specifies the authorizer's Uniform Resource Identifier (URI). For
     #   `TOKEN` or `REQUEST` authorizers, this must be a well-formed Lambda
     #   function URI, for example,
-    #   `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:\{account_id\}:function:\{lambda_function_name\}/invocations`.
+    #   `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations`.
     #   In general, the URI has this form
-    #   `arn:aws:apigateway:\{region\}:lambda:path/\{service_api\}`, where
-    #   `\{region\}` is the same as the region hosting the Lambda function,
+    #   `arn:aws:apigateway:{region}:lambda:path/{service_api}`, where
+    #   `{region}` is the same as the region hosting the Lambda function,
     #   `path` indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial `/`. For
     #   Lambda functions, this is usually of the form
@@ -538,7 +538,7 @@ module Aws::APIGateway
     # @!attribute [rw] provider_arns
     #   A list of the Amazon Cognito user pool ARNs for the
     #   `COGNITO_USER_POOLS` authorizer. Each element is of this format:
-    #   `arn:aws:cognito-idp:\{region\}:\{account_id\}:userpool/\{user_pool_id\}`.
+    #   `arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}`.
     #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
     #   @return [Array<String>]
     #
@@ -551,10 +551,10 @@ module Aws::APIGateway
     #   Specifies the authorizer's Uniform Resource Identifier (URI). For
     #   `TOKEN` or `REQUEST` authorizers, this must be a well-formed Lambda
     #   function URI, for example,
-    #   `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:\{account_id\}:function:\{lambda_function_name\}/invocations`.
+    #   `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations`.
     #   In general, the URI has this form
-    #   `arn:aws:apigateway:\{region\}:lambda:path/\{service_api\}`, where
-    #   `\{region\}` is the same as the region hosting the Lambda function,
+    #   `arn:aws:apigateway:{region}:lambda:path/{service_api}`, where
+    #   `{region}` is the same as the region hosting the Lambda function,
     #   `path` indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial `/`. For
     #   Lambda functions, this is usually of the form
@@ -1018,10 +1018,9 @@ module Aws::APIGateway
     # @!attribute [rw] disable_execute_api_endpoint
     #   Specifies whether clients can invoke your API by using the default
     #   `execute-api` endpoint. By default, clients can invoke your API with
-    #   the default
-    #   `https://\{api_id\}.execute-api.\{region\}.amazonaws.com` endpoint.
-    #   To require that clients use a custom domain name to invoke your API,
-    #   disable the default endpoint
+    #   the default `https://{api_id}.execute-api.{region}.amazonaws.com`
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint
     #   @return [Boolean]
     #
     class CreateRestApiRequest < Struct.new(
@@ -1676,7 +1675,7 @@ module Aws::APIGateway
     # @!attribute [rw] properties
     #   A content map of API-specific key-value pairs describing the
     #   targeted API entity. The map must be encoded as a JSON string, e.g.,
-    #   `"\{ "description": "The API does ..." \}"`. Only
+    #   `"{ "description": "The API does ..." }"`. Only
     #   OpenAPI-compliant documentation-related fields from the properties
     #   map are exported and, hence, published as part of the API entity
     #   definitions, while the original documentation parts are exported in
@@ -2315,13 +2314,13 @@ module Aws::APIGateway
     #   the returned Deployment resource in the response. In a REST API
     #   call, this `embed` parameter value is a list of comma-separated
     #   strings, as in `GET
-    #   /restapis/\{restapi_id\}/deployments/\{deployment_id\}?embed=var1,var2`.
+    #   /restapis/{restapi_id}/deployments/{deployment_id}?embed=var1,var2`.
     #   The SDK and other platform-dependent libraries might use a different
     #   format for the list. Currently, this request supports only retrieval
     #   of the embedded API summary this way. Hence, the parameter value
     #   must be a single-valued list containing only the `"apisummary"`
     #   string. For example, `GET
-    #   /restapis/\{restapi_id\}/deployments/\{deployment_id\}?embed=apisummary`.
+    #   /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary`.
     #   @return [Array<String>]
     #
     class GetDeploymentRequest < Struct.new(
@@ -2803,7 +2802,7 @@ module Aws::APIGateway
     #   request supports only retrieval of the embedded Method resources
     #   this way. The query parameter value must be a single-valued list and
     #   contain the `"methods"` string. For example, `GET
-    #   /restapis/\{restapi_id\}/resources/\{resource_id\}?embed=methods`.
+    #   /restapis/{restapi_id}/resources/{resource_id}?embed=methods`.
     #   @return [Array<String>]
     #
     class GetResourceRequest < Struct.new(
@@ -2836,7 +2835,7 @@ module Aws::APIGateway
     #   request supports only retrieval of the embedded Method resources
     #   this way. The query parameter value must be a single-valued list and
     #   contain the `"methods"` string. For example, `GET
-    #   /restapis/\{restapi_id\}/resources?embed=methods`.
+    #   /restapis/{restapi_id}/resources?embed=methods`.
     #   @return [Array<String>]
     #
     class GetResourcesRequest < Struct.new(
@@ -3293,23 +3292,22 @@ module Aws::APIGateway
     #   for standard integrations. If `connectionType` is `VPC_LINK` specify
     #   the Network Load Balancer DNS name. For `AWS` or `AWS_PROXY`
     #   integrations, the URI is of the form
-    #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api\}`.
-    #   Here, \\\{Region\\} is the API Gateway region (e.g., us-east-1);
-    #   \\\{service\\} is the name of the integrated Amazon Web Services
-    #   service (e.g., s3); and \\\{subdomain\\} is a designated subdomain
-    #   supported by certain Amazon Web Services service for fast host-name
-    #   lookup. action can be used for an Amazon Web Services service
-    #   action-based API, using an
-    #   Action=\\\{name\\}&amp;\\\{p1\\}=\\\{v1\\}&amp;p2=\\\{v2\\}... query
-    #   string. The ensuing \\\{service\_api\\} refers to a supported action
-    #   \\\{name\\} plus any required input parameters. Alternatively, path
-    #   can be used for an Amazon Web Services service path-based API. The
+    #   `arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}`.
+    #   Here, \{Region} is the API Gateway region (e.g., us-east-1);
+    #   \{service} is the name of the integrated Amazon Web Services service
+    #   (e.g., s3); and \{subdomain} is a designated subdomain supported by
+    #   certain Amazon Web Services service for fast host-name lookup.
+    #   action can be used for an Amazon Web Services service action-based
+    #   API, using an Action=\{name}&amp;\{p1}=\{v1}&amp;p2=\{v2}... query
+    #   string. The ensuing \{service\_api} refers to a supported action
+    #   \{name} plus any required input parameters. Alternatively, path can
+    #   be used for an Amazon Web Services service path-based API. The
     #   ensuing service\_api refers to the path to an Amazon Web Services
     #   service resource, including the region of the integrated Amazon Web
     #   Services service, if applicable. For example, for integration with
     #   the S3 API of GetObject, the uri can be either
-    #   `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
-    #   or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`
+    #   `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}`
+    #   or `arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}`
     #   @return [String]
     #
     # @!attribute [rw] connection_type
@@ -3342,7 +3340,7 @@ module Aws::APIGateway
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the back end. The method
     #   request parameter value must match the pattern of
-    #   `method.request.\{location\}.\{name\}`, where `location` is
+    #   `method.request.{location}.{name}`, where `location` is
     #   `querystring`, `path`, or `header` and `name` must be a valid and
     #   unique method request parameter name.
     #   @return [Hash<String,String>]
@@ -3463,10 +3461,10 @@ module Aws::APIGateway
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   `method.response.header.\{name\}`, where `name` is a valid and
-    #   unique header name. The mapped non-static value must match the
-    #   pattern of `integration.response.header.\{name\}` or
-    #   `integration.response.body.\{JSON-expression\}`, where `name` is a
+    #   `method.response.header.{name}`, where `name` is a valid and unique
+    #   header name. The mapped non-static value must match the pattern of
+    #   `integration.response.header.{name}` or
+    #   `integration.response.body.{JSON-expression}`, where `name` is a
     #   valid and unique response header name and `JSON-expression` is a
     #   valid JSON expression without the `$` prefix.
     #   @return [Hash<String,String>]
@@ -3560,7 +3558,7 @@ module Aws::APIGateway
     #   A key-value map defining required or optional method request
     #   parameters that can be accepted by API Gateway. A key is a method
     #   request parameter name matching the pattern of
-    #   `method.request.\{location\}.\{name\}`, where `location` is
+    #   `method.request.{location}.{name}`, where `location` is
     #   `querystring`, `path`, or `header` and `name` is a valid and unique
     #   parameter name. The value associated with the key is a Boolean flag
     #   indicating whether the parameter is required (`true`) or optional
@@ -3627,16 +3625,16 @@ module Aws::APIGateway
     #   that API Gateway can send back to the caller. A key defines a method
     #   response header and the value specifies whether the associated
     #   method response header is required or not. The expression of the key
-    #   must match the pattern `method.response.header.\{name\}`, where
-    #   `name` is a valid and unique header name. API Gateway passes certain
+    #   must match the pattern `method.response.header.{name}`, where `name`
+    #   is a valid and unique header name. API Gateway passes certain
     #   integration response data to the method response headers specified
     #   here according to the mapping you prescribe in the API's
     #   IntegrationResponse. The integration response data that can be
     #   mapped include an integration response header expressed in
-    #   `integration.response.header.\{name\}`, a static value enclosed
-    #   within a pair of single quotes (e.g., `'application/json'`), or a
-    #   JSON expression from the back-end response payload in the form of
-    #   `integration.response.body.\{JSON-expression\}`, where
+    #   `integration.response.header.{name}`, a static value enclosed within
+    #   a pair of single quotes (e.g., `'application/json'`), or a JSON
+    #   expression from the back-end response payload in the form of
+    #   `integration.response.body.{JSON-expression}`, where
     #   `JSON-expression` is a valid JSON expression without the `$`
     #   prefix.)
     #   @return [Hash<String,Boolean>]
@@ -3898,20 +3896,20 @@ module Aws::APIGateway
     #   The op operation's target, as identified by a JSON Pointer value
     #   that references a location within the targeted resource. For
     #   example, if the target resource has an updateable property of
-    #   \\\{"name":"value"\\}, the path for this property is /name. If
-    #   the name property value is a JSON object (e.g., \\\{"name":
-    #   \\\{"child/name": "child-value"\\}\\}), the path for the
-    #   child/name property will be /name/child~1name. Any slash ("/")
-    #   character appearing in path names must be escaped with "~1", as
-    #   shown in the example above. Each op operation can have only one path
-    #   associated with it.
+    #   \{"name":"value"}, the path for this property is /name. If the
+    #   name property value is a JSON object (e.g., \{"name":
+    #   \{"child/name": "child-value"}}), the path for the child/name
+    #   property will be /name/child~1name. Any slash ("/") character
+    #   appearing in path names must be escaped with "~1", as shown in the
+    #   example above. Each op operation can have only one path associated
+    #   with it.
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The new target value of the update operation. It is applicable for
     #   the add or replace operation. When using AWS CLI to update a
     #   property of a JSON value, enclose the JSON object with a pair of
-    #   single quotes in a Linux shell, e.g., '\\\{"a": ...\\}'.
+    #   single quotes in a Linux shell, e.g., '\{"a": ...}'.
     #   @return [String]
     #
     # @!attribute [rw] from
@@ -3999,23 +3997,22 @@ module Aws::APIGateway
     #   `connectionType` is `VPC_LINK`. For a private HTTP integration, the
     #   URI is not used for routing. For `AWS` or `AWS_PROXY` integrations,
     #   the URI is of the form
-    #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api`\\}.
-    #   Here, \\\{Region\\} is the API Gateway region (e.g., us-east-1);
-    #   \\\{service\\} is the name of the integrated Amazon Web Services
-    #   service (e.g., s3); and \\\{subdomain\\} is a designated subdomain
-    #   supported by certain Amazon Web Services service for fast host-name
-    #   lookup. action can be used for an Amazon Web Services service
-    #   action-based API, using an
-    #   Action=\\\{name\\}&amp;\\\{p1\\}=\\\{v1\\}&amp;p2=\\\{v2\\}... query
-    #   string. The ensuing \\\{service\_api\\} refers to a supported action
-    #   \\\{name\\} plus any required input parameters. Alternatively, path
-    #   can be used for an Amazon Web Services service path-based API. The
+    #   `arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api`}.
+    #   Here, \{Region} is the API Gateway region (e.g., us-east-1);
+    #   \{service} is the name of the integrated Amazon Web Services service
+    #   (e.g., s3); and \{subdomain} is a designated subdomain supported by
+    #   certain Amazon Web Services service for fast host-name lookup.
+    #   action can be used for an Amazon Web Services service action-based
+    #   API, using an Action=\{name}&amp;\{p1}=\{v1}&amp;p2=\{v2}... query
+    #   string. The ensuing \{service\_api} refers to a supported action
+    #   \{name} plus any required input parameters. Alternatively, path can
+    #   be used for an Amazon Web Services service path-based API. The
     #   ensuing service\_api refers to the path to an Amazon Web Services
     #   service resource, including the region of the integrated Amazon Web
     #   Services service, if applicable. For example, for integration with
     #   the S3 API of `GetObject`, the `uri` can be either
-    #   `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
-    #   or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`.
+    #   `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}`
+    #   or `arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}`.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
@@ -4042,7 +4039,7 @@ module Aws::APIGateway
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the back end. The method
     #   request parameter value must match the pattern of
-    #   `method.request.\{location\}.\{name\}`, where `location` is
+    #   `method.request.{location}.{name}`, where `location` is
     #   `querystring`, `path`, or `header` and `name` must be a valid and
     #   unique method request parameter name.
     #   @return [Hash<String,String>]
@@ -4147,11 +4144,11 @@ module Aws::APIGateway
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   `method.response.header.\{name\}`, where `name` is a valid and
-    #   unique header name. The mapped non-static value must match the
-    #   pattern of `integration.response.header.\{name\}` or
-    #   `integration.response.body.\{JSON-expression\}`, where `name` must
-    #   be a valid and unique response header name and `JSON-expression` a
+    #   `method.response.header.{name}`, where `name` is a valid and unique
+    #   header name. The mapped non-static value must match the pattern of
+    #   `integration.response.header.{name}` or
+    #   `integration.response.body.{JSON-expression}`, where `name` must be
+    #   a valid and unique response header name and `JSON-expression` a
     #   valid JSON expression without the `$` prefix.
     #   @return [Hash<String,String>]
     #
@@ -4224,7 +4221,7 @@ module Aws::APIGateway
     #   A key-value map defining required or optional method request
     #   parameters that can be accepted by API Gateway. A key defines a
     #   method request parameter name matching the pattern of
-    #   `method.request.\{location\}.\{name\}`, where `location` is
+    #   `method.request.{location}.{name}`, where `location` is
     #   `querystring`, `path`, or `header` and `name` is a valid and unique
     #   parameter name. The value associated with the key is a Boolean flag
     #   indicating whether the parameter is required (`true`) or optional
@@ -4296,14 +4293,14 @@ module Aws::APIGateway
     #   response header name and the associated value is a Boolean flag
     #   indicating whether the method response parameter is required or not.
     #   The method response header names must match the pattern of
-    #   `method.response.header.\{name\}`, where `name` is a valid and
-    #   unique header name. The response parameter names defined here are
-    #   available in the integration response to be mapped from an
-    #   integration response header expressed in
-    #   `integration.response.header.\{name\}`, a static value enclosed
-    #   within a pair of single quotes (e.g., `'application/json'`), or a
-    #   JSON expression from the back-end response payload in the form of
-    #   `integration.response.body.\{JSON-expression\}`, where
+    #   `method.response.header.{name}`, where `name` is a valid and unique
+    #   header name. The response parameter names defined here are available
+    #   in the integration response to be mapped from an integration
+    #   response header expressed in `integration.response.header.{name}`, a
+    #   static value enclosed within a pair of single quotes (e.g.,
+    #   `'application/json'`), or a JSON expression from the back-end
+    #   response payload in the form of
+    #   `integration.response.body.{JSON-expression}`, where
     #   `JSON-expression` is a valid JSON expression without the `$`
     #   prefix.)
     #   @return [Hash<String,Boolean>]
@@ -4554,10 +4551,9 @@ module Aws::APIGateway
     # @!attribute [rw] disable_execute_api_endpoint
     #   Specifies whether clients can invoke your API by using the default
     #   `execute-api` endpoint. By default, clients can invoke your API with
-    #   the default
-    #   `https://\{api_id\}.execute-api.\{region\}.amazonaws.com` endpoint.
-    #   To require that clients use a custom domain name to invoke your API,
-    #   disable the default endpoint.
+    #   the default `https://{api_id}.execute-api.{region}.amazonaws.com`
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint.
     #   @return [Boolean]
     #
     # @!attribute [rw] root_resource_id
@@ -4761,10 +4757,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] method_settings
     #   A map that defines the method settings for a Stage resource. Keys
-    #   (designated as `/\{method_setting_key` below) are method paths
-    #   defined as `\{resource_path\}/\{http_method\}` for an individual
-    #   method override, or `/*/*` for overriding all methods in the
-    #   stage.
+    #   (designated as `/{method_setting_key` below) are method paths
+    #   defined as `{resource_path}/{http_method}` for an individual method
+    #   override, or `/*/*` for overriding all methods in the stage.
     #   @return [Hash<String,Types::MethodSetting>]
     #
     # @!attribute [rw] variables
@@ -4830,7 +4825,7 @@ module Aws::APIGateway
     end
 
     # A reference to a unique stage identified in the format
-    # `\{restApiId\}/\{stage\}`.
+    # `{restApiId}/{stage}`.
     #
     # @!attribute [rw] rest_api_id
     #   The string identifier of the associated RestApi.
@@ -5803,10 +5798,9 @@ module Aws::APIGateway
     # @!attribute [rw] items
     #   The usage data, as daily logs of used and remaining quotas, over the
     #   specified time interval indexed over the API keys in a usage plan.
-    #   For example, `\{..., "values" : \{ "\{api_key\}" : [ [0, 100], [10,
-    #   90], [100, 10]]\}`, where `\{api_key\}` stands for an API key value
-    #   and the daily log entry is of the format `[used quota, remaining
-    #   quota]`.
+    #   For example, `{..., "values" : { "{api_key}" : [ [0, 100], [10, 90],
+    #   [100, 10]]}`, where `{api_key}` stands for an API key value and the
+    #   daily log entry is of the format `[used quota, remaining quota]`.
     #   @return [Hash<String,Array<Array<Integer>>>]
     #
     class Usage < Struct.new(

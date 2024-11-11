@@ -1665,8 +1665,8 @@ module Aws::CostExplorer
     #         Virginia)`.
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         "us-west-1" ] \} \}`
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -1679,8 +1679,8 @@ module Aws::CostExplorer
     #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
-    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions":
+    #         [ "STARTS_WITH" ], "Values": [ "a" ] } }`
     #
     #   * Compound `Expression` types with logical operations.
     #
@@ -1692,17 +1692,17 @@ module Aws::CostExplorer
     #       us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
     #       DataTransfer)`.
     #
-    #     * The corresponding `Expression` for this example is as follows: `\{
-    #       "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values": [
-    #       "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
-    #       "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
-    #       "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #     * The corresponding `Expression` for this example is as follows: `{
+    #       "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+    #       "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error: ` \{
-    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
-    #     "DataTransfer" ] \} \} `
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
     #
     #      The following is an example of the corresponding error message:
     #     `"Expression has more than one roots. Only one root operator is
@@ -2211,8 +2211,8 @@ module Aws::CostExplorer
     #         Virginia)`.
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         "us-west-1" ] \} \}`
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -2225,8 +2225,8 @@ module Aws::CostExplorer
     #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
-    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions":
+    #         [ "STARTS_WITH" ], "Values": [ "a" ] } }`
     #
     #   * Compound `Expression` types with logical operations.
     #
@@ -2238,17 +2238,17 @@ module Aws::CostExplorer
     #       us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
     #       DataTransfer)`.
     #
-    #     * The corresponding `Expression` for this example is as follows: `\{
-    #       "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values": [
-    #       "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
-    #       "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
-    #       "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #     * The corresponding `Expression` for this example is as follows: `{
+    #       "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+    #       "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error: ` \{
-    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
-    #     "DataTransfer" ] \} \} `
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
     #
     #      The following is an example of the corresponding error message:
     #     `"Expression has more than one roots. Only one root operator is
@@ -2721,8 +2721,8 @@ module Aws::CostExplorer
     #         Virginia)`.
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         "us-west-1" ] \} \}`
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -2735,8 +2735,8 @@ module Aws::CostExplorer
     #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
-    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions":
+    #         [ "STARTS_WITH" ], "Values": [ "a" ] } }`
     #
     #   * Compound `Expression` types with logical operations.
     #
@@ -2748,17 +2748,17 @@ module Aws::CostExplorer
     #       us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
     #       DataTransfer)`.
     #
-    #     * The corresponding `Expression` for this example is as follows: `\{
-    #       "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values": [
-    #       "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
-    #       "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
-    #       "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #     * The corresponding `Expression` for this example is as follows: `{
+    #       "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+    #       "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error: ` \{
-    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
-    #     "DataTransfer" ] \} \} `
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
     #
     #      The following is an example of the corresponding error message:
     #     `"Expression has more than one roots. Only one root operator is
@@ -3242,8 +3242,8 @@ module Aws::CostExplorer
     #         Virginia)`.
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         "us-west-1" ] \} \}`
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -3256,8 +3256,8 @@ module Aws::CostExplorer
     #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
-    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions":
+    #         [ "STARTS_WITH" ], "Values": [ "a" ] } }`
     #
     #   * Compound `Expression` types with logical operations.
     #
@@ -3269,17 +3269,17 @@ module Aws::CostExplorer
     #       us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
     #       DataTransfer)`.
     #
-    #     * The corresponding `Expression` for this example is as follows: `\{
-    #       "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values": [
-    #       "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
-    #       "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
-    #       "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #     * The corresponding `Expression` for this example is as follows: `{
+    #       "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+    #       "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error: ` \{
-    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
-    #     "DataTransfer" ] \} \} `
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
     #
     #      The following is an example of the corresponding error message:
     #     `"Expression has more than one roots. Only one root operator is
@@ -4220,8 +4220,8 @@ module Aws::CostExplorer
     #         Virginia)`.
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         "us-west-1" ] \} \}`
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -4234,8 +4234,8 @@ module Aws::CostExplorer
     #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
-    #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
-    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] \} \}`
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions":
+    #         [ "STARTS_WITH" ], "Values": [ "a" ] } }`
     #
     #   * Compound `Expression` types with logical operations.
     #
@@ -4247,17 +4247,17 @@ module Aws::CostExplorer
     #       us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
     #       DataTransfer)`.
     #
-    #     * The corresponding `Expression` for this example is as follows: `\{
-    #       "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values": [
-    #       "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
-    #       "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions": \{ "Key":
-    #       "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
+    #     * The corresponding `Expression` for this example is as follows: `{
+    #       "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+    #       "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
     #
     #     <note markdown="1"> Because each `Expression` can have only one operator, the service
     #     returns an error if more than one is specified. The following
-    #     example shows an `Expression` object that creates an error: ` \{
-    #     "And": [ ... ], "Dimensions": \{ "Key": "USAGE_TYPE", "Values": [
-    #     "DataTransfer" ] \} \} `
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
     #
     #      The following is an example of the corresponding error message:
     #     `"Expression has more than one roots. Only one root operator is
@@ -5095,27 +5095,25 @@ module Aws::CostExplorer
     #
     #   The following are examples of valid ThresholdExpressions:
     #
-    #   * Absolute threshold: `\{ "Dimensions": \{ "Key":
+    #   * Absolute threshold: `{ "Dimensions": { "Key":
     #     "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
-    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}`
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }`
     #
-    #   * Percentage threshold: `\{ "Dimensions": \{ "Key":
+    #   * Percentage threshold: `{ "Dimensions": { "Key":
     #     "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
-    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}`
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }`
     #
-    #   * `AND` two thresholds together: `\{ "And": [ \{ "Dimensions": \{
-    #     "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
-    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}, \{
-    #     "Dimensions": \{ "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE",
-    #     "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \}
-    #     \} ] \}`
-    #
-    #   * `OR` two thresholds together: `\{ "Or": [ \{ "Dimensions": \{ "Key":
+    #   * `AND` two thresholds together: `{ "And": [ { "Dimensions": { "Key":
     #     "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
-    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \} \}, \{
-    #     "Dimensions": \{ "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE",
-    #     "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] \}
-    #     \} ] \}`
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions":
+    #     { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }`
+    #
+    #   * `OR` two thresholds together: `{ "Or": [ { "Dimensions": { "Key":
+    #     "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions":
+    #     { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
+    #     "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }`
     #
     #
     #
@@ -5358,7 +5356,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

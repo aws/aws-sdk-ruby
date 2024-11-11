@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-10-25)
+------------------
+
+* Feature - API doc updates, and also support showing error message on a failed instance
+
 1.18.0 (2024-10-18)
 ------------------
 

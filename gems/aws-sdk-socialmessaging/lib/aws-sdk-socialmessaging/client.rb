@@ -970,9 +970,9 @@ module Aws::SocialMessaging
     #   [1]: https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages
     #
     # @option params [required, String] :meta_api_version
-    #   The API version for the request formatted as `v\{VersionNumber\}`. For
-    #   a list of supported API versions and Amazon Web Services Regions, see
-    #   [ *Amazon Web Services End User Messaging Social API* Service
+    #   The API version for the request formatted as `v{VersionNumber}`. For a
+    #   list of supported API versions and Amazon Web Services Regions, see [
+    #   *Amazon Web Services End User Messaging Social API* Service
     #   Endpoints][1] in the *Amazon Web Services General Reference*.
     #
     #
@@ -1093,7 +1093,7 @@ module Aws::SocialMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-socialmessaging'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

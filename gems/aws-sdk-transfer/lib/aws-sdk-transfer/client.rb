@@ -502,8 +502,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "/directory1", "Target":
-    #   "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory"
+    #   } ]`
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock down your user to the designated home directory ("`chroot`").
@@ -512,15 +512,15 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same Identity
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #
     #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
     #   Amazon EFS does not use session policies.
@@ -571,7 +571,7 @@ module Aws::Transfer
     #   view the SID values by running the following command using Windows
     #   PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your Active
@@ -1324,8 +1324,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "/directory1", "Target":
-    #   "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory"
+    #   } ]`
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock your user down to the designated home directory ("`chroot`").
@@ -1334,15 +1334,15 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same Identity
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #
     #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
     #   Amazon EFS does not use session policies.
@@ -1669,7 +1669,7 @@ module Aws::Transfer
     #   view the SID values by running the following command using Windows
     #   PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your Active
@@ -1952,7 +1952,7 @@ module Aws::Transfer
     #   view the SID values by running the following command using Windows
     #   PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your Active
@@ -3961,8 +3961,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "/directory1", "Target":
-    #   "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory"
+    #   } ]`
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock down your user to the designated home directory ("`chroot`").
@@ -3971,15 +3971,15 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same Identity
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #
     #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
     #   Amazon EFS does not use session policies.
@@ -4030,7 +4030,7 @@ module Aws::Transfer
     #   view the SID values by running the following command using Windows
     #   PowerShell.
     #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   `Get-ADGroup -Filter {samAccountName -like "YourGroupName*"}
     #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your Active
@@ -4628,7 +4628,7 @@ module Aws::Transfer
     #   empty `OnUpload` object, as in the following example.
     #
     #   `aws transfer update-server --server-id s-01234567890abcdef
-    #   --workflow-details '\{"OnUpload":[]\}'`
+    #   --workflow-details '{"OnUpload":[]}'`
     #
     # @option params [Array<String>] :structured_log_destinations
     #   Specifies the log groups to which your server logs are sent.
@@ -4747,7 +4747,7 @@ module Aws::Transfer
     #
     # ` aws transfer update-user --server-id <server-id> --user-name
     # admin-user --home-directory-type LOGICAL --home-directory-mappings
-    # "[\{"Entry":"/", "Target":"/test/admin-user"\}]"`
+    # "[{"Entry":"/", "Target":"/test/admin-user"}]"`
     #
     # @option params [String] :home_directory
     #   The landing directory (folder) for a user when they log in to the
@@ -4789,8 +4789,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "/directory1", "Target":
-    #   "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory"
+    #   } ]`
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock down your user to the designated home directory ("`chroot`").
@@ -4799,15 +4799,15 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]`
     #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same Identity
     #   and Access Management (IAM) role across multiple users. This policy
     #   scopes down a user's access to portions of their Amazon S3 bucket.
     #   Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   `${Transfer:UserName}`, `${Transfer:HomeDirectory}`, and
+    #   `${Transfer:HomeBucket}`.
     #
     #   <note markdown="1"> This policy applies only when the domain of `ServerId` is Amazon S3.
     #   Amazon EFS does not use session policies.
@@ -4919,7 +4919,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -434,6 +434,40 @@ module Aws::LakeFormation
     #
     class CreateDataCellsFilterResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   A name for the expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description with information about the LF-Tag expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your Lake Formation environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   A list of LF-Tag conditions (key-value pairs).
+    #   @return [Array<Types::LFTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLFTagExpressionRequest AWS API Documentation
+    #
+    class CreateLFTagExpressionRequest < Struct.new(
+      :name,
+      :description,
+      :catalog_id,
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLFTagExpressionResponse AWS API Documentation
+    #
+    class CreateLFTagExpressionResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -848,6 +882,28 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteDataCellsFilterResponse AWS API Documentation
     #
     class DeleteDataCellsFilterResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   The name for the LF-Tag expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID in
+    #   which the LF-Tag expression is saved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLFTagExpressionRequest AWS API Documentation
+    #
+    class DeleteLFTagExpressionRequest < Struct.new(
+      :name,
+      :catalog_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLFTagExpressionResponse AWS API Documentation
+    #
+    class DeleteLFTagExpressionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -1393,6 +1449,52 @@ module Aws::LakeFormation
     class GetEffectivePermissionsForPathResponse < Struct.new(
       :permissions,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name for the LF-Tag expression
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetLFTagExpressionRequest AWS API Documentation
+    #
+    class GetLFTagExpressionRequest < Struct.new(
+      :name,
+      :catalog_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name for the LF-Tag expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description with information about the LF-Tag expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID in
+    #   which the LF-Tag expression is saved.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The body of the LF-Tag expression. It is composed of one or more
+    #   LF-Tag key-value pairs.
+    #   @return [Array<Types::LFTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetLFTagExpressionResponse AWS API Documentation
+    #
+    class GetLFTagExpressionResponse < Struct.new(
+      :name,
+      :description,
+      :catalog_id,
+      :expression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2032,6 +2134,54 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # A structure consists LF-Tag expression name and catalog ID.
+    #
+    # @!attribute [rw] name
+    #   The name for saved the LF-Tag expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A structure that contains information about the LF-Tag expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   A logical expression composed of one or more LF-Tags.
+    #   @return [Array<Types::LFTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/LFTagExpression AWS API Documentation
+    #
+    class LFTagExpression < Struct.new(
+      :name,
+      :description,
+      :catalog_id,
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing a LF-Tag expression (keys and values).
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the LF-Tag expression to grant permissions on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/LFTagExpressionResource AWS API Documentation
+    #
+    class LFTagExpressionResource < Struct.new(
+      :catalog_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure containing an LF-tag key and values for a resource.
     #
     # @!attribute [rw] catalog_id
@@ -2086,8 +2236,8 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # A structure containing a list of LF-tag conditions that apply to a
-    # resource's LF-tag policy.
+    # A structure containing a list of LF-tag conditions or saved LF-Tag
+    # expressions that apply to a resource's LF-tag policy.
     #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
@@ -2101,16 +2251,23 @@ module Aws::LakeFormation
     #   @return [String]
     #
     # @!attribute [rw] expression
-    #   A list of LF-tag conditions that apply to the resource's LF-tag
-    #   policy.
+    #   A list of LF-tag conditions or a saved expression that apply to the
+    #   resource's LF-tag policy.
     #   @return [Array<Types::LFTag>]
+    #
+    # @!attribute [rw] expression_name
+    #   If provided, permissions are granted to the Data Catalog resources
+    #   whose assigned LF-Tags match the expression body of the saved
+    #   expression under the provided `ExpressionName`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/LFTagPolicyResource AWS API Documentation
     #
     class LFTagPolicyResource < Struct.new(
       :catalog_id,
       :resource_type,
-      :expression)
+      :expression,
+      :expression_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2181,6 +2338,47 @@ module Aws::LakeFormation
     #
     class ListDataCellsFilterResponse < Struct.new(
       :data_cells_filters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is not the first call to retrieve this
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListLFTagExpressionsRequest AWS API Documentation
+    #
+    class ListLFTagExpressionsRequest < Struct.new(
+      :catalog_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lf_tag_expressions
+    #   Logical expressions composed of one more LF-Tag key-value pairs.
+    #   @return [Array<Types::LFTagExpression>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is not the first call to retrieve this
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListLFTagExpressionsResponse AWS API Documentation
+    #
+    class ListLFTagExpressionsResponse < Struct.new(
+      :lf_tag_expressions,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2901,8 +3099,14 @@ module Aws::LakeFormation
     #   @return [Types::LFTagKeyResource]
     #
     # @!attribute [rw] lf_tag_policy
-    #   A list of LF-tag conditions that define a resource's LF-tag policy.
+    #   A list of LF-tag conditions or saved LF-Tag expressions that define
+    #   a resource's LF-tag policy.
     #   @return [Types::LFTagPolicyResource]
+    #
+    # @!attribute [rw] lf_tag_expression
+    #   LF-Tag expression resource. A logical expression composed of one or
+    #   more LF-Tag key:value pairs.
+    #   @return [Types::LFTagExpressionResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/Resource AWS API Documentation
     #
@@ -2914,7 +3118,8 @@ module Aws::LakeFormation
       :data_location,
       :data_cells_filter,
       :lf_tag,
-      :lf_tag_policy)
+      :lf_tag_policy,
+      :lf_tag_expression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3540,6 +3745,38 @@ module Aws::LakeFormation
     #
     class UpdateDataCellsFilterResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   The name for the LF-Tag expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description with information about the saved LF-Tag expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The LF-Tag expression body composed of one more LF-Tag key-value
+    #   pairs.
+    #   @return [Array<Types::LFTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLFTagExpressionRequest AWS API Documentation
+    #
+    class UpdateLFTagExpressionRequest < Struct.new(
+      :name,
+      :description,
+      :catalog_id,
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLFTagExpressionResponse AWS API Documentation
+    #
+    class UpdateLFTagExpressionResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -3708,7 +3945,7 @@ module Aws::LakeFormation
     #   @return [String]
     #
     # @!attribute [rw] storage_optimizer_config
-    #   Name of the table for which to enable the storage optimizer.
+    #   Name of the configuration for the storage optimizer.
     #   @return [Hash<String,Hash<String,String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateTableStorageOptimizerRequest AWS API Documentation

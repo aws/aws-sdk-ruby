@@ -54,7 +54,6 @@ module AwsSdkCodeGenerator
         option_tags(operation, api),
         return_tag(operation, api),
         pagination(pager, operation, api),
-        generated_examples(operation, api),
         eventstream_examples(module_name, method_name, operation, api),
         shared_examples(examples, operation, api),
         given_examples(client_examples),
@@ -203,13 +202,9 @@ module AwsSdkCodeGenerator
         end
         example_block.join("\n")
       rescue
-        puts "Invalid example for operation: #{@name}"
+        puts "Invalid example for operation: #{@module_name} - #{@name}"
         nil
       end
-    end
-
-    def generated_examples(operation, api)
-      nil
     end
 
     def eventstream_examples(module_name, method_name, operation, api)

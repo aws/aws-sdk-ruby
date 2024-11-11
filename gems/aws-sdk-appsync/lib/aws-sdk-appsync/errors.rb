@@ -33,10 +33,12 @@ module Aws::AppSync
   # * {ApiLimitExceededException}
   # * {BadRequestException}
   # * {ConcurrentModificationException}
+  # * {ConflictException}
   # * {GraphQLSchemaException}
   # * {InternalFailureException}
   # * {LimitExceededException}
   # * {NotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {UnauthorizedException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -145,6 +147,21 @@ module Aws::AppSync
       end
     end
 
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppSync::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class GraphQLSchemaException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -195,6 +212,21 @@ module Aws::AppSync
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AppSync::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppSync::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

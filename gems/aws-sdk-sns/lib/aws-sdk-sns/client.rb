@@ -1862,7 +1862,7 @@ module Aws::SNS
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
     #   `MessageDeduplicationId` can contain up to 128 alphanumeric characters
     #   `(a-z, A-Z, 0-9)` and punctuation ``
-    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
     #   Every message must have a unique `MessageDeduplicationId`, which is a
     #   token used for deduplication of sent messages. If a message with a
@@ -1877,7 +1877,7 @@ module Aws::SNS
     # @option params [String] :message_group_id
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
     #   `MessageGroupId` can contain up to 128 alphanumeric characters `(a-z,
-    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
     #   The `MessageGroupId` is a tag that specifies that a message belongs to
     #   a specific message group. Messages that belong to the same message
@@ -2995,7 +2995,7 @@ module Aws::SNS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

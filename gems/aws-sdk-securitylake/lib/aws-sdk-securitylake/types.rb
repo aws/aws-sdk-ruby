@@ -248,10 +248,10 @@ module Aws::SecurityLake
     #   Specify the name for a third-party custom source. This must be a
     #   Regionally unique value. The `sourceName` you enter here, is used in
     #   the `LogProviderRole` name which follows the convention
-    #   `AmazonSecurityLake-Provider-\{name of the custom
-    #   source\}-\{region\}`. You must use a `CustomLogSource` name that is
-    #   shorter than or equal to 20 characters. This ensures that the
-    #   `LogProviderRole` name is below the 64 character limit.
+    #   `AmazonSecurityLake-Provider-{name of the custom source}-{region}`.
+    #   You must use a `CustomLogSource` name that is shorter than or equal
+    #   to 20 characters. This ensures that the `LogProviderRole` name is
+    #   below the 64 character limit.
     #   @return [String]
     #
     # @!attribute [rw] source_version

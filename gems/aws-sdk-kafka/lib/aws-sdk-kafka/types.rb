@@ -1990,42 +1990,42 @@ module Aws::Kafka
     #   A string that contains one or more DNS names (or IP addresses) and
     #   SASL IAM port pairs. The following is an example.
     #
-    #   <programlisting>\{ "BootstrapBrokerStringSaslIam": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198" \}</programlisting>
+    #   <programlisting>{ "BootstrapBrokerStringSaslIam": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198" }</programlisting>
     #   @return [String]
     #
     # @!attribute [rw] bootstrap_broker_string_public_sasl_scram
     #   A string containing one or more DNS names (or IP addresses) and SASL
     #   SCRAM port pairs. The following is an example.
     #
-    #   <programlisting>\{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196" \}</programlisting>
+    #   <programlisting>{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196" }</programlisting>
     #   @return [String]
     #
     # @!attribute [rw] bootstrap_broker_string_public_tls
     #   A string containing one or more DNS names (or IP addresses) and TLS
     #   port pairs. The following is an example.
     #
-    #   <programlisting>\{ "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194" \}</programlisting>
+    #   <programlisting>{ "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194" }</programlisting>
     #   @return [String]
     #
     # @!attribute [rw] bootstrap_broker_string_tls
     #   A string containing one or more DNS names (or IP addresses) and TLS
     #   port pairs. The following is an example.
     #
-    #   <programlisting>\{ "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094" \}</programlisting>
+    #   <programlisting>{ "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094" }</programlisting>
     #   @return [String]
     #
     # @!attribute [rw] bootstrap_broker_string_sasl_scram
     #   A string containing one or more DNS names (or IP addresses) and SASL
     #   SCRAM port pairs. The following is an example.
     #
-    #   <programlisting>\{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096" \}</programlisting>
+    #   <programlisting>{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096" }</programlisting>
     #   @return [String]
     #
     # @!attribute [rw] bootstrap_broker_string_sasl_iam
     #   A string that contains one or more DNS names (or IP addresses) and
     #   SASL IAM port pairs. The following is an example.
     #
-    #   <programlisting>\{ "BootstrapBrokerStringSaslIam": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098" \}</programlisting>
+    #   <programlisting>{ "BootstrapBrokerStringSaslIam": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098" }</programlisting>
     #   @return [String]
     #
     # @!attribute [rw] bootstrap_broker_string_vpc_connectivity_tls

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-10-28)
+------------------
+
+* Feature - Documentation update: Amazon FSx File Gateway will no longer be available to new customers.
+
 1.99.0 (2024-10-18)
 ------------------
 

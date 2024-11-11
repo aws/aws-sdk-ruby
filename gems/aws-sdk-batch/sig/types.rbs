@@ -437,6 +437,7 @@ module Aws::Batch
 
     class EksAttemptContainerDetail
       attr_accessor name: ::String
+      attr_accessor container_id: ::String
       attr_accessor exit_code: ::Integer
       attr_accessor reason: ::String
       SENSITIVE: []
@@ -447,6 +448,7 @@ module Aws::Batch
       attr_accessor init_containers: ::Array[Types::EksAttemptContainerDetail]
       attr_accessor eks_cluster_arn: ::String
       attr_accessor pod_name: ::String
+      attr_accessor pod_namespace: ::String
       attr_accessor node_name: ::String
       attr_accessor started_at: ::Integer
       attr_accessor stopped_at: ::Integer
@@ -783,6 +785,15 @@ module Aws::Batch
       attr_accessor launch_template_id: ::String
       attr_accessor launch_template_name: ::String
       attr_accessor version: ::String
+      attr_accessor overrides: ::Array[Types::LaunchTemplateSpecificationOverride]
+      SENSITIVE: []
+    end
+
+    class LaunchTemplateSpecificationOverride
+      attr_accessor launch_template_id: ::String
+      attr_accessor launch_template_name: ::String
+      attr_accessor version: ::String
+      attr_accessor target_instance_types: ::Array[::String]
       SENSITIVE: []
     end
 

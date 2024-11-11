@@ -188,6 +188,11 @@ module Aws
                        transit_gateway_multicast_domain_id: ::String?,
                        replica_mode: ("open-read-only" | "mounted")?
                      },
+                     ?monitoring_interval: ::Integer,
+                     ?monitoring_role_arn: ::String,
+                     ?enable_performance_insights: bool,
+                     ?performance_insights_kms_key_id: ::String,
+                     ?performance_insights_retention_period: ::Integer,
                      ?engine_lifecycle_support: ::String
                    ) -> DBCluster
                  | (?Hash[Symbol, untyped]) -> DBCluster

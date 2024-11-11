@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-11-08)
+------------------
+
+* Feature - AWS Control Catalog GetControl public API returns additional data in output, including Implementation and Parameters
+
+1.15.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2024-10-18)
 ------------------
 

@@ -647,7 +647,7 @@ module Aws::MachineLearning
     #     rearrangement requirements for the `Datasource`.
     #
     #     Sample - `
-    #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
+    #     "{"splitting":{"percentBegin":10,"percentEnd":60}}"`
     #
     #
     #
@@ -786,7 +786,7 @@ module Aws::MachineLearning
     #     rearrangement requirements for the `DataSource`.
     #
     #     Sample - `
-    #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
+    #     "{"splitting":{"percentBegin":10,"percentEnd":60}}"`
     #
     # @option params [required, String] :role_arn
     #   A fully specified role Amazon Resource Name (ARN). Amazon ML assumes
@@ -898,7 +898,7 @@ module Aws::MachineLearning
     #     rearrangement requirements for the `Datasource`.
     #
     #     Sample - `
-    #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
+    #     "{"splitting":{"percentBegin":10,"percentEnd":60}}"`
     #
     # @option params [Boolean] :compute_statistics
     #   The compute statistics for a `DataSource`. The statistics are
@@ -2488,7 +2488,7 @@ module Aws::MachineLearning
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-machinelearning'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

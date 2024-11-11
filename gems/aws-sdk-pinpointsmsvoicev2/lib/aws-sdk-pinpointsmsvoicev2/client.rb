@@ -1199,6 +1199,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.reviewing_timestamp #=> Time
+    #   resp.registration_version_status_history.requires_authentication_timestamp #=> Time
     #   resp.registration_version_status_history.approved_timestamp #=> Time
     #   resp.registration_version_status_history.discarded_timestamp #=> Time
     #   resp.registration_version_status_history.denied_timestamp #=> Time
@@ -3010,6 +3011,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_versions[0].registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.reviewing_timestamp #=> Time
+    #   resp.registration_versions[0].registration_version_status_history.requires_authentication_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.approved_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.discarded_timestamp #=> Time
     #   resp.registration_versions[0].registration_version_status_history.denied_timestamp #=> Time
@@ -3421,6 +3423,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.reviewing_timestamp #=> Time
+    #   resp.registration_version_status_history.requires_authentication_timestamp #=> Time
     #   resp.registration_version_status_history.approved_timestamp #=> Time
     #   resp.registration_version_status_history.discarded_timestamp #=> Time
     #   resp.registration_version_status_history.denied_timestamp #=> Time
@@ -4868,6 +4871,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.registration_version_status_history.draft_timestamp #=> Time
     #   resp.registration_version_status_history.submitted_timestamp #=> Time
     #   resp.registration_version_status_history.reviewing_timestamp #=> Time
+    #   resp.registration_version_status_history.requires_authentication_timestamp #=> Time
     #   resp.registration_version_status_history.approved_timestamp #=> Time
     #   resp.registration_version_status_history.discarded_timestamp #=> Time
     #   resp.registration_version_status_history.denied_timestamp #=> Time
@@ -5459,7 +5463,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

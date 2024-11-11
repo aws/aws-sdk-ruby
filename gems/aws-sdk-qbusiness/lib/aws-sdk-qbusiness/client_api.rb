@@ -34,6 +34,7 @@ module Aws::QBusiness
     ActionReviewPayloadField = Shapes::StructureShape.new(name: 'ActionReviewPayloadField')
     ActionReviewPayloadFieldAllowedValue = Shapes::StructureShape.new(name: 'ActionReviewPayloadFieldAllowedValue')
     ActionReviewPayloadFieldAllowedValues = Shapes::ListShape.new(name: 'ActionReviewPayloadFieldAllowedValues')
+    ActionReviewPayloadFieldArrayItemJsonSchema = Shapes::DocumentShape.new(name: 'ActionReviewPayloadFieldArrayItemJsonSchema', document: true)
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
@@ -498,6 +499,7 @@ module Aws::QBusiness
     ActionReviewPayloadField.add_member(:value, Shapes::ShapeRef.new(shape: ActionPayloadFieldValue, location_name: "value"))
     ActionReviewPayloadField.add_member(:allowed_values, Shapes::ShapeRef.new(shape: ActionReviewPayloadFieldAllowedValues, location_name: "allowedValues"))
     ActionReviewPayloadField.add_member(:allowed_format, Shapes::ShapeRef.new(shape: String, location_name: "allowedFormat"))
+    ActionReviewPayloadField.add_member(:array_item_json_schema, Shapes::ShapeRef.new(shape: ActionReviewPayloadFieldArrayItemJsonSchema, location_name: "arrayItemJsonSchema"))
     ActionReviewPayloadField.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))
     ActionReviewPayloadField.struct_class = Types::ActionReviewPayloadField
 
@@ -1179,6 +1181,7 @@ module Aws::QBusiness
 
     GroupMembers.add_member(:member_groups, Shapes::ShapeRef.new(shape: MemberGroups, location_name: "memberGroups"))
     GroupMembers.add_member(:member_users, Shapes::ShapeRef.new(shape: MemberUsers, location_name: "memberUsers"))
+    GroupMembers.add_member(:s3_path_for_group_members, Shapes::ShapeRef.new(shape: S3, location_name: "s3PathForGroupMembers"))
     GroupMembers.struct_class = Types::GroupMembers
 
     GroupStatusDetail.add_member(:status, Shapes::ShapeRef.new(shape: GroupStatus, location_name: "status"))
@@ -1473,6 +1476,7 @@ module Aws::QBusiness
     PutGroupRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "dataSourceId"))
     PutGroupRequest.add_member(:type, Shapes::ShapeRef.new(shape: MembershipType, required: true, location_name: "type"))
     PutGroupRequest.add_member(:group_members, Shapes::ShapeRef.new(shape: GroupMembers, required: true, location_name: "groupMembers"))
+    PutGroupRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     PutGroupRequest.struct_class = Types::PutGroupRequest
 
     PutGroupResponse.struct_class = Types::PutGroupResponse

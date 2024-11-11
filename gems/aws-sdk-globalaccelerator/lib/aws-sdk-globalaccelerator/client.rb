@@ -855,8 +855,8 @@ module Aws::GlobalAccelerator
     # For a command line operation, for example, you might use a statement
     # like the following:
     #
-    # ` "Resources": [\{"Cidr": "169.254.60.0/24"\},\{"Cidr":
-    # "169.254.59.0/24"\}]`
+    # ` "Resources": [{"Cidr": "169.254.60.0/24"},{"Cidr":
+    # "169.254.59.0/24"}]`
     #
     # For more information, see [ Working with cross-account attachments and
     # resources in Global Accelerator][1] in the <i> Global Accelerator
@@ -3648,7 +3648,7 @@ module Aws::GlobalAccelerator
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

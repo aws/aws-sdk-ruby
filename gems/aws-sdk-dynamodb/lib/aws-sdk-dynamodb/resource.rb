@@ -93,7 +93,7 @@ module Aws::DynamoDB
     #     Developer Guide*). To work around this, you could specify the
     #     following for `ExpressionAttributeNames`:
     #
-    #     * `\{"#P":"Percentile"\}`
+    #     * `{"#P":"Percentile"}`
     #
     #     ^
     #

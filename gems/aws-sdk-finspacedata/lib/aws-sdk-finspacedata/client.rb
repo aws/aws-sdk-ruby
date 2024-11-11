@@ -521,9 +521,9 @@ module Aws::FinSpaceData
     #
     #   Here is an example of how you could specify the `sourceParams`:
     #
-    #   ` "sourceParams": \{ "s3SourcePath":
+    #   ` "sourceParams": { "s3SourcePath":
     #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
-    #   "sourceType": "S3" \} `
+    #   "sourceType": "S3" } `
     #
     #   The S3 path that you specify must allow the FinSpace role access. To
     #   do that, you first need to configure the IAM policy on S3 bucket. For
@@ -552,13 +552,13 @@ module Aws::FinSpaceData
     #
     #   Here is an example of how you could specify the `formatParams`:
     #
-    #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
-    #   "separator": ",", "compression":"None" \} `
+    #   ` "formatParams": { "formatType": "CSV", "withHeader": "true",
+    #   "separator": ",", "compression":"None" } `
     #
     #   Note that if you only provide `formatType` as `CSV`, the rest of the
     #   attributes will automatically default to CSV values as following:
     #
-    #   ` \{ "withHeader": "true", "separator": "," \} `
+    #   ` { "withHeader": "true", "separator": "," } `
     #
     #   For more information about supported file formats, see [Supported Data
     #   Types and File Formats][1] in the FinSpace User Guide.
@@ -1875,9 +1875,9 @@ module Aws::FinSpaceData
     #
     #   Here is an example of how you could specify the `sourceParams`:
     #
-    #   ` "sourceParams": \{ "s3SourcePath":
+    #   ` "sourceParams": { "s3SourcePath":
     #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
-    #   "sourceType": "S3" \} `
+    #   "sourceType": "S3" } `
     #
     #   The S3 path that you specify must allow the FinSpace role access. To
     #   do that, you first need to configure the IAM policy on S3 bucket. For
@@ -1906,13 +1906,13 @@ module Aws::FinSpaceData
     #
     #   Here is an example of how you could specify the `formatParams`:
     #
-    #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
-    #   "separator": ",", "compression":"None" \} `
+    #   ` "formatParams": { "formatType": "CSV", "withHeader": "true",
+    #   "separator": ",", "compression":"None" } `
     #
     #   Note that if you only provide `formatType` as `CSV`, the rest of the
     #   attributes will automatically default to CSV values as following:
     #
-    #   ` \{ "withHeader": "true", "separator": "," \} `
+    #   ` { "withHeader": "true", "separator": "," } `
     #
     #   For more information about supported file formats, see [Supported Data
     #   Types and File Formats][1] in the FinSpace User Guide.
@@ -2187,7 +2187,7 @@ module Aws::FinSpaceData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

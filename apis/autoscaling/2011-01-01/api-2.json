@@ -1247,7 +1247,8 @@
         "DesiredCapacityType":{"shape":"XmlStringMaxLen255"},
         "DefaultInstanceWarmup":{"shape":"DefaultInstanceWarmup"},
         "TrafficSources":{"shape":"TrafficSources"},
-        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"}
+        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"},
+        "AvailabilityZoneDistribution":{"shape":"AvailabilityZoneDistribution"}
       }
     },
     "AutoScalingGroupDesiredCapacity":{"type":"integer"},
@@ -1322,9 +1323,20 @@
       "type":"list",
       "member":{"shape":"XmlStringMaxLen255"}
     },
+    "AvailabilityZoneDistribution":{
+      "type":"structure",
+      "members":{
+        "CapacityDistributionStrategy":{"shape":"CapacityDistributionStrategy"}
+      }
+    },
     "AvailabilityZones":{
       "type":"list",
       "member":{"shape":"XmlStringMaxLen255"}
+    },
+    "BakeTime":{
+      "type":"integer",
+      "max":172800,
+      "min":0
     },
     "BareMetal":{
       "type":"string",
@@ -1432,6 +1444,13 @@
         "AutoScalingGroupName":{"shape":"XmlStringMaxLen255"}
       }
     },
+    "CapacityDistributionStrategy":{
+      "type":"string",
+      "enum":[
+        "balanced-only",
+        "balanced-best-effort"
+      ]
+    },
     "CapacityForecast":{
       "type":"structure",
       "required":[
@@ -1526,7 +1545,8 @@
         "DesiredCapacityType":{"shape":"XmlStringMaxLen255"},
         "DefaultInstanceWarmup":{"shape":"DefaultInstanceWarmup"},
         "TrafficSources":{"shape":"TrafficSources"},
-        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"}
+        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"},
+        "AvailabilityZoneDistribution":{"shape":"AvailabilityZoneDistribution"}
       }
     },
     "CreateLaunchConfigurationType":{
@@ -2213,7 +2233,8 @@
         "Cancelled",
         "RollbackInProgress",
         "RollbackFailed",
-        "RollbackSuccessful"
+        "RollbackSuccessful",
+        "Baking"
       ]
     },
     "InstanceRefreshWarmPoolProgress":{
@@ -3085,7 +3106,8 @@
         "ScaleInProtectedInstances":{"shape":"ScaleInProtectedInstances"},
         "StandbyInstances":{"shape":"StandbyInstances"},
         "AlarmSpecification":{"shape":"AlarmSpecification"},
-        "MaxHealthyPercentage":{"shape":"IntPercent100To200"}
+        "MaxHealthyPercentage":{"shape":"IntPercent100To200"},
+        "BakeTime":{"shape":"BakeTime"}
       }
     },
     "RefreshStrategy":{
@@ -3549,7 +3571,8 @@
         "Context":{"shape":"Context"},
         "DesiredCapacityType":{"shape":"XmlStringMaxLen255"},
         "DefaultInstanceWarmup":{"shape":"DefaultInstanceWarmup"},
-        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"}
+        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"},
+        "AvailabilityZoneDistribution":{"shape":"AvailabilityZoneDistribution"}
       }
     },
     "UpdatePlacementGroupParam":{

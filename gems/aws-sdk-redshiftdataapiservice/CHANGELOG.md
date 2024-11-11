@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2024-10-29)
+------------------
+
+* Feature - Adding a new API GetStatementResultV2 that supports CSV formatted results from ExecuteStatement and BatchExecuteStatement calls.
+
 1.49.0 (2024-10-18)
 ------------------
 

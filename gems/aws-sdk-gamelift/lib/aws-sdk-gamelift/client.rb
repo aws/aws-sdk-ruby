@@ -2017,7 +2017,7 @@ module Aws::GameLift
     #
     # @option params [Array<Types::GameProperty>] :game_properties
     #   A set of key-value pairs that can store custom data in a game session.
-    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`. For an
+    #   For example: `{"Key": "difficulty", "Value": "novice"}`. For an
     #   example, see [Create a game session with custom properties][1].
     #
     #
@@ -2465,7 +2465,7 @@ module Aws::GameLift
     #
     # @option params [Array<Types::GameProperty>] :game_properties
     #   A set of key-value pairs that can store custom data in a game session.
-    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`. This
+    #   For example: `{"Key": "difficulty", "Value": "novice"}`. This
     #   information is added to the new `GameSession` object that is created
     #   for a successful match. This parameter is not used if `FlexMatchMode`
     #   is set to `STANDALONE`.
@@ -7950,8 +7950,8 @@ module Aws::GameLift
     #   names do not need to be unique to a game session.
     #
     # * **gameSessionProperties** -- A set of key-value pairs that can store
-    #   custom data in a game session. For example: `\{"Key": "difficulty",
-    #   "Value": "novice"\}`. The filter expression must specify the
+    #   custom data in a game session. For example: `{"Key": "difficulty",
+    #   "Value": "novice"}`. The filter expression must specify the
     #   GameProperty -- a `Key` and a string `Value` to search for the game
     #   sessions.
     #
@@ -8265,7 +8265,7 @@ module Aws::GameLift
     #
     # @option params [Array<Types::GameProperty>] :game_properties
     #   A set of key-value pairs that can store custom data in a game session.
-    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   For example: `{"Key": "difficulty", "Value": "novice"}`.
     #
     # @option params [required, Integer] :maximum_player_session_count
     #   The maximum number of players that can be connected simultaneously to
@@ -9681,7 +9681,7 @@ module Aws::GameLift
     #
     # @option params [Array<Types::GameProperty>] :game_properties
     #   A set of key-value pairs that can store custom data in a game session.
-    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`. You can use
+    #   For example: `{"Key": "difficulty", "Value": "novice"}`. You can use
     #   this parameter to modify game properties in an active game session.
     #   This action adds new properties and modifies existing properties.
     #   There is no way to delete properties. For an example, see [Update the
@@ -9951,7 +9951,7 @@ module Aws::GameLift
     #
     # @option params [Array<Types::GameProperty>] :game_properties
     #   A set of key-value pairs that can store custom data in a game session.
-    #   For example: `\{"Key": "difficulty", "Value": "novice"\}`. This
+    #   For example: `{"Key": "difficulty", "Value": "novice"}`. This
     #   information is added to the new `GameSession` object that is created
     #   for a successful match. This parameter is not used if `FlexMatchMode`
     #   is set to `STANDALONE`.
@@ -10296,7 +10296,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

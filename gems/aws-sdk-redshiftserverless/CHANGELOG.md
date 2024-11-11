@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2024-10-30)
+------------------
+
+* Feature - Adds and updates API members for the Redshift Serverless AI-driven scaling and optimization feature using the price-performance target setting.
+
 1.40.0 (2024-10-18)
 ------------------
 

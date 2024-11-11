@@ -651,8 +651,8 @@ module Aws::CloudWatchLogs
     # multiple deliveries to configure multiple delivery sources to send
     # logs to the same delivery destination.
     #
-    # You can't update an existing delivery. You can only create and delete
-    # deliveries.
+    # To update an existing delivery configuration, use
+    # [UpdateDeliveryConfiguration][5].
     #
     #
     #
@@ -660,6 +660,7 @@ module Aws::CloudWatchLogs
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
     # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
+    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html
     #
     # @option params [required, String] :delivery_source_name
     #   The name of the delivery source to use for this delivery.
@@ -669,8 +670,8 @@ module Aws::CloudWatchLogs
     #
     # @option params [Array<String>] :record_fields
     #   The list of record fields to be delivered to the destination, in
-    #   order. If the delivery’s log source has mandatory fields, they must be
-    #   included in this list.
+    #   order. If the delivery's log source has mandatory fields, they must
+    #   be included in this list.
     #
     # @option params [String] :field_delimiter
     #   The field delimiter to use between record fields when the final output
@@ -678,7 +679,7 @@ module Aws::CloudWatchLogs
     #
     # @option params [Types::S3DeliveryConfiguration] :s3_delivery_configuration
     #   This structure contains parameters that are valid only when the
-    #   delivery’s delivery destination is an S3 bucket.
+    #   delivery's delivery destination is an S3 bucket.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional list of key-value pairs to associate with the resource.
@@ -799,6 +800,10 @@ module Aws::CloudWatchLogs
     # @option params [String] :destination_prefix
     #   The prefix used as the start of the key for every object exported. If
     #   you don't specify a value, the default is `exportedlogs`.
+    #
+    #   The length of this parameter must comply with the S3 object key name
+    #   length limits. The object key name is a sequence of Unicode characters
+    #   with UTF-8 encoding, and can be up to 1,024 bytes.
     #
     # @return [Types::CreateExportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1957,7 +1962,7 @@ module Aws::CloudWatchLogs
     # filter the results by prefix. The results are ASCII-sorted by log
     # group name.
     #
-    # CloudWatch Logs doesn’t support IAM policies that control access to
+    # CloudWatch Logs doesn't support IAM policies that control access to
     # the `DescribeLogGroups` action by using the `aws:ResourceTag/key-name
     # ` condition key. Other CloudWatch Logs actions do support the use of
     # the `aws:ResourceTag/key-name ` condition key to control access. For
@@ -3324,6 +3329,7 @@ module Aws::CloudWatchLogs
     #   resp.anomalies[0].pattern_tokens[0].token_string #=> String
     #   resp.anomalies[0].pattern_tokens[0].enumerations #=> Hash
     #   resp.anomalies[0].pattern_tokens[0].enumerations["TokenString"] #=> Integer
+    #   resp.anomalies[0].pattern_tokens[0].inferred_token_name #=> String
     #   resp.anomalies[0].log_group_arn_list #=> Array
     #   resp.anomalies[0].log_group_arn_list[0] #=> String
     #   resp.anomalies[0].suppressed #=> Boolean
@@ -3586,8 +3592,8 @@ module Aws::CloudWatchLogs
     #     in the first block of the policy.
     #
     #     The `Operation` property with the `Deidentify` action is what
-    #     actually masks the data, and it must contain the ` "MaskConfig":
-    #     \{\}` object. The ` "MaskConfig": \{\}` object must be empty.
+    #     actually masks the data, and it must contain the ` "MaskConfig": {}`
+    #     object. The ` "MaskConfig": {}` object must be empty.
     #
     #   For an example data protection policy, see the **Examples** section on
     #   this page.
@@ -3763,8 +3769,8 @@ module Aws::CloudWatchLogs
     #     in the first block of the policy.
     #
     #     The `Operation` property with the `Deidentify` action is what
-    #     actually masks the data, and it must contain the ` "MaskConfig":
-    #     \{\}` object. The ` "MaskConfig": \{\}` object must be empty.
+    #     actually masks the data, and it must contain the ` "MaskConfig": {}`
+    #     object. The ` "MaskConfig": {}` object must be empty.
     #
     #   For an example data protection policy, see the **Examples** section on
     #   this page.
@@ -4540,12 +4546,12 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
-    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
-    #   "Service": [ "route53.amazonaws.com" ] \}, "Action":
-    #   "logs:PutLogEvents", "Resource": "logArn", "Condition": \{ "ArnLike":
-    #   \{ "aws:SourceArn": "myRoute53ResourceArn" \}, "StringEquals": \{
-    #   "aws:SourceAccount": "myAwsAccountId" \} \} \} ] \}`
+    #   `{ "Version": "2012-10-17", "Statement": [ { "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": {
+    #   "Service": [ "route53.amazonaws.com" ] }, "Action":
+    #   "logs:PutLogEvents", "Resource": "logArn", "Condition": { "ArnLike": {
+    #   "aws:SourceArn": "myRoute53ResourceArn" }, "StringEquals": {
+    #   "aws:SourceAccount": "myAwsAccountId" } } } ] }`
     #
     #
     #
@@ -4582,14 +4588,14 @@ module Aws::CloudWatchLogs
     # policy, you can configure the number of days for which to retain log
     # events in the specified log group.
     #
-    # <note markdown="1"> CloudWatch Logs doesn’t immediately delete log events when they reach
+    # <note markdown="1"> CloudWatch Logs doesn't immediately delete log events when they reach
     # their retention setting. It typically takes up to 72 hours after that
     # before log events are deleted, but in rare situations might take
     # longer.
     #
     #  To illustrate, imagine that you change a log group to have a longer
     # retention setting when it contains log events that are past the
-    # expiration date, but haven’t been deleted. Those log events will take
+    # expiration date, but haven't been deleted. Those log events will take
     # up to 72 hours to be deleted after the new retention date is reached.
     # To make sure that log data is deleted permanently, keep a log group at
     # its lower retention setting until 72 hours after the previous
@@ -5131,7 +5137,7 @@ module Aws::CloudWatchLogs
     # @option params [Integer] :limit
     #   The maximum number of log events to return in the query. If the query
     #   string uses the `fields` command, only the specified fields and their
-    #   values are returned. The default is 1000.
+    #   values are returned. The default is 10,000.
     #
     # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5204,7 +5210,7 @@ module Aws::CloudWatchLogs
     # For more information about tags, see [Tag Log Groups in Amazon
     # CloudWatch Logs][4] in the *Amazon CloudWatch Logs User Guide*.
     #
-    # CloudWatch Logs doesn’t support IAM policies that prevent users from
+    # CloudWatch Logs doesn't support IAM policies that prevent users from
     # assigning specified tags to log groups using the
     # `aws:Resource/key-name ` or `aws:TagKeys` condition keys. For more
     # information about using tags to control access, see [Controlling
@@ -5351,7 +5357,7 @@ module Aws::CloudWatchLogs
     # To list the tags for a log group, use [ListTagsForResource][2]. To add
     # tags, use [TagResource][3].
     #
-    # CloudWatch Logs doesn’t support IAM policies that prevent users from
+    # CloudWatch Logs doesn't support IAM policies that prevent users from
     # assigning specified tags to log groups using the
     # `aws:Resource/key-name ` or `aws:TagKeys` condition keys.
     #
@@ -5426,10 +5432,10 @@ module Aws::CloudWatchLogs
     end
 
     # Use this operation to *suppress* anomaly detection for a specified
-    # anomaly or pattern. If you suppress an anomaly, CloudWatch Logs won’t
+    # anomaly or pattern. If you suppress an anomaly, CloudWatch Logs won't
     # report new occurrences of that anomaly and won't update that anomaly
-    # with new data. If you suppress a pattern, CloudWatch Logs won’t report
-    # any anomalies related to that pattern.
+    # with new data. If you suppress a pattern, CloudWatch Logs won't
+    # report any anomalies related to that pattern.
     #
     # You must specify either `anomalyId` or `patternId`, but you can't
     # specify both parameters in the same operation.
@@ -5471,6 +5477,15 @@ module Aws::CloudWatchLogs
     #   If you are temporarily suppressing an anomaly or pattern, use this
     #   structure to specify how long the suppression is to last.
     #
+    # @option params [Boolean] :baseline
+    #   Set this to `true` to prevent CloudWatch Logs from displaying this
+    #   behavior as an anomaly in the future. The behavior is then treated as
+    #   baseline behavior. However, if similar but more severe occurrences of
+    #   this behavior occur in the future, those will still be reported as
+    #   anomalies.
+    #
+    #   The default is `false`
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5484,6 +5499,7 @@ module Aws::CloudWatchLogs
     #       value: 1,
     #       suppression_unit: "SECONDS", # accepts SECONDS, MINUTES, HOURS
     #     },
+    #     baseline: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateAnomaly AWS API Documentation
@@ -5509,8 +5525,8 @@ module Aws::CloudWatchLogs
     #
     # @option params [Array<String>] :record_fields
     #   The list of record fields to be delivered to the destination, in
-    #   order. If the delivery’s log source has mandatory fields, they must be
-    #   included in this list.
+    #   order. If the delivery's log source has mandatory fields, they must
+    #   be included in this list.
     #
     # @option params [String] :field_delimiter
     #   The field delimiter to use between record fields when the final output
@@ -5518,7 +5534,7 @@ module Aws::CloudWatchLogs
     #
     # @option params [Types::S3DeliveryConfiguration] :s3_delivery_configuration
     #   This structure contains parameters that are valid only when the
-    #   delivery’s delivery destination is an S3 bucket.
+    #   delivery's delivery destination is an S3 bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5611,7 +5627,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

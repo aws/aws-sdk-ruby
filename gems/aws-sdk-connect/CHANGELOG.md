@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.184.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.183.0 (2024-10-30)
+------------------
+
+* Feature - Updated the public documentation for the UserIdentityInfo object to accurately reflect the character limits for the FirstName and LastName fields, which were previously listed as 1-100 characters.
+
+1.182.0 (2024-10-23)
+------------------
+
+* Feature - Amazon Connect Service Feature: Add support to start screen sharing for a web calling contact.
+
 1.181.0 (2024-10-18)
 ------------------
 

@@ -114,6 +114,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#instance_maintenance_policy-instance_method
       def instance_maintenance_policy: () -> Types::InstanceMaintenancePolicy
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#availability_zone_distribution-instance_method
+      def availability_zone_distribution: () -> Types::AvailabilityZoneDistribution
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#load-instance_method
@@ -475,6 +478,9 @@ module Aws
                     ?instance_maintenance_policy: {
                       min_healthy_percentage: ::Integer?,
                       max_healthy_percentage: ::Integer?
+                    },
+                    ?availability_zone_distribution: {
+                      capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")?
                     }
                   ) -> AutoScalingGroup
                 | (?Hash[Symbol, untyped]) -> AutoScalingGroup

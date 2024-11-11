@@ -54,7 +54,7 @@ module Aws::IoT1ClickProjects
   autoload :EndpointProvider, 'aws-sdk-iot1clickprojects/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iot1clickprojects/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
 

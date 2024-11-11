@@ -3179,12 +3179,12 @@ module Aws::FraudDetector
     #   The label mapper maps the Amazon Fraud Detector supported model
     #   classification labels (`FRAUD`, `LEGIT`) to the appropriate event
     #   type labels. For example, if "`FRAUD`" and "`LEGIT`" are Amazon
-    #   Fraud Detector supported labels, this mapper could be: `\{"FRAUD" =>
-    #   ["0"]`, `"LEGIT" => ["1"]\}` or `\{"FRAUD" => ["false"]`, `"LEGIT"
-    #   => ["true"]\}` or `\{"FRAUD" => ["fraud", "abuse"]`, `"LEGIT" =>
-    #   ["legit", "safe"]\}`. The value part of the mapper is a list,
-    #   because you may have multiple label variants from your event type
-    #   for a single Amazon Fraud Detector label.
+    #   Fraud Detector supported labels, this mapper could be: `{"FRAUD" =>
+    #   ["0"]`, `"LEGIT" => ["1"]}` or `{"FRAUD" => ["false"]`, `"LEGIT" =>
+    #   ["true"]}` or `{"FRAUD" => ["fraud", "abuse"]`, `"LEGIT" =>
+    #   ["legit", "safe"]}`. The value part of the mapper is a list, because
+    #   you may have multiple label variants from your event type for a
+    #   single Amazon Fraud Detector label.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] unlabeled_events_treatment

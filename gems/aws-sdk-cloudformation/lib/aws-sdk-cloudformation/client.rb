@@ -661,9 +661,9 @@ module Aws::CloudFormation
     #   limit resource-level permissions and avoid returning a response when
     #   no parameter is sent in the request:
     #
-    #    `\{ "Version": "2012-10-17", "Statement": [\{ "Effect": "Deny",
+    #    `{ "Version": "2012-10-17", "Statement": [{ "Effect": "Deny",
     #   "Action": "cloudformation:DescribeStacks", "NotResource":
-    #   "arn:aws:cloudformation:*:*:stack/*/*" \}] \}`
+    #   "arn:aws:cloudformation:*:*:stack/*/*" }] }`
     #
     #    </note>
     #
@@ -3716,10 +3716,9 @@ module Aws::CloudFormation
     #   limit resource-level permissions and avoid returning a response when
     #   no parameter is sent in the request:
     #
-    #    \\\{ "Version": "2012-10-17", "Statement": \[\\\{ "Effect":
+    #    \{ "Version": "2012-10-17", "Statement": \[\{ "Effect":
     #   "Deny", "Action": "cloudformation:DescribeStacks",
-    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" \\}\]
-    #   \\}
+    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }\] }
     #
     #    </note>
     #
@@ -4399,7 +4398,7 @@ module Aws::CloudFormation
     # @option params [required, String] :generated_template_name
     #   The name or Amazon Resource Name (ARN) of the generated template. The
     #   format is
-    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   `arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}`.
     #   For example,
     #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
     #   `.
@@ -8352,7 +8351,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

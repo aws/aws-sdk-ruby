@@ -25,6 +25,62 @@ module Aws::DocDBElastic
       include Aws::Structure
     end
 
+    # @!attribute [rw] apply_action
+    #   The pending maintenance action to apply to the resource.
+    #
+    #   Valid actions are:
+    #
+    #   * `ENGINE_UPDATE `
+    #
+    #   * `ENGINE_UPGRADE`
+    #
+    #   * `SECURITY_UPDATE`
+    #
+    #   * `OS_UPDATE`
+    #
+    #   * `MASTER_USER_PASSWORD_UPDATE`
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_on
+    #   A specific date to apply the pending maintenance action. Required if
+    #   opt-in-type is `APPLY_ON`. Format: `yyyy/MM/dd HH:mm-yyyy/MM/dd
+    #   HH:mm`
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in_type
+    #   A value that specifies the type of opt-in request, or undoes an
+    #   opt-in request. An opt-in request of type `IMMEDIATE` can't be
+    #   undone.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon DocumentDB Amazon Resource Name (ARN) of the resource to
+    #   which the pending maintenance action applies.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ApplyPendingMaintenanceActionInput AWS API Documentation
+    #
+    class ApplyPendingMaintenanceActionInput < Struct.new(
+      :apply_action,
+      :apply_on,
+      :opt_in_type,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_pending_maintenance_action
+    #   The output of the pending maintenance action being applied.
+    #   @return [Types::ResourcePendingMaintenanceAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ApplyPendingMaintenanceActionOutput AWS API Documentation
+    #
+    class ApplyPendingMaintenanceActionOutput < Struct.new(
+      :resource_pending_maintenance_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns information about a specific elastic cluster.
     #
     # @!attribute [rw] admin_user_name
@@ -659,6 +715,32 @@ module Aws::DocDBElastic
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   Retrieves pending maintenance actions for a specific Amazon Resource
+    #   Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/GetPendingMaintenanceActionInput AWS API Documentation
+    #
+    class GetPendingMaintenanceActionInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_pending_maintenance_action
+    #   Provides information about a pending maintenance action for a
+    #   resource.
+    #   @return [Types::ResourcePendingMaintenanceAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/GetPendingMaintenanceActionOutput AWS API Documentation
+    #
+    class GetPendingMaintenanceActionOutput < Struct.new(
+      :resource_pending_maintenance_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There was an internal server error.
     #
     # @!attribute [rw] message
@@ -779,6 +861,48 @@ module Aws::DocDBElastic
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response. If more
+    #   records exist than the specified `maxResults` value, a pagination
+    #   token (marker) is included in the response so that the remaining
+    #   results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `maxResults`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ListPendingMaintenanceActionsInput AWS API Documentation
+    #
+    class ListPendingMaintenanceActionsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is displayed, the responses will include only records
+    #   beyond the marker, up to the value specified by `maxResults`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_pending_maintenance_actions
+    #   Provides information about a pending maintenance action for a
+    #   resource.
+    #   @return [Array<Types::ResourcePendingMaintenanceAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ListPendingMaintenanceActionsOutput AWS API Documentation
+    #
+    class ListPendingMaintenanceActionsOutput < Struct.new(
+      :next_token,
+      :resource_pending_maintenance_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN identifier of the elastic cluster resource.
     #   @return [String]
@@ -803,6 +927,54 @@ module Aws::DocDBElastic
       include Aws::Structure
     end
 
+    # Retrieves the details of maintenance actions that are pending.
+    #
+    # @!attribute [rw] action
+    #   Displays the specific action of a pending maintenance action.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_applied_after_date
+    #   Displays the date of the maintenance window when the action is
+    #   applied. The maintenance action is applied to the resource during
+    #   its first maintenance window after this date. If this date is
+    #   specified, any `NEXT_MAINTENANCE` `optInType` requests are ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_apply_date
+    #   Displays the effective date when the pending maintenance action is
+    #   applied to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Displays a description providing more detail about the maintenance
+    #   action.
+    #   @return [String]
+    #
+    # @!attribute [rw] forced_apply_date
+    #   Displays the date when the maintenance action is automatically
+    #   applied. The maintenance action is applied to the resource on this
+    #   date regardless of the maintenance window for the resource. If this
+    #   date is specified, any `IMMEDIATE` `optInType` requests are ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in_status
+    #   Displays the type of `optInType` request that has been received for
+    #   the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/PendingMaintenanceActionDetails AWS API Documentation
+    #
+    class PendingMaintenanceActionDetails < Struct.new(
+      :action,
+      :auto_applied_after_date,
+      :current_apply_date,
+      :description,
+      :forced_apply_date,
+      :opt_in_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource could not be located.
     #
     # @!attribute [rw] message
@@ -823,6 +995,28 @@ module Aws::DocDBElastic
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a pending maintenance action for a
+    # resource.
+    #
+    # @!attribute [rw] pending_maintenance_action_details
+    #   Provides information about a pending maintenance action for a
+    #   resource.
+    #   @return [Array<Types::PendingMaintenanceActionDetails>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon DocumentDB Amazon Resource Name (ARN) of the resource to
+    #   which the pending maintenance action applies.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ResourcePendingMaintenanceAction AWS API Documentation
+    #
+    class ResourcePendingMaintenanceAction < Struct.new(
+      :pending_maintenance_action_details,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end

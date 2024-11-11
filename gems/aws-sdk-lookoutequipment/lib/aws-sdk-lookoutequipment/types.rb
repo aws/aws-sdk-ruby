@@ -2569,14 +2569,14 @@ module Aws::LookoutEquipment
     #   The pattern for matching the Amazon S3 files that will be used for
     #   ingestion. If the schema was created previously without any
     #   KeyPattern, then the default KeyPattern
-    #   \\\{prefix\\}/\\\{component\_name\\}/* is used to download files
-    #   from Amazon S3 according to the schema. This field is required when
+    #   \{prefix}/\{component\_name}/* is used to download files from
+    #   Amazon S3 according to the schema. This field is required when
     #   ingestion is being done for the first time.
     #
-    #   Valid Values: \\\{prefix\\}/\\\{component\_name\\}\_* \|
-    #   \\\{prefix\\}/\\\{component\_name\\}/* \|
-    #   \\\{prefix\\}/\\\{component\_name\\}\[DELIMITER\]* (Allowed
-    #   delimiters : space, dot, underscore, hyphen)
+    #   Valid Values: \{prefix}/\{component\_name}\_* \|
+    #   \{prefix}/\{component\_name}/* \|
+    #   \{prefix}/\{component\_name}\[DELIMITER\]* (Allowed delimiters :
+    #   space, dot, underscore, hyphen)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/IngestionS3InputConfiguration AWS API Documentation

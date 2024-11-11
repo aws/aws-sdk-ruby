@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2024-11-07)
+------------------
+
+* Feature - Add prompt support for chat template configuration and agent generative AI resource. Add support for configuring an optional guardrail in Prompt and Knowledge Base nodes in Prompt Flows. Add API to validate flow definition
+
+1.33.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2024-11-01)
+------------------
+
+* Feature - Amazon Bedrock Knowledge Bases now supports using application inference profiles to increase throughput and improve resilience.
+
+1.31.0 (2024-10-25)
+------------------
+
+* Feature - Add support of new model types for Bedrock Agents, Adding inference profile support for Flows and Prompt Management, Adding new field to configure additional inference configurations for Flows and Prompt Management
+
 1.30.0 (2024-10-18)
 ------------------
 

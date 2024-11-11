@@ -71,13 +71,13 @@ module Aws::DynamoDBStreams
     # @!attribute [rw] m
     #   An attribute of type Map. For example:
     #
-    #   `"M": \{"Name": \{"S": "Joe"\}, "Age": \{"N": "35"\}\}`
+    #   `"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}`
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] l
     #   An attribute of type List. For example:
     #
-    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N": "3.14159"\}]`
+    #   `"L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}]`
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] null

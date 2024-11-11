@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:verifiedpermissions)
 # structure.
 #
 #     verified_permissions = Aws::VerifiedPermissions::Client.new
-#     resp = verified_permissions.batch_is_authorized(params)
+#     resp = verified_permissions.batch_get_policy(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::VerifiedPermissions
   autoload :EndpointProvider, 'aws-sdk-verifiedpermissions/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-verifiedpermissions/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

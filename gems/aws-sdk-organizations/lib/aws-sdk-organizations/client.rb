@@ -3211,7 +3211,7 @@ module Aws::Organizations
     #   to invite to join your organization. This is a JSON object that
     #   contains the following elements:
     #
-    #   `\{ "Type": "ACCOUNT", "Id": "< account id number >" \}`
+    #   `{ "Type": "ACCOUNT", "Id": "< account id number >" }`
     #
     #   If you use the CLI, you can submit this as a single string, similar to
     #   the following example:
@@ -5833,7 +5833,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

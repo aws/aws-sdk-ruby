@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-11-01)
+------------------
+
+* Feature - Add support for supplemental tax registrations via these new APIs: PutSupplementalTaxRegistration, ListSupplementalTaxRegistrations, and DeleteSupplementalTaxRegistration.
+
 1.12.0 (2024-10-18)
 ------------------
 

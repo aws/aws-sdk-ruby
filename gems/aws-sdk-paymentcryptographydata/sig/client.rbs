@@ -112,7 +112,15 @@ module Aws
                           },
                           ?wrapped_key: {
                             wrapped_key_material: {
-                              tr_31_key_block: ::String?
+                              tr_31_key_block: ::String?,
+                              diffie_hellman_symmetric_key: {
+                                certificate_authority_public_key_identifier: ::String,
+                                public_key_certificate: ::String,
+                                key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                shared_information: ::String
+                              }?
                             },
                             key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
                           }
@@ -156,7 +164,15 @@ module Aws
                           },
                           ?wrapped_key: {
                             wrapped_key_material: {
-                              tr_31_key_block: ::String?
+                              tr_31_key_block: ::String?,
+                              diffie_hellman_symmetric_key: {
+                                certificate_authority_public_key_identifier: ::String,
+                                public_key_certificate: ::String,
+                                key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                shared_information: ::String
+                              }?
                             },
                             key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
                           }
@@ -366,7 +382,21 @@ module Aws
                                },
                                ?pin_data_length: ::Integer,
                                primary_account_number: ::String,
-                               pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3")
+                               pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3" | "ISO_FORMAT_4"),
+                               ?encryption_wrapped_key: {
+                                 wrapped_key_material: {
+                                   tr_31_key_block: ::String?,
+                                   diffie_hellman_symmetric_key: {
+                                     certificate_authority_public_key_identifier: ::String,
+                                     public_key_certificate: ::String,
+                                     key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                     key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                     key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                     shared_information: ::String
+                                   }?
+                                 },
+                                 key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                               }
                              ) -> _GeneratePinDataResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GeneratePinDataResponseSuccess
 
@@ -411,13 +441,29 @@ module Aws
                              },
                              ?incoming_wrapped_key: {
                                wrapped_key_material: {
-                                 tr_31_key_block: ::String?
+                                 tr_31_key_block: ::String?,
+                                 diffie_hellman_symmetric_key: {
+                                   certificate_authority_public_key_identifier: ::String,
+                                   public_key_certificate: ::String,
+                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                   key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                   key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                   shared_information: ::String
+                                 }?
                                },
                                key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
                              },
                              ?outgoing_wrapped_key: {
                                wrapped_key_material: {
-                                 tr_31_key_block: ::String?
+                                 tr_31_key_block: ::String?,
+                                 diffie_hellman_symmetric_key: {
+                                   certificate_authority_public_key_identifier: ::String,
+                                   public_key_certificate: ::String,
+                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                   key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                   key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                   shared_information: ::String
+                                 }?
                                },
                                key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
                              }
@@ -473,13 +519,29 @@ module Aws
                                 },
                                 ?incoming_wrapped_key: {
                                   wrapped_key_material: {
-                                    tr_31_key_block: ::String?
+                                    tr_31_key_block: ::String?,
+                                    diffie_hellman_symmetric_key: {
+                                      certificate_authority_public_key_identifier: ::String,
+                                      public_key_certificate: ::String,
+                                      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                      key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                      key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                      shared_information: ::String
+                                    }?
                                   },
                                   key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
                                 },
                                 ?outgoing_wrapped_key: {
                                   wrapped_key_material: {
-                                    tr_31_key_block: ::String?
+                                    tr_31_key_block: ::String?,
+                                    diffie_hellman_symmetric_key: {
+                                      certificate_authority_public_key_identifier: ::String,
+                                      public_key_certificate: ::String,
+                                      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                      key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                      key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                      shared_information: ::String
+                                    }?
                                   },
                                   key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
                                 }
@@ -654,11 +716,25 @@ module Aws
                              },
                              encrypted_pin_block: ::String,
                              primary_account_number: ::String,
-                             pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3"),
+                             pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3" | "ISO_FORMAT_4"),
                              ?pin_data_length: ::Integer,
                              ?dukpt_attributes: {
                                key_serial_number: ::String,
                                dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")
+                             },
+                             ?encryption_wrapped_key: {
+                               wrapped_key_material: {
+                                 tr_31_key_block: ::String?,
+                                 diffie_hellman_symmetric_key: {
+                                   certificate_authority_public_key_identifier: ::String,
+                                   public_key_certificate: ::String,
+                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                   key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                   key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                   shared_information: ::String
+                                 }?
+                               },
+                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
                              }
                            ) -> _VerifyPinDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyPinDataResponseSuccess

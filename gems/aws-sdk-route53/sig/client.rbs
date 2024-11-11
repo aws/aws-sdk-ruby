@@ -94,7 +94,7 @@ module Aws
       def associate_vpc_with_hosted_zone: (
                                             hosted_zone_id: ::String,
                                             vpc: {
-                                              vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
+                                              vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
                                               vpc_id: ::String?
                                             },
                                             ?comment: ::String
@@ -133,7 +133,7 @@ module Aws
                                                action: ("CREATE" | "DELETE" | "UPSERT"),
                                                resource_record_set: {
                                                  name: ::String,
-                                                 type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                                 type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
                                                  set_identifier: ::String?,
                                                  weight: ::Integer?,
                                                  region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "cn-north-1" | "cn-northwest-1" | "ap-east-1" | "me-south-1" | "me-central-1" | "ap-south-1" | "ap-south-2" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
@@ -252,7 +252,7 @@ module Aws
       def create_hosted_zone: (
                                 name: ::String,
                                 ?vpc: {
-                                  vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
+                                  vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
                                   vpc_id: ::String?
                                 },
                                 caller_reference: ::String,
@@ -354,7 +354,7 @@ module Aws
       def create_vpc_association_authorization: (
                                                   hosted_zone_id: ::String,
                                                   vpc: {
-                                                    vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
+                                                    vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
                                                     vpc_id: ::String?
                                                   }
                                                 ) -> _CreateVPCAssociationAuthorizationResponseSuccess
@@ -454,7 +454,7 @@ module Aws
       def delete_vpc_association_authorization: (
                                                   hosted_zone_id: ::String,
                                                   vpc: {
-                                                    vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
+                                                    vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
                                                     vpc_id: ::String?
                                                   }
                                                 ) -> _DeleteVPCAssociationAuthorizationResponseSuccess
@@ -478,7 +478,7 @@ module Aws
       def disassociate_vpc_from_hosted_zone: (
                                                hosted_zone_id: ::String,
                                                vpc: {
-                                                 vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
+                                                 vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")?,
                                                  vpc_id: ::String?
                                                },
                                                ?comment: ::String
@@ -798,7 +798,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_hosted_zones_by_vpc-instance_method
       def list_hosted_zones_by_vpc: (
                                       vpc_id: ::String,
-                                      vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5"),
+                                      vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5"),
                                       ?max_items: ::Integer,
                                       ?next_token: ::String
                                     ) -> _ListHostedZonesByVPCResponseSuccess
@@ -822,7 +822,7 @@ module Aws
         def resource_record_sets: () -> ::Array[Types::ResourceRecordSet]
         def is_truncated: () -> bool
         def next_record_name: () -> ::String
-        def next_record_type: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def next_record_type: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
         def next_record_identifier: () -> ::String
         def max_items: () -> ::Integer
       end
@@ -830,7 +830,7 @@ module Aws
       def list_resource_record_sets: (
                                        hosted_zone_id: ::String,
                                        ?start_record_name: ::String,
-                                       ?start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                       ?start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
                                        ?start_record_identifier: ::String,
                                        ?max_items: ::Integer
                                      ) -> _ListResourceRecordSetsResponseSuccess
@@ -892,7 +892,7 @@ module Aws
         def traffic_policy_instances: () -> ::Array[Types::TrafficPolicyInstance]
         def hosted_zone_id_marker: () -> ::String
         def traffic_policy_instance_name_marker: () -> ::String
-        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
         def is_truncated: () -> bool
         def max_items: () -> ::Integer
       end
@@ -900,7 +900,7 @@ module Aws
       def list_traffic_policy_instances: (
                                            ?hosted_zone_id_marker: ::String,
                                            ?traffic_policy_instance_name_marker: ::String,
-                                           ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                           ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
                                            ?max_items: ::Integer
                                          ) -> _ListTrafficPolicyInstancesResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPolicyInstancesResponseSuccess
@@ -909,7 +909,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficPolicyInstancesByHostedZoneResponse]
         def traffic_policy_instances: () -> ::Array[Types::TrafficPolicyInstance]
         def traffic_policy_instance_name_marker: () -> ::String
-        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
         def is_truncated: () -> bool
         def max_items: () -> ::Integer
       end
@@ -917,7 +917,7 @@ module Aws
       def list_traffic_policy_instances_by_hosted_zone: (
                                                           hosted_zone_id: ::String,
                                                           ?traffic_policy_instance_name_marker: ::String,
-                                                          ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                                          ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
                                                           ?max_items: ::Integer
                                                         ) -> _ListTrafficPolicyInstancesByHostedZoneResponseSuccess
                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPolicyInstancesByHostedZoneResponseSuccess
@@ -927,7 +927,7 @@ module Aws
         def traffic_policy_instances: () -> ::Array[Types::TrafficPolicyInstance]
         def hosted_zone_id_marker: () -> ::String
         def traffic_policy_instance_name_marker: () -> ::String
-        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
         def is_truncated: () -> bool
         def max_items: () -> ::Integer
       end
@@ -937,7 +937,7 @@ module Aws
                                                      traffic_policy_version: ::Integer,
                                                      ?hosted_zone_id_marker: ::String,
                                                      ?traffic_policy_instance_name_marker: ::String,
-                                                     ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                                     ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
                                                      ?max_items: ::Integer
                                                    ) -> _ListTrafficPolicyInstancesByPolicyResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPolicyInstancesByPolicyResponseSuccess
@@ -975,7 +975,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::TestDNSAnswerResponse]
         def nameserver: () -> ::String
         def record_name: () -> ::String
-        def record_type: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def record_type: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
         def record_data: () -> ::Array[::String]
         def response_code: () -> ::String
         def protocol: () -> ::String
@@ -984,7 +984,7 @@ module Aws
       def test_dns_answer: (
                              hosted_zone_id: ::String,
                              record_name: ::String,
-                             record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                             record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
                              ?resolver_ip: ::String,
                              ?edns0_client_subnet_ip: ::String,
                              ?edns0_client_subnet_mask: ::String

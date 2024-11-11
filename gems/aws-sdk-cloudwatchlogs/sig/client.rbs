@@ -912,7 +912,8 @@ module Aws
                             ?suppression_period: {
                               value: ::Integer?,
                               suppression_unit: ("SECONDS" | "MINUTES" | "HOURS")?
-                            }
+                            },
+                            ?baseline: bool
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

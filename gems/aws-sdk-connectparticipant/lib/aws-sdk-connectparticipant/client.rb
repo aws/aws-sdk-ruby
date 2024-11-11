@@ -520,7 +520,7 @@ module Aws::ConnectParticipant
     # For chat, you need to publish the following on the established
     # websocket connection:
     #
-    # `\{"topic":"aws/subscribe","content":\{"topics":["aws/chat"]\}\}`
+    # `{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}`
     #
     # Upon websocket URL expiry, as specified in the response
     # ConnectionExpiry parameter, clients need to call this API again to
@@ -894,7 +894,7 @@ module Aws::ConnectParticipant
     #   a JSON string.
     #
     #   Sample Content:
-    #   "\\\{\\"messageId\\":\\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\\"\\}"
+    #   "\{\\"messageId\\":\\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\\"}"
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1114,7 +1114,7 @@ module Aws::ConnectParticipant
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

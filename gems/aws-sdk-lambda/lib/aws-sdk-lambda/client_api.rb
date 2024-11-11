@@ -349,6 +349,9 @@ module Aws::Lambda
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaggableResource = Shapes::StringShape.new(name: 'TaggableResource')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TagsError = Shapes::StructureShape.new(name: 'TagsError')
+    TagsErrorCode = Shapes::StringShape.new(name: 'TagsErrorCode')
+    TagsErrorMessage = Shapes::StringShape.new(name: 'TagsErrorMessage')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -737,12 +740,14 @@ module Aws::Lambda
     FunctionCode.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     FunctionCode.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
     FunctionCode.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
+    FunctionCode.add_member(:source_kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "SourceKMSKeyArn"))
     FunctionCode.struct_class = Types::FunctionCode
 
     FunctionCodeLocation.add_member(:repository_type, Shapes::ShapeRef.new(shape: String, location_name: "RepositoryType"))
     FunctionCodeLocation.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "Location"))
     FunctionCodeLocation.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
     FunctionCodeLocation.add_member(:resolved_image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ResolvedImageUri"))
+    FunctionCodeLocation.add_member(:source_kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceKMSKeyArn"))
     FunctionCodeLocation.struct_class = Types::FunctionCodeLocation
 
     FunctionConfiguration.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, location_name: "FunctionName"))
@@ -860,6 +865,7 @@ module Aws::Lambda
     GetFunctionResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "Configuration"))
     GetFunctionResponse.add_member(:code, Shapes::ShapeRef.new(shape: FunctionCodeLocation, location_name: "Code"))
     GetFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    GetFunctionResponse.add_member(:tags_error, Shapes::ShapeRef.new(shape: TagsError, location_name: "TagsError"))
     GetFunctionResponse.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, location_name: "Concurrency"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
@@ -1414,6 +1420,10 @@ module Aws::Lambda
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
 
+    TagsError.add_member(:error_code, Shapes::ShapeRef.new(shape: TagsErrorCode, required: true, location_name: "ErrorCode"))
+    TagsError.add_member(:message, Shapes::ShapeRef.new(shape: TagsErrorMessage, required: true, location_name: "Message"))
+    TagsError.struct_class = Types::TagsError
+
     TooManyRequestsException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
     TooManyRequestsException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -1482,6 +1492,7 @@ module Aws::Lambda
     UpdateFunctionCodeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateFunctionCodeRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     UpdateFunctionCodeRequest.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
+    UpdateFunctionCodeRequest.add_member(:source_kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "SourceKMSKeyArn"))
     UpdateFunctionCodeRequest.struct_class = Types::UpdateFunctionCodeRequest
 
     UpdateFunctionConfigurationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))

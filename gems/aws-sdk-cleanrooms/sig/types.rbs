@@ -29,7 +29,7 @@ module Aws::CleanRooms
 
     class AnalysisParameter
       attr_accessor name: ::String
-      attr_accessor type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE")
+      attr_accessor type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE" | "BINARY" | "BYTE" | "CHARACTER" | "DOUBLE" | "FLOAT" | "INT" | "LONG" | "NUMERIC" | "SHORT" | "STRING" | "TIMESTAMP_LTZ" | "TIMESTAMP_NTZ" | "TINYINT")
       attr_accessor default_value: ::String
       SENSITIVE: []
     end
@@ -230,6 +230,11 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class BilledResourceUtilization
+      attr_accessor units: ::Float
+      SENSITIVE: []
+    end
+
     class Collaboration
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -244,6 +249,7 @@ module Aws::CleanRooms
       attr_accessor membership_arn: ::String
       attr_accessor data_encryption_metadata: Types::DataEncryptionMetadata
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
       SENSITIVE: []
     end
 
@@ -387,6 +393,7 @@ module Aws::CleanRooms
       attr_accessor member_status: ("INVITED" | "ACTIVE" | "LEFT" | "REMOVED")
       attr_accessor membership_id: ::String
       attr_accessor membership_arn: ::String
+      attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
       SENSITIVE: []
     end
 
@@ -394,6 +401,17 @@ module Aws::CleanRooms
       attr_accessor name: ::String
       attr_accessor type: ::String
       SENSITIVE: []
+    end
+
+    class ComputeConfiguration
+      attr_accessor worker: Types::WorkerComputeConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Worker < ComputeConfiguration
+      end
+      class Unknown < ComputeConfiguration
+      end
     end
 
     class ConfigurationDetails
@@ -615,11 +633,13 @@ module Aws::CleanRooms
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor creator_member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor creator_ml_member_abilities: Types::MLMemberAbilities
       attr_accessor creator_display_name: ::String
       attr_accessor data_encryption_metadata: Types::DataEncryptionMetadata
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor creator_payment_configuration: Types::PaymentConfiguration
+      attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
       SENSITIVE: []
     end
 
@@ -1511,9 +1531,21 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class MLMemberAbilities
+      attr_accessor custom_ml_member_abilities: ::Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
+      SENSITIVE: []
+    end
+
+    class MLPaymentConfig
+      attr_accessor model_training: Types::ModelTrainingPaymentConfig
+      attr_accessor model_inference: Types::ModelInferencePaymentConfig
+      SENSITIVE: []
+    end
+
     class MemberSpecification
       attr_accessor account_id: ::String
       attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor ml_member_abilities: Types::MLMemberAbilities
       attr_accessor display_name: ::String
       attr_accessor payment_configuration: Types::PaymentConfiguration
       SENSITIVE: []
@@ -1524,6 +1556,7 @@ module Aws::CleanRooms
       attr_accessor status: ("INVITED" | "ACTIVE" | "LEFT" | "REMOVED")
       attr_accessor display_name: ::String
       attr_accessor abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor ml_abilities: Types::MLMemberAbilities
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor membership_id: ::String
@@ -1544,14 +1577,32 @@ module Aws::CleanRooms
       attr_accessor update_time: ::Time
       attr_accessor status: ("ACTIVE" | "REMOVED" | "COLLABORATION_DELETED")
       attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor ml_member_abilities: Types::MLMemberAbilities
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
       attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
       SENSITIVE: []
     end
 
+    class MembershipMLPaymentConfig
+      attr_accessor model_training: Types::MembershipModelTrainingPaymentConfig
+      attr_accessor model_inference: Types::MembershipModelInferencePaymentConfig
+      SENSITIVE: []
+    end
+
+    class MembershipModelInferencePaymentConfig
+      attr_accessor is_responsible: bool
+      SENSITIVE: []
+    end
+
+    class MembershipModelTrainingPaymentConfig
+      attr_accessor is_responsible: bool
+      SENSITIVE: []
+    end
+
     class MembershipPaymentConfiguration
       attr_accessor query_compute: Types::MembershipQueryComputePaymentConfig
+      attr_accessor machine_learning: Types::MembershipMLPaymentConfig
       SENSITIVE: []
     end
 
@@ -1589,12 +1640,24 @@ module Aws::CleanRooms
       attr_accessor update_time: ::Time
       attr_accessor status: ("ACTIVE" | "REMOVED" | "COLLABORATION_DELETED")
       attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor ml_member_abilities: Types::MLMemberAbilities
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class ModelInferencePaymentConfig
+      attr_accessor is_responsible: bool
+      SENSITIVE: []
+    end
+
+    class ModelTrainingPaymentConfig
+      attr_accessor is_responsible: bool
       SENSITIVE: []
     end
 
     class PaymentConfiguration
       attr_accessor query_compute: Types::QueryComputePaymentConfig
+      attr_accessor machine_learning: Types::MLPaymentConfig
       SENSITIVE: []
     end
 
@@ -1741,6 +1804,7 @@ module Aws::CleanRooms
       attr_accessor result: Types::ProtectedQueryResult
       attr_accessor error: Types::ProtectedQueryError
       attr_accessor differential_privacy: Types::DifferentialPrivacyParameters
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       SENSITIVE: [:sql_parameters]
     end
 
@@ -1802,6 +1866,7 @@ module Aws::CleanRooms
       attr_accessor result_format: ("CSV" | "PARQUET")
       attr_accessor bucket: ::String
       attr_accessor key_prefix: ::String
+      attr_accessor single_file_output: bool
       SENSITIVE: []
     end
 
@@ -1819,6 +1884,7 @@ module Aws::CleanRooms
 
     class ProtectedQueryStatistics
       attr_accessor total_duration_in_millis: ::Integer
+      attr_accessor billed_resource_utilization: Types::BilledResourceUtilization
       SENSITIVE: []
     end
 
@@ -1941,6 +2007,7 @@ module Aws::CleanRooms
       attr_accessor membership_identifier: ::String
       attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters
       attr_accessor result_configuration: Types::ProtectedQueryResultConfiguration
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       SENSITIVE: [:sql_parameters]
     end
 
@@ -2144,6 +2211,12 @@ module Aws::CleanRooms
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkerComputeConfiguration
+      attr_accessor type: ("CR.1X" | "CR.4X")
+      attr_accessor number: ::Integer
       SENSITIVE: []
     end
   end

@@ -176,6 +176,9 @@ module Aws::AutoScaling
     #       min_healthy_percentage: 1,
     #       max_healthy_percentage: 1,
     #     },
+    #     availability_zone_distribution: {
+    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
@@ -468,6 +471,8 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
+    # @option options [Types::AvailabilityZoneDistribution] :availability_zone_distribution
+    #   The instance capacity distribution across Availability Zones.
     # @return [AutoScalingGroup]
     def create_group(options = {})
       Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

@@ -109,6 +109,21 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CreateInferenceProfileRequest
+      attr_accessor inference_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor model_source: Types::InferenceProfileModelSource
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:description]
+    end
+
+    class CreateInferenceProfileResponse
+      attr_accessor inference_profile_arn: ::String
+      attr_accessor status: ("ACTIVE")
+      SENSITIVE: []
+    end
+
     class CreateModelCopyJobRequest
       attr_accessor source_model_arn: ::String
       attr_accessor target_model_name: ::String
@@ -231,6 +246,14 @@ module Aws::Bedrock
     end
 
     class DeleteImportedModelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteInferenceProfileRequest
+      attr_accessor inference_profile_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInferenceProfileResponse < Aws::EmptyStructure
     end
 
     class DeleteModelInvocationLoggingConfigurationRequest < Aws::EmptyStructure
@@ -470,15 +493,15 @@ module Aws::Bedrock
 
     class GetInferenceProfileResponse
       attr_accessor inference_profile_name: ::String
-      attr_accessor models: ::Array[Types::InferenceProfileModel]
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor inference_profile_arn: ::String
+      attr_accessor models: ::Array[Types::InferenceProfileModel]
       attr_accessor inference_profile_id: ::String
       attr_accessor status: ("ACTIVE")
-      attr_accessor type: ("SYSTEM_DEFINED")
-      SENSITIVE: []
+      attr_accessor type: ("SYSTEM_DEFINED" | "APPLICATION")
+      SENSITIVE: [:description]
     end
 
     class GetModelCopyJobRequest
@@ -797,17 +820,28 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class InferenceProfileModelSource
+      attr_accessor copy_from: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CopyFrom < InferenceProfileModelSource
+      end
+      class Unknown < InferenceProfileModelSource
+      end
+    end
+
     class InferenceProfileSummary
       attr_accessor inference_profile_name: ::String
-      attr_accessor models: ::Array[Types::InferenceProfileModel]
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor inference_profile_arn: ::String
+      attr_accessor models: ::Array[Types::InferenceProfileModel]
       attr_accessor inference_profile_id: ::String
       attr_accessor status: ("ACTIVE")
-      attr_accessor type: ("SYSTEM_DEFINED")
-      SENSITIVE: []
+      attr_accessor type: ("SYSTEM_DEFINED" | "APPLICATION")
+      SENSITIVE: [:description]
     end
 
     class InternalServerException
@@ -899,6 +933,7 @@ module Aws::Bedrock
     class ListInferenceProfilesRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor type_equals: ("SYSTEM_DEFINED" | "APPLICATION")
       SENSITIVE: []
     end
 

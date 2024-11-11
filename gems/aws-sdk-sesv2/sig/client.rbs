@@ -292,6 +292,11 @@ module Aws
                                                  template: {
                                                    template_name: ::String?,
                                                    template_arn: ::String?,
+                                                   template_content: {
+                                                     subject: ::String?,
+                                                     text: ::String?,
+                                                     html: ::String?
+                                                   }?,
                                                    template_data: ::String?,
                                                    headers: Array[
                                                      {
@@ -1256,6 +1261,11 @@ module Aws
                                template: {
                                  template_name: ::String?,
                                  template_arn: ::String?,
+                                 template_content: {
+                                   subject: ::String?,
+                                   text: ::String?,
+                                   html: ::String?
+                                 }?,
                                  template_data: ::String?,
                                  headers: Array[
                                    {
@@ -1352,6 +1362,11 @@ module Aws
                           template: {
                             template_name: ::String?,
                             template_arn: ::String?,
+                            template_content: {
+                              subject: ::String?,
+                              text: ::String?,
+                              html: ::String?
+                            }?,
                             template_data: ::String?,
                             headers: Array[
                               {

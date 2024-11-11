@@ -380,8 +380,8 @@ module Aws::MailManager
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateAddonInstanceRequest AWS API Documentation
@@ -421,8 +421,8 @@ module Aws::MailManager
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateAddonSubscriptionRequest AWS API Documentation
@@ -472,8 +472,8 @@ module Aws::MailManager
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateArchiveRequest AWS API Documentation
@@ -526,8 +526,8 @@ module Aws::MailManager
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] traffic_policy_id
@@ -592,8 +592,8 @@ module Aws::MailManager
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateRelayRequest AWS API Documentation
@@ -640,8 +640,8 @@ module Aws::MailManager
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateRuleSetRequest AWS API Documentation
@@ -692,8 +692,8 @@ module Aws::MailManager
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] traffic_policy_name
@@ -2250,8 +2250,8 @@ module Aws::MailManager
 
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListTagsForResourceResponse AWS API Documentation
@@ -3474,8 +3474,8 @@ module Aws::MailManager
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for the
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/TagResourceRequest AWS API Documentation

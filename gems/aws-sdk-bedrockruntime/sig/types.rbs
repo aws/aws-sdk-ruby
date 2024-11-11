@@ -131,8 +131,9 @@ module Aws::BedrockRuntime
       attr_accessor tool_config: Types::ToolConfiguration
       attr_accessor guardrail_config: Types::GuardrailConfiguration
       attr_accessor additional_model_request_fields: untyped
+      attr_accessor prompt_variables: ::Hash[::String, Types::PromptVariableValues]
       attr_accessor additional_model_response_field_paths: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:prompt_variables]
     end
 
     class ConverseResponse
@@ -166,8 +167,9 @@ module Aws::BedrockRuntime
       attr_accessor tool_config: Types::ToolConfiguration
       attr_accessor guardrail_config: Types::GuardrailStreamConfiguration
       attr_accessor additional_model_request_fields: untyped
+      attr_accessor prompt_variables: ::Hash[::String, Types::PromptVariableValues]
       attr_accessor additional_model_response_field_paths: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:prompt_variables]
     end
 
     class ConverseStreamResponse
@@ -494,6 +496,17 @@ module Aws::BedrockRuntime
       attr_accessor bytes: ::String
       attr_accessor event_type: untyped
       SENSITIVE: [:bytes]
+    end
+
+    class PromptVariableValues
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < PromptVariableValues
+      end
+      class Unknown < PromptVariableValues
+      end
     end
 
     class ResourceNotFoundException

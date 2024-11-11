@@ -245,6 +245,10 @@ module Aws
                               ?max_capacity: ::Integer,
                               namespace_name: ::String,
                               ?port: ::Integer,
+                              ?price_performance_target: {
+                                level: ::Integer?,
+                                status: ("ENABLED" | "DISABLED")?
+                              },
                               ?publicly_accessible: bool,
                               ?security_group_ids: Array[::String],
                               ?subnet_ids: Array[::String],
@@ -854,6 +858,10 @@ module Aws
                               ?ip_address_type: ::String,
                               ?max_capacity: ::Integer,
                               ?port: ::Integer,
+                              ?price_performance_target: {
+                                level: ::Integer?,
+                                status: ("ENABLED" | "DISABLED")?
+                              },
                               ?publicly_accessible: bool,
                               ?security_group_ids: Array[::String],
                               ?subnet_ids: Array[::String],

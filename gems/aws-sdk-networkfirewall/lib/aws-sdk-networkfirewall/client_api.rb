@@ -93,6 +93,7 @@ module Aws::NetworkFirewall
     FirewallStatusValue = Shapes::StringShape.new(name: 'FirewallStatusValue')
     Firewalls = Shapes::ListShape.new(name: 'Firewalls')
     Flags = Shapes::ListShape.new(name: 'Flags')
+    FlowTimeouts = Shapes::StructureShape.new(name: 'FlowTimeouts')
     GeneratedRulesType = Shapes::StringShape.new(name: 'GeneratedRulesType')
     HashMapKey = Shapes::StringShape.new(name: 'HashMapKey')
     HashMapValue = Shapes::StringShape.new(name: 'HashMapValue')
@@ -234,6 +235,7 @@ module Aws::NetworkFirewall
     TagsPaginationMaxResults = Shapes::IntegerShape.new(name: 'TagsPaginationMaxResults')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     TargetTypes = Shapes::ListShape.new(name: 'TargetTypes')
+    TcpIdleTimeoutRangeBound = Shapes::IntegerShape.new(name: 'TcpIdleTimeoutRangeBound')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TlsCertificateData = Shapes::StructureShape.new(name: 'TlsCertificateData')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
@@ -566,6 +568,9 @@ module Aws::NetworkFirewall
 
     Flags.member = Shapes::ShapeRef.new(shape: TCPFlag)
 
+    FlowTimeouts.add_member(:tcp_idle_timeout_seconds, Shapes::ShapeRef.new(shape: TcpIdleTimeoutRangeBound, location_name: "TcpIdleTimeoutSeconds"))
+    FlowTimeouts.struct_class = Types::FlowTimeouts
+
     Header.add_member(:protocol, Shapes::ShapeRef.new(shape: StatefulRuleProtocol, required: true, location_name: "Protocol"))
     Header.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "Source"))
     Header.add_member(:source_port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "SourcePort"))
@@ -811,6 +816,7 @@ module Aws::NetworkFirewall
 
     StatefulEngineOptions.add_member(:rule_order, Shapes::ShapeRef.new(shape: RuleOrder, location_name: "RuleOrder"))
     StatefulEngineOptions.add_member(:stream_exception_policy, Shapes::ShapeRef.new(shape: StreamExceptionPolicy, location_name: "StreamExceptionPolicy"))
+    StatefulEngineOptions.add_member(:flow_timeouts, Shapes::ShapeRef.new(shape: FlowTimeouts, location_name: "FlowTimeouts"))
     StatefulEngineOptions.struct_class = Types::StatefulEngineOptions
 
     StatefulRule.add_member(:action, Shapes::ShapeRef.new(shape: StatefulAction, required: true, location_name: "Action"))

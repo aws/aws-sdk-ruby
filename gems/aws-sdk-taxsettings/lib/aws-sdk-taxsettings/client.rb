@@ -532,24 +532,35 @@ module Aws::TaxSettings
     #
     # **Malaysia**
     #
-    # * If you use this operation to set a tax registration number (TRN) in
-    #   Malaysia, only resellers with a valid sales and service tax (SST)
-    #   number are required to provide tax registration information.
+    # * The sector valid values are `Business` and `Individual`.
     #
-    # * By using this API operation to set a TRN in Malaysia, Amazon Web
-    #   Services will regard you as self-declaring that you're an
-    #   authorized business reseller registered with the Royal Malaysia
-    #   Customs Department (RMCD) and have a valid SST number.
+    # * `RegistrationType` valid values are `NRIC` for individual, and TIN
+    #   and sales and service tax (SST) for Business.
+    #
+    # * For individual, you can specify the `taxInformationNumber` in
+    #   `MalaysiaAdditionalInfo` with NRIC type, and a valid `MyKad` or NRIC
+    #   number.
+    #
+    # * For business, you must specify a `businessRegistrationNumber` in
+    #   `MalaysiaAdditionalInfo` with a TIN type and tax identification
+    #   number.
+    #
+    # * For business resellers, you must specify a
+    #   `businessRegistrationNumber` and `taxInformationNumber` in
+    #   `MalaysiaAdditionalInfo` with a sales and service tax (SST) type and
+    #   a valid SST number.
+    #
+    # * For business resellers with service codes, you must specify
+    #   `businessRegistrationNumber`, `taxInformationNumber`, and distinct
+    #   `serviceTaxCodes` in `MalaysiaAdditionalInfo` with a SST type and
+    #   valid sales and service tax (SST) number. By using this API
+    #   operation, Amazon Web Services registers your self-declaration that
+    #   you’re an authorized business reseller registered with the Royal
+    #   Malaysia Customs Department (RMCD), and have a valid SST number.
     #
     # * Amazon Web Services reserves the right to seek additional
     #   information and/or take other actions to support your
     #   self-declaration as appropriate.
-    #
-    # * If you're not a reseller of Amazon Web Services, we don't
-    #   recommend that you use this operation to set the TRN in Malaysia.
-    #
-    # * Only use this API operation to upload the TRNs for accounts through
-    #   which you're reselling Amazon Web Services.
     #
     # * Amazon Web Services is currently registered under the following
     #   service tax codes. You must include at least one of the service tax
@@ -679,7 +690,9 @@ module Aws::TaxSettings
     #           person_type: "Legal Person", # required, accepts Legal Person, Physical Person, Business
     #         },
     #         malaysia_additional_info: {
-    #           service_tax_codes: ["Consultancy"], # required, accepts Consultancy, Digital Service And Electronic Medium, IT Services, Training Or Coaching
+    #           business_registration_number: "BusinessRegistrationNumber",
+    #           service_tax_codes: ["Consultancy"], # accepts Consultancy, Digital Service And Electronic Medium, IT Services, Training Or Coaching
+    #           tax_information_number: "TaxInformationNumber",
     #         },
     #         poland_additional_info: {
     #           individual_registration_number: "IndividualRegistrationNumber",
@@ -722,7 +735,7 @@ module Aws::TaxSettings
     #       },
     #       legal_name: "LegalName",
     #       registration_id: "RegistrationId", # required
-    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST
+    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC
     #       sector: "Business", # accepts Business, Individual, Government
     #       verification_details: {
     #         date_of_birth: "DateOfBirth",
@@ -752,6 +765,29 @@ module Aws::TaxSettings
     # @param [Hash] params ({})
     def batch_put_tax_registration(params = {}, options = {})
       req = build_request(:batch_put_tax_registration, params)
+      req.send_request(options)
+    end
+
+    # Deletes a supplemental tax registration for a single account.
+    #
+    # @option params [required, String] :authority_id
+    #   The unique authority Id for the supplemental TRN information that
+    #   needs to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_supplemental_tax_registration({
+    #     authority_id: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/DeleteSupplementalTaxRegistration AWS API Documentation
+    #
+    # @overload delete_supplemental_tax_registration(params = {})
+    # @param [Hash] params ({})
+    def delete_supplemental_tax_registration(params = {}, options = {})
+      req = build_request(:delete_supplemental_tax_registration, params)
       req.send_request(options)
     end
 
@@ -822,8 +858,10 @@ module Aws::TaxSettings
     #   resp.tax_registration.additional_tax_information.italy_additional_info.sdi_account_id #=> String
     #   resp.tax_registration.additional_tax_information.italy_additional_info.tax_code #=> String
     #   resp.tax_registration.additional_tax_information.kenya_additional_info.person_type #=> String, one of "Legal Person", "Physical Person", "Business"
+    #   resp.tax_registration.additional_tax_information.malaysia_additional_info.business_registration_number #=> String
     #   resp.tax_registration.additional_tax_information.malaysia_additional_info.service_tax_codes #=> Array
     #   resp.tax_registration.additional_tax_information.malaysia_additional_info.service_tax_codes[0] #=> String, one of "Consultancy", "Digital Service And Electronic Medium", "IT Services", "Training Or Coaching"
+    #   resp.tax_registration.additional_tax_information.malaysia_additional_info.tax_information_number #=> String
     #   resp.tax_registration.additional_tax_information.poland_additional_info.individual_registration_number #=> String
     #   resp.tax_registration.additional_tax_information.poland_additional_info.is_group_vat_enabled #=> Boolean
     #   resp.tax_registration.additional_tax_information.romania_additional_info.tax_registration_number_type #=> String, one of "TaxRegistrationNumber", "LocalRegistrationNumber"
@@ -848,7 +886,7 @@ module Aws::TaxSettings
     #   resp.tax_registration.legal_address.state_or_region #=> String
     #   resp.tax_registration.legal_name #=> String
     #   resp.tax_registration.registration_id #=> String
-    #   resp.tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST"
+    #   resp.tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC"
     #   resp.tax_registration.sector #=> String, one of "Business", "Individual", "Government"
     #   resp.tax_registration.status #=> String, one of "Verified", "Pending", "Deleted", "Rejected"
     #   resp.tax_registration.tax_document_metadatas #=> Array
@@ -901,6 +939,55 @@ module Aws::TaxSettings
     # @param [Hash] params ({})
     def get_tax_registration_document(params = {}, options = {})
       req = build_request(:get_tax_registration_document, params)
+      req.send_request(options)
+    end
+
+    # Retrieves supplemental tax registrations for a single account.
+    #
+    # @option params [Integer] :max_results
+    #   The number of `taxRegistrations` results you want in one response.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @return [Types::ListSupplementalTaxRegistrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSupplementalTaxRegistrationsResponse#next_token #next_token} => String
+    #   * {Types::ListSupplementalTaxRegistrationsResponse#tax_registrations #tax_registrations} => Array&lt;Types::SupplementalTaxRegistration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_supplemental_tax_registrations({
+    #     max_results: 1,
+    #     next_token: "PaginationTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.tax_registrations #=> Array
+    #   resp.tax_registrations[0].address.address_line_1 #=> String
+    #   resp.tax_registrations[0].address.address_line_2 #=> String
+    #   resp.tax_registrations[0].address.address_line_3 #=> String
+    #   resp.tax_registrations[0].address.city #=> String
+    #   resp.tax_registrations[0].address.country_code #=> String
+    #   resp.tax_registrations[0].address.district_or_county #=> String
+    #   resp.tax_registrations[0].address.postal_code #=> String
+    #   resp.tax_registrations[0].address.state_or_region #=> String
+    #   resp.tax_registrations[0].authority_id #=> String
+    #   resp.tax_registrations[0].legal_name #=> String
+    #   resp.tax_registrations[0].registration_id #=> String
+    #   resp.tax_registrations[0].registration_type #=> String, one of "VAT"
+    #   resp.tax_registrations[0].status #=> String, one of "Verified", "Pending", "Deleted", "Rejected"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/ListSupplementalTaxRegistrations AWS API Documentation
+    #
+    # @overload list_supplemental_tax_registrations(params = {})
+    # @param [Hash] params ({})
+    def list_supplemental_tax_registrations(params = {}, options = {})
+      req = build_request(:list_supplemental_tax_registrations, params)
       req.send_request(options)
     end
 
@@ -964,8 +1051,10 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.additional_tax_information.italy_additional_info.sdi_account_id #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.italy_additional_info.tax_code #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.kenya_additional_info.person_type #=> String, one of "Legal Person", "Physical Person", "Business"
+    #   resp.account_details[0].tax_registration.additional_tax_information.malaysia_additional_info.business_registration_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.malaysia_additional_info.service_tax_codes #=> Array
     #   resp.account_details[0].tax_registration.additional_tax_information.malaysia_additional_info.service_tax_codes[0] #=> String, one of "Consultancy", "Digital Service And Electronic Medium", "IT Services", "Training Or Coaching"
+    #   resp.account_details[0].tax_registration.additional_tax_information.malaysia_additional_info.tax_information_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.poland_additional_info.individual_registration_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.poland_additional_info.is_group_vat_enabled #=> Boolean
     #   resp.account_details[0].tax_registration.additional_tax_information.romania_additional_info.tax_registration_number_type #=> String, one of "TaxRegistrationNumber", "LocalRegistrationNumber"
@@ -984,7 +1073,7 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.jurisdiction.state_or_region #=> String
     #   resp.account_details[0].tax_registration.legal_name #=> String
     #   resp.account_details[0].tax_registration.registration_id #=> String
-    #   resp.account_details[0].tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST"
+    #   resp.account_details[0].tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC"
     #   resp.account_details[0].tax_registration.sector #=> String, one of "Business", "Individual", "Government"
     #   resp.account_details[0].tax_registration.status #=> String, one of "Verified", "Pending", "Deleted", "Rejected"
     #   resp.account_details[0].tax_registration.tax_document_metadatas #=> Array
@@ -998,6 +1087,51 @@ module Aws::TaxSettings
     # @param [Hash] params ({})
     def list_tax_registrations(params = {}, options = {})
       req = build_request(:list_tax_registrations, params)
+      req.send_request(options)
+    end
+
+    # Stores supplemental tax registration for a single account.
+    #
+    # @option params [required, Types::SupplementalTaxRegistrationEntry] :tax_registration_entry
+    #   The supplemental TRN information that will be stored for the caller
+    #   account ID.
+    #
+    # @return [Types::PutSupplementalTaxRegistrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutSupplementalTaxRegistrationResponse#authority_id #authority_id} => String
+    #   * {Types::PutSupplementalTaxRegistrationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_supplemental_tax_registration({
+    #     tax_registration_entry: { # required
+    #       address: { # required
+    #         address_line_1: "AddressLine1", # required
+    #         address_line_2: "AddressLine2",
+    #         address_line_3: "AddressLine3",
+    #         city: "City", # required
+    #         country_code: "CountryCode", # required
+    #         district_or_county: "District",
+    #         postal_code: "PostalCode", # required
+    #         state_or_region: "State",
+    #       },
+    #       legal_name: "LegalName", # required
+    #       registration_id: "RegistrationId", # required
+    #       registration_type: "VAT", # required, accepts VAT
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authority_id #=> String
+    #   resp.status #=> String, one of "Verified", "Pending", "Deleted", "Rejected"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/PutSupplementalTaxRegistration AWS API Documentation
+    #
+    # @overload put_supplemental_tax_registration(params = {})
+    # @param [Hash] params ({})
+    def put_supplemental_tax_registration(params = {}, options = {})
+      req = build_request(:put_supplemental_tax_registration, params)
       req.send_request(options)
     end
 
@@ -1043,24 +1177,35 @@ module Aws::TaxSettings
     #
     # **Malaysia**
     #
-    # * If you use this operation to set a tax registration number (TRN) in
-    #   Malaysia, only resellers with a valid sales and service tax (SST)
-    #   number are required to provide tax registration information.
+    # * The sector valid values are `Business` and `Individual`.
     #
-    # * By using this API operation to set a TRN in Malaysia, Amazon Web
-    #   Services will regard you as self-declaring that you're an
-    #   authorized business reseller registered with the Royal Malaysia
-    #   Customs Department (RMCD) and have a valid SST number.
+    # * `RegistrationType` valid values are `NRIC` for individual, and TIN
+    #   and sales and service tax (SST) for Business.
+    #
+    # * For individual, you can specify the `taxInformationNumber` in
+    #   `MalaysiaAdditionalInfo` with NRIC type, and a valid `MyKad` or NRIC
+    #   number.
+    #
+    # * For business, you must specify a `businessRegistrationNumber` in
+    #   `MalaysiaAdditionalInfo` with a TIN type and tax identification
+    #   number.
+    #
+    # * For business resellers, you must specify a
+    #   `businessRegistrationNumber` and `taxInformationNumber` in
+    #   `MalaysiaAdditionalInfo` with a sales and service tax (SST) type and
+    #   a valid SST number.
+    #
+    # * For business resellers with service codes, you must specify
+    #   `businessRegistrationNumber`, `taxInformationNumber`, and distinct
+    #   `serviceTaxCodes` in `MalaysiaAdditionalInfo` with a SST type and
+    #   valid sales and service tax (SST) number. By using this API
+    #   operation, Amazon Web Services registers your self-declaration that
+    #   you’re an authorized business reseller registered with the Royal
+    #   Malaysia Customs Department (RMCD), and have a valid SST number.
     #
     # * Amazon Web Services reserves the right to seek additional
     #   information and/or take other actions to support your
     #   self-declaration as appropriate.
-    #
-    # * If you're not a reseller of Amazon Web Services, we don't
-    #   recommend that you use this operation to set the TRN in Malaysia.
-    #
-    # * Only use this API operation to upload the TRNs for accounts through
-    #   which you're reselling Amazon Web Services.
     #
     # * Amazon Web Services is currently registered under the following
     #   service tax codes. You must include at least one of the service tax
@@ -1189,7 +1334,9 @@ module Aws::TaxSettings
     #           person_type: "Legal Person", # required, accepts Legal Person, Physical Person, Business
     #         },
     #         malaysia_additional_info: {
-    #           service_tax_codes: ["Consultancy"], # required, accepts Consultancy, Digital Service And Electronic Medium, IT Services, Training Or Coaching
+    #           business_registration_number: "BusinessRegistrationNumber",
+    #           service_tax_codes: ["Consultancy"], # accepts Consultancy, Digital Service And Electronic Medium, IT Services, Training Or Coaching
+    #           tax_information_number: "TaxInformationNumber",
     #         },
     #         poland_additional_info: {
     #           individual_registration_number: "IndividualRegistrationNumber",
@@ -1232,7 +1379,7 @@ module Aws::TaxSettings
     #       },
     #       legal_name: "LegalName",
     #       registration_id: "RegistrationId", # required
-    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST
+    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC
     #       sector: "Business", # accepts Business, Individual, Government
     #       verification_details: {
     #         date_of_birth: "DateOfBirth",
@@ -1279,7 +1426,7 @@ module Aws::TaxSettings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-taxsettings'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

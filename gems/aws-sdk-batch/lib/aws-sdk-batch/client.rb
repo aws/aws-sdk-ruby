@@ -472,7 +472,9 @@ module Aws::Batch
     # @option params [required, String] :reason
     #   A message to attach to the job that explains the reason for canceling
     #   it. This message is returned by future DescribeJobs operations on the
-    #   job. This message is also recorded in the Batch activity logs.
+    #   job. It is also recorded in the Batch activity logs.
+    #
+    #   This parameter has as limit of 1024 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -857,6 +859,14 @@ module Aws::Batch
     #         launch_template_id: "String",
     #         launch_template_name: "String",
     #         version: "String",
+    #         overrides: [
+    #           {
+    #             launch_template_id: "String",
+    #             launch_template_name: "String",
+    #             version: "String",
+    #             target_instance_types: ["String"],
+    #           },
+    #         ],
     #       },
     #       ec2_configuration: [
     #         {
@@ -913,15 +923,22 @@ module Aws::Batch
     #   finish.
     #
     # @option params [String] :scheduling_policy_arn
-    #   The Amazon Resource Name (ARN) of the fair share scheduling policy. If
-    #   this parameter is specified, the job queue uses a fair share
-    #   scheduling policy. If this parameter isn't specified, the job queue
-    #   uses a first in, first out (FIFO) scheduling policy. After a job queue
-    #   is created, you can replace but can't remove the fair share
-    #   scheduling policy. The format is
-    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. An
-    #   example is
+    #   The Amazon Resource Name (ARN) of the fair share scheduling policy.
+    #   Job queues that don't have a scheduling policy are scheduled in a
+    #   first-in, first-out (FIFO) model. After a job queue has a scheduling
+    #   policy, it can be replaced but can't be removed.
+    #
+    #   The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `.
+    #
+    #   An example is
     #   `aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy`.
+    #
+    #   A job queue without a scheduling policy is scheduled as a FIFO job
+    #   queue and can't have a scheduling policy added. Jobs queues with a
+    #   scheduling policy can have a maximum of 500 active fair share
+    #   identifiers. When the limit has been reached, submissions of any jobs
+    #   that add a new fair share identifier fail.
     #
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -963,6 +980,8 @@ module Aws::Batch
     #   The set of actions that Batch performs on jobs that remain at the head
     #   of the job queue in the specified state longer than specified times.
     #   Batch will perform each action after `maxTimeSeconds` has passed.
+    #   (**Note**: The minimum value for maxTimeSeconds is 600 (10 minutes)
+    #   and its maximum value is 86,400 (24 hours).)
     #
     # @return [Types::CreateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1402,6 +1421,12 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_id #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_name #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.version #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides #=> Array
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].launch_template_id #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].launch_template_name #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].version #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].target_instance_types #=> Array
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].target_instance_types[0] #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration #=> Array
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
@@ -1431,10 +1456,9 @@ module Aws::Batch
     # @option params [Array<String>] :job_definitions
     #   A list of up to 100 job definitions. Each entry in the list can either
     #   be an ARN in the format
-    #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
-    #   or a short version using the form
-    #   `$\{JobDefinitionName\}:$\{Revision\}`. This parameter can't be used
-    #   with other parameters.
+    #   `arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`
+    #   or a short version using the form `${JobDefinitionName}:${Revision}`.
+    #   This parameter can't be used with other parameters.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `DescribeJobDefinitions` in
@@ -2546,14 +2570,17 @@ module Aws::Batch
     #   resp.jobs[0].eks_attempts #=> Array
     #   resp.jobs[0].eks_attempts[0].containers #=> Array
     #   resp.jobs[0].eks_attempts[0].containers[0].name #=> String
+    #   resp.jobs[0].eks_attempts[0].containers[0].container_id #=> String
     #   resp.jobs[0].eks_attempts[0].containers[0].exit_code #=> Integer
     #   resp.jobs[0].eks_attempts[0].containers[0].reason #=> String
     #   resp.jobs[0].eks_attempts[0].init_containers #=> Array
     #   resp.jobs[0].eks_attempts[0].init_containers[0].name #=> String
+    #   resp.jobs[0].eks_attempts[0].init_containers[0].container_id #=> String
     #   resp.jobs[0].eks_attempts[0].init_containers[0].exit_code #=> Integer
     #   resp.jobs[0].eks_attempts[0].init_containers[0].reason #=> String
     #   resp.jobs[0].eks_attempts[0].eks_cluster_arn #=> String
     #   resp.jobs[0].eks_attempts[0].pod_name #=> String
+    #   resp.jobs[0].eks_attempts[0].pod_namespace #=> String
     #   resp.jobs[0].eks_attempts[0].node_name #=> String
     #   resp.jobs[0].eks_attempts[0].started_at #=> Integer
     #   resp.jobs[0].eks_attempts[0].stopped_at #=> Integer
@@ -2813,7 +2840,7 @@ module Aws::Batch
     #     the job definition that's used doesn't affect the sort order. When
     #     the `JOB_DEFINITION` filter is used and the ARN is used (which is in
     #     the form
-    #     `arn:$\{Partition\}:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`),
+    #     `arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`),
     #     the results include jobs that used the specified revision of the job
     #     definition. Asterisk (*) isn't supported when the ARN is used.
     #
@@ -4480,7 +4507,9 @@ module Aws::Batch
     # @option params [required, String] :reason
     #   A message to attach to the job that explains the reason for canceling
     #   it. This message is returned by future DescribeJobs operations on the
-    #   job. This message is also recorded in the Batch activity logs.
+    #   job. It is also recorded in the Batch activity logs.
+    #
+    #   This parameter has as limit of 1024 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4707,6 +4736,14 @@ module Aws::Batch
     #         launch_template_id: "String",
     #         launch_template_name: "String",
     #         version: "String",
+    #         overrides: [
+    #           {
+    #             launch_template_id: "String",
+    #             launch_template_name: "String",
+    #             version: "String",
+    #             target_instance_types: ["String"],
+    #           },
+    #         ],
     #       },
     #       ec2_configuration: [
     #         {
@@ -4790,6 +4827,8 @@ module Aws::Batch
     #   The set of actions that Batch perform on jobs that remain at the head
     #   of the job queue in the specified state longer than specified times.
     #   Batch will perform each action after `maxTimeSeconds` has passed.
+    #   (**Note**: The minimum value for maxTimeSeconds is 600 (10 minutes)
+    #   and its maximum value is 86,400 (24 hours).)
     #
     # @return [Types::UpdateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4902,7 +4941,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

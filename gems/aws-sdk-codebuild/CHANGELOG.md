@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2024-11-06)
+------------------
+
+* Feature - AWS CodeBuild now adds additional compute types for reserved capacity fleet.
+
+1.135.0 (2024-10-25)
+------------------
+
+* Feature - AWS CodeBuild now supports automatically retrying failed builds
+
 1.134.0 (2024-10-18)
 ------------------
 

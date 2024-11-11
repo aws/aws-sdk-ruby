@@ -48,9 +48,7 @@ module AwsSdkCodeGenerator
             @operation_inputs = operation_inputs.map do |operation_inputs_test|
               OperationInputsTest.new(
                 service: @service,
-                operation_name: Underscore.underscore(
-                  operation_inputs_test['operationName']
-                ),
+                operation_name: operation_inputs_test['operationName'],
                 operation_params: operation_inputs_test['operationParams'] || {},
                 built_in_params: operation_inputs_test['builtInParams'] || {},
                 client_params: operation_inputs_test['clientParams'] || {}
@@ -110,9 +108,13 @@ module AwsSdkCodeGenerator
 
           def initialize(options)
             @service = options[:service]
-            @operation_name = options[:operation_name]
+            @api = @service.api
+            @operation_name = Underscore.underscore(options[:operation_name])
+            input_shape_name = @api['operations'][options[:operation_name]]['input']['shape']
+            input = @api['shapes'][input_shape_name]
             @operation_params = options[:operation_params].map do |k,v|
-              Param.new(Underscore.underscore(k), transform_operation_values(v))
+              member_shape = @api['shapes'][input['members'][k]['shape']]
+              Param.new(Underscore.underscore(k), transform_operation_values(v, member_shape))
             end
             @client_params = options[:client_params].map do |k,v|
               Param.new(Underscore.underscore(k), v)
@@ -126,6 +128,10 @@ module AwsSdkCodeGenerator
                !options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
               @client_params << built_in_to_param('AWS::S3::UseGlobalEndpoint', false)
             end
+
+            if @service.identifier == 'dynamodb'
+              @client_params << Param.new(:simple_attributes, false, true)
+            end
           end
 
           # @return String
@@ -138,14 +144,21 @@ module AwsSdkCodeGenerator
           attr_reader :client_params
 
           private
-          def transform_operation_values(value)
-            case value
-            when Hash
+          def transform_operation_values(value, ref)
+            case ref['type']
+            when 'structure', 'union'
               value.each_with_object({}) do |(k, v), o|
-                o[Underscore.underscore(k).to_sym] = transform_operation_values(v)
+                member_shape = @api['shapes'][ref['members'][k]['shape']]
+                o[Underscore.underscore(k).to_sym] = transform_operation_values(v, member_shape)
               end
-            when Array
-              value.map { |v| transform_operation_values(v) }
+            when 'list'
+              member_shape = @api['shapes'][ref['member']['shape']]
+              value.map { |v| transform_operation_values(v, member_shape) }
+            when 'map'
+              member_shape = @api['shapes'][ref['value']['shape']]
+              value.each_with_object({}) do |(k, v), o|
+                o[k] = transform_operation_values(v, member_shape)
+              end
             else
               value
             end

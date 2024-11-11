@@ -67,8 +67,8 @@ module Aws::IoTAnalytics
     #   @return [String]
     #
     # @!attribute [rw] messages
-    #   The list of messages to be sent. Each message has the format: \\\{
-    #   "messageId": "string", "payload": "string"\\}.
+    #   The list of messages to be sent. Each message has the format: \{
+    #   "messageId": "string", "payload": "string"}.
     #
     #   The field names of message payloads (data) that you send to IoT
     #   Analytics:
@@ -88,9 +88,9 @@ module Aws::IoTAnalytics
     #   * Are case insensitive. (Fields named foo and FOO in the same
     #     payload are considered duplicates.)
     #
-    #   For example, \\\{"temp\_01": 29\\} or \\\{"\_temp\_01": 29\\}
-    #   are valid, but \\\{"temp-01": 29\\}, \\\{"01\_temp": 29\\} or
-    #   \\\{"\_\_temp\_01": 29\\} are invalid in message payloads.
+    #   For example, \{"temp\_01": 29} or \{"\_temp\_01": 29} are valid,
+    #   but \{"temp-01": 29}, \{"01\_temp": 29} or \{"\_\_temp\_01":
+    #   29} are invalid in message payloads.
     #   @return [Array<Types::Message>]
     #
     class BatchPutMessageRequest < Struct.new(
@@ -643,8 +643,8 @@ module Aws::IoTAnalytics
     #   both a `channel` and a `datastore` activity. Each entry in the list
     #   must contain only one activity. For example:
     #
-    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
-    #   ... \} \}, ... ]`
+    #   `pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... }
+    #   }, ... ]`
     #   @return [Array<Types::PipelineActivity>]
     #
     # @!attribute [rw] tags
@@ -2606,19 +2606,19 @@ module Aws::IoTAnalytics
     #
     #   You can create a unique key with the following options:
     #
-    #   * Use `!\{iotanalytics:scheduleTime\}` to insert the time of a
+    #   * Use `!{iotanalytics:scheduleTime}` to insert the time of a
     #     scheduled SQL query run.
     #
-    #   * Use `!\{iotanalytics:versionId\}` to insert a unique hash that
+    #   * Use `!{iotanalytics:versionId}` to insert a unique hash that
     #     identifies a dataset content.
     #
-    #   * Use `!\{iotanalytics:creationTime\}` to insert the creation time
-    #     of a dataset content.
+    #   * Use `!{iotanalytics:creationTime}` to insert the creation time of
+    #     a dataset content.
     #
     #   The following example creates a unique key for a CSV file:
-    #   `dataset/mydataset/!\{iotanalytics:scheduleTime\}/!\{iotanalytics:versionId\}.csv`
+    #   `dataset/mydataset/!{iotanalytics:scheduleTime}/!{iotanalytics:versionId}.csv`
     #
-    #   <note markdown="1"> If you don't use `!\{iotanalytics:versionId\}` to specify the key,
+    #   <note markdown="1"> If you don't use `!{iotanalytics:versionId}` to specify the key,
     #   you might get duplicate keys. For example, you might have two
     #   dataset contents with the same `scheduleTime` but different
     #   `versionId`s. This means that one dataset content overwrites the
@@ -3071,8 +3071,8 @@ module Aws::IoTAnalytics
     #   both a `channel` and a `datastore` activity. Each entry in the list
     #   must contain only one activity. For example:
     #
-    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
-    #   ... \} \}, ... ]`
+    #   `pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... }
+    #   }, ... ]`
     #   @return [Array<Types::PipelineActivity>]
     #
     class UpdatePipelineRequest < Struct.new(

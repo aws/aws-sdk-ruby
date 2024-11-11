@@ -909,8 +909,8 @@ module Aws::SavingsPlans
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags. For example, \\\{ "tags":
-    #   \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #   One or more tags. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/TagResourceRequest AWS API Documentation

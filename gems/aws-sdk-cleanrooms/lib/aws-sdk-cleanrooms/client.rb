@@ -488,7 +488,7 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_templates[0].source.text #=> String
     #   resp.collaboration_analysis_templates[0].analysis_parameters #=> Array
     #   resp.collaboration_analysis_templates[0].analysis_parameters[0].name #=> String
-    #   resp.collaboration_analysis_templates[0].analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.collaboration_analysis_templates[0].analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
     #   resp.collaboration_analysis_templates[0].analysis_parameters[0].default_value #=> String
     #   resp.collaboration_analysis_templates[0].validations #=> Array
     #   resp.collaboration_analysis_templates[0].validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
@@ -713,7 +713,7 @@ module Aws::CleanRooms
     #     analysis_parameters: [
     #       {
     #         name: "ParameterName", # required
-    #         type: "SMALLINT", # required, accepts SMALLINT, INTEGER, BIGINT, DECIMAL, REAL, DOUBLE_PRECISION, BOOLEAN, CHAR, VARCHAR, DATE, TIMESTAMP, TIMESTAMPTZ, TIME, TIMETZ, VARBYTE
+    #         type: "SMALLINT", # required, accepts SMALLINT, INTEGER, BIGINT, DECIMAL, REAL, DOUBLE_PRECISION, BOOLEAN, CHAR, VARCHAR, DATE, TIMESTAMP, TIMESTAMPTZ, TIME, TIMETZ, VARBYTE, BINARY, BYTE, CHARACTER, DOUBLE, FLOAT, INT, LONG, NUMERIC, SHORT, STRING, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TINYINT
     #         default_value: "ParameterValue",
     #       },
     #     ],
@@ -737,7 +737,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.analysis_parameters #=> Array
     #   resp.analysis_template.analysis_parameters[0].name #=> String
-    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
     #   resp.analysis_template.analysis_parameters[0].default_value #=> String
     #   resp.analysis_template.validations #=> Array
     #   resp.analysis_template.validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
@@ -770,6 +770,17 @@ module Aws::CleanRooms
     # @option params [required, Array<String>] :creator_member_abilities
     #   The abilities granted to the collaboration creator.
     #
+    # @option params [Types::MLMemberAbilities] :creator_ml_member_abilities
+    #   The ML abilities granted to the collaboration creator.
+    #
+    #   Custom ML modeling is in beta release and is subject to change. For
+    #   beta terms and conditions, see *Betas and Previews* in the [Amazon Web
+    #   Services Service Terms][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms/
+    #
     # @option params [required, String] :creator_display_name
     #   The display name of the collaboration creator.
     #
@@ -795,6 +806,9 @@ module Aws::CleanRooms
     #   paying for query compute costs, then the member who can query is the
     #   default payer.
     #
+    # @option params [String] :analytics_engine
+    #   The analytics engine.
+    #
     # @return [Types::CreateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCollaborationOutput#collaboration #collaboration} => Types::Collaboration
@@ -806,10 +820,21 @@ module Aws::CleanRooms
     #       {
     #         account_id: "AccountId", # required
     #         member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS
+    #         ml_member_abilities: {
+    #           custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
+    #         },
     #         display_name: "DisplayName", # required
     #         payment_configuration: {
     #           query_compute: { # required
     #             is_responsible: false, # required
+    #           },
+    #           machine_learning: {
+    #             model_training: {
+    #               is_responsible: false, # required
+    #             },
+    #             model_inference: {
+    #               is_responsible: false, # required
+    #             },
     #           },
     #         },
     #       },
@@ -817,6 +842,9 @@ module Aws::CleanRooms
     #     name: "CollaborationName", # required
     #     description: "CollaborationDescription", # required
     #     creator_member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS
+    #     creator_ml_member_abilities: {
+    #       custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
+    #     },
     #     creator_display_name: "DisplayName", # required
     #     data_encryption_metadata: {
     #       allow_cleartext: false, # required
@@ -832,7 +860,16 @@ module Aws::CleanRooms
     #       query_compute: { # required
     #         is_responsible: false, # required
     #       },
+    #       machine_learning: {
+    #         model_training: {
+    #           is_responsible: false, # required
+    #         },
+    #         model_inference: {
+    #           is_responsible: false, # required
+    #         },
+    #       },
     #     },
+    #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
     #   })
     #
     # @example Response structure
@@ -853,6 +890,7 @@ module Aws::CleanRooms
     #   resp.collaboration.data_encryption_metadata.allow_joins_on_columns_with_different_names #=> Boolean
     #   resp.collaboration.data_encryption_metadata.preserve_nulls #=> Boolean
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaboration AWS API Documentation
     #
@@ -1476,6 +1514,7 @@ module Aws::CleanRooms
     #           result_format: "CSV", # required, accepts CSV, PARQUET
     #           bucket: "ProtectedQueryS3OutputConfigurationBucketString", # required
     #           key_prefix: "KeyPrefix",
+    #           single_file_output: false,
     #         },
     #       },
     #       role_arn: "RoleArn",
@@ -1483,6 +1522,14 @@ module Aws::CleanRooms
     #     payment_configuration: {
     #       query_compute: { # required
     #         is_responsible: false, # required
+    #       },
+    #       machine_learning: {
+    #         model_training: {
+    #           is_responsible: false, # required
+    #         },
+    #         model_inference: {
+    #           is_responsible: false, # required
+    #         },
     #       },
     #     },
     #   })
@@ -1501,12 +1548,17 @@ module Aws::CleanRooms
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembership AWS API Documentation
     #
@@ -1956,7 +2008,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.analysis_parameters #=> Array
     #   resp.analysis_template.analysis_parameters[0].name #=> String
-    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
     #   resp.analysis_template.analysis_parameters[0].default_value #=> String
     #   resp.analysis_template.validations #=> Array
     #   resp.analysis_template.validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
@@ -2006,6 +2058,7 @@ module Aws::CleanRooms
     #   resp.collaboration.data_encryption_metadata.allow_joins_on_columns_with_different_names #=> Boolean
     #   resp.collaboration.data_encryption_metadata.preserve_nulls #=> Boolean
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaboration AWS API Documentation
     #
@@ -2054,7 +2107,7 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_template.source.text #=> String
     #   resp.collaboration_analysis_template.analysis_parameters #=> Array
     #   resp.collaboration_analysis_template.analysis_parameters[0].name #=> String
-    #   resp.collaboration_analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.collaboration_analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
     #   resp.collaboration_analysis_template.analysis_parameters[0].default_value #=> String
     #   resp.collaboration_analysis_template.validations #=> Array
     #   resp.collaboration_analysis_template.validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
@@ -2589,12 +2642,17 @@ module Aws::CleanRooms
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetMembership AWS API Documentation
     #
@@ -2683,8 +2741,10 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
+    #   resp.protected_query.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
@@ -2696,6 +2756,8 @@ module Aws::CleanRooms
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].user_contribution_limit #=> Integer
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].min_column_value #=> Float
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
+    #   resp.protected_query.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.protected_query.compute_configuration.worker.number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetProtectedQuery AWS API Documentation
     #
@@ -2857,11 +2919,13 @@ module Aws::CleanRooms
     #   The identifier for a membership resource.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListAnalysisTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2909,11 +2973,13 @@ module Aws::CleanRooms
     #   belong to. Currently accepts collaboration ID.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListCollaborationAnalysisTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2960,11 +3026,13 @@ module Aws::CleanRooms
     #   model association belongs to. Accepts a collaboration ID.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListCollaborationConfiguredAudienceModelAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3066,13 +3134,13 @@ module Aws::CleanRooms
     #   A unique identifier for one of your collaborations.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListCollaborationPrivacyBudgetTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3122,13 +3190,13 @@ module Aws::CleanRooms
     #   Specifies the type of the privacy budget.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @return [Types::ListCollaborationPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3178,13 +3246,13 @@ module Aws::CleanRooms
     # invited to.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @option params [String] :member_status
     #   The caller's status in a collaboration.
@@ -3218,6 +3286,7 @@ module Aws::CleanRooms
     #   resp.collaboration_list[0].member_status #=> String, one of "INVITED", "ACTIVE", "LEFT", "REMOVED"
     #   resp.collaboration_list[0].membership_id #=> String
     #   resp.collaboration_list[0].membership_arn #=> String
+    #   resp.collaboration_list[0].analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborations AWS API Documentation
     #
@@ -3236,13 +3305,13 @@ module Aws::CleanRooms
     #   audience model associations that you want to retrieve.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListConfiguredAudienceModelAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3291,11 +3360,13 @@ module Aws::CleanRooms
     #   associations for. Currently accepts the membership ID.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListConfiguredTableAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3337,11 +3408,13 @@ module Aws::CleanRooms
     # Lists configured tables.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListConfiguredTablesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3496,11 +3569,13 @@ module Aws::CleanRooms
     #   The identifier of the collaboration in which the members are listed.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListMembersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3526,11 +3601,15 @@ module Aws::CleanRooms
     #   resp.member_summaries[0].display_name #=> String
     #   resp.member_summaries[0].abilities #=> Array
     #   resp.member_summaries[0].abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.member_summaries[0].ml_abilities.custom_ml_member_abilities #=> Array
+    #   resp.member_summaries[0].ml_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.member_summaries[0].create_time #=> Time
     #   resp.member_summaries[0].update_time #=> Time
     #   resp.member_summaries[0].membership_id #=> String
     #   resp.member_summaries[0].membership_arn #=> String
     #   resp.member_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.member_summaries[0].payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.member_summaries[0].payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMembers AWS API Documentation
     #
@@ -3544,11 +3623,13 @@ module Aws::CleanRooms
     # Lists all memberships resources within the caller's account.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @option params [String] :status
     #   A filter which will return only memberships in the specified status.
@@ -3584,7 +3665,11 @@ module Aws::CleanRooms
     #   resp.membership_summaries[0].status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership_summaries[0].member_abilities #=> Array
     #   resp.membership_summaries[0].member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership_summaries[0].ml_member_abilities.custom_ml_member_abilities #=> Array
+    #   resp.membership_summaries[0].ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.membership_summaries[0].payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.membership_summaries[0].payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMemberships AWS API Documentation
     #
@@ -3604,13 +3689,13 @@ module Aws::CleanRooms
     #   this membership belongs to. Accepts a membership ID.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListPrivacyBudgetTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3662,13 +3747,13 @@ module Aws::CleanRooms
     #   The privacy budget type.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3724,13 +3809,13 @@ module Aws::CleanRooms
     #   A filter on the status of the protected query.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service can return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListProtectedQueriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3778,15 +3863,16 @@ module Aws::CleanRooms
     #   Currently accepts a collaboration ID.
     #
     # @option params [String] :schema_type
-    #   If present, filter schemas by schema type. The only valid schema type
-    #   is currently `TABLE`.
+    #   If present, filter schemas by schema type.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListSchemasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3949,6 +4035,9 @@ module Aws::CleanRooms
     # @option params [Types::ProtectedQueryResultConfiguration] :result_configuration
     #   The details needed to write the query results.
     #
+    # @option params [Types::ComputeConfiguration] :compute_configuration
+    #   The compute configuration for the protected query.
+    #
     # @return [Types::StartProtectedQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartProtectedQueryOutput#protected_query #protected_query} => Types::ProtectedQuery
@@ -3971,10 +4060,17 @@ module Aws::CleanRooms
     #           result_format: "CSV", # required, accepts CSV, PARQUET
     #           bucket: "ProtectedQueryS3OutputConfigurationBucketString", # required
     #           key_prefix: "KeyPrefix",
+    #           single_file_output: false,
     #         },
     #         member: {
     #           account_id: "AccountId", # required
     #         },
+    #       },
+    #     },
+    #     compute_configuration: {
+    #       worker: {
+    #         type: "CR.1X", # accepts CR.1X, CR.4X
+    #         number: 1,
     #       },
     #     },
     #   })
@@ -3993,8 +4089,10 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
+    #   resp.protected_query.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
@@ -4006,6 +4104,8 @@ module Aws::CleanRooms
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].user_contribution_limit #=> Integer
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].min_column_value #=> Float
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
+    #   resp.protected_query.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.protected_query.compute_configuration.worker.number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedQuery AWS API Documentation
     #
@@ -4113,7 +4213,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.analysis_parameters #=> Array
     #   resp.analysis_template.analysis_parameters[0].name #=> String
-    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
     #   resp.analysis_template.analysis_parameters[0].default_value #=> String
     #   resp.analysis_template.validations #=> Array
     #   resp.analysis_template.validations[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
@@ -4173,6 +4273,7 @@ module Aws::CleanRooms
     #   resp.collaboration.data_encryption_metadata.allow_joins_on_columns_with_different_names #=> Boolean
     #   resp.collaboration.data_encryption_metadata.preserve_nulls #=> Boolean
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaboration AWS API Documentation
     #
@@ -4681,6 +4782,7 @@ module Aws::CleanRooms
     #           result_format: "CSV", # required, accepts CSV, PARQUET
     #           bucket: "ProtectedQueryS3OutputConfigurationBucketString", # required
     #           key_prefix: "KeyPrefix",
+    #           single_file_output: false,
     #         },
     #       },
     #       role_arn: "RoleArn",
@@ -4701,12 +4803,17 @@ module Aws::CleanRooms
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembership AWS API Documentation
     #
@@ -4815,8 +4922,10 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
+    #   resp.protected_query.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
@@ -4828,6 +4937,8 @@ module Aws::CleanRooms
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].user_contribution_limit #=> Integer
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].min_column_value #=> Float
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
+    #   resp.protected_query.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.protected_query.compute_configuration.worker.number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateProtectedQuery AWS API Documentation
     #
@@ -4856,7 +4967,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

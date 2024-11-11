@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-11-06)
+------------------
+
+* Feature - API changes for new named tag expressions feature.
+
 1.63.0 (2024-10-18)
 ------------------
 

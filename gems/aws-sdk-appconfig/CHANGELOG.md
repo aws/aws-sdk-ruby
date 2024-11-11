@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2024-10-24)
+------------------
+
+* Feature - This release improves deployment safety by granting customers the ability to REVERT completed deployments, to the last known good state.In the StopDeployment API revert case the status of a COMPLETE deployment will be REVERTED. AppConfig only allows a revert within 72 hours of deployment completion.
+
 1.59.0 (2024-10-18)
 ------------------
 

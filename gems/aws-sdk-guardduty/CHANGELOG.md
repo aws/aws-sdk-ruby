@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2024-11-06)
+------------------
+
+* Feature - GuardDuty RDS Protection expands support for Amazon Aurora PostgreSQL Limitless Databases.
+
 1.105.0 (2024-10-18)
 ------------------
 

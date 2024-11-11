@@ -108,6 +108,19 @@ module Aws::Keyspaces
       SENSITIVE: []
     end
 
+    class CreateTypeRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor field_definitions: ::Array[Types::FieldDefinition]
+      SENSITIVE: []
+    end
+
+    class CreateTypeResponse
+      attr_accessor keyspace_arn: ::String
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
     class DeleteKeyspaceRequest
       attr_accessor keyspace_name: ::String
       SENSITIVE: []
@@ -125,9 +138,27 @@ module Aws::Keyspaces
     class DeleteTableResponse < Aws::EmptyStructure
     end
 
+    class DeleteTypeRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTypeResponse
+      attr_accessor keyspace_arn: ::String
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
     class EncryptionSpecification
       attr_accessor type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY")
       attr_accessor kms_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class FieldDefinition
+      attr_accessor name: ::String
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 
@@ -183,6 +214,25 @@ module Aws::Keyspaces
       SENSITIVE: []
     end
 
+    class GetTypeRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor type_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTypeResponse
+      attr_accessor keyspace_name: ::String
+      attr_accessor type_name: ::String
+      attr_accessor field_definitions: ::Array[Types::FieldDefinition]
+      attr_accessor last_modified_timestamp: ::Time
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "RESTORING")
+      attr_accessor direct_referring_tables: ::Array[::String]
+      attr_accessor direct_parent_types: ::Array[::String]
+      attr_accessor max_nesting_depth: ::Integer
+      attr_accessor keyspace_arn: ::String
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -231,6 +281,19 @@ module Aws::Keyspaces
     class ListTagsForResourceResponse
       attr_accessor next_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTypesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor keyspace_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTypesResponse
+      attr_accessor next_token: ::String
+      attr_accessor types: ::Array[::String]
       SENSITIVE: []
     end
 

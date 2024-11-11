@@ -3419,6 +3419,7 @@ module Aws::Connect
 
     class ParticipantCapabilities
       attr_accessor video: ("SEND")
+      attr_accessor screen_share: ("SEND")
       SENSITIVE: []
     end
 
@@ -4619,6 +4620,16 @@ module Aws::Connect
     class StartOutboundVoiceContactResponse
       attr_accessor contact_id: ::String
       SENSITIVE: []
+    end
+
+    class StartScreenSharingRequest
+      attr_accessor client_token: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartScreenSharingResponse < Aws::EmptyStructure
     end
 
     class StartTaskContactRequest

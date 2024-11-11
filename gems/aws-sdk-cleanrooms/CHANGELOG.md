@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2024-11-07)
+------------------
+
+* Feature - This release introduces support for Custom Models in AWS Clean Rooms ML.
+
+1.35.0 (2024-10-29)
+------------------
+
+* Feature - This release adds the option for customers to configure analytics engine when creating a collaboration, and introduces the new SPARK analytics engine type in addition to maintaining the legacy CLEAN_ROOMS_SQL engine type.
+
 1.34.0 (2024-10-18)
 ------------------
 

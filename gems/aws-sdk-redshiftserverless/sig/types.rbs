@@ -170,6 +170,7 @@ module Aws::RedshiftServerless
       attr_accessor max_capacity: ::Integer
       attr_accessor namespace_name: ::String
       attr_accessor port: ::Integer
+      attr_accessor price_performance_target: Types::PerformanceTarget
       attr_accessor publicly_accessible: bool
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
@@ -612,6 +613,12 @@ module Aws::RedshiftServerless
       SENSITIVE: []
     end
 
+    class PerformanceTarget
+      attr_accessor level: ::Integer
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class PutResourcePolicyRequest
       attr_accessor policy: ::String
       attr_accessor resource_arn: ::String
@@ -959,6 +966,7 @@ module Aws::RedshiftServerless
       attr_accessor ip_address_type: ::String
       attr_accessor max_capacity: ::Integer
       attr_accessor port: ::Integer
+      attr_accessor price_performance_target: Types::PerformanceTarget
       attr_accessor publicly_accessible: bool
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
@@ -1015,6 +1023,7 @@ module Aws::RedshiftServerless
       attr_accessor namespace_name: ::String
       attr_accessor patch_version: ::String
       attr_accessor port: ::Integer
+      attr_accessor price_performance_target: Types::PerformanceTarget
       attr_accessor publicly_accessible: bool
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor status: ("CREATING" | "AVAILABLE" | "MODIFYING" | "DELETING")

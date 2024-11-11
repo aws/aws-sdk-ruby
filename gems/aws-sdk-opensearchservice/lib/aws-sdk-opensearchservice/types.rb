@@ -411,6 +411,78 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Configurations of the OpenSearch Application.
+    #
+    # @!attribute [rw] key
+    #   Specify the item to configure, such as admin role for the OpenSearch
+    #   Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies the value to configure for the key, such as an IAM user
+    #   ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AppConfig AWS API Documentation
+    #
+    class AppConfig < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Basic information of the OpenSearch Application.
+    #
+    # @!attribute [rw] id
+    #   Unique identifier for an OpenSearch application.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of an OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   Endpoint URL of an OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of an OpenSearch Application. Possible values are `CREATING`,
+    #   `UPDATING`,` DELETING`, `FAILED`, `ACTIVE`, and `DELETED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp at which an OpenSearch Application was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   Timestamp at which an OpenSearch Application was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ApplicationSummary AWS API Documentation
+    #
+    class ApplicationSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :endpoint,
+      :status,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the request parameters to the `AssociatePackage`
     # operation.
     #
@@ -455,11 +527,16 @@ module Aws::OpenSearchService
     #   The Amazon Web Services account ID to grant access to.
     #   @return [String]
     #
+    # @!attribute [rw] service
+    #   The Amazon Web Services service SP to grant access to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AuthorizeVpcEndpointAccessRequest AWS API Documentation
     #
     class AuthorizeVpcEndpointAccessRequest < Struct.new(
       :domain_name,
-      :account)
+      :account,
+      :service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -567,7 +644,7 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] duration
     #   The duration of the maintenance schedule. For example, `"Duration":
-    #   \{"Value": 2, "Unit": "HOURS"\}`.
+    #   {"Value": 2, "Unit": "HOURS"}`.
     #   @return [Types::Duration]
     #
     # @!attribute [rw] cron_expression_for_recurrence
@@ -1136,6 +1213,10 @@ module Aws::OpenSearchService
     #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] node_options
+    #   List of node options for the domain.
+    #   @return [Array<Types::NodeOption>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ClusterConfig AWS API Documentation
     #
     class ClusterConfig < Struct.new(
@@ -1150,7 +1231,8 @@ module Aws::OpenSearchService
       :warm_type,
       :warm_count,
       :cold_storage_options,
-      :multi_az_with_standby_enabled)
+      :multi_az_with_standby_enabled,
+      :node_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1304,6 +1386,105 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique client idempotency token. It will be auto generated if not
+    #   provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the OpenSearch Appication to create. Application names are
+    #   unique across the applications owned by an account within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Data sources to be associated with the OpenSearch Application.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] iam_identity_center_options
+    #   Settings of IAM Identity Center for the OpenSearch Application.
+    #   @return [Types::IamIdentityCenterOptionsInput]
+    #
+    # @!attribute [rw] app_configs
+    #   Configurations of the OpenSearch Application, inlcuding admin
+    #   configuration.
+    #   @return [Array<Types::AppConfig>]
+    #
+    # @!attribute [rw] tag_list
+    #   A list of tags attached to a domain.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplicationRequest AWS API Documentation
+    #
+    class CreateApplicationRequest < Struct.new(
+      :client_token,
+      :name,
+      :data_sources,
+      :iam_identity_center_options,
+      :app_configs,
+      :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Unique identifier for the created OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the created OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Data sources associated with the created OpenSearch Application.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] iam_identity_center_options
+    #   Settings of IAM Identity Center for the created OpenSearch
+    #   Application.
+    #   @return [Types::IamIdentityCenterOptions]
+    #
+    # @!attribute [rw] app_configs
+    #   Configurations of the OpenSearch Application, inlcuding admin
+    #   configuration.
+    #   @return [Array<Types::AppConfig>]
+    #
+    # @!attribute [rw] tag_list
+    #   A list of tags attached to a domain.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp when the OpenSearch Application was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplicationResponse AWS API Documentation
+    #
+    class CreateApplicationResponse < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :data_sources,
+      :iam_identity_center_options,
+      :app_configs,
+      :tag_list,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_name
     #   Name of the OpenSearch Service domain to create. Domain names are
     #   unique across the domains owned by an account within an Amazon Web
@@ -1424,6 +1605,10 @@ module Aws::OpenSearchService
     #   Options for fine-grained access control.
     #   @return [Types::AdvancedSecurityOptionsInput]
     #
+    # @!attribute [rw] identity_center_options
+    #   Options for IAM Identity Center Option control for the domain.
+    #   @return [Types::IdentityCenterOptionsInput]
+    #
     # @!attribute [rw] tag_list
     #   List of tags to add to the domain upon creation.
     #   @return [Array<Types::Tag>]
@@ -1467,6 +1652,7 @@ module Aws::OpenSearchService
       :log_publishing_options,
       :domain_endpoint_options,
       :advanced_security_options,
+      :identity_center_options,
       :tag_list,
       :auto_tune_options,
       :off_peak_window_options,
@@ -1668,6 +1854,31 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Data sources that are associated with an OpenSearch Application.
+    #
+    # @!attribute [rw] data_source_arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_description
+    #   Detailed description of a data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DataSource AWS API Documentation
+    #
+    class DataSource < Struct.new(
+      :data_source_arn,
+      :data_source_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a direct-query data source.
     #
     # @!attribute [rw] data_source_type
@@ -1719,6 +1930,23 @@ module Aws::OpenSearchService
       class S3GlueDataCatalog < DataSourceType; end
       class Unknown < DataSourceType; end
     end
+
+    # @!attribute [rw] id
+    #   Unique identifier for the OpenSearch Application that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteApplicationRequest AWS API Documentation
+    #
+    class DeleteApplicationRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteApplicationResponse AWS API Documentation
+    #
+    class DeleteApplicationResponse < Aws::EmptyStructure; end
 
     # Container for the parameters to the `DeleteDataSource` operation.
     #
@@ -2749,6 +2977,10 @@ module Aws::OpenSearchService
     #   Container for fine-grained access control settings for the domain.
     #   @return [Types::AdvancedSecurityOptionsStatus]
     #
+    # @!attribute [rw] identity_center_options
+    #   Container for IAM Identity Center Option control for the domain.
+    #   @return [Types::IdentityCenterOptionsStatus]
+    #
     # @!attribute [rw] auto_tune_options
     #   Container for Auto-Tune settings for the domain.
     #   @return [Types::AutoTuneOptionsStatus]
@@ -2793,6 +3025,7 @@ module Aws::OpenSearchService
       :log_publishing_options,
       :domain_endpoint_options,
       :advanced_security_options,
+      :identity_center_options,
       :auto_tune_options,
       :change_progress_details,
       :off_peak_window_options,
@@ -3202,6 +3435,10 @@ module Aws::OpenSearchService
     #   Settings for fine-grained access control.
     #   @return [Types::AdvancedSecurityOptions]
     #
+    # @!attribute [rw] identity_center_options
+    #   Container for IAM Identity Center Option control for the domain.
+    #   @return [Types::IdentityCenterOptions]
+    #
     # @!attribute [rw] auto_tune_options
     #   Auto-Tune settings for the domain.
     #   @return [Types::AutoTuneOptionsOutput]
@@ -3263,6 +3500,7 @@ module Aws::OpenSearchService
       :service_software_options,
       :domain_endpoint_options,
       :advanced_security_options,
+      :identity_center_options,
       :auto_tune_options,
       :change_progress_details,
       :off_peak_window_options,
@@ -3518,6 +3756,84 @@ module Aws::OpenSearchService
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Unique identifier of the checked OpenSearch Application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetApplicationRequest AWS API Documentation
+    #
+    class GetApplicationRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Unique identifier of the checked OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the checked OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   Endpoint URL of the checked OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Current status of the checked OpenSearch Application. Possible
+    #   values are `CREATING`, `UPDATING`, `DELETING`, `FAILED`, `ACTIVE`,
+    #   and `DELETED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_identity_center_options
+    #   IAM Identity Center settings for the checked OpenSearch Application.
+    #   @return [Types::IamIdentityCenterOptions]
+    #
+    # @!attribute [rw] data_sources
+    #   Associated data sources to the checked OpenSearch Application.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] app_configs
+    #   App configurations of the checked OpenSearch Application.
+    #   @return [Array<Types::AppConfig>]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp at which the checked OpenSearch Application was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   Timestamp at which the checked OpenSearch Application was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetApplicationResponse AWS API Documentation
+    #
+    class GetApplicationResponse < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :endpoint,
+      :status,
+      :iam_identity_center_options,
+      :data_sources,
+      :app_configs,
+      :created_at,
+      :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3833,6 +4149,174 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Settings for IAM Identity Center for an OpenSearch Application.
+    #
+    # @!attribute [rw] enabled
+    #   IAM Identity Center is enabled for the OpenSearch Application.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] iam_identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_for_identity_center_application_arn
+    #   Amazon Resource Name of the IAM Identity Center's Application
+    #   created for the OpenSearch Application after enabling IAM Identity
+    #   Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_identity_center_application_arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IamIdentityCenterOptions AWS API Documentation
+    #
+    class IamIdentityCenterOptions < Struct.new(
+      :enabled,
+      :iam_identity_center_instance_arn,
+      :iam_role_for_identity_center_application_arn,
+      :iam_identity_center_application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for IAM Identity Center.
+    #
+    # @!attribute [rw] enabled
+    #   Enable/disable settings for IAM Identity Center.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] iam_identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_for_identity_center_application_arn
+    #   Amazon Resource Name of IAM Identity Center's application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IamIdentityCenterOptionsInput AWS API Documentation
+    #
+    class IamIdentityCenterOptionsInput < Struct.new(
+      :enabled,
+      :iam_identity_center_instance_arn,
+      :iam_role_for_identity_center_application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for IAM Identity Center Options settings.
+    #
+    # @!attribute [rw] enabled_api_access
+    #   True to enable IAM Identity Center for API access in Amazon
+    #   OpenSearch Service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The ARN for IAM Identity Center Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_key
+    #   Specify the attribute that contains the subject (username, userID,
+    #   email) of IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   Specify the attribute that contains the backend role (groupName,
+    #   groupID) of IAM Identity Center
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_application_arn
+    #   The ARN for IAM Identity Center Application which will integrate
+    #   with Amazon OpenSearch Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The ID of IAM Identity Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IdentityCenterOptions AWS API Documentation
+    #
+    class IdentityCenterOptions < Struct.new(
+      :enabled_api_access,
+      :identity_center_instance_arn,
+      :subject_key,
+      :roles_key,
+      :identity_center_application_arn,
+      :identity_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for IAM Identity Center Options settings.
+    #
+    # @!attribute [rw] enabled_api_access
+    #   True to enable IAM Identity Center for API access in Amazon
+    #   OpenSearch Service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The ARN for IAM Identity Center Instance which will be used for IAM
+    #   Identity Center Application creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_key
+    #   Specify the attribute that contains the subject (username, userID,
+    #   email) of IAM Identity Center.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   Specify the attribute that contains the backend role (groupName,
+    #   groupID) of IAM Identity Center
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IdentityCenterOptionsInput AWS API Documentation
+    #
+    class IdentityCenterOptionsInput < Struct.new(
+      :enabled_api_access,
+      :identity_center_instance_arn,
+      :subject_key,
+      :roles_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of IAM Identity Center Options settings for a domain.
+    #
+    # @!attribute [rw] options
+    #   Container for IAM Identity Center Options settings.
+    #   @return [Types::IdentityCenterOptions]
+    #
+    # @!attribute [rw] status
+    #   The status of IAM Identity Center Options settings for a domain.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IdentityCenterOptionsStatus AWS API Documentation
+    #
+    class IdentityCenterOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an inbound cross-cluster connection for Amazon OpenSearch
     # Service. For more information, see [Cross-cluster search for Amazon
     # OpenSearch Service][1].
@@ -4111,6 +4595,55 @@ module Aws::OpenSearchService
       :storage_types,
       :instance_limits,
       :additional_limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Send the request again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] statuses
+    #   OpenSearch Application Status can be used as filters for the listing
+    #   request. Possible values are `CREATING`, `UPDATING`, `DELETING`,
+    #   `FAILED`, `ACTIVE`, and `DELETED`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return for a given request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListApplicationsRequest AWS API Documentation
+    #
+    class ListApplicationsRequest < Struct.new(
+      :next_token,
+      :statuses,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_summaries
+    #   Summary of the OpenSearch Applications, including ID, ARN, name,
+    #   endpoint, status, create time and last update time.
+    #   @return [Array<Types::ApplicationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Send the request again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListApplicationsResponse AWS API Documentation
+    #
+    class ListApplicationsResponse < Struct.new(
+      :application_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4750,7 +5283,7 @@ module Aws::OpenSearchService
     #     "c5.large.search".
     #
     #   * `STRINGIFIED_JSON`: Contain content in JSON format, such as
-    #     \\\{"Enabled":"True"\\}".
+    #     \{"Enabled":"True"}".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ModifyingProperties AWS API Documentation
@@ -4798,6 +5331,50 @@ module Aws::OpenSearchService
     class NaturalLanguageQueryGenerationOptionsOutput < Struct.new(
       :desired_state,
       :current_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for specifying configuration of any node type.
+    #
+    # @!attribute [rw] enabled
+    #   A boolean that indicates whether a particular node type is enabled
+    #   or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The instance type of a particular node type in the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of nodes of a particular node type in the cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/NodeConfig AWS API Documentation
+    #
+    class NodeConfig < Struct.new(
+      :enabled,
+      :type,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for specifying node type.
+    #
+    # @!attribute [rw] node_type
+    #   Container for node type like coordinating.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_config
+    #   Container for specifying configuration of any node type.
+    #   @return [Types::NodeConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/NodeOption AWS API Documentation
+    #
+    class NodeOption < Struct.new(
+      :node_type,
+      :node_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5477,11 +6054,16 @@ module Aws::OpenSearchService
     #   The account ID to revoke access from.
     #   @return [String]
     #
+    # @!attribute [rw] service
+    #   The service SP to revoke access from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RevokeVpcEndpointAccessRequest AWS API Documentation
     #
     class RevokeVpcEndpointAccessRequest < Struct.new(
       :domain_name,
-      :account)
+      :account,
+      :service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6043,6 +6625,81 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   Unique identifier of the OpenSearch Application to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Data sources to be associated with the OpenSearch Application.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] app_configs
+    #   Configurations to be changed for the OpenSearch Application.
+    #   @return [Array<Types::AppConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateApplicationRequest AWS API Documentation
+    #
+    class UpdateApplicationRequest < Struct.new(
+      :id,
+      :data_sources,
+      :app_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Unique identifier of the updated OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the updated OpenSearch Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Data sources associated with the updated OpenSearch Application.
+    #   @return [Array<Types::DataSource>]
+    #
+    # @!attribute [rw] iam_identity_center_options
+    #   IAM Identity Center settings for the updated OpenSearch Application.
+    #   @return [Types::IamIdentityCenterOptions]
+    #
+    # @!attribute [rw] app_configs
+    #   Configurations for the updated OpenSearch Application.
+    #   @return [Array<Types::AppConfig>]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp at which the OpenSearch Application was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   Timestamp at which the OpenSearch Application was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateApplicationResponse AWS API Documentation
+    #
+    class UpdateApplicationResponse < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :data_sources,
+      :iam_identity_center_options,
+      :app_configs,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `UpdateDataSource` operation.
     #
     # @!attribute [rw] domain_name
@@ -6188,6 +6845,10 @@ module Aws::OpenSearchService
     #   Options for fine-grained access control.
     #   @return [Types::AdvancedSecurityOptionsInput]
     #
+    # @!attribute [rw] identity_center_options
+    #   Container for IAM Identity Center Options settings.
+    #   @return [Types::IdentityCenterOptionsInput]
+    #
     # @!attribute [rw] auto_tune_options
     #   Options for Auto-Tune.
     #   @return [Types::AutoTuneOptions]
@@ -6242,6 +6903,7 @@ module Aws::OpenSearchService
       :domain_endpoint_options,
       :node_to_node_encryption_options,
       :advanced_security_options,
+      :identity_center_options,
       :auto_tune_options,
       :dry_run,
       :dry_run_mode,

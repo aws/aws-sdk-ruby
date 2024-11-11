@@ -483,7 +483,7 @@ module Aws::MWAA
       req.send_request(options)
     end
 
-    # Creates an Amazon Managed Workflows for Apache Airflow (MWAA)
+    # Creates an Amazon Managed Workflows for Apache Airflow (Amazon MWAA)
     # environment.
     #
     # @option params [required, String] :name
@@ -640,10 +640,10 @@ module Aws::MWAA
     #   The Apache Airflow version for your environment. If no value is
     #   specified, it defaults to the latest version. For more information,
     #   see [Apache Airflow versions on Amazon Managed Workflows for Apache
-    #   Airflow (MWAA)][1].
+    #   Airflow (Amazon MWAA)][1].
     #
     #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`, `2.6.3`,
-    #   `2.7.2` `2.8.1`
+    #   `2.7.2`, `2.8.1`, `2.9.2`, and `2.10.1`.
     #
     #
     #
@@ -847,7 +847,7 @@ module Aws::MWAA
       req.send_request(options)
     end
 
-    # Deletes an Amazon Managed Workflows for Apache Airflow (MWAA)
+    # Deletes an Amazon Managed Workflows for Apache Airflow (Amazon MWAA)
     # environment.
     #
     # @option params [required, String] :name
@@ -954,6 +954,79 @@ module Aws::MWAA
     # @param [Hash] params ({})
     def get_environment(params = {}, options = {})
       req = build_request(:get_environment, params)
+      req.send_request(options)
+    end
+
+    # Invokes the Apache Airflow REST API on the webserver with the
+    # specified inputs. To learn more, see [Using the Apache Airflow REST
+    # API][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/access-mwaa-apache-airflow-rest-api.html
+    #
+    # @option params [required, String] :name
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
+    #
+    # @option params [required, String] :path
+    #   The Apache Airflow REST API endpoint path to be called. For example,
+    #   `/dags/123456/clearTaskInstances`. For more information, see [Apache
+    #   Airflow API][1]
+    #
+    #
+    #
+    #   [1]: https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html
+    #
+    # @option params [required, String] :method
+    #   The HTTP method used for making Airflow REST API calls. For example,
+    #   `POST`.
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :query_parameters
+    #   Query parameters to be included in the Apache Airflow REST API call,
+    #   provided as a JSON object.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :body
+    #   The request body for the Apache Airflow REST API call, provided as a
+    #   JSON object.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @return [Types::InvokeRestApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeRestApiResponse#rest_api_status_code #rest_api_status_code} => Integer
+    #   * {Types::InvokeRestApiResponse#rest_api_response #rest_api_response} => Hash,Array,String,Numeric,Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_rest_api({
+    #     name: "EnvironmentName", # required
+    #     path: "RestApiPath", # required
+    #     method: "GET", # required, accepts GET, PUT, POST, PATCH, DELETE
+    #     query_parameters: {
+    #     },
+    #     body: {
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rest_api_status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/InvokeRestApi AWS API Documentation
+    #
+    # @overload invoke_rest_api(params = {})
+    # @param [Hash] params ({})
+    def invoke_rest_api(params = {}, options = {})
+      req = build_request(:invoke_rest_api, params)
       req.send_request(options)
     end
 
@@ -1179,7 +1252,7 @@ module Aws::MWAA
     #   environment][1].
     #
     #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`, `2.6.3`,
-    #   `2.7.2`, `2.8.1`.
+    #   `2.7.2`, `2.8.1`, `2.9.2`, and `2.10.1`.
     #
     #
     #
@@ -1452,7 +1525,7 @@ module Aws::MWAA
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -209,6 +209,21 @@ module Aws::Synthetics
     #   screen to ignore during the visual monitoring comparison.
     #   @return [Types::VisualReferenceOutput]
     #
+    # @!attribute [rw] provisioned_resource_cleanup
+    #   Specifies whether to also delete the Lambda functions and layers
+    #   used by this canary when the canary is deleted. If it is
+    #   `AUTOMATIC`, the Lambda functions and layers will be deleted when
+    #   the canary is deleted.
+    #
+    #   If the value of this parameter is `OFF`, then the value of the
+    #   `DeleteLambda` parameter of the [DeleteCanary][1] operation
+    #   determines whether the Lambda functions and layers will be deleted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The list of key-value pairs that are associated with the canary.
     #   @return [Hash<String,String>]
@@ -237,6 +252,7 @@ module Aws::Synthetics
       :runtime_version,
       :vpc_config,
       :visual_reference,
+      :provisioned_resource_cleanup,
       :tags,
       :artifact_config)
       SENSITIVE = []
@@ -430,7 +446,7 @@ module Aws::Synthetics
     #   Specifies the keys and values to use for any environment variables
     #   used in the canary script. Use the following format:
     #
-    #   \\\{ "key1" : "value1", "key2" : "value2", ...\\}
+    #   \{ "key1" : "value1", "key2" : "value2", ...}
     #
     #   Keys must start with a letter and be at least two characters. The
     #   total size of your environment variables cannot exceed 4 KB. You
@@ -787,6 +803,22 @@ module Aws::Synthetics
     #   `Tags` parameter, the canary creation fails.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] provisioned_resource_cleanup
+    #   Specifies whether to also delete the Lambda functions and layers
+    #   used by this canary when the canary is deleted. If you omit this
+    #   parameter, the default of `AUTOMATIC` is used, which means that the
+    #   Lambda functions and layers will be deleted when the canary is
+    #   deleted.
+    #
+    #   If the value of this parameter is `OFF`, then the value of the
+    #   `DeleteLambda` parameter of the [DeleteCanary][1] operation
+    #   determines whether the Lambda functions and layers will be deleted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of key-value pairs to associate with the canary. You can
     #   associate as many as 50 tags with a canary.
@@ -821,6 +853,7 @@ module Aws::Synthetics
       :runtime_version,
       :vpc_config,
       :resources_to_replicate_tags,
+      :provisioned_resource_cleanup,
       :tags,
       :artifact_config)
       SENSITIVE = []
@@ -889,7 +922,12 @@ module Aws::Synthetics
     #
     # @!attribute [rw] delete_lambda
     #   Specifies whether to also delete the Lambda functions and layers
-    #   used by this canary. The default is false.
+    #   used by this canary. The default is `false`.
+    #
+    #   Your setting for this parameter is used only if the canary doesn't
+    #   have `AUTOMATIC` for its `ProvisionedResourceCleanup` field. If that
+    #   field is set to `AUTOMATIC`, then the Lambda functions and layers
+    #   will be deleted when this canary is deleted.
     #
     #   Type: Boolean
     #   @return [Boolean]
@@ -1804,6 +1842,19 @@ module Aws::Synthetics
     #   canary uploads to Amazon S3.
     #   @return [Types::ArtifactConfigInput]
     #
+    # @!attribute [rw] provisioned_resource_cleanup
+    #   Specifies whether to also delete the Lambda functions and layers
+    #   used by this canary when the canary is deleted.
+    #
+    #   If the value of this parameter is `OFF`, then the value of the
+    #   `DeleteLambda` parameter of the [DeleteCanary][1] operation
+    #   determines whether the Lambda functions and layers will be deleted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanaryRequest AWS API Documentation
     #
     class UpdateCanaryRequest < Struct.new(
@@ -1818,7 +1869,8 @@ module Aws::Synthetics
       :vpc_config,
       :visual_reference,
       :artifact_s3_location,
-      :artifact_config)
+      :artifact_config,
+      :provisioned_resource_cleanup)
       SENSITIVE = []
       include Aws::Structure
     end

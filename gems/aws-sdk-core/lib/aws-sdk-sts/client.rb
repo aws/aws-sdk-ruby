@@ -545,7 +545,7 @@ module Aws::STS
     # denied. The condition in a trust policy that tests for MFA
     # authentication might look like the following example.
     #
-    # `"Condition": \{"Bool": \{"aws:MultiFactorAuthPresent": true\}\}`
+    # `"Condition": {"Bool": {"aws:MultiFactorAuthPresent": true}}`
     #
     # For more information, see [Configuring MFA-Protected API Access][8] in
     # the *IAM User Guide* guide.
@@ -834,7 +834,7 @@ module Aws::STS
     #   a single trusted context assertion and the ARN of the context provider
     #   from which the trusted context assertion was generated.
     #
-    #   `[\{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"\}]`
+    #   `[{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"}]`
     #
     # @return [Types::AssumeRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2416,7 +2416,7 @@ module Aws::STS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.211.0'
+      context[:gem_version] = '3.212.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

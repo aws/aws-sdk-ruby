@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.487.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.486.0 (2024-10-30)
+------------------
+
+* Feature - This release adds two new capabilities to VPC Security Groups: Security Group VPC Associations and Shared Security Groups.
+
+1.485.0 (2024-10-24)
+------------------
+
+* Feature - This release includes a new API to describe some details of the Amazon Machine Images (AMIs) that were used to launch EC2 instances, even if those AMIs are no longer available for use.
+
+1.484.0 (2024-10-23)
+------------------
+
+* Feature - Amazon EC2 X8g, C8g and M8g instances are powered by AWS Graviton4 processors. X8g provide the lowest cost per GiB of memory among Graviton4 instances. C8g provide the best price performance for compute-intensive workloads. M8g provide the best price performance in for general purpose workloads.
+
 1.483.0 (2024-10-21)
 ------------------
 

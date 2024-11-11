@@ -119,6 +119,7 @@ module Aws
                              security_group_ids: Array[::String]?
                            },
                            ?resources_to_replicate_tags: Array[("lambda-function")],
+                           ?provisioned_resource_cleanup: ("AUTOMATIC" | "OFF"),
                            ?tags: Hash[::String, ::String],
                            ?artifact_config: {
                              s3_encryption: {
@@ -372,7 +373,8 @@ module Aws
                                encryption_mode: ("SSE_S3" | "SSE_KMS")?,
                                kms_key_arn: ::String?
                              }?
-                           }
+                           },
+                           ?provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
                          ) -> _UpdateCanaryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCanaryResponseSuccess
     end

@@ -279,7 +279,7 @@ module Aws::S3Control
     ListRegionalBucketsResult = Shapes::StructureShape.new(name: 'ListRegionalBucketsResult')
     ListStorageLensConfigurationEntry = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationEntry')
     ListStorageLensConfigurationsRequest = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsRequest')
-    ListStorageLensConfigurationsResult = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsResult')
+    ListStorageLensConfigurationsResult = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsResult', locationName: "ListStorageLensConfigurationResult")
     ListStorageLensGroupEntry = Shapes::StructureShape.new(name: 'ListStorageLensGroupEntry')
     ListStorageLensGroupsRequest = Shapes::StructureShape.new(name: 'ListStorageLensGroupsRequest')
     ListStorageLensGroupsResult = Shapes::StructureShape.new(name: 'ListStorageLensGroupsResult')
@@ -1426,7 +1426,7 @@ module Aws::S3Control
     ListStorageLensConfigurationsRequest.struct_class = Types::ListStorageLensConfigurationsRequest
 
     ListStorageLensConfigurationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
-    ListStorageLensConfigurationsResult.add_member(:storage_lens_configuration_list, Shapes::ShapeRef.new(shape: StorageLensConfigurationList, location_name: "StorageLensConfigurationList"))
+    ListStorageLensConfigurationsResult.add_member(:storage_lens_configuration_list, Shapes::ShapeRef.new(shape: StorageLensConfigurationList, location_name: "StorageLensConfiguration"))
     ListStorageLensConfigurationsResult.struct_class = Types::ListStorageLensConfigurationsResult
 
     ListStorageLensGroupEntry.add_member(:name, Shapes::ShapeRef.new(shape: StorageLensGroupName, required: true, location_name: "Name"))
@@ -1439,7 +1439,7 @@ module Aws::S3Control
     ListStorageLensGroupsRequest.struct_class = Types::ListStorageLensGroupsRequest
 
     ListStorageLensGroupsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
-    ListStorageLensGroupsResult.add_member(:storage_lens_group_list, Shapes::ShapeRef.new(shape: StorageLensGroupList, location_name: "StorageLensGroupList"))
+    ListStorageLensGroupsResult.add_member(:storage_lens_group_list, Shapes::ShapeRef.new(shape: StorageLensGroupList, location_name: "StorageLensGroup"))
     ListStorageLensGroupsResult.struct_class = Types::ListStorageLensGroupsResult
 
     ListTagsForResourceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))

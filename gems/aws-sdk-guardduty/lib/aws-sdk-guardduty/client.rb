@@ -486,6 +486,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, String] :master_id
     #   The account ID of the GuardDuty administrator account whose invitation
     #   you're accepting.
@@ -524,6 +531,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to archive.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, Array<String>] :finding_ids
     #   The IDs of the findings that you want to archive.
@@ -677,6 +691,13 @@ module Aws::GuardDuty
     #   The detector ID associated with the GuardDuty account for which you
     #   want to create a filter.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, String] :name
     #   The name of the filter. Valid characters include period (.),
     #   underscore (\_), dash (-), and alphanumeric characters. A whitespace
@@ -685,7 +706,7 @@ module Aws::GuardDuty
     # @option params [String] :description
     #   The description of the filter. Valid characters include alphanumeric
     #   characters, and special characters such as hyphen, period, colon,
-    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
+    #   underscore, parentheses (`{ }`, `[ ]`, and `( )`), forward slash,
     #   horizontal tab, vertical tab, newline, form feed, return, and
     #   whitespace.
     #
@@ -984,6 +1005,13 @@ module Aws::GuardDuty
     #   The unique ID of the detector of the GuardDuty account for which you
     #   want to create an IPSet.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, String] :name
     #   The user-friendly name to identify the IPSet.
     #
@@ -1151,6 +1179,13 @@ module Aws::GuardDuty
     #   The unique ID of the detector of the GuardDuty account for which you
     #   want to associate member accounts.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, Array<Types::AccountDetail>] :account_details
     #   A list of account ID and email address pairs of the accounts that you
     #   want to associate with the GuardDuty administrator account.
@@ -1193,6 +1228,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The ID of the GuardDuty detector associated with the publishing
     #   destination.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :destination_type
     #   The type of resource for the publishing destination. Currently only
@@ -1244,6 +1286,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The ID of the detector for which you need to create sample findings.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Array<String>] :finding_types
     #   The types of sample findings to generate.
     #
@@ -1273,6 +1322,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account for which you
     #   want to create a `ThreatIntelSet`.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :name
     #   A user-friendly ThreatIntelSet name displayed in all findings that are
@@ -1368,6 +1424,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that you want to delete.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1389,6 +1452,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with the filter.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :filter_name
     #   The name of the filter that you want to delete.
@@ -1416,6 +1486,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector associated with the IPSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :ip_set_id
     #   The unique ID of the IPSet to delete.
@@ -1506,6 +1583,13 @@ module Aws::GuardDuty
     #   The unique ID of the detector of the GuardDuty account whose members
     #   you want to delete.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
     #   to delete.
@@ -1542,6 +1626,13 @@ module Aws::GuardDuty
     #   The unique ID of the detector associated with the publishing
     #   destination to delete.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, String] :destination_id
     #   The ID of the publishing destination to delete.
     #
@@ -1568,6 +1659,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with the
     #   threatIntelSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :threat_intel_set_id
     #   The unique ID of the threatIntelSet that you want to delete.
@@ -1605,6 +1703,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that the request is associated with.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [String] :next_token
     #   You can use this parameter when paginating results. Set the value of
@@ -1714,6 +1819,13 @@ module Aws::GuardDuty
     #   The detector ID of the delegated administrator for which you need to
     #   retrieve the information.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items
     #   that you want in the response.
@@ -1775,6 +1887,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector associated with the publishing
     #   destination to retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :destination_id
     #   The ID of the publishing destination to retrieve.
@@ -2058,6 +2177,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the GuardDuty detector.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Types::CoverageFilterCriteria] :filter_criteria
     #   Represents the criteria used to filter the coverage statistics.
     #
@@ -2116,6 +2242,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that you want to get.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @return [Types::GetDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDetectorResponse#created_at #created_at} => String
@@ -2172,6 +2305,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with this filter.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :filter_name
     #   The name of the filter you want to get.
@@ -2232,6 +2372,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, Array<String>] :finding_ids
     #   The IDs of the findings that you want to retrieve.
@@ -2440,6 +2587,15 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.rds_db_instance_details.tags #=> Array
     #   resp.findings[0].resource.rds_db_instance_details.tags[0].key #=> String
     #   resp.findings[0].resource.rds_db_instance_details.tags[0].value #=> String
+    #   resp.findings[0].resource.rds_limitless_db_details.db_shard_group_identifier #=> String
+    #   resp.findings[0].resource.rds_limitless_db_details.db_shard_group_resource_id #=> String
+    #   resp.findings[0].resource.rds_limitless_db_details.db_shard_group_arn #=> String
+    #   resp.findings[0].resource.rds_limitless_db_details.engine #=> String
+    #   resp.findings[0].resource.rds_limitless_db_details.engine_version #=> String
+    #   resp.findings[0].resource.rds_limitless_db_details.db_cluster_identifier #=> String
+    #   resp.findings[0].resource.rds_limitless_db_details.tags #=> Array
+    #   resp.findings[0].resource.rds_limitless_db_details.tags[0].key #=> String
+    #   resp.findings[0].resource.rds_limitless_db_details.tags[0].value #=> String
     #   resp.findings[0].resource.rds_db_user_details.user #=> String
     #   resp.findings[0].resource.rds_db_user_details.application #=> String
     #   resp.findings[0].resource.rds_db_user_details.database #=> String
@@ -2759,6 +2915,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The ID of the detector whose findings statistics you want to retrieve.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Array<String>] :finding_statistic_types
     #   The types of finding statistics to retrieve.
     #
@@ -2856,6 +3019,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with the IPSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :ip_set_id
     #   The unique ID of the IPSet to retrieve.
@@ -2976,6 +3146,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with this scan.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @return [Types::GetMalwareScanSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMalwareScanSettingsResponse#scan_resource_criteria #scan_resource_criteria} => Types::ScanResourceCriteria
@@ -3013,6 +3190,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3054,6 +3238,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The detector ID for the administrator account.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, Array<String>] :account_ids
     #   A list of member account IDs.
@@ -3109,6 +3300,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
     #   you want to retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
@@ -3190,6 +3388,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Array<String>] :account_ids
     #   A list of account identifiers of the GuardDuty member account.
     #
@@ -3237,6 +3442,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with the
     #   threatIntelSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :threat_intel_set_id
     #   The unique ID of the threatIntelSet that you want to get.
@@ -3288,6 +3500,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   usage statistics you want to retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :usage_statistic_type
     #   The type of usage statistics to retrieve.
@@ -3421,6 +3640,13 @@ module Aws::GuardDuty
     #   The unique ID of the detector of the GuardDuty account with which you
     #   want to invite members.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the accounts that you want to invite to
     #   GuardDuty as members.
@@ -3472,6 +3698,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector whose coverage details you want to
     #   retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
@@ -3606,6 +3839,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with the filter.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items
     #   that you want in the response. The default value is 50. The maximum
@@ -3661,6 +3901,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to list.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [Types::FindingCriteria] :finding_criteria
     #   Represents the criteria used for querying findings. Valid values
@@ -3847,6 +4094,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with IPSet.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items you
     #   want in the response. The default value is 50. The maximum value is
@@ -3978,6 +4232,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with the member.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items you
     #   want in the response. The default value is 50. The maximum value is
@@ -4090,6 +4351,13 @@ module Aws::GuardDuty
     #   The detector ID for which you want to retrieve the publishing
     #   destination.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
     #
@@ -4172,6 +4440,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that is associated with the
     #   threatIntelSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items
@@ -4266,6 +4541,13 @@ module Aws::GuardDuty
     #   The unique ID of the detector of the GuardDuty administrator account
     #   associated with the member accounts to monitor.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts to start
     #   monitoring.
@@ -4307,6 +4589,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The unique ID of the detector associated with the GuardDuty
     #   administrator account that is monitoring member accounts.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs for the member accounts to stop monitoring.
@@ -4370,6 +4659,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector associated with the findings to unarchive.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, Array<String>] :finding_ids
     #   The IDs of the findings to unarchive.
@@ -4438,6 +4734,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector to update.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [Boolean] :enable
     #   Specifies whether the detector is enabled or not enabled.
@@ -4513,13 +4816,20 @@ module Aws::GuardDuty
     #   The unique ID of the detector that specifies the GuardDuty service
     #   where you want to update a filter.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, String] :filter_name
     #   The name of the filter.
     #
     # @option params [String] :description
     #   The description of the filter. Valid characters include alphanumeric
     #   characters, and special characters such as hyphen, period, colon,
-    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
+    #   underscore, parentheses (`{ }`, `[ ]`, and `( )`), forward slash,
     #   horizontal tab, vertical tab, newline, form feed, return, and
     #   whitespace.
     #
@@ -4587,6 +4897,13 @@ module Aws::GuardDuty
     #   The ID of the detector that is associated with the findings for which
     #   you want to update the feedback.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, Array<String>] :finding_ids
     #   The IDs of the findings that you want to mark as useful or not useful.
     #
@@ -4621,6 +4938,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The detectorID that specifies the GuardDuty service whose IPSet you
     #   want to update.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :ip_set_id
     #   The unique ID that specifies the IPSet that you want to update.
@@ -4717,6 +5041,13 @@ module Aws::GuardDuty
     #   The unique ID of the detector that specifies the GuardDuty service
     #   where you want to update scan settings.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [Types::ScanResourceCriteria] :scan_resource_criteria
     #   Represents the criteria to be used in the filter for selecting
     #   resources to scan.
@@ -4784,6 +5115,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The detector ID of the administrator account.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, Array<String>] :account_ids
     #   A list of member account IDs to be updated.
@@ -4870,6 +5208,13 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector that configures the delegated administrator.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [Boolean] :auto_enable
     #   Represents whether or not to automatically enable member accounts in
@@ -4971,6 +5316,13 @@ module Aws::GuardDuty
     #   The ID of the detector associated with the publishing destinations to
     #   update.
     #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
     # @option params [required, String] :destination_id
     #   The ID of the publishing destination to update.
     #
@@ -5005,6 +5357,13 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #   The detectorID that specifies the GuardDuty service whose
     #   ThreatIntelSet you want to update.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
     # @option params [required, String] :threat_intel_set_id
     #   The unique ID that specifies the ThreatIntelSet that you want to
@@ -5060,7 +5419,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

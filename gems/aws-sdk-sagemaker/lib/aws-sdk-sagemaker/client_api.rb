@@ -175,6 +175,11 @@ module Aws::SageMaker
     BacktestResultsLocation = Shapes::StringShape.new(name: 'BacktestResultsLocation')
     BaseModelName = Shapes::StringShape.new(name: 'BaseModelName')
     BatchDataCaptureConfig = Shapes::StructureShape.new(name: 'BatchDataCaptureConfig')
+    BatchDeleteClusterNodesError = Shapes::StructureShape.new(name: 'BatchDeleteClusterNodesError')
+    BatchDeleteClusterNodesErrorCode = Shapes::StringShape.new(name: 'BatchDeleteClusterNodesErrorCode')
+    BatchDeleteClusterNodesErrorList = Shapes::ListShape.new(name: 'BatchDeleteClusterNodesErrorList')
+    BatchDeleteClusterNodesRequest = Shapes::StructureShape.new(name: 'BatchDeleteClusterNodesRequest')
+    BatchDeleteClusterNodesResponse = Shapes::StructureShape.new(name: 'BatchDeleteClusterNodesResponse')
     BatchDescribeModelPackageError = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageError')
     BatchDescribeModelPackageErrorMap = Shapes::MapShape.new(name: 'BatchDescribeModelPackageErrorMap')
     BatchDescribeModelPackageInput = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageInput')
@@ -284,6 +289,7 @@ module Aws::SageMaker
     ClusterNameOrArn = Shapes::StringShape.new(name: 'ClusterNameOrArn')
     ClusterNodeDetails = Shapes::StructureShape.new(name: 'ClusterNodeDetails')
     ClusterNodeId = Shapes::StringShape.new(name: 'ClusterNodeId')
+    ClusterNodeIds = Shapes::ListShape.new(name: 'ClusterNodeIds')
     ClusterNodeRecovery = Shapes::StringShape.new(name: 'ClusterNodeRecovery')
     ClusterNodeSummaries = Shapes::ListShape.new(name: 'ClusterNodeSummaries')
     ClusterNodeSummary = Shapes::StructureShape.new(name: 'ClusterNodeSummary')
@@ -1484,6 +1490,7 @@ module Aws::SageMaker
     ModelInsightsLocation = Shapes::StringShape.new(name: 'ModelInsightsLocation')
     ModelLatencyThreshold = Shapes::StructureShape.new(name: 'ModelLatencyThreshold')
     ModelLatencyThresholds = Shapes::ListShape.new(name: 'ModelLatencyThresholds')
+    ModelLifeCycle = Shapes::StructureShape.new(name: 'ModelLifeCycle')
     ModelMetadataFilter = Shapes::StructureShape.new(name: 'ModelMetadataFilter')
     ModelMetadataFilterType = Shapes::StringShape.new(name: 'ModelMetadataFilterType')
     ModelMetadataFilters = Shapes::ListShape.new(name: 'ModelMetadataFilters')
@@ -2034,6 +2041,7 @@ module Aws::SageMaker
     SpaceStorageSettings = Shapes::StructureShape.new(name: 'SpaceStorageSettings')
     SpawnRate = Shapes::IntegerShape.new(name: 'SpawnRate')
     SplitType = Shapes::StringShape.new(name: 'SplitType')
+    StageDescription = Shapes::StringShape.new(name: 'StageDescription')
     StageStatus = Shapes::StringShape.new(name: 'StageStatus')
     Stairs = Shapes::StructureShape.new(name: 'Stairs')
     StartEdgeDeploymentStageRequest = Shapes::StructureShape.new(name: 'StartEdgeDeploymentStageRequest')
@@ -2779,6 +2787,21 @@ module Aws::SageMaker
     BatchDataCaptureConfig.add_member(:generate_inference_id, Shapes::ShapeRef.new(shape: Boolean, location_name: "GenerateInferenceId"))
     BatchDataCaptureConfig.struct_class = Types::BatchDataCaptureConfig
 
+    BatchDeleteClusterNodesError.add_member(:code, Shapes::ShapeRef.new(shape: BatchDeleteClusterNodesErrorCode, required: true, location_name: "Code"))
+    BatchDeleteClusterNodesError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    BatchDeleteClusterNodesError.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    BatchDeleteClusterNodesError.struct_class = Types::BatchDeleteClusterNodesError
+
+    BatchDeleteClusterNodesErrorList.member = Shapes::ShapeRef.new(shape: BatchDeleteClusterNodesError)
+
+    BatchDeleteClusterNodesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
+    BatchDeleteClusterNodesRequest.add_member(:node_ids, Shapes::ShapeRef.new(shape: ClusterNodeIds, required: true, location_name: "NodeIds"))
+    BatchDeleteClusterNodesRequest.struct_class = Types::BatchDeleteClusterNodesRequest
+
+    BatchDeleteClusterNodesResponse.add_member(:failed, Shapes::ShapeRef.new(shape: BatchDeleteClusterNodesErrorList, location_name: "Failed"))
+    BatchDeleteClusterNodesResponse.add_member(:successful, Shapes::ShapeRef.new(shape: ClusterNodeIds, location_name: "Successful"))
+    BatchDeleteClusterNodesResponse.struct_class = Types::BatchDeleteClusterNodesResponse
+
     BatchDescribeModelPackageError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
     BatchDescribeModelPackageError.add_member(:error_response, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorResponse"))
     BatchDescribeModelPackageError.struct_class = Types::BatchDescribeModelPackageError
@@ -3027,6 +3050,8 @@ module Aws::SageMaker
     ClusterNodeDetails.add_member(:private_dns_hostname, Shapes::ShapeRef.new(shape: ClusterPrivateDnsHostname, location_name: "PrivateDnsHostname"))
     ClusterNodeDetails.add_member(:placement, Shapes::ShapeRef.new(shape: ClusterInstancePlacement, location_name: "Placement"))
     ClusterNodeDetails.struct_class = Types::ClusterNodeDetails
+
+    ClusterNodeIds.member = Shapes::ShapeRef.new(shape: ClusterNodeId)
 
     ClusterNodeSummaries.member = Shapes::ShapeRef.new(shape: ClusterNodeSummary)
 
@@ -3668,6 +3693,7 @@ module Aws::SageMaker
     CreateModelPackageInput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     CreateModelPackageInput.add_member(:security_config, Shapes::ShapeRef.new(shape: ModelPackageSecurityConfig, location_name: "SecurityConfig"))
     CreateModelPackageInput.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
+    CreateModelPackageInput.add_member(:model_life_cycle, Shapes::ShapeRef.new(shape: ModelLifeCycle, location_name: "ModelLifeCycle"))
     CreateModelPackageInput.struct_class = Types::CreateModelPackageInput
 
     CreateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -5109,6 +5135,7 @@ module Aws::SageMaker
     DescribeModelPackageOutput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     DescribeModelPackageOutput.add_member(:security_config, Shapes::ShapeRef.new(shape: ModelPackageSecurityConfig, location_name: "SecurityConfig"))
     DescribeModelPackageOutput.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
+    DescribeModelPackageOutput.add_member(:model_life_cycle, Shapes::ShapeRef.new(shape: ModelLifeCycle, location_name: "ModelLifeCycle"))
     DescribeModelPackageOutput.struct_class = Types::DescribeModelPackageOutput
 
     DescribeModelQualityJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionName, required: true, location_name: "JobDefinitionName"))
@@ -7975,6 +8002,11 @@ module Aws::SageMaker
 
     ModelLatencyThresholds.member = Shapes::ShapeRef.new(shape: ModelLatencyThreshold)
 
+    ModelLifeCycle.add_member(:stage, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Stage"))
+    ModelLifeCycle.add_member(:stage_status, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageStatus"))
+    ModelLifeCycle.add_member(:stage_description, Shapes::ShapeRef.new(shape: StageDescription, location_name: "StageDescription"))
+    ModelLifeCycle.struct_class = Types::ModelLifeCycle
+
     ModelMetadataFilter.add_member(:name, Shapes::ShapeRef.new(shape: ModelMetadataFilterType, required: true, location_name: "Name"))
     ModelMetadataFilter.add_member(:value, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "Value"))
     ModelMetadataFilter.struct_class = Types::ModelMetadataFilter
@@ -8025,6 +8057,7 @@ module Aws::SageMaker
     ModelPackage.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     ModelPackage.add_member(:security_config, Shapes::ShapeRef.new(shape: ModelPackageSecurityConfig, location_name: "SecurityConfig"))
     ModelPackage.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
+    ModelPackage.add_member(:model_life_cycle, Shapes::ShapeRef.new(shape: ModelLifeCycle, location_name: "ModelLifeCycle"))
     ModelPackage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ModelPackage.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     ModelPackage.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
@@ -9742,6 +9775,7 @@ module Aws::SageMaker
     TrainingJobSummary.add_member(:training_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingEndTime"))
     TrainingJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     TrainingJobSummary.add_member(:training_job_status, Shapes::ShapeRef.new(shape: TrainingJobStatus, required: true, location_name: "TrainingJobStatus"))
+    TrainingJobSummary.add_member(:secondary_status, Shapes::ShapeRef.new(shape: SecondaryStatus, location_name: "SecondaryStatus"))
     TrainingJobSummary.add_member(:warm_pool_status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "WarmPoolStatus"))
     TrainingJobSummary.struct_class = Types::TrainingJobSummary
 
@@ -10194,6 +10228,8 @@ module Aws::SageMaker
     UpdateModelPackageInput.add_member(:inference_specification, Shapes::ShapeRef.new(shape: InferenceSpecification, location_name: "InferenceSpecification"))
     UpdateModelPackageInput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     UpdateModelPackageInput.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
+    UpdateModelPackageInput.add_member(:model_life_cycle, Shapes::ShapeRef.new(shape: ModelLifeCycle, location_name: "ModelLifeCycle"))
+    UpdateModelPackageInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
     UpdateModelPackageInput.struct_class = Types::UpdateModelPackageInput
 
     UpdateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -10511,6 +10547,15 @@ module Aws::SageMaker
         o.output = Shapes::ShapeRef.new(shape: AssociateTrialComponentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:batch_delete_cluster_nodes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteClusterNodes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteClusterNodesRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteClusterNodesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:batch_describe_model_package, Seahorse::Model::Operation.new.tap do |o|

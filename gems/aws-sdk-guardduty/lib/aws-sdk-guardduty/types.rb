@@ -40,6 +40,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] master_id
@@ -434,6 +441,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to archive.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -1209,6 +1223,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The detector ID associated with the GuardDuty account for which you
     #   want to create a filter.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1220,7 +1241,7 @@ module Aws::GuardDuty
     # @!attribute [rw] description
     #   The description of the filter. Valid characters include alphanumeric
     #   characters, and special characters such as hyphen, period, colon,
-    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
+    #   underscore, parentheses (`{ }`, `[ ]`, and `( )`), forward slash,
     #   horizontal tab, vertical tab, newline, form feed, return, and
     #   whitespace.
     #   @return [String]
@@ -1495,6 +1516,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account for which you
     #   want to create an IPSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1609,6 +1637,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account for which you
     #   want to associate member accounts.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_details
@@ -1657,6 +1692,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The ID of the GuardDuty detector associated with the publishing
     #   destination.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] destination_type
@@ -1722,6 +1764,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The ID of the detector for which you need to create sample findings.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] finding_types
@@ -1744,6 +1793,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account for which you
     #   want to create a `ThreatIntelSet`.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2032,6 +2088,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that you want to delete.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorRequest AWS API Documentation
@@ -2048,6 +2111,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with the filter.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] filter_name
@@ -2069,6 +2139,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector associated with the IPSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
@@ -2131,6 +2208,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
     #   you want to delete.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -2162,6 +2246,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector associated with the publishing
     #   destination to delete.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] destination_id
@@ -2184,6 +2275,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with the
     #   threatIntelSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id
@@ -2205,6 +2303,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the request is associated with.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2268,6 +2373,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The detector ID of the delegated administrator for which you need to
     #   retrieve the information.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2365,6 +2477,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector associated with the publishing
     #   destination to retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] destination_id
@@ -3363,6 +3482,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the GuardDuty detector.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] filter_criteria
@@ -3399,6 +3525,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that you want to get.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorRequest AWS API Documentation
@@ -3458,6 +3591,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with this filter.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] filter_name
@@ -3517,6 +3657,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -3552,6 +3699,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The ID of the detector whose findings statistics you want to
     #   retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] finding_statistic_types
@@ -3616,6 +3770,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with the IPSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
@@ -3749,6 +3910,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with this scan.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScanSettingsRequest AWS API Documentation
@@ -3779,6 +3947,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountRequest AWS API Documentation
@@ -3803,6 +3978,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The detector ID for the administrator account.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -3840,6 +4022,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
     #   you want to retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -3888,6 +4077,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -3925,6 +4121,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with the
     #   threatIntelSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id
@@ -3977,6 +4180,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   usage statistics you want to retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] usage_statistic_type
@@ -4244,6 +4454,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account with which
     #   you want to invite members.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -4777,6 +4994,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector whose coverage details you want to
     #   retrieve.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4872,6 +5096,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with the filter.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -4919,6 +5150,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to list.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] finding_criteria
@@ -5083,6 +5321,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with IPSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5208,6 +5453,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with the member.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5312,6 +5564,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The detector ID for which you want to retrieve the publishing
     #   destination.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5385,6 +5644,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that is associated with the
     #   threatIntelSet.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6762,8 +7028,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Instance tag key-value pairs associated with the database instance
-    #   ID.
+    #   Information about the tag key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RdsDbInstanceDetails AWS API Documentation
@@ -6811,6 +7076,54 @@ module Aws::GuardDuty
       :database,
       :ssl,
       :auth_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the resource type `RDSLimitlessDB` that is
+    # involved in a GuardDuty finding.
+    #
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name associated with the Limitless DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_shard_group_resource_id
+    #   The resource identifier of the DB shard group within the Limitless
+    #   Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_shard_group_arn
+    #   The Amazon Resource Name (ARN) that identifies the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The database engine of the database instance involved in the
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The name of the database cluster that is a part of the Limitless
+    #   Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Information about the tag-key value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RdsLimitlessDbDetails AWS API Documentation
+    #
+    class RdsLimitlessDbDetails < Struct.new(
+      :db_shard_group_identifier,
+      :db_shard_group_resource_id,
+      :db_shard_group_arn,
+      :engine,
+      :engine_version,
+      :db_cluster_identifier,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6963,6 +7276,11 @@ module Aws::GuardDuty
     #   anomalous login attempt was made.
     #   @return [Types::RdsDbInstanceDetails]
     #
+    # @!attribute [rw] rds_limitless_db_details
+    #   Contains information about the RDS Limitless database that was
+    #   involved in a GuardDuty finding.
+    #   @return [Types::RdsLimitlessDbDetails]
+    #
     # @!attribute [rw] rds_db_user_details
     #   Contains information about the user details through which anomalous
     #   login attempt was made.
@@ -6986,6 +7304,7 @@ module Aws::GuardDuty
       :ecs_cluster_details,
       :container_details,
       :rds_db_instance_details,
+      :rds_limitless_db_details,
       :rds_db_user_details,
       :lambda_details)
       SENSITIVE = []
@@ -7374,12 +7693,26 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the request is associated with.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] admin_detector_id
     #   The unique detector ID of the administrator account that the request
     #   is associated with. If the account is an administrator, the
     #   `AdminDetectorId` will be the same as the one used for `DetectorId`.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] scan_id
@@ -7902,6 +8235,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty administrator account
     #   associated with the member accounts to monitor.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -7934,6 +8274,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector associated with the GuardDuty
     #   administrator account that is monitoring member accounts.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -7963,14 +8310,14 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about a tag associated with the EC2 instance.
+    # Contains information about a tag key-value pair.
     #
     # @!attribute [rw] key
-    #   The EC2 instance tag key.
+    #   Describes the key associated with the tag.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The EC2 instance tag value.
+    #   Describes the value associated with the tag key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Tag AWS API Documentation
@@ -8143,6 +8490,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The ID of the detector associated with the findings to unarchive.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -8219,6 +8573,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector to update.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] enable
@@ -8266,6 +8627,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that specifies the GuardDuty service
     #   where you want to update a filter.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] filter_name
@@ -8275,7 +8643,7 @@ module Aws::GuardDuty
     # @!attribute [rw] description
     #   The description of the filter. Valid characters include alphanumeric
     #   characters, and special characters such as hyphen, period, colon,
-    #   underscore, parentheses (`\{ \}`, `[ ]`, and `( )`), forward slash,
+    #   underscore, parentheses (`{ }`, `[ ]`, and `( )`), forward slash,
     #   horizontal tab, vertical tab, newline, form feed, return, and
     #   whitespace.
     #   @return [String]
@@ -8324,6 +8692,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The ID of the detector that is associated with the findings for
     #   which you want to update the feedback.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -8357,6 +8732,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The detectorID that specifies the GuardDuty service whose IPSet you
     #   want to update.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
@@ -8426,6 +8808,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that specifies the GuardDuty service
     #   where you want to update scan settings.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] scan_resource_criteria
@@ -8453,6 +8842,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The detector ID of the administrator account.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -8494,6 +8890,13 @@ module Aws::GuardDuty
 
     # @!attribute [rw] detector_id
     #   The ID of the detector that configures the delegated administrator.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] auto_enable
@@ -8580,6 +8983,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The ID of the detector associated with the publishing destinations
     #   to update.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] destination_id
@@ -8624,6 +9034,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   The detectorID that specifies the GuardDuty service whose
     #   ThreatIntelSet you want to update.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id

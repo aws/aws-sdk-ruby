@@ -1384,10 +1384,10 @@ module Aws::LexModelsV2
     #
     # @option params [Array<Types::SampleUtterance>] :sample_utterances
     #   An array of strings that a user might say to signal the intent. For
-    #   example, "I want a pizza", or "I want a \\\{PizzaSize\\} pizza".
+    #   example, "I want a pizza", or "I want a \{PizzaSize} pizza".
     #
-    #   In an utterance, slot names are enclosed in curly braces ("\\\{",
-    #   "\\}") to indicate where they should be displayed in the utterance
+    #   In an utterance, slot names are enclosed in curly braces ("\{",
+    #   "}") to indicate where they should be displayed in the utterance
     #   shown to the user..
     #
     # @option params [Types::DialogCodeHookSettings] :dialog_code_hook
@@ -10498,7 +10498,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -470,14 +470,14 @@ module Aws::EC2
     #   Constraints: Up to 255 characters in length
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     # @option options [required, String] :group_name
     #   The name of the security group.
     #
     #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the security group.
     # @option options [Boolean] :dry_run
@@ -1732,12 +1732,12 @@ module Aws::EC2
     #
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
-    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efs` \|
-    #     `gateway_load_balancer` \| `gateway_load_balancer_endpoint` \|
-    #     `global_accelerator_managed` \| `interface` \| `iot_rules_managed`
-    #     \| `lambda` \| `load_balancer` \| `nat_gateway` \|
-    #     `network_load_balancer` \| `quicksight` \| `transit_gateway` \|
-    #     `trunk` \| `vpc_endpoint`).
+    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
+    #     \| `efs` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
+    #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
+    #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|
+    #     `transit_gateway` \| `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #

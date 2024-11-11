@@ -553,7 +553,7 @@ module Aws::APIGateway
     # @option params [Array<String>] :provider_arns
     #   A list of the Amazon Cognito user pool ARNs for the
     #   `COGNITO_USER_POOLS` authorizer. Each element is of this format:
-    #   `arn:aws:cognito-idp:\{region\}:\{account_id\}:userpool/\{user_pool_id\}`.
+    #   `arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}`.
     #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
     #
     # @option params [String] :auth_type
@@ -564,10 +564,10 @@ module Aws::APIGateway
     #   Specifies the authorizer's Uniform Resource Identifier (URI). For
     #   `TOKEN` or `REQUEST` authorizers, this must be a well-formed Lambda
     #   function URI, for example,
-    #   `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:\{account_id\}:function:\{lambda_function_name\}/invocations`.
+    #   `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations`.
     #   In general, the URI has this form
-    #   `arn:aws:apigateway:\{region\}:lambda:path/\{service_api\}`, where
-    #   `\{region\}` is the same as the region hosting the Lambda function,
+    #   `arn:aws:apigateway:{region}:lambda:path/{service_api}`, where
+    #   `{region}` is the same as the region hosting the Lambda function,
     #   `path` indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial `/`. For
     #   Lambda functions, this is usually of the form
@@ -1269,7 +1269,7 @@ module Aws::APIGateway
     # @option params [Boolean] :disable_execute_api_endpoint
     #   Specifies whether clients can invoke your API by using the default
     #   `execute-api` endpoint. By default, clients can invoke your API with
-    #   the default `https://\{api_id\}.execute-api.\{region\}.amazonaws.com`
+    #   the default `https://{api_id}.execute-api.{region}.amazonaws.com`
     #   endpoint. To require that clients use a custom domain name to invoke
     #   your API, disable the default endpoint
     #
@@ -2689,13 +2689,13 @@ module Aws::APIGateway
     #   returned Deployment resource in the response. In a REST API call, this
     #   `embed` parameter value is a list of comma-separated strings, as in
     #   `GET
-    #   /restapis/\{restapi_id\}/deployments/\{deployment_id\}?embed=var1,var2`.
+    #   /restapis/{restapi_id}/deployments/{deployment_id}?embed=var1,var2`.
     #   The SDK and other platform-dependent libraries might use a different
     #   format for the list. Currently, this request supports only retrieval
     #   of the embedded API summary this way. Hence, the parameter value must
     #   be a single-valued list containing only the `"apisummary"` string. For
     #   example, `GET
-    #   /restapis/\{restapi_id\}/deployments/\{deployment_id\}?embed=apisummary`.
+    #   /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary`.
     #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3686,7 +3686,7 @@ module Aws::APIGateway
     #   request supports only retrieval of the embedded Method resources this
     #   way. The query parameter value must be a single-valued list and
     #   contain the `"methods"` string. For example, `GET
-    #   /restapis/\{restapi_id\}/resources/\{resource_id\}?embed=methods`.
+    #   /restapis/{restapi_id}/resources/{resource_id}?embed=methods`.
     #
     # @return [Types::Resource] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3781,7 +3781,7 @@ module Aws::APIGateway
     #   request supports only retrieval of the embedded Method resources this
     #   way. The query parameter value must be a single-valued list and
     #   contain the `"methods"` string. For example, `GET
-    #   /restapis/\{restapi_id\}/resources?embed=methods`.
+    #   /restapis/{restapi_id}/resources?embed=methods`.
     #
     # @return [Types::Resources] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4883,23 +4883,22 @@ module Aws::APIGateway
     #   is not `VPC_LINK`, or private integration, where `connectionType` is
     #   `VPC_LINK`. For a private HTTP integration, the URI is not used for
     #   routing. For `AWS` or `AWS_PROXY` integrations, the URI is of the form
-    #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api`\\}.
-    #   Here, \\\{Region\\} is the API Gateway region (e.g., us-east-1);
-    #   \\\{service\\} is the name of the integrated Amazon Web Services
-    #   service (e.g., s3); and \\\{subdomain\\} is a designated subdomain
-    #   supported by certain Amazon Web Services service for fast host-name
-    #   lookup. action can be used for an Amazon Web Services service
-    #   action-based API, using an
-    #   Action=\\\{name\\}&amp;\\\{p1\\}=\\\{v1\\}&amp;p2=\\\{v2\\}... query
-    #   string. The ensuing \\\{service\_api\\} refers to a supported action
-    #   \\\{name\\} plus any required input parameters. Alternatively, path
-    #   can be used for an Amazon Web Services service path-based API. The
-    #   ensuing service\_api refers to the path to an Amazon Web Services
-    #   service resource, including the region of the integrated Amazon Web
-    #   Services service, if applicable. For example, for integration with the
-    #   S3 API of `GetObject`, the `uri` can be either
-    #   `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
-    #   or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`.
+    #   `arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api`}.
+    #   Here, \{Region} is the API Gateway region (e.g., us-east-1);
+    #   \{service} is the name of the integrated Amazon Web Services service
+    #   (e.g., s3); and \{subdomain} is a designated subdomain supported by
+    #   certain Amazon Web Services service for fast host-name lookup. action
+    #   can be used for an Amazon Web Services service action-based API, using
+    #   an Action=\{name}&amp;\{p1}=\{v1}&amp;p2=\{v2}... query string. The
+    #   ensuing \{service\_api} refers to a supported action \{name} plus any
+    #   required input parameters. Alternatively, path can be used for an
+    #   Amazon Web Services service path-based API. The ensuing service\_api
+    #   refers to the path to an Amazon Web Services service resource,
+    #   including the region of the integrated Amazon Web Services service, if
+    #   applicable. For example, for integration with the S3 API of
+    #   `GetObject`, the `uri` can be either
+    #   `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}`
+    #   or `arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}`.
     #
     # @option params [String] :connection_type
     #   The type of the network connection to the integration endpoint. The
@@ -4920,10 +4919,9 @@ module Aws::APIGateway
     #   parameter name and the associated value is a method request parameter
     #   value or static value that must be enclosed within single quotes and
     #   pre-encoded as required by the back end. The method request parameter
-    #   value must match the pattern of
-    #   `method.request.\{location\}.\{name\}`, where `location` is
-    #   `querystring`, `path`, or `header` and `name` must be a valid and
-    #   unique method request parameter name.
+    #   value must match the pattern of `method.request.{location}.{name}`,
+    #   where `location` is `querystring`, `path`, or `header` and `name` must
+    #   be a valid and unique method request parameter name.
     #
     # @option params [Hash<String,String>] :request_templates
     #   Represents a map of Velocity templates that are applied on the request
@@ -5071,11 +5069,11 @@ module Aws::APIGateway
     #   parameter name and the mapped value is an integration response header
     #   value, a static value enclosed within a pair of single quotes, or a
     #   JSON expression from the integration response body. The mapping key
-    #   must match the pattern of `method.response.header.\{name\}`, where
+    #   must match the pattern of `method.response.header.{name}`, where
     #   `name` is a valid and unique header name. The mapped non-static value
-    #   must match the pattern of `integration.response.header.\{name\}` or
-    #   `integration.response.body.\{JSON-expression\}`, where `name` must be
-    #   a valid and unique response header name and `JSON-expression` a valid
+    #   must match the pattern of `integration.response.header.{name}` or
+    #   `integration.response.body.{JSON-expression}`, where `name` must be a
+    #   valid and unique response header name and `JSON-expression` a valid
     #   JSON expression without the `$` prefix.
     #
     # @option params [Hash<String,String>] :response_templates
@@ -5166,13 +5164,12 @@ module Aws::APIGateway
     #   A key-value map defining required or optional method request
     #   parameters that can be accepted by API Gateway. A key defines a method
     #   request parameter name matching the pattern of
-    #   `method.request.\{location\}.\{name\}`, where `location` is
-    #   `querystring`, `path`, or `header` and `name` is a valid and unique
-    #   parameter name. The value associated with the key is a Boolean flag
-    #   indicating whether the parameter is required (`true`) or optional
-    #   (`false`). The method request parameter names defined here are
-    #   available in Integration to be mapped to integration request
-    #   parameters or body-mapping templates.
+    #   `method.request.{location}.{name}`, where `location` is `querystring`,
+    #   `path`, or `header` and `name` is a valid and unique parameter name.
+    #   The value associated with the key is a Boolean flag indicating whether
+    #   the parameter is required (`true`) or optional (`false`). The method
+    #   request parameter names defined here are available in Integration to
+    #   be mapped to integration request parameters or body-mapping templates.
     #
     # @option params [Hash<String,String>] :request_models
     #   Specifies the Model resources used for the request's content type.
@@ -5301,15 +5298,15 @@ module Aws::APIGateway
     #   response header name and the associated value is a Boolean flag
     #   indicating whether the method response parameter is required or not.
     #   The method response header names must match the pattern of
-    #   `method.response.header.\{name\}`, where `name` is a valid and unique
+    #   `method.response.header.{name}`, where `name` is a valid and unique
     #   header name. The response parameter names defined here are available
     #   in the integration response to be mapped from an integration response
-    #   header expressed in `integration.response.header.\{name\}`, a static
+    #   header expressed in `integration.response.header.{name}`, a static
     #   value enclosed within a pair of single quotes (e.g.,
     #   `'application/json'`), or a JSON expression from the back-end response
-    #   payload in the form of
-    #   `integration.response.body.\{JSON-expression\}`, where
-    #   `JSON-expression` is a valid JSON expression without the `$` prefix.)
+    #   payload in the form of `integration.response.body.{JSON-expression}`,
+    #   where `JSON-expression` is a valid JSON expression without the `$`
+    #   prefix.)
     #
     # @option params [Hash<String,String>] :response_models
     #   Specifies the Model resources used for the response's content type.
@@ -7125,7 +7122,7 @@ module Aws::APIGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

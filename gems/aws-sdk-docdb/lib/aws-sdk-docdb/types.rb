@@ -5732,7 +5732,7 @@ module Aws::DocDB
     #   or "`rds:`". The string can contain only the set of Unicode
     #   letters, digits, white space, '\_', '.', '/', '=', '+',
     #   '-' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5741,7 +5741,7 @@ module Aws::DocDB
     #   or "`rds:`". The string can contain only the set of Unicode
     #   letters, digits, white space, '\_', '.', '/', '=', '+',
     #   '-' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/Tag AWS API Documentation

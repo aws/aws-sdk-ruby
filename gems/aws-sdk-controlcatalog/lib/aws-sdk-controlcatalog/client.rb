@@ -465,11 +465,11 @@ module Aws::ControlCatalog
     #
     #   *Global format*
     #
-    #   `arn:\{PARTITION\}:controlcatalog:::control/\{CONTROL_CATALOG_OPAQUE_ID\}`
+    #   `arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}`
     #
     #   *Or Regional format*
     #
-    #   `arn:\{PARTITION\}:controltower:\{REGION\}::control/\{CONTROL_TOWER_OPAQUE_ID\}`
+    #   `arn:{PARTITION}:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}`
     #
     #   Here is a more general pattern that covers Amazon Web Services Control
     #   Tower and Control Catalog ARNs:
@@ -483,6 +483,8 @@ module Aws::ControlCatalog
     #   * {Types::GetControlResponse#description #description} => String
     #   * {Types::GetControlResponse#behavior #behavior} => String
     #   * {Types::GetControlResponse#region_configuration #region_configuration} => Types::RegionConfiguration
+    #   * {Types::GetControlResponse#implementation #implementation} => Types::ImplementationDetails
+    #   * {Types::GetControlResponse#parameters #parameters} => Array&lt;Types::ControlParameter&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -499,6 +501,9 @@ module Aws::ControlCatalog
     #   resp.region_configuration.scope #=> String, one of "GLOBAL", "REGIONAL"
     #   resp.region_configuration.deployable_regions #=> Array
     #   resp.region_configuration.deployable_regions[0] #=> String
+    #   resp.implementation.type #=> String
+    #   resp.parameters #=> Array
+    #   resp.parameters[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/GetControl AWS API Documentation
     #
@@ -736,7 +741,7 @@ module Aws::ControlCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controlcatalog'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

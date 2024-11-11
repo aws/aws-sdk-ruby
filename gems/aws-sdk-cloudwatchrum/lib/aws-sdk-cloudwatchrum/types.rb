@@ -1035,66 +1035,65 @@ module Aws::CloudWatchRUM
     #
     #   * If `Name` is `PerformanceNavigationDuration`, then `ValueKey`must
     #     be `event_details.duration` and the `EventPattern` must include
-    #     `\{"event_type":["com.amazon.rum.performance_navigation_event"]\}`
+    #     `{"event_type":["com.amazon.rum.performance_navigation_event"]}`
     #
     #   * If `Name` is `PerformanceResourceDuration`, then `ValueKey`must be
     #     `event_details.duration` and the `EventPattern` must include
-    #     `\{"event_type":["com.amazon.rum.performance_resource_event"]\}`
+    #     `{"event_type":["com.amazon.rum.performance_resource_event"]}`
     #
     #   * If `Name` is `NavigationSatisfiedTransaction`, then `ValueKey`must
-    #     be null and the `EventPattern` must include `\{ "event_type":
+    #     be null and the `EventPattern` must include `{ "event_type":
     #     ["com.amazon.rum.performance_navigation_event"], "event_details":
-    #     \{ "duration": [\{ "numeric": [">",2000] \}] \} \}`
+    #     { "duration": [{ "numeric": [">",2000] }] } }`
     #
     #   * If `Name` is `NavigationToleratedTransaction`, then `ValueKey`must
-    #     be null and the `EventPattern` must include `\{ "event_type":
+    #     be null and the `EventPattern` must include `{ "event_type":
     #     ["com.amazon.rum.performance_navigation_event"], "event_details":
-    #     \{ "duration": [\{ "numeric": [">=",2000,"<"8000] \}] \} \}`
+    #     { "duration": [{ "numeric": [">=",2000,"<"8000] }] } }`
     #
     #   * If `Name` is `NavigationFrustratedTransaction`, then
-    #     `ValueKey`must be null and the `EventPattern` must include `\{
+    #     `ValueKey`must be null and the `EventPattern` must include `{
     #     "event_type": ["com.amazon.rum.performance_navigation_event"],
-    #     "event_details": \{ "duration": [\{ "numeric": [">=",8000] \}] \}
-    #     \}`
+    #     "event_details": { "duration": [{ "numeric": [">=",8000] }] } }`
     #
     #   * If `Name` is `WebVitalsCumulativeLayoutShift`, then `ValueKey`must
     #     be `event_details.value` and the `EventPattern` must include
-    #     `\{"event_type":["com.amazon.rum.cumulative_layout_shift_event"]\}`
+    #     `{"event_type":["com.amazon.rum.cumulative_layout_shift_event"]}`
     #
     #   * If `Name` is `WebVitalsFirstInputDelay`, then `ValueKey`must be
     #     `event_details.value` and the `EventPattern` must include
-    #     `\{"event_type":["com.amazon.rum.first_input_delay_event"]\}`
+    #     `{"event_type":["com.amazon.rum.first_input_delay_event"]}`
     #
     #   * If `Name` is `WebVitalsLargestContentfulPaint`, then
     #     `ValueKey`must be `event_details.value` and the `EventPattern`
     #     must include
-    #     `\{"event_type":["com.amazon.rum.largest_contentful_paint_event"]\}`
+    #     `{"event_type":["com.amazon.rum.largest_contentful_paint_event"]}`
     #
     #   * If `Name` is `JsErrorCount`, then `ValueKey`must be null and the
     #     `EventPattern` must include
-    #     `\{"event_type":["com.amazon.rum.js_error_event"]\}`
+    #     `{"event_type":["com.amazon.rum.js_error_event"]}`
     #
     #   * If `Name` is `HttpErrorCount`, then `ValueKey`must be null and the
     #     `EventPattern` must include
-    #     `\{"event_type":["com.amazon.rum.http_event"]\}`
+    #     `{"event_type":["com.amazon.rum.http_event"]}`
     #
     #   * If `Name` is `SessionCount`, then `ValueKey`must be null and the
     #     `EventPattern` must include
-    #     `\{"event_type":["com.amazon.rum.session_start_event"]\}`
+    #     `{"event_type":["com.amazon.rum.session_start_event"]}`
     #
     #   * If `Name` is `PageViewCount`, then `ValueKey`must be null and the
     #     `EventPattern` must include
-    #     `\{"event_type":["com.amazon.rum.page_view_event"]\}`
+    #     `{"event_type":["com.amazon.rum.page_view_event"]}`
     #
     #   * If `Name` is `Http4xxCount`, then `ValueKey`must be null and the
-    #     `EventPattern` must include `\{"event_type":
-    #     ["com.amazon.rum.http_event"],"event_details":\{"response":\{"status":[\{"numeric":[">=",400,"<",500]\}]\}\}\}
-    #     \}`
+    #     `EventPattern` must include `{"event_type":
+    #     ["com.amazon.rum.http_event"],"event_details":{"response":{"status":[{"numeric":[">=",400,"<",500]}]}}}
+    #     }`
     #
     #   * If `Name` is `Http5xxCount`, then `ValueKey`must be null and the
-    #     `EventPattern` must include `\{"event_type":
-    #     ["com.amazon.rum.http_event"],"event_details":\{"response":\{"status":[\{"numeric":[">=",500,"<=",599]\}]\}\}\}
-    #     \}`
+    #     `EventPattern` must include `{"event_type":
+    #     ["com.amazon.rum.http_event"],"event_details":{"response":{"status":[{"numeric":[">=",500,"<=",599]}]}}}
+    #     }`
     #
     # For custom metrics, the following validation rules apply:
     #
@@ -1197,19 +1196,18 @@ module Aws::CloudWatchRUM
     #
     #   Example event patterns:
     #
-    #   * `'\{ "event_type": ["com.amazon.rum.js_error_event"], "metadata":
-    #     \{ "browserName": [ "Chrome", "Safari" ], \} \}'`
+    #   * `'{ "event_type": ["com.amazon.rum.js_error_event"], "metadata": {
+    #     "browserName": [ "Chrome", "Safari" ], } }'`
     #
-    #   * `'\{ "event_type":
-    #     ["com.amazon.rum.performance_navigation_event"], "metadata": \{
-    #     "browserName": [ "Chrome", "Firefox" ] \}, "event_details": \{
-    #     "duration": [\{ "numeric": [ "<", 2000 ] \}] \} \}'`
+    #   * `'{ "event_type": ["com.amazon.rum.performance_navigation_event"],
+    #     "metadata": { "browserName": [ "Chrome", "Firefox" ] },
+    #     "event_details": { "duration": [{ "numeric": [ "<", 2000 ] }] }
+    #     }'`
     #
-    #   * `'\{ "event_type":
-    #     ["com.amazon.rum.performance_navigation_event"], "metadata": \{
-    #     "browserName": [ "Chrome", "Safari" ], "countryCode": [ "US" ] \},
-    #     "event_details": \{ "duration": [\{ "numeric": [ ">=", 2000, "<",
-    #     8000 ] \}] \} \}'`
+    #   * `'{ "event_type": ["com.amazon.rum.performance_navigation_event"],
+    #     "metadata": { "browserName": [ "Chrome", "Safari" ],
+    #     "countryCode": [ "US" ] }, "event_details": { "duration": [{
+    #     "numeric": [ ">=", 2000, "<", 8000 ] }] } }'`
     #
     #   If the metrics destination is `CloudWatch` and the event also
     #   matches a value in `DimensionKeys`, then the metric is published

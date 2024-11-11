@@ -823,6 +823,11 @@ module Aws::RDS
     #   Aurora Limitless Database to create a DB shard group.
     #
     #   Valid for: Aurora DB clusters only
+    #
+    #   <note markdown="1"> This setting is no longer used. Instead use the
+    #   `ClusterScalabilityType` setting.
+    #
+    #    </note>
     # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
     #   Contains the scaling configuration of an Aurora Serverless v2 DB
     #   cluster.

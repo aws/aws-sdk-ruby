@@ -951,6 +951,49 @@ module Aws::ResourceExplorer2
       req.send_request(options)
     end
 
+    # Retrieves details of the specified [Amazon Web Services-managed
+    # view][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html
+    #
+    # @option params [required, String] :managed_view_arn
+    #   The Amazon resource name (ARN) of the managed view.
+    #
+    # @return [Types::GetManagedViewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedViewOutput#managed_view #managed_view} => Types::ManagedView
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_view({
+    #     managed_view_arn: "GetManagedViewInputManagedViewArnString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_view.filters.filter_string #=> String
+    #   resp.managed_view.included_properties #=> Array
+    #   resp.managed_view.included_properties[0].name #=> String
+    #   resp.managed_view.last_updated_at #=> Time
+    #   resp.managed_view.managed_view_arn #=> String
+    #   resp.managed_view.managed_view_name #=> String
+    #   resp.managed_view.owner #=> String
+    #   resp.managed_view.resource_policy #=> String
+    #   resp.managed_view.scope #=> String
+    #   resp.managed_view.trusted_service #=> String
+    #   resp.managed_view.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetManagedView AWS API Documentation
+    #
+    # @overload get_managed_view(params = {})
+    # @param [Hash] params ({})
+    def get_managed_view(params = {}, options = {})
+      req = build_request(:get_managed_view, params)
+      req.send_request(options)
+    end
+
     # Retrieves details of the specified view.
     #
     # @option params [required, String] :view_arn
@@ -1126,6 +1169,71 @@ module Aws::ResourceExplorer2
     # @param [Hash] params ({})
     def list_indexes_for_members(params = {}, options = {})
       req = build_request(:list_indexes_for_members, params)
+      req.send_request(options)
+    end
+
+    # Lists the Amazon resource names (ARNs) of the [Amazon Web
+    # Services-managed views][1] available in the Amazon Web Services Region
+    # in which you call this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value appropriate to the operation. If additional items exist beyond
+    #   those included in the current response, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
+    #
+    # @option params [String] :service_principal
+    #   Specifies a service principal name. If specified, then the operation
+    #   only returns the managed views that are managed by the input service.
+    #
+    # @return [Types::ListManagedViewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedViewsOutput#managed_views #managed_views} => Array&lt;String&gt;
+    #   * {Types::ListManagedViewsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_views({
+    #     max_results: 1,
+    #     next_token: "ListManagedViewsInputNextTokenString",
+    #     service_principal: "ListManagedViewsInputServicePrincipalString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_views #=> Array
+    #   resp.managed_views[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListManagedViews AWS API Documentation
+    #
+    # @overload list_managed_views(params = {})
+    # @param [Hash] params ({})
+    def list_managed_views(params = {}, options = {})
+      req = build_request(:list_managed_views, params)
       req.send_request(options)
     end
 
@@ -1758,7 +1866,7 @@ module Aws::ResourceExplorer2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

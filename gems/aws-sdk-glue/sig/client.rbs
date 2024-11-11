@@ -519,6 +519,23 @@ module Aws
                              ) -> _CreateClassifierResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClassifierResponseSuccess
 
+      interface _CreateColumnStatisticsTaskSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateColumnStatisticsTaskSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#create_column_statistics_task_settings-instance_method
+      def create_column_statistics_task_settings: (
+                                                    database_name: ::String,
+                                                    table_name: ::String,
+                                                    role: ::String,
+                                                    ?schedule: ::String,
+                                                    ?column_name_list: Array[::String],
+                                                    ?sample_size: ::Float,
+                                                    ?catalog_id: ::String,
+                                                    ?security_configuration: ::String,
+                                                    ?tags: Hash[::String, ::String]
+                                                  ) -> _CreateColumnStatisticsTaskSettingsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateColumnStatisticsTaskSettingsResponseSuccess
+
       interface _CreateConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionResponse]
         def create_connection_status: () -> ("READY" | "IN_PROGRESS" | "FAILED")
@@ -2563,6 +2580,16 @@ module Aws
                                               ) -> _DeleteColumnStatisticsForTableResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteColumnStatisticsForTableResponseSuccess
 
+      interface _DeleteColumnStatisticsTaskSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteColumnStatisticsTaskSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_column_statistics_task_settings-instance_method
+      def delete_column_statistics_task_settings: (
+                                                    database_name: ::String,
+                                                    table_name: ::String
+                                                  ) -> _DeleteColumnStatisticsTaskSettingsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteColumnStatisticsTaskSettingsResponseSuccess
+
       interface _DeleteConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectionResponse]
       end
@@ -2936,6 +2963,17 @@ module Aws
                                              ?next_token: ::String
                                            ) -> _GetColumnStatisticsTaskRunsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetColumnStatisticsTaskRunsResponseSuccess
+
+      interface _GetColumnStatisticsTaskSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetColumnStatisticsTaskSettingsResponse]
+        def column_statistics_task_settings: () -> Types::ColumnStatisticsTaskSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_column_statistics_task_settings-instance_method
+      def get_column_statistics_task_settings: (
+                                                 database_name: ::String,
+                                                 table_name: ::String
+                                               ) -> _GetColumnStatisticsTaskSettingsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetColumnStatisticsTaskSettingsResponseSuccess
 
       interface _GetConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionResponse]
@@ -4652,6 +4690,16 @@ module Aws
                                             ) -> _StartColumnStatisticsTaskRunResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartColumnStatisticsTaskRunResponseSuccess
 
+      interface _StartColumnStatisticsTaskRunScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartColumnStatisticsTaskRunScheduleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#start_column_statistics_task_run_schedule-instance_method
+      def start_column_statistics_task_run_schedule: (
+                                                       database_name: ::String,
+                                                       table_name: ::String
+                                                     ) -> _StartColumnStatisticsTaskRunScheduleResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartColumnStatisticsTaskRunScheduleResponseSuccess
+
       interface _StartCrawlerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartCrawlerResponse]
       end
@@ -4828,6 +4876,16 @@ module Aws
                                              table_name: ::String
                                            ) -> _StopColumnStatisticsTaskRunResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopColumnStatisticsTaskRunResponseSuccess
+
+      interface _StopColumnStatisticsTaskRunScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopColumnStatisticsTaskRunScheduleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#stop_column_statistics_task_run_schedule-instance_method
+      def stop_column_statistics_task_run_schedule: (
+                                                      database_name: ::String,
+                                                      table_name: ::String
+                                                    ) -> _StopColumnStatisticsTaskRunScheduleResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopColumnStatisticsTaskRunScheduleResponseSuccess
 
       interface _StopCrawlerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopCrawlerResponse]
@@ -5111,6 +5169,22 @@ module Aws
                                                 ]
                                               ) -> _UpdateColumnStatisticsForTableResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateColumnStatisticsForTableResponseSuccess
+
+      interface _UpdateColumnStatisticsTaskSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateColumnStatisticsTaskSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#update_column_statistics_task_settings-instance_method
+      def update_column_statistics_task_settings: (
+                                                    database_name: ::String,
+                                                    table_name: ::String,
+                                                    ?role: ::String,
+                                                    ?schedule: ::String,
+                                                    ?column_name_list: Array[::String],
+                                                    ?sample_size: ::Float,
+                                                    ?catalog_id: ::String,
+                                                    ?security_configuration: ::String
+                                                  ) -> _UpdateColumnStatisticsTaskSettingsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateColumnStatisticsTaskSettingsResponseSuccess
 
       interface _UpdateConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionResponse]

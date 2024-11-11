@@ -19,6 +19,7 @@ module Aws::CodeBuild
     ArtifactPackaging = Shapes::StringShape.new(name: 'ArtifactPackaging')
     ArtifactsType = Shapes::StringShape.new(name: 'ArtifactsType')
     AuthType = Shapes::StringShape.new(name: 'AuthType')
+    AutoRetryConfig = Shapes::StructureShape.new(name: 'AutoRetryConfig')
     BatchDeleteBuildsInput = Shapes::StructureShape.new(name: 'BatchDeleteBuildsInput')
     BatchDeleteBuildsOutput = Shapes::StructureShape.new(name: 'BatchDeleteBuildsOutput')
     BatchGetBuildBatchesInput = Shapes::StructureShape.new(name: 'BatchGetBuildBatchesInput')
@@ -67,6 +68,7 @@ module Aws::CodeBuild
     CodeCoverage = Shapes::StructureShape.new(name: 'CodeCoverage')
     CodeCoverageReportSummary = Shapes::StructureShape.new(name: 'CodeCoverageReportSummary')
     CodeCoverages = Shapes::ListShape.new(name: 'CodeCoverages')
+    ComputeConfiguration = Shapes::StructureShape.new(name: 'ComputeConfiguration')
     ComputeType = Shapes::StringShape.new(name: 'ComputeType')
     ComputeTypesAllowed = Shapes::ListShape.new(name: 'ComputeTypesAllowed')
     CreateFleetInput = Shapes::StructureShape.new(name: 'CreateFleetInput')
@@ -178,6 +180,7 @@ module Aws::CodeBuild
     LogsConfig = Shapes::StructureShape.new(name: 'LogsConfig')
     LogsConfigStatusType = Shapes::StringShape.new(name: 'LogsConfigStatusType')
     LogsLocation = Shapes::StructureShape.new(name: 'LogsLocation')
+    MachineType = Shapes::StringShape.new(name: 'MachineType')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonNegativeInt = Shapes::IntegerShape.new(name: 'NonNegativeInt')
@@ -304,6 +307,12 @@ module Aws::CodeBuild
 
     AccountLimitExceededException.struct_class = Types::AccountLimitExceededException
 
+    AutoRetryConfig.add_member(:auto_retry_limit, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "autoRetryLimit"))
+    AutoRetryConfig.add_member(:auto_retry_number, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "autoRetryNumber"))
+    AutoRetryConfig.add_member(:next_auto_retry, Shapes::ShapeRef.new(shape: String, location_name: "nextAutoRetry"))
+    AutoRetryConfig.add_member(:previous_auto_retry, Shapes::ShapeRef.new(shape: String, location_name: "previousAutoRetry"))
+    AutoRetryConfig.struct_class = Types::AutoRetryConfig
+
     BatchDeleteBuildsInput.add_member(:ids, Shapes::ShapeRef.new(shape: BuildIds, required: true, location_name: "ids"))
     BatchDeleteBuildsInput.struct_class = Types::BatchDeleteBuildsInput
 
@@ -389,6 +398,7 @@ module Aws::CodeBuild
     Build.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     Build.add_member(:debug_session, Shapes::ShapeRef.new(shape: DebugSession, location_name: "debugSession"))
     Build.add_member(:build_batch_arn, Shapes::ShapeRef.new(shape: String, location_name: "buildBatchArn"))
+    Build.add_member(:auto_retry_config, Shapes::ShapeRef.new(shape: AutoRetryConfig, location_name: "autoRetryConfig"))
     Build.struct_class = Types::Build
 
     BuildArtifacts.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
@@ -522,12 +532,19 @@ module Aws::CodeBuild
 
     CodeCoverages.member = Shapes::ShapeRef.new(shape: CodeCoverage)
 
+    ComputeConfiguration.add_member(:v_cpu, Shapes::ShapeRef.new(shape: WrapperLong, location_name: "vCpu"))
+    ComputeConfiguration.add_member(:memory, Shapes::ShapeRef.new(shape: WrapperLong, location_name: "memory"))
+    ComputeConfiguration.add_member(:disk, Shapes::ShapeRef.new(shape: WrapperLong, location_name: "disk"))
+    ComputeConfiguration.add_member(:machine_type, Shapes::ShapeRef.new(shape: MachineType, location_name: "machineType"))
+    ComputeConfiguration.struct_class = Types::ComputeConfiguration
+
     ComputeTypesAllowed.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     CreateFleetInput.add_member(:name, Shapes::ShapeRef.new(shape: FleetName, required: true, location_name: "name"))
     CreateFleetInput.add_member(:base_capacity, Shapes::ShapeRef.new(shape: FleetCapacity, required: true, location_name: "baseCapacity"))
     CreateFleetInput.add_member(:environment_type, Shapes::ShapeRef.new(shape: EnvironmentType, required: true, location_name: "environmentType"))
     CreateFleetInput.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "computeType"))
+    CreateFleetInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     CreateFleetInput.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationInput, location_name: "scalingConfiguration"))
     CreateFleetInput.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     CreateFleetInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
@@ -561,6 +578,7 @@ module Aws::CodeBuild
     CreateProjectInput.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     CreateProjectInput.add_member(:build_batch_config, Shapes::ShapeRef.new(shape: ProjectBuildBatchConfig, location_name: "buildBatchConfig"))
     CreateProjectInput.add_member(:concurrent_build_limit, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "concurrentBuildLimit"))
+    CreateProjectInput.add_member(:auto_retry_limit, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "autoRetryLimit"))
     CreateProjectInput.struct_class = Types::CreateProjectInput
 
     CreateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
@@ -703,6 +721,7 @@ module Aws::CodeBuild
     Fleet.add_member(:base_capacity, Shapes::ShapeRef.new(shape: FleetCapacity, location_name: "baseCapacity"))
     Fleet.add_member(:environment_type, Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "environmentType"))
     Fleet.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
+    Fleet.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     Fleet.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationOutput, location_name: "scalingConfiguration"))
     Fleet.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     Fleet.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
@@ -943,6 +962,7 @@ module Aws::CodeBuild
     Project.add_member(:project_visibility, Shapes::ShapeRef.new(shape: ProjectVisibilityType, location_name: "projectVisibility"))
     Project.add_member(:public_project_alias, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "publicProjectAlias"))
     Project.add_member(:resource_access_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "resourceAccessRole"))
+    Project.add_member(:auto_retry_limit, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "autoRetryLimit"))
     Project.struct_class = Types::Project
 
     ProjectArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -982,6 +1002,7 @@ module Aws::CodeBuild
     ProjectEnvironment.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentType, required: true, location_name: "type"))
     ProjectEnvironment.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "image"))
     ProjectEnvironment.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "computeType"))
+    ProjectEnvironment.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     ProjectEnvironment.add_member(:fleet, Shapes::ShapeRef.new(shape: ProjectFleet, location_name: "fleet"))
     ProjectEnvironment.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     ProjectEnvironment.add_member(:privileged_mode, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "privilegedMode"))
@@ -1232,6 +1253,7 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:image_pull_credentials_type_override, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsTypeOverride"))
     StartBuildInput.add_member(:debug_session_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "debugSessionEnabled"))
     StartBuildInput.add_member(:fleet_override, Shapes::ShapeRef.new(shape: ProjectFleet, location_name: "fleetOverride"))
+    StartBuildInput.add_member(:auto_retry_limit_override, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "autoRetryLimitOverride"))
     StartBuildInput.struct_class = Types::StartBuildInput
 
     StartBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "build"))
@@ -1288,6 +1310,7 @@ module Aws::CodeBuild
     UpdateFleetInput.add_member(:base_capacity, Shapes::ShapeRef.new(shape: FleetCapacity, location_name: "baseCapacity"))
     UpdateFleetInput.add_member(:environment_type, Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "environmentType"))
     UpdateFleetInput.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
+    UpdateFleetInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     UpdateFleetInput.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationInput, location_name: "scalingConfiguration"))
     UpdateFleetInput.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     UpdateFleetInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
@@ -1321,6 +1344,7 @@ module Aws::CodeBuild
     UpdateProjectInput.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     UpdateProjectInput.add_member(:build_batch_config, Shapes::ShapeRef.new(shape: ProjectBuildBatchConfig, location_name: "buildBatchConfig"))
     UpdateProjectInput.add_member(:concurrent_build_limit, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "concurrentBuildLimit"))
+    UpdateProjectInput.add_member(:auto_retry_limit, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "autoRetryLimit"))
     UpdateProjectInput.struct_class = Types::UpdateProjectInput
 
     UpdateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))

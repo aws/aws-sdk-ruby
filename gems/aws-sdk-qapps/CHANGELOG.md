@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2024-11-06)
+------------------
+
+* Feature - Introduces category apis in AmazonQApps. Web experience users use Categories to tag and filter library items.
+
 1.8.0 (2024-10-18)
 ------------------
 

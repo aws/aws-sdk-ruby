@@ -454,6 +454,135 @@ module Aws::VerifiedPermissions
 
     # @!group API Operations
 
+    # Retrieves information about a group (batch) of policies.
+    #
+    # <note markdown="1"> The `BatchGetPolicy` operation doesn't have its own IAM permission.
+    # To authorize this operation for Amazon Web Services principals,
+    # include the permission `verifiedpermissions:GetPolicy` in their IAM
+    # policies.
+    #
+    #  </note>
+    #
+    # @option params [required, Array<Types::BatchGetPolicyInputItem>] :requests
+    #   An array of up to 100 policies you want information about.
+    #
+    # @return [Types::BatchGetPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetPolicyOutput#results #results} => Array&lt;Types::BatchGetPolicyOutputItem&gt;
+    #   * {Types::BatchGetPolicyOutput#errors #errors} => Array&lt;Types::BatchGetPolicyErrorItem&gt;
+    #
+    #
+    # @example Example: To retrieve details about a policy
+    #
+    #   # The following example retrieves information about the specified policy contained in the specified policy store. In this
+    #   # example, the requested policy is a template-linked policy, so it returns the ID of the policy template, and the specific
+    #   # principal and resource used by this policy.
+    #
+    #   resp = client.batch_get_policy({
+    #     requests: [
+    #       {
+    #         policy_id: "PWv5M6d5HePx3gVVLKY1nK", 
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC", 
+    #       }, 
+    #       {
+    #         policy_id: "LzFn6KgLWvv4Mbegus35jn", 
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC", 
+    #       }, 
+    #       {
+    #         policy_id: "77gLjer8H5o3mvrnMGrSL5", 
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     results: [
+    #       {
+    #         created_date: Time.parse("2024-10-18T18:53:39.258153Z"), 
+    #         definition: {
+    #           static: {
+    #             description: "Users can manage account resources in any account they own", 
+    #             statement: "permit (principal, action in PhotoFlash::Action::\"ManageAccount\",resource) when { resource in principal.Account };", 
+    #           }, 
+    #         }, 
+    #         last_updated_date: Time.parse("2024-10-18T18:53:39.258153Z"), 
+    #         policy_id: "PWv5M6d5HePx3gVVLKY1nK", 
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC", 
+    #         policy_type: "STATIC", 
+    #       }, 
+    #       {
+    #         created_date: Time.parse("2024-10-18T18:57:03.305027Z"), 
+    #         definition: {
+    #           static: {
+    #             description: "User alice can't delete any photos.", 
+    #             statement: "forbid (principal == PhotoFlash::User::\"alice\", action in [PhotoFlash::Action::\"DeletePhoto\"], resource);", 
+    #           }, 
+    #         }, 
+    #         last_updated_date: Time.parse("2024-10-18T18:57:03.305027Z"), 
+    #         policy_id: "LzFn6KgLWvv4Mbegus35jn", 
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC", 
+    #         policy_type: "STATIC", 
+    #       }, 
+    #       {
+    #         created_date: Time.parse("2024-10-18T18:57:48.005343Z"), 
+    #         definition: {
+    #           static: {
+    #             description: "User alice can view and delete photos.", 
+    #             statement: "permit (principal == PhotoFlash::User::\"alice\", action in [PhotoFlash::Action::\"DeletePhoto\", PhotoFlash::Action::\"ViewPhoto\"], resource);", 
+    #           }, 
+    #         }, 
+    #         last_updated_date: Time.parse("2024-10-18T18:57:48.005343Z"), 
+    #         policy_id: "77gLjer8H5o3mvrnMGrSL5", 
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC", 
+    #         policy_type: "STATIC", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_policy({
+    #     requests: [ # required
+    #       {
+    #         policy_store_id: "PolicyStoreId", # required
+    #         policy_id: "PolicyId", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].policy_store_id #=> String
+    #   resp.results[0].policy_id #=> String
+    #   resp.results[0].policy_type #=> String, one of "STATIC", "TEMPLATE_LINKED"
+    #   resp.results[0].definition.static.description #=> String
+    #   resp.results[0].definition.static.statement #=> String
+    #   resp.results[0].definition.template_linked.policy_template_id #=> String
+    #   resp.results[0].definition.template_linked.principal.entity_type #=> String
+    #   resp.results[0].definition.template_linked.principal.entity_id #=> String
+    #   resp.results[0].definition.template_linked.resource.entity_type #=> String
+    #   resp.results[0].definition.template_linked.resource.entity_id #=> String
+    #   resp.results[0].created_date #=> Time
+    #   resp.results[0].last_updated_date #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].code #=> String, one of "POLICY_STORE_NOT_FOUND", "POLICY_NOT_FOUND"
+    #   resp.errors[0].policy_store_id #=> String
+    #   resp.errors[0].policy_id #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchGetPolicy AWS API Documentation
+    #
+    # @overload batch_get_policy(params = {})
+    # @param [Hash] params ({})
+    def batch_get_policy(params = {}, options = {})
+      req = build_request(:batch_get_policy, params)
+      req.send_request(options)
+    end
+
     # Makes a series of decisions about multiple authorization requests for
     # one principal or resource. Each request contains the equivalent
     # content of an `IsAuthorized` request: principal, action, resource, and
@@ -3644,7 +3773,7 @@ module Aws::VerifiedPermissions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

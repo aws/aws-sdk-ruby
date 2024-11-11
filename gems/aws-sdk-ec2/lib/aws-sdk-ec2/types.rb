@@ -2382,6 +2382,43 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_id
+    #   A security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   A VPC ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSecurityGroupVpcRequest AWS API Documentation
+    #
+    class AssociateSecurityGroupVpcRequest < Struct.new(
+      :group_id,
+      :vpc_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The state of the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSecurityGroupVpcResult AWS API Documentation
+    #
+    class AssociateSecurityGroupVpcResult < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ipv_6_ipam_pool_id
     #   An IPv6 IPAM pool ID.
     #   @return [String]
@@ -8275,7 +8312,7 @@ module Aws::EC2
     #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
     #   *Amazon Web Services Transit Gateway Guide*.
     #
-    #   Specify the fields using the `$\{field-id\}` format, separated by
+    #   Specify the fields using the `${field-id}` format, separated by
     #   spaces.
     #
     #
@@ -8828,9 +8865,6 @@ module Aws::EC2
     #     ([supported Local Zones][1]). This option is only available for
     #     IPAM IPv4 pools in the public scope.
     #
-    #   If you do not choose a locale, resources in Regions others than the
-    #   IPAM's home region cannot use CIDRs from this pool.
-    #
     #   Possible values: Any Amazon Web Services Region or supported Amazon
     #   Web Services Local Zone. Default is `none` and means any locale.
     #
@@ -8871,8 +8905,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] publicly_advertisable
-    #   Determines if the pool is publicly advertisable. This option is not
-    #   available for pools with AddressFamily set to `ipv4`.
+    #   Determines if the pool is publicly advertisable. The request can
+    #   only contain `PubliclyAdvertisable` if `AddressFamily` is `ipv6` and
+    #   `PublicIpSource` is `byoip`.
     #   @return [Boolean]
     #
     # @!attribute [rw] allocation_min_netmask_length
@@ -10161,7 +10196,12 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface. The default is `interface`.
     #
-    #   The only supported values are `interface`, `efa`, and `trunk`.
+    #   If you specify `efa-only`, do not assign any IP addresses to the
+    #   network interface. EFA-only network interfaces do not support IP
+    #   addresses.
+    #
+    #   The only supported values are `interface`, `efa`, `efa-only`, and
+    #   `trunk`.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -10795,7 +10835,7 @@ module Aws::EC2
     #   Constraints: Up to 255 characters in length
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -10805,7 +10845,7 @@ module Aws::EC2
     #   `sg-`.
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -10843,11 +10883,16 @@ module Aws::EC2
     #   The tags assigned to the security group.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] security_group_arn
+    #   The security group ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroupResult AWS API Documentation
     #
     class CreateSecurityGroupResult < Struct.new(
       :group_id,
-      :tags)
+      :tags,
+      :security_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20317,6 +20362,104 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The name of the Availability Zone (for
+    #     example, `us-west-2a`) or Local Zone (for example,
+    #     `us-west-2-lax-1b`) of the instance.
+    #
+    #   * `instance-id` - The ID of the instance.
+    #
+    #   * `instance-state-name` - The state of the instance (`pending` \|
+    #     `running` \| `shutting-down` \| `terminated` \| `stopping` \|
+    #     `stopped`).
+    #
+    #   * `instance-type` - The type of instance (for example, `t3.micro`).
+    #
+    #   * `launch-time` - The time when the instance was launched, in the
+    #     ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ),
+    #     for example, `2023-09-29T11:04:43.305Z`. You can use a wildcard
+    #     (`*`), for example, `2023-09-29T*`, which matches an entire day.
+    #
+    #   * `tag:<key>` - The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `zone-id` - The ID of the Availability Zone (for example,
+    #     `usw2-az2`) or Local Zone (for example, `usw2-lax1-az1`) of the
+    #     instance.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] instance_ids
+    #   The instance IDs.
+    #
+    #   If you don't specify an instance ID or filters, the output includes
+    #   information for all instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   Default: 1000
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceImageMetadataRequest AWS API Documentation
+    #
+    class DescribeInstanceImageMetadataRequest < Struct.new(
+      :filters,
+      :instance_ids,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_image_metadata
+    #   Information about the instance and the AMI used to launch the
+    #   instance.
+    #   @return [Array<Types::InstanceImageMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceImageMetadataResult AWS API Documentation
+    #
+    class DescribeInstanceImageMetadataResult < Struct.new(
+      :instance_image_metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_ids
     #   The instance IDs.
     #
@@ -20771,7 +20914,8 @@ module Aws::EC2
     #   * `supported-root-device-type` - The root device type (`ebs` \|
     #     `instance-store`).
     #
-    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`).
+    #   * `supported-usage-class` - The usage class (`on-demand` \| `spot`
+    #     \| `capacity-block`).
     #
     #   * `supported-virtualization-type` - The virtualization type (`hvm`
     #     \| `paravirtual`).
@@ -23581,12 +23725,12 @@ module Aws::EC2
     #
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
-    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efs` \|
-    #     `gateway_load_balancer` \| `gateway_load_balancer_endpoint` \|
-    #     `global_accelerator_managed` \| `interface` \| `iot_rules_managed`
-    #     \| `lambda` \| `load_balancer` \| `nat_gateway` \|
-    #     `network_load_balancer` \| `quicksight` \| `transit_gateway` \|
-    #     `trunk` \| `vpc_endpoint`).
+    #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
+    #     \| `efs` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed`
+    #     \| `interface` \| `iot_rules_managed` \| `lambda` \|
+    #     `load_balancer` \| `nat_gateway` \| `network_load_balancer` \|
+    #     `quicksight` \| `transit_gateway` \| `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #
@@ -24834,6 +24978,80 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   Security group VPC association filters.
+    #
+    #   * `group-id`: The security group ID.
+    #
+    #   * `vpc-id`: The ID of the associated VPC.
+    #
+    #   * `vpc-owner-id`: The account ID of the VPC owner.
+    #
+    #   * `state`: The state of the association.
+    #
+    #   * `tag:<key>`: The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key`: The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupVpcAssociationsRequest AWS API Documentation
+    #
+    class DescribeSecurityGroupVpcAssociationsRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_group_vpc_associations
+    #   The security group VPC associations.
+    #   @return [Array<Types::SecurityGroupVpcAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupVpcAssociationsResult AWS API Documentation
+    #
+    class DescribeSecurityGroupVpcAssociationsResult < Struct.new(
+      :security_group_vpc_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group_ids
     #   The IDs of the security groups. Required for security groups in a
     #   nondefault VPC.
@@ -25805,8 +26023,7 @@ module Aws::EC2
 
     # @!attribute [rw] next_token
     #   The token to include in another request to get the next page of
-    #   items. If there are no additional items to return, the string is
-    #   empty.
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] stale_security_group_set
@@ -30227,6 +30444,43 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_id
+    #   A security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   A VPC ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSecurityGroupVpcRequest AWS API Documentation
+    #
+    class DisassociateSecurityGroupVpcRequest < Struct.new(
+      :group_id,
+      :vpc_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The state of the disassociation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSecurityGroupVpcResult AWS API Documentation
+    #
+    class DisassociateSecurityGroupVpcResult < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] association_id
     #   The association ID for the CIDR block.
     #   @return [String]
@@ -31262,14 +31516,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
+    # Deprecated.
+    #
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
     #  </note>
     #
-    # Describes an elastic GPU.
-    #
     # @!attribute [rw] type
-    #   The elastic GPU type.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse AWS API Documentation
@@ -38470,6 +38732,62 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about the AMI.
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the AMI. If the state is `available`, the AMI
+    #   is successfully registered and can be used to launch an instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_owner_alias
+    #   The alias of the AMI owner.
+    #
+    #   Valid values: `amazon` \| `aws-marketplace`
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time the AMI was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecation_time
+    #   The deprecation date and time of the AMI, in UTC, in the following
+    #   format: *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_public
+    #   Indicates whether the AMI has public launch permissions. A value of
+    #   `true` means this AMI has public launch permissions, while `false`
+    #   means it has only implicit (AMI owner) or explicit (shared with your
+    #   account) launch permissions.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageMetadata AWS API Documentation
+    #
+    class ImageMetadata < Struct.new(
+      :image_id,
+      :name,
+      :owner_id,
+      :state,
+      :image_owner_alias,
+      :creation_date,
+      :deprecation_time,
+      :is_public)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an AMI that is currently in the Recycle Bin.
     #
     # @!attribute [rw] image_id
@@ -40426,6 +40744,61 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about the instance and the AMI used to launch the
+    # instance.
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_time
+    #   The time the instance was launched.
+    #   @return [Time]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone or Local Zone of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_id
+    #   The ID of the Availability Zone or Local Zone of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the instance.
+    #   @return [Types::InstanceState]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the instance.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] image_metadata
+    #   Information about the AMI used to launch the instance.
+    #   @return [Types::ImageMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceImageMetadata AWS API Documentation
+    #
+    class InstanceImageMetadata < Struct.new(
+      :instance_id,
+      :instance_type,
+      :launch_time,
+      :availability_zone,
+      :zone_id,
+      :state,
+      :owner_id,
+      :tags,
+      :image_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an IPv4 prefix.
     #
     # @!attribute [rw] ipv_4_prefix
@@ -40822,7 +41195,7 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface.
     #
-    #   Valid values: `interface` \| `efa` \| `trunk`
+    #   Valid values: `interface` \| `efa` \| `efa-only` \| `trunk`
     #   @return [String]
     #
     # @!attribute [rw] ipv_4_prefixes
@@ -41076,7 +41449,11 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface.
     #
-    #   Valid values: `interface` \| `efa`
+    #   If you specify `efa-only`, do not assign any IP addresses to the
+    #   network interface. EFA-only network interfaces do not support IP
+    #   addresses.
+    #
+    #   Valid values: `interface` \| `efa` \| `efa-only`
     #   @return [String]
     #
     # @!attribute [rw] network_card_index
@@ -42526,8 +42903,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] supported_usage_classes
-    #   Indicates whether the instance type is offered for spot or
-    #   On-Demand.
+    #   Indicates whether the instance type is offered for spot, On-Demand,
+    #   or Capacity Blocks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_root_device_types
@@ -42885,7 +43262,7 @@ module Aws::EC2
     #   address range.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] cidr_ip
@@ -44551,7 +44928,7 @@ module Aws::EC2
     #   address range.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] cidr_ipv_6
@@ -45142,7 +45519,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN of the Key Management Service (KMS) CMK used for encryption.
+    #   Identifier (key ID, key alias, key ARN, or alias ARN) of the
+    #   customer managed KMS key to use for EBS encryption.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -45217,8 +45595,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN of the symmetric Key Management Service (KMS) CMK used for
-    #   encryption.
+    #   Identifier (key ID, key alias, key ARN, or alias ARN) of the
+    #   customer managed KMS key to use for EBS encryption.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -45942,13 +46320,17 @@ module Aws::EC2
     #
     # @!attribute [rw] interface_type
     #   The type of network interface. To create an Elastic Fabric Adapter
-    #   (EFA), specify `efa`. For more information, see [Elastic Fabric
-    #   Adapter][1] in the *Amazon EC2 User Guide*.
+    #   (EFA), specify `efa` or `efa`. For more information, see [Elastic
+    #   Fabric Adapter][1] in the *Amazon EC2 User Guide*.
     #
     #   If you are not creating an EFA, specify `interface` or omit this
     #   parameter.
     #
-    #   Valid values: `interface` \| `efa`
+    #   If you specify `efa-only`, do not assign any IP addresses to the
+    #   network interface. EFA-only network interfaces do not support IP
+    #   addresses.
+    #
+    #   Valid values: `interface` \| `efa` \| `efa-only`
     #
     #
     #
@@ -55005,7 +55387,7 @@ module Aws::EC2
     #   prefix list ID.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] prefix_list_id
@@ -57648,15 +58030,35 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_specifications
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   Deprecated.
-    #
     #   <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #    </note>
+    #
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the
+    #   same request.
+    #
+    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    #   customers to Amazon Elastic Inference (EI), and will help current
+    #   customers migrate their workloads to options that offer better price
+    #   and performance. After April 15, 2023, new customers will not be
+    #   able to launch instances with Amazon EI accelerators in Amazon
+    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
+    #   used Amazon EI at least once during the past 30-day period are
+    #   considered current customers and will be able to continue using the
+    #   service.
     #
     #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAccelerator>]
@@ -59090,15 +59492,35 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_specifications
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
     #
     # @!attribute [rw] elastic_inference_accelerators
-    #   Deprecated.
-    #
     #   <note markdown="1"> Amazon Elastic Inference is no longer available.
+    #
+    #    </note>
+    #
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the
+    #   same request.
+    #
+    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    #   customers to Amazon Elastic Inference (EI), and will help current
+    #   customers migrate their workloads to options that offer better price
+    #   and performance. After April 15, 2023, new customers will not be
+    #   able to launch instances with Amazon EI accelerators in Amazon
+    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
+    #   used Amazon EI at least once during the past 30-day period are
+    #   considered current customers and will be able to continue using the
+    #   service.
     #
     #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAcceleratorResponse>]
@@ -59618,11 +60040,16 @@ module Aws::EC2
     #   request parameter.
     #   @return [Array<Types::IpPermission>]
     #
+    # @!attribute [rw] revoked_security_group_rules
+    #   Details about the revoked security group rules.
+    #   @return [Array<Types::RevokedSecurityGroupRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgressResult AWS API Documentation
     #
     class RevokeSecurityGroupEgressResult < Struct.new(
       :return,
-      :unknown_ip_permissions)
+      :unknown_ip_permissions,
+      :revoked_security_group_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -59720,11 +60147,86 @@ module Aws::EC2
     #   request parameter.
     #   @return [Array<Types::IpPermission>]
     #
+    # @!attribute [rw] revoked_security_group_rules
+    #   Details about the revoked security group rules.
+    #   @return [Array<Types::RevokedSecurityGroupRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressResult AWS API Documentation
     #
     class RevokeSecurityGroupIngressResult < Struct.new(
       :return,
-      :unknown_ip_permissions)
+      :unknown_ip_permissions,
+      :revoked_security_group_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group rule removed with [RevokeSecurityGroupEgress][1] or
+    # [RevokeSecurityGroupIngress][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupEgress.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupIngress.html
+    #
+    # @!attribute [rw] security_group_rule_id
+    #   A security group rule ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   A security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_egress
+    #   Defines if a security group rule is an outbound rule.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ip_protocol
+    #   The security group rule's protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_port
+    #   The 'from' port number of the security group rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The 'to' port number of the security group rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cidr_ipv_4
+    #   The IPv4 CIDR of the traffic source.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_ipv_6
+    #   The IPv6 CIDR of the traffic source.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of a prefix list that's the traffic source.
+    #   @return [String]
+    #
+    # @!attribute [rw] referenced_group_id
+    #   The ID of a referenced security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the revoked security group rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokedSecurityGroupRule AWS API Documentation
+    #
+    class RevokedSecurityGroupRule < Struct.new(
+      :security_group_rule_id,
+      :group_id,
+      :is_egress,
+      :ip_protocol,
+      :from_port,
+      :to_port,
+      :cidr_ipv_4,
+      :cidr_ipv_6,
+      :prefix_list_id,
+      :referenced_group_id,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61456,6 +61958,10 @@ module Aws::EC2
     #   The ID of the VPC for the security group.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_arn
+    #   The ARN of the security group.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_id
     #   The Amazon Web Services account ID of the owner of the security
     #   group.
@@ -61480,6 +61986,7 @@ module Aws::EC2
       :ip_permissions_egress,
       :tags,
       :vpc_id,
+      :security_group_arn,
       :owner_id,
       :group_name,
       :description,
@@ -61655,6 +62162,10 @@ module Aws::EC2
     #   The tags applied to the security group rule.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] security_group_rule_arn
+    #   The ARN of the security group rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupRule AWS API Documentation
     #
     class SecurityGroupRule < Struct.new(
@@ -61670,7 +62181,8 @@ module Aws::EC2
       :prefix_list_id,
       :referenced_group_info,
       :description,
-      :tags)
+      :tags,
+      :security_group_rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61791,6 +62303,45 @@ module Aws::EC2
     class SecurityGroupRuleUpdate < Struct.new(
       :security_group_rule_id,
       :security_group_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group association with a VPC that you made with
+    # [AssociateSecurityGroupVpc][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html
+    #
+    # @!attribute [rw] group_id
+    #   The association's security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The association's VPC ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_owner_id
+    #   The Amazon Web Services account ID of the owner of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The association's state.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The association's state reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupVpcAssociation AWS API Documentation
+    #
+    class SecurityGroupVpcAssociation < Struct.new(
+      :group_id,
+      :vpc_id,
+      :vpc_owner_id,
+      :state,
+      :state_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -67694,7 +68245,7 @@ module Aws::EC2
     #   ID group pair.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] user_id

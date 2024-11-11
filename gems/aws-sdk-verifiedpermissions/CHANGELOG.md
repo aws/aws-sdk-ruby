@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2024-11-06)
+------------------
+
+* Feature - Adding BatchGetPolicy API which supports the retrieval of multiple policies across multiple policy stores within a single request.
+
 1.36.0 (2024-10-18)
 ------------------
 

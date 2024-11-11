@@ -2101,7 +2101,8 @@
         "S3Bucket":{"shape":"S3Bucket"},
         "S3Key":{"shape":"S3Key"},
         "S3ObjectVersion":{"shape":"S3ObjectVersion"},
-        "ImageUri":{"shape":"String"}
+        "ImageUri":{"shape":"String"},
+        "SourceKMSKeyArn":{"shape":"KMSKeyArn"}
       }
     },
     "FunctionCodeLocation":{
@@ -2110,7 +2111,8 @@
         "RepositoryType":{"shape":"String"},
         "Location":{"shape":"String"},
         "ImageUri":{"shape":"String"},
-        "ResolvedImageUri":{"shape":"String"}
+        "ResolvedImageUri":{"shape":"String"},
+        "SourceKMSKeyArn":{"shape":"String"}
       }
     },
     "FunctionConfiguration":{
@@ -2403,6 +2405,7 @@
         "Configuration":{"shape":"FunctionConfiguration"},
         "Code":{"shape":"FunctionCodeLocation"},
         "Tags":{"shape":"Tags"},
+        "TagsError":{"shape":"TagsError"},
         "Concurrency":{"shape":"Concurrency"}
       }
     },
@@ -4289,6 +4292,29 @@
       "key":{"shape":"TagKey"},
       "value":{"shape":"TagValue"}
     },
+    "TagsError":{
+      "type":"structure",
+      "required":[
+        "ErrorCode",
+        "Message"
+      ],
+      "members":{
+        "ErrorCode":{"shape":"TagsErrorCode"},
+        "Message":{"shape":"TagsErrorMessage"}
+      }
+    },
+    "TagsErrorCode":{
+      "type":"string",
+      "max":21,
+      "min":10,
+      "pattern":"[A-Za-z]+Exception"
+    },
+    "TagsErrorMessage":{
+      "type":"string",
+      "max":1000,
+      "min":84,
+      "pattern":"^.*$"
+    },
     "ThrottleReason":{
       "type":"string",
       "enum":[
@@ -4488,7 +4514,8 @@
         "Publish":{"shape":"Boolean"},
         "DryRun":{"shape":"Boolean"},
         "RevisionId":{"shape":"String"},
-        "Architectures":{"shape":"ArchitecturesList"}
+        "Architectures":{"shape":"ArchitecturesList"},
+        "SourceKMSKeyArn":{"shape":"KMSKeyArn"}
       }
     },
     "UpdateFunctionConfigurationRequest":{

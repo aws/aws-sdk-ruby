@@ -1450,6 +1450,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationVersionStatusHistory.add_member(:draft_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "DraftTimestamp"))
     RegistrationVersionStatusHistory.add_member(:submitted_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedTimestamp"))
     RegistrationVersionStatusHistory.add_member(:reviewing_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReviewingTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:requires_authentication_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RequiresAuthenticationTimestamp"))
     RegistrationVersionStatusHistory.add_member(:approved_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApprovedTimestamp"))
     RegistrationVersionStatusHistory.add_member(:discarded_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DiscardedTimestamp"))
     RegistrationVersionStatusHistory.add_member(:denied_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeniedTimestamp"))

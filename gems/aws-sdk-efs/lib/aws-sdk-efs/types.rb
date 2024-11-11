@@ -493,7 +493,7 @@ module Aws::EFS
     # @!attribute [rw] tags
     #   Use to create one or more tags associated with the file system. Each
     #   tag is a user-defined key-value pair. Name your file system on
-    #   creation by including a `"Key":"Name","Value":"\{value\}"` key-value
+    #   creation by including a `"Key":"Name","Value":"{value}"` key-value
     #   pair. Each key must be unique. For more information, see [Tagging
     #   Amazon Web Services resources][1] in the *Amazon Web Services
     #   General Reference Guide*.

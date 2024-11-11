@@ -2726,8 +2726,8 @@ module Aws::WAFV2
     #   accepts the resource's host domain plus all domains in the token
     #   domain list, including their prefixed subdomains.
     #
-    #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
-    #   "myotherwebsite.com" \}`
+    #   Example JSON: `"TokenDomains": { "mywebsite.com", "myotherwebsite.com"
+    #   }`
     #
     #   Public suffixes aren't allowed. For example, you can't use `gov.au`
     #   or `co.uk` as token domains.
@@ -8276,8 +8276,8 @@ module Aws::WAFV2
     #   accepts the resource's host domain plus all domains in the token
     #   domain list, including their prefixed subdomains.
     #
-    #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
-    #   "myotherwebsite.com" \}`
+    #   Example JSON: `"TokenDomains": { "mywebsite.com", "myotherwebsite.com"
+    #   }`
     #
     #   Public suffixes aren't allowed. For example, you can't use `gov.au`
     #   or `co.uk` as token domains.
@@ -9225,7 +9225,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

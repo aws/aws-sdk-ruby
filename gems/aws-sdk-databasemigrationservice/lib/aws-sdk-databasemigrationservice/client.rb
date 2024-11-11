@@ -1127,8 +1127,8 @@ module Aws::DatabaseMigrationService
     #   Shorthand syntax for these settings is as follows:
     #   `ServiceAccessRoleArn=string,BucketName=string`
     #
-    #   JSON syntax for these settings is as follows: `\{
-    #   "ServiceAccessRoleArn": "string", "BucketName": "string", \} `
+    #   JSON syntax for these settings is as follows: `{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string", } `
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
@@ -8503,7 +8503,7 @@ module Aws::DatabaseMigrationService
     #   SSL. Provide the name of a `.sso` file using the `fileb://` prefix.
     #   You can't provide the certificate inline.
     #
-    #   Example: `filebase64("$\{path.root\}/rds-ca-2019-root.sso")`
+    #   Example: `filebase64("${path.root}/rds-ca-2019-root.sso")`
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags associated with the certificate.
@@ -9088,8 +9088,8 @@ module Aws::DatabaseMigrationService
     #   Shorthand syntax for these settings is as follows:
     #   `ServiceAccessRoleArn=string ,BucketName=string`
     #
-    #   JSON syntax for these settings is as follows: `\{
-    #   "ServiceAccessRoleArn": "string", "BucketName": "string"\} `
+    #   JSON syntax for these settings is as follows: `{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string"} `
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
@@ -9241,15 +9241,15 @@ module Aws::DatabaseMigrationService
     #     settings with different names.
     #
     #   For example, if you call `create-endpoint ... --endpoint-settings
-    #   '\{"a":1\}' ...`, the endpoint has the following endpoint settings:
-    #   `'\{"a":1\}'`. If you then call `modify-endpoint ...
-    #   --endpoint-settings '\{"b":2\}' ...` for the same endpoint, the
-    #   endpoint has the following settings: `'\{"a":1,"b":2\}'`.
+    #   '{"a":1}' ...`, the endpoint has the following endpoint settings:
+    #   `'{"a":1}'`. If you then call `modify-endpoint ... --endpoint-settings
+    #   '{"b":2}' ...` for the same endpoint, the endpoint has the following
+    #   settings: `'{"a":1,"b":2}'`.
     #
     #   However, suppose that you follow this with a call to `modify-endpoint
-    #   ... --endpoint-settings '\{"b":2\}' --exact-settings ...` for that
-    #   same endpoint again. Then the endpoint has the following settings:
-    #   `'\{"b":2\}'`. All existing settings are replaced with the exact
+    #   ... --endpoint-settings '{"b":2}' --exact-settings ...` for that same
+    #   endpoint again. Then the endpoint has the following settings:
+    #   `'{"b":2}'`. All existing settings are replaced with the exact
     #   settings that you specify.
     #
     # @option params [Types::GcpMySQLSettings] :gcp_my_sql_settings
@@ -12445,7 +12445,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

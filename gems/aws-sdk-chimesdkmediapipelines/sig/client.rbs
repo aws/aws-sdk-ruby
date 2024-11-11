@@ -139,6 +139,11 @@ module Aws
                                                }?
                                              }?
                                            },
+                                           ?sse_aws_key_management_params: {
+                                             aws_kms_key_id: ::String,
+                                             aws_kms_encryption_context: ::String?
+                                           },
+                                           ?sink_iam_role_arn: ::String,
                                            ?tags: Array[
                                              {
                                                key: ::String,

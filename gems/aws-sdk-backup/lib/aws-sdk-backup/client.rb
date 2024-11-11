@@ -5457,7 +5457,7 @@ module Aws::Backup
     #   Key-value pairs that are used to help organize your resources. You can
     #   assign your own metadata to the resources you create. For clarity,
     #   this is the structure to assign tags:
-    #   `[\{"Key":"string","Value":"string"\}]`.
+    #   `[{"Key":"string","Value":"string"}]`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6070,7 +6070,7 @@ module Aws::Backup
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

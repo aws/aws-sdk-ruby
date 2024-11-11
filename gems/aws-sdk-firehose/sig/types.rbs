@@ -136,6 +136,7 @@ module Aws::Firehose
 
     class CatalogConfiguration
       attr_accessor catalog_arn: ::String
+      attr_accessor warehouse_location: ::String
       SENSITIVE: []
     end
 
@@ -160,7 +161,7 @@ module Aws::Firehose
 
     class CreateDeliveryStreamInput
       attr_accessor delivery_stream_name: ::String
-      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource")
+      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource" | "DatabaseAsSource")
       attr_accessor kinesis_stream_source_configuration: Types::KinesisStreamSourceConfiguration
       attr_accessor delivery_stream_encryption_configuration_input: Types::DeliveryStreamEncryptionConfigurationInput
       attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration
@@ -175,6 +176,7 @@ module Aws::Firehose
       attr_accessor msk_source_configuration: Types::MSKSourceConfiguration
       attr_accessor snowflake_destination_configuration: Types::SnowflakeDestinationConfiguration
       attr_accessor iceberg_destination_configuration: Types::IcebergDestinationConfiguration
+      attr_accessor database_source_configuration: Types::DatabaseSourceConfiguration
       SENSITIVE: []
     end
 
@@ -188,6 +190,75 @@ module Aws::Firehose
       attr_accessor input_format_configuration: Types::InputFormatConfiguration
       attr_accessor output_format_configuration: Types::OutputFormatConfiguration
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class DatabaseColumnList
+      attr_accessor include: ::Array[::String]
+      attr_accessor exclude: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DatabaseList
+      attr_accessor include: ::Array[::String]
+      attr_accessor exclude: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DatabaseSnapshotInfo
+      attr_accessor id: ::String
+      attr_accessor table: ::String
+      attr_accessor request_timestamp: ::Time
+      attr_accessor requested_by: ("USER" | "FIREHOSE")
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "SUSPENDED")
+      attr_accessor failure_description: Types::FailureDescription
+      SENSITIVE: []
+    end
+
+    class DatabaseSourceAuthenticationConfiguration
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
+      SENSITIVE: []
+    end
+
+    class DatabaseSourceConfiguration
+      attr_accessor type: ("MySQL" | "PostgreSQL")
+      attr_accessor endpoint: ::String
+      attr_accessor port: ::Integer
+      attr_accessor ssl_mode: ("Disabled" | "Enabled")
+      attr_accessor databases: Types::DatabaseList
+      attr_accessor tables: Types::DatabaseTableList
+      attr_accessor columns: Types::DatabaseColumnList
+      attr_accessor surrogate_keys: ::Array[::String]
+      attr_accessor snapshot_watermark_table: ::String
+      attr_accessor database_source_authentication_configuration: Types::DatabaseSourceAuthenticationConfiguration
+      attr_accessor database_source_vpc_configuration: Types::DatabaseSourceVPCConfiguration
+      SENSITIVE: []
+    end
+
+    class DatabaseSourceDescription
+      attr_accessor type: ("MySQL" | "PostgreSQL")
+      attr_accessor endpoint: ::String
+      attr_accessor port: ::Integer
+      attr_accessor ssl_mode: ("Disabled" | "Enabled")
+      attr_accessor databases: Types::DatabaseList
+      attr_accessor tables: Types::DatabaseTableList
+      attr_accessor columns: Types::DatabaseColumnList
+      attr_accessor surrogate_keys: ::Array[::String]
+      attr_accessor snapshot_watermark_table: ::String
+      attr_accessor snapshot_info: ::Array[Types::DatabaseSnapshotInfo]
+      attr_accessor database_source_authentication_configuration: Types::DatabaseSourceAuthenticationConfiguration
+      attr_accessor database_source_vpc_configuration: Types::DatabaseSourceVPCConfiguration
+      SENSITIVE: []
+    end
+
+    class DatabaseSourceVPCConfiguration
+      attr_accessor vpc_endpoint_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseTableList
+      attr_accessor include: ::Array[::String]
+      attr_accessor exclude: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -206,7 +277,7 @@ module Aws::Firehose
       attr_accessor delivery_stream_status: ("CREATING" | "CREATING_FAILED" | "DELETING" | "DELETING_FAILED" | "ACTIVE")
       attr_accessor failure_description: Types::FailureDescription
       attr_accessor delivery_stream_encryption_configuration: Types::DeliveryStreamEncryptionConfiguration
-      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource")
+      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource" | "DatabaseAsSource")
       attr_accessor version_id: ::String
       attr_accessor create_timestamp: ::Time
       attr_accessor last_update_timestamp: ::Time
@@ -267,6 +338,7 @@ module Aws::Firehose
       attr_accessor destination_table_name: ::String
       attr_accessor destination_database_name: ::String
       attr_accessor unique_keys: ::Array[::String]
+      attr_accessor partition_spec: Types::PartitionSpec
       attr_accessor s3_error_output_prefix: ::String
       SENSITIVE: []
     end
@@ -409,7 +481,7 @@ module Aws::Firehose
     end
 
     class FailureDescription
-      attr_accessor type: ("RETIRE_KMS_GRANT_FAILED" | "CREATE_KMS_GRANT_FAILED" | "KMS_ACCESS_DENIED" | "DISABLED_KMS_KEY" | "INVALID_KMS_KEY" | "KMS_KEY_NOT_FOUND" | "KMS_OPT_IN_REQUIRED" | "CREATE_ENI_FAILED" | "DELETE_ENI_FAILED" | "SUBNET_NOT_FOUND" | "SECURITY_GROUP_NOT_FOUND" | "ENI_ACCESS_DENIED" | "SUBNET_ACCESS_DENIED" | "SECURITY_GROUP_ACCESS_DENIED" | "UNKNOWN_ERROR")
+      attr_accessor type: ("VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND" | "VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED" | "RETIRE_KMS_GRANT_FAILED" | "CREATE_KMS_GRANT_FAILED" | "KMS_ACCESS_DENIED" | "DISABLED_KMS_KEY" | "INVALID_KMS_KEY" | "KMS_KEY_NOT_FOUND" | "KMS_OPT_IN_REQUIRED" | "CREATE_ENI_FAILED" | "DELETE_ENI_FAILED" | "SUBNET_NOT_FOUND" | "SECURITY_GROUP_NOT_FOUND" | "ENI_ACCESS_DENIED" | "SUBNET_ACCESS_DENIED" | "SECURITY_GROUP_ACCESS_DENIED" | "UNKNOWN_ERROR")
       attr_accessor details: ::String
       SENSITIVE: []
     end
@@ -499,6 +571,8 @@ module Aws::Firehose
 
     class IcebergDestinationConfiguration
       attr_accessor destination_table_configuration_list: ::Array[Types::DestinationTableConfiguration]
+      attr_accessor schema_evolution_configuration: Types::SchemaEvolutionConfiguration
+      attr_accessor table_creation_configuration: Types::TableCreationConfiguration
       attr_accessor buffering_hints: Types::BufferingHints
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
       attr_accessor processing_configuration: Types::ProcessingConfiguration
@@ -512,6 +586,8 @@ module Aws::Firehose
 
     class IcebergDestinationDescription
       attr_accessor destination_table_configuration_list: ::Array[Types::DestinationTableConfiguration]
+      attr_accessor schema_evolution_configuration: Types::SchemaEvolutionConfiguration
+      attr_accessor table_creation_configuration: Types::TableCreationConfiguration
       attr_accessor buffering_hints: Types::BufferingHints
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
       attr_accessor processing_configuration: Types::ProcessingConfiguration
@@ -525,6 +601,8 @@ module Aws::Firehose
 
     class IcebergDestinationUpdate
       attr_accessor destination_table_configuration_list: ::Array[Types::DestinationTableConfiguration]
+      attr_accessor schema_evolution_configuration: Types::SchemaEvolutionConfiguration
+      attr_accessor table_creation_configuration: Types::TableCreationConfiguration
       attr_accessor buffering_hints: Types::BufferingHints
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
       attr_accessor processing_configuration: Types::ProcessingConfiguration
@@ -583,7 +661,7 @@ module Aws::Firehose
 
     class ListDeliveryStreamsInput
       attr_accessor limit: ::Integer
-      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource")
+      attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource" | "DatabaseAsSource")
       attr_accessor exclusive_start_delivery_stream_name: ::String
       SENSITIVE: []
     end
@@ -657,6 +735,16 @@ module Aws::Firehose
       attr_accessor enable_dictionary_compression: bool
       attr_accessor max_padding_bytes: ::Integer
       attr_accessor writer_version: ("V1" | "V2")
+      SENSITIVE: []
+    end
+
+    class PartitionField
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class PartitionSpec
+      attr_accessor identity: ::Array[Types::PartitionField]
       SENSITIVE: []
     end
 
@@ -828,6 +916,11 @@ module Aws::Firehose
       SENSITIVE: []
     end
 
+    class SchemaEvolutionConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class SecretsManagerConfiguration
       attr_accessor secret_arn: ::String
       attr_accessor role_arn: ::String
@@ -940,6 +1033,7 @@ module Aws::Firehose
     class SourceDescription
       attr_accessor kinesis_stream_source_description: Types::KinesisStreamSourceDescription
       attr_accessor msk_source_description: Types::MSKSourceDescription
+      attr_accessor database_source_description: Types::DatabaseSourceDescription
       SENSITIVE: []
     end
 
@@ -1014,6 +1108,11 @@ module Aws::Firehose
     end
 
     class StopDeliveryStreamEncryptionOutput < Aws::EmptyStructure
+    end
+
+    class TableCreationConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
     end
 
     class Tag

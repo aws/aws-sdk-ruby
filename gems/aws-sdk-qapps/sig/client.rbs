@@ -89,6 +89,39 @@ module Aws
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#batch_create_category-instance_method
+      def batch_create_category: (
+                                   instance_id: ::String,
+                                   categories: Array[
+                                     {
+                                       id: ::String?,
+                                       title: ::String,
+                                       color: ::String?
+                                     },
+                                   ]
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#batch_delete_category-instance_method
+      def batch_delete_category: (
+                                   instance_id: ::String,
+                                   categories: Array[::String]
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#batch_update_category-instance_method
+      def batch_update_category: (
+                                   instance_id: ::String,
+                                   categories: Array[
+                                     {
+                                       id: ::String,
+                                       title: ::String,
+                                       color: ::String?
+                                     },
+                                   ]
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _CreateLibraryItemResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLibraryItemOutput]
         def library_item_id: () -> ::String
@@ -345,6 +378,16 @@ module Aws
                              ?session_id: ::String
                            ) -> _ImportDocumentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportDocumentResponseSuccess
+
+      interface _ListCategoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCategoriesOutput]
+        def categories: () -> ::Array[Types::Category]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#list_categories-instance_method
+      def list_categories: (
+                             instance_id: ::String
+                           ) -> _ListCategoriesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCategoriesResponseSuccess
 
       interface _ListLibraryItemsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLibraryItemsOutput]

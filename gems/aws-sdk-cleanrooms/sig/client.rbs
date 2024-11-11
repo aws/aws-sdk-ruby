@@ -133,7 +133,7 @@ module Aws
                                       ?analysis_parameters: Array[
                                         {
                                           name: ::String,
-                                          type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE"),
+                                          type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE" | "BINARY" | "BYTE" | "CHARACTER" | "DOUBLE" | "FLOAT" | "INT" | "LONG" | "NUMERIC" | "SHORT" | "STRING" | "TIMESTAMP_LTZ" | "TIMESTAMP_NTZ" | "TINYINT"),
                                           default_value: ::String?
                                         },
                                       ]
@@ -150,17 +150,31 @@ module Aws
                                     {
                                       account_id: ::String,
                                       member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")],
+                                      ml_member_abilities: {
+                                        custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
+                                      }?,
                                       display_name: ::String,
                                       payment_configuration: {
                                         query_compute: {
                                           is_responsible: bool
-                                        }
+                                        },
+                                        machine_learning: {
+                                          model_training: {
+                                            is_responsible: bool
+                                          }?,
+                                          model_inference: {
+                                            is_responsible: bool
+                                          }?
+                                        }?
                                       }?
                                     },
                                   ],
                                   name: ::String,
                                   description: ::String,
                                   creator_member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")],
+                                  ?creator_ml_member_abilities: {
+                                    custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
+                                  },
                                   creator_display_name: ::String,
                                   ?data_encryption_metadata: {
                                     allow_cleartext: bool,
@@ -173,8 +187,17 @@ module Aws
                                   ?creator_payment_configuration: {
                                     query_compute: {
                                       is_responsible: bool
-                                    }
-                                  }
+                                    },
+                                    machine_learning: {
+                                      model_training: {
+                                        is_responsible: bool
+                                      }?,
+                                      model_inference: {
+                                        is_responsible: bool
+                                      }?
+                                    }?
+                                  },
+                                  ?analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
                                 ) -> _CreateCollaborationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollaborationResponseSuccess
 
@@ -363,7 +386,8 @@ module Aws
                                    s3: {
                                      result_format: ("CSV" | "PARQUET"),
                                      bucket: ::String,
-                                     key_prefix: ::String?
+                                     key_prefix: ::String?,
+                                     single_file_output: bool?
                                    }?
                                  },
                                  role_arn: ::String?
@@ -371,7 +395,15 @@ module Aws
                                ?payment_configuration: {
                                  query_compute: {
                                    is_responsible: bool
-                                 }
+                                 },
+                                 machine_learning: {
+                                   model_training: {
+                                     is_responsible: bool
+                                   }?,
+                                   model_inference: {
+                                     is_responsible: bool
+                                   }?
+                                 }?
                                }
                              ) -> _CreateMembershipResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMembershipResponseSuccess
@@ -1002,12 +1034,19 @@ module Aws
                                        s3: {
                                          result_format: ("CSV" | "PARQUET"),
                                          bucket: ::String,
-                                         key_prefix: ::String?
+                                         key_prefix: ::String?,
+                                         single_file_output: bool?
                                        }?,
                                        member: {
                                          account_id: ::String
                                        }?
                                      }
+                                   },
+                                   ?compute_configuration: {
+                                     worker: {
+                                       type: ("CR.1X" | "CR.4X")?,
+                                       number: ::Integer?
+                                     }?
                                    }
                                  ) -> _StartProtectedQueryResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProtectedQueryResponseSuccess
@@ -1219,7 +1258,8 @@ module Aws
                                    s3: {
                                      result_format: ("CSV" | "PARQUET"),
                                      bucket: ::String,
-                                     key_prefix: ::String?
+                                     key_prefix: ::String?,
+                                     single_file_output: bool?
                                    }?
                                  },
                                  role_arn: ::String?

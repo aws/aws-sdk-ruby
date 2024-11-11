@@ -1379,9 +1379,9 @@ module Aws::IoT
     #
     # On Linux and OS X, the command is:
     #
-    # `$ ls my-csr-directory/ | xargs -I \{\} aws iot
+    # `$ ls my-csr-directory/ | xargs -I {} aws iot
     # create-certificate-from-csr --certificate-signing-request
-    # file://my-csr-directory/\{\}`
+    # file://my-csr-directory/{}`
     #
     # This command lists all of the CSRs in my-csr-directory and pipes each
     # CSR file name to the `aws iot create-certificate-from-csr` Amazon Web
@@ -1391,15 +1391,15 @@ module Aws::IoT
     # You can also run the `aws iot create-certificate-from-csr` part of the
     # command in parallel to speed up the certificate creation process:
     #
-    # `$ ls my-csr-directory/ | xargs -P 10 -I \{\} aws iot
+    # `$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot
     # create-certificate-from-csr --certificate-signing-request
-    # file://my-csr-directory/\{\} `
+    # file://my-csr-directory/{} `
     #
     # On Windows PowerShell, the command to create certificates for all CSRs
     # in my-csr-directory is:
     #
-    # `> ls -Name my-csr-directory | %\{aws iot create-certificate-from-csr
-    # --certificate-signing-request file://my-csr-directory/$_\} `
+    # `> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr
+    # --certificate-signing-request file://my-csr-directory/$_} `
     #
     # On a Windows command prompt, the command to create certificates for
     # all CSRs in my-csr-directory is:
@@ -3523,7 +3523,7 @@ module Aws::IoT
     #   The attribute payload, which consists of up to three name/value pairs
     #   in a JSON document. For example:
     #
-    #   `\{"attributes":\{"string1":"string2"\}\}`
+    #   `{"attributes":{"string1":"string2"}}`
     #
     # @option params [String] :billing_group_name
     #   The name of the billing group the thing will be added to.
@@ -15337,7 +15337,7 @@ module Aws::IoT
     #   A list of thing attributes, a JSON string containing name-value pairs.
     #   For example:
     #
-    #   `\{"attributes":\{"name1":"value2"\}\}`
+    #   `{"attributes":{"name1":"value2"}}`
     #
     #   This data is used to add new attributes or update existing attributes.
     #
@@ -15613,7 +15613,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

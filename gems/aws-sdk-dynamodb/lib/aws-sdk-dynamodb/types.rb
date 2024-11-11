@@ -132,13 +132,13 @@ module Aws::DynamoDB
     # @!attribute [rw] m
     #   An attribute of type Map. For example:
     #
-    #   `"M": \{"Name": \{"S": "Joe"\}, "Age": \{"N": "35"\}\}`
+    #   `"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}`
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] l
     #   An attribute of type List. For example:
     #
-    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N": "3.14159"\}]`
+    #   `"L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}]`
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] null
@@ -775,7 +775,7 @@ module Aws::DynamoDB
     #     Developer Guide*). To work around this, you could specify the
     #     following for `ExpressionAttributeNames`:
     #
-    #     * `\{"#P":"Percentile"\}`
+    #     * `{"#P":"Percentile"}`
     #
     #     ^
     #
@@ -1301,9 +1301,9 @@ module Aws::DynamoDB
     #     of type String, Number, Binary, String Set, Number Set, or Binary
     #     Set. If an item contains an `AttributeValue` element of a
     #     different type than the one provided in the request, the value
-    #     does not match. For example, `\{"S":"6"\}` does not equal
-    #     `\{"N":"6"\}`. Also, `\{"N":"6"\}` does not equal `\{"NS":["6",
-    #     "2", "1"]\}`.
+    #     does not match. For example, `{"S":"6"}` does not equal
+    #     `{"N":"6"}`. Also, `{"N":"6"}` does not equal `{"NS":["6", "2",
+    #     "1"]}`.
     #
     #
     #
@@ -1314,8 +1314,8 @@ module Aws::DynamoDB
     #     String, Number, Binary, String Set, Number Set, or Binary Set. If
     #     an item contains an `AttributeValue` of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not equal `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not equal `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1325,8 +1325,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1335,9 +1335,9 @@ module Aws::DynamoDB
     #     `AttributeValueList` can contain only one `AttributeValue` of type
     #     String, Number, or Binary (not a set type). If an item contains an
     #     `AttributeValue` element of a different type than the one provided
-    #     in the request, the value does not match. For example,
-    #     `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also, `\{"N":"6"\}`
-    #     does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     in the request, the value does not match. For example, `{"S":"6"}`
+    #     does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to
+    #     `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1347,8 +1347,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1358,8 +1358,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1444,9 +1444,9 @@ module Aws::DynamoDB
     #     equal to, the first element and less than, or equal to, the second
     #     element. If an item contains an `AttributeValue` element of a
     #     different type than the one provided in the request, the value
-    #     does not match. For example, `\{"S":"6"\}` does not compare to
-    #     `\{"N":"6"\}`. Also, `\{"N":"6"\}` does not compare to
-    #     `\{"NS":["6", "2", "1"]\}`
+    #     does not match. For example, `{"S":"6"}` does not compare to
+    #     `{"N":"6"}`. Also, `{"N":"6"}` does not compare to `{"NS":["6",
+    #     "2", "1"]}`
     #
     #   For usage examples of `AttributeValueList` and `ComparisonOperator`,
     #   see [Legacy Conditional Parameters][1] in the *Amazon DynamoDB
@@ -2374,7 +2374,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -2413,8 +2413,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -3336,9 +3336,9 @@ module Aws::DynamoDB
     #     of type String, Number, Binary, String Set, Number Set, or Binary
     #     Set. If an item contains an `AttributeValue` element of a
     #     different type than the one provided in the request, the value
-    #     does not match. For example, `\{"S":"6"\}` does not equal
-    #     `\{"N":"6"\}`. Also, `\{"N":"6"\}` does not equal `\{"NS":["6",
-    #     "2", "1"]\}`.
+    #     does not match. For example, `{"S":"6"}` does not equal
+    #     `{"N":"6"}`. Also, `{"N":"6"}` does not equal `{"NS":["6", "2",
+    #     "1"]}`.
     #
     #
     #
@@ -3349,8 +3349,8 @@ module Aws::DynamoDB
     #     String, Number, Binary, String Set, Number Set, or Binary Set. If
     #     an item contains an `AttributeValue` of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not equal `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not equal `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3360,8 +3360,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3370,9 +3370,9 @@ module Aws::DynamoDB
     #     `AttributeValueList` can contain only one `AttributeValue` of type
     #     String, Number, or Binary (not a set type). If an item contains an
     #     `AttributeValue` element of a different type than the one provided
-    #     in the request, the value does not match. For example,
-    #     `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also, `\{"N":"6"\}`
-    #     does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     in the request, the value does not match. For example, `{"S":"6"}`
+    #     does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to
+    #     `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3382,8 +3382,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3393,8 +3393,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3479,9 +3479,9 @@ module Aws::DynamoDB
     #     equal to, the first element and less than, or equal to, the second
     #     element. If an item contains an `AttributeValue` element of a
     #     different type than the one provided in the request, the value
-    #     does not match. For example, `\{"S":"6"\}` does not compare to
-    #     `\{"N":"6"\}`. Also, `\{"N":"6"\}` does not compare to
-    #     `\{"NS":["6", "2", "1"]\}`
+    #     does not match. For example, `{"S":"6"}` does not compare to
+    #     `{"N":"6"}`. Also, `{"N":"6"}` does not compare to `{"NS":["6",
+    #     "2", "1"]}`
     #   @return [String]
     #
     # @!attribute [rw] attribute_value_list
@@ -3967,7 +3967,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -5066,7 +5066,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -6259,7 +6259,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -6298,8 +6298,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -6836,7 +6836,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -6875,8 +6875,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -8174,7 +8174,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -8213,8 +8213,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -10056,7 +10056,7 @@ module Aws::DynamoDB
     #   Developer Guide*.) To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -10096,8 +10096,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.166.0 (2024-10-30)
+------------------
+
+* Feature - This release supports service deployments and service revisions which provide a comprehensive view of your Amazon ECS service history.
+
+1.165.0 (2024-10-24)
+------------------
+
+* Feature - This release adds support for EBS volumes attached to Amazon ECS Windows tasks running on EC2 instances.
+
 1.164.0 (2024-10-18)
 ------------------
 

@@ -4951,12 +4951,12 @@ module Aws::QuickSight
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme:
-    #   `"AccountCustomization": \{ "DefaultTheme":
-    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" \}`. Or, you can add a
-    #   custom theme by specifying `"AccountCustomization": \{
+    #   `"AccountCustomization": { "DefaultTheme":
+    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" }`. Or, you can add a
+    #   custom theme by specifying `"AccountCustomization": {
     #   "DefaultTheme":
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
-    #   \}`.
+    #   }`.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] tags
@@ -11664,7 +11664,7 @@ module Aws::QuickSight
     #   `DescribeAssetBundleExportJob` again for a fresh URL if needed.
     #
     #   The downloaded asset bundle is a zip file named
-    #   `assetbundle-\{jobId\}.qs`. The file has a `.qs` extension.
+    #   `assetbundle-{jobId}.qs`. The file has a `.qs` extension.
     #
     #   This URL can't be used in a `StartAssetBundleImportJob` API call
     #   and should only be used for download purposes.
@@ -22245,6 +22245,38 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An object that contains information needed to create a data source
+    # connection that uses OAuth client credentials. This option is
+    # available for data source connections that are made with Snowflake and
+    # Starburst.
+    #
+    # @!attribute [rw] token_provider_url
+    #   The token endpoint URL of the identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_scope
+    #   The OAuth scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_vpc_connection_properties
+    #   VPC connection properties.
+    #   @return [Types::VpcConnectionProperties]
+    #
+    # @!attribute [rw] identity_provider_resource_uri
+    #   The resource uri of the identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OAuthParameters AWS API Documentation
+    #
+    class OAuthParameters < Struct.new(
+      :token_provider_url,
+      :o_auth_scope,
+      :identity_provider_vpc_connection_properties,
+      :identity_provider_resource_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for Oracle.
     #
     # @!attribute [rw] host
@@ -26311,9 +26343,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] filters
     #   The filters to apply to the search. Currently, you can search only
-    #   by user name, for example, `"Filters": [ \{ "Name":
+    #   by user name, for example, `"Filters": [ { "Name":
     #   "QUICKSIGHT_USER", "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" \} ]`
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]`
     #   @return [Array<Types::DashboardSearchFilter>]
     #
     # @!attribute [rw] next_token
@@ -26480,9 +26512,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] filters
     #   The filters to apply to the search. Currently, you can search only
-    #   by the parent folder ARN. For example, `"Filters": [ \{ "Name":
+    #   by the parent folder ARN. For example, `"Filters": [ { "Name":
     #   "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" \} ]`.
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" } ]`.
     #   @return [Array<Types::FolderSearchFilter>]
     #
     # @!attribute [rw] next_token
@@ -27800,12 +27832,29 @@ module Aws::QuickSight
     #   Warehouse.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_type
+    #   The authentication type that you want to use for your connection.
+    #   This parameter accepts OAuth and non-OAuth authentication types.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_access_control_role
+    #   The database access control role.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_parameters
+    #   An object that contains information needed to create a data source
+    #   connection between an Amazon QuickSight account and Snowflake.
+    #   @return [Types::OAuthParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnowflakeParameters AWS API Documentation
     #
     class SnowflakeParameters < Struct.new(
       :host,
       :database,
-      :warehouse)
+      :warehouse,
+      :authentication_type,
+      :database_access_control_role,
+      :o_auth_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27916,13 +27965,30 @@ module Aws::QuickSight
     #   The product type for the Starburst data source.
     #   @return [String]
     #
+    # @!attribute [rw] database_access_control_role
+    #   The database access control role.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type that you want to use for your connection.
+    #   This parameter accepts OAuth and non-OAuth authentication types.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_parameters
+    #   An object that contains information needed to create a data source
+    #   connection between an Amazon QuickSight account and Starburst.
+    #   @return [Types::OAuthParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StarburstParameters AWS API Documentation
     #
     class StarburstParameters < Struct.new(
       :host,
       :port,
       :catalog,
-      :product_type)
+      :product_type,
+      :database_access_control_role,
+      :authentication_type,
+      :o_auth_parameters)
       SENSITIVE = []
       include Aws::Structure
     end

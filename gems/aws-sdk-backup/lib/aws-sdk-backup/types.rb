@@ -778,8 +778,8 @@ module Aws::Backup
     #
     # @!attribute [rw] list_of_tags
     #   The conditions that you define to assign resources to your backup
-    #   plans using tags. For example, `"StringEquals": \{ "ConditionKey":
-    #   "backup", "ConditionValue": "daily"\}`.
+    #   plans using tags. For example, `"StringEquals": { "ConditionKey":
+    #   "backup", "ConditionValue": "daily"}`.
     #
     #   `ListOfTags` supports only `StringEquals`. Condition operators are
     #   case sensitive.
@@ -800,8 +800,8 @@ module Aws::Backup
     #
     # @!attribute [rw] conditions
     #   The conditions that you define to assign resources to your backup
-    #   plans using tags. For example, `"StringEquals": \{ "ConditionKey":
-    #   "aws:ResourceTag/backup", "ConditionValue": "daily" \}`.
+    #   plans using tags. For example, `"StringEquals": { "ConditionKey":
+    #   "aws:ResourceTag/backup", "ConditionValue": "daily" }`.
     #
     #   `Conditions` supports `StringEquals`, `StringLike`,
     #   `StringNotEquals`, and `StringNotLike`. Condition operators are case
@@ -1248,7 +1248,7 @@ module Aws::Backup
     #   empty string when included in a CloudFormation template).
     #
     #   The structure to assign a tag is:
-    #   `[\{"Key":"string","Value":"string"\}]`.
+    #   `[{"Key":"string","Value":"string"}]`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ControlScope AWS API Documentation
@@ -4262,8 +4262,7 @@ module Aws::Backup
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 128.
     #
-    #   Pattern:
-    #   `^(?![aA]\{1\}[wW]\{1\}[sS]\{1\}:)([\p\{L\}\p\{Z\}\p\{N\}_.:/=+\-@]+)$`
+    #   Pattern: `^(?![aA]{1}[wW]{1}[sS]{1}:)([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$`
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -4271,7 +4270,7 @@ module Aws::Backup
     #
     #   Length Constraints: Maximum length of 256.
     #
-    #   Pattern: `^([\p\{L\}\p\{Z\}\p\{N\}_.:/=+\-@]*)$`
+    #   Pattern: `^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/KeyValue AWS API Documentation
@@ -7665,8 +7664,8 @@ module Aws::Backup
     #
     # @!attribute [rw] protected_resource_conditions
     #   If you have included the wildcard in ProtectedResourceArns, you can
-    #   include resource conditions, such as `ProtectedResourceConditions:
-    #   \{ StringEquals: [\{ key: "XXXX", value: "YYYY" \}]`.
+    #   include resource conditions, such as `ProtectedResourceConditions: {
+    #   StringEquals: [{ key: "XXXX", value: "YYYY" }]`.
     #   @return [Types::ProtectedResourceConditions]
     #
     # @!attribute [rw] protected_resource_type
@@ -8397,7 +8396,7 @@ module Aws::Backup
     #   Key-value pairs that are used to help organize your resources. You
     #   can assign your own metadata to the resources you create. For
     #   clarity, this is the structure to assign tags:
-    #   `[\{"Key":"string","Value":"string"\}]`.
+    #   `[{"Key":"string","Value":"string"}]`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/TagResourceInput AWS API Documentation

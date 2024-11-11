@@ -1,0 +1,171 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GeoMaps
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoMaps/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _GetGlyphsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGlyphsResponse]
+        def blob: () -> ::IO
+        def content_type: () -> ::String
+        def cache_control: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoMaps/Client.html#get_glyphs-instance_method
+      def get_glyphs: (
+                        font_stack: ::String,
+                        font_unicode_range: ::String
+                      ) ?{ (*untyped) -> void } -> _GetGlyphsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetGlyphsResponseSuccess
+
+      interface _GetSpritesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSpritesResponse]
+        def blob: () -> ::IO
+        def content_type: () -> ::String
+        def cache_control: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoMaps/Client.html#get_sprites-instance_method
+      def get_sprites: (
+                         file_name: ::String,
+                         style: ("Standard" | "Monochrome" | "Hybrid" | "Satellite"),
+                         color_scheme: ("Light" | "Dark"),
+                         variant: ("Default")
+                       ) ?{ (*untyped) -> void } -> _GetSpritesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetSpritesResponseSuccess
+
+      interface _GetStaticMapResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStaticMapResponse]
+        def blob: () -> ::IO
+        def content_type: () -> ::String
+        def cache_control: () -> ::String
+        def etag: () -> ::String
+        def pricing_bucket: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoMaps/Client.html#get_static_map-instance_method
+      def get_static_map: (
+                            ?bounding_box: ::String,
+                            ?bounded_positions: ::String,
+                            ?center: ::String,
+                            ?compact_overlay: ::String,
+                            ?geo_json_overlay: ::String,
+                            height: ::Integer,
+                            ?key: ::String,
+                            ?padding: ::Integer,
+                            ?radius: ::Integer,
+                            file_name: ::String,
+                            ?scale_bar_unit: ("Kilometers" | "KilometersMiles" | "Miles" | "MilesKilometers"),
+                            ?style: ("Satellite"),
+                            width: ::Integer,
+                            ?zoom: ::Float
+                          ) ?{ (*untyped) -> void } -> _GetStaticMapResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetStaticMapResponseSuccess
+
+      interface _GetStyleDescriptorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStyleDescriptorResponse]
+        def blob: () -> ::IO
+        def content_type: () -> ::String
+        def cache_control: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoMaps/Client.html#get_style_descriptor-instance_method
+      def get_style_descriptor: (
+                                  style: ("Standard" | "Monochrome" | "Hybrid" | "Satellite"),
+                                  ?color_scheme: ("Light" | "Dark"),
+                                  ?political_view: ::String,
+                                  ?key: ::String
+                                ) ?{ (*untyped) -> void } -> _GetStyleDescriptorResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetStyleDescriptorResponseSuccess
+
+      interface _GetTileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTileResponse]
+        def blob: () -> ::IO
+        def content_type: () -> ::String
+        def cache_control: () -> ::String
+        def etag: () -> ::String
+        def pricing_bucket: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoMaps/Client.html#get_tile-instance_method
+      def get_tile: (
+                      tileset: ::String,
+                      z: ::String,
+                      x: ::String,
+                      y: ::String,
+                      ?key: ::String
+                    ) ?{ (*untyped) -> void } -> _GetTileResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetTileResponseSuccess
+    end
+  end
+end
+

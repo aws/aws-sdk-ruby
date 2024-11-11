@@ -41,6 +41,11 @@ module Aws::ControlCatalog
       SENSITIVE: []
     end
 
+    class ControlParameter
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class ControlSummary
       attr_accessor arn: ::String
       attr_accessor name: ::String
@@ -73,6 +78,13 @@ module Aws::ControlCatalog
       attr_accessor description: ::String
       attr_accessor behavior: ("PREVENTIVE" | "PROACTIVE" | "DETECTIVE")
       attr_accessor region_configuration: Types::RegionConfiguration
+      attr_accessor implementation: Types::ImplementationDetails
+      attr_accessor parameters: ::Array[Types::ControlParameter]
+      SENSITIVE: []
+    end
+
+    class ImplementationDetails
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 

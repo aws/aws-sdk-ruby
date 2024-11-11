@@ -850,7 +850,7 @@ module Aws::FSx
     #   `CompletionReport`. `REPORT_CSV_20191124` is the only format
     #   currently supported. When `Format` is set to `REPORT_CSV_20191124`,
     #   the `CompletionReport` is provided in CSV format, and is delivered
-    #   to `\{path\}/task-\{id\}/failures.csv`.
+    #   to `{path}/task-{id}/failures.csv`.
     #   @return [String]
     #
     # @!attribute [rw] scope

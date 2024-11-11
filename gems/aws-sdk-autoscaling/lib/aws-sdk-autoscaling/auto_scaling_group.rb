@@ -243,6 +243,12 @@ module Aws::AutoScaling
       data[:instance_maintenance_policy]
     end
 
+    # The instance capacity distribution across Availability Zones.
+    # @return [Types::AvailabilityZoneDistribution]
+    def availability_zone_distribution
+      data[:availability_zone_distribution]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1273,6 +1279,9 @@ module Aws::AutoScaling
     #       min_healthy_percentage: 1,
     #       max_healthy_percentage: 1,
     #     },
+    #     availability_zone_distribution: {
+    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1470,6 +1479,8 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
+    # @option options [Types::AvailabilityZoneDistribution] :availability_zone_distribution
+    #   The instance capacity distribution across Availability Zones.
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)

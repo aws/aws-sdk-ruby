@@ -1280,6 +1280,7 @@
         "resourceIdentifier":{"shape":"ResourceIdentifier"}
       }
     },
+    "Baseline":{"type":"boolean"},
     "Boolean":{"type":"boolean"},
     "CancelExportTaskRequest":{
       "type":"structure",
@@ -1983,7 +1984,7 @@
       "type":"map",
       "key":{"shape":"EntityKeyAttributesKey"},
       "value":{"shape":"EntityKeyAttributesValue"},
-      "max":3,
+      "max":4,
       "min":2
     },
     "EntityKeyAttributesKey":{
@@ -2331,6 +2332,10 @@
       "value":{"shape":"Count"}
     },
     "IncludeLinkedAccounts":{"type":"boolean"},
+    "InferredTokenName":{
+      "type":"string",
+      "min":1
+    },
     "InheritedProperties":{
       "type":"list",
       "member":{"shape":"InheritedProperty"}
@@ -2769,7 +2774,8 @@
         "dynamicTokenPosition":{"shape":"DynamicTokenPosition"},
         "isDynamic":{"shape":"Boolean"},
         "tokenString":{"shape":"TokenString"},
-        "enumerations":{"shape":"Enumerations"}
+        "enumerations":{"shape":"Enumerations"},
+        "inferredTokenName":{"shape":"InferredTokenName"}
       }
     },
     "PatternTokens":{
@@ -3595,7 +3601,8 @@
         "patternId":{"shape":"PatternId"},
         "anomalyDetectorArn":{"shape":"AnomalyDetectorArn"},
         "suppressionType":{"shape":"SuppressionType"},
-        "suppressionPeriod":{"shape":"SuppressionPeriod"}
+        "suppressionPeriod":{"shape":"SuppressionPeriod"},
+        "baseline":{"shape":"Baseline"}
       }
     },
     "UpdateDeliveryConfigurationRequest":{

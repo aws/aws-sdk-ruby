@@ -248,7 +248,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] certificate_wallet
     #   The location of an imported Oracle Wallet certificate for use with
-    #   SSL. Example: `filebase64("$\{path.root\}/rds-ca-2019-root.sso")`
+    #   SSL. Example: `filebase64("${path.root}/rds-ca-2019-root.sso")`
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -842,8 +842,8 @@ module Aws::DatabaseMigrationService
     #   Shorthand syntax for these settings is as follows:
     #   `ServiceAccessRoleArn=string,BucketName=string`
     #
-    #   JSON syntax for these settings is as follows: `\{
-    #   "ServiceAccessRoleArn": "string", "BucketName": "string", \} `
+    #   JSON syntax for these settings is as follows: `{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string", } `
     #   @return [Types::DmsTransferSettings]
     #
     # @!attribute [rw] mongo_db_settings
@@ -6324,7 +6324,7 @@ module Aws::DatabaseMigrationService
     #   SSL. Provide the name of a `.sso` file using the `fileb://` prefix.
     #   You can't provide the certificate inline.
     #
-    #   Example: `filebase64("$\{path.root\}/rds-ca-2019-root.sso")`
+    #   Example: `filebase64("${path.root}/rds-ca-2019-root.sso")`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7513,8 +7513,8 @@ module Aws::DatabaseMigrationService
     #   Shorthand syntax for these settings is as follows:
     #   `ServiceAccessRoleArn=string ,BucketName=string`
     #
-    #   JSON syntax for these settings is as follows: `\{
-    #   "ServiceAccessRoleArn": "string", "BucketName": "string"\} `
+    #   JSON syntax for these settings is as follows: `{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string"} `
     #   @return [Types::DmsTransferSettings]
     #
     # @!attribute [rw] mongo_db_settings
@@ -7683,16 +7683,16 @@ module Aws::DatabaseMigrationService
     #     settings with different names.
     #
     #   For example, if you call `create-endpoint ... --endpoint-settings
-    #   '\{"a":1\}' ...`, the endpoint has the following endpoint settings:
-    #   `'\{"a":1\}'`. If you then call `modify-endpoint ...
-    #   --endpoint-settings '\{"b":2\}' ...` for the same endpoint, the
-    #   endpoint has the following settings: `'\{"a":1,"b":2\}'`.
+    #   '{"a":1}' ...`, the endpoint has the following endpoint settings:
+    #   `'{"a":1}'`. If you then call `modify-endpoint ...
+    #   --endpoint-settings '{"b":2}' ...` for the same endpoint, the
+    #   endpoint has the following settings: `'{"a":1,"b":2}'`.
     #
     #   However, suppose that you follow this with a call to
-    #   `modify-endpoint ... --endpoint-settings '\{"b":2\}'
-    #   --exact-settings ...` for that same endpoint again. Then the
-    #   endpoint has the following settings: `'\{"b":2\}'`. All existing
-    #   settings are replaced with the exact settings that you specify.
+    #   `modify-endpoint ... --endpoint-settings '{"b":2}' --exact-settings
+    #   ...` for that same endpoint again. Then the endpoint has the
+    #   following settings: `'{"b":2}'`. All existing settings are replaced
+    #   with the exact settings that you specify.
     #   @return [Boolean]
     #
     # @!attribute [rw] gcp_my_sql_settings
@@ -12545,10 +12545,10 @@ module Aws::DatabaseMigrationService
     #   this parameter when `DatePartitionedEnabled` is set to `true`, as
     #   shown in the following example.
     #
-    #   `s3-settings='\{"DatePartitionEnabled": true,
+    #   `s3-settings='{"DatePartitionEnabled": true,
     #   "DatePartitionSequence": "YYYYMMDDHH", "DatePartitionDelimiter":
     #   "SLASH", "DatePartitionTimezone":"Asia/Seoul", "BucketName":
-    #   "dms-nattarat-test"\}'`
+    #   "dms-nattarat-test"}'`
     #   @return [String]
     #
     # @!attribute [rw] add_trailing_padding_character
@@ -12560,8 +12560,7 @@ module Aws::DatabaseMigrationService
     #   To specify a bucket owner and prevent sniping, you can use the
     #   `ExpectedBucketOwner` endpoint setting.
     #
-    #   Example: `--s3-settings='\{"ExpectedBucketOwner":
-    #   "AWS_Account_ID"\}'`
+    #   Example: `--s3-settings='{"ExpectedBucketOwner": "AWS_Account_ID"}'`
     #
     #   When you make a request to test a connection or perform a migration,
     #   S3 checks the account ID of the bucket owner against the specified
@@ -13857,7 +13856,7 @@ module Aws::DatabaseMigrationService
     #   "dms:". The string can only contain only the set of Unicode
     #   letters, digits, white-space, '\_', '.', '/', '=', '+',
     #   '-' (Java regular expressions:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -13866,7 +13865,7 @@ module Aws::DatabaseMigrationService
     #   "aws:" or "dms:". The string can only contain only the set of
     #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
     #   '+', '-' (Java regular expressions:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] resource_arn

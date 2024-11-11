@@ -13,6 +13,18 @@ module Aws::MediaPackageV2
       SENSITIVE: []
     end
 
+    class CancelHarvestJobRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor harvest_job_name: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CancelHarvestJobResponse < Aws::EmptyStructure
+    end
+
     class ChannelGroupListConfiguration
       attr_accessor channel_group_name: ::String
       attr_accessor arn: ::String
@@ -95,6 +107,39 @@ module Aws::MediaPackageV2
       attr_accessor scte_dash: Types::ScteDash
       attr_accessor drm_signaling: ("INDIVIDUAL" | "REFERENCED")
       attr_accessor utc_timing: Types::DashUtcTiming
+      SENSITIVE: []
+    end
+
+    class CreateHarvestJobRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor description: ::String
+      attr_accessor harvested_manifests: Types::HarvestedManifests
+      attr_accessor schedule_configuration: Types::HarvesterScheduleConfiguration
+      attr_accessor destination: Types::Destination
+      attr_accessor client_token: ::String
+      attr_accessor harvest_job_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateHarvestJobResponse
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor destination: Types::Destination
+      attr_accessor harvest_job_name: ::String
+      attr_accessor harvested_manifests: Types::HarvestedManifests
+      attr_accessor description: ::String
+      attr_accessor schedule_configuration: Types::HarvesterScheduleConfiguration
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+      attr_accessor error_message: ::String
+      attr_accessor etag: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -209,6 +254,11 @@ module Aws::MediaPackageV2
     class DeleteOriginEndpointResponse < Aws::EmptyStructure
     end
 
+    class Destination
+      attr_accessor s3_destination: Types::S3DestinationConfig
+      SENSITIVE: []
+    end
+
     class Encryption
       attr_accessor constant_initialization_vector: ::String
       attr_accessor encryption_method: Types::EncryptionMethod
@@ -309,6 +359,33 @@ module Aws::MediaPackageV2
       SENSITIVE: []
     end
 
+    class GetHarvestJobRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor harvest_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetHarvestJobResponse
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor destination: Types::Destination
+      attr_accessor harvest_job_name: ::String
+      attr_accessor harvested_manifests: Types::HarvestedManifests
+      attr_accessor description: ::String
+      attr_accessor schedule_configuration: Types::HarvesterScheduleConfiguration
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+      attr_accessor error_message: ::String
+      attr_accessor etag: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetHlsManifestConfiguration
       attr_accessor manifest_name: ::String
       attr_accessor url: ::String
@@ -375,6 +452,52 @@ module Aws::MediaPackageV2
       SENSITIVE: []
     end
 
+    class HarvestJob
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor destination: Types::Destination
+      attr_accessor harvest_job_name: ::String
+      attr_accessor harvested_manifests: Types::HarvestedManifests
+      attr_accessor description: ::String
+      attr_accessor schedule_configuration: Types::HarvesterScheduleConfiguration
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+      attr_accessor error_message: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class HarvestedDashManifest
+      attr_accessor manifest_name: ::String
+      SENSITIVE: []
+    end
+
+    class HarvestedHlsManifest
+      attr_accessor manifest_name: ::String
+      SENSITIVE: []
+    end
+
+    class HarvestedLowLatencyHlsManifest
+      attr_accessor manifest_name: ::String
+      SENSITIVE: []
+    end
+
+    class HarvestedManifests
+      attr_accessor hls_manifests: ::Array[Types::HarvestedHlsManifest]
+      attr_accessor dash_manifests: ::Array[Types::HarvestedDashManifest]
+      attr_accessor low_latency_hls_manifests: ::Array[Types::HarvestedLowLatencyHlsManifest]
+      SENSITIVE: []
+    end
+
+    class HarvesterScheduleConfiguration
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
     class IngestEndpoint
       attr_accessor id: ::String
       attr_accessor url: ::String
@@ -414,6 +537,22 @@ module Aws::MediaPackageV2
     class ListDashManifestConfiguration
       attr_accessor manifest_name: ::String
       attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ListHarvestJobsRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHarvestJobsResponse
+      attr_accessor items: ::Array[Types::HarvestJob]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -494,7 +633,13 @@ module Aws::MediaPackageV2
 
     class ResourceNotFoundException
       attr_accessor message: ::String
-      attr_accessor resource_type_not_found: ("CHANNEL_GROUP" | "CHANNEL" | "ORIGIN_ENDPOINT")
+      attr_accessor resource_type_not_found: ("CHANNEL_GROUP" | "CHANNEL" | "ORIGIN_ENDPOINT" | "HARVEST_JOB")
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfig
+      attr_accessor bucket_name: ::String
+      attr_accessor destination_path: ::String
       SENSITIVE: []
     end
 
@@ -640,7 +785,7 @@ module Aws::MediaPackageV2
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS" | "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION" | "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY" | "CLIP_START_TIME_WITH_START_OR_END" | "START_TAG_TIME_OFFSET_INVALID")
+      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS" | "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION" | "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY" | "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION" | "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT" | "TOO_MANY_IN_PROGRESS_HARVEST_JOBS" | "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION" | "INVALID_HARVEST_JOB_DURATION" | "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE" | "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION" | "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED" | "CLIP_START_TIME_WITH_START_OR_END" | "START_TAG_TIME_OFFSET_INVALID")
       SENSITIVE: []
     end
   end

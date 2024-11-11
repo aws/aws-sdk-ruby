@@ -151,7 +151,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def description: () -> ::String
-        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK")
+        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
         def monitors: () -> ::Array[Types::Monitor]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_environment-instance_method
@@ -363,7 +363,7 @@ module Aws
         def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
         def growth_factor: () -> ::Float
         def final_bake_time_in_minutes: () -> ::Integer
-        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK")
+        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
         def event_log: () -> ::Array[Types::DeploymentEvent]
         def percentage_complete: () -> ::Float
         def started_at: () -> ::Time
@@ -404,7 +404,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def description: () -> ::String
-        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK")
+        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
         def monitors: () -> ::Array[Types::Monitor]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_environment-instance_method
@@ -598,7 +598,7 @@ module Aws
         def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
         def growth_factor: () -> ::Float
         def final_bake_time_in_minutes: () -> ::Integer
-        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK")
+        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
         def event_log: () -> ::Array[Types::DeploymentEvent]
         def percentage_complete: () -> ::Float
         def started_at: () -> ::Time
@@ -637,7 +637,7 @@ module Aws
         def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
         def growth_factor: () -> ::Float
         def final_bake_time_in_minutes: () -> ::Integer
-        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK")
+        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
         def event_log: () -> ::Array[Types::DeploymentEvent]
         def percentage_complete: () -> ::Float
         def started_at: () -> ::Time
@@ -651,7 +651,8 @@ module Aws
       def stop_deployment: (
                              application_id: ::String,
                              environment_id: ::String,
-                             deployment_number: ::Integer
+                             deployment_number: ::Integer,
+                             ?allow_revert: bool
                            ) -> _StopDeploymentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDeploymentResponseSuccess
 
@@ -754,7 +755,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def description: () -> ::String
-        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK")
+        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK" | "REVERTED")
         def monitors: () -> ::Array[Types::Monitor]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_environment-instance_method

@@ -833,6 +833,7 @@ module Aws::DynamoDB
         client = Client.new(
           endpoint: 'https://example.com',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -861,6 +862,7 @@ module Aws::DynamoDB
         client = Client.new(
           endpoint: 'https://example.com',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: ''),
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -928,6 +930,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'local',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
+          simple_attributes: false,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"dynamodb", "signingRegion"=>"us-east-1"})
@@ -957,6 +960,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'local',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: ''),
+          simple_attributes: false,
           stub_responses: true
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"dynamodb", "signingRegion"=>"us-east-1"})
@@ -985,6 +989,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'us-east-1',
           account_id_endpoint_mode: 'required',
+          simple_attributes: false,
           stub_responses: true
         )
         expect do
@@ -1013,6 +1018,7 @@ module Aws::DynamoDB
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           use_fips_endpoint: true,
           use_dualstack_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1042,6 +1048,7 @@ module Aws::DynamoDB
           region: 'us-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           use_fips_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1072,6 +1079,7 @@ module Aws::DynamoDB
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           account_id_endpoint_mode: 'preferred',
           use_fips_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1102,6 +1110,7 @@ module Aws::DynamoDB
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           account_id_endpoint_mode: 'required',
           use_fips_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1131,6 +1140,7 @@ module Aws::DynamoDB
           region: 'us-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           use_dualstack_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1160,6 +1170,7 @@ module Aws::DynamoDB
           region: 'us-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           use_dualstack_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1231,6 +1242,7 @@ module Aws::DynamoDB
           region: 'us-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           account_id_endpoint_mode: 'preferred',
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1260,6 +1272,7 @@ module Aws::DynamoDB
           region: 'us-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           account_id_endpoint_mode: 'required',
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1289,6 +1302,7 @@ module Aws::DynamoDB
           region: 'us-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           account_id_endpoint_mode: 'disabled',
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1316,6 +1330,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'us-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: ' '),
+          simple_attributes: false,
           stub_responses: true
         )
         expect do
@@ -1344,6 +1359,7 @@ module Aws::DynamoDB
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           use_fips_endpoint: true,
           use_dualstack_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1373,6 +1389,7 @@ module Aws::DynamoDB
           region: 'cn-north-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           use_fips_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1402,6 +1419,7 @@ module Aws::DynamoDB
           region: 'cn-north-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           use_dualstack_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1430,6 +1448,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'cn-north-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1500,6 +1519,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'cn-north-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: ''),
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1542,6 +1562,7 @@ module Aws::DynamoDB
           region: 'us-iso-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
           use_fips_endpoint: true,
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1583,6 +1604,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'us-iso-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1611,6 +1633,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'us-iso-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1681,6 +1704,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'us-gov-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(
@@ -1709,6 +1733,7 @@ module Aws::DynamoDB
         client = Client.new(
           region: 'us-gov-east-1',
           credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: ''),
+          simple_attributes: false,
           stub_responses: true
         )
         resp = client.list_tables(

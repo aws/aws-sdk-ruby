@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.211.0 (2024-10-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-georoutes` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-geoplaces` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-geomaps` gem.
+
 3.210.0 (2024-10-16)
 ------------------
 

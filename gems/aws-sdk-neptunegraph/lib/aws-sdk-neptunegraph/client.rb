@@ -1061,7 +1061,7 @@ module Aws::NeptuneGraph
     #
     # @option params [Hash<String,Hash,Array,String,Numeric,Boolean>] :parameters
     #   The data parameters the query can use in JSON format. For example:
-    #   \\\{"name": "john", "age": 20\\}. (optional)
+    #   \{"name": "john", "age": 20}. (optional)
     #
     # @option params [String] :plan_cache
     #   Query plan cache is a feature that saves the query plan and reuses it
@@ -1991,13 +1991,13 @@ module Aws::NeptuneGraph
     #   string value can be from 1 to 128 Unicode characters in length. It
     #   can't be prefixed with `aws:` and can only contain the set of Unicode
     #   characters specified by this Java regular expression:
-    #   `"^([\p\{L\}\p\{Z\}\p\{N\}_.:/=+\-]*)$")`.
+    #   `"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")`.
     #
     #   **Value** (string)   –   A value is the optional value of the tag. The
     #   string value can be from 1 to 256 Unicode characters in length. It
     #   can't be prefixed with `aws:` and can only contain the set of Unicode
     #   characters specified by this Java regular expression:
-    #   `"^([\p\{L\}\p\{Z\}\p\{N\}_.:/=+\-]*)$")`.
+    #   `"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2138,7 +2138,7 @@ module Aws::NeptuneGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

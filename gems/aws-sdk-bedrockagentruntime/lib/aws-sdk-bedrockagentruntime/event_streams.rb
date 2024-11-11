@@ -133,6 +133,10 @@ module Aws::BedrockAgentRuntime
         @event_emitter.on(:flow_output_event, block) if block_given?
       end
 
+      def on_flow_trace_event_event(&block)
+        @event_emitter.on(:flow_trace_event, block) if block_given?
+      end
+
       def on_internal_server_exception_event(&block)
         @event_emitter.on(:internal_server_exception, block) if block_given?
       end
@@ -172,6 +176,7 @@ module Aws::BedrockAgentRuntime
         on_dependency_failed_exception_event(&block)
         on_flow_completion_event_event(&block)
         on_flow_output_event_event(&block)
+        on_flow_trace_event_event(&block)
         on_internal_server_exception_event(&block)
         on_resource_not_found_exception_event(&block)
         on_service_quota_exceeded_exception_event(&block)

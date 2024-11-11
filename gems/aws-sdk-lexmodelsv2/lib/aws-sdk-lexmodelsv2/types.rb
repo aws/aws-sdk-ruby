@@ -3926,10 +3926,10 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] sample_utterances
     #   An array of strings that a user might say to signal the intent. For
-    #   example, "I want a pizza", or "I want a \\\{PizzaSize\\} pizza".
+    #   example, "I want a pizza", or "I want a \{PizzaSize} pizza".
     #
-    #   In an utterance, slot names are enclosed in curly braces ("\\\{",
-    #   "\\}") to indicate where they should be displayed in the utterance
+    #   In an utterance, slot names are enclosed in curly braces ("\{",
+    #   "}") to indicate where they should be displayed in the utterance
     #   shown to the user..
     #   @return [Array<Types::SampleUtterance>]
     #
@@ -12793,7 +12793,7 @@ module Aws::LexModelsV2
     #
     #   The following regular expression operators are not supported:
     #
-    #   * Infinite repeaters: *, +, or \\\{x,\\} with no upper bound.
+    #   * Infinite repeaters: *, +, or \{x,} with no upper bound.
     #
     #   * Wild card (.)
     #   @return [String]

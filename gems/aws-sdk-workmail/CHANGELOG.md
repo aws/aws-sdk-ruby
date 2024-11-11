@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2024-10-30)
+------------------
+
+* Feature - This release adds support for Multi-Factor Authentication (MFA) and Personal Access Tokens through integration with AWS IAM Identity Center.
+
 1.77.0 (2024-10-18)
 ------------------
 

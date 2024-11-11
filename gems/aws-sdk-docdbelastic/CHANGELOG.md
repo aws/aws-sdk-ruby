@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-11-01)
+------------------
+
+* Feature - Amazon DocumentDB Elastic Clusters adds support for pending maintenance actions feature with APIs GetPendingMaintenanceAction, ListPendingMaintenanceActions and ApplyPendingMaintenanceAction
+
 1.25.0 (2024-10-18)
 ------------------
 

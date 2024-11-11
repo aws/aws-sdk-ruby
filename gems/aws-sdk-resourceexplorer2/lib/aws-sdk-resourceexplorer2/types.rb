@@ -479,6 +479,30 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
+    # @!attribute [rw] managed_view_arn
+    #   The Amazon resource name (ARN) of the managed view.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetManagedViewInput AWS API Documentation
+    #
+    class GetManagedViewInput < Struct.new(
+      :managed_view_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_view
+    #   Details about the specified managed view.
+    #   @return [Types::ManagedView]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetManagedViewOutput AWS API Documentation
+    #
+    class GetManagedViewOutput < Struct.new(
+      :managed_view)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] view_arn
     #   The [Amazon resource name (ARN)][1] of the view that you want
     #   information about.
@@ -732,6 +756,70 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value appropriate to the operation. If additional items exist beyond
+    #   those included in the current response, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after
+    #   24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_principal
+    #   Specifies a service principal name. If specified, then the operation
+    #   only returns the managed views that are managed by the input
+    #   service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListManagedViewsInput AWS API Documentation
+    #
+    class ListManagedViewsInput < Struct.new(
+      :max_results,
+      :next_token,
+      :service_principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_views
+    #   The list of managed views available in the Amazon Web Services
+    #   Region in which you called this operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`. The pagination tokens expire after 24
+    #   hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListManagedViewsOutput AWS API Documentation
+    #
+    class ListManagedViewsOutput < Struct.new(
+      :managed_views,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filters
     #   A search filter defines which resources can be part of a search
     #   query result set.
@@ -955,6 +1043,91 @@ module Aws::ResourceExplorer2
       include Aws::Structure
     end
 
+    # An Amazon Web Services-managed view is how other Amazon Web Services
+    # services can access resource information indexed by Resource Explorer
+    # for your Amazon Web Services account or organization with your
+    # consent. For more information, see [Managed views][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html
+    #
+    # @!attribute [rw] filters
+    #   A search filter defines which resources can be part of a search
+    #   query result set.
+    #   @return [Types::SearchFilter]
+    #
+    # @!attribute [rw] included_properties
+    #   A structure that contains additional information about the managed
+    #   view.
+    #   @return [Array<Types::IncludedProperty>]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when this managed view was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] managed_view_arn
+    #   The [Amazon resource name (ARN)][1] of the managed view.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_view_name
+    #   The name of the managed view.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The Amazon Web Services account that owns this managed view.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   The resource policy that defines access to the managed view. To
+    #   learn more about this policy, review [Managed views][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   An [Amazon resource name (ARN)][1] of an Amazon Web Services account
+    #   or organization that specifies whether this managed view includes
+    #   resources from only the specified Amazon Web Services account or all
+    #   accounts in the specified organization.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] trusted_service
+    #   The service principal of the Amazon Web Services service that
+    #   created and manages the managed view.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the managed view.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ManagedView AWS API Documentation
+    #
+    class ManagedView < Struct.new(
+      :filters,
+      :included_properties,
+      :last_updated_at,
+      :managed_view_arn,
+      :managed_view_name,
+      :owner,
+      :resource_policy,
+      :scope,
+      :trusted_service,
+      :version)
+      SENSITIVE = [:filters]
+      include Aws::Structure
+    end
+
     # An index is the data store used by Amazon Web Services Resource
     # Explorer to hold information about your Amazon Web Services resources
     # that the service discovers.
@@ -1061,7 +1234,7 @@ module Aws::ResourceExplorer2
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   The Amazon Web Servicesservice that owns the resource and is
+    #   The Amazon Web Services service that owns the resource and is
     #   responsible for creating and updating it.
     #   @return [String]
     #
@@ -1315,7 +1488,7 @@ module Aws::ResourceExplorer2
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   The Amazon Web Servicesservice that is associated with the resource
+    #   The Amazon Web Services service that is associated with the resource
     #   type. This is the primary service that lets you create and interact
     #   with resources of this type.
     #   @return [String]

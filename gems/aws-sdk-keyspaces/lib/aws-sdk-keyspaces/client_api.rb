@@ -35,14 +35,22 @@ module Aws::Keyspaces
     CreateKeyspaceResponse = Shapes::StructureShape.new(name: 'CreateKeyspaceResponse')
     CreateTableRequest = Shapes::StructureShape.new(name: 'CreateTableRequest')
     CreateTableResponse = Shapes::StructureShape.new(name: 'CreateTableResponse')
+    CreateTypeRequest = Shapes::StructureShape.new(name: 'CreateTypeRequest')
+    CreateTypeResponse = Shapes::StructureShape.new(name: 'CreateTypeResponse')
     DefaultTimeToLive = Shapes::IntegerShape.new(name: 'DefaultTimeToLive')
     DeleteKeyspaceRequest = Shapes::StructureShape.new(name: 'DeleteKeyspaceRequest')
     DeleteKeyspaceResponse = Shapes::StructureShape.new(name: 'DeleteKeyspaceResponse')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
     DeleteTableResponse = Shapes::StructureShape.new(name: 'DeleteTableResponse')
+    DeleteTypeRequest = Shapes::StructureShape.new(name: 'DeleteTypeRequest')
+    DeleteTypeResponse = Shapes::StructureShape.new(name: 'DeleteTypeResponse')
+    Depth = Shapes::IntegerShape.new(name: 'Depth')
     DoubleObject = Shapes::FloatShape.new(name: 'DoubleObject')
     EncryptionSpecification = Shapes::StructureShape.new(name: 'EncryptionSpecification')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    FieldDefinition = Shapes::StructureShape.new(name: 'FieldDefinition')
+    FieldDefinitionNameString = Shapes::StringShape.new(name: 'FieldDefinitionNameString')
+    FieldList = Shapes::ListShape.new(name: 'FieldList')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GetKeyspaceRequest = Shapes::StructureShape.new(name: 'GetKeyspaceRequest')
     GetKeyspaceResponse = Shapes::StructureShape.new(name: 'GetKeyspaceResponse')
@@ -50,6 +58,8 @@ module Aws::Keyspaces
     GetTableAutoScalingSettingsResponse = Shapes::StructureShape.new(name: 'GetTableAutoScalingSettingsResponse')
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
+    GetTypeRequest = Shapes::StructureShape.new(name: 'GetTypeRequest')
+    GetTypeResponse = Shapes::StructureShape.new(name: 'GetTypeResponse')
     IntegerObject = Shapes::IntegerShape.new(name: 'IntegerObject')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KeyspaceName = Shapes::StringShape.new(name: 'KeyspaceName')
@@ -61,6 +71,8 @@ module Aws::Keyspaces
     ListTablesResponse = Shapes::StructureShape.new(name: 'ListTablesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTypesRequest = Shapes::StructureShape.new(name: 'ListTypesRequest')
+    ListTypesResponse = Shapes::StructureShape.new(name: 'ListTypesResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PartitionKey = Shapes::StructureShape.new(name: 'PartitionKey')
@@ -86,6 +98,7 @@ module Aws::Keyspaces
     StaticColumnList = Shapes::ListShape.new(name: 'StaticColumnList')
     String = Shapes::StringShape.new(name: 'String')
     TableName = Shapes::StringShape.new(name: 'TableName')
+    TableNameList = Shapes::ListShape.new(name: 'TableNameList')
     TableStatus = Shapes::StringShape.new(name: 'TableStatus')
     TableSummary = Shapes::StructureShape.new(name: 'TableSummary')
     TableSummaryList = Shapes::ListShape.new(name: 'TableSummaryList')
@@ -100,6 +113,9 @@ module Aws::Keyspaces
     TimeToLive = Shapes::StructureShape.new(name: 'TimeToLive')
     TimeToLiveStatus = Shapes::StringShape.new(name: 'TimeToLiveStatus')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TypeName = Shapes::StringShape.new(name: 'TypeName')
+    TypeNameList = Shapes::ListShape.new(name: 'TypeNameList')
+    TypeStatus = Shapes::StringShape.new(name: 'TypeStatus')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateTableRequest = Shapes::StructureShape.new(name: 'UpdateTableRequest')
@@ -183,6 +199,15 @@ module Aws::Keyspaces
     CreateTableResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
     CreateTableResponse.struct_class = Types::CreateTableResponse
 
+    CreateTypeRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
+    CreateTypeRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "typeName"))
+    CreateTypeRequest.add_member(:field_definitions, Shapes::ShapeRef.new(shape: FieldList, required: true, location_name: "fieldDefinitions"))
+    CreateTypeRequest.struct_class = Types::CreateTypeRequest
+
+    CreateTypeResponse.add_member(:keyspace_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "keyspaceArn"))
+    CreateTypeResponse.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "typeName"))
+    CreateTypeResponse.struct_class = Types::CreateTypeResponse
+
     DeleteKeyspaceRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
     DeleteKeyspaceRequest.struct_class = Types::DeleteKeyspaceRequest
 
@@ -194,9 +219,23 @@ module Aws::Keyspaces
 
     DeleteTableResponse.struct_class = Types::DeleteTableResponse
 
+    DeleteTypeRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
+    DeleteTypeRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "typeName"))
+    DeleteTypeRequest.struct_class = Types::DeleteTypeRequest
+
+    DeleteTypeResponse.add_member(:keyspace_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "keyspaceArn"))
+    DeleteTypeResponse.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "typeName"))
+    DeleteTypeResponse.struct_class = Types::DeleteTypeResponse
+
     EncryptionSpecification.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "type"))
     EncryptionSpecification.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: kmsKeyARN, location_name: "kmsKeyIdentifier"))
     EncryptionSpecification.struct_class = Types::EncryptionSpecification
+
+    FieldDefinition.add_member(:name, Shapes::ShapeRef.new(shape: FieldDefinitionNameString, required: true, location_name: "name"))
+    FieldDefinition.add_member(:type, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "type"))
+    FieldDefinition.struct_class = Types::FieldDefinition
+
+    FieldList.member = Shapes::ShapeRef.new(shape: FieldDefinition)
 
     GetKeyspaceRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
     GetKeyspaceRequest.struct_class = Types::GetKeyspaceRequest
@@ -238,6 +277,21 @@ module Aws::Keyspaces
     GetTableResponse.add_member(:replica_specifications, Shapes::ShapeRef.new(shape: ReplicaSpecificationSummaryList, location_name: "replicaSpecifications"))
     GetTableResponse.struct_class = Types::GetTableResponse
 
+    GetTypeRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
+    GetTypeRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "typeName"))
+    GetTypeRequest.struct_class = Types::GetTypeRequest
+
+    GetTypeResponse.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
+    GetTypeResponse.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, required: true, location_name: "typeName"))
+    GetTypeResponse.add_member(:field_definitions, Shapes::ShapeRef.new(shape: FieldList, location_name: "fieldDefinitions"))
+    GetTypeResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    GetTypeResponse.add_member(:status, Shapes::ShapeRef.new(shape: TypeStatus, location_name: "status"))
+    GetTypeResponse.add_member(:direct_referring_tables, Shapes::ShapeRef.new(shape: TableNameList, location_name: "directReferringTables"))
+    GetTypeResponse.add_member(:direct_parent_types, Shapes::ShapeRef.new(shape: TypeNameList, location_name: "directParentTypes"))
+    GetTypeResponse.add_member(:max_nesting_depth, Shapes::ShapeRef.new(shape: Depth, location_name: "maxNestingDepth"))
+    GetTypeResponse.add_member(:keyspace_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "keyspaceArn"))
+    GetTypeResponse.struct_class = Types::GetTypeResponse
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -274,6 +328,15 @@ module Aws::Keyspaces
     ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListTypesRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
+    ListTypesRequest.struct_class = Types::ListTypesRequest
+
+    ListTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTypesResponse.add_member(:types, Shapes::ShapeRef.new(shape: TypeNameList, required: true, location_name: "types"))
+    ListTypesResponse.struct_class = Types::ListTypesResponse
 
     PartitionKey.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "name"))
     PartitionKey.struct_class = Types::PartitionKey
@@ -347,6 +410,8 @@ module Aws::Keyspaces
 
     StaticColumnList.member = Shapes::ShapeRef.new(shape: StaticColumn)
 
+    TableNameList.member = Shapes::ShapeRef.new(shape: TableName)
+
     TableSummary.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
     TableSummary.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "tableName"))
     TableSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
@@ -374,6 +439,8 @@ module Aws::Keyspaces
 
     TimeToLive.add_member(:status, Shapes::ShapeRef.new(shape: TimeToLiveStatus, required: true, location_name: "status"))
     TimeToLive.struct_class = Types::TimeToLive
+
+    TypeNameList.member = Shapes::ShapeRef.new(shape: TypeName)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
@@ -408,9 +475,11 @@ module Aws::Keyspaces
 
       api.metadata = {
         "apiVersion" => "2022-02-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cassandra",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Keyspaces",
         "serviceId" => "Keyspaces",
         "signatureVersion" => "v4",
@@ -446,6 +515,20 @@ module Aws::Keyspaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:create_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_keyspace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteKeyspace"
         o.http_method = "POST"
@@ -466,6 +549,20 @@ module Aws::Keyspaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTableResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTypeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -506,6 +603,19 @@ module Aws::Keyspaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetTableAutoScalingSettingsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTableAutoScalingSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTypeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -570,6 +680,25 @@ module Aws::Keyspaces
         )
       end)
 
+      api.add_operation(:list_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTypes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTypesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:restore_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RestoreTable"
         o.http_method = "POST"
@@ -593,6 +722,7 @@ module Aws::Keyspaces
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

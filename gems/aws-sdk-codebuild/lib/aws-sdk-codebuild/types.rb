@@ -17,6 +17,42 @@ module Aws::CodeBuild
     #
     class AccountLimitExceededException < Aws::EmptyStructure; end
 
+    # Information about the auto-retry configuration for the build.
+    #
+    # @!attribute [rw] auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_retry_number
+    #   The number of times that the build has been retried. The initial
+    #   build will have an auto-retry number of 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_auto_retry
+    #   The build ARN of the auto-retried build triggered by the current
+    #   build. The next auto-retry will be `null` for builds that don't
+    #   trigger an auto-retry.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_auto_retry
+    #   The build ARN of the build that triggered the current auto-retry
+    #   build. The previous auto-retry will be `null` for the initial build.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/AutoRetryConfig AWS API Documentation
+    #
+    class AutoRetryConfig < Struct.new(
+      :auto_retry_limit,
+      :auto_retry_number,
+      :next_auto_retry,
+      :previous_auto_retry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ids
     #   The IDs of the builds to delete.
     #   @return [Array<String>]
@@ -474,6 +510,10 @@ module Aws::CodeBuild
     #   applicable.
     #   @return [String]
     #
+    # @!attribute [rw] auto_retry_config
+    #   Information about the auto-retry configuration for the build.
+    #   @return [Types::AutoRetryConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -508,7 +548,8 @@ module Aws::CodeBuild
       :report_arns,
       :file_system_locations,
       :debug_session,
-      :build_batch_arn)
+      :build_batch_arn,
+      :auto_retry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1397,6 +1438,38 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains compute attributes. These attributes only need be specified
+    # when your project's or fleet's `computeType` is set to
+    # `ATTRIBUTE_BASED_COMPUTE`.
+    #
+    # @!attribute [rw] v_cpu
+    #   The number of vCPUs of the instance type included in your fleet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory
+    #   The amount of memory of the instance type included in your fleet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] disk
+    #   The amount of disk space of the instance type included in your
+    #   fleet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] machine_type
+    #   The machine type of the instance type included in your fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ComputeConfiguration AWS API Documentation
+    #
+    class ComputeConfiguration < Struct.new(
+      :v_cpu,
+      :memory,
+      :disk,
+      :machine_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the compute fleet.
     #   @return [String]
@@ -1457,51 +1530,88 @@ module Aws::CodeBuild
     #   Information about the compute resources the compute fleet uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #   * `ATTRIBUTE_BASED_COMPUTE`: Specify the amount of vCPUs, memory,
+    #     disk space, and the type of machine.
+    #
+    #     <note markdown="1"> If you use `ATTRIBUTE_BASED_COMPUTE`, you must define your
+    #     attributes by using `computeConfiguration`. CodeBuild will select
+    #     the cheapest instance that satisfies your specified attributes.
+    #     For more information, see [Reserved capacity environment types][1]
+    #     in the *CodeBuild User Guide*.
+    #
+    #      </note>
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 72 GiB memory and 36 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 144 GiB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
     #   If you use `BUILD_GENERAL1_SMALL`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
-    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #     GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
-    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #     GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [Build environment compute types][1] in
-    #   the *CodeBuild User Guide.*
+    #   For more information, see [On-demand environment types][2] in the
+    #   *CodeBuild User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the compute fleet. This is only
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration
     #   The scaling configuration of the compute fleet.
@@ -1567,6 +1677,7 @@ module Aws::CodeBuild
       :base_capacity,
       :environment_type,
       :compute_type,
+      :compute_configuration,
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
@@ -1746,6 +1857,13 @@ module Aws::CodeBuild
     #   limit, new builds are throttled and are not run.
     #   @return [Integer]
     #
+    # @!attribute [rw] auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
@@ -1769,7 +1887,8 @@ module Aws::CodeBuild
       :logs_config,
       :file_system_locations,
       :build_batch_config,
-      :concurrent_build_limit)
+      :concurrent_build_limit,
+      :auto_retry_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2474,51 +2593,88 @@ module Aws::CodeBuild
     #   Information about the compute resources the compute fleet uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #   * `ATTRIBUTE_BASED_COMPUTE`: Specify the amount of vCPUs, memory,
+    #     disk space, and the type of machine.
+    #
+    #     <note markdown="1"> If you use `ATTRIBUTE_BASED_COMPUTE`, you must define your
+    #     attributes by using `computeConfiguration`. CodeBuild will select
+    #     the cheapest instance that satisfies your specified attributes.
+    #     For more information, see [Reserved capacity environment types][1]
+    #     in the *CodeBuild User Guide*.
+    #
+    #      </note>
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 72 GiB memory and 36 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 144 GiB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
     #   If you use `BUILD_GENERAL1_SMALL`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
-    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #     GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
-    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #     GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [Build environment compute types][1] in
-    #   the *CodeBuild User Guide.*
+    #   For more information, see [On-demand environment types][2] in the
+    #   *CodeBuild User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the compute fleet. This is only
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration
     #   The scaling configuration of the compute fleet.
@@ -2589,6 +2745,7 @@ module Aws::CodeBuild
       :base_capacity,
       :environment_type,
       :compute_type,
+      :compute_configuration,
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
@@ -3666,7 +3823,7 @@ module Aws::CodeBuild
     # @!attribute [rw] cloud_watch_logs_arn
     #   The ARN of the CloudWatch Logs stream for a build execution. Its
     #   format is
-    #   `arn:$\{Partition\}:logs:$\{Region\}:$\{Account\}:log-group:$\{LogGroupName\}:log-stream:$\{LogStreamName\}`.
+    #   `arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}`.
     #   The CloudWatch Logs stream is created during the PROVISIONING phase
     #   of a build and the ARN will not be valid until it is created. For
     #   more information, see [Resources Defined by CloudWatch Logs][1].
@@ -3678,7 +3835,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] s3_logs_arn
     #   The ARN of S3 logs for a build project. Its format is
-    #   `arn:$\{Partition\}:s3:::$\{BucketName\}/$\{ObjectName\}`. For more
+    #   `arn:${Partition}:s3:::${BucketName}/${ObjectName}`. For more
     #   information, see [Resources Defined by Amazon S3][1].
     #
     #
@@ -3947,6 +4104,13 @@ module Aws::CodeBuild
     #   CloudWatch Logs and Amazon S3 artifacts for the project's builds.
     #   @return [String]
     #
+    # @!attribute [rw] auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -3977,7 +4141,8 @@ module Aws::CodeBuild
       :concurrent_build_limit,
       :project_visibility,
       :public_project_alias,
-      :resource_access_role)
+      :resource_access_role,
+      :auto_retry_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4421,76 +4586,88 @@ module Aws::CodeBuild
     #   Information about the compute resources the build project uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #   * `ATTRIBUTE_BASED_COMPUTE`: Specify the amount of vCPUs, memory,
+    #     disk space, and the type of machine.
+    #
+    #     <note markdown="1"> If you use `ATTRIBUTE_BASED_COMPUTE`, you must define your
+    #     attributes by using `computeConfiguration`. CodeBuild will select
+    #     the cheapest instance that satisfies your specified attributes.
+    #     For more information, see [Reserved capacity environment types][1]
+    #     in the *CodeBuild User Guide*.
+    #
+    #      </note>
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 72 GiB memory and 36 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 144 GiB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
-    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
-    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
-    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
-    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
-    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
     #   If you use `BUILD_GENERAL1_SMALL`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
-    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #     GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
-    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #     GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   <note markdown="1"> If you're using compute fleets during project creation,
-    #   `computeType` will be ignored.
-    #
-    #    </note>
-    #
-    #   For more information, see [Build Environment Compute Types][1] in
-    #   the *CodeBuild User Guide.*
+    #   For more information, see [On-demand environment types][2] in the
+    #   *CodeBuild User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the build project. This is only
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] fleet
     #   A ProjectFleet object to use for this build project.
@@ -4564,6 +4741,7 @@ module Aws::CodeBuild
       :type,
       :image,
       :compute_type,
+      :compute_configuration,
       :fleet,
       :environment_variables,
       :privileged_mode,
@@ -6199,6 +6377,13 @@ module Aws::CodeBuild
     #   one defined in the build project.
     #   @return [Types::ProjectFleet]
     #
+    # @!attribute [rw] auto_retry_limit_override
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -6233,7 +6418,8 @@ module Aws::CodeBuild
       :registry_credential_override,
       :image_pull_credentials_type_override,
       :debug_session_enabled,
-      :fleet_override)
+      :fleet_override,
+      :auto_retry_limit_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6516,51 +6702,88 @@ module Aws::CodeBuild
     #   Information about the compute resources the compute fleet uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #   * `ATTRIBUTE_BASED_COMPUTE`: Specify the amount of vCPUs, memory,
+    #     disk space, and the type of machine.
+    #
+    #     <note markdown="1"> If you use `ATTRIBUTE_BASED_COMPUTE`, you must define your
+    #     attributes by using `computeConfiguration`. CodeBuild will select
+    #     the cheapest instance that satisfies your specified attributes.
+    #     For more information, see [Reserved capacity environment types][1]
+    #     in the *CodeBuild User Guide*.
+    #
+    #      </note>
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 72 GiB memory and 36 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 144 GiB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
     #   If you use `BUILD_GENERAL1_SMALL`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
-    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #     GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
-    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #     GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [Build environment compute types][1] in
-    #   the *CodeBuild User Guide.*
+    #   For more information, see [On-demand environment types][2] in the
+    #   *CodeBuild User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the compute fleet. This is only
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration
     #   The scaling configuration of the compute fleet.
@@ -6626,6 +6849,7 @@ module Aws::CodeBuild
       :base_capacity,
       :environment_type,
       :compute_type,
+      :compute_configuration,
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
@@ -6807,6 +7031,13 @@ module Aws::CodeBuild
     #   To remove this limit, set this value to -1.
     #   @return [Integer]
     #
+    # @!attribute [rw] auto_retry_limit
+    #   The maximum number of additional automatic retries after a failed
+    #   build. For example, if the auto-retry limit is set to 2, CodeBuild
+    #   will call the `RetryBuild` API to automatically retry your build for
+    #   up to 2 additional times.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -6830,7 +7061,8 @@ module Aws::CodeBuild
       :logs_config,
       :file_system_locations,
       :build_batch_config,
-      :concurrent_build_limit)
+      :concurrent_build_limit,
+      :auto_retry_limit)
       SENSITIVE = []
       include Aws::Structure
     end

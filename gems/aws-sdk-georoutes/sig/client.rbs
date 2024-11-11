@@ -1,0 +1,801 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GeoRoutes
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoRoutes/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CalculateIsolinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CalculateIsolinesResponse]
+        def arrival_time: () -> ::String
+        def departure_time: () -> ::String
+        def isoline_geometry_format: () -> ("FlexiblePolyline" | "Simple")
+        def isolines: () -> ::Array[Types::Isoline]
+        def pricing_bucket: () -> ::String
+        def snapped_destination: () -> ::Array[::Float]
+        def snapped_origin: () -> ::Array[::Float]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoRoutes/Client.html#calculate_isolines-instance_method
+      def calculate_isolines: (
+                                ?allow: {
+                                  hot: bool?,
+                                  hov: bool?
+                                },
+                                ?arrival_time: ::String,
+                                ?avoid: {
+                                  areas: Array[
+                                    {
+                                      except: Array[
+                                        {
+                                          bounding_box: Array[::Float]?,
+                                          corridor: {
+                                            line_string: Array[
+                                              Array[::Float],
+                                            ],
+                                            radius: ::Integer
+                                          }?,
+                                          polygon: Array[
+                                            Array[
+                                              Array[::Float],
+                                            ],
+                                          ]?,
+                                          polyline_corridor: {
+                                            polyline: ::String,
+                                            radius: ::Integer
+                                          }?,
+                                          polyline_polygon: Array[::String]?
+                                        },
+                                      ]?,
+                                      geometry: {
+                                        bounding_box: Array[::Float]?,
+                                        corridor: {
+                                          line_string: Array[
+                                            Array[::Float],
+                                          ],
+                                          radius: ::Integer
+                                        }?,
+                                        polygon: Array[
+                                          Array[
+                                            Array[::Float],
+                                          ],
+                                        ]?,
+                                        polyline_corridor: {
+                                          polyline: ::String,
+                                          radius: ::Integer
+                                        }?,
+                                        polyline_polygon: Array[::String]?
+                                      }
+                                    },
+                                  ]?,
+                                  car_shuttle_trains: bool?,
+                                  controlled_access_highways: bool?,
+                                  dirt_roads: bool?,
+                                  ferries: bool?,
+                                  seasonal_closure: bool?,
+                                  toll_roads: bool?,
+                                  toll_transponders: bool?,
+                                  truck_road_types: Array[::String]?,
+                                  tunnels: bool?,
+                                  u_turns: bool?,
+                                  zone_categories: Array[
+                                    {
+                                      category: ("CongestionPricing" | "Environmental" | "Vignette")?
+                                    },
+                                  ]?
+                                },
+                                ?depart_now: bool,
+                                ?departure_time: ::String,
+                                ?destination: Array[::Float],
+                                ?destination_options: {
+                                  avoid_actions_for_distance: ::Integer?,
+                                  heading: ::Float?,
+                                  matching: {
+                                    name_hint: ::String?,
+                                    on_road_threshold: ::Integer?,
+                                    radius: ::Integer?,
+                                    strategy: ("MatchAny" | "MatchMostSignificantRoad")?
+                                  }?,
+                                  side_of_street: {
+                                    position: Array[::Float],
+                                    use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                  }?
+                                },
+                                ?isoline_geometry_format: ("FlexiblePolyline" | "Simple"),
+                                ?isoline_granularity: {
+                                  max_points: ::Integer?,
+                                  max_resolution: ::Integer?
+                                },
+                                ?key: ::String,
+                                ?optimize_isoline_for: ("AccurateCalculation" | "BalancedCalculation" | "FastCalculation"),
+                                ?optimize_routing_for: ("FastestRoute" | "ShortestRoute"),
+                                ?origin: Array[::Float],
+                                ?origin_options: {
+                                  avoid_actions_for_distance: ::Integer?,
+                                  heading: ::Float?,
+                                  matching: {
+                                    name_hint: ::String?,
+                                    on_road_threshold: ::Integer?,
+                                    radius: ::Integer?,
+                                    strategy: ("MatchAny" | "MatchMostSignificantRoad")?
+                                  }?,
+                                  side_of_street: {
+                                    position: Array[::Float],
+                                    use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                  }?
+                                },
+                                thresholds: {
+                                  distance: Array[::Integer]?,
+                                  time: Array[::Integer]?
+                                },
+                                ?traffic: {
+                                  flow_event_threshold_override: ::Integer?,
+                                  usage: ("IgnoreTrafficData" | "UseTrafficData")?
+                                },
+                                ?travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck"),
+                                ?travel_mode_options: {
+                                  car: {
+                                    engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")?,
+                                    license_plate: {
+                                      last_character: ::String?
+                                    }?,
+                                    max_speed: ::Float?,
+                                    occupancy: ::Integer?
+                                  }?,
+                                  scooter: {
+                                    engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")?,
+                                    license_plate: {
+                                      last_character: ::String?
+                                    }?,
+                                    max_speed: ::Float?,
+                                    occupancy: ::Integer?
+                                  }?,
+                                  truck: {
+                                    axle_count: ::Integer?,
+                                    engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")?,
+                                    gross_weight: ::Integer?,
+                                    hazardous_cargos: Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]?,
+                                    height: ::Integer?,
+                                    height_above_first_axle: ::Integer?,
+                                    kpra_length: ::Integer?,
+                                    length: ::Integer?,
+                                    license_plate: {
+                                      last_character: ::String?
+                                    }?,
+                                    max_speed: ::Float?,
+                                    occupancy: ::Integer?,
+                                    payload_capacity: ::Integer?,
+                                    tire_count: ::Integer?,
+                                    trailer: {
+                                      axle_count: ::Integer?,
+                                      trailer_count: ::Integer?
+                                    }?,
+                                    truck_type: ("LightTruck" | "StraightTruck" | "Tractor")?,
+                                    tunnel_restriction_code: ::String?,
+                                    weight_per_axle: ::Integer?,
+                                    weight_per_axle_group: {
+                                      single: ::Integer?,
+                                      tandem: ::Integer?,
+                                      triple: ::Integer?,
+                                      quad: ::Integer?,
+                                      quint: ::Integer?
+                                    }?,
+                                    width: ::Integer?
+                                  }?
+                                }
+                              ) -> _CalculateIsolinesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CalculateIsolinesResponseSuccess
+
+      interface _CalculateRouteMatrixResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CalculateRouteMatrixResponse]
+        def error_count: () -> ::Integer
+        def pricing_bucket: () -> ::String
+        def route_matrix: () -> ::Array[::Array[Types::RouteMatrixEntry]]
+        def routing_boundary: () -> Types::RouteMatrixBoundary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoRoutes/Client.html#calculate_route_matrix-instance_method
+      def calculate_route_matrix: (
+                                    ?allow: {
+                                      hot: bool?,
+                                      hov: bool?
+                                    },
+                                    ?avoid: {
+                                      areas: Array[
+                                        {
+                                          geometry: {
+                                            bounding_box: Array[::Float]?,
+                                            polygon: Array[
+                                              Array[
+                                                Array[::Float],
+                                              ],
+                                            ]?,
+                                            polyline_polygon: Array[::String]?
+                                          }
+                                        },
+                                      ]?,
+                                      car_shuttle_trains: bool?,
+                                      controlled_access_highways: bool?,
+                                      dirt_roads: bool?,
+                                      ferries: bool?,
+                                      toll_roads: bool?,
+                                      toll_transponders: bool?,
+                                      truck_road_types: Array[::String]?,
+                                      tunnels: bool?,
+                                      u_turns: bool?,
+                                      zone_categories: Array[
+                                        {
+                                          category: ("CongestionPricing" | "Environmental" | "Vignette")?
+                                        },
+                                      ]?
+                                    },
+                                    ?depart_now: bool,
+                                    ?departure_time: ::String,
+                                    destinations: Array[
+                                      {
+                                        options: {
+                                          avoid_actions_for_distance: ::Integer?,
+                                          heading: ::Float?,
+                                          matching: {
+                                            name_hint: ::String?,
+                                            on_road_threshold: ::Integer?,
+                                            radius: ::Integer?,
+                                            strategy: ("MatchAny" | "MatchMostSignificantRoad")?
+                                          }?,
+                                          side_of_street: {
+                                            position: Array[::Float],
+                                            use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                          }?
+                                        }?,
+                                        position: Array[::Float]
+                                      },
+                                    ],
+                                    ?exclude: {
+                                      countries: Array[::String]
+                                    },
+                                    ?key: ::String,
+                                    ?optimize_routing_for: ("FastestRoute" | "ShortestRoute"),
+                                    origins: Array[
+                                      {
+                                        options: {
+                                          avoid_actions_for_distance: ::Integer?,
+                                          heading: ::Float?,
+                                          matching: {
+                                            name_hint: ::String?,
+                                            on_road_threshold: ::Integer?,
+                                            radius: ::Integer?,
+                                            strategy: ("MatchAny" | "MatchMostSignificantRoad")?
+                                          }?,
+                                          side_of_street: {
+                                            position: Array[::Float],
+                                            use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                          }?
+                                        }?,
+                                        position: Array[::Float]
+                                      },
+                                    ],
+                                    routing_boundary: {
+                                      geometry: {
+                                        auto_circle: {
+                                          margin: ::Integer?,
+                                          max_radius: ::Integer?
+                                        }?,
+                                        circle: {
+                                          center: Array[::Float],
+                                          radius: ::Float
+                                        }?,
+                                        bounding_box: Array[::Float]?,
+                                        polygon: Array[
+                                          Array[
+                                            Array[::Float],
+                                          ],
+                                        ]?
+                                      }?,
+                                      unbounded: bool?
+                                    },
+                                    ?traffic: {
+                                      flow_event_threshold_override: ::Integer?,
+                                      usage: ("IgnoreTrafficData" | "UseTrafficData")?
+                                    },
+                                    ?travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck"),
+                                    ?travel_mode_options: {
+                                      car: {
+                                        license_plate: {
+                                          last_character: ::String?
+                                        }?,
+                                        max_speed: ::Float?,
+                                        occupancy: ::Integer?
+                                      }?,
+                                      scooter: {
+                                        license_plate: {
+                                          last_character: ::String?
+                                        }?,
+                                        max_speed: ::Float?,
+                                        occupancy: ::Integer?
+                                      }?,
+                                      truck: {
+                                        axle_count: ::Integer?,
+                                        gross_weight: ::Integer?,
+                                        hazardous_cargos: Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]?,
+                                        height: ::Integer?,
+                                        kpra_length: ::Integer?,
+                                        length: ::Integer?,
+                                        license_plate: {
+                                          last_character: ::String?
+                                        }?,
+                                        max_speed: ::Float?,
+                                        occupancy: ::Integer?,
+                                        payload_capacity: ::Integer?,
+                                        trailer: {
+                                          trailer_count: ::Integer?
+                                        }?,
+                                        truck_type: ("LightTruck" | "StraightTruck" | "Tractor")?,
+                                        tunnel_restriction_code: ::String?,
+                                        weight_per_axle: ::Integer?,
+                                        weight_per_axle_group: {
+                                          single: ::Integer?,
+                                          tandem: ::Integer?,
+                                          triple: ::Integer?,
+                                          quad: ::Integer?,
+                                          quint: ::Integer?
+                                        }?,
+                                        width: ::Integer?
+                                      }?
+                                    }
+                                  ) -> _CalculateRouteMatrixResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CalculateRouteMatrixResponseSuccess
+
+      interface _CalculateRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CalculateRoutesResponse]
+        def leg_geometry_format: () -> ("FlexiblePolyline" | "Simple")
+        def notices: () -> ::Array[Types::RouteResponseNotice]
+        def pricing_bucket: () -> ::String
+        def routes: () -> ::Array[Types::Route]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoRoutes/Client.html#calculate_routes-instance_method
+      def calculate_routes: (
+                              ?allow: {
+                                hot: bool?,
+                                hov: bool?
+                              },
+                              ?arrival_time: ::String,
+                              ?avoid: {
+                                areas: Array[
+                                  {
+                                    except: Array[
+                                      {
+                                        corridor: {
+                                          line_string: Array[
+                                            Array[::Float],
+                                          ],
+                                          radius: ::Integer
+                                        }?,
+                                        bounding_box: Array[::Float]?,
+                                        polygon: Array[
+                                          Array[
+                                            Array[::Float],
+                                          ],
+                                        ]?,
+                                        polyline_corridor: {
+                                          polyline: ::String,
+                                          radius: ::Integer
+                                        }?,
+                                        polyline_polygon: Array[::String]?
+                                      },
+                                    ]?,
+                                    geometry: {
+                                      corridor: {
+                                        line_string: Array[
+                                          Array[::Float],
+                                        ],
+                                        radius: ::Integer
+                                      }?,
+                                      bounding_box: Array[::Float]?,
+                                      polygon: Array[
+                                        Array[
+                                          Array[::Float],
+                                        ],
+                                      ]?,
+                                      polyline_corridor: {
+                                        polyline: ::String,
+                                        radius: ::Integer
+                                      }?,
+                                      polyline_polygon: Array[::String]?
+                                    }
+                                  },
+                                ]?,
+                                car_shuttle_trains: bool?,
+                                controlled_access_highways: bool?,
+                                dirt_roads: bool?,
+                                ferries: bool?,
+                                seasonal_closure: bool?,
+                                toll_roads: bool?,
+                                toll_transponders: bool?,
+                                truck_road_types: Array[::String]?,
+                                tunnels: bool?,
+                                u_turns: bool?,
+                                zone_categories: Array[
+                                  {
+                                    category: ("CongestionPricing" | "Environmental" | "Vignette")
+                                  },
+                                ]?
+                              },
+                              ?depart_now: bool,
+                              ?departure_time: ::String,
+                              destination: Array[::Float],
+                              ?destination_options: {
+                                avoid_actions_for_distance: ::Integer?,
+                                avoid_u_turns: bool?,
+                                heading: ::Float?,
+                                matching: {
+                                  name_hint: ::String?,
+                                  on_road_threshold: ::Integer?,
+                                  radius: ::Integer?,
+                                  strategy: ("MatchAny" | "MatchMostSignificantRoad")?
+                                }?,
+                                side_of_street: {
+                                  position: Array[::Float],
+                                  use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                }?,
+                                stop_duration: ::Integer?
+                              },
+                              ?driver: {
+                                schedule: Array[
+                                  {
+                                    drive_duration: ::Integer,
+                                    rest_duration: ::Integer
+                                  },
+                                ]?
+                              },
+                              ?exclude: {
+                                countries: Array[::String]
+                              },
+                              ?instructions_measurement_system: ("Metric" | "Imperial"),
+                              ?key: ::String,
+                              ?languages: Array[::String],
+                              ?leg_additional_features: Array[("Elevation" | "Incidents" | "PassThroughWaypoints" | "Summary" | "Tolls" | "TravelStepInstructions" | "TruckRoadTypes" | "TypicalDuration" | "Zones")],
+                              ?leg_geometry_format: ("FlexiblePolyline" | "Simple"),
+                              ?max_alternatives: ::Integer,
+                              ?optimize_routing_for: ("FastestRoute" | "ShortestRoute"),
+                              origin: Array[::Float],
+                              ?origin_options: {
+                                avoid_actions_for_distance: ::Integer?,
+                                avoid_u_turns: bool?,
+                                heading: ::Float?,
+                                matching: {
+                                  name_hint: ::String?,
+                                  on_road_threshold: ::Integer?,
+                                  radius: ::Integer?,
+                                  strategy: ("MatchAny" | "MatchMostSignificantRoad")?
+                                }?,
+                                side_of_street: {
+                                  position: Array[::Float],
+                                  use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                }?
+                              },
+                              ?span_additional_features: Array[("BestCaseDuration" | "CarAccess" | "Country" | "Distance" | "Duration" | "DynamicSpeed" | "FunctionalClassification" | "Gates" | "Incidents" | "Names" | "Notices" | "PedestrianAccess" | "RailwayCrossings" | "Region" | "RoadAttributes" | "RouteNumbers" | "ScooterAccess" | "SpeedLimit" | "TollSystems" | "TruckAccess" | "TruckRoadTypes" | "TypicalDuration" | "Zones" | "Consumption")],
+                              ?tolls: {
+                                all_transponders: bool?,
+                                all_vignettes: bool?,
+                                currency: ::String?,
+                                emission_type: {
+                                  co_2_emission_class: ::String?,
+                                  type: ::String
+                                }?,
+                                vehicle_category: ("Minibus")?
+                              },
+                              ?traffic: {
+                                flow_event_threshold_override: ::Integer?,
+                                usage: ("IgnoreTrafficData" | "UseTrafficData")?
+                              },
+                              ?travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck"),
+                              ?travel_mode_options: {
+                                car: {
+                                  engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")?,
+                                  license_plate: {
+                                    last_character: ::String?
+                                  }?,
+                                  max_speed: ::Float?,
+                                  occupancy: ::Integer?
+                                }?,
+                                pedestrian: {
+                                  speed: ::Float?
+                                }?,
+                                scooter: {
+                                  engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")?,
+                                  license_plate: {
+                                    last_character: ::String?
+                                  }?,
+                                  max_speed: ::Float?,
+                                  occupancy: ::Integer?
+                                }?,
+                                truck: {
+                                  axle_count: ::Integer?,
+                                  engine_type: ("Electric" | "InternalCombustion" | "PluginHybrid")?,
+                                  gross_weight: ::Integer?,
+                                  hazardous_cargos: Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]?,
+                                  height: ::Integer?,
+                                  height_above_first_axle: ::Integer?,
+                                  kpra_length: ::Integer?,
+                                  length: ::Integer?,
+                                  license_plate: {
+                                    last_character: ::String?
+                                  }?,
+                                  max_speed: ::Float?,
+                                  occupancy: ::Integer?,
+                                  payload_capacity: ::Integer?,
+                                  tire_count: ::Integer?,
+                                  trailer: {
+                                    axle_count: ::Integer?,
+                                    trailer_count: ::Integer?
+                                  }?,
+                                  truck_type: ("LightTruck" | "StraightTruck" | "Tractor")?,
+                                  tunnel_restriction_code: ::String?,
+                                  weight_per_axle: ::Integer?,
+                                  weight_per_axle_group: {
+                                    single: ::Integer?,
+                                    tandem: ::Integer?,
+                                    triple: ::Integer?,
+                                    quad: ::Integer?,
+                                    quint: ::Integer?
+                                  }?,
+                                  width: ::Integer?
+                                }?
+                              },
+                              ?travel_step_type: ("Default" | "TurnByTurn"),
+                              ?waypoints: Array[
+                                {
+                                  avoid_actions_for_distance: ::Integer?,
+                                  avoid_u_turns: bool?,
+                                  heading: ::Float?,
+                                  matching: {
+                                    name_hint: ::String?,
+                                    on_road_threshold: ::Integer?,
+                                    radius: ::Integer?,
+                                    strategy: ("MatchAny" | "MatchMostSignificantRoad")?
+                                  }?,
+                                  pass_through: bool?,
+                                  position: Array[::Float],
+                                  side_of_street: {
+                                    position: Array[::Float],
+                                    use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                  }?,
+                                  stop_duration: ::Integer?
+                                },
+                              ]
+                            ) -> _CalculateRoutesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CalculateRoutesResponseSuccess
+
+      interface _OptimizeWaypointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::OptimizeWaypointsResponse]
+        def connections: () -> ::Array[Types::WaypointOptimizationConnection]
+        def distance: () -> ::Integer
+        def duration: () -> ::Integer
+        def impeding_waypoints: () -> ::Array[Types::WaypointOptimizationImpedingWaypoint]
+        def optimized_waypoints: () -> ::Array[Types::WaypointOptimizationOptimizedWaypoint]
+        def pricing_bucket: () -> ::String
+        def time_breakdown: () -> Types::WaypointOptimizationTimeBreakdown
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoRoutes/Client.html#optimize_waypoints-instance_method
+      def optimize_waypoints: (
+                                ?avoid: {
+                                  areas: Array[
+                                    {
+                                      geometry: {
+                                        bounding_box: Array[::Float]?
+                                      }
+                                    },
+                                  ]?,
+                                  car_shuttle_trains: bool?,
+                                  controlled_access_highways: bool?,
+                                  dirt_roads: bool?,
+                                  ferries: bool?,
+                                  toll_roads: bool?,
+                                  tunnels: bool?,
+                                  u_turns: bool?
+                                },
+                                ?departure_time: ::String,
+                                ?destination: Array[::Float],
+                                ?destination_options: {
+                                  access_hours: {
+                                    from: {
+                                      day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
+                                      time_of_day: ::String
+                                    },
+                                    to: {
+                                      day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
+                                      time_of_day: ::String
+                                    }
+                                  }?,
+                                  appointment_time: ::String?,
+                                  heading: ::Float?,
+                                  id: ::String?,
+                                  service_duration: ::Integer?,
+                                  side_of_street: {
+                                    position: Array[::Float],
+                                    use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                  }?
+                                },
+                                ?driver: {
+                                  rest_cycles: {
+                                    long_cycle: {
+                                      rest_duration: ::Integer,
+                                      work_duration: ::Integer
+                                    },
+                                    short_cycle: {
+                                      rest_duration: ::Integer,
+                                      work_duration: ::Integer
+                                    }
+                                  }?,
+                                  rest_profile: {
+                                    profile: ::String
+                                  }?,
+                                  treat_service_time_as: ("Rest" | "Work")?
+                                },
+                                ?exclude: {
+                                  countries: Array[::String]
+                                },
+                                ?key: ::String,
+                                ?optimize_sequencing_for: ("FastestRoute" | "ShortestRoute"),
+                                origin: Array[::Float],
+                                ?origin_options: {
+                                  id: ::String?
+                                },
+                                ?traffic: {
+                                  usage: ("IgnoreTrafficData" | "UseTrafficData")?
+                                },
+                                ?travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck"),
+                                ?travel_mode_options: {
+                                  pedestrian: {
+                                    speed: ::Float?
+                                  }?,
+                                  truck: {
+                                    gross_weight: ::Integer?,
+                                    hazardous_cargos: Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]?,
+                                    height: ::Integer?,
+                                    length: ::Integer?,
+                                    trailer: {
+                                      trailer_count: ::Integer?
+                                    }?,
+                                    truck_type: ("StraightTruck" | "Tractor")?,
+                                    tunnel_restriction_code: ::String?,
+                                    weight_per_axle: ::Integer?,
+                                    width: ::Integer?
+                                  }?
+                                },
+                                ?waypoints: Array[
+                                  {
+                                    access_hours: {
+                                      from: {
+                                        day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
+                                        time_of_day: ::String
+                                      },
+                                      to: {
+                                        day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
+                                        time_of_day: ::String
+                                      }
+                                    }?,
+                                    appointment_time: ::String?,
+                                    before: Array[::Integer]?,
+                                    heading: ::Float?,
+                                    id: ::String?,
+                                    position: Array[::Float],
+                                    service_duration: ::Integer?,
+                                    side_of_street: {
+                                      position: Array[::Float],
+                                      use_with: ("AnyStreet" | "DividedStreetOnly")?
+                                    }?
+                                  },
+                                ]
+                              ) -> _OptimizeWaypointsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _OptimizeWaypointsResponseSuccess
+
+      interface _SnapToRoadsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SnapToRoadsResponse]
+        def notices: () -> ::Array[Types::RoadSnapNotice]
+        def pricing_bucket: () -> ::String
+        def snapped_geometry: () -> Types::RoadSnapSnappedGeometry
+        def snapped_geometry_format: () -> ("FlexiblePolyline" | "Simple")
+        def snapped_trace_points: () -> ::Array[Types::RoadSnapSnappedTracePoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoRoutes/Client.html#snap_to_roads-instance_method
+      def snap_to_roads: (
+                           ?key: ::String,
+                           ?snapped_geometry_format: ("FlexiblePolyline" | "Simple"),
+                           ?snap_radius: ::Integer,
+                           trace_points: Array[
+                             {
+                               heading: ::Float?,
+                               position: Array[::Float],
+                               speed: ::Float?,
+                               timestamp: ::String?
+                             },
+                           ],
+                           ?travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck"),
+                           ?travel_mode_options: {
+                             truck: {
+                               gross_weight: ::Integer?,
+                               hazardous_cargos: Array[("Combustible" | "Corrosive" | "Explosive" | "Flammable" | "Gas" | "HarmfulToWater" | "Organic" | "Other" | "Poison" | "PoisonousInhalation" | "Radioactive")]?,
+                               height: ::Integer?,
+                               length: ::Integer?,
+                               trailer: {
+                                 trailer_count: ::Integer?
+                               }?,
+                               tunnel_restriction_code: ::String?,
+                               width: ::Integer?
+                             }?
+                           }
+                         ) -> _SnapToRoadsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SnapToRoadsResponseSuccess
+    end
+  end
+end
+

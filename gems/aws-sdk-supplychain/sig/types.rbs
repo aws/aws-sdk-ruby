@@ -267,6 +267,7 @@ module Aws::SupplyChain
       attr_accessor instance_id: ::String
       attr_accessor aws_account_id: ::String
       attr_accessor state: ("Initializing" | "Active" | "CreateFailed" | "DeleteFailed" | "Deleting" | "Deleted")
+      attr_accessor error_message: ::String
       attr_accessor web_app_dns_domain: ::String
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time

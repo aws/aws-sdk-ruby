@@ -460,7 +460,7 @@ module Aws::MarketplaceCommerceAnalytics
     # unique request identifier that can be used to correlate requests with
     # notifications from the SNS topic. Data sets will be published in
     # comma-separated values (CSV) format with the file name
-    # \\\{data\_set\_type\\}\_YYYY-MM-DD.csv. If a file with the same name
+    # \{data\_set\_type}\_YYYY-MM-DD.csv. If a file with the same name
     # already exists (e.g. if the same data set is requested twice), the
     # original file will be overwritten by the new file. Requires a Role
     # with an attached permissions policy providing Allow permissions for
@@ -626,7 +626,7 @@ module Aws::MarketplaceCommerceAnalytics
       req.send_request(options)
     end
 
-    # *This target has been deprecated.* Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name \\\{data\_set\_type\\}\_YYYY-MM-DD'T'HH-mm-ss'Z'.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.
+    # *This target has been deprecated.* Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name \{data\_set\_type}\_YYYY-MM-DD'T'HH-mm-ss'Z'.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.
     #
     # @option params [required, String] :data_set_type
     #   *This target has been deprecated.* Specifies the data set type to be
@@ -713,7 +713,7 @@ module Aws::MarketplaceCommerceAnalytics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

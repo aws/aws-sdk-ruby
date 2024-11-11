@@ -3758,7 +3758,7 @@ module Aws::DataExchange
     #
     # @!attribute [rw] path
     #   URI path value for the API request. Alternatively, you can set the
-    #   URI path directly by invoking /v1/\\\{pathValue\\}.
+    #   URI path directly by invoking /v1/\{pathValue}.
     #   @return [String]
     #
     # @!attribute [rw] revision_id

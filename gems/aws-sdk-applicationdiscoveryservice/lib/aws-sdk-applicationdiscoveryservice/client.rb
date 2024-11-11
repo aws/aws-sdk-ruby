@@ -604,7 +604,7 @@ module Aws::ApplicationDiscoveryService
     #   Specify the tags that you want to create in a *key*-*value* format.
     #   For example:
     #
-    #   `\{"key": "serverType", "value": "webServer"\}`
+    #   `{"key": "serverType", "value": "webServer"}`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -659,7 +659,7 @@ module Aws::ApplicationDiscoveryService
     #   Specify the tags that you want to delete in a *key*-*value* format.
     #   For example:
     #
-    #   `\{"key": "serverType", "value": "webServer"\}`
+    #   `{"key": "serverType", "value": "webServer"}`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -695,7 +695,7 @@ module Aws::ApplicationDiscoveryService
     #   You can filter the request using various logical operators and a
     #   *key*-*value* format. For example:
     #
-    #   `\{"key": "collectionStatus", "value": "STARTED"\}`
+    #   `{"key": "collectionStatus", "value": "STARTED"}`
     #
     # @option params [Integer] :max_results
     #   The total number of agents/collectors to return in a single page of
@@ -1267,7 +1267,7 @@ module Aws::ApplicationDiscoveryService
     #   You can filter the request using various logical operators and a
     #   *key*-*value* format. For example:
     #
-    #   `\{"key": "serverType", "value": "webServer"\}`
+    #   `{"key": "serverType", "value": "webServer"}`
     #
     #   For a complete list of filter options and guidance about using them
     #   with this action, see [Using the ListConfigurations Action][1] in the
@@ -1812,7 +1812,7 @@ module Aws::ApplicationDiscoveryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-11-07)
+------------------
+
+* Feature - This release introduces support for Custom Models in AWS Clean Rooms ML.
+
+1.18.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.17.0 (2024-10-18)
 ------------------
 

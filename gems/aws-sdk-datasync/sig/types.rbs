@@ -258,6 +258,7 @@ module Aws::DataSync
       attr_accessor includes: ::Array[Types::FilterRule]
       attr_accessor manifest_config: Types::ManifestConfig
       attr_accessor task_report_config: Types::TaskReportConfig
+      attr_accessor task_mode: ("BASIC" | "ENHANCED")
       SENSITIVE: []
     end
 
@@ -579,6 +580,10 @@ module Aws::DataSync
       attr_accessor files_verified: ::Integer
       attr_accessor report_result: Types::ReportResult
       attr_accessor estimated_files_to_delete: ::Integer
+      attr_accessor task_mode: ("BASIC" | "ENHANCED")
+      attr_accessor files_prepared: ::Integer
+      attr_accessor files_listed: Types::TaskExecutionFilesListedDetail
+      attr_accessor files_failed: Types::TaskExecutionFilesFailedDetail
       SENSITIVE: []
     end
 
@@ -607,6 +612,7 @@ module Aws::DataSync
       attr_accessor manifest_config: Types::ManifestConfig
       attr_accessor task_report_config: Types::TaskReportConfig
       attr_accessor schedule_details: Types::TaskScheduleDetails
+      attr_accessor task_mode: ("BASIC" | "ENHANCED")
       SENSITIVE: []
     end
 
@@ -1073,9 +1079,24 @@ module Aws::DataSync
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class TaskExecutionFilesFailedDetail
+      attr_accessor prepare: ::Integer
+      attr_accessor transfer: ::Integer
+      attr_accessor verify: ::Integer
+      attr_accessor delete: ::Integer
+      SENSITIVE: []
+    end
+
+    class TaskExecutionFilesListedDetail
+      attr_accessor at_source: ::Integer
+      attr_accessor at_destination_for_delete: ::Integer
+      SENSITIVE: []
+    end
+
     class TaskExecutionListEntry
       attr_accessor task_execution_arn: ::String
       attr_accessor status: ("QUEUED" | "CANCELLING" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
+      attr_accessor task_mode: ("BASIC" | "ENHANCED")
       SENSITIVE: []
     end
 
@@ -1103,6 +1124,7 @@ module Aws::DataSync
       attr_accessor task_arn: ::String
       attr_accessor status: ("AVAILABLE" | "CREATING" | "QUEUED" | "RUNNING" | "UNAVAILABLE")
       attr_accessor name: ::String
+      attr_accessor task_mode: ("BASIC" | "ENHANCED")
       SENSITIVE: []
     end
 

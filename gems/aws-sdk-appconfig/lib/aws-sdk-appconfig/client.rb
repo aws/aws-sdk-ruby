@@ -916,7 +916,7 @@ module Aws::AppConfig
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.state #=> String, one of "READY_FOR_DEPLOYMENT", "DEPLOYING", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.state #=> String, one of "READY_FOR_DEPLOYMENT", "DEPLOYING", "ROLLING_BACK", "ROLLED_BACK", "REVERTED"
     #   resp.monitors #=> Array
     #   resp.monitors[0].alarm_arn #=> String
     #   resp.monitors[0].alarm_role_arn #=> String
@@ -1664,13 +1664,14 @@ module Aws::AppConfig
     #   saved for subsequent calls to GetConfiguration.
     #
     #   For more information about working with configurations, see
-    #   [Retrieving the Configuration][3] in the *AppConfig User Guide*.
+    #   [Retrieving feature flags and configuration data in AppConfig][3] in
+    #   the *AppConfig User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html
     #   [2]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html
-    #   [3]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
+    #   [3]: http://docs.aws.amazon.com/appconfig/latest/userguide/retrieving-feature-flags.html
     #
     # @return [Types::Configuration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1933,9 +1934,9 @@ module Aws::AppConfig
     #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
-    #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK", "REVERTED"
     #   resp.event_log #=> Array
-    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED", "REVERT_COMPLETED"
     #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
     #   resp.event_log[0].description #=> String
     #   resp.event_log[0].action_invocations #=> Array
@@ -2090,7 +2091,7 @@ module Aws::AppConfig
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.state #=> String, one of "READY_FOR_DEPLOYMENT", "DEPLOYING", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.state #=> String, one of "READY_FOR_DEPLOYMENT", "DEPLOYING", "ROLLING_BACK", "ROLLED_BACK", "REVERTED"
     #   resp.monitors #=> Array
     #   resp.monitors[0].alarm_arn #=> String
     #   resp.monitors[0].alarm_role_arn #=> String
@@ -2565,7 +2566,7 @@ module Aws::AppConfig
     #   resp.items[0].growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.items[0].growth_factor #=> Float
     #   resp.items[0].final_bake_time_in_minutes #=> Integer
-    #   resp.items[0].state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.items[0].state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK", "REVERTED"
     #   resp.items[0].percentage_complete #=> Float
     #   resp.items[0].started_at #=> Time
     #   resp.items[0].completed_at #=> Time
@@ -2639,7 +2640,7 @@ module Aws::AppConfig
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].description #=> String
-    #   resp.items[0].state #=> String, one of "READY_FOR_DEPLOYMENT", "DEPLOYING", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.items[0].state #=> String, one of "READY_FOR_DEPLOYMENT", "DEPLOYING", "ROLLING_BACK", "ROLLED_BACK", "REVERTED"
     #   resp.items[0].monitors #=> Array
     #   resp.items[0].monitors[0].alarm_arn #=> String
     #   resp.items[0].monitors[0].alarm_role_arn #=> String
@@ -3038,9 +3039,9 @@ module Aws::AppConfig
     #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
-    #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK", "REVERTED"
     #   resp.event_log #=> Array
-    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED", "REVERT_COMPLETED"
     #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
     #   resp.event_log[0].description #=> String
     #   resp.event_log[0].action_invocations #=> Array
@@ -3075,8 +3076,11 @@ module Aws::AppConfig
     end
 
     # Stops a deployment. This API action works only on deployments that
-    # have a status of `DEPLOYING`. This action moves the deployment to a
-    # status of `ROLLED_BACK`.
+    # have a status of `DEPLOYING`, unless an `AllowRevert` parameter is
+    # supplied. If the `AllowRevert` parameter is supplied, the status of an
+    # in-progress deployment will be `ROLLED_BACK`. The status of a
+    # completed deployment will be `REVERTED`. AppConfig only allows a
+    # revert within 72 hours of deployment completion.
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -3086,6 +3090,11 @@ module Aws::AppConfig
     #
     # @option params [required, Integer] :deployment_number
     #   The sequence number of the deployment.
+    #
+    # @option params [Boolean] :allow_revert
+    #   A Boolean that enables AppConfig to rollback a `COMPLETED` deployment
+    #   to the previous configuration version. This action moves the
+    #   deployment to a status of `REVERTED`.
     #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3138,6 +3147,7 @@ module Aws::AppConfig
     #     application_id: "Id", # required
     #     environment_id: "Id", # required
     #     deployment_number: 1, # required
+    #     allow_revert: false,
     #   })
     #
     # @example Response structure
@@ -3155,9 +3165,9 @@ module Aws::AppConfig
     #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
-    #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK", "REVERTED"
     #   resp.event_log #=> Array
-    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED", "REVERT_COMPLETED"
     #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
     #   resp.event_log[0].description #=> String
     #   resp.event_log[0].action_invocations #=> Array
@@ -3658,7 +3668,7 @@ module Aws::AppConfig
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.state #=> String, one of "READY_FOR_DEPLOYMENT", "DEPLOYING", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.state #=> String, one of "READY_FOR_DEPLOYMENT", "DEPLOYING", "ROLLING_BACK", "ROLLED_BACK", "REVERTED"
     #   resp.monitors #=> Array
     #   resp.monitors[0].alarm_arn #=> String
     #   resp.monitors[0].alarm_role_arn #=> String
@@ -3867,7 +3877,7 @@ module Aws::AppConfig
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

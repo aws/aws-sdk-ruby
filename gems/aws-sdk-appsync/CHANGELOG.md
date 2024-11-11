@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2024-10-30)
+------------------
+
+* Feature - This release adds support for AppSync Event APIs.
+
 1.90.0 (2024-10-18)
 ------------------
 

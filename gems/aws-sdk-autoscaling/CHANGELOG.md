@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2024-11-07)
+------------------
+
+* Feature - Auto Scaling groups now support the ability to strictly balance instances across Availability Zones by configuring the AvailabilityZoneDistribution parameter. If balanced-only is configured for a group, launches will always be attempted in the under scaled Availability Zone even if it is unhealthy.
+
+1.124.0 (2024-10-31)
+------------------
+
+* Feature - Adds bake time for Auto Scaling group Instance Refresh
+
 1.123.0 (2024-10-21)
 ------------------
 

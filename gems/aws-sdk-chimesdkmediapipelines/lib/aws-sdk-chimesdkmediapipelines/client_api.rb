@@ -220,6 +220,7 @@ module Aws::ChimeSDKMediaPipelines
     SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
     SpeakerSearchTask = Shapes::StructureShape.new(name: 'SpeakerSearchTask')
     SqsQueueSinkConfiguration = Shapes::StructureShape.new(name: 'SqsQueueSinkConfiguration')
+    SseAwsKeyManagementParams = Shapes::StructureShape.new(name: 'SseAwsKeyManagementParams')
     StartSpeakerSearchTaskRequest = Shapes::StructureShape.new(name: 'StartSpeakerSearchTaskRequest')
     StartSpeakerSearchTaskResponse = Shapes::StructureShape.new(name: 'StartSpeakerSearchTaskResponse')
     StartVoiceToneAnalysisTaskRequest = Shapes::StructureShape.new(name: 'StartVoiceToneAnalysisTaskRequest')
@@ -394,6 +395,8 @@ module Aws::ChimeSDKMediaPipelines
     CreateMediaCapturePipelineRequest.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SinkArn"))
     CreateMediaCapturePipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateMediaCapturePipelineRequest.add_member(:chime_sdk_meeting_configuration, Shapes::ShapeRef.new(shape: ChimeSdkMeetingConfiguration, location_name: "ChimeSdkMeetingConfiguration"))
+    CreateMediaCapturePipelineRequest.add_member(:sse_aws_key_management_params, Shapes::ShapeRef.new(shape: SseAwsKeyManagementParams, location_name: "SseAwsKeyManagementParams"))
+    CreateMediaCapturePipelineRequest.add_member(:sink_iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SinkIamRoleArn"))
     CreateMediaCapturePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMediaCapturePipelineRequest.struct_class = Types::CreateMediaCapturePipelineRequest
 
@@ -657,6 +660,8 @@ module Aws::ChimeSDKMediaPipelines
     MediaCapturePipeline.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     MediaCapturePipeline.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
     MediaCapturePipeline.add_member(:chime_sdk_meeting_configuration, Shapes::ShapeRef.new(shape: ChimeSdkMeetingConfiguration, location_name: "ChimeSdkMeetingConfiguration"))
+    MediaCapturePipeline.add_member(:sse_aws_key_management_params, Shapes::ShapeRef.new(shape: SseAwsKeyManagementParams, location_name: "SseAwsKeyManagementParams"))
+    MediaCapturePipeline.add_member(:sink_iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SinkIamRoleArn"))
     MediaCapturePipeline.struct_class = Types::MediaCapturePipeline
 
     MediaCapturePipelineSourceConfiguration.add_member(:media_pipeline_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MediaPipelineArn"))
@@ -858,6 +863,10 @@ module Aws::ChimeSDKMediaPipelines
 
     SqsQueueSinkConfiguration.add_member(:insights_target, Shapes::ShapeRef.new(shape: Arn, location_name: "InsightsTarget"))
     SqsQueueSinkConfiguration.struct_class = Types::SqsQueueSinkConfiguration
+
+    SseAwsKeyManagementParams.add_member(:aws_kms_key_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AwsKmsKeyId"))
+    SseAwsKeyManagementParams.add_member(:aws_kms_encryption_context, Shapes::ShapeRef.new(shape: String, location_name: "AwsKmsEncryptionContext"))
+    SseAwsKeyManagementParams.struct_class = Types::SseAwsKeyManagementParams
 
     StartSpeakerSearchTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
     StartSpeakerSearchTaskRequest.add_member(:voice_profile_domain_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "VoiceProfileDomainArn"))

@@ -528,7 +528,7 @@ module Aws::OpsWorks
     #   override the corresponding default stack configuration JSON values.
     #   The string should be in the following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to
     #   Modify the Stack Configuration Attributes][1]
@@ -1056,7 +1056,7 @@ module Aws::OpsWorks
     #   parameter to override some corresponding default stack configuration
     #   JSON values. The string should be in the following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to
     #   Modify the Stack Configuration Attributes][1] and [Overriding
@@ -1703,7 +1703,7 @@ module Aws::OpsWorks
     #   values or to pass data to recipes. The string should be in the
     #   following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to
     #   Modify the Stack Configuration Attributes][1].
@@ -2067,7 +2067,7 @@ module Aws::OpsWorks
     #   values for stack or to pass data to recipes. The string should be in
     #   the following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information on custom JSON, see [Use Custom JSON to Modify
     #   the Stack Configuration Attributes][1].
@@ -2111,7 +2111,7 @@ module Aws::OpsWorks
     #     recipes, set an `Args` parameter named `recipes` to the list of
     #     recipes to be executed. For example, to execute
     #     `phpapp::appsetup`, set `Args` to
-    #     `\{"recipes":["phpapp::appsetup"]\}`.
+    #     `{"recipes":["phpapp::appsetup"]}`.
     #
     #   * `install_dependencies`: Install the stack's dependencies.
     #
@@ -2129,8 +2129,8 @@ module Aws::OpsWorks
     #
     #   * `deploy`: Deploy an app. Ruby on Rails apps have an optional
     #     `Args` parameter named `migrate`. Set `Args` to
-    #     \\\{"migrate":\["true"\]\\} to migrate the database. The
-    #     default setting is \\\{"migrate":\["false"\]\\}.
+    #     \{"migrate":\["true"\]} to migrate the database. The default
+    #     setting is \{"migrate":\["false"\]}.
     #
     #   * `rollback` Roll the app back to the previous version. When you
     #     update an app, OpsWorks Stacks stores the previous version, up to
@@ -2150,8 +2150,8 @@ module Aws::OpsWorks
     #   The arguments of those commands that take arguments. It should be
     #   set to a JSON object with the following format:
     #
-    #   `\{"arg_name1" : ["value1", "value2", ...], "arg_name2" : ["value1",
-    #   "value2", ...], ...\}`
+    #   `{"arg_name1" : ["value1", "value2", ...], "arg_name2" : ["value1",
+    #   "value2", ...], ...}`
     #
     #   The `update_dependencies` command takes two arguments:
     #
@@ -2167,8 +2167,8 @@ module Aws::OpsWorks
     #   For example, to upgrade an instance to Amazon Linux 2018.03, set
     #   `Args` to the following.
     #
-    #   ` \{ "upgrade_os_to":["Amazon Linux 2018.03"],
-    #   "allow_reboot":["true"] \} `
+    #   ` { "upgrade_os_to":["Amazon Linux 2018.03"],
+    #   "allow_reboot":["true"] } `
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeploymentCommand AWS API Documentation
@@ -4947,7 +4947,7 @@ module Aws::OpsWorks
     #   configuration attribute values or to pass data to recipes. The
     #   string should be in the following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information on custom JSON, see [Use Custom JSON to Modify
     #   the Stack Configuration Attributes][1].
@@ -5855,7 +5855,7 @@ module Aws::OpsWorks
     #   or to pass data to recipes. The string should be in the following
     #   format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to
     #   Modify the Stack Configuration Attributes][1].
@@ -6326,7 +6326,7 @@ module Aws::OpsWorks
     # four hours, from UTC 1200 - 1600. It will be off for the remainder of
     # the day.
     #
-    # ` \{ "12":"on", "13":"on", "14":"on", "15":"on" \} `
+    # ` { "12":"on", "13":"on", "14":"on", "15":"on" } `
     #
     # @!attribute [rw] monday
     #   The schedule for Monday.

@@ -813,7 +813,7 @@ module Aws::Pipes
 
     # The overrides that are sent to a container. An empty container
     # override can be passed in. An example of an empty container override
-    # is `\{"containerOverrides": [ ] \}`. If a non-empty container override
+    # is `{"containerOverrides": [ ] }`. If a non-empty container override
     # is specified, the `name` parameter must be included.
     #
     # @!attribute [rw] command

@@ -217,7 +217,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] activation_key
     #   Specifies your DataSync agent's activation key. If you don't have
-    #   an activation key, see [Activate your agent][1].
+    #   an activation key, see [Activating your agent][1].
     #
     #
     #
@@ -225,8 +225,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] agent_name
-    #   Specifies a name for your agent. You can see this name in the
-    #   DataSync console.
+    #   Specifies a name for your agent. We recommend specifying a name that
+    #   you can remember.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -236,34 +236,27 @@ module Aws::DataSync
     #   @return [Array<Types::TagListEntry>]
     #
     # @!attribute [rw] vpc_endpoint_id
-    #   Specifies the ID of the VPC endpoint that you want your agent to
-    #   connect to. For example, a VPC endpoint ID looks like
+    #   Specifies the ID of the [VPC service endpoint][1] that you're
+    #   using. For example, a VPC endpoint ID looks like
     #   `vpce-01234d5aff67890e1`.
     #
-    #   The VPC endpoint you use must include the DataSync service name (for
-    #   example, `com.amazonaws.us-east-2.datasync`).
+    #   The VPC service endpoint you use must include the DataSync service
+    #   name (for example, `com.amazonaws.us-east-2.datasync`).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#datasync-in-vpc
     #   @return [String]
     #
     # @!attribute [rw] subnet_arns
-    #   Specifies the ARN of the subnet where you want to run your DataSync
-    #   task when using a VPC endpoint. This is the subnet where DataSync
-    #   creates and manages the [network interfaces][1] for your transfer.
-    #   You can only specify one ARN.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
+    #   Specifies the ARN of the subnet where your VPC service endpoint is
+    #   located. You can only specify one ARN.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_arns
     #   Specifies the Amazon Resource Name (ARN) of the security group that
-    #   protects your task's [network interfaces][1] when [using a virtual
-    #   private cloud (VPC) endpoint][2]. You can only specify one ARN.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
+    #   allows traffic between your agent and VPC service endpoint. You can
+    #   only specify one ARN.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateAgentRequest AWS API Documentation
@@ -393,22 +386,29 @@ module Aws::DataSync
     # @!attribute [rw] subdirectory
     #   Specifies a mount path for your Amazon EFS file system. This is
     #   where DataSync reads or writes data (depending on if this is a
-    #   source or destination location). By default, DataSync uses the root
-    #   directory, but you can also include subdirectories.
+    #   source or destination location) on your file system.
     #
-    #   <note markdown="1"> You must specify a value with forward slashes (for example,
+    #   By default, DataSync uses the root directory (or [access point][1]
+    #   if you provide one by using `AccessPointArn`). You can also include
+    #   subdirectories using forward slashes (for example,
     #   `/path/to/folder`).
     #
-    #    </note>
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] efs_filesystem_arn
-    #   Specifies the ARN for the Amazon EFS file system.
+    #   Specifies the ARN for your Amazon EFS file system.
     #   @return [String]
     #
     # @!attribute [rw] ec2_config
-    #   Specifies the subnet and security groups DataSync uses to access
-    #   your Amazon EFS file system.
+    #   Specifies the subnet and security groups DataSync uses to connect to
+    #   one of your Amazon EFS file system's [mount targets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html
     #   @return [Types::Ec2Config]
     #
     # @!attribute [rw] tags
@@ -420,18 +420,31 @@ module Aws::DataSync
     #
     # @!attribute [rw] access_point_arn
     #   Specifies the Amazon Resource Name (ARN) of the access point that
-    #   DataSync uses to access the Amazon EFS file system.
+    #   DataSync uses to mount your Amazon EFS file system.
+    #
+    #   For more information, see [Accessing restricted file systems][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam
     #   @return [String]
     #
     # @!attribute [rw] file_system_access_role_arn
-    #   Specifies an Identity and Access Management (IAM) role that DataSync
-    #   assumes when mounting the Amazon EFS file system.
+    #   Specifies an Identity and Access Management (IAM) role that allows
+    #   DataSync to access your Amazon EFS file system.
+    #
+    #   For information on creating this role, see [Creating a DataSync IAM
+    #   role for file system access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam-role
     #   @return [String]
     #
     # @!attribute [rw] in_transit_encryption
     #   Specifies whether you want DataSync to use Transport Layer Security
-    #   (TLS) 1.2 encryption when it copies data to or from the Amazon EFS
-    #   file system.
+    #   (TLS) 1.2 encryption when it transfers data to or from your Amazon
+    #   EFS file system.
     #
     #   If you specify an access point using `AccessPointArn` or an IAM role
     #   using `FileSystemAccessRoleArn`, you must set this parameter to
@@ -652,8 +665,13 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
-    #   Specifies the ARNs of the security groups that provide access to
-    #   your file system's preferred subnet.
+    #   Specifies the ARNs of the Amazon EC2 security groups that provide
+    #   access to your file system's preferred subnet.
+    #
+    #   The security groups that you specify must be able to communicate
+    #   with your file system's security groups. For information about
+    #   configuring security groups for file system access, see the [
+    #   *Amazon FSx for Windows File Server User Guide* ][1].
     #
     #   <note markdown="1"> If you choose a security group that doesn't allow connections from
     #   within itself, do one of the following:
@@ -665,6 +683,10 @@ module Aws::DataSync
     #     mount target's security group.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/limit-access-security-groups.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -818,8 +840,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The Amazon Resource Names (ARNs) of the agents that are used to
-    #   connect to the HDFS cluster.
+    #   The Amazon Resource Names (ARNs) of the DataSync agents that can
+    #   connect to your HDFS cluster.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -849,7 +871,7 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The ARN of the source HDFS cluster location that's created.
+    #   The ARN of the source HDFS cluster location that you create.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationHdfsResponse AWS API Documentation
@@ -882,14 +904,14 @@ module Aws::DataSync
     #
     # @!attribute [rw] on_prem_config
     #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
-    #   want to connect to your NFS file server.
+    #   can connect to your NFS file server.
     #
     #   You can specify more than one agent. For more information, see
-    #   [Using multiple agents for transfers][1].
+    #   [Using multiple DataSync agents][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html#multiple-agents
     #   @return [Types::OnPremConfig]
     #
     # @!attribute [rw] mount_options
@@ -972,7 +994,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] agent_arns
     #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents
-    #   that can securely connect with your location.
+    #   that can connect with your object storage system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1211,9 +1233,9 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   Specifies the DataSync agent (or agents) which you want to connect
-    #   to your SMB file server. You specify an agent by using its Amazon
-    #   Resource Name (ARN).
+    #   Specifies the DataSync agent (or agents) that can connect to your
+    #   SMB file server. You specify an agent by using its Amazon Resource
+    #   Name (ARN).
     #   @return [Array<String>]
     #
     # @!attribute [rw] mount_options
@@ -1269,6 +1291,10 @@ module Aws::DataSync
     # @!attribute [rw] cloud_watch_log_group_arn
     #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
     #   group for monitoring your task.
+    #
+    #   For Enhanced mode tasks, you don't need to specify anything.
+    #   DataSync automatically sends logs to a CloudWatch log group named
+    #   `/aws/datasync`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1308,10 +1334,10 @@ module Aws::DataSync
     #   @return [Array<Types::TagListEntry>]
     #
     # @!attribute [rw] includes
-    #   Specifies include filters define the files, objects, and folders in
-    #   your source location that you want DataSync to transfer. For more
-    #   information and examples, see [Specifying what DataSync transfers by
-    #   using filters][1].
+    #   Specifies include filters that define the files, objects, and
+    #   folders in your source location that you want DataSync to transfer.
+    #   For more information and examples, see [Specifying what DataSync
+    #   transfers by using filters][1].
     #
     #
     #
@@ -1352,6 +1378,32 @@ module Aws::DataSync
     #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
     #   @return [Types::TaskReportConfig]
     #
+    # @!attribute [rw] task_mode
+    #   Specifies one of the following task modes for your data transfer:
+    #
+    #   * `ENHANCED` - Transfer virtually unlimited numbers of objects with
+    #     enhanced metrics, more detailed logs, and higher performance than
+    #     Basic mode. Currently available for transfers between Amazon S3
+    #     locations.
+    #
+    #     <note markdown="1"> To create an Enhanced mode task, the IAM role that you use to call
+    #     the `CreateTask` operation must have the
+    #     `iam:CreateServiceLinkedRole` permission.
+    #
+    #      </note>
+    #
+    #   * `BASIC` (default) - Transfer files or objects between Amazon Web
+    #     Services storage and on-premises, edge, or other cloud storage.
+    #     DataSync [quotas][1] apply.
+    #
+    #   For more information, see [Understanding task mode differences][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-limits.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateTaskRequest AWS API Documentation
     #
     class CreateTaskRequest < Struct.new(
@@ -1365,7 +1417,8 @@ module Aws::DataSync
       :tags,
       :includes,
       :manifest_config,
-      :task_report_config)
+      :task_report_config,
+      :task_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1718,8 +1771,12 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] ec2_config
-    #   The subnet and security groups that DataSync uses to access your
-    #   Amazon EFS file system.
+    #   The subnet and security groups that DataSync uses to connect to one
+    #   of your Amazon EFS file system's [mount targets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html
     #   @return [Types::Ec2Config]
     #
     # @!attribute [rw] creation_time
@@ -1729,16 +1786,30 @@ module Aws::DataSync
     # @!attribute [rw] access_point_arn
     #   The ARN of the access point that DataSync uses to access the Amazon
     #   EFS file system.
+    #
+    #   For more information, see [Accessing restricted file systems][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam
     #   @return [String]
     #
     # @!attribute [rw] file_system_access_role_arn
-    #   The Identity and Access Management (IAM) role that DataSync assumes
-    #   when mounting the Amazon EFS file system.
+    #   The Identity and Access Management (IAM) role that allows DataSync
+    #   to access your Amazon EFS file system.
+    #
+    #   For more information, see [Creating a DataSync IAM role for file
+    #   system access][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam-role
     #   @return [String]
     #
     # @!attribute [rw] in_transit_encryption
-    #   Describes whether DataSync uses Transport Layer Security (TLS)
-    #   encryption when copying data to or from the Amazon EFS file system.
+    #   Indicates whether DataSync uses Transport Layer Security (TLS)
+    #   encryption when transferring data to or from the Amazon EFS file
+    #   system.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationEfsResponse AWS API Documentation
@@ -1928,8 +1999,16 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
-    #   The ARNs of the security groups that are configured for the FSx for
-    #   Windows File Server file system.
+    #   The ARNs of the Amazon EC2 security groups that provide access to
+    #   your file system's preferred subnet.
+    #
+    #   For information about configuring security groups for file system
+    #   access, see the [ *Amazon FSx for Windows File Server User Guide*
+    #   ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/limit-access-security-groups.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
@@ -2073,8 +2152,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] on_prem_config
-    #   The DataSync agents that are connecting to a Network File System
-    #   (NFS) location.
+    #   The DataSync agents that can connect to your Network File System
+    #   (NFS) file server.
     #   @return [Types::OnPremConfig]
     #
     # @!attribute [rw] mount_options
@@ -2624,46 +2703,92 @@ module Aws::DataSync
     #   @return [Time]
     #
     # @!attribute [rw] estimated_files_to_transfer
-    #   The expected number of files, objects, and directories that DataSync
-    #   will transfer over the network. This value is calculated during the
-    #   task execution's `PREPARING` phase before the `TRANSFERRING` phase.
-    #   The calculation is based on comparing the content of the source and
-    #   destination locations and finding the difference that needs to be
-    #   transferred.
+    #   The number of files, objects, and directories that DataSync expects
+    #   to transfer over the network. This value is calculated during the
+    #   task execution's `PREPARING` [step][1] before the `TRANSFERRING`
+    #   step.
+    #
+    #   How this gets calculated depends primarily on your task’s [transfer
+    #   mode][2] configuration:
+    #
+    #   * If `TranserMode` is set to `CHANGED` - The calculation is based on
+    #     comparing the content of the source and destination locations and
+    #     determining the difference that needs to be transferred. The
+    #     difference can include:
+    #
+    #     * Anything that's added or modified at the source location.
+    #
+    #     * Anything that's in both locations and modified at the
+    #       destination after an initial transfer (unless [OverwriteMode][3]
+    #       is set to `NEVER`).
+    #
+    #     * **(Basic task mode only)** The number of items that DataSync
+    #       expects to delete (if [PreserveDeletedFiles][4] is set to
+    #       `REMOVE`).
+    #
+    #   * If `TranserMode` is set to `ALL` - The calculation is based only
+    #     on the items that DataSync finds at the source location.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode
+    #   [4]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-PreserveDeletedFiles
     #   @return [Integer]
     #
     # @!attribute [rw] estimated_bytes_to_transfer
-    #   The estimated physical number of bytes that will transfer over the
-    #   network.
+    #   The number of logical bytes that DataSync expects to write to the
+    #   destination location.
     #   @return [Integer]
     #
     # @!attribute [rw] files_transferred
-    #   The actual number of files, objects, and directories that DataSync
-    #   transferred over the network. This value is updated periodically
-    #   during the task execution's `TRANSFERRING` phase when something is
-    #   read from the source and sent over the network.
+    #   The number of files, objects, and directories that DataSync actually
+    #   transfers over the network. This value is updated periodically
+    #   during the task execution's `TRANSFERRING` [step][1] when something
+    #   is read from the source and sent over the network.
     #
     #   If DataSync fails to transfer something, this value can be less than
     #   `EstimatedFilesToTransfer`. In some cases, this value can also be
     #   greater than `EstimatedFilesToTransfer`. This element is
     #   implementation-specific for some location types, so don't use it as
-    #   an exact indication of what transferred or to monitor your task
+    #   an exact indication of what's transferring or to monitor your task
     #   execution.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_written
-    #   The number of logical bytes written to the destination location.
+    #   The number of logical bytes that DataSync actually writes to the
+    #   destination location.
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_transferred
-    #   The total number of bytes that are involved in the transfer. For the
-    #   number of bytes sent over the network, see `BytesCompressed`.
+    #   The number of bytes that DataSync sends to the network before
+    #   compression (if compression is possible). For the number of bytes
+    #   transferred over the network, see [BytesCompressed][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-BytesCompressed
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_compressed
-    #   The physical number of bytes transferred over the network after
-    #   compression was applied. In most cases, this number is less than
-    #   `BytesTransferred` unless the data isn't compressible.
+    #   The number of physical bytes that DataSync transfers over the
+    #   network after compression (if compression is possible). This number
+    #   is typically less than [BytesTransferred][1] unless the data isn't
+    #   compressible.
+    #
+    #   <note markdown="1"> Not currently supported with [Enhanced mode tasks][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-BytesTransferred
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
     #   @return [Integer]
     #
     # @!attribute [rw] result
@@ -2681,10 +2806,10 @@ module Aws::DataSync
     #   @return [Types::TaskReportConfig]
     #
     # @!attribute [rw] files_deleted
-    #   The number of files, objects, and directories that DataSync deleted
-    #   in your destination location. If you don't [configure your task][1]
-    #   to delete data in the destination that isn't in the source, the
-    #   value is always `0`.
+    #   The number of files, objects, and directories that DataSync actually
+    #   deletes in your destination location. If you don't [configure your
+    #   task][1] to delete data in the destination that isn't in the
+    #   source, the value is always `0`.
     #
     #
     #
@@ -2692,12 +2817,12 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] files_skipped
-    #   The number of files, objects, and directories that DataSync skipped
+    #   The number of files, objects, and directories that DataSync skips
     #   during your transfer.
     #   @return [Integer]
     #
     # @!attribute [rw] files_verified
-    #   The number of files, objects, and directories that DataSync verified
+    #   The number of files, objects, and directories that DataSync verifies
     #   during your transfer.
     #
     #   <note markdown="1"> When you configure your task to [verify only the data that's
@@ -2721,8 +2846,8 @@ module Aws::DataSync
     #   @return [Types::ReportResult]
     #
     # @!attribute [rw] estimated_files_to_delete
-    #   The expected number of files, objects, and directories that DataSync
-    #   will delete in your destination location. If you don't [configure
+    #   The number of files, objects, and directories that DataSync expects
+    #   to delete in your destination location. If you don't [configure
     #   your task][1] to delete data in the destination that isn't in the
     #   source, the value is always `0`.
     #
@@ -2730,6 +2855,59 @@ module Aws::DataSync
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] task_mode
+    #   The task mode that you're using. For more information, see
+    #   [Choosing a task mode for your data transfer][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [String]
+    #
+    # @!attribute [rw] files_prepared
+    #   The number of objects that DataSync will attempt to transfer after
+    #   comparing your source and destination locations.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #   This metric isn't applicable if you configure your task to
+    #   [transfer all data][2]. In that scenario, DataSync copies everything
+    #   from the source to the destination without comparing differences
+    #   between the locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-transfer-mode
+    #   @return [Integer]
+    #
+    # @!attribute [rw] files_listed
+    #   The number of objects that DataSync finds at your locations.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Types::TaskExecutionFilesListedDetail]
+    #
+    # @!attribute [rw] files_failed
+    #   The number of objects that DataSync fails to prepare, transfer,
+    #   verify, and delete during your task execution.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Types::TaskExecutionFilesFailedDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskExecutionResponse AWS API Documentation
     #
@@ -2753,7 +2931,11 @@ module Aws::DataSync
       :files_skipped,
       :files_verified,
       :report_result,
-      :estimated_files_to_delete)
+      :estimated_files_to_delete,
+      :task_mode,
+      :files_prepared,
+      :files_listed,
+      :files_failed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2808,12 +2990,12 @@ module Aws::DataSync
     #   The Amazon Resource Name (ARN) of an Amazon CloudWatch log group for
     #   monitoring your task.
     #
-    #   For more information, see [Monitoring DataSync with Amazon
-    #   CloudWatch][1].
+    #   For more information, see [Monitoring data transfers with CloudWatch
+    #   Logs][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-logging.html
     #   @return [String]
     #
     # @!attribute [rw] source_network_interface_arns
@@ -2923,6 +3105,15 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #   @return [Types::TaskScheduleDetails]
     #
+    # @!attribute [rw] task_mode
+    #   The task mode that you're using. For more information, see
+    #   [Choosing a task mode for your data transfer][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskResponse AWS API Documentation
     #
     class DescribeTaskResponse < Struct.new(
@@ -2944,7 +3135,8 @@ module Aws::DataSync
       :includes,
       :manifest_config,
       :task_report_config,
-      :schedule_details)
+      :schedule_details,
+      :task_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2995,8 +3187,12 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The subnet and security groups that DataSync uses to access your
-    # Amazon EFS file system.
+    # The subnet and security groups that DataSync uses to connect to one of
+    # your Amazon EFS file system's [mount targets][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html
     #
     # @!attribute [rw] subnet_arn
     #   Specifies the ARN of a subnet where DataSync creates the [network
@@ -4129,12 +4325,19 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The DataSync agents that are connecting to a Network File System (NFS)
-    # location.
+    # The DataSync agents that can connect to your Network File System (NFS)
+    # file server.
     #
     # @!attribute [rw] agent_arns
-    #   The Amazon Resource Names (ARNs) of the agents connecting to a
-    #   transfer location.
+    #   The Amazon Resource Names (ARNs) of the DataSync agents that can
+    #   connect to your NFS file server.
+    #
+    #   You can specify more than one agent. For more information, see
+    #   [Using multiple DataSync agents][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html#multiple-agents
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/OnPremConfig AWS API Documentation
@@ -4162,39 +4365,50 @@ module Aws::DataSync
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
     #
     # @!attribute [rw] verify_mode
-    #   Specifies how and when DataSync checks the integrity of your data
-    #   during a transfer.
+    #   Specifies if and how DataSync checks the integrity of your data at
+    #   the end of your transfer.
     #
     #   * `ONLY_FILES_TRANSFERRED` (recommended) - DataSync calculates the
-    #     checksum of transferred files and metadata at the source location.
-    #     At the end of the transfer, DataSync then compares this checksum
-    #     to the checksum calculated on those files at the destination.
+    #     checksum of transferred data (including metadata) at the source
+    #     location. At the end of the transfer, DataSync then compares this
+    #     checksum to the checksum calculated on that data at the
+    #     destination.
+    #
+    #     <note markdown="1"> This is the default option for [Enhanced mode tasks][1].
+    #
+    #      </note>
     #
     #     We recommend this option when transferring to S3 Glacier Flexible
     #     Retrieval or S3 Glacier Deep Archive storage classes. For more
     #     information, see [Storage class considerations with Amazon S3
-    #     locations][1].
+    #     locations][2].
     #
-    #   * `POINT_IN_TIME_CONSISTENT` (default) - At the end of the transfer,
-    #     DataSync scans the entire source and destination to verify that
-    #     both locations are fully synchronized.
+    #   * `POINT_IN_TIME_CONSISTENT` - At the end of the transfer, DataSync
+    #     checks the entire source and destination to verify that both
+    #     locations are fully synchronized.
     #
-    #     If you use a [manifest][2], DataSync only scans and verifies
+    #     <note markdown="1"> The is the default option for [Basic mode tasks][1] and isn't
+    #     currently supported with Enhanced mode tasks.
+    #
+    #      </note>
+    #
+    #     If you use a [manifest][3], DataSync only scans and verifies
     #     what's listed in the manifest.
     #
     #     You can't use this option when transferring to S3 Glacier
     #     Flexible Retrieval or S3 Glacier Deep Archive storage classes. For
     #     more information, see [Storage class considerations with Amazon S3
-    #     locations][1].
+    #     locations][2].
     #
-    #   * `NONE` - DataSync doesn't run additional verification at the end
-    #     of the transfer. All data transmissions are still
-    #     integrity-checked with checksum verification during the transfer.
+    #   * `NONE` - DataSync performs data integrity checks only during your
+    #     transfer. Unlike other options, there's no additional
+    #     verification at the end of your transfer.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
     #   @return [String]
     #
     # @!attribute [rw] overwrite_mode
@@ -4230,7 +4444,7 @@ module Aws::DataSync
     #
     #   * `BEST_EFFORT` (default) - DataSync attempts to preserve the
     #     original `Atime` attribute on all source files (that is, the
-    #     version before the `PREPARING` phase of the task execution). This
+    #     version before the `PREPARING` steps of the task execution). This
     #     option is recommended.
     #
     #   * `NONE` - Ignores `Atime`.
@@ -4245,7 +4459,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] mtime
     #   Specifies whether to preserve metadata indicating the last time that
-    #   a file was written to before the `PREPARING` phase of your task
+    #   a file was written to before the `PREPARING` step of your task
     #   execution. This option is required when you need to run the a task
     #   more than once.
     #
@@ -4285,11 +4499,12 @@ module Aws::DataSync
     #
     #   * `NONE` - Ignores UID and GID.
     #
-    #   For more information, see [Metadata copied by DataSync][1].
+    #   For more information, see [Understanding how DataSync handles file
+    #   and object metadata][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html
     #   @return [String]
     #
     # @!attribute [rw] preserve_deleted_files
@@ -4338,7 +4553,8 @@ module Aws::DataSync
     #   Specifies which users or groups can access a file for a specific
     #   purpose such as reading, writing, or execution of the file.
     #
-    #   For more information, see [Metadata copied by DataSync][1].
+    #   For more information, see [Understanding how DataSync handles file
+    #   and object metadata][1].
     #
     #   * `PRESERVE` (default) - Preserves POSIX-style permissions, which is
     #     recommended.
@@ -4351,13 +4567,21 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html
     #   @return [String]
     #
     # @!attribute [rw] bytes_per_second
     #   Limits the bandwidth used by a DataSync task. For example, if you
     #   want DataSync to use a maximum of 1 MB, set this value to `1048576`
     #   (`=1024*1024`).
+    #
+    #   <note markdown="1"> Not applicable to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
     #   @return [Integer]
     #
     # @!attribute [rw] task_queueing
@@ -4389,14 +4613,15 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] transfer_mode
-    #   Determines whether DataSync transfers only the data and metadata
-    #   that differ between the source and the destination location or
-    #   transfers all the content from the source (without comparing what's
-    #   in the destination).
+    #   Specifies whether DataSync transfers only the data (including
+    #   metadata) that differs between locations following an initial copy
+    #   or transfers all data every time you run the task. If you're
+    #   planning on recurring transfers, you might only want to transfer
+    #   what's changed since your previous task execution.
     #
-    #   * `CHANGED` (default) - DataSync copies only data or metadata that
-    #     is new or different content from the source location to the
-    #     destination location.
+    #   * `CHANGED` (default) - After your initial full transfer, DataSync
+    #     copies only the data and metadata that differs between the source
+    #     and destination location.
     #
     #   * `ALL` - DataSync copies everything in the source to the
     #     destination without comparing differences between the locations.
@@ -4408,8 +4633,8 @@ module Aws::DataSync
     #
     #   This value is only used for transfers between SMB and Amazon FSx for
     #   Windows File Server locations or between two FSx for Windows File
-    #   Server locations. For more information, see [how DataSync handles
-    #   metadata][1].
+    #   Server locations. For more information, see [Understanding how
+    #   DataSync handles file and object metadata][1].
     #
     #   * `OWNER_DACL` (default) - For each copied object, DataSync copies
     #     the following metadata:
@@ -4447,7 +4672,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html
     #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
     #   [4]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb
@@ -4546,7 +4771,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-share-your-services.html
     #   @return [String]
     #
     # @!attribute [rw] subnet_arns
@@ -5270,6 +5495,96 @@ module Aws::DataSync
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The number of objects that DataSync fails to prepare, transfer,
+    # verify, and delete during your task execution.
+    #
+    # <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #
+    # @!attribute [rw] prepare
+    #   The number of objects that DataSync fails to prepare during your
+    #   task execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transfer
+    #   The number of objects that DataSync fails to transfer during your
+    #   task execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] verify
+    #   The number of objects that DataSync fails to verify during your task
+    #   execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete
+    #   The number of objects that DataSync fails to delete during your task
+    #   execution.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionFilesFailedDetail AWS API Documentation
+    #
+    class TaskExecutionFilesFailedDetail < Struct.new(
+      :prepare,
+      :transfer,
+      :verify,
+      :delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of objects that DataSync finds at your locations.
+    #
+    # <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #
+    # @!attribute [rw] at_source
+    #   The number of objects that DataSync finds at your source location.
+    #
+    #   * With a [manifest][1], DataSync lists only what's in your manifest
+    #     (and not everything at your source location).
+    #
+    #   * With an include [filter][2], DataSync lists only what matches the
+    #     filter at your source location.
+    #
+    #   * With an exclude filter, DataSync lists everything at your source
+    #     location before applying the filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] at_destination_for_delete
+    #   The number of objects that DataSync finds at your destination
+    #   location. This metric is only applicable if you [configure your
+    #   task][1] to delete data in the destination that isn't in the
+    #   source.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionFilesListedDetail AWS API Documentation
+    #
+    class TaskExecutionFilesListedDetail < Struct.new(
+      :at_source,
+      :at_destination_for_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a single entry in a list of DataSync task executions
     # that's returned with the [ListTaskExecutions][1] operation.
     #
@@ -5290,60 +5605,118 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-execution-statuses
     #   @return [String]
     #
+    # @!attribute [rw] task_mode
+    #   The task mode that you're using. For more information, see
+    #   [Choosing a task mode for your data transfer][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionListEntry AWS API Documentation
     #
     class TaskExecutionListEntry < Struct.new(
       :task_execution_arn,
-      :status)
+      :status,
+      :task_mode)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Describes the detailed result of a `TaskExecution` operation. This
-    # result includes the time in milliseconds spent in each phase, the
-    # status of the task execution, and the errors encountered.
+    # Provides detailed information about the result of your DataSync task
+    # execution.
     #
     # @!attribute [rw] prepare_duration
-    #   The total time in milliseconds that DataSync spent in the PREPARING
-    #   phase.
+    #   The time in milliseconds that your task execution was in the
+    #   `PREPARING` step. For more information, see [Task execution
+    #   statuses][1].
+    #
+    #   For Enhanced mode tasks, the value is always `0`. For more
+    #   information, see [How DataSync prepares your data transfer][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-transfer-works.html#how-datasync-prepares
     #   @return [Integer]
     #
     # @!attribute [rw] prepare_status
-    #   The status of the PREPARING phase.
+    #   The status of the `PREPARING` step for your task execution. For more
+    #   information, see [Task execution statuses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
     #   @return [String]
     #
     # @!attribute [rw] total_duration
-    #   The total time in milliseconds that DataSync took to transfer the
-    #   file from the source to the destination location.
+    #   The time in milliseconds that your task execution ran.
     #   @return [Integer]
     #
     # @!attribute [rw] transfer_duration
-    #   The total time in milliseconds that DataSync spent in the
-    #   TRANSFERRING phase.
+    #   The time in milliseconds that your task execution was in the
+    #   `TRANSFERRING` step. For more information, see [Task execution
+    #   statuses][1].
+    #
+    #   For Enhanced mode tasks, the value is always `0`. For more
+    #   information, see [How DataSync transfers your data][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-transfer-works.html#how-datasync-transfers
     #   @return [Integer]
     #
     # @!attribute [rw] transfer_status
-    #   The status of the TRANSFERRING phase.
+    #   The status of the `TRANSFERRING` step for your task execution. For
+    #   more information, see [Task execution statuses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
     #   @return [String]
     #
     # @!attribute [rw] verify_duration
-    #   The total time in milliseconds that DataSync spent in the VERIFYING
-    #   phase.
+    #   The time in milliseconds that your task execution was in the
+    #   `VERIFYING` step. For more information, see [Task execution
+    #   statuses][1].
+    #
+    #   For Enhanced mode tasks, the value is always `0`. For more
+    #   information, see [How DataSync verifies your data's integrity][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-transfer-works.html#how-verifying-works
     #   @return [Integer]
     #
     # @!attribute [rw] verify_status
-    #   The status of the VERIFYING phase.
+    #   The status of the `VERIFYING` step for your task execution. For more
+    #   information, see [Task execution statuses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   Errors that DataSync encountered during execution of the task. You
-    #   can use this error code to help troubleshoot issues.
+    #   An error that DataSync encountered during your task execution. You
+    #   can use this information to help [troubleshoot issues][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] error_detail
-    #   Detailed description of an error that was encountered during the
-    #   task execution. You can use this information to help troubleshoot
-    #   issues.
+    #   The detailed description of an error that DataSync encountered
+    #   during your task execution. You can use this information to help
+    #   [troubleshoot issues][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionResultDetail AWS API Documentation
@@ -5420,12 +5793,22 @@ module Aws::DataSync
     #   The name of the task.
     #   @return [String]
     #
+    # @!attribute [rw] task_mode
+    #   The task mode that you're using. For more information, see
+    #   [Choosing a task mode for your data transfer][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskListEntry AWS API Documentation
     #
     class TaskListEntry < Struct.new(
       :task_arn,
       :status,
-      :name)
+      :name,
+      :task_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5511,13 +5894,26 @@ module Aws::DataSync
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
     #
     # @!attribute [rw] schedule_expression
-    #   Specifies your task schedule by using a cron expression in UTC time.
-    #   For information about cron expression syntax, see the [ *Amazon
-    #   EventBridge User Guide* ][1].
+    #   Specifies your task schedule by using a cron or rate expression.
+    #
+    #   Use cron expressions for task schedules that run on a specific time
+    #   and day. For example, the following cron expression creates a task
+    #   schedule that runs at 8 AM on the first Wednesday of every month:
+    #
+    #   `cron(0 8 * * 3#1)`
+    #
+    #   Use rate expressions for task schedules that run on a regular
+    #   interval. For example, the following rate expression creates a task
+    #   schedule that runs every 12 hours:
+    #
+    #   `rate(12 hours)`
+    #
+    #   For information about cron and rate expression syntax, see the [
+    #   *Amazon EventBridge User Guide* ][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-scheduled-rule-pattern.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5839,7 +6235,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The ARNs of the agents that are used to connect to the HDFS cluster.
+    #   The Amazon Resource Names (ARNs) of the DataSync agents that can
+    #   connect to your HDFS cluster.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationHdfsRequest AWS API Documentation
@@ -5885,8 +6282,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] on_prem_config
-    #   The DataSync agents that are connecting to a Network File System
-    #   (NFS) location.
+    #   The DataSync agents that can connect to your Network File System
+    #   (NFS) file server.
     #   @return [Types::OnPremConfig]
     #
     # @!attribute [rw] mount_options
@@ -5942,7 +6339,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] agent_arns
     #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents
-    #   that can securely connect with your location.
+    #   that can connect with your object storage system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] server_certificate
@@ -6056,9 +6453,9 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   Specifies the DataSync agent (or agents) which you want to connect
-    #   to your SMB file server. You specify an agent by using its Amazon
-    #   Resource Name (ARN).
+    #   Specifies the DataSync agent (or agents) that can connect to your
+    #   SMB file server. You specify an agent by using its Amazon Resource
+    #   Name (ARN).
     #   @return [Array<String>]
     #
     # @!attribute [rw] mount_options
@@ -6220,6 +6617,18 @@ module Aws::DataSync
     # @!attribute [rw] cloud_watch_log_group_arn
     #   Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log
     #   group for monitoring your task.
+    #
+    #   For Enhanced mode tasks, you must use `/aws/datasync` as your log
+    #   group name. For example:
+    #
+    #   `arn:aws:logs:us-east-1:111222333444:log-group:/aws/datasync:*`
+    #
+    #   For more information, see [Monitoring data transfers with CloudWatch
+    #   Logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-logging.html
     #   @return [String]
     #
     # @!attribute [rw] includes

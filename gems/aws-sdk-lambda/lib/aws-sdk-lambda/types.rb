@@ -1016,19 +1016,35 @@ module Aws::Lambda
     #
     # @!attribute [rw] kms_key_arn
     #   The ARN of the Key Management Service (KMS) customer managed key
-    #   that's used to encrypt your function's [environment variables][1].
-    #   When [Lambda SnapStart][2] is activated, Lambda also uses this key
-    #   is to encrypt your function's snapshot. If you deploy your function
-    #   using a container image, Lambda also uses this key to encrypt your
-    #   function when it's deployed. Note that this is not the same key
-    #   that's used to protect your container image in the Amazon Elastic
-    #   Container Registry (Amazon ECR). If you don't provide a customer
-    #   managed key, Lambda uses a default service key.
+    #   that's used to encrypt the following resources:
+    #
+    #   * The function's [environment variables][1].
+    #
+    #   * The function's [Lambda SnapStart][2] snapshots.
+    #
+    #   * When used with `SourceKMSKeyArn`, the unzipped version of the .zip
+    #     deployment package that's used for function invocations. For more
+    #     information, see [ Specifying a customer managed key for
+    #     Lambda][3].
+    #
+    #   * The optimized version of the container image that's used for
+    #     function invocations. Note that this is not the same key that's
+    #     used to protect your container image in the Amazon Elastic
+    #     Container Registry (Amazon ECR). For more information, see
+    #     [Function lifecycle][4].
+    #
+    #   If you don't provide a customer managed key, Lambda uses an [Amazon
+    #   Web Services owned key][5] or an [Amazon Web Services managed
+    #   key][6].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
     #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/encrypt-zip-package.html#enable-zip-custom-encryption
+    #   [4]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    #   [6]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -2181,6 +2197,17 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html
     #   @return [String]
     #
+    # @!attribute [rw] source_kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that's used to encrypt your function's .zip deployment package. If
+    #   you don't provide a customer managed key, Lambda uses an [Amazon
+    #   Web Services owned key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode AWS API Documentation
     #
     class FunctionCode < Struct.new(
@@ -2188,7 +2215,8 @@ module Aws::Lambda
       :s3_bucket,
       :s3_key,
       :s3_object_version,
-      :image_uri)
+      :image_uri,
+      :source_kms_key_arn)
       SENSITIVE = [:zip_file]
       include Aws::Structure
     end
@@ -2211,13 +2239,25 @@ module Aws::Lambda
     #   The resolved URI for the image.
     #   @return [String]
     #
+    # @!attribute [rw] source_kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that's used to encrypt your function's .zip deployment package. If
+    #   you don't provide a customer managed key, Lambda uses an [Amazon
+    #   Web Services owned key][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation AWS API Documentation
     #
     class FunctionCodeLocation < Struct.new(
       :repository_type,
       :location,
       :image_uri,
-      :resolved_image_uri)
+      :resolved_image_uri,
+      :source_kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2313,15 +2353,36 @@ module Aws::Lambda
     #   @return [Types::EnvironmentResponse]
     #
     # @!attribute [rw] kms_key_arn
-    #   The KMS key that's used to encrypt the function's [environment
-    #   variables][1]. When [Lambda SnapStart][2] is activated, this key is
-    #   also used to encrypt the function's snapshot. This key is returned
-    #   only if you've configured a customer managed key.
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that's used to encrypt the following resources:
+    #
+    #   * The function's [environment variables][1].
+    #
+    #   * The function's [Lambda SnapStart][2] snapshots.
+    #
+    #   * When used with `SourceKMSKeyArn`, the unzipped version of the .zip
+    #     deployment package that's used for function invocations. For more
+    #     information, see [ Specifying a customer managed key for
+    #     Lambda][3].
+    #
+    #   * The optimized version of the container image that's used for
+    #     function invocations. Note that this is not the same key that's
+    #     used to protect your container image in the Amazon Elastic
+    #     Container Registry (Amazon ECR). For more information, see
+    #     [Function lifecycle][4].
+    #
+    #   If you don't provide a customer managed key, Lambda uses an [Amazon
+    #   Web Services owned key][5] or an [Amazon Web Services managed
+    #   key][6].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
     #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/encrypt-zip-package.html#enable-zip-custom-encryption
+    #   [4]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    #   [6]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -2922,12 +2983,19 @@ module Aws::Lambda
     #   @return [Types::FunctionCodeLocation]
     #
     # @!attribute [rw] tags
-    #   The function's [tags][1].
+    #   The function's [tags][1]. Lambda returns tag data only if you have
+    #   explicit allow permissions for [lambda:ListTags][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/api/API_ListTags.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags_error
+    #   An object that contains details about an error related to retrieving
+    #   tags.
+    #   @return [Types::TagsError]
     #
     # @!attribute [rw] concurrency
     #   The function's [reserved concurrency][1].
@@ -2943,6 +3011,7 @@ module Aws::Lambda
       :configuration,
       :code,
       :tags,
+      :tags_error,
       :concurrency)
       SENSITIVE = []
       include Aws::Structure
@@ -3614,8 +3683,8 @@ module Aws::Lambda
     # @!attribute [rw] payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
-    #   You can enter the JSON directly. For example, `--payload '\{ "key":
-    #   "value" \}'`. You can also specify a file path. For example,
+    #   You can enter the JSON directly. For example, `--payload '{ "key":
+    #   "value" }'`. You can also specify a file path. For example,
     #   `--payload file://payload.json`.
     #   @return [String]
     #
@@ -3805,8 +3874,8 @@ module Aws::Lambda
     # @!attribute [rw] payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
-    #   You can enter the JSON directly. For example, `--payload '\{ "key":
-    #   "value" \}'`. You can also specify a file path. For example,
+    #   You can enter the JSON directly. For example, `--payload '{ "key":
+    #   "value" }'`. You can also specify a file path. For example,
     #   `--payload file://payload.json`.
     #   @return [String]
     #
@@ -6059,6 +6128,26 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # An object that contains details about an error related to retrieving
+    # tags.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagsError AWS API Documentation
+    #
+    class TagsError < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request throughput limit was exceeded. For more information, see
     # [Lambda quotas][1].
     #
@@ -6496,6 +6585,13 @@ module Aws::Lambda
     #   default value is `x86_64`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] source_kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that's used to encrypt your function's .zip deployment package. If
+    #   you don't provide a customer managed key, Lambda uses an Amazon Web
+    #   Services managed key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation
     #
     class UpdateFunctionCodeRequest < Struct.new(
@@ -6508,7 +6604,8 @@ module Aws::Lambda
       :publish,
       :dry_run,
       :revision_id,
-      :architectures)
+      :architectures,
+      :source_kms_key_arn)
       SENSITIVE = [:zip_file]
       include Aws::Structure
     end
@@ -6620,19 +6717,35 @@ module Aws::Lambda
     #
     # @!attribute [rw] kms_key_arn
     #   The ARN of the Key Management Service (KMS) customer managed key
-    #   that's used to encrypt your function's [environment variables][1].
-    #   When [Lambda SnapStart][2] is activated, Lambda also uses this key
-    #   is to encrypt your function's snapshot. If you deploy your function
-    #   using a container image, Lambda also uses this key to encrypt your
-    #   function when it's deployed. Note that this is not the same key
-    #   that's used to protect your container image in the Amazon Elastic
-    #   Container Registry (Amazon ECR). If you don't provide a customer
-    #   managed key, Lambda uses a default service key.
+    #   that's used to encrypt the following resources:
+    #
+    #   * The function's [environment variables][1].
+    #
+    #   * The function's [Lambda SnapStart][2] snapshots.
+    #
+    #   * When used with `SourceKMSKeyArn`, the unzipped version of the .zip
+    #     deployment package that's used for function invocations. For more
+    #     information, see [ Specifying a customer managed key for
+    #     Lambda][3].
+    #
+    #   * The optimized version of the container image that's used for
+    #     function invocations. Note that this is not the same key that's
+    #     used to protect your container image in the Amazon Elastic
+    #     Container Registry (Amazon ECR). For more information, see
+    #     [Function lifecycle][4].
+    #
+    #   If you don't provide a customer managed key, Lambda uses an [Amazon
+    #   Web Services owned key][5] or an [Amazon Web Services managed
+    #   key][6].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
     #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/encrypt-zip-package.html#enable-zip-custom-encryption
+    #   [4]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    #   [6]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     #   @return [String]
     #
     # @!attribute [rw] tracing_config

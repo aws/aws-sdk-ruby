@@ -839,7 +839,7 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] parameters
     #   The data parameters the query can use in JSON format. For example:
-    #   \\\{"name": "john", "age": 20\\}. (optional)
+    #   \{"name": "john", "age": 20}. (optional)
     #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
     #
     # @!attribute [rw] plan_cache
@@ -2426,13 +2426,13 @@ module Aws::NeptuneGraph
     #   string value can be from 1 to 128 Unicode characters in length. It
     #   can't be prefixed with `aws:` and can only contain the set of
     #   Unicode characters specified by this Java regular expression:
-    #   `"^([\p\{L\}\p\{Z\}\p\{N\}_.:/=+\-]*)$")`.
+    #   `"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")`.
     #
     #   **Value** (string)   –   A value is the optional value of the tag.
     #   The string value can be from 1 to 256 Unicode characters in length.
     #   It can't be prefixed with `aws:` and can only contain the set of
     #   Unicode characters specified by this Java regular expression:
-    #   `"^([\p\{L\}\p\{Z\}\p\{N\}_.:/=+\-]*)$")`.
+    #   `"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/TagResourceInput AWS API Documentation

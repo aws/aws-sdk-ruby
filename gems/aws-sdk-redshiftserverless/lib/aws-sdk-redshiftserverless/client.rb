@@ -814,9 +814,9 @@ module Aws::RedshiftServerless
     #   A JSON format string of the Amazon Redshift Serverless API operation
     #   with input parameters. The following is an example of a target action.
     #
-    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   `"{"CreateSnapshot": {"NamespaceName":
     #   "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod":
-    #   "1"\}\}"`
+    #   "1"}}"`
     #
     # @return [Types::CreateScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1106,6 +1106,10 @@ module Aws::RedshiftServerless
     #   The custom port to use when connecting to a workgroup. Valid port
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
     #
+    # @option params [Types::PerformanceTarget] :price_performance_target
+    #   An object that represents the price performance target settings for
+    #   the workgroup.
+    #
     # @option params [Boolean] :publicly_accessible
     #   A value that specifies whether the workgroup can be accessed from a
     #   public network.
@@ -1141,6 +1145,10 @@ module Aws::RedshiftServerless
     #     max_capacity: 1,
     #     namespace_name: "NamespaceName", # required
     #     port: 1,
+    #     price_performance_target: {
+    #       level: 1,
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
     #     publicly_accessible: false,
     #     security_group_ids: ["SecurityGroupId"],
     #     subnet_ids: ["SubnetId"],
@@ -1182,6 +1190,8 @@ module Aws::RedshiftServerless
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
+    #   resp.workgroup.price_performance_target.level #=> Integer
+    #   resp.workgroup.price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
     #   resp.workgroup.security_group_ids[0] #=> String
@@ -1557,6 +1567,8 @@ module Aws::RedshiftServerless
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
+    #   resp.workgroup.price_performance_target.level #=> Integer
+    #   resp.workgroup.price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
     #   resp.workgroup.security_group_ids[0] #=> String
@@ -2065,6 +2077,8 @@ module Aws::RedshiftServerless
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
+    #   resp.workgroup.price_performance_target.level #=> Integer
+    #   resp.workgroup.price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
     #   resp.workgroup.security_group_ids[0] #=> String
@@ -2720,6 +2734,8 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].namespace_name #=> String
     #   resp.workgroups[0].patch_version #=> String
     #   resp.workgroups[0].port #=> Integer
+    #   resp.workgroups[0].price_performance_target.level #=> Integer
+    #   resp.workgroups[0].price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.workgroups[0].publicly_accessible #=> Boolean
     #   resp.workgroups[0].security_group_ids #=> Array
     #   resp.workgroups[0].security_group_ids[0] #=> String
@@ -2747,11 +2763,11 @@ module Aws::RedshiftServerless
     #   The policy to create or update. For example, the following policy
     #   grants a user authorization to restore a snapshot.
     #
-    #   `"\{"Version": "2012-10-17", "Statement" : [\{ "Sid":
-    #   "AllowUserRestoreFromSnapshot", "Principal":\{"AWS":
-    #   ["739247239426"]\}, "Action":
+    #   `"{"Version": "2012-10-17", "Statement" : [{ "Sid":
+    #   "AllowUserRestoreFromSnapshot", "Principal":{"AWS":
+    #   ["739247239426"]}, "Action":
     #   ["redshift-serverless:RestoreFromSnapshot"] , "Effect": "Allow"
-    #   \}]\}"`
+    #   }]}"`
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the account to create or update a
@@ -3387,9 +3403,9 @@ module Aws::RedshiftServerless
     #   A JSON format string of the Amazon Redshift Serverless API operation
     #   with input parameters. The following is an example of a target action.
     #
-    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   `"{"CreateSnapshot": {"NamespaceName":
     #   "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod":
-    #   "1"\}\}"`
+    #   "1"}}"`
     #
     # @return [Types::UpdateScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3632,6 +3648,10 @@ module Aws::RedshiftServerless
     #   The custom port to use when connecting to a workgroup. Valid port
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
     #
+    # @option params [Types::PerformanceTarget] :price_performance_target
+    #   An object that represents the price performance target settings for
+    #   the workgroup.
+    #
     # @option params [Boolean] :publicly_accessible
     #   A value that specifies whether the workgroup can be accessible from a
     #   public network.
@@ -3664,6 +3684,10 @@ module Aws::RedshiftServerless
     #     ip_address_type: "IpAddressType",
     #     max_capacity: 1,
     #     port: 1,
+    #     price_performance_target: {
+    #       level: 1,
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
     #     publicly_accessible: false,
     #     security_group_ids: ["SecurityGroupId"],
     #     subnet_ids: ["SubnetId"],
@@ -3699,6 +3723,8 @@ module Aws::RedshiftServerless
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
     #   resp.workgroup.port #=> Integer
+    #   resp.workgroup.price_performance_target.level #=> Integer
+    #   resp.workgroup.price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.workgroup.publicly_accessible #=> Boolean
     #   resp.workgroup.security_group_ids #=> Array
     #   resp.workgroup.security_group_ids[0] #=> String
@@ -3737,7 +3763,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5716,6 +5716,14 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class OAuthParameters
+      attr_accessor token_provider_url: ::String
+      attr_accessor o_auth_scope: ::String
+      attr_accessor identity_provider_vpc_connection_properties: Types::VpcConnectionProperties
+      attr_accessor identity_provider_resource_uri: ::String
+      SENSITIVE: []
+    end
+
     class OracleParameters
       attr_accessor host: ::String
       attr_accessor port: ::Integer
@@ -7099,6 +7107,9 @@ module Aws::QuickSight
       attr_accessor host: ::String
       attr_accessor database: ::String
       attr_accessor warehouse: ::String
+      attr_accessor authentication_type: ("PASSWORD" | "TOKEN" | "X509")
+      attr_accessor database_access_control_role: ::String
+      attr_accessor o_auth_parameters: Types::OAuthParameters
       SENSITIVE: []
     end
 
@@ -7133,6 +7144,9 @@ module Aws::QuickSight
       attr_accessor port: ::Integer
       attr_accessor catalog: ::String
       attr_accessor product_type: ("GALAXY" | "ENTERPRISE")
+      attr_accessor database_access_control_role: ::String
+      attr_accessor authentication_type: ("PASSWORD" | "TOKEN" | "X509")
+      attr_accessor o_auth_parameters: Types::OAuthParameters
       SENSITIVE: []
     end
 

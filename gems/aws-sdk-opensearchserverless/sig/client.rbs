@@ -187,6 +187,11 @@ module Aws
       def create_security_config: (
                                     ?client_token: ::String,
                                     ?description: ::String,
+                                    ?iam_identity_center_options: {
+                                      group_attribute: ("GroupId" | "GroupName")?,
+                                      instance_arn: ::String,
+                                      user_attribute: ("UserId" | "UserName" | "Email")?
+                                    },
                                     name: ::String,
                                     ?saml_options: {
                                       group_attribute: ::String?,
@@ -194,7 +199,7 @@ module Aws
                                       session_timeout: ::Integer?,
                                       user_attribute: ::String?
                                     },
-                                    type: ("saml")
+                                    type: ("saml" | "iamidentitycenter")
                                   ) -> _CreateSecurityConfigResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityConfigResponseSuccess
 
@@ -398,7 +403,7 @@ module Aws
       def list_security_configs: (
                                    ?max_results: ::Integer,
                                    ?next_token: ::String,
-                                   type: ("saml")
+                                   type: ("saml" | "iamidentitycenter")
                                  ) -> _ListSecurityConfigsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityConfigsResponseSuccess
 
@@ -530,6 +535,10 @@ module Aws
                                     ?client_token: ::String,
                                     config_version: ::String,
                                     ?description: ::String,
+                                    ?iam_identity_center_options_updates: {
+                                      group_attribute: ("GroupId" | "GroupName")?,
+                                      user_attribute: ("UserId" | "UserName" | "Email")?
+                                    },
                                     id: ::String,
                                     ?saml_options: {
                                       group_attribute: ::String?,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2024-10-24)
+------------------
+
+* Feature - Documentation update: added the default value of the Slurm configuration parameter scaleDownIdleTimeInSeconds to its description.
+
 1.8.0 (2024-10-18)
 ------------------
 

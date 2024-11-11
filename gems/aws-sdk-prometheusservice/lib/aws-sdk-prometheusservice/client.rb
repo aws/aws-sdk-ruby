@@ -512,7 +512,8 @@ module Aws::PrometheusService
     #
     # @option params [required, String] :log_group_arn
     #   The ARN of the CloudWatch log group to which the vended log data will
-    #   be published. This log group must exist prior to calling this API.
+    #   be published. This log group must exist prior to calling this
+    #   operation.
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to create the logging configuration for.
@@ -621,36 +622,35 @@ module Aws::PrometheusService
     # The `CreateScraper` operation creates a scraper to collect metrics. A
     # scraper pulls metrics from Prometheus-compatible sources within an
     # Amazon EKS cluster, and sends them to your Amazon Managed Service for
-    # Prometheus workspace. You can configure the scraper to control what
-    # metrics are collected, and what transformations are applied prior to
-    # sending them to your workspace.
+    # Prometheus workspace. Scrapers are flexible, and can be configured to
+    # control what metrics are collected, the frequency of collection, what
+    # transformations are applied to the metrics, and more.
     #
-    # If needed, an IAM role will be created for you that gives Amazon
-    # Managed Service for Prometheus access to the metrics in your cluster.
-    # For more information, see [Using roles for scraping metrics from
-    # EKS][1] in the *Amazon Managed Service for Prometheus User Guide*.
+    # An IAM role will be created for you that Amazon Managed Service for
+    # Prometheus uses to access the metrics in your cluster. You must
+    # configure this role with a policy that allows it to scrape metrics
+    # from your cluster. For more information, see [Configuring your Amazon
+    # EKS cluster][1] in the *Amazon Managed Service for Prometheus User
+    # Guide*.
     #
-    # You cannot update a scraper. If you want to change the configuration
-    # of the scraper, create a new scraper and delete the old one.
-    #
-    # The `scrapeConfiguration` parameter contains the base64-encoded
-    # version of the YAML configuration file.
+    # The `scrapeConfiguration` parameter contains the base-64 encoded YAML
+    # configuration for the scraper.
     #
     # <note markdown="1"> For more information about collectors, including what metrics are
-    # collected, and how to configure the scraper, see [Amazon Web Services
-    # managed collectors][2] in the *Amazon Managed Service for Prometheus
-    # User Guide*.
+    # collected, and how to configure the scraper, see [Using an Amazon Web
+    # Services managed collector][2] in the *Amazon Managed Service for
+    # Prometheus User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/using-service-linked-roles.html#using-service-linked-roles-prom-scraper
-    # [2]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector.html
+    # [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup
+    # [2]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html
     #
     # @option params [String] :alias
-    #   (optional) a name to associate with the scraper. This is for your use,
-    #   and does not need to be unique.
+    #   (optional) An alias to associate with the scraper. This is for your
+    #   use, and does not need to be unique.
     #
     # @option params [String] :client_token
     #   (Optional) A unique, case-sensitive identifier that you can provide to
@@ -665,9 +665,12 @@ module Aws::PrometheusService
     #
     # @option params [required, Types::ScrapeConfiguration] :scrape_configuration
     #   The configuration file to use in the new scraper. For more
-    #   information, see [Scraper
-    #   configuration](prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration)
-    #   in the *Amazon Managed Service for Prometheus User Guide*.
+    #   information, see [Scraper configuration][1] in the *Amazon Managed
+    #   Service for Prometheus User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration
     #
     # @option params [required, Types::Source] :source
     #   The Amazon EKS cluster from which the scraper will collect metrics.
@@ -712,7 +715,7 @@ module Aws::PrometheusService
     #
     #   resp.arn #=> String
     #   resp.scraper_id #=> String
-    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATION_FAILED", "DELETION_FAILED"
+    #   resp.status.status_code #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -918,7 +921,7 @@ module Aws::PrometheusService
     # @example Response structure
     #
     #   resp.scraper_id #=> String
-    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATION_FAILED", "DELETION_FAILED"
+    #   resp.status.status_code #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteScraper AWS API Documentation
     #
@@ -1105,7 +1108,7 @@ module Aws::PrometheusService
     #   resp.scraper.source.eks_configuration.security_group_ids[0] #=> String
     #   resp.scraper.source.eks_configuration.subnet_ids #=> Array
     #   resp.scraper.source.eks_configuration.subnet_ids[0] #=> String
-    #   resp.scraper.status.status_code #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATION_FAILED", "DELETION_FAILED"
+    #   resp.scraper.status.status_code #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.scraper.status_reason #=> String
     #   resp.scraper.tags #=> Hash
     #   resp.scraper.tags["TagKey"] #=> String
@@ -1314,7 +1317,7 @@ module Aws::PrometheusService
     #   resp.scrapers[0].source.eks_configuration.security_group_ids[0] #=> String
     #   resp.scrapers[0].source.eks_configuration.subnet_ids #=> Array
     #   resp.scrapers[0].source.eks_configuration.subnet_ids[0] #=> String
-    #   resp.scrapers[0].status.status_code #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATION_FAILED", "DELETION_FAILED"
+    #   resp.scrapers[0].status.status_code #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.scrapers[0].status_reason #=> String
     #   resp.scrapers[0].tags #=> Hash
     #   resp.scrapers[0].tags["TagKey"] #=> String
@@ -1330,12 +1333,12 @@ module Aws::PrometheusService
 
     # The `ListTagsForResource` operation returns the tags that are
     # associated with an Amazon Managed Service for Prometheus resource.
-    # Currently, the only resources that can be tagged are workspaces and
-    # rule groups namespaces.
+    # Currently, the only resources that can be tagged are scrapers,
+    # workspaces, and rule groups namespaces.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource to list tages for. Must be a workspace or rule
-    #   groups namespace resource.
+    #   The ARN of the resource to list tages for. Must be a workspace,
+    #   scraper, or rule groups namespace resource.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1545,20 +1548,21 @@ module Aws::PrometheusService
 
     # The `TagResource` operation associates tags with an Amazon Managed
     # Service for Prometheus resource. The only resources that can be tagged
-    # are workspaces and rule groups namespaces.
+    # are rule groups namespaces, scrapers, and workspaces.
     #
     # If you specify a new tag key for the resource, this tag is appended to
     # the list of tags associated with the resource. If you specify a tag
     # key that is already associated with the resource, the new tag value
-    # that you specify replaces the previous value for that tag.
+    # that you specify replaces the previous value for that tag. To remove a
+    # tag, use `UntagResource`.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the workspace or rule groups namespace to apply tags to.
+    #   The ARN of the resource to apply tags to.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The list of tag keys and values to associate with the resource.
     #
-    #   Keys may not begin with `aws:`.
+    #   Keys must not begin with `aws:`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1581,11 +1585,11 @@ module Aws::PrometheusService
     end
 
     # Removes the specified tags from an Amazon Managed Service for
-    # Prometheus resource. The only resources that can be tagged are
-    # workspaces and rule groups namespaces.
+    # Prometheus resource. The only resources that can be tagged are rule
+    # groups namespaces, scrapers, and workspaces.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the workspace or rule groups namespace.
+    #   The ARN of the resource from which to remove a tag.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to remove.
@@ -1651,6 +1655,82 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Updates an existing scraper.
+    #
+    # You can't use this function to update the source from which the
+    # scraper is collecting metrics. To change the source, delete the
+    # scraper and create a new one.
+    #
+    # @option params [String] :alias
+    #   The new alias of the scraper.
+    #
+    # @option params [String] :client_token
+    #   A unique identifier that you can provide to ensure the idempotency of
+    #   the request. Case-sensitive.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::Destination] :destination
+    #   The new Amazon Managed Service for Prometheus workspace to send
+    #   metrics to.
+    #
+    # @option params [Types::ScrapeConfiguration] :scrape_configuration
+    #   Contains the base-64 encoded YAML configuration for the scraper.
+    #
+    #   <note markdown="1"> For more information about configuring a scraper, see [Using an Amazon
+    #   Web Services managed collector][1] in the *Amazon Managed Service for
+    #   Prometheus User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html
+    #
+    # @option params [required, String] :scraper_id
+    #   The ID of the scraper to update.
+    #
+    # @return [Types::UpdateScraperResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateScraperResponse#arn #arn} => String
+    #   * {Types::UpdateScraperResponse#scraper_id #scraper_id} => String
+    #   * {Types::UpdateScraperResponse#status #status} => Types::ScraperStatus
+    #   * {Types::UpdateScraperResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scraper({
+    #     alias: "ScraperAlias",
+    #     client_token: "IdempotencyToken",
+    #     destination: {
+    #       amp_configuration: {
+    #         workspace_arn: "WorkspaceArn", # required
+    #       },
+    #     },
+    #     scrape_configuration: {
+    #       configuration_blob: "data",
+    #     },
+    #     scraper_id: "ScraperId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.scraper_id #=> String
+    #   resp.status.status_code #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraper AWS API Documentation
+    #
+    # @overload update_scraper(params = {})
+    # @param [Hash] params ({})
+    def update_scraper(params = {}, options = {})
+      req = build_request(:update_scraper, params)
+      req.send_request(options)
+    end
+
     # Updates the alias of an existing workspace.
     #
     # @option params [String] :alias
@@ -1706,7 +1786,7 @@ module Aws::PrometheusService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

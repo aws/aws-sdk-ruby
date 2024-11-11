@@ -1497,7 +1497,7 @@ module Aws::MigrationHubRefactorSpaces
     #   This is the path that Refactor Spaces uses to match traffic. Paths
     #   must start with `/` and are relative to the base of the application.
     #   To use path parameters in the source path, add a variable in curly
-    #   braces. For example, the resource path \\\{user\\} represents a path
+    #   braces. For example, the resource path \{user} represents a path
     #   parameter called 'user'.
     #   @return [String]
     #
@@ -2078,7 +2078,7 @@ module Aws::MigrationHubRefactorSpaces
     #   This is the path that Refactor Spaces uses to match traffic. Paths
     #   must start with `/` and are relative to the base of the application.
     #   To use path parameters in the source path, add a variable in curly
-    #   braces. For example, the resource path \\\{user\\} represents a path
+    #   braces. For example, the resource path \{user} represents a path
     #   parameter called 'user'.
     #   @return [String]
     #
@@ -2418,7 +2418,7 @@ module Aws::MigrationHubRefactorSpaces
     #   This is the path that Refactor Spaces uses to match traffic. Paths
     #   must start with `/` and are relative to the base of the application.
     #   To use path parameters in the source path, add a variable in curly
-    #   braces. For example, the resource path \\\{user\\} represents a path
+    #   braces. For example, the resource path \{user} represents a path
     #   parameter called 'user'.
     #   @return [String]
     #

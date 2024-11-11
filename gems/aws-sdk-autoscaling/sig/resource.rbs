@@ -216,6 +216,9 @@ module Aws
                           ?instance_maintenance_policy: {
                             min_healthy_percentage: ::Integer?,
                             max_healthy_percentage: ::Integer?
+                          },
+                          ?availability_zone_distribution: {
+                            capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")?
                           }
                         ) -> AutoScalingGroup
                       | (?Hash[Symbol, untyped]) -> AutoScalingGroup

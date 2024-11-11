@@ -121,7 +121,9 @@ module Aws
                                               person_type: ("Legal Person" | "Physical Person" | "Business")
                                             }?,
                                             malaysia_additional_info: {
-                                              service_tax_codes: Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]
+                                              business_registration_number: ::String?,
+                                              service_tax_codes: Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]?,
+                                              tax_information_number: ::String?
                                             }?,
                                             poland_additional_info: {
                                               individual_registration_number: ::String?,
@@ -164,7 +166,7 @@ module Aws
                                           }?,
                                           legal_name: ::String?,
                                           registration_id: ::String,
-                                          registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST"),
+                                          registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC"),
                                           sector: ("Business" | "Individual" | "Government")?,
                                           verification_details: {
                                             date_of_birth: ::String?,
@@ -180,6 +182,15 @@ module Aws
                                         }
                                       ) -> _BatchPutTaxRegistrationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutTaxRegistrationResponseSuccess
+
+      interface _DeleteSupplementalTaxRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSupplementalTaxRegistrationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#delete_supplemental_tax_registration-instance_method
+      def delete_supplemental_tax_registration: (
+                                                  authority_id: ::String
+                                                ) -> _DeleteSupplementalTaxRegistrationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSupplementalTaxRegistrationResponseSuccess
 
       interface _DeleteTaxRegistrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTaxRegistrationResponse]
@@ -217,6 +228,18 @@ module Aws
                                          ) -> _GetTaxRegistrationDocumentResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTaxRegistrationDocumentResponseSuccess
 
+      interface _ListSupplementalTaxRegistrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSupplementalTaxRegistrationsResponse]
+        def next_token: () -> ::String
+        def tax_registrations: () -> ::Array[Types::SupplementalTaxRegistration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#list_supplemental_tax_registrations-instance_method
+      def list_supplemental_tax_registrations: (
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _ListSupplementalTaxRegistrationsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSupplementalTaxRegistrationsResponseSuccess
+
       interface _ListTaxRegistrationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTaxRegistrationsResponse]
         def account_details: () -> ::Array[Types::AccountDetails]
@@ -228,6 +251,31 @@ module Aws
                                     ?next_token: ::String
                                   ) -> _ListTaxRegistrationsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTaxRegistrationsResponseSuccess
+
+      interface _PutSupplementalTaxRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSupplementalTaxRegistrationResponse]
+        def authority_id: () -> ::String
+        def status: () -> ("Verified" | "Pending" | "Deleted" | "Rejected")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#put_supplemental_tax_registration-instance_method
+      def put_supplemental_tax_registration: (
+                                               tax_registration_entry: {
+                                                 address: {
+                                                   address_line_1: ::String,
+                                                   address_line_2: ::String?,
+                                                   address_line_3: ::String?,
+                                                   city: ::String,
+                                                   country_code: ::String,
+                                                   district_or_county: ::String?,
+                                                   postal_code: ::String,
+                                                   state_or_region: ::String?
+                                                 },
+                                                 legal_name: ::String,
+                                                 registration_id: ::String,
+                                                 registration_type: ("VAT")
+                                               }
+                                             ) -> _PutSupplementalTaxRegistrationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSupplementalTaxRegistrationResponseSuccess
 
       interface _PutTaxRegistrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutTaxRegistrationResponse]
@@ -264,7 +312,9 @@ module Aws
                                         person_type: ("Legal Person" | "Physical Person" | "Business")
                                       }?,
                                       malaysia_additional_info: {
-                                        service_tax_codes: Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]
+                                        business_registration_number: ::String?,
+                                        service_tax_codes: Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]?,
+                                        tax_information_number: ::String?
                                       }?,
                                       poland_additional_info: {
                                         individual_registration_number: ::String?,
@@ -307,7 +357,7 @@ module Aws
                                     }?,
                                     legal_name: ::String?,
                                     registration_id: ::String,
-                                    registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST"),
+                                    registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC"),
                                     sector: ("Business" | "Individual" | "Government")?,
                                     verification_details: {
                                       date_of_birth: ::String?,

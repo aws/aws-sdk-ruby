@@ -500,7 +500,8 @@ module Aws
                                report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
                              }?
                            }?
-                         }
+                         },
+                         ?task_mode: ("BASIC" | "ENHANCED")
                        ) -> _CreateTaskResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTaskResponseSuccess
 
@@ -809,6 +810,7 @@ module Aws
         def manifest_config: () -> Types::ManifestConfig
         def task_report_config: () -> Types::TaskReportConfig
         def schedule_details: () -> Types::TaskScheduleDetails
+        def task_mode: () -> ("BASIC" | "ENHANCED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_task-instance_method
       def describe_task: (
@@ -838,6 +840,10 @@ module Aws
         def files_verified: () -> ::Integer
         def report_result: () -> Types::ReportResult
         def estimated_files_to_delete: () -> ::Integer
+        def task_mode: () -> ("BASIC" | "ENHANCED")
+        def files_prepared: () -> ::Integer
+        def files_listed: () -> Types::TaskExecutionFilesListedDetail
+        def files_failed: () -> Types::TaskExecutionFilesFailedDetail
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_task_execution-instance_method
       def describe_task_execution: (

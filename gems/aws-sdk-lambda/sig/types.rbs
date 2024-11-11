@@ -441,6 +441,7 @@ module Aws::Lambda
       attr_accessor s3_key: ::String
       attr_accessor s3_object_version: ::String
       attr_accessor image_uri: ::String
+      attr_accessor source_kms_key_arn: ::String
       SENSITIVE: [:zip_file]
     end
 
@@ -449,6 +450,7 @@ module Aws::Lambda
       attr_accessor location: ::String
       attr_accessor image_uri: ::String
       attr_accessor resolved_image_uri: ::String
+      attr_accessor source_kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -595,6 +597,7 @@ module Aws::Lambda
       attr_accessor configuration: Types::FunctionConfiguration
       attr_accessor code: Types::FunctionCodeLocation
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tags_error: Types::TagsError
       attr_accessor concurrency: Types::Concurrency
       SENSITIVE: []
     end
@@ -1321,6 +1324,12 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class TagsError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class TooManyRequestsException
       attr_accessor retry_after_seconds: ::String
       attr_accessor type: ::String
@@ -1406,6 +1415,7 @@ module Aws::Lambda
       attr_accessor dry_run: bool
       attr_accessor revision_id: ::String
       attr_accessor architectures: ::Array[("x86_64" | "arm64")]
+      attr_accessor source_kms_key_arn: ::String
       SENSITIVE: [:zip_file]
     end
 

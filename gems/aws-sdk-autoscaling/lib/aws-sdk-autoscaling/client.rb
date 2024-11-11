@@ -1309,6 +1309,9 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     #
+    # @option params [Types::AvailabilityZoneDistribution] :availability_zone_distribution
+    #   The instance capacity distribution across Availability Zones.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1573,6 +1576,9 @@ module Aws::AutoScaling
     #     instance_maintenance_policy: {
     #       min_healthy_percentage: 1,
     #       max_healthy_percentage: 1,
+    #     },
+    #     availability_zone_distribution: {
+    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
     #     },
     #   })
     #
@@ -2681,6 +2687,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].traffic_sources[0].type #=> String
     #   resp.auto_scaling_groups[0].instance_maintenance_policy.min_healthy_percentage #=> Integer
     #   resp.auto_scaling_groups[0].instance_maintenance_policy.max_healthy_percentage #=> Integer
+    #   resp.auto_scaling_groups[0].availability_zone_distribution.capacity_distribution_strategy #=> String, one of "balanced-only", "balanced-best-effort"
     #   resp.next_token #=> String
     #
     #
@@ -2941,7 +2948,7 @@ module Aws::AutoScaling
     #   resp.instance_refreshes #=> Array
     #   resp.instance_refreshes[0].instance_refresh_id #=> String
     #   resp.instance_refreshes[0].auto_scaling_group_name #=> String
-    #   resp.instance_refreshes[0].status #=> String, one of "Pending", "InProgress", "Successful", "Failed", "Cancelling", "Cancelled", "RollbackInProgress", "RollbackFailed", "RollbackSuccessful"
+    #   resp.instance_refreshes[0].status #=> String, one of "Pending", "InProgress", "Successful", "Failed", "Cancelling", "Cancelled", "RollbackInProgress", "RollbackFailed", "RollbackSuccessful", "Baking"
     #   resp.instance_refreshes[0].status_reason #=> String
     #   resp.instance_refreshes[0].start_time #=> Time
     #   resp.instance_refreshes[0].end_time #=> Time
@@ -2963,6 +2970,7 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].preferences.alarm_specification.alarms #=> Array
     #   resp.instance_refreshes[0].preferences.alarm_specification.alarms[0] #=> String
     #   resp.instance_refreshes[0].preferences.max_healthy_percentage #=> Integer
+    #   resp.instance_refreshes[0].preferences.bake_time #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_id #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_name #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.version #=> String
@@ -6572,6 +6580,8 @@ module Aws::AutoScaling
     #
     #   * Skip matching
     #
+    #   * Bake time
+    #
     # @return [Types::StartInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartInstanceRefreshAnswer#instance_refresh_id #instance_refresh_id} => String
@@ -6713,6 +6723,7 @@ module Aws::AutoScaling
     #         alarms: ["XmlStringMaxLen255"],
     #       },
     #       max_healthy_percentage: 1,
+    #       bake_time: 1,
     #     },
     #   })
     #
@@ -7152,6 +7163,9 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     #
+    # @option params [Types::AvailabilityZoneDistribution] :availability_zone_distribution
+    #   The instance capacity distribution across Availability Zones.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -7282,6 +7296,9 @@ module Aws::AutoScaling
     #       min_healthy_percentage: 1,
     #       max_healthy_percentage: 1,
     #     },
+    #     availability_zone_distribution: {
+    #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -7311,7 +7328,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -76,6 +76,22 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchGetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetPolicyOutput]
+        def results: () -> ::Array[Types::BatchGetPolicyOutputItem]
+        def errors: () -> ::Array[Types::BatchGetPolicyErrorItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#batch_get_policy-instance_method
+      def batch_get_policy: (
+                              requests: Array[
+                                {
+                                  policy_store_id: ::String,
+                                  policy_id: ::String
+                                },
+                              ]
+                            ) -> _BatchGetPolicyResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetPolicyResponseSuccess
+
       interface _BatchIsAuthorizedResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchIsAuthorizedOutput]
         def results: () -> ::Array[Types::BatchIsAuthorizedOutputItem]

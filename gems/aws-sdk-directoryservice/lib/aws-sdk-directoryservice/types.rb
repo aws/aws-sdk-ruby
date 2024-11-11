@@ -763,7 +763,7 @@ module Aws::DirectoryService
     #   The regex pattern for this string is made up of the following
     #   conditions:
     #
-    #   * Length (?=^.\\\{8,64\\}$) – Must be between 8 and 64 characters
+    #   * Length (?=^.\{8,64}$) – Must be between 8 and 64 characters
     #
     #   ^
     #
@@ -4261,7 +4261,7 @@ module Aws::DirectoryService
     #   and cannot be prefixed with "aws:". The string can contain only
     #   the set of Unicode letters, digits, white-space, '\_', '.',
     #   '/', '=', '+', '-', ':', '@'(Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -4269,7 +4269,7 @@ module Aws::DirectoryService
     #   characters. The string can contain only the set of Unicode letters,
     #   digits, white-space, '\_', '.', '/', '=', '+', '-',
     #   ':', '@' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Tag AWS API Documentation

@@ -321,6 +321,7 @@ module Aws::SupplyChain
     Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "instanceId"))
     Instance.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "awsAccountId"))
     Instance.add_member(:state, Shapes::ShapeRef.new(shape: InstanceState, required: true, location_name: "state"))
+    Instance.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
     Instance.add_member(:web_app_dns_domain, Shapes::ShapeRef.new(shape: InstanceWebAppDnsDomain, location_name: "webAppDnsDomain"))
     Instance.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTime"))
     Instance.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))

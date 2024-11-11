@@ -641,10 +641,10 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of a Lambda function implements the
     #   logic for [annotation consolidation][1] and to process output data.
     #
-    #   This parameter is required for all labeling jobs. For [built-in task
-    #   types][2], use one of the following Amazon SageMaker Ground Truth
-    #   Lambda function ARNs for `AnnotationConsolidationLambdaArn`. For
-    #   custom labeling workflows, see [Post-annotation Lambda][3].
+    #   For [built-in task types][2], use one of the following Amazon
+    #   SageMaker Ground Truth Lambda function ARNs for
+    #   `AnnotationConsolidationLambdaArn`. For custom labeling workflows,
+    #   see [Post-annotation Lambda][3].
     #
     #   **Bounding box** - Finds the most similar boxes from different
     #   workers based on the Jaccard index of the boxes.
@@ -1916,13 +1916,13 @@ module Aws::SageMaker
     #   the input data source to run an Autopilot job. You can input
     #   `FeatureAttributeNames` (optional) in JSON format as shown below:
     #
-    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #   `{ "FeatureAttributeNames":["col1", "col2", ...] }`.
     #
     #   You can also specify the data type of the feature (optional) in the
     #   format shown below:
     #
-    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
-    #   \} \}`
+    #   `{ "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... }
+    #   }`
     #
     #   <note markdown="1"> These column keys may not include the target column.
     #
@@ -2740,8 +2740,8 @@ module Aws::SageMaker
     #
     #     A `ManifestFile` should have the format shown below:
     #
-    #     `[ \{"prefix":
-    #     "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"\},
+    #     `[ {"prefix":
+    #     "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},
     #     `
     #
     #     `"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",`
@@ -2759,10 +2759,10 @@ module Aws::SageMaker
     #     Here is a minimal, single-record example of an
     #     `AugmentedManifestFile`:
     #
-    #     `\{"source-ref":
+    #     `{"source-ref":
     #     "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg",`
     #
-    #     `"label-metadata": \{"class-name": "cat"` \\}
+    #     `"label-metadata": {"class-name": "cat"` }
     #
     #     For more information on `AugmentedManifestFile`, see [Provide
     #     Dataset Metadata to Training Jobs with an Augmented Manifest
@@ -2931,6 +2931,79 @@ module Aws::SageMaker
       :destination_s3_uri,
       :kms_key_id,
       :generate_inference_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an error encountered when deleting a node from a SageMaker
+    # HyperPod cluster.
+    #
+    # @!attribute [rw] code
+    #   The error code associated with the error encountered when deleting a
+    #   node.
+    #
+    #   The code provides information about the specific issue encountered,
+    #   such as the node not being found, the node's status being invalid
+    #   for deletion, or the node ID being in use by another process.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the error encountered when deleting a node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The ID of the node that encountered an error during the deletion
+    #   process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDeleteClusterNodesError AWS API Documentation
+    #
+    class BatchDeleteClusterNodesError < Struct.new(
+      :code,
+      :message,
+      :node_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of the SageMaker HyperPod cluster from which to delete the
+    #   specified nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_ids
+    #   A list of node IDs to be deleted from the specified cluster.
+    #
+    #   <note markdown="1"> For SageMaker HyperPod clusters using the Slurm workload manager,
+    #   you cannot remove instances that are configured as Slurm controller
+    #   nodes.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDeleteClusterNodesRequest AWS API Documentation
+    #
+    class BatchDeleteClusterNodesRequest < Struct.new(
+      :cluster_name,
+      :node_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed
+    #   A list of errors encountered when deleting the specified nodes.
+    #   @return [Array<Types::BatchDeleteClusterNodesError>]
+    #
+    # @!attribute [rw] successful
+    #   A list of node IDs that were successfully deleted from the specified
+    #   cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDeleteClusterNodesResponse AWS API Documentation
+    #
+    class BatchDeleteClusterNodesResponse < Struct.new(
+      :failed,
+      :successful)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3789,14 +3862,14 @@ module Aws::SageMaker
     #   model container input in JSON Lines format. For example, if
     #   `FeaturesAttribute` is the JMESPath expression `'myfeatures'`, it
     #   extracts a list of features `[1,2,3]` from request data
-    #   `'\{"myfeatures":[1,2,3]\}'`.
+    #   `'{"myfeatures":[1,2,3]}'`.
     #   @return [String]
     #
     # @!attribute [rw] content_template
     #   A template string used to format a JSON record into an acceptable
     #   model container input. For example, a `ContentTemplate` string
-    #   `'\{"myfeatures":$features\}'` will format a list of features
-    #   `[1,2,3]` into the record string `'\{"myfeatures":[1,2,3]\}'`.
+    #   `'{"myfeatures":$features}'` will format a list of features
+    #   `[1,2,3]` into the record string `'{"myfeatures":[1,2,3]}'`.
     #   Required only when the model container input is in JSON Lines
     #   format.
     #   @return [String]
@@ -3857,7 +3930,7 @@ module Aws::SageMaker
     #   Lines format.
     #
     #   **Example**: If the model container output of a single request is
-    #   `'\{"predicted_label":1,"probability":0.6\}'`, then set
+    #   `'{"predicted_label":1,"probability":0.6}'`, then set
     #   `ProbabilityAttribute` to `'probability'`.
     #   @return [String]
     #
@@ -3866,7 +3939,7 @@ module Aws::SageMaker
     #   the model container output.
     #
     #   **Example**: If the model container output of a batch request is
-    #   `'\{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]\}'`,
+    #   `'{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]}'`,
     #   then set `LabelAttribute` to `'labels'` to extract the list of label
     #   headers `["cat","dog","fish"]`
     #   @return [String]
@@ -6135,7 +6208,7 @@ module Aws::SageMaker
     # @!attribute [rw] enable_iot_role_alias
     #   Whether to create an Amazon Web Services IoT Role Alias during
     #   device fleet creation. The name of the role alias generated will
-    #   match this pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #   match this pattern: "SageMakerEdge-\{DeviceFleetName}".
     #
     #   For example, if your device fleet is called "demo-fleet", the name
     #   of the role alias will be "SageMakerEdge-demo-fleet".
@@ -6230,7 +6303,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_space_settings
-    #   The default settings used to create a space.
+    #   The default settings for shared spaces that users create in the
+    #   domain.
     #   @return [Types::DefaultSpaceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
@@ -7719,8 +7793,8 @@ module Aws::SageMaker
     #   For named entity recognition jobs, in addition to `"labels"`, you
     #   must provide worker instructions in the label category configuration
     #   file using the `"instructions"` parameter: `"instructions":
-    #   \{"shortInstruction":"<h1>Add header</h1><p>Add Instructions</p>",
-    #   "fullInstruction":"<p>Add additional instructions.</p>"\}`. For
+    #   {"shortInstruction":"<h1>Add header</h1><p>Add Instructions</p>",
+    #   "fullInstruction":"<p>Add additional instructions.</p>"}`. For
     #   details and an example, see [Create a Named Entity Recognition
     #   Labeling Job (API) ][2].
     #
@@ -7729,14 +7803,14 @@ module Aws::SageMaker
     #   following format. Identify the labels you want to use by replacing
     #   `label_1`, `label_2`,`...`,`label_n` with your label categories.
     #
-    #   `\{ `
+    #   `{ `
     #
     #   `"document-version": "2018-11-28",`
     #
-    #   `"labels": [\{"label": "label_1"\},\{"label":
-    #   "label_2"\},...\{"label": "label_n"\}]`
+    #   `"labels": [{"label": "label_1"},{"label": "label_2"},...{"label":
+    #   "label_n"}]`
     #
-    #   `\}`
+    #   `}`
     #
     #   Note the following about the label category configuration file:
     #
@@ -8483,6 +8557,11 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
+    # @!attribute [rw] model_life_cycle
+    #   A structure describing the current state of the model in its life
+    #   cycle.
+    #   @return [Types::ModelLifeCycle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -8507,7 +8586,8 @@ module Aws::SageMaker
       :skip_model_validation,
       :source_uri,
       :security_config,
-      :model_card)
+      :model_card,
+      :model_life_cycle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8733,14 +8813,11 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] accelerator_types
-    #   A list of Elastic Inference (EI) instance types to associate with
-    #   this notebook instance. Currently, only one instance type can be
-    #   associated with a notebook instance. For more information, see
-    #   [Using Elastic Inference in Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify a list of EI instance types to
+    #   associate with this notebook instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_code_repository
@@ -10932,7 +11009,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A collection of settings that apply to spaces created in the domain.
+    # The default settings for shared spaces that users create in the
+    # domain.
+    #
+    # SageMaker applies these settings only to shared spaces. It doesn't
+    # apply them to private spaces.
     #
     # @!attribute [rw] execution_role
     #   The ARN of the execution role for the space.
@@ -13519,7 +13600,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_space_settings
-    #   The default settings used to create a space.
+    #   The default settings for shared spaces that users create in the
+    #   domain.
     #   @return [Types::DefaultSpaceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomainResponse AWS API Documentation
@@ -15381,35 +15463,35 @@ module Aws::SageMaker
     #
     #   The file is a JSON structure in the following format:
     #
-    #   `\{`
+    #   `{`
     #
     #   ` "document-version": "2018-11-28"`
     #
     #   ` "labels": [`
     #
-    #   ` \{`
+    #   ` {`
     #
     #   ` "label": "label 1"`
     #
-    #   ` \},`
+    #   ` },`
     #
-    #   ` \{`
+    #   ` {`
     #
     #   ` "label": "label 2"`
     #
-    #   ` \},`
+    #   ` },`
     #
     #   ` ...`
     #
-    #   ` \{`
+    #   ` {`
     #
     #   ` "label": "label n"`
     #
-    #   ` \}`
+    #   ` }`
     #
     #   ` ]`
     #
-    #   `\}`
+    #   `}`
     #   @return [String]
     #
     # @!attribute [rw] stopping_conditions
@@ -16284,6 +16366,11 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
+    # @!attribute [rw] model_life_cycle
+    #   A structure describing the current state of the model in its life
+    #   cycle.
+    #   @return [Types::ModelLifeCycle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
     class DescribeModelPackageOutput < Struct.new(
@@ -16315,7 +16402,8 @@ module Aws::SageMaker
       :skip_model_validation,
       :source_uri,
       :security_config,
-      :model_card)
+      :model_card,
+      :model_life_cycle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16636,14 +16724,11 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] accelerator_types
-    #   A list of the Elastic Inference (EI) instance types associated with
-    #   this notebook instance. Currently only one EI instance type can be
-    #   associated with a notebook instance. For more information, see
-    #   [Using Elastic Inference in Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify a list of the EI instance types
+    #   associated with this notebook instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_code_repository
@@ -20670,7 +20755,7 @@ module Aws::SageMaker
     #   the following filter searches for training jobs with an `"accuracy"`
     #   metric greater than `"0.9"`:
     #
-    #   `\{`
+    #   `{`
     #
     #   `"Name": "Metrics.accuracy",`
     #
@@ -20678,7 +20763,7 @@ module Aws::SageMaker
     #
     #   `"Value": "0.9"`
     #
-    #   `\}`
+    #   `}`
     #
     # HyperParameters
     #
@@ -20690,7 +20775,7 @@ module Aws::SageMaker
     #   the following filter is satisfied by training jobs with a
     #   `"learning_rate"` hyperparameter that is less than `"0.5"`:
     #
-    #   ` \{`
+    #   ` {`
     #
     #   ` "Name": "HyperParameters.learning_rate",`
     #
@@ -20698,7 +20783,7 @@ module Aws::SageMaker
     #
     #   ` "Value": "0.5"`
     #
-    #   ` \}`
+    #   ` }`
     #
     # Tags
     #
@@ -21260,7 +21345,7 @@ module Aws::SageMaker
     #   repository. The secret must have a staging label of `AWSCURRENT` and
     #   must be in the following format:
     #
-    #   `\{"username": UserName, "password": Password\}`
+    #   `{"username": UserName, "password": Password}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfig AWS API Documentation
@@ -21282,7 +21367,7 @@ module Aws::SageMaker
     #   repository. The secret must have a staging label of `AWSCURRENT` and
     #   must be in the following format:
     #
-    #   `\{"username": UserName, "password": Password\}`
+    #   `{"username": UserName, "password": Password}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfigForUpdate AWS API Documentation
@@ -24814,17 +24899,17 @@ module Aws::SageMaker
     #
     #     * Examples for one input:
     #
-    #       * If using the console, `\{"input":[1,1024,1024,3]\}`
+    #       * If using the console, `{"input":[1,1024,1024,3]}`
     #
-    #       * If using the CLI, `\{"input":[1,1024,1024,3]\}`
+    #       * If using the CLI, `{"input":[1,1024,1024,3]}`
     #
     #     * Examples for two inputs:
     #
-    #       * If using the console, `\{"data1": [1,28,28,1],
-    #         "data2":[1,28,28,1]\}`
+    #       * If using the console, `{"data1": [1,28,28,1],
+    #         "data2":[1,28,28,1]}`
     #
-    #       * If using the CLI, `\{"data1": [1,28,28,1],
-    #         "data2":[1,28,28,1]\}`
+    #       * If using the CLI, `{"data1": [1,28,28,1],
+    #         "data2":[1,28,28,1]}`
     #
     #   * `KERAS`: You must specify the name and shape (NCHW format) of
     #     expected data inputs using a dictionary format for your trained
@@ -24835,17 +24920,17 @@ module Aws::SageMaker
     #
     #     * Examples for one input:
     #
-    #       * If using the console, `\{"input_1":[1,3,224,224]\}`
+    #       * If using the console, `{"input_1":[1,3,224,224]}`
     #
-    #       * If using the CLI, `\{"input_1":[1,3,224,224]\}`
+    #       * If using the CLI, `{"input_1":[1,3,224,224]}`
     #
     #     * Examples for two inputs:
     #
-    #       * If using the console, `\{"input_1": [1,3,224,224],
-    #         "input_2":[1,3,224,224]\} `
+    #       * If using the console, `{"input_1": [1,3,224,224],
+    #         "input_2":[1,3,224,224]} `
     #
-    #       * If using the CLI, `\{"input_1": [1,3,224,224],
-    #         "input_2":[1,3,224,224]\}`
+    #       * If using the CLI, `{"input_1": [1,3,224,224],
+    #         "input_2":[1,3,224,224]}`
     #
     #   * `MXNET/ONNX/DARKNET`: You must specify the name and shape (NCHW
     #     format) of the expected data inputs in order using a dictionary
@@ -24854,17 +24939,17 @@ module Aws::SageMaker
     #
     #     * Examples for one input:
     #
-    #       * If using the console, `\{"data":[1,3,1024,1024]\}`
+    #       * If using the console, `{"data":[1,3,1024,1024]}`
     #
-    #       * If using the CLI, `\{"data":[1,3,1024,1024]\}`
+    #       * If using the CLI, `{"data":[1,3,1024,1024]}`
     #
     #     * Examples for two inputs:
     #
-    #       * If using the console, `\{"var1": [1,1,28,28],
-    #         "var2":[1,1,28,28]\} `
+    #       * If using the console, `{"var1": [1,1,28,28],
+    #         "var2":[1,1,28,28]} `
     #
-    #       * If using the CLI, `\{"var1": [1,1,28,28],
-    #         "var2":[1,1,28,28]\}`
+    #       * If using the CLI, `{"var1": [1,1,28,28],
+    #         "var2":[1,1,28,28]}`
     #
     #   * `PyTorch`: You can either specify the name and shape (NCHW format)
     #     of expected data inputs in order using a dictionary format for
@@ -24875,19 +24960,19 @@ module Aws::SageMaker
     #
     #     * Examples for one input in dictionary format:
     #
-    #       * If using the console, `\{"input0":[1,3,224,224]\}`
+    #       * If using the console, `{"input0":[1,3,224,224]}`
     #
-    #       * If using the CLI, `\{"input0":[1,3,224,224]\}`
+    #       * If using the CLI, `{"input0":[1,3,224,224]}`
     #
     #     * Example for one input in list format: `[[1,3,224,224]]`
     #
     #     * Examples for two inputs in dictionary format:
     #
-    #       * If using the console, `\{"input0":[1,3,224,224],
-    #         "input1":[1,3,224,224]\}`
+    #       * If using the console, `{"input0":[1,3,224,224],
+    #         "input1":[1,3,224,224]}`
     #
-    #       * If using the CLI, `\{"input0":[1,3,224,224],
-    #         "input1":[1,3,224,224]\} `
+    #       * If using the CLI, `{"input0":[1,3,224,224],
+    #         "input1":[1,3,224,224]} `
     #
     #     * Example for two inputs in list format: `[[1,3,224,224],
     #       [1,3,224,224]]`
@@ -24897,24 +24982,24 @@ module Aws::SageMaker
     #   `DataInputConfig` supports the following parameters for `CoreML`
     #   `TargetDevice` (ML Model format):
     #
-    #   * `shape`: Input shape, for example `\{"input_1": \{"shape":
-    #     [1,224,224,3]\}\}`. In addition to static input shapes, CoreML
+    #   * `shape`: Input shape, for example `{"input_1": {"shape":
+    #     [1,224,224,3]}}`. In addition to static input shapes, CoreML
     #     converter supports Flexible input shapes:
     #
     #     * Range Dimension. You can use the Range Dimension feature if you
     #       know the input shape will be within some specific interval in
-    #       that dimension, for example: `\{"input_1": \{"shape": ["1..10",
-    #       224, 224, 3]\}\}`
+    #       that dimension, for example: `{"input_1": {"shape": ["1..10",
+    #       224, 224, 3]}}`
     #
     #     * Enumerated shapes. Sometimes, the models are trained to work
     #       only on a select set of inputs. You can enumerate all supported
-    #       input shapes, for example: `\{"input_1": \{"shape": [[1, 224,
-    #       224, 3], [1, 160, 160, 3]]\}\}`
+    #       input shapes, for example: `{"input_1": {"shape": [[1, 224, 224,
+    #       3], [1, 160, 160, 3]]}}`
     #
     #   * `default_shape`: Default input shape. You can set a default shape
     #     during conversion for both Range Dimension and Enumerated Shapes.
-    #     For example `\{"input_1": \{"shape": ["1..10", 224, 224, 3],
-    #     "default_shape": [1, 224, 224, 3]\}\}`
+    #     For example `{"input_1": {"shape": ["1..10", 224, 224, 3],
+    #     "default_shape": [1, 224, 224, 3]}}`
     #
     #   * `type`: Input type. Allowed values: `Image` and `Tensor`. By
     #     default, the converter generates an ML Model with inputs of type
@@ -24934,35 +25019,35 @@ module Aws::SageMaker
     #
     #   * Tensor type input:
     #
-    #     * `"DataInputConfig": \{"input_1": \{"shape": [[1,224,224,3],
-    #       [1,160,160,3]], "default_shape": [1,224,224,3]\}\}`
+    #     * `"DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
+    #       [1,160,160,3]], "default_shape": [1,224,224,3]}}`
     #
     #     ^
     #
     #   * Tensor type input without input name (PyTorch):
     #
-    #     * `"DataInputConfig": [\{"shape": [[1,3,224,224], [1,3,160,160]],
-    #       "default_shape": [1,3,224,224]\}]`
+    #     * `"DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]],
+    #       "default_shape": [1,3,224,224]}]`
     #
     #     ^
     #
     #   * Image type input:
     #
-    #     * `"DataInputConfig": \{"input_1": \{"shape": [[1,224,224,3],
+    #     * `"DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
     #       [1,160,160,3]], "default_shape": [1,224,224,3], "type": "Image",
-    #       "bias": [-1,-1,-1], "scale": 0.007843137255\}\}`
+    #       "bias": [-1,-1,-1], "scale": 0.007843137255}}`
     #
-    #     * `"CompilerOptions": \{"class_labels":
-    #       "imagenet_labels_1000.txt"\}`
+    #     * `"CompilerOptions": {"class_labels":
+    #       "imagenet_labels_1000.txt"}`
     #
     #   * Image type input without input name (PyTorch):
     #
-    #     * `"DataInputConfig": [\{"shape": [[1,3,224,224], [1,3,160,160]],
+    #     * `"DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]],
     #       "default_shape": [1,3,224,224], "type": "Image", "bias":
-    #       [-1,-1,-1], "scale": 0.007843137255\}]`
+    #       [-1,-1,-1], "scale": 0.007843137255}]`
     #
-    #     * `"CompilerOptions": \{"class_labels":
-    #       "imagenet_labels_1000.txt"\}`
+    #     * `"CompilerOptions": {"class_labels":
+    #       "imagenet_labels_1000.txt"}`
     #
     #   Depending on the model format, `DataInputConfig` requires the
     #   following parameters for `ml_eia2` [OutputConfig:TargetDevice][2].
@@ -24973,18 +25058,18 @@ module Aws::SageMaker
     #     `OutputConfig:CompilerOptions` ][3] if the model does not use
     #     TensorFlow's default signature def key. For example:
     #
-    #     * `"DataInputConfig": \{"inputs": [1, 224, 224, 3]\}`
+    #     * `"DataInputConfig": {"inputs": [1, 224, 224, 3]}`
     #
-    #     * `"CompilerOptions": \{"signature_def_key": "serving_custom"\}`
+    #     * `"CompilerOptions": {"signature_def_key": "serving_custom"}`
     #
     #   * For TensorFlow models saved as a frozen graph, specify the input
     #     tensor names and shapes in `DataInputConfig` and the output tensor
     #     names for `output_names` in [ `OutputConfig:CompilerOptions` ][3].
     #     For example:
     #
-    #     * `"DataInputConfig": \{"input_tensor:0": [1, 224, 224, 3]\}`
+    #     * `"DataInputConfig": {"input_tensor:0": [1, 224, 224, 3]}`
     #
-    #     * `"CompilerOptions": \{"output_names": ["output_tensor:0"]\}`
+    #     * `"CompilerOptions": {"output_names": ["output_tensor:0"]}`
     #
     #
     #
@@ -32845,6 +32930,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A structure describing the current state of the model in its life
+    # cycle.
+    #
+    # @!attribute [rw] stage
+    #   The current stage in the model life cycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_status
+    #   The current status of a stage in model life cycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_description
+    #   Describes the stage related details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelLifeCycle AWS API Documentation
+    #
+    class ModelLifeCycle < Struct.new(
+      :stage,
+      :stage_status,
+      :stage_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Part of the search expression. You can specify the name and value
     # (domain, task, framework, framework version, task, and model).
     #
@@ -33105,6 +33215,11 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
+    # @!attribute [rw] model_life_cycle
+    #   A structure describing the current state of the model in its life
+    #   cycle.
+    #   @return [Types::ModelLifeCycle]
+    #
     # @!attribute [rw] tags
     #   A list of the tags associated with the model package. For more
     #   information, see [Tagging Amazon Web Services resources][1] in the
@@ -33157,6 +33272,7 @@ module Aws::SageMaker
       :source_uri,
       :security_config,
       :model_card,
+      :model_life_cycle,
       :tags,
       :customer_metadata_properties,
       :drift_check_baselines,
@@ -34684,11 +34800,11 @@ module Aws::SageMaker
     # with a specific channel name and `S3Uri` prefix, define the following
     # filters:
     #
-    # * `'\{Name:"InputDataConfig.ChannelName", "Operator":"Equals",
-    #   "Value":"train"\}',`
+    # * `'{Name:"InputDataConfig.ChannelName", "Operator":"Equals",
+    #   "Value":"train"}',`
     #
-    # * `'\{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
-    #   "Operator":"Contains", "Value":"mybucket/catdata"\}'`
+    # * `'{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
+    #   "Operator":"Contains", "Value":"mybucket/catdata"}'`
     #
     #
     #
@@ -35561,42 +35677,41 @@ module Aws::SageMaker
     #
     #   * Raspberry Pi 3 Model B+
     #
-    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM_EABIHF"\},`
+    #     `"TargetPlatform": {"Os": "LINUX", "Arch": "ARM_EABIHF"},`
     #
-    #     ` "CompilerOptions": \{'mattr': ['+neon']\}`
+    #     ` "CompilerOptions": {'mattr': ['+neon']}`
     #
     #   * Jetson TX2
     #
-    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM64",
-    #     "Accelerator": "NVIDIA"\},`
+    #     `"TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator":
+    #     "NVIDIA"},`
     #
-    #     ` "CompilerOptions": \{'gpu-code': 'sm_62', 'trt-ver': '6.0.1',
-    #     'cuda-ver': '10.0'\}`
+    #     ` "CompilerOptions": {'gpu-code': 'sm_62', 'trt-ver': '6.0.1',
+    #     'cuda-ver': '10.0'}`
     #
     #   * EC2 m5.2xlarge instance OS
     #
-    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "X86_64",
-    #     "Accelerator": "NVIDIA"\},`
+    #     `"TargetPlatform": {"Os": "LINUX", "Arch": "X86_64",
+    #     "Accelerator": "NVIDIA"},`
     #
-    #     ` "CompilerOptions": \{'mcpu': 'skylake-avx512'\}`
+    #     ` "CompilerOptions": {'mcpu': 'skylake-avx512'}`
     #
     #   * RK3399
     #
-    #     `"TargetPlatform": \{"Os": "LINUX", "Arch": "ARM64",
-    #     "Accelerator": "MALI"\}`
+    #     `"TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator":
+    #     "MALI"}`
     #
     #   * ARMv7 phone (CPU)
     #
-    #     `"TargetPlatform": \{"Os": "ANDROID", "Arch": "ARM_EABI"\},`
+    #     `"TargetPlatform": {"Os": "ANDROID", "Arch": "ARM_EABI"},`
     #
-    #     ` "CompilerOptions": \{'ANDROID_PLATFORM': 25, 'mattr':
-    #     ['+neon']\}`
+    #     ` "CompilerOptions": {'ANDROID_PLATFORM': 25, 'mattr': ['+neon']}`
     #
     #   * ARMv8 phone (CPU)
     #
-    #     `"TargetPlatform": \{"Os": "ANDROID", "Arch": "ARM64"\},`
+    #     `"TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"},`
     #
-    #     ` "CompilerOptions": \{'ANDROID_PLATFORM': 29\}`
+    #     ` "CompilerOptions": {'ANDROID_PLATFORM': 29}`
     #   @return [Types::TargetPlatform]
     #
     # @!attribute [rw] compiler_options
@@ -35614,25 +35729,24 @@ module Aws::SageMaker
     #
     #     * int64: Use either `"int64"` or `"long"`.
     #
-    #     For example, `\{"dtype" : "float32"\}`.
+    #     For example, `{"dtype" : "float32"}`.
     #
     #   * `CPU`: Compilation for CPU supports the following compiler
     #     options.
     #
-    #     * `mcpu`: CPU micro-architecture. For example, `\{'mcpu':
-    #       'skylake-avx512'\}`
+    #     * `mcpu`: CPU micro-architecture. For example, `{'mcpu':
+    #       'skylake-avx512'}`
     #
-    #     * `mattr`: CPU flags. For example, `\{'mattr': ['+neon',
-    #       '+vfpv4']\}`
+    #     * `mattr`: CPU flags. For example, `{'mattr': ['+neon',
+    #       '+vfpv4']}`
     #
     #   * `ARM`: Details of ARM CPU compilations.
     #
     #     * `NEON`: NEON is an implementation of the Advanced SIMD extension
     #       used in ARMv7 processors.
     #
-    #       For example, add `\{'mattr': ['+neon']\}` to the compiler
-    #       options if compiling for ARM 32-bit platform with the NEON
-    #       support.
+    #       For example, add `{'mattr': ['+neon']}` to the compiler options
+    #       if compiling for ARM 32-bit platform with the NEON support.
     #
     #   * `NVIDIA`: Compilation for NVIDIA GPU supports the following
     #     compiler options.
@@ -35643,17 +35757,17 @@ module Aws::SageMaker
     #
     #     * `cuda-ver`: Specifies the CUDA version in x.y format.
     #
-    #     For example, `\{'gpu-code': 'sm_72', 'trt-ver': '6.0.1',
-    #     'cuda-ver': '10.1'\}`
+    #     For example, `{'gpu-code': 'sm_72', 'trt-ver': '6.0.1',
+    #     'cuda-ver': '10.1'}`
     #
     #   * `ANDROID`: Compilation for the Android OS supports the following
     #     compiler options:
     #
     #     * `ANDROID_PLATFORM`: Specifies the Android API levels. Available
-    #       levels range from 21 to 29. For example, `\{'ANDROID_PLATFORM':
-    #       28\}`.
+    #       levels range from 21 to 29. For example, `{'ANDROID_PLATFORM':
+    #       28}`.
     #
-    #     * `mattr`: Add `\{'mattr': ['+neon']\}` to compiler options if
+    #     * `mattr`: Add `{'mattr': ['+neon']}` to compiler options if
     #       compiling for ARM 32-bit platform with NEON support.
     #
     #   * `INFERENTIA`: Compilation for target ml\_inf1 uses compiler
@@ -35667,28 +35781,11 @@ module Aws::SageMaker
     #     `TargetDevice` supports the following compiler options:
     #
     #     * `class_labels`: Specifies the classification labels file name
-    #       inside input tar.gz file. For example, `\{"class_labels":
-    #       "imagenet_labels_1000.txt"\}`. Labels inside the txt file should
+    #       inside input tar.gz file. For example, `{"class_labels":
+    #       "imagenet_labels_1000.txt"}`. Labels inside the txt file should
     #       be separated by newlines.
     #
     #     ^
-    #
-    #   * `EIA`: Compilation for the Elastic Inference Accelerator supports
-    #     the following compiler options:
-    #
-    #     * `precision_mode`: Specifies the precision of compiled artifacts.
-    #       Supported values are `"FP16"` and `"FP32"`. Default is `"FP32"`.
-    #
-    #     * `signature_def_key`: Specifies the signature to use for models
-    #       in SavedModel format. Defaults is TensorFlow's default
-    #       signature def key.
-    #
-    #     * `output_names`: Specifies a list of output tensor names for
-    #       models in FrozenGraph format. Set at most one API field, either:
-    #       `signature_def_key` or `output_names`.
-    #
-    #     For example: `\{"precision_mode": "FP32", "output_names":
-    #     ["output:0"]\}`
     #
     #
     #
@@ -36108,14 +36205,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] accelerator_type
-    #   The size of the Elastic Inference (EI) instance to use for the
-    #   production variant. EI instances provide on-demand GPU computing for
-    #   inference. For more information, see [Using Elastic Inference in
-    #   Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify the size of the EI instance to
+    #   use for the production variant.
     #   @return [String]
     #
     # @!attribute [rw] variant_status
@@ -37275,14 +37369,11 @@ module Aws::SageMaker
     #   @return [Float]
     #
     # @!attribute [rw] accelerator_type
-    #   The size of the Elastic Inference (EI) instance to use for the
-    #   production variant. EI instances provide on-demand GPU computing for
-    #   inference. For more information, see [Using Elastic Inference in
-    #   Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify the size of the EI instance to
+    #   use for the production variant.
     #   @return [String]
     #
     # @!attribute [rw] core_dump_config
@@ -39857,7 +39948,7 @@ module Aws::SageMaker
     #
     #     The following code example shows a valid manifest format:
     #
-    #     `[ \{"prefix": "s3://customer_bucket/some/prefix/"\},`
+    #     `[ {"prefix": "s3://customer_bucket/some/prefix/"},`
     #
     #     ` "relative/path/to/custdata-1",`
     #
@@ -42009,13 +42100,13 @@ module Aws::SageMaker
     #   the input data source to run an Autopilot job V2. You can input
     #   `FeatureAttributeNames` (optional) in JSON format as shown below:
     #
-    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #   `{ "FeatureAttributeNames":["col1", "col2", ...] }`.
     #
     #   You can also specify the data type of the feature (optional) in the
     #   format shown below:
     #
-    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
-    #   \} \}`
+    #   `{ "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... }
+    #   }`
     #
     #   <note markdown="1"> These column keys may not include the target column.
     #
@@ -42203,7 +42294,7 @@ module Aws::SageMaker
     #
     #   * `ANDROID`: Android operating systems. Android API level can be
     #     specified using the `ANDROID_PLATFORM` compiler option. For
-    #     example, `"CompilerOptions": \{'ANDROID_PLATFORM': 28\}`
+    #     example, `"CompilerOptions": {'ANDROID_PLATFORM': 28}`
     #   @return [String]
     #
     # @!attribute [rw] arch
@@ -42394,8 +42485,8 @@ module Aws::SageMaker
     #
     #   Here is an example where all four hyperparameters are configured.
     #
-    #   `\{ "epochCount":"5", "learningRate":"0.5", "batchSize": "32",
-    #   "learningRateWarmupSteps": "10" \}`
+    #   `{ "epochCount":"5", "learningRate":"0.5", "batchSize": "32",
+    #   "learningRateWarmupSteps": "10" }`
     #
     #
     #
@@ -42630,13 +42721,13 @@ module Aws::SageMaker
     #   You can input `FeatureAttributeNames` (optional) in JSON format as
     #   shown below:
     #
-    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #   `{ "FeatureAttributeNames":["col1", "col2", ...] }`.
     #
     #   You can also specify the data type of the feature (optional) in the
     #   format shown below:
     #
-    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
-    #   \} \}`
+    #   `{ "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... }
+    #   }`
     #
     #   Autopilot supports the following data types: `numeric`,
     #   `categorical`, `text`, and `datetime`.
@@ -43478,6 +43569,10 @@ module Aws::SageMaker
     #   The status of the training job.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_status
+    #   The secondary status of the training job.
+    #   @return [String]
+    #
     # @!attribute [rw] warm_pool_status
     #   The status of the warm pool associated with the training job.
     #   @return [Types::WarmPoolStatus]
@@ -43491,6 +43586,7 @@ module Aws::SageMaker
       :training_end_time,
       :last_modified_time,
       :training_job_status,
+      :secondary_status,
       :warm_pool_status)
       SENSITIVE = []
       include Aws::Structure
@@ -44154,7 +44250,7 @@ module Aws::SageMaker
     #     The manifest is an S3 object which is a JSON file with the
     #     following format:
     #
-    #     `[ \{"prefix": "s3://customer_bucket/some/prefix/"\},`
+    #     `[ {"prefix": "s3://customer_bucket/some/prefix/"},`
     #
     #     `"relative/path/to/custdata-1",`
     #
@@ -45183,7 +45279,7 @@ module Aws::SageMaker
     #   repository. The secret must have a staging label of `AWSCURRENT` and
     #   must be in the following format:
     #
-    #   `\{"username": UserName, "password": Password\}`
+    #   `{"username": UserName, "password": Password}`
     #   @return [Types::GitConfigForUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepositoryInput AWS API Documentation
@@ -45265,7 +45361,7 @@ module Aws::SageMaker
     # @!attribute [rw] enable_iot_role_alias
     #   Whether to create an Amazon Web Services IoT Role Alias during
     #   device fleet creation. The name of the role alias generated will
-    #   match this pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #   match this pattern: "SageMakerEdge-\{DeviceFleetName}".
     #
     #   For example, if your device fleet is called "demo-fleet", the name
     #   of the role alias will be "SageMakerEdge-demo-fleet".
@@ -45322,7 +45418,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_space_settings
-    #   The default settings used to create a space within the domain.
+    #   The default settings for shared spaces that users create in the
+    #   domain.
     #   @return [Types::DefaultSpaceSettings]
     #
     # @!attribute [rw] subnet_ids
@@ -46085,6 +46182,16 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
+    # @!attribute [rw] model_life_cycle
+    #   A structure describing the current state of the model in its life
+    #   cycle.
+    #   @return [Types::ModelLifeCycle]
+    #
+    # @!attribute [rw] client_token
+    #   A unique token that guarantees that the call to this API is
+    #   idempotent.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelPackageInput AWS API Documentation
     #
     class UpdateModelPackageInput < Struct.new(
@@ -46096,7 +46203,9 @@ module Aws::SageMaker
       :additional_inference_specifications_to_add,
       :inference_specification,
       :source_uri,
-      :model_card)
+      :model_card,
+      :model_life_cycle,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46274,21 +46383,19 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] accelerator_types
-    #   A list of the Elastic Inference (EI) instance types to associate
-    #   with this notebook instance. Currently only one EI instance type can
-    #   be associated with a notebook instance. For more information, see
-    #   [Using Elastic Inference in Amazon SageMaker][1].
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   This parameter was used to specify a list of the EI instance types
+    #   to associate with this notebook instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] disassociate_accelerator_types
-    #   A list of the Elastic Inference (EI) instance types to remove from
-    #   this notebook instance. This operation is idempotent. If you specify
-    #   an accelerator type that is not associated with the notebook
-    #   instance when you call this method, it does not throw an error.
+    #   This parameter is no longer supported. Elastic Inference (EI) is no
+    #   longer available.
+    #
+    #   This parameter was used to specify a list of the EI instance types
+    #   to remove from this notebook instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] disassociate_default_code_repository
@@ -46988,6 +47095,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] execution_role
     #   The execution role for the user.
+    #
+    #   SageMaker applies this setting only to private spaces that the user
+    #   creates in the domain. SageMaker doesn't apply this setting to
+    #   shared spaces.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -47004,6 +47115,10 @@ module Aws::SageMaker
     #   Amazon SageMaker adds a security group to allow NFS traffic from
     #   Amazon SageMaker Studio. Therefore, the number of security groups
     #   that you can specify is one less than the maximum number shown.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sharing_settings
@@ -47033,18 +47148,33 @@ module Aws::SageMaker
     #
     # @!attribute [rw] canvas_app_settings
     #   The Canvas app settings.
+    #
+    #   SageMaker applies these settings only to private spaces that
+    #   SageMaker creates for the Canvas app.
     #   @return [Types::CanvasAppSettings]
     #
     # @!attribute [rw] code_editor_app_settings
     #   The Code Editor application settings.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Types::CodeEditorAppSettings]
     #
     # @!attribute [rw] jupyter_lab_app_settings
     #   The settings for the JupyterLab application.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Types::JupyterLabAppSettings]
     #
     # @!attribute [rw] space_storage_settings
     #   The storage settings for a space.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Types::DefaultSpaceStorageSettings]
     #
     # @!attribute [rw] default_landing_uri
@@ -47067,12 +47197,20 @@ module Aws::SageMaker
     # @!attribute [rw] custom_posix_user_config
     #   Details about the POSIX identity that is used for file system
     #   operations.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Types::CustomPosixUserConfig]
     #
     # @!attribute [rw] custom_file_system_configs
     #   The settings for assigning a custom file system to a user profile.
     #   Permitted users can access this file system in Amazon SageMaker
     #   Studio.
+    #
+    #   SageMaker applies these settings only to private spaces that the
+    #   user creates in the domain. SageMaker doesn't apply these settings
+    #   to shared spaces.
     #   @return [Array<Types::CustomFileSystemConfig>]
     #
     # @!attribute [rw] studio_web_portal_settings
@@ -47085,6 +47223,10 @@ module Aws::SageMaker
     #   the user profile. The `DefaultAsDomain` value is only supported for
     #   user profiles. Do not use the `DefaultAsDomain` value when setting
     #   this parameter for a domain.
+    #
+    #   SageMaker applies this setting only to private spaces that the user
+    #   creates in the domain. SageMaker doesn't apply this setting to
+    #   shared spaces.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserSettings AWS API Documentation

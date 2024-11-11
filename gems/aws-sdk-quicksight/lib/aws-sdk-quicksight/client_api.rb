@@ -195,6 +195,7 @@ module Aws::QuickSight
     AuroraParameters = Shapes::StructureShape.new(name: 'AuroraParameters')
     AuroraPostgreSqlParameters = Shapes::StructureShape.new(name: 'AuroraPostgreSqlParameters')
     AuthenticationMethodOption = Shapes::StringShape.new(name: 'AuthenticationMethodOption')
+    AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AuthorSpecifiedAggregation = Shapes::StringShape.new(name: 'AuthorSpecifiedAggregation')
     AuthorSpecifiedAggregations = Shapes::ListShape.new(name: 'AuthorSpecifiedAggregations')
     AuthorizedTargetsByService = Shapes::StructureShape.new(name: 'AuthorizedTargetsByService')
@@ -519,6 +520,7 @@ module Aws::QuickSight
     DataSourceSummaryList = Shapes::ListShape.new(name: 'DataSourceSummaryList')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     Database = Shapes::StringShape.new(name: 'Database')
+    DatabaseAccessControlRole = Shapes::StringShape.new(name: 'DatabaseAccessControlRole')
     DatabaseGroup = Shapes::StringShape.new(name: 'DatabaseGroup')
     DatabaseGroupList = Shapes::ListShape.new(name: 'DatabaseGroupList')
     DatabaseUser = Shapes::StringShape.new(name: 'DatabaseUser')
@@ -949,6 +951,7 @@ module Aws::QuickSight
     IdentityMap = Shapes::MapShape.new(name: 'IdentityMap')
     IdentityName = Shapes::StringShape.new(name: 'IdentityName')
     IdentityNameList = Shapes::ListShape.new(name: 'IdentityNameList')
+    IdentityProviderResourceUri = Shapes::StringShape.new(name: 'IdentityProviderResourceUri')
     IdentityStore = Shapes::StringShape.new(name: 'IdentityStore')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     IdentityTypeNotSupportedException = Shapes::StructureShape.new(name: 'IdentityTypeNotSupportedException')
@@ -1187,6 +1190,8 @@ module Aws::QuickSight
     NumericalAggregationFunction = Shapes::StructureShape.new(name: 'NumericalAggregationFunction')
     NumericalDimensionField = Shapes::StructureShape.new(name: 'NumericalDimensionField')
     NumericalMeasureField = Shapes::StructureShape.new(name: 'NumericalMeasureField')
+    OAuthParameters = Shapes::StructureShape.new(name: 'OAuthParameters')
+    OAuthScope = Shapes::StringShape.new(name: 'OAuthScope')
     OnClause = Shapes::StringShape.new(name: 'OnClause')
     OperandList = Shapes::ListShape.new(name: 'OperandList')
     OptionalPort = Shapes::IntegerShape.new(name: 'OptionalPort')
@@ -1692,6 +1697,7 @@ module Aws::QuickSight
     TimeRangeFilter = Shapes::StructureShape.new(name: 'TimeRangeFilter')
     TimeRangeFilterValue = Shapes::StructureShape.new(name: 'TimeRangeFilterValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TokenProviderUrl = Shapes::StringShape.new(name: 'TokenProviderUrl')
     TooltipItem = Shapes::StructureShape.new(name: 'TooltipItem')
     TooltipItemList = Shapes::ListShape.new(name: 'TooltipItemList')
     TooltipOptions = Shapes::StructureShape.new(name: 'TooltipOptions')
@@ -6500,6 +6506,12 @@ module Aws::QuickSight
     NumericalMeasureField.add_member(:format_configuration, Shapes::ShapeRef.new(shape: NumberFormatConfiguration, location_name: "FormatConfiguration"))
     NumericalMeasureField.struct_class = Types::NumericalMeasureField
 
+    OAuthParameters.add_member(:token_provider_url, Shapes::ShapeRef.new(shape: TokenProviderUrl, required: true, location_name: "TokenProviderUrl"))
+    OAuthParameters.add_member(:o_auth_scope, Shapes::ShapeRef.new(shape: OAuthScope, location_name: "OAuthScope"))
+    OAuthParameters.add_member(:identity_provider_vpc_connection_properties, Shapes::ShapeRef.new(shape: VpcConnectionProperties, location_name: "IdentityProviderVpcConnectionProperties"))
+    OAuthParameters.add_member(:identity_provider_resource_uri, Shapes::ShapeRef.new(shape: IdentityProviderResourceUri, location_name: "IdentityProviderResourceUri"))
+    OAuthParameters.struct_class = Types::OAuthParameters
+
     OperandList.member = Shapes::ShapeRef.new(shape: Identifier)
 
     OracleParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
@@ -7615,6 +7627,9 @@ module Aws::QuickSight
     SnowflakeParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     SnowflakeParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     SnowflakeParameters.add_member(:warehouse, Shapes::ShapeRef.new(shape: Warehouse, required: true, location_name: "Warehouse"))
+    SnowflakeParameters.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
+    SnowflakeParameters.add_member(:database_access_control_role, Shapes::ShapeRef.new(shape: DatabaseAccessControlRole, location_name: "DatabaseAccessControlRole"))
+    SnowflakeParameters.add_member(:o_auth_parameters, Shapes::ShapeRef.new(shape: OAuthParameters, location_name: "OAuthParameters"))
     SnowflakeParameters.struct_class = Types::SnowflakeParameters
 
     Spacing.add_member(:top, Shapes::ShapeRef.new(shape: Length, location_name: "Top"))
@@ -7639,6 +7654,9 @@ module Aws::QuickSight
     StarburstParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     StarburstParameters.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
     StarburstParameters.add_member(:product_type, Shapes::ShapeRef.new(shape: StarburstProductType, location_name: "ProductType"))
+    StarburstParameters.add_member(:database_access_control_role, Shapes::ShapeRef.new(shape: DatabaseAccessControlRole, location_name: "DatabaseAccessControlRole"))
+    StarburstParameters.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
+    StarburstParameters.add_member(:o_auth_parameters, Shapes::ShapeRef.new(shape: OAuthParameters, location_name: "OAuthParameters"))
     StarburstParameters.struct_class = Types::StarburstParameters
 
     StartAssetBundleExportJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))

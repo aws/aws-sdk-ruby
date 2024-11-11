@@ -387,7 +387,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] default_delivery_config_values
     #   A mapping that displays the default value of each property within a
-    #   delivery’s configuration, if it is not specified in the request.
+    #   delivery's configuration, if it is not specified in the request.
     #   @return [Types::ConfigurationTemplateDeliveryConfigValues]
     #
     # @!attribute [rw] allowed_fields
@@ -508,7 +508,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] record_fields
     #   The list of record fields to be delivered to the destination, in
-    #   order. If the delivery’s log source has mandatory fields, they must
+    #   order. If the delivery's log source has mandatory fields, they must
     #   be included in this list.
     #   @return [Array<String>]
     #
@@ -519,7 +519,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] s3_delivery_configuration
     #   This structure contains parameters that are valid only when the
-    #   delivery’s delivery destination is an S3 bucket.
+    #   delivery's delivery destination is an S3 bucket.
     #   @return [Types::S3DeliveryConfiguration]
     #
     # @!attribute [rw] tags
@@ -595,6 +595,10 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] destination_prefix
     #   The prefix used as the start of the key for every object exported.
     #   If you don't specify a value, the default is `exportedlogs`.
+    #
+    #   The length of this parameter must comply with the S3 object key name
+    #   length limits. The object key name is a sequence of Unicode
+    #   characters with UTF-8 encoding, and can be up to 1,024 bytes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTaskRequest AWS API Documentation
@@ -1057,12 +1061,13 @@ module Aws::CloudWatchLogs
     #
     # For more information, see [CreateDelivery][1].
     #
-    # You can't update an existing delivery. You can only create and delete
-    # deliveries.
+    # To update an existing delivery configuration, use
+    # [UpdateDeliveryConfiguration][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html
     #
     # @!attribute [rw] id
     #   The unique ID that identifies this delivery in your account.
@@ -3727,13 +3732,28 @@ module Aws::CloudWatchLogs
     #   times each value was found.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] inferred_token_name
+    #   A name that CloudWatch Logs assigned to this dynamic token to make
+    #   the pattern more readable. The string part of the
+    #   `inferredTokenName` gives you a clearer idea of the content of this
+    #   token. The number part of the `inferredTokenName` shows where in the
+    #   pattern this token appears, compared to other dynamic tokens.
+    #   CloudWatch Logs assigns the string part of the name based on
+    #   analyzing the content of the log events that contain it.
+    #
+    #   For example, an inferred token name of `IPAddress-3` means that the
+    #   token represents an IP address, and this token is the third dynamic
+    #   token in the pattern.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PatternToken AWS API Documentation
     #
     class PatternToken < Struct.new(
       :dynamic_token_position,
       :is_dynamic,
       :token_string,
-      :enumerations)
+      :enumerations,
+      :inferred_token_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3784,7 +3804,7 @@ module Aws::CloudWatchLogs
     #
     #     The `Operation` property with the `Deidentify` action is what
     #     actually masks the data, and it must contain the ` "MaskConfig":
-    #     \{\}` object. The ` "MaskConfig": \{\}` object must be empty.
+    #     {}` object. The ` "MaskConfig": {}` object must be empty.
     #
     #   For an example data protection policy, see the **Examples** section
     #   on this page.
@@ -3924,7 +3944,7 @@ module Aws::CloudWatchLogs
     #
     #     The `Operation` property with the `Deidentify` action is what
     #     actually masks the data, and it must contain the ` "MaskConfig":
-    #     \{\}` object. The ` "MaskConfig": \{\}` object must be empty.
+    #     {}` object. The ` "MaskConfig": {}` object must be empty.
     #
     #   For an example data protection policy, see the **Examples** section
     #   on this page.
@@ -4399,13 +4419,12 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
-    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
-    #   "Service": [ "route53.amazonaws.com" ] \}, "Action":
-    #   "logs:PutLogEvents", "Resource": "logArn", "Condition": \{
-    #   "ArnLike": \{ "aws:SourceArn": "myRoute53ResourceArn" \},
-    #   "StringEquals": \{ "aws:SourceAccount": "myAwsAccountId" \} \} \} ]
-    #   \}`
+    #   `{ "Version": "2012-10-17", "Statement": [ { "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": {
+    #   "Service": [ "route53.amazonaws.com" ] }, "Action":
+    #   "logs:PutLogEvents", "Resource": "logArn", "Condition": { "ArnLike":
+    #   { "aws:SourceArn": "myRoute53ResourceArn" }, "StringEquals": {
+    #   "aws:SourceAccount": "myAwsAccountId" } } } ] }`
     #
     #
     #
@@ -5041,7 +5060,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] limit
     #   The maximum number of log events to return in the query. If the
     #   query string uses the `fields` command, only the specified fields
-    #   and their values are returned. The default is 1000.
+    #   and their values are returned. The default is 10,000.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQueryRequest AWS API Documentation
@@ -5359,6 +5378,16 @@ module Aws::CloudWatchLogs
     #   structure to specify how long the suppression is to last.
     #   @return [Types::SuppressionPeriod]
     #
+    # @!attribute [rw] baseline
+    #   Set this to `true` to prevent CloudWatch Logs from displaying this
+    #   behavior as an anomaly in the future. The behavior is then treated
+    #   as baseline behavior. However, if similar but more severe
+    #   occurrences of this behavior occur in the future, those will still
+    #   be reported as anomalies.
+    #
+    #   The default is `false`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateAnomalyRequest AWS API Documentation
     #
     class UpdateAnomalyRequest < Struct.new(
@@ -5366,7 +5395,8 @@ module Aws::CloudWatchLogs
       :pattern_id,
       :anomaly_detector_arn,
       :suppression_type,
-      :suppression_period)
+      :suppression_period,
+      :baseline)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5377,7 +5407,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] record_fields
     #   The list of record fields to be delivered to the destination, in
-    #   order. If the delivery’s log source has mandatory fields, they must
+    #   order. If the delivery's log source has mandatory fields, they must
     #   be included in this list.
     #   @return [Array<String>]
     #
@@ -5388,7 +5418,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] s3_delivery_configuration
     #   This structure contains parameters that are valid only when the
-    #   delivery’s delivery destination is an S3 bucket.
+    #   delivery's delivery destination is an S3 bucket.
     #   @return [Types::S3DeliveryConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateDeliveryConfigurationRequest AWS API Documentation

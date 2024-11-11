@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2024-10-30)
+------------------
+
+* Feature - Neo Integration via IAM Identity Center (IdC)
+
 1.29.0 (2024-10-18)
 ------------------
 

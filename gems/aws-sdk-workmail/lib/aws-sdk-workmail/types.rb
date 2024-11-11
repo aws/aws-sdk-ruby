@@ -421,6 +421,43 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the IAM Identity Center application.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateIdentityCenterApplicationRequest AWS API Documentation
+    #
+    class CreateIdentityCenterApplicationRequest < Struct.new(
+      :name,
+      :instance_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateIdentityCenterApplicationResponse AWS API Documentation
+    #
+    class CreateIdentityCenterApplicationResponse < Struct.new(
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   The idempotency token for the client request.
     #
@@ -653,7 +690,7 @@ module Aws::WorkMail
       :type,
       :description,
       :hidden_from_global_address_list)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -707,6 +744,12 @@ module Aws::WorkMail
     #   address book.
     #   @return [Boolean]
     #
+    # @!attribute [rw] identity_provider_user_id
+    #   User ID from the IAM Identity Center. If this parameter is empty it
+    #   will be updated automatically when the user logs in for the first
+    #   time to the mailbox associated with WorkMail.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateUserRequest AWS API Documentation
     #
     class CreateUserRequest < Struct.new(
@@ -717,7 +760,8 @@ module Aws::WorkMail
       :role,
       :first_name,
       :last_name,
-      :hidden_from_global_address_list)
+      :hidden_from_global_address_list,
+      :identity_provider_user_id)
       SENSITIVE = [:display_name, :password, :first_name, :last_name]
       include Aws::Structure
     end
@@ -874,6 +918,38 @@ module Aws::WorkMail
     #
     class DeleteGroupResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteIdentityCenterApplicationRequest AWS API Documentation
+    #
+    class DeleteIdentityCenterApplicationRequest < Struct.new(
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteIdentityCenterApplicationResponse AWS API Documentation
+    #
+    class DeleteIdentityCenterApplicationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organization_id
+    #   The Organization ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteIdentityProviderConfigurationRequest AWS API Documentation
+    #
+    class DeleteIdentityProviderConfigurationRequest < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteIdentityProviderConfigurationResponse AWS API Documentation
+    #
+    class DeleteIdentityProviderConfigurationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] organization_id
     #   The WorkMail organization from which to delete the impersonation
     #   role.
@@ -1024,13 +1100,19 @@ module Aws::WorkMail
     #   users.
     #   @return [Boolean]
     #
+    # @!attribute [rw] delete_identity_center_application
+    #   Deletes IAM Identity Center application for WorkMail. This action
+    #   does not affect authentication settings for any organization.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteOrganizationRequest AWS API Documentation
     #
     class DeleteOrganizationRequest < Struct.new(
       :client_token,
       :organization_id,
       :delete_directory,
-      :force_delete)
+      :force_delete,
+      :delete_identity_center_application)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1051,6 +1133,27 @@ module Aws::WorkMail
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] organization_id
+    #   The Organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] personal_access_token_id
+    #   The Personal Access Token ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeletePersonalAccessTokenRequest AWS API Documentation
+    #
+    class DeletePersonalAccessTokenRequest < Struct.new(
+      :organization_id,
+      :personal_access_token_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeletePersonalAccessTokenResponse AWS API Documentation
+    #
+    class DeletePersonalAccessTokenResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] organization_id
     #   The identifier associated with the organization from which the
@@ -1330,6 +1433,40 @@ module Aws::WorkMail
     end
 
     # @!attribute [rw] organization_id
+    #   The Organization ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeIdentityProviderConfigurationRequest AWS API Documentation
+    #
+    class DescribeIdentityProviderConfigurationRequest < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authentication_mode
+    #   The authentication mode used in WorkMail.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_configuration
+    #   The details of the IAM Identity Center configuration.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
+    # @!attribute [rw] personal_access_token_configuration
+    #   The details of the Personal Access Token configuration.
+    #   @return [Types::PersonalAccessTokenConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeIdentityProviderConfigurationResponse AWS API Documentation
+    #
+    class DescribeIdentityProviderConfigurationResponse < Struct.new(
+      :authentication_mode,
+      :identity_center_configuration,
+      :personal_access_token_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_id
     #   Lists the ID of the given organization.
     #   @return [String]
     #
@@ -1603,7 +1740,7 @@ module Aws::WorkMail
       :disabled_date,
       :description,
       :hidden_from_global_address_list)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -1735,6 +1872,18 @@ module Aws::WorkMail
     #   Office where the user is located.
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider_user_id
+    #   User ID from the IAM Identity Center. If this parameter is empty it
+    #   will be updated automatically when the user logs in for the first
+    #   time to the mailbox associated with WorkMail.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_identity_store_id
+    #   Identity Store ID from the IAM Identity Center. If this parameter is
+    #   empty it will be updated automatically when the user logs in for the
+    #   first time to the mailbox associated with WorkMail.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeUserResponse AWS API Documentation
     #
     class DescribeUserResponse < Struct.new(
@@ -1760,7 +1909,9 @@ module Aws::WorkMail
       :zip_code,
       :department,
       :country,
-      :office)
+      :office,
+      :identity_provider_user_id,
+      :identity_provider_identity_store_id)
       SENSITIVE = [:display_name, :first_name, :last_name, :initials, :telephone, :street, :job_title, :city, :company, :zip_code, :department, :country, :office]
       include Aws::Structure
     end
@@ -2487,6 +2638,65 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @!attribute [rw] organization_id
+    #   The Organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] personal_access_token_id
+    #   The Personal Access Token ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetPersonalAccessTokenMetadataRequest AWS API Documentation
+    #
+    class GetPersonalAccessTokenMetadataRequest < Struct.new(
+      :organization_id,
+      :personal_access_token_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] personal_access_token_id
+    #   The Personal Access Token ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail User ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The Personal Access Token name.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The date when the Personal Access Token ID was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_last_used
+    #   The date when the Personal Access Token ID was last used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_time
+    #   The time when the Personal Access Token ID will expire.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scopes
+    #   Lists all the Personal Access Token permissions for a mailbox.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetPersonalAccessTokenMetadataResponse AWS API Documentation
+    #
+    class GetPersonalAccessTokenMetadataResponse < Struct.new(
+      :personal_access_token_id,
+      :user_id,
+      :name,
+      :date_created,
+      :date_last_used,
+      :expires_time,
+      :scopes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The representation of an WorkMail group.
     #
     # @!attribute [rw] id
@@ -2541,6 +2751,29 @@ module Aws::WorkMail
     class GroupIdentifier < Struct.new(
       :group_id,
       :group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The IAM Identity Center configuration.
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the of IAM Identity Center
+    #   instance. Must be in the same AWS account and region as WorkMail
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of IAMIdentity Center Application for
+    #   WorkMail. Must be created by the WorkMail API, see
+    #   CreateIdentityCenterApplication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/IdentityCenterConfiguration AWS API Documentation
+    #
+    class IdentityCenterConfiguration < Struct.new(
+      :instance_arn,
+      :application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3353,6 +3586,51 @@ module Aws::WorkMail
     end
 
     # @!attribute [rw] organization_id
+    #   The Organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail User ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token from the previous response to query the next page.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum amount of items that should be returned in a response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListPersonalAccessTokensRequest AWS API Documentation
+    #
+    class ListPersonalAccessTokensRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token from the previous response to query the next page.
+    #   @return [String]
+    #
+    # @!attribute [rw] personal_access_token_summaries
+    #   Lists all the personal tokens in an organization or user, if user ID
+    #   is provided.
+    #   @return [Array<Types::PersonalAccessTokenSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListPersonalAccessTokensResponse AWS API Documentation
+    #
+    class ListPersonalAccessTokensResponse < Struct.new(
+      :next_token,
+      :personal_access_token_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_id
     #   The identifier for the organization that contains the resource for
     #   which delegates are listed.
     #   @return [String]
@@ -3525,13 +3803,18 @@ module Aws::WorkMail
     #   Filters only users with the provided state.
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider_user_id_prefix
+    #   Filters only users with the ID from the IAM Identity Center.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListUsersFilters AWS API Documentation
     #
     class ListUsersFilters < Struct.new(
       :username_prefix,
       :display_name_prefix,
       :primary_email_prefix,
-      :state)
+      :state,
+      :identity_provider_user_id_prefix)
       SENSITIVE = [:display_name_prefix]
       include Aws::Structure
     end
@@ -3992,6 +4275,82 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # Displays the Personal Access Token status.
+    #
+    # @!attribute [rw] status
+    #   The status of the Personal Access Token allowed for the
+    #   organization.
+    #
+    #   * *Active* - Mailbox users can login to the web application and
+    #     choose *Settings* to see the new *Personal Access Tokens* page to
+    #     create and delete the Personal Access Tokens. Mailbox users can
+    #     use the Personal Access Tokens to set up mailbox connection from
+    #     desktop or mobile email clients.
+    #
+    #   * *Inactive* - Personal Access Tokens are disabled for your
+    #     organization. Mailbox users can’t create, list, or delete Personal
+    #     Access Tokens and can’t use them to connect to their mailboxes
+    #     from desktop or mobile email clients.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifetime_in_days
+    #   The validity of the Personal Access Token status in days.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PersonalAccessTokenConfiguration AWS API Documentation
+    #
+    class PersonalAccessTokenConfiguration < Struct.new(
+      :status,
+      :lifetime_in_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the Personal Access Token.
+    #
+    # @!attribute [rw] personal_access_token_id
+    #   The ID of the Personal Access Token.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The user ID of the WorkMail user associated with the Personal Access
+    #   Token.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Personal Access Token.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The date when the Personal Access Token was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_last_used
+    #   The date when the Personal Access Token was last used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_time
+    #   The date when the Personal Access Token will expire.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scopes
+    #   Lists all the Personal Access Token permissions for a mailbox.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PersonalAccessTokenSummary AWS API Documentation
+    #
+    class PersonalAccessTokenSummary < Struct.new(
+      :personal_access_token_id,
+      :user_id,
+      :name,
+      :date_created,
+      :date_last_used,
+      :expires_time,
+      :scopes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The rule name.
     #   @return [String]
@@ -4095,6 +4454,37 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutEmailMonitoringConfigurationResponse AWS API Documentation
     #
     class PutEmailMonitoringConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organization_id
+    #   The ID of the WorkMail Organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_mode
+    #   The authentication mode used in WorkMail.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_configuration
+    #   The details of the IAM Identity Center configuration.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
+    # @!attribute [rw] personal_access_token_configuration
+    #   The details of the Personal Access Token configuration.
+    #   @return [Types::PersonalAccessTokenConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutIdentityProviderConfigurationRequest AWS API Documentation
+    #
+    class PutIdentityProviderConfigurationRequest < Struct.new(
+      :organization_id,
+      :authentication_mode,
+      :identity_center_configuration,
+      :personal_access_token_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutIdentityProviderConfigurationResponse AWS API Documentation
+    #
+    class PutIdentityProviderConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] organization_id
     #   The ID of the organization that you are applying the DMARC policy
@@ -4435,7 +4825,7 @@ module Aws::WorkMail
       :enabled_date,
       :disabled_date,
       :description)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -5007,7 +5397,7 @@ module Aws::WorkMail
       :description,
       :type,
       :hidden_from_global_address_list)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -5080,7 +5470,7 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] zip_code
-    #   Updates the user's zipcode.
+    #   Updates the user's zip code.
     #   @return [String]
     #
     # @!attribute [rw] department
@@ -5093,6 +5483,12 @@ module Aws::WorkMail
     #
     # @!attribute [rw] office
     #   Updates the user's office.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_user_id
+    #   User ID from the IAM Identity Center. If this parameter is empty it
+    #   will be updated automatically when the user logs in for the first
+    #   time to the mailbox associated with WorkMail.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateUserRequest AWS API Documentation
@@ -5114,7 +5510,8 @@ module Aws::WorkMail
       :zip_code,
       :department,
       :country,
-      :office)
+      :office,
+      :identity_provider_user_id)
       SENSITIVE = [:display_name, :first_name, :last_name, :initials, :telephone, :street, :job_title, :city, :company, :zip_code, :department, :country, :office]
       include Aws::Structure
     end
@@ -5157,6 +5554,18 @@ module Aws::WorkMail
     #   The date indicating when the user was disabled from WorkMail use.
     #   @return [Time]
     #
+    # @!attribute [rw] identity_provider_user_id
+    #   User ID from the IAM Identity Center. If this parameter is empty it
+    #   will be updated automatically when the user logs in for the first
+    #   time to the mailbox associated with WorkMail.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_identity_store_id
+    #   Identity store ID from the IAM Identity Center. If this parameter is
+    #   empty it will be updated automatically when the user logs in for the
+    #   first time to the mailbox associated with WorkMail.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/User AWS API Documentation
     #
     class User < Struct.new(
@@ -5167,7 +5576,9 @@ module Aws::WorkMail
       :state,
       :user_role,
       :enabled_date,
-      :disabled_date)
+      :disabled_date,
+      :identity_provider_user_id,
+      :identity_provider_identity_store_id)
       SENSITIVE = []
       include Aws::Structure
     end

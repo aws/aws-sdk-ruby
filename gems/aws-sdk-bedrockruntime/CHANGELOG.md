@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-11-07)
+------------------
+
+* Feature - Add Prompt management support to Bedrock runtime APIs: Converse, ConverseStream, InvokeModel, InvokeModelWithStreamingResponse
+
+1.30.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2024-10-29)
+------------------
+
+* Feature - Update Application Inference Profile
+
 1.28.0 (2024-10-22)
 ------------------
 

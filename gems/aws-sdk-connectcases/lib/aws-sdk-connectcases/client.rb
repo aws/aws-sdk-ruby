@@ -990,8 +990,7 @@ module Aws::ConnectCases
     # * Calling `UpdateCase` with a deleted field ID throws a
     #   `ValidationException` if the case does not already contain a value
     #   for the deleted field. Otherwise it succeeds, allowing you to update
-    #   or remove (using `emptyValue: \{\}`) the field's value from the
-    #   case.
+    #   or remove (using `emptyValue: {}`) the field's value from the case.
     #
     # * `GetTemplate` does not return field IDs for deleted fields.
     #
@@ -2307,7 +2306,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

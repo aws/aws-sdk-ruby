@@ -2088,8 +2088,8 @@ module Aws::SecurityHub
     # @!attribute [rw] route_selection_expression
     #   The route selection expression for the API.
     #
-    #   For HTTP APIs, must be `$\{request.method\} $\{request.path\}`. This
-    #   is the default value for HTTP APIs.
+    #   For HTTP APIs, must be `${request.method} ${request.path}`. This is
+    #   the default value for HTTP APIs.
     #
     #   For WebSocket APIs, there is no default value.
     #   @return [String]

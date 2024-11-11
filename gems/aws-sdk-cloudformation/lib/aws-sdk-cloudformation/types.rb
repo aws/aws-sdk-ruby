@@ -351,9 +351,9 @@ module Aws::CloudFormation
     #   limit resource-level permissions and avoid returning a response when
     #   no parameter is sent in the request:
     #
-    #    `\{ "Version": "2012-10-17", "Statement": [\{ "Effect": "Deny",
+    #    `{ "Version": "2012-10-17", "Statement": [{ "Effect": "Deny",
     #   "Action": "cloudformation:DescribeStacks", "NotResource":
-    #   "arn:aws:cloudformation:*:*:stack/*/*" \}] \}`
+    #   "arn:aws:cloudformation:*:*:stack/*/*" }] }`
     #
     #    </note>
     #
@@ -2557,7 +2557,7 @@ module Aws::CloudFormation
     # @!attribute [rw] generated_template_id
     #   The Amazon Resource Name (ARN) of the generated template. The format
     #   is
-    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   `arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}`.
     #   For example,
     #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
     #   `.
@@ -2743,7 +2743,7 @@ module Aws::CloudFormation
 
     # @!attribute [rw] resource_scan_id
     #   The Amazon Resource Name (ARN) of the resource scan. The format is
-    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:resourceScan/$\{Id\}`.
+    #   `arn:${Partition}:cloudformation:${Region}:${Account}:resourceScan/${Id}`.
     #   An example is
     #   `arn:aws:cloudformation:us-east-1:123456789012:resourceScan/f5b490f7-7ed4-428a-aa06-31ff25db0772
     #   `.
@@ -3333,10 +3333,9 @@ module Aws::CloudFormation
     #   limit resource-level permissions and avoid returning a response when
     #   no parameter is sent in the request:
     #
-    #    \\\{ "Version": "2012-10-17", "Statement": \[\\\{ "Effect":
+    #    \{ "Version": "2012-10-17", "Statement": \[\{ "Effect":
     #   "Deny", "Action": "cloudformation:DescribeStacks",
-    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" \\}\]
-    #   \\}
+    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }\] }
     #
     #    </note>
     #
@@ -4132,7 +4131,7 @@ module Aws::CloudFormation
     # @!attribute [rw] generated_template_name
     #   The name or Amazon Resource Name (ARN) of the generated template.
     #   The format is
-    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   `arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}`.
     #   For example,
     #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
     #   `.
@@ -6668,16 +6667,16 @@ module Aws::CloudFormation
     #   entity groups:
     #
     #   * `ResourceReference` entities are `Ref` intrinsic functions that
-    #     refer to resources in the template, such as `\{ "Ref" :
-    #     "MyEC2InstanceResource" \}`.
+    #     refer to resources in the template, such as `{ "Ref" :
+    #     "MyEC2InstanceResource" }`.
     #
     #   * `ParameterReference` entities are `Ref` intrinsic functions that
-    #     get template parameter values, such as `\{ "Ref" :
-    #     "MyPasswordParameter" \}`.
+    #     get template parameter values, such as `{ "Ref" :
+    #     "MyPasswordParameter" }`.
     #
     #   * `ResourceAttribute` entities are `Fn::GetAtt` intrinsic functions
-    #     that get resource attribute values, such as `\{ "Fn::GetAtt" : [
-    #     "MyEC2InstanceResource", "PublicDnsName" ] \}`.
+    #     that get resource attribute values, such as `{ "Fn::GetAtt" : [
+    #     "MyEC2InstanceResource", "PublicDnsName" ] }`.
     #
     #   * `DirectModification` entities are changes that are made directly
     #     to the template.
@@ -9726,7 +9725,7 @@ module Aws::CloudFormation
 
     # @!attribute [rw] resource_scan_id
     #   The Amazon Resource Name (ARN) of the resource scan. The format is
-    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:resourceScan/$\{Id\}`.
+    #   `arn:${Partition}:cloudformation:${Region}:${Account}:resourceScan/${Id}`.
     #   An example is
     #   `arn:aws:cloudformation:us-east-1:123456789012:resourceScan/f5b490f7-7ed4-428a-aa06-31ff25db0772
     #   `.
@@ -9920,7 +9919,7 @@ module Aws::CloudFormation
     # @!attribute [rw] generated_template_id
     #   The Amazon Resource Name (ARN) of the generated template. The format
     #   is
-    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   `arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}`.
     #   For example,
     #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
     #   `.
@@ -10106,7 +10105,7 @@ module Aws::CloudFormation
     #   in this account and Region.
     #
     #   If a configuration hasn't been set for a specified extension,
-    #   CloudFormation returns `\{\}`.
+    #   CloudFormation returns `{}`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated
@@ -10536,7 +10535,7 @@ module Aws::CloudFormation
     # @!attribute [rw] generated_template_id
     #   The Amazon Resource Name (ARN) of the generated template. The format
     #   is
-    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   `arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}`.
     #   For example,
     #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
     #   `.

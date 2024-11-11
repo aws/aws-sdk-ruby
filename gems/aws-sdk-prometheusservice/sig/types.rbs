@@ -390,7 +390,7 @@ module Aws::PrometheusService
     end
 
     class ScraperStatus
-      attr_accessor status_code: ("CREATING" | "ACTIVE" | "DELETING" | "CREATION_FAILED" | "DELETION_FAILED")
+      attr_accessor status_code: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "CREATION_FAILED" | "UPDATE_FAILED" | "DELETION_FAILED")
       SENSITIVE: []
     end
 
@@ -464,6 +464,23 @@ module Aws::PrometheusService
 
     class UpdateLoggingConfigurationResponse
       attr_accessor status: Types::LoggingConfigurationStatus
+      SENSITIVE: []
+    end
+
+    class UpdateScraperRequest
+      attr_accessor alias: ::String
+      attr_accessor client_token: ::String
+      attr_accessor destination: Types::Destination
+      attr_accessor scrape_configuration: Types::ScrapeConfiguration
+      attr_accessor scraper_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateScraperResponse
+      attr_accessor arn: ::String
+      attr_accessor scraper_id: ::String
+      attr_accessor status: Types::ScraperStatus
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

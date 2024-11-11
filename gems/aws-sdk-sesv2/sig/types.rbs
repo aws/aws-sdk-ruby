@@ -1596,6 +1596,7 @@ module Aws::SESV2
     class Template
       attr_accessor template_name: ::String
       attr_accessor template_arn: ::String
+      attr_accessor template_content: Types::EmailTemplateContent
       attr_accessor template_data: ::String
       attr_accessor headers: ::Array[Types::MessageHeader]
       SENSITIVE: []

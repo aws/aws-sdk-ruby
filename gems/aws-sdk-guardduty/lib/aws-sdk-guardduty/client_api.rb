@@ -407,6 +407,7 @@ module Aws::GuardDuty
     PublishingStatus = Shapes::StringShape.new(name: 'PublishingStatus')
     RdsDbInstanceDetails = Shapes::StructureShape.new(name: 'RdsDbInstanceDetails')
     RdsDbUserDetails = Shapes::StructureShape.new(name: 'RdsDbUserDetails')
+    RdsLimitlessDbDetails = Shapes::StructureShape.new(name: 'RdsLimitlessDbDetails')
     RdsLoginAttemptAction = Shapes::StructureShape.new(name: 'RdsLoginAttemptAction')
     RemoteAccountDetails = Shapes::StructureShape.new(name: 'RemoteAccountDetails')
     RemoteIpDetails = Shapes::StructureShape.new(name: 'RemoteIpDetails')
@@ -1953,6 +1954,15 @@ module Aws::GuardDuty
     RdsDbUserDetails.add_member(:auth_method, Shapes::ShapeRef.new(shape: String, location_name: "authMethod"))
     RdsDbUserDetails.struct_class = Types::RdsDbUserDetails
 
+    RdsLimitlessDbDetails.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "dbShardGroupIdentifier"))
+    RdsLimitlessDbDetails.add_member(:db_shard_group_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "dbShardGroupResourceId"))
+    RdsLimitlessDbDetails.add_member(:db_shard_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "dbShardGroupArn"))
+    RdsLimitlessDbDetails.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "engine"))
+    RdsLimitlessDbDetails.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "engineVersion"))
+    RdsLimitlessDbDetails.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "dbClusterIdentifier"))
+    RdsLimitlessDbDetails.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    RdsLimitlessDbDetails.struct_class = Types::RdsLimitlessDbDetails
+
     RdsLoginAttemptAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     RdsLoginAttemptAction.add_member(:login_attributes, Shapes::ShapeRef.new(shape: LoginAttributes, location_name: "LoginAttributes"))
     RdsLoginAttemptAction.struct_class = Types::RdsLoginAttemptAction
@@ -1983,6 +1993,7 @@ module Aws::GuardDuty
     Resource.add_member(:ecs_cluster_details, Shapes::ShapeRef.new(shape: EcsClusterDetails, location_name: "ecsClusterDetails"))
     Resource.add_member(:container_details, Shapes::ShapeRef.new(shape: Container, location_name: "containerDetails"))
     Resource.add_member(:rds_db_instance_details, Shapes::ShapeRef.new(shape: RdsDbInstanceDetails, location_name: "rdsDbInstanceDetails"))
+    Resource.add_member(:rds_limitless_db_details, Shapes::ShapeRef.new(shape: RdsLimitlessDbDetails, location_name: "rdsLimitlessDbDetails"))
     Resource.add_member(:rds_db_user_details, Shapes::ShapeRef.new(shape: RdsDbUserDetails, location_name: "rdsDbUserDetails"))
     Resource.add_member(:lambda_details, Shapes::ShapeRef.new(shape: LambdaDetails, location_name: "lambdaDetails"))
     Resource.struct_class = Types::Resource

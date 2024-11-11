@@ -68853,7 +68853,17 @@ module Aws
                                   snowflake_parameters: {
                                     host: ::String,
                                     database: ::String,
-                                    warehouse: ::String
+                                    warehouse: ::String,
+                                    authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                    database_access_control_role: ::String?,
+                                    o_auth_parameters: {
+                                      token_provider_url: ::String,
+                                      o_auth_scope: ::String?,
+                                      identity_provider_vpc_connection_properties: {
+                                        vpc_connection_arn: ::String
+                                      }?,
+                                      identity_provider_resource_uri: ::String?
+                                    }?
                                   }?,
                                   spark_parameters: {
                                     host: ::String,
@@ -68889,7 +68899,17 @@ module Aws
                                     host: ::String,
                                     port: ::Integer,
                                     catalog: ::String,
-                                    product_type: ("GALAXY" | "ENTERPRISE")?
+                                    product_type: ("GALAXY" | "ENTERPRISE")?,
+                                    database_access_control_role: ::String?,
+                                    authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                    o_auth_parameters: {
+                                      token_provider_url: ::String,
+                                      o_auth_scope: ::String?,
+                                      identity_provider_vpc_connection_properties: {
+                                        vpc_connection_arn: ::String
+                                      }?,
+                                      identity_provider_resource_uri: ::String?
+                                    }?
                                   }?,
                                   trino_parameters: {
                                     host: ::String,
@@ -68987,7 +69007,17 @@ module Aws
                                         snowflake_parameters: {
                                           host: ::String,
                                           database: ::String,
-                                          warehouse: ::String
+                                          warehouse: ::String,
+                                          authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                          database_access_control_role: ::String?,
+                                          o_auth_parameters: {
+                                            token_provider_url: ::String,
+                                            o_auth_scope: ::String?,
+                                            identity_provider_vpc_connection_properties: {
+                                              vpc_connection_arn: ::String
+                                            }?,
+                                            identity_provider_resource_uri: ::String?
+                                          }?
                                         }?,
                                         spark_parameters: {
                                           host: ::String,
@@ -69023,7 +69053,17 @@ module Aws
                                           host: ::String,
                                           port: ::Integer,
                                           catalog: ::String,
-                                          product_type: ("GALAXY" | "ENTERPRISE")?
+                                          product_type: ("GALAXY" | "ENTERPRISE")?,
+                                          database_access_control_role: ::String?,
+                                          authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                          o_auth_parameters: {
+                                            token_provider_url: ::String,
+                                            o_auth_scope: ::String?,
+                                            identity_provider_vpc_connection_properties: {
+                                              vpc_connection_arn: ::String
+                                            }?,
+                                            identity_provider_resource_uri: ::String?
+                                          }?
                                         }?,
                                         trino_parameters: {
                                           host: ::String,
@@ -105505,7 +105545,17 @@ module Aws
                                                    snowflake_parameters: {
                                                      host: ::String,
                                                      database: ::String,
-                                                     warehouse: ::String
+                                                     warehouse: ::String,
+                                                     authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                                     database_access_control_role: ::String?,
+                                                     o_auth_parameters: {
+                                                       token_provider_url: ::String,
+                                                       o_auth_scope: ::String?,
+                                                       identity_provider_vpc_connection_properties: {
+                                                         vpc_connection_arn: ::String
+                                                       }?,
+                                                       identity_provider_resource_uri: ::String?
+                                                     }?
                                                    }?,
                                                    spark_parameters: {
                                                      host: ::String,
@@ -105541,7 +105591,17 @@ module Aws
                                                      host: ::String,
                                                      port: ::Integer,
                                                      catalog: ::String,
-                                                     product_type: ("GALAXY" | "ENTERPRISE")?
+                                                     product_type: ("GALAXY" | "ENTERPRISE")?,
+                                                     database_access_control_role: ::String?,
+                                                     authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                                     o_auth_parameters: {
+                                                       token_provider_url: ::String,
+                                                       o_auth_scope: ::String?,
+                                                       identity_provider_vpc_connection_properties: {
+                                                         vpc_connection_arn: ::String
+                                                       }?,
+                                                       identity_provider_resource_uri: ::String?
+                                                     }?
                                                    }?,
                                                    trino_parameters: {
                                                      host: ::String,
@@ -173911,7 +173971,17 @@ module Aws
                                   snowflake_parameters: {
                                     host: ::String,
                                     database: ::String,
-                                    warehouse: ::String
+                                    warehouse: ::String,
+                                    authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                    database_access_control_role: ::String?,
+                                    o_auth_parameters: {
+                                      token_provider_url: ::String,
+                                      o_auth_scope: ::String?,
+                                      identity_provider_vpc_connection_properties: {
+                                        vpc_connection_arn: ::String
+                                      }?,
+                                      identity_provider_resource_uri: ::String?
+                                    }?
                                   }?,
                                   spark_parameters: {
                                     host: ::String,
@@ -173947,7 +174017,17 @@ module Aws
                                     host: ::String,
                                     port: ::Integer,
                                     catalog: ::String,
-                                    product_type: ("GALAXY" | "ENTERPRISE")?
+                                    product_type: ("GALAXY" | "ENTERPRISE")?,
+                                    database_access_control_role: ::String?,
+                                    authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                    o_auth_parameters: {
+                                      token_provider_url: ::String,
+                                      o_auth_scope: ::String?,
+                                      identity_provider_vpc_connection_properties: {
+                                        vpc_connection_arn: ::String
+                                      }?,
+                                      identity_provider_resource_uri: ::String?
+                                    }?
                                   }?,
                                   trino_parameters: {
                                     host: ::String,
@@ -174045,7 +174125,17 @@ module Aws
                                         snowflake_parameters: {
                                           host: ::String,
                                           database: ::String,
-                                          warehouse: ::String
+                                          warehouse: ::String,
+                                          authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                          database_access_control_role: ::String?,
+                                          o_auth_parameters: {
+                                            token_provider_url: ::String,
+                                            o_auth_scope: ::String?,
+                                            identity_provider_vpc_connection_properties: {
+                                              vpc_connection_arn: ::String
+                                            }?,
+                                            identity_provider_resource_uri: ::String?
+                                          }?
                                         }?,
                                         spark_parameters: {
                                           host: ::String,
@@ -174081,7 +174171,17 @@ module Aws
                                           host: ::String,
                                           port: ::Integer,
                                           catalog: ::String,
-                                          product_type: ("GALAXY" | "ENTERPRISE")?
+                                          product_type: ("GALAXY" | "ENTERPRISE")?,
+                                          database_access_control_role: ::String?,
+                                          authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                          o_auth_parameters: {
+                                            token_provider_url: ::String,
+                                            o_auth_scope: ::String?,
+                                            identity_provider_vpc_connection_properties: {
+                                              vpc_connection_arn: ::String
+                                            }?,
+                                            identity_provider_resource_uri: ::String?
+                                          }?
                                         }?,
                                         trino_parameters: {
                                           host: ::String,

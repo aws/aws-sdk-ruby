@@ -43,8 +43,11 @@ module Aws::RedshiftDataAPIService
     ExecuteStatementOutput = Shapes::StructureShape.new(name: 'ExecuteStatementOutput')
     Field = Shapes::UnionShape.new(name: 'Field')
     FieldList = Shapes::ListShape.new(name: 'FieldList')
+    FormattedSqlRecords = Shapes::ListShape.new(name: 'FormattedSqlRecords')
     GetStatementResultRequest = Shapes::StructureShape.new(name: 'GetStatementResultRequest')
     GetStatementResultResponse = Shapes::StructureShape.new(name: 'GetStatementResultResponse')
+    GetStatementResultV2Request = Shapes::StructureShape.new(name: 'GetStatementResultV2Request')
+    GetStatementResultV2Response = Shapes::StructureShape.new(name: 'GetStatementResultV2Response')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListDatabasesRequest = Shapes::StructureShape.new(name: 'ListDatabasesRequest')
@@ -60,8 +63,10 @@ module Aws::RedshiftDataAPIService
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
+    QueryRecords = Shapes::UnionShape.new(name: 'QueryRecords')
     QueryTimeoutException = Shapes::StructureShape.new(name: 'QueryTimeoutException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResultFormatString = Shapes::StringShape.new(name: 'ResultFormatString')
     SchemaList = Shapes::ListShape.new(name: 'SchemaList')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SessionAliveSeconds = Shapes::IntegerShape.new(name: 'SessionAliveSeconds')
@@ -101,6 +106,7 @@ module Aws::RedshiftDataAPIService
     BatchExecuteStatementInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifierString, location_name: "ClusterIdentifier"))
     BatchExecuteStatementInput.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
     BatchExecuteStatementInput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
+    BatchExecuteStatementInput.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormatString, location_name: "ResultFormat"))
     BatchExecuteStatementInput.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     BatchExecuteStatementInput.add_member(:session_id, Shapes::ShapeRef.new(shape: UUID, location_name: "SessionId"))
     BatchExecuteStatementInput.add_member(:session_keep_alive_seconds, Shapes::ShapeRef.new(shape: SessionAliveSeconds, location_name: "SessionKeepAliveSeconds"))
@@ -168,6 +174,7 @@ module Aws::RedshiftDataAPIService
     DescribeStatementResponse.add_member(:query_string, Shapes::ShapeRef.new(shape: StatementString, location_name: "QueryString"))
     DescribeStatementResponse.add_member(:redshift_pid, Shapes::ShapeRef.new(shape: Long, location_name: "RedshiftPid"))
     DescribeStatementResponse.add_member(:redshift_query_id, Shapes::ShapeRef.new(shape: Long, location_name: "RedshiftQueryId"))
+    DescribeStatementResponse.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormatString, location_name: "ResultFormat"))
     DescribeStatementResponse.add_member(:result_rows, Shapes::ShapeRef.new(shape: Long, location_name: "ResultRows"))
     DescribeStatementResponse.add_member(:result_size, Shapes::ShapeRef.new(shape: Long, location_name: "ResultSize"))
     DescribeStatementResponse.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
@@ -204,6 +211,7 @@ module Aws::RedshiftDataAPIService
     ExecuteStatementInput.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
     ExecuteStatementInput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ExecuteStatementInput.add_member(:parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "Parameters"))
+    ExecuteStatementInput.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormatString, location_name: "ResultFormat"))
     ExecuteStatementInput.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     ExecuteStatementInput.add_member(:session_id, Shapes::ShapeRef.new(shape: UUID, location_name: "SessionId"))
     ExecuteStatementInput.add_member(:session_keep_alive_seconds, Shapes::ShapeRef.new(shape: SessionAliveSeconds, location_name: "SessionKeepAliveSeconds"))
@@ -242,6 +250,8 @@ module Aws::RedshiftDataAPIService
 
     FieldList.member = Shapes::ShapeRef.new(shape: Field)
 
+    FormattedSqlRecords.member = Shapes::ShapeRef.new(shape: QueryRecords)
+
     GetStatementResultRequest.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "Id"))
     GetStatementResultRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetStatementResultRequest.struct_class = Types::GetStatementResultRequest
@@ -251,6 +261,17 @@ module Aws::RedshiftDataAPIService
     GetStatementResultResponse.add_member(:records, Shapes::ShapeRef.new(shape: SqlRecords, required: true, location_name: "Records"))
     GetStatementResultResponse.add_member(:total_num_rows, Shapes::ShapeRef.new(shape: Long, location_name: "TotalNumRows"))
     GetStatementResultResponse.struct_class = Types::GetStatementResultResponse
+
+    GetStatementResultV2Request.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "Id"))
+    GetStatementResultV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetStatementResultV2Request.struct_class = Types::GetStatementResultV2Request
+
+    GetStatementResultV2Response.add_member(:column_metadata, Shapes::ShapeRef.new(shape: ColumnMetadataList, location_name: "ColumnMetadata"))
+    GetStatementResultV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetStatementResultV2Response.add_member(:records, Shapes::ShapeRef.new(shape: FormattedSqlRecords, required: true, location_name: "Records"))
+    GetStatementResultV2Response.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormatString, location_name: "ResultFormat"))
+    GetStatementResultV2Response.add_member(:total_num_rows, Shapes::ShapeRef.new(shape: Long, location_name: "TotalNumRows"))
+    GetStatementResultV2Response.struct_class = Types::GetStatementResultV2Response
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -310,6 +331,12 @@ module Aws::RedshiftDataAPIService
     ListTablesResponse.add_member(:tables, Shapes::ShapeRef.new(shape: TableList, location_name: "Tables"))
     ListTablesResponse.struct_class = Types::ListTablesResponse
 
+    QueryRecords.add_member(:csv_records, Shapes::ShapeRef.new(shape: String, location_name: "CSVRecords"))
+    QueryRecords.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    QueryRecords.add_member_subclass(:csv_records, Types::QueryRecords::CsvRecords)
+    QueryRecords.add_member_subclass(:unknown, Types::QueryRecords::Unknown)
+    QueryRecords.struct_class = Types::QueryRecords
+
     QueryTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     QueryTimeoutException.struct_class = Types::QueryTimeoutException
 
@@ -335,6 +362,7 @@ module Aws::RedshiftDataAPIService
     StatementData.add_member(:query_parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "QueryParameters"))
     StatementData.add_member(:query_string, Shapes::ShapeRef.new(shape: StatementString, location_name: "QueryString"))
     StatementData.add_member(:query_strings, Shapes::ShapeRef.new(shape: StatementStringList, location_name: "QueryStrings"))
+    StatementData.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormatString, location_name: "ResultFormat"))
     StatementData.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     StatementData.add_member(:session_id, Shapes::ShapeRef.new(shape: UUID, location_name: "SessionId"))
     StatementData.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementNameString, location_name: "StatementName"))
@@ -379,6 +407,7 @@ module Aws::RedshiftDataAPIService
 
       api.metadata = {
         "apiVersion" => "2019-12-20",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "redshift-data",
         "jsonVersion" => "1.1",
         "protocol" => "json",
@@ -464,6 +493,22 @@ module Aws::RedshiftDataAPIService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetStatementResultRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStatementResultResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_statement_result_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStatementResultV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetStatementResultV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetStatementResultV2Response)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

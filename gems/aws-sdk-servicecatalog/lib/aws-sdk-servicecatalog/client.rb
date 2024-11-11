@@ -967,11 +967,11 @@ module Aws::ServiceCatalog
     #
     #     Specify the `RoleArn` property as follows:
     #
-    #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #     `{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}`
     #
     #     Specify the `LocalRoleName` property as follows:
     #
-    #     `\{"LocalRoleName": "SCBasicLaunchRole"\}`
+    #     `{"LocalRoleName": "SCBasicLaunchRole"}`
     #
     #     If you specify the `LocalRoleName` property, when an account uses
     #     the launch constraint, the IAM role with that name in the account
@@ -994,14 +994,14 @@ module Aws::ServiceCatalog
     #
     #   : Specify the `NotificationArns` property as follows:
     #
-    #     `\{"NotificationArns" :
-    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
+    #     `{"NotificationArns" :
+    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]}`
     #
     #   RESOURCE\_UPDATE
     #
     #   : Specify the `TagUpdatesOnProvisionedProduct` property as follows:
     #
-    #     `\{"Version":"2.0","Properties":\{"TagUpdateOnProvisionedProduct":"String"\}\}`
+    #     `{"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}`
     #
     #     The `TagUpdatesOnProvisionedProduct` property accepts a string value
     #     of `ALLOWED` or `NOT_ALLOWED`.
@@ -1010,9 +1010,9 @@ module Aws::ServiceCatalog
     #
     #   : Specify the `Parameters` property as follows:
     #
-    #     `\{"Version": "String", "Properties": \{"AccountList": [ "String" ],
+    #     `{"Version": "String", "Properties": {"AccountList": [ "String" ],
     #     "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole":
-    #     "String"\}\}`
+    #     "String"}}`
     #
     #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
     #
@@ -1667,8 +1667,8 @@ module Aws::ServiceCatalog
     #
     #   : The list of parameters in JSON format.
     #
-    #     For example: `[\{"Name":"InstanceId","Type":"TARGET"\}]` or
-    #     `[\{"Name":"InstanceId","Type":"TEXT_VALUE"\}]`.
+    #     For example: `[{"Name":"InstanceId","Type":"TARGET"}]` or
+    #     `[{"Name":"InstanceId","Type":"TEXT_VALUE"}]`.
     #
     # @option params [String] :description
     #   The self-service action description.
@@ -5537,11 +5537,11 @@ module Aws::ServiceCatalog
     #
     #     Specify the `RoleArn` property as follows:
     #
-    #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #     `{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}`
     #
     #     Specify the `LocalRoleName` property as follows:
     #
-    #     `\{"LocalRoleName": "SCBasicLaunchRole"\}`
+    #     `{"LocalRoleName": "SCBasicLaunchRole"}`
     #
     #     If you specify the `LocalRoleName` property, when an account uses
     #     the launch constraint, the IAM role with that name in the account
@@ -5564,14 +5564,14 @@ module Aws::ServiceCatalog
     #
     #   : Specify the `NotificationArns` property as follows:
     #
-    #     `\{"NotificationArns" :
-    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]\}`
+    #     `{"NotificationArns" :
+    #     ["arn:aws:sns:us-east-1:123456789012:Topic"]}`
     #
     #   RESOURCE\_UPDATE
     #
     #   : Specify the `TagUpdatesOnProvisionedProduct` property as follows:
     #
-    #     `\{"Version":"2.0","Properties":\{"TagUpdateOnProvisionedProduct":"String"\}\}`
+    #     `{"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}`
     #
     #     The `TagUpdatesOnProvisionedProduct` property accepts a string value
     #     of `ALLOWED` or `NOT_ALLOWED`.
@@ -5580,9 +5580,9 @@ module Aws::ServiceCatalog
     #
     #   : Specify the `Parameters` property as follows:
     #
-    #     `\{"Version": "String", "Properties": \{"AccountList": [ "String" ],
+    #     `{"Version": "String", "Properties": {"AccountList": [ "String" ],
     #     "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole":
-    #     "String"\}\}`
+    #     "String"}}`
     #
     #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
     #
@@ -6350,7 +6350,7 @@ module Aws::ServiceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

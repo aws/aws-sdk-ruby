@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.201.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.200.0 (2024-10-31)
+------------------
+
+* Feature - Add schedule support for AWS Glue column statistics
+
 1.199.0 (2024-10-18)
 ------------------
 

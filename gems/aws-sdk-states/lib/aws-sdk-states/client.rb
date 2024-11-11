@@ -487,7 +487,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -602,7 +602,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -2617,7 +2617,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -2636,10 +2636,10 @@ module Aws::States
     #   The string that contains the JSON input data for the execution, for
     #   example:
     #
-    #   `"input": "\{"first_name" : "test"\}"`
+    #   `"input": "{"first_name" : "test"}"`
     #
     #   <note markdown="1"> If you don't include any JSON input data, you still must include the
-    #   two braces, for example: `"input": "\{\}"`
+    #   two braces, for example: `"input": "{}"`
     #
     #    </note>
     #
@@ -2703,10 +2703,10 @@ module Aws::States
     #   The string that contains the JSON input data for the execution, for
     #   example:
     #
-    #   `"input": "\{"first_name" : "test"\}"`
+    #   `"input": "{"first_name" : "test"}"`
     #
     #   <note markdown="1"> If you don't include any JSON input data, you still must include the
-    #   two braces, for example: `"input": "\{\}"`
+    #   two braces, for example: `"input": "{}"`
     #
     #    </note>
     #
@@ -3426,7 +3426,7 @@ module Aws::States
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -27,6 +27,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#vpc_id-instance_method
       def vpc_id: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#security_group_arn-instance_method
+      def security_group_arn: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#owner_id-instance_method
       def owner_id: () -> ::String
 

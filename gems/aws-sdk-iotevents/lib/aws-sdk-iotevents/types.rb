@@ -183,15 +183,15 @@ module Aws::IoTEvents
     #     For example, the value for the `hashKeyField` parameter can be
     #     `$input.GreenhouseInput.name`.
     #
-    #   * For a substitution template, you must use `$\{\}`, and the
-    #     template must be in single quotes. A substitution template can
-    #     also contain a combination of literals, operators, functions,
-    #     references, and substitution templates.
+    #   * For a substitution template, you must use `${}`, and the template
+    #     must be in single quotes. A substitution template can also contain
+    #     a combination of literals, operators, functions, references, and
+    #     substitution templates.
     #
     #     In the following example, the value for the `hashKeyValue`
     #     parameter uses a substitution template.
     #
-    #     `'$\{$input.GreenhouseInput.temperature * 6 / 5 + 32\} in
+    #     `'${$input.GreenhouseInput.temperature * 6 / 5 + 32} in
     #     Fahrenheit'`
     #
     #   * For a string concatenation, you must use `+`. A string
@@ -239,17 +239,17 @@ module Aws::IoTEvents
     #     For example, the value for the `tableName` parameter can be
     #     `$variable.ddbtableName`.
     #
-    #   * For a substitution template, you must use `$\{\}`, and the
-    #     template must be in single quotes. A substitution template can
-    #     also contain a combination of literals, operators, functions,
-    #     references, and substitution templates.
+    #   * For a substitution template, you must use `${}`, and the template
+    #     must be in single quotes. A substitution template can also contain
+    #     a combination of literals, operators, functions, references, and
+    #     substitution templates.
     #
     #     In the following example, the value for the `contentExpression`
     #     parameter in `Payload` uses a substitution template.
     #
-    #     `'\{"sensorID": "$\{$input.GreenhouseInput.sensor_id\}",
-    #     "temperature": "$\{$input.GreenhouseInput.temperature * 9 / 5 +
-    #     32\}"\}'`
+    #     `'{"sensorID": "${$input.GreenhouseInput.sensor_id}",
+    #     "temperature": "${$input.GreenhouseInput.temperature * 9 / 5 +
+    #     32}"}'`
     #
     #   * For a string concatenation, you must use `+`. A string
     #     concatenation can also contain a combination of literals,
@@ -290,16 +290,16 @@ module Aws::IoTEvents
     #     For example, the value for the `assetId` parameter can be
     #     `$input.TurbineInput.assetId1`.
     #
-    #   * For a substitution template, you must use `$\{\}`, and the
-    #     template must be in single quotes. A substitution template can
-    #     also contain a combination of literals, operators, functions,
-    #     references, and substitution templates.
+    #   * For a substitution template, you must use `${}`, and the template
+    #     must be in single quotes. A substitution template can also contain
+    #     a combination of literals, operators, functions, references, and
+    #     substitution templates.
     #
     #     In the following example, the value for the `propertyAlias`
     #     parameter uses a substitution template.
     #
-    #     `'company/windfarm/$\{$input.TemperatureInput.sensorData.windfarmID\}/turbine/
-    #     $\{$input.TemperatureInput.sensorData.turbineID\}/temperature'`
+    #     `'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/
+    #     ${$input.TemperatureInput.sensorData.turbineID}/temperature'`
     #
     #   You must specify either `propertyAlias` or both `assetId` and
     #   `propertyId` to identify the target asset property in AWS IoT
@@ -587,7 +587,7 @@ module Aws::IoTEvents
     #   For example, the value for the `offsetInNanos` parameter can be
     #   `$variable.time`.
     #
-    # * For a substitution template, you must use `$\{\}`, and the template
+    # * For a substitution template, you must use `${}`, and the template
     #   must be in single quotes. A substitution template can also contain a
     #   combination of literals, operators, functions, references, and
     #   substitution templates.
@@ -595,7 +595,7 @@ module Aws::IoTEvents
     #   In the following example, the value for the `timeInSeconds`
     #   parameter uses a substitution template.
     #
-    #   `'$\{$input.TemperatureInput.sensorData.timestamp / 1000\}'`
+    #   `'${$input.TemperatureInput.sensorData.timestamp / 1000}'`
     #
     # For more information, see [Expressions][2] in the *AWS IoT Events
     # Developer Guide*.
@@ -684,7 +684,7 @@ module Aws::IoTEvents
     #   example, the value for the `booleanValue` parameter can be
     #   `$variable.offline`.
     #
-    # * For a substitution template, you must use `$\{\}`, and the template
+    # * For a substitution template, you must use `${}`, and the template
     #   must be in single quotes. A substitution template can also contain a
     #   combination of literals, operators, functions, references, and
     #   substitution templates.
@@ -692,7 +692,7 @@ module Aws::IoTEvents
     #   In the following example, the value for the `doubleValue` parameter
     #   uses a substitution template.
     #
-    #   `'$\{$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32\}'`
+    #   `'${$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32}'`
     #
     # For more information, see [Expressions][2] in the *AWS IoT Events
     # Developer Guide*.
@@ -1457,7 +1457,7 @@ module Aws::IoTEvents
     #   For example, the value for the `hashKeyField` parameter can be
     #   `$input.GreenhouseInput.name`.
     #
-    # * For a substitution template, you must use `$\{\}`, and the template
+    # * For a substitution template, you must use `${}`, and the template
     #   must be in single quotes. A substitution template can also contain a
     #   combination of literals, operators, functions, references, and
     #   substitution templates.
@@ -1465,8 +1465,7 @@ module Aws::IoTEvents
     #   In the following example, the value for the `hashKeyValue` parameter
     #   uses a substitution template.
     #
-    #   `'$\{$input.GreenhouseInput.temperature * 6 / 5 + 32\} in
-    #   Fahrenheit'`
+    #   `'${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'`
     #
     # * For a string concatenation, you must use `+`. A string concatenation
     #   can also contain a combination of literals, operators, functions,
@@ -1614,7 +1613,7 @@ module Aws::IoTEvents
     #   For example, the value for the `tableName` parameter can be
     #   `$variable.ddbtableName`.
     #
-    # * For a substitution template, you must use `$\{\}`, and the template
+    # * For a substitution template, you must use `${}`, and the template
     #   must be in single quotes. A substitution template can also contain a
     #   combination of literals, operators, functions, references, and
     #   substitution templates.
@@ -1622,9 +1621,9 @@ module Aws::IoTEvents
     #   In the following example, the value for the `contentExpression`
     #   parameter in `Payload` uses a substitution template.
     #
-    #   `'\{"sensorID": "$\{$input.GreenhouseInput.sensor_id\}",
-    #   "temperature": "$\{$input.GreenhouseInput.temperature * 9 / 5 +
-    #   32\}"\}'`
+    #   `'{"sensorID": "${$input.GreenhouseInput.sensor_id}",
+    #   "temperature": "${$input.GreenhouseInput.temperature * 9 / 5 +
+    #   32}"}'`
     #
     # * For a string concatenation, you must use `+`. A string concatenation
     #   can also contain a combination of literals, operators, functions,
@@ -2045,7 +2044,7 @@ module Aws::IoTEvents
     #   For example, the value for the `assetId` parameter can be
     #   `$input.TurbineInput.assetId1`.
     #
-    # * For a substitution template, you must use `$\{\}`, and the template
+    # * For a substitution template, you must use `${}`, and the template
     #   must be in single quotes. A substitution template can also contain a
     #   combination of literals, operators, functions, references, and
     #   substitution templates.
@@ -2053,8 +2052,8 @@ module Aws::IoTEvents
     #   In the following example, the value for the `propertyAlias`
     #   parameter uses a substitution template.
     #
-    #   `'company/windfarm/$\{$input.TemperatureInput.sensorData.windfarmID\}/turbine/
-    #   $\{$input.TemperatureInput.sensorData.turbineID\}/temperature'`
+    #   `'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/
+    #   ${$input.TemperatureInput.sensorData.turbineID}/temperature'`
     #
     # You must specify either `propertyAlias` or both `assetId` and
     # `propertyId` to identify the target asset property in AWS IoT
@@ -2541,7 +2540,7 @@ module Aws::IoTEvents
     #   includes quoted strings (`'<string>'`), variables
     #   (`$variable.<variable-name>`), input values
     #   (`$input.<input-name>.<path-to-datum>`), string concatenations, and
-    #   quoted strings that contain `$\{\}` as the content. The recommended
+    #   quoted strings that contain `${}` as the content. The recommended
     #   maximum size of a content expression is 1 KB.
     #   @return [String]
     #

@@ -225,6 +225,12 @@
       "output_token": "NextToken",
       "result_key": "InstanceEventWindows"
     },
+    "DescribeInstanceImageMetadata": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "InstanceImageMetadata"
+    },
     "DescribeInstanceStatus": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -484,6 +490,12 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "SecurityGroupRules"
+    },
+    "DescribeSecurityGroupVpcAssociations": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "SecurityGroupVpcAssociations"
     },
     "DescribeSecurityGroups": {
       "input_token": "NextToken",

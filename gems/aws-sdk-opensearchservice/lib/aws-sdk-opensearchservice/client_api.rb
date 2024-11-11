@@ -20,6 +20,7 @@ module Aws::OpenSearchService
     ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccount = Shapes::StringShape.new(name: 'AWSAccount')
     AWSDomainInformation = Shapes::StructureShape.new(name: 'AWSDomainInformation')
+    AWSServicePrincipal = Shapes::StringShape.new(name: 'AWSServicePrincipal')
     AcceptInboundConnectionRequest = Shapes::StructureShape.new(name: 'AcceptInboundConnectionRequest')
     AcceptInboundConnectionResponse = Shapes::StructureShape.new(name: 'AcceptInboundConnectionResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
@@ -37,6 +38,15 @@ module Aws::OpenSearchService
     AdvancedSecurityOptions = Shapes::StructureShape.new(name: 'AdvancedSecurityOptions')
     AdvancedSecurityOptionsInput = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsInput')
     AdvancedSecurityOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsStatus')
+    AppConfig = Shapes::StructureShape.new(name: 'AppConfig')
+    AppConfigType = Shapes::StringShape.new(name: 'AppConfigType')
+    AppConfigValue = Shapes::StringShape.new(name: 'AppConfigValue')
+    AppConfigs = Shapes::ListShape.new(name: 'AppConfigs')
+    ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
+    ApplicationStatus = Shapes::StringShape.new(name: 'ApplicationStatus')
+    ApplicationStatuses = Shapes::ListShape.new(name: 'ApplicationStatuses')
+    ApplicationSummaries = Shapes::ListShape.new(name: 'ApplicationSummaries')
+    ApplicationSummary = Shapes::StructureShape.new(name: 'ApplicationSummary')
     AssociatePackageRequest = Shapes::StructureShape.new(name: 'AssociatePackageRequest')
     AssociatePackageResponse = Shapes::StructureShape.new(name: 'AssociatePackageResponse')
     AuthorizeVpcEndpointAccessRequest = Shapes::StructureShape.new(name: 'AuthorizeVpcEndpointAccessRequest')
@@ -93,6 +103,8 @@ module Aws::OpenSearchService
     ConnectionMode = Shapes::StringShape.new(name: 'ConnectionMode')
     ConnectionProperties = Shapes::StructureShape.new(name: 'ConnectionProperties')
     ConnectionStatusMessage = Shapes::StringShape.new(name: 'ConnectionStatusMessage')
+    CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
+    CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
     CreateOutboundConnectionRequest = Shapes::StructureShape.new(name: 'CreateOutboundConnectionRequest')
@@ -103,12 +115,16 @@ module Aws::OpenSearchService
     CreateVpcEndpointResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     CrossClusterSearchConnectionProperties = Shapes::StructureShape.new(name: 'CrossClusterSearchConnectionProperties')
+    DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceDescription = Shapes::StringShape.new(name: 'DataSourceDescription')
     DataSourceDetails = Shapes::StructureShape.new(name: 'DataSourceDetails')
     DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceName = Shapes::StringShape.new(name: 'DataSourceName')
     DataSourceStatus = Shapes::StringShape.new(name: 'DataSourceStatus')
     DataSourceType = Shapes::UnionShape.new(name: 'DataSourceType')
+    DataSources = Shapes::ListShape.new(name: 'DataSources')
+    DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
+    DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteDataSourceResponse = Shapes::StructureShape.new(name: 'DeleteDataSourceResponse')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
@@ -212,6 +228,8 @@ module Aws::OpenSearchService
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     GUID = Shapes::StringShape.new(name: 'GUID')
     GUIDList = Shapes::ListShape.new(name: 'GUIDList')
+    GetApplicationRequest = Shapes::StructureShape.new(name: 'GetApplicationRequest')
+    GetApplicationResponse = Shapes::StructureShape.new(name: 'GetApplicationResponse')
     GetCompatibleVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleVersionsRequest')
     GetCompatibleVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleVersionsResponse')
     GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
@@ -227,7 +245,16 @@ module Aws::OpenSearchService
     HostedZoneId = Shapes::StringShape.new(name: 'HostedZoneId')
     IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
     IPAddressTypeStatus = Shapes::StructureShape.new(name: 'IPAddressTypeStatus')
+    IamIdentityCenterOptions = Shapes::StructureShape.new(name: 'IamIdentityCenterOptions')
+    IamIdentityCenterOptionsInput = Shapes::StructureShape.new(name: 'IamIdentityCenterOptionsInput')
+    Id = Shapes::StringShape.new(name: 'Id')
+    IdentityCenterApplicationARN = Shapes::StringShape.new(name: 'IdentityCenterApplicationARN')
+    IdentityCenterInstanceARN = Shapes::StringShape.new(name: 'IdentityCenterInstanceARN')
+    IdentityCenterOptions = Shapes::StructureShape.new(name: 'IdentityCenterOptions')
+    IdentityCenterOptionsInput = Shapes::StructureShape.new(name: 'IdentityCenterOptionsInput')
+    IdentityCenterOptionsStatus = Shapes::StructureShape.new(name: 'IdentityCenterOptionsStatus')
     IdentityPoolId = Shapes::StringShape.new(name: 'IdentityPoolId')
+    IdentityStoreId = Shapes::StringShape.new(name: 'IdentityStoreId')
     InboundConnection = Shapes::StructureShape.new(name: 'InboundConnection')
     InboundConnectionStatus = Shapes::StructureShape.new(name: 'InboundConnectionStatus')
     InboundConnectionStatusCode = Shapes::StringShape.new(name: 'InboundConnectionStatusCode')
@@ -258,6 +285,8 @@ module Aws::OpenSearchService
     LimitValueList = Shapes::ListShape.new(name: 'LimitValueList')
     Limits = Shapes::StructureShape.new(name: 'Limits')
     LimitsByRole = Shapes::MapShape.new(name: 'LimitsByRole')
+    ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
+    ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
     ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
     ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
     ListDomainMaintenancesRequest = Shapes::StructureShape.new(name: 'ListDomainMaintenancesRequest')
@@ -303,7 +332,11 @@ module Aws::OpenSearchService
     NaturalLanguageQueryGenerationOptionsInput = Shapes::StructureShape.new(name: 'NaturalLanguageQueryGenerationOptionsInput')
     NaturalLanguageQueryGenerationOptionsOutput = Shapes::StructureShape.new(name: 'NaturalLanguageQueryGenerationOptionsOutput')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NodeConfig = Shapes::StructureShape.new(name: 'NodeConfig')
     NodeId = Shapes::StringShape.new(name: 'NodeId')
+    NodeOption = Shapes::StructureShape.new(name: 'NodeOption')
+    NodeOptionsList = Shapes::ListShape.new(name: 'NodeOptionsList')
+    NodeOptionsNodeType = Shapes::StringShape.new(name: 'NodeOptionsNodeType')
     NodeStatus = Shapes::StringShape.new(name: 'NodeStatus')
     NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
     NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
@@ -367,6 +400,7 @@ module Aws::OpenSearchService
     RevokeVpcEndpointAccessResponse = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RolesKey = Shapes::StringShape.new(name: 'RolesKey')
+    RolesKeyIdCOption = Shapes::StringShape.new(name: 'RolesKeyIdCOption')
     RollbackOnDisable = Shapes::StringShape.new(name: 'RollbackOnDisable')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3GlueDataCatalog = Shapes::StructureShape.new(name: 'S3GlueDataCatalog')
@@ -410,15 +444,19 @@ module Aws::OpenSearchService
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubjectKey = Shapes::StringShape.new(name: 'SubjectKey')
+    SubjectKeyIdCOption = Shapes::StringShape.new(name: 'SubjectKeyIdCOption')
     TLSSecurityPolicy = Shapes::StringShape.new(name: 'TLSSecurityPolicy')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TotalNumberOfStages = Shapes::IntegerShape.new(name: 'TotalNumberOfStages')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
     UncompressedPluginSizeInBytes = Shapes::IntegerShape.new(name: 'UncompressedPluginSizeInBytes')
+    UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
+    UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDataSourceResponse')
     UpdateDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateDomainConfigRequest')
@@ -540,6 +578,25 @@ module Aws::OpenSearchService
     AdvancedSecurityOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     AdvancedSecurityOptionsStatus.struct_class = Types::AdvancedSecurityOptionsStatus
 
+    AppConfig.add_member(:key, Shapes::ShapeRef.new(shape: AppConfigType, location_name: "key"))
+    AppConfig.add_member(:value, Shapes::ShapeRef.new(shape: AppConfigValue, location_name: "value"))
+    AppConfig.struct_class = Types::AppConfig
+
+    AppConfigs.member = Shapes::ShapeRef.new(shape: AppConfig)
+
+    ApplicationStatuses.member = Shapes::ShapeRef.new(shape: ApplicationStatus)
+
+    ApplicationSummaries.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
+
+    ApplicationSummary.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "id"))
+    ApplicationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    ApplicationSummary.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
+    ApplicationSummary.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    ApplicationSummary.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "status"))
+    ApplicationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    ApplicationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    ApplicationSummary.struct_class = Types::ApplicationSummary
+
     AssociatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
     AssociatePackageRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     AssociatePackageRequest.struct_class = Types::AssociatePackageRequest
@@ -548,7 +605,8 @@ module Aws::OpenSearchService
     AssociatePackageResponse.struct_class = Types::AssociatePackageResponse
 
     AuthorizeVpcEndpointAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
-    AuthorizeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, required: true, location_name: "Account"))
+    AuthorizeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, location_name: "Account"))
+    AuthorizeVpcEndpointAccessRequest.add_member(:service, Shapes::ShapeRef.new(shape: AWSServicePrincipal, location_name: "Service"))
     AuthorizeVpcEndpointAccessRequest.struct_class = Types::AuthorizeVpcEndpointAccessRequest
 
     AuthorizeVpcEndpointAccessResponse.add_member(:authorized_principal, Shapes::ShapeRef.new(shape: AuthorizedPrincipal, required: true, location_name: "AuthorizedPrincipal"))
@@ -681,6 +739,7 @@ module Aws::OpenSearchService
     ClusterConfig.add_member(:warm_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "WarmCount"))
     ClusterConfig.add_member(:cold_storage_options, Shapes::ShapeRef.new(shape: ColdStorageOptions, location_name: "ColdStorageOptions"))
     ClusterConfig.add_member(:multi_az_with_standby_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAZWithStandbyEnabled"))
+    ClusterConfig.add_member(:node_options, Shapes::ShapeRef.new(shape: NodeOptionsList, location_name: "NodeOptions"))
     ClusterConfig.struct_class = Types::ClusterConfig
 
     ClusterConfigStatus.add_member(:options, Shapes::ShapeRef.new(shape: ClusterConfig, required: true, location_name: "Options"))
@@ -712,6 +771,24 @@ module Aws::OpenSearchService
     ConnectionProperties.add_member(:cross_cluster_search, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionProperties, location_name: "CrossClusterSearch"))
     ConnectionProperties.struct_class = Types::ConnectionProperties
 
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "name"))
+    CreateApplicationRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
+    CreateApplicationRequest.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: IamIdentityCenterOptionsInput, location_name: "iamIdentityCenterOptions"))
+    CreateApplicationRequest.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
+    CreateApplicationRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "tagList"))
+    CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
+
+    CreateApplicationResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "id"))
+    CreateApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
+    CreateApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    CreateApplicationResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
+    CreateApplicationResponse.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: IamIdentityCenterOptions, location_name: "iamIdentityCenterOptions"))
+    CreateApplicationResponse.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
+    CreateApplicationResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "tagList"))
+    CreateApplicationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
+
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CreateDomainRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: VersionString, location_name: "EngineVersion"))
     CreateDomainRequest.add_member(:cluster_config, Shapes::ShapeRef.new(shape: ClusterConfig, location_name: "ClusterConfig"))
@@ -727,6 +804,7 @@ module Aws::OpenSearchService
     CreateDomainRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     CreateDomainRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     CreateDomainRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
+    CreateDomainRequest.add_member(:identity_center_options, Shapes::ShapeRef.new(shape: IdentityCenterOptionsInput, location_name: "IdentityCenterOptions"))
     CreateDomainRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     CreateDomainRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsInput, location_name: "AutoTuneOptions"))
     CreateDomainRequest.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "OffPeakWindowOptions"))
@@ -773,6 +851,10 @@ module Aws::OpenSearchService
     CrossClusterSearchConnectionProperties.add_member(:skip_unavailable, Shapes::ShapeRef.new(shape: SkipUnavailableStatus, location_name: "SkipUnavailable"))
     CrossClusterSearchConnectionProperties.struct_class = Types::CrossClusterSearchConnectionProperties
 
+    DataSource.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "dataSourceArn"))
+    DataSource.add_member(:data_source_description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "dataSourceDescription"))
+    DataSource.struct_class = Types::DataSource
+
     DataSourceDetails.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "DataSourceType"))
     DataSourceDetails.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
     DataSourceDetails.add_member(:description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "Description"))
@@ -786,6 +868,13 @@ module Aws::OpenSearchService
     DataSourceType.add_member_subclass(:s3_glue_data_catalog, Types::DataSourceType::S3GlueDataCatalog)
     DataSourceType.add_member_subclass(:unknown, Types::DataSourceType::Unknown)
     DataSourceType.struct_class = Types::DataSourceType
+
+    DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
+
+    DeleteApplicationRequest.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "id"))
+    DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
+
+    DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
 
     DeleteDataSourceRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DeleteDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location: "uri", location_name: "DataSourceName"))
@@ -985,6 +1074,7 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptionsStatus, location_name: "LogPublishingOptions"))
     DomainConfig.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
     DomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
+    DomainConfig.add_member(:identity_center_options, Shapes::ShapeRef.new(shape: IdentityCenterOptionsStatus, location_name: "IdentityCenterOptions"))
     DomainConfig.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsStatus, location_name: "AutoTuneOptions"))
     DomainConfig.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     DomainConfig.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptionsStatus, location_name: "OffPeakWindowOptions"))
@@ -1078,6 +1168,7 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     DomainStatus.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     DomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
+    DomainStatus.add_member(:identity_center_options, Shapes::ShapeRef.new(shape: IdentityCenterOptions, location_name: "IdentityCenterOptions"))
     DomainStatus.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsOutput, location_name: "AutoTuneOptions"))
     DomainStatus.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     DomainStatus.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "OffPeakWindowOptions"))
@@ -1143,6 +1234,21 @@ module Aws::OpenSearchService
 
     GUIDList.member = Shapes::ShapeRef.new(shape: GUID)
 
+    GetApplicationRequest.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "id"))
+    GetApplicationRequest.struct_class = Types::GetApplicationRequest
+
+    GetApplicationResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "id"))
+    GetApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    GetApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
+    GetApplicationResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    GetApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "status"))
+    GetApplicationResponse.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: IamIdentityCenterOptions, location_name: "iamIdentityCenterOptions"))
+    GetApplicationResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
+    GetApplicationResponse.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
+    GetApplicationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetApplicationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    GetApplicationResponse.struct_class = Types::GetApplicationResponse
+
     GetCompatibleVersionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
     GetCompatibleVersionsRequest.struct_class = Types::GetCompatibleVersionsRequest
 
@@ -1201,6 +1307,35 @@ module Aws::OpenSearchService
     IPAddressTypeStatus.add_member(:options, Shapes::ShapeRef.new(shape: IPAddressType, required: true, location_name: "Options"))
     IPAddressTypeStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     IPAddressTypeStatus.struct_class = Types::IPAddressTypeStatus
+
+    IamIdentityCenterOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    IamIdentityCenterOptions.add_member(:iam_identity_center_instance_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "iamIdentityCenterInstanceArn"))
+    IamIdentityCenterOptions.add_member(:iam_role_for_identity_center_application_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRoleForIdentityCenterApplicationArn"))
+    IamIdentityCenterOptions.add_member(:iam_identity_center_application_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "iamIdentityCenterApplicationArn"))
+    IamIdentityCenterOptions.struct_class = Types::IamIdentityCenterOptions
+
+    IamIdentityCenterOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    IamIdentityCenterOptionsInput.add_member(:iam_identity_center_instance_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "iamIdentityCenterInstanceArn"))
+    IamIdentityCenterOptionsInput.add_member(:iam_role_for_identity_center_application_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRoleForIdentityCenterApplicationArn"))
+    IamIdentityCenterOptionsInput.struct_class = Types::IamIdentityCenterOptionsInput
+
+    IdentityCenterOptions.add_member(:enabled_api_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnabledAPIAccess"))
+    IdentityCenterOptions.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceARN, location_name: "IdentityCenterInstanceARN"))
+    IdentityCenterOptions.add_member(:subject_key, Shapes::ShapeRef.new(shape: SubjectKeyIdCOption, location_name: "SubjectKey"))
+    IdentityCenterOptions.add_member(:roles_key, Shapes::ShapeRef.new(shape: RolesKeyIdCOption, location_name: "RolesKey"))
+    IdentityCenterOptions.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationARN, location_name: "IdentityCenterApplicationARN"))
+    IdentityCenterOptions.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, location_name: "IdentityStoreId"))
+    IdentityCenterOptions.struct_class = Types::IdentityCenterOptions
+
+    IdentityCenterOptionsInput.add_member(:enabled_api_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnabledAPIAccess"))
+    IdentityCenterOptionsInput.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceARN, location_name: "IdentityCenterInstanceARN"))
+    IdentityCenterOptionsInput.add_member(:subject_key, Shapes::ShapeRef.new(shape: SubjectKeyIdCOption, location_name: "SubjectKey"))
+    IdentityCenterOptionsInput.add_member(:roles_key, Shapes::ShapeRef.new(shape: RolesKeyIdCOption, location_name: "RolesKey"))
+    IdentityCenterOptionsInput.struct_class = Types::IdentityCenterOptionsInput
+
+    IdentityCenterOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: IdentityCenterOptions, required: true, location_name: "Options"))
+    IdentityCenterOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    IdentityCenterOptionsStatus.struct_class = Types::IdentityCenterOptionsStatus
 
     InboundConnection.add_member(:local_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, location_name: "LocalDomainInfo"))
     InboundConnection.add_member(:remote_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, location_name: "RemoteDomainInfo"))
@@ -1267,6 +1402,15 @@ module Aws::OpenSearchService
 
     LimitsByRole.key = Shapes::ShapeRef.new(shape: InstanceRole)
     LimitsByRole.value = Shapes::ShapeRef.new(shape: Limits)
+
+    ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListApplicationsRequest.add_member(:statuses, Shapes::ShapeRef.new(shape: ApplicationStatuses, location: "querystring", location_name: "statuses"))
+    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
+
+    ListApplicationsResponse.add_member(:application_summaries, Shapes::ShapeRef.new(shape: ApplicationSummaries, location_name: "ApplicationSummaries"))
+    ListApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
 
     ListDataSourcesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     ListDataSourcesRequest.struct_class = Types::ListDataSourcesRequest
@@ -1397,6 +1541,17 @@ module Aws::OpenSearchService
     NaturalLanguageQueryGenerationOptionsOutput.add_member(:desired_state, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationDesiredState, location_name: "DesiredState"))
     NaturalLanguageQueryGenerationOptionsOutput.add_member(:current_state, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationCurrentState, location_name: "CurrentState"))
     NaturalLanguageQueryGenerationOptionsOutput.struct_class = Types::NaturalLanguageQueryGenerationOptionsOutput
+
+    NodeConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    NodeConfig.add_member(:type, Shapes::ShapeRef.new(shape: OpenSearchPartitionInstanceType, location_name: "Type"))
+    NodeConfig.add_member(:count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "Count"))
+    NodeConfig.struct_class = Types::NodeConfig
+
+    NodeOption.add_member(:node_type, Shapes::ShapeRef.new(shape: NodeOptionsNodeType, location_name: "NodeType"))
+    NodeOption.add_member(:node_config, Shapes::ShapeRef.new(shape: NodeConfig, location_name: "NodeConfig"))
+    NodeOption.struct_class = Types::NodeOption
+
+    NodeOptionsList.member = Shapes::ShapeRef.new(shape: NodeOption)
 
     NodeToNodeEncryptionOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     NodeToNodeEncryptionOptions.struct_class = Types::NodeToNodeEncryptionOptions
@@ -1532,7 +1687,8 @@ module Aws::OpenSearchService
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RevokeVpcEndpointAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
-    RevokeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, required: true, location_name: "Account"))
+    RevokeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, location_name: "Account"))
+    RevokeVpcEndpointAccessRequest.add_member(:service, Shapes::ShapeRef.new(shape: AWSServicePrincipal, location_name: "Service"))
     RevokeVpcEndpointAccessRequest.struct_class = Types::RevokeVpcEndpointAccessRequest
 
     RevokeVpcEndpointAccessResponse.struct_class = Types::RevokeVpcEndpointAccessResponse
@@ -1645,6 +1801,21 @@ module Aws::OpenSearchService
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    UpdateApplicationRequest.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "id"))
+    UpdateApplicationRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
+    UpdateApplicationRequest.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
+    UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
+
+    UpdateApplicationResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "id"))
+    UpdateApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
+    UpdateApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    UpdateApplicationResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
+    UpdateApplicationResponse.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: IamIdentityCenterOptions, location_name: "iamIdentityCenterOptions"))
+    UpdateApplicationResponse.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
+    UpdateApplicationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    UpdateApplicationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
+
     UpdateDataSourceRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location: "uri", location_name: "DataSourceName"))
     UpdateDataSourceRequest.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "DataSourceType"))
@@ -1669,6 +1840,7 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     UpdateDomainConfigRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     UpdateDomainConfigRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
+    UpdateDomainConfigRequest.add_member(:identity_center_options, Shapes::ShapeRef.new(shape: IdentityCenterOptionsInput, location_name: "IdentityCenterOptions"))
     UpdateDomainConfigRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptions, location_name: "AutoTuneOptions"))
     UpdateDomainConfigRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
     UpdateDomainConfigRequest.add_member(:dry_run_mode, Shapes::ShapeRef.new(shape: DryRunMode, location_name: "DryRunMode"))
@@ -1911,6 +2083,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/application"
+        o.input = Shapes::ShapeRef.new(shape: CreateApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:create_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDomain"
         o.http_method = "POST"
@@ -1965,6 +2151,21 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
+      api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApplication"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2021-01-01/opensearch/application/{id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:delete_data_source, Seahorse::Model::Operation.new.tap do |o|
@@ -2271,6 +2472,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:get_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApplication"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/application/{id}"
+        o.input = Shapes::ShapeRef.new(shape: GetApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:get_compatible_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCompatibleVersions"
         o.http_method = "GET"
@@ -2360,6 +2575,26 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplications"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/list-applications"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_data_sources, Seahorse::Model::Operation.new.tap do |o|
@@ -2616,6 +2851,21 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApplication"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2021-01-01/opensearch/application/{id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:update_data_source, Seahorse::Model::Operation.new.tap do |o|

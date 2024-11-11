@@ -3489,17 +3489,16 @@ module Aws::FMS
     #   You can specify account IDs, OUs, or a combination:
     #
     #   * Specify account IDs by setting the key to `ACCOUNT`. For example,
-    #     the following is a valid map: `\{“ACCOUNT” : [“accountID1”,
-    #     “accountID2”]\}`.
+    #     the following is a valid map: `{“ACCOUNT” : [“accountID1”,
+    #     “accountID2”]}`.
     #
     #   * Specify OUs by setting the key to `ORG_UNIT`. For example, the
-    #     following is a valid map: `\{“ORG_UNIT” : [“ouid111”,
-    #     “ouid112”]\}`.
+    #     following is a valid map: `{“ORG_UNIT” : [“ouid111”, “ouid112”]}`.
     #
     #   * Specify accounts and OUs together in a single map, separated with
-    #     a comma. For example, the following is a valid map: `\{“ACCOUNT” :
+    #     a comma. For example, the following is a valid map: `{“ACCOUNT” :
     #     [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
-    #     “ouid112”]\}`.
+    #     “ouid112”]}`.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] exclude_map
@@ -3519,17 +3518,16 @@ module Aws::FMS
     #   You can specify account IDs, OUs, or a combination:
     #
     #   * Specify account IDs by setting the key to `ACCOUNT`. For example,
-    #     the following is a valid map: `\{“ACCOUNT” : [“accountID1”,
-    #     “accountID2”]\}`.
+    #     the following is a valid map: `{“ACCOUNT” : [“accountID1”,
+    #     “accountID2”]}`.
     #
     #   * Specify OUs by setting the key to `ORG_UNIT`. For example, the
-    #     following is a valid map: `\{“ORG_UNIT” : [“ouid111”,
-    #     “ouid112”]\}`.
+    #     following is a valid map: `{“ORG_UNIT” : [“ouid111”, “ouid112”]}`.
     #
     #   * Specify accounts and OUs together in a single map, separated with
-    #     a comma. For example, the following is a valid map: `\{“ACCOUNT” :
+    #     a comma. For example, the following is a valid map: `{“ACCOUNT” :
     #     [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
-    #     “ouid112”]\}`.
+    #     “ouid112”]}`.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] resource_set_ids
@@ -4824,7 +4822,7 @@ module Aws::FMS
     #
     #   * Example: `DNS_FIREWALL`
     #
-    #     `"\{"type":"DNS_FIREWALL","preProcessRuleGroups":[\{"ruleGroupId":"rslvr-frg-1","priority":10\}],"postProcessRuleGroups":[\{"ruleGroupId":"rslvr-frg-2","priority":9911\}]\}"`
+    #     `"{"type":"DNS_FIREWALL","preProcessRuleGroups":[{"ruleGroupId":"rslvr-frg-1","priority":10}],"postProcessRuleGroups":[{"ruleGroupId":"rslvr-frg-2","priority":9911}]}"`
     #
     #     <note markdown="1"> Valid values for `preProcessRuleGroups` are between 1 and 99.
     #     Valid values for `postProcessRuleGroups` are between 9901 and
@@ -4834,9 +4832,9 @@ module Aws::FMS
     #
     #   * Example: `IMPORT_NETWORK_FIREWALL`
     #
-    #     `"\{"type":"IMPORT_NETWORK_FIREWALL","awsNetworkFirewallConfig":\{"networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-2:000000000000:stateless-rulegroup\/rg1","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:drop"],"networkFirewallStatelessFragmentDefaultActions":["aws:pass"],"networkFirewallStatelessCustomActions":[],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-2:aws-managed:stateful-rulegroup\/ThreatSignaturesEmergingEventsStrictOrder","priority":8\}],"networkFirewallStatefulEngineOptions":\{"ruleOrder":"STRICT_ORDER"\},"networkFirewallStatefulDefaultActions":["aws:drop_strict"]\}\}"`
+    #     `"{"type":"IMPORT_NETWORK_FIREWALL","awsNetworkFirewallConfig":{"networkFirewallStatelessRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-west-2:000000000000:stateless-rulegroup\/rg1","priority":1}],"networkFirewallStatelessDefaultActions":["aws:drop"],"networkFirewallStatelessFragmentDefaultActions":["aws:pass"],"networkFirewallStatelessCustomActions":[],"networkFirewallStatefulRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-west-2:aws-managed:stateful-rulegroup\/ThreatSignaturesEmergingEventsStrictOrder","priority":8}],"networkFirewallStatefulEngineOptions":{"ruleOrder":"STRICT_ORDER"},"networkFirewallStatefulDefaultActions":["aws:drop_strict"]}}"`
     #
-    #     `"\{"type":"DNS_FIREWALL","preProcessRuleGroups":[\{"ruleGroupId":"rslvr-frg-1","priority":10\}],"postProcessRuleGroups":[\{"ruleGroupId":"rslvr-frg-2","priority":9911\}]\}"`
+    #     `"{"type":"DNS_FIREWALL","preProcessRuleGroups":[{"ruleGroupId":"rslvr-frg-1","priority":10}],"postProcessRuleGroups":[{"ruleGroupId":"rslvr-frg-2","priority":9911}]}"`
     #
     #     <note markdown="1"> Valid values for `preProcessRuleGroups` are between 1 and 99.
     #     Valid values for `postProcessRuleGroups` are between 9901 and
@@ -4846,7 +4844,7 @@ module Aws::FMS
     #
     #   * Example: `NETWORK_FIREWALL` - Centralized deployment model
     #
-    #     `"\{"type":"NETWORK_FIREWALL","awsNetworkFirewallConfig":\{"networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessCustomActions":[\{"actionName":"customActionName","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"metricdimensionvalue"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"\}],"networkFirewallLoggingConfiguration":\{"logDestinationConfigs":[\{"logDestinationType":"S3","logType":"ALERT","logDestination":\{"bucketName":"s3-bucket-name"\}\},\{"logDestinationType":"S3","logType":"FLOW","logDestination":\{"bucketName":"s3-bucket-name"\}\}],"overrideExistingConfig":true\}\},"firewallDeploymentModel":\{"centralizedFirewallDeploymentModel":\{"centralizedFirewallOrchestrationConfig":\{"inspectionVpcIds":[\{"resourceId":"vpc-1234","accountId":"123456789011"\}],"firewallCreationConfig":\{"endpointLocation":\{"availabilityZoneConfigList":[\{"availabilityZoneId":null,"availabilityZoneName":"us-east-1a","allowedIPV4CidrList":["10.0.0.0/28"]\}]\}\},"allowedIPV4CidrList":[]\}\}\}\}"`
+    #     `"{"type":"NETWORK_FIREWALL","awsNetworkFirewallConfig":{"networkFirewallStatelessRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessCustomActions":[{"actionName":"customActionName","actionDefinition":{"publishMetricAction":{"dimensions":[{"value":"metricdimensionvalue"}]}}}],"networkFirewallStatefulRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"}],"networkFirewallLoggingConfiguration":{"logDestinationConfigs":[{"logDestinationType":"S3","logType":"ALERT","logDestination":{"bucketName":"s3-bucket-name"}},{"logDestinationType":"S3","logType":"FLOW","logDestination":{"bucketName":"s3-bucket-name"}}],"overrideExistingConfig":true}},"firewallDeploymentModel":{"centralizedFirewallDeploymentModel":{"centralizedFirewallOrchestrationConfig":{"inspectionVpcIds":[{"resourceId":"vpc-1234","accountId":"123456789011"}],"firewallCreationConfig":{"endpointLocation":{"availabilityZoneConfigList":[{"availabilityZoneId":null,"availabilityZoneName":"us-east-1a","allowedIPV4CidrList":["10.0.0.0/28"]}]}},"allowedIPV4CidrList":[]}}}}"`
     #
     #     To use the centralized deployment model, you must set
     #     [PolicyOption][1] to `CENTRALIZED`.
@@ -4855,7 +4853,7 @@ module Aws::FMS
     #     automatic Availability Zone configuration
     #
     #     `
-    #     "\{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessCustomActions":[\{"actionName":"customActionName","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"metricdimensionvalue"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"\}],"networkFirewallOrchestrationConfig":\{"singleFirewallEndpointPerVPC":false,"allowedIPV4CidrList":["10.0.0.0/28","192.168.0.0/28"],"routeManagementAction":"OFF"\},"networkFirewallLoggingConfiguration":\{"logDestinationConfigs":[\{"logDestinationType":"S3","logType":"ALERT","logDestination":\{"bucketName":"s3-bucket-name"\}\},\{"logDestinationType":"S3","logType":"FLOW","logDestination":\{"bucketName":"s3-bucket-name"\}\}],"overrideExistingConfig":true\}\}"
+    #     "{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessCustomActions":[{"actionName":"customActionName","actionDefinition":{"publishMetricAction":{"dimensions":[{"value":"metricdimensionvalue"}]}}}],"networkFirewallStatefulRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"}],"networkFirewallOrchestrationConfig":{"singleFirewallEndpointPerVPC":false,"allowedIPV4CidrList":["10.0.0.0/28","192.168.0.0/28"],"routeManagementAction":"OFF"},"networkFirewallLoggingConfiguration":{"logDestinationConfigs":[{"logDestinationType":"S3","logType":"ALERT","logDestination":{"bucketName":"s3-bucket-name"}},{"logDestinationType":"S3","logType":"FLOW","logDestination":{"bucketName":"s3-bucket-name"}}],"overrideExistingConfig":true}}"
     #     `
     #
     #     With automatic Availbility Zone configuration, Firewall Manager
@@ -4867,8 +4865,8 @@ module Aws::FMS
     #     automatic Availability Zone configuration and route management
     #
     #     `
-    #     "\{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessCustomActions":[\{"actionName":"customActionName","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"metricdimensionvalue"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"\}],"networkFirewallOrchestrationConfig":\{"singleFirewallEndpointPerVPC":false,"allowedIPV4CidrList":["10.0.0.0/28","192.168.0.0/28"],"routeManagementAction":"MONITOR","routeManagementTargetTypes":["InternetGateway"]\},"networkFirewallLoggingConfiguration":\{"logDestinationConfigs":[\{"logDestinationType":"S3","logType":"ALERT","logDestination":\{"bucketName":"s3-bucket-name"\}\},\{"logDestinationType":"S3","logType":
-    #     "FLOW","logDestination":\{"bucketName":"s3-bucket-name"\}\}],"overrideExistingConfig":true\}\}"
+    #     "{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessCustomActions":[{"actionName":"customActionName","actionDefinition":{"publishMetricAction":{"dimensions":[{"value":"metricdimensionvalue"}]}}}],"networkFirewallStatefulRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"}],"networkFirewallOrchestrationConfig":{"singleFirewallEndpointPerVPC":false,"allowedIPV4CidrList":["10.0.0.0/28","192.168.0.0/28"],"routeManagementAction":"MONITOR","routeManagementTargetTypes":["InternetGateway"]},"networkFirewallLoggingConfiguration":{"logDestinationConfigs":[{"logDestinationType":"S3","logType":"ALERT","logDestination":{"bucketName":"s3-bucket-name"}},{"logDestinationType":"S3","logType":
+    #     "FLOW","logDestination":{"bucketName":"s3-bucket-name"}}],"overrideExistingConfig":true}}"
     #     `
     #
     #     To use the distributed deployment model, you must set
@@ -4877,11 +4875,11 @@ module Aws::FMS
     #   * Example: `NETWORK_FIREWALL` - Distributed deployment model with
     #     custom Availability Zone configuration
     #
-    #     `"\{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","fragmentcustomactionname"],"networkFirewallStatelessCustomActions":[\{"actionName":"customActionName",
-    #     "actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"metricdimensionvalue"\}]\}\}\},\{"actionName":"fragmentcustomactionname","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"fragmentmetricdimensionvalue"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"\}],"networkFirewallOrchestrationConfig":\{"firewallCreationConfig":\{
-    #     "endpointLocation":\{"availabilityZoneConfigList":[\{"availabilityZoneName":"us-east-1a","allowedIPV4CidrList":["10.0.0.0/28"]\},\{"availabilityZoneName":"us-east-1b","allowedIPV4CidrList":[
-    #     "10.0.0.0/28"]\}]\}
-    #     \},"singleFirewallEndpointPerVPC":false,"allowedIPV4CidrList":null,"routeManagementAction":"OFF","networkFirewallLoggingConfiguration":\{"logDestinationConfigs":[\{"logDestinationType":"S3","logType":"ALERT","logDestination":\{"bucketName":"s3-bucket-name"\}\},\{"logDestinationType":"S3","logType":"FLOW","logDestination":\{"bucketName":"s3-bucket-name"\}\}],"overrideExistingConfig":boolean\}\}"
+    #     `"{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","fragmentcustomactionname"],"networkFirewallStatelessCustomActions":[{"actionName":"customActionName",
+    #     "actionDefinition":{"publishMetricAction":{"dimensions":[{"value":"metricdimensionvalue"}]}}},{"actionName":"fragmentcustomactionname","actionDefinition":{"publishMetricAction":{"dimensions":[{"value":"fragmentmetricdimensionvalue"}]}}}],"networkFirewallStatefulRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"}],"networkFirewallOrchestrationConfig":{"firewallCreationConfig":{
+    #     "endpointLocation":{"availabilityZoneConfigList":[{"availabilityZoneName":"us-east-1a","allowedIPV4CidrList":["10.0.0.0/28"]},{"availabilityZoneName":"us-east-1b","allowedIPV4CidrList":[
+    #     "10.0.0.0/28"]}]}
+    #     },"singleFirewallEndpointPerVPC":false,"allowedIPV4CidrList":null,"routeManagementAction":"OFF","networkFirewallLoggingConfiguration":{"logDestinationConfigs":[{"logDestinationType":"S3","logType":"ALERT","logDestination":{"bucketName":"s3-bucket-name"}},{"logDestinationType":"S3","logType":"FLOW","logDestination":{"bucketName":"s3-bucket-name"}}],"overrideExistingConfig":boolean}}"
     #     `
     #
     #     With custom Availability Zone configuration, you define which
@@ -4897,7 +4895,7 @@ module Aws::FMS
     #   * Example: `NETWORK_FIREWALL` - Distributed deployment model with
     #     custom Availability Zone configuration and route management
     #
-    #     `"\{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","fragmentcustomactionname"],"networkFirewallStatelessCustomActions":[\{"actionName":"customActionName","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"metricdimensionvalue"\}]\}\}\},\{"actionName":"fragmentcustomactionname","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"fragmentmetricdimensionvalue"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"\}],"networkFirewallOrchestrationConfig":\{"firewallCreationConfig":\{"endpointLocation":\{"availabilityZoneConfigList":[\{"availabilityZoneName":"us-east-1a","allowedIPV4CidrList":["10.0.0.0/28"]\},\{"availabilityZoneName":"us-east-1b","allowedIPV4CidrList":["10.0.0.0/28"]\}]\}\},"singleFirewallEndpointPerVPC":false,"allowedIPV4CidrList":null,"routeManagementAction":"MONITOR","routeManagementTargetTypes":["InternetGateway"],"routeManagementConfig":\{"allowCrossAZTrafficIfNoEndpoint":true\}\},"networkFirewallLoggingConfiguration":\{"logDestinationConfigs":[\{"logDestinationType":"S3","logType":"ALERT","logDestination":\{"bucketName":"s3-bucket-name"\}\},\{"logDestinationType":"S3","logType":"FLOW","logDestination":\{"bucketName":"s3-bucket-name"\}\}],"overrideExistingConfig":boolean\}\}"
+    #     `"{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","fragmentcustomactionname"],"networkFirewallStatelessCustomActions":[{"actionName":"customActionName","actionDefinition":{"publishMetricAction":{"dimensions":[{"value":"metricdimensionvalue"}]}}},{"actionName":"fragmentcustomactionname","actionDefinition":{"publishMetricAction":{"dimensions":[{"value":"fragmentmetricdimensionvalue"}]}}}],"networkFirewallStatefulRuleGroupReferences":[{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"}],"networkFirewallOrchestrationConfig":{"firewallCreationConfig":{"endpointLocation":{"availabilityZoneConfigList":[{"availabilityZoneName":"us-east-1a","allowedIPV4CidrList":["10.0.0.0/28"]},{"availabilityZoneName":"us-east-1b","allowedIPV4CidrList":["10.0.0.0/28"]}]}},"singleFirewallEndpointPerVPC":false,"allowedIPV4CidrList":null,"routeManagementAction":"MONITOR","routeManagementTargetTypes":["InternetGateway"],"routeManagementConfig":{"allowCrossAZTrafficIfNoEndpoint":true}},"networkFirewallLoggingConfiguration":{"logDestinationConfigs":[{"logDestinationType":"S3","logType":"ALERT","logDestination":{"bucketName":"s3-bucket-name"}},{"logDestinationType":"S3","logType":"FLOW","logDestination":{"bucketName":"s3-bucket-name"}}],"overrideExistingConfig":boolean}}"
     #     `
     #
     #     To use the distributed deployment model, you must set
@@ -4905,12 +4903,12 @@ module Aws::FMS
     #
     #   * Example: `SECURITY_GROUPS_COMMON`
     #
-    #     `"\{"type":"SECURITY_GROUPS_COMMON","securityGroups":[\{"id":"sg-03b1f67d69ed00197"\}],"revertManualSecurityGroupChanges":true,"exclusiveResourceSecurityGroupManagement":true,"applyToAllEC2InstanceENIs":false,"includeSharedVPC":true,"enableSecurityGroupReferencesDistribution":true\}"`
+    #     `"{"type":"SECURITY_GROUPS_COMMON","securityGroups":[{"id":"sg-03b1f67d69ed00197"}],"revertManualSecurityGroupChanges":true,"exclusiveResourceSecurityGroupManagement":true,"applyToAllEC2InstanceENIs":false,"includeSharedVPC":true,"enableSecurityGroupReferencesDistribution":true}"`
     #
     #   * Example: `SECURITY_GROUPS_COMMON` - Security group tag
     #     distribution
     #
-    #     `""\{"type":"SECURITY_GROUPS_COMMON","securityGroups":[\{"id":"sg-000e55995d61a06bd"\}],"revertManualSecurityGroupChanges":true,"exclusiveResourceSecurityGroupManagement":false,"applyToAllEC2InstanceENIs":false,"includeSharedVPC":false,"enableTagDistribution":true\}""`
+    #     `""{"type":"SECURITY_GROUPS_COMMON","securityGroups":[{"id":"sg-000e55995d61a06bd"}],"revertManualSecurityGroupChanges":true,"exclusiveResourceSecurityGroupManagement":false,"applyToAllEC2InstanceENIs":false,"includeSharedVPC":false,"enableTagDistribution":true}""`
     #
     #     Firewall Manager automatically distributes tags from the primary
     #     group to the security groups created by this policy. To use
@@ -4928,13 +4926,13 @@ module Aws::FMS
     #   * Example: Shared VPCs. Apply the preceding policy to resources in
     #     shared VPCs as well as to those in VPCs that the account owns
     #
-    #     `"\{"type":"SECURITY_GROUPS_COMMON","revertManualSecurityGroupChanges":false,"exclusiveResourceSecurityGroupManagement":false,
-    #     "applyToAllEC2InstanceENIs":false,"includeSharedVPC":true,"securityGroups":[\{"id":"
-    #     sg-000e55995d61a06bd"\}]\}"`
+    #     `"{"type":"SECURITY_GROUPS_COMMON","revertManualSecurityGroupChanges":false,"exclusiveResourceSecurityGroupManagement":false,
+    #     "applyToAllEC2InstanceENIs":false,"includeSharedVPC":true,"securityGroups":[{"id":"
+    #     sg-000e55995d61a06bd"}]}"`
     #
     #   * Example: `SECURITY_GROUPS_CONTENT_AUDIT`
     #
-    #     `"\{"type":"SECURITY_GROUPS_CONTENT_AUDIT","preManagedOptions":[\{"denyProtocolAllValue":true\},\{"auditSgDirection":\{"type":"ALL"\}\}],"securityGroups":[\{"id":"sg-049b2393a25468971"\}],"securityGroupAction":\{"type":"ALLOW"\}\}"`
+    #     `"{"type":"SECURITY_GROUPS_CONTENT_AUDIT","preManagedOptions":[{"denyProtocolAllValue":true},{"auditSgDirection":{"type":"ALL"}}],"securityGroups":[{"id":"sg-049b2393a25468971"}],"securityGroupAction":{"type":"ALLOW"}}"`
     #
     #     The security group action for content audit can be `ALLOW` or
     #     `DENY`. For `ALLOW`, all in-scope security group rules must be
@@ -4945,11 +4943,11 @@ module Aws::FMS
     #
     #   * Example: `SECURITY_GROUPS_USAGE_AUDIT`
     #
-    #     `"\{"type":"SECURITY_GROUPS_USAGE_AUDIT","deleteUnusedSecurityGroups":true,"coalesceRedundantSecurityGroups":true,"optionalDelayForUnusedInMinutes":60\}"`
+    #     `"{"type":"SECURITY_GROUPS_USAGE_AUDIT","deleteUnusedSecurityGroups":true,"coalesceRedundantSecurityGroups":true,"optionalDelayForUnusedInMinutes":60}"`
     #
     #   * Example: `SHIELD_ADVANCED` with web ACL management
     #
-    #     `"\{"type":"SHIELD_ADVANCED","optimizeUnassociatedWebACL":true\}"`
+    #     `"{"type":"SHIELD_ADVANCED","optimizeUnassociatedWebACL":true}"`
     #
     #     If you set `optimizeUnassociatedWebACL` to `true`, Firewall
     #     Manager creates web ACLs in accounts within the policy scope if
@@ -4976,16 +4974,16 @@ module Aws::FMS
     #   * Specification for `SHIELD_ADVANCED` for Amazon CloudFront
     #     distributions
     #
-    #     `"\{"type":"SHIELD_ADVANCED","automaticResponseConfiguration":
-    #     \{"automaticResponseStatus":"ENABLED|IGNORED|DISABLED",
-    #     "automaticResponseAction":"BLOCK|COUNT"\},
+    #     `"{"type":"SHIELD_ADVANCED","automaticResponseConfiguration":
+    #     {"automaticResponseStatus":"ENABLED|IGNORED|DISABLED",
+    #     "automaticResponseAction":"BLOCK|COUNT"},
     #     "overrideCustomerWebaclClassic":true|false,
-    #     "optimizeUnassociatedWebACL":true|false\}"`
+    #     "optimizeUnassociatedWebACL":true|false}"`
     #
     #     For example:
-    #     `"\{"type":"SHIELD_ADVANCED","automaticResponseConfiguration":
-    #     \{"automaticResponseStatus":"ENABLED",
-    #     "automaticResponseAction":"COUNT"\}\}"`
+    #     `"{"type":"SHIELD_ADVANCED","automaticResponseConfiguration":
+    #     {"automaticResponseStatus":"ENABLED",
+    #     "automaticResponseAction":"COUNT"}}"`
     #
     #     The default value for `automaticResponseStatus` is `IGNORED`. The
     #     value for `automaticResponseAction` is only required when
@@ -5001,23 +4999,22 @@ module Aws::FMS
     #     Replace `THIRD_PARTY_FIREWALL_NAME` with the name of the
     #     third-party firewall.
     #
-    #     `"\{ "type":"THIRD_PARTY_FIREWALL",
+    #     `"{ "type":"THIRD_PARTY_FIREWALL",
     #     "thirdPartyFirewall":"THIRD_PARTY_FIREWALL_NAME",
-    #     "thirdPartyFirewallConfig":\{
-    #     "thirdPartyFirewallPolicyList":["global-1"] \},
-    #     "firewallDeploymentModel":\{
-    #     "distributedFirewallDeploymentModel":\{
-    #     "distributedFirewallOrchestrationConfig":\{
-    #     "firewallCreationConfig":\{ "endpointLocation":\{
-    #     "availabilityZoneConfigList":[ \{
-    #     "availabilityZoneName":"$\{AvailabilityZone\}" \} ] \} \},
-    #     "allowedIPV4CidrList":[ ] \} \} \} \}"`
+    #     "thirdPartyFirewallConfig":{
+    #     "thirdPartyFirewallPolicyList":["global-1"] },
+    #     "firewallDeploymentModel":{ "distributedFirewallDeploymentModel":{
+    #     "distributedFirewallOrchestrationConfig":{
+    #     "firewallCreationConfig":{ "endpointLocation":{
+    #     "availabilityZoneConfigList":[ {
+    #     "availabilityZoneName":"${AvailabilityZone}" } ] } },
+    #     "allowedIPV4CidrList":[ ] } } } }"`
     #
     #   * Example: `WAFV2` - Account takeover prevention, Bot Control
     #     managed rule groups, optimize unassociated web ACL, and rule
     #     action override
     #
-    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesATPRuleSet","managedRuleGroupConfigs":[\{"awsmanagedRulesATPRuleSet":\{"loginPath":"/loginpath","requestInspection":\{"payloadType":"FORM_ENCODED|JSON","usernameField":\{"identifier":"/form/username"\},"passwordField":\{"identifier":"/form/password"\}\}\}\}]\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true\},\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesBotControlRuleSet","managedRuleGroupConfigs":[\{"awsmanagedRulesBotControlRuleSet":\{"inspectionLevel":"TARGETED|COMMON"\}\}]\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true,"ruleActionOverrides":[\{"name":"Rule1","actionToUse":\{"allow|block|count|captcha|challenge":\{\}\}\},\{"name":"Rule2","actionToUse":\{"allow|block|count|captcha|challenge":\{\}\}\}]\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"customRequestHandling":null,"customResponse":null,"overrideCustomerWebACLAssociation":false,"loggingConfiguration":null,"sampledRequestsEnabledForDefaultActions":true,"optimizeUnassociatedWebACL":true\}"`
+    #     `"{"type":"WAFV2","preProcessRuleGroups":[{"ruleGroupArn":null,"overrideAction":{"type":"NONE"},"managedRuleGroupIdentifier":{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesATPRuleSet","managedRuleGroupConfigs":[{"awsmanagedRulesATPRuleSet":{"loginPath":"/loginpath","requestInspection":{"payloadType":"FORM_ENCODED|JSON","usernameField":{"identifier":"/form/username"},"passwordField":{"identifier":"/form/password"}}}}]},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true},{"ruleGroupArn":null,"overrideAction":{"type":"NONE"},"managedRuleGroupIdentifier":{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesBotControlRuleSet","managedRuleGroupConfigs":[{"awsmanagedRulesBotControlRuleSet":{"inspectionLevel":"TARGETED|COMMON"}}]},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true,"ruleActionOverrides":[{"name":"Rule1","actionToUse":{"allow|block|count|captcha|challenge":{}}},{"name":"Rule2","actionToUse":{"allow|block|count|captcha|challenge":{}}}]}],"postProcessRuleGroups":[],"defaultAction":{"type":"ALLOW"},"customRequestHandling":null,"customResponse":null,"overrideCustomerWebACLAssociation":false,"loggingConfiguration":null,"sampledRequestsEnabledForDefaultActions":true,"optimizeUnassociatedWebACL":true}"`
     #
     #     * Bot Control - For information about
     #       `AWSManagedRulesBotControlRuleSet` managed rule groups, see
@@ -5061,7 +5058,7 @@ module Aws::FMS
     #
     #   * Example: `WAFV2` - `CAPTCHA` and `Challenge` configs
     #
-    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet"\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"customRequestHandling":null,"customResponse":null,"overrideCustomerWebACLAssociation":false,"loggingConfiguration":null,"sampledRequestsEnabledForDefaultActions":true,"captchaConfig":\{"immunityTimeProperty":\{"immunityTime":500\}\},"challengeConfig":\{"immunityTimeProperty":\{"immunityTime":800\}\},"tokenDomains":["google.com","amazon.com"],"associationConfig":\{"requestBody":\{"CLOUDFRONT":\{"defaultSizeInspectionLimit":"KB_16"\}\}\}\}"`
+    #     `"{"type":"WAFV2","preProcessRuleGroups":[{"ruleGroupArn":null,"overrideAction":{"type":"NONE"},"managedRuleGroupIdentifier":{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet"},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true}],"postProcessRuleGroups":[],"defaultAction":{"type":"ALLOW"},"customRequestHandling":null,"customResponse":null,"overrideCustomerWebACLAssociation":false,"loggingConfiguration":null,"sampledRequestsEnabledForDefaultActions":true,"captchaConfig":{"immunityTimeProperty":{"immunityTime":500}},"challengeConfig":{"immunityTimeProperty":{"immunityTime":800}},"tokenDomains":["google.com","amazon.com"],"associationConfig":{"requestBody":{"CLOUDFRONT":{"defaultSizeInspectionLimit":"KB_16"}}}}"`
     #
     #     * `CAPTCHA` and `Challenge` configs - If you update the policy's
     #       values for `associationConfig`, `captchaConfig`,
@@ -5084,7 +5081,7 @@ module Aws::FMS
     #   * Example: `WAFV2` - Firewall Manager support for WAF managed rule
     #     group versioning
     #
-    #     `"\{"preProcessRuleGroups":[\{"ruleGroupType":"ManagedRuleGroup","overrideAction":\{"type":"NONE"\},"sampledRequestsEnabled":true,"managedRuleGroupIdentifier":\{"managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet","vendorName":"AWS","managedRuleGroupConfigs":null\}\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"customRequestHandling":null,"tokenDomains":null,"customResponse":null,"type":"WAFV2","overrideCustomerWebACLAssociation":false,"sampledRequestsEnabledForDefaultActions":true,"optimizeUnassociatedWebACL":true,"webACLSource":"RETROFIT_EXISTING"\}"`
+    #     `"{"preProcessRuleGroups":[{"ruleGroupType":"ManagedRuleGroup","overrideAction":{"type":"NONE"},"sampledRequestsEnabled":true,"managedRuleGroupIdentifier":{"managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet","vendorName":"AWS","managedRuleGroupConfigs":null}}],"postProcessRuleGroups":[],"defaultAction":{"type":"ALLOW"},"customRequestHandling":null,"tokenDomains":null,"customResponse":null,"type":"WAFV2","overrideCustomerWebACLAssociation":false,"sampledRequestsEnabledForDefaultActions":true,"optimizeUnassociatedWebACL":true,"webACLSource":"RETROFIT_EXISTING"}"`
     #
     #     To use a specific version of a WAF managed rule group in your
     #     Firewall Manager policy, you must set `versionEnabled` to `true`,
@@ -5095,21 +5092,21 @@ module Aws::FMS
     #
     #   * Example: `WAFV2` - Logging configurations
     #
-    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,
-    #     "overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":
-    #     \{"versionEnabled":null,"version":null,"vendorName":"AWS",
-    #     "managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet"\}
+    #     `"{"type":"WAFV2","preProcessRuleGroups":[{"ruleGroupArn":null,
+    #     "overrideAction":{"type":"NONE"},"managedRuleGroupIdentifier":
+    #     {"versionEnabled":null,"version":null,"vendorName":"AWS",
+    #     "managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet"}
     #     ,"ruleGroupType":"ManagedRuleGroup","excludeRules":[],
-    #     "sampledRequestsEnabled":true\}],"postProcessRuleGroups":[],
-    #     "defaultAction":\{"type":"ALLOW"\},"customRequestHandling"
+    #     "sampledRequestsEnabled":true}],"postProcessRuleGroups":[],
+    #     "defaultAction":{"type":"ALLOW"},"customRequestHandling"
     #     \:null,"customResponse":null,"overrideCustomerWebACLAssociation"
-    #     \:false,"loggingConfiguration":\{"logDestinationConfigs":
+    #     \:false,"loggingConfiguration":{"logDestinationConfigs":
     #     ["arn:aws:s3:::aws-waf-logs-example-bucket"]
-    #     ,"redactedFields":[],"loggingFilterConfigs":\{"defaultBehavior":"KEEP",
-    #     "filters":[\{"behavior":"KEEP","requirement":"MEETS_ALL",
-    #     "conditions":[\{"actionCondition":"CAPTCHA"\},\{"actionCondition":
-    #     "CHALLENGE"\},
-    #     \{"actionCondition":"EXCLUDED_AS_COUNT"\}]\}]\}\},"sampledRequestsEnabledForDefaultActions":true\}"`
+    #     ,"redactedFields":[],"loggingFilterConfigs":{"defaultBehavior":"KEEP",
+    #     "filters":[{"behavior":"KEEP","requirement":"MEETS_ALL",
+    #     "conditions":[{"actionCondition":"CAPTCHA"},{"actionCondition":
+    #     "CHALLENGE"},
+    #     {"actionCondition":"EXCLUDED_AS_COUNT"}]}]}},"sampledRequestsEnabledForDefaultActions":true}"`
     #
     #     Firewall Manager supports Amazon Kinesis Data Firehose and Amazon
     #     S3 as the `logDestinationConfigs` in your `loggingConfiguration`.
@@ -5123,7 +5120,7 @@ module Aws::FMS
     #
     #   * Example: `WAF Classic`
     #
-    #     `"\{"ruleGroups":[\{"id":"78cb36c0-1b5e-4d7d-82b2-cf48d3ad9659","overrideAction":\{"type":"NONE"\}\}],"overrideCustomerWebACLAssociation":true,"defaultAction":\{"type":"ALLOW"\},"type":"WAF"\}"`
+    #     `"{"ruleGroups":[{"id":"78cb36c0-1b5e-4d7d-82b2-cf48d3ad9659","overrideAction":{"type":"NONE"}}],"overrideCustomerWebACLAssociation":true,"defaultAction":{"type":"ALLOW"},"type":"WAF"}"`
     #
     #
     #

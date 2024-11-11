@@ -1123,7 +1123,7 @@ module Aws::ServiceDiscovery
     #
     # @option params [Hash<String,String>] :query_parameters
     #   Filters to scope the results based on custom attributes for the
-    #   instance (for example, `\{version=v1, az=1a\}`). Only instances that
+    #   instance (for example, `{version=v1, az=1a}`). Only instances that
     #   match all the specified key-value pairs are returned.
     #
     # @option params [Hash<String,String>] :optional_parameters
@@ -2831,7 +2831,7 @@ module Aws::ServiceDiscovery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

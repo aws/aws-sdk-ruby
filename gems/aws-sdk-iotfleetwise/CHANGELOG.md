@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2024-10-29)
+------------------
+
+* Feature - Updated BatchCreateVehicle and BatchUpdateVehicle APIs: LimitExceededException has been added and the maximum number of vehicles in a batch has been set to 10 explicitly
+
 1.36.0 (2024-10-18)
 ------------------
 

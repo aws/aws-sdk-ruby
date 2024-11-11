@@ -542,7 +542,7 @@ module Aws::ApplicationDiscoveryService
     #   items. Specify the tags that you want to create in a *key*-*value*
     #   format. For example:
     #
-    #   `\{"key": "serverType", "value": "webServer"\}`
+    #   `{"key": "serverType", "value": "webServer"}`
     #   @return [Array<Types::Tag>]
     #
     class CreateTagsRequest < Struct.new(
@@ -765,7 +765,7 @@ module Aws::ApplicationDiscoveryService
     #   Specify the tags that you want to delete in a *key*-*value* format.
     #   For example:
     #
-    #   `\{"key": "serverType", "value": "webServer"\}`
+    #   `{"key": "serverType", "value": "webServer"}`
     #   @return [Array<Types::Tag>]
     #
     class DeleteTagsRequest < Struct.new(
@@ -810,7 +810,7 @@ module Aws::ApplicationDiscoveryService
     #   You can filter the request using various logical operators and a
     #   *key*-*value* format. For example:
     #
-    #   `\{"key": "collectionStatus", "value": "STARTED"\}`
+    #   `{"key": "collectionStatus", "value": "STARTED"}`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -1609,7 +1609,7 @@ module Aws::ApplicationDiscoveryService
     #   You can filter the request using various logical operators and a
     #   *key*-*value* format. For example:
     #
-    #   `\{"key": "serverType", "value": "webServer"\}`
+    #   `{"key": "serverType", "value": "webServer"}`
     #
     #   For a complete list of filter options and guidance about using them
     #   with this action, see [Using the ListConfigurations Action][1] in

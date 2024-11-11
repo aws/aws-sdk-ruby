@@ -24,7 +24,7 @@ module Aws::PersonalizeEvents
     #
     # @!attribute [rw] properties
     #   A string map of action-specific metadata. Each element in the map
-    #   consists of a key-value pair. For example, `\{"value": "100"\}`.
+    #   consists of a key-value pair. For example, `{"value": "100"}`.
     #
     #   The keys use camel case names that match the fields in the schema
     #   for the Actions dataset. In the previous example, the `value`
@@ -105,7 +105,7 @@ module Aws::PersonalizeEvents
     #
     #   Each item in the map consists of a key-value pair. For example,
     #
-    #   `\{"numberOfActions": "12"\}`
+    #   `{"numberOfActions": "12"}`
     #
     #   The keys use camel case names that match the fields in the Action
     #   interactions schema. In the above example, the `numberOfActions`
@@ -180,7 +180,7 @@ module Aws::PersonalizeEvents
     #
     #   Each item in the map consists of a key-value pair. For example,
     #
-    #   `\{"numberOfRatings": "12"\}`
+    #   `{"numberOfRatings": "12"}`
     #
     #   The keys use camel case names that match the fields in the Item
     #   interactions dataset's schema. In the above example, the
@@ -290,8 +290,8 @@ module Aws::PersonalizeEvents
     #
     # @!attribute [rw] properties
     #   A string map of item-specific metadata. Each element in the map
-    #   consists of a key-value pair. For example, `\{"numberOfRatings":
-    #   "12"\}`.
+    #   consists of a key-value pair. For example, `{"numberOfRatings":
+    #   "12"}`.
     #
     #   The keys use camel case names that match the fields in the schema
     #   for the Items dataset. In the previous example, the
@@ -488,7 +488,7 @@ module Aws::PersonalizeEvents
     # @!attribute [rw] properties
     #   A string map of user-specific metadata. Each element in the map
     #   consists of a key-value pair. For example,
-    #   `\{"numberOfVideosWatched": "45"\}`.
+    #   `{"numberOfVideosWatched": "45"}`.
     #
     #   The keys use camel case names that match the fields in the schema
     #   for the Users dataset. In the previous example, the

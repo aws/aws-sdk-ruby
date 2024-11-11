@@ -482,8 +482,8 @@ module Aws::AppIntegrationsService
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @option params [Array<String>] :permissions
     #   The configuration of events or requests that the application has
@@ -588,8 +588,8 @@ module Aws::AppIntegrationsService
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -801,8 +801,8 @@ module Aws::AppIntegrationsService
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Types::CreateEventIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1499,8 +1499,8 @@ module Aws::AppIntegrationsService
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1756,7 +1756,7 @@ module Aws::AppIntegrationsService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

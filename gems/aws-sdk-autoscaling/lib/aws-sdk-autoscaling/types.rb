@@ -491,6 +491,10 @@ module Aws::AutoScaling
     #   An instance maintenance policy.
     #   @return [Types::InstanceMaintenancePolicy]
     #
+    # @!attribute [rw] availability_zone_distribution
+    #   The instance capacity distribution across Availability Zones.
+    #   @return [Types::AvailabilityZoneDistribution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -528,7 +532,8 @@ module Aws::AutoScaling
       :desired_capacity_type,
       :default_instance_warmup,
       :traffic_sources,
-      :instance_maintenance_policy)
+      :instance_maintenance_policy,
+      :availability_zone_distribution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -687,6 +692,29 @@ module Aws::AutoScaling
     class AutoScalingInstancesType < Struct.new(
       :auto_scaling_instances,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Availability Zone distribution.
+    #
+    # @!attribute [rw] capacity_distribution_strategy
+    #   If launches fail in an Availability Zone, the following strategies
+    #   are available. The default is `balanced-best-effort`.
+    #
+    #   * `balanced-only` - If launches fail in an Availability Zone, Auto
+    #     Scaling will continue to attempt to launch in the unhealthy zone
+    #     to preserve a balanced distribution.
+    #
+    #   * `balanced-best-effort` - If launches fail in an Availability Zone,
+    #     Auto Scaling will attempt to launch in another healthy
+    #     Availability Zone instead.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AvailabilityZoneDistribution AWS API Documentation
+    #
+    class AvailabilityZoneDistribution < Struct.new(
+      :capacity_distribution_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1263,6 +1291,10 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     #   @return [Types::InstanceMaintenancePolicy]
     #
+    # @!attribute [rw] availability_zone_distribution
+    #   The instance capacity distribution across Availability Zones.
+    #   @return [Types::AvailabilityZoneDistribution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
     class CreateAutoScalingGroupType < Struct.new(
@@ -1293,7 +1325,8 @@ module Aws::AutoScaling
       :desired_capacity_type,
       :default_instance_warmup,
       :traffic_sources,
-      :instance_maintenance_policy)
+      :instance_maintenance_policy,
+      :availability_zone_distribution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3362,6 +3395,9 @@ module Aws::AutoScaling
     #     troubleshoot using the status reason and the scaling activities.
     #
     #   * `RollbackSuccessful` - The rollback completed successfully.
+    #
+    #   * `Baking` - Waiting the specified bake time after an instance
+    #     refresh has finished updating instances.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -6503,6 +6539,11 @@ module Aws::AutoScaling
     #   Scaling group, if defined.
     #   @return [Integer]
     #
+    # @!attribute [rw] bake_time
+    #   The amount of time, in seconds, to wait at the end of an instance
+    #   refresh before the instance refresh is considered complete.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RefreshPreferences AWS API Documentation
     #
     class RefreshPreferences < Struct.new(
@@ -6515,7 +6556,8 @@ module Aws::AutoScaling
       :scale_in_protected_instances,
       :standby_instances,
       :alarm_specification,
-      :max_healthy_percentage)
+      :max_healthy_percentage,
+      :bake_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7121,6 +7163,8 @@ module Aws::AutoScaling
     #   * CloudWatch alarms
     #
     #   * Skip matching
+    #
+    #   * Bake time
     #   @return [Types::RefreshPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefreshType AWS API Documentation
@@ -7894,6 +7938,10 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     #   @return [Types::InstanceMaintenancePolicy]
     #
+    # @!attribute [rw] availability_zone_distribution
+    #   The instance capacity distribution across Availability Zones.
+    #   @return [Types::AvailabilityZoneDistribution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
@@ -7918,7 +7966,8 @@ module Aws::AutoScaling
       :context,
       :desired_capacity_type,
       :default_instance_warmup,
-      :instance_maintenance_policy)
+      :instance_maintenance_policy,
+      :availability_zone_distribution)
       SENSITIVE = []
       include Aws::Structure
     end

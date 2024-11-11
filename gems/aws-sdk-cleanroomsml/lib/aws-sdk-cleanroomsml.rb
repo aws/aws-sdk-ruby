@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:cleanroomsml)
 # structure.
 #
 #     clean_rooms_ml = Aws::CleanRoomsML::Client.new
-#     resp = clean_rooms_ml.create_audience_model(params)
+#     resp = clean_rooms_ml.cancel_trained_model(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::CleanRoomsML
   autoload :EndpointProvider, 'aws-sdk-cleanroomsml/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cleanroomsml/endpoints'
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.19.0'
 
 end
 

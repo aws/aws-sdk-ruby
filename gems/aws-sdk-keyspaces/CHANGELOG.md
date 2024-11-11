@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-10-30)
+------------------
+
+* Feature - Adds support for interacting with user-defined types (UDTs) through the following new operations: Create-Type, Delete-Type, List-Types, Get-Type.
+
 1.31.0 (2024-10-18)
 ------------------
 

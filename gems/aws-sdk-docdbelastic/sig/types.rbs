@@ -13,6 +13,19 @@ module Aws::DocDBElastic
       SENSITIVE: []
     end
 
+    class ApplyPendingMaintenanceActionInput
+      attr_accessor apply_action: ::String
+      attr_accessor apply_on: ::String
+      attr_accessor opt_in_type: ("IMMEDIATE" | "NEXT_MAINTENANCE" | "APPLY_ON" | "UNDO_OPT_IN")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ApplyPendingMaintenanceActionOutput
+      attr_accessor resource_pending_maintenance_action: Types::ResourcePendingMaintenanceAction
+      SENSITIVE: []
+    end
+
     class Cluster
       attr_accessor admin_user_name: ::String
       attr_accessor auth_type: ("PLAIN_TEXT" | "SECRET_ARN")
@@ -28,7 +41,7 @@ module Aws::DocDBElastic
       attr_accessor shard_count: ::Integer
       attr_accessor shard_instance_count: ::Integer
       attr_accessor shards: ::Array[Types::Shard]
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED" | "MAINTENANCE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE")
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_security_group_ids: ::Array[::String]
       SENSITIVE: []
@@ -37,7 +50,7 @@ module Aws::DocDBElastic
     class ClusterInList
       attr_accessor cluster_arn: ::String
       attr_accessor cluster_name: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED" | "MAINTENANCE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE")
       SENSITIVE: []
     end
 
@@ -50,7 +63,7 @@ module Aws::DocDBElastic
       attr_accessor snapshot_creation_time: ::String
       attr_accessor snapshot_name: ::String
       attr_accessor snapshot_type: ("MANUAL" | "AUTOMATED")
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED" | "MAINTENANCE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE")
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_security_group_ids: ::Array[::String]
       SENSITIVE: []
@@ -61,7 +74,7 @@ module Aws::DocDBElastic
       attr_accessor snapshot_arn: ::String
       attr_accessor snapshot_creation_time: ::String
       attr_accessor snapshot_name: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED" | "MAINTENANCE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE")
       SENSITIVE: []
     end
 
@@ -162,6 +175,16 @@ module Aws::DocDBElastic
       SENSITIVE: []
     end
 
+    class GetPendingMaintenanceActionInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPendingMaintenanceActionOutput
+      attr_accessor resource_pending_maintenance_action: Types::ResourcePendingMaintenanceAction
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -193,6 +216,18 @@ module Aws::DocDBElastic
       SENSITIVE: []
     end
 
+    class ListPendingMaintenanceActionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPendingMaintenanceActionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor resource_pending_maintenance_actions: ::Array[Types::ResourcePendingMaintenanceAction]
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -203,10 +238,26 @@ module Aws::DocDBElastic
       SENSITIVE: []
     end
 
+    class PendingMaintenanceActionDetails
+      attr_accessor action: ::String
+      attr_accessor auto_applied_after_date: ::String
+      attr_accessor current_apply_date: ::String
+      attr_accessor description: ::String
+      attr_accessor forced_apply_date: ::String
+      attr_accessor opt_in_status: ::String
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePendingMaintenanceAction
+      attr_accessor pending_maintenance_action_details: ::Array[Types::PendingMaintenanceActionDetails]
+      attr_accessor resource_arn: ::String
       SENSITIVE: []
     end
 
@@ -235,7 +286,7 @@ module Aws::DocDBElastic
     class Shard
       attr_accessor create_time: ::String
       attr_accessor shard_id: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS" | "INACCESSIBLE_SECRET_ARN" | "INACCESSIBLE_VPC_ENDPOINT" | "INCOMPATIBLE_NETWORK" | "MERGING" | "MODIFYING" | "SPLITTING" | "COPYING" | "STARTING" | "STOPPING" | "STOPPED" | "MAINTENANCE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE")
       SENSITIVE: []
     end
 

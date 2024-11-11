@@ -3690,7 +3690,7 @@ module Aws::IoTTwinMaker
     #   You can filter the request using various logical operators and a
     #   key-value format. For example:
     #
-    #   `\{"key": "serverType", "value": "webServer"\}`
+    #   `{"key": "serverType", "value": "webServer"}`
     #   @return [Array<Types::PropertyFilter>]
     #
     class TabularConditions < Struct.new(

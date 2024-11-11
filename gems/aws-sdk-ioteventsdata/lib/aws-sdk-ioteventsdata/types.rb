@@ -404,8 +404,8 @@ module Aws::IoTEventsData
 
     # @!attribute [rw] messages
     #   The list of messages to send. Each message has the following format:
-    #   `'\{ "messageId": "string", "inputName": "string", "payload":
-    #   "string"\}'`
+    #   `'{ "messageId": "string", "inputName": "string", "payload":
+    #   "string"}'`
     #   @return [Array<Types::Message>]
     #
     class BatchPutMessageRequest < Struct.new(

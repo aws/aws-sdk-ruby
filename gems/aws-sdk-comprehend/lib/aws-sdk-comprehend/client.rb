@@ -1150,12 +1150,12 @@ module Aws::Comprehend
     #   enclosed in double quotes, then you must escape the double quotes that
     #   are inside the policy:
     #
-    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #   `"{"attribute": "value", "attribute": ["value"]}"`
     #
     #   To avoid escaping quotes, you can use single quotes to enclose the
     #   policy and double quotes to enclose the JSON names and values:
     #
-    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   `'{"attribute": "value", "attribute": ["value"]}'`
     #
     # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1395,12 +1395,12 @@ module Aws::Comprehend
     #   quotes, then you must escape the double quotes that are inside the
     #   policy:
     #
-    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #   `"{"attribute": "value", "attribute": ["value"]}"`
     #
     #   To avoid escaping quotes, you can use single quotes to enclose the
     #   policy and double quotes to enclose the JSON names and values:
     #
-    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   `'{"attribute": "value", "attribute": ["value"]}'`
     #
     # @return [Types::CreateEntityRecognizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4361,12 +4361,12 @@ module Aws::Comprehend
     #   double quotes. If the JSON body is also enclosed in double quotes,
     #   then you must escape the double quotes that are inside the policy:
     #
-    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #   `"{"attribute": "value", "attribute": ["value"]}"`
     #
     #   To avoid escaping quotes, you can use single quotes to enclose the
     #   policy and double quotes to enclose the JSON names and values:
     #
-    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   `'{"attribute": "value", "attribute": ["value"]}'`
     #
     # @option params [String] :policy_revision_id
     #   The revision ID that Amazon Comprehend assigned to the policy that you
@@ -5973,7 +5973,7 @@ module Aws::Comprehend
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -312,6 +312,9 @@ module Aws
                                        ?instance_maintenance_policy: {
                                          min_healthy_percentage: ::Integer?,
                                          max_healthy_percentage: ::Integer?
+                                       },
+                                       ?availability_zone_distribution: {
+                                         capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")?
                                        }
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1197,7 +1200,8 @@ module Aws
                                       alarm_specification: {
                                         alarms: Array[::String]?
                                       }?,
-                                      max_healthy_percentage: ::Integer?
+                                      max_healthy_percentage: ::Integer?,
+                                      bake_time: ::Integer?
                                     }
                                   ) -> _StartInstanceRefreshResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInstanceRefreshResponseSuccess
@@ -1330,6 +1334,9 @@ module Aws
                                        ?instance_maintenance_policy: {
                                          min_healthy_percentage: ::Integer?,
                                          max_healthy_percentage: ::Integer?
+                                       },
+                                       ?availability_zone_distribution: {
+                                         capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")?
                                        }
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

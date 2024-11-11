@@ -35,6 +35,7 @@ module Aws::CloudWatchLogs
     AnomalyVisibilityTime = Shapes::IntegerShape.new(name: 'AnomalyVisibilityTime')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateKmsKeyRequest = Shapes::StructureShape.new(name: 'AssociateKmsKeyRequest')
+    Baseline = Shapes::BooleanShape.new(name: 'Baseline')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelExportTaskRequest = Shapes::StructureShape.new(name: 'CancelExportTaskRequest')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -189,6 +190,7 @@ module Aws::CloudWatchLogs
     GetQueryResultsResponse = Shapes::StructureShape.new(name: 'GetQueryResultsResponse')
     Histogram = Shapes::MapShape.new(name: 'Histogram')
     IncludeLinkedAccounts = Shapes::BooleanShape.new(name: 'IncludeLinkedAccounts')
+    InferredTokenName = Shapes::StringShape.new(name: 'InferredTokenName')
     InheritedProperties = Shapes::ListShape.new(name: 'InheritedProperties')
     InheritedProperty = Shapes::StringShape.new(name: 'InheritedProperty')
     InputLogEvent = Shapes::StructureShape.new(name: 'InputLogEvent')
@@ -1082,6 +1084,7 @@ module Aws::CloudWatchLogs
     PatternToken.add_member(:is_dynamic, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDynamic"))
     PatternToken.add_member(:token_string, Shapes::ShapeRef.new(shape: TokenString, location_name: "tokenString"))
     PatternToken.add_member(:enumerations, Shapes::ShapeRef.new(shape: Enumerations, location_name: "enumerations"))
+    PatternToken.add_member(:inferred_token_name, Shapes::ShapeRef.new(shape: InferredTokenName, location_name: "inferredTokenName"))
     PatternToken.struct_class = Types::PatternToken
 
     PatternTokens.member = Shapes::ShapeRef.new(shape: PatternToken)
@@ -1377,6 +1380,7 @@ module Aws::CloudWatchLogs
     UpdateAnomalyRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: AnomalyDetectorArn, required: true, location_name: "anomalyDetectorArn"))
     UpdateAnomalyRequest.add_member(:suppression_type, Shapes::ShapeRef.new(shape: SuppressionType, location_name: "suppressionType"))
     UpdateAnomalyRequest.add_member(:suppression_period, Shapes::ShapeRef.new(shape: SuppressionPeriod, location_name: "suppressionPeriod"))
+    UpdateAnomalyRequest.add_member(:baseline, Shapes::ShapeRef.new(shape: Baseline, location_name: "baseline"))
     UpdateAnomalyRequest.struct_class = Types::UpdateAnomalyRequest
 
     UpdateDeliveryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: DeliveryId, required: true, location_name: "id"))

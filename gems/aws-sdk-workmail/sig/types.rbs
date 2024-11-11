@@ -118,6 +118,18 @@ module Aws::WorkMail
       SENSITIVE: []
     end
 
+    class CreateIdentityCenterApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIdentityCenterApplicationResponse
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateImpersonationRoleRequest
       attr_accessor client_token: ::String
       attr_accessor organization_id: ::String
@@ -176,7 +188,7 @@ module Aws::WorkMail
       attr_accessor type: ("ROOM" | "EQUIPMENT")
       attr_accessor description: ::String
       attr_accessor hidden_from_global_address_list: bool
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class CreateResourceResponse
@@ -193,6 +205,7 @@ module Aws::WorkMail
       attr_accessor first_name: ::String
       attr_accessor last_name: ::String
       attr_accessor hidden_from_global_address_list: bool
+      attr_accessor identity_provider_user_id: ::String
       SENSITIVE: [:display_name, :password, :first_name, :last_name]
     end
 
@@ -252,6 +265,22 @@ module Aws::WorkMail
     class DeleteGroupResponse < Aws::EmptyStructure
     end
 
+    class DeleteIdentityCenterApplicationRequest
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdentityCenterApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIdentityProviderConfigurationRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdentityProviderConfigurationResponse < Aws::EmptyStructure
+    end
+
     class DeleteImpersonationRoleRequest
       attr_accessor organization_id: ::String
       attr_accessor impersonation_role_id: ::String
@@ -295,6 +324,7 @@ module Aws::WorkMail
       attr_accessor organization_id: ::String
       attr_accessor delete_directory: bool
       attr_accessor force_delete: bool
+      attr_accessor delete_identity_center_application: bool
       SENSITIVE: []
     end
 
@@ -302,6 +332,15 @@ module Aws::WorkMail
       attr_accessor organization_id: ::String
       attr_accessor state: ::String
       SENSITIVE: []
+    end
+
+    class DeletePersonalAccessTokenRequest
+      attr_accessor organization_id: ::String
+      attr_accessor personal_access_token_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePersonalAccessTokenResponse < Aws::EmptyStructure
     end
 
     class DeleteResourceRequest
@@ -390,6 +429,18 @@ module Aws::WorkMail
       SENSITIVE: []
     end
 
+    class DescribeIdentityProviderConfigurationRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityProviderConfigurationResponse
+      attr_accessor authentication_mode: ("IDENTITY_PROVIDER_ONLY" | "IDENTITY_PROVIDER_AND_DIRECTORY")
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
+      attr_accessor personal_access_token_configuration: Types::PersonalAccessTokenConfiguration
+      SENSITIVE: []
+    end
+
     class DescribeInboundDmarcSettingsRequest
       attr_accessor organization_id: ::String
       SENSITIVE: []
@@ -459,7 +510,7 @@ module Aws::WorkMail
       attr_accessor disabled_date: ::Time
       attr_accessor description: ::String
       attr_accessor hidden_from_global_address_list: bool
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class DescribeUserRequest
@@ -492,6 +543,8 @@ module Aws::WorkMail
       attr_accessor department: ::String
       attr_accessor country: ::String
       attr_accessor office: ::String
+      attr_accessor identity_provider_user_id: ::String
+      attr_accessor identity_provider_identity_store_id: ::String
       SENSITIVE: [:display_name, :first_name, :last_name, :initials, :telephone, :street, :job_title, :city, :company, :zip_code, :department, :country, :office]
     end
 
@@ -695,6 +748,23 @@ module Aws::WorkMail
       SENSITIVE: []
     end
 
+    class GetPersonalAccessTokenMetadataRequest
+      attr_accessor organization_id: ::String
+      attr_accessor personal_access_token_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPersonalAccessTokenMetadataResponse
+      attr_accessor personal_access_token_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor name: ::String
+      attr_accessor date_created: ::Time
+      attr_accessor date_last_used: ::Time
+      attr_accessor expires_time: ::Time
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class Group
       attr_accessor id: ::String
       attr_accessor email: ::String
@@ -708,6 +778,12 @@ module Aws::WorkMail
     class GroupIdentifier
       attr_accessor group_id: ::String
       attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterConfiguration
+      attr_accessor instance_arn: ::String
+      attr_accessor application_arn: ::String
       SENSITIVE: []
     end
 
@@ -948,6 +1024,20 @@ module Aws::WorkMail
       SENSITIVE: []
     end
 
+    class ListPersonalAccessTokensRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPersonalAccessTokensResponse
+      attr_accessor next_token: ::String
+      attr_accessor personal_access_token_summaries: ::Array[Types::PersonalAccessTokenSummary]
+      SENSITIVE: []
+    end
+
     class ListResourceDelegatesRequest
       attr_accessor organization_id: ::String
       attr_accessor resource_id: ::String
@@ -998,6 +1088,7 @@ module Aws::WorkMail
       attr_accessor display_name_prefix: ::String
       attr_accessor primary_email_prefix: ::String
       attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor identity_provider_user_id_prefix: ::String
       SENSITIVE: [:display_name_prefix]
     end
 
@@ -1124,6 +1215,23 @@ module Aws::WorkMail
       SENSITIVE: []
     end
 
+    class PersonalAccessTokenConfiguration
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor lifetime_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class PersonalAccessTokenSummary
+      attr_accessor personal_access_token_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor name: ::String
+      attr_accessor date_created: ::Time
+      attr_accessor date_last_used: ::Time
+      attr_accessor expires_time: ::Time
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PutAccessControlRuleRequest
       attr_accessor name: ::String
       attr_accessor effect: ("ALLOW" | "DENY")
@@ -1151,6 +1259,17 @@ module Aws::WorkMail
     end
 
     class PutEmailMonitoringConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class PutIdentityProviderConfigurationRequest
+      attr_accessor organization_id: ::String
+      attr_accessor authentication_mode: ("IDENTITY_PROVIDER_ONLY" | "IDENTITY_PROVIDER_AND_DIRECTORY")
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
+      attr_accessor personal_access_token_configuration: Types::PersonalAccessTokenConfiguration
+      SENSITIVE: []
+    end
+
+    class PutIdentityProviderConfigurationResponse < Aws::EmptyStructure
     end
 
     class PutInboundDmarcSettingsRequest
@@ -1247,7 +1366,7 @@ module Aws::WorkMail
       attr_accessor enabled_date: ::Time
       attr_accessor disabled_date: ::Time
       attr_accessor description: ::String
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class ResourceNotFoundException
@@ -1411,7 +1530,7 @@ module Aws::WorkMail
       attr_accessor description: ::String
       attr_accessor type: ("ROOM" | "EQUIPMENT")
       attr_accessor hidden_from_global_address_list: bool
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class UpdateResourceResponse < Aws::EmptyStructure
@@ -1435,6 +1554,7 @@ module Aws::WorkMail
       attr_accessor department: ::String
       attr_accessor country: ::String
       attr_accessor office: ::String
+      attr_accessor identity_provider_user_id: ::String
       SENSITIVE: [:display_name, :first_name, :last_name, :initials, :telephone, :street, :job_title, :city, :company, :zip_code, :department, :country, :office]
     end
 
@@ -1450,6 +1570,8 @@ module Aws::WorkMail
       attr_accessor user_role: ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER")
       attr_accessor enabled_date: ::Time
       attr_accessor disabled_date: ::Time
+      attr_accessor identity_provider_user_id: ::String
+      attr_accessor identity_provider_identity_store_id: ::String
       SENSITIVE: []
     end
   end

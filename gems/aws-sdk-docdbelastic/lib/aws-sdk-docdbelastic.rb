@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:docdbelastic)
 # structure.
 #
 #     doc_db_elastic = Aws::DocDBElastic::Client.new
-#     resp = doc_db_elastic.copy_cluster_snapshot(params)
+#     resp = doc_db_elastic.apply_pending_maintenance_action(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::DocDBElastic
   autoload :EndpointProvider, 'aws-sdk-docdbelastic/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-docdbelastic/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end
 

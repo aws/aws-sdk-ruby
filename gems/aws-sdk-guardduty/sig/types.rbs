@@ -1781,6 +1781,17 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class RdsLimitlessDbDetails
+      attr_accessor db_shard_group_identifier: ::String
+      attr_accessor db_shard_group_resource_id: ::String
+      attr_accessor db_shard_group_arn: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class RdsLoginAttemptAction
       attr_accessor remote_ip_details: Types::RemoteIpDetails
       attr_accessor login_attributes: ::Array[Types::LoginAttribute]
@@ -1820,6 +1831,7 @@ module Aws::GuardDuty
       attr_accessor ecs_cluster_details: Types::EcsClusterDetails
       attr_accessor container_details: Types::Container
       attr_accessor rds_db_instance_details: Types::RdsDbInstanceDetails
+      attr_accessor rds_limitless_db_details: Types::RdsLimitlessDbDetails
       attr_accessor rds_db_user_details: Types::RdsDbUserDetails
       attr_accessor lambda_details: Types::LambdaDetails
       SENSITIVE: []

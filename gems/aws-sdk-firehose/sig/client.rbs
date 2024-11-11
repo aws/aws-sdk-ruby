@@ -83,7 +83,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Firehose/Client.html#create_delivery_stream-instance_method
       def create_delivery_stream: (
                                     delivery_stream_name: ::String,
-                                    ?delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource"),
+                                    ?delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource" | "DatabaseAsSource"),
                                     ?kinesis_stream_source_configuration: {
                                       kinesis_stream_arn: ::String,
                                       role_arn: ::String
@@ -726,9 +726,22 @@ module Aws
                                           destination_table_name: ::String,
                                           destination_database_name: ::String,
                                           unique_keys: Array[::String]?,
+                                          partition_spec: {
+                                            identity: Array[
+                                              {
+                                                source_name: ::String
+                                              },
+                                            ]?
+                                          }?,
                                           s3_error_output_prefix: ::String?
                                         },
                                       ]?,
+                                      schema_evolution_configuration: {
+                                        enabled: bool
+                                      }?,
+                                      table_creation_configuration: {
+                                        enabled: bool
+                                      }?,
                                       buffering_hints: {
                                         size_in_m_bs: ::Integer?,
                                         interval_in_seconds: ::Integer?
@@ -758,7 +771,8 @@ module Aws
                                       }?,
                                       role_arn: ::String,
                                       catalog_configuration: {
-                                        catalog_arn: ::String?
+                                        catalog_arn: ::String?,
+                                        warehouse_location: ::String?
                                       },
                                       s3_configuration: {
                                         role_arn: ::String,
@@ -781,6 +795,36 @@ module Aws
                                           log_group_name: ::String?,
                                           log_stream_name: ::String?
                                         }?
+                                      }
+                                    },
+                                    ?database_source_configuration: {
+                                      type: ("MySQL" | "PostgreSQL"),
+                                      endpoint: ::String,
+                                      port: ::Integer,
+                                      ssl_mode: ("Disabled" | "Enabled")?,
+                                      databases: {
+                                        include: Array[::String]?,
+                                        exclude: Array[::String]?
+                                      },
+                                      tables: {
+                                        include: Array[::String]?,
+                                        exclude: Array[::String]?
+                                      },
+                                      columns: {
+                                        include: Array[::String]?,
+                                        exclude: Array[::String]?
+                                      }?,
+                                      surrogate_keys: Array[::String]?,
+                                      snapshot_watermark_table: ::String,
+                                      database_source_authentication_configuration: {
+                                        secrets_manager_configuration: {
+                                          secret_arn: ::String?,
+                                          role_arn: ::String?,
+                                          enabled: bool
+                                        }
+                                      },
+                                      database_source_vpc_configuration: {
+                                        vpc_endpoint_service_name: ::String
                                       }
                                     }
                                   ) -> _CreateDeliveryStreamResponseSuccess
@@ -816,7 +860,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Firehose/Client.html#list_delivery_streams-instance_method
       def list_delivery_streams: (
                                    ?limit: ::Integer,
-                                   ?delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource"),
+                                   ?delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource" | "DatabaseAsSource"),
                                    ?exclusive_start_delivery_stream_name: ::String
                                  ) -> _ListDeliveryStreamsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeliveryStreamsResponseSuccess
@@ -1518,9 +1562,22 @@ module Aws
                                       destination_table_name: ::String,
                                       destination_database_name: ::String,
                                       unique_keys: Array[::String]?,
+                                      partition_spec: {
+                                        identity: Array[
+                                          {
+                                            source_name: ::String
+                                          },
+                                        ]?
+                                      }?,
                                       s3_error_output_prefix: ::String?
                                     },
                                   ]?,
+                                  schema_evolution_configuration: {
+                                    enabled: bool
+                                  }?,
+                                  table_creation_configuration: {
+                                    enabled: bool
+                                  }?,
                                   buffering_hints: {
                                     size_in_m_bs: ::Integer?,
                                     interval_in_seconds: ::Integer?
@@ -1550,7 +1607,8 @@ module Aws
                                   }?,
                                   role_arn: ::String?,
                                   catalog_configuration: {
-                                    catalog_arn: ::String?
+                                    catalog_arn: ::String?,
+                                    warehouse_location: ::String?
                                   }?,
                                   s3_configuration: {
                                     role_arn: ::String,

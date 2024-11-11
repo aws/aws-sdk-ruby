@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2024-11-08)
+------------------
+
+* Feature - Added support for Media Capture Pipeline and Media Concatenation Pipeline for customer managed server side encryption. Now Media Capture Pipeline can use IAM sink role to get access to KMS key and encrypt/decrypt recorded artifacts. KMS key ID can also be supplied with encryption context.
+
 1.33.0 (2024-10-18)
 ------------------
 

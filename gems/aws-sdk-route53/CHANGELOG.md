@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-10-30)
+------------------
+
+* Feature - This release adds support for TLSA, SSHFP, SVCB, and HTTPS record types.
+
 1.103.0 (2024-10-18)
 ------------------
 

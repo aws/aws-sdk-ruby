@@ -54,6 +54,8 @@ module Aws::LakeFormation
     ContextValue = Shapes::StringShape.new(name: 'ContextValue')
     CreateDataCellsFilterRequest = Shapes::StructureShape.new(name: 'CreateDataCellsFilterRequest')
     CreateDataCellsFilterResponse = Shapes::StructureShape.new(name: 'CreateDataCellsFilterResponse')
+    CreateLFTagExpressionRequest = Shapes::StructureShape.new(name: 'CreateLFTagExpressionRequest')
+    CreateLFTagExpressionResponse = Shapes::StructureShape.new(name: 'CreateLFTagExpressionResponse')
     CreateLFTagRequest = Shapes::StructureShape.new(name: 'CreateLFTagRequest')
     CreateLFTagResponse = Shapes::StructureShape.new(name: 'CreateLFTagResponse')
     CreateLakeFormationIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'CreateLakeFormationIdentityCenterConfigurationRequest')
@@ -75,6 +77,8 @@ module Aws::LakeFormation
     DateTime = Shapes::TimestampShape.new(name: 'DateTime', timestampFormat: "iso8601")
     DeleteDataCellsFilterRequest = Shapes::StructureShape.new(name: 'DeleteDataCellsFilterRequest')
     DeleteDataCellsFilterResponse = Shapes::StructureShape.new(name: 'DeleteDataCellsFilterResponse')
+    DeleteLFTagExpressionRequest = Shapes::StructureShape.new(name: 'DeleteLFTagExpressionRequest')
+    DeleteLFTagExpressionResponse = Shapes::StructureShape.new(name: 'DeleteLFTagExpressionResponse')
     DeleteLFTagRequest = Shapes::StructureShape.new(name: 'DeleteLFTagRequest')
     DeleteLFTagResponse = Shapes::StructureShape.new(name: 'DeleteLFTagResponse')
     DeleteLakeFormationIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteLakeFormationIdentityCenterConfigurationRequest')
@@ -117,6 +121,8 @@ module Aws::LakeFormation
     GetDataLakeSettingsResponse = Shapes::StructureShape.new(name: 'GetDataLakeSettingsResponse')
     GetEffectivePermissionsForPathRequest = Shapes::StructureShape.new(name: 'GetEffectivePermissionsForPathRequest')
     GetEffectivePermissionsForPathResponse = Shapes::StructureShape.new(name: 'GetEffectivePermissionsForPathResponse')
+    GetLFTagExpressionRequest = Shapes::StructureShape.new(name: 'GetLFTagExpressionRequest')
+    GetLFTagExpressionResponse = Shapes::StructureShape.new(name: 'GetLFTagExpressionResponse')
     GetLFTagRequest = Shapes::StructureShape.new(name: 'GetLFTagRequest')
     GetLFTagResponse = Shapes::StructureShape.new(name: 'GetLFTagResponse')
     GetQueryStateRequest = Shapes::StructureShape.new(name: 'GetQueryStateRequest')
@@ -156,6 +162,9 @@ module Aws::LakeFormation
     LFTag = Shapes::StructureShape.new(name: 'LFTag')
     LFTagError = Shapes::StructureShape.new(name: 'LFTagError')
     LFTagErrors = Shapes::ListShape.new(name: 'LFTagErrors')
+    LFTagExpression = Shapes::StructureShape.new(name: 'LFTagExpression')
+    LFTagExpressionResource = Shapes::StructureShape.new(name: 'LFTagExpressionResource')
+    LFTagExpressionsList = Shapes::ListShape.new(name: 'LFTagExpressionsList')
     LFTagKey = Shapes::StringShape.new(name: 'LFTagKey')
     LFTagKeyResource = Shapes::StructureShape.new(name: 'LFTagKeyResource')
     LFTagPair = Shapes::StructureShape.new(name: 'LFTagPair')
@@ -167,6 +176,8 @@ module Aws::LakeFormation
     LastModifiedTimestamp = Shapes::TimestampShape.new(name: 'LastModifiedTimestamp')
     ListDataCellsFilterRequest = Shapes::StructureShape.new(name: 'ListDataCellsFilterRequest')
     ListDataCellsFilterResponse = Shapes::StructureShape.new(name: 'ListDataCellsFilterResponse')
+    ListLFTagExpressionsRequest = Shapes::StructureShape.new(name: 'ListLFTagExpressionsRequest')
+    ListLFTagExpressionsResponse = Shapes::StructureShape.new(name: 'ListLFTagExpressionsResponse')
     ListLFTagsRequest = Shapes::StructureShape.new(name: 'ListLFTagsRequest')
     ListLFTagsResponse = Shapes::StructureShape.new(name: 'ListLFTagsResponse')
     ListLakeFormationOptInsRequest = Shapes::StructureShape.new(name: 'ListLakeFormationOptInsRequest')
@@ -290,6 +301,8 @@ module Aws::LakeFormation
     URI = Shapes::StringShape.new(name: 'URI')
     UpdateDataCellsFilterRequest = Shapes::StructureShape.new(name: 'UpdateDataCellsFilterRequest')
     UpdateDataCellsFilterResponse = Shapes::StructureShape.new(name: 'UpdateDataCellsFilterResponse')
+    UpdateLFTagExpressionRequest = Shapes::StructureShape.new(name: 'UpdateLFTagExpressionRequest')
+    UpdateLFTagExpressionResponse = Shapes::StructureShape.new(name: 'UpdateLFTagExpressionResponse')
     UpdateLFTagRequest = Shapes::StructureShape.new(name: 'UpdateLFTagRequest')
     UpdateLFTagResponse = Shapes::StructureShape.new(name: 'UpdateLFTagResponse')
     UpdateLakeFormationIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLakeFormationIdentityCenterConfigurationRequest')
@@ -416,6 +429,14 @@ module Aws::LakeFormation
 
     CreateDataCellsFilterResponse.struct_class = Types::CreateDataCellsFilterResponse
 
+    CreateLFTagExpressionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateLFTagExpressionRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateLFTagExpressionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    CreateLFTagExpressionRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    CreateLFTagExpressionRequest.struct_class = Types::CreateLFTagExpressionRequest
+
+    CreateLFTagExpressionResponse.struct_class = Types::CreateLFTagExpressionResponse
+
     CreateLFTagRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateLFTagRequest.add_member(:tag_key, Shapes::ShapeRef.new(shape: LFTagKey, required: true, location_name: "TagKey"))
     CreateLFTagRequest.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, required: true, location_name: "TagValues"))
@@ -490,6 +511,12 @@ module Aws::LakeFormation
     DeleteDataCellsFilterRequest.struct_class = Types::DeleteDataCellsFilterRequest
 
     DeleteDataCellsFilterResponse.struct_class = Types::DeleteDataCellsFilterResponse
+
+    DeleteLFTagExpressionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DeleteLFTagExpressionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    DeleteLFTagExpressionRequest.struct_class = Types::DeleteLFTagExpressionRequest
+
+    DeleteLFTagExpressionResponse.struct_class = Types::DeleteLFTagExpressionResponse
 
     DeleteLFTagRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeleteLFTagRequest.add_member(:tag_key, Shapes::ShapeRef.new(shape: LFTagKey, required: true, location_name: "TagKey"))
@@ -615,6 +642,16 @@ module Aws::LakeFormation
     GetEffectivePermissionsForPathResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PrincipalResourcePermissionsList, location_name: "Permissions"))
     GetEffectivePermissionsForPathResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetEffectivePermissionsForPathResponse.struct_class = Types::GetEffectivePermissionsForPathResponse
+
+    GetLFTagExpressionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetLFTagExpressionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    GetLFTagExpressionRequest.struct_class = Types::GetLFTagExpressionRequest
+
+    GetLFTagExpressionResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    GetLFTagExpressionResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    GetLFTagExpressionResponse.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    GetLFTagExpressionResponse.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "Expression"))
+    GetLFTagExpressionResponse.struct_class = Types::GetLFTagExpressionResponse
 
     GetLFTagRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetLFTagRequest.add_member(:tag_key, Shapes::ShapeRef.new(shape: LFTagKey, required: true, location_name: "TagKey"))
@@ -742,6 +779,18 @@ module Aws::LakeFormation
 
     LFTagErrors.member = Shapes::ShapeRef.new(shape: LFTagError)
 
+    LFTagExpression.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    LFTagExpression.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    LFTagExpression.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    LFTagExpression.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "Expression"))
+    LFTagExpression.struct_class = Types::LFTagExpression
+
+    LFTagExpressionResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    LFTagExpressionResource.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    LFTagExpressionResource.struct_class = Types::LFTagExpressionResource
+
+    LFTagExpressionsList.member = Shapes::ShapeRef.new(shape: LFTagExpression)
+
     LFTagKeyResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     LFTagKeyResource.add_member(:tag_key, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TagKey"))
     LFTagKeyResource.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, required: true, location_name: "TagValues"))
@@ -754,7 +803,8 @@ module Aws::LakeFormation
 
     LFTagPolicyResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     LFTagPolicyResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
-    LFTagPolicyResource.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    LFTagPolicyResource.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "Expression"))
+    LFTagPolicyResource.add_member(:expression_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ExpressionName"))
     LFTagPolicyResource.struct_class = Types::LFTagPolicyResource
 
     LFTagsList.member = Shapes::ShapeRef.new(shape: LFTagPair)
@@ -775,6 +825,15 @@ module Aws::LakeFormation
     ListDataCellsFilterResponse.add_member(:data_cells_filters, Shapes::ShapeRef.new(shape: DataCellsFilterList, location_name: "DataCellsFilters"))
     ListDataCellsFilterResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDataCellsFilterResponse.struct_class = Types::ListDataCellsFilterResponse
+
+    ListLFTagExpressionsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    ListLFTagExpressionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListLFTagExpressionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListLFTagExpressionsRequest.struct_class = Types::ListLFTagExpressionsRequest
+
+    ListLFTagExpressionsResponse.add_member(:lf_tag_expressions, Shapes::ShapeRef.new(shape: LFTagExpressionsList, location_name: "LFTagExpressions"))
+    ListLFTagExpressionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListLFTagExpressionsResponse.struct_class = Types::ListLFTagExpressionsResponse
 
     ListLFTagsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     ListLFTagsRequest.add_member(:resource_share_type, Shapes::ShapeRef.new(shape: ResourceShareType, location_name: "ResourceShareType"))
@@ -937,6 +996,7 @@ module Aws::LakeFormation
     Resource.add_member(:data_cells_filter, Shapes::ShapeRef.new(shape: DataCellsFilterResource, location_name: "DataCellsFilter"))
     Resource.add_member(:lf_tag, Shapes::ShapeRef.new(shape: LFTagKeyResource, location_name: "LFTag"))
     Resource.add_member(:lf_tag_policy, Shapes::ShapeRef.new(shape: LFTagPolicyResource, location_name: "LFTagPolicy"))
+    Resource.add_member(:lf_tag_expression, Shapes::ShapeRef.new(shape: LFTagExpressionResource, location_name: "LFTagExpression"))
     Resource.struct_class = Types::Resource
 
     ResourceInfo.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, location_name: "ResourceArn"))
@@ -1086,6 +1146,14 @@ module Aws::LakeFormation
     UpdateDataCellsFilterRequest.struct_class = Types::UpdateDataCellsFilterRequest
 
     UpdateDataCellsFilterResponse.struct_class = Types::UpdateDataCellsFilterResponse
+
+    UpdateLFTagExpressionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateLFTagExpressionRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UpdateLFTagExpressionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    UpdateLFTagExpressionRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    UpdateLFTagExpressionRequest.struct_class = Types::UpdateLFTagExpressionRequest
+
+    UpdateLFTagExpressionResponse.struct_class = Types::UpdateLFTagExpressionResponse
 
     UpdateLFTagRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateLFTagRequest.add_member(:tag_key, Shapes::ShapeRef.new(shape: LFTagKey, required: true, location_name: "TagKey"))
@@ -1278,6 +1346,20 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_lf_tag_expression, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLFTagExpression"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateLFTagExpression"
+        o.input = Shapes::ShapeRef.new(shape: CreateLFTagExpressionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLFTagExpressionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
       api.add_operation(:create_lake_formation_identity_center_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLakeFormationIdentityCenterConfiguration"
         o.http_method = "POST"
@@ -1325,6 +1407,19 @@ module Aws::LakeFormation
         o.http_request_uri = "/DeleteLFTag"
         o.input = Shapes::ShapeRef.new(shape: DeleteLFTagRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteLFTagResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_lf_tag_expression, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLFTagExpression"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteLFTagExpression"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLFTagExpressionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLFTagExpressionResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
@@ -1506,6 +1601,19 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_lf_tag_expression, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLFTagExpression"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetLFTagExpression"
+        o.input = Shapes::ShapeRef.new(shape: GetLFTagExpressionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLFTagExpressionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_query_state, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetQueryState"
         o.http_method = "POST"
@@ -1658,6 +1766,25 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_lf_tag_expressions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLFTagExpressions"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListLFTagExpressions"
+        o.input = Shapes::ShapeRef.new(shape: ListLFTagExpressionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLFTagExpressionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1914,6 +2041,20 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_lf_tag_expression, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLFTagExpression"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateLFTagExpression"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLFTagExpressionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLFTagExpressionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 

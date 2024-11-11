@@ -162,8 +162,10 @@ module Aws::ChimeSDKMediaPipelines
       attr_accessor sink_arn: ::String
       attr_accessor client_request_token: ::String
       attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration
+      attr_accessor sse_aws_key_management_params: Types::SseAwsKeyManagementParams
+      attr_accessor sink_iam_role_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: [:source_arn, :sink_arn, :client_request_token]
+      SENSITIVE: [:source_arn, :sink_arn, :client_request_token, :sink_iam_role_arn]
     end
 
     class CreateMediaCapturePipelineResponse
@@ -533,7 +535,9 @@ module Aws::ChimeSDKMediaPipelines
       attr_accessor created_timestamp: ::Time
       attr_accessor updated_timestamp: ::Time
       attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration
-      SENSITIVE: [:source_arn, :sink_arn]
+      attr_accessor sse_aws_key_management_params: Types::SseAwsKeyManagementParams
+      attr_accessor sink_iam_role_arn: ::String
+      SENSITIVE: [:source_arn, :sink_arn, :sink_iam_role_arn]
     end
 
     class MediaCapturePipelineSourceConfiguration
@@ -779,6 +783,12 @@ module Aws::ChimeSDKMediaPipelines
     class SqsQueueSinkConfiguration
       attr_accessor insights_target: ::String
       SENSITIVE: [:insights_target]
+    end
+
+    class SseAwsKeyManagementParams
+      attr_accessor aws_kms_key_id: ::String
+      attr_accessor aws_kms_encryption_context: ::String
+      SENSITIVE: []
     end
 
     class StartSpeakerSearchTaskRequest

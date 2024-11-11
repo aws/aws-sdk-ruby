@@ -962,27 +962,30 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_status
     #   The status of the registration.
     #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
     #   * `CREATED`: Your registration is created but not submitted.
     #
-    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
-    #     review.
+    #   * `COMPLETE`: Your registration has been approved and your
+    #     origination identity has been created.
     #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
+    #   * `DELETED`: The registration has been deleted.
     #
     #   * `PROVISIONING`: Your registration has been approved and your
     #     origination identity is being created.
     #
-    #   * `COMPLETE`: Your registration has been approved and and your
-    #     origination identity has been created.
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
     #
     #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
     #     it.
     #
-    #   * `CLOSED`: The phone number or sender ID has been deleted and you
-    #     must also delete the registration for the number.
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
     #
-    #   * `DELETED`: The registration has been deleted.
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
     #   @return [String]
     #
     # @!attribute [rw] current_version_number
@@ -1050,26 +1053,29 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_version_status
     #   The status of the registration.
     #
-    #   * `DRAFT`: The initial status of a registration version after it’s
-    #     created.
-    #
-    #   * `SUBMITTED`: Your registration has been submitted.
-    #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
-    #
     #   * `APPROVED`: Your registration has been approved.
-    #
-    #   * `DISCARDED`: You've abandon this version of their registration to
-    #     start over with a new version.
-    #
-    #   * `DENIED`: You must fix your registration and resubmit it.
-    #
-    #   * `REVOKED`: Your previously approved registration has been revoked.
     #
     #   * `ARCHIVED`: Your previously approved registration version moves
     #     into this status when a more recently submitted version is
     #     approved.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
     #   @return [String]
     #
     # @!attribute [rw] registration_version_status_history
@@ -1834,27 +1840,30 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_status
     #   The status of the registration.
     #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
     #   * `CREATED`: Your registration is created but not submitted.
     #
-    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
-    #     review.
+    #   * `COMPLETE`: Your registration has been approved and your
+    #     origination identity has been created.
     #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
+    #   * `DELETED`: The registration has been deleted.
     #
     #   * `PROVISIONING`: Your registration has been approved and your
     #     origination identity is being created.
     #
-    #   * `COMPLETE`: Your registration has been approved and and your
-    #     origination identity has been created.
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
     #
     #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
     #     it.
     #
-    #   * `CLOSED`: The phone number or sender ID has been deleted and you
-    #     must also delete the registration for the number.
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
     #
-    #   * `DELETED`: The registration has been deleted.
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
     #   @return [String]
     #
     # @!attribute [rw] current_version_number
@@ -3186,26 +3195,29 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_version_status
     #   The status of the registration version.
     #
-    #   * `DRAFT`: The initial status of a registration version after it’s
-    #     created.
-    #
-    #   * `SUBMITTED`: Your registration has been submitted.
-    #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
-    #
     #   * `APPROVED`: Your registration has been approved.
-    #
-    #   * `DISCARDED`: You've abandon this version of their registration to
-    #     start over with a new version.
-    #
-    #   * `DENIED`: You must fix your registration and resubmit it.
-    #
-    #   * `REVOKED`: Your previously approved registration has been revoked.
     #
     #   * `ARCHIVED`: Your previously approved registration version moves
     #     into this status when a more recently submitted version is
     #     approved.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
     #   @return [String]
     #
     # @!attribute [rw] registration_version_status_history
@@ -4656,27 +4668,30 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_status
     #   The status of the registration.
     #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
     #   * `CREATED`: Your registration is created but not submitted.
     #
-    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
-    #     review.
+    #   * `COMPLETE`: Your registration has been approved and your
+    #     origination identity has been created.
     #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
+    #   * `DELETED`: The registration has been deleted.
     #
     #   * `PROVISIONING`: Your registration has been approved and your
     #     origination identity is being created.
     #
-    #   * `COMPLETE`: Your registration has been approved and and your
-    #     origination identity has been created.
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
     #
     #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
     #     it.
     #
-    #   * `CLOSED`: The phone number or sender ID has been deleted and you
-    #     must also delete the registration for the number.
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
     #
-    #   * `DELETED`: The registration has been deleted.
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
     #   @return [String]
     #
     # @!attribute [rw] current_version_number
@@ -4882,26 +4897,29 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_version_status
     #   The status of the registration.
     #
-    #   * `DRAFT`: The initial status of a registration version after it’s
-    #     created.
-    #
-    #   * `SUBMITTED`: Your registration has been submitted.
-    #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
-    #
     #   * `APPROVED`: Your registration has been approved.
-    #
-    #   * `DISCARDED`: You've abandon this version of their registration to
-    #     start over with a new version.
-    #
-    #   * `DENIED`: You must fix your registration and resubmit it.
-    #
-    #   * `REVOKED`: Your previously approved registration has been revoked.
     #
     #   * `ARCHIVED`: Your previously approved registration version moves
     #     into this status when a more recently submitted version is
     #     approved.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
     #   @return [String]
     #
     # @!attribute [rw] registration_version_status_history
@@ -4948,6 +4966,15 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] reviewing_timestamp
     #   The time when the registration was in the reviewing state, in [UNIX
     #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] requires_authentication_timestamp
+    #   The time when the registration was in the requires authentication
+    #   state, in [UNIX epoch time][1] format.
     #
     #
     #
@@ -5005,6 +5032,7 @@ module Aws::PinpointSMSVoiceV2
       :draft_timestamp,
       :submitted_timestamp,
       :reviewing_timestamp,
+      :requires_authentication_timestamp,
       :approved_timestamp,
       :discarded_timestamp,
       :denied_timestamp,
@@ -6342,26 +6370,29 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_version_status
     #   The status of the registration version.
     #
-    #   * `DRAFT`: The initial status of a registration version after it’s
-    #     created.
-    #
-    #   * `SUBMITTED`: Your registration has been submitted.
-    #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
-    #
     #   * `APPROVED`: Your registration has been approved.
-    #
-    #   * `DISCARDED`: You've abandon this version of their registration to
-    #     start over with a new version.
-    #
-    #   * `DENIED`: You must fix your registration and resubmit it.
-    #
-    #   * `REVOKED`: Your previously approved registration has been revoked.
     #
     #   * `ARCHIVED`: Your previously approved registration version moves
     #     into this status when a more recently submitted version is
     #     approved.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
     #   @return [String]
     #
     # @!attribute [rw] registration_version_status_history

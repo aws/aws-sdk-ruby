@@ -1835,7 +1835,7 @@ module Aws::LocationService
     #   a key-value pair helps manage, identify, search, and filter your
     #   resources by labelling them.
     #
-    #   * For example: \\\{ `"tag1" : "value1"`, `"tag2" : "value2"`\\}
+    #   * For example: \{ `"tag1" : "value1"`, `"tag2" : "value2"`}
     #
     #   ^
     #
@@ -4711,7 +4711,7 @@ module Aws::LocationService
     #   Tags that have been applied to the specified resource. Tags are
     #   mapped from the tag key to the tag value: `"TagKey" : "TagValue"`.
     #
-    #   * Format example: `\{"tag1" : "value1", "tag2" : "value2"\} `
+    #   * Format example: `{"tag1" : "value1", "tag2" : "value2"} `
     #
     #   ^
     #   @return [Hash<String,String>]

@@ -663,10 +663,10 @@ module Aws::Kinesis
     # Delete a policy for the specified data stream or consumer. Request
     # patterns can be one of the following:
     #
-    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d\{12\}:.*stream/\S+`
+    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d{12}:.*stream/\S+`
     #
     # * Consumer pattern:
-    #   `^(arn):aws.*:kinesis:.*:\d\{12\}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
+    #   `^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the data stream or consumer.
@@ -1346,10 +1346,10 @@ module Aws::Kinesis
     # Returns a policy attached to the specified data stream or consumer.
     # Request patterns can be one of the following:
     #
-    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d\{12\}:.*stream/\S+`
+    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d{12}:.*stream/\S+`
     #
     # * Consumer pattern:
-    #   `^(arn):aws.*:kinesis:.*:\d\{12\}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
+    #   `^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the data stream or consumer.
@@ -2285,10 +2285,10 @@ module Aws::Kinesis
     #
     # Request patterns can be one of the following:
     #
-    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d\{12\}:.*stream/\S+`
+    # * Data stream pattern: `arn:aws.*:kinesis:.*:\d{12}:.*stream/\S+`
     #
     # * Consumer pattern:
-    #   `^(arn):aws.*:kinesis:.*:\d\{12\}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
+    #   `^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
     #
     # For more information, see [Controlling Access to Amazon Kinesis Data
     # Streams Resources Using IAM][1].
@@ -2854,7 +2854,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

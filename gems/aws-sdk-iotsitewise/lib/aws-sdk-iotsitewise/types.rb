@@ -959,7 +959,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] arn
     #   The [ARN][1] of the asset model, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:asset-model/$\{AssetModelId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}`
     #
     #
     #
@@ -1248,7 +1248,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] arn
     #   The [ARN][1] of the asset, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:asset/$\{AssetId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}`
     #
     #
     #
@@ -1418,7 +1418,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] arn
     #   The [ARN][1] of the asset, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:asset/$\{AssetId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}`
     #
     #
     #
@@ -2537,7 +2537,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] access_policy_arn
     #   The [ARN][1] of the access policy, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:access-policy/$\{AccessPolicyId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}`
     #
     #
     #
@@ -2817,7 +2817,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] asset_model_arn
     #   The [ARN][1] of the asset model, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:asset-model/$\{AssetModelId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}`
     #
     #
     #
@@ -2916,7 +2916,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] asset_arn
     #   The [ARN][1] of the asset, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:asset/$\{AssetId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}`
     #
     #
     #
@@ -3086,7 +3086,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] dashboard_arn
     #   The [ARN][1] of the dashboard, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:dashboard/$\{DashboardId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}`
     #
     #
     #
@@ -3135,7 +3135,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] gateway_arn
     #   The [ARN][1] of the gateway, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:gateway/$\{GatewayId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}`
     #
     #
     #
@@ -3267,7 +3267,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] portal_arn
     #   The [ARN][1] of the portal, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:portal/$\{PortalId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:portal/${PortalId}`
     #
     #
     #
@@ -3349,7 +3349,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] project_arn
     #   The [ARN][1] of the project, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:project/$\{ProjectId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}`
     #
     #
     #
@@ -3804,7 +3804,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] access_policy_arn
     #   The [ARN][1] of the access policy, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:access-policy/$\{AccessPolicyId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}`
     #
     #
     #
@@ -4133,7 +4133,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] asset_model_arn
     #   The [ARN][1] of the asset model, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:asset-model/$\{AssetModelId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}`
     #
     #
     #
@@ -4344,7 +4344,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] asset_arn
     #   The [ARN][1] of the asset, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:asset/$\{AssetId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}`
     #
     #
     #
@@ -4538,7 +4538,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] dashboard_arn
     #   The [ARN][1] of the dashboard, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:dashboard/$\{DashboardId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}`
     #
     #
     #
@@ -4693,7 +4693,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] gateway_arn
     #   The [ARN][1] of the gateway, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:gateway/$\{GatewayId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}`
     #
     #
     #
@@ -4766,7 +4766,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] portal_arn
     #   The [ARN][1] of the portal, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:portal/$\{PortalId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:portal/${PortalId}`
     #
     #
     #
@@ -4878,7 +4878,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] project_arn
     #   The [ARN][1] of the project, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:project/$\{ProjectId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}`
     #
     #
     #
@@ -5077,7 +5077,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] time_series_arn
     #   The [ARN][1] of the time series, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:time-series/$\{TimeSeriesId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:time-series/${TimeSeriesId}`
     #
     #
     #
@@ -8055,7 +8055,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] time_series_arn
     #   The [ARN][1] of the time series, which has the following format.
     #
-    #   `arn:$\{Partition\}:iotsitewise:$\{Region\}:$\{Account\}:time-series/$\{TimeSeriesId\}`
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:time-series/${TimeSeriesId}`
     #
     #
     #

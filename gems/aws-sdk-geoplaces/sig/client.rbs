@@ -1,0 +1,281 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GeoPlaces
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AutocompleteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AutocompleteResponse]
+        def pricing_bucket: () -> ::String
+        def result_items: () -> ::Array[Types::AutocompleteResultItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#autocomplete-instance_method
+      def autocomplete: (
+                          query_text: ::String,
+                          ?max_results: ::Integer,
+                          ?bias_position: Array[::Float],
+                          ?filter: {
+                            bounding_box: Array[::Float]?,
+                            circle: {
+                              center: Array[::Float],
+                              radius: ::Integer
+                            }?,
+                            include_countries: Array[::String]?,
+                            include_place_types: Array[("Locality" | "PostalCode")]?
+                          },
+                          ?postal_code_mode: ("MergeAllSpannedLocalities" | "EnumerateSpannedLocalities"),
+                          ?additional_features: Array[("Core")],
+                          ?language: ::String,
+                          ?political_view: ::String,
+                          ?intended_use: ("SingleUse"),
+                          ?key: ::String
+                        ) -> _AutocompleteResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AutocompleteResponseSuccess
+
+      interface _GeocodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GeocodeResponse]
+        def pricing_bucket: () -> ::String
+        def result_items: () -> ::Array[Types::GeocodeResultItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#geocode-instance_method
+      def geocode: (
+                     ?query_text: ::String,
+                     ?query_components: {
+                       country: ::String?,
+                       region: ::String?,
+                       sub_region: ::String?,
+                       locality: ::String?,
+                       district: ::String?,
+                       street: ::String?,
+                       address_number: ::String?,
+                       postal_code: ::String?
+                     },
+                     ?max_results: ::Integer,
+                     ?bias_position: Array[::Float],
+                     ?filter: {
+                       include_countries: Array[::String]?,
+                       include_place_types: Array[("Locality" | "PostalCode" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]?
+                     },
+                     ?additional_features: Array[("TimeZone" | "Access")],
+                     ?language: ::String,
+                     ?political_view: ::String,
+                     ?intended_use: ("SingleUse" | "Storage"),
+                     ?key: ::String
+                   ) -> _GeocodeResponseSuccess
+                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GeocodeResponseSuccess
+
+      interface _GetPlaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaceResponse]
+        def place_id: () -> ::String
+        def place_type: () -> ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+        def title: () -> ::String
+        def pricing_bucket: () -> ::String
+        def address: () -> Types::Address
+        def address_number_corrected: () -> bool
+        def postal_code_details: () -> ::Array[Types::PostalCodeDetails]
+        def position: () -> ::Array[::Float]
+        def map_view: () -> ::Array[::Float]
+        def categories: () -> ::Array[Types::Category]
+        def food_types: () -> ::Array[Types::FoodType]
+        def business_chains: () -> ::Array[Types::BusinessChain]
+        def contacts: () -> Types::Contacts
+        def opening_hours: () -> ::Array[Types::OpeningHours]
+        def access_points: () -> ::Array[Types::AccessPoint]
+        def access_restrictions: () -> ::Array[Types::AccessRestriction]
+        def time_zone: () -> Types::TimeZone
+        def political_view: () -> ::String
+        def phonemes: () -> Types::PhonemeDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#get_place-instance_method
+      def get_place: (
+                       place_id: ::String,
+                       ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact")],
+                       ?language: ::String,
+                       ?political_view: ::String,
+                       ?intended_use: ("SingleUse" | "Storage"),
+                       ?key: ::String
+                     ) -> _GetPlaceResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPlaceResponseSuccess
+
+      interface _ReverseGeocodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReverseGeocodeResponse]
+        def pricing_bucket: () -> ::String
+        def result_items: () -> ::Array[Types::ReverseGeocodeResultItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#reverse_geocode-instance_method
+      def reverse_geocode: (
+                             query_position: Array[::Float],
+                             ?query_radius: ::Integer,
+                             ?max_results: ::Integer,
+                             ?filter: {
+                               include_place_types: Array[("Locality" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]?
+                             },
+                             ?additional_features: Array[("TimeZone" | "Access")],
+                             ?language: ::String,
+                             ?political_view: ::String,
+                             ?intended_use: ("SingleUse" | "Storage"),
+                             ?key: ::String
+                           ) -> _ReverseGeocodeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReverseGeocodeResponseSuccess
+
+      interface _SearchNearbyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchNearbyResponse]
+        def pricing_bucket: () -> ::String
+        def result_items: () -> ::Array[Types::SearchNearbyResultItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#search_nearby-instance_method
+      def search_nearby: (
+                           query_position: Array[::Float],
+                           ?query_radius: ::Integer,
+                           ?max_results: ::Integer,
+                           ?filter: {
+                             bounding_box: Array[::Float]?,
+                             include_countries: Array[::String]?,
+                             include_categories: Array[::String]?,
+                             exclude_categories: Array[::String]?,
+                             include_business_chains: Array[::String]?,
+                             exclude_business_chains: Array[::String]?,
+                             include_food_types: Array[::String]?,
+                             exclude_food_types: Array[::String]?
+                           },
+                           ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact")],
+                           ?language: ::String,
+                           ?political_view: ::String,
+                           ?intended_use: ("SingleUse" | "Storage"),
+                           ?next_token: ::String,
+                           ?key: ::String
+                         ) -> _SearchNearbyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchNearbyResponseSuccess
+
+      interface _SearchTextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchTextResponse]
+        def pricing_bucket: () -> ::String
+        def result_items: () -> ::Array[Types::SearchTextResultItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#search_text-instance_method
+      def search_text: (
+                         ?query_text: ::String,
+                         ?query_id: ::String,
+                         ?max_results: ::Integer,
+                         ?bias_position: Array[::Float],
+                         ?filter: {
+                           bounding_box: Array[::Float]?,
+                           circle: {
+                             center: Array[::Float],
+                             radius: ::Integer
+                           }?,
+                           include_countries: Array[::String]?
+                         },
+                         ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact")],
+                         ?language: ::String,
+                         ?political_view: ::String,
+                         ?intended_use: ("SingleUse" | "Storage"),
+                         ?next_token: ::String,
+                         ?key: ::String
+                       ) -> _SearchTextResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTextResponseSuccess
+
+      interface _SuggestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SuggestResponse]
+        def pricing_bucket: () -> ::String
+        def result_items: () -> ::Array[Types::SuggestResultItem]
+        def query_refinements: () -> ::Array[Types::QueryRefinement]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#suggest-instance_method
+      def suggest: (
+                     query_text: ::String,
+                     ?max_results: ::Integer,
+                     ?max_query_refinements: ::Integer,
+                     ?bias_position: Array[::Float],
+                     ?filter: {
+                       bounding_box: Array[::Float]?,
+                       circle: {
+                         center: Array[::Float],
+                         radius: ::Integer
+                       }?,
+                       include_countries: Array[::String]?
+                     },
+                     ?additional_features: Array[("Core" | "TimeZone" | "Phonemes" | "Access")],
+                     ?language: ::String,
+                     ?political_view: ::String,
+                     ?intended_use: ("SingleUse"),
+                     ?key: ::String
+                   ) -> _SuggestResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SuggestResponseSuccess
+    end
+  end
+end
+

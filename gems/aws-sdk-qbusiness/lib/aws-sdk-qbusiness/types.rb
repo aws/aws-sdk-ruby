@@ -304,6 +304,11 @@ module Aws::QBusiness
     #   allowed format.
     #   @return [String]
     #
+    # @!attribute [rw] array_item_json_schema
+    #   Use to create a custom form with array fields (fields with nested
+    #   objects inside an array).
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @!attribute [rw] required
     #   Information about whether the field is required.
     #   @return [Boolean]
@@ -318,6 +323,7 @@ module Aws::QBusiness
       :value,
       :allowed_values,
       :allowed_format,
+      :array_item_json_schema,
       :required)
       SENSITIVE = []
       include Aws::Structure
@@ -3729,11 +3735,17 @@ module Aws::QBusiness
     #   interns all belong to the "Interns" group.
     #   @return [Array<Types::MemberUser>]
     #
+    # @!attribute [rw] s3_path_for_group_members
+    #   Information required for Amazon Q Business to find a specific file
+    #   in an Amazon S3 bucket.
+    #   @return [Types::S3]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GroupMembers AWS API Documentation
     #
     class GroupMembers < Struct.new(
       :member_groups,
-      :member_users)
+      :member_users,
+      :s3_path_for_group_members)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5209,6 +5221,13 @@ module Aws::QBusiness
     #   has access to.
     #   @return [Types::GroupMembers]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has access to the
+    #   S3 file that contains your list of users that belong to a group.The
+    #   Amazon Resource Name (ARN) of an IAM role that has access to the S3
+    #   file that contains your list of users that belong to a group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PutGroupRequest AWS API Documentation
     #
     class PutGroupRequest < Struct.new(
@@ -5217,7 +5236,8 @@ module Aws::QBusiness
       :group_name,
       :data_source_id,
       :type,
-      :group_members)
+      :group_members,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

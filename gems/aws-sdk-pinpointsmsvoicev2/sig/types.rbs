@@ -1247,6 +1247,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor draft_timestamp: ::Time
       attr_accessor submitted_timestamp: ::Time
       attr_accessor reviewing_timestamp: ::Time
+      attr_accessor requires_authentication_timestamp: ::Time
       attr_accessor approved_timestamp: ::Time
       attr_accessor discarded_timestamp: ::Time
       attr_accessor denied_timestamp: ::Time

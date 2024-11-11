@@ -189,7 +189,10 @@ module Aws
                                       stateful_default_actions: Array[::String]?,
                                       stateful_engine_options: {
                                         rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?,
-                                        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?
+                                        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?,
+                                        flow_timeouts: {
+                                          tcp_idle_timeout_seconds: ::Integer?
+                                        }?
                                       }?,
                                       tls_inspection_configuration_arn: ::String?,
                                       policy_variables: {
@@ -770,7 +773,10 @@ module Aws
                                       stateful_default_actions: Array[::String]?,
                                       stateful_engine_options: {
                                         rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?,
-                                        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?
+                                        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?,
+                                        flow_timeouts: {
+                                          tcp_idle_timeout_seconds: ::Integer?
+                                        }?
                                       }?,
                                       tls_inspection_configuration_arn: ::String?,
                                       policy_variables: {

@@ -274,7 +274,7 @@ module Aws::SecretsManager
     #   A list of tags to attach to the secret. Each tag is a key and value
     #   pair of strings in a JSON text string, for example:
     #
-    #   `[\{"Key":"CostCenter","Value":"12345"\},\{"Key":"environment","Value":"production"\}]`
+    #   `[{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]`
     #
     #   Secrets Manager tag key names are case sensitive. A tag with the key
     #   "ABC" is a different tag from one with key "abc".
@@ -767,7 +767,7 @@ module Aws::SecretsManager
     # @!attribute [rw] exclude_punctuation
     #   Specifies whether to exclude the following punctuation characters
     #   from the password: `` ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [
-    #   \ ] ^ _ ` \{ | \} ~ ``. If you don't include this switch, the
+    #   \ ] ^ _ ` { | } ~ ``. If you don't include this switch, the
     #   password can contain punctuation.
     #   @return [Boolean]
     #

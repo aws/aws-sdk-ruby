@@ -140,6 +140,7 @@ module Aws::ElasticLoadBalancingV2
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException', error: {"code"=>"DuplicateTagKeys", "httpStatusCode"=>400, "senderFault"=>true})
     DuplicateTargetGroupNameException = Shapes::StructureShape.new(name: 'DuplicateTargetGroupNameException', error: {"code"=>"DuplicateTargetGroupName", "httpStatusCode"=>400, "senderFault"=>true})
     DuplicateTrustStoreNameException = Shapes::StructureShape.new(name: 'DuplicateTrustStoreNameException', error: {"code"=>"DuplicateTrustStoreName", "httpStatusCode"=>400, "senderFault"=>true})
+    EnablePrefixForIpv6SourceNatEnum = Shapes::StringShape.new(name: 'EnablePrefixForIpv6SourceNatEnum')
     EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = Shapes::StringShape.new(name: 'EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic')
     EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = Shapes::StringShape.new(name: 'EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum')
     FixedResponseActionConfig = Shapes::StructureShape.new(name: 'FixedResponseActionConfig')
@@ -298,6 +299,8 @@ module Aws::ElasticLoadBalancingV2
     SetSubnetsInput = Shapes::StructureShape.new(name: 'SetSubnetsInput')
     SetSubnetsOutput = Shapes::StructureShape.new(name: 'SetSubnetsOutput')
     SourceIpConditionConfig = Shapes::StructureShape.new(name: 'SourceIpConditionConfig')
+    SourceNatIpv6Prefix = Shapes::StringShape.new(name: 'SourceNatIpv6Prefix')
+    SourceNatIpv6Prefixes = Shapes::ListShape.new(name: 'SourceNatIpv6Prefixes')
     SslPolicies = Shapes::ListShape.new(name: 'SslPolicies')
     SslPolicy = Shapes::StructureShape.new(name: 'SslPolicy')
     SslPolicyName = Shapes::StringShape.new(name: 'SslPolicyName')
@@ -464,6 +467,7 @@ module Aws::ElasticLoadBalancingV2
     AvailabilityZone.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     AvailabilityZone.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
     AvailabilityZone.add_member(:load_balancer_addresses, Shapes::ShapeRef.new(shape: LoadBalancerAddresses, location_name: "LoadBalancerAddresses"))
+    AvailabilityZone.add_member(:source_nat_ipv_6_prefixes, Shapes::ShapeRef.new(shape: SourceNatIpv6Prefixes, location_name: "SourceNatIpv6Prefixes"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZoneNotSupportedException.struct_class = Types::AvailabilityZoneNotSupportedException
@@ -509,6 +513,7 @@ module Aws::ElasticLoadBalancingV2
     CreateLoadBalancerInput.add_member(:type, Shapes::ShapeRef.new(shape: LoadBalancerTypeEnum, location_name: "Type"))
     CreateLoadBalancerInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CreateLoadBalancerInput.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
+    CreateLoadBalancerInput.add_member(:enable_prefix_for_ipv_6_source_nat, Shapes::ShapeRef.new(shape: EnablePrefixForIpv6SourceNatEnum, location_name: "EnablePrefixForIpv6SourceNat"))
     CreateLoadBalancerInput.struct_class = Types::CreateLoadBalancerInput
 
     CreateLoadBalancerOutput.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "LoadBalancers"))
@@ -847,6 +852,7 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     LoadBalancer.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
     LoadBalancer.add_member(:enforce_security_group_inbound_rules_on_private_link_traffic, Shapes::ShapeRef.new(shape: EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, location_name: "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic"))
+    LoadBalancer.add_member(:enable_prefix_for_ipv_6_source_nat, Shapes::ShapeRef.new(shape: EnablePrefixForIpv6SourceNatEnum, location_name: "EnablePrefixForIpv6SourceNat"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
     LoadBalancerAddress.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
@@ -1080,14 +1086,18 @@ module Aws::ElasticLoadBalancingV2
     SetSubnetsInput.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, location_name: "Subnets"))
     SetSubnetsInput.add_member(:subnet_mappings, Shapes::ShapeRef.new(shape: SubnetMappings, location_name: "SubnetMappings"))
     SetSubnetsInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    SetSubnetsInput.add_member(:enable_prefix_for_ipv_6_source_nat, Shapes::ShapeRef.new(shape: EnablePrefixForIpv6SourceNatEnum, location_name: "EnablePrefixForIpv6SourceNat"))
     SetSubnetsInput.struct_class = Types::SetSubnetsInput
 
     SetSubnetsOutput.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     SetSubnetsOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    SetSubnetsOutput.add_member(:enable_prefix_for_ipv_6_source_nat, Shapes::ShapeRef.new(shape: EnablePrefixForIpv6SourceNatEnum, location_name: "EnablePrefixForIpv6SourceNat"))
     SetSubnetsOutput.struct_class = Types::SetSubnetsOutput
 
     SourceIpConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
     SourceIpConditionConfig.struct_class = Types::SourceIpConditionConfig
+
+    SourceNatIpv6Prefixes.member = Shapes::ShapeRef.new(shape: SourceNatIpv6Prefix)
 
     SslPolicies.member = Shapes::ShapeRef.new(shape: SslPolicy)
 
@@ -1105,6 +1115,7 @@ module Aws::ElasticLoadBalancingV2
     SubnetMapping.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     SubnetMapping.add_member(:private_i_pv_4_address, Shapes::ShapeRef.new(shape: PrivateIPv4Address, location_name: "PrivateIPv4Address"))
     SubnetMapping.add_member(:i_pv_6_address, Shapes::ShapeRef.new(shape: IPv6Address, location_name: "IPv6Address"))
+    SubnetMapping.add_member(:source_nat_ipv_6_prefix, Shapes::ShapeRef.new(shape: SourceNatIpv6Prefix, location_name: "SourceNatIpv6Prefix"))
     SubnetMapping.struct_class = Types::SubnetMapping
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)

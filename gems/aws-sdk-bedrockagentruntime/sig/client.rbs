@@ -249,6 +249,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#invoke_flow-instance_method
       def invoke_flow: (
+                         ?enable_trace: bool,
                          flow_alias_identifier: ::String,
                          flow_identifier: ::String,
                          inputs: Array[

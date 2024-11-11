@@ -1372,9 +1372,8 @@ module Aws::GameLift
     # retry the command 3 times before considering the container to be
     # unhealthy.
     #
-    # `\{"Command": [ "CMD-SHELL", "ps cax | grep "processmanager" || exit
-    # 1" ], "Interval": 300, "Timeout": 30, "Retries": 5, "StartPeriod": 100
-    # \}`
+    # `{"Command": [ "CMD-SHELL", "ps cax | grep "processmanager" || exit 1"
+    # ], "Interval": 300, "Timeout": 30, "Retries": 5, "StartPeriod": 100 }`
     #
     # **Part of:** ContainerDefinition$HealthCheck
     #
@@ -2405,7 +2404,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_properties
     #   A set of key-value pairs that can store custom data in a game
-    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #   For an example, see [Create a game session with custom
     #   properties][1].
     #
@@ -2717,7 +2716,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_properties
     #   A set of key-value pairs that can store custom data in a game
-    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #   This information is added to the new `GameSession` object that is
     #   created for a successful match. This parameter is not used if
     #   `FlexMatchMode` is set to `STANDALONE`.
@@ -5646,8 +5645,8 @@ module Aws::GameLift
     # This key-value pair can store custom data about a game session. For
     # example, you might use a `GameProperty` to track a game session's
     # map, level of difficulty, or remaining time. The difficulty level
-    # could be specified like this: `\{"Key": "difficulty",
-    # "Value":"Novice"\}`.
+    # could be specified like this: `{"Key": "difficulty",
+    # "Value":"Novice"}`.
     #
     # You can set game properties when creating a game session. You can also
     # modify game properties of an active game session. When searching for
@@ -6083,7 +6082,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_properties
     #   A set of key-value pairs that can store custom data in a game
-    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] ip_address
@@ -6329,7 +6328,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_properties
     #   A set of key-value pairs that can store custom data in a game
-    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -7935,7 +7934,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_properties
     #   A set of key-value pairs that can store custom data in a game
-    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #   This information is added to the new `GameSession` object that is
     #   created for a successful match. This parameter is not used when
     #   `FlexMatchMode` is set to `STANDALONE`.
@@ -8301,8 +8300,8 @@ module Aws::GameLift
     #   A collection of key:value pairs containing player information for
     #   use in matchmaking. Player attribute keys must match the
     #   *playerAttributes* used in a matchmaking rule set. Example:
-    #   `"PlayerAttributes": \{"skill": \{"N": "23"\}, "gameMode": \{"S":
-    #   "deathmatch"\}\}`.
+    #   `"PlayerAttributes": {"skill": {"N": "23"}, "gameMode": {"S":
+    #   "deathmatch"}}`.
     #
     #   You can provide up to 10 `PlayerAttributes`.
     #   @return [Hash<String,Types::AttributeValue>]
@@ -9624,7 +9623,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_properties
     #   A set of key-value pairs that can store custom data in a game
-    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -10604,7 +10603,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_properties
     #   A set of key-value pairs that can store custom data in a game
-    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #   You can use this parameter to modify game properties in an active
     #   game session. This action adds new properties and modifies existing
     #   properties. There is no way to delete properties. For an example,
@@ -10807,7 +10806,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_properties
     #   A set of key-value pairs that can store custom data in a game
-    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   session. For example: `{"Key": "difficulty", "Value": "novice"}`.
     #   This information is added to the new `GameSession` object that is
     #   created for a successful match. This parameter is not used if
     #   `FlexMatchMode` is set to `STANDALONE`.

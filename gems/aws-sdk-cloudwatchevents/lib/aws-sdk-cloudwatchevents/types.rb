@@ -318,8 +318,8 @@ module Aws::CloudWatchEvents
     # `Value` fields. The `Value` field specifies the ID of the Amazon Web
     # Services organization. Following is an example value for `Condition`:
     #
-    # `'\{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
-    # "o-1234567890"\}'`
+    # `'{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
+    # "o-1234567890"}'`
     #
     # @!attribute [rw] type
     #   Specifies the type of condition. Currently the only supported value
@@ -2041,14 +2041,14 @@ module Aws::CloudWatchEvents
     #
     #   ` "InputTransformer":`
     #
-    #   `\{`
+    #   `{`
     #
-    #   `"InputPathsMap": \{"instance": "$.detail.instance","status":
-    #   "$.detail.status"\},`
+    #   `"InputPathsMap": {"instance": "$.detail.instance","status":
+    #   "$.detail.status"},`
     #
     #   `"InputTemplate": "<instance> is in state <status>"`
     #
-    #   `\}`
+    #   `}`
     #
     #   To have the `InputTemplate` include quote marks within a JSON
     #   string, escape each quote marks with a slash, as in the following
@@ -2056,29 +2056,29 @@ module Aws::CloudWatchEvents
     #
     #   ` "InputTransformer":`
     #
-    #   `\{`
+    #   `{`
     #
-    #   `"InputPathsMap": \{"instance": "$.detail.instance","status":
-    #   "$.detail.status"\},`
+    #   `"InputPathsMap": {"instance": "$.detail.instance","status":
+    #   "$.detail.status"},`
     #
     #   `"InputTemplate": "<instance> is in state "<status>""`
     #
-    #   `\}`
+    #   `}`
     #
     #   The `InputTemplate` can also be valid JSON with varibles in quotes
     #   or out, as in the following example:
     #
     #   ` "InputTransformer":`
     #
-    #   `\{`
+    #   `{`
     #
-    #   `"InputPathsMap": \{"instance": "$.detail.instance","status":
-    #   "$.detail.status"\},`
+    #   `"InputPathsMap": {"instance": "$.detail.instance","status":
+    #   "$.detail.status"},`
     #
-    #   `"InputTemplate": '\{"myInstance": <instance>,"myStatus":
-    #   "<instance> is in state "<status>""\}'`
+    #   `"InputTemplate": '{"myInstance": <instance>,"myStatus": "<instance>
+    #   is in state "<status>""}'`
     #
-    #   `\}`
+    #   `}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InputTransformer AWS API Documentation

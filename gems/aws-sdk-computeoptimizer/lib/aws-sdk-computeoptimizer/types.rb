@@ -3322,7 +3322,7 @@ module Aws::ComputeOptimizer
     #
     #   The following is the format of the ARN:
     #
-    #   `arn:aws:rds:\{region\}:\{accountId\}:db:\{resourceName\}`
+    #   `arn:aws:rds:{region}:{accountId}:db:{resourceName}`
     #   @return [String]
     #
     # @!attribute [rw] stat
@@ -3379,11 +3379,11 @@ module Aws::ComputeOptimizer
     #
     #   The following is the format of the ARN:
     #
-    #   `arn:aws:rds:\{region\}:\{accountId\}:db:\{resourceName\}`
+    #   `arn:aws:rds:{region}:{accountId}:db:{resourceName}`
     #
     #   The following is the format of a DB Cluster ARN:
     #
-    #   `arn:aws:rds:\{region\}:\{accountId\}:cluster:\{resourceName\}`
+    #   `arn:aws:rds:{region}:{accountId}:cluster:{resourceName}`
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -5483,7 +5483,7 @@ module Aws::ComputeOptimizer
     #
     #   The following is the format of the ARN:
     #
-    #   `arn:aws:rds:\{region\}:\{accountId\}:db:\{resourceName\}`
+    #   `arn:aws:rds:{region}:{accountId}:db:{resourceName}`
     #   @return [String]
     #
     # @!attribute [rw] account_id

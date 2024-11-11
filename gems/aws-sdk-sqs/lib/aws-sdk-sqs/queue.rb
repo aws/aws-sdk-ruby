@@ -400,7 +400,7 @@ module Aws::SQS
     #
     #   The maximum length of `ReceiveRequestAttemptId` is 128 characters.
     #   `ReceiveRequestAttemptId` can contain alphanumeric characters (`a-z`,
-    #   `A-Z`, `0-9`) and punctuation (`` !"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~
+    #   `A-Z`, `0-9`) and punctuation (`` !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
     #   ``).
     #
     #   For best practices of using `ReceiveRequestAttemptId`, see [Using the
@@ -573,7 +573,7 @@ module Aws::SQS
     #
     #   The maximum length of `MessageDeduplicationId` is 128 characters.
     #   `MessageDeduplicationId` can contain alphanumeric characters (`a-z`,
-    #   `A-Z`, `0-9`) and punctuation (`` !"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~
+    #   `A-Z`, `0-9`) and punctuation (`` !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
     #   ``).
     #
     #   For best practices of using `MessageDeduplicationId`, see [Using the
@@ -605,7 +605,7 @@ module Aws::SQS
     #
     #   The maximum length of `MessageGroupId` is 128 characters. Valid
     #   values: alphanumeric characters and punctuation ``
-    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
     #   For best practices of using `MessageGroupId`, see [Using the
     #   MessageGroupId Property][1] in the *Amazon SQS Developer Guide*.

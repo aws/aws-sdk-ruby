@@ -37,6 +37,8 @@ module Aws::Bedrock
     CreateGuardrailResponse = Shapes::StructureShape.new(name: 'CreateGuardrailResponse')
     CreateGuardrailVersionRequest = Shapes::StructureShape.new(name: 'CreateGuardrailVersionRequest')
     CreateGuardrailVersionResponse = Shapes::StructureShape.new(name: 'CreateGuardrailVersionResponse')
+    CreateInferenceProfileRequest = Shapes::StructureShape.new(name: 'CreateInferenceProfileRequest')
+    CreateInferenceProfileResponse = Shapes::StructureShape.new(name: 'CreateInferenceProfileResponse')
     CreateModelCopyJobRequest = Shapes::StructureShape.new(name: 'CreateModelCopyJobRequest')
     CreateModelCopyJobResponse = Shapes::StructureShape.new(name: 'CreateModelCopyJobResponse')
     CreateModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'CreateModelCustomizationJobRequest')
@@ -58,6 +60,8 @@ module Aws::Bedrock
     DeleteGuardrailResponse = Shapes::StructureShape.new(name: 'DeleteGuardrailResponse')
     DeleteImportedModelRequest = Shapes::StructureShape.new(name: 'DeleteImportedModelRequest')
     DeleteImportedModelResponse = Shapes::StructureShape.new(name: 'DeleteImportedModelResponse')
+    DeleteInferenceProfileRequest = Shapes::StructureShape.new(name: 'DeleteInferenceProfileRequest')
+    DeleteInferenceProfileResponse = Shapes::StructureShape.new(name: 'DeleteInferenceProfileResponse')
     DeleteModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteModelInvocationLoggingConfigurationRequest')
     DeleteModelInvocationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteModelInvocationLoggingConfigurationResponse')
     DeleteProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'DeleteProvisionedModelThroughputRequest')
@@ -215,6 +219,8 @@ module Aws::Bedrock
     InferenceProfileId = Shapes::StringShape.new(name: 'InferenceProfileId')
     InferenceProfileIdentifier = Shapes::StringShape.new(name: 'InferenceProfileIdentifier')
     InferenceProfileModel = Shapes::StructureShape.new(name: 'InferenceProfileModel')
+    InferenceProfileModelSource = Shapes::UnionShape.new(name: 'InferenceProfileModelSource')
+    InferenceProfileModelSourceArn = Shapes::StringShape.new(name: 'InferenceProfileModelSourceArn')
     InferenceProfileModels = Shapes::ListShape.new(name: 'InferenceProfileModels')
     InferenceProfileName = Shapes::StringShape.new(name: 'InferenceProfileName')
     InferenceProfileStatus = Shapes::StringShape.new(name: 'InferenceProfileStatus')
@@ -435,6 +441,17 @@ module Aws::Bedrock
     CreateGuardrailVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: GuardrailNumericalVersion, required: true, location_name: "version"))
     CreateGuardrailVersionResponse.struct_class = Types::CreateGuardrailVersionResponse
 
+    CreateInferenceProfileRequest.add_member(:inference_profile_name, Shapes::ShapeRef.new(shape: InferenceProfileName, required: true, location_name: "inferenceProfileName"))
+    CreateInferenceProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: InferenceProfileDescription, location_name: "description"))
+    CreateInferenceProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateInferenceProfileRequest.add_member(:model_source, Shapes::ShapeRef.new(shape: InferenceProfileModelSource, required: true, location_name: "modelSource"))
+    CreateInferenceProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateInferenceProfileRequest.struct_class = Types::CreateInferenceProfileRequest
+
+    CreateInferenceProfileResponse.add_member(:inference_profile_arn, Shapes::ShapeRef.new(shape: InferenceProfileArn, required: true, location_name: "inferenceProfileArn"))
+    CreateInferenceProfileResponse.add_member(:status, Shapes::ShapeRef.new(shape: InferenceProfileStatus, location_name: "status"))
+    CreateInferenceProfileResponse.struct_class = Types::CreateInferenceProfileResponse
+
     CreateModelCopyJobRequest.add_member(:source_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "sourceModelArn"))
     CreateModelCopyJobRequest.add_member(:target_model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "targetModelName"))
     CreateModelCopyJobRequest.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "modelKmsKeyId"))
@@ -529,6 +546,11 @@ module Aws::Bedrock
     DeleteImportedModelRequest.struct_class = Types::DeleteImportedModelRequest
 
     DeleteImportedModelResponse.struct_class = Types::DeleteImportedModelResponse
+
+    DeleteInferenceProfileRequest.add_member(:inference_profile_identifier, Shapes::ShapeRef.new(shape: InferenceProfileIdentifier, required: true, location: "uri", location_name: "inferenceProfileIdentifier"))
+    DeleteInferenceProfileRequest.struct_class = Types::DeleteInferenceProfileRequest
+
+    DeleteInferenceProfileResponse.struct_class = Types::DeleteInferenceProfileResponse
 
     DeleteModelInvocationLoggingConfigurationRequest.struct_class = Types::DeleteModelInvocationLoggingConfigurationRequest
 
@@ -720,11 +742,11 @@ module Aws::Bedrock
     GetInferenceProfileRequest.struct_class = Types::GetInferenceProfileRequest
 
     GetInferenceProfileResponse.add_member(:inference_profile_name, Shapes::ShapeRef.new(shape: InferenceProfileName, required: true, location_name: "inferenceProfileName"))
-    GetInferenceProfileResponse.add_member(:models, Shapes::ShapeRef.new(shape: InferenceProfileModels, required: true, location_name: "models"))
     GetInferenceProfileResponse.add_member(:description, Shapes::ShapeRef.new(shape: InferenceProfileDescription, location_name: "description"))
     GetInferenceProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetInferenceProfileResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     GetInferenceProfileResponse.add_member(:inference_profile_arn, Shapes::ShapeRef.new(shape: InferenceProfileArn, required: true, location_name: "inferenceProfileArn"))
+    GetInferenceProfileResponse.add_member(:models, Shapes::ShapeRef.new(shape: InferenceProfileModels, required: true, location_name: "models"))
     GetInferenceProfileResponse.add_member(:inference_profile_id, Shapes::ShapeRef.new(shape: InferenceProfileId, required: true, location_name: "inferenceProfileId"))
     GetInferenceProfileResponse.add_member(:status, Shapes::ShapeRef.new(shape: InferenceProfileStatus, required: true, location_name: "status"))
     GetInferenceProfileResponse.add_member(:type, Shapes::ShapeRef.new(shape: InferenceProfileType, required: true, location_name: "type"))
@@ -1003,16 +1025,22 @@ module Aws::Bedrock
     InferenceProfileModel.add_member(:model_arn, Shapes::ShapeRef.new(shape: FoundationModelArn, location_name: "modelArn"))
     InferenceProfileModel.struct_class = Types::InferenceProfileModel
 
+    InferenceProfileModelSource.add_member(:copy_from, Shapes::ShapeRef.new(shape: InferenceProfileModelSourceArn, location_name: "copyFrom"))
+    InferenceProfileModelSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    InferenceProfileModelSource.add_member_subclass(:copy_from, Types::InferenceProfileModelSource::CopyFrom)
+    InferenceProfileModelSource.add_member_subclass(:unknown, Types::InferenceProfileModelSource::Unknown)
+    InferenceProfileModelSource.struct_class = Types::InferenceProfileModelSource
+
     InferenceProfileModels.member = Shapes::ShapeRef.new(shape: InferenceProfileModel)
 
     InferenceProfileSummaries.member = Shapes::ShapeRef.new(shape: InferenceProfileSummary)
 
     InferenceProfileSummary.add_member(:inference_profile_name, Shapes::ShapeRef.new(shape: InferenceProfileName, required: true, location_name: "inferenceProfileName"))
-    InferenceProfileSummary.add_member(:models, Shapes::ShapeRef.new(shape: InferenceProfileModels, required: true, location_name: "models"))
     InferenceProfileSummary.add_member(:description, Shapes::ShapeRef.new(shape: InferenceProfileDescription, location_name: "description"))
     InferenceProfileSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     InferenceProfileSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     InferenceProfileSummary.add_member(:inference_profile_arn, Shapes::ShapeRef.new(shape: InferenceProfileArn, required: true, location_name: "inferenceProfileArn"))
+    InferenceProfileSummary.add_member(:models, Shapes::ShapeRef.new(shape: InferenceProfileModels, required: true, location_name: "models"))
     InferenceProfileSummary.add_member(:inference_profile_id, Shapes::ShapeRef.new(shape: InferenceProfileId, required: true, location_name: "inferenceProfileId"))
     InferenceProfileSummary.add_member(:status, Shapes::ShapeRef.new(shape: InferenceProfileStatus, required: true, location_name: "status"))
     InferenceProfileSummary.add_member(:type, Shapes::ShapeRef.new(shape: InferenceProfileType, required: true, location_name: "type"))
@@ -1086,6 +1114,7 @@ module Aws::Bedrock
 
     ListInferenceProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListInferenceProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListInferenceProfilesRequest.add_member(:type_equals, Shapes::ShapeRef.new(shape: InferenceProfileType, location: "querystring", location_name: "type"))
     ListInferenceProfilesRequest.struct_class = Types::ListInferenceProfilesRequest
 
     ListInferenceProfilesResponse.add_member(:inference_profile_summaries, Shapes::ShapeRef.new(shape: InferenceProfileSummaries, location_name: "inferenceProfileSummaries"))
@@ -1487,6 +1516,22 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_inference_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInferenceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/inference-profiles"
+        o.input = Shapes::ShapeRef.new(shape: CreateInferenceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInferenceProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_model_copy_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateModelCopyJob"
         o.http_method = "POST"
@@ -1595,6 +1640,20 @@ module Aws::Bedrock
         o.http_request_uri = "/imported-models/{modelIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: DeleteImportedModelRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteImportedModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_inference_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInferenceProfile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/inference-profiles/{inferenceProfileIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInferenceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInferenceProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

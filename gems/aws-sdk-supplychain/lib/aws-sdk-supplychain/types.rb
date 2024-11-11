@@ -951,6 +951,13 @@ module Aws::SupplyChain
     #   The state of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] error_message
+    #   The Amazon Web Services Supply Chain instance error message. If the
+    #   instance results in an unhealthy state, customers need to check the
+    #   error message, delete the current instance, and recreate a new one
+    #   based on the mitigation from the error message.
+    #   @return [String]
+    #
     # @!attribute [rw] web_app_dns_domain
     #   The WebApp DNS domain name of the instance.
     #   @return [String]
@@ -988,6 +995,7 @@ module Aws::SupplyChain
       :instance_id,
       :aws_account_id,
       :state,
+      :error_message,
       :web_app_dns_domain,
       :created_time,
       :last_modified_time,

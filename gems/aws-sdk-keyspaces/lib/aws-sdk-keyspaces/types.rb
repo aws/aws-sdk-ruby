@@ -657,6 +657,62 @@ module Aws::Keyspaces
     end
 
     # @!attribute [rw] keyspace_name
+    #   The name of the keyspace.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the user-defined type.
+    #
+    #   UDT names must contain 48 characters or less, must begin with an
+    #   alphabetic character, and can only contain alpha-numeric characters
+    #   and underscores. Amazon Keyspaces converts upper case characters
+    #   automatically into lower case characters.
+    #
+    #   Alternatively, you can declare a UDT name in double quotes. When
+    #   declaring a UDT name inside double quotes, Amazon Keyspaces
+    #   preserves upper casing and allows special characters.
+    #
+    #   You can also use double quotes as part of the name when you create
+    #   the UDT, but you must escape each double quote character with an
+    #   additional double quote character.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_definitions
+    #   The field definitions, consisting of names and types, that define
+    #   this type.
+    #   @return [Array<Types::FieldDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CreateTypeRequest AWS API Documentation
+    #
+    class CreateTypeRequest < Struct.new(
+      :keyspace_name,
+      :type_name,
+      :field_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] keyspace_arn
+    #   The unique identifier of the keyspace that contains the new type in
+    #   the format of an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The formatted name of the user-defined type that was created. Note
+    #   that Amazon Keyspaces requires the formatted name of the type for
+    #   other operations, for example `GetType`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CreateTypeResponse AWS API Documentation
+    #
+    class CreateTypeResponse < Struct.new(
+      :keyspace_arn,
+      :type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] keyspace_name
     #   The name of the keyspace to be deleted.
     #   @return [String]
     #
@@ -692,6 +748,41 @@ module Aws::Keyspaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/DeleteTableResponse AWS API Documentation
     #
     class DeleteTableResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] keyspace_name
+    #   The name of the keyspace of the to be deleted type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/DeleteTypeRequest AWS API Documentation
+    #
+    class DeleteTypeRequest < Struct.new(
+      :keyspace_name,
+      :type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] keyspace_arn
+    #   The unique identifier of the keyspace from which the type was
+    #   deleted in the format of an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/DeleteTypeResponse AWS API Documentation
+    #
+    class DeleteTypeResponse < Struct.new(
+      :keyspace_arn,
+      :type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Amazon Keyspaces encrypts and decrypts the table data at rest
     # transparently and integrates with Key Management Service for storing
@@ -746,6 +837,33 @@ module Aws::Keyspaces
     class EncryptionSpecification < Struct.new(
       :type,
       :kms_key_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A field definition consists out of a name and a type.
+    #
+    # @!attribute [rw] name
+    #   The identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Any supported Cassandra data type, including collections and other
+    #   user-defined types that are contained in the same keyspace.
+    #
+    #   For more information, see [Cassandra data type support][1] in the
+    #   *Amazon Keyspaces Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html#cassandra-data-type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/FieldDefinition AWS API Documentation
+    #
+    class FieldDefinition < Struct.new(
+      :name,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -942,6 +1060,79 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
+    # @!attribute [rw] keyspace_name
+    #   The name of the keyspace that contains this type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The formatted name of the type. For example, if the name of the type
+    #   was created without double quotes, Amazon Keyspaces saved the name
+    #   in lower-case characters. If the name was created in double quotes,
+    #   you must use double quotes to specify the type name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTypeRequest AWS API Documentation
+    #
+    class GetTypeRequest < Struct.new(
+      :keyspace_name,
+      :type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] keyspace_name
+    #   The name of the keyspace that contains this type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the type.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_definitions
+    #   The names and types that define this type.
+    #   @return [Array<Types::FieldDefinition>]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The timestamp that shows when this type was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of this type.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_referring_tables
+    #   The tables that use this type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] direct_parent_types
+    #   The types that use this type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_nesting_depth
+    #   The level of nesting implemented for this type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] keyspace_arn
+    #   The unique identifier of the keyspace that contains this type in the
+    #   format of an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTypeResponse AWS API Documentation
+    #
+    class GetTypeResponse < Struct.new(
+      :keyspace_name,
+      :type_name,
+      :field_definitions,
+      :last_modified_timestamp,
+      :status,
+      :direct_referring_tables,
+      :direct_parent_types,
+      :max_nesting_depth,
+      :keyspace_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon Keyspaces was unable to fully process this request because of
     # an internal server error.
     #
@@ -1113,6 +1304,50 @@ module Aws::Keyspaces
     class ListTagsForResourceResponse < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token. To resume pagination, provide the `NextToken`
+    #   value as an argument of a subsequent API invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The total number of types to return in the output. If the total
+    #   number of types available is more than the value specified, a
+    #   `NextToken` is provided in the output. To resume pagination, provide
+    #   the `NextToken` value as an argument of a subsequent API invocation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] keyspace_name
+    #   The name of the keyspace that contains the listed types.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ListTypesRequest AWS API Documentation
+    #
+    class ListTypesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :keyspace_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token. To resume pagination, provide the `NextToken`
+    #   value as an argument of a subsequent API invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] types
+    #   The list of types contained in the specified keyspace.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ListTypesResponse AWS API Documentation
+    #
+    class ListTypesResponse < Struct.new(
+      :next_token,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1314,17 +1549,17 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # The operation tried to access a keyspace or table that doesn't exist.
-    # The resource might not be specified correctly, or its status might not
-    # be `ACTIVE`.
+    # The operation tried to access a keyspace, table, or type that doesn't
+    # exist. The resource might not be specified correctly, or its status
+    # might not be `ACTIVE`.
     #
     # @!attribute [rw] message
     #   Description of the error.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The unique identifier in the format of Amazon Resource Name (ARN),
-    #   for the resource not found.
+    #   The unique identifier in the format of Amazon Resource Name (ARN)
+    #   for the resource could't be found.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ResourceNotFoundException AWS API Documentation

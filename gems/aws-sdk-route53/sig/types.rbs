@@ -1034,7 +1034,7 @@ module Aws::Route53
 
     class ListHostedZonesByVPCRequest
       attr_accessor vpc_id: ::String
-      attr_accessor vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")
+      attr_accessor vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")
       attr_accessor max_items: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -1080,7 +1080,7 @@ module Aws::Route53
     class ListResourceRecordSetsRequest
       attr_accessor hosted_zone_id: ::String
       attr_accessor start_record_name: ::String
-      attr_accessor start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor start_record_identifier: ::String
       attr_accessor max_items: ::Integer
       SENSITIVE: []
@@ -1090,7 +1090,7 @@ module Aws::Route53
       attr_accessor resource_record_sets: ::Array[Types::ResourceRecordSet]
       attr_accessor is_truncated: bool
       attr_accessor next_record_name: ::String
-      attr_accessor next_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor next_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor next_record_identifier: ::String
       attr_accessor max_items: ::Integer
       SENSITIVE: []
@@ -1150,7 +1150,7 @@ module Aws::Route53
     class ListTrafficPolicyInstancesByHostedZoneRequest
       attr_accessor hosted_zone_id: ::String
       attr_accessor traffic_policy_instance_name_marker: ::String
-      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor max_items: ::Integer
       SENSITIVE: []
     end
@@ -1158,7 +1158,7 @@ module Aws::Route53
     class ListTrafficPolicyInstancesByHostedZoneResponse
       attr_accessor traffic_policy_instances: ::Array[Types::TrafficPolicyInstance]
       attr_accessor traffic_policy_instance_name_marker: ::String
-      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor is_truncated: bool
       attr_accessor max_items: ::Integer
       SENSITIVE: []
@@ -1169,7 +1169,7 @@ module Aws::Route53
       attr_accessor traffic_policy_version: ::Integer
       attr_accessor hosted_zone_id_marker: ::String
       attr_accessor traffic_policy_instance_name_marker: ::String
-      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor max_items: ::Integer
       SENSITIVE: []
     end
@@ -1178,7 +1178,7 @@ module Aws::Route53
       attr_accessor traffic_policy_instances: ::Array[Types::TrafficPolicyInstance]
       attr_accessor hosted_zone_id_marker: ::String
       attr_accessor traffic_policy_instance_name_marker: ::String
-      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor is_truncated: bool
       attr_accessor max_items: ::Integer
       SENSITIVE: []
@@ -1187,7 +1187,7 @@ module Aws::Route53
     class ListTrafficPolicyInstancesRequest
       attr_accessor hosted_zone_id_marker: ::String
       attr_accessor traffic_policy_instance_name_marker: ::String
-      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor max_items: ::Integer
       SENSITIVE: []
     end
@@ -1196,7 +1196,7 @@ module Aws::Route53
       attr_accessor traffic_policy_instances: ::Array[Types::TrafficPolicyInstance]
       attr_accessor hosted_zone_id_marker: ::String
       attr_accessor traffic_policy_instance_name_marker: ::String
-      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor is_truncated: bool
       attr_accessor max_items: ::Integer
       SENSITIVE: []
@@ -1330,7 +1330,7 @@ module Aws::Route53
 
     class ResourceRecordSet
       attr_accessor name: ::String
-      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor set_identifier: ::String
       attr_accessor weight: ::Integer
       attr_accessor region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "cn-north-1" | "cn-northwest-1" | "ap-east-1" | "me-south-1" | "me-central-1" | "ap-south-1" | "ap-south-2" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")
@@ -1375,7 +1375,7 @@ module Aws::Route53
     class TestDNSAnswerRequest
       attr_accessor hosted_zone_id: ::String
       attr_accessor record_name: ::String
-      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor resolver_ip: ::String
       attr_accessor edns0_client_subnet_ip: ::String
       attr_accessor edns0_client_subnet_mask: ::String
@@ -1385,7 +1385,7 @@ module Aws::Route53
     class TestDNSAnswerResponse
       attr_accessor nameserver: ::String
       attr_accessor record_name: ::String
-      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor record_data: ::Array[::String]
       attr_accessor response_code: ::String
       attr_accessor protocol: ::String
@@ -1436,7 +1436,7 @@ module Aws::Route53
       attr_accessor id: ::String
       attr_accessor version: ::Integer
       attr_accessor name: ::String
-      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor document: ::String
       attr_accessor comment: ::String
       SENSITIVE: []
@@ -1461,7 +1461,7 @@ module Aws::Route53
       attr_accessor message: ::String
       attr_accessor traffic_policy_id: ::String
       attr_accessor traffic_policy_version: ::Integer
-      attr_accessor traffic_policy_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor traffic_policy_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       SENSITIVE: []
     end
 
@@ -1473,7 +1473,7 @@ module Aws::Route53
     class TrafficPolicySummary
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       attr_accessor latest_version: ::Integer
       attr_accessor traffic_policy_count: ::Integer
       SENSITIVE: []
@@ -1542,7 +1542,7 @@ module Aws::Route53
     end
 
     class VPC
-      attr_accessor vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")
+      attr_accessor vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "cn-northwest-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1" | "ap-southeast-5")
       attr_accessor vpc_id: ::String
       SENSITIVE: []
     end

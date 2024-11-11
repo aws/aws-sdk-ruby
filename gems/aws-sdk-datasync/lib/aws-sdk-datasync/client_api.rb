@@ -303,6 +303,8 @@ module Aws::DataSync
     TaggableResourceArn = Shapes::StringShape.new(name: 'TaggableResourceArn')
     TaskArn = Shapes::StringShape.new(name: 'TaskArn')
     TaskExecutionArn = Shapes::StringShape.new(name: 'TaskExecutionArn')
+    TaskExecutionFilesFailedDetail = Shapes::StructureShape.new(name: 'TaskExecutionFilesFailedDetail')
+    TaskExecutionFilesListedDetail = Shapes::StructureShape.new(name: 'TaskExecutionFilesListedDetail')
     TaskExecutionList = Shapes::ListShape.new(name: 'TaskExecutionList')
     TaskExecutionListEntry = Shapes::StructureShape.new(name: 'TaskExecutionListEntry')
     TaskExecutionResultDetail = Shapes::StructureShape.new(name: 'TaskExecutionResultDetail')
@@ -312,6 +314,7 @@ module Aws::DataSync
     TaskFilters = Shapes::ListShape.new(name: 'TaskFilters')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
     TaskListEntry = Shapes::StructureShape.new(name: 'TaskListEntry')
+    TaskMode = Shapes::StringShape.new(name: 'TaskMode')
     TaskQueueing = Shapes::StringShape.new(name: 'TaskQueueing')
     TaskReportConfig = Shapes::StructureShape.new(name: 'TaskReportConfig')
     TaskSchedule = Shapes::StructureShape.new(name: 'TaskSchedule')
@@ -541,6 +544,7 @@ module Aws::DataSync
     CreateTaskRequest.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
     CreateTaskRequest.add_member(:manifest_config, Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
     CreateTaskRequest.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
+    CreateTaskRequest.add_member(:task_mode, Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
     CreateTaskRequest.struct_class = Types::CreateTaskRequest
 
     CreateTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
@@ -781,6 +785,10 @@ module Aws::DataSync
     DescribeTaskExecutionResponse.add_member(:files_verified, Shapes::ShapeRef.new(shape: long, location_name: "FilesVerified"))
     DescribeTaskExecutionResponse.add_member(:report_result, Shapes::ShapeRef.new(shape: ReportResult, location_name: "ReportResult"))
     DescribeTaskExecutionResponse.add_member(:estimated_files_to_delete, Shapes::ShapeRef.new(shape: long, location_name: "EstimatedFilesToDelete"))
+    DescribeTaskExecutionResponse.add_member(:task_mode, Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
+    DescribeTaskExecutionResponse.add_member(:files_prepared, Shapes::ShapeRef.new(shape: long, location_name: "FilesPrepared"))
+    DescribeTaskExecutionResponse.add_member(:files_listed, Shapes::ShapeRef.new(shape: TaskExecutionFilesListedDetail, location_name: "FilesListed"))
+    DescribeTaskExecutionResponse.add_member(:files_failed, Shapes::ShapeRef.new(shape: TaskExecutionFilesFailedDetail, location_name: "FilesFailed"))
     DescribeTaskExecutionResponse.struct_class = Types::DescribeTaskExecutionResponse
 
     DescribeTaskRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
@@ -805,6 +813,7 @@ module Aws::DataSync
     DescribeTaskResponse.add_member(:manifest_config, Shapes::ShapeRef.new(shape: ManifestConfig, location_name: "ManifestConfig"))
     DescribeTaskResponse.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     DescribeTaskResponse.add_member(:schedule_details, Shapes::ShapeRef.new(shape: TaskScheduleDetails, location_name: "ScheduleDetails"))
+    DescribeTaskResponse.add_member(:task_mode, Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
     DescribeTaskResponse.struct_class = Types::DescribeTaskResponse
 
     DestinationNetworkInterfaceArns.member = Shapes::ShapeRef.new(shape: NetworkInterfaceArn)
@@ -1196,10 +1205,21 @@ module Aws::DataSync
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TaskExecutionFilesFailedDetail.add_member(:prepare, Shapes::ShapeRef.new(shape: long, location_name: "Prepare"))
+    TaskExecutionFilesFailedDetail.add_member(:transfer, Shapes::ShapeRef.new(shape: long, location_name: "Transfer"))
+    TaskExecutionFilesFailedDetail.add_member(:verify, Shapes::ShapeRef.new(shape: long, location_name: "Verify"))
+    TaskExecutionFilesFailedDetail.add_member(:delete, Shapes::ShapeRef.new(shape: long, location_name: "Delete"))
+    TaskExecutionFilesFailedDetail.struct_class = Types::TaskExecutionFilesFailedDetail
+
+    TaskExecutionFilesListedDetail.add_member(:at_source, Shapes::ShapeRef.new(shape: long, location_name: "AtSource"))
+    TaskExecutionFilesListedDetail.add_member(:at_destination_for_delete, Shapes::ShapeRef.new(shape: long, location_name: "AtDestinationForDelete"))
+    TaskExecutionFilesListedDetail.struct_class = Types::TaskExecutionFilesListedDetail
+
     TaskExecutionList.member = Shapes::ShapeRef.new(shape: TaskExecutionListEntry)
 
     TaskExecutionListEntry.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
     TaskExecutionListEntry.add_member(:status, Shapes::ShapeRef.new(shape: TaskExecutionStatus, location_name: "Status"))
+    TaskExecutionListEntry.add_member(:task_mode, Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
     TaskExecutionListEntry.struct_class = Types::TaskExecutionListEntry
 
     TaskExecutionResultDetail.add_member(:prepare_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "PrepareDuration"))
@@ -1225,6 +1245,7 @@ module Aws::DataSync
     TaskListEntry.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
     TaskListEntry.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "Status"))
     TaskListEntry.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
+    TaskListEntry.add_member(:task_mode, Shapes::ShapeRef.new(shape: TaskMode, location_name: "TaskMode"))
     TaskListEntry.struct_class = Types::TaskListEntry
 
     TaskReportConfig.add_member(:destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "Destination"))
