@@ -14,7 +14,7 @@
   {
     "documentation": "CRC32C checksum provided by user.",
     "requestPayload": "Hello world",
-    "checksumAlgorithm": "Crc32c",
+    "checksumAlgorithm": "Crc32C",
     "checksumValue": "crUfeA==",
     "expectHeaders": {
       "x-amz-checksum-crc32c": "crUfeA=="
