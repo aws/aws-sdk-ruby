@@ -56,7 +56,7 @@ module BuildTools
     end
 
     def manifest
-      JSON.load(File.read(@manifest_path))
+      JSON.load_file(@manifest_path)
     end
 
     def build_service(svc_name, config)
@@ -84,13 +84,13 @@ module BuildTools
     end
 
     def load_api(svc_name, models_dir)
-      api = JSON.load(File.read(model_path('api-2.json', models_dir)))
+      api = JSON.load_file(model_path('api-2.json', models_dir))
       BuildTools::Customizations.apply_api_customizations(svc_name, api)
       api
     end
 
     def load_docs(svc_name, models_dir)
-      docs = JSON.load(File.read(model_path('docs-2.json', models_dir)))
+      docs = JSON.load_file(model_path('docs-2.json', models_dir))
       BuildTools::Customizations.apply_doc_customizations(svc_name, docs)
       docs
     end
@@ -98,7 +98,7 @@ module BuildTools
     def load_examples(svc_name, models_dir)
       path = model_path('examples-1.json', models_dir)
       if path
-        examples = JSON.load(File.read(path))
+        examples = JSON.load_file(path)
         BuildTools::Customizations.apply_example_customizations(svc_name, examples)
         examples
       else
@@ -109,7 +109,7 @@ module BuildTools
     def load_smoke(svc_name, models_dir)
       path = model_path('smoke-2.json', models_dir)
       if path
-        smoke = JSON.load(File.read(path))
+        smoke = JSON.load_file(path)
         BuildTools::Customizations.apply_smoke_customizations(svc_name, smoke)
         smoke
       else

@@ -52,7 +52,7 @@ module BuildTools
     private
 
     def load_json(model_dir)
-      JSON.load(File.read(model_path(model_dir)))
+      JSON.load_file(model_path(model_dir))
     end
 
     def model_path(model_dir)

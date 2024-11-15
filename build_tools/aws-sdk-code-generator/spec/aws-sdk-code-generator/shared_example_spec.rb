@@ -7,11 +7,11 @@ module AwsSdkCodeGenerator
 
     let(:dir) { File.dirname(__FILE__) }
     let(:example_path) { File.join(dir, '..', 'fixtures', 'shared_examples', 'examples.json') }
-    let(:example_file) { File.open(example_path, 'rb') {|file| JSON.load(file.read)} }
+    let(:example_file) { JSON.load_file(example_path) }
     let(:examples) {example_file['examples']}
 
     let(:api_path) { File.join(dir, '..', 'fixtures', 'shared_examples', 'api.json') }
-    let(:s3_api) { File.open(api_path, 'rb') {|file| JSON.load(file.read)} }
+    let(:s3_api) { JSON.load_file(api_path) }
 
     def load_example_input(operation_name)
       example = examples[operation_name][0]
