@@ -14,7 +14,7 @@ if defined?(JRUBY_VERSION)
 end
 
 # protocol parsers
-gem 'json', '>= 2.4.0', '<= 2.7.6' # due to load_file support and we use it for specs
+gem 'json', '>= 2.4.0' # due to load_file support
 gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
 gem 'rexml'
